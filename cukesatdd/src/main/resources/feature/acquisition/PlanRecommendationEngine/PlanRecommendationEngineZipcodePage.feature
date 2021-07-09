@@ -10,7 +10,7 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
 
-    @FunctionalAARP @F568452
+    @FunctionalAARP @F568452 @vbfgate
     Examples: 
       | site | Zipcode | isMultutiCounty |
       | AARP |   90210 | NO              |

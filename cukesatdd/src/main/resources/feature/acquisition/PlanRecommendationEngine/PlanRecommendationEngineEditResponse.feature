@@ -75,7 +75,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Drug Selection  | <E_Drug Selection>                                                               |
       | Drug Details    | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user return to vpp page using "update" from edit response page
-    Then user validate UI and API recommendation rankings in results page
+    #Then user validate UI and API recommendation rankings in results page
 
     @regressionAARP
     Examples: 

@@ -2,6 +2,7 @@ package acceptancetests.acquisition.planRecommendationEngine;
 
 import java.util.HashMap;
 
+import org.json.JSONException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -719,7 +720,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validate UI and API recommendation rankings in results page$")
-   	public void verify_UI_API_rankings_results_page() {
+   	public void verify_UI_API_rankings_results_page() throws JSONException {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.validateUIAPIRankingPlans();
@@ -778,7 +779,7 @@ public class PlanRecommendationEngineStepDefinition {
    	}
 	
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
-   	public void verify_Future_UI_API_rankings_results_page() {
+   	public void verify_Future_UI_API_rankings_results_page() throws JSONException {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.checkPlanyear("future");

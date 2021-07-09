@@ -241,8 +241,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase()+ " " +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
@@ -255,7 +254,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		int count = drugsNamesinDCE.size();
 		DCEDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div>h4")).getText().trim().replace("(Brand)", "").toUpperCase());
+			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div>h4")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
 		Collections.sort(DCEDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());

@@ -60,7 +60,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option and comparing DCE and Drug page
       | Drug Selection | <Drug Selection> |
 
-    @regressionAARP
+    @regressionAARP456
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 |
@@ -125,19 +125,18 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    When user navigate to Drug Cost Estimator page
     Then user validate drugs details from VPP to DCE page
       | Drugs Name | <DrugsName> |
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
-      | AARP |   35034 | Yes           | Bibb County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
+      | AARP |   35034 | No            | [blank] | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
-      | UHC  |   35034 | Yes           | Bibb County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
+      | UHC  |   35034 | No            | [blank] | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
 
   @PRE @DruglistSessionStoragePREtoDCEWithoutContinue @F558359
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> - To validate Drug list are same PRE vs DCE
@@ -158,10 +157,10 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
-      | AARP |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
+      | AARP |   35034 | No            | [blank] | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
-      | UHC  |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
+      | UHC  |   35034 | No            | [blank] | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |

@@ -50,6 +50,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	ArrayList<String> DrugsInPRE;
 	ArrayList<String> DocInPRE;
 	ArrayList<String> DrugsInDCE;
+	ArrayList<String> DrugsInVPP;
 	ArrayList<String> DrugsList = new ArrayList<String>();
 	ArrayList<String> ModelDrugsList = new ArrayList<String>();
 	ArrayList<String> werallyResults = new ArrayList<String>();
@@ -84,13 +85,13 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "a[dtmname*='Shop For a Plan']")
 	private WebElement headerNavigationBarShopForaPlanTab;
 	
-	@FindBy(linkText = "Drug Cost Estimator")
+	@FindBy(css = "#uhc-footer div[class*='d-none d-lg-block'] a[href*='drug-cost-estimator']")
     private WebElement headerDrugcostLink;
 	
 	@FindBy(linkText = "Provider Search")
     private WebElement headerProvidersearchLink;
 	
-	@FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
+	@FindBy(xpath = "#uhc-footer div[class*='d-none d-lg-block'] a[href*='plan-recommendation-engine']")
     private WebElement headerGetaPlanRecommendationLink;
 	
 	@FindBy(css = "#selectCounty p>a")
@@ -848,12 +849,14 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			validate(MAViewPlansLink, 60);
 			jsClickNew(MAViewPlansLink);
-			DrugsInDCE = dce.getDrugNamesDCE();
-			int count =DrugsInDCE.size();
+			int count= Druglist.size();
+			DrugsInVPP = drugsCoveredInVPP(count);
+//			DrugsInDCE = dce.getDrugNamesDCE();
 			DCEtoPRE();
 		}
 		
 		public void DrugsDetailsVPPtoDCE(String drugsList) {
+			ArrayList<String> drugsName = new ArrayList<String>();
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			System.out.println("Navigating to DCE Page: ");
 			vppToDCE();
@@ -862,7 +865,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			DrugsInDCE = dce.getDrugNamesDCE();
 			int count =DrugsInDCE.size();
 			String[] strSplit = drugsList.split(":");
-			ArrayList<String> drugsName = new ArrayList<String>(Arrays.asList(strSplit));
+			for(String drug:strSplit)
+				drugsName.add(drug.toUpperCase());
+			Collections.sort(drugsName);
+			System.out.println("DrugList in DCE: "+drugsName);
 			verifyConfirmationmodalResults(count,DrugsInDCE,drugsName);
 		}
 		
@@ -899,8 +905,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			drugcoveredsession();
 			for (int i = count-1; i >= 0; i--) {
 				threadsleep(1000);
-				DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() + " " +
-						DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+				DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() );
 				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
 				WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
 				validate(RemoveIcon,20);
@@ -938,15 +943,15 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void vppToDCE() {
 			System.out.println("Validating VPP to DCE Page");
-			desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+			scrollToView(headerDrugcostLink);
 			headerDrugcostLink.click();
 			pageloadcomplete();
-			Assert.assertTrue(driver.getCurrentUrl().contains("/health-plans/estimate-drug-costs.html"), "Page is not navigated to DCE");		
+			Assert.assertTrue(driver.getCurrentUrl().contains("drug-cost-estimator"), "Page is not navigated to DCE");		
 		}
 		
 		public void DCEtoPRE() {
 			System.out.println("Navigating to PRE Page");
-			desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+			scrollToView(headerGetaPlanRecommendationLink);
 			headerGetaPlanRecommendationLink.click();
 			pageloadcomplete();
 			Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html#/get-started"), "Page is not navigated to PRE");		
