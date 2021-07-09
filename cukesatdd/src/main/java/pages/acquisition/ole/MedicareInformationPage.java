@@ -1265,7 +1265,7 @@ public class MedicareInformationPage extends UhcDriver {
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		
-		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Use and Disclosure')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
 			return new UseAndDisclosureAuthorizationPage(driver);
 		}
 		else{
