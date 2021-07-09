@@ -71,11 +71,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	public WebElement MenuMobile;
-	
-	
+
 	@FindBy(xpath = "//button[@class='icon-mob-btn dropdown-btn']")
 	public WebElement siteSearchTextBox;
-	
 
 	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
 	public WebElement LearnAboutMedicare;
@@ -688,7 +686,20 @@ public abstract class UhcDriver {
 		return true;
 
 	}
+	public boolean checkElementisDisabled(WebElement element) {
+		System.out.println("Looking for Element to disable .......");
+		try {
+			if (element.getAttribute("@disbaled") != "true") {
+				System.out.println("Element is disabled.......");
 
+			}
+		} catch (Exception e) {
+			System.out.println("Element is enabled hence action failed....");
+		}
+
+		return true;
+
+	}
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")
 				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
