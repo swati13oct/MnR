@@ -617,7 +617,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Please confirm your')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -670,7 +670,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -815,7 +815,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
