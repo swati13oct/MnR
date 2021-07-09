@@ -56,7 +56,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	@FindBy(xpath = "//h2[contains(@class,'h3-welcome-class')]")
+	@FindBy(xpath = "//*[contains(@class,'h3-welcome-class')]")
 	private WebElement PlanYear_PlanName;
 
 	@FindBy(xpath = "//strong[contains(text(),'ZIP Code:')]/..")
