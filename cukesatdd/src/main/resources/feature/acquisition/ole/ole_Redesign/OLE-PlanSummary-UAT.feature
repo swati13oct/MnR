@@ -438,11 +438,11 @@ Then the user validates the Plan details on OLE
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
-      Then the user validate on Review Page and click on Edit information for Medicare Information Page
-      | Medicare Number1 | <medicarenumber1> |
-      | Card Type        | <cardtype>        |
-       | PartA Date1     | <partadate1>      |
-      | PartB Date1     | <partbdate2>      |
+     # Then the user validate on Review Page and click on Edit information for Medicare Information Page
+    #  | Medicare Number1 | <medicarenumber1> |
+    #  | Card Type        | <cardtype>        |
+    #   | PartA Date1     | <partadate1>      |
+     # | PartB Date1     | <partbdate2>      |
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
