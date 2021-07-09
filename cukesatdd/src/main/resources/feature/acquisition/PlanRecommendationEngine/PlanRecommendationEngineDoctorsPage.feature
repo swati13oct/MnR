@@ -168,13 +168,13 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
       | AARP |   10001 | NO            | New York    | None          | None         | [blank]     | [blank]       |
-      | AARP |   35034 | YES           | Bibb County | None          | None         | robert      | NO            |
+      | AARP |   35035 | YES           | Bibb County | None          | None         | robert      | NO            |
       
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
       | UHC  |   10001 | NO            | New York    | None          | None         | [blank]     | [blank]       |
-      | UHC  |   35034 | YES           | Bibb County | None          | None         | robert      | NO            |
+      | UHC  |   35035 | YES           | Bibb County | None          | None         | robert      | NO            |
 
   @PRE @planrecommandonation @doctorspage @editprovider @F427538
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page fucntions with lookup in Plan Recommendation Engine

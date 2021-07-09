@@ -101,12 +101,12 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
-      | AARP |   35034 | Yes           | Bibb County | PDP           | Yes            |
+      | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            |
 
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
-      | UHC  |   35034 | Yes           | Bibb County | PDP           | Yes            |
+      | UHC  |   35035 | Yes           | Bibb County | PDP           | Yes            |
 
   @PRE @Ranking @PDPPlansRanking @F358846 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -128,14 +128,14 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  |
-      | AARP |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
-      | AARP |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,Week,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,Day,1,NO,NO |
+      | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
+      | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,Week,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,Day,1,NO,NO |
 
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  |
-      | UHC  |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
-      | UHC  |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,Week,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,Day,1,NO,NO |
+      | UHC  |   35035 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
+      | UHC  |   35035 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,Week,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,Day,1,NO,NO |
 
   @PRE @Ranking @SNPPlansRanking @F358846 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate SNP ranking plans in PRE

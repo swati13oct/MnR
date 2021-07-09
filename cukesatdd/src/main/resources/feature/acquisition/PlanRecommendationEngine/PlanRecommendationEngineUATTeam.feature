@@ -112,8 +112,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | site                   | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 |
       | Myuhcplans             |   10002 | NO            | New York     | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                                                   |
       | uhcandwellmedsa        |   10003 | NO            | New York     | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO                                              |
-      | mauhcmedicaresolutions |   35034 | YES           | Bibb County  | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO                                                                 |
-      | maaarpmedicareplans    |   35034 | YES           | Perry County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
+      | mauhcmedicaresolutions |   35035 | YES           | Bibb County  | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO                                                                 |
+      | maaarpmedicareplans    |   35035 | YES           | Perry County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
       | uhcmedicaresolutions   |   10001 | NO            | New County   | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                                                  |
       | aarpmedicareplans      |   10001 | NO            | New York     | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO                                               |
 
