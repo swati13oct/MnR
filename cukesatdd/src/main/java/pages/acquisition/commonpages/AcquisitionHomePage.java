@@ -1255,7 +1255,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-
+		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
@@ -3302,6 +3302,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(getStarted);
 		// getStarted.click();
 		jsClickNew(getStarted);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
@@ -3367,6 +3368,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 10);
 		jsClickNew(DCELink);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
