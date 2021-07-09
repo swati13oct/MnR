@@ -594,7 +594,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		zipCodeTextfield.sendKeys(zipcode);
 		//sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		jsClickNew(continueButton);
+		continueButton.click();
+		//jsClickNew(continueButton);
 		selectYear(year);
 
 		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
