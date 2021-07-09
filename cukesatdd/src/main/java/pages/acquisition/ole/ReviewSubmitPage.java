@@ -20,6 +20,7 @@ import org.testng.Assert;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import sun.misc.Cache;
 
 /**
  *@author sdwaraka
@@ -689,15 +690,22 @@ public class ReviewSubmitPage extends UhcDriver{
 		jsClickNew(ReviewEditSavechanges);
 	//	sendkeysNew(medicaidNumberField,"12345876");
 		Thread.sleep(5000);
-		sendkeysNew(partAStartDateField, PartAeffectiveDate);
-		sendkeysNew(partBStartDateField, PartBeffectiveDate);
-		Thread.sleep(2000);
-		//jsClickNew(ReviewEditSavechanges);
-		//validateNew(ReviewEditSavechanges);
-		jsClickNew(ReviewEditSavechanges);
+	try {
+		if (partAStartDateField.isDisplayed() || partBStartDateField.isDisplayed()) {
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			Thread.sleep(2000);
+			//jsClickNew(ReviewEditSavechanges);
+			//validateNew(ReviewEditSavechanges);
+			jsClickNew(ReviewEditSavechanges);
+			System.out.println(" MedicareNumber Details and part a , Part b are edited from Review Page");
+		}
+	}
+	catch (Exception e){
 
-		System.out.println(" MedicareNumber Details are edited from Review Page");
-		/*
+				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
+
+			}/*
 		if(ReviewEditSavechanges.isEnabled()){
 			System.out.println("User navigate back to Review Page");
 			return true;
