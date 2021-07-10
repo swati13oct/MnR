@@ -22,7 +22,8 @@ public class AboutUsAARPPage extends GlobalWebElements{
 	public WebElement header;
 	
 	//@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
-	@FindBy(xpath="(//span[contains(@class,'paragraph') and string-length(text()) > '1'])[1]")
+	//@FindBy(xpath="(//span[contains(@class,'paragraph') and string-length(text()) > '1'])[1]")
+	@FindBy(xpath="(//*[contains(@class,'content-section')]//span[contains(@class,'paragraph') and string-length(text()) > '1'])[1]")
 	public WebElement abountUsBodyParaSection;
 	
 	
