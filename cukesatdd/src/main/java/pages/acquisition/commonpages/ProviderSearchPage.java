@@ -606,8 +606,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 		
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-		jsClickNew(selectProviderBtn);
+	//	CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+	//	jsClickNew(selectProviderBtn);
 		
 		int counter =0;
 		for (WebElement element : MulitpleSaveBtns) {
@@ -641,24 +641,30 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 
 		}
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+		
+		/*---------------------Commented the lines as per new changes in rally---------------
+			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders); 	
 		waitForPageLoadSafari();
+		
 		
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
 		Checkcoverage.click();
 	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+	else
+		if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		//FinishButton.click();
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
 	}else
 		System.out.println("Issue with Xpath");
-
+	---------------------Commented the lines as per new changes in rally---------------*/
+		validateNew(FinishButton);
+		jsClickNew(FinishButton);
 	threadsleep(3);
-	waitForCountDecrement(2);
+	//waitForCountDecrement(2);
 //	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
