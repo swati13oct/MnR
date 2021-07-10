@@ -720,6 +720,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(id = "header-tfn-link")
 	private WebElement tfnHeaderLink;
+	
+	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
+	private WebElement tfnHeaderPopup;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6877,8 +6880,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(tfnHeaderLink);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		driver.switchTo().activeElement();
-		validate(CallSamTFN);
-		String ExpectedCallSAMTFN = CallSamTFN.getText();
+		validate(tfnHeaderPopup);
+		String ExpectedCallSAMTFN = tfnHeaderPopup.getText();
 		System.out.println("TFN No displayed on the Modal" + ExpectedCallSAMTFN);
 		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
 			System.out
@@ -6889,6 +6892,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
+		
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
 		
 	}
 
