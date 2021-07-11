@@ -73,7 +73,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'uhc-container')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need')]")
 	private WebElement needHelpHeader;
 	
-	@FindBy(xpath="//div[@data-bind-class='{hidden : !fedTfn}']//a[@class='tel tfn desktop'][normalize-space()='1-877-699-5710']")
+	@FindBy(xpath="//div[@data-bind-class='{hidden : !fedTfn}']//a[@class='tel tfn desktop']")
 	private WebElement needHelpTFN;
 	
 	@FindBy(id = "proceed")

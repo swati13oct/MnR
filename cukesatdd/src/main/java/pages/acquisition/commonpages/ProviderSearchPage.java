@@ -641,7 +641,9 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 
 		}
-		/*	CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+		
+		/*---------------------Commented the lines as per new changes in rally---------------
+			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders); 	
 		waitForPageLoadSafari();
 		
@@ -658,7 +660,7 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(FinishButton);
 	}else
 		System.out.println("Issue with Xpath");
-*/
+	---------------------Commented the lines as per new changes in rally---------------*/
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
 	threadsleep(3);

@@ -313,9 +313,10 @@ public class VisitorProfilePage extends UhcDriver {
 			Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		}*/
         //CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-        Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
+        Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs and Pharmacy")));
         //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
         jsClickNew(drugHeader);
+        System.out.println("Drug Name in VP page: "+drugName.getText());
         Assertion.assertTrue(drugName.getText().trim().contains(drug));
         Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
         Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
@@ -942,7 +943,7 @@ public class VisitorProfilePage extends UhcDriver {
             }
             driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
             try {
-                validateNew(ShareOneHealth_AgreeButton);
+                validate(ShareOneHealth_AgreeButton);
                 System.out.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
                 jsClickNew(ShareOneHealth_AgreeButton);
 
@@ -950,8 +951,8 @@ public class VisitorProfilePage extends UhcDriver {
                 System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
             }
             try {
-                validateNew(ConfirmIdentity_ModalHdr);
-                validateNew(ConfirmIdentity_ModalClose);
+                validate(ConfirmIdentity_ModalHdr);
+                validate(ConfirmIdentity_ModalClose);
                 jsClickNew(ConfirmIdentity_ModalClose);
             } catch (Exception e) {
                 System.out.println("Confirm Identity and Import Modal is NOT Dispalyed for VP Login - Continuing to VP");
