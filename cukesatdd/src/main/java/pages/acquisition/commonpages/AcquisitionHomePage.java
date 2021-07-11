@@ -723,6 +723,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
 	private WebElement tfnHeaderPopup;
+	
+	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
+	private WebElement tfnHeaderPopupClose;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6893,8 +6896,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					+ ExpectedCallSAMTFN);
 		}
 		
-		validate(CallSamTFNClose);
-		jsClickNew(CallSamTFNClose);
+		validate(tfnHeaderPopupClose);
+		jsClickNew(tfnHeaderPopupClose);
 		
 	}
 
