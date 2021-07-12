@@ -2,6 +2,7 @@ package acceptancetests.mobile.acquisition.planrecommendationengine;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -19,6 +20,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
@@ -691,6 +694,15 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_validate_prioritiesElements() {
 		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
 		prioritiesMobile.prioritiesElementsMobile();
+	}
+	
+	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
+	public void navigate_Plan_Selector_tool() {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		HeaderFooterMobile headerAndFooter =  new HeaderFooterMobile(driver);
+		LandingAndZipcodeMobilePage planSelectorhomepage =  new LandingAndZipcodeMobilePage(driver);
+		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
+//		headerAndFooter.breadCrumbs();
 	}
 
 }
