@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import io.appium.java_client.AppiumDriver;
 
 public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile {
 
@@ -31,7 +32,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	 * postData from the email plan list request Use that deeplink to open page and
 	 * validate content at later step
 	 */
-	public String getEmailDeepLink() {
+	public String getEmailDeepLink(AppiumDriver driver) {
 		String deepLinkEntryLine = null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 		for (LogEntry entry : entries) {

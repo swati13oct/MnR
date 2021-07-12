@@ -66,18 +66,18 @@ public class DCEACQDrugSummaryMobile {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	@When("^I access the acquisition DCE tool from home page$")
+	/*@When("^I access the acquisition DCE tool from home page$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) acquisitionHomePage
-				.navigateToDCEToolFromHome();
-		if (null != dcePage) {
-			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) acquisitionHomePage
+				.navigateToDCERedesignFromHome();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE page object not loaded");
-	}
+	}*/
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -94,23 +94,7 @@ public class DCEACQDrugSummaryMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	@When("^the user navigates to following medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_page(DataTable givenAttributes)
-			throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String path = memberAttributesMap.get("PagePath");
-		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : " + path);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.navigateToPath(path);
-	}
+	
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
@@ -389,6 +373,20 @@ public class DCEACQDrugSummaryMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+	@Then("^user should be navigated to first step of DCE Page$")
+	public void the_user_navigated_to_first_step_of_DCE_Page() {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
+	}
+	
+	
+	@When("^user clicks on Return to plan summary page link in DCE$")
+	public void user_clicks_on_Return_to_plan_summary_page_link_in_DCE() {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
+		drugSummaryPage.clickReturnToPlanSummary();
+	}
 
 }

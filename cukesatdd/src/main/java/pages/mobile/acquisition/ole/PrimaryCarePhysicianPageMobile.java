@@ -195,8 +195,9 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		if (validate(LookUpProviderBtn)) {
 			String PCPWindow = driver.getWindowHandle();
 
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", LookUpProviderBtn);
+			jsClickNew(LookUpProviderBtn);
+			/*JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", LookUpProviderBtn);*/
 			// LookUpProviderBtn.click();
 			// driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 			try {
@@ -260,8 +261,10 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 					// firstPCP.click();
 					// SelectPCPAddress.click();
 					jsClickNew(SelectPCPAddress);
-					executor = (JavascriptExecutor) driver;
-					executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
+					pageloadcomplete();
+					jsClickNew(SelectPCPContinueBtn);
+					/*executor = (JavascriptExecutor) driver;
+					executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);*/
 					/*
 					 * try { Thread.sleep(2000); if(validate(ReviewPCPButton)){
 					 * jsClickNew(ReviewPCPButton);
@@ -279,8 +282,10 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 						if (validate(SelectMedicalGrp)) {
 							// SelectMedicalGrp.click();
 							jsClickNew(SelectMedicalGrp);
-							executor = (JavascriptExecutor) driver;
-							executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
+							pageloadcomplete();
+							jsClickNew(MedicalGrpContinueBtn);
+							/*executor = (JavascriptExecutor) driver;
+							executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);*/
 
 						}
 
@@ -307,8 +312,9 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 						e.printStackTrace();
 					}
 					String PCPname = ProviderName.getText();
-					executor = (JavascriptExecutor) driver;
-					executor.executeScript("arguments[0].click();", AddProvider);
+					jsClickNew(AddProvider);
+					/*executor = (JavascriptExecutor) driver;
+					executor.executeScript("arguments[0].click();", AddProvider);*/
 
 					// AddProvider.click();
 					System.out.println("PCP selected : " + PCPname);
