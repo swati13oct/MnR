@@ -302,7 +302,7 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 	}
 	
 	public void nextPageNameValidation(String pageName) {
-		System.out.println("Next page Validation Mobile");
+		System.out.println("Next page Validation");
 		findPagedetails(pageName);
 		if (nextPageName.contains("NULL") == false) {
 			try {

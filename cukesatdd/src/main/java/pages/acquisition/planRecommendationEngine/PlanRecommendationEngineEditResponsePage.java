@@ -252,6 +252,16 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		}
 	}
 	
+	public void SignIn(String username, String password) {
+		System.out.println("Signin the profile:");
+		scrollToView(ShoppingCartImg);
+		actions.clickAndHold(ShoppingCartImg).build().perform();
+		validate(signInLink,10);
+		signInLink.click();
+		signIn(username, password);
+		threadsleep(3000);
+	}
+	
 	public void navigatePlanTypeFromMS(String flow) {
 		if(flow.equalsIgnoreCase("pdp")) 
 			PDPViewPlansLink.click();

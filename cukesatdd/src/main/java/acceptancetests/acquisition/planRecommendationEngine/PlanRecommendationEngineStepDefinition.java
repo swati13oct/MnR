@@ -1009,6 +1009,23 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorResultspage.validateLinks(tabtype);
    	}
 	
+	@Then("^user navigate to visitor profile with saving MS plan$")
+    public void Guest_Profile_MSPlan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.SavingMsplan();
+		preEditpage.shoppingcartNavigation(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+		planSelectorResultspage.ValidatePREWithMSPlan();
+    }
+	
+	@When("^user Sigin visitor profile from PRE$")
+	public void sign_vp(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.SignIn(inputValues.get("User Name"),inputValues.get("Password"));
+	}
+	
 	@Then("^user do browser back from current page$")
    	public void browser_back() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));

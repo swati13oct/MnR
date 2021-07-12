@@ -257,7 +257,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	
 	public void zipcodePagemultiCounty() {
 			waitforElementVisibilityInTime(zipcodeTextLabel, 45);
-			Assert.assertTrue(zipcodeTextLabel.getText().contains("Plans are specific to your area"));
+			validate(zipcodeTextLabel);
 			validate(zipcodePageCountyQuestion);
 			Assert.assertTrue(zipcodePageCountyQuestion.getText().contains("County"));
 			validate(zipcodePageCountyQuestionMark);

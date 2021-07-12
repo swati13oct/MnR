@@ -211,6 +211,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 	
+	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) #responsiveplan .status-bar img.unliked")
+	private WebElement MS1stPlanSaveImg;
+	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
 	private WebElement PDPPlanInfo;
 
@@ -2071,6 +2074,43 @@ public void ValidatePREWithoutMSPlan(String userType) {
 		validate(PREImage, 30);
 		validate(EditMyResponsesLink, 30);
 	}
+}
+
+public void ValidatePREWithMSPlan() {
+	System.out.println("Checking PRE widget in VP with MS Plan saving...");
+	if (!validate(PRESection, 30) || !validate(SavedRecomTitle, 30)) {
+		System.out.println("PRE widget is not displaying in VP...");
+		removeMSplaninVP();
+	} else
+		System.out.println("PRE widget is displaying in VP. Since its not having MS Plan...");
+
+}
+
+public void removeMSplaninVP() {
+	System.out.println("Deleting MS Plan in VP");
+	threadsleep(3000);
+	if (validate(MSPlanSection, 20)) {
+		scrollToView(MSPlanSection);
+		int MScount = MSPlansCount.size();
+		for (int i = 0; i < MScount; i++) {
+			MSPlanName.get(i).getText();
+			MSPlanRemoveIcon.get(i).click();
+			threadsleep(2000);
+		}
+	} else
+		System.out.println("MS Plan not found in VP");
+}
+
+public void SavingMsplan() {
+	System.out.println("Saving MS plan in PRE...");
+	if (validate(MSViewPlansLink)) {
+		MSViewPlansLink.click();
+		threadsleep(5000);
+	}
+	submitMSform();
+	threadsleep(2000);
+	validate(MS1stPlanSaveImg, 20);
+	MS1stPlanSaveImg.click();
 }
 
 public boolean click_ViewPlanLink(WebElement plantype) {
