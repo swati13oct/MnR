@@ -269,7 +269,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//table[@id='your-drugs-table']//td[contains(@ng-class,'Agent')]/parent::tr") })
 	private List<WebElement> drugList;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
@@ -278,7 +278,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[@id='printPlans']/th[2]/div[1]/span")
