@@ -339,10 +339,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
