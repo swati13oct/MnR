@@ -19,7 +19,7 @@ import acceptancetests.util.CommonUtility;
 public class DisclaimersAARPPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	@FindBy(xpath = "//span[contains(@class,'heading-1')]")
+	@FindBy(xpath = "//span[contains(@class,'heading-1') and contains(text(),'Disclaimers')]")
 	public WebElement header;
 
 	// @FindBy(xpath =
