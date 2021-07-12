@@ -200,7 +200,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		doctorspageOptions(doctor);
 		if (radioselect.isDisplayed()) {
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+			Assert.assertTrue(pageProgressPercentage.getText().contains("33% Complete"));
 		} else {
 			System.out.println("Doctor Type not selected in Doctors Page");
 		}
