@@ -593,7 +593,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[@id='gf_lnk_2']")
 	private WebElement Aboutus;
 
-	@FindBy(id = "logged-username")
+	@FindBy(xpath = "//button[contains(@id,'guest-saved')]")
 	private WebElement guestProfileLink;
 
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
