@@ -76,7 +76,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-3-button")
 	public WebElement learnAboutMedicareFooterButton;
 
-	@FindBy(xpath = "//div[contains(text(),'More')]")
+	@FindBy(xpath = "//*[@id='accordion-4-button']/div")
 	public WebElement more;
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")

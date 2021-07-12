@@ -1056,7 +1056,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
 
-		// jsClickNew(more);
+		jsClickNew(more);
 		validateNew(footerAboutUsLink);
 		iosScroll(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
