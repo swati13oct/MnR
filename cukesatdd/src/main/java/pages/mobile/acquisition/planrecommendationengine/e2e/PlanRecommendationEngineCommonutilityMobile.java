@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.data.CommonConstants;
 import pages.acquisition.commonpages.GlobalWebElements;
 
 
@@ -122,7 +123,7 @@ public class PlanRecommendationEngineCommonutilityMobile extends GlobalWebElemen
 		}
 
 		public void findPagedetails(String pageName) {
-			flow = PlanRecommendationEngineStepDefinition.PREflow;
+			flow = CommonConstants.PRE_FLOW;//PlanRecommendationEngineStepDefinition.PREflow; // Change static flow
 			currentPageName = pageName.toUpperCase().trim();
 			currrentPagePercentage = new String();
 			previousPageName = new String();

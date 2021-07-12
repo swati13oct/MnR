@@ -48,7 +48,7 @@ public class PlanRecommendationEngineStepDefinition {
 //	WebDriver wd;
 //	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
-	public static String PREflow="";
+	public String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
 		inputValues = new HashMap<String, String>();
@@ -56,6 +56,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
+			getLoginScenario().saveBean(CommonConstants.PRE_FLOW,PREflow);
 			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}

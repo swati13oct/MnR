@@ -27,6 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
@@ -830,7 +831,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void removedDrugsDetailsVPPtoPRE() {
 			System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
-			flow = PlanRecommendationEngineStepDefinition.PREflow;
+			flow = CommonConstants.PRE_FLOW;//PlanRecommendationEngineStepDefinition.PREflow;
 			DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 			boolean remove = true;
 			int count =DrugsInPRE.size();
@@ -842,7 +843,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void startnowtilldrugs() {
 			System.out.println("Navigating to PRE Using StartNow: ");
-			flow = PlanRecommendationEngineStepDefinition.PREflow;
+			flow = CommonConstants.PRE_FLOW;;//PlanRecommendationEngineStepDefinition.PREflow;
 			vppToPre();
 			validateDrugPage(flow, false);
 		}

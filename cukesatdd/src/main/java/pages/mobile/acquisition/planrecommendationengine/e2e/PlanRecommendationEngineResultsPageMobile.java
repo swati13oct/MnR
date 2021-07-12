@@ -689,7 +689,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	public void startnowtilldrugs() {
 		System.out.println("Navigating to PRE Using StartNow: ");
-		flow = PlanRecommendationEngineStepDefinition.PREflow;
+		flow = "MA";//PlanRecommendationEngineStepDefinition.PREflow; // Need to change on HOLD
 		MobileMenuAndGetPlanRecom();
 		// vppToPre();
 		validateDrugPage(flow, false);
