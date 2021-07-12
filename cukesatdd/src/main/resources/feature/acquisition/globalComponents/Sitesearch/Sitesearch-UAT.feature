@@ -21,7 +21,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_AMP | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
       | E2E Scenario 1_AMP | AARP | Dental coverage | Drug cost estimator             |
 
-    #@SiteSearch_UHC_01 @regressionUHC @vbfGate
+    @SiteSearch_UHC_01 @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_UMS | UHC  | Medicare        | Pharmacy                        |
@@ -90,7 +90,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    #@SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC @vbfGate
+    @SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
