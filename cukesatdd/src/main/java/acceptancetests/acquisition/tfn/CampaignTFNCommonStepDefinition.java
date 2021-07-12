@@ -1150,6 +1150,12 @@ public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable ar
 
 }
 
+@Then("^user clicks on back to plans link to navigate plan summary$")
+public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateBackToPlanSummaryPageFromDetailsPage();
+}
+
 }
 
 
