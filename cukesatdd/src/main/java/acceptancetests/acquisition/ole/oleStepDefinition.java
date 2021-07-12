@@ -432,8 +432,12 @@ public class oleStepDefinition {
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		scenario.log("Sai - Change made 06/15 - Validate TFN on Welcome OLE Page");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
-		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
+		
+	
+	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = welcomePage.ValidateTFN(PlanDetailsMap);
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
@@ -3319,7 +3323,7 @@ public class oleStepDefinition {
 
 	@Then("^the user validates TFN in Welcome OLE Right Rail PlanCompare$")
 	public void the_user_validates_TFN_in_Right_Rail_PlanCompare() throws Throwable {
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		/*WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		String TFN ="";
 		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
 
@@ -3333,7 +3337,7 @@ public class oleStepDefinition {
 		else{
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
 			Assertion.fail();
-		}
+		}*/
 	}
 
 	@Then("^the user validates Footer links on Welcome OLE Page$")
