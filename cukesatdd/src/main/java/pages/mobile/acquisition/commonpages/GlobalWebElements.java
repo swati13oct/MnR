@@ -23,15 +23,15 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
-	
+
 	@FindBy(xpath = "//a[text()='Home']")
 	public WebElement breadCrumbHomeLink;
 
 	// @FindBy(id = "gf_lnk_2")
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'about-us')]")
 	public WebElement footerAboutUsLink;
 
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'contact-us')]")
 	public WebElement footerContactUsLink;
 
 	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'sitemap')]")
@@ -62,7 +62,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBys(value = { @FindBy(id = "footnotes1") })
 	public WebElement footnotesContent;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-advantage-plans')]")
+	// @FindBy(xpath =
+	// "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-advantage-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
 	public WebElement medicareAdvantagePlansLink;
 
 	@FindBy(xpath = "//div[contains(text(),'Shop Plans')]")
@@ -77,16 +79,16 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'More')]")
 	public WebElement more;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'dual-special-needs-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-supplement-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
 	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
 	public WebElement medicareSupplementInsurancePlansHeader;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'prescription-drug-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -136,7 +138,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
-	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	// @FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
 	public WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
@@ -251,7 +254,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
 	public WebElement UHCLogo;
 
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	// @FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	public WebElement visitorprofileicon;
 
 	// @FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
@@ -261,82 +265,67 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'plan-recommendation')]")
 	public WebElement planRecommendationLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'estimate-drug-costs')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'estimate-drug-costs')]")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'Pharmacy-Search-English')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'Pharmacy-Search-English')]")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
 	public WebElement providerSearchLink;
 
-	// @FindBy(xpath =
-	// "(//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-education')])[1]")
-	@FindBy(xpath = "//*[@id='accordion-3-content']//a[@href='/medicare-education.html']")
-	public WebElement introductionToMedicareLink;
+	@FindBy(xpath = "(//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-education')])[1]")
+	public WebElement introductioMedicareLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-eligibility')]")
-	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-eligibility')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-eligibility')]")
+
 	public WebElement eligibilityLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
-	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-parts-and-medigap-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
 	public WebElement coverageChoiceLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-faq')]")
-	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-faq')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-faq')]")
 	public WebElement medicareFaqLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
-	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'about-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'about-us')]")
 	public WebElement aboutLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
-	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'contact-us')]")
 	public WebElement contactLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
-	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'language-assistance')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
 
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'aarp.org')]")
 	public WebElement footerAARPLink;
-	
-	
-//	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+
+	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
-	
+
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
-	
+
 	@FindBy(css = "#ghn_lnk_2")
 	public WebElement shopForAPlan;
-	
+
 	@FindBy(css = "#subnav_2 .nav-back")
 	public WebElement shopForPlanBackButton;
-	
+
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
-	
+
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
-	
+
 	@FindBy(css = "#ghn_lnk_3")
 	public WebElement learnAboutMedicareNavButton;
-	
+
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
-	
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
@@ -406,33 +395,33 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
-	public void accessFooterLinkFromLearnAboutMedicare(String option) {
-		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-3-button"));
-		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
-		if (!expanded) {
-			jsClickNew(learnAboutMedicareFooterButton);
-		}
-
-		option = option.toLowerCase();
-
-		switch (option) {
-		case "introduction to medicare":
-			jsClickNew(introductionToMedicareLink);
-			break;
-		case "eligibility":
-			jsClickNew(eligibilityLink);
-			break;
-		case "coverage choices":
-			jsClickNew(coverageChoiceLink);
-			break;
-		case "medicare faq":
-			jsClickNew(medicareFaqLink);
-			break;
-		default:
-			throw new IllegalArgumentException("Invalid Learn about Medicare option" + option);
-		}
-		pageloadcomplete();
-	}
+//	public void accessFooterLinkFromLearnAboutMedicare(String option) {
+//		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-3-button"));
+//		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
+//		if (!expanded) {
+//			jsClickNew(learnAboutMedicareFooterButton);
+//		}
+//
+//		option = option.toLowerCase();
+//
+//		switch (option) {
+//		case "introduction to medicare":
+//			jsClickNew(introductionToMedicareLink);
+//			break;
+//		case "eligibility":
+//			jsClickNew(eligibilityLink);
+//			break;
+//		case "coverage choices":
+//			jsClickNew(coverageChoiceLink);
+//			break;
+//		case "medicare faq":
+//			jsClickNew(medicareFaqLink);
+//			break;
+//		default:
+//			throw new IllegalArgumentException("Invalid Learn about Medicare option" + option);
+//		}
+//		pageloadcomplete();
+//	}
 
 	public void accessFooterLinkFromMore(String option) {
 		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-4-button"));
@@ -459,44 +448,44 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
-		
+
 		pageloadcomplete();
 	}
 
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		jsClickNew(home);
-		if(validate(getStartedButton)) {
+		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
-		} 
+		}
 		return null;
 	}
-	
+
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		jsClickNew(shopForAPlan);
-		if(validate(shopForPlanBackButton)) {
+		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
-		} 
+		}
 		return null;
 	}
-	
+
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		jsClickNew(learnAboutMedicareNavButton);
-		if(validate(learnAboutMedicareBackButton)) {
+		if (validate(learnAboutMedicareBackButton)) {
 			return new LearnAboutMedicareHomePageMobile(driver);
-		} 
+		}
 		return null;
 	}
-	
+
 }

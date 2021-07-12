@@ -47,6 +47,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	private WebElement UHCICSubTitle;
+
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent;
 
@@ -341,7 +344,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-//	@FindBy(xpath = "//h3[@id='guest-profile']")
+	// @FindBy(xpath = "//h3[@id='guest-profile']")
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
@@ -1052,11 +1055,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		/*
-		 * scrollToView(footerAboutUsLink); validateNew(footerAboutUsLink);
-		 * jsClickNew(footerAboutUsLink);
-		 */
-		accessFooterLinkFromMore("about");
+
+		// jsClickNew(more);
+		validateNew(footerAboutUsLink);
+		iosScroll(footerAboutUsLink);
+		jsClickNew(footerAboutUsLink);
+
 		pageloadcomplete();
 		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
@@ -1095,11 +1099,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		/*
-		 * scrollToView(footerContactUsLink); validateNew(footerContactUsLink); //
-		 * footerContactUsLink.click(); jsClickNew(footerContactUsLink);
-		 */
-		accessFooterLinkFromMore("contact");
+
+		jsClickNew(more);
+		validateNew(footerContactUsLink);
+		// footerContactUsLink.click();
+		jsClickNew(footerContactUsLink);
+
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPageMobile(driver);
@@ -2376,30 +2381,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			// validateNew(aarpOrgLink);
+			validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
-		jsClickNew(shopPlansExpander);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
 		// validateNew(learnAboutMedicareLink);
 
-		jsClickNew(toolsAndResources);
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
-		jsClickNew(learnAboutMedicareFooterButton);
-		validateNew(introductionToMedicareLink);
+		validateNew(introductioMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
-		jsClickNew(more);
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
@@ -2921,7 +2922,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
-//		jsClickNew(guestProfileLink);	//This locator is seen after we hover on heart icon
+		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
+		// icon
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
@@ -3200,15 +3202,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		// validateNew(headerSignInLink);
+		// validateNew(headerRegisterLink);
+		// Actions action = new Actions(driver);
+		// action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(visitAARPLink);
+			validate(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(visitorprofileicon);
+		validate(visitorprofileicon);
 	}
 
 	public void clickRequestAsistancce() {
@@ -3346,7 +3353,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'Accessibility')]")
+	@FindBy(xpath = "//*[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
 
 	public void Accessibility() {
@@ -3403,19 +3410,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
 	private WebElement MedicareAdvantagePlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
 	private WebElement DualSpecialNeedsPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
 	private WebElement MedicareSupplementInsurancePlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
@@ -3669,9 +3676,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-
-	@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
-	private WebElement UHCICSubTitle;
 
 	public void validateSubtitle() {
 		threadsleep(5);
@@ -4733,4 +4737,34 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.navigate().back();
 	}
+
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
+	private WebElement planMemberLink;
+
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	private WebElement goToMemberSiteLink;
+
+	public void clickMemberSiteLink() {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		// Actions action = new Actions(driver);
+		// action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
+		jsClickNew(goToMemberSiteLink);
+		String base = driver.getWindowHandle();
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				driver.close();
+			}
+		}
+		driver.switchTo().window(base);
+	}
+
 }
