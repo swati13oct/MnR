@@ -1,7 +1,7 @@
 @UATRegression @F513647 @globalComponent @headerfooter @GlobalHeaderFooter
 Feature: 1.12 UAT - Header and Footer flows
 
-  @globalfooterULayer @UATRegression123 
+  @globalfooterULayer @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -32,10 +32,11 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user validates Language assistance links
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
-    And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
+    #And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -105,10 +106,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
+    And user hover over for plan member to click to go to member site
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -162,10 +164,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -219,10 +222,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -278,10 +282,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -305,7 +310,7 @@ Feature: 1.12 UAT - Header and Footer flows
       #| E2E Scenario_2 AMP | AARP | shop/connect.html                 | Connect with UnitedHealthcare                        |
       | E2E Scenario_2 AMP | AARP | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
       #| E2E Scenario_2 AMP | AARP | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
-      | E2E Scenario_2 AMP | AARP | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
+      #| E2E Scenario_2 AMP | AARP | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 AMP | AARP | shop/compare.html                 | Shop: Compare Plans                                  |
 
     #|E2E Scenario_2 AMP|AARP|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |Appeals and Grievances|
@@ -347,7 +352,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | resources/prescription-drug-appeals.html                      | Prescription Drug Coverage Determinations, Appeals and Grievances |
       | E2E Scenario_2 AMP | AARP | resources/healthcare-fraud.html                               | Preventing Medicare Fraud                                         |
       | E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans.html                   | Medicare Supplement Insurance Plans                               |
-      | E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
+      #| E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
       | E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 AMP | AARP | medicare-education.html                                       | Understanding Medicare                                            |
 
@@ -399,7 +404,7 @@ Feature: 1.12 UAT - Header and Footer flows
       # | E2E Scenario_2 UMS | UHC  | shop/connect.html                 | Connect with UnitedHealthcare                        |
       | E2E Scenario_2 UMS | UHC  | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
       # | E2E Scenario_2 UMS | UHC  | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
-      | E2E Scenario_2 UMS | UHC  | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
+      #| E2E Scenario_2 UMS | UHC  | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 UMS | UHC  | shop/compare.html                 | Shop: Compare Plans                                  |
 
     #| E2E Scenario_2 UMS | UHC  | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html        | Appeals and Grievances                                 |
@@ -441,7 +446,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | resources/prescription-drug-appeals.html                      | Prescription Drug Coverage Determinations, Appeals and Grievances |
       | E2E Scenario_2 UMS | UHC  | resources/healthcare-fraud.html                               | Preventing Medicare Fraud                                         |
       | E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans.html                   | Medicare Supplement Insurance Plans                               |
-      | E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
+      #| E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
       | E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 UMS | UHC  | medicare-education.html                                       | Understanding Medicare                                            |
 
@@ -515,10 +520,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header

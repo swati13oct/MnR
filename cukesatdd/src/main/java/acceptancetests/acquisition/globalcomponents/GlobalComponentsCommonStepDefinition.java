@@ -97,6 +97,7 @@ public class GlobalComponentsCommonStepDefinition {
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
+		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
 		
 	}
@@ -1081,5 +1082,26 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateFooterLinksNavigation(linkName);
 	}
+	
+	@When("^user hover over for plan member to click to go to member site$")
+	public void hover_plan_Member_to_Click_membersite() {
+		scenario.log("Changes made on 6/30- Step added for new Header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			aquisitionhomepage.clickMemberSiteLink();
+		} else {
+			Assertion.fail("Home page not found");
+		}
+	}
+	
+	@When("user validates TFN in header")
+	public void user_clicks_on_tfn_in_header() throws InterruptedException {
+		scenario.log("Changes made on 7/06- Step added for new Header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateTfnInHeader();
+	}
+
 }
 
