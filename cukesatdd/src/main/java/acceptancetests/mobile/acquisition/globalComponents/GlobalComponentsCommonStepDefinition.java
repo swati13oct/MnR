@@ -38,6 +38,7 @@ import pages.mobile.acquisition.commonpages.MedicareSupplementInsurancePlansPage
 import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
