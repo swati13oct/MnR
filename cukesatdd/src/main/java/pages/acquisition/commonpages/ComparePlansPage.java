@@ -278,7 +278,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	@FindBy(xpath  = "//button[contains(@id,'saved-items')]")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[@id='printPlans']/th[2]/div[1]/span")
