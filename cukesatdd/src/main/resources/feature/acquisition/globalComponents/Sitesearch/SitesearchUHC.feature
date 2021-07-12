@@ -107,7 +107,7 @@ Feature: 2.03 Acq-To verify Sitesearch results in UMS site
       | searchValue     | url                                                           |
       | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-  @vbfGate
+  #@vbfGate
   Scenario Outline: Verify search results on Homepage - <searchValue> - <newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

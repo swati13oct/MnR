@@ -29,7 +29,6 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
@@ -329,7 +328,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-	@FindBy(xpath = "//*[@id='addDrug']")
+	// @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//a[normalize-space()='Estimate Your Drug Costs']")
@@ -445,7 +445,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
 
-	@FindBy(xpath = "//*[@id='search-field']")
+	@FindBy(xpath = "//input[@id='search-field']")
 	private WebElement EnterSearch;
 
 	@FindBy(xpath = "//button[contains(text(),'Search')]")
@@ -3200,15 +3200,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		//validateNew(headerSignInLink);
+		//validateNew(headerRegisterLink);
+		//Actions action = new Actions(driver);
+		//action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(visitAARPLink);
+			validate(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(visitorprofileicon);
+		validate(visitorprofileicon);
 	}
 
 	public void clickRequestAsistancce() {
@@ -3403,19 +3408,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
 	private WebElement MedicareAdvantagePlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
 	private WebElement DualSpecialNeedsPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
 	private WebElement MedicareSupplementInsurancePlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
@@ -4246,293 +4251,52 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
+	public void clickOnPlanRecommendationButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 32).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
+		WebElement lnkPRE = driver
+				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
+		jsClickNew(lnkPRE);
+		sleepBySec(5);
+		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
+			System.out.println("Plan Recommendation Engine open successfully");
 
 			Assertion.assertTrue(true);
 		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
+			Assertion.fail("Plan Recommendation Engine did not open successfully");
 		}
-		// ViewMedicareplanlinks.click();
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
-		String prodURL = "https://www.aarpmedicareplans.com/";
-		String offlineprodURL = "https://offline.aarpmedicareplans.com/";
-		String urlCheck = driver.getCurrentUrl();
-		String expectedURL = urlCheck.replace(prodURL, offlineprodURL);
-		System.out.println("**********Actual URL is displayed *************" + expectedURL);
-
+		driver.navigate().back();
 	}
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
+	private WebElement planMemberLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	private WebElement goToMemberSiteLink;
 
-	public void clickLearnAboutMedicareNavLink(String linkName) {
-		WebElement link = driver.findElement(
-				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
-		waitforElement(link);
-		jsClickNew(link);
-	}
-
-	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
-		switch (linkName) {
-
-		case "Introduction":
-			Assertion.assertTrue("Navigation to Introduction page failed",
-					driver.getCurrentUrl().contains("/medicare-education"));
-			break;
-		case "Eligibility":
-			Assertion.assertTrue("Navigation to Eligibility page failed",
-					driver.getCurrentUrl().contains("/medicare-eligibility"));
-			break;
-		case "Coverage Options":
-			Assertion.assertTrue("Navigation to Coverage Options failed",
-					driver.getCurrentUrl().contains("medicare-parts-and-medigap-plans"));
-			break;
-
-		case "Prescriptions, Providers & Benefits":
-			Assertion.assertTrue("Navigation to Prescriptions, Providers & Benefits page failed",
-					driver.getCurrentUrl().contains("medicare-benefits"));
-			break;
-
-		case "Medicare Cost Basics":
-			Assertion.assertTrue("Navigation to Medicare Cost Basics page failed",
-					driver.getCurrentUrl().contains("medicare-costs"));
-			break;
-
-		case "Medicare Advantage Plans":
-			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed",
-					driver.getCurrentUrl().contains("medicare-advantage-plans"));
-			break;
-
-		case "Medicare Supplement Insurance":
-			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed",
-					driver.getCurrentUrl().contains("medicare-supplement-plans"));
-			break;
-
-		case "Medicare Prescription Drug Plans":
-			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed",
-					driver.getCurrentUrl().contains("medicare-part-d"));
-			break;
-
-		case "When to Enroll":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed",
-					driver.getCurrentUrl().contains("when-to-enroll"));
-			break;
-
-		case "Medicare FAQ":
-			Assertion.assertTrue("Navigation to Medicare FAQ page failed",
-					driver.getCurrentUrl().contains("medicare-faq"));
-			break;
-
-		case "Articles and Special Topics":
-			Assertion.assertTrue("Navigation to Articles and Special Topics page failed",
-					driver.getCurrentUrl().contains("medicare-articles"));
-			break;
-
-		default:
-			System.out.println("Link not available under Learn about Medicare");
-		}
-	}
-
-	public void validateFooterLinksNavigation(String linkName) {
+	
+	public void clickMemberSiteLink() {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		//Actions action = new Actions(driver);
+		//action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
+		jsClickNew(goToMemberSiteLink);
 		String base = driver.getWindowHandle();
 		Set<String> all = driver.getWindowHandles();
-		boolean flag = false;
-		switch (linkName) {
-
-		case "Introduction to Medicare":
-			Assertion.assertTrue("Navigation to Introduction page failed",
-					driver.getCurrentUrl().contains("/medicare-education"));
-			break;
-		case "Eligibility":
-			Assertion.assertTrue("Navigation to Eligibility page failed",
-					driver.getCurrentUrl().contains("/medicare-eligibility"));
-			break;
-		case "Coverage Choices":
-			Assertion.assertTrue("Navigation to Coverage Options failed",
-					driver.getCurrentUrl().contains("medicare-parts-and-medigap-plans"));
-			break;
-
-		case "Medicare FAQ":
-			Assertion.assertTrue("Navigation to Medicare FAQ page failed",
-					driver.getCurrentUrl().contains("medicare-faq"));
-			break;
-
-		case "Medicare Advantage Plans":
-			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed",
-					driver.getCurrentUrl().contains("medicare-advantage-plans"));
-			break;
-
-		case "Medicare Supplement Insurance Plans":
-			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed",
-					driver.getCurrentUrl().contains("medicare-supplement-plans"));
-			break;
-
-		case "Medicare Prescription Drug Plans":
-			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed",
-					driver.getCurrentUrl().contains("prescription-drug-plans"));
-			break;
-
-		case "Dual Special Needs Plans":
-			Assertion.assertTrue("Navigation to Dual Special Needs Plans page failed",
-					driver.getCurrentUrl().contains("dual-special-needs-plans"));
-			break;
-
-		case "Plan Recommendation":
-			Assertion.assertTrue("Navigation to Plan Recommendation page failed",
-					driver.getCurrentUrl().contains("plan-recommendation-engine"));
-			break;
-
-		case "Drug Cost Estimator":
-			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed",
-					driver.getCurrentUrl().contains("estimate-drug-costs"));
-			break;
-
-		case "Pharmacy Search":
-			Assertion.assertTrue("Navigation to Pharmacy Search page failed",
-					driver.getCurrentUrl().contains("Pharmacy-Search"));
-			break;
-
-		case "Provider Search":
-			for (String s : all) {
-				driver.switchTo().window(s);
-				// sleepBySec(5);
-				flag = driver.getCurrentUrl().contains("werally");
-				if (!base.equals(s)) {
-					driver.close();
-					break;
-				}
-			}
-			driver.switchTo().window(base);
-			Assertion.assertTrue("Navigation to Provider Search page failed", flag);
-			break;
-
-		case "About":
-			Assertion.assertTrue("Navigation to About page failed", driver.getCurrentUrl().contains("about-us"));
-			break;
-
-		case "Contact":
-			Assertion.assertTrue("Navigation to Contact page failed", driver.getCurrentUrl().contains("contact-us"));
-			break;
-
-		case "Language Assistance":
-			for (String s : all) {
-				driver.switchTo().window(s);
-				flag = driver.getCurrentUrl().contains("language-assistance");
-				if (!base.equals(s)) {
-					driver.close();
-					break;
-				}
-			}
-			driver.switchTo().window(base);
-			Assertion.assertTrue("Navigation to Language Assistance page failed", flag);
-			break;
-
-		case "AARP.org":
-			if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
-				System.out.println("AARP.org link not present for UHC site");
-				break;
-			} else {
-				for (String s : all) {
-					driver.switchTo().window(s);
-					flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
-					if (!base.equals(s)) {
-						driver.close();
-						break;
-					}
-				}
-				driver.switchTo().window(base);
-				Assertion.assertTrue("Navigation to AARP.org page failed", flag);
-				break;
-			}
-
-		default:
-			System.out.println("Link not available under Learn about Medicare");
-		}
-	}
-
-	@FindBy(id = "learnmore-email-address")
-	private WebElement learnMoreMedicareEmailTxtBox;
-
-	@FindBy(xpath = "//*[@id='learnmore-email-address']/../button")
-	private WebElement learnMoreMedicareEmailSubmitBtn;
-
-	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
-	private WebElement learnMoreMedicareEmailSubmissionMsg;
-
-	public void validateLearnAboutMedicareEmailSection() {
-		learnMoreMedicareEmailTxtBox.sendKeys("abc@abc.com");
-		learnMoreMedicareEmailSubmitBtn.click();
-	}
-
-	public void validateEmailSubmissionMessage(String expectedMsg) {
-		waitforElement(learnMoreMedicareEmailSubmissionMsg);
-		System.out.println(learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", ""));
-		String actualMsg = learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", "");
-		System.out.println(expectedMsg);
-		Assertion.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
-	}
-
-	public VPPPlanSummaryPageMobile checkZipCompSubNavVpp(String zipCode) {
-		sendkeys(OurPlans_zipfield, zipCode);
-		jsClickNew(FindPlansButton1);
-		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
-			return new VPPPlanSummaryPageMobile(driver);
-		}
-		return null;
-	}
-
-	public void closeBrowserTab() {
-		if (driver.getWindowHandles().size() > 1) {
-			String currentPage = driver.getWindowHandle();
-			Set<String> newWindow = driver.getWindowHandles();
-			for (String tabs : newWindow) {
-				if (!tabs.equalsIgnoreCase(currentPage)) {
-					driver.switchTo().window(currentPage).close();
-					driver.switchTo().window(tabs);
-					CommonUtility.checkPageIsReadyNew(driver);
-				}
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				driver.close();
 			}
 		}
-
+		driver.switchTo().window(base);
 	}
-
+	
 	public void validatestatedropDown(String state, String code) {
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
@@ -4545,192 +4309,4 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 */
 	}
 
-	public void validateMedupsStateUrl(String state, String code, String classicStates, String AllStates) {
-		if (state.equalsIgnoreCase("Oregon")) {
-			validate(stateDropDown);
-			validate(MedSuppClassicUrl);
-			System.out.println("State is: " + state);
-			System.out.println("Code is: " + code);
-			System.out.println("Medicare Supplement Url is: " + MedSuppClassicUrl.getAttribute("href"));
-			Assert.assertTrue(MedSuppClassicUrl.getAttribute("href").contains(classicStates));
-			String CurrentURL = driver.getCurrentUrl();
-			System.out.println("Current URL : " + CurrentURL);
-			Assert.assertTrue(CurrentURL.contains(classicStates));
-		} else {
-			validate(stateDropDown);
-			validate(MedicareSuppUrl);
-			System.out.println("State is: " + state);
-			System.out.println("Code is: " + code);
-			System.out.println("Medicare Supplement Url is: " + MedicareSuppUrl.getAttribute("href"));
-			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains(AllStates));
-			String CurrentURL = driver.getCurrentUrl();
-			System.out.println("Current URL : " + CurrentURL);
-			Assert.assertTrue(CurrentURL.contains(AllStates));
-		}
-	}
-
-	public void clickFooterLinks(String linkName) {
-		WebElement link = null;
-		String url = driver.getCurrentUrl();
-
-		if (linkName.equals("Medicare Supplement Insurance Plans")) {
-			link = driver.findElement(
-					By.xpath("//*[@class='uhc-footer']//span[contains(text(),'Medicare Supplement Insurance Plans')]"));
-			waitforElement(link);
-			jsClickNew(link);
-			pageloadcomplete();
-		} else {
-			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
-				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName + "')]")).size();
-				if (size != 0) {
-					System.out.println("AARP.org link is not displaying");
-				} else {
-					System.out.println("AARP.org link is displaying");
-					Assert.assertFalse(size == 0);
-				}
-			} else {
-				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName + "')]"));
-				waitforElement(link);
-				jsClickNew(link);
-				pageloadcomplete();
-			}
-		}
-
-	}
-
-	public String fetchEnvironmentUrlsUMS() {
-		if (MRScenario.environment.equals("offline")) {
-			testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-			return testSiteUrl;
-		} else if (MRScenario.environment.equals("prod")) {
-			testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-			return testSiteUrl;
-		} else if (MRScenario.environment.contains("stage-0")) {
-			testSiteUrl = UMS_ACQISITION_PAGE_URL_NEW;
-			return testSiteUrl;
-		} else
-			testSiteUrl = UMS_ACQISITION_PAGE_URL;
-		return testSiteUrl;
-	}
-
-	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 28).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
-		}
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-	}
-
-	@FindBy(xpath = "(//*[contains(text(),'Sign in')])[1]")
-	private WebElement memberSignInPage;
-
-	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/?WT.mc_id=8009508')]")
-	private WebElement ViewMedicareplanlinks;
-
-	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 31).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
-		}
-		// ViewMedicareplanlinks.click();
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
-		String prodURL = "https://www.aarpmedicareplans.com/";
-		String urlCheck = driver.getCurrentUrl();
-		String expectedURL = urlCheck.replace(prodURL, stageURL);
-		System.out.println("**********Actual URL is displayed *************" + expectedURL);
-
-	}
-
-	public void clickOnPlanRecommendationButton() {
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkPRE = driver
-				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
-		jsClickNew(lnkPRE);
-		sleepBySec(5);
-		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
-			System.out.println("Plan Recommendation Engine open successfully");
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("Plan Recommendation Engine did not open successfully");
-		}
-		driver.navigate().back();
-	}
 }

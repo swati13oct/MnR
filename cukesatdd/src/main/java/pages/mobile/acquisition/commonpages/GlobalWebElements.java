@@ -136,7 +136,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
-	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
 	public WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
@@ -251,7 +252,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
 	public WebElement UHCLogo;
 
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	public WebElement visitorprofileicon;
 
 	// @FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
@@ -273,38 +275,24 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
 	public WebElement providerSearchLink;
 
-	// @FindBy(xpath =
-	// "(//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-education')])[1]")
 	@FindBy(xpath = "//*[@id='accordion-3-content']//a[@href='/medicare-education.html']")
 	public WebElement introductionToMedicareLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-eligibility')]")
 	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-eligibility')]")
 	public WebElement eligibilityLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
 	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-parts-and-medigap-plans')]")
 	public WebElement coverageChoiceLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-faq')]")
 	@FindBy(xpath = "//*[@id='accordion-3-content']//a[contains(@href,'medicare-faq')]")
 	public WebElement medicareFaqLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'about-us')]")
 	public WebElement aboutLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'contact-us')]")
 	public WebElement contactLink;
 
-	// @FindBy(xpath =
-	// "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
 
