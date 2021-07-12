@@ -638,7 +638,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
 	private WebElement rightRailSectionTFNHeader1;
 
-	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[3]")
 	private WebElement footertextsectioncallus;
 
 	@FindBy(xpath = "(//*[contains(text(),'Hours: 8 a.m.')])")
