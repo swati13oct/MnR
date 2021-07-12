@@ -339,7 +339,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
+//	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
 //	@FindBy(xpath = "//h3[@id='guest-profile']")
@@ -509,7 +510,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
 	private WebElement MedicareSuppUrl;
-
+	
+	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
+	private WebElement pdpPharmacyLink;
+	
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
 	String CallSam = "1-877";
@@ -4100,7 +4104,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
-		MobileMenuAccessPharmacy();
+		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
+		shopForPlanNavigationPageMobile.selectPlanTypeOption("PDP", false);
+		
+		jsClickNew(pdpPharmacyLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
