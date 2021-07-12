@@ -1,4 +1,3 @@
-
 package acceptancetests.acquisition.vpp;
 
 import java.io.File;
@@ -4483,6 +4482,18 @@ public class VppCommonStepDefinition {
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String drugName = givenAttributesMap.get("Drugs");
 		planComparePage.validateViewDrugInformation(drugName);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
+	
+	@Then("^the user Select PCP popup modal on Plan Compare page")
+	public void user_select_PCP_modal_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pcps = givenAttributesMap.get("PCPs");
+		planComparePage.validatePCPModal(pcps);
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}

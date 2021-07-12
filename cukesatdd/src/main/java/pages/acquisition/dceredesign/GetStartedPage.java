@@ -33,14 +33,14 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@dtmname,'get started') and contains(@class, 'disabled')])[1]")
 	public WebElement getStartedStep;
 
-//	@FindBy(id = "dupIconFlyOut")
-	@FindBy(xpath = "//*[contains(@class,'saved_items')]")
+
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 
-	@FindBy(xpath = "//button[contains(@id,'saved-items')]")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
