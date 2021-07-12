@@ -167,6 +167,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#filter_toggle_id")
 	protected WebElement filterToggle;
 	
+	@FindBy(css = "div[class$='accordion'] > div[id^='collapsible']")
+	protected WebElement filterOptions;
+	
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
 	@FindBy(css = "[id*='indian-tribal-label']")
 	protected WebElement indian_tribal_label_filter;

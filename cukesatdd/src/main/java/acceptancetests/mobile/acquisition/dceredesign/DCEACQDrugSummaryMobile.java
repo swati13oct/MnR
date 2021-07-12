@@ -208,15 +208,15 @@ public class DCEACQDrugSummaryMobile {
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		drugSummaryPage.verifyDefaultPlanType();
+//		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+//		drugSummaryPage.verifyDefaultPlanType();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
 	@When("^user should be able to see \"([^\"]*)\" by default$")
 	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(wd);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
