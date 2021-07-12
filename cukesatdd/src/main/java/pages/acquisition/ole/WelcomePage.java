@@ -82,7 +82,11 @@ public class WelcomePage extends UhcDriver{
 
 	//	@FindBy(id = "//*[contains(text(),'Need Help? Call')]/u")
 	@FindBy(xpath = "//*[contains(@class,'tel tfn')]")
-	private WebElement RightRailTFN;
+	private WebElement TFNNoWidget;
+	
+	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	private WebElement TFNNoNeedHelp;
+	
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
@@ -217,22 +221,25 @@ public class WelcomePage extends UhcDriver{
 			
 	}
 
-
+	
 	public boolean ValidateTFN(Map<String, String> planDetailsMap) {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
 		
-		String TFN_OLE = RightRailTFN.getText();
+		String TFNWidget_OLE = TFNNoWidget.getText();
+		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
+			
 		
-		System.out.println("TFN in OLE Right Rail : "+TFN_OLE);
+		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
+		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
 		
 		String Expected_TFN = planDetailsMap.get("TFN");
 		
 		System.out.println("TFN in VPP page : "+Expected_TFN);
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
-					flag = TFN_OLE.contains(Expected_TFN);
+					flag = TFNWidget_OLE.contains(Expected_TFN) && TFNNeedHelp_OLE.contains(Expected_TFN);
 				}			
 		
 		System.out.println("TFN not displayed in OLE right rail"+flag);
