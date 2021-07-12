@@ -123,7 +123,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	 public WebElement importantDisclosuresLink;
 	
-	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
 	 public WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
@@ -241,7 +242,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[contains(@id,'uhcSVGLogo')]")
 	public  WebElement UHCLogo;
 	
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	 public WebElement visitorprofileicon;
 	
 	//@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
@@ -283,6 +285,27 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
+	
+	@FindBy(id = "search-field")
+	public WebElement searchTxtbox;
+	
+	@FindBy(id = "header-tfn-link")
+	public WebElement headerTfn;
+	
+	@FindBy(id = "guest-profile")
+	public WebElement visitorProfileFlyoutTitle;
+	
+	@FindBy(id = "guest-saved-items-button")
+	public WebElement visitorProfileFlyoutViewSavedItemBtn;
+	
+	@FindBy(id = "flyout-drug-button")
+	public WebElement visitorProfileFlyoutAddDrugBtn;
+	
+	@FindBy(id = "flyout-plan-button")
+	public WebElement visitorProfileFlyoutAddPlansBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
+	public WebElement visitorProfileFlyoutSignInLink;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
