@@ -47,8 +47,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//h2[contains(text(),'Get Started')]")
-
+	@FindBy(xpath = "//div/h2[text()='Get Started ']")
 	public WebElement getStartedTab;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")
@@ -141,6 +140,14 @@ public class GetStartedPageMobile extends UhcDriver {
 		}
 		return null;
 
+	}
+	
+	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
+	private WebElement breadCrumbLink;
+
+	public void validateBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+				breadCrumbLink.getText().equals(breadCrumb));
 	}
 
 }

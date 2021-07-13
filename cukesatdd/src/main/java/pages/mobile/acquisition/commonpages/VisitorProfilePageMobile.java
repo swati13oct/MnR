@@ -61,16 +61,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
 
-	@FindBy(css = "div.signupCTA a.profileBtn")
+//	@FindBy(css = "div.signupCTA a.profileBtn")
+	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--outlined uhc-button--secondary mt-20']")
 	private WebElement addPlans;
 
-	@FindBy(css = "a.addrugs")
+	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
@@ -106,14 +107,20 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(id = "header-number")
 	private WebElement shoppingCartNumber;
 
-	@FindBy(xpath = "//div[contains(@class,'compare')]/button")
+	@FindBy(xpath = "//a[text()='Compare Plans']")
 	private WebElement comparePlans;
 
 	@FindBy(css = "button.cta-button.create-profile")
 	private WebElement comparePlansOnPopup;
 
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
-	private WebElement enrollBtn;
+	private WebElement comparePlansPageControl;
+
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']/button/span")
+	private WebElement enrollButton;
+
+	@FindBy(xpath = "//div[@class='uhc-compare-header__controls']")
+	private WebElement comparePlansConrol;
 
 	@FindBy(css = "div#navLinks>a:first-child")
 	private WebElement backToPlans;
@@ -127,7 +134,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drugs')]")
+	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
@@ -295,10 +302,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
-			iosScroll(addrugs);
+			scrollToView(addrugs);
 			jsClickNew(addrugs);
 		} else {
-			iosScroll(addDrugsBtn);
+			scrollToView(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
@@ -438,7 +445,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
+	@FindBy(xpath = "//button[normalize-space()='Edit']")
 	public WebElement editDrugsPharmacy;
 
 	public BuildYourDrugListMobile clickOnEditDrugAndPharmacy() {
@@ -638,6 +645,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			jsClickNew(enrollForPlan);
 		}
 		waitForPageLoadSafari();
+		waitforElementVisibilityInTime(NextBtn, 20);
 		validateNew(NextBtn);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -696,14 +704,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public ComparePlansPageMobile planCompare(String plans) {
 
 		comparePlans.click();
+		waitforElementVisibilityInTime(comparePlansPageControl, 10);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
 		 * = plans.split(","); for(int i=0;i<4;i++) {
 		 * driver.findElement(By.xpath("//label[text()='"+plan[i]+
 		 * "']/preceding-sibling::input")).click(); } comparePlansOnPopup.click();
 		 */
-		validateNew(enrollBtn);
+		validateNew(enrollButton);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
+
 			System.out.println("Navigation to Plan Compare page is Passed");
 			return new ComparePlansPageMobile(driver);
 		} else {
@@ -802,21 +812,35 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public void validateAddedPlansNew(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		String[] listOfTestPlans = planNames.split(",");
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);/*
-										 * System.out.println(driver.findElement(By.xpath(
-										 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-										 * + plan + "')]")) .getText());
-										 */
-			Assertion.assertEquals(plan, driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assertion.assertTrue(driver
-					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-							+ plan + "')]/following::button[1]"))
-					.isDisplayed());
+			System.out.println("Checking Saved Plan on VP for : " + plan);
+			WebElement addedPlan = driver
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			validateNew(addedPlan);
+			/*
+			 * System.out.println(driver.findElement(By.xpath(
+			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]")) .getText());
+			 */
+			System.out.println(addedPlan.getText());
+			/*
+			 * Assertion.assertEquals(plan, driver.findElement(By.xpath(
+			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]")) .getText().trim());
+			 */
+			Assertion.assertEquals(plan, addedPlan.getText().trim());
+			/*
+			 * Assertion.assertTrue(driver .findElement(By.
+			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]/following::button[1]")) .isDisplayed());
+			 */
+			/*
+			 * Assertion.assertTrue(driver .findElement(By.xpath(
+			 * "//*[contains(@id,'planName') and contains(text(),'" + plan +
+			 * "')]/./following::button[1]")) .isDisplayed());
+			 */
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
