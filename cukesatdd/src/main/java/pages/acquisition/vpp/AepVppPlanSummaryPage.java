@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.WeakHashMap;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -222,11 +222,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return validation_Flag;
 	}
 
-	public WeakHashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
+	public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the plan benefits info on vpp summary page");
 
-		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
 		System.out.println("Plan card xpath : "+ planCard);
 		String rowXpath = "";
@@ -309,11 +309,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return result;
 	}
 
-    public WeakHashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+    public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
 		this.sheetName = sheetName;
 		this.rowIndex = rowIndex;
 
-        WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+        HashMap<String, String> result=new HashMap<String, String>();
         int minBenefitListCnt = 5;
 
         if(planName.contains("(PDP)"))
@@ -343,10 +343,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         return result;
     }
 	
-	public WeakHashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, WeakHashMap<String, String> benefitsMap) {
+	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="", headerPremiumString="";
-		WeakHashMap<Boolean, String> comparedResult = new WeakHashMap<Boolean, String>();
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = benefitsMap.get("header premium"); //gets the value for the header premium that was stored from the UI
 		
 		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
@@ -450,11 +450,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 	}
 	
-	public WeakHashMap<Boolean, String> comparePremium(String sheetName, int rowIndex, String columnName, String valueExcel, WeakHashMap<String, String> premiumMap) {
+	public HashMap<Boolean, String> comparePremium(String sheetName, int rowIndex, String columnName, String valueExcel, HashMap<String, String> premiumMap) {
 		boolean flag = true; int counter =0;
 
 		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
-		WeakHashMap<Boolean, String> comparedResult = new WeakHashMap<Boolean, String>();
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = premiumMap.get("Monthly Premium"); //gets the value for the header premium that was stored from the UI
 		
 		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
@@ -640,11 +640,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 	}
 	
-	public WeakHashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
 		this.sheetName = sheetName;
 		this.rowIndex = rowIndex;
 
-		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+		HashMap<String, String> result=new HashMap<String, String>();
         
         result = collectInfoOLEpg(planName,sheetName,rowIndex);
         
@@ -655,11 +655,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         return result;
     }
 
-    public WeakHashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
+    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
 		//driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
 
-		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
 		System.out.println("Plan card xpath : "+ planCard);
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
