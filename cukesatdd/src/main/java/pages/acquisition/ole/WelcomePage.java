@@ -282,7 +282,7 @@ public class WelcomePage extends UhcDriver{
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){		
-		if(validateNew(driver.findElement(By.xpath("//legend[contains(text(),'Personal')]")))){	
+		if(validateNew(driver.findElement(By.xpath("//*[contains(text(),'Personal')]")))){
 			System.out.println("OLE Personal Information Page is Displayed");
 			return new PersonalInformationPage(driver);
 		}
