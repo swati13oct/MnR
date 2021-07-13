@@ -112,7 +112,7 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
     private WebElement profileCrntYrPlans;
 
-    @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+    @FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[1]")
     public WebElement AddMyDrugsBtn;
 
     // New Shopper profile page objects
@@ -247,6 +247,10 @@ public class VisitorProfilePage extends UhcDriver {
 
     @FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:last-child")
     private WebElement signOutText;
+    
+    @FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
+    private WebElement addDoctor;
+    
 
     public VisitorProfilePage(WebDriver driver) {
         super(driver);
@@ -308,15 +312,16 @@ public class VisitorProfilePage extends UhcDriver {
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		}*/
-        CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-        Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
+        //CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+        Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs and Pharmacy")));
         //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
         jsClickNew(drugHeader);
+        System.out.println("Drug Name in VP page: "+drugName.getText());
         Assertion.assertTrue(drugName.getText().trim().contains(drug));
         Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
         Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
                 savedDrugsAndDoctorsHeader.getText().trim());
-        Assertion.assertTrue(pharmacyAddress.isDisplayed());
+        //Assertion.assertTrue(pharmacyAddress.isDisplayed());
     }
     
 
@@ -459,7 +464,7 @@ public class VisitorProfilePage extends UhcDriver {
                 for (String plan : listOfTestPlans) {
                     jsClickNew(driver.findElement(By.xpath(
                             "//h3[contains(text(),'" + plan + "')]/preceding::button[contains(@class,'remove')][1]")));
-                    Thread.sleep(5000);
+                    sleepBySec(7);
                 }
             } else
                 System.out.println("##############No saved plans available here##############");
@@ -536,7 +541,7 @@ public class VisitorProfilePage extends UhcDriver {
             Thread.sleep(2000);
             String mproviderinfo = driver
                     .findElement(By.xpath(
-                            "//table//td/div/div/div[@id='ProviderName-noplan-undefined']"))
+                            "(//div[@id='ProviderName-noplan-0'])[1]"))
                     .getText().trim();
 
             String rallyProviderName = MRConstants.PROV_NAME;
@@ -938,7 +943,7 @@ public class VisitorProfilePage extends UhcDriver {
             }
             driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
             try {
-                validateNew(ShareOneHealth_AgreeButton);
+                validate(ShareOneHealth_AgreeButton);
                 System.out.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
                 jsClickNew(ShareOneHealth_AgreeButton);
 
@@ -946,8 +951,8 @@ public class VisitorProfilePage extends UhcDriver {
                 System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
             }
             try {
-                validateNew(ConfirmIdentity_ModalHdr);
-                validateNew(ConfirmIdentity_ModalClose);
+                validate(ConfirmIdentity_ModalHdr);
+                validate(ConfirmIdentity_ModalClose);
                 jsClickNew(ConfirmIdentity_ModalClose);
             } catch (Exception e) {
                 System.out.println("Confirm Identity and Import Modal is NOT Dispalyed for VP Login - Continuing to VP");
@@ -1139,8 +1144,8 @@ public class VisitorProfilePage extends UhcDriver {
                 driver.findElement(By.xpath("//div[contains(text(),'" + provider.getText().trim() + "')]/following::button[text()='Remove']")).click();
                 removeDrugBtn.click();
             }
-            CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
-            Assertion.assertTrue(importLnk.isDisplayed());
+            CommonUtility.waitForPageLoadNew(driver, addDoctor, 45);
+            Assertion.assertTrue(addDoctor.isDisplayed());
     }
 
     /**
@@ -1183,4 +1188,14 @@ public class VisitorProfilePage extends UhcDriver {
             Assertion.assertTrue(">>>>>> Validation Failed for Providers NOT Added <<<<<<<<< - Providers Added ", removeProviders.size() == 0);
         }
     }
+    
+    public ProviderSearchPage addDoctor() {
+		switchToNewTabNew(addDoctor);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+    }
+    
 }

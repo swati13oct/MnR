@@ -171,14 +171,14 @@ public class ShopPage extends UhcDriver {
 		}
 	}
 
-	public EnrollmentBasicsPage enrollLinkOnShopPlan() throws Exception {
+	public EnrollmentBasicsPageMobile enrollLinkOnShopPlan() throws Exception {
 		waitforElement(enrollLink);
 		enrollLink.click();
 		Thread.sleep(4000);
 		if (validate(maLeanHowToEnrollLink)) {
 			waitforElement(maLeanHowToEnrollLink);
 			System.out.println("OLE Learn More Modal is Displayed");
-			return new EnrollmentBasicsPage(driver);
+			return new EnrollmentBasicsPageMobile(driver);
 		}
 		return null;
 	}

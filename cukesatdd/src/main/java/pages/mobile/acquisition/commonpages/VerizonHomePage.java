@@ -27,7 +27,7 @@ public class VerizonHomePage extends UhcDriver {
 		openAndValidate();
 }
 
-	public Rallytool_Page findaproviderverizonclick() {
+	public Rallytool_PageMobile findaproviderverizonclick() {
 		validate(findaproviderlink);
 		
 		findaproviderlink.click();
@@ -36,7 +36,7 @@ public class VerizonHomePage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

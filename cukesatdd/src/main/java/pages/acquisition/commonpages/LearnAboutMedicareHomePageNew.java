@@ -801,27 +801,34 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             Assert.fail("PDF menu not clicked");
         }
         WebElement btnDownload = driver.findElement(By.xpath("//button[contains(@class,'Button')]//span[contains(text(),'Download PDF')]"));
-        jsClickNew(btnDownload);
-        System.out.println("Download Button Clicked");
-        sleepBySec(2);
-        driver.switchTo().defaultContent();
-        driver.navigate().to("chrome://downloads/");
-        sleepBySec(2);
-        driver.switchTo().defaultContent();
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        WebElement pdfDownload = (WebElement) executor.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#mainContainer').querySelector('downloads-item').shadowRoot.querySelector('#content.is-active').querySelector('#details')");
+        if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
+            jsClickNew(btnDownload);
+            System.out.println("Download Button Clicked");
+            sleepBySec(2);
+            driver.switchTo().defaultContent();
+            driver.navigate().to("chrome://downloads/");
+            sleepBySec(2);
+            driver.switchTo().defaultContent();
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            WebElement pdfDownload = (WebElement) executor.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#mainContainer').querySelector('downloads-item').shadowRoot.querySelector('#content.is-active').querySelector('#details')");
 
 
-        if (pdfDownload!=null){
-            String downloadedPDFName=(pdfDownload.getText().split("\n"))[0].trim();
-            if (downloadedPDFName.equalsIgnoreCase(pdfName))
-            System.out.println("PDF Downloaded:\n"+downloadedPDFName);
-        }else{
-            Assert.fail("Correct PDF not downloaded");
+            if (pdfDownload != null) {
+                String downloadedPDFName = (pdfDownload.getText().split("\n"))[0].trim();
+                if (downloadedPDFName.equalsIgnoreCase(pdfName))
+                    System.out.println("PDF Downloaded:\n" + downloadedPDFName);
+            } else {
+                Assert.fail("Correct PDF not downloaded");
+            }
+
+            driver.navigate().back();
+            driver.switchTo().defaultContent();
+        } else {
+            if (!btnDownload.isDisplayed()) {
+                Assert.fail("Download link not present");
+            }
+            System.out.println("Download Validation not available on browser other than Chrome");
         }
-
-        driver.navigate().back();
-        driver.switchTo().defaultContent();
 
 
     }
@@ -877,10 +884,10 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             if (btnPrintCancel != null) {
                 btnPrintCancel.click();
                 System.out.println("Print Dialog Closed");
-            }else{
+            } else {
                 Assert.fail("Print Dialog not Closed");
             }
-           driver.switchTo().window((String) windowHandles.toArray()[0]);;
+            driver.switchTo().window((String) windowHandles.toArray()[0]);
         } else {
             System.out.println("Print Validation not available on browser other than Chrome");
         }

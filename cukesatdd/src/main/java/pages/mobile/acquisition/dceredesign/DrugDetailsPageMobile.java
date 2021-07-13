@@ -370,7 +370,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
 		PlanNameElement.getText().replaceAll("\u00A00", " ").trim();
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
@@ -2202,5 +2202,18 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					"Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug on DCE Details Page : "
 							+ drugName);
 
+	}
+	
+	
+	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("details")) {
+			System.out.println("Plan Details Page displayed ");
+			return new PlanDetailsPageMobile(driver);
+		} else {
+			return null;
+		}
 	}
 }

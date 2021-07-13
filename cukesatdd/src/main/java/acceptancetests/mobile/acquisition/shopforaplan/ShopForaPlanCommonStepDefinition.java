@@ -405,7 +405,7 @@ public class ShopForaPlanCommonStepDefinition {
 
 		if (shopForPlan != null) {
 			boolean classicUrl = shopForPlan.checkForClassicURL(stateSelected);
-			shopForPlan.selectOptionFromShopForPlanModal("Plan Types", "Medsupp", classicUrl);
+			shopForPlan.selectPlanTypeOption("Medsupp", classicUrl);
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shopForPlan);
 		} else
 			Assertion.fail("Shop for a Plan menu did not open");

@@ -193,7 +193,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     And user clicks on disclaimers link of terms & conditions page
     And user clicks on agents & brokers link of disclaimers page
     #And user clicks on Request Assistance and validates modal window ulayer
-    And user verifies home link of agents & brokers page
+    #And user verifies home link of agents & brokers page
 
     @vppPlanSummaryCommonAARP02 @regressionAARP
     Examples: 

@@ -97,7 +97,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 	
-	@FindBy(xpath = "//span[@class='heading-1']")
+	@FindBy(xpath = "(//span[@class='heading-1'])[3]")
 	private WebElement ShopHeader;
 	
 	@FindBy(xpath = "//*[contains(text(),'See more benefits')]")

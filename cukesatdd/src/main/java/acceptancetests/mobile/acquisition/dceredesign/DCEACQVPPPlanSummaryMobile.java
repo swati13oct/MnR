@@ -312,6 +312,13 @@ public class DCEACQVPPPlanSummaryMobile {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
-
+	}
+	
+	
+	@And("^user clicks on get started button on NBA$")
+	public void user_click_Get_started_button_on_NBA() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickGetStartedBtnOnNba();
 	}
 }
