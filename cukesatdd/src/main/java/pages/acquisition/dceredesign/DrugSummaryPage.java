@@ -162,7 +162,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::div[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
 	private WebElement pharmacyNameSelected;
 
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
