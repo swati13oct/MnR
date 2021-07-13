@@ -642,8 +642,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validateCallpopup() throws InterruptedException {
-		// CommonUtility.checkPageIsReady(driver);
-		callsam.click();
+		System.out.println("Verifying CallSam icon availability on mobile emulator - We are not trying to click and verify here.....");
+		//callsam.click();
+		validate(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		// driver.switchTo().activeElement();
 		// if (CallSamTFN.getText().isEmpty()) {

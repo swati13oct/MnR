@@ -160,8 +160,6 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
-
-
 	@Then("^the User validates Shop for a Plan Navigation link$")
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -774,8 +772,18 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnPlanRecommendationButton();
 	}
-	
 
+	@When("^user hover over for plan member to click to go to member site$")
+	public void hover_plan_Member_to_Click_membersite() {
+		// scenario.log("Changes made on 6/30- Step added for new Header redesign");
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			aquisitionhomepage.clickMemberSiteLink();
+		} else {
+			Assertion.fail("Home page not found");
+		}
+	}
 	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
 		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
@@ -1140,18 +1148,6 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateFooterLinksNavigation(linkName);
-	}
-
-	@When("^user hover over for plan member to click to go to member site$")
-	public void hover_plan_Member_to_Click_membersite() {
-		//scenario.log("Changes made on 6/30- Step added for new Header redesign");
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		if (aquisitionhomepage != null) {
-			aquisitionhomepage.clickMemberSiteLink();
-		} else {
-			Assertion.fail("Home page not found");
-		}
 	}
 
 }

@@ -47,6 +47,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
+	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	private WebElement UHCICSubTitle;
+	
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent;
 
@@ -343,7 +346,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
-//	@FindBy(xpath = "//h3[@id='guest-profile']")
+	// @FindBy(xpath = "//h3[@id='guest-profile']")
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
@@ -3680,10 +3683,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	//@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
-	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company')]")
-	private WebElement UHCICSubTitle;
-
 	public void validateSubtitle() {
 		threadsleep(5);
 		if (UHCICSubTitle.isDisplayed()) {
@@ -4756,12 +4755,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
 	private WebElement goToMemberSiteLink;
 
-	
 	public void clickMemberSiteLink() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
-		//Actions action = new Actions(driver);
-		//action.moveToElement(planMemberLink).perform();
+		// Actions action = new Actions(driver);
+		// action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
 		jsMouseOver(navigationSectionHomeLink);
 		validate(goToMemberSiteLink);
@@ -4779,6 +4777,5 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.switchTo().window(base);
 	}
-	
 
 }

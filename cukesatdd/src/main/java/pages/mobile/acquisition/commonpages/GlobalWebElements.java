@@ -298,9 +298,8 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'aarp.org')]")
 	public WebElement footerAARPLink;
-	
-	
-//	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+
+	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
 	
@@ -324,7 +323,6 @@ public class GlobalWebElements extends UhcDriver {
 	
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
-	
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
@@ -457,9 +455,9 @@ public class GlobalWebElements extends UhcDriver {
 		validateNew(mobileNav, 5);
 		
 		jsClickNew(home);
-		if(validate(getStartedButton)) {
+		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
-		} 
+		}
 		return null;
 	}
 	
@@ -469,9 +467,9 @@ public class GlobalWebElements extends UhcDriver {
 		validateNew(mobileNav, 5);
 		
 		jsClickNew(shopForAPlan);
-		if(validate(shopForPlanBackButton)) {
+		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
-		} 
+		}
 		return null;
 	}
 	
@@ -481,9 +479,9 @@ public class GlobalWebElements extends UhcDriver {
 		validateNew(mobileNav, 5);
 		
 		jsClickNew(learnAboutMedicareNavButton);
-		if(validate(learnAboutMedicareBackButton)) {
+		if (validate(learnAboutMedicareBackButton)) {
 			return new LearnAboutMedicareHomePageMobile(driver);
-		} 
+		}
 		return null;
 	}
 	

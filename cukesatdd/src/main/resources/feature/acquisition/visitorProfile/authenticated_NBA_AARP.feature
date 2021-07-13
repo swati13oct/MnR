@@ -117,23 +117,23 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
     @continueEnrollmentNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@2 | Password@9 | NO            |   55344 | Hennepin County | MAPD     |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | MAPD     |
 
     @authenticatedNBAPDPAARP01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@2 | Password@9 | NO            |   55344 | Hennepin County | PDP      |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | PDP      |
 
     @continueEnrollmentNBA__MAPD_UHC @authenticatedNBAMAPDUHC01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@2 | Password@9 | NO            |   55344 | Hennepin County | MAPD     |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | MAPD     |
 
     @authenticatedNBAPDPUHC02
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@2 | Password@9 | NO            |   55344 | Hennepin County | PDP      |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | PDP      |
 
   @continueEnrollmentNBAMultiplePlan @decRelease @authenticated
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan for <plantype> plantype
@@ -161,20 +161,20 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
     @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@9 | NO            |   55344 | Hennepin County | MAPD     |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA_PDP_AARP @authenticatedNBAPDPAARP01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@9 | NO            |   55344 | Hennepin County | PDP      |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | PDP      |
 
     @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@9 | NO            |   55344 | Hennepin County | MAPD     |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA__PDP_UHC01 @authenticatedNBAPDPUHC02
     Examples: 
-      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@9 | NO            |   55344 | Hennepin County | PDP      |
+      | site | userName           | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | mnracq@givmail.com | Password@1 | NO            |   55344 | Hennepin County | PDP      |
