@@ -1193,17 +1193,24 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(dceNBAModalBtn);
 	}
 
-	@FindBy(xpath = "//select[contains(@dlassetid,'planselect')]")
-	private WebElement planToggleDropdown;
+	/*@FindBy(xpath = "//select[contains(@dlassetid,'planselect')]")
+	private WebElement planToggleDropdown;*/
 
 	public PlanDetailsPageMobile clickViewplanDetailsForPlan(String plantype, String planName) {
 
-		String planType = plantype.toUpperCase();
-		selectFromDropDownByValue(planToggleDropdown, planType);
+		/*String planType = plantype.toUpperCase();
+		selectFromDropDownByValue(planToggleDropdown, planType);*/
+		CommonUtility.waitForPageLoadNew(driver, planTypeToggle, 30);
+		String planType = plantype.toLowerCase();
+		WebElement planTypeOption = driver.findElement(By.cssSelector("input[id^='" + planType + "']"));
+		jsClickNew(planTypeOption);
 		System.out.println(planType + " Plan Toggle Clicked");
 
-		WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath(
-				"//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '" + planName + "')]"));
+		/*WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath(
+				"//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '" + planName + "')]"));*/
+		
+		WebElement PlanDetailsLinkforPlan = driver
+				.findElement(By.cssSelector("div[class^='view-details'] > button[aria-label$='" + planName + "']"));
 		if (validate(PlanDetailsLinkforPlan)) {
 			jsClickNew(PlanDetailsLinkforPlan);
 			System.out.println("View Plan details Clicked for " + planType + " Plan : " + planName);
