@@ -1334,7 +1334,7 @@ public class MedicareInformationPage extends UhcDriver {
 		return true;
 	}
 	
-	public WelcomePage ValidateWidgetsonOLEPages(Map<String, String> planDetailsMap) {
+	public MedicareInformationPage ValidateWidgetsonOLEPages(Map<String, String> planDetailsMap) {
 		validate(WidgetsImage);
 		if(validate(WidgetsImage)){
 			System.out.println("OLE Widgets Image is Displayed");
@@ -1372,7 +1372,7 @@ public class MedicareInformationPage extends UhcDriver {
 			driver.close();
 			driver.switchTo().window(parentWindow);
 			
-			return new WelcomePage(driver);
+			return new MedicareInformationPage(driver);
 		}
 		return null;
 	}
