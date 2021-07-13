@@ -53,11 +53,11 @@ public class AepPlanComparePage extends UhcDriver {
 
     }
 
-    public WeakHashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, WeakHashMap<String, String> benefitsMap) {
+    public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
         boolean flag = true;
         int counter = 0;
         String tmpUIString1 = "", tmpUIString2 = "", benefitValueUI = "";
-        WeakHashMap<Boolean, String> comparedResult = new WeakHashMap<Boolean, String>();
+        HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
         for (String key : benefitsMap.keySet()) {
             benefitValueUI = benefitsMap.get(key);
             tmpUIString1 = benefitValueUI;
@@ -138,8 +138,8 @@ public class AepPlanComparePage extends UhcDriver {
 
     }
 
-    public WeakHashMap<String, String> collectInfoVppPlanComparePg(String planType, String network, String sheetName, int rowIndex) {
-        WeakHashMap<String, String> result = new WeakHashMap<String, String>();
+    public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network, String sheetName, int rowIndex) {
+        HashMap<String, String> result = new HashMap<String, String>();
 
         for (int i = 0; i < 5; i++) {
             try {
@@ -165,21 +165,21 @@ public class AepPlanComparePage extends UhcDriver {
         return result;
     }
 
-    public WeakHashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
+    public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
         threadsleep(2000);
 
         //CommonUtility.checkPageIsReady(driver);
 
         System.out.println("Proceed to collect the info on vpp compare page =====");
-        WeakHashMap<String, String> result = new WeakHashMap<String, String>();
+        HashMap<String, String> result = new HashMap<String, String>();
 
         result.putAll(readPlanName());
 
         //Read prescription Drug Benefits table
         //result.putAll(readBenefitsData("prescription-drug-table", ""));
 
-        WeakHashMap<String, String> pdresult = new WeakHashMap<String, String>();
+        HashMap<String, String> pdresult = new HashMap<String, String>();
         for (int i = 0; i < 4; i++) {
             try {
                 pdresult = readBenefitsData("prescription-drug-table", "");
@@ -274,10 +274,10 @@ public class AepPlanComparePage extends UhcDriver {
     //This method reads the benefit table values on UI into a HashMap as key value pairs
     //tableId - Id attribute of the benefit table
     //keyword - this is a parameter passed to generate the key name matching with that of the excel header name to distinguish between PC,INN and OON
-    private WeakHashMap<String, String> readBenefitsData(String tableId, String keyword) {
+    private HashMap<String, String> readBenefitsData(String tableId, String keyword) {
 
 
-        WeakHashMap<String, String> result = new WeakHashMap<String, String>();
+        HashMap<String, String> result = new HashMap<String, String>();
 
         //validateNew(driver.findElement(By.id(tableId)));
 
@@ -363,7 +363,7 @@ public class AepPlanComparePage extends UhcDriver {
         return currentColName;
     }
 
-    public Map<String, String> sortDetailMap(WeakHashMap<String, String> benefitsDetailMap) {
+    public Map<String, String> sortDetailMap(HashMap<String, String> benefitsDetailMap) {
         Map<String, String> map = new TreeMap<String, String>(benefitsDetailMap);
         return map;
     }
