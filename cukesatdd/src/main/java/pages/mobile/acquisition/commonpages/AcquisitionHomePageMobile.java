@@ -2987,7 +2987,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (size > 0) {
 			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 			threadsleep(4);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
@@ -2997,11 +2997,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			// SubmitEmail.click();
 			jsClickNew(SubmitEmail);
 			threadsleep(4);
-			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+			Assert.assertEquals(ErrorFirstName.getText(), "Error: Please enter First Name");
 			threadsleep(2);
-			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+			Assert.assertEquals(ErrorLastName.getText(), "Error: Please enter Last Name");
 			threadsleep(2);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
