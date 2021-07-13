@@ -751,12 +751,12 @@ public class CampaignTFNPage extends UhcDriver {
 				}
 	}
 
-	//@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style, 'display: block'))]")
+	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	//@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style, 'display: block'))]")
 	private WebElement HomeLogo;
 
-	//@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
-	@FindBy(xpath="//div[contains(@id,'enroll-cancel')]//a[(contains(text(), 'Leave Online'))]")
+	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
+	//@FindBy(xpath="//div[contains(@id,'enroll-cancel')]//a[(contains(text(), 'Leave Online'))]")
 	private WebElement LeaveOLE;
 	
 	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
@@ -1347,4 +1347,11 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				
 
 	}
+				@FindBy(id = "backToPlanSummaryTop")
+				private WebElement lnkBackToAllPlans;
+				
+				public void navigateBackToPlanSummaryPageFromDetailsPage() {
+					validateNew(lnkBackToAllPlans);
+					jsClickNew(lnkBackToAllPlans);
+				}
 }
