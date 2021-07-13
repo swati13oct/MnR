@@ -50,10 +50,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "SignIn")
 	public WebElement signInBtn;
 
-	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
+//	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
+	@FindBy(css = "div[class='uhc-radio-tabs']")
 	public WebElement planTypeToggle;
 
-	@FindBy(xpath = "//span[text()='Pharmacy:']/..")
+//	@FindBy(xpath = "//span[text()='Pharmacy:']/..")
+	@FindBy(css = "#changepharmacymobile h3")
 	public WebElement pharmacyLink;
 
 	@FindBy(xpath = "//*[@class='column column-12']//*[@class='uhc-select uhc-select--block']")
@@ -62,16 +64,20 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='uhc-card__header']//h4")
 	public WebElement planCardHeader;
 
-	@FindBy(xpath = "//*[text()='Average Monthly Drug Cost']/following-sibling::div")
+//	@FindBy(xpath = "//*[text()='Average Monthly Drug Cost']/following-sibling::div")
+	@FindBy(xpath = "//p[text()='Average Monthly Drug Cost']/preceding-sibling::p")
 	public WebElement avgMonthlyDrugCost;
 
-	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
+//	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
+	@FindBy(xpath = "//p[contains(text(),'Monthly Premium')]/span")
 	public WebElement monthlyPremium;
 
-	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')]//following-sibling::div")
+//	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	@FindBy(xpath = "//p[contains(text(), 'Annual Estimated')]/span")
 	public WebElement annualEstimatedTotal;
 
-	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
+//	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
+	@FindBy(xpath = "//p[contains(text(), 'Drugs Covered')]/span/span")
 	public WebElement drugsCovered;
 
 	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]")
@@ -80,22 +86,26 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]")
 	public WebElement whatsIncludedLink;
 
-	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
+//	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
+	@FindBy(css = "div[class*='d-block'] button[id*='priceLinkBtn']")
 	public WebElement drugPricingLink;
 
-	@FindBy(xpath = "//button/span[text()='View Drug Costs']")
+//	@FindBy(xpath = "//button/span[text()='View Drug Costs']")
+	@FindBy(css = "#buttoncontainer button[aria-label*='View Drug Costs']")
 	public WebElement viewDrugCostBtn;
 
-	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+//	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+	@FindBy(css = "div[class^='view-details-btn'] > button")
 	public WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//span[contains(text(),' Save ')]")
+//	@FindBy(xpath = "//span[contains(text(),' Save ')]")
+	@FindBy(css = "div[class$='card__header'] button[id^='saveBtn']")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@id='accordion-1-button']")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//p)[1]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
@@ -156,24 +166,61 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile validateDrugSummaryPage() throws InterruptedException {
+		boolean validation = false;
+		// Commented locators are no longer seen on ui
 		// && validateNew(whyAverageLink)
 		// && validateNew(whatsIncludedLink)
-
-		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(pharmacyLink)
-				&& validateNew(planCardHeader) && validateNew(avgMonthlyDrugCost) && validateNew(monthlyPremium)
-				&& validateNew(annualEstimatedTotal) && validateNew(drugsCovered) && validateNew(whyAverageLink)
-				&& validateNew(whatsIncludedLink) && validateNew(drugPricingLink) && validateNew(viewDrugCostBtn)
-				&& validateNew(viewPlanDetailsBtn) && validateNew(saveBtn) && validateNew(disclaimer)) {
+		
+		scrollToView(reviewDrugCostPageHeading);
+		validation = validateNew(reviewDrugCostPageHeading);
+		
+		scrollToView(planTypeToggle);
+		validation = validation && validateNew(planTypeToggle);
+		
+		scrollToView(pharmacyLink);
+		validation = validation && validateNew(pharmacyLink);
+		
+		scrollToView(planCardHeader);
+		validation = validation && validateNew(planCardHeader);
+		
+		scrollToView(avgMonthlyDrugCost);
+		validation = validation && validateNew(avgMonthlyDrugCost);
+		
+		scrollToView(monthlyPremium);
+		validation = validation && validateNew(monthlyPremium);
+		
+		scrollToView(annualEstimatedTotal);
+		validation = validation && validateNew(annualEstimatedTotal);
+		
+		scrollToView(drugsCovered);
+		validation = validation && validateNew(drugsCovered);
+		
+		scrollToView(drugPricingLink);
+		validation = validation && validateNew(drugPricingLink);
+		
+		scrollToView(viewDrugCostBtn);
+		validation = validation && validateNew(viewDrugCostBtn);
+		
+		scrollToView(viewPlanDetailsBtn);
+		validation = validation && validateNew(viewPlanDetailsBtn);
+		
+		scrollToView(saveBtn);
+		validation = validation && validateNew(saveBtn);
+		
+		scrollToView(disclaimer);
+		validation = validation && validateNew(disclaimer);
+		
+		if (validation) {
 			return new DrugSummaryPageMobile(driver);
 		}
 
 		return null;
 	}
 
-	public DrugSummaryPageMobile verifyDefaultPlanType() {
+	public DrugSummaryPageMobile verifyDefaultPlanType(String planType) {
 		scrollToView(planTypeHeading);
 		validateNew(planTypeHeading);
-		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+		if (planTypeHeading.getText().contains(planType)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 		return null;

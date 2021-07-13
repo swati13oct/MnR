@@ -221,6 +221,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 //	@FindBy(xpath = "//th//*[contains(@class,'provider-name')]")
 	@FindBy(xpath = "//*[@id='your-doctors-table']//tr[3]/th/span")
 	private WebElement FirstProviderName;
+	
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/td[1]/span")
+	private WebElement FirstProviderNameAfterAddition;
+	
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/td[1]/span")
+	private WebElement SecondProviderName;
 
 	@FindBy(xpath = "//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;
@@ -1739,5 +1745,32 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return new WelcomePageMobile(driver);
 		}
 		return null;
+	}
+	
+	public void validateAllDoctors() {
+		scrollToView(backToAllPlansLink);
+		validateNew(backToAllPlansLink);
+		
+		scrollToView(yourDoctorsBanner);
+		validateNew(yourDoctorsBanner);
+		
+		scrollToView(editDoctorsLink);
+		validateNew(editDoctorsLink);
+		
+		scrollToView(providerSumamryHeader);
+		validateNew(providerSumamryHeader);
+		
+		scrollToView(providerSumamryHeaderCount);
+		validateNew(providerSumamryHeaderCount);
+		
+		scrollToView(FirstProviderNameAfterAddition);
+		validateNew(FirstProviderNameAfterAddition);
+		
+		scrollToView(SecondProviderName);
+		validateNew(SecondProviderName);
+		
+		scrollToView(viewlocationsLink);
+		validateNew(viewlocationsLink);
+		System.out.println("Verified Edit Doctors Section");
 	}
 }

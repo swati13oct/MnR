@@ -47,9 +47,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
-	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
 	private WebElement UHCICSubTitle;
-
+	
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent;
 
@@ -332,7 +332,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-	@FindBy(xpath = "//*[@id='addDrug']")
+	// @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//a[normalize-space()='Estimate Your Drug Costs']")
@@ -341,7 +342,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
+//	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
 	// @FindBy(xpath = "//h3[@id='guest-profile']")
@@ -448,7 +450,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
 
-	@FindBy(xpath = "//*[@id='search-field']")
+	@FindBy(xpath = "//input[@id='search-field']")
 	private WebElement EnterSearch;
 
 	@FindBy(xpath = "//button[contains(text(),'Search')]")
@@ -511,7 +513,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
 	private WebElement MedicareSuppUrl;
-
+	
+	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
+	private WebElement pdpPharmacyLink;
+	
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
 	String CallSam = "1-877";
@@ -1055,12 +1060,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-
-		jsClickNew(more);
-		validateNew(footerAboutUsLink);
-		iosScroll(footerAboutUsLink);
-		jsClickNew(footerAboutUsLink);
-
+		/*
+		 * scrollToView(footerAboutUsLink); validateNew(footerAboutUsLink);
+		 * jsClickNew(footerAboutUsLink);
+		 */
+		accessFooterLinkFromMore("about");
 		pageloadcomplete();
 		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
@@ -1099,12 +1103,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-
-		jsClickNew(more);
-		validateNew(footerContactUsLink);
-		// footerContactUsLink.click();
-		jsClickNew(footerContactUsLink);
-
+		/*
+		 * scrollToView(footerContactUsLink); validateNew(footerContactUsLink); //
+		 * footerContactUsLink.click(); jsClickNew(footerContactUsLink);
+		 */
+		accessFooterLinkFromMore("contact");
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPageMobile(driver);
@@ -2381,26 +2384,30 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(aarpOrgLink);
+			// validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
+		jsClickNew(shopPlansExpander);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
 		// validateNew(learnAboutMedicareLink);
 
+		jsClickNew(toolsAndResources);
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
-		validateNew(introductioMedicareLink);
+		jsClickNew(learnAboutMedicareFooterButton);
+		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
+		jsClickNew(more);
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
@@ -2922,8 +2929,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
-		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
-		// icon
+//		jsClickNew(guestProfileLink);	//This locator is seen after we hover on heart icon
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
@@ -3202,10 +3208,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		// validateNew(headerSignInLink);
-		// validateNew(headerRegisterLink);
-		// Actions action = new Actions(driver);
-		// action.moveToElement(planMemberLink).perform();
+		//validateNew(headerSignInLink);
+		//validateNew(headerRegisterLink);
+		//Actions action = new Actions(driver);
+		//action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
 		jsMouseOver(navigationSectionHomeLink);
 		validate(goToMemberSiteLink);
@@ -3353,7 +3359,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(text(),'Accessibility')]")
+	@FindBy(xpath = "//div[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
 
 	public void Accessibility() {
@@ -4097,7 +4103,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
-		MobileMenuAccessPharmacy();
+		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
+		shopForPlanNavigationPageMobile.selectPlanTypeOption("PDP", false);
+		
+		jsClickNew(pdpPharmacyLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
@@ -4737,10 +4748,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.navigate().back();
 	}
-
+	
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
-
+	
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
 	private WebElement goToMemberSiteLink;
 
