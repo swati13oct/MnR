@@ -2345,7 +2345,7 @@ public class DrugDetailsPage extends UhcDriver {
 //		WebElement CopaySection_TierCopay = driver.findElement(By.xpath("//*[@id='plancopaydetail']//*[contains(text(), 'Drug Copays')]//parent::div[contains(@class, 'column')]//li//*[contains(text(), '"+ tierNo +"')]"));
 		WebElement CopaySection_TierCopay = driver.findElement(By.xpath("(//*[@id='plancopaydetail']//*[contains(text(), 'Drug Copays')]//ancestor::div[contains(@class, 'row')]//li//*[contains(text(), '"+ tierNo +"')])[1]"));
 		validateNew(CopaySection_TierCopay);
-		WebElement CopayText = driver.findElement(By.xpath("(//*[@id='plancopaydetail']//*[contains(text(), 'Drug Copays')]//ancestor::div[contains(@class, 'row')]//li//*[contains(text(), '"+ tierNo +"')])[1]//following-sibling::span[contains(text(), '$')]"));
+		WebElement CopayText = driver.findElement(By.xpath("(//*[@id='plancopaydetail']//*[contains(text(), 'Drug Copays')]//ancestor::div[contains(@class, 'row')]//li//*[contains(text(), '"+ tierNo +"')])[1]//following-sibling::span"));
  		validateNew(CopayText);
  		System.out.println("Copay Amount Displayed for Tier - "+CopayText.getText());
  		if(!CopayText.getText().contains(tierCopay)){
