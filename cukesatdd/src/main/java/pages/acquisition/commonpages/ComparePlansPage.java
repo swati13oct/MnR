@@ -269,7 +269,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//table[@id='your-drugs-table']//td[contains(@ng-class,'Agent')]/parent::tr") })
 	private List<WebElement> drugList;
 
-	@FindBy(id = "dupIconFlyOut")
+  @FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
@@ -278,7 +278,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	@FindBy(css = "a#visitor-profile-header")
+  @FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[@id='printPlans']/th[2]/div[1]/span")
@@ -377,6 +377,12 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
+
+	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div/div/button[text()='Continue']")
+	private WebElement btnContinuetoMira;
+
+	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div/div/button[text()='Cancel']")
+	private WebElement btnCancelToMira;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1151,13 +1157,12 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
-		
+
 		if (Strings.isNullOrEmpty(mbi)) {
 			System.out.println("#########Empty Profile#########");
-		}else {
+		} else {
 			allSet(providers, drugs);
 		}
-		
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
@@ -1229,7 +1234,7 @@ public class ComparePlansPage extends UhcDriver {
 
 		Assertion.assertTrue(btnSaveToMira.isDisplayed());
 	}
-	
+
 	/**
 	 * Import Drugs for non-member
 	 */
@@ -1259,12 +1264,12 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
 				agentModeBanner.getText().trim());
-		
+
 		Assertion.assertTrue(btnSaveToMira.isDisplayed());
 		Assertion.assertTrue(btnImportDrugsAndDoctors.isDisplayed());
-		
+
 		importDrugsForNonMember();
-		
+
 		allSet(providers, drugs);
 
 		// Validate Providers
@@ -1274,7 +1279,7 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			if (providers.contains(";")) {
 				String[] provider = providers.split(";");
-				for (int i = 0; i < provider.length-1; i++) {
+				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
 								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
@@ -1300,12 +1305,13 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
-				actualDrugs = actualDrugs+drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()+",";
+				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()
+						+ ",";
 			}
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
 					Assertion.assertTrue(actualDrugs.contains(drugName[i]));
-					System.out.println("#########"+ actualDrugs.split(",")[i] + "#########");
+					System.out.println("#########" + actualDrugs.split(",")[i] + "#########");
 				}
 			}
 
@@ -1330,17 +1336,17 @@ public class ComparePlansPage extends UhcDriver {
 				String[] provider = providers.split(";");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of providers loaded: " + provider.length));
-				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of drugs loaded: " + "0"));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of drugs loaded: " + "0"));
 			} else if (!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")) {
 				String[] drugName = drugs.split(",");
-				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of providers loaded: " + "0"));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of providers loaded: " + "0"));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("No data within 12 months of order date."));
+				Assertion.assertTrue(
+						allSetDrugsProvidersInfo.getText().trim().contains("No data within 12 months of order date."));
 			}
 			CommonUtility.waitForPageLoad(driver, popupAccept, 100);
 			popupAccept.click();
@@ -1356,10 +1362,10 @@ public class ComparePlansPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
-		//jsClickNew(shoppingCartIcon);
+		// jsClickNew(shoppingCartIcon);
 		scrollToView(shoppingCartIcon);
 		shoppingCartIcon.click();
-		//jsClickNew(lnkProfile);
+		// jsClickNew(lnkProfile);
 		lnkProfile.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
@@ -1370,7 +1376,7 @@ public class ComparePlansPage extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Navigate to Visitor Profile Page
 	 * 
@@ -1380,9 +1386,9 @@ public class ComparePlansPage extends UhcDriver {
 		allSet("no", "no");
 		scrollToView(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
-		//shoppingCartIcon.click();
+		// shoppingCartIcon.click();
 		jsClickNew(lnkProfile);
-		//lnkProfile.click();
+		// lnkProfile.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -1770,7 +1776,8 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 	/**
-	 * Save 2 plans 
+	 * Save 2 plans
+	 * 
 	 * @param plans
 	 */
 	public void save2Plans(String plans) {
@@ -1781,11 +1788,11 @@ public class ComparePlansPage extends UhcDriver {
 			for (int i = 1; i <= planNames.length; i++) {
 				WebElement moreOptions = driver
 						.findElement(By.xpath("(//button//span[text()='More Options'])[" + i + "]"));
-				//moreOptions.click();
+				// moreOptions.click();
 				jsClickNew(moreOptions);
 				waitforElement(saveAPlan);
 				sleepBySec(4);
-				//saveAPlan.click();
+				// saveAPlan.click();
 				jsClickNew(saveAPlan);
 
 			}
@@ -1796,6 +1803,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	/**
 	 * Validate the drug Information
+	 * 
 	 * @param drugName
 	 */
 	public void validateViewDrugInformation(String drugName) {
@@ -1825,5 +1833,31 @@ public String GetMonthlyPremiumValue() {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+	/**
+	 * Validate PCP modal on plan compare page
+	 * 
+	 * @param drugName
+	 */
+	public void validatePCPModal(String providers) {
+		
+		if (!providers.equalsIgnoreCase("no")) {
+			validate(btnSaveToMira);
+			jsClickNew(btnSaveToMira);
+			waitforElement(btnContinuetoMira);
+			jsClickNew(btnContinuetoMira);
+			waitforElement(btnCancelToMira);
+			if (providers.contains(";")) {
+				String[] provider = providers.split(";");
+				for (int i = 0; i < provider.length; i++) {
+					Assertion.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'" + provider[i] + "')]"))
+							.isDisplayed());
+				}
+				btnCancelToMira.click();
+			} else {
+
+				System.out.println("#########No Providers for this member#########");
+			}
+		}
 	}
 }

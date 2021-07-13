@@ -33,6 +33,8 @@ Feature: 1.09. ACQ- Shopper Profile
       | County             | <county>           |
     Then the user validates the view drug information on Plan Compare page
       | Drugs | <drugNames> |
+    Then the user Select PCP popup modal on Plan Compare page
+      | PCPs | <pcps> |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -44,13 +46,13 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @team-e @regressionSPTeamE
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
-      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                | pcps                                                                                                                                       |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 | David Joiner Knapp MD [1245 E South Blvd, Montgomery, AL, 36116];Margaret S Miklic MD [3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243] |
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
-      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                | pcps                                                                                                                                       |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 | David Joiner Knapp MD [1245 E South Blvd, Montgomery, AL, 36116];Margaret S Miklic MD [3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243] |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name

@@ -593,7 +593,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[@id='gf_lnk_2']")
 	private WebElement Aboutus;
 
-	@FindBy(id = "logged-username")
+	@FindBy(xpath = "//button[contains(@id,'guest-saved')]")
 	private WebElement guestProfileLink;
 
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
@@ -638,7 +638,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
 	private WebElement rightRailSectionTFNHeader1;
 
-	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[3]")
 	private WebElement footertextsectioncallus;
 
 	@FindBy(xpath = "(//*[contains(text(),'Hours: 8 a.m.')])")
@@ -723,6 +723,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
 	private WebElement tfnHeaderPopup;
+	
+	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
+	private WebElement tfnHeaderPopupClose;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -4363,11 +4366,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement ViewMedicareplanlinks;
 
 	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		//validateNew(memberSignInPage);
+		//CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		validateNew(goToMemberSiteLink);
 		String parentWindow = driver.getWindowHandle();
+		jsClickNew(goToMemberSiteLink);
 		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
+		//jsClickNew(memberSignInPage);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -4672,11 +4679,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		//validateNew(memberSignInPage);
+		//CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		validateNew(goToMemberSiteLink);
 		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
+		jsClickNew(goToMemberSiteLink);
+		//jsClickNew(memberSignInPage);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -4704,17 +4714,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// ViewMedicareplanlinks.click();
 		validateNew(ViewMedicareplanlinks);
 		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
+		//String parentWindow1 = driver.getWindowHandle();
 		jsClickNew(ViewMedicareplanlinks);
 		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
+		//Set<String> tabs_windows1 = driver.getWindowHandles();
+		//Iterator<String> itr1 = tabs_windows1.iterator();
+		/*while (itr1.hasNext()) {
 			String window = itr1.next();
 			if (!parentWindow1.equals(window)) {
 				driver.switchTo().window(window);
 			}
-		}
+		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
 		String prodURL = "https://www.aarpmedicareplans.com/";
@@ -5236,7 +5246,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (size > 0) {
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 			threadsleep(4);
-			Assertion.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
@@ -5248,11 +5258,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			scrollToView(SubmitEmail);
 			jsClickNew(SubmitEmail);
 			threadsleep(4);
-			Assertion.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+			Assertion.assertEquals(ErrorFirstName.getText(), "Error: Please enter First Name");
 			threadsleep(2);
-			Assertion.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+			Assertion.assertEquals(ErrorLastName.getText(), "Error: Please enter Last Name");
 			threadsleep(2);
-			Assertion.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
@@ -6893,8 +6903,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					+ ExpectedCallSAMTFN);
 		}
 		
-		validate(CallSamTFNClose);
-		jsClickNew(CallSamTFNClose);
+		validate(tfnHeaderPopupClose);
+		jsClickNew(tfnHeaderPopupClose);
 		
 	}
 
