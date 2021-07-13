@@ -7,15 +7,42 @@ Feature: PRE Plans benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @PREPlanBenefitsAARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS1_AARP
     Examples: 
-      | excelPath                    | workSheet   | site |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS1| AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS2| AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS3| AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS4| AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS5| AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS6| AARP |
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS1 | AARP |
+
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS2_AARP
+    Examples: 
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS2 | AARP |
+
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS3_AARP
+    Examples: 
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS3 | AARP |
+
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS4_AARP
+    Examples: 
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS4 | AARP |
+
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS5_AARP
+    Examples: 
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS5 | AARP |
+
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS6_AARP
+    Examples: 
+      | excelPath                    | workSheet    | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS6 | AARP |
+
+    @MA_SNP_PREBENEFITS_Temp_AARP
+    Examples: 
+      | excelPath                    | workSheet        | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_Temp | AARP |
+
+    @PREPlanBenefitsAARP @PDP_PREBENEFITS_AARP
+    Examples: 
+      | excelPath                  | workSheet   | site |
       | 2021 PDP_ Plan details_PRE | PREBENEFITS | AARP |
-      #| 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_Temp| AARP |
-      
