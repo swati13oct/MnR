@@ -1334,15 +1334,15 @@ public class MedicareInformationPage extends UhcDriver {
 		return true;
 	}
 	
-	public MedicareInformationPage ValidateWidgetsonOLEPages(Map<String, String> planDetailsMap) {
+	public MedicareInformationPage ValidateWidgetsonOLEPages(String ExpectedTFNNo) {
 		validate(WidgetsImage);
 		if(validate(WidgetsImage)){
 			System.out.println("OLE Widgets Image is Displayed");
 			String TFNNoWidget_OLE = TFNNoWidget.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
-			String Expected_TFN = planDetailsMap.get("TFN");		
-			System.out.println("TFN in VPP page : "+Expected_TFN);
-			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(Expected_TFN));			
+		//	String Expected_TFN = planDetailsMap.get("TFN");		
+			System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
 			validateNew(PrivacyPolicy);
 			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
 			String parentWindow = driver.getWindowHandle();

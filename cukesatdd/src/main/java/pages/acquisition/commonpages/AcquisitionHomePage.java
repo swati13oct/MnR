@@ -230,7 +230,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = "//*[contains(@class,'zip-button') or
 	// contains(@id,'zipcodebtn')]"
 
-	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[3]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -1263,6 +1263,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
 		//viewPlansButton.click();
+		validateNew(viewPlansButton);
 		jsClickNew(viewPlansButton);
 		// }
 		// while(validate(overlayFilm, 10)) {/**wait*/}

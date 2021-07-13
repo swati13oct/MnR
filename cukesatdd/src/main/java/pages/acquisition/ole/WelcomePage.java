@@ -229,7 +229,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	
-	public boolean ValidateTFNonWelcomeOLE(Map<String, String> planDetailsMap) {
+	public boolean ValidateTFNonWelcomeOLE(String ExpectedTFNNo) {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
@@ -241,12 +241,12 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
 		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
 		
-		String Expected_TFN = planDetailsMap.get("TFN");
+		//String Expected_TFN = planDetailsMap.get("TFN");
 		
-		System.out.println("TFN in VPP page : "+Expected_TFN);
+		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
-					flag = TFNWidget_OLE.contains(Expected_TFN) && TFNNeedHelp_OLE.contains(Expected_TFN);
+					flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
 				}			
 		
 		System.out.println("TFN not displayed in OLE right rail"+flag);
@@ -695,34 +695,32 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-	public boolean ValidateTFNExitModels(Map<String, String> planDetailsMap) {
+	public boolean ValidateTFNExitModels(String ExpectedTFNNo) {
 	
 		boolean flag = false;
 		
 		String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
 		System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
 		
-		String Expected_TFN = planDetailsMap.get("TFN");
+	//	String Expected_TFN = planDetailsMap.get("TFN");
 		
-		System.out.println("TFN in VPP page : "+Expected_TFN);
+		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
 				if (flag){
-					flag = TFNNoNeedHelp_OLE.contains(Expected_TFN);
+					flag = TFNNoNeedHelp_OLE.contains(ExpectedTFNNo);
 				}			
-		
-		System.out.println("TFN not displayed in OLE ExitModels"+flag);
 		return flag;		
 		
 	}
 	
-	public WelcomePage ValidateWidgetsonWelcomeOLE(Map<String, String> planDetailsMap) {
+	public WelcomePage ValidateWidgetsonWelcomeOLE(String ExpectedTFNNo) {
 		validate(WidgetsImage);
 		if(validate(WidgetsImage)){
 			System.out.println("OLE Widgets Image is Displayed");
 			String TFNNoWidget_OLE = TFNNoWidget.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
-			String Expected_TFN = planDetailsMap.get("TFN");		
-			System.out.println("TFN in VPP page : "+Expected_TFN);
-			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(Expected_TFN));			
+		
+			System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
 			validateNew(PrivacyPolicy);
 			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
 			String parentWindow = driver.getWindowHandle();
