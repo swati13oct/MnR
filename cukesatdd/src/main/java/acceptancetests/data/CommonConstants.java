@@ -1010,7 +1010,7 @@ public class CommonConstants {
 	
 	public static final String FOOTER_LINK = "linkName";
 	
-	public static final String PRE_FLOW = "";
+	public static String PRE_FLOW = "";
 }
 
 
