@@ -335,7 +335,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::div[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')] ")
 	private WebElement pharmacyNameSelected;
 
 	@FindBy(xpath = "//*[@id='switch_1N1V3S593B_widget']")
@@ -401,8 +401,8 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		pageloadcomplete();
 		validateNew(DrugDetails_ChangePharmacyLnk);
-
         validateNew(DrugDetails_DrugCostsHeading);
         validateNew(LinktoExitScenario);
         if(!LinktoExitScenario.getText().contains("Compare")) {
@@ -589,7 +589,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(LinkToDrugSummary);
 		jsClickNew(LinkToDrugSummary);
         pageloadcomplete();
-		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		//CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
@@ -866,7 +866,7 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
 		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
+		//CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
@@ -885,8 +885,9 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_MonthlyPremium_Amount);
 		validateNew(DrugCosts_AnnualEstTotal_Amount);
 		validateNew(MonthlyDrugStage_Header);
-
-		CommonUtility.waitForPageLoad(driver, YourDrugs_Header, 20);
+        pageloadcomplete();
+        validateNew(YourDrugs_Header);
+		//CommonUtility.waitForPageLoad(driver, YourDrugs_Header, 20);
 		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
 		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
@@ -927,6 +928,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickChangePharmacyLinkDetailsPage() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		jsClickNew(DrugDetails_ChangePharmacyLnk);
+		pageloadcomplete();
+		validateNew(pharmacyZipcodeSearch);
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 		validateSelectPharmacyPage();
 	}
