@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -92,7 +93,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	private WebElement Primary;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
-	private WebElement Physician;
+	private WebElement AllPrimaryCare;
 
 	@FindBy(xpath = "//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
@@ -236,9 +237,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 
-		Physician.click();
+		AllPrimaryCare.click();
 		// CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 		scrollToView(SaveBtn);
 		jsClickNew(SaveBtn);
@@ -266,17 +267,21 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	public VPPPlanSummaryPageMobile selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		GetStarted.click();
+		scrollToView(GetStarted);
+		jsClickNew(GetStarted);
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		scrollToView(People);
 		People.click();
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		scrollToView(Primary);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 
-		Physician.click();
+		scrollToView(AllPrimaryCare);
+		AllPrimaryCare.click();
 		scrollToView(selectProviderBtn);
 		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
@@ -429,8 +434,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// Primary.click();
 
 		// CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-		scrollToView(Physician);
-		jsClickNew(Physician);
+		scrollToView(AllPrimaryCare);
+		jsClickNew(AllPrimaryCare);
 		// Physician.click();
 
 		// CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
@@ -515,8 +520,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		jsClickNew(Primary);
 
 		// CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
-		jsClickNew(Physician);
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 10);
+		jsClickNew(AllPrimaryCare);
 
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 //		jsClickNew(selectProviderBtn);
@@ -581,18 +586,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public void verifyProviderSearchRallyPageDisplayed() {
-		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
+		Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
 	
 	public int entersZipcodeAndPlancount(String zipcode, String year) {
 
-		//validateNew(zipCodeTextfield);
-		waitforElementVisibilityInTime(zipCodeTextfield, 5);
+		pageloadcomplete();
+		waitforElementVisibilityInTime(zipCodeTextfield, 10);
 		zipCodeTextfield.sendKeys(zipcode);
 		//sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		jsClickNew(continueButton);
+		continueButton.click();
+		//jsClickNew(continueButton);
 		selectYear(year);
 
 		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
