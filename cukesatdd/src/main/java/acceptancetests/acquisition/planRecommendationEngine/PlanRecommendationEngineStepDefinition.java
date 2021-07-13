@@ -165,7 +165,6 @@ public class PlanRecommendationEngineStepDefinition {
 			headerAndFooter.enterSearchFunction(searchKey);
 			Thread.sleep(5000);	
 		}
-		headerAndFooter.backtoTopFunction();
 	}
 	
 	@And("^clicks on get started button and check error scenarios$")
@@ -953,8 +952,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user save recommendation results and validate in VP$")
-   	public void save_results(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
+   	public void save_results() {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		preEditpage.validateSaveResults();

@@ -29,7 +29,6 @@ Feature: Plan Recommendation Engine flow - Verify header and footer page in plan
      Examples: 
       | site |
       | AARP |
-      | UHC  |
       
       @FunctionalUHC
       Examples: 
