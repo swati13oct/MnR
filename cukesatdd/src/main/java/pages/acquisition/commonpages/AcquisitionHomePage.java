@@ -3430,8 +3430,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(samChatOptions);
 			samChatOptions.click();
 
-			validateNew(CloseChat);
-			CloseChat.click();
+			validate(CloseChat);
+			jsClickNew(CloseChat);
+			//CloseChat.click();
 
 			driver.switchTo().defaultContent();
 			System.out.println("Page Title---" + driver.getTitle());
