@@ -87,6 +87,8 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//u[contains(@class,'tel')]")
 	private WebElement TFNNoNeedHelp;
 	
+	@FindBy(xpath = "(//u[contains(@class,'tel')])[2]")
+	private WebElement TFNNoSaveWelcomeOLE;	
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
@@ -222,7 +224,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	
-	public boolean ValidateTFN(Map<String, String> planDetailsMap) {
+	public boolean ValidateTFNonWelcomeOLE(Map<String, String> planDetailsMap) {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
@@ -245,6 +247,27 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("TFN not displayed in OLE right rail"+flag);
 		return flag;
 		
+		
+	}
+	
+	public boolean ValidateTFNOLEPages(Map<String, String> planDetailsMap) {
+		//TFN no  above the continue button
+		
+		boolean flag = false;
+		
+		String TFNWidget_OLE = TFNNoWidget.getText();
+		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		
+		String Expected_TFN = planDetailsMap.get("TFN");
+		
+		System.out.println("TFN in VPP page : "+Expected_TFN);
+			//	flag = driver.getCurrentUrl().contains("welcome");
+				if (flag){
+					flag = TFNWidget_OLE.contains(Expected_TFN);
+				}			
+		
+		System.out.println("TFN not displayed in OLE right rail"+flag);
+		return flag;		
 		
 	}
 
@@ -579,6 +602,8 @@ public class WelcomePage extends UhcDriver{
 			Saveclosepopup.isDisplayed();
 			//Saveclosepopup.click();
 			jsClickNew(Saveclosepopup);
+			String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			return new SaveandReturnOLEModal(driver);
 		}
 		return null;
@@ -662,5 +687,24 @@ public class WelcomePage extends UhcDriver{
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public boolean ValidateTFNExitModels(Map<String, String> planDetailsMap) {
+	
+		boolean flag = false;
+		
+		String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
+		System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
+		
+		String Expected_TFN = planDetailsMap.get("TFN");
+		
+		System.out.println("TFN in VPP page : "+Expected_TFN);
+				if (flag){
+					flag = TFNNoNeedHelp_OLE.contains(Expected_TFN);
+				}			
+		
+		System.out.println("TFN not displayed in OLE ExitModels"+flag);
+		return flag;		
+		
 	}
 }

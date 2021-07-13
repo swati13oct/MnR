@@ -434,10 +434,8 @@ public class oleStepDefinition {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
-		
-	
 	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
-		boolean Validation_Status = welcomePage.ValidateTFN(PlanDetailsMap);
+		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(PlanDetailsMap);
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);

@@ -214,6 +214,9 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "(//a[contains(text(),'No thanks, leave online application')])[1]")
 	private WebElement LeaveOnlineApplicationforLogo;
 	
+	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	private WebElement TFNNoNeedHelp;
+	
 	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -849,6 +852,8 @@ public class PersonalInformationPage extends UhcDriver{
 			SignIn.isDisplayed();
 			validate(LeaveOnlineApplicationforLogo);
 			LeaveOnlineApplicationforLogo.isDisplayed();
+			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
 			closepopup.click();
 			return new CancelOLEModal(driver);
 		}

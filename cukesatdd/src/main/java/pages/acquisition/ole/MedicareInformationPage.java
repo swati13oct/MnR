@@ -333,6 +333,9 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
 	private WebElement ReturntoEnrollment;
 	
+	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	private WebElement TFNNoNeedHelp;
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1196,6 +1199,8 @@ public class MedicareInformationPage extends UhcDriver {
 			SignIn.isDisplayed();		
 			validate(CancelEnrollmentApplication);
 			CancelEnrollmentApplication.isDisplayed();
+			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
 			// closepopup.click();
 			jsClickNew(closepopup);
 			return new CancelOLEModal(driver);
@@ -1226,6 +1231,8 @@ public class MedicareInformationPage extends UhcDriver {
 			Saveclosepopup.isDisplayed();
 			// Saveclosepopup.click();
 			ReturntoEnrollment.isDisplayed();
+			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
 			jsClickNew(Saveclosepopup);
 			return new SaveandReturnOLEModal(driver);
 		}
