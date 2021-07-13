@@ -357,6 +357,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 	
 	public void validatePrintPlanDetails() {
+		scrollToView(validatePrintButtonOnPlanDetails);
 		validateNew(validatePrintButtonOnPlanDetails);
 		System.out.println("successfully validated the Print Buttons on plan details page.");
 	}

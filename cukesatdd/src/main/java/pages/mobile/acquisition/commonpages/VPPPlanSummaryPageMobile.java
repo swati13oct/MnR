@@ -1168,6 +1168,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public void clickBackToViewAllPlans() {
 		if (MRScenario.environment.equalsIgnoreCase("prod") && validate(backToAllPlansLnk)) {
 			jsClickNew(backToAllPlansLnk);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
 
