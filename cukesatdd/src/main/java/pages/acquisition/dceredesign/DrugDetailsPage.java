@@ -402,6 +402,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		pageloadcomplete();
+		threadsleep(3000);
 		validateNew(DrugDetails_ChangePharmacyLnk);
         validateNew(DrugDetails_DrugCostsHeading);
         validateNew(LinktoExitScenario);
