@@ -3,8 +3,10 @@
  */
 package pages.acquisition.ole;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.testng.Assert;
 import org.openqa.selenium.By;
@@ -16,6 +18,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -335,6 +338,15 @@ public class MedicareInformationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//u[contains(@class,'tel')]")
 	private WebElement TFNNoNeedHelp;
+	
+	@FindBy(xpath = "//*[contains(@id,'olesections')]")
+	private WebElement WidgetsImage;
+	
+	@FindBy(xpath = "//*[contains(@class,'tel tfn')]")
+	private WebElement TFNNoWidget;
+	
+	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
+	private WebElement PrivacyPolicy;
 	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
@@ -1320,6 +1332,49 @@ public class MedicareInformationPage extends UhcDriver {
 			// return new SpecialElectionPeriodPage(driver);
 		}
 		return true;
+	}
+	
+	public WelcomePage ValidateWidgetsonOLEPages(Map<String, String> planDetailsMap) {
+		validate(WidgetsImage);
+		if(validate(WidgetsImage)){
+			System.out.println("OLE Widgets Image is Displayed");
+			String TFNNoWidget_OLE = TFNNoWidget.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
+			String Expected_TFN = planDetailsMap.get("TFN");		
+			System.out.println("TFN in VPP page : "+Expected_TFN);
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(Expected_TFN));			
+			validateNew(PrivacyPolicy);
+			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(PrivacyPolicy);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+					break;
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentPageURL = driver.getCurrentUrl();
+			System.out.println(" Page is displayed : " + CurrentPageURL);
+			
+			if (CurrentPageURL.contains("privacy-policy.html")) {
+				System.out.println("****************privacy policy is displayed  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail("****************privacy policy is not loaded ***************");
+			}
+			driver.close();
+			driver.switchTo().window(parentWindow);
+			
+			return new WelcomePage(driver);
+		}
+		return null;
 	}
 
 }

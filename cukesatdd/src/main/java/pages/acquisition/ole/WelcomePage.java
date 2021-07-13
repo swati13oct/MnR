@@ -114,6 +114,8 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
 	
+	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
+	private WebElement PrivacyPolicy;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
@@ -157,6 +159,9 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath = "(//div[contains(@id,'leavingSite')])[1]")
 	private WebElement LogoModalOLE;
+	
+	@FindBy(xpath = "//*[contains(@id,'olesections')]")
+	private WebElement WidgetsImage;
 	
 	public WelcomePage(WebDriver driver) {
 
@@ -601,9 +606,10 @@ public class WelcomePage extends UhcDriver{
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
 			//Saveclosepopup.click();
-			jsClickNew(Saveclosepopup);
 			String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
+			jsClickNew(Saveclosepopup);
+			
 			return new SaveandReturnOLEModal(driver);
 		}
 		return null;
@@ -706,5 +712,48 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("TFN not displayed in OLE ExitModels"+flag);
 		return flag;		
 		
+	}
+	
+	public WelcomePage ValidateWidgetsonWelcomeOLE(Map<String, String> planDetailsMap) {
+		validate(WidgetsImage);
+		if(validate(WidgetsImage)){
+			System.out.println("OLE Widgets Image is Displayed");
+			String TFNNoWidget_OLE = TFNNoWidget.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
+			String Expected_TFN = planDetailsMap.get("TFN");		
+			System.out.println("TFN in VPP page : "+Expected_TFN);
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(Expected_TFN));			
+			validateNew(PrivacyPolicy);
+			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(PrivacyPolicy);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+					break;
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentPageURL = driver.getCurrentUrl();
+			System.out.println(" Page is displayed : " + CurrentPageURL);
+			
+			if (CurrentPageURL.contains("privacy-policy.html")) {
+				System.out.println("****************privacy policy is displayed  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail("****************privacy policy is not loaded ***************");
+			}
+			driver.close();
+			driver.switchTo().window(parentWindow);
+			
+			return new WelcomePage(driver);
+		}
+		return null;
 	}
 }

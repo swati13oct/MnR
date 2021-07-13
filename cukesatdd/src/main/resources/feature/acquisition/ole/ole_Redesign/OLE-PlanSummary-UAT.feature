@@ -16,7 +16,8 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates TFN on Welcome OLE Page
+    Then the user validate widgets on Welcome OLE Page
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -44,7 +45,8 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Home Number        | <phoneno>                      |
       | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
-	Then the user validates cancellation and Save Return Later modal for OLE Page
+		Then the user validates cancellation and Save Return Later modal for OLE Page
+		Then the user validate widgets on OLE Pages
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
@@ -131,8 +133,9 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
-Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
+		Then the user validates the Plan details on OLE
+   Then the user validates TFN on Welcome OLE Page
+    Then the user validate widgets on Welcome OLE Page
    Then the user validates Logo Image on Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -159,6 +162,7 @@ Then the user validates the Plan details on OLE
       | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
     Then the user validates cancellation and Save Return Later modal for OLE Page
+    Then the user validate widgets on OLE Pages
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
@@ -250,7 +254,8 @@ Then the user validates the Plan details on OLE
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates TFN on Welcome OLE Page
+    Then the user validate widgets on Welcome OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -292,6 +297,7 @@ Then the user validates the Plan details on OLE
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
+      Then the user validate widgets on OLE Pages
     Then the user validates the long term questions in Medicare Information Page
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
@@ -360,7 +366,8 @@ Then the user validates the Plan details on OLE
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
 Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
+   Then the user validates TFN on Welcome OLE Page
+    Then the user validate widgets on Welcome OLE Page
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -401,6 +408,7 @@ Then the user validates the Plan details on OLE
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
+      Then the user validate widgets on OLE Pages
     Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
@@ -475,7 +483,8 @@ Then the user validates the Plan details on OLE
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE CSNP Plans
-    #Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates TFN on Welcome OLE Page
+    Then the user validate widgets on Welcome OLE Page
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -506,9 +515,10 @@ Then the user validates the Plan details on OLE
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
       | Card Type          | <cardtype>          |
+    Then the user validate widgets on OLE Pages
     Then the user validates Medicaid Number in OLE Page
       | MedicaidNumber | <medicaidnumber> |
-      | Plan Year      | <planYear>       |
+      | Plan Year      | <planYear>       |  
      Then the user navigates to Confirm your Eligibility Page
       | Input Data     | <inputdataType>  |
       | PartA Date     | <partadate>      |

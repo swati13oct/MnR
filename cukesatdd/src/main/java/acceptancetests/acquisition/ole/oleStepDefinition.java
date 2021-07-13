@@ -428,8 +428,8 @@ public class oleStepDefinition {
 		}
 	}
 
-	@Then("^the user validates TFN in Welcome OLE Right Rail$")
-	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
+	@Then("^the user validates TFN on Welcome OLE Page$")
+	public void the_user_validates_TFN_on_Welcome_OLE_Page() throws Throwable {
 		scenario.log("Sai - Change made 06/15 - Validate TFN on Welcome OLE Page");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
@@ -3471,4 +3471,22 @@ public class oleStepDefinition {
 		} else
 			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
+	
+	@Then("^the user validate widgets on Welcome OLE Page$")
+	public void the_user_validates_widgtes_welcome_OLE() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
+		welcomePage.ValidateWidgetsonWelcomeOLE(PlanDetailsMap);
+		System.out.println("Widgets are displayed on welcome Pages");
+		}
+	
+	@Then("^the user validate widgets on OLE Pages$")
+	public void the_user_validates_widgtes_OLE_Pages() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+	Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+	PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
+	medicareInfoPage.ValidateWidgetsonOLEPages(PlanDetailsMap);
+	System.out.println("Widgets are displayed on welcome Pages");
 	}
+}
