@@ -325,10 +325,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
         
 // DCE elements
 	
-	@FindBy(css = "#addDrug")
+	@FindBy(css = "a[dtmid*='cta_dce']")
 	private WebElement drugAddBtn;
 	
-	@FindBy(css = "h1#progressHeader")
+	@FindBy(css = "h1[class*='drug-cost-estimator']")
 	private WebElement dceTitle;
 	
 //Header Element Verification Method 

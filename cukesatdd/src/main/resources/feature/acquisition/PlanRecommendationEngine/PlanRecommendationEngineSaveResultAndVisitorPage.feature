@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @SaveResultsPREWidget
 Feature: Plan Recommendation Engine flow - Verify Save Results functionality and Verify PRE widget in Visitor page
 
-  @PRE @SaveResultWithoutMS @SaveResult @F543314 
+  @PRE @SaveResultWithoutMS @SaveResult @F543314
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection>, <UserType>  - To Visitor Profile without MS Plans
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -53,14 +53,14 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
       | Password  | <password>      |
 
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName          | password |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]           | [blank]  |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DigitalDestroyer1 | DDpwd123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]  |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234 |
 
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName          | password |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]           | [blank]  |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DigitalDestroyer1 | DDpwd123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]  |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234 |
 
   @PRE @MAFlow
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
@@ -142,13 +142,13 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
-      | AARP |   10001 | NO            | New York    | None          | Medicaid     | Lookup     | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
+      | AARP |   10001 | NO            | New York | None          | Medicaid     | Lookup  | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
-      | UHC  |   10001 | NO            | New York    | None          | Medicaid     | Lookup     | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
+      | UHC  |   10001 | NO            | New York | None          | Medicaid     | Lookup  | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |
 
   @PRE @PDPFlow @F607619
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <pharmacyoption>, <UserType>  - To Validate Scenario2 PRE Widget Reommendations in visitor profile page
@@ -178,7 +178,7 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
     Then user validate recommendation section in PRE Widget on VP
     Then user validate a "View ranked list of plans" buttons from PRE
 
-    @regressionAARP
+    @regressionAARP1234
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
       | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |

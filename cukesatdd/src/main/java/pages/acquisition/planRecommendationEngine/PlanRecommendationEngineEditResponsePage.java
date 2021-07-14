@@ -108,20 +108,24 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	private WebElement CreateProfileButton;
 	
 	//Shopping Cart elements
-		@FindBy(css = "img[alt*='Shopping Cart']")
-		private WebElement ShoppingCartImg;
+	
+	@FindBy(css = "button[class*='saved-items-button']")
+	private WebElement mySavedItems ;
+	
+	@FindBy(css = "img[alt*='Shopping Cart']")
+	private WebElement ShoppingCartImg;
 		
-		@FindBy(css = "h3#guest-profile")
-		private WebElement guestProfileLink;
+	@FindBy(css = "h3#guest-profile")
+	private WebElement guestProfileLink;
 		
-		@FindBy(css = "h3#auth-profile")
-		private WebElement AuthProfileLink;
+	@FindBy(css = "h3#auth-profile")
+	private WebElement AuthProfileLink;
 		
-		@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
-		private WebElement signOut;
+	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+	private WebElement signOut;
 		
-		@FindBy(xpath = "//a[contains(text(),'Sign In')]")
-		private WebElement signInLink;
+	@FindBy(xpath = "div[class*='log-in'] a")
+	private WebElement signInLink;
 
 	// Edit Responses page Elements
 
@@ -254,8 +258,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	public void SignIn(String username, String password) {
 		System.out.println("Signin the profile:");
-		scrollToView(ShoppingCartImg);
-		actions.clickAndHold(ShoppingCartImg).build().perform();
+		actions.clickAndHold(mySavedItems).build().perform();
 		validate(signInLink,10);
 		signInLink.click();
 		signIn(username, password);
@@ -293,13 +296,13 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	public void PRESaveResultModelBtn() {
 		SignInButton.click();
 		threadsleep(2000);
-		Assert.assertTrue(driver.getCurrentUrl().contains("/app/index.html#/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
+		Assert.assertTrue(driver.getCurrentUrl().contains("/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
 		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 		CreateProfileButton.click();
 		threadsleep(2000);
-		Assert.assertTrue(driver.getCurrentUrl().contains("/app/index.html#/registration"),"***Create One Healthcare ID Page Not Opened***");
+		Assert.assertTrue(driver.getCurrentUrl().contains("/registration"),"***Create One Healthcare ID Page Not Opened***");
 		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
