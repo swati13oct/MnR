@@ -211,8 +211,8 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	}
 	
 	
-	String firstRecomPlanName = "";
-	String planType = "";
+	public String firstRecomPlanName = "";
+	public String planType = "";
 	public String navigateSaveResultsPage() {
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
