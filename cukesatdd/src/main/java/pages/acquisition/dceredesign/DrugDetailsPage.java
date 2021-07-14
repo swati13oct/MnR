@@ -2513,7 +2513,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assertion.fail(">>>>> Expected LIS Copay for Defined Standard Plan - "+liScopay+"; Actual - "+ActualLISCopay+" <<<<<");
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'plancopaydetail')]//h3[contains(text(), 'No LIS')]//following-sibling::div//strong")
+	@FindBy(xpath = "//*[contains(@id,'plancopaydetail')]//h3[contains(text(), 'No LIS')]//following-sibling::div//span")
 	private List<WebElement> DefStPlan_nonLISCopayTexts;
 
 	public void validateDefStandard_nonLIScopay(String nonliScopay) {
