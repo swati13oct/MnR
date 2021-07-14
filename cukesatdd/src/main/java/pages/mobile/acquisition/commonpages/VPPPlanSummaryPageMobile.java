@@ -151,7 +151,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
 	private WebElement msPlansNumber;
 
-	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed ng-scope']")
+	@FindBy(xpath = "//*[@class='trigger-closed' and @dtmname='Plans Landing:Plan Box:MS:View Plans']")
 	private WebElement msPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
@@ -851,7 +851,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#currPlansBanner>div>a")
 	private WebElement enrolledPlansBanner;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath = "//img[@class='mr-10 saved-item-icn']")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(css = "a#visitor-profile-header")
@@ -5016,6 +5016,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
+		scrollToView(shoppingCartIcon);
 		shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);

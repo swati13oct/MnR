@@ -1027,12 +1027,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
-	 * @author bnaveen4
-	 * @param additionalBenefits
-	 *            --> Data table which has the different benefit types To validate
-	 *            all the additional benefits given in the feature file
-	 */
 	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
 		// boolean validationFlag = true;
 		WebElement AdditionalBenefitType;
