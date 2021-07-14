@@ -801,7 +801,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
-    @avengersRegressionAARP @Validate3packCTA_Article_AARP @check
+    @avengersRegressionAARP @Validate3packCTA_Article_AARP
     Examples:
       | site | geoState | path                                                                                                                       | pageName          | tfnXpath                                                           | tfnFlag | UHCUrl                      |
       | AARP | Alabama  | medicare-articles/can-i-change-my-medicare-plan.html                                                                       | Article Page 1    | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
