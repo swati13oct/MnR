@@ -237,8 +237,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);
-		validate(drugcount, 60);
-		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
+		int count = drugsListinDCE.size();
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
 			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
@@ -280,7 +279,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
 		druglistPRE = drugPRE.drugnamesList();
 		threadsleep(5000);
-		jsClickNew(drugAddBtn);
 		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}

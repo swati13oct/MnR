@@ -33,7 +33,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | CountyDropDown      | <county>                                                                       |
       | Plan Type           | <isCoverageOpt>                                                                |
       | SNP Options         | <specialNeeds>                                                                 |
-      | Travel Options      | <travel>                                                                       |
       | Doctors             | <doctors>                                                                      |
       | Doctors Search Text | <DoctorsName>                                                                  |
       | Drug Selection      | <Drug Selection>                                                               |
