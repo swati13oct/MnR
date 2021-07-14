@@ -839,9 +839,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='city']")
 	private WebElement cityInput;
 
-	@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
-	private List<WebElement> stateDropDownValues;
-
+	/*@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+	private List<WebElement> stateDropDownValues;*/
+	
+	@FindBy(css = "#statedrpdwn")
+	private WebElement stateDropDown;
+	
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 	private WebElement findPlansButton;
 
@@ -4196,7 +4199,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void clickOnChangeZipCode() {
 		validateNew(changeLocationBtn);
-		changeLocationBtn.click();
+//		changeLocationBtn.click();
+		jsClickNew(changeLocationBtn);
 
 	}
 
@@ -4206,9 +4210,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsClickNew(searchByAddressButton);
 		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
-		sendkeys(addressInput, address);
-		sendkeys(cityInput, city);
-		selectFromDropDown(stateDropDownValues, state.toUpperCase());
+		sendkeysMobile(addressInput, address);
+		sendkeysMobile(cityInput, city);
+		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
+//		selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
 	}
 
