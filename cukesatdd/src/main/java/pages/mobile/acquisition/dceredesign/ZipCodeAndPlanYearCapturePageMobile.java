@@ -1,9 +1,5 @@
 package pages.mobile.acquisition.dceredesign;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,9 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
-
 import atdd.framework.Assertion;
-
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
@@ -54,7 +48,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
 	public WebElement ReturnToPagePopup;
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
@@ -151,19 +146,15 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
-	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
-		try {
-
-			mobileUtils.mobileLocateElement(zipCodeTxtbox);
-			mobileUtils.mobileLocateElement(countyDropdown);
-			// mobileUtils.mobileLocateElement(planYearDropdown);
-			mobileUtils.mobileLocateElement(continueBtn);
-			return new ZipCodeAndPlanYearCapturePageMobile(driver);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Element not found");
+	public void validateZipCodePlanYearCapturePageNonAEP() {
+		CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
+			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		}
-		return null;
+		else {
+		Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
+		}
+		
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {

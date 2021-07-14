@@ -339,10 +339,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
@@ -916,7 +916,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
 	private List<WebElement> savePlanImgList;
 
-	@FindBy(xpath = "//span[@id='header-number']")
+
+//	@FindBy(xpath = "//span[@id='header-number']")
+	@FindBy(xpath = "(//span[contains(@class,'cart-plans-count')])[1]")
 	private WebElement savedPlanHeaderCount;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
@@ -7130,7 +7132,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		validateNew(groupPlanMarkettingBullets);
 	}
-
 	
 	@FindBy(id = "savePlanheading")
 	private WebElement savedplanHeading;
@@ -7143,4 +7144,5 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(savedplanHeading);
 		jsClickNew(keepshopping);
 	}
+
 }

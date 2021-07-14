@@ -241,10 +241,10 @@ public class DCEACQVPPPlanDetailsMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		System.out.println("plan details ");
-		plansummaryPage.viewPlanSummary(planType);
+//		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 			System.out.println("plan details "+plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
@@ -258,5 +258,26 @@ public class DCEACQVPPPlanDetailsMobile {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DrugDetailsPageMobile drugDetailsPage = DCEbuildDrugList.navigateToDrugDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^the user clicks VPP Plan Details button from Drug Details Page$")
+	public void the_user_clicks__VPP_Plan_Details_button_from_Drug_Details_Page() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		PlanDetailsPageMobile plandetailspage = drugDetailsPage.clickViewPlanDetailsBtn();
+		if (null != plandetailspage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		} else
+			Assertion.fail("VPP Plan Details not loaded");
+	}
+	
+	@Then("^the user click on view plan summary button on vpp detail page$")
+	public void the_user_click_on_view_plan_summary_details() throws Throwable {
+		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = plandetailspage.clickViewPlanSummaryBtn();
+		if (null != plansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		} else
+			Assertion.fail("VPP Plan Details not loaded");
 	}
 }

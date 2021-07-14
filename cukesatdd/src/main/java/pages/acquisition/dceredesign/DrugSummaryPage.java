@@ -747,7 +747,7 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		WebElement SwitchLink = driver.findElement(
-				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::button[contains(text(), 'Switch ')]"));
+				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::*[contains(@id, 'switchToGenericLink')]"));
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
@@ -918,8 +918,8 @@ public class DrugSummaryPage extends UhcDriver {
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 			WebElement PlanDetailsLinkforPlan = driver.findElement(
-					By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
-							+ planName + "')]"));
+					By.xpath("(//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
+							+ planName + "')])[2]"));
 			validateNew(PlanDetailsLinkforPlan);
 			jsClickNew(PlanDetailsLinkforPlan);
 			System.out.println("View Plan details Clicked for MAPD Plan : " + planName);
@@ -929,8 +929,8 @@ public class DrugSummaryPage extends UhcDriver {
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 			WebElement PlanDetailsLinkforPlan = driver.findElement(
-					By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
-							+ planName + "')]"));
+					By.xpath("(//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
+							+ planName + "')])[2]"));
 			validateNew(PlanDetailsLinkforPlan);
 			jsClickNew(PlanDetailsLinkforPlan);
 			System.out.println("View Plan details Clicked for PDP Plan : " + planName);
@@ -940,8 +940,8 @@ public class DrugSummaryPage extends UhcDriver {
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 			WebElement PlanDetailsLinkforPlan = driver.findElement(
-					By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
-							+ planName + "')]"));
+					By.xpath("(//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"
+							+ planName + "')])[2]"));
 			validateNew(PlanDetailsLinkforPlan);
 			jsClickNew(PlanDetailsLinkforPlan);
 			System.out.println("View Plan details Clicked for SNP Plan : " + planName);
@@ -1310,7 +1310,6 @@ public class DrugSummaryPage extends UhcDriver {
         Assertion.fail("Did not Navigate to Build Drug List Page");
         return null;
     }
-
 	
 	@FindBy(xpath = "//*[@id='pdp-plans-radio']")
 	public WebElement pdpTabHeading;
@@ -1348,3 +1347,5 @@ public class DrugSummaryPage extends UhcDriver {
 
 
 }
+
+
