@@ -1689,6 +1689,9 @@ public abstract class UhcDriver {
 		
 		jsClickNew(pdfLink);
 		
+		WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/button1")));
+		
 		Set<String> contexts = mobileDriver.getContextHandles();
 
 		for (String context : contexts) {
@@ -1699,11 +1702,12 @@ public abstract class UhcDriver {
 					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
 					break;
 				} catch (NoSuchElementException e) {
-					System.out.println("Memory permission was already granted. File downloaded !");
+					System.out.println("Permission was already granted.");
 				}
 			}
 		}
 		
+		sleepBySec(3);						//Added sleep for letting a file to get downloaded.
 		mobileDriver.context(webContext);
 	}
 	
