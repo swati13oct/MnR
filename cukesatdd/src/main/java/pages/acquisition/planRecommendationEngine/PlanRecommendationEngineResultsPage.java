@@ -831,7 +831,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void removedDrugsDetailsVPPtoPRE() {
 			System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
-			flow = CommonConstants.PRE_FLOW;//PlanRecommendationEngineStepDefinition.PREflow;
+			flow = CommonConstants.PRE_FLOW.get(String.valueOf(Thread.currentThread().getId()));//PlanRecommendationEngineStepDefinition.PREflow;
 			DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 			boolean remove = true;
 			int count =DrugsInPRE.size();
@@ -843,7 +843,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void startnowtilldrugs() {
 			System.out.println("Navigating to PRE Using StartNow: ");
-			flow = CommonConstants.PRE_FLOW;;//PlanRecommendationEngineStepDefinition.PREflow;
+			flow = CommonConstants.PRE_FLOW.get(String.valueOf(Thread.currentThread().getId()));//PlanRecommendationEngineStepDefinition.PREflow;
 			vppToPre();
 			validateDrugPage(flow, false);
 		}

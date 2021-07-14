@@ -123,7 +123,7 @@ public class PlanRecommendationEngineCommonutilityMobile extends GlobalWebElemen
 		}
 
 		public void findPagedetails(String pageName) {
-			flow = CommonConstants.PRE_FLOW;//PlanRecommendationEngineStepDefinition.PREflow; // Change static flow
+			flow = CommonConstants.PRE_FLOW.get(String.valueOf(Thread.currentThread().getId()));//PlanRecommendationEngineStepDefinition.PREflow; // Change static flow
 			currentPageName = pageName.toUpperCase().trim();
 			currrentPagePercentage = new String();
 			previousPageName = new String();
