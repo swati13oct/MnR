@@ -751,8 +751,8 @@ public class CampaignTFNPage extends UhcDriver {
 				}
 	}
 
-	//@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style, 'display: block'))]")
+	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	//@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style, 'display: block'))]")
 	private WebElement HomeLogo;
 
 	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
@@ -925,7 +925,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 		//
 			}
 			
-			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
+			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[2]")
 			private WebElement firstPlanDetailsLinkdce;
 
 			public void NavigateToPlanDetailsdce(String planType) {
@@ -1294,7 +1294,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				@FindBy(xpath = "//select[@id='plan-type']")
 				private WebElement seletPlandropdown;
 				
-				@FindBy(xpath = "(//button/span)[1]")	
+				@FindBy(xpath = "//button[contains(@dtmid,'cta_pharmacylocator')]//span[contains(text(),'Continue')]")	
 				private WebElement ContinuePharmacy;
 								
 				@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")

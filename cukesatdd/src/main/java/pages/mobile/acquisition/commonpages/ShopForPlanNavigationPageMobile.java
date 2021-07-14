@@ -12,7 +12,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
-public class ShopForPlanNavigationPageMobile extends UhcDriver {
+public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
@@ -55,9 +55,9 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Member Resources']")
 	private WebElement memberResourcesLink;
-
-	// @FindBy(xpath =
-	// "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	
+	@FindBy (css = "nav-zipcode")
+	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
 	private WebElement shopLink;
@@ -65,11 +65,29 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
 	
-	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Plan Types']")
+	@FindBy(css = "#subnav_2 div[class*='section-1']")
+	private WebElement shopForPlanContainer;
+	
+	@FindBy(css = "#subnav_2 .nav-back")
+	private WebElement shopPlanBack;
+	
+	@FindBy(xpath = "//p[contains(@class,'dropdown-btn')][normalize-space()='Plan Types']")
 	private WebElement planTypesTab;
 	
-	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
+	@FindBy(css = "div[class*='mob-sctn section-2'] > div[class*='container']")
+	private WebElement planTypesContainer;
+	
+	@FindBy(css = "div[class*='mob-sctn section-2'] span[class='nav-srch-back']")
+	private WebElement planTypeBack;
+	
+	@FindBy(xpath = "//p[contains(@class,'dropdown-btn')][normalize-space()='Tools to help you choose a plan']")
 	public WebElement toolsToChoosePlanTab;
+	
+	@FindBy(css = "div[class*='mob-sctn section-3'] > div[class*='container']")
+	private WebElement toolsContainer;
+	
+	@FindBy(css = "div[class*='mob-sctn section-3'] span[class='nav-srch-back']")
+	private WebElement toolsToChooseBack;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
@@ -88,7 +106,6 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
-	
 	
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation']")
 	private WebElement getPlanRecommendation;
@@ -110,6 +127,12 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
+	
+	@FindBy(css = "#nav-zipcode")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = "//*[contains(text(),'Find Plans')]/parent::button")
+	private WebElement findPlansButton;
 
 	public ShopForPlanNavigationPageMobile(WebDriver driver) {
 		super(driver);
@@ -125,7 +148,7 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 
 	public EnrollmentBasicsPageMobile enrollLinkOnShopPlan() throws Exception {
 		
-		selectOptionFromShopForPlanModal("Shop", "Enroll", false);
+		selectShopOption("Enroll");
 		/*waitforElement(enrollLink);
 		scrollToView(enrollLink);
 		jsClickNew(enrollLink);*/
@@ -139,7 +162,7 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
-		selectOptionFromShopForPlanModal("Shop", "Shop", false);
+		selectShopOption("Shop");
 		/*scrollToView(shopLink);
 		waitforElement(shopLink);
 		jsClickNew(shopLink);*/
@@ -283,68 +306,151 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 		}
 	}
 	
-	public void selectOptionFromShopForPlanModal(String parentTab, String option, boolean classicUrl) {
-		switch (parentTab.toUpperCase()) {
-		case "SHOP":
-			if (option.equalsIgnoreCase("Shop")) {
-				scrollToView(shopLink);
-				jsClickNew(shopLink);
-			} else if (option.equalsIgnoreCase("Enroll")) {
-				scrollToView(enrollLink);
-				jsClickNew(enrollLink);
-			} else if (option.equalsIgnoreCase("Member Resources")) {
-				scrollToView(memberResourcesLink);
-				jsClickNew(memberResourcesLink);
-			} else {
-				throw new IllegalArgumentException("Option " + option + " is not available under 'Shop for a Plan' menu");
-			}
+	
+	public void selectShopOption(String shopOption) {
+		switch (shopOption.toLowerCase()) {
+		case "shop":
+			jsClickNew(shopLink);
 			break;
-		case "PLAN TYPES":
-			scrollToView(planTypesTab);
-			jsClickNew(planTypesTab);
-			if (option.equalsIgnoreCase("MA")) {
-				scrollToView(maLeanHowToshopLink);
-				jsClickNew(maLeanHowToshopLink);
-			} else if (option.equalsIgnoreCase("DSNP")) {
-				scrollToView(dsnpLeanHowToshopLink);
-				jsClickNew(dsnpLeanHowToshopLink);
-			} else if (option.equalsIgnoreCase("MEDSUPP")) {
-				if(!classicUrl) {
-					scrollToView(msLeanHowToshopLink);
-					jsClickNew(msLeanHowToshopLink);
-				} else {
-					scrollToView(MedSuppClassicUrl);
-					jsClickNew(MedSuppClassicUrl);
-				}
-			} else if (option.equalsIgnoreCase("PDP")) {
-				scrollToView(pdpLeanHowToshopLink);
-				jsClickNew(pdpLeanHowToshopLink);
-			} else {
-				throw new IllegalArgumentException("Plan type " + option + " is not available under 'Plan Types' menu");
-			}
+		case "enroll":
+			jsClickNew(enrollLink);
 			break;
-		case "TOOLS":
-			scrollToView(toolsToChoosePlanTab);
-			jsClickNew(toolsToChoosePlanTab);
-			if (option.equalsIgnoreCase("PRE")) {
-				scrollToView(getPlanRecommendation);
-				jsClickNew(getPlanRecommendation);
-			} else if (option.equalsIgnoreCase("DCE")) {
-				scrollToView(drugCostEstimator);
-				jsClickNew(drugCostEstimator);
-			} else if (option.equalsIgnoreCase("PHARMACYSEARCH")) {
-				scrollToView(pharmacySearch);
-				jsClickNew(pharmacySearch);
-			} else if (option.equalsIgnoreCase("PROVIDERSEARCH")) {
-				scrollToView(providerSearch);
-				jsClickNew(providerSearch);
-			} else {
-				throw new IllegalArgumentException("Tool " + option + " is not available under 'Tools to help you choose a plan' menu");
-			}
+		case "member resources":
+			jsClickNew(memberResourcesLink);
+			break;
 		default:
-			throw new IllegalArgumentException("Parent tab " + parentTab + " is not a tab from 'Shop for a Plan' menu");
+			throw new IllegalArgumentException(
+					"Option " + shopOption + " is not available under 'Shop for a Plan' menu");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
+
+	public void selectPlanTypeOption(String planType, boolean classicUrl) {
+		
+		if(!planTypesContainer.isDisplayed()) {
+			jsClickNew(planTypesTab);
+		}
+		switch (planType.toLowerCase()) {
+		case "ma":
+		case "mapd":
+			jsClickNew(maLeanHowToshopLink);
+		case "dsnp":
+		case "snp":
+			jsClickNew(dsnpLeanHowToshopLink);
+			break;
+		case "medsupp":
+		case "ms":
+			if (classicUrl)
+				jsClickNew(MedSuppClassicUrl);
+			else
+				jsClickNew(msLeanHowToshopLink);
+			
+			break;
+		case "pdp":
+			jsClickNew(pdpLeanHowToshopLink);
+			break;
+		default:
+			throw new IllegalArgumentException("Plan type " + planType + " is not available under 'Plan Types' menu");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+	public void selectTool(String tool) {
+		if(!toolsContainer.isDisplayed()) {
+			jsClickNew(toolsToChoosePlanTab);
+		}
+		switch (tool.toLowerCase()) {
+		case "pre":
+			jsClickNew(getPlanRecommendation);
+			break;
+		case "dce":
+			jsClickNew(drugCostEstimator);
+			break;
+		case "pharmacy search":
+			jsClickNew(pharmacySearch);
+			break;
+		case "provider search":
+			jsClickNew(providerSearch);
+			break;
+		default:
+			throw new IllegalArgumentException(
+					"Tool " + tool + " is not available under 'Tools to help you choose a plan' menu");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+	
+	public boolean validateShopForPlanMenu() {
+		boolean validateMenuOptions = false;
+		
+		try {
+			scrollToView(shopLink);
+			validateMenuOptions = shopLink.isDisplayed();
+			
+			scrollToView(enrollLink);
+			validateMenuOptions = validateMenuOptions && enrollLink.isDisplayed();
+			
+			scrollToView(memberResourcesLink);
+			validateMenuOptions = validateMenuOptions && memberResourcesLink.isDisplayed();
+			
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
+		}
+		return validateMenuOptions;
+		
+	}
+	
+	public boolean validatePlanTypeMenu() {
+		boolean validatePlanTypeOptions = false;
+
+		if(!planTypesContainer.isDisplayed()) {
+			jsClickNew(planTypesTab);
+		}
+		try {
+			validatePlanTypeOptions = maLeanHowToshopLink.isDisplayed();
+			validatePlanTypeOptions = validatePlanTypeOptions &&  dsnpLeanHowToshopLink.isDisplayed();
+			
+			validatePlanTypeOptions = validatePlanTypeOptions && (msLeanHowToshopLink.isDisplayed() || MedSuppClassicUrl.isDisplayed());
+			
+			validatePlanTypeOptions = validatePlanTypeOptions && pdpLeanHowToshopLink.isDisplayed();
+			
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the Plan Types menu");
+		}
+		
+		jsClickNew(planTypeBack);
+		return validatePlanTypeOptions;
+		
+	}
+	
+	
+	public boolean validateToolsMenu() {
+		boolean validateToolsOptions = false;
+
+		if(!toolsContainer.isDisplayed()) {
+			jsClickNew(toolsToChoosePlanTab);
+		}
+		try {
+			validateToolsOptions = getPlanRecommendation.isDisplayed();
+			validateToolsOptions = validateToolsOptions &&  drugCostEstimator.isDisplayed();
+			
+			validateToolsOptions = validateToolsOptions && pharmacySearch.isDisplayed();
+			
+			validateToolsOptions = validateToolsOptions && providerSearch.isDisplayed();
+			
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the Tools menu");
+		}
+		jsClickNew(toolsToChooseBack);
+		return validateToolsOptions;
+		
+	}
+	
+	
+	public void searchPlanForZipcodeFromShopMenu(String zipcode) {
+		sendkeysMobile(zipcodeField, zipcode);
+		jsClickNew(findPlansButton);
+	}
+	
 	
 	public boolean checkForClassicURL(String state) {
 		//This list can be a constant rather than updating in each page class 

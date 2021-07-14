@@ -22,9 +22,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -35,7 +34,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
@@ -146,6 +146,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
 
+	@FindBy(xpath = "//*[text()='Return to plan summary']")
+	public WebElement returnToPlanSummaryLink;
+
 	@Override
 	public void openAndValidate() {
 		// validateNew(reviewDrugCostPageHeading);
@@ -196,10 +199,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 
-		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
+		jsClickNew(PharmacyName.get(PharmacyName.size() - 1));
 		validateNew(saveDrugBtn);
 		jsClickNew(saveDrugBtn);
-		//saveDrugBtn.click();
+		// saveDrugBtn.click();
 	}
 
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
@@ -438,9 +441,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement MailPharmacy;
 
 	public void selectMailOrderPharmacy() {
+		iosScroll(MailPharmacy);
 		jsClickNew(MailPharmacy);
 		validateNew(saveDrugBtn);
-		saveDrugBtn.click();
+		jsClickNew(saveDrugBtn);
+		// saveDrugBtn.click();
 	}
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
@@ -623,7 +628,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		String countyValue = sl.getOptions().get(2).getText().toString();
 		mobileSelectOption(planDropDown, countyValue, true);
 		validateNew(viewProceBtn);
-		
+
 		jsClickNew(viewProceBtn);
 	}
 	// Switch to Generic
@@ -829,8 +834,15 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public void clickViewDrugCostBtn() {
-		viewDrugCostBtn.click();
+	public DrugDetailsPageMobile clickViewDrugCostBtn() {
+		jsClickNew(viewDrugCostBtn);
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPageMobile(driver);
+		} else {
+			Assertion.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}
 	}
 
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
@@ -1151,6 +1163,56 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		return new PlanDetailsPageMobile(driver);
 
+	}
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'drug pricing:edit drug list')]")
+	public WebElement DrugPricingModal_EditDrugs;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement EnterDrugNameTxt;
+
+	@FindBy(xpath = "//button[(@id= 'search')]")
+	public WebElement SearchBtn;
+
+	public BuildYourDrugListMobile clickEditDrugs_DrugPricingModal() {
+		pageloadcomplete();
+		validateNew(DrugPricingModal_EditDrugs);
+		jsClickNew(DrugPricingModal_EditDrugs);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
+		if (validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
+	}
+
+	public void clickReturnToPlanSummary() {
+		// returnToPlanSummaryLink.click();
+		jsClickNew(returnToPlanSummaryLink);
+		waitForPageLoadSafari();
+	}
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
+
+	@FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	public WebElement returnToHomeBtn;
+
+	public void clickOnReturnToHome() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				jsClickNew(savedPlansPopupCloseIcon);
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		scrollToView(returnToHomeBtn);
+		validateNew(returnToHomeBtn);
+		jsClickNew(returnToHomeBtn);
 	}
 
 }
