@@ -853,7 +853,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			if(validate(MAViewPlansLink, 60))
 				jsClickNew(MAViewPlansLink);
-			int count = Integer.parseInt(MA1stPlanList.get(0).findElement(By.cssSelector("a[id*='drug-list-title']")).getText().trim().split("drugs")[0].split("of")[1]);
+			int count = Integer.parseInt(MA1stPlanList.get(0).findElement(By.cssSelector("a[id*='drug-list-title']")).getText().trim().split(" drugs")[0].split("of ")[1]);
 					//Druglist.size();
 			DrugsInVPP = drugsCoveredInVPP(count);
 //			DrugsInDCE = dce.getDrugNamesDCE();
