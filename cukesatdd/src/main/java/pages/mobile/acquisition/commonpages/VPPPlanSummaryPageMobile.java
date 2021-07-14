@@ -4264,6 +4264,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			providerNames.add(providername);
 		}
 
+		//Click again on provider list button for making enroll button visible
+		jsClickNew(ProviderSearchLink);
 		return providerNames;
 	}
 	//
