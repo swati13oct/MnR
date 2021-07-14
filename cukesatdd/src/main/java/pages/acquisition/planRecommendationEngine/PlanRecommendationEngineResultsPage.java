@@ -851,8 +851,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		public void DrugsDetailsVPPtoPRE() {
 			System.out.println("Validating Drugs Details from DCE to VPP Drug Page: ");
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
-			validate(MAViewPlansLink, 60);
-			jsClickNew(MAViewPlansLink);
+			if(validate(MAViewPlansLink, 60))
+				jsClickNew(MAViewPlansLink);
 			int count= Druglist.size();
 			DrugsInVPP = drugsCoveredInVPP(count);
 //			DrugsInDCE = dce.getDrugNamesDCE();

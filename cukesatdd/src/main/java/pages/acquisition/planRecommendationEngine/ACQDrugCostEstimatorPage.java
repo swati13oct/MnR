@@ -70,7 +70,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> searchList;
 
-	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
+	@FindBy(css = "#buildyourdruglist button span[class*='tabButtontext ']")
 	private List<WebElement> drugpageButtons;
 	
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
@@ -120,7 +120,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "#nextSummary")
 	private WebElement viewCostButton;
 
-	@FindBy(css = "a[class*='ng-star-inserted']:nth-of-type(1)")
+	@FindBy(css = "a[class*='ng-star-inserted']")
 	private List<WebElement> backtoPlansButton;
 
 	@FindBy(css = "button.delete-drug-confirm")
