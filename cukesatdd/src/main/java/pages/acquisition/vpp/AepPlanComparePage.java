@@ -167,7 +167,8 @@ public class AepPlanComparePage extends UhcDriver {
 
     public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
-        threadsleep(2000);
+       
+        sleepBySec(5);
 
         //CommonUtility.checkPageIsReady(driver);
 
