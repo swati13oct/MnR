@@ -613,7 +613,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"SNP Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+					.equalsIgnoreCase(R1PlanName), "MS PlanName Invalid");
 		}
 	}
 		
@@ -853,7 +853,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			if(validate(MAViewPlansLink, 60))
 				jsClickNew(MAViewPlansLink);
-			int count= Druglist.size();
+			int count = Integer.parseInt(MA1stPlanList.get(0).findElement(By.cssSelector("a[id*='drug-list-title']")).getText().trim().split("drugs")[0].split("of")[1]);
+					//Druglist.size();
 			DrugsInVPP = drugsCoveredInVPP(count);
 //			DrugsInDCE = dce.getDrugNamesDCE();
 			DCEtoPRE();
