@@ -51,11 +51,13 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the long term questions in Medicare Information Page
+   Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -91,12 +93,12 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-   # Then the user validates the OLE Submission Details in GPS
-     # | Plan Type                | <plantype>               |
-     # | Auth Flag                | <authflag>               |
-    #  | Mailing Address Question | <mailingaddressquestion> |
+    Then the user validates the OLE Submission Details in GPS
+      | Plan Type                | <plantype>               |
+      | Auth Flag                | <authflag>               |
+      | Mailing Address Question | <mailingaddressquestion> |
       
     @SNP_OLE_AARP_Future @OLE @regressionAARP @OLE @sanity @OLE_Redesign @OLE_Redesign_DSNP @ole_Redesign_Gating
     Examples: 
@@ -191,10 +193,12 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
       | Provider Phone Number   | <providernumber>  |
       | Mailing_State           | <mailingstate>    | 
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -232,10 +236,10 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
     Then the user navigates to Review and Submit Page
    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-   # Then the user validates the OLE Submission Details in GPS
-     # | Plan Type                | <plantype>               |
-     # | Auth Flag                | <authflag>               |
-    #  | Mailing Address Question | <mailingaddressquestion> |
+    Then the user validates the OLE Submission Details in GPS
+      | Plan Type                | <plantype>               |
+      | Auth Flag                | <authflag>               |
+      | Mailing Address Question | <mailingaddressquestion> |
     
     @CSNP_OLE_AARP_Future @regressionAARP @OLE @OLE_Redesign @ole_Redesign_Gating
     Examples: 

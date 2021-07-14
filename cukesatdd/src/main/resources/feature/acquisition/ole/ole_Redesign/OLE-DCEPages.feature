@@ -56,11 +56,13 @@ Feature: 1.05.1.E2E for DCE to OLE Flows
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the long term questions in Medicare Information Page
+   Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |

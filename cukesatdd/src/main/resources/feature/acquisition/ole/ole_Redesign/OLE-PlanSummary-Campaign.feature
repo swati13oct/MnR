@@ -171,6 +171,7 @@ Feature: 1.05.5. OLE Flow from Campaign URL
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
+     | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |

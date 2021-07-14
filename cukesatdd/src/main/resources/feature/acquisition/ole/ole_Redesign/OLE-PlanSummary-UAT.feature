@@ -63,10 +63,12 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -182,10 +184,12 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -308,10 +312,12 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       Then the user validate widgets on OLE Pages
       		| TFN No    | <TFNNo>    |
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -422,6 +428,7 @@ Then the user validates the Plan details on OLE
       Then the user validate widgets on OLE Pages
       			| TFN No    | <TFNNo>    |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
+      | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -560,10 +567,12 @@ Then the user validates the Plan details on OLE
       | Provider Phone Number   | <providernumber>  |
       | Mailing_State           | <mailingstate>    | 
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |

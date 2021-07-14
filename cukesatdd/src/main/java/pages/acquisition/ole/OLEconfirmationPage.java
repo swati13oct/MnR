@@ -592,7 +592,7 @@ public Connection createDataBaseConnection() {
 		String date = intputDate.substring(2, 4);
 		String month = intputDate.substring(0, 2);;
 		String year = intputDate.substring(4,8);
-		String outputDate= year+"-"+month+"-"+date; 
+		String outputDate= year+"/"+month+"/"+date; 
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
 	}
@@ -601,7 +601,7 @@ public Connection createDataBaseConnection() {
 		String date = intputDate.substring(3,5);
         String month = intputDate.substring(0,2);
         String year = intputDate.substring(6,10);
-		String outputDate= year+"-"+month+"-"+date; 
+		String outputDate= year+"/"+month+"/"+date; 
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
 	}

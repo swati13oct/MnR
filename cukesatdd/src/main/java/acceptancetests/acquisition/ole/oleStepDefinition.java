@@ -657,7 +657,7 @@ public class oleStepDefinition {
 
 			//	getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
 			//	getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
-			getLoginScenario().saveBean(oleCommonConstants.PAPERLESS_DELIVERY, MedicareDetailsMap.get("Go Green"));
+			//getLoginScenario().saveBean(oleCommonConstants.PAPERLESS_DELIVERY, MedicareDetailsMap.get("Go Green"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
 			//	getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
@@ -1209,6 +1209,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
+			getLoginScenario().saveBean(oleCommonConstants.PAPERLESS_DELIVERY, MemberDetailsMap.get("Go Green"));
 			getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
 			//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
 			Assertion.assertTrue(true);
@@ -2450,6 +2451,8 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Other Insurance Questions in Medicare Information Page - All required Member Details are entered");
+			
+			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE, MemberDetailsMap.get("LongTerm Question"));
 			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE_NAME, MemberDetailsMap.get("Health Insurance Name"));
 			getLoginScenario().saveBean(oleCommonConstants.GROUP_NUMBER, MemberDetailsMap.get("Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MEMBER_NUMBER, MemberDetailsMap.get("Member Number"));
@@ -2471,6 +2474,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Prescription drug coverage Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_DRUG, MemberDetailsMap.get("PDP Question"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));
@@ -2585,6 +2589,7 @@ public class oleStepDefinition {
 							DetailsMap.put("Paperless Delivery", "N");
 						} else {
 							String paperless= ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
+							System.out.println("--------------------Storing Data for paperless delivery" +paperless);
 							paperless=paperless.toUpperCase().substring(0, 1);
 							DetailsMap.put("Paperless Delivery",paperless);
 							//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
@@ -3467,6 +3472,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Prescription drug coverage Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_DRUG, MemberDetailsMap.get("PDP Question"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));

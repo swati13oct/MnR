@@ -1001,7 +1001,9 @@ public class MedicareInformationPage extends UhcDriver {
 			throws InterruptedException {
 
 		boolean Validation_Flag = true;
-
+		
+		String LongTermQuestionFlag = memberDetailsMap.get("LongTerm Question");
+		
 			if (LongTermQuestionFlagNo.isDisplayed()) {
 				jsClickNew(LongTermQuestionFlagNo);
 				if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
@@ -1013,6 +1015,7 @@ public class MedicareInformationPage extends UhcDriver {
 				}
 			
 			}
+			if (LongTermQuestionFlag.equalsIgnoreCase("yes")) {
 			LongTermQuestionFlagYes.isDisplayed();
 			jsClickNew(LongTermQuestionFlagYes);
 
@@ -1023,7 +1026,7 @@ public class MedicareInformationPage extends UhcDriver {
 			sendkeysNew(healthInsuranceNameField, HealthInsuranceName);
 			sendkeysNew(groupNumberField, GroupNumber);
 			sendkeysNew(memberNumberField, MemberNumber);
-
+			}
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Prescription Drug Coverage options selected :  Next button is enabled");
@@ -1037,6 +1040,8 @@ public class MedicareInformationPage extends UhcDriver {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
+		
+		String PDPquestionFlag = memberDetailsMap.get("PDP Question");
 		
 			CommonUtility.checkPageIsReadyNew(driver);
 			// if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription
@@ -1056,6 +1061,7 @@ public class MedicareInformationPage extends UhcDriver {
 				}
 			}
 
+			if (PDPquestionFlag.equalsIgnoreCase("yes")) {
 			PrescriptionCoverageQuestionFlagYes.isDisplayed();
 			jsClickNew(PrescriptionCoverageQuestionFlagYes);
 
@@ -1069,7 +1075,7 @@ public class MedicareInformationPage extends UhcDriver {
 			sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
 			sendkeysNew(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
 
-		
+			}
 		if (NextBtn.isEnabled()) {
 			System.out.println("SEP options selected :  Next button is enabled");
 			// return new SpecialElectionPeriodPage(driver);

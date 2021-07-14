@@ -289,6 +289,7 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
+      | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
