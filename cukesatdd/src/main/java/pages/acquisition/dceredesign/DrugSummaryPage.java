@@ -1161,7 +1161,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
-		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().trim().contains(defaultPharmacy));
 	}
 
 	public void clickKeepUsingPharmacyLink() {
