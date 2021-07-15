@@ -65,7 +65,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validates TFN on page
+    Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
@@ -716,13 +716,13 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @avengersRegressionUHC
     Examples:
-      | Scenario                          | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                            | tfnFlag |
-      | UAT E2E Regression Scenario 1_UMS | UHC  | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[10] | true    |
-      | UAT E2E Regression Scenario 2_UMS | UHC  | Alabama  | shop/medicare-advantage-plans.html                 | Shop MA Plans Page            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[10] | true    |
-      | UAT E2E Regression Scenario 2_UMS | UHC  | Alabama  | shop/medicare-advantage-plans/california.html      | Shop MA Plans California Page | https://www.myuhcagent.com/ | //span[contains(text(),'Call')]//*[contains(@class,'tel tfn')]      | true    |
-      | UAT E2E Regression Scenario 3_UMS | UHC  | Alabama  | shop/dual-special-needs-plans.html                 | Shop DSNP Plans Page          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[10] | true    |
-      | UAT E2E Regression Scenario 4_UMS | UHC  | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[10] | true    |
-      | Avengers UMS                      | UHC  | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5]  | true    |
+      | Scenario                          | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | UAT E2E Regression Scenario 1_UMS | UHC  | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_UMS | UHC  | Alabama  | shop/medicare-advantage-plans.html                 | Shop MA Plans Page            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_UMS | UHC  | Alabama  | shop/medicare-advantage-plans/california.html      | Shop MA Plans California Page | https://www.myuhcagent.com/ | //span[contains(text(),'Call')]//*[contains(@class,'tel tfn')]     | true    |
+      | UAT E2E Regression Scenario 3_UMS | UHC  | Alabama  | shop/dual-special-needs-plans.html                 | Shop DSNP Plans Page          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 4_UMS | UHC  | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | Avengers UMS                      | UHC  | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
     @avengersRegressionAARP
     Examples:
