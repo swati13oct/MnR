@@ -156,6 +156,9 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
 	protected WebElement emailPopup;
+	
+	@FindBy(css = ".modal-title")
+	protected WebElement emailModalTitle;
 
 	@FindBy(xpath = ".//*[@id='closepopup']")
 	protected WebElement cancelButtonEmailPlanDetailsPopUp;
