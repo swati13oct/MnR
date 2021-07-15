@@ -209,7 +209,7 @@ public class DCEACQDrugSummaryMobile {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 //		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-//		drugSummaryPage.verifyDefaultPlanType();
+		drugSummaryPage.verifyDefaultPlanType("Medicare Advantage");
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	

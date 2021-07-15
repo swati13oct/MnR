@@ -62,7 +62,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
 	public WebElement Tier5_MailPharmacy_Text;
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(css = "button[id='changePharmacyLink'][class$='block']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -71,11 +71,15 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
+//	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
+	@FindBy(css = "#edityourdrug")
 	public WebElement LinktoEditDrugList;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
+	
+	@FindBy(css = ".uhc-card__content")
+	public WebElement DrugDetails_DrugCostsCard;
 
 	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]")
 	public WebElement DrugCosts_AvgMonDrugCost;
@@ -360,10 +364,19 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		scrollToView(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsHeading);
+		
+		scrollToView(DrugDetails_DrugCostsCard);
+		validateNew(DrugDetails_DrugCostsCard);
+		
+		scrollToView(LinkToDrugSummary);
 		validateNew(LinkToDrugSummary);
+		
+		scrollToView(LinktoExitScenario);
 		validateNew(LinktoExitScenario);
+		
+		scrollToView(LinktoEditDrugList);
 		validateNew(LinktoEditDrugList);
 	}
 

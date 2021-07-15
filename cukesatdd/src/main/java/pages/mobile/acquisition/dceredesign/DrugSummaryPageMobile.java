@@ -112,7 +112,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
-	@FindBy(id = "changePharmacyLink")
+//	@FindBy(id = "changePharmacyLink")
+	@FindBy(css = "button[id='changePharmacyLink'][class$='block']")
 	public WebElement changePharmacy;
 
 	@FindBy(id = "modal-label")
@@ -799,6 +800,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
+	@FindBy(css = ".uhc-card__content")
+	public WebElement DrugDetails_DrugCostsCard;
+	
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement ToggleDropDown;
 
@@ -884,8 +888,15 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugDetailsPageMobile clickViewDrugCostBtn() {
 		jsClickNew(viewDrugCostBtn);
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
+		boolean elementsPresent = false;
+		scrollToView(DrugDetails_DrugCostsCard);
+		elementsPresent = validateNew(DrugDetails_DrugCostsCard);
+		
+		scrollToView(changePharmacy);
+		elementsPresent = elementsPresent && validateNew(changePharmacy);
+		
+		if (elementsPresent) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assertion.fail("Drug Details Page is NOT Displayed");
