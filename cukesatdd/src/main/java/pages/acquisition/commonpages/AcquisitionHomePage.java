@@ -669,7 +669,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[2]")
+	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[4]")
 	private WebElement footertextsectioncallusMedsupp;
 
 	// @FindBy(xpath =
@@ -6197,8 +6197,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
