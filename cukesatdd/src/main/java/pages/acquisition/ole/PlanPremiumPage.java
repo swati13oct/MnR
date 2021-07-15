@@ -407,8 +407,31 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	}
 	
-
-
+	public boolean validateNoPremium() {
+		boolean flag = false;
+		
+		String actualText = noMonthlyPremium.getText();
+		String LastEnrollmentPenaltyText = lastEnrollmentPenalty.getText();
+		
+			System.out.println("Validate no monthly premium text");
+		//	actualText = noMonthlyPremium.getText().replaceAll("\u00A0"," ").trim();
+		//	LastEnrollmentPenaltyText = lastEnrollmentPenalty.getText().replaceAll("\u00A0"," ").trim();
+			System.out.println("Validate no monthly premium text:" +actualText);
+			System.out.println("Validate Last Enrollment Penalty premium text:" +LastEnrollmentPenaltyText);
+			
+			String expectedText = CommonConstants.NO_MONTHLY_PREMIUM_TEXT;
+			String expectedLastEnrollmentPenaltyText = CommonConstants.LAST_ENROLLMENT_PENALITY_TEXT;
+			
+			System.out.println("Expected no monthly premium text:" +expectedText);
+			System.out.println("Expected Last Enrollment Penalty premium text:" +expectedLastEnrollmentPenaltyText);
+			flag = (actualText.equals(expectedText) && (LastEnrollmentPenaltyText.equals(expectedLastEnrollmentPenaltyText)));
+			if (flag){	
+			
+			}
+			return flag;
+	
+	}
+	
 }
 
 
