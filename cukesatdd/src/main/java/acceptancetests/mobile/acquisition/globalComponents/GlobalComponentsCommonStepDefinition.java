@@ -20,6 +20,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
@@ -116,6 +117,8 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home Page not Loading");
 		}
 	}
+	
+
 
 	@When("^user verifies the logo on home page$")
 	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {

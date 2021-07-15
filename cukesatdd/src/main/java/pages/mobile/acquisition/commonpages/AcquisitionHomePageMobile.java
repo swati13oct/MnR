@@ -2389,28 +2389,32 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		jsClickNew(shopPlansExpander);
+		sleepBySec(2);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
-		// validateNew(learnAboutMedicareLink);
+		jsClickNew(shopPlansExpander);
 
 		jsClickNew(toolsAndResources);
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
+		jsClickNew(toolsAndResources);
 
 		jsClickNew(learnAboutMedicareFooterButton);
 		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
+		jsClickNew(learnAboutMedicareFooterButton);
 
 		jsClickNew(more);
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
+		jsClickNew(more);
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
