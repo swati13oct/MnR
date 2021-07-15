@@ -301,7 +301,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	public void validatingFunctionalityOfEmailOnPlanDetails() {
 
 		validateEmailButtonOnPlanDetails.click();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		validateNew(emailPopup);
 		validateNew(cancelButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanDetailsPopUp.isDisplayed());
@@ -311,7 +311,8 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
 		sendkeysMobile(driver.findElement(By.xpath(".//*[@id='email']")), "alisha_kapoor@optum.com");
 		System.out.println("!!!Entered valid Email ");
-		hidekeypad();
+//		hidekeypad();
+		emailModalTitle.click();
 		sendButtonEmailPlanDetailsPopUp.click();
 		System.out.println("Email has success fully send to user");
 		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send",

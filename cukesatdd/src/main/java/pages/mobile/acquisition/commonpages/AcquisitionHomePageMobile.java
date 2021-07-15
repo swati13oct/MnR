@@ -36,6 +36,8 @@ import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * @author pperugu
  *
@@ -2966,7 +2968,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[1]")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
@@ -2978,7 +2980,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@name='newsletter-input3']")
 	private WebElement EmailAddress;
 
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	@FindBy(xpath = "(//span[contains(text(),'Submit')])[2]")
 	private WebElement SubmitEmail;
 
 	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
@@ -2991,43 +2993,40 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Thankyou;
 
 	public void enterAndvalidateEmail() {
-
 		threadsleep(8);
-
-		// if(SubmitEmail.isDisplayed()) {
 		int size = driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
 		System.out.println("size of sign up" + size);
 		if (size > 0) {
-			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 			threadsleep(4);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		} else {
+			threadsleep(8);
 			// SubmitEmail.click();
+			scrollToView(SubmitEmail);
 			jsClickNew(SubmitEmail);
 			threadsleep(4);
-			Assert.assertEquals(ErrorFirstName.getText(), "Error: Please enter First Name");
+			Assertion.assertEquals(ErrorFirstName.getText(), "Error: Please enter First Name");
 			threadsleep(2);
-			Assert.assertEquals(ErrorLastName.getText(), "Error: Please enter Last Name");
+			Assertion.assertEquals(ErrorLastName.getText(), "Error: Please enter Last Name");
 			threadsleep(2);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
 			// SubmitEmail.click();
 			jsClickNew(SubmitEmail);
+			threadsleep(4);
+			if (Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+				assertTrue(true);
+			}
 		}
-
-		threadsleep(4);
-		if (Thankyou.getText().equalsIgnoreCase("Thank you!")) {
-			Assertion.assertTrue(true);
-		}
-
 	}
 
 	public TermsnConditionsAARPPageMobile termsnconditionsFooterClick() {
