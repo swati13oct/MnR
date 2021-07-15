@@ -49,7 +49,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
 	private WebElement UHCICSubTitle;
-	
+
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent;
 
@@ -342,7 +342,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
 
-//	@FindBy(id = "dupIconFlyOut")
+	// @FindBy(id = "dupIconFlyOut")
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
@@ -513,10 +513,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
 	private WebElement MedicareSuppUrl;
-	
+
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
-	
+
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
 	String CallSam = "1-877";
@@ -1797,7 +1797,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
-		
+
 		MobileLearnAboutMedicarePrescProvBenefit();
 
 	}
@@ -2373,6 +2373,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateGlobalFooterLinks() {
+		pageloadcomplete();
 		scrollToView(footerSiteMapLink);
 		// validateNew(footerHomeLink);
 		// validateNew(footerAboutUsLink);
@@ -2388,29 +2389,30 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
-		jsClickNew(shopPlansExpander);
+		scrollToView(shopPlansExpander);
+		shopPlansExpander.click();
 		sleepBySec(2);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
-		jsClickNew(shopPlansExpander);
 
-		jsClickNew(toolsAndResources);
+		scrollToView(toolsAndResources);
+		toolsAndResources.click();
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
-		jsClickNew(toolsAndResources);
 
-		jsClickNew(learnAboutMedicareFooterButton);
+		scrollToView(learnAboutMedicareFooterButton);
+		learnAboutMedicareFooterButton.click();
 		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
-		jsClickNew(learnAboutMedicareFooterButton);
 
-		jsClickNew(more);
+		scrollToView(more);
+		more.click();
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
@@ -2933,7 +2935,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
-//		jsClickNew(guestProfileLink);	//This locator is seen after we hover on heart icon
+		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
+		// icon
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
@@ -3212,10 +3215,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		//validateNew(headerSignInLink);
-		//validateNew(headerRegisterLink);
-		//Actions action = new Actions(driver);
-		//action.moveToElement(planMemberLink).perform();
+		// validateNew(headerSignInLink);
+		// validateNew(headerRegisterLink);
+		// Actions action = new Actions(driver);
+		// action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
 		jsMouseOver(navigationSectionHomeLink);
 		validate(goToMemberSiteLink);
@@ -4109,10 +4112,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
 		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
 		shopForPlanNavigationPageMobile.selectPlanTypeOption("PDP", false);
-		
+
 		jsClickNew(pdpPharmacyLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
@@ -4752,10 +4755,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.navigate().back();
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
 	private WebElement goToMemberSiteLink;
 
