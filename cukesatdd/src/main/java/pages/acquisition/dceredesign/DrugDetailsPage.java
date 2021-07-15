@@ -252,7 +252,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class, 'keepPharmacyLink')]")
 	public WebElement keepUsingPharmBtn;
 
-	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
+	@FindBy(xpath = "//button[contains(text(),'Change Pharmacy')]//ancestor::div[contains(@class, 'd-lg-block')]//span[contains(@class, 'text-normal')]")
 	// @FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span")
 	public WebElement pharmacyName;
 
