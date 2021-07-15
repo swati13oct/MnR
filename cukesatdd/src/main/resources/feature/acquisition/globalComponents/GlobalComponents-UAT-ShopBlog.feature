@@ -65,7 +65,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validates TFN on page
+    Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
