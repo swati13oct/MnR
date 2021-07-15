@@ -23,7 +23,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.EnterZipCodePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -807,6 +806,43 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validatestatedropDown(state, code);
 		getLoginScenario().saveBean(CommonConstants.STATE_SELECTED, state);
 
+	}
+
+	@Given("^the user navigates to following medicare acquisition site page$")
+	public void the_user_navigates_to_following_medicare_acquisition_site_page(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String path = memberAttributesMap.get("PagePath");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPath(path);
+	}
+
+	@Then("^the user validate ZipCode Components on the page using ZipCode \"([^\"]*)\"$")
+	public void the_user_validate_ZipCode_Components_on_the_page_using_ZipCode(String zipCode) throws Throwable {
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		EnterZipCodePageMobile enterZipCodePage = aquisitionhomepage.enterZipCode();
+		enterZipCodePage.validateZipComp(zipCode);
+	}
+
+	@Then("^the user enters and validate the fields and clicks on submit$")
+	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndvalidateEmail();
+	}
+	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
+	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		EnterZipCodePageMobile enterZipCodePage = aquisitionhomepage.enterZipCode();
+		enterZipCodePage.validateZipComp(zipCode);
 	}
 
 }
