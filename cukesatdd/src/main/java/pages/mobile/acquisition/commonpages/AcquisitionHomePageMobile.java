@@ -1225,7 +1225,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		pageloadcomplete();
-		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1678,7 +1678,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(viewPlansButton);
 
 		pageloadcomplete();
-
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		// validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
