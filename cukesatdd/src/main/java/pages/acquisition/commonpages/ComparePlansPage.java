@@ -103,7 +103,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
 	private WebElement CallSamTFN;
 
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
+	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div/div[1]/a")
 	private WebElement CallSamTFNClose;
 
 	String CallSam = "Call a Licensed Insurance Agent";
@@ -736,7 +736,7 @@ public class ComparePlansPage extends UhcDriver {
 			// return null;
 			Assertion.fail("TFN number was not found on the SAM call Popup");
 		} else {
-			CallSamTFNClose.click();
+			CommonUtility.waitForPageLoad(driver, CallSamTFNClose, 30);
 			validateNew(callsam);
 		}
 	}

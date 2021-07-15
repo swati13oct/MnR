@@ -436,8 +436,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
 
-	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']/label[contains(text(),'Plan pricing')]")
 	private WebElement samChatOptions;
+	
+	@FindBy(id = "cancelPreChatForm")
+	private WebElement samChatCancel;
+	
 
 	// @FindBy(xpath
 	// ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn
@@ -3428,9 +3432,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(samChatOptions);
 			samChatOptions.click();
 
-			validateNew(CloseChat);
-			CloseChat.click();
-
+			validate(CloseChat);
+			//jsClickNew(CloseChat);
+			samChatCancel.click();
 			driver.switchTo().defaultContent();
 			System.out.println("Page Title---" + driver.getTitle());
 
