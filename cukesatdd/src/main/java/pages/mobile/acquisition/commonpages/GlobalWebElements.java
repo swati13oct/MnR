@@ -80,7 +80,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(xpath = "//*[@id='_kowtz3ay']/span")
+	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[3]")
 	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
