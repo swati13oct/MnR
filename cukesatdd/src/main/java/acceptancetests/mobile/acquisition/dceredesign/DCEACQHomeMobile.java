@@ -1104,17 +1104,13 @@ public class DCEACQHomeMobile {
 		buildYourDrugsListPage.validateDrugRecommendationSectionNOTdisplayed(druglist);
 	}
 
+
 	@Then("^the user tries to add following drug over cabinet limit and validates error modal$")
 	public void the_user_searches_and_adds_and_validates_drug_cabinet_limit(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()

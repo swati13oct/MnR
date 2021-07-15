@@ -1797,7 +1797,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
-		MobileLearnAboutMedicare();
+		
 		MobileLearnAboutMedicarePrescProvBenefit();
 
 	}

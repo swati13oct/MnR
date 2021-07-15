@@ -53,7 +53,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath = "//img[@class='mr-10 saved-item-icn']")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")

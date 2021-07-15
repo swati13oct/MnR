@@ -24,6 +24,7 @@ import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -696,7 +697,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		WebElement SwitchLink = driver.findElement(
-				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::a[contains(text(), 'Switch ')]"));
+				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::*[contains(@id, 'switchToGenericLink')]"));
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {

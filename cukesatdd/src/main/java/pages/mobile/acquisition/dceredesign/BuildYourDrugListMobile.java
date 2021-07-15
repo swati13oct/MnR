@@ -204,7 +204,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		jsClickNew(SearchBtn);
 
 		waitforElementVisibilityInTime(NoDrugError, 5);
-		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("No drugs were found")) {
+		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("Please enter at least 4 characters")) {
 			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 		} else
 			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
@@ -361,8 +361,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				&& validateNew(DrugListModal_GotItBtn)) {
 			jsClickNew(DrugListModal_GotItBtn);
 			System.out.println("Got It button Clicked to close modal");
-			Assertion.assertTrue(
-					"Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message, true);
+			Assertion.assertTrue("Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message,
+					true);
 		} else
 			Assertion.fail("Drug List Modal and Message NOT Displayed!!!");
 
