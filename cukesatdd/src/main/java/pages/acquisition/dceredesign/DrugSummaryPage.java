@@ -165,7 +165,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
 	private WebElement pharmacyNameSelected;
 
-	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
+	@FindBy(xpath = "//*[@id='changepharmacy']//h3/span")
 	private WebElement pharmacyName;
 
 	@FindBy(xpath = "//*[[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/span")
@@ -1159,7 +1159,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
-		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().trim().contains(defaultPharmacy));
 	}
 
 	public void clickKeepUsingPharmacyLink() {

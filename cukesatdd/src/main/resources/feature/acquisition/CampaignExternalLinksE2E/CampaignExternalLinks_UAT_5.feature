@@ -195,7 +195,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | TFN Xpath | <TFNxpath5> |
     And the user closes the new browser tab
 
-    @Scenario5_AARP_Stage123 @regressionAARP @campaignExternalStage
+    @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          | TFNxpath3                         | TFNxpath4                         | pscCode | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                                                         | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            |
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class, 'tel')])[1] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   65656 | YES           | Christian County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] |
