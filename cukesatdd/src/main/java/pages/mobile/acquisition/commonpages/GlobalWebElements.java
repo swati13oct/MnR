@@ -56,7 +56,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'accessibility')]")
 	public WebElement footerAccessibilitylink;
 
-	@FindBys(value = { @FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'aarp.org')]") })
+	@FindBy(xpath = "//*[@id='accordion-4-button']//..//a[contains(@href,'aarp.org')]")
 	public WebElement aarpOrgLink;
 
 	@FindBys(value = { @FindBy(id = "footnotes1") })
@@ -323,6 +323,15 @@ public class GlobalWebElements extends UhcDriver {
 	
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
+	
+	@FindBy(xpath = "//*[@id='accordion-1-button']/div")
+	public WebElement shopPlans;
+	
+	@FindBy(xpath = "//*[@id='accordion-2-button']/div")
+	public WebElement tools;
+	
+	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
+	public WebElement learnMedicare;
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
