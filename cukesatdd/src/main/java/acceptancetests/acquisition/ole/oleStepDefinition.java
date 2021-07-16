@@ -3390,6 +3390,7 @@ public class oleStepDefinition {
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));		
 		String Premium;	
 		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));	
+	//	boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		boolean Validation_Status = welcomePage.validate_plan_details_CSNP(PlanDetailsMap);
 		Premium = welcomePage.GetMonthlyPremiumValue();
 		if (Validation_Status) {
