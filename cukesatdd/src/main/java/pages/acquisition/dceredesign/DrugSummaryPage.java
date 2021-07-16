@@ -114,7 +114,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'mailSelectPharmacyBtn')]")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(xpath = "//*[@role='list']")
+	@FindBy(xpath = "//*[@role='tabpanel']")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
