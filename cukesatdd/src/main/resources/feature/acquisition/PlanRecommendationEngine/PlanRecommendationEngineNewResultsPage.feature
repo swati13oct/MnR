@@ -211,17 +211,17 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds    | doctors         | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                           |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds     | doctors         | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                           |
       | AARP |   10001 | NO            | New York | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),local or National,True:Home Plan 1 (PPO I-SNP),See any provider,True:Home Plan 2 (HMO I-SNP),local or National,False     |
-      | AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not provide,False:Home Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
-      | AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
+      | AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not provide,False:Home Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
+      | AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds    | doctors         | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                           |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds     | doctors         | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                           |
       | UHC  |   10001 | NO            | New York | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),local or National,True:Home Plan 1 (PPO I-SNP),See any provider,True:Home Plan 2 (HMO I-SNP),local or National,False     |
-      | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not provide,False:Home Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
-      | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
+      | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not provide,False:Home Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
+      | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
 
   @PRE @planrecommendation @MAPDTile @PREResultsMAPDZeroDoctor
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
@@ -383,15 +383,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                 | DrugInfo                                                                                                                                |
-      | AARP |   10003 | NO            | New York    | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                    | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True                                                 |
-      | AARP |   35035 | YES           | Bibb County | PDP           | Yes            | fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO:Zolgensma,YES,Zolgensma 10.1-10.5 KG INJ,,,Day,1,NO,NO | Plan 1 (HMO),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False:Plan 1 (HMO),Zolgensma 10.1-10.5 KG INJ,False |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                         | DrugInfo                                                                                                  |
+      | AARP |   10003 | NO            | New York    | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO            | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True                   |
+      | AARP |   35035 | YES           | Bibb County | PDP           | Yes            | fentanyl citrate,YES,FENTANYL CITRATE PREFILLED SYRINGE 20MCG,,,Month,1,NO,NO:Zolgensma,YES,Zolgensma 10.1-10.5 KG INJ,,,Day,1,NO,NO | Plan 1 (HMO),FENTANYL CITRATE PREFILLED SYRINGE 20MCG,False:Plan 1 (HMO),Zolgensma 10.1-10.5 KG INJ,False |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                 | DrugInfo                                                                                                                                |
-      | UHC  |   10003 | NO            | New York    | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                    | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True                                                 |
-      | UHC  |   35035 | YES           | Bibb County | PDP           | Yes            | fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO:Zolgensma,YES,Zolgensma 10.1-10.5 KG INJ,,,Day,1,NO,NO | Plan 1 (HMO),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False:Plan 1 (HMO),Zolgensma 10.1-10.5 KG INJ,False |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                         | DrugInfo                                                                                                  |
+      | UHC  |   10003 | NO            | New York    | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO            | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True                   |
+      | UHC  |   35035 | YES           | Bibb County | PDP           | Yes            | fentanyl citrate,YES,FENTANYL CITRATE PREFILLED SYRINGE 20MCG,,,Month,1,NO,NO:Zolgensma,YES,Zolgensma 10.1-10.5 KG INJ,,,Day,1,NO,NO | Plan 1 (HMO),FENTANYL CITRATE PREFILLED SYRINGE 20MCG,False:Plan 1 (HMO),Zolgensma 10.1-10.5 KG INJ,False |
 
   @PRE @planrecommandonation @PREResultsPage @showMoreDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -460,64 +460,4 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName                                                         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                   |
       | UHC  |   10001 | NO            | New York | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
 
-  @PRESessionPOC
-  Scenario Outline: - To validate Email Plan List PDP plans in PRE
-    | Site | <site> |
-
-    Given the user is on UHC medicare acquisition site PRE landing page
-    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
-    And clicks on get started button and runs questionnaire
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | CountyDropDown  | <county>        |
-    Then the user do poc
-
-    @regressionAARP
-    Examples: 
-      | site | Zipcode | isMultiCounty | county   |
-      | AARP |   10001 | NO            | New York |
-
-    @regressionUHC
-    Examples: 
-      | site | Zipcode | isMultiCounty | county   |
-      | UHC  |   10001 | NO            | New York |
-
-  @PRE @MAPDFlow @Performance @F471404
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
-    Given the user is on UHC medicare acquisition site PRE landing page
-      | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
-    And clicks on get started button and runs questionnaire
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | CountyDropDown  | <county>        |
-    And user selects plan type in coverage options page
-      | Plan Type | <isCoverageOpt> |
-    And user selects SNP options in Special Needs Page
-      | SNP Options | <specialNeeds> |
-    And user selects doctors in doctors page
-      | Doctors             | <doctors>       |
-      | Doctors Search Text | <DoctorsName>   |
-      | Multi Doctor        | <isMultiDoctor> |
-    Then user selects add drug option in Drug page
-      | Drug Selection | <Drug Selection>                                                               |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    And user selects additional services option in additional services page
-      | Additional Option | <Dental-Hearing-Vision-Fitness> |
-    Then user selects cost preferences option in cost preferences page
-      | Preference Option | <costPreferenceOption> |
-    And verify continue function on "Priorities" page
-    Then user validate elements in loading results page
-    Then user validate MA Plan Names in VPP Summary VS Details in results page
-    Then user validate PDP Plan Names in VPP Summary VS Details in results page
-    Then user validate SNP Plan Names in VPP Summary VS Details in results page
-
-    @regressionAARP
-    Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      | AARP |   10003 | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,No,No,Yes                 | Lower                |
-
-    @regressionUHC
-    Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      | UHC  |   10003 | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,No,No,Yes                 | Lower                |
+ 

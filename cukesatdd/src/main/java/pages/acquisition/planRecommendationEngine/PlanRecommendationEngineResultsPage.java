@@ -92,7 +92,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(linkText = "Provider Search")
     private WebElement headerProvidersearchLink;
 	
-	@FindBy(xpath = "#uhc-footer div[class*='d-none d-lg-block'] a[href*='plan-recommendation-engine']")
+	@FindBy(css = "#uhc-footer div[class*='d-none d-lg-block'] a[href*='plan-recommendation-engine']")
     private WebElement headerGetaPlanRecommendationLink;
 	
 	@FindBy(css = "#selectCounty p>a")
@@ -481,12 +481,6 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) p#planType")
 		private WebElement FirstRecommendationSectionPlanType;
 
-		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card .uhc-pre-card__label")
-		private WebElement FirstRecommendationSectionTag;
-
-		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
-		private WebElement FirstRecommendationSectionPlanName;
-
 		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) a[class*='plan-details-link']")
 		private WebElement FirstRecommendationSectionViewPlanDetails;
 		
@@ -507,6 +501,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		@FindBy(css = ".planNameMinHeight h2")
 		private WebElement planNameinPlanDetailsPage;
+		
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
+		private WebElement FirstRecommendationSectionPlanName;
 	
 // External page elements
 	
@@ -567,55 +564,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		}
 	}
 	
-	public void recomPREWidget() {
-		System.out.println("Validating Recommendation on UI Page: ");
-		pageloadcomplete();
-		String R1 = "";
-		String R1PlanType = editRes.planType;
-		String R1PlanName = editRes.firstRecomPlanName;
-		if(R1PlanType.contains("Prescription Drug Plans")) 
-			R1 = "PDP";
-		else if(R1PlanType.contains("Advantage Plans"))
-			R1 = "MA";
-		else if(R1PlanType.contains("Special Needs Plans"))
-			R1 = "SNP";
-		else
-			R1 = "MS";
-		waitForPageLoadSafari();
-		String recom1 = "#1 Recommendation";
-			validateRecommVP(R1, recom1, R1PlanName);
-
-	}
-
-	public void validateRecommVP(String R1, String rcom1, String R1PlanName) {
-		System.out.println("Validating Recommendations in Visitor Profile Page");
-		
-		// Verify 1st Recommendation in PRE Widget
-		if (R1.equalsIgnoreCase("MA")) {
-			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
-					"MA Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
-		}
-		if (R1.equalsIgnoreCase("PDP")) {
-			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
-					"PDP Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
-		}
-		if (R1.equalsIgnoreCase("SNP")) {
-			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
-					"SNP Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
-		}
-		if (R1.equalsIgnoreCase("MS")) {
-			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
-					"SNP Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "MS PlanName Invalid");
-		}
-	}
+	
 		
 		
 	
