@@ -339,10 +339,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
@@ -916,7 +916,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
 	private List<WebElement> savePlanImgList;
 
-	@FindBy(xpath = "//span[@id='header-number']")
+//	@FindBy(xpath = "//span[@id='header-number']")
+	@FindBy(xpath = "(//span[contains(@class,'cart-plans-count')])[1]")
 	private WebElement savedPlanHeaderCount;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
@@ -1028,6 +1029,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
 	private WebElement groupPlanMarkettingBullets;
+	
+	@FindBy(xpath = "//label[@for='GI30dayBday_1']")
+	public WebElement	BirthdayEnrollment;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1198,6 +1202,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
+//		ProviderSearchLink.click();
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -4092,6 +4097,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
@@ -4401,6 +4407,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(drugSummaryLink);
 
 		}
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		return new DrugDetailsPage(driver);
 
@@ -4649,7 +4656,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(gender);
 
 	}
-
+	
 	public String continueApplicationuntilSubmitPage(String Medicarenumber) throws InterruptedException {
 
 		// CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
@@ -4659,7 +4666,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// jsClickNew(Gender);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		//Added line for Birthday
 		jsClickNew(nextButton);
+		jsClickNew(BirthdayEnrollment);
+		//jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -5988,7 +5998,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
 	private WebElement viewSavedPlansBtn;
 
-	@FindBy(xpath = "//h2[text()='Your Guest Profile']")
+	@FindBy(xpath = "//h2[contains(text(),'Your Guest Profile')]")
 	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])")
@@ -6819,6 +6829,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		jsClickNew(BirthdayEnrollment);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);

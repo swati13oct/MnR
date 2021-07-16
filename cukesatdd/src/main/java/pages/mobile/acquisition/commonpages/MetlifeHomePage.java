@@ -47,14 +47,14 @@ public class MetlifeHomePage extends UhcDriver{
 	
 	private static String METLIFE_HOME_PAGE_URL= MRConstants.METLIFE_HOME_PAGE_URL;
 	
-	public Rallytool_Page metlifehomepageproviderclick() {
+	public Rallytool_PageMobile metlifehomepageproviderclick() {
 		validate(metlifefindaproviderlink);
 		metlifefindaproviderlink.click();
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase( 
 				"Enter Zip")) {
-	     return new Rallytool_Page(driver);
+	     return new Rallytool_PageMobile(driver);
 	    }
 		
 		return null;

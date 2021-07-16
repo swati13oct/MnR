@@ -15,6 +15,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='zipcodeTxt']")
 	protected WebElement zipcodeField;
+	
+	@FindBy(css = "#enterZipCodeText")
+	protected WebElement zipCodeFieldLabel;
 
 	@FindBy(xpath = "//*[@id='zipcode-wrapper']//button[@class='uhc-button']")
 	protected WebElement searchbtn;
@@ -161,10 +164,18 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	 * indian_tribal_label_filter;
 	 */
 
-	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
+	@FindBy(css = "#filter_toggle_id")
+	protected WebElement filterToggle;
+	
+//	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
+	@FindBy(css = "[id*='indian-tribal-label']")
 	protected WebElement indian_tribal_label_filter;
+	
+	@FindBy(css = "#indian-tribal")
+	protected WebElement indian_tribal_filter;
 
-	@FindBy(id = "noResultsFoundErrorMessage")
+//	@FindBy(id = "noResultsFoundErrorMessage")
+	@FindBy(css = "#noResultsFoundErrorMessage")
 	protected WebElement noPharmaciesErrorMessage;
 
 	@FindBy(xpath = "//*[@id='modifyYourSearchId']//li")
@@ -179,14 +190,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(id = "distance")
 	protected WebElement distanceDropDownField;
 
-	// @FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and
-	// not(contains(@class,'ng-hide'))]")
-	@FindBy(css = ".desktopErrorMsg #emptyzipcodeerror_id>p")
+	@FindBy(css = ".mobileErrorMsg #emptyzipcodeerror_id>p")
 	protected WebElement noZipcode;
 
-	// @FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and
-	// not(contains(@class,'ng-hide'))]")
-	@FindBy(css = ".desktopErrorMsg #zipcodeformaterror_id>p")
+	@FindBy(css = ".mobileErrorMsg #zipcodeformaterror_id>p")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath = "//div[contains(@id,'modifyYourSearchId')]//li")

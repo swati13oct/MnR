@@ -68,7 +68,7 @@ public class ChangingMedicarePlansPage extends GlobalWebElements {
         jsClickNew(backtotop);
         System.out.println("Link Clicked: When can I change Medicare plans?");
 
-        jsClickNew(lnkWhenChange);
+        jsClickNew(lnkHowChange);
         sleepBySec(2);
         System.out.println("How do I change Medicare plans?");
     }

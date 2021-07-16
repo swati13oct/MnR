@@ -43,7 +43,8 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		
 		
 		for (int i=0; i<listOfTabHeaders.size(); i++) { //note: loop through each table and store info
-			listOfTabHeaders.get(i).click();
+			scrollToView(listOfTabHeaders.get(i));
+			jsClickNew(listOfTabHeaders.get(i));
 			CommonUtility.checkPageIsReady(driver);
 			int tabIndex=(i+1);
 			keepSessionAlive(forWhat, origDriver);
@@ -52,6 +53,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 			//note: store section header
 			for(int k=0; k<listOfSectionHeaderForActiveTab.size(); k++) {
+				scrollToView(listOfSectionHeaderForActiveTab.get(k));
 				String sectionHeader=listOfSectionHeaderForActiveTab.get(k).getText();
 				key="T"+tabIndex+"S"+(k+1);
 				result.put(key, sectionHeader);
@@ -304,20 +306,18 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		validateNew(cancelButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanDetailsPopUp.isDisplayed());
 		cancelButtonEmailPlanDetailsPopUp.click();
-		;
 		validateEmailButtonOnPlanDetails.click();
 		validateNew(emailPopup);
-		iosScroll(sendButtonEmailPlanDetailsPopUp);
-		//validateNew(sendButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
-		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("alisha_kapoor@optum.com");
+		sendkeysMobile(driver.findElement(By.xpath(".//*[@id='email']")), "alisha_kapoor@optum.com");
 		System.out.println("!!!Entered valid Email ");
+		hidekeypad();
 		sendButtonEmailPlanDetailsPopUp.click();
 		System.out.println("Email has success fully send to user");
-		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send", validate(validatesuccesspopup));
-		//validateNew(validatesuccesspopup);
+		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send",
+				validate(validatesuccesspopup));
 		System.out.println("Validated Thank you Message");
-		scrollToView(closeButtonthankyoumessagepopup);
+		validate(closeButtonthankyoumessagepopup);
 		closeButtonthankyoumessagepopup.click();
 		CommonUtility.checkPageIsReady(driver);
 
@@ -326,7 +326,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
 		System.out.println("Proceed to validate print popup screen for cancel option");
-		validatePrintButtonOnPlanDetails.click();
+		jsClickNew(validatePrintButtonOnPlanDetails);
 
 		// Store the current window handle
 		String winHandleBefore = driver.getWindowHandle();

@@ -24,8 +24,8 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
-import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.mobile.acquisition.commonpages.ShopperProfileAgentLogin;
@@ -136,15 +136,15 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
-
-	@And("^the user clicks on the shopping cart icon mobile$")
+	
+	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		VisitorProfilePageMobile VisitorProfilePageMobile = acqHomePage.navigateToVisitorProfilePage();
-
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, VisitorProfilePageMobile);
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")
@@ -249,7 +249,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user returns to the visitor profile page$")
 	public void the_user_returns_to_the_visitor_profile_page() {
 
-		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario()
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 
 		VisitorProfilePageMobile VisitorProfilePageMobile = dcePage.retrunToProfile();
@@ -388,6 +388,9 @@ public class VisitorProfileMobileStepDefinition {
 
 		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
+
+		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);

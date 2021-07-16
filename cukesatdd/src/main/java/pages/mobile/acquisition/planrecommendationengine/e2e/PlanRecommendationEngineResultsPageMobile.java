@@ -31,6 +31,9 @@ import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.mobile.acquisition.planrecommendationengine.DCEMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
 public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements {
@@ -674,7 +677,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		String plantype = "MA";
 
 		flow = "MAPD";
-		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
+		DrugsInPRE = DrugMobilePage.addedDrugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
 		drugsCoveredInVPP(count, plantype);
@@ -932,7 +935,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 	}
 
-	PlanRecommendationEngineDoctorsPageMobile docdesktop = new PlanRecommendationEngineDoctorsPageMobile(driver);
+	DoctorsMobilePage docdesktop = new DoctorsMobilePage(driver);
 	int count = 1;
 
 	public void addProviderVPP(String name, String multi) {
@@ -942,7 +945,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		jsClickNew(enterProvidersInfoMA1stPlan);
 		if (multi.equalsIgnoreCase("Yes"))
 			count = 1;
-		werallyResults = docdesktop.validateLinksanotherWindow(curdriverhandle, "Doctors", name, count);
+		werallyResults = docdesktop.validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", name, count);
 		ArrayList<String> vppResults = getProvidersVPP();
 		Assert.assertTrue(vppResults.size() == count, "Providers count mismatch in VPP");
 	}
@@ -1022,7 +1025,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
 		getProvidersVPP();
-		containsname(PlanRecommendationEngineDoctorsPageMobile.confirmationProviderResults, vppProviderResults);
+		containsname(DoctorsMobilePage.confirmationProviderResults, vppProviderResults);
 	}
 
 	public void countyandViewPlan(String zip, String county, String isMultiCounty) {
@@ -1544,14 +1547,14 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	}
 
 	public void DrugsDetailsVPPtoDCE() {
-		pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage dce = new pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage(
-				driver);
+		DCEMobilePage dce = new DCEMobilePage(driver);
 		System.out.println("Validating Pharmacy Details in DCE Page: ");
 		MobileMenuAccessDCE();
 		jsClickNew(adddrugbtn);
-		dce.Pharmacytype();
+		//Fix Below
+		//dce.Pharmacytype();
 		System.out.println("Validating Drugs Details from VPP to DCE Page: ");
-		DrugsInDCE = dce.DCEDrugsResults;
+		//DrugsInDCE = dce.DCEDrugsResults;
 		int count = DrugsInDCE.size();
 		verifyConfirmationmodalResults(count, DrugsInDCE, DrugsList);
 	}

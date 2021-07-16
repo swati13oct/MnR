@@ -41,7 +41,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	
+//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -229,7 +229,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')])[2]")
 	// @FindBy(xpath = "//*[contains(@class,'zip-button') or
 	// contains(@id,'zipcodebtn')]"
-	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -298,9 +299,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	// @FindBy(xpath = "//a[@title='Provider Search
-	// Tool']/span[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//a[@title = 'Provider Search Tool']")
+	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]/a")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -321,7 +321,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='more-list-heading']/..//a[contains(@href,'aarp.org')]")
 	private WebElement visitAARPFooterLink;
 
-	@FindBy(xpath = "//*[contains(@id, 'aarplink')]")
+	@FindBy(xpath = "//*[contains(@class, 'aarp-link')]")
 	private WebElement visitAARPHeaderLink;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -336,10 +336,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
+	//@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath = "//*[contains(@class,'saved_items')]")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "a#visitor-profile-header")
+	//@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath = "//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
@@ -434,8 +436,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
 
-	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']/label[contains(text(),'Plan pricing')]")
 	private WebElement samChatOptions;
+	
+	@FindBy(id = "cancelPreChatForm")
+	private WebElement samChatCancel;
+	
 
 	// @FindBy(xpath
 	// ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn
@@ -591,7 +597,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[@id='gf_lnk_2']")
 	private WebElement Aboutus;
 
-	@FindBy(id = "logged-username")
+	@FindBy(xpath = "//button[contains(@id,'guest-saved')]")
 	private WebElement guestProfileLink;
 
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
@@ -636,7 +642,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
 	private WebElement rightRailSectionTFNHeader1;
 
-	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[3]")
 	private WebElement footertextsectioncallus;
 
 	@FindBy(xpath = "(//*[contains(text(),'Hours: 8 a.m.')])")
@@ -651,7 +657,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
 	private WebElement CallSamModalMember;
 
-	@FindBy(xpath = "//*[@id='sam-call-modal__title']")
+	@FindBy(xpath = "//*[@id='sam-call-modal']//*[contains(@class,'modal-title')]")
 	private WebElement CallSamModalHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]/..")
@@ -663,7 +669,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[2]")
+	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[4]")
 	private WebElement footertextsectioncallusMedsupp;
 
 	// @FindBy(xpath =
@@ -709,6 +715,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
+
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
+	private WebElement planMemberLink;
+
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	private WebElement goToMemberSiteLink;
+	
+	@FindBy(id = "header-tfn-link")
+	private WebElement tfnHeaderLink;
+	
+	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
+	private WebElement tfnHeaderPopup;
+	
+	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
+	private WebElement tfnHeaderPopupClose;
+	
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	private WebElement tfnHeaderRightRailOLE;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1240,15 +1264,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		pageloadcomplete();
+		validateNew(zipCodeField);
+//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
+		//viewPlansButton.click();
 		jsClickNew(viewPlansButton);
 		// }
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-
+		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
@@ -2907,9 +2934,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
 
 		validateNew(providerSearchFromHomeScreen);
+		scrollToView(providerSearchFromHomeScreen);
 
-		// switchToNewTabNew(providerSearchFromHomeScreen);
-		jsClickNew(providerSearchFromHomeScreen);
+		switchToNewTabNew(providerSearchFromHomeScreen);
+//		jsClickNew(providerSearchFromHomeScreen);
 		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3295,6 +3323,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(getStarted);
 		// getStarted.click();
 		jsClickNew(getStarted);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
@@ -3318,12 +3347,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		// WebElement DCELink =
-		// driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and
-		// contains(@title, 'prescription drug costs')]"));
+		 //WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 		validateNew(DCELink);
+		//jsClickNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
@@ -3357,6 +3385,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 10);
 		jsClickNew(DCELink);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
@@ -3406,9 +3435,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(samChatOptions);
 			samChatOptions.click();
 
-			validateNew(CloseChat);
-			CloseChat.click();
-
+			validate(CloseChat);
+			//jsClickNew(CloseChat);
+			samChatCancel.click();
 			driver.switchTo().defaultContent();
 			System.out.println("Page Title---" + driver.getTitle());
 
@@ -3418,8 +3447,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	}
-	
-	
 
 	public void validateProActiveChatpopupconnect() {
 		driver.navigate().refresh();
@@ -3478,15 +3505,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		validateNew(goToMemberSiteLink);
+		jsMouseOut(planMemberLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
+		validateNew(searchTxtbox);
+		validateNew(headerTfn);
 		validateNew(visitorprofileicon);
+		validateVisitorProfileIcon();
 	}
 
 	public void signInheader() {
@@ -3569,7 +3604,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validatevisitorprofile() {
 		if (visitorprofileicon.isDisplayed()) {
-			scrollToView(visitorprofileicon);
 			Actions actions = new Actions(driver);
 			actions.moveToElement(visitorprofileicon).perform();
 			// jsMouseOver(visitorprofileicon);
@@ -3578,11 +3612,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(),
 		// 'Create Profile')]"));
-		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
+		WebElement CreateProfile = driver.findElement(By.xpath("//button[@id='guest-saved-items-button']"));
 		WebElement VPSignIn = driver.findElement(
 				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		validateNew(CreateProfile);
-		validateNew(VPSignIn);
+		validate(CreateProfile);
+		validate(VPSignIn);
 		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 			Assertion.assertTrue(true);
 			System.out.println("Visitor Profile elements are present on home page");
@@ -3675,8 +3709,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 		jse.executeScript("window.scrollBy(0,-500)");
-		validateNew(TFNelement, 45);
-		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		validate(TFNelement, 45);
+		System.out.println(">>>>>>>>>>>>> :"+TFNelement.getText());
+		if (TFNelement.isDisplayed()) {
 			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
 		} else {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
@@ -4325,11 +4360,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement ViewMedicareplanlinks;
 
 	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		//validateNew(memberSignInPage);
+		//CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		validateNew(goToMemberSiteLink);
 		String parentWindow = driver.getWindowHandle();
+		jsClickNew(goToMemberSiteLink);
 		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
+		//jsClickNew(memberSignInPage);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -4481,7 +4520,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assertion.assertTrue(true);
 			}
 		}
-
 	}
 
 	public void headerRegisterLink() {
@@ -4635,11 +4673,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		//validateNew(memberSignInPage);
+		//CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		validateNew(goToMemberSiteLink);
 		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
+		jsClickNew(goToMemberSiteLink);
+		//jsClickNew(memberSignInPage);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -4667,17 +4708,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// ViewMedicareplanlinks.click();
 		validateNew(ViewMedicareplanlinks);
 		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
+		//String parentWindow1 = driver.getWindowHandle();
 		jsClickNew(ViewMedicareplanlinks);
 		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
+		//Set<String> tabs_windows1 = driver.getWindowHandles();
+		//Iterator<String> itr1 = tabs_windows1.iterator();
+		/*while (itr1.hasNext()) {
 			String window = itr1.next();
 			if (!parentWindow1.equals(window)) {
 				driver.switchTo().window(window);
 			}
-		}
+		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
 		String prodURL = "https://www.aarpmedicareplans.com/";
@@ -4830,10 +4871,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(MedicareEducation);
 		threadsleep(5);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
-			Assertion.assertTrue(true);
+			Assert.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
-			Assertion.fail("Error loading Medicare Education Homepage link");
+			Assert.fail("Error loading Medicare Education Homepage link");
 		}
 		// Assertion.assertEquals(driver.getCurrentUrl(),
 		// "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
@@ -4861,13 +4902,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// threadsleep(6);
 		threadsleep(5000);
 		// Accessibility.click();
+		String base = driver.getWindowHandle();
 		jsClickNew(Accessibility);
 		threadsleep(5000);
 		// Assertion.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
-		if (driver.getCurrentUrl().contains("accessibility")) {
-			assertTrue(true);
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("accessibility"));
+				driver.close();
+			}
 		}
+		driver.switchTo().window(base);
+		/*if (driver.getCurrentUrl().contains("accessibility")) {
+			assertTrue(true);
+		}*/
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
@@ -5015,7 +5068,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver.findElement(By.xpath("//div[contains(@class,'logo aarplogo')]"));
+		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -5187,7 +5240,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (size > 0) {
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 			threadsleep(4);
-			Assertion.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
@@ -5199,11 +5252,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			scrollToView(SubmitEmail);
 			jsClickNew(SubmitEmail);
 			threadsleep(4);
-			Assertion.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+			Assertion.assertEquals(ErrorFirstName.getText(), "Error: Please enter First Name");
 			threadsleep(2);
-			Assertion.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+			Assertion.assertEquals(ErrorLastName.getText(), "Error: Please enter Last Name");
 			threadsleep(2);
-			Assertion.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
@@ -5335,8 +5388,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		//close the window only if a new window is opened
-		if(tabs_windows.size() > 1){
+		// close the window only if a new window is opened
+		if (tabs_windows.size() > 1) {
 			driver.close();
 			driver.switchTo().window(parentWindow);
 		}
@@ -5959,8 +6012,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -6130,8 +6184,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -6667,7 +6722,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				pageloadcomplete();
 			}
 		}
-		
+
 	}
 
 	public void validateFooterLinksNavigation(String linkName) {
@@ -6732,7 +6787,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		case "Provider Search":
 			for (String s : all) {
 				driver.switchTo().window(s);
-				//sleepBySec(5);
+				// sleepBySec(5);
 				flag = driver.getCurrentUrl().contains("werally");
 				if (!base.equals(s)) {
 					driver.close();
@@ -6765,26 +6820,88 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 
 		case "AARP.org":
-			if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 				System.out.println("AARP.org link not present for UHC site");
 				break;
-			}
-			else {
-			for (String s : all) {
-				driver.switchTo().window(s);
-				flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
-				if (!base.equals(s)) {
-					driver.close();
-					break;
+			} else {
+				for (String s : all) {
+					driver.switchTo().window(s);
+					flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
+					if (!base.equals(s)) {
+						driver.close();
+						break;
+					}
 				}
-			}
-			driver.switchTo().window(base);
-			Assertion.assertTrue("Navigation to AARP.org page failed", flag);
-			break;
+				driver.switchTo().window(base);
+				Assertion.assertTrue("Navigation to AARP.org page failed", flag);
+				break;
 			}
 
 		default:
 			System.out.println("Link not available under Learn about Medicare");
 		}
 	}
+
+	public void validateVisitorProfileIcon() {
+		// jsMouseOver(visitorprofileicon);
+		Actions action = new Actions(driver);
+		action.moveToElement(visitorprofileicon).perform();
+		validateNew(visitorProfileFlyoutTitle);
+		if (!driver.getCurrentUrl().contains("profile")) {
+			validateNew(visitorProfileFlyoutViewSavedItemBtn);
+		}
+		validateNew(visitorProfileFlyoutAddDrugBtn);
+		validateNew(visitorProfileFlyoutAddPlansBtn);
+		validateNew(visitorProfileFlyoutSignInLink);
+	}
+
+	public void clickMemberSiteLink() {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		validateNew(goToMemberSiteLink);
+		jsClickNew(goToMemberSiteLink);
+		String base = driver.getWindowHandle();
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				driver.close();
+			}
+		}
+		driver.switchTo().window(base);
+	}
+	
+	public void validateTfnInHeader() throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		CheckiPerseptions();
+		validateNew(tfnHeaderLink);
+		String ActualCallSAMTFN = tfnHeaderLink.getText().trim();
+		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+		jsClickNew(tfnHeaderLink);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		validate(tfnHeaderPopup);
+		String ExpectedCallSAMTFN = tfnHeaderPopup.getText();
+		System.out.println("TFN No displayed on the Modal" + ExpectedCallSAMTFN);
+		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+			System.out
+					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
+					+ ExpectedCallSAMTFN);
+		}
+		
+		validate(tfnHeaderPopupClose);
+		jsClickNew(tfnHeaderPopupClose);
+		
+	}
+
 }

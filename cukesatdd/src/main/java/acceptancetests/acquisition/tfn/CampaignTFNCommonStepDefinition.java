@@ -303,7 +303,7 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 	tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
@@ -1148,6 +1148,12 @@ public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable ar
 		Assertion.fail("Error in loading the UHC Agent Page");
 	//tfnPage.validateFederalTFN(TFN_Xpath);
 
+}
+
+@Then("^user clicks on back to plans link to navigate plan summary$")
+public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateBackToPlanSummaryPageFromDetailsPage();
 }
 
 }

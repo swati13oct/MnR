@@ -18,7 +18,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class GetStartedPage extends UhcDriver {
 
-	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	@FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[1]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
@@ -30,16 +30,17 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//*[contains(@dtmname,'get started') and contains(@class, 'disabled')]")
+	@FindBy(xpath = "(//*[contains(@dtmname,'get started') and contains(@class, 'disabled')])[1]")
 	public WebElement getStartedStep;
 
-	@FindBy(id = "dupIconFlyOut")
+
+	@FindBy(xpath  = "//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 
-	@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")

@@ -70,7 +70,7 @@ public class SwitchToGeneric extends UhcDriver {
 	}
 
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -82,6 +82,7 @@ public class SwitchToGeneric extends UhcDriver {
 	public DrugDetailsPage ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
@@ -90,13 +91,14 @@ public class SwitchToGeneric extends UhcDriver {
 		Assertion.fail("Did not Navigate to DCE Drug Details Page");
 		return null;
 	}
-	
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPage ClickSwitch_ReturnSummaryPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if(validateNew(reviewDrugCostPageHeading)) {
