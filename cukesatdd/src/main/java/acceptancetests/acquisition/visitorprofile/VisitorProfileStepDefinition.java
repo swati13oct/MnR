@@ -789,5 +789,22 @@ public class VisitorProfileStepDefinition {
 		 visitorProfilePage.viewDrugs();
 
 			}
+	@Then("^edit drug from the saved profile$")
+	public void edit_drug_from_saved_profile(DataTable givenAttributes) {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String drugName = memberAttributesMap.get("DrugName");
+		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		BuildYourDrugList buildDrugList =visitorProfilePage.editDrugfromProfile(drugName);
+		//button[contains(@aria-label,"Edit ")]
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		
+	}
 
+	
 }

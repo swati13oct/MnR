@@ -1316,12 +1316,25 @@ public class VisitorProfilePage extends UhcDriver {
 	private WebElement viewDrugs;
 
     
-    public void viewDrugs() {
-        
+    public void viewDrugs() { 
     viewDrugs.click();
     }
     
-}
+    @FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement EnterDrugNameTxt;
+
+    public BuildYourDrugList editDrugfromProfile(String editDrug) {
+		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + editDrug + "')]"));
+		jsClickNew(editLink);
+		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
+		if (validateNew(EnterDrugNameTxt)) {
+			return new BuildYourDrugList(driver);
+		} else {
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}
+    }
+ }
 
 
 

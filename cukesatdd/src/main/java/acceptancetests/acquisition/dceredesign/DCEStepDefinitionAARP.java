@@ -3058,4 +3058,41 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
     
+	@Then("^the user validates Get Started Page vp$")
+	public void the_user_validates_Get_Started_Page_vp(DataTable givenAttributes) throws Throwable {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String site = memberAttributesMap.get("Site");
+		
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+
+		aquisitionhomepage.navigateToURL(site);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+
+	}
+	
+	@Then("^remove drug from the saved profile$")
+	public void remove_drug_from_saved_profile(DataTable givenAttributes) {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String drugName = memberAttributesMap.get("DrugName");
+		
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
+		buildDrugList.deleteDrugProfile(drugName);
+		//button[contains(@aria-label,"Edit ")]
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		
+	}
+
 }

@@ -413,7 +413,7 @@ public class DrugDetailsPage extends UhcDriver {
          */
 
 		validateNew(LinktoExitScenario);
-		validateNew(LinktoEditDrugList);
+		//validateNew(LinktoEditDrugList);
 	}
 
 	public void validatePlanName(String planName) {

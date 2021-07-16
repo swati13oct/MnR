@@ -6907,5 +6907,101 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(tfnHeaderPopupClose);
 		
 	}
+	public AcquisitionHomePage navigateToURL(String site) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		//System.out.println("Current URL : " + CurrentURL);
+
+/*		String NavigateToURL = path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+*/
+		
+		
+		
+		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.navigate().to(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.equals("prod")) {
+				driver.navigate().to(UMS_ACQISITION_PROD_PAGE_URL);
+				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.contains("stage-0")) {
+				driver.navigate().to(UMS_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			} else {
+				driver.navigate().to(UMS_ACQISITION_PAGE_URL);
+				testSiteUrl = UMS_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
+				// checkModelPopup(driver, 10);
+			}
+
+		} else if ("health-plans".equalsIgnoreCase(site)) {
+			isHealthPlan = true;
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			testSiteUrl = driver.getCurrentUrl();
+			checkModelPopup(driver, 15);
+			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
+			try {
+				if (proactiveChatExitBtn != null) {
+					jsClickNew(proactiveChatExitBtn);
+				} else {
+					Assertion.fail("Please check booleanvalue");
+				}
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		} else if (site.equalsIgnoreCase("AARP") || site.equalsIgnoreCase("Ulayer") || site.equalsIgnoreCase("AMP")) {
+			if (MRScenario.environment.equals("offline")) {
+				driver.navigate().to(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.equals("prod")) {
+				driver.navigate().to(AARP_ACQISITION_PROD_PAGE_URL);
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.contains("stage-0")) {
+				driver.navigate().to(AARP_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
+			} else {
+				driver.navigate().to(AARP_ACQISITION_PAGE_URL);
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
+				// checkModelPopup(driver, 10);
+			}
+		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
+			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
+																									// part of AARP/UHC
+																									// cleanup
+		}
+
+		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
+																				// bypass PRE/ARE flows
+			// CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			// checkModelPopup(driver,15);
+			// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
+			// CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not
+			// change this to waitForPageLoadNew as
+			// we're not trying to fail the test if it
+			// isn't found
+			try {
+				validate(proactiveChatExitBtn, 20);
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		}
+		return new AcquisitionHomePage(driver);
+	}
+	
+	
 
 }
