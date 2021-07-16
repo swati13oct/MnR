@@ -76,25 +76,13 @@ public class OLEStepDefinitionMobile {
 
 	// AppiumDriver wd;
 
-	/**
-	 * @author sdwaraka
-	 * 
-	 * @param planAttributes
-	 * @throws Throwable
-	 */
 	@Given("^the user lands on OLE Welcome Page wity following Plan Details$")
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes)
 			throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanPremium = givenAttributesMap.get("Premium");
 		String County = givenAttributesMap.get("County Name");
@@ -201,12 +189,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		String PlanName = givenAttributesMap.get("Plan Name");
-		// String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-
-		// String County = "St. Louis County";
-		// String ZipCode = "63043";
-		// String PlanYear = "2020";
-
+		
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
 		String ZipCode = "";
@@ -262,13 +245,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -323,88 +300,12 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
-	// /**
-	// * @author sdwaraka
-	// * To start Enroll Now and land on Welcome Page from Plan Details Page of VPP
-	// * @param planAttributes
-	// * @throws Throwable
-	// */
-	// @Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE
-	// flow$")
-	// public void
-	// the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow()
-	// throws Throwable {
-	// String PlanName = (String)
-	// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-	// String PlanYear = (String)
-	// getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-	//
-	// String ZipCode = (String)
-	// getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-	// String County = (String)
-	// getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-	// String PlanType = (String)
-	// getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-	// String TFN;
-	// String SiteName;
-	// SiteName = (String)
-	// getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-	//
-	// WelcomePageMobile welcomePage;
-	// if(SiteName.contains("UHC_ACQ")){
-	//
-	// pages.acquisition.bluelayer.PlanDetailsPageMobile vppPlanDetailsPage =
-	// (pages.acquisition.bluelayer.PlanDetailsPageMobile) getLoginScenario()
-	// .getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	// TFN = vppPlanDetailsPage.GetTFNforPlanType();
-	// welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
-	// }
-	// else{
-	// PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile)
-	// getLoginScenario()
-	// .getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	// TFN = vppPlanDetailsPage.GetTFNforPlanType();
-	// welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
-	// }
-	// String PlanPremium = (String)
-	// getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-	// getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
-	// System.out.println("Plan Name is : "+PlanName);
-	// System.out.println("Plan Type is : "+PlanType);
-	// System.out.println("Plan Zip Code is : "+ZipCode);
-	// System.out.println("Plan County Name is : "+County);
-	// System.out.println("Plan Plan Premium is : "+PlanPremium);
-	// System.out.println("TFN for Plan Type is : "+TFN);
-	// System.out.println("Plan Year is : "+PlanYear);
-	// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
-	// if (welcomePage != null) {
-	//
-	// getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
-	// welcomePage);
-	// System.out.println("OLE Welcome Page is Displayed");
-	// Assertion.assertTrue(true);
-	// }
-	// else
-	// Assertion.fail("Error in validating the OLE Welcome Page");
-	// }
-
+	
 	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
 	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -495,15 +396,9 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
-		// String DateOfBirth = memberAttributesMap.get("DOB");
+
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -517,14 +412,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -538,14 +426,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String DateOfBirth = memberAttributesMap.get("DOB");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -768,14 +649,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
@@ -791,20 +665,12 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
-		// VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage)
-		// getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		// plansummaryPage.MedSupFormValidation(DateOfBirth);
+		
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPageMobile plansummaryPage1 = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -816,13 +682,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*
-		 * List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows(); for
-		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
-		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-		 * plannameAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
@@ -919,16 +779,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		/*
-		 * PharmacySearchPageMobile pharmacySearchPage =
-		 * aquisitionhomepage.navigateToShopPlanMobile();
-		 * 
-		 * //PharmacySearchPage pharmacySearchPage=new
-		 * PharmacySearchPage(aquisitionhomepage.driver);
-		 * 
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
-		 * PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-		 */
+		
 
 	}
 
@@ -1053,22 +904,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*
-		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
-		 * = 0; i < personalAttributesRow.size(); i++) {
-		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-		 * personalAttributesRow.get(i).getCells().get(1)); }
-		 */
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
@@ -1132,13 +968,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void user_fill_information_Preliminary_Questions_page(DataTable personalAttributes) {
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
 		personalAttributesMap = DataTableParser.readDataTableAsMaps(personalAttributes);
-		/*
-		 * List<DataTableRow> personalAttributesRow =
-		 * personalAttributes.getGherkinRows(); for (int i = 0; i <
-		 * personalAttributesRow.size(); i++) {
-		 * personalAttributesMap.put(personalAttributesRow.get(i).getCells().get(0),
-		 * personalAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
 		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
 		if (alreadyEnrolled_Flag) {
@@ -1317,16 +1147,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		PersonalInformationPageMobile personalInformationPage = welcomePage.navigate_to_Personal_Information_page();
@@ -1611,16 +1432,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates TFN in Right Rail on SEP Page$")
 	public void the_user_validates_TFN_in_Right_Rail_on_SEP_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
@@ -1639,16 +1451,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates Leave OLE modal for SEP Page$")
 	public void the_user_validates_Leave_OLE_modal_for_SEP_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LeavingOLEmodalMobile leaveOLEmodal = specialElectionPeriodPage.OpenLeaveOLEmodal();
@@ -1671,16 +1474,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates Learn more modal for SEP Page$")
 	public void the_user_validates_Learn_more_modal_for_SEP_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LearnMoreModalMobile learnMoremodal = specialElectionPeriodPage.OpenLearnMore();
@@ -1704,16 +1498,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	@Then("^the user validates cancellation modal for SEP Page$")
 	public void the_user_validates_cancellation_modal_for_SEP_Page() throws Throwable {
 
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
@@ -1736,17 +1521,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
 	public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * System.out.println("alreadyEnrolled_Flag value is"+alreadyEnrolled_Flag);
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -2021,16 +1796,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates required fields for Authorization Page$")
 	public void the_user_validates_required_fields_for_Authorization_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		AuthorizationPageMobile authorizationPage = (AuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		boolean Validation_Status = authorizationPage.validate_required_field();
@@ -2271,12 +2037,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		return memberAttributesMap;
 	}
 
@@ -2285,13 +2046,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
 		String SiteId = givenAttributesMap.get("SiteId");
 		String PBPNumber = givenAttributesMap.get("PBPNumber");
@@ -2456,14 +2211,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String planName = givenAttributesMap.get("PlanName");
 		String plantype = givenAttributesMap.get("Plan Type");
 
@@ -2517,13 +2265,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -2559,13 +2301,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -2614,13 +2350,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		{
 			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 			plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-			/*
-			 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
-			 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-			 * 
-			 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-			 * plannameAttributesRow.get(i).getCells().get(1)); }
-			 */
+			
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -2650,33 +2380,14 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 
 		String planName = givenAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		/*
-		 * ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
-		 * plansummaryPage.setStringList(providers);
-		 * Assertion.assertFalse("Providers not added",providers.isEmpty());
-		 * 
-		 * //Adding Line for Marketing bullet points VPPPlanSummaryPage plansummaryPage1
-		 * = (VPPPlanSummaryPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); ArrayList<String>
-		 * vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
-		 * plansummaryPage1.setStringList(vppmarketingBullets);
-		 * Assertion.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
-		 * System.out.println("List of MarketingBullets in OLE page is: " +
-		 * vppmarketingBullets); // Line End for Marketing bullet points
-		 */
+		
 		ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 		Assertion.assertFalse("Providers not added", providers.isEmpty());
 		System.out.println("List of Providers in OLE page is: " + providers);
@@ -2692,16 +2403,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user navigates to Medicare Information Page for DSNP$")
 	public void the_user_navigates_to_Medicare_Information_Page_for_DSNP() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		MedicareInformationPageMobile medicalInformationPage = welcomePage.navigate_to_medicare_info_page();
@@ -2720,13 +2422,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		String CardType = MedicareDetailsMap.get("Card Type");
 
 		Random rnd = new Random();
@@ -2745,10 +2441,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
-			// getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE,
-			// MedicareDetailsMap.get("PartA Date"));
-			// getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE,
-			// MedicareDetailsMap.get("PartB Date"));
+			
 			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
 			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
 
@@ -2807,489 +2500,357 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*
-		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
-		 * 0; i < givenAttributesRow.size(); i++) {
-		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String plantype = MemberDetailsMap.get("Plan Type");
 		String AuthorizationRiderFlag = MemberDetailsMap.get("Auth Flag");
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String[] dateArray = null;
 
-		/*
-		 * if (!(MRScenario.environment.equalsIgnoreCase("offline") ||
-		 * MRScenario.environment.equalsIgnoreCase("prod")||
-		 * MRScenario.environment.equalsIgnoreCase("stage")) ) {
-		 */
-		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")
-				|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
 
-			OLEconfirmationPageMobile OLEGPSValidation = (OLEconfirmationPageMobile) getLoginScenario()
-					.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			OLEconfirmationPageMobile OLEGPSValidation = (OLEconfirmationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
 
-				System.out.println(
-						"--------------------Creating a map to store Expected Data for Comparison----------------------");
+				System.out.println("--------------------Creating a map to store Expected Data for Comparison----------------------");
 				Map<String, String> DetailsMap = new HashMap<String, String>();
 
 				System.out.println("--------------------Storing Data for VPP Page Started----------------------");
 
-				// VPP Page
+
+				//VPP Page
 				String PlanName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-				// -------------------------------------------------------------------------------------
-				/*
-				 * DetailsMap.put("Plan Name", PlanName.toUpperCase());
-				 * DetailsMap.put("Plan Year", (String)
-				 * getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR)); String county
-				 * = (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY);
-				 * DetailsMap.put("County", county.toUpperCase());
+				//-------------------------------------------------------------------------------------
+				/*DetailsMap.put("Plan Name", PlanName.toUpperCase());
+				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));	
+				String county = (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY);
+				DetailsMap.put("County", county.toUpperCase());
 				 */
-				DetailsMap.put("Confirmation No",
-						(String) getLoginScenario().getBean(oleCommonConstants.CONFIRMATION_NUMBER));
+				DetailsMap.put("Confirmation No", (String) getLoginScenario().getBean(oleCommonConstants.CONFIRMATION_NUMBER));
 
 				System.out.println("--------------------Storing Data for Confirmation Number----------------------");
 
 				// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				System.out.println(
-						"--------------------Storing Data for Personal Information Page Started----------------------");
+						System.out.println("--------------------Storing Data for Personal Information Page Started----------------------");
 
-				// Personal Information
-				String firstName = (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME);
-				DetailsMap.put("First Name", firstName.toUpperCase());
-				String lastName = (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME);
-				DetailsMap.put("Last Name", lastName.toUpperCase());
-				String middleName = (String) getLoginScenario().getBean(oleCommonConstants.MIDDLE_NAME);
-				DetailsMap.put("MiddleInitial", middleName.toUpperCase());
-				String dob = (String) getLoginScenario().getBean(oleCommonConstants.DOB);
-				dob = OLEGPSValidation.converttogpsDate(dob);
-				DetailsMap.put("DOB", dob);
+						// Personal Information
+						String firstName = (String) getLoginScenario().getBean(oleCommonConstants.FIRST_NAME);
+						DetailsMap.put("First Name", firstName.toUpperCase());
+						String lastName = (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME);
+						DetailsMap.put("Last Name", lastName.toUpperCase());
+						String middleName = (String) getLoginScenario().getBean(oleCommonConstants.MIDDLE_NAME);
+						DetailsMap.put("MiddleInitial", middleName.toUpperCase());
+						String dob = (String) getLoginScenario().getBean(oleCommonConstants.DOB);
+						dob = OLEGPSValidation.converttogpsDate(dob);
+						DetailsMap.put("DOB", dob);
 
-				// Gender
-				String gender = (String) getLoginScenario().getBean(oleCommonConstants.GENDER);
-				gender = gender.substring(0, 1);
-				DetailsMap.put("Gender", gender);
+						//Gender
+						String gender= (String) getLoginScenario().getBean(oleCommonConstants.GENDER);
+						gender=gender.substring(0, 1);
+						DetailsMap.put("Gender",gender);
 
-				// Primary Address
-				String perm_Street = (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET);
-				DetailsMap.put("Perm_Street", perm_Street.toUpperCase());
-				// String perm_Address = (String)
-				// getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER);
-				DetailsMap.put("Perm_Apartment",
-						(String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER));
-				// DetailsMap.put("Perm_Apartment", "");
-				String perm_city = (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY);
-				DetailsMap.put("Perm_city", perm_city.toUpperCase());
-				// TODO: Need to check and add Permanent State
-				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+						// Primary Address
+						String perm_Street = (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET);
+						DetailsMap.put("Perm_Street", perm_Street.toUpperCase());
+						//	String perm_Address = (String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER);
+						DetailsMap.put("Perm_Apartment", (String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER));
+						// DetailsMap.put("Perm_Apartment", "");
+						String perm_city = (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY);
+						DetailsMap.put("Perm_city", perm_city.toUpperCase());
+						// TODO: Need to check and add Permanent State
+						DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 
-				// Mailing Address
-				/*
-				 * <----------Mailing question is not showing up GPS---------------- String
-				 * mailing_Question = (String)
-				 * getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION);
-				 * DetailsMap.put("Mailing_Question", mailing_Question.toUpperCase());
-				 * ----------Mailing question is not showing up GPS---------------->
-				 */
-				if (MailingAddressQuestion.equalsIgnoreCase("no")) {
-					String mailing_Street = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET);
-					DetailsMap.put("Mailing_Street", mailing_Street.toUpperCase());
-					String mailing_City = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY);
-					DetailsMap.put("Mailing Apartment Number",
-							(String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
-					DetailsMap.put("Mailing_City", mailing_City.toUpperCase());
-					String mailing_State = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE);
-					DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
-					DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
-				}
-				/*
-				 * else { DetailsMap.put("Mailing_Street", "");
-				 * DetailsMap.put("Mailing Apartment Number", "");
-				 * DetailsMap.put("Mailing_City", ""); DetailsMap.put("Mailing_State", "");
-				 * DetailsMap.put("Mailing_Zip", ""); }
-				 */
-				// Phone Number
-				DetailsMap.put("Home Number",
-						(String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
-				DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
+						//Mailing Address
+						/*<----------Mailing question is not showing up GPS----------------
+				String mailing_Question = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION);
+				DetailsMap.put("Mailing_Question", mailing_Question.toUpperCase());
+				----------Mailing question is not showing up GPS---------------->*/
+						if(MailingAddressQuestion.equalsIgnoreCase("no")) {
+							String mailing_Street = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET);
+							DetailsMap.put("Mailing_Street", mailing_Street.toUpperCase());
+							String mailing_City = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY);
+							DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
+							DetailsMap.put("Mailing_City", mailing_City.toUpperCase());
+							String mailing_State = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE);
+							DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
+							DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
+						}
+						
+						//Phone Number
+						DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
+						DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
 
-				// Email
-				// DetailsMap.put("Email Confirmation", (String)
-				// getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION)); 1-6-This
-				// is not mentioned in GPS query so commented it
-				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
-				DetailsMap.put("Email", email.toUpperCase());
+						//Email
+						//DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION)); 1-6-This is not mentioned in GPS query so commented it
+						String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
+						DetailsMap.put("Email", email.toUpperCase());
 
-				if (PlanName.contains("Chronic") || PlanName.contains("Gold") || PlanName.contains("Silver")
-						|| PlanName.contains("D-SNP")) {
-					DetailsMap.put("Paperless Delivery", "N");
-				} else {
-					String paperless = ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
-					paperless = paperless.toUpperCase().substring(0, 1);
-					DetailsMap.put("Paperless Delivery", paperless);
-					// DetailsMap.put("Paperless Delivery", (String)
-					// getLoginScenario().getBean(oleCommonConstants.Go_Green));
-				}
-				DetailsMap.put("Language", "1");
+						if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver") || PlanName.contains("D-SNP")) {
+							DetailsMap.put("Paperless Delivery", "N");
+						} else {
+							String paperless= ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
+							System.out.println("--------------------Storing Data for paperless delivery" +paperless);
+							paperless=paperless.toUpperCase().substring(0, 1);
+							DetailsMap.put("Paperless Delivery",paperless);
+							//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
+						}
+						DetailsMap.put("Language", "1");
 
-				System.out.println(
-						"--------------------Storing Data for Personal Information Page Ended----------------------");
+						System.out.println("--------------------Storing Data for Personal Information Page Ended----------------------");
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				System.out.println(
-						"--------------------Storing Data for Medicare Information Page Started----------------------");
+						System.out.println("--------------------Storing Data for Medicare Information Page Started----------------------");
 
-				// Medicare Information Page
+						// Medicare Information Page
 
-				// Medicare and Medicaid Number
-				String medicareNumber = (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER);
-				medicareNumber = medicareNumber.replaceAll("-", "").toUpperCase();
-				DetailsMap.put("Medicare Number", medicareNumber);
+						//Medicare and Medicaid Number
+						String medicareNumber= (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER);
+						medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
+						DetailsMap.put("Medicare Number", medicareNumber);
 
-				DetailsMap.put("Medicaid Number",
-						(String) getLoginScenario().getBean(OLE_PageConstants.MEDICAID_NUMBER));
-				String ssnFlag = (String) getLoginScenario().getBean(oleCommonConstants.SSN_FLAG);
-				if (ssnFlag.equalsIgnoreCase("true")) {
-					String SSN = (String) getLoginScenario().getBean(oleCommonConstants.SSN_NUMBER);
-					DetailsMap.put("SSN Number", SSN);
-				} else {
-					DetailsMap.put("SSN Number", "");
+						DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(OLE_PageConstants.MEDICAID_NUMBER));
+						String ssnFlag = (String) getLoginScenario().getBean(oleCommonConstants.SSN_FLAG);
+						if(ssnFlag.equalsIgnoreCase("true")) {
+							String SSN = (String) getLoginScenario().getBean(oleCommonConstants.SSN_NUMBER);
+							DetailsMap.put("SSN Number", SSN);
+						} else {
+							DetailsMap.put("SSN Number", "");
 
-				}
+						}
 
-				// Other Health Insurance
-				if (!plantype.contains("PDP")) {
-					String healthInsurance = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE);
-					DetailsMap.put("Health Insurance", healthInsurance.substring(0, 1).toUpperCase());
-					String otherHealthInsuranceeName = (String) getLoginScenario()
-							.getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
-					DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
-					String groupNumber = (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER);
-					DetailsMap.put("Group Number", groupNumber.toUpperCase());
-					DetailsMap.put("Member Number",
-							(String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
-				} else {
-					DetailsMap.put("Health Insurance", "N");
-					/*
-					 * DetailsMap.put("Health Insurance Name", ""); DetailsMap.put("Group Number",
-					 * ""); DetailsMap.put("Member Number", "");
-					 */
-				}
-				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
+						//Other Health Insurance
+						if(!plantype.contains("PDP")) {
+							String healthInsurance = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE);
+							DetailsMap.put("Health Insurance", healthInsurance.substring(0, 1).toUpperCase());
+							String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
+							DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
+							String groupNumber = (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER);
+							DetailsMap.put("Group Number", groupNumber.toUpperCase());
+							DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
+						}
+						else {
+							DetailsMap.put("Health Insurance", "N");
+							/*	DetailsMap.put("Health Insurance Name", "");
+					DetailsMap.put("Group Number", "");		
+					DetailsMap.put("Member Number", "");	*/
+						}
+						System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 
-				// Prescription Drug Coverage
-				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
-				DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
-				String prescriptionCoverageName = (String) getLoginScenario()
-						.getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
-				// prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
-				prescriptionCoverageName = prescriptionCoverageName.toUpperCase() + '"' + '+' + '"'
-						+ prescriptionCoverageName.toUpperCase();
-				DetailsMap.put("Prescription Name", prescriptionCoverageName);
-				String pdGroupNumber = (String) getLoginScenario()
-						.getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
-				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
-				DetailsMap.put("PD Member Number",
-						(String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
+						// Prescription Drug Coverage
+						String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
+						DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
+						String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
+						// prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
+						prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+'"'+'+'+'"'+prescriptionCoverageName.toUpperCase();
+						DetailsMap.put("Prescription Name", prescriptionCoverageName);
+						String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
+						DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
+						DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
+						DetailsMap.put("RX BIN Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_RXBIN_NUMBER));
+						System.out.println("--------------------Storing Data for Medicare Information Page Ended----------------------");
 
-				System.out.println(
-						"--------------------Storing Data for Medicare Information Page Ended----------------------");
+						// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						System.out.println("--------------------Storing Data for Eligibility Page Started----------------------");
 
-				System.out
-						.println("--------------------Storing Data for Eligibility Page Started----------------------");
+						// Eligibility Page
+						String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
+						partAEffective = OLEGPSValidation.converttogpsDate(partAEffective);
+						DetailsMap.put("PartA Date", partAEffective);
+						String partBEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE);
+						partBEffective = OLEGPSValidation.converttogpsDate(partBEffective);
+						DetailsMap.put("PartB Date", partBEffective);
 
-				// Eligibility Page
-				String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
-				partAEffective = OLEGPSValidation.converttogpsDate(partAEffective);
-				DetailsMap.put("PartA Date", partAEffective);
-				String partBEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE);
-				partBEffective = OLEGPSValidation.converttogpsDate(partBEffective);
-				DetailsMap.put("PartB Date", partBEffective);
+						System.out.println("--------------------Storing Data for Eligibility Page Ended----------------------");
 
-				System.out.println("--------------------Storing Data for Eligibility Page Ended----------------------");
+						// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						System.out.println("--------------------Storing Data for SEP Page Started----------------------");
 
-				System.out.println("--------------------Storing Data for SEP Page Started----------------------");
+						//SEP Page
+						/*String note = "Q:I am losing coverage I had from an employer. A:09012020";
+				DetailsMap.put("Note", note);
+						 */
 
-				// SEP Page
-				/*
-				 * String note = "Q:I am losing coverage I had from an employer. A:09012020";
-				 * DetailsMap.put("Note", note);
-				 */
+						System.out.println("--------------------Storing Data for SEP Page Ended----------------------");
 
-				System.out.println("--------------------Storing Data for SEP Page Ended----------------------");
+						// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						System.out.println("--------------------Storing Data for PCP Page Started----------------------");
 
-				System.out.println("--------------------Storing Data for PCP Page Started----------------------");
+						//PCP Page
+						if(!plantype.contains("PDP")) {
+							String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
+							DetailsMap.put("PCP Name", pcpName.replaceAll("-", "").toUpperCase());
 
-				// PCP Page
-				if (!plantype.contains("PDP")) {
-					String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
-					DetailsMap.put("PCP Name", pcpName.replaceAll("-", "").toUpperCase());
+							String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
+							DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
 
-					String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
-					DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
+							String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
+							pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
+							DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
+						}
+						else {
+							DetailsMap.put("PCP Name", "");
+							DetailsMap.put("PCP Number", "");
+							DetailsMap.put("PCP Recently Visited", "N");
+						}
+						System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 
-					String pcpRecentlyVisited = (String) getLoginScenario()
-							.getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
-					pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
-					DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
-					/*
-					 * if(PlanName.contains("PDP")) { DetailsMap.put("PCP Recently Visited", "N"); }
-					 * else { String pcpRecentlyVisited= ((String)
-					 * getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
-					 * pcpRecentlyVisited=pcpRecentlyVisited.toUpperCase().substring(0, 1);
-					 * DetailsMap.put("PCP Recently Visited",pcpRecentlyVisited);
-					 * 
-					 * // DetailsMap.put("Paperless Delivery", (String)
-					 * getLoginScenario().getBean(oleCommonConstants.Go_Green)); }
-					 */
-				} else {
-					DetailsMap.put("PCP Name", "");
-					DetailsMap.put("PCP Number", "");
-					DetailsMap.put("PCP Recently Visited", "N");
-				}
-				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
+						//------------------------------------------------------------------------------------------------------------------------------------------------
+						//Payment type
+						System.out.println("--------------------Storing Data for Plan Premium Page ----------------------");
+						String paymentPlan = (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_METHOD);
+						if(paymentPlan.equalsIgnoreCase("Pay By Mail")) {
+							DetailsMap.put("payment type is Pay by mail: ", "0");
+						}
+						else if(paymentPlan.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+							DetailsMap.put("payment type is SSN: ", "1");	
+						}
+						else {
+							DetailsMap.put("payment type is Credit Card: ", "2");		
+						}
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
-				// Payment type
-				System.out.println("--------------------Storing Data for Plan Premium Page ----------------------");
-				String paymentPlan = (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_METHOD);
-				if (paymentPlan.equalsIgnoreCase("Pay By Mail")) {
-					DetailsMap.put("payment type is Pay by mail: ", "0");
-				} else if (paymentPlan.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
-					DetailsMap.put("payment type is SSN: ", "1");
-				} else {
-					DetailsMap.put("payment type is Credit Card: ", "2");
-				}
+						//Credit Card Details
+						System.out.println("--------------------Storing Data for Credit Card Started----------------------");
+						String creditCardNumber = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NUMBER);
+						DetailsMap.put("Credit Card Number", creditCardNumber);
+						String creditCardNameOnCreditCard = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD);
+						DetailsMap.put("Credit Card Name On Card", creditCardNameOnCreditCard);
+						String creditCardExpirationDate = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE);
+						DetailsMap.put("Credit Card Expiration Date", creditCardExpirationDate);
+						System.out.println("--------------------Storing Data for Credit Card Ended----------------------");
 
-				// Credit Card Details
-				System.out.println("--------------------Storing Data for Credit Card Started----------------------");
-				String creditCardNumber = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NUMBER);
-				DetailsMap.put("Credit Card Number", creditCardNumber);
-				String creditCardNameOnCreditCard = (String) getLoginScenario()
-						.getBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD);
-				DetailsMap.put("Credit Card Name On Card", creditCardNameOnCreditCard);
-				String creditCardExpirationDate = (String) getLoginScenario()
-						.getBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE);
-				DetailsMap.put("Credit Card Expiration Date", creditCardExpirationDate);
-				System.out.println("--------------------Storing Data for Credit Card Ended----------------------");
+						//Proposed Effective Date
+						System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
 
-				// Proposed Effective Date
-				System.out.println(
-						"--------------------Storing Data for Proposed Effective Date Started----------------------");
+						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+						proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
+						System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
+						proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
+						DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
 
-				String proposedEffectiveDate = (String) getLoginScenario()
-						.getBean(oleCommonConstants.PROPOSED_EFF_DATE);
-				proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
-				System.out.println(
-						"--------------------Storing Data for Proposed Effective Date Ended----------------------"
-								+ proposedEffectiveDate);
-				proposedEffectiveDate = OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
-				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
+						System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 
-				/*
-				 * String proposedEffectiveDate = (String)
-				 * getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
-				 * DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
-				 * //DetailsMap.put("Proposed Effective date", (String)
-				 * getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));
-				 */
-				System.out.println(
-						"--------------------Storing Data for Proposed Effective Date Ended----------------------"
-								+ proposedEffectiveDate);
+						// ------------------------------------------------------------------------------------------------------------------------------------------------
 
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						System.out.println("--------------------Storing Data for Authorization Page Started----------------------");
 
-				System.out.println(
-						"--------------------Storing Data for Authorization Page Started----------------------");
+						// Authorization Page
+						DetailsMap.put("Authorization Agree", "Y");
 
-				// Authorization Page
-				DetailsMap.put("Authorization Agree", "Y");
+						if(AuthorizationRiderFlag.contains("true")) {
+							String authorizationFirstName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
+							DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
+							String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
+							DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
+							DetailsMap.put("Auth Representative Indicator", "Y");
+							String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
+							DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
+							DetailsMap.put("Authorization Address", (String) getLoginScenario().getBean(oleCommonConstants. AUTHORIZATION_ADDRESS));
+							DetailsMap.put("Authorization Apartment Suite", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
+							DetailsMap.put("Authorization City", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
+							DetailsMap.put("Authorization State", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY));
+							DetailsMap.put("Auth Zip Display", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
+							String authorizationPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
+							authorizationPhoneNumber=authorizationPhoneNumber.replaceAll("-", "").toUpperCase();
+							DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);
 
-				if (AuthorizationRiderFlag.contains("true")) {
-					String authorizationFirstName = (String) getLoginScenario()
-							.getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
-					DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
-					String authorizationLastName = (String) getLoginScenario()
-							.getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
-					DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
-					/*
-					 * String authorizationRepresentativeIndicator = (String)
-					 * getLoginScenario().getBean(oleCommonConstants.
-					 * AUTHORIZATION_REPRESENTATIVE_INDICATOR);
-					 * if(authorizationRepresentativeIndicator.contains(authorizationFirstName)) {
-					 * DetailsMap.put("Auth Representative Indicator", "Y"); } else {
-					 * DetailsMap.put("Auth Representative Indicator", "N"); }
-					 */
-					DetailsMap.put("Auth Representative Indicator", "Y");
-					String authorizationRelationship = (String) getLoginScenario()
-							.getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
-					DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
-					DetailsMap.put("Authorization Address",
-							(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ADDRESS));
-					DetailsMap.put("Authorization Apartment Suite",
-							(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
-					DetailsMap.put("Authorization City",
-							(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
-					DetailsMap.put("Authorization State",
-							(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY));
-					DetailsMap.put("Auth Zip Display",
-							(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
-					String authorizationPhoneNumber = (String) getLoginScenario()
-							.getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
-					authorizationPhoneNumber = authorizationPhoneNumber.replaceAll("-", "").toUpperCase();
-					DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);
+							System.out.println("--------------------Storing Data for Authorization Page Ended----------------------");
+						}
+						
+						//------------------------------------------------------------------------------------------------------------------------------------------------
 
-					System.out.println(
-							"--------------------Storing Data for Authorization Page Ended----------------------");
-				}
-				/*
-				 * else { DetailsMap.put("Authorization First Name", "");
-				 * DetailsMap.put("Authorization last Name", "");
-				 * DetailsMap.put("Auth Representative Indicator", "N");
-				 * DetailsMap.put("Authorization Relationship", "");
-				 * DetailsMap.put("Authorization Apartment Suite", "");
-				 * DetailsMap.put("Authorization City", "");
-				 * DetailsMap.put("Authorization State", ""); DetailsMap.put("Auth Zip Display",
-				 * ""); DetailsMap.put("Authorization Phone No", ""); }
-				 */
-				// ------------------------------------------------------------------------------------------------------------------------------------------------
+						//-----------Adding for CSNP-----------------//
+						if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
+							String diabetesquestion1= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1);
+							diabetesquestion1=diabetesquestion1.substring(0, 1);
+							DetailsMap.put("Diabetes Question 1",diabetesquestion1.toUpperCase());
+							String diabetesquestion2= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2);
+							diabetesquestion2=diabetesquestion2.substring(0, 1);
+							DetailsMap.put("Diabetes Question 2",diabetesquestion2);
 
-				// -----------Adding for CSNP-----------------//
-				if (PlanName.contains("Chronic") || PlanName.contains("Gold") || PlanName.contains("Silver")) {
-					String diabetesquestion1 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DIABETES_QUESTION_1);
-					diabetesquestion1 = diabetesquestion1.substring(0, 1);
-					DetailsMap.put("Diabetes Question 1", diabetesquestion1.toUpperCase());
-					String diabetesquestion2 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DIABETES_QUESTION_2);
-					diabetesquestion2 = diabetesquestion2.substring(0, 1);
-					DetailsMap.put("Diabetes Question 2", diabetesquestion2);
+							String chronicheartfailurequestion1= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1);
+							chronicheartfailurequestion1=chronicheartfailurequestion1.substring(0, 1);
+							DetailsMap.put("Chronic Heart Failure Question 1",chronicheartfailurequestion1);
+							String chronicheartfailurequestion2= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2);
+							chronicheartfailurequestion2=chronicheartfailurequestion2.substring(0, 1);
+							DetailsMap.put("Chronic Heart Failure Question 2",chronicheartfailurequestion2);				
+							String chronicheartfailurequestion3= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3);
+							chronicheartfailurequestion3=chronicheartfailurequestion3.substring(0, 1);
+							DetailsMap.put("Chronic Heart Failure Question 3",chronicheartfailurequestion3);
 
-					String chronicheartfailurequestion1 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1);
-					chronicheartfailurequestion1 = chronicheartfailurequestion1.substring(0, 1);
-					DetailsMap.put("Chronic Heart Failure Question 1", chronicheartfailurequestion1);
-					String chronicheartfailurequestion2 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2);
-					chronicheartfailurequestion2 = chronicheartfailurequestion2.substring(0, 1);
-					DetailsMap.put("Chronic Heart Failure Question 2", chronicheartfailurequestion2);
-					String chronicheartfailurequestion3 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3);
-					chronicheartfailurequestion3 = chronicheartfailurequestion3.substring(0, 1);
-					DetailsMap.put("Chronic Heart Failure Question 3", chronicheartfailurequestion3);
+							String cardiovasculardisorderquestion1= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1);
+							cardiovasculardisorderquestion1=cardiovasculardisorderquestion1.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 1",cardiovasculardisorderquestion1);
+							String cardiovasculardisorderquestion2= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2);
+							cardiovasculardisorderquestion2=cardiovasculardisorderquestion2.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 2",cardiovasculardisorderquestion2);
+							String cardiovasculardisorderquestion3= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3);
+							cardiovasculardisorderquestion3=cardiovasculardisorderquestion3.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 3",cardiovasculardisorderquestion3);
+							String cardiovasculardisorderquestion4= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4);
+							cardiovasculardisorderquestion4=cardiovasculardisorderquestion4.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 4",cardiovasculardisorderquestion4);
+							String cardiovasculardisorderquestion5= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5);
+							cardiovasculardisorderquestion5=cardiovasculardisorderquestion5.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 5",cardiovasculardisorderquestion5);
+							String cardiovasculardisorderquestion6= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6);
+							cardiovasculardisorderquestion6=cardiovasculardisorderquestion6.substring(0, 1);
+							DetailsMap.put("Cardio Vascular Disorder Question 6",cardiovasculardisorderquestion6);
 
-					String cardiovasculardisorderquestion1 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1);
-					cardiovasculardisorderquestion1 = cardiovasculardisorderquestion1.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 1", cardiovasculardisorderquestion1);
-					String cardiovasculardisorderquestion2 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2);
-					cardiovasculardisorderquestion2 = cardiovasculardisorderquestion2.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 2", cardiovasculardisorderquestion2);
-					String cardiovasculardisorderquestion3 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3);
-					cardiovasculardisorderquestion3 = cardiovasculardisorderquestion3.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 3", cardiovasculardisorderquestion3);
-					String cardiovasculardisorderquestion4 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4);
-					cardiovasculardisorderquestion4 = cardiovasculardisorderquestion4.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 4", cardiovasculardisorderquestion4);
-					String cardiovasculardisorderquestion5 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5);
-					cardiovasculardisorderquestion5 = cardiovasculardisorderquestion5.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 5", cardiovasculardisorderquestion5);
-					String cardiovasculardisorderquestion6 = (String) getLoginScenario()
-							.getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6);
-					cardiovasculardisorderquestion6 = cardiovasculardisorderquestion6.substring(0, 1);
-					DetailsMap.put("Cardio Vascular Disorder Question 6", cardiovasculardisorderquestion6);
+							String disclosurecheckbox = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX);
+							if(disclosurecheckbox.equalsIgnoreCase("true")) {
+								DetailsMap.put("Disclosure Checkbox", "Y");
+							}
+							else {
+								DetailsMap.put("Disclosure Checkbox", "N");
+							}
+							String disclosureprovidername = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME);
+							DetailsMap.put("Disclosure Provider Name", disclosureprovidername.toUpperCase());
 
-					String disclosurecheckbox = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_CHECKBOX);
-					if (disclosurecheckbox.equalsIgnoreCase("true")) {
-						DetailsMap.put("Disclosure Checkbox", "Y");
-					} else {
-						DetailsMap.put("Disclosure Checkbox", "N");
-					}
-					// DetailsMap.put("Disclosure Checkbox", disclosurecheckbox.toUpperCase());
+							
+							String disclosureprovidercity = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
+							
+							String disclosureproviderstate = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE);
+							String disclosureproviderzip = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP);
+							
 
-					String disclosureprovidername = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME);
-					DetailsMap.put("Disclosure Provider Name", disclosureprovidername.toUpperCase());
+							String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
+							disclosureProviderPhoneNumber=disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
+							DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
 
-					/*
-					 * String disclosureproviderstreetaddress = (String)
-					 * getLoginScenario().getBean(oleCommonConstants.
-					 * DISCLOSURE_PROVIDER_STREET_ADDRESS);
-					 * DetailsMap.put("Disclosure Provider Street Address",
-					 * disclosureproviderstreetaddress.toUpperCase());
-					 */
+							String disclosureprovideraddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
+							disclosureprovideraddress=disclosureprovideraddress.toUpperCase()+','+disclosureprovidercity.toUpperCase()+','+disclosureproviderstate.toUpperCase()+','+disclosureproviderzip;
+							DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
+							System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
+						}
+						//---------------------------------------------------//	
+						//------------Added for Jenkins Report---------------//
+						List<String> testNote=new ArrayList<String>();
+						// testNote.add("===================================================");
 
-					String disclosureprovidercity = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
-					// DetailsMap.put("Disclosure Provider City",
-					// disclosureprovidercity.toUpperCase());
+						// testNote.add("\tValidation for able to print all the values from the GPS");
 
-					String disclosureproviderstate = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE);
-					// DetailsMap.put("Disclosure Provider State",
-					// disclosureproviderstate.toUpperCase());
+						Map <String, String> matched = new HashMap<>();
+						Map <String, String> mismatched = new HashMap<>();
+						//------------Added for Jenkins Report---------------//	
+						boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
+						if (Validation_Status) {
+							System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
+							getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
 
-					// DetailsMap.put("Disclosure Provider Zip", (String)
-					// getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
-					String disclosureproviderzip = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP);
-					// DetailsMap.put("Disclosure Provider Zip", disclosureproviderzip);
+							// getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
+							Assertion.assertTrue(true);
+							// testNote.addAll(matched);
 
-					String disclosureProviderPhoneNumber = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
-					disclosureProviderPhoneNumber = disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
-					DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
+						} else {
+							System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
+							Assertion.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 
-					String disclosureprovideraddress = (String) getLoginScenario()
-							.getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
-					// prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
-					disclosureprovideraddress = disclosureprovideraddress.toUpperCase() + ','
-							+ disclosureprovidercity.toUpperCase() + ',' + disclosureproviderstate.toUpperCase() + ','
-							+ disclosureproviderzip;
-					DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
-					System.out.println(
-							"--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"
-									+ disclosureprovideraddress);
-				}
-				// ---------------------------------------------------//
-				// ------------Added for Jenkins Report---------------//
-				List<String> testNote = new ArrayList<String>();
-				// testNote.add("===================================================");
-
-				// testNote.add("\tValidation for able to print all the values from the GPS");
-
-				Map<String, String> matched = new HashMap<>();
-				Map<String, String> mismatched = new HashMap<>();
-				// ------------Added for Jenkins Report---------------//
-				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap, matched, mismatched);
-				if (Validation_Status) {
-					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
-					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
-
-					// getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
-					Assertion.assertTrue(true);
-					// testNote.addAll(matched);
-
-				} else {
-					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
-					Assertion.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
-
-				}
+						}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
 				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
