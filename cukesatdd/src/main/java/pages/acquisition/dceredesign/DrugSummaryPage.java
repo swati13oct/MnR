@@ -62,7 +62,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@id,'priceLinkBtn')])[1]")
 	public WebElement drugPricingLink;
 
-	@FindBy(xpath = "(//button/span[contains(text(),'View Drug Costs')])[1]")
+	@FindBy(xpath = "(//button[contains(@aria-label,'View Drug Costs')])[1]")
 	public WebElement viewDrugCostBtn;
 
 	@FindBy(xpath = "(//button[contains(@aria-label,'View Plan Details') and contains(@class, 'uhc-button--outlined')])[1]")
@@ -660,7 +660,8 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public DrugDetailsPage clickViewDrugCostBtn() {
-		viewDrugCostBtn.click();
+		jsClickNew(viewDrugCostBtn);
+		//viewDrugCostBtn.click();
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
