@@ -1012,7 +1012,7 @@ public class CommonConstants {
 	
 	public static final String FOOTER_LINK = "linkName";
 	
-	public static LinkedHashMap<String,String> PRE_FLOW = null;
+	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
 }
 
 

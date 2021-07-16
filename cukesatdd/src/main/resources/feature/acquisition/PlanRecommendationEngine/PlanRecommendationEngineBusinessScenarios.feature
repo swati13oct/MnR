@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
-  @PRE @APIRanking @MAPDFlowRanking
+  @PRE @APIRanking @MAPDFlowRanking111
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |

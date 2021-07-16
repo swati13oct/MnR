@@ -124,8 +124,9 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 	}
 
 	public void findPagedetails(String pageName) {
+		String curID = String.valueOf(Thread.currentThread().getId());
 		flow = CommonConstants.PRE_FLOW.get(String.valueOf(Thread.currentThread().getId()));//PlanRecommendationEngineStepDefinition.PREflow;
-		System.out.println("*** Current PRE Flow : "+flow+" ***");
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+flow+" ****");
 		currentPageName = pageName.toUpperCase().trim();
 		currrentPagePercentage = new String();
 		previousPageName = new String();

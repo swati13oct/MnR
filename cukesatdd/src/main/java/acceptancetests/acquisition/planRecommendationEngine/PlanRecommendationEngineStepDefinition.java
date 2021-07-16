@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.planRecommendationEngine;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.json.JSONException;
 import org.openqa.selenium.WebDriver;
@@ -56,9 +57,11 @@ public class PlanRecommendationEngineStepDefinition {
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			CommonConstants.PRE_FLOW.put(String.valueOf(Thread.currentThread().getId()), PREflow);
-			//getLoginScenario().saveBean(CommonConstants.PRE_FLOW,PREflow);
-			System.out.println("Current PRE Flow : "+PREflow);
+			//System.out.println("\n\n\n\n\n\n");
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - "+curID+" for the flow "+PREflow);
+			//CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			CommonConstants.PRE_FLOW.put(curID, PREflow);
 		}
 	}
 	
