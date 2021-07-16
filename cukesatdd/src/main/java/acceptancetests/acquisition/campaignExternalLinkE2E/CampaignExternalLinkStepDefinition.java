@@ -32,6 +32,11 @@ import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
+import pages.acquisition.tfn.CampaignTFNPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -765,5 +770,70 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		Assert.fail("Error Loading VPP plan summary page");
 	}
 }
+
+@And("^user clicks on get started to start questionnaire$")
+public void clicks_on_get_started_button_to_start_questionaire(DataTable givenAttributes) throws Throwable {
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String zipcode = memberAttributesMap.get("Zip Code");
+		System.out.println("Zipcode is:"+zipcode);
+		String county = memberAttributesMap.get("CountyDropDown");
+		System.out.println("Email is:"+county);
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		System.out.println("Entered Search Key is:"+isMultiCounty);
+		
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+		
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	if (isMultiCounty.equalsIgnoreCase("NO")) {
+		campaignExternalLinkspage.startQuestionnaire(zipcode);
+	} else {
+		campaignExternalLinkspage.startQuestionnaireWithCounty(zipcode, county);
+	}
+}
+
+@And("^user select plantype in the coverage options page$")
+public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String plantype = memberAttributesMap.get("Plan Type");
+	if (!(plantype.isEmpty())) {
+		campaignExternalLinkspage.selectCoverageOption(plantype);
+	}
+}
+
+@Then("^user select add drug option in the Drug page$")
+	public void select_add_drugs_option(DataTable givenAttributes) {
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.drugsInitiate(memberAttributesMap.get("Drug Selection"));
+	campaignExternalLinkspage.drugsHandlerWithdetails(memberAttributesMap.get("Drug Details"));
+	campaignExternalLinkspage.continueNextpage();
+	}
+
+@Then("^user validate loading results page$")
+	public void user_validate_results_page() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.resultsloadingpage();
+	}
+
+@Then("^user validates plan recommendations in the results page$")
+	public void view_recommendations_results_page(DataTable givenAttributes) {
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String zip = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	campaignExternalLinkspage.resultsUI(zip,county);
+	}
 }
 

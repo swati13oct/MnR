@@ -126,21 +126,21 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | PSC Code | <pscCode> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And clicks on get started button and runs questionnaire
+    And user clicks on get started to start questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And user selects plan type in coverage options page
+    And user select plantype in the coverage options page
       | Plan Type | <isCoverageOpt> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    Then user selects add drug option in Drug page
+    Then user select add drug option in the Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate elements in loading results page
-    Then user validate recommendations in results page
+    Then user validates plan recommendations in the results page
       | Zip Code           | <Zipcode>           |
       | County Name        | <county>            |
       | 1st Recommendation | <1stRecommendation> |

@@ -1,6 +1,7 @@
 package pages.acquisition.commonpages;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -1164,5 +1167,301 @@ public class CampaignExternalLinks extends UhcDriver {
 		else {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		}
+	}
+	
+	@FindBy(css = "div[class*='get-started-banner'] button")
+	private WebElement getStartedBtn;
+	
+	@FindBy(css = "div[class*='get-started-main-inner'] button")
+	private WebElement getStartedBtn1;
+	
+	@FindBy(id = "zip-code")
+	private WebElement zipCode;
+	
+	@FindBy(xpath = "//button[contains(text(),'Continue')]")
+	private WebElement continueBtn;
+	
+	@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(1)")
+	private WebElement coverageTitle;
+	
+	@FindBy(id = "MultipleCounty")
+	private WebElement countyDrpdown;
+	
+	public void startQuestionnaire(String zipcode) throws InterruptedException {
+		waitTillElementClickableInTime(getStartedBtn, 45);
+		waitTillElementClickableInTime(getStartedBtn1, 45);
+		System.out.println("Before clicking GetStarted");
+		threadsleep(5000);
+		jsClickNew(getStartedBtn);
+		System.out.println("After clicking GetStarted");
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.sendKeys(zipcode);
+		threadsleep(5000);
+		jsClickNew(continueBtn);
+		waitforElementVisibilityInTime(coverageTitle, 30);
+	}
+	
+	public void startQuestionnaireWithCounty(String zipcode,String county) throws InterruptedException {
+		waitTillElementClickableInTime(getStartedBtn, 45);
+		waitTillElementClickableInTime(getStartedBtn1, 45);
+		System.out.println("Before clicking GetStarted");
+		threadsleep(5000);
+		jsClickNew(getStartedBtn);
+		System.out.println("After clicking GetStarted");
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.sendKeys(zipcode);
+		threadsleep(5000);
+		selectFromDropDownByText(driver,countyDrpdown, county);
+		jsClickNew(continueBtn);
+		waitforElementVisibilityInTime(coverageTitle, 30);
+	}
+	
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	private WebElement plantypeMAPD;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	private WebElement plantypeMA;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(4)>label")
+	private WebElement plantypePDP;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
+	private WebElement plantypeNone;
+	
+	public void selectCoverageOption(String planType) {
+		if (planType.equalsIgnoreCase("MAPD")) {
+			validate(plantypeMAPD);
+			jsClickNew(plantypeMAPD);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("MA")) {
+			validate(plantypeMA);
+			jsClickNew(plantypeMA);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			validate(plantypePDP);
+			jsClickNew(plantypePDP);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("None")) {
+			validate(plantypeNone);
+			jsClickNew(plantypeNone);
+			System.out.println("Plan Type " + planType + " Clicked");
+		}
+		jsClickNew(continueBtn);
+	}
+	
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	private WebElement yesOption;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	private WebElement noOption;
+	
+	@FindBy(css = "input#drug")
+	private WebElement drugsearchBox;
+	
+	public void drugsInitiate(String drugSelection) {
+		threadsleep(3000);
+		System.out.println("Drugs Page Functional Operations");
+		if (drugSelection.equalsIgnoreCase("Yes")) {
+			validate(yesOption);
+			jsClickNew(yesOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		} else if (drugSelection.equalsIgnoreCase("No")) {
+			validate(noOption);
+			jsClickNew(noOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		}
+		jsClickNew(continueBtn);
+		validate(drugsearchBox);
+	}
+	
+	public void drugsHandlerWithdetails(String drugsDetails) {
+		String drugName = "";
+		boolean searchButtonClick = false;
+		String dosage = "";
+		String packageName = "";
+		String count = "";
+		String frequency = "";
+		boolean threeeMonthSLength = false;
+		boolean GenericDrug = false;
+		boolean switchGeneric = false;
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String drugInfo = drugslist[i];
+			if (drugInfo.trim().length() > 0) {
+				String[] drugDetails = drugInfo.split(",");
+				drugName = drugDetails[0];
+				if (drugDetails[1].toUpperCase().equals("NO"))
+					searchButtonClick = true;
+				dosage = drugDetails[2];
+				packageName = drugDetails[3];
+				count = drugDetails[4];
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
+				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
+					switchGeneric = true;
+
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
+						GenericDrug, switchGeneric);
+			}
+		}
+
+	}
+
+	@FindBy(css = "uhc-autocomplete button")
+	private WebElement drugsearchButton;
+	
+	@FindBy(css = "#modal uhc-radio[class*='checked']")
+	private WebElement modalSelcetedDrug;
+
+	@FindBy(css = "#modal uhc-radio-group uhc-radio")
+	private List<WebElement> modalSelcetedDrugsList;
+	
+	@FindBy(css = "#modal div>button[class*='primary button']")
+	private WebElement modalcontinue;
+	
+	@FindBy(css = "uhc-autocomplete uhc-menu-item")
+	private List<WebElement> drugsAutoList;
+	
+	@FindBy(css = "#modal #dosage-select")
+	private WebElement modalDosageSelect;
+	
+	@FindBy(css = "#modal legend")
+	private WebElement modalGenericDrug;
+	
+	@FindBy(css = "#modal #frequency-select")
+	private WebElement modalFrequencySelect;
+
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
+	
+	@FindBy(css = "#modal #package-select")
+	private WebElement modalPackageSelect;
+
+	@FindBy(css = "#modal #Quantity")
+	private WebElement modalQuantity;
+	
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
+	private WebElement modalGenericSwitchLabel;
+	
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+	private WebElement modalGenericSwitch;
+	
+	@FindBy(css = "uhc-list uhc-list-item")
+	private List<WebElement> drugsList;
+	
+	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
+			String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+		try {
+			validate(drugsearchBox, 30);
+			threadsleep(2000);
+			drugsearchBox.clear();
+			drugsearchBox.sendKeys(drugName);
+			if (searchButtonClick) {
+				jsClickNew(drugsearchButton);
+				threadsleep(6000);
+				validate(modalSelcetedDrug, 30);
+				threadsleep(2000);
+				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+						"Drug name is not Matched :" + drugName);
+				// Select modal
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+				threadsleep(2000);
+			} else {
+				jsClickNew(drugsAutoList.get(0));
+			}
+
+			validate(modalDosageSelect, 30);
+			threadsleep(2000);
+			Select dos = new Select(modalDosageSelect);
+			Select freq = new Select(modalFrequencySelect);
+			Select slen = new Select(modalSLengthSelect);
+			
+			if (!dosage.isEmpty())
+				dos.selectByVisibleText(dosage);
+			if (!packageName.isEmpty()) {
+				Select pack = new Select(modalPackageSelect);
+				pack.selectByVisibleText(packageName);
+			}
+			if (!count.isEmpty()) {
+				modalQuantity.clear();
+				modalQuantity.sendKeys(count);
+			}
+			
+			freq.selectByVisibleText(frequency);
+			
+			if (threeeMonthSLength)
+				slen.selectByVisibleText("Every 3 Months");
+
+			threadsleep(4000);
+			jsClickNew(modalcontinue);
+
+			if (GenericDrug) {
+				validate(modalGenericDrug, 30);
+				threadsleep(2000);
+				// Generic modal
+				if (switchGeneric) {
+					jsClickNew(modalGenericSwitchLabel);
+					threadsleep(2000);
+//					jsClickMobile(modalGenericSwitch);
+					jsClickNew(modalGenericSwitch);
+					drugName = modalGenericDrug.getText();
+				}
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+			}
+			Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
+					"Added drug name Mistmatch from selected one : " + drugName);
+		} catch (Exception e) {
+			System.out.println("Unable to add drug");
+		}
+	}
+	
+	public void continueNextpage() {
+		validate(drugsearchBox, 30);
+		threadsleep(2000);
+		jsClickNew(continueBtn);
+	}
+	
+	@FindBy(css = "#loadingText")
+	private WebElement resultsloadingTitle;
+
+	@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
+	private WebElement svgAnimation;
+
+	@FindBy(css = "div>img[alt*='Loading Plan Recommendations']")
+	private WebElement loadingImage;
+	
+	public void resultsloadingpage() {
+		System.out.println("Validating Results loading Page: ");
+		String currentPageUrl = driver.getCurrentUrl();
+		currentPageUrl.contains("/plan-recommendation-engine.html/");
+		validate(resultsloadingTitle);
+		validate(svgAnimation, 30);
+		validate(loadingImage, 30);
+	}
+	
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	private WebElement planZipInfo;
+	
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+	
+	@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
+	private WebElement planBasedInfo;
+	
+	public void resultsUI(String zip,String county) {
+		System.out.println("Validating Results UI Page: ");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		validate(planZipInfo,60);
+		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
+		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
 	}
 }
