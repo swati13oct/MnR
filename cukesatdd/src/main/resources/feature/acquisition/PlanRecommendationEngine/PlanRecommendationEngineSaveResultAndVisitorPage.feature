@@ -178,7 +178,7 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
     Then user validate recommendation section in PRE Widget on VP
     Then user validate a "View ranked list of plans" buttons from PRE
 
-    @regressionAARP1234
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
       | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |
