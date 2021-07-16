@@ -898,8 +898,8 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 			campaignExternalLinkspage.navigateToDCERedesignFromExternaltakeadvantagePage();
 	}
 
-	@When("^user clicks on Find Plans and Pricing on take advantage page to open a new tab$")
-	public void user_clicks_on_Find_Plans_and_Pricing_on_take_advantage_page_to_open_a_new_tab() {
+	@When("^user clicks on Find Plans and Pricing on take advantage page$")
+	public void user_clicks_on_Find_Plans_and_Pricing_on_take_advantage_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickFindPlansPricingtakeadvantage();

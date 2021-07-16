@@ -31,7 +31,7 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
       | Campaign External Links - E2E Scenario 11_AMP |   65656      |33111        |Yes            | Stone County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] |  https://www.aarpmedicareplans.com/lp/medicare-plans.html   |  
 	
 	@Scenario11 
-  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
+  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages-VPP
     Given user is on campaign external Links page
       | External Link | <externallink> |
     Then user verify TFN on AARP external links page

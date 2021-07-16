@@ -58,8 +58,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
 	
-	
-
 	@FindBy(xpath = "//a[contains(@href,'/medicare-education.html')]")
 	private WebElement LearnAboutMedicareBtn;
 
@@ -232,7 +230,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement Heading;
 
 	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
-	private WebElement Accessbility;
+	private WebElement Accessibility;
 
 	@FindBy(xpath ="//input[@id='zipcode']")
 	private WebElement zip;
@@ -1457,9 +1455,9 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public void validateAccess() {
-		validateNew(Accessbility);
+		validateNew(Accessibility);
 		String parentwindow=driver.getWindowHandle();
-		Accessbility.click();
+		Accessibility.click();
 		switchToNewTab();
 		threadsleep(8);
 		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
