@@ -657,7 +657,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
 	private WebElement CallSamModalMember;
 
-	@FindBy(xpath = "//*[@id='sam-call-modal__title']")
+	@FindBy(xpath = "//*[@id='sam-call-modal']//*[contains(@class,'modal-title')]")
 	private WebElement CallSamModalHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]/..")
@@ -669,7 +669,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[2]")
+	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[4]")
 	private WebElement footertextsectioncallusMedsupp;
 
 	// @FindBy(xpath =
@@ -730,6 +730,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
+	
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	private WebElement tfnHeaderRightRailOLE;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1272,7 +1275,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-
+		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
@@ -3320,6 +3323,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(getStarted);
 		// getStarted.click();
 		jsClickNew(getStarted);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
@@ -3343,21 +3347,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		// WebElement DCELink =
-		// driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and
-		// contains(@title, 'prescription drug costs')]"));
+		 //WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 		validateNew(DCELink);
-		jsClickNew(DCELink);
-/*
+		//jsClickNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleCurrent);
-*/
 		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);
@@ -3385,6 +3385,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 10);
 		jsClickNew(DCELink);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
@@ -6022,8 +6023,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -6193,8 +6195,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
