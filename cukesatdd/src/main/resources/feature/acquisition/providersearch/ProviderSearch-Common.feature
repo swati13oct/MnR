@@ -98,13 +98,13 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
 
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
-      | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
-      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
+      | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
+      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
-      | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
-      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
+      | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
+      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
