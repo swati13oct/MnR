@@ -303,7 +303,7 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 	tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
