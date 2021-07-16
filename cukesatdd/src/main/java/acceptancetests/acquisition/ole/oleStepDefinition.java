@@ -2496,9 +2496,6 @@ public class oleStepDefinition {
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String[] dateArray = null;
 
-		/*if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("stage")) ) {
-		 */
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
 
@@ -2569,13 +2566,7 @@ public class oleStepDefinition {
 							DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
 							DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
 						}
-						/*	else {
-					DetailsMap.put("Mailing_Street", "");
-					DetailsMap.put("Mailing Apartment Number", "");
-					DetailsMap.put("Mailing_City", "");
-					DetailsMap.put("Mailing_State", "");
-					DetailsMap.put("Mailing_Zip", "");					
-					}*/
+						
 						//Phone Number
 						DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
 						DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
@@ -2690,16 +2681,6 @@ public class oleStepDefinition {
 							String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
 							pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
 							DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
-							/*
-				if(PlanName.contains("PDP")) {
-					DetailsMap.put("PCP Recently Visited", "N");
-				} else {
-						String pcpRecentlyVisited= ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
-						pcpRecentlyVisited=pcpRecentlyVisited.toUpperCase().substring(0, 1);
-						DetailsMap.put("PCP Recently Visited",pcpRecentlyVisited);
-
-				//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
-					}	*/
 						}
 						else {
 							DetailsMap.put("PCP Name", "");
@@ -2741,11 +2722,6 @@ public class oleStepDefinition {
 						proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
 						DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
 
-
-						/*
-				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
-				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
-				//DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));*/
 						System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 
 						// ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2760,13 +2736,6 @@ public class oleStepDefinition {
 							DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
 							String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
 							DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
-							/*String authorizationRepresentativeIndicator = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_REPRESENTATIVE_INDICATOR);
-				if(authorizationRepresentativeIndicator.contains(authorizationFirstName)) {
-				DetailsMap.put("Auth Representative Indicator", "Y");
-				}
-				else {
-				DetailsMap.put("Auth Representative Indicator", "N");	
-				}*/
 							DetailsMap.put("Auth Representative Indicator", "Y");
 							String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
 							DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
@@ -2781,17 +2750,7 @@ public class oleStepDefinition {
 
 							System.out.println("--------------------Storing Data for Authorization Page Ended----------------------");
 						}
-						/*	else {
-					DetailsMap.put("Authorization First Name", "");
-					DetailsMap.put("Authorization last Name", "");
-					DetailsMap.put("Auth Representative Indicator", "N");	
-					DetailsMap.put("Authorization Relationship", "");
-					DetailsMap.put("Authorization Apartment Suite", "");
-					DetailsMap.put("Authorization City", "");	
-					DetailsMap.put("Authorization State", "");
-					DetailsMap.put("Auth Zip Display", "");
-					DetailsMap.put("Authorization Phone No", "");	
-				}*/
+						
 						//------------------------------------------------------------------------------------------------------------------------------------------------
 
 						//-----------Adding for CSNP-----------------//
@@ -2839,31 +2798,21 @@ public class oleStepDefinition {
 							else {
 								DetailsMap.put("Disclosure Checkbox", "N");
 							}
-							//DetailsMap.put("Disclosure Checkbox", disclosurecheckbox.toUpperCase());
-
 							String disclosureprovidername = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME);
 							DetailsMap.put("Disclosure Provider Name", disclosureprovidername.toUpperCase());
 
-							/*	String disclosureproviderstreetaddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
-				DetailsMap.put("Disclosure Provider Street Address", disclosureproviderstreetaddress.toUpperCase());*/
-
+							
 							String disclosureprovidercity = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
-							//DetailsMap.put("Disclosure Provider City", disclosureprovidercity.toUpperCase());
-
+							
 							String disclosureproviderstate = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE);
-							//DetailsMap.put("Disclosure Provider State", disclosureproviderstate.toUpperCase());
-
-							//DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 							String disclosureproviderzip = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP);
-							//DetailsMap.put("Disclosure Provider Zip", disclosureproviderzip);
-
+							
 
 							String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
 							disclosureProviderPhoneNumber=disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
 							DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
 
 							String disclosureprovideraddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
-							// prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
 							disclosureprovideraddress=disclosureprovideraddress.toUpperCase()+','+disclosureprovidercity.toUpperCase()+','+disclosureproviderstate.toUpperCase()+','+disclosureproviderzip;
 							DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
 							System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
