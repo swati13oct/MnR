@@ -1,4 +1,4 @@
-@PlanRecommendationEngine 
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
 
   @PRE @EditResponsePage @EditResponsePageValidation
@@ -74,8 +74,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Drug Selection  | <E_Drug Selection>                                                               |
       | Drug Details    | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user return to vpp page using "update" from edit response page
-    #Then user validate UI and API recommendation rankings in results page
 
+    #Then user validate UI and API recommendation rankings in results page
     @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_Zipcode | E_isMultiCounty | E_county | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
@@ -184,12 +184,12 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
-      | AARP |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
+      | AARP |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Vision,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
 
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
-      | UHC  |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
+      | UHC  |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Vision,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
 
   @PRE @EditResponsePage @EditResponseAddProvider
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Edit preference functions with add provider in PRE
@@ -320,7 +320,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   32115 | NO            | Volusia  | MA            | Medicaid     | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
       | AARP |   10004 | NO            | New York | MA            | Medicaid     | Lookup  | sue               | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Doctors, Health Care Premium | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                     |
-      
+
     @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
@@ -359,11 +359,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Preference Option | <E_costPreferenceOption> |
     Then user validate UI and API recommendation rankings in results page
 
-		@regressionAARP
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | AARP |   33143 | NO            | Miami-Dade | PDP           | No             | PDPTOMAPD       | nursing        | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Week,1,YES,NO                                   | No,No,No,No                     | Higher                 |
-      
+
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
@@ -398,12 +398,12 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Preference Option | <E_costPreferenceOption> |
     Then user validate UI and API recommendation rankings in results page
 
-		@regressionAARP
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | AARP |   33143 | NO            | Miami-Dade | PDP           | No             | MA              | nursing        | Lookup    | john          | NO              | No,No,No,No                     | Lower                  |
-      
-   	@regressionUHC
+
+    @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | UHC  |   33143 | NO            | Miami-Dade | PDP           | No             | MA              | nursing        | Lookup    | john          | NO              | No,No,No,No                     | Lower                  |

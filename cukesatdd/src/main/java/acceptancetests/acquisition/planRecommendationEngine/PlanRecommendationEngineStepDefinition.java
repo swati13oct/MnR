@@ -1001,9 +1001,9 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate recommendation section in PRE Widget on VP$")
     public void pre_Widget_recom() {
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
-		planSelectorResultspage.recomPREWidget();
+		preEditpage.recomPREWidget();
     }
 	
 	@Then("^user validate a \"([^\"]*)\" buttons from PRE$")
