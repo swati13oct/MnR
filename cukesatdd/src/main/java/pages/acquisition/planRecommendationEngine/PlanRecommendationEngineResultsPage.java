@@ -481,6 +481,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) p#planType")
 		private WebElement FirstRecommendationSectionPlanType;
 
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
+		private WebElement FirstRecommendationSectionPlanName;
+
 		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) a[class*='plan-details-link']")
 		private WebElement FirstRecommendationSectionViewPlanDetails;
 		
@@ -501,9 +504,6 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		@FindBy(css = ".planNameMinHeight h2")
 		private WebElement planNameinPlanDetailsPage;
-		
-		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
-		private WebElement FirstRecommendationSectionPlanName;
 	
 // External page elements
 	
@@ -563,10 +563,6 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			 }
 		}
 	}
-	
-	
-		
-		
 	
 	
 	public void validateRecommendations(String R1, String rcom1, String R2, String rcom2) {
