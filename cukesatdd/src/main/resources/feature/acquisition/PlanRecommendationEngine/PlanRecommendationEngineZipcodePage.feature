@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
-  @PRE @zipcodepage @siglecounty @F372735 @F511315
+  @PRE @zipcodepage @siglecounty @F372735 @F511315 
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -10,7 +10,7 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
 
-    @FunctionalAARP @F552923 @vbfgate
+    @FunctionalAARP @F552923 @vbfgate @F642675
     Examples: 
       | site | Zipcode | isMultutiCounty |
       | AARP |   90210 | NO              |
