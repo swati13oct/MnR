@@ -137,7 +137,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'pharmacy-info')]/*[contains(@class,'pharmacy-name')]")
 	protected WebElement pharmacyNameLink;
 
-	@FindBy(xpath = "//div[contains(@class,'callus')]")
+	@FindBy(xpath = "//div[contains(@class, 'rightrailwidgets ')]//div[contains(@class,'callus')]")
 	protected WebElement questionsRightRailWidget;
 
 	@FindBy(id = "lang-select")
