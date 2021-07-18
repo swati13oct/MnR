@@ -1,6 +1,6 @@
 @UATRegression @visitorProfile @visitorProfileUpdated
 Feature: 1.08. UAT- Visitor profile 
-
+	
 @sanity
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to Enroll in plans available in Guest Profile. Additional functionality tested: global flyout menu, saved plans, alert tip, external links
     Given user is on campaign external Links page
@@ -55,7 +55,7 @@ Feature: 1.08. UAT- Visitor profile
     | DrugName | <drug4> |
     Then remove drug from the saved profile
     | DrugName | <drug2> |
-    @regressionAARP1234567
+    @regressionAARP
     Examples: 
       | Scenario                                             | externallink                                             |	site	|  drug1 | drug2   | drug3   | drug4   | zipCode |	testPlans	|	planName	|	planType	|	SelectPharmacy	| userName  | password   |
       | Scenario 4 | https://ma.aarpmedicareplans.com/aarp-medicare-advantage | AARP |	Nexium	|	Advair Diskus	|	aripiprazole	|	insulin lispro	|	80243	|	 AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)	|	UnitedHealthcare Dual Complete (HMO D-SNP)	|	Medicare Special Needs Plans	|	UCHEALTH OUTPATIENT PHARMACY CCM	|	uatscenario4 | Password@1 |
@@ -67,14 +67,9 @@ Feature: 1.08. UAT- Visitor profile
 
 
  Scenario Outline: Validate that M&R Prospective client has the ability to Enroll in plans available in Guest Profile. Additional functionality tested: log in, provider search
-  Given user is on campaign external Links page
-      | External Link | <externallink> |
-    When user clicks on Estimate Your Prescription Drug Costs from external page
-    Then the user validates Get Started Page vp
-    	 | Site | <site> |
-   	When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
-    And the user clicks on the shopping cart icon from DCE
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
@@ -225,12 +220,12 @@ Feature: 1.08. UAT- Visitor profile
 		
 	@regressionAARP12345
 	Examples: 
-		|	externallink	| state   | planyear | zipcode | isMultiCounty | county          | userName  | password   | plantype | testPlans                                                                                              |	plantype1	|	testPlans1							|	plantype2	|	testPlans2											|	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-		| https://ma.aarpmedicareplans.com/aarp-medicare-advantage | Alabama | future   |   30342 | NO            | Fulton County 	| telaqo@givmail.com | Password@1 | MAPD     |	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) |	PDP			|	AARP MedicareRx Walgreens (PDP)		|	SNP			|	UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)	|	AARP Medicare Advantage Walgreens (HMO)	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+		|	externallink	|	site	| state   | planyear | zipcode | isMultiCounty | county          | userName  | password   | plantype | testPlans                                                                                              |	plantype1	|	testPlans1							|	plantype2	|	testPlans2											|	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
+		| https://ma.aarpmedicareplans.com/aarp-medicare-advantage |	AARP	| Alabama | future   |   30342 | NO            | Fulton County 	| telaqo@givmail.com | Password@1 | MAPD     |	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) |	PDP			|	AARP MedicareRx Walgreens (PDP)		|	SNP			|	UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)	|	AARP Medicare Advantage Walgreens (HMO)	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 	@regressionUHC 	
 	Examples: 
-		|	externallink	| state   | planyear | zipcode | isMultiCounty | county          | userName  | password   | plantype | testPlans                                                                                              |	plantype1	|	testPlans1							|	plantype2	|	testPlans2											|	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-		|  https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | Alabama | future   |   30342 | NO            | Fulton County 	| telaqo@givmail.com | Password@1 | MAPD     |	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) |	PDP			|	AARP MedicareRx Walgreens (PDP)		|	SNP			|	UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)	|	AARP Medicare Advantage Walgreens (HMO)	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+		|	externallink	|	site	| state   | planyear | zipcode | isMultiCounty | county          | userName  | password   | plantype | testPlans                                                                                              |	plantype1	|	testPlans1							|	plantype2	|	testPlans2											|	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
+		|  https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 |	UHC	| Alabama | future   |   30342 | NO            | Fulton County 	| telaqo@givmail.com | Password@1 | MAPD     |	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) |	PDP			|	AARP MedicareRx Walgreens (PDP)		|	SNP			|	UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)	|	AARP Medicare Advantage Walgreens (HMO)	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 			
  Scenario Outline: Validate that M&R Prospective client has the ability Save plans, sync to authenticated profile, DCE, Provider search
     Given the user is on medicare acquisition site landing page
@@ -263,16 +258,16 @@ Feature: 1.08. UAT- Visitor profile
       | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |
       | UHC  | New York |   10001 | NO              | New York County | uatscenario2 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 	
-			
+
  Scenario Outline: Validate that M&R Prospective client has the ability to Add plan, remove plan, view plan details
-    Given the user is on medicare acquisition site landing page 
-		| Site | <site> |
-	And the user clicks on the shopping cart icon 
-	And the user clicks on the add plans button in the profile 
-	When the user enters zipcode on health plans page 
-		| Zip Code        | <zipcode>       |
-		| County Name     | <county>        |
-		| Is Multi County | <isMultiCounty> |
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add plans button in the profile
+    When the user enters zipcode on health plans page
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
 	Then user validates plan count for all plan types on plan summary page 
 	And the user views the plans of the below plan type 
 		| Plan Type | <plantype> |
@@ -290,14 +285,14 @@ Feature: 1.08. UAT- Visitor profile
     And the user selects plan and navigates back to profile
     |	PlanName	|	<testPlan>	|
     
-        @visitorProfile_AARP @regressionAARP13131
+        @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | planyear |	 testPlans	|	testPlan	|
-      | AARP | King County |   98105 | NO              | New York County | uatscenario1 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   | 	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) 	|	UnitedHealthcare Medicare Advantage Choice (Regional PPO)	|
+      | AARP | King County |   98105 | NO              | New York County | uatscenario1 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   | 	AARP Medicare Advantage Plan 2 (HMO),AARP Medicare Advantage Choice (PPO) 	|	AARP Medicare Advantage Plan 2 (HMO)	|
 
     @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |planyear |	 testPlans	|	testPlan	|
-      | UHC  | King County |   98105 | NO              | New York County | uatscenario1 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |future   | 	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) 	|	UnitedHealthcare Medicare Advantage Choice (Regional PPO)	|
+      | UHC  | King County |   98105 | NO              | New York County | uatscenario1 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |future   | 	AARP Medicare Advantage Plan 2 (HMO),AARP Medicare Advantage Choice (PPO) 	|	AARP Medicare Advantage Plan 2 (HMO)	|
       
-	
+			

@@ -1296,7 +1296,7 @@ public class VisitorProfilePage extends UhcDriver {
      * Back to VPP
      */
 	
-	@FindBy(xpath = "//*[contains(dlassetid(),'pd_lnk_1')]")
+	@FindBy(xpath = "//*[contains(@dlassetid,'pd_lnk_1')]")
 	private WebElement backtoProfile;
 
     public void selectPlan(String planName) {
@@ -1308,6 +1308,7 @@ public class VisitorProfilePage extends UhcDriver {
 
             waitForPageLoadSafari();
             CommonUtility.checkPageIsReadyNew(driver);
+            waitforElementNew(backtoProfile);
             backtoProfile.click();
            
     }
