@@ -1334,6 +1334,21 @@ public class VisitorProfilePage extends UhcDriver {
 			return null;
 		}
     }
+    
+	@FindBy(xpath = "//button[contains(@dtmname, 'Yes Remove')]")
+	public WebElement DeleteYesBtn;
+
+	public void deleteDrugProfile(String deleteDrug) {
+		 waitForPageLoadSafari();
+         CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Drug to be removed : " + deleteDrug);
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
+		waitforElementNew(removeLink);
+		//validateNew(removeLink);
+		jsClickNew(removeLink);
+	//	validateNew(DeleteYesBtn);
+		jsClickNew(DeleteYesBtn);
+	}
  }
 
 

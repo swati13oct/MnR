@@ -651,7 +651,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public DrugSummaryPage validateSelectPharmacyPage() {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
-				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
+				&& validateNew(preferredMailPharmacy)/* && validateNew(pharmacyListSection)*/
 				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
 			return new DrugSummaryPage(driver);

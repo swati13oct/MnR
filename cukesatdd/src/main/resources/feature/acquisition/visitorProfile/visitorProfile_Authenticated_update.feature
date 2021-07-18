@@ -46,15 +46,15 @@ Feature: 1.08. UAT- Visitor profile
     Then the user edits supply length to three months for following drug
     | EditDrug | <drug1> |
     And the user clicks on the shopping cart icon from DCE
-    And the user views the drugs added
+    #And the user views the drugs added
     Then remove drug from the saved profile
     | DrugName | <drug1> |
-    Then remove drug from the saved profile
-    | DrugName | <drug2> |
     Then remove drug from the saved profile
     | DrugName | <drug3> |
     Then remove drug from the saved profile
     | DrugName | <drug4> |
+    Then remove drug from the saved profile
+    | DrugName | <drug2> |
     @regressionAARP1234567
     Examples: 
       | Scenario                                             | externallink                                             |	site	|  drug1 | drug2   | drug3   | drug4   | zipCode |	testPlans	|	planName	|	planType	|	SelectPharmacy	| userName  | password   |
@@ -290,7 +290,7 @@ Feature: 1.08. UAT- Visitor profile
     And the user selects plan and navigates back to profile
     |	PlanName	|	<testPlan>	|
     
-        @visitorProfile_AARP @regressionAARP
+        @visitorProfile_AARP @regressionAARP13131
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | planyear |	 testPlans	|	testPlan	|
       | AARP | King County |   98105 | NO              | New York County | uatscenario1 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   | 	UnitedHealthcare Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Walgreens (HMO) 	|	UnitedHealthcare Medicare Advantage Choice (Regional PPO)	|

@@ -3085,13 +3085,12 @@ public class DCEStepDefinitionAARP {
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		
 		String drugName = memberAttributesMap.get("DrugName");
-		
-		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
-		buildDrugList.deleteDrugProfile(drugName);
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.deleteDrugProfile(drugName);
 		//button[contains(@aria-label,"Edit ")]
 		
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		
 	}
 

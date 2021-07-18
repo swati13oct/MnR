@@ -468,14 +468,5 @@ public class BuildYourDrugList extends UhcDriver {
 		return false;
 	}
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'Yes Remove')]")
-	public WebElement DeleteYesBtn;
 
-	public void deleteDrugProfile(String deleteDrug) {
-		System.out.println("Drug to be removed : " + deleteDrug);
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
-		jsClickNew(removeLink);
-		validateNew(ConfirmDeleteYesBtn);
-		jsClickNew(ConfirmDeleteYesBtn);
-	}
 }
