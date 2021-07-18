@@ -29,7 +29,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
+//	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
+	@FindBy(css = "#adddrug")
 	public WebElement addDrugButton;
 
 	@FindBy(css = "#previousButton")
@@ -62,11 +63,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public List<WebElement> AutoCompleteitems;
 
 	// @FindBy(xpath = "//*[@id='drugPopHeading']")
-	@FindBy(id = "modal-label")
-	public WebElement TellUsABoutHeader;
+//	@FindBy(id = "modal-label")
+	@FindBy(css = "div[class*='tellusyourdrugModal']  #modal-label")
+	public WebElement TellUsAboutHeader;
 
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close ng-tns-c35-8')]")
-	public WebElement TellUsABoutCloseBtn;
+	public WebElement TellUsAboutCloseBtn;
 
 	// uhc-menu-item
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
@@ -93,6 +95,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
 	public WebElement returnToCompareBtn;
+	
+	@FindBy(css = "div[class*='d-block'] button[dtmname$='remove drug:yes']")
+	private WebElement removeDrugYesButton;
+	
+	@FindBy(css = "div[class*='d-block'] button[dtmname$='remove drug:no']")
+	private WebElement removeDrugNoButton;
 
 	public BuildYourDrugListMobile(WebDriver driver) {
 		super(driver);
@@ -169,7 +177,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile verifyReviewDrugCostPage() {
@@ -232,8 +241,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(AutoCompleteList);
 		WebElement Drug = driver.findElement(By.xpath("//*[@id='" + drugName + "']"));
 		jsClickNew(Drug);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
-		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 20);
+		if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
@@ -278,8 +287,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		threadsleep(2000);
 		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
-		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+		// CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 30);
+		if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
@@ -312,8 +321,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		threadsleep(2000);
 		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
-		if (validateNew(TellUsABoutHeader)) {
+		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 30);
+		if (validateNew(TellUsAboutHeader)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
@@ -398,6 +407,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		System.out.println("Drug to be removed : " + deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
 		jsClickNew(removeLink);
+		
+		validateNew(removeDrugYesButton, 10);
+		jsClickNew(removeDrugYesButton);
 
 	}
 
@@ -461,8 +473,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public TellUsAboutDrugMobile EditDrug(String drugName) {
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + drugName + "')]"));
 		jsClickNew(removeLink);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
-		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 20);
+		if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
@@ -511,8 +523,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			threadsleep(2000);
 			waitForPageLoadSafari();
 			CommonUtility.checkPageIsReadyNew(driver);
-			CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
-			if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+			CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 20);
+			if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {
 				validateNew(AddDrugBtn);
 				jsClickNew(AddDrugBtn);
 				waitForPageLoadSafari();
@@ -555,12 +567,15 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement reviewDrugCost;
 	
 	public DrugSummaryPageMobile navigateToDrugSummaryPage() {
-		validateNew(reviewDrugCost);
-		jsClickNew(reviewDrugCost);
+		/*validateNew(reviewDrugCost);
+		jsClickNew(reviewDrugCost);*/
+		
+		validateNew(reviewDrugCostButtonHeader);
+		jsClickNew(reviewDrugCostButtonHeader);
+		
 		waitForPageLoadSafari();
 		threadsleep(2000);
 		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		} else {

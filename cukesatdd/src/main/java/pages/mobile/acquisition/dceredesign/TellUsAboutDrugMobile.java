@@ -13,11 +13,13 @@ import atdd.framework.UhcDriver;
 public class TellUsAboutDrugMobile extends UhcDriver {
 
 
-	@FindBy(id="modal-label")
-	public WebElement TellUsABoutHeader;
+//	@FindBy(id="modal-label")
+	@FindBy(css = "div[class*='tellusyourdrugModal']  #modal-label")
+	public WebElement TellUsAboutHeader;
 	
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
-	public WebElement TellUsABoutCloseBtn;
+//	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	@FindBy(css = "div[class*='tellusyourdrugModal']  #cancelicon")
+	public WebElement TellUsAboutCloseBtn;
 
 	/*
 	 * @FindBy(xpath =
@@ -31,7 +33,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+//	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+	@FindBy(css = "button[dtmname$='add to drug list']")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -56,7 +59,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	public WebElement QuantityTxt;
 	
 //	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
-	@FindBy(id="selectdosage")
+	@FindBy(css = "#selectdosage")
 	public WebElement FrequencyDrpDwn;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
@@ -70,8 +73,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(TellUsABoutHeader);
-		validateNew(TellUsABoutCloseBtn);
+		validateNew(TellUsAboutHeader);
+		validateNew(TellUsAboutCloseBtn);
 		scrollToView(AddDrugBtn);
 		
 		validateNew(supplyLengthDrpDwn);

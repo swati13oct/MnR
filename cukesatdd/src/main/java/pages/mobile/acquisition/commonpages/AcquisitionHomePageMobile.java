@@ -3456,10 +3456,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+//	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	@FindBy(css = "[class*='enrollmentPopup'] > #modal")
 	private WebElement savedPlansPopup;
 
-	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+//	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	@FindBy(css = "[class*='enrollmentPopup'] #cancelicon")
 	private WebElement savedPlansPopupCloseIcon;
 
 	/**
@@ -3476,9 +3478,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Saved Plans modal not displayed");
 		}
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		// guestProfileLink.click();
-		jsClickNew(guestProfileLink);
+//		jsClickNew(guestProfileLink);
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("profile")) {
 			System.out.println("Navigated to Visitor profile page");
