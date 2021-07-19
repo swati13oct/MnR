@@ -15,6 +15,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
     Then agent validates information cleared in session storge
       | ZIP | <PlanCompareZIP> |
 
+		@vbfgate
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
