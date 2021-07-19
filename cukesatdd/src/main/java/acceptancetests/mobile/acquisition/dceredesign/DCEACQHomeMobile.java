@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -75,14 +76,38 @@ public class DCEACQHomeMobile {
 
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		AppiumDriver wd = getLoginScenario().getMobileDriver();
+		/*AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openPRE();
 
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);*/
+		
+		
+		
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String site = memberAttributesMap.get("Site");
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, null);
+		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
+		else
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
+
+		aquisitionhomepage.validateSubtitle();
 	}
 
 	@Then("^the user clicks on Edit button on Drug List page on DCE$")

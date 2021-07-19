@@ -61,12 +61,12 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     @agentFlowEBRCUlayer @UATRegression @regressionAARP @vbfGate @sanity
     Examples: 
       | scenario           | zipcode | site |
-      | E2E Scenario 3_AMP |   90002 | AARP |
+      | E2E Scenario 3_AMP |   10001 | AARP |
 
     @agentFlowEBRCBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario           | zipcode | site |
-      | E2E Scenario 3_UMS |   90002 | UHC  |
+      | E2E Scenario 3_UMS |   10001 | UHC  |
 
   Scenario Outline: <scenario> Verify request an appointment for Medsupp <site> site flows
     Given the user is on medicare acquisition site landing page

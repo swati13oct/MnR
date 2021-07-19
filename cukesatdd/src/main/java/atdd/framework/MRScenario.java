@@ -136,8 +136,7 @@ public class MRScenario {
 
 	public final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
 	public final String RealDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
-	public final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY
-			+ "@ondemand.saucelabs.com:80/wd/hub";
+	public final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
 	
 	private static final ThreadLocal<WeakHashMap<String, Object>> scenarioObjectMap = new ThreadLocal<WeakHashMap<String, Object>>() {
@@ -786,7 +785,7 @@ public class MRScenario {
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
-		capabilities.setCapability("locationContextEnabled", false);
+//		capabilities.setCapability("locationContextEnabled", "false");
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10800);
@@ -808,12 +807,17 @@ public class MRScenario {
 
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
+				capabilities.setCapability("enablePerformanceLogging", true);
 				browserName="Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 				threadSafeMobileDriver.set(new AndroidDriver(new URL(SauceLabsURL), capabilities));
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
+				capabilities.setCapability("autoAcceptAlerts", "true");
+				capabilities.setCapability("safariAllowPopups", "true");
+				capabilities.setCapability("locationServicesEnabled", "true");
+				capabilities.setCapability("locationServicesAuthorized", "true");
 				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));

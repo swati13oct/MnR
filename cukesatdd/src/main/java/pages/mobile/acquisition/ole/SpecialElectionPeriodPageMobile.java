@@ -440,15 +440,16 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver {
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
 					if(validate(dataTextBx))
-						sendkeysMobile(dataTextBx, currentOptionData);
-//						dataTextBx.sendKeys(currentOptionData);
+//						sendkeysMobile(dataTextBx, currentOptionData);
+						dataTextBx.sendKeys(currentOptionData);
 				} 
 				catch (Exception e) {
 				}
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
 					if(validate(dataTextBx))
-						sendkeysMobile(dataTextBx, currentOptionData);
+//						sendkeysMobile(dataTextBx, currentOptionData);
+						dataTextBx.sendKeys(currentOptionData);
 				} catch (Exception e) {
 					System.out.println("No additional data required for Option selected");
 				}

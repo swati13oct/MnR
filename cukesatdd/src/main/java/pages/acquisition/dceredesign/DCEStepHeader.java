@@ -121,6 +121,7 @@ public class DCEStepHeader extends UhcDriver {
 		validateNew(StepHeader_Step2);
 		jsClickNew(StepHeader_Step2);
 		waitForPageLoadSafari();
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
 		if (validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
 			return new BuildYourDrugList(driver);
@@ -129,7 +130,7 @@ public class DCEStepHeader extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	public DrugDetailsPage ClickStep3_NavigateDrugDetailsPage() {
@@ -137,6 +138,7 @@ public class DCEStepHeader extends UhcDriver {
 		jsClickNew(StepHeader_Step3);
 		waitForPageLoadSafari();
 		threadsleep(2000);
+		pageloadcomplete();
 		//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk))
 		{
@@ -147,7 +149,7 @@ public class DCEStepHeader extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPage ClickStep3_NavigateDrugSummaryPage() {
@@ -155,6 +157,7 @@ public class DCEStepHeader extends UhcDriver {
 		jsClickNew(StepHeader_Step3);
 		waitForPageLoadSafari();
 		threadsleep(2000);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);

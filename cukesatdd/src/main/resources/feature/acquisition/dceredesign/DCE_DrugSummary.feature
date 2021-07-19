@@ -1,10 +1,10 @@
-@dce_redesign_Drug_summary_AARP @dce
-Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
+@dce_redesign_Drug_summary @dce
+Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
 
   ############# DCE Summary Regression Scenario #################
-  ############# Validate - Summary Page validation, Switch to generic, Change Pharmacy, Covered Drugs view for Not Covered Pharmacy
+  ############# Validate - Summary Page validation, Switch to generic, Edit Drug Link, Change Pharmacy, Covered Drugs view for Not Covered Pharmacy
   @dce_DrugSummary_Page
-  Scenario Outline: Test to verify the Drug summary page on <site> site - Switch to generic, Change Pharmacy and Not Covered Pharmacy Covered Drug validation
+  Scenario Outline: Test to verify the Drug summary page on <site> site - Switch to generic, Edit Drug Link, Change Pharmacy and Not Covered Pharmacy Covered Drug validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -26,6 +26,16 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
       | Brand Drug   | <drug1>        |
       | Generic Drug | <genericDrug1> |
+    And user click on View Drug Pricing Modal
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
+    And user click on View Drug Pricing Modal
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user deletes the following drug from Drug list
+      | DrugName | <drug3> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
     And user click on PDP plan to view drug pricing
     Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
       | Brand Drug   | <drug2>        |
@@ -55,15 +65,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
-    @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression 
+    @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
     @dce_DrugSummary_Page_UHC @regressionUHC @sanity
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   ############# END - DCE Summary Regression Scenario #################
   @dceRedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
@@ -104,7 +114,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | NoResultsMessage | <message> |
     When user search with incorrect zipcode
       | ZipCode | <zipCode2> |
-    Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
+    Then error message "Please enter a valid ZIP code" should be displayed on change pharmacy modal
 
     @dceRedesign_ChangePharmacyModal_AARP @regressionAARP
     Examples: 

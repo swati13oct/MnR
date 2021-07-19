@@ -38,7 +38,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(id = "selectedState")
 	private WebElement state;
 	
-	@FindBy(name = "reppage")
+	@FindBy(xpath = "//*[@id='targetContainer']/div[1]/div[2]/p")
 	private WebElement viewRepresentativePage;
 
 //	@FindBy(xpath = "(//div[@id='searchResultDiv'][contains(@style,'display: block;')]//*[contains(@class,'agentname')])[1]")

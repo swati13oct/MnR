@@ -133,8 +133,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 
 		// note: if email is successfully sent, deepLink info should be available, save
 		// it for later use
-		// String deepLink = util.getEmailDeepLink();
-		// getLoginScenario().saveBean(PageConstants.COMPARE_PAGE_DEEPLINK, deepLink);
+		String deepLink = util.getEmailDeepLink(wDriver);
+		getLoginScenario().saveBean(PageConstants.COMPARE_PAGE_DEEPLINK, deepLink);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
 	}
 
@@ -255,7 +255,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 
 		// note: if email is successfully sent, deepLink info should be available, save
 		// it for later use
-		String deepLink = util.getEmailDeepLink();
+		String deepLink = util.getEmailDeepLink(wDriver);
 		System.out.println("TEST - email deepLink=" + deepLink);
 		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK, deepLink);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -276,7 +276,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		HashMap<String, String> origPage = (HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
 
 		// note: use new driver to achieve clear cache
-		WebDriver newTestDriver = getLoginScenario().getWebDriverNew();
+		WebDriver newTestDriver = getLoginScenario().getMobileDriver();
 		newTestDriver.get(deepLink);
 		commonUtils.checkPageIsReady(newTestDriver);
 		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
@@ -355,7 +355,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 
 		// note: if email is successfully sent, deepLink info should be available, save
 		// it for later use
-		String deepLinkStr = util.getEmailDeepLink();
+		String deepLinkStr = util.getEmailDeepLink(wDriver);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -380,7 +380,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		HashMap<String, Integer> origPage = (HashMap<String, Integer>) getLoginScenario().getBean(infoMapStringId);
 
 		// note: use new driver to achieve clear cache
-		WebDriver newTestDriver = getLoginScenario().getWebDriverNew();
+		WebDriver newTestDriver = getLoginScenario().getMobileDriver();
 		newTestDriver.get(deepLink);
 		commonUtils.checkPageIsReady(newTestDriver);
 		// tbd wDriver.navigate().refresh(); //note: need this to trick the original

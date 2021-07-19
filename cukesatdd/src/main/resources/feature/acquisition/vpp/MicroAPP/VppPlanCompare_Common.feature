@@ -198,7 +198,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page
     And click on Edit your doctors link and Navigate to Rally page
     When user selects a provider from medical group and retuns to plan compare page
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page
+    Then verify Your doctors is loaded with all added doctor summary on Plan Compare page
 
     @vppPlanCompareCommon_AARP02 @regressionAARP
     Examples: 
@@ -229,9 +229,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then verify Your doctors is loaded with doctor summary on Plan Compare page
     And click on Edit your doctors link and Navigate to Rally page
     When user selects a provider from medical group and retuns to plan compare page
-    Then verify Your doctors is loaded with doctor summary on Plan Compare page
+    Then verify Your doctors is loaded with all added doctor summary on Plan Compare page
 
-    @vppPlanCompareCommon_AARP02 @regressionAARP
+    @vppPlanCompareCommon_AARP02 @regressionAARP 
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |

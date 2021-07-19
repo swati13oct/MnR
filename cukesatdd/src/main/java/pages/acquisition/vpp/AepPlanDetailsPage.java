@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
@@ -338,10 +338,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return validation_Flag;
 	}
 	
-	public WeakHashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
+	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
-		WeakHashMap<Boolean, String> comparedResult = new WeakHashMap<Boolean, String>();
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
 		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
 			columnName = columnName.replace(" Zero", "");
@@ -588,8 +588,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 	}
 
-	public WeakHashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
-		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
+		HashMap<String, String> result=new HashMap<String, String>();
 
 		for (int i = 0; i < 5; i++) {
 			try {
@@ -613,10 +613,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return result;
 	}
 
-	public WeakHashMap<String, String> collectInfoVppPlanDetailPg() {
+	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
-		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
+		HashMap<String, String> result=new HashMap<String, String>();
 		
 		result.put("Plan Name", planName.getText());
 		String key="Total Tabs";
@@ -626,6 +626,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
 			listOfTabHeaders.get(tab).click();
+			sleepBySec(5);
 			int tabIndex=(tab+1);
 			CommonUtility.checkPageIsReady(driver);
 

@@ -27,9 +27,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
+//import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -230,28 +232,23 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 
-		/*
-		 * List<String> noteList=new ArrayList<String>(); noteList.add(""); noteList.
-		 * add("===== TEST NOTE ================================================");
-		 * String testSiteUrl=(String)
-		 * getLoginScenario().getBean(PageConstants.TEST_SITE_URL); String
-		 * currentEnvTime=pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
-		 * noteList.add("test run at stage time ="+currentEnvTime);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME,
-		 * currentEnvTime); String[] tmpDateAndTime=currentEnvTime.split(" "); String[]
-		 * tmpDate=tmpDateAndTime[0].split("/"); String
-		 * envTimeYear=tmpDate[tmpDate.length-1];
-		 * System.out.println("TEST - sysTimeYear="+envTimeYear);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR,
-		 * envTimeYear);
-		 */
-		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		List<String> noteList = new ArrayList<String>();
+		noteList.add("");
+		noteList.add("===== TEST NOTE ================================================");
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		noteList.add("test run at stage time =" + currentEnvTime);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime = currentEnvTime.split(" ");
+		String[] tmpDate = tmpDateAndTime[0].split("/");
+		String envTimeYear = tmpDate[tmpDate.length - 1];
+		System.out.println("TEST - sysTimeYear=" + envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 
-		/*
-		 * noteList.addAll(testNote);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE,
-		 * noteList);
-		 */
+		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 
 	}
 
@@ -375,19 +372,19 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
 		Map<String, String> inputDataMap = parseInputArguments(inputData);
 		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		AssertJUnit.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. \nActual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Walgreens plan").trim();
-		AssertJUnit.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
+		Assertion.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasWalgreens = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
-		AssertJUnit.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
@@ -419,8 +416,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void verifyMapSectionContent() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		// pharmacySearchPage.validateMapSectionContent();
-		System.out.println("***Skipping step to verify map section on Mobile as we cannot handle maps on Saucelabs***");
+		 pharmacySearchPage.validateMapSectionContent();
 	}
 
 	/**
@@ -431,14 +427,10 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void viewsShowOnMapResult() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*
-		 * pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		 * Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
-		 * pharmacySearchPage != null);
-		 * getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
-		 * pharmacySearchPage);
-		 */System.out.println(
-				"***Skipping step to Validate show on map section on Mobile as we cannot handle maps on Saucelabs***");
+
+		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
+		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
 
 	@Then("^the user validate get direction link$")
@@ -474,9 +466,9 @@ public class PharmacyLocatorStepDefinitionMobile {
 
 	@And("^user click on return to home on drug summary in AARP site$")
 	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
-		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		// drugSummaryPage.clickOnReturnToHome();
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
+		drugSummaryPage.clickOnReturnToHome();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
@@ -564,21 +556,6 @@ public class PharmacyLocatorStepDefinitionMobile {
 		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
 
-	@Then("^user should be navigated to the previous page$")
-	public void user_should_be_navigated_to_the_previous_page(DataTable givenAttributes) throws Throwable {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String path = memberAttributesMap.get("PagePath");
-		aquisitionhomepage.validatePageNavigated(path);
-	}
 
 	@And("^the user validates header section content$")
 	public void verifyHeaderSection1() {

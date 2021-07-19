@@ -1504,7 +1504,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
@@ -1513,8 +1513,9 @@ public class PlanDetailsPage extends UhcDriver {
 	public DrugDetailsPage clickLearnMore() {
 		validateNew(learnMore);
 		jsClickNew(learnMore);
+		pageloadcomplete();
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPage(driver);
 		} else {
