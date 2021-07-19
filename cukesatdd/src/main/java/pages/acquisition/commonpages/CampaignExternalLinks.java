@@ -20,6 +20,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class CampaignExternalLinks extends UhcDriver {
@@ -1463,5 +1464,279 @@ public class CampaignExternalLinks extends UhcDriver {
 		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+
+}
+
+	//@FindBy(xpath = "//span[contains(text(),'Find Plans')]")
+	
+	@FindBy(xpath ="(//*[@class='enrollSection'])[1]/div/button")
+	private WebElement viewPlanButton;
+	
+public void clickViewResults() {
+	//System.out.println("Validating Results UI Page: ");
+	//pageloadcomplete();
+	//waitForPageLoadSafari();
+	//validate(planZipInfo,60);
+	//waitforElementInvisibilityInTime(planLoaderscreen,60);
+	validate(viewPlanButton);
+	jsClickNew(viewPlanButton);
+	
+}
+
+@FindBy(id = "backToPlanSummaryTop")
+private WebElement clickBackToPlans;
+
+@FindBy(xpath= "//*[@id='selectCounty']/p[1]/a")
+private WebElement selectCounty;
+
+public CampaignExternalLinks backToPlans() {
+	validate(clickBackToPlans);
+	jsClickNew(clickBackToPlans);
+	jsClickNew(selectCounty);
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("plan-summary")) {
+		return new CampaignExternalLinks(driver);
+		
 	}
+	return null;
+}
+public void bypassABTest() {
+
+	if(MRScenario.environment.equalsIgnoreCase("Prod") && validate(clickBackToPlans)) {
+		ComparePlansPage planComparePage = new ComparePlansPage(driver);
+		planComparePage.backToVPPPage();
+		List<WebElement> compareCheckBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-box')]//label"));;
+
+		for(int i = 1; i<=compareCheckBoxes.size(); i++) {
+			jsClickNew(driver.findElement(By.xpath("(//div[contains(@class,'compare-box')]//label)["+i+"]")));
+		}
+	}
+}
+
+@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
+private WebElement pdpPlansViewLink;
+
+
+@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+private WebElement maPlansViewLink;
+
+@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
+private WebElement snpPlansViewLink;
+
+@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
+private WebElement planListContainer;
+@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-open']/following-sibling::a")
+private WebElement msPlansViewLink;
+
+@FindBy(id = "msVppZipCode")
+private WebElement medSuppZipCode;
+
+
+public void viewPlanSummary(String planType) {
+	
+	if (planType.equalsIgnoreCase("PDP")) {
+		// sleepBySec(2);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
+		CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+		// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
+		// from
+		// waitForPageLoadNew but didn't work
+		jsClickNew(pdpPlansViewLink);
+		System.out.println("PDP Plan Type Clicked");
+		waitForPageLoadSafari();
+		bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+		CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+	} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+		CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+
+		jsClickNew(maPlansViewLink);
+		// sleepBySec(2);
+		waitForPageLoadSafari();
+		bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+		CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+	} else if (planType.equalsIgnoreCase("MS")) {
+		CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+		// sleepBySec(2);
+		jsClickNew(msPlansViewLink);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+		/*
+		 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
+		 * medSuppPlanList.get(0), 30);
+		 */
+	} else if (planType.equalsIgnoreCase("SNP")) {
+		// sleepBySec(5);
+		CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
+		jsClickNew(snpPlansViewLink);
+		waitForPageLoadSafari();
+		bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+		CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+
+	}
+}
+	
+public String getPlanPremium(String PlanName, String planType) {
+	System.out.println("Plan Name is : " + PlanName);
+	WebElement premiumForPlan = null;
+	if (planType.equalsIgnoreCase("PDP")) {
+		premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+				+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+	} else
+		premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+				+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+	CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+	String PlanPremium = premiumForPlan.getText();
+
+	System.out.println("Premium for Plan : " + PlanPremium);
+	return PlanPremium;
+}
+
+public void clickOnViewMoreForPlan(String planName) {
+
+	List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+			+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+
+	if (viewMoreLink.size() > 0) // if it finds the that the View More is shown then it will click on it
+		viewMoreLink.get(0).click();
+
+}
+
+public void openAndValidate(String planType) {
+	if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+		checkModelPopup(driver, 45);
+	/*else
+		checkModelPopup(driver, 10);*/
+
+	// note: setting the implicit wait to 0 as it fails because of TimeoutException
+	// while finding List<WebElement> of the different tabs on Plan detail page
+	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	if (planType.equalsIgnoreCase("MA")) {
+		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+		Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+
+	} else if (planType.equalsIgnoreCase("MAPD")) {
+		CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+		Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
+	} else if (planType.equalsIgnoreCase("PDP")) {
+		CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+		Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+	} else if (planType.equalsIgnoreCase("SNP")) {
+		CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+		Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+				"Medical Benefit tab not displayed for SNP plans");
+	} /* Added for SNP as well */
+	validateNew(planCostsTab);
+	// note: setting the implicit wait back to default value - 10
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+}
+
+@FindBy(id = "medicalbenefits")
+private List<WebElement> medBenefitsTab;
+@FindBy(id = "prescriptiondrug")
+private List<WebElement> presDrugTab;
+@FindBy(id = "plancosts")
+private WebElement planCostsTab;
+
+@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+// contains(@class,'active')]")
+private List<WebElement> presDrugTab1;
+
+@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+private List<WebElement> presDrugTab2;
+
+public CampaignExternalLinks(WebDriver driver, String planType) {
+	super(driver);
+	PageFactory.initElements(driver, this);
+	openAndValidate(planType);
+}
+
+public CampaignExternalLinks navigateToPlanDetails(String planName, String planType) {
+	CommonUtility.checkPageIsReadyNew(driver);
+
+	if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+		WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+		CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+		jsClickNew(MAmoreDetailsLink);
+		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+	} else if (planType.equalsIgnoreCase("PDP")) {
+		WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+		CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+		jsClickNew(PDPmoreDetailsLink);
+		System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
+
+	} else if (planType.equalsIgnoreCase("SNP")) {
+		WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+		CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+		jsClickNew(SNPmoreDetailsLink);
+		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+	}
+	CommonUtility.checkPageIsReadyNew(driver);
+	waitForPageLoadSafari();
+	return new CampaignExternalLinks(driver, planType);
+
+}
+
+public String GetTFNforPlanType() {
+	if (validate(RightRail_TFN)) {
+		System.out.println("TFN is displayed in Right Rail");
+		String TFN_Number = RightRail_TFN.getText();
+		return TFN_Number;
+	}
+	System.out.println("TFN is not Displayed for PlanType in VPP page");
+
+	return null;
+}
+@FindBy(xpath = "//*[@class='tel ng-binding']")
+private WebElement RightRail_TFN;
+
+
+@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+private WebElement EnrollinPlan;
+
+public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	System.out.println("Enroll in Plan for Plan : " + planName);
+	try {
+		if (validate(EnrollinPlan))
+			System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	} catch (Exception e) {
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+
+	jsClickNew(EnrollinPlan);
+
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	// if (driver.getCurrentUrl().contains("enrollment"))
+	if (driver.getCurrentUrl().contains("welcome")) {
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+}
+
 }
