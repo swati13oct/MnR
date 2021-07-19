@@ -1860,8 +1860,8 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void validateBreadCrumb(String breadCrumb) {
-		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
-				breaCrumbLink.getText().trim().equals(breadCrumb));
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed - "+LinktoExitScenario.getText(),
+				LinktoExitScenario.getText().trim().equals(breadCrumb));
 	}
 
 	public void verifyBackToProfileBtnDisplayed() {

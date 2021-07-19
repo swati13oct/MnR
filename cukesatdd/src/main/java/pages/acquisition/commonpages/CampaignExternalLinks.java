@@ -4,10 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -16,6 +13,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import org.testng.Assert;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -59,7 +57,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
-
+	
 	@FindBy(xpath = "//a[contains(@href,'/medicare-education.html')]")
 	private WebElement LearnAboutMedicareBtn;
 
@@ -150,6 +148,186 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement zipcodeonpage;
 	
 	
+	//Locators for Scenario 10 - New LPM
+
+	@FindBy(xpath = "//*[contains(@href,'#modal--location-change')]")
+	private WebElement LocationLink;
+
+
+	@FindBy(xpath = "//button[contains(text(),'Change Location')]")
+	private WebElement LocationBtn;
+
+
+	@FindBy(xpath = "//p[contains(text(),'Please enter valid zip code')]")
+	private WebElement EnterValidZipCode;
+
+	@FindBy(xpath = "//input[@class='c-input js-state-zipcode']")
+	private WebElement InputZipCode;
+
+
+	@FindBy(xpath = "(//label[@class='c-input-control__label'])[1]")
+	private WebElement FirstZipCode;
+
+
+	@FindBy(xpath ="//button[contains(@id,'drawer')]")
+	private WebElement RequestAnAppointMent;
+
+
+	@FindBy(xpath ="//button[@type='submit']")
+	private WebElement ReqAppsubmitBtn;
+
+
+	@FindBy(xpath ="//p[@id='field-fname-error-msg']")
+	private WebElement FirstNameErroMsg;
+
+//Enter a first name and must contain only letters, spaces, hyphens and apostrophes
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-fname']")
+	private WebElement FirstName;
+
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-lname']")
+	private WebElement LastName;
+
+	@FindBy(xpath ="//p[@id='field-lname-error-msg']")
+	private WebElement LastNameErroMsg;
+
+//Enter a last name and must contain only letters, spaces, hyphens and apostrophes
+
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-lname pac-target-input']")
+	private WebElement Address1Input;
+
+	@FindBy(xpath ="//p[@id='field-address1-error-msg']")
+	private WebElement AddressErroMsg;
+	
+//Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space
+
+	@FindBy(xpath ="//input[@id='newsletter-input5']")
+	private WebElement CityInput;
+
+	@FindBy(xpath ="//p[@id='field-city-error-msg']")
+	private WebElement CityErroMsg;
+
+
+	@FindBy(xpath ="//a[contains(text(),'Find Plans in Your Area')]")
+	private WebElement FindPlanInyourArea;
+
+	@FindBy(xpath ="(//a[@class='tel ng-binding'])[1]")
+	private WebElement FindPlanTFN;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find plans']")
+	private WebElement FindPlansLink;
+
+	@FindBy(xpath ="//a[contains(text(),'Find Your Doctor')]")
+	private WebElement FindADoctor;
+
+	@FindBy(xpath ="//span[contains(text(),'Privacy Policy')]")
+	private WebElement PrivacyPolicy;
+
+
+	@FindBy(xpath ="//span[@class='heading-1']")
+	private WebElement Heading;
+
+	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
+	private WebElement Accessibility;
+
+	@FindBy(xpath ="//input[@id='zipcode']")
+	private WebElement zip;
+
+	@FindBy(xpath ="//input[@id='location']")
+	private WebElement location;
+	
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Drug cost estimator')]")
+	private WebElement dceExternalLinktakeadvantage;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Prescription Drug Costs')]")
+	private WebElement dceexternallinkMA;
+
+
+//Enter a city that only contains non-numeric characters, apostrophe , hyphen or space
+
+	@FindBy(xpath ="//select[@id='newsletter-input6']")
+	private WebElement SelectState;
+
+	@FindBy(xpath ="//p[@id='field-state-error-msg']")
+	private WebElement SelectStateErroMsg;
+
+//Select a State
+
+	@FindBy(xpath ="//input[@id='newsletter-input9']")
+	private WebElement phoneInput;
+
+	@FindBy(xpath ="//p[@id='field-phoneNo-error-msg']")
+	private WebElement PhoneErroMsg;
+
+
+
+
+//Please enter  10 digit valid Phone Number
+
+
+	@FindBy(xpath ="//input[@id='newsletter-input8']")
+	private WebElement EmailInput;
+
+	@FindBy(xpath ="//p[@id='field-ename-error-msg']")
+	private WebElement EmailErroMsg;
+
+//Please enter a valid email address
+
+
+	@FindBy(xpath ="//input[@id='newsletter-input7']")
+	private WebElement ZipInput;
+
+	@FindBy(xpath ="//p[@id='field-zipCode-error-msg']")
+	private WebElement ZipErroMsg;
+
+//Enter a valid 5-digit ZIP code in the format 12345
+
+
+	@FindBy(xpath = "(//span[contains(text(),'View Plans & Pricing')])[1]")
+	private WebElement viewplanspricing;
+	
+	@FindBy(xpath = "//div[@id='zipErrorMessage-0']")
+	private WebElement ziperrorMsg;
+
+	@FindBy(xpath ="//input[@name='zipcodemeded-0']")
+	private WebElement Zipinput;
+	
+	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
+	private WebElement tfn;
+
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
+	private WebElement clickFindPlansinyourArea;
+
+	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
+	private WebElement GetMoreInformation;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find Plans and Pricing']")
+	private WebElement findPlansPricingtakeadvantage;
+	
+	
+	@FindBy(xpath = "//a[@data-asset-name='View Plans & Pricing ']")
+	private WebElement viewPricingBtn;
+	
+	@FindBy(xpath = "//span[@class='sam__button__text desktop-tfn-text']")
+	private WebElement samTfn;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Estimate Your Prescription Drug Costs ']")
+	private WebElement PrescriptiondrugcostsBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	private WebElement EstimateDrugCost;
+
+	
+	@FindBy(xpath = "//a[contains(text(), 'Start Now')]")
+	private WebElement StartNowBtn;
+	
+	
+			
+			@FindBy(xpath = "(//a[contains(text(), 'View Plans & Pricing')])[2]")
+			private WebElement viewPricingBtn2;
+			
 	public String parentWindow;
 	
 	public CampaignExternalLinks(WebDriver driver) {
@@ -579,18 +757,33 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	
 	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
+		threadsleep(5);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		threadsleep(5);
+		
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
 		} else if (driver.getCurrentUrl().contains("ma.uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} else
+		} else if (driver.getCurrentUrl().contains("aarpmedicareplans.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("stage-aarpmedicareplans.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("stage-uhcmedicaresolutions.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		}else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
-		validateNew(tfnHeader);
-
+		threadsleep(8);
+		//validateNew(tfnHeader);
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 		String actualTfnNo = TFNelement.getText();
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
@@ -598,12 +791,14 @@ public class CampaignExternalLinks extends UhcDriver {
 		else
 			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
-		System.out.println(tfnHeader.getText());
+		//System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
 		if(validate(workingHrs)) {
 			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
-	}
+		}
+	
+	
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -687,8 +882,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		start(url);
 	}
 	
-	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
-	private WebElement clickFindPlansinyourArea;
 	
 	public void clickFindPlansinyourArea() {
 		String parentWindow = driver.getWindowHandle();
@@ -1165,4 +1358,317 @@ public class CampaignExternalLinks extends UhcDriver {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		}
 	}
+
+	public void validateErrorMsg() {
+		threadsleep(8);
+		validateNew(RequestAnAppointMent);
+		RequestAnAppointMent.click();
+		threadsleep(8);
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(8);
+		validateNew(FirstNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
+		validateNew(LastNameErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
+		validateNew(AddressErroMsg);
+		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
+		validateNew(CityErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
+		validateNew(SelectStateErroMsg);
+		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
+		validateNew(ZipErroMsg);
+		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
+		validateNew(EmailErroMsg);
+		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
+		validateNew(PhoneErroMsg);
+		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+	}
+
+	public void enterdetais() {
+
+		threadsleep(8);
+		validateNew(FirstName);
+		FirstName.clear();
+		FirstName.sendKeys("test_MR_optum_R");
+		LastName.clear();
+		LastName.sendKeys("test_MR_optum_M");
+		Address1Input.clear();
+		Address1Input.sendKeys("455 Flatbush Ave");
+		Address1Input.sendKeys(Keys.TAB);
+		CityInput.clear();
+		CityInput.sendKeys("Brooklyn");
+		threadsleep(8);
+		selectFromDropDownByText(driver, SelectState, "New York");
+		ZipInput.clear();
+		ZipInput.sendKeys("11238");
+		EmailInput.clear();
+		EmailInput.sendKeys("test@test.com");
+		phoneInput.clear();
+		phoneInput.sendKeys("800-800-8000");
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(5);
+		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+
+	}
+	public void validateFindPlansInyourArea() {
+		validateNew(FindPlanInyourArea);
+		FindPlanInyourArea.click();
+		CommonUtility.waitForPageLoadNew(driver, zip, 30);
+		Assert.assertTrue(true);
+		Assert.assertEquals("1-855-264-3792", FindPlanTFN.getText());
+	}
+//	public void switchToNewTab() {
+//		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//		driver.switchTo().window(tabs.get(1));
+//	}
+
+	public void naviagteBack() {
+
+		driver.navigate().back();
+	}
+
+	public void  validateFindADoc() {
+		validateNew(FindADoctor);
+		FindADoctor.click();
+
+		CommonUtility.waitForPageLoadNew(driver, location, 30);
+		Assert.assertTrue(true);
+		Assert.assertEquals("https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false", driver.getCurrentUrl());
+	}
+
+	//https://www.uhc.com/legal/accessibility
+
+	public void validatePrivacy() {
+		validateNew(PrivacyPolicy);
+		String parentwindow=driver.getWindowHandle();
+		PrivacyPolicy.click();
+		switchToNewTab();
+		CommonUtility.waitForPageLoadNew(driver, Heading, 30);
+		Assert.assertEquals("Privacy Policy", Heading.getText());
+		driver.close();
+		driver.switchTo().window(parentwindow);
+
+	}
+
+	public void validateAccess() {
+		validateNew(Accessibility);
+		String parentwindow=driver.getWindowHandle();
+		Accessibility.click();
+		switchToNewTab();
+		threadsleep(8);
+		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
+		driver.close();
+		driver.switchTo().window(parentwindow);
+	}
+
+	public void validateErrorMsgtakeadvantage() {
+		threadsleep(8);
+		validateNew(GetMoreInformation);
+		GetMoreInformation.click();
+		threadsleep(8);
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(8);
+		validateNew(FirstNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
+		validateNew(LastNameErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
+		validateNew(AddressErroMsg);
+		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
+		validateNew(CityErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
+		validateNew(SelectStateErroMsg);
+		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
+		validateNew(ZipErroMsg);
+		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
+		validateNew(EmailErroMsg);
+		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
+		validateNew(PhoneErroMsg);
+		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+
+	}
+
+	public void enterdetailstakeadvantage() {
+		threadsleep(8);
+		validateNew(FirstName);
+		FirstName.clear();
+		FirstName.sendKeys("test-MR-optum-R");
+		LastName.clear();
+		LastName.sendKeys("test-MR-optum-M");
+		Address1Input.clear();
+		Address1Input.sendKeys("455 Flatbush Ave");
+		Address1Input.sendKeys(Keys.TAB);
+		CityInput.clear();
+		CityInput.sendKeys("Brooklyn");
+		threadsleep(8);
+		selectFromDropDownByText(driver, SelectState, "New York");
+		ZipInput.clear();
+		ZipInput.sendKeys("11238");
+		EmailInput.clear();
+		EmailInput.sendKeys("test@test.com");
+		phoneInput.clear();
+		phoneInput.sendKeys("800-800-8000");
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(5);
+		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+
+	}
+	
+	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(LocationLink);
+		LocationLink.click();
+		threadsleep(5);
+		validateNew(LocationBtn);
+		LocationBtn.click();
+		threadsleep(5);
+		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
+		InputZipCode.clear();
+		InputZipCode.sendKeys(zipcodeSingle);
+		threadsleep(8);
+		LocationBtn.click();
+		threadsleep(8);
+		driver.navigate().refresh();
+		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
+		LocationLink.click();
+		threadsleep(8);
+		InputZipCode.clear();
+		InputZipCode.sendKeys(zipcodeMulti);
+		jsClickNew(LocationBtn);
+		FirstZipCode.click();
+		jsClickNew(LocationBtn);
+		
+			
+	}
+
+	public void validatezipcodecomponent() {
+		// TODO Auto-generated method stub
+		
+		waitforElementNew(viewplanspricing);
+		viewplanspricing.click();
+		
+		waitforElementNew(ziperrorMsg);
+		System.out.println("@@Zip error Message@@@"+ziperrorMsg.getText());
+		Assert.assertEquals(ziperrorMsg.getText(), "Please enter a valid zip code");
+		
+		Zipinput.clear();
+		Zipinput.sendKeys("33111");
+		viewplanspricing.click();
+		
+		waitforElementNew(tfn);
+		
+		System.out.println("@@tfn@@"+tfn.getText());
+		Assert.assertEquals(tfn.getText(), "1-855-264-3792");
+		
+//		//driver.navigate().back();
+		
+		
+	}
+
+	public void clickFindPlansPricingtakeadvantage() {
+		parentWindow = driver.getWindowHandle();
+		findPlansPricingtakeadvantage.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+	}
+
+		public void clickFindPlansLink() {
+			parentWindow = driver.getWindowHandle();
+			FindPlansLink.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
+
+		public void clickonViewpricingAndNavigatesToVPP() {
+			
+			waitforElementNew(viewPricingBtn);
+			viewPricingBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonPrescriptionDrugCostAndNavigatesToDCE() {
+			// TODO Auto-generated method stub
+			waitforElementNew(PrescriptiondrugcostsBtn);
+			PrescriptiondrugcostsBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonEstimateDrugCostBtnAndNavigatesToDCE() {
+			waitforElementNew(EstimateDrugCost);
+			EstimateDrugCost.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+		}
+
+		public void clickonStartNowAndNavigatesToPharmacyPage() {
+			// TODO Auto-generated method stub
+			waitforElementNew(StartNowBtn);
+			StartNowBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+		}
+
+		public void clickonViewPlanPricingBtnAndNavigatesToVPP() {
+			waitforElementNew(viewPricingBtn2);
+			viewPricingBtn2.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void navigateToPath(String path) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void navigateToDCERedesignFromExternaltakeadvantagePage() {
+			// TODO Auto-generated method stub
+			parentWindow = driver.getWindowHandle();
+			dceExternalLinktakeadvantage.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			
+		}
+		
+		public void validateDCEExternallinkMA() {
+			parentWindow = driver.getWindowHandle();
+			dceexternallinkMA.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
 }
