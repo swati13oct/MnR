@@ -112,7 +112,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement viewPlanButton;
 
 //	@FindBy(id = "changePharmacyLink")
-	@FindBy(css = "#changePharmacyLinkmobile")
+	@FindBy(css = "div[class*='d-block'] [id*='changePharmacyLink']")
 	public WebElement changePharmacy;
 
 	@FindBy(css = "#modal-label")
@@ -171,7 +171,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		// validateNew(reviewDrugCostPageHeading);
+//		 validateNew(reviewDrugCostPageHeading);
 
 	}
 
@@ -840,8 +840,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("View Drug Costs Clicked for SNP Plan : " + planName);
 		}
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
+		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsCard)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assertion.fail("Drug Details Page is NOT Displayed");

@@ -36,7 +36,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "#previousButton")
 	public WebElement getStartedButton;
 
-	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']")
+	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']/parent::button")
 	public WebElement SearchBtn;
 
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
@@ -47,19 +47,20 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[(@id= 'drugError')]")
 	public WebElement BlankDrugError;
+	
 	@FindBy(xpath = "//*[@id='Lipitor']/div")
 	public WebElement selectdrug;
 
-	@FindBy(xpath = "//div[@class='column column-12']/p[@id='drugError']")
+	@FindBy(css = "div[class^='uhc-modal__content'] p#drugError")
 	public WebElement NoDrugError;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
-	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
+	@FindBy(css = "div[class^='uhc-modal__content'] div[class^='autocomplete-container']")
 	public WebElement AutoCompleteList;
 
-	@FindBy(xpath = "//uhc-menu-item")
+	@FindBy(css = "div[class^='uhc-modal__content'] #listPop > li")
 	public List<WebElement> AutoCompleteitems;
 
 	// @FindBy(xpath = "//*[@id='drugPopHeading']")
@@ -67,7 +68,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "div[class*='tellusyourdrugModal']  #modal-label")
 	public WebElement TellUsAboutHeader;
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close ng-tns-c35-8')]")
+	@FindBy(css = "div[class*='tellusyourdrugModal'] #cancelicon")
 	public WebElement TellUsAboutCloseBtn;
 
 	// uhc-menu-item
@@ -202,17 +203,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//label[@id='drug-label']")
-	public WebElement enterDrugNameTitle;
-
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.sendKeys("not");
-		jsClickNew(enterDrugNameTitle);
+		sendkeysMobile(EnterDrugNameTxt, "india");
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 
-		waitforElementVisibilityInTime(NoDrugError, 5);
 		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("No drugs were found")) {
 			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 		} else
@@ -221,13 +217,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void ValidateDrugAutocomplete(String partialDrug) {
 
-		jsClickNew(DrugSearchBackClick);
+//		jsClickNew(DrugSearchBackClick);
 		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
-		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.clear();
-		EnterDrugNameTxt.sendKeys(partialDrug);
+//		validateNew(EnterDrugNameTxt);
+		sendkeysMobile(EnterDrugNameTxt, partialDrug);
 		validateNew(AutoCompleteList);
-		System.out.println("Drug Auto complete lis COunt : " + AutoCompleteitems.size());
+		System.out.println("Drug Auto complete list count : " + AutoCompleteitems.size());
 		if (validateNew(AutoCompleteList) && AutoCompleteitems.size() <= 5) {
 			System.out.println("Drug Autocomplete Validated - less than or 5 drugs displayed for autocomplete");
 		} else
@@ -239,7 +234,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
-		WebElement Drug = driver.findElement(By.xpath("//*[@id='" + drugName + "']"));
+		WebElement Drug = driver.findElement(By.cssSelector("div[class^='uhc-modal__content'] [id='" + drugName + "']"));
 		jsClickNew(Drug);
 		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 20);
 		if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {

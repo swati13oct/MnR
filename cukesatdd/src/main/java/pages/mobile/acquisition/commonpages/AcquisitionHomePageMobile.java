@@ -2701,11 +2701,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
-		/*
-		 * MobileMenuAccessDCE(); validateNew(getStarted); jsClickNew(getStarted);
-		 */
-
-		scrollToView(DCEToolLink);
 		validateNew(DCEToolLink);
 		jsClickNew(DCEToolLink);
 

@@ -43,10 +43,10 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 	
-	@FindBy(xpath = "//button[contains(@class,'uhc-button') and contains(@dtmname,'review drug costs')]")
+	@FindBy(css = "button[class*='uhc-button'][dtmname$='review drug costs']")
 	public WebElement reviewDrugCostButtonHeader;
 	
-	@FindBy(xpath = "//div[contains(@class,'lg-center')]/button[contains(@dtmname,'review drug')]")
+	@FindBy(css = "div.row:not(.d-none) button[dtmname$='review drug']")
 	public WebElement reviewDrugCostButtonFooter;
 	
 	@FindBy(xpath = "//select[contains(@id, 'selectdosage')]")

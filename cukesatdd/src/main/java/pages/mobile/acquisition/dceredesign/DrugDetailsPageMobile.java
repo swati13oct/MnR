@@ -81,10 +81,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = ".uhc-card__content")
 	public WebElement DrugDetails_DrugCostsCard;
 
-	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]")
+	@FindBy(xpath = "//div[contains(@class,'d-block')]//p[normalize-space()='Average Monthly Drug Cost']")
 	public WebElement DrugCosts_AvgMonDrugCost;
 
-	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]")
+	@FindBy(xpath = "//div[contains(@class,'d-block')]//p[contains(text(),'Monthly Premium:')]")
 	public WebElement DrugCosts_MonthlyPremium;
 
 	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')][1]")
@@ -108,44 +108,44 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
 	public WebElement DrugCosts_TFN;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Your Drugs')]")
+	@FindBy(xpath = "//span[contains(text(), 'Your Drugs')]")
 	public WebElement YourDrugs_Header;
 
-	@FindBy(xpath = "//div[@id='coveredtable']")
+	@FindBy(css = "#editdrugcontainer")
 	public WebElement YourDrugs_Table;
 
-	@FindBy(xpath = "//h2[@id='yourdrug']")
+	@FindBy(xpath = "//h2//*[contains(text(), 'Your Drugs')]")
 	public WebElement YourDrugs_DrugsTxt;
 
-	@FindBy(xpath = "//div[@class='text-semibold mt-10' and contains(text(), 'You Pay')]")
-	public WebElement YourDrugs_YouPayTxt;
+	@FindBy(css = "div[class^='d-block'] ul[class*='yourdrugs'] li:first-child span")
+	public List<WebElement> YourDrugs_YouPayTxt;
 
 	// This element does not display for Mobile so xpath changed
-	@FindBy(xpath = "//body//div[@id='site-wrapper']//div[@id='monthlycostdetails']//div//div//div//div//div[1]//div[2]")
-	public WebElement YourDrugs_InitlCoverageTxt;
+	@FindBy(css = "div[class^='d-block'] ul[class*='yourdrugs'] li:first-child")
+	public List<WebElement> YourDrugs_InitlCoverageTxt;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")
+	@FindBy(xpath = "//h2//*[contains(text(), 'Monthly Drug Costs By Stage')]")
 	public WebElement MonthlyDrugStage_Header;
 
-	@FindBy(xpath = "//h4[contains(text(),'Initial Coverage Stage')]")
+	@FindBy(css = "#initialmobile > h3")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
 	@FindBy(css = "#div_initial_coverage_0")
 	public WebElement MonthlyDrugStage_InitialCoverageLink;
 
-	@FindBy(xpath = "//h4[contains(text(),'Coverage Gap Stage')]")
+	@FindBy(css = "#coveragemobile > h3")
 	public WebElement MonthlyDrugStage_CoverageGapStagerTbl;
 
 	@FindBy(css = "#div_coverage_gap_0")
 	public WebElement MonthlyDrugStage_CoverageGapLink;
 
-	@FindBy(xpath = "//h4[contains(text(),'Catastrophic Coverage Stage')]")
+	@FindBy(css = "#cataratopcimobile > h3")
 	public WebElement MonthlyDrugStage_CatastropheStagerTbl;
 
 	@FindBy(css = "#div_catastrophic_coverage_0")
 	public WebElement MonthlyDrugStage_CatastropheLink;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
+	@FindBy(xpath = "//h2//*[contains(text(), 'Important Information')]")
 	public WebElement ImportantInfo_Header;
 
 	@FindBy(xpath = "//h3[contains(text(),'Plan Formulary')]")
@@ -392,25 +392,21 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void validateDrugCosts() {
-		validateNew(DrugDetails_DrugCostsHeading);
+		validateNew(DrugDetails_DrugCostsCard);
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
 
 	}
 
 	public void validateYourDrugs() {
-		scrollToView(YourDrugs_Header);
 		validateNew(YourDrugs_Header);
-		scrollToView(YourDrugs_Table);
 		validateNew(YourDrugs_Table);
-		scrollToView(YourDrugs_DrugsTxt);
 		validateNew(YourDrugs_DrugsTxt);
-		scrollToView(YourDrugs_YouPayTxt);
-		validateNew(YourDrugs_YouPayTxt);
-		scrollToView(YourDrugs_InitlCoverageTxt);
-		validateNew(YourDrugs_InitlCoverageTxt);
-		scrollToView(LinktoEditDrugList);
+//		validateNew(YourDrugs_YouPayTxt);
+//		validateNew(YourDrugs_InitlCoverageTxt);
 		validateNew(LinktoEditDrugList);
+		YourDrugs_YouPayTxt.stream().forEach(drugsYouPayTxt -> validateNew(drugsYouPayTxt));
+		YourDrugs_InitlCoverageTxt.stream().forEach(drugInitialCoverageTxt -> validateNew(drugInitialCoverageTxt));
 	}
 
 	public void validateMonthlyCostStage() {
@@ -498,7 +494,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile ClickLinktoNavigatetoDrugSummary() {
