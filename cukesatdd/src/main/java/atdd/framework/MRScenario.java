@@ -127,6 +127,22 @@ public class MRScenario {
 	public static void setRunnerFileName(String runnerFile) {
 		runnerFileName.set(runnerFile);
 	}
+	
+	public static String getTagLists() {
+		GlobalBeforeHook beforeHook = new GlobalBeforeHook();
+		List<String> tagsList = beforeHook.getTagsList();
+		 StringBuilder strbul=new StringBuilder();
+	        for(String str : tagsList)
+	        {
+	            strbul.append(str);
+	        }
+	        String tagsLists=strbul.toString();
+		return tagsLists;
+	}
+	
+	public static void setTagList(String tagName) {
+		runnerFileName.set(tagName);
+	}
 
 	public static final String USERNAME = "gpdadmin1";
 
