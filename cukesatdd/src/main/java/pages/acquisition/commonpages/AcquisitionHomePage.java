@@ -6497,7 +6497,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		case "When to Enroll":
 			Assertion.assertTrue("Navigation to Enrollment Basics page failed",
-					driver.getCurrentUrl().contains("when-to-enroll"));
+					driver.getCurrentUrl().contains("enrollment-and-changing-plans"));
 			break;
 
 		case "Medicare FAQ":
