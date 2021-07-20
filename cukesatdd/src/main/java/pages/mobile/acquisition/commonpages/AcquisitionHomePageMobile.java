@@ -613,7 +613,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
-	public void openPRE(String site) {
+	public void openPRE() {
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewMobile(
