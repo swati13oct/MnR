@@ -226,7 +226,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement PrivacyPolicy;
 
 
-	@FindBy(xpath ="//span[@class='heading-1']")
+	@FindBy(xpath ="//span[@class='heading-1' and contains(text(),'Privacy Policy')]")
 	private WebElement Heading;
 
 	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
