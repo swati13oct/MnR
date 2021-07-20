@@ -104,7 +104,7 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
-      | UHC  |   00610 | NO            | Anasco  | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Travel, Doctors              | MS                | [blank]           | Authenticated | DigitalDestroyer1 | DDpwd123 |
+      | UHC  |   00610 | NO            | Anasco  | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DigitalDestroyer1 | DDpwd123 |
       | UHC  |   00501 | NO            | Suffolk | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DigitalDestroyer1 | DDpwd123 |
 
   @PRE @MAPDFlowScenario6 @F614720
