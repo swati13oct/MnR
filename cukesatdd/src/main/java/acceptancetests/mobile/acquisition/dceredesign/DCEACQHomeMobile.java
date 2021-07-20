@@ -578,6 +578,7 @@ public class DCEACQHomeMobile {
 	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
 	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -594,6 +595,7 @@ public class DCEACQHomeMobile {
 	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
 	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -610,6 +612,7 @@ public class DCEACQHomeMobile {
 	@Then("^user saves MAPD plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

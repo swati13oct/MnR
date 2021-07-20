@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.visitorProfile;
 
 import java.util.HashMap;
@@ -22,7 +23,6 @@ import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 
@@ -137,14 +137,14 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
-	
+
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
-		
+
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
@@ -258,18 +258,18 @@ public class VisitorProfileMobileStepDefinition {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, VisitorProfilePageMobile);
 	}
 
-	
 	@And("^the user should be able to see the Drug information in the guest profile page$")
 	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);*/
-		List<List<String>> memberAttributesRow = data.asLists();
-		String drug = memberAttributesRow.get(0).get(1);
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
+		 * memberAttributesRow.get(0).getCells().get(1);
+		 */
+		String drug = data.cell(0, 1);
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedDrugAndPharmacy(drug);
 	}
-	
+
 	@And("^user validates the added plans on visitor profile page$")
 	public void user_validates_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -383,13 +383,15 @@ public class VisitorProfileMobileStepDefinition {
 
 	}
 
-	
-	
 	@Then("^the user validates the following Additional Benefits of Plan for the plan$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(
 			DataTable givenAttributes) throws Throwable {
-//		List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+
+		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
+
+		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);

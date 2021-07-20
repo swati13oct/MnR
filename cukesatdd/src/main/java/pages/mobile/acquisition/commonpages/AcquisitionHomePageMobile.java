@@ -1004,8 +1004,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-
-
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		scrollToView(footerAgentsnBrokersLink);
 		validate(footerAgentsnBrokersLink);
@@ -1084,8 +1082,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		driver.navigate().back();
 	}
 
-
-
 	public ContactUsAARPPageMobile contactUsFooterClick() {
 		validateNew(contactLink);
 		contactLink.click();
@@ -1121,7 +1117,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
-	
+
 	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
 		// footerPrivacyPolicyLink.click();
@@ -2119,7 +2115,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuSiteSearch();
 
 		// sendkeysMobile(EnterSearch, sv);
-		//sendKeysByCharacter(EnterSearch, sv);
+		// sendKeysByCharacter(EnterSearch, sv);
 		sendkeysNew(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
@@ -2396,7 +2392,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerDisclaimersLink);
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
-		jsClickNew(more);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			// validateNew(aarpOrgLink);
 		} else {
@@ -2422,6 +2417,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		scrollToView(learnAboutMedicareFooterButton);
 		learnAboutMedicareFooterButton.click();
+
 		validateNew(introductionToMedicareLink);
 
 		validateNew(eligibilityLink);
@@ -2723,11 +2719,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
-		/*
-		 * MobileMenuAccessDCE(); validateNew(getStarted); jsClickNew(getStarted);
-		 */
-
-		scrollToView(DCEToolLink);
 		validateNew(DCEToolLink);
 		jsClickNew(DCEToolLink);
 
@@ -3147,7 +3138,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-
 	public GetStartedPageMobile navigateToDCERedesignFromSubNav() {
 		// navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
 
@@ -3240,23 +3230,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateHeaderLinks() {
 		MobileMenuMain();
 		pageloadcomplete();
-		
+
 		validateNew(goToMemberSiteLink);
-		
+
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		//validateNew(searchTxtbox);
-		//validateNew(headerTfn);//not for mobile- confirmed with Rathulya
+		// validateNew(searchTxtbox);
+		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(visitorprofileicon);
-		//validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
+		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
 	}
-	
+
 	@FindBy(css = "#mobile-nav > div.position-relative.mobile-mysaved-btn-wrap > div > button")
-	 public WebElement visitorprofileicon;
+	public WebElement visitorprofileicon;
 
 	public void validateVisitorProfileIcon() {
 		// jsMouseOver(visitorprofileicon);
@@ -3339,7 +3329,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+		WebElement headLogo = driver
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3504,10 +3495,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	// @FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	@FindBy(css = "[class*='enrollmentPopup'] > #modal")
 	private WebElement savedPlansPopup;
 
-	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	// @FindBy(xpath =
+	// "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	@FindBy(css = "[class*='enrollmentPopup'] #cancelicon")
 	private WebElement savedPlansPopupCloseIcon;
 
 	/**
@@ -3524,9 +3518,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Saved Plans modal not displayed");
 		}
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		// guestProfileLink.click();
-		jsClickNew(guestProfileLink);
+		// jsClickNew(guestProfileLink);
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("profile")) {
 			System.out.println("Navigated to Visitor profile page");

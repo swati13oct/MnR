@@ -981,7 +981,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public ProviderSearchPageMobile validateLookUpYourProviderButton() throws InterruptedException {
-		scrollToView(lookUpYourProviderButton);
 		validateNew(lookUpYourProviderButton);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());

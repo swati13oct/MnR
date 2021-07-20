@@ -147,15 +147,14 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	}
 
 	public void validateZipCodePlanYearCapturePageNonAEP() {
+
 		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
 		pageloadcomplete();
 		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
 			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
+		} else {
+			Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
 		}
-		else {
-		Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
-		}
-		
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {

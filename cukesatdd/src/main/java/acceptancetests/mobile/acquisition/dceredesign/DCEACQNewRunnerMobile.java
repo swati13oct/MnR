@@ -2,7 +2,9 @@ package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,17 +15,16 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
-
 import pages.mobile.acquisition.dceredesign.DCEStepHeaderMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -43,8 +44,15 @@ public class DCEACQNewRunnerMobile {
 		return loginScenario;
 	}
 
-	private Scenario scenario;
 	AppiumDriver wd;
+	
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
 
 	@Then("^the user edits supply length to three months for following drug$")
 	public void the_user_edits_supply_length_to_three_months_for_following_drug(DataTable givenAttributes)
@@ -401,19 +409,25 @@ public class DCEACQNewRunnerMobile {
 
 	@And("^user validates the plans on new visitor profile page of AARP site$")
 	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
-		 * i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String savePlanNames = givenAttributesMap.get("Test Plans");
+		
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String mapdPlanName = givenAttributesMap.get("Test Plans");*/
+		
+		List<List<String>> givenAttributesMap = planNames.asLists();
+		List<String> favPlans = givenAttributesMap.stream().map(planDetails -> planDetails.get(1)).collect(Collectors.toList());
+		
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlansNew(savePlanNames);
+		visitorProfile.validateAddedPlansNew(favPlans);
 	}
 
 	@Then("^the user validates planName on LearnMore page matches plan Name in VPP$")
@@ -552,19 +566,22 @@ public class DCEACQNewRunnerMobile {
 
 	@And("^user validates the added plans on new visitor profile page$")
 	public void user_validates_the_added_plans_on_new_visitor_profile_page(DataTable planNames) {
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
+		
 		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
 		 * i = 0; i < givenAttributesRow.size(); i++) {
 		 * 
 		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String savePlanNames = givenAttributesMap.get("Test Plans");
+		 
+		String savePlanNames = givenAttributesMap.get("Test Plans"); */
+		List<List<String>> givenAttributesMap = planNames.asLists();
+		List<String> favPlans = givenAttributesMap.stream().map(planDetails -> planDetails.get(1)).collect(Collectors.toList());
+		
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlansNew(savePlanNames);
+		visitorProfile.validateAddedPlansNew(favPlans);
 	}
 
 	@And("^user click on view saved plans button$")
@@ -697,7 +714,7 @@ public class DCEACQNewRunnerMobile {
 				"Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
 		scenario.log(
 				"Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
-
+		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		BuildYourDrugListMobile buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);

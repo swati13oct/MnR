@@ -1,4 +1,3 @@
-
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -117,7 +117,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_AARP() {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);

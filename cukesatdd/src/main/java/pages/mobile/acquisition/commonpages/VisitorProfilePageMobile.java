@@ -850,36 +850,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		validate(backToDrugCostEstimatorLink);
 	}
 
-	public void validateAddedPlansNew(String planNames) {
-		String[] listOfTestPlans = planNames.split(",");
+	public void validateAddedPlansNew(List<String> planNames) {
+//		String[] listOfTestPlans = planNames.split(",");
 		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan : listOfTestPlans) {
+		for (String plan : planNames) {
 			System.out.println("Checking Saved Plan on VP for : " + plan);
-			WebElement addedPlan = driver
-					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			WebElement addedPlan = driver.findElement(By.cssSelector("[dtmname$='Card:" + plan + "']"));
 			validateNew(addedPlan);
-			/*
-			 * System.out.println(driver.findElement(By.xpath(
-			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-			 * + plan + "')]")) .getText());
-			 */
-			System.out.println(addedPlan.getText());
-			/*
-			 * Assertion.assertEquals(plan, driver.findElement(By.xpath(
-			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-			 * + plan + "')]")) .getText().trim());
-			 */
 			Assertion.assertEquals(plan, addedPlan.getText().trim());
-			/*
-			 * Assertion.assertTrue(driver .findElement(By.
-			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-			 * + plan + "')]/following::button[1]")) .isDisplayed());
-			 */
-			/*
-			 * Assertion.assertTrue(driver .findElement(By.xpath(
-			 * "//*[contains(@id,'planName') and contains(text(),'" + plan +
-			 * "')]/./following::button[1]")) .isDisplayed());
-			 */
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}

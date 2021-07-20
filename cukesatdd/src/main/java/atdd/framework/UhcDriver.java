@@ -210,7 +210,6 @@ public abstract class UhcDriver {
 	}
 
 	public void startNewMobile(String url) {
-
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
@@ -863,10 +862,13 @@ public abstract class UhcDriver {
 	 * @return : boolean
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
-		// scrollToView(element);
-
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-50)", "");
+		if (driver.getClass().toString().toUpperCase().contains("IOS")
+				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			scrollToView(element);
+		} else {
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-50)", "");
+		}
 		try {
 			waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {

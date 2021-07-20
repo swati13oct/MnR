@@ -1,34 +1,24 @@
 package pages.mobile.acquisition.dceredesign;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//button[contains(text(),'Add My Drug')]")
+	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
+	@FindBy(css = "#adddrug")
 	public WebElement addDrugButton;
 	
 	@FindBy(xpath = "//*[@id='drugsearchmobile']")
@@ -72,8 +62,10 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
-		if (validate(AddMyDrugsBtn))
+		if (validateNew(AddMyDrugsBtn))
 			jsClickNew(AddMyDrugsBtn);
+		
+		CommonUtility.waitForPageLoadNew(driver, addDrugButton, 5);
 		jsClickNew(addDrugButton);
 
 		if (validateNew(drugtSearchTextBox)) {
