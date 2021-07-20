@@ -153,6 +153,11 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
 	
+	@FindBy(xpath = "//*[@class='modal-content']")
+	private WebElement externalPopupModal;
+	
+	@FindBy(xpath = "//*[@class='modal-content']//*[@class='modal-close']")
+	private WebElement externalPopupModalClose;
 	
 	public String parentWindow;
 	
@@ -495,6 +500,13 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void clickFindPlansPricing() {
 		parentWindow = driver.getWindowHandle();
+		try {
+		if(externalPopupModal.isDisplayed()) {
+			externalPopupModalClose.click();
+		}
+		}catch(Exception e) {
+			System.out.println("External popup modal not found");
+		}
 		findPlansPricing.click();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -1492,7 +1504,13 @@ private WebElement selectCounty;
 public CampaignExternalLinks backToPlans() {
 	validate(clickBackToPlans);
 	jsClickNew(clickBackToPlans);
-	jsClickNew(selectCounty);
+	try {
+		if(selectCounty.isDisplayed())
+			jsClickNew(selectCounty);
+	}
+	catch(Exception e) {
+		System.out.println("County popup not displayed");
+	}
 	CommonUtility.checkPageIsReadyNew(driver);
 	if (driver.getCurrentUrl().contains("plan-summary")) {
 		return new CampaignExternalLinks(driver);
