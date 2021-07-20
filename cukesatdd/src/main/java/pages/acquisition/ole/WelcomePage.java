@@ -163,6 +163,17 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id,'olesections')]")
 	private WebElement WidgetsImage;
 	
+	@FindBy(xpath = "//*[contains(@id,'oleStickyHeader')]")
+	private WebElement OLEStickyHeader;
+	
+	@FindBy(xpath = "//*[contains(@class,'sticky-planname')]")
+	private WebElement OLEStickyPlanName;
+	
+	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
+	private WebElement OLEProgressBar;
+	
+	
+	
 	public WelcomePage(WebDriver driver) {
 
 		super(driver);
@@ -197,9 +208,12 @@ public class WelcomePage extends UhcDriver{
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
+		String StickyPlanName = OLEStickyPlanName.getText();
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
+		System.out.println("OLEStickyPlanName Displayed on welcome OLE : "+StickyPlanName);
+		
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
@@ -217,7 +231,7 @@ public class WelcomePage extends UhcDriver{
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
-							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
+							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
 				}
 
 			}
@@ -284,6 +298,8 @@ public class WelcomePage extends UhcDriver{
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){		
 		if(validateNew(driver.findElement(By.xpath("//*[contains(text(),'Personal')]")))){
 			System.out.println("OLE Personal Information Page is Displayed");
+			validate(OLEProgressBar);
+			OLEProgressBar.isDisplayed();
 			return new PersonalInformationPage(driver);
 		}
 		return null;
@@ -468,6 +484,8 @@ public class WelcomePage extends UhcDriver{
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
+			validate(OLEProgressBar);
+			OLEProgressBar.isDisplayed();
 			return new MedicareInformationPage(driver);
 		}
 		return null;
@@ -609,6 +627,11 @@ public class WelcomePage extends UhcDriver{
 			String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			jsClickNew(Saveclosepopup);
+			validate(OLEStickyHeader);
+			OLEStickyHeader.isDisplayed();
+			validate(OLEStickyPlanName);
+			validate(OLEProgressBar);
+			OLEProgressBar.isDisplayed();
 			
 			return new SaveandReturnOLEModal(driver);
 		}
@@ -653,17 +676,23 @@ public class WelcomePage extends UhcDriver{
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
+		String StickyPlanName = OLEStickyPlanName.getText();
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
+		System.out.println("OLE Sticky PlanName on Welcome OLE Page : "+StickyPlanName);
+		
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
+		
+	
+		
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
-							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
+							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
 				}			
 		
 		System.out.println("WELCOME OLE Page are Validated : "+flag);

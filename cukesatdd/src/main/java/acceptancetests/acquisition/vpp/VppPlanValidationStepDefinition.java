@@ -630,9 +630,8 @@ public class VppPlanValidationStepDefinition {
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
 
-
-		 WebDriver wd = getLoginScenario().getWebDriverNew();
-		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 
 		//Getting Date
@@ -661,34 +660,28 @@ public class VppPlanValidationStepDefinition {
 			styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
 			styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
-
-
 		//Setting First Row for Results excel
 
 			try {
-
-				 AepVppPlanSummaryPage planSummaryPage = null;
+			     AepVppPlanSummaryPage planSummaryPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
-				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, planTypeCellNum = 0;
-				 HashMap <String, String> premiumMap = new HashMap<String, String>();
+				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, planTypeCellNum = 0, highOptionDentalCellNum = 0, dentalPlatinumCellNum = 0, monthlyPremiumCellNum = 0;
+				 HashMap<String, String> premiumMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
 					 	int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
-
-					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+                	 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
 		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
-
-		                //looping through columns until an empty column is found
+                         //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) {
 							HashMap<Boolean, String> resultMap = new HashMap<Boolean, String>();
 							boolean valueMatches = true;
 							HSSFCell cell = (HSSFCell) cellIterator.next();
-
-							try {
+                    	try {
 								currentCellValue = cell.getStringCellValue();
 								currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
 							} catch (Exception e) {
@@ -706,14 +699,16 @@ public class VppPlanValidationStepDefinition {
 									planNameCellNum = cellIndex;
 								else if (cell.getStringCellValue().equalsIgnoreCase("portal labels"))
 									planTypeCellNum = cellIndex;
-
-
+								else if (cell.getStringCellValue().equalsIgnoreCase("high option dental"))
+									highOptionDentalCellNum = cellIndex;
+								else if (cell.getStringCellValue().equalsIgnoreCase("dental platinum"))
+									dentalPlatinumCellNum = cellIndex;
+								else if (cell.getStringCellValue().equalsIgnoreCase("Monthly Premium"))
+									monthlyPremiumCellNum = cellIndex;
 							}
-
-							 if(rowIndex!=0) { //skip the header row
+                    		 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) {
-
-									  String countyName = row.getCell(countyCellNum).getStringCellValue();
+                    				  String countyName = row.getCell(countyCellNum).getStringCellValue();
 									  String planYear = row.getCell(planYearCellNum).getStringCellValue();
 									  String planName = row.getCell(planNameCellNum).getStringCellValue();
 									  String planType = "";
@@ -722,6 +717,9 @@ public class VppPlanValidationStepDefinition {
 									  }else {
 									  	  planType = row.getCell(planTypeCellNum).getStringCellValue();
 									  }
+									  String highOptionDental = row.getCell(highOptionDentalCellNum).getStringCellValue();
+									  String dentalPlatinum = row.getCell(dentalPlatinumCellNum).getStringCellValue();
+									 String monthlyPremium = row.getCell(monthlyPremiumCellNum).getStringCellValue();
 									System.out.println("Validating " + sheetName + " Plan " + rowIndex + " ************************************************************");
 									new VppCommonPage(wd, siteType, currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
@@ -729,17 +727,14 @@ public class VppPlanValidationStepDefinition {
 										result = true;
 										planSummaryPage.selectCounty(countyName);
 										planSummaryPage.Enroll_OLE_Plan(planName, planType);
-										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										} else {
-
-
-										result = planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName, planType);
+					    					result = planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName, planType);
 										if (result) {
-											premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+											premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										}
 									}
-
-								}
+								 }
 								if (result) {
 									if (!(currentColName.equalsIgnoreCase("plan year") ||
 											currentColName.equalsIgnoreCase("plan id qa script") ||
@@ -749,21 +744,13 @@ public class VppPlanValidationStepDefinition {
 											currentColName.equalsIgnoreCase("dsnp sub type") ||
 											currentColName.equalsIgnoreCase("Error Count") ||
 											currentColName.equalsIgnoreCase("portal labels") ||
-											//	currentColName.equalsIgnoreCase("OON_IN") ||
 											currentColName.equalsIgnoreCase("plan type") ||
 											currentColName.equalsIgnoreCase("county") ||
 											currentColName.equalsIgnoreCase("Link parameters") ||
 											currentColName.equalsIgnoreCase("product") ||
-											//	currentColName.equalsIgnoreCase("Plan Premium") ||
-											//	currentColName.equalsIgnoreCase("Plan Premium Zero") ||
-											//	currentColName.equalsIgnoreCase("Medical Benefits") ||
-											//	currentColName.equalsIgnoreCase("High Option DentalPS") ||
-											//	currentColName.equalsIgnoreCase("Platinum DentalPS") ||
 											currentColName.equalsIgnoreCase("Fips")
 									)) {
-
-
-										resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
+                                        resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
 
 										if (resultMap.containsKey(false))
 											valueMatches = false;
@@ -778,22 +765,62 @@ public class VppPlanValidationStepDefinition {
 									}
 								}
 								//
-								if(currentColName.equalsIgnoreCase("Monthly Premium") && rowIndex != 0 && !result){
+								/*if(currentColName.equalsIgnoreCase("Monthly Premium") && rowIndex != 0 && !result){
 										newCell.setCellValue("N/A");
 										newCell.setCellStyle(stylePassed);
 								}
+								 if(currentColName.equalsIgnoreCase("Monthly Premium") && rowIndex != 0){
+								 	System.out.println("VALIDATE_PREMIUM_NA_AND_PLAN SHOULD NOT HAVE ENROLL BUTTON");
+								 	//result = true;
+								 	if (currentCellValue.equalsIgnoreCase("NA") && result) {
+								 		 newCell.setCellValue("ERROR");
+										 newCell.setCellStyle(styleFailed);
+										 failureCounter++;
+									 }
+								 }
+		*/
 
-
-							//	if(result){
+								 if(currentColName.equalsIgnoreCase("Monthly Premium")) {
+									 System.out.println("RUNNING TEST FOR MONTHLY PREMIUM");
+									 System.out.println("MONTHLY PREMIUM IS: "+currentCellValue);
+									 //For plan having enroll button in UI result flag is true
+									 //TEST1- PREMIUM_ANY NUMERIC VALUE-e.g. 90$ & PLAN DOES NOT HAVE ENROLL BTN- RESULT SHOULD BE-ERROR COUNT=1
+									 if (currentCellValue.contains("$") && rowIndex != 0 && !result) {
+										 System.out.println("EXECUTING TEST1");
+										 String output = "ERROR_EXPECTED-ENROLL BTN SHOULD BE PRESENT FOR THIS PLAN_ACTUAL-ENROLL BTN NOT PRESENT";
+										 newCell.setCellValue(output);
+										 newCell.setCellStyle(styleFailed);
+										 System.out.println(output);
+										 failureCounter++;
+									 }
+									 //TEST2- PREMIUM_NA & PLAN HAVE ENROLL BTN- RESULT SHOULD BE-ERROR COUNT=1
+									 if (currentCellValue.equalsIgnoreCase("NA") && rowIndex != 0 && result) {
+										 System.out.println("EXECUTING TEST2");
+										 String output = "ERROR_EXPECTED-ENROLL BTN SHOULD NOT BE PRESENT FOR THIS PLAN_ACTUAL-ENROLL BTN PRESENT";
+									 	 newCell.setCellValue(output);
+										 newCell.setCellStyle(styleFailed);
+										 System.out.println(output);
+										 failureCounter++;
+									 }
+									 //TEST3- PREMIUM_NA & PLAN DO NOT HAVE ENROLL BTN- RESULT SHOULD BE-ERROR COUNT=0
+									 if (currentCellValue.equalsIgnoreCase("NA") && rowIndex != 0 && !result) {
+										 System.out.println("EXECUTING TEST3");
+									 	 String output = "SUCCESS_EXPECTED-ENROLL BTN SHOULD NOT BE PRESENT FOR THIS PLAN_ACTUAL-ENROLL BTN NOT PRESENT";
+										 newCell.setCellValue(output);
+										 newCell.setCellStyle(stylePassed);
+										 System.out.println(output);
+									 }
+								 }
+									 //	if(result){
 								if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0)
 									newCell.setCellValue(failureCounter);
 								else {
 									if (valueMatches) {            //if boolean value is true then it will write only the excel value from the input sheet and mark it green
 										//newCell.setCellValue(cell.getStringCellValue());
-										if(!(currentColName.equalsIgnoreCase("Monthly Premium") && newCell.getStringCellValue().equals("N/A"))) {
+										//if(!currentColName.equalsIgnoreCase("Monthly Premium")){
 											//if boolean value is true then it will write only the excel value from the input sheet and mark it green
 											newCell.setCellValue(cell.getStringCellValue());
-										}
+										//}
 									} else {                        //boolean value is false so it will add the UI value as well to differentiate and mark the cell red
 										newCell.setCellValue("Excel Value: " + cell.getStringCellValue() + " / UI Value: " + resultMap.get(false));
 									}

@@ -1919,7 +1919,8 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
 				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
 
-				System.out.println("OLE Confirmation Page is Displayed");
+				System.out.println("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber);
+				scenario.log("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber); 
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
 				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
