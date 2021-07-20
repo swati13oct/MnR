@@ -148,14 +148,5 @@ public class oleCommonStepDefinition {
 
 	}
 
-	/**
-	 * @author sdwaraka To Validate the Plan Details carried forward from VPP on
-	 *         Welcome Page of VPP
-	 * @param planAttributes
-	 * @throws Throwable
-	 */
-
-
-
 
 }
