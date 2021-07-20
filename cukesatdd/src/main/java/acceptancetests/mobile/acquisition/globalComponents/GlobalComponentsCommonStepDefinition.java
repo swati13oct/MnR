@@ -117,8 +117,6 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home Page not Loading");
 		}
 	}
-	
-
 
 	@When("^user verifies the logo on home page$")
 	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {
@@ -787,6 +785,7 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
+
 	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
 		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
@@ -823,7 +822,6 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-
 
 	@Then("^user validates Subtitle$")
 	public void user_validates_Subtitle(DataTable givenAttributes) throws Throwable {

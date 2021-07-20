@@ -79,6 +79,8 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
 	public WebElement medicareSpecialNeedsPlansLink;
+	
+	
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[3]")
 	public WebElement medicareSupplementInsurancePlansLink;
@@ -137,8 +139,31 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement importantDisclosuresLink;
 
 	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
-	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
 	public WebElement visitAARPLink;
+	
+
+	
+	@FindBy(id = "search-field")
+	public WebElement searchTxtbox;
+	
+	@FindBy(id = "header-tfn-link")
+	public WebElement headerTfn;
+	
+	@FindBy(id = "guest-profile")
+	public WebElement visitorProfileFlyoutTitle;
+	
+	@FindBy(id = "guest-saved-items-button")
+	public WebElement visitorProfileFlyoutViewSavedItemBtn;
+	
+	@FindBy(id = "flyout-drug-button")
+	public WebElement visitorProfileFlyoutAddDrugBtn;
+	
+	@FindBy(id = "flyout-plan-button")
+	public WebElement visitorProfileFlyoutAddPlansBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
+	public WebElement visitorProfileFlyoutSignInLink;
 
 	@FindBy(id = "proceed")
 	public WebElement proceedLink;

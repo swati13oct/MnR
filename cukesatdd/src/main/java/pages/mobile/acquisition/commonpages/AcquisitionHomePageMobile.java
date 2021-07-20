@@ -28,7 +28,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.SiteMapAARPPage;
+import pages.acquisition.commonpages.TermsnConditionsAARPPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -328,7 +332,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop;
 
-	@FindBy(xpath = "//div[contains(text(),'Disclaimers')]")
+	@FindBy(xpath = "//div[contains(@class, 'viewdisclaimerstext')]")
 	private WebElement disclaimerInformation;
 
 	@FindBy(css = ".icon-search")
@@ -1000,17 +1004,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
-		validateNew(footerPrivacyPolicyLink);
-		// footerPrivacyPolicyLink.click();
-		jsClickNew(footerPrivacyPolicyLink);
-		pageloadcomplete();
-		validateNew(privacyHeader);
-		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
-			return new PrivacyPolicyAARPPageMobile(driver);
-		}
-		return null;
-	}
+
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		scrollToView(footerAgentsnBrokersLink);
@@ -1090,29 +1084,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		driver.navigate().back();
 	}
 
-	public SiteMapAARPPageMobile siteMapFooterClick() {
-		scrollToView(footerSiteMapLink);
-		validateNew(footerSiteMapLink);
-		// footerSiteMapLink.click();
-		jsClickNew(footerSiteMapLink);
-		// pageloadcomplete();
-		pageloadcomplete();
-		validateNew(siteMapHeader);
-		if (driver.getCurrentUrl().contains("sitemap.html")) {
-			return new SiteMapAARPPageMobile(driver);
+
+
+	public ContactUsAARPPageMobile contactUsFooterClick() {
+		validateNew(contactLink);
+		contactLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public ContactUsAARPPageMobile contactUsFooterClick() {
-		/*
-		 * scrollToView(footerContactUsLink); validateNew(footerContactUsLink); //
-		 * footerContactUsLink.click(); jsClickNew(footerContactUsLink);
-		 */
-		accessFooterLinkFromMore("contact");
-		pageloadcomplete();
-		if (driver.getCurrentUrl().contains("contact-us")) {
-			return new ContactUsAARPPageMobile(driver);
+	public SiteMapAARPPageMobile siteMapFooterClick() {
+		validateNew(footerSiteMapLink);
+		// footerSiteMapLink.click();
+		jsClickNew(footerSiteMapLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(siteMapHeader);
+		if (driver.getCurrentUrl().contains("sitemap.html")) {
+			return new SiteMapAARPPageMobile(driver);
 		}
 		return null;
 	}
@@ -1128,6 +1120,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 
+	}
+	
+	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
+		validateNew(footerPrivacyPolicyLink);
+		// footerPrivacyPolicyLink.click();
+		jsClickNew(footerPrivacyPolicyLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(privacyHeader);
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
+			return new PrivacyPolicyAARPPageMobile(driver);
+		}
+		return null;
 	}
 
 	public DisclaimersAARPPageMobile disclaimersClick() {
@@ -2115,7 +2119,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuSiteSearch();
 
 		// sendkeysMobile(EnterSearch, sv);
-		sendKeysByCharacter(EnterSearch, sv);
+		//sendKeysByCharacter(EnterSearch, sv);
+		sendkeysNew(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
 
@@ -2271,23 +2276,28 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
 	}
 
-	public void validateDisclaimer() {
+	@FindBy(xpath = "//*[@id=\'accordion-disclaimer-button\']/div[2]")
+	private WebElement hide_Disclaimer_Information;
 
-		scrollToView(disclaimerInformation);
+	public void validateDisclaimer() {
 		validateNew(disclaimerInformation);
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
-		validateNew(backToTop_Disclaimer, 3);
-
+		validateNew(hide_Disclaimer_Information);
+		jsClickNew(hide_Disclaimer_Information);
 	}
 
 	public void validateVisitAarpOrglink() {
-		waitforElementVisibilityInTime(visitAARPFooterLink, 10);
-		validateNew(visitAARPFooterLink);
-		String hRef = visitAARPFooterLink.getAttribute("href");
-		System.out.println("href for Visit AARP.org link : " + hRef);
-		Assert.assertTrue(hRef.contains("www.aarp.org"), "Incorrect href for Visit AARP.org : " + hRef);
-		visitAARPFooterLink.isEnabled();
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			validateNew(visitAARPFooterLink);
+			String hRef = visitAARPFooterLink.getAttribute("href");
+			System.out.println("href for Visit AARP.org link : " + hRef);
+			Assertion.assertTrue("Incorrect href for Visit AARP.org : " + hRef, hRef.contains("www.aarp.org"));
+			visitAARPFooterLink.isEnabled();
+		} else {
+			System.out.println("UHC Medicare solutions site loaded");
+		}
+
 	}
 
 	public void backToToplink() {
@@ -2397,12 +2407,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		shopPlansExpander.click();
 		sleepBySec(2);
 
-
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
-
 
 		scrollToView(toolsAndResources);
 		toolsAndResources.click();
@@ -2412,7 +2420,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
-
 		scrollToView(learnAboutMedicareFooterButton);
 		learnAboutMedicareFooterButton.click();
 		validateNew(introductionToMedicareLink);
@@ -2420,7 +2427,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
-
 
 		scrollToView(more);
 		more.click();
@@ -3041,10 +3047,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public TermsnConditionsAARPPageMobile termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
-		scrollToView(footerTermsnConditionsLink);
+		// footerTermsnConditionsLink.click();
 		jsClickNew(footerTermsnConditionsLink);
-		pageloadcomplete();
-		validateNew(footerLinkHeader);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPageMobile(driver);
 		}
@@ -3119,26 +3124,29 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// TODO Auto-generated method stub
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(AARPlogo);
-			WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
-			WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+			WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 			if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
-				Assert.assertTrue(true);
+				scrollToView(AARPLogo);
+				Assertion.assertTrue(true);
 				System.out.println("Correct AARP Logo is Displayed");
 			} else {
-				Assert.fail("AARP logo is not dispalyed for Ulayer");
+				Assertion.fail("AARP logo is not dispalyed for Ulayer");
 			}
 		} else {
-			WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
-			WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+			WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
-				Assert.assertTrue(true);
+				scrollToView(UHCLogo);
+				Assertion.assertTrue(true);
 				System.out.println("Correct UHC Logo is Displayed");
 			} else {
-				Assert.fail("UHC logo is not dispalyed for Ulayer");
+				Assertion.fail("UHC logo is not dispalyed for Blayer");
 			}
 
 		}
 	}
+
 
 	public GetStartedPageMobile navigateToDCERedesignFromSubNav() {
 		// navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
@@ -3223,21 +3231,44 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Register')]")
 	public WebElement headerRegisterLinkMobile;
 
+	@FindBy(id = "search-field")
+	public WebElement searchTxtbox;
+
+	@FindBy(id = "header-tfn-link")
+	public WebElement headerTfn;
+
 	public void validateHeaderLinks() {
-		// validateNew(headerSignInLink);
-		// validateNew(headerRegisterLink);
-		// Actions action = new Actions(driver);
-		// action.moveToElement(planMemberLink).perform();
-		// validateNew(headerRegisterLink);
-		jsMouseOver(navigationSectionHomeLink);
-		validate(goToMemberSiteLink);
+		MobileMenuMain();
+		pageloadcomplete();
+		
+		validateNew(goToMemberSiteLink);
+		
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validate(visitAARPLink);
+			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validate(visitorprofileicon);
+		//validateNew(searchTxtbox);
+		//validateNew(headerTfn);//not for mobile- confirmed with Rathulya
+		validateNew(visitorprofileicon);
+		//validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
+	}
+	
+	@FindBy(css = "#mobile-nav > div.position-relative.mobile-mysaved-btn-wrap > div > button")
+	 public WebElement visitorprofileicon;
+
+	public void validateVisitorProfileIcon() {
+		// jsMouseOver(visitorprofileicon);
+		Actions action = new Actions(driver);
+		action.moveToElement(visitorprofileicon).perform();
+		validateNew(visitorProfileFlyoutTitle);
+		if (!driver.getCurrentUrl().contains("profile")) {
+			validateNew(visitorProfileFlyoutViewSavedItemBtn);
+		}
+		validateNew(visitorProfileFlyoutAddDrugBtn);
+		validateNew(visitorProfileFlyoutAddPlansBtn);
+		validateNew(visitorProfileFlyoutSignInLink);
 	}
 
 	public void clickRequestAsistancce() {
@@ -3300,20 +3331,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(lnkContact);
 		validateNew(lnkContact);
 		jsClickNew(lnkContact);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("contact-us.html")) {
 			System.out.println("Contact( " + language + " ) link is clicked Successfully");
 
 		} else {
-			Assert.fail("Error Clicking Contact( " + language + " ) link");
+			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver.findElement(By.xpath("//div[contains(@class,'logo aarplogo')]"));
+		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
-
 	}
 
 	public void proceedToLeaveAARP() {
@@ -3326,7 +3356,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickComplaintFormLink() {
 		/* Open Disclaimer Link section on mobile to validate complaint form */
-		disclaimerLnkMobile.click();
 		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
 		validateNew(lnkComplaintForm);
 		scrollToView(lnkComplaintForm);
@@ -3334,13 +3363,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		proceedToLeaveAARP();
 		if (driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
 			System.out.println("Successfully clicked Complaint Form link");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 
 		} else {
-			Assert.fail("Error clicking Complaint Form link");
+			Assertion.fail("Error clicking Complaint Form link");
 		}
 		driver.navigate().back();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
 	}
 
@@ -3363,15 +3392,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// method to click View Disclaimer Information link present in Footer
 	public void clickViewDisclaimerInfoLink() {
 		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(viewAllDisclaimerInformationLink);
 		jsClickNew(viewAllDisclaimerInformationLink);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
 		if (content.isDisplayed() && content.isEnabled()) {
 			System.out.println("View Diclaimer Information Link clicked Successfully");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Error clicking View Diclaimer Information Link ");
+			Assertion.fail("Error clicking View Diclaimer Information Link ");
 		}
 	}
 
@@ -3420,15 +3450,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// method to click Hide Disclaimer Information link present in Footer
 	public void clickHideDisclaimerInfoLink() {
 		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(hideDiscliamerInformation);
 		jsClickNew(hideDiscliamerInformation);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]"));
 		if (!content.isDisplayed() && content.isEnabled()) {
 			System.out.println("Hide Diclaimer Information Link clicked Successfully");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Error clicking Hide Diclaimer Information Link ");
+			Assertion.fail("Error clicking Hide Diclaimer Information Link ");
 		}
 	}
 
@@ -4768,7 +4799,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
 
-	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > div > div > div > a")
 	private WebElement goToMemberSiteLink;
 
 	public void clickMemberSiteLink() {
