@@ -1,6 +1,8 @@
 
 package acceptancetests.data;
 
+import java.util.LinkedHashMap;
+
 /**
  * @author pjaising
  *
@@ -1009,6 +1011,12 @@ public class CommonConstants {
 	public static final String MEDSUP_TFN="medsupTfn";
 	
 	public static final String FOOTER_LINK = "linkName";
+	
+	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
+	
+	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
+	
+	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
 }
 
 

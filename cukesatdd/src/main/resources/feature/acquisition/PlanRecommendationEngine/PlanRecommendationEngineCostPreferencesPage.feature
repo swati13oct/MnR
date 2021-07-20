@@ -1,9 +1,10 @@
-@planRecommendationEngine
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan Recommendation Engine
 
-  @PRE @planrecommendation @costpreferencespage @costpreferenceselements @F374228
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate elements in Cost Preferences using Single County in Plan Recommendation Engine
-    Given the user is on UHC medicare acquisition site landing page
+  @PRE @costpreferencespage @costpreferenceselements @F374228
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <doctors> , <Drug Selection>  - To validate elements in Cost Preferences using Single County in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -13,8 +14,6 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
@@ -25,13 +24,20 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user validate elements in cost preferences page
 
+    @FunctionalAARP
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
-      |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
+      | AARP |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  |
 
-  @PRE @planrecommendation @prioritypage @costpreferencespageselection @F374228
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
-    Given the user is on UHC medicare acquisition site landing page
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
+      | UHC  |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  |
+
+  @PRE @prioritypage @costpreferencespageselection @F374228
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <doctors> , <Drug Selection>  - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -41,8 +47,6 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
@@ -55,14 +59,20 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in priorities page
 
+    @FunctionalAARP
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | AARP |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
+      
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | UHC  |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
 
-  #|   90201 | NO            | [blank] | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,Yes,Yes                | Lower                |
-  @PRE @planrecommendation @costpreferencespage @costpreferenceserror @F374228
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Error Function in Cost Preferences using Single County in Plan Recommendation Engine
-    Given the user is on UHC medicare acquisition site landing page
+  @PRE @costpreferencespage @costpreferenceserror @F374228
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <Drug Selection>  - To validate Error Function in Cost Preferences using Single County in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -72,8 +82,6 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
@@ -85,6 +93,12 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     Then user validates cost preferences error function in cost preferences page
       | Preference Option | <costPreferenceOption> |
 
+    @FunctionalAARP
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | [blank]              |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | AARP |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
+      
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | UHC  |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
