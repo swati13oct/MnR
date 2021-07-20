@@ -192,7 +192,7 @@ public class WelcomePageMobile extends UhcDriver {
 		 * else checkModelPopup(driver,10);
 		 */
 		validateNew(WelcomePageHeader);
-		validateNew(PlanYear_PlanName);
+		//validateNew(PlanYear_PlanName);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
