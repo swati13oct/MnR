@@ -1,27 +1,17 @@
 package pages.mobile.acquisition.dceredesign;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 public class GetStartedPageMobile extends UhcDriver {
 

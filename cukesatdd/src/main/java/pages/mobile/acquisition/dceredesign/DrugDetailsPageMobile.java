@@ -364,19 +364,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		scrollToView(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		
-		scrollToView(DrugDetails_DrugCostsCard);
 		validateNew(DrugDetails_DrugCostsCard);
-		
-		scrollToView(LinkToDrugSummary);
 		validateNew(LinkToDrugSummary);
-		
-		scrollToView(LinktoExitScenario);
 		validateNew(LinktoExitScenario);
-		
-		scrollToView(LinktoEditDrugList);
 		validateNew(LinktoEditDrugList);
 	}
 

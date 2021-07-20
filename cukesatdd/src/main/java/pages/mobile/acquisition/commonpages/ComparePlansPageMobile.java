@@ -1750,28 +1750,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 	
 	public void validateAllDoctors() {
-		scrollToView(backToAllPlansLink);
 		validateNew(backToAllPlansLink);
-		
-		scrollToView(yourDoctorsBanner);
 		validateNew(yourDoctorsBanner);
-		
-		scrollToView(editDoctorsLink);
 		validateNew(editDoctorsLink);
-		
-		scrollToView(providerSumamryHeader);
 		validateNew(providerSumamryHeader);
-		
-		scrollToView(providerSumamryHeaderCount);
 		validateNew(providerSumamryHeaderCount);
-		
-		scrollToView(FirstProviderNameAfterAddition);
 		validateNew(FirstProviderNameAfterAddition);
-		
-		scrollToView(SecondProviderName);
 		validateNew(SecondProviderName);
-		
-		scrollToView(viewlocationsLink);
 		validateNew(viewlocationsLink);
 		System.out.println("Verified Edit Doctors Section");
 	}

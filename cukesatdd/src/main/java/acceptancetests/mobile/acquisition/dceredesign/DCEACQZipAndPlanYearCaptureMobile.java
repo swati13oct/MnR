@@ -1,4 +1,3 @@
-
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
