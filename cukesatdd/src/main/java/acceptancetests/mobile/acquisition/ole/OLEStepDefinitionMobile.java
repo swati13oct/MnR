@@ -24,17 +24,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.ole.AuthorizationPage;
-import pages.acquisition.ole.ConfirmYourEligibilityPage;
-import pages.acquisition.ole.MedicareInformationPage;
-import pages.acquisition.ole.OLEconfirmationPage;
-import pages.acquisition.ole.PersonalInformationPage;
-import pages.acquisition.ole.PlanPremiumPage;
-import pages.acquisition.ole.PrimaryCarePhysicianPage;
-import pages.acquisition.ole.ReviewSubmitPage;
-import pages.acquisition.ole.SpecialElectionPeriodPage;
-import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
@@ -74,7 +63,7 @@ public class OLEStepDefinitionMobile {
 		return loginScenario;
 	}
 
-	// AppiumDriver wd;
+	 AppiumDriver wd;
 
 	@Given("^the user lands on OLE Welcome Page wity following Plan Details$")
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes)
