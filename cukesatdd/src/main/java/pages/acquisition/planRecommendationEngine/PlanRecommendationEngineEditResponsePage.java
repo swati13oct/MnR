@@ -16,6 +16,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import pages.acquisition.commonpages.GlobalWebElements;
 
 public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements {
@@ -222,6 +223,11 @@ private WebElement signInLink;
 	public String navigateSaveResultsPage() {
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
+		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
+		CommonConstants.firstRecommentionplanType.put(curID, planType);
 		validate(saveYourResults, 10);
 		saveYourResults.click();
 		validate(saveResultsTitle);
@@ -709,9 +715,14 @@ private WebElement signInLink;
 	public void recomPREWidget() {
 		System.out.println("Validating Recommendation on UI Page: ");
 		pageloadcomplete();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(String.valueOf(Thread.currentThread().getId()));
+		String R1PlanType = CommonConstants.firstRecommentionplanType.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanName+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanType+" ****");
 		String R1 = "";
-		String R1PlanType = planType;
-		String R1PlanName = firstRecomPlanName;
+//		String R1PlanType = planType;
+//		String R1PlanName = firstRecomPlanName;
 		if(R1PlanType.contains("Prescription Drug Plans")) 
 			R1 = "PDP";
 		else if(R1PlanType.contains("Advantage Plans"))
