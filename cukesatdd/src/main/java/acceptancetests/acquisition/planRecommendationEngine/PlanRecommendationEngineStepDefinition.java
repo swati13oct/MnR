@@ -1,7 +1,9 @@
 package acceptancetests.acquisition.planRecommendationEngine;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
+import org.json.JSONException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,29 +49,30 @@ public class PlanRecommendationEngineStepDefinition {
 //	WebDriver wd;
 //	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
-	public static String PREflow="";
+	public String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
-//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
 		inputValues = DataTableParser.readDataTableAsMaps(data);
-		/*for (int i = 0; i < inputRow.size(); i++) {
-			inputValues.put(inputRow.get(i).getCells().get(0),
-			inputRow.get(i).getCells().get(1));
-		}*/
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
+			//System.out.println("\n\n\n\n\n\n");
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - "+curID+" for the flow "+PREflow);
+			//CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			CommonConstants.PRE_FLOW.put(curID, PREflow);
 		}
 	}
+	
 	boolean if_offline_prod = false, popup_clicked = false;
-	@Given("^the user is on UHC medicare acquisition site landing page$")
-	public void the_user_on_uhc_medicaresolutions_Site() {
+	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_uhc_medicaresolutions_Site(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
-		if_offline_prod = aquisitionhomepage.openPRE();
+		if_offline_prod = aquisitionhomepage.openPRE(inputValues.get("Site"));
 //		aquisitionhomepage.fixPrivateConnection();
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
@@ -100,40 +103,10 @@ public class PlanRecommendationEngineStepDefinition {
 		}
 	}
 	
-	
-	@And("^I select my second Response and go directly to results page$")
-	public void I_click_questionnaire_second()  throws Throwable {
-		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		boolean isResultsPage = planSelectorNewPage.JumpLink();
-		Assertion.assertTrue("Plan Results Page not loaded", isResultsPage);
-	}
-	
-
-	@When("^I click plan detail button$")
-	public void i_click_plan_detail_button() throws Throwable {
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails(County);
-		Assertion.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
-
-	}
-
-
-	@Then("^the user clicks on both top and bottom back to plan options link and validates its redirection$")
-	public void i_should_be_brought_back_to_the_plan_selector_results_page() throws Throwable {
-		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
-		planSelectorNewPage.verifyBackToPlanOptionslink();
-
-	}
-	
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
-		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-//		headerAndFooter.navigationToPlanRecommendationEngine();
-//		headerAndFooter.breadCrumbs();
+		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorhomepage.landingpage();
 	}
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -156,6 +129,12 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		headerAndFooter.navigationToPlanRecommendationEngineViaMedicareArticles();
+}
+	
+	@When("^user navigate to Medicare Education and validate Plan Recommendation Engine Widget$")
+	public void navigate_MedicareEducation() {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		headerAndFooter.navigationToPlanRecommendationEngineViaMedicareEducation();
 }
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -190,7 +169,6 @@ public class PlanRecommendationEngineStepDefinition {
 			headerAndFooter.enterSearchFunction(searchKey);
 			Thread.sleep(5000);	
 		}
-		headerAndFooter.backtoTopFunction();
 	}
 	
 	@And("^clicks on get started button and check error scenarios$")
@@ -273,28 +251,6 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String status = "Negative";
 		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
-	}
-	
-	@Then("^user validate elements in Travel page$")
-	public void elements_travel_page() {
-		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorTravelpage.travelPageElement();
-	}
-	
-	@And("^user selects Travel options in Care Away From Home Page")
-	public void select_travel_page(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		String status = "Positive";
-		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"),status);	
-	}
-	
-	@And("^user validating error scenario in Care Away From Home Page")
-	public void error_travel_page(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineTravelPage planSelectorTravelpage =  new PlanRecommendationEngineTravelPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		String status = "Negative";
-		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"),status);	
 	}
 	
 	@And("^user validate elements in doctors page$")
@@ -430,7 +386,6 @@ public class PlanRecommendationEngineStepDefinition {
       		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
       		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
       		planSelectorDrugspage.comparingDrugwithDCE();
-      		planSelectorDrugspage.continueNextpage();
       	}
       	
       	@Then("^user verify drug list are same in DCE VS Drug page$")
@@ -467,42 +422,6 @@ public class PlanRecommendationEngineStepDefinition {
    		planSelectorDrugspage.drugNotFound(inputValues.get("Search Text"));
    	}
        
-       @And("^user validate elements in pharmacy page$")
-   	public void elements_pharmacy_page() {
-    	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-   		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-//   		headerAndFooter.breadCrumbs();
-   		planSelectorPharmacyepage.pharmacypage();
-   		
-   	}
-   	
-   	@And("^user selects pharmacy option in pharmacy page$")
-   	public void select_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
-   		readfeaturedata(givenAttributes);
-   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-   		String pharmacytype = inputValues.get("Pharmacy Type");
-   		if (!(pharmacytype.isEmpty())) {
-   			planSelectorPharmacyepage.doctorspageFunctional(pharmacytype);
-   		}
-   	}
-   	
-   	@And("^user not selects pharmacy option in pharmacy page$")
-   	public void notselect_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
-   		readfeaturedata(givenAttributes);
-   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-   		String pharmacytype = inputValues.get("Pharmacy Type");
-   		if (pharmacytype.isEmpty()) {
-   			planSelectorPharmacyepage.pharmacypageerror();
-   		}
-   	}
-   	
-   	@And("^user select pharmacy option and Click previous button to check previous page$")
-   	public void previous_pharmacy_page(DataTable givenAttributes) {
-   		readfeaturedata(givenAttributes);
-   		PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-   		planSelectorPharmacyepage.pharmacypagePreviousButton(inputValues.get("Pharmacy Type"));
-   	}
-	
    	@Then("^user validate elements in additional services page$")
    	public void elements_additional_page(DataTable givenAttributes) {
    		readfeaturedata(givenAttributes);
@@ -608,16 +527,17 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.startNowFullFlow(inputValues.get("Plan Type"));
 	}
 	
-	@Then("^user validate drugs details from DCE to VPP and PRE page$")
+	@Then("^user validate drugs details from DCE to PRE page$")
 	public void drugs_DCE_VPP_PRE_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.DrugsDetailsVPPtoPRE();
 	}
 	
 	@Then("^user validate drugs details from VPP to DCE page$")
-	public void drugs_VPP_DCE_page() {
+	public void drugs_VPP_DCE_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.DrugsDetailsVPPtoDCE();
+		planSelectorResultspage.DrugsDetailsVPPtoDCE(inputValues.get("Drugs Name"));
 	}
 	
 	@And("^user navigates to vpp summary page$")
@@ -643,6 +563,13 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.vppToPre();
+   	}
+	
+	@Then("^user clicks on GetStarted button in PRE page$")
+   	public void PRE_GetStarted() {
+		checkpopup();
+		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorhomepage.navigatezipcodepage();
    	}
 	
 	@Then("^user navigate Doctors lookup session in Doctors page$")
@@ -673,7 +600,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_navigates_to_zipcode_page_fromvpp_pdp() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
-		planSelectorResultspage.vppToPre();
+		planSelectorResultspage.DCEtoPRE();
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorhomepage.navigatezipcodepage();
 	}
@@ -797,10 +724,9 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validate UI and API recommendation rankings in results page$")
-   	public void verify_UI_API_rankings_results_page() {
+   	public void verify_UI_API_rankings_results_page() throws JSONException {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
    	}
 	
@@ -857,7 +783,7 @@ public class PlanRecommendationEngineStepDefinition {
    	}
 	
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
-   	public void verify_Future_UI_API_rankings_results_page() {
+   	public void verify_Future_UI_API_rankings_results_page() throws JSONException {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.checkPlanyear("future");
@@ -997,14 +923,14 @@ public class PlanRecommendationEngineStepDefinition {
 		priorities.prioritiesElements();
 	}
 	
-	@Then("^user validate PDP Plan Names in VPP Details and Click Enroll Button in Plan Details page$")
+	@Then("^user validate PDP Plan Names in VPP Details and Click Enroll button in Plan Details page$")
    	public void verify_Plan_names_Enroll_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 	
-	@When("^user validate navigate to Drug Cost Estimator page$")
+	@When("^user navigate to Drug Cost Estimator page$")
 	public void navigate_DCE() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
@@ -1030,26 +956,26 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user save recommendation results and validate in VP$")
-   	public void save_results(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
+   	public void save_results() {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
-		preEditpage.validateSaveResults(inputValues.get("Plan Type"));
+		preEditpage.validateSaveResults();
 	}
+	
+	@Then("^user navigate to visitor profile and open PRE Widget$")
+    public void pre_Widget_open(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+		planSelectorResultspage.ValidatePREWithoutMSPlan(inputValues.get("User Type"));
+    }
 	
 	@And("^user Click on Getstarted in PRE Home Page and Continue till Covergae page$")
     public void I_click_questionnaire_first() {
         PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
         planSelectorhomepage.getStartedContinueZipcode();
     }
-	
-	@Then("^user validate elements in new PRE results page$")
-   	public void elements_new_results_page(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		checkpopup();
-		planSelectorNewResultspage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
-   	}
 	
 	@Then("^user select plans in VPP Summary and navigate to Plan Compare page$")
    	public void verify_Plans_compare_page() {
@@ -1058,10 +984,145 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateMAPlanNamesPlanCompare();
 	}
 	
+	@And("^user validate buttons in SaveResult Model and PRE Widget in VP$")
+	public void btn_SaveResult_Widget(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.navigateSaveResultsPage();
+		preEditpage.PRESaveResultModelBtn();
+		preEditpage.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+	}
+	
 	@Then("^user creates a \"([^\"]*)\" tab from PRE$")
    	public void create_tab(String tabtype) {
 		PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 //		commonutli.creatingTab(tabtype.toUpperCase());
    	}
+	
+	@Then("^user validate recommendation section in PRE Widget on VP$")
+    public void pre_Widget_recom() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.recomPREWidget();
+    }
+	
+	@Then("^user validate a \"([^\"]*)\" buttons from PRE$")
+   	public void btn_tab(String tabtype) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+			planSelectorResultspage.validateLinks(tabtype);
+   	}
+	
+	@Then("^user navigate to visitor profile with saving MS plan$")
+    public void Guest_Profile_MSPlan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.SavingMsplan();
+		preEditpage.shoppingcartNavigation(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+		planSelectorResultspage.ValidatePREWithMSPlan();
+    }
+	
+	@When("^user Sigin visitor profile from PRE$")
+	public void sign_vp(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.SignIn(inputValues.get("User Name"),inputValues.get("Password"));
+	}
+	
+	@Then("^user do browser back from current page$")
+   	public void browser_back() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+			planSelectorResultspage.browserBack();
+   	}
+	
+	/////////////////////////////////////////////////////// New Results Page //////////////////////////////
+	
+	@Then("^user validate elements in PRE results page$")
+   	public void elements_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		planSelectorNewResultspage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+   	}
+	
+	@Then("^user validate pagination in PRE results page$")
+   	public void pagination_new_results_page() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		//checkpopup();
+		planSelectorNewResultspage.validatePagination();
+		//planSelectorNewResultspage.findPlan();
+   	}
+	
+	@Then("^user validate drugDetails in PRE results page$")
+   	public void drugDetails_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		//checkpopup();
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"tile");
+   	}
+	
+	@Then("^user validate doctors info in PRE results page$")
+   	public void doctorDetails_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		//checkpopup();
+		planSelectorNewResultspage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"tile");
+   	}
+	
+	@And("^user selects empty doctors in doctors page$")
+    public void zeroDoctor_doctor_page(DataTable givenAttributes) throws Throwable {
+        readfeaturedata(givenAttributes);
+        PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        planSelectorDoctorspage.addZeroProviders(inputValues.get("Doctors Search Text"));
+     }
+	
+	@Then("^user validate snp info in PRE results page$")
+   	public void snpDetails_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateSNPInfo(inputValues.get("SNPInfo"));
+   	}
+	
+	@Then("^user views plan details from results page$")
+   	public void viewDetails_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+   	}
+	
+	@Then("^user views learn more from results page$")
+   	public void learnMore_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.learnMore(inputValues.get("Learn More"));
+   	}
+
+	@Then("^user validate drugCostModal in PRE results page$")
+   	public void drugDetailsModel_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"model");
+   	}
+	
+	@Then("^user validate showmoreDrug in PRE results page$")
+   	public void drugShowMore_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"show");
+   	}
+	
+	@Then("^user validate showmoreDoctor in PRE results page$")
+   	public void doctorShowMore_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"show");
+   	}
+	
+	@Then("^the user do poc$")
+   	public void poc_new_results_page() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.poc();
+   	}
+
 	
 }
