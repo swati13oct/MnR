@@ -140,7 +140,7 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
       | Password  | <password>      |
     Then user validate recommendation section in PRE Widget on VP
 
-    @regressionAARP
+    @regressionAARP @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password |
       | AARP |   10001 | NO            | New York | None          | Medicaid     | Lookup  | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123 |

@@ -1118,6 +1118,15 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"show");
    	}
 	
+	@Then("^user navigate to visitor profile without saving MS plan$")
+    public void Guest_Profile_NoMSPlan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+		planSelectorResultspage.ValidatePREWithoutMSPlan(inputValues.get("User Type"));
+    }
+	
 	@Then("^the user do poc$")
    	public void poc_new_results_page() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
