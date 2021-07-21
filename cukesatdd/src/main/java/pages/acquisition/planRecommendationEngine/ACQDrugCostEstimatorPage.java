@@ -28,12 +28,10 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
-	
-	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	ArrayList<String> druglistPRE;
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
-	public static ArrayList<String> vppDrugsResults = new ArrayList<String>();
-	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
+	public ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
 
@@ -72,7 +70,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> searchList;
 
-	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
+	@FindBy(css = "#buildyourdruglist button span[class*='tabButtontext ']")
 	private List<WebElement> drugpageButtons;
 	
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
@@ -122,7 +120,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "#nextSummary")
 	private WebElement viewCostButton;
 
-	@FindBy(css = "a[class*='ng-star-inserted']:nth-of-type(1)")
+	@FindBy(css = "a[class*='ng-star-inserted']")
 	private List<WebElement> backtoPlansButton;
 
 	@FindBy(css = "button.delete-drug-confirm")
@@ -130,7 +128,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 // DCE View Drug cost Plans
 	
-	@FindBy(css = "table[class*='yourDrugsTable'] tbody >tr")
+	@FindBy(css = "uhc-list[class*='list-accented'] uhc-list-item")
 	private List<WebElement> drugsNamesinDCE; 
 	
 	@FindBy(css = "span[class*='text-normal']")
@@ -239,12 +237,10 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);
-		validate(drugcount, 60);
-		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
+		int count = drugsListinDCE.size();
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase()+ " " +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
@@ -257,8 +253,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		int count = drugsNamesinDCE.size();
 		DCEDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div[class='align-items-start'] span:nth-of-type(1)")).getText().trim().replace("(Brand)", "").toUpperCase()+ " " +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div>h4")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
 		Collections.sort(DCEDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
@@ -272,11 +267,18 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
     	Assert.assertTrue(PharmacyType.getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 	
+	public void clickDCEAddDrugBtn() {
+		threadsleep(3000);
+    	validate(drugAddBtn);
+    	jsClickNew(drugAddBtn);
+    	threadsleep(2000);
+    	Assert.assertTrue(driver.getCurrentUrl().contains("/estimate-drug-costs.html#/buildyourdruglist"), "Page is not navigated to Add your prescription drugs in DCE");
+	}
+	
 	public void getDruglist(){
 		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
 		druglistPRE = drugPRE.drugnamesList();
 		threadsleep(5000);
-		jsClickNew(drugAddBtn);
 		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}

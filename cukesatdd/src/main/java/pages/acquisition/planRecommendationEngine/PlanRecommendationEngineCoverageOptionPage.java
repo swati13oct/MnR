@@ -122,7 +122,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends GlobalWebElement
 		chooseCoverageOption(planType);
 		if (radioselect.isDisplayed()) {
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("10% Complete"));
+			Assert.assertTrue(pageProgressPercentage.getText().contains("11% Complete"));
 		} else {
 			System.out.println("Plan Type not selected in Coverage Options Page");
 		}
