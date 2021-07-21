@@ -3405,20 +3405,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void Accessibility() {
 
 		pageloadcomplete();
-
+		validateNew(Accessibility);
 		// jsClickNew(Accessibility);
-		switchToNewTabNew(Accessibility);
+		// switchToNewTabNew(Accessibility);
+		//
+		// threadsleep(5000);
+		//
+		// if (driver.getCurrentUrl().contains("accessibility")) {
+		// Assertion.assertTrue(true);
+		// driver.get(CommonConstants.getMainWindowHandle());
+		//
+		//
+		// }
 
-		threadsleep(5000);
-
-		if (driver.getCurrentUrl().contains("accessibility")) {
-			Assertion.assertTrue(true);
-			driver.close();
-			
-
-		}
-
-		
 	}
 
 	public void validateAssistancelink(String language) {
@@ -3462,7 +3461,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(css = "//a[@title='Shop Medicare Advantage Plans']")
+	@FindBy(xpath = "//a[@title='Shop Medicare Advantage Plans']")
 	private WebElement MedicareAdvantagePlans;
 
 	@FindBy(xpath = "//a[@title='Shop Medicare Dual Special Needs Plans']")
@@ -3474,7 +3473,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Shop Medicare Prescription Drug Plans']")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
+	@FindBy(css = "#accordion-1-content > nav > p:nth-child(4) > a")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
@@ -3597,11 +3596,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void MedicarePrescriptionDrugPlans() {
 
-		threadsleep(6);
-		// MedicarePrescriptionDrugPlans.click();
+		pageloadcomplete();
+		scrollToView(shopPlans);
+		jsClickNew(shopPlans);
+	
 		jsClickNew(footerMedicarePrescriptionDrugPlans);
 		threadsleep(5);
-		pageloadcomplete();
+	
 		if (driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assert.assertTrue(true);
 			System.out.println("PDP Plan Page open: URL-->" + driver.getCurrentUrl());
