@@ -338,7 +338,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(xpath = "//a[normalize-space()='Estimate Your Drug Costs']")
+	@FindBy(css = "a[title='Estimate your prescription drug costs']")
 	public WebElement EstimateYourDrugCost;
 
 	@FindBy(id = "search-field")
@@ -1789,7 +1789,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		jsClickNew(EstimateYourDrugCost);
+//		jsClickNew(EstimateYourDrugCost);
+		switchToNewTabNew(EstimateYourDrugCost);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -1799,9 +1800,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
-		MobileLearnAboutMedicare();
-		MobileLearnAboutMedicarePrescProvBenefit();
-
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = openLearnAboutMedicareFromMenu();
+		learnAboutMedicareHomePageMobile.selectIntroductionToMedicareOption("benefits");
 	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
