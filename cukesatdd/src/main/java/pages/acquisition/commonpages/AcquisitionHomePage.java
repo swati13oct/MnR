@@ -5650,7 +5650,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 							+ ActualCallSamTFNMember);
 
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-		validateNew(ActualTFNelement);
+		validate(ActualTFNelement);
 
 		System.out.println("########Validating TFN No in Right Rail########");
 		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
@@ -5757,7 +5757,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateCallpopuponMedsupppage(String TFNXpath, String ExpecetdTFNNo) {
-
+		threadsleep(10);
 		System.out.println("########Validating TFN on Call SAM icon and Call popup for Medsupp#######");
 		CommonUtility.checkPageIsReady(driver);
 
