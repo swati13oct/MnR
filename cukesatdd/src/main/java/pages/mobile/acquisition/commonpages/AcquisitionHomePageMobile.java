@@ -456,7 +456,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
 
-	@FindBy(xpath = "//input[@id='search-field']")
+	@FindBy(css = "#search-field-2")
 	private WebElement EnterSearch;
 
 	@FindBy(xpath = "//button[contains(text(),'Search')]")
@@ -2116,7 +2116,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		// sendkeysMobile(EnterSearch, sv);
 		// sendKeysByCharacter(EnterSearch, sv);
-		sendkeysNew(EnterSearch, sv);
+		sendkeysMobile(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
 
@@ -3086,21 +3086,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validatevisitorprofile() {
 		pageloadcomplete();
+		clickBrowserBackButton();
 
 		if (visitorprofileicon.isDisplayed()) {
 			scrollToView(visitorprofileicon);
-			Actions actions = new Actions(driver);
-			actions.moveToElement(visitorprofileicon).perform();
+			visitorprofileicon.click();
+			// Actions actions = new Actions(driver);
+			// actions.moveToElement(visitorprofileicon).perform();
 			// jsMouseOver(visitorprofileicon);
 			// visitorprofileicon.click();
 			System.out.println("Hover over visitor profile completed");
 		}
 
-		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
-		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+		WebElement CreateProfile = driver.findElement(By.cssSelector(
+				"#landrover > main > app-dashboard-header > header.uhc-profile-header-mobile.position-relative.pt-20.mb-40 > div:nth-child(2) > div > div > a:nth-child(1)"));
+		WebElement VPSignIn = driver.findElement(By.cssSelector(
+				"#landrover > main > app-dashboard-header > header.uhc-profile-header-mobile.position-relative.pt-20.mb-40 > div:nth-child(2) > div > div > a:nth-child(3)"));
 
-		jsClickNew(visitorprofileicon);
+		// jsClickNew(visitorprofileicon);
 
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
@@ -3396,21 +3399,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'Accessibility')]")
+	@FindBy(xpath = "//a[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
 
 	public void Accessibility() {
 
-		// threadsleep(6);
 		pageloadcomplete();
-		// Accessibility.click();
-		jsClickNew(Accessibility);
+
+		// jsClickNew(Accessibility);
+		switchToNewTabNew(Accessibility);
+
 		threadsleep(5000);
-		// Assert.assertEquals(driver.getCurrentUrl(),
-		// "https://www.uhc.com/legal/accessibility");
+
 		if (driver.getCurrentUrl().contains("accessibility")) {
 			Assertion.assertTrue(true);
+			driver.close();
+			
+
 		}
+
+		
 	}
 
 	public void validateAssistancelink(String language) {
@@ -3454,16 +3462,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
+	@FindBy(css = "//a[@title='Shop Medicare Advantage Plans']")
 	private WebElement MedicareAdvantagePlans;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
+	@FindBy(xpath = "//a[@title='Shop Medicare Dual Special Needs Plans']")
 	private WebElement DualSpecialNeedsPlans;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
+	@FindBy(xpath = "//a[@title='Shop Medicare Supplement Insurance Plans']")
 	private WebElement MedicareSupplementInsurancePlans;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
+	@FindBy(xpath = "//a[@title='Shop Medicare Prescription Drug Plans']")
 	private WebElement MedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
@@ -3476,7 +3484,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement BackToTop;
 
 	public void MedicareAdvantagePlans() {
-		threadsleep(6);
+		pageloadcomplete();
+		scrollToView(MedicareAdvantagePlans);
 		// MedicareAdvantagePlans.click();
 		jsClickNew(MedicareAdvantagePlans);
 		threadsleep(5);
@@ -3574,7 +3583,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'aarplink')]")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
 	private WebElement visitAARPHeaderLink;
 
 	public void clickVisitAARPHeaderLink() {
