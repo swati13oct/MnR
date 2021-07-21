@@ -733,6 +733,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	private WebElement tfnHeaderRightRailOLE;
+	
+	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]")
+	private WebElement samChatIcon;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+	private WebElement samChatPopup;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	private WebElement samChatPopupHeader;
+	
+	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+	private WebElement samChatPopupMsg;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6904,6 +6917,38 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(tfnHeaderPopupClose);
 		jsClickNew(tfnHeaderPopupClose);
 		
+	}
+	
+	public void validateSamChatIcon() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(samChatIcon);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Chat Icon not available @@@@@@@@@");
+
+	}
+	
+	public void validateChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(samChatIcon);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+
 	}
 
 }

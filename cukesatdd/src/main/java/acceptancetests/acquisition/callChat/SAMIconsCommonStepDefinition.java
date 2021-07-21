@@ -417,5 +417,13 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateTFNNoonSNPRightRailForOLE(TFNXpath, ExpectedTFNNo);
 	
 	}
+	
+	@Then("^the user validates the chat icon")
+	public void the_user_validates_chat_icon() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateSamChatIcon();
+		aquisitionhomepage.validateChatPopup();		
+	}
 
 }
