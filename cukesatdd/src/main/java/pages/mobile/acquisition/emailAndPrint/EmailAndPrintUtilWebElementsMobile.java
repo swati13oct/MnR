@@ -124,7 +124,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[contains(@id,'printComparison')]")
 	protected WebElement compare_validateprintbutton;
 
-	@FindBy(xpath=".//*[@id='emailComparison']")
+	@FindBy(css="#email-text")
 	protected WebElement compare_validateemailbutton;
 
 	@FindBy(xpath="//*[@id='backtoplansummarypage']")
@@ -136,7 +136,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[contains(@id,'SuccessPopUp')]//form//div[2]//button")
 	protected WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath="//*[@id='email-text']")
+	@FindBy(css="#email-text")
 	protected WebElement validateemailbutton;
 	
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")
@@ -155,7 +155,10 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	protected WebElement validateEmailButtonOnPlanDetails;
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
-	protected WebElement emailPopup;
+	protected WebElement emailPopupPlanDetail;
+	
+	@FindBy(css = "#emailPlanSummaryPopUp")
+	protected WebElement emailPopupPlanSummary;
 	
 	@FindBy(css = ".modal-title")
 	protected WebElement emailModalTitle;

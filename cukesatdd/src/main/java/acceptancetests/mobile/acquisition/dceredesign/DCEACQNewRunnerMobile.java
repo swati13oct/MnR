@@ -620,7 +620,9 @@ public class DCEACQNewRunnerMobile {
 	public void user_clicks_on_Back_to_profile_button() {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.clickBackToProfileBtn();
+//		drugSummaryPage.clickBackToProfileBtn();
+		System.out.println("Clicking 'Return To Profile' link.");
+		drugSummaryPage.clickReturnToProfileLink();
 	}
 
 	@Then("^Back to profile button should be displayed for each plan card$")
@@ -677,11 +679,13 @@ public class DCEACQNewRunnerMobile {
 		scenario.log(
 				"Sneha Dwarakanath - Change made 06/07/2021 - Step Header validation Added --> C for Current, E for Enabled, D for Disabled ");
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 		String StepHeaderFlag = memberAttributesMap.get("Flags");
 		System.out.println("Flags -->>" + StepHeaderFlag);
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		dceStepHeader.validateStepHeader(StepHeaderFlag);
+		System.out.println(">>> Skipping validation on mobile <<< Step headers are not displayed on mobile.");
+//		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+//		dceStepHeader.validateStepHeader(StepHeaderFlag);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")

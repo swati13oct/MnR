@@ -336,13 +336,6 @@ public class DCEACQHomeMobile {
 
 	}
 
-	@When("^user clicks on Add drugs button globally on shopper profile page$")
-	public void user_clicks_on_add_drugs_button_globally() {
-		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.clickAddDrugsBtn();
-	}
-
 	@When("^user saves and updates pharmacy from list$")
 	public void user_saves_and_updates_pharmacy_from_list() {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);

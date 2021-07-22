@@ -65,16 +65,16 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[1]/a")
 	public WebElement medicareAdvantagePlansLink;
 
-	@FindBy(xpath = "//*[@id='accordion-1-button']/div")
+	@FindBy(css = "#accordion-1-button")
 	public WebElement shopPlansExpander;
 
-	@FindBy(xpath = "//*[@id='accordion-2-button']/div")
+	@FindBy(css = "#accordion-2-button")
 	public WebElement toolsAndResources;
 
-	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
+	@FindBy(css = "#accordion-3-button")
 	public WebElement learnAboutMedicareFooterButton;
 
-	@FindBy(xpath = "//*[@id='accordion-4-button']/div")
+	@FindBy(css = "#accordion-4-button")
 	public WebElement more;
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
@@ -349,7 +349,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
 	
-	@FindBy(xpath = "//*[@id='accordion-1-button']/div")
+	@FindBy(css = "#accordion-1-button > svg")
 	public WebElement shopPlans;
 	
 	@FindBy(xpath = "//*[@id='accordion-2-button']/div")

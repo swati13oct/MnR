@@ -1873,15 +1873,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public int checkAllMAPlans() {
-		try {
-			Thread.sleep(5000);
-
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<WebElement> allMAPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+		pageloadcomplete();
+		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");

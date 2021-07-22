@@ -52,7 +52,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	@FindBy(id = "dupIconFlyOut")
+//	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//a[@class='text-small header-link-mobile'][normalize-space()='Or, Sign In to your Profile']")
@@ -512,14 +513,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+	@FindBy(css = "a[dlassetid^='vp_add_drug']")
 	public WebElement AddDrugsGlobal;
 
 	/**
 	 * click edit drugs globally
 	 */
 	public void clickAddDrugsBtn() {
-		AddDrugsGlobal.click();
+		jsClickNew(AddDrugsGlobal);
 	}
 
 	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove Modal:Yes Remove')]")
@@ -557,7 +558,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove Modal:Yes Remove')]")
 	public WebElement ConfirmRemoveDrug;
 
-	@FindBy(xpath = "//a[contains(@dtmname, 'Visitor Profile:Header:Auth:Your Saved Drugs & Pharmacy')]/span[contains(@class, 'uhc-profile-header-nav__item-bottom')]")
+	@FindBy(css = "header[class^='uhc-profile-header-mobile'] a[dtmname$='Header:Auth:Your Saved Drugs & Pharmacy']")
 	public WebElement VPHeader_DrugsLinks;
 
 	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
@@ -574,7 +575,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			while (removeDrugs.size() != 0) {
 				waitforElementNew(removeDrugs.get(0));
 				validateNew(removeDrugs.get(0));
-				removeDrugs.get(0).click();
+				jsClickNew(removeDrugs.get(0));
 				validateNew(ConfirmRemoveDrug);
 				jsClickNew(ConfirmRemoveDrug);
 				System.out.println(removeDrugs.size());
@@ -819,28 +820,36 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		jsClickNew(addDrugsGlobal);
 	}
 
-	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
-	public WebElement expandDrugsPlanCard;
+	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
+    private WebElement viewDrugPricingLink;
 
-	@FindBy(xpath = "//*[text()='Edit Drugs']")
-	public WebElement editDrugsPlanCard;
+	@FindBy(xpath = "//*[contains(@class, 'plan-drug-doctor')]//a[contains(@dtmname, 'Update your drugs')]")
+    private WebElement DrugPricingModal_EditDrugslink;
 
 	/**
 	 * click edit drugs from plan card
 	 */
 	public void clickEditDrugsPlancard() {
-		expandDrugsPlanCard.click();
-		editDrugsPlanCard.click();
+		validateNew(viewDrugPricingLink);
+        viewDrugPricingLink.click();
+        System.out.println("View Drug Pricing is clicked for Plan Card");
+        validateNew(DrugPricingModal_EditDrugslink);
+        jsClickNew(DrugPricingModal_EditDrugslink);
+        System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
 	}
 
 	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
 	public WebElement enterDrugInfoPlanCard;
+	
+	@FindBy(xpath = "(//div[@role='list']/div[starts-with(@class,'d-inline-block')]//a[contains(@dtmname,'Add Drugs')])[1]")
+	public WebElement addDrugLinkFirstPlanCard;
 
 	/**
 	 * click add drugs from plan card
 	 */
 	public void clickAddDrugsPlancardNew() {
-		enterDrugInfoPlanCard.click();
+//		enterDrugInfoPlanCard.click();
+		jsClickNew(addDrugLinkFirstPlanCard);
 	}
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
@@ -851,14 +860,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public void validateAddedPlansNew(List<String> planNames) {
-//		String[] listOfTestPlans = planNames.split(",");
 		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan : planNames) {
-			System.out.println("Checking Saved Plan on VP for : " + plan);
-			WebElement addedPlan = driver.findElement(By.cssSelector("[dtmname$='Card:" + plan + "']"));
-			validateNew(addedPlan);
-			Assertion.assertEquals(plan, addedPlan.getText().trim());
-			System.out.println("Verified plans are added on visitior profile page");
+		for (String plans : planNames) {
+			String[] listOfTestPlans = plans.split(",");
+			for (String plan : listOfTestPlans) {
+				System.out.println("Checking Saved Plan on VP for : " + plan);
+				WebElement addedPlan = driver.findElement(By.cssSelector("[dtmname$='Card:" + plan + "']"));
+				validateNew(addedPlan);
+				Assertion.assertEquals(plan, addedPlan.getText().trim());
+				System.out.println("Verified plans are added on visitior profile page");
+			}
 		}
 	}
 
@@ -950,7 +961,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'identity-confirm')]//button[contains(@class, 'close')]")
 	public WebElement ConfirmIdentity_ModalClose;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+//	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	@FindBy(css = "header[class*='uhc-profile-header-mobile'] a[dtmname$='Sign Out']")
 	public WebElement signOutLink;
 
 	public void logIn(String username, String password) {
@@ -959,10 +971,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			// loginLink.click();
 			jsClickNew(loginLink);
 			waitForPageLoadSafari();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			sendkeysMobile(driver.findElement(By.cssSelector("input#userNameId_input")), username);
+			sendkeysMobile(driver.findElement(By.cssSelector("input#passwdId_input")), password);
 			System.out.println("before signin");
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			System.out.println("before wait");
 			waitForPageLoadSafari();
 			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
@@ -971,29 +983,31 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			WebElement securityAnswer = driver.findElement(By.cssSelector("#UnrecognizedSecAns_input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
-				securityAnswer.sendKeys("name1");
+				sendkeysMobile(securityAnswer, "name1");
 			}
 
 			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
 				System.out.println("Question is related to color");
-				securityAnswer.sendKeys("color1");
+				sendkeysMobile(securityAnswer, "color1");
 			} else {
 				System.out.println("Question is related to phone");
-				securityAnswer.sendKeys("number1");
+				sendkeysMobile(securityAnswer, "number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			try {
-				validateNew(ShareOneHealth_AgreeButton);
-				System.out.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
-				jsClickNew(ShareOneHealth_AgreeButton);
+				if (validate(ShareOneHealth_AgreeButton)) {
+					System.out
+							.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
+					jsClickNew(ShareOneHealth_AgreeButton);
+				}
 
 			} catch (Exception e) {
 				System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
 			}
 			try {
-				validateNew(ConfirmIdentity_ModalHdr);
-				validateNew(ConfirmIdentity_ModalClose);
-				jsClickNew(ConfirmIdentity_ModalClose);
+				if (validate(ConfirmIdentity_ModalHdr) && validate(ConfirmIdentity_ModalClose)) {
+					jsClickNew(ConfirmIdentity_ModalClose);
+				}
 			} catch (Exception e) {
 				System.out
 						.println("Confirm Identity and Import Modal is NOT Dispalyed for VP Login - Continuing to VP");

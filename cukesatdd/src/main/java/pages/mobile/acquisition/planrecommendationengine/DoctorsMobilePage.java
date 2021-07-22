@@ -34,7 +34,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	WerallyMobilePage werally = new WerallyMobilePage(driver);
 	ArrayList<String> werallyResults = new ArrayList<String>();
-	ArrayList<String> confirmationResults = new ArrayList<String>();
+	public ArrayList<String> confirmationResults = new ArrayList<String>();
 
 	// Doctors Page Elements
 
@@ -355,7 +355,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(continueBtn);
 	}
 	
-	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
+	public static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
 	
 	public void addProvidersPRE(String doctorsName, String multiDoctor) {
 				mobileUtils.mobileLocateElementClick(doctorLookupOption);
