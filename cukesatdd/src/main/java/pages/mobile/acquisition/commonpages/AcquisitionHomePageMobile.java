@@ -459,7 +459,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#search-field-2")
 	private WebElement EnterSearch;
 
-	@FindBy(xpath = "//button[contains(text(),'Search')]")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button")
 	private WebElement SubmitBtn;
 
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
@@ -2115,11 +2115,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuSiteSearch();
 
 		// sendkeysMobile(EnterSearch, sv);
-		// sendKeysByCharacter(EnterSearch, sv);
-		sendkeysMobile(EnterSearch, sv);
+		sendKeysByCharacter(EnterSearch, sv);
+		//sendkeysMobile(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
-
+		sleepBySec(4);
 		scrollToView(SubmitBtn);
 
 		jsClickNew(SubmitBtn);
@@ -3476,7 +3476,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#accordion-1-content > nav > p:nth-child(4) > a")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
+	@FindBy(css = "#accordion-3-content > nav > p:nth-child(1) > a")
 	private WebElement MedicareEducation;
 
 	@FindBy(xpath = "//a[@class='back-to-top']")
@@ -3599,10 +3599,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(shopPlans);
 		jsClickNew(shopPlans);
-	
+
 		jsClickNew(footerMedicarePrescriptionDrugPlans);
 		threadsleep(5);
-	
+
 		if (driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assert.assertTrue(true);
 			System.out.println("PDP Plan Page open: URL-->" + driver.getCurrentUrl());
@@ -3619,17 +3619,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void MedicareEducation() {
 		threadsleep(6);
-		// MedicareEducation.click();
+		scrollToView(learnAboutMedicareFooterButton);
+
+		jsClickNew(learnAboutMedicareFooterButton);
 		jsClickNew(MedicareEducation);
-		threadsleep(5);
+	pageloadcomplete();
 		if (driver.getCurrentUrl().contains("medicare-education.html")) {
 			Assert.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
 			Assert.fail("Error loading Medicare Education Homepage link");
 		}
-		// Assert.assertEquals(driver.getCurrentUrl(),
-		// "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
+
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 			Assertion.assertTrue(true);
