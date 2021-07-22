@@ -736,21 +736,28 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "//input[@value='SP']/ancestor::label")
 	public WebElement standardPharmacyTab;
+	
+	@FindBy(css = "#pharmacyswitch input[value='SP']")
+	public WebElement standardPharmacyRadioButton;
 
 	public void validateStandardTab() {
 		waitforElement(standardPharmacyTab);
 		validate(standardPharmacyTab);
-		standardPharmacyTab.click();
+		jsClickNew(standardPharmacyRadioButton);
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
+	@FindBy(xpath = "//input[@value='PP']/ancestor::label")
 	public WebElement preferredPharmacyTab;
+	
+	@FindBy(css = "#pharmacyswitch input[value='PP']")
+	public WebElement preferredPharmacyRadioButton;
 
 	public void validatePreferredTab() {
 		waitforElement(preferredPharmacyTab);
 		validate(preferredPharmacyTab);
-		preferredPharmacyTab.click();
+		jsClickNew(preferredPharmacyRadioButton);
 	}
 
 	public void ValidatesDrugsList_MonthlyDrugStage(String druglist) {
