@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.visitorProfile;
 
 import java.util.HashMap;
@@ -664,3 +665,4 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.clickAddDrugsBtn();
 	}
 }
+

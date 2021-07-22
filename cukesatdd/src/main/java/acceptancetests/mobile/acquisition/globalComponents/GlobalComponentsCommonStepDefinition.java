@@ -20,6 +20,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
@@ -784,6 +785,7 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
+
 	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
 		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
@@ -820,7 +822,6 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-
 
 	@Then("^user validates Subtitle$")
 	public void user_validates_Subtitle(DataTable givenAttributes) throws Throwable {

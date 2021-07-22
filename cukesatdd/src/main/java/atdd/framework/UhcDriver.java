@@ -69,13 +69,13 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
 	public WebElement IPerceptionNoBtn;
 
-	@FindBy(xpath = "//*[@id='Wrapper']/header/div[2]/div[1]/div[4]/span/img")
+	@FindBy(css = "#Wrapper > header > div.brandandnavigation.iparsys.parsys > div.brand.parbase.section > div.nav-toggle > span > p.menu-txt-mob")
 	public WebElement MenuMobile;
 
-	@FindBy(xpath = "//button[@class='icon-mob-btn dropdown-btn']")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > button.icon-mob-btn.dropdown-btn")
 	public WebElement siteSearchTextBox;
 
-	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']/span")
 	public WebElement LearnAboutMedicare;
 
 	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")

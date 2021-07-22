@@ -62,7 +62,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
 
-//	@FindBy(css = "div.signupCTA a.profileBtn")
+	// @FindBy(css = "div.signupCTA a.profileBtn")
 	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
@@ -164,11 +164,50 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	public void validateAddedDrugAndPharmacy(String drug) {
-		// expandDrugBlock.click();//No Expand block seen on mobile
+	@FindBy(css = "h2#saved-drugs-and-doctors")
+	public WebElement savedDrugsAndDoctorsHeader;
+	
+    @FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
+    public WebElement drugHeader;
 
+    @FindBy(css = "h3#saved-drugs")
+    public WebElement savedDrugsHeader;
+
+	public void validateAddedDrugAndPharmacy(String drug) {
+
+		/*
+		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+		 * "Pennsylvania") ||
+		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
+		 * {
+		 */
+		/*
+		 * String State = CommonConstants.getSelectedState(); if
+		 * (StringUtils.equalsIgnoreCase(State, "Virginia")) {
+		 * jsClickNew(expandDrugBlock);
+		 * Assertion.assertTrue(drugname.getText().trim().contains(drug)); } else {
+		 * CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+		 * Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy",
+		 * drugHeader.getText().trim()); jsClickNew(drugHeader);
+		 * Assertion.assertTrue(drugName.getText().trim().contains(drug));
+		 * Assertion.assertEquals("Drugs (1) & Pharmacy",
+		 * savedDrugsHeader.getText().trim());
+		 * Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)"
+		 * , savedDrugsAndDoctorsHeader.getText().trim());
+		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
+		 */
+		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs and Pharmacy")));
+		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
+		// drugHeader.getText().trim());
+		jsClickNew(drugHeader);
+		System.out.println("Drug Name in VP page: " + drugName.getText());
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
-		Assertion.assertTrue(pharmacyAddress.isDisplayed());
+		Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+				savedDrugsAndDoctorsHeader.getText().trim());
+		// Assertion.assertTrue(pharmacyAddress.isDisplayed());
 	}
 
 	public void validateAddedPlans(String planNames) {
