@@ -519,7 +519,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
-    And user closes current tab and navigate to previous tab
+    #And user closes current tab and navigate to previous tab
+    And the user closes the new browser tab
      @CampaignExternal_Scenario1_AARP_Stage @regressionAARP @campaignExternalStage
     Examples: 
       | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                            | defaultPharmacy                                                                            |
