@@ -311,6 +311,7 @@ public abstract class UhcDriver {
 	
 	public void sendKeysByCharacter(WebElement element, String message) {
 		scrollToView(element);
+		element.click();
 		element.clear();
 		jsClickNew(element);
 		for (int i = 0; i < message.length(); i++) {

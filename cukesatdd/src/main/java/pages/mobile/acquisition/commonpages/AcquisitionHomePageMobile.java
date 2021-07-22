@@ -478,13 +478,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
+	@FindBy(css = "#autoWrapper > button > img")
 	private WebElement SecondaryClearBtn;
 
-	@FindBy(xpath = "//input[@id='secondarySearchInput']")
+	@FindBy(css = "#secondarySearchInput")
 	private WebElement SecondarySearchInput;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]/following::button[1]")
+	@FindBy(css = "#secondarySearchBox > div.input-group.is-valid > button")
 	private WebElement SecondarySearchBtn;
 
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
@@ -2046,9 +2046,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void enterSecondarySearchValue(String str) {
 		System.out.println("@@@inside secondary search validation method@@@");
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
-		SecondaryClearBtn.click();
+		//SecondaryClearBtn.click();
+		jsClickNew(SecondaryClearBtn);
 		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
-		SecondarySearchInput.sendKeys(str);
+		//SecondarySearchInput.sendKeys(str);
+		sendKeysByCharacter(SecondarySearchInput, str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
 		// SecondarySearchBtn.click();
 		jsClickNew(SecondarySearchBtn);
