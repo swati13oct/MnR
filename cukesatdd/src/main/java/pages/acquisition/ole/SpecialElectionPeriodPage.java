@@ -512,6 +512,30 @@ public boolean validate_SEP_RadioButton_options() {
 		//jsClickNew(NextBtn);
 		
 		return Validation_Flag;
-}	
-	
 }
+
+	public SpecialElectionPeriodPage select_new_medicare_option(String selectoptions, String optionsData) {
+		validate(ChangingNewMedicareRadio);
+		if(ChangingNewMedicareRadio.isDisplayed()) {
+			jsClickNew(ChangingNewMedicareRadio);
+			if(!validate(OtherReason) && validate(NoneApply)){
+				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
+
+			} else {
+
+				System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+			}
+		}
+
+		jsClickNew(ChangingNewMedicareRadio);
+
+		if(NextBtn.isEnabled()){
+			System.out.println("SEP options selected :  Next button is enabled");
+			return new SpecialElectionPeriodPage(driver);
+		}
+
+		return null;
+	}
+
+}
+
