@@ -1229,8 +1229,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
-		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1682,8 +1682,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
-		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		// validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -3531,7 +3531,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VisitorProfilePageMobile navigateToNewVisitorProfilePage() {
 		try {
 			if (savedPlansPopup.isDisplayed()) {
-				savedPlansPopupCloseIcon.click();
+				jsClickNew(savedPlansPopupCloseIcon);
 			}
 		} catch (Exception e) {
 			System.out.println("Saved Plans modal not displayed");

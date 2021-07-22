@@ -390,21 +390,16 @@ public class DCEACQNewRunnerMobile {
 	}
 
 	@When("^the user saves plan from drug details page$")
-	public void the_user_saves_plan_from_drug_details_page(DataTable givenAttributes) {
+	public void the_user_saves_plan_from_drug_details_page() {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
-		String PlanName = memberAttributesMap.get("planname");
-		System.out.println(PlanName);
-		drugDetailsPage.savePlan(PlanName);
+		drugDetailsPage.savePlan();
 	}
 
 	@And("^user validates the plans on new visitor profile page of AARP site$")

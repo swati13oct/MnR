@@ -1324,8 +1324,8 @@ public class DCEACQHomeMobile {
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		DrugDetailsPageMobile drugDetailsPage = drugSummaryPage.clickViewDrugDetailsForPlan(plantype, planName);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
@@ -1334,9 +1334,8 @@ public class DCEACQHomeMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, PlanName);
 	}
 
 	@Then("^the user validates Drug Costs section$")

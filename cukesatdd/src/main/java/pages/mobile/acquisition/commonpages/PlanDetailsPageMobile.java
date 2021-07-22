@@ -586,8 +586,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		// presDrugTab.get(0).click();
 		jsClickNew(presDrugTab.get(0));
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		jsClickNew(estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
