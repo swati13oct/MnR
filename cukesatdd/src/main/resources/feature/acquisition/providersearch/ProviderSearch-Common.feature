@@ -138,21 +138,21 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        21 | future |
+      |   10001 | AARP |        13 | future |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        21 | future |
+      |   10001 | UHC  |        13 | future |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         12 | future |
+      |   55344 | AARP |         13 | future |
       |   04011 | AARP |         15 | future |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         12 | future |
+      |   55344 | UHC  |         13 | future |
       |   04011 | UHC  |         15 | future |
 
   Scenario Outline: Verify Provider Search plan count in <site> site from Home Page
@@ -167,20 +167,20 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        21 | future |
+      |   10001 | AARP |        13 | future |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        21 | future |
+      |   10001 | UHC  |        13 | future |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         12 | future |
+      |   55344 | AARP |         13 | future |
       |   04011 | AARP |         15 | future |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         12 | future |
+      |   55344 | UHC  |         13 | future |
       |   04011 | UHC  |         15 | future |
 
