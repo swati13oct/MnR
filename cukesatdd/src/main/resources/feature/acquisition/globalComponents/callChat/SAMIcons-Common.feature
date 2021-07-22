@@ -19,7 +19,7 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | site |
       | /        | UHC |
 
-  Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, DCE, Compare, OLE
+  Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, Compare, OLE
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user validates whether call icon is visible
@@ -74,7 +74,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
       
-      Scenario Outline: To test the SAM icons on DCE pages
+    Scenario Outline: To test the SAM icons on DCE pages
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user validates whether call icon is visible
@@ -112,3 +112,33 @@ Feature: ACQ M&R- To test SAM Icons
     Examples: 
       | site | zipCode | planType | planName                                            |drug1|
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|
+      
+      Scenario Outline: To test the SAM icons on PRE pages
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user opens the page to validate M&R Sites
+      | pagename | <pagename> |
+    And user clicks on get started to start questionnaire
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+      And user select plantype in the coverage options page
+      | Plan Type | <isCoverageOpt> |
+      Then user select add drug option in the Drug page
+      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      Then user validate elements in loading results page
+      And the user click on view plan in results page
+      And User clicks on Back to Plans on detail page
+      And the user clicks the plans of the below plan type
+      | Plan Type | <planType> |
+      
+      @samChatAARP123 @regressionAARP
+    Examples: 
+      | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
+      | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
+
+    @samChatUHC @regressionUHC
+    Examples: 
+      | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
+      | UHC |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
