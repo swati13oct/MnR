@@ -23,7 +23,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
-	
+
 	@FindBy(xpath = "//a[text()='Home']")
 	public WebElement breadCrumbHomeLink;
 
@@ -79,8 +79,6 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
 	public WebElement medicareSpecialNeedsPlansLink;
-	
-	
 
 	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[3]")
 	public WebElement medicareSupplementInsurancePlansLink;
@@ -138,30 +136,28 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
-	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	// @FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
 	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
 	public WebElement visitAARPLink;
-	
 
-	
 	@FindBy(id = "search-field")
 	public WebElement searchTxtbox;
-	
+
 	@FindBy(id = "header-tfn-link")
 	public WebElement headerTfn;
-	
+
 	@FindBy(id = "guest-profile")
 	public WebElement visitorProfileFlyoutTitle;
-	
+
 	@FindBy(id = "guest-saved-items-button")
 	public WebElement visitorProfileFlyoutViewSavedItemBtn;
-	
+
 	@FindBy(id = "flyout-drug-button")
 	public WebElement visitorProfileFlyoutAddDrugBtn;
-	
+
 	@FindBy(id = "flyout-plan-button")
 	public WebElement visitorProfileFlyoutAddPlansBtn;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
 	public WebElement visitorProfileFlyoutSignInLink;
 
@@ -277,7 +273,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
 	public WebElement UHCLogo;
 
-	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	// @FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	public WebElement visitorprofileicon;
 
@@ -327,34 +323,37 @@ public class GlobalWebElements extends UhcDriver {
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
-	
+
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
-	
+
 	@FindBy(css = "#ghn_lnk_2")
 	public WebElement shopForAPlan;
-	
-	@FindBy(css = "#subnav_2 .nav-back")
+
+	@FindBy(xpath = "//a[@class='visible-inline-block' and text()='Shop for Medicare Plans ']")
 	public WebElement shopForPlanBackButton;
-	
+
+	@FindBy(css = "#_knon0g5x_mobile_mobile_mobile_mobile_mobile_mobile > span:nth-child(2)")
+	public WebElement medicareSupplimentPlans;
+
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
-	
+
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
-	
+
 	@FindBy(css = "#ghn_lnk_3")
 	public WebElement learnAboutMedicareNavButton;
-	
+
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
-	
+
 	@FindBy(css = "#accordion-1-button > svg")
 	public WebElement shopPlans;
-	
+
 	@FindBy(xpath = "//*[@id='accordion-2-button']/div")
 	public WebElement tools;
-	
+
 	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
 	public WebElement learnMedicare;
 
@@ -479,44 +478,47 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
-		
+
 		pageloadcomplete();
 	}
 
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		jsClickNew(home);
 		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
 	}
-	
+
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
-		jsClickNew(MenuMobile);
-		
-		validateNew(mobileNav, 5);
-		
-		jsClickNew(shopForAPlan);
+		// jsClickNew(MenuMobile);
+		//
+		// validateNew(mobileNav, 5);
+		//
+		// jsClickNew(shopForAPlan);
+
+		MobileMenuToPlanTypes();
+		jsClickNew(medicareSupplimentPlans);
 		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}
 		return null;
 	}
-	
+
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		jsClickNew(learnAboutMedicareNavButton);
 		if (validate(learnAboutMedicareBackButton)) {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		}
 		return null;
 	}
-	
+
 }

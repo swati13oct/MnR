@@ -86,6 +86,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
+	
+	@FindBy(css="#shop-scroll > div.nav-row > div.mob-sctn.section-2.column.column-lg-4 > p")
+	public WebElement PlanTypes;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
@@ -96,7 +99,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
 
-	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
+	@FindBy(css = "#shop-scroll > div.nav-row > div.column.section-1.column-lg-4 > h3:nth-child(1) > a")
 	public WebElement ShopTool;
 
 	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
@@ -173,6 +176,19 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		// jsClickNew(ShopTool);
+	}
+	
+
+	public void MobileMenuToShopToolToShop() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(ShopTool);
+	}
+	
+	public void MobileMenuToPlanTypes() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+	    jsClickNew(PlanTypes);
 	}
 
 	public void MobileMenuToolsToHelp() {

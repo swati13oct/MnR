@@ -236,6 +236,7 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void clickOnMAShopButton() {
+		MobileMenuToShopToolToShop();
 		validateNew(MAShopLink);
 		jsClickNew(MAShopLink);
 		waitForPageLoadSafari();
@@ -249,6 +250,7 @@ public class ShopPage extends UhcDriver {
 	
 	public void clickOnPDPShopButton() {
 		waitForPageLoadSafari();
+		MobileMenuToShopToolToShop();
 		scrollToView(MAShopLink);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
@@ -262,6 +264,7 @@ public class ShopPage extends UhcDriver {
 	}
 	
 	public void clickOnSNPShopButton() {
+		MobileMenuToShopToolToShop();
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
 		waitForPageLoadSafari();

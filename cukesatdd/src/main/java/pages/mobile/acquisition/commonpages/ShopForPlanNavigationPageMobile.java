@@ -132,6 +132,9 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(text(),'Find Plans')]/parent::button")
 	private WebElement findPlansButton;
+	
+	@FindBy(xpath = "//a[@class='visible-inline-block' and text()='Shop for Medicare Plans ']")
+	public WebElement shopForPlanBackButton;
 
 	public ShopForPlanNavigationPageMobile(WebDriver driver) {
 		super(driver);
@@ -141,8 +144,8 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, ShopForaplan, 60);
-		validateNew(ShopForaplan);
+		CommonUtility.waitForPageLoadNew(driver, shopForPlanBackButton, 60);
+		validateNew(shopForPlanBackButton);
 	}
 
 	public EnrollmentBasicsPageMobile enrollLinkOnShopPlan() throws Exception {
@@ -161,6 +164,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
+		
 		selectShopOption("Shop");
 		/*scrollToView(shopLink);
 		waitforElement(shopLink);
@@ -309,6 +313,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	public void selectShopOption(String shopOption) {
 		switch (shopOption.toLowerCase()) {
 		case "shop":
+			jsClickNew(shopForAPlan);
 			jsClickNew(shopLink);
 			break;
 		case "enroll":

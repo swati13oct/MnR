@@ -320,7 +320,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(xpath = "//select[@id='state-select']")
+	@FindBy(css = "#state-select")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -1085,6 +1085,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
+		jsClickNew(more);
 		validateNew(contactLink);
 		contactLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1791,7 +1792,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-//		jsClickNew(EstimateYourDrugCost);
+		// jsClickNew(EstimateYourDrugCost);
 		switchToNewTabNew(EstimateYourDrugCost);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2046,10 +2047,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void enterSecondarySearchValue(String str) {
 		System.out.println("@@@inside secondary search validation method@@@");
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
-		//SecondaryClearBtn.click();
+		// SecondaryClearBtn.click();
 		jsClickNew(SecondaryClearBtn);
 		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
-		//SecondarySearchInput.sendKeys(str);
+		// SecondarySearchInput.sendKeys(str);
 		sendKeysByCharacter(SecondarySearchInput, str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
 		// SecondarySearchBtn.click();
@@ -2122,7 +2123,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		// sendkeysMobile(EnterSearch, sv);
 		sendKeysByCharacter(EnterSearch, sv);
-		//sendkeysMobile(EnterSearch, sv);
+		// sendkeysMobile(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
 		sleepBySec(4);
@@ -2269,9 +2270,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateStateDropDown() {
-		scrollToView(stateDropDown);
-		validateNew(stateDropDown);
+		// scrollToView(stateDropDown);
+		// validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, "California");
+
 		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
@@ -3483,7 +3485,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(css = "#accordion-3-content > nav > p:nth-child(1) > a")
-	private WebElement MedicareEducation;
+	private WebElement medicareEducation;
+
+	@FindBy(css = "#globalContentIdForSkipLink > div > div > div.hero.aem-GridColumn.aem-GridColumn--default--12 > div.hero-root.f588505_hero_newstyle_feature_toggle > div > div.hero-parent > div > div > div.row-hero > div > div > div > h1")
+	private WebElement medicareMadeClearHeader;
 
 	@FindBy(xpath = "//a[@class='back-to-top']")
 	private WebElement BackToTop;
@@ -3628,9 +3633,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(learnAboutMedicareFooterButton);
 
 		jsClickNew(learnAboutMedicareFooterButton);
-		jsClickNew(MedicareEducation);
-	pageloadcomplete();
-		if (driver.getCurrentUrl().contains("medicare-education.html")) {
+		jsClickNew(medicareEducation);
+		validateNew(medicareMadeClearHeader);
+		if (driver.getCurrentUrl().contains("medicare-education")) {
 			Assert.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
