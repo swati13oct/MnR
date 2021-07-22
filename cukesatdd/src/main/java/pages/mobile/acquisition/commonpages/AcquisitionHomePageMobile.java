@@ -3469,7 +3469,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VisitorProfilePageMobile navigateToNewVisitorProfilePage() {
 		try {
 			if (savedPlansPopup.isDisplayed()) {
-				savedPlansPopupCloseIcon.click();
+				jsClickNew(savedPlansPopupCloseIcon);
 			}
 		} catch (Exception e) {
 			System.out.println("Saved Plans modal not displayed");
