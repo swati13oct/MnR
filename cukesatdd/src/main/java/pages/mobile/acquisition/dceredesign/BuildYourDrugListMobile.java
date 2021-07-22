@@ -85,6 +85,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	 * public WebElement reviewDrugCost;
 	 */
 
+	@FindBy(css = "app-uhc-header h2")
+	public WebElement buildYourDrugListHeader;
+	
 	@FindBy(xpath = "//div[contains(@class,'lg-center')]/button[contains(@dtmname,'review drug')]")
 	public WebElement reviewDrugCostButtonFooter;
 
@@ -328,7 +331,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
+	@FindBy(css = "button[id='changePharmacyLink'][class$='block']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[normalize-space()='Drug Cost Details')]")
@@ -554,9 +557,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateBuildDrugListPageDisplayed() {
-		validateNew(EnterDrugNameTxt);
-		validateNew(SearchBtn);
-		validateNew(PreviousBtn);
+		validateNew(buildYourDrugListHeader);
+		validateNew(reviewDrugCostButtonHeader);
+		validateNew(addDrugButton);
 	}
 
 	

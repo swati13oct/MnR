@@ -935,7 +935,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void verifyBackToProfileBtnDisplayed() {
 		try {
-			if (((WebElement) backToProfileBtn).isDisplayed()) {
+			if (validateNew(backToProfileBtn)) {
 				System.out.println("Back to profile button is displayed");
 			}
 		} catch (Exception e) {
@@ -1886,9 +1886,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void clickReturnToProfile() {
 		try {
-			if (returnToProfileLink.isDisplayed()) {
+			if (validateNew(returnToProfileLink)) {
 				System.out.println("Return to profile displayed");
-				returnToProfileLink.click();
+				jsClickNew(returnToProfileLink);
 			}
 
 		} catch (Exception e) {
@@ -1937,12 +1937,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		Assertion.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}
 
-	@FindBy(xpath = "//button//span[text()='Back to Profile']")
-	public List<WebElement> backToProfileBtn;
+	@FindBy(css = "app-uhc-header[currentpage='drugdetails'] + div button[dtmname$='Return to Profile']")
+	public WebElement backToProfileBtn;
 
 	public void clickBackToProfileBtn() {
 		try {
-			backToProfileBtn.get(1).click();
+			jsClickNew(backToProfileBtn);
 			System.out.println("Back to profile clicked");
 		} catch (Exception e) {
 			Assertion.fail("Back to profile not displayed ");

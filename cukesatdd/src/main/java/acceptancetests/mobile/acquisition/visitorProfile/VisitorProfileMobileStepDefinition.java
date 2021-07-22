@@ -137,14 +137,14 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
-
+	
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
-
+		
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
@@ -657,4 +657,12 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.cancelEnrollment(planName);
 	}
+	
+	@When("^user clicks on Add drugs button globally on shopper profile page$")
+	public void user_clicks_on_add_drugs_button_globally() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsBtn();
+	}
 }
+

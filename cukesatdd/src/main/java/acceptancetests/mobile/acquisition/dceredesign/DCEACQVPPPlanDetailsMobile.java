@@ -89,7 +89,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	@And("^I access the DCE Redesign from Plan Details for the plan$")
 	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		System.out.println("plan details page : " + plandetailspage);
 		GetStartedPageMobile getStartedPage = plandetailspage.navigateToDCERedesign();
 		if (null != getStartedPage) {
@@ -240,16 +240,14 @@ public class DCEACQVPPPlanDetailsMobile {
 		
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		System.out.println("plan details ");
 //		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
-			System.out.println("plan details "+plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
-
-		}
+		} else
+			Assertion.fail("VPP Plan Details not loaded");
 	}
 
 	@Then("^the user clicks on Review Drug Costs to Land on Drug DetailsP Page$")

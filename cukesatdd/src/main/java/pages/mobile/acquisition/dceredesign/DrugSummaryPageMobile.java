@@ -914,19 +914,25 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[text()='Return to Profile']")
+//	@FindBy(xpath = "//*[text()='Return to Profile']")
+	@FindBy(css = "a[dtmname='dce:return to profile']")
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {
 
 		validateNew(returnToProfileLink, 3);
-		scrollToView(returnToProfileLink);
 		try {
 			if (returnToProfileLink.isDisplayed()) {
 				System.out.println("Return to profile displayed");
 			}
 		} catch (Exception e) {
 			Assertion.fail("Return to profile not displayed");
+		}
+	}
+	
+	public void clickReturnToProfileLink() {
+		if(validateNew(returnToProfileLink)) {
+			jsClickNew(returnToProfileLink);
 		}
 	}
 
