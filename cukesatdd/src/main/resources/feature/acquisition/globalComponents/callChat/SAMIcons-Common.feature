@@ -14,6 +14,21 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | site |
       | /        | AARP |
       
+      Examples: 
+      | pagename | site |
+      |medicare-education/medicare-eligibility.html|               
+ |medicare-education/medicare-parts-and-medigap-plans.html|   
+ |medicare-education/medicare-benefits.html|  
+ |medicare-education/medicare-advantage-plans.html|           
+ |medicare-education/medicare-supplement-plans.html|          
+ |medicare-education/medicare-part-d.html|                    
+ |medicare-education/medicare-costs.html|                   
+ |medicare-education/when-to-enroll.html|                     
+ |medicare-education/medicare-faq.html|                       
+ |medicare-education.html|                                    
+ |medicare-education/medicare-medicaid-dual-eligibility.html| 
+ |medicare-education/extra-help-program.html|
+      
     @samChatUHC @regressionUHC
     Examples: 
       | pagename | site |
