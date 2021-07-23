@@ -55,7 +55,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
 	protected List<WebElement> distanceDropDown;
 
-	@FindBy(xpath = "//select[@id='plan-type']")
+	@FindBy(xpath = "//*[@id='plan-type']")
 	protected WebElement seletPlandropdown;
 
 	@FindBy(xpath = "//select[@id='plan-type']/option")
@@ -141,7 +141,8 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'pharmacy-info')]/*[contains(@class,'pharmacy-name')]")
 	protected WebElement pharmacyNameLink;
 
-	@FindBy(xpath = "//div[contains(@class,'callus')]")
+//	@FindBy(xpath = "//div[contains(@class,'callus')]")
+	@FindBy(css = "div[class^='rightrailwidgets'] div[class^='callus']")
 	protected WebElement questionsRightRailWidget;
 
 	@FindBy(id = "lang-select")
@@ -166,6 +167,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(css = "#filter_toggle_id")
 	protected WebElement filterToggle;
+	
+	@FindBy(css = "div[class$='accordion'] > div[id^='collapsible']")
+	protected WebElement filterOptions;
 	
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
 	@FindBy(css = "[id*='indian-tribal-label']")

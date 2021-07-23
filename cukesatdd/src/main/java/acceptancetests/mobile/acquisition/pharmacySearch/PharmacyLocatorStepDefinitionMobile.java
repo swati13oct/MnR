@@ -631,7 +631,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void user_clicks_on_pharmacy_link_on_OLE_page() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		PharmacySearchPage pharmacySearchPage = welcomePage.clickPharamcyLinkAndSwitchTab();
+		PharmacySearchPageMobile pharmacySearchPage = welcomePage.clickPharamcyLinkAndSwitchTab();
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 

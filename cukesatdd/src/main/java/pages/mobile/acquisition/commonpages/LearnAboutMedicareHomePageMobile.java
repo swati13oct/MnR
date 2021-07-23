@@ -66,8 +66,82 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	private WebElement lnkEnrollmentBasic;
 	
 	@FindBy(xpath="(//span[contains(text(),'Supplement')])[4]")
-	private WebElement lnkMedicareSupplement;	
-
+	private WebElement lnkMedicareSupplement;
+	
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(2) > p")
+	private WebElement introductionAboutMedicareButton;
+	
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(4) > p")
+	private WebElement typesOfPlansButton;
+	
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(6) > p")
+	private WebElement medicareEnrollmentButton;
+	
+	// Introduction to medicare hamburger flyout locators
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(2) .nav-srch-back")
+	private WebElement introductionAboutMedicareBackButton;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Introduction']")
+	private WebElement introductionLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Eligibility']")
+	private WebElement eligibilityLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Coverage Options']")
+	private WebElement coverageOptionsLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Prescriptions, Providers & Benefits']")
+	private WebElement prescriptionProviderBenefitsLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Medicare Cost Basics']")
+	private WebElement medicareCostBasicsLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Articles and Special Topics']")
+	private WebElement articlesAndSpecialTopicsLink;
+	
+	
+	// Types of plans hamburger flyout locators
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(4) .nav-srch-back")
+	private WebElement typesOfPlansBackButton;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Overview of Plans']")
+	private WebElement overviewOfPlansLink;
+	
+	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Medicare Advantage Plans']")
+	private WebElement medicareAdvantagePlansLink;
+	
+	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Medicare Supplement Insurance']")
+	private WebElement medicareSupplementInsuranceLink;
+	
+	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Medicare Prescription Drug Plans']")
+	private WebElement medicarePrescriptionDrugPlansLink;
+	
+	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Special Needs Plans']")
+	private WebElement specialNeedsPlansLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Medicare FAQ']")
+	private WebElement medicareFAQLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Glossary']")
+	private WebElement glossaryLink;
+	
+	//Medicare Enrollment hamburger flyout locators
+	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(6) .nav-srch-back")
+	private WebElement medicareEnrollmentBackButton;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='When to Enroll']")
+	private WebElement whenToEnrollLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='How to Enroll']")
+	private WebElement howToEnrollLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Changing Plans']")
+	private WebElement changingPlansLink;
+	
+	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Working Past 65']")
+	private WebElement workingPast65Link;
+	
+	
 	public WebElement getLnkMedicareAdvantage() {
 		return lnkMedicareAdvantage;
 	}
@@ -689,6 +763,99 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	}
 
+	
+	public void selectIntroductionToMedicareOption(String option) {
+		if (!introductionAboutMedicareBackButton.isDisplayed()) {
+			jsClickNew(introductionAboutMedicareButton);
+			CommonUtility.waitForPageLoadNew(driver, introductionAboutMedicareBackButton, 10);
+		}
+
+		option = option.toLowerCase();
+
+		switch (option) {
+		case "introduction":
+			jsClickNew(introductionLink);
+			break;
+		case "eligibility":
+			jsClickNew(eligibilityLink);
+			break;
+		case "coverage options":
+			jsClickNew(coverageOptionsLink);
+			break;
+		case "benefits":
+			jsClickNew(prescriptionProviderBenefitsLink);
+			break;
+		case "cost basics":
+			jsClickNew(medicareCostBasicsLink);
+			break;
+		case "articles":
+			jsClickNew(articlesAndSpecialTopicsLink);
+			break;
+		default:
+			throw new IllegalArgumentException(option + " is not available under 'Introduction to Medicare' menu.");
+		}
+	}
+	
+	public void selectTypesOfPlansOption(String planType) {
+		if (!typesOfPlansBackButton.isDisplayed()) {
+			jsClickNew(typesOfPlansButton);
+			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
+		}
+
+		planType = planType.toLowerCase();
+
+		switch (planType) {
+		case "overview of plans":
+			jsClickNew(overviewOfPlansLink);
+			break;
+		case "ma":
+		case "mapd":
+			jsClickNew(medicareAdvantagePlansLink);
+			break;
+		case "medsupp":
+		case "ms":
+			jsClickNew(medicareSupplementInsuranceLink);
+			break;
+		case "pdp":
+			jsClickNew(medicarePrescriptionDrugPlansLink);
+			break;
+		case "snp":
+			jsClickNew(specialNeedsPlansLink);
+			break;
+		case "medicare faq":
+			jsClickNew(medicareFAQLink);
+			break;
+		default:
+			throw new IllegalArgumentException(planType + " is not available under 'Types of Plan' menu.");
+		}
+	}
+	
+	
+	public void selectMedicareEnrollmentOption(String option) {
+		if (!medicareEnrollmentBackButton.isDisplayed()) {
+			jsClickNew(medicareEnrollmentButton);
+			CommonUtility.waitForPageLoadNew(driver, medicareEnrollmentBackButton, 10);
+		}
+
+		option = option.toLowerCase();
+
+		switch (option) {
+		case "when to enroll":
+			jsClickNew(whenToEnrollLink);
+			break;
+		case "how to enroll":
+			jsClickNew(howToEnrollLink);
+			break;
+		case "changing plans":
+			jsClickNew(changingPlansLink);
+			break;
+		case "working past 65":
+			jsClickNew(workingPast65Link);
+			break;
+		default:
+			throw new IllegalArgumentException(option + " is not available under 'Medicare Enrollment' menu.");
+		}
+	}
 
 
 }

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
 
 public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
