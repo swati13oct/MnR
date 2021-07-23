@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -26,8 +25,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.acquisition.ole.SaveandReturnOLEModal;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -456,13 +455,13 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
 	private WebElement pharmacyLink;
 
-	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+	public PharmacySearchPageMobile clickPharamcyLinkAndSwitchTab() {
 		/*
 		 * pharmacyLink.click(); switchToNewTab();
 		 */
 		switchToNewTabNew(pharmacyLink);
 		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageMobile(driver);
 		}
 		return null;
 	}

@@ -32,6 +32,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -5014,6 +5015,13 @@ public class VppPlanCompareMobile {
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
+	}
+	
+	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
+	public void verify_all_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAllDoctors();
 	}
 
 }

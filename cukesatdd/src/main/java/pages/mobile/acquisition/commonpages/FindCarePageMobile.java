@@ -49,7 +49,8 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Clinics')]")
 	public WebElement ClinicsButton;
 	
-	@FindBy(xpath = "//*[text()='Primary Care Clinic']")
+//	@FindBy(xpath = "//*[text()='Primary Care Clinic']")
+	@FindBy(css = "button[data-test-id='PrimaryCareClinic']")
 	public WebElement PrimaryCareClinicButton;
 	
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Medical Groups')]")
