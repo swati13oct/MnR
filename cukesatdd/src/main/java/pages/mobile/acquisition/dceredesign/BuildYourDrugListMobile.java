@@ -546,14 +546,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		return false;
 	}
 	
-	@FindBy(xpath = "//div[contains(@id, 'modal')]//button[contains(@dtmname, 'remove drug:yes')]")
-	public WebElement ConfirmDeleteYesBtn;
-	
 	public void clickOnRemoveButton(String drug) {
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
 		jsClickNew(removeLink);
-		validateNew(ConfirmDeleteYesBtn);
-		jsClickNew(ConfirmDeleteYesBtn);
+		validateNew(removeDrugYesButton);
+		jsClickNew(removeDrugYesButton);
 	}
 
 	public void validateBuildDrugListPageDisplayed() {

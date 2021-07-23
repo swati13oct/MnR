@@ -932,9 +932,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, printPlanDetailsButton, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
-		iosScroll(PlanName_PlanDetails);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : " + planName);
 			return new PlanDetailsPageMobile(driver);
@@ -1683,10 +1683,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	// Learn More changes Start
 	public void validatePlanNameLearnMore(String PlanName) {
-
 		System.out.println("Plan Name : " + PlanName);
-
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(),'" + PlanName + "')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(),'" + PlanName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
 		} else

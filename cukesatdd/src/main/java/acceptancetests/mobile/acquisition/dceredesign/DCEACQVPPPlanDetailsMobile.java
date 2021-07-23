@@ -203,12 +203,9 @@ public class DCEACQVPPPlanDetailsMobile {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		PlanDetailsPageMobile plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
 		if (null != plandetailspage) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		} else
 			Assertion.fail("VPP Plan Details not loaded");
-		
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,drugDetailsPage);
-
 	}
 
 	@Then("^the user Captures Drug costs on Drug Details Page$")
