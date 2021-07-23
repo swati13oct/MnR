@@ -406,7 +406,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void deleteDrug(String deleteDrug) {
 		System.out.println("Drug to be removed : " + deleteDrug);
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
+		WebElement removeLink = driver.findElement(By.cssSelector("button[aria-label^='Remove " + deleteDrug + "']"));
 		jsClickNew(removeLink);
 		
 		validateNew(removeDrugYesButton, 10);
@@ -546,14 +546,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		return false;
 	}
 	
-	@FindBy(xpath = "//div[contains(@id, 'modal')]//button[contains(@dtmname, 'remove drug:yes')]")
-	public WebElement ConfirmDeleteYesBtn;
-	
 	public void clickOnRemoveButton(String drug) {
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
 		jsClickNew(removeLink);
-		validateNew(ConfirmDeleteYesBtn);
-		jsClickNew(ConfirmDeleteYesBtn);
+		validateNew(removeDrugYesButton);
+		jsClickNew(removeDrugYesButton);
 	}
 
 	public void validateBuildDrugListPageDisplayed() {

@@ -55,13 +55,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "#backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 	
+	@FindBy(css = "#backtoprofilepage")
+	private WebElement backToProfilePageLink;
+	
 	@FindBy(xpath = "//div/div[@class='text-semibold text-small text-lg-normal mb-20 ng-binding ng-scope']")
 	private WebElement planAvailableText;
 	
-	@FindBy(xpath = ".//*[@id='printComparison']")
+	@FindBy(css = "#printComparison")
 	private WebElement validateprintbutton;
 
-	@FindBy(xpath = ".//*[@id='emailComparison']")
+	@FindBy(css = "#emailComparison")
 	private WebElement validateemailbutton;
 
 	@FindBy(xpath = ".//*[@id='emailcompareDescription']")
@@ -82,7 +85,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[contains(text(),'Look up')]")
 	private WebElement LookUpYourDoctorLink;
 
-	@FindBy(id = "add-drug")
+	@FindBy(css = "#adddrug")
 	public WebElement addDrug;
 
 	@FindBy(xpath = "//span[text()='Find Care']")
@@ -233,26 +236,26 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;
 
-	@FindBy(xpath = "//*[contains(@id,'yourdrugsheading')]")
+	@FindBy(css = "#yourdrugsheading")
 	private WebElement yourDrugsBanner;
 
 	@FindBy(xpath = "//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Edit Drugs']")
+	@FindBy(css = "[dtmname='Plan Compare:Edit Drugs']")
 	private WebElement editDrugsLink;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']")
+	@FindBy(css = "#your-drugs-table tr[id='printHeadingHide']:nth-child(1) > th")
 	private WebElement DrugSummaryHeader;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
-	private WebElement DrugSummaryCoverageHeader;
+	@FindBy(css = "#your-drugs-table tr:nth-child(2) > td > div[class*='drugcovered']")
+	private List<WebElement> DrugSummaryCoverageRow;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
+	@FindBy(css = "#your-drugs-table tr:nth-child(3) > th span[class*='name']")
 	private WebElement DrugName;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
-	private WebElement DrugCoverageText;
+	@FindBy(css = "#your-drugs-table tr:nth-child(3) table[class$='mobileSectionsDrugs'] td")
+	private List<WebElement> firstAddedDrugCoverageText;
 
 	@FindBy(css = "div.member-info-status>p:nth-child(2)")
 	private WebElement memberName;
@@ -295,21 +298,37 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_PDP;
+	
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	private WebElement proactiveChatExitBtn;
 
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver, 10);
+		if (currentUrl().contains("profile=true"))
+			validateNew(backToProfilePageLink);
+		else
+			validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 20);
 
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
 
 	public VPPPlanSummaryPageMobile backToVPPPage() {
-		backToAllPlansLink.click();
+		jsClickNew(backToAllPlansLink);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -897,12 +916,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
 		validateNew(DrugSummaryHeader);
-		validateNew(DrugSummaryCoverageHeader);
-		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
+		DrugSummaryCoverageRow.stream().forEach(drugCoverage -> validateNew(drugCoverage));
+		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageRow.get(0).getText());
 		validateNew(DrugName);
 		System.out.println("Added Drug Name : " + DrugName.getText());
-		validateNew(DrugCoverageText);
-		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
+		firstAddedDrugCoverageText.stream().forEach(drugCoverage -> validateNew(drugCoverage));
+		System.out.println("Covered or not covered text for plan 1 : " + firstAddedDrugCoverageText.get(0).getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
 
 	}
@@ -1073,12 +1092,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(editDrugsLink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+		validateNew(editDrugsLink);
 		jsClickNew(editDrugsLink);
-		waitforElement(addDrug);
-		if (validate(addDrug)) {
+		if (validateNew(addDrug)) {
 			System.out.println("User is on DCE Page");
 			return new BuildYourDrugListMobile(driver);
 		} else
@@ -1314,16 +1330,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void validateDrugInfo(String drug) {
 		validateNew(backToAllPlansLink);
-		scrollToView(yourDrugsBanner);
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
 		validateNew(DrugSummaryHeader);
-		validateNew(DrugSummaryCoverageHeader);
-		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
+		DrugSummaryCoverageRow.stream().forEach(drugCoverage -> validateNew(drugCoverage));
+		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageRow.get(0).getText());
 		validateNew(DrugName);
 		Assertion.assertTrue("Drug name is not displayed on the plan compare page", DrugName.getText().contains(drug));
-		validateNew(DrugCoverageText);
-		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
+		firstAddedDrugCoverageText.stream().forEach(drugCoverage -> validateNew(drugCoverage));
+		System.out.println("Covered or not covered text for plan 1 : " + firstAddedDrugCoverageText.get(0).getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
 
 	}
@@ -1339,15 +1354,17 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
 	public WebElement viewAllplansButton;
+	
+	@FindBy(css = "#adddrug")
+	public WebElement addDrugButton;
 
-	public GetStartedPageMobile navigateToDCERedesign() {
+	public BuildYourDrugListMobile navigateToDCERedesign() {
 
 		validateNew(addDrugsLink, 30);
-		scrollToView(addDrugsLink);
 		jsClickNew(addDrugsLink);
-		if (validateNew(getStartedTab)) {
+		if (validateNew(addDrugButton)) {
 			System.out.println("User is on DCE Get started Page");
-			return new GetStartedPageMobile(driver);
+			return new BuildYourDrugListMobile(driver);
 		} else
 			return null;
 	}
@@ -1599,25 +1616,25 @@ public class ComparePlansPageMobile extends UhcDriver {
 			validateNew(yourDrugsBanner);
 			validateNew(editDrugsLink);
 			validateNew(DrugSummaryHeader);
-			validateNew(DrugSummaryCoverageHeader);
+			DrugSummaryCoverageRow.stream().forEach(drugCoverage -> validateNew(drugCoverage));
 			System.out.println("Drug Info Modal Closed - Plan Compare page displayed");
 		}
 		
 		
 	
-		@FindBy(xpath = "//button[@id='changePharmacyLink']")
+		@FindBy(css = "#drugdetails div[class*='d-block'] #changePharmacyLink")
 		public WebElement DrugDetails_ChangePharmacyLnk;
 
-		@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
-		public WebElement DrugDetails_DrugCostsHeading;
+		@FindBy(css = ".uhc-card__content")
+		public WebElement DrugDetails_DrugCostsCard;
 
 
 		public DrugDetailsPageMobile clickDrugCostDetails_DrugInfoModal() {
 			validateNew(DrugInfoModal_DrugCostDetailsBtn);
 			jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-			if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+//			CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
+			if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsCard))
 			{
 				return new DrugDetailsPageMobile(driver, "Compare");
 			}
@@ -1668,7 +1685,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 //		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
 		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
+		WebElement TotalDrugCount = driver.findElement(By.xpath("(//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')])[1]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
@@ -1676,7 +1693,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//table[@id='your-drugs-table']//th//span[contains(text(),'"+currentDrug+"')]"));
 
 			if(validateNew(DrugName)) {
 				System.out.println("Plan Compare Page, Validated Drug List for Drug : "+currentDrug);

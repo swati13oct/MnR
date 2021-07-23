@@ -1524,8 +1524,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
-		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		WebElement planCard = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]"));
+		scrollToView(planCard);
+		WebElement drugCost = planCard.findElement(By.xpath(".//*[contains(text(),'Estimated Annual')]/following-sibling::span"));
+		scrollToView(drugCost);
 		System.out.println("Captured drug cost: " + capturedDrugCost);
 		System.out.println("Drug cost on plan summary : " + drugCost.getText());
 		if (drugCost.getText().equals(capturedDrugCost))

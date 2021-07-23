@@ -43,11 +43,14 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 	
-	@FindBy(css = "button[class*='uhc-button'][dtmname$='review drug costs']")
-	public WebElement reviewDrugCostButtonHeader;
+	@FindBy(xpath = "//h2[normalize-space()='Build Your Drug List']")
+	private WebElement buildYourDrugListHeader;
 	
-	@FindBy(css = "div.row:not(.d-none) button[dtmname$='review drug']")
-	public WebElement reviewDrugCostButtonFooter;
+	@FindBy(css = "#adddrug")
+	private WebElement addDrugButtonBuildDrugList;
+	
+	@FindBy(css = "#previousButton")
+	private WebElement previousGetStartedButton;
 	
 	@FindBy(xpath = "//select[contains(@id, 'selectdosage')]")
 	public WebElement SelectDosageDrpDwn;
@@ -128,8 +131,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 
 	public BuildYourDrugListMobile ClickAddDrug() {
 		jsClickNew(AddDrugBtn);
-		CommonUtility.waitForPageLoad(driver, reviewDrugCostButtonHeader, 30);
-		if (validateNew(reviewDrugCostButtonHeader)) {
+		CommonUtility.waitForPageLoad(driver, buildYourDrugListHeader, 30);
+		if (validateNew(addDrugButtonBuildDrugList)) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}

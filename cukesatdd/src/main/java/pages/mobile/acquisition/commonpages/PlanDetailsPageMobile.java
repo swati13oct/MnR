@@ -474,9 +474,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(editDrugLinkPlanCost, 20);
 		jsClickNew(editDrugLinkPlanCost);
 
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+		if (validateNew(BuildDrugPageHeader)) {
+			Assertion.assertTrue("Navigated to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -488,21 +487,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
+	@FindBy(css = "#DrugListDetails")
 	private WebElement editDrugLink;
 
-	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
-	public WebElement BuildDrugPage_EnterDrugNameTxt;
+	@FindBy(xpath = "//h2[normalize-space()='Build Your Drug List']")
+	public WebElement BuildDrugPageHeader;
 
 	public BuildYourDrugListMobile navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+		jsClickNew(editDrugLink);
+		if (validateNew(BuildDrugPageHeader)) {
+			Assertion.assertTrue("Navigated to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -1667,20 +1664,23 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	// LearnMore changes Start
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(css = "div[class*='d-block'] > #changePharmacyLink")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
+	
+	@FindBy(css = "div[class='uhc-card__content']")
+	public WebElement DrugDetails_DrugCostsCard;
 
-	@FindBy(xpath = "//a[@class='cta-button ng-scope' and text()='Learn More']")
+	@FindBy(css = ".waystosave > a[dtmname$='Learn More']")
 	private WebElement learnMore;
 
 	public DrugDetailsPageMobile clickLearnMore() {
 		validateNew(learnMore);
 		jsClickNew(learnMore);
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+//		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsCard)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assertion.fail("Drug Details Page is NOT Displayed");
