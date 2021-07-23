@@ -86,8 +86,8 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
-	
-	@FindBy(css="#shop-scroll > div.nav-row > div.mob-sctn.section-2.column.column-lg-4 > p")
+
+	@FindBy(css = "#shop-scroll > div.nav-row > div.mob-sctn.section-2.column.column-lg-4 > p")
 	public WebElement PlanTypes;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
@@ -177,18 +177,17 @@ public abstract class UhcDriver {
 		jsClickNew(MenuShopForPlanMobile);
 		// jsClickNew(ShopTool);
 	}
-	
 
 	public void MobileMenuToShopToolToShop() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(ShopTool);
 	}
-	
+
 	public void MobileMenuToPlanTypes() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
-	    jsClickNew(PlanTypes);
+		jsClickNew(PlanTypes);
 	}
 
 	public void MobileMenuToolsToHelp() {
@@ -205,7 +204,7 @@ public abstract class UhcDriver {
 		jsClickNew(toolsToChoosePlan);
 		jsClickNew(DCERedesignLink);
 	}
-	
+
 	public void MobileMenuSiteSearch() {
 		jsClickNew(MenuMobile);
 		jsClickNew(siteSearchTextBox);
@@ -316,15 +315,15 @@ public abstract class UhcDriver {
 			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
-//			scrollToView(element);
+			// scrollToView(element);
 			jsClickNew(element);
-			threadsleep(5);  //Adding 5ms wait
+			threadsleep(5); // Adding 5ms wait
 			element.clear();
 			element.sendKeys(message);
 		}
 
 	}
-	
+
 	public void sendKeysByCharacter(WebElement element, String message) {
 		scrollToView(element);
 		element.click();
@@ -659,18 +658,10 @@ public abstract class UhcDriver {
 
 	public void jsClickNew(WebElement element) {
 
-		/*JavascriptExecutor js = (JavascriptExecutor) driver;
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
-				driver.getClass().toString().toUpperCase().contains("IOS")) {
-			scrollToView(element);
-		}
-		js.executeScript("arguments[0].click();", element);*/
-	
-
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			
-			/* To handle iOS specific click problem By: Harshal Ahire*/
-			 
+
+			/* To handle iOS specific click problem By: Harshal Ahire */
+
 			iOSClick(element);
 		} else {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -702,6 +693,7 @@ public abstract class UhcDriver {
 		return true;
 
 	}
+
 	public boolean checkElementisDisabled(WebElement element) {
 		System.out.println("Looking for Element to disable .......");
 		try {
@@ -716,6 +708,7 @@ public abstract class UhcDriver {
 		return true;
 
 	}
+
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")
 				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -735,11 +728,13 @@ public abstract class UhcDriver {
 		}
 		return true;
 	}
-	
+
 	private boolean scrollElementInMobileView(WebElement element) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+			js.executeScript(
+					"arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});",
+					element);
 		} catch (Exception e) {
 			Assertion.fail("The element " + element + " is not found for scrolling into view");
 			return false;
@@ -1189,13 +1184,13 @@ public abstract class UhcDriver {
 		// open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
-		
-		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			System.out.println("Waiting for accepting the open new window alert on iOS device");
 			threadsleep(5000);
 			waitForCountIncrement(1);
 		}
-		
+
 		for (String winHandle : driver.getWindowHandles()) {
 			if (!winHandle.equals(winHandleBefore)) {
 				driver.switchTo().window(winHandle);
@@ -1409,7 +1404,6 @@ public abstract class UhcDriver {
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
-
 	public void clickTextIOSNative(String text) {
 
 		String curHandle = ((IOSDriver) driver).getContext();
@@ -1555,19 +1549,21 @@ public abstract class UhcDriver {
 		System.out.println("All");
 	}
 
-	/*public void jsClickMobile(WebElement element) {
-
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
-			iOSClick(element);
-
-		}
-
-	}*/
+	/*
+	 * public void jsClickMobile(WebElement element) {
+	 * 
+	 * if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
+	 * driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+	 * JavascriptExecutor js = (JavascriptExecutor) driver;
+	 * js.executeScript("arguments[0].click();", element); } else if
+	 * (driver.getClass().toString().toUpperCase().contains("IOS")) {
+	 * 
+	 * iOSClick(element);
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	public String returnDriverStorageJS(String StorageType, String StorageKey) {
 		String ReturnValue = "";
@@ -1694,23 +1690,23 @@ public abstract class UhcDriver {
 
 		return driver.getWindowHandles().size();
 	}
-	
-	
+
 	/**
 	 * Grant memory access on android chrome.
 	 *
 	 * @author amahale
-	 * @param pdfLink the pdf link
+	 * @param pdfLink
+	 *            the pdf link
 	 */
 	public void grantPermissionOnAndroidChrome(WebElement pdfLink) {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
 		String webContext = mobileDriver.getContext();
-		
+
 		jsClickNew(pdfLink);
-		
+
 		WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/button1")));
-		
+
 		Set<String> contexts = mobileDriver.getContextHandles();
 
 		for (String context : contexts) {
@@ -1725,20 +1721,20 @@ public abstract class UhcDriver {
 				}
 			}
 		}
-		
-		sleepBySec(3);						//Added sleep for letting a file to get downloaded.
+
+		sleepBySec(3); // Added sleep for letting a file to get downloaded.
 		mobileDriver.context(webContext);
 	}
-	
-	
+
 	/**
 	 * Gets the downloaded pdf file content on android device.
 	 *
 	 * @author amahale
-	 * @param fileName the file name without .pdf extension
+	 * @param fileName
+	 *            the file name without .pdf extension
 	 * @return the downloaded pdf file content android
 	 */
-	
+
 	public byte[] getDownloadedPdfFileContentAndroid(String fileName) {
 		byte[] content = null;
 		try {
@@ -1752,18 +1748,18 @@ public abstract class UhcDriver {
 
 		return content;
 	}
-	
+
 	/**
 	 * Delete downloaded file from Android device.
 	 * 
-	 * @author amahale
-	 * This is not working as of now.
-	 * Since Appium server needs a flag to be set while starting. this isn't possible on saucelabs as of now
+	 * @author amahale This is not working as of now. Since Appium server needs a
+	 *         flag to be set while starting. this isn't possible on saucelabs as of
+	 *         now
 	 */
 	public void deleteDownloadedFile() {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
-		List<String> removePDFArgs = Arrays.asList("-rf","/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
-		Map<String, Object> removePDFCmd = ImmutableMap.of("command","rm","args", removePDFArgs);
+		List<String> removePDFArgs = Arrays.asList("-rf", "/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
+		Map<String, Object> removePDFCmd = ImmutableMap.of("command", "rm", "args", removePDFArgs);
 		mobileDriver.executeScript("mobile: shell", removePDFCmd);
 	}
 
