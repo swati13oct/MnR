@@ -1,14 +1,12 @@
 package pages.mobile.acquisition.commonpages;
 
-import java.io.BufferedInputStream;
-import java.net.URL;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -21,7 +19,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -32,16 +29,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import io.cucumber.datatable.DataTable;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
-import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class ComparePlansPageMobile extends UhcDriver {
@@ -540,8 +529,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 	}
 	private int findindexofPlan_PlanCompare(String planName) {
-		int index = 1;
-		List<WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));
+		int index = 0;
+		List<WebElement> PlanHeadings = driver.findElements(By.cssSelector("#printPlans th[ng-repeat]"));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -549,9 +538,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		System.out.println("Total Plans displayed - Total elements for Plan Name are : " + PlanHeadings.size());
+		
 		for (WebElement currentPlanColumn : PlanHeadings) {
-			WebElement PlanNameDisplay = driver.findElement(
-					By.xpath("//div[@ng-repeat = 'i in count'][" + index + "]//a[contains(@class,'ng-binding')]"));
+			WebElement PlanNameDisplay = currentPlanColumn.findElement(By.cssSelector("span"));
 			if (validateNew(PlanNameDisplay) && PlanNameDisplay.getText().contains(planName)) {
 				System.out.println("Index for the Plan -" + planName + " in Plan Compare is : " + index);
 				return index;
@@ -1589,13 +1578,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	// START >>>>>  F&F - Added Code for DCE flow - View Drug COsts from View Drug Info Modal
 
-		@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+		@FindBy(css="button[dtmname$='View Drug Information Modal:Drug Cost Details']")
 		private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
 		
 		public void clickViewDrugInfoLinkForPlan(String planName) {
 			int i = findindexofPlan_PlanCompare(planName);
-			WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
+			WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-" + i + "')]"));
 			validateNew(DrugInfoLink);
 			jsClickNew(DrugInfoLink);
 			
@@ -1606,7 +1595,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		}
 		
-		@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+		@FindBy(css="[dtmname$='View Drug Information Modal:Close']")
 		private WebElement DrugInfoModal_CloseBtn;
 
 		public void CloseDrugInfoModal() {
