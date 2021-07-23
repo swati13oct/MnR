@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -350,7 +351,8 @@ public class DCEACQNewRunnerMobile {
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		System.out.println("Drug List before Delete Drug : " + druglist);
-		druglist = druglist.replace("&" + DeleteDrug, "");
+		
+		druglist = Stream.of(druglist.split("&")).filter(drugName -> !drugName.equalsIgnoreCase(DeleteDrug)).collect(Collectors.joining("&"));
 		System.out.println("Updated Drugs List after Delete Drug : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);

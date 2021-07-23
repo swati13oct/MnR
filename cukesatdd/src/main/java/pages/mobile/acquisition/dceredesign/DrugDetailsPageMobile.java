@@ -369,8 +369,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_DrugCostsCard);
-		validateNew(LinkToDrugSummary);
 		validateNew(LinktoExitScenario);
+		if(!LinktoExitScenario.getText().contains("Compare")) {
+            validateNew(LinkToDrugSummary);
+        }
+        /*
+         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+         */
+
 		validateNew(LinktoEditDrugList);
 	}
 
@@ -1153,7 +1159,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
 	}
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
+	@FindBy(css = "button[id='plancompare']")
 	public WebElement DrugCosts_PlanCompareBtn;
 
 	public ComparePlansPageMobile clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
@@ -1198,11 +1204,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+					By.xpath("//*[@buttonid='edityourdrug']//div[starts-with(@class,'d-block')]//p[contains(text(), '"
 							+ currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentAddedDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+					By.xpath("//*[@buttonid='edityourdrug']//p[contains(text(),'"
+														+ currentAddedDrug + "')]/following-sibling::ul//span[normalize-space()='You Pay']/parent::li"));
 			String currentDrugYouPay = DrugYouPay.getText().trim().replace(",", "");
 
 			String ExpectedYouPay = Drugs_YouPay[i];
@@ -1210,7 +1216,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			System.out.println("Displayed Current Drug You Pay : " + currentDrugYouPay);
 			System.out.println("Expected Current Drug You Pay : " + ExpectedYouPay);
 
-			if (validateNew(DrugName) && validateNew(DrugYouPay) && currentDrugYouPay.contentEquals(ExpectedYouPay)) {
+			if (validateNew(DrugName) && validateNew(DrugYouPay) && currentDrugYouPay.contains(ExpectedYouPay)) {
 				System.out.println(
 						"DCE Details Page -  Validated Drug List and You Pay for Drugs Against Compare Page Display");
 			} else
@@ -2037,10 +2043,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
 
-	@FindBy(xpath = "//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+	@FindBy(css = "[dtmname$='Modal:Drug Cost Details']")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
-	@FindBy(xpath = "//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+	@FindBy(css = "#closeIconId")
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
