@@ -981,9 +981,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public ProviderSearchPageMobile validateLookUpYourProviderButton() throws InterruptedException {
-		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
-		iosScroll(lookUpYourProviderTitle);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		Thread.sleep(5000);
@@ -1028,12 +1026,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
-	 * @author bnaveen4
-	 * @param additionalBenefits
-	 *            --> Data table which has the different benefit types To validate
-	 *            all the additional benefits given in the feature file
-	 */
 	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
 		// boolean validationFlag = true;
 		WebElement AdditionalBenefitType;

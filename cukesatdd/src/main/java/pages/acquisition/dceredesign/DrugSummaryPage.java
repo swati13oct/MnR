@@ -62,7 +62,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@id,'priceLinkBtn')])[1]")
 	public WebElement drugPricingLink;
 
-	@FindBy(xpath = "(//button/span[contains(text(),'View Drug Costs')])[1]")
+	@FindBy(xpath = "(//button[contains(@aria-label,'View Drug Costs')])[1]")
 	public WebElement viewDrugCostBtn;
 
 	@FindBy(xpath = "(//button[contains(@aria-label,'View Plan Details') and contains(@class, 'uhc-button--outlined')])[1]")
@@ -92,7 +92,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(xpath = "//*[@id='modal-label'][text()='Select a Pharmacy']")
+	@FindBy(xpath = "(//button[contains(@aria-label,'View Drug Costs')])[1]")
 	public WebElement selectPharmacyHeader;
 
 //	@FindBy(id = "selectPharmcyModalCloseLink")
@@ -114,7 +114,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'mailSelectPharmacyBtn')]")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(xpath = "//*[@role='list']")
+	@FindBy(xpath = "//*[@role='tabpanel']")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
@@ -162,10 +162,10 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::div[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
 	private WebElement pharmacyNameSelected;
 
-	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
+	@FindBy(xpath = "//*[contains(@class,'d-lg-block')]//h3[contains(text(), 'Pharmacy')]/span")
 	private WebElement pharmacyName;
 
 	@FindBy(xpath = "//*[[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/span")
@@ -555,7 +555,7 @@ public class DrugSummaryPage extends UhcDriver {
 		je.executeScript("arguments[0].click()", snpPlanToggle);
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
@@ -660,7 +660,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public DrugDetailsPage clickViewDrugCostBtn() {
-		viewDrugCostBtn.click();
+		jsClickNew(viewDrugCostBtn);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
@@ -797,6 +797,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement DrugsCoveredText;
 
 	public void ValidateNCPharmacyCoveredDrugs() {
+	pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver,planCardHeader, 30 );
 		if (validateNew(DrugsCoveredText)) {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
@@ -1121,6 +1122,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validateNoResultsMsg(String expectedMsg) {
+	pageloadcomplete();
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
 		System.out.println(expectedMsg);
@@ -1159,7 +1161,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
-		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().trim().contains(defaultPharmacy));
 	}
 
 	public void clickKeepUsingPharmacyLink() {
@@ -1332,20 +1334,14 @@ public class DrugSummaryPage extends UhcDriver {
 			validateNew(snpTabHeading);
 			jsClickNew(snpTabHeading);
 		}
-		
-	//	validateNew(headingPlantype);
-		
+	
 		WebElement DrugCost;
-		//if (planTypeHeading.getText().contains(planType)) {
+		
 			DrugCost = driver.findElement(By.xpath("//button[contains(@aria-label,'View Drug Costs "+PlanName+"')]"));
             validateNew(DrugCost);
             jsClickNew(DrugCost);
 
-		//}else 
-		//	Assertion.fail();
 		}
 
 
 }
-
-

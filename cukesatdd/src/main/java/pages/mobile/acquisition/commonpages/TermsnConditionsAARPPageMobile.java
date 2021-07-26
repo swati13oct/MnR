@@ -21,7 +21,7 @@ public class TermsnConditionsAARPPageMobile extends GlobalWebElements{
 		public WebElement header;
 		
 		//@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
-		@FindBy(xpath="(//div[contains(@class,'phone')]//p//span[contains(@class,'paragraph')])[19]")
+		@FindBy(xpath="(//p//span[contains(@class,'paragraph')])[12]")
 		public WebElement pageContent_Para1;
 	
 	public TermsnConditionsAARPPageMobile(WebDriver driver) {

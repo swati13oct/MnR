@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.visitorProfile;
 
 import java.util.HashMap;
@@ -656,4 +657,12 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.cancelEnrollment(planName);
 	}
+	
+	@When("^user clicks on Add drugs button globally on shopper profile page$")
+	public void user_clicks_on_add_drugs_button_globally() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsBtn();
+	}
 }
+

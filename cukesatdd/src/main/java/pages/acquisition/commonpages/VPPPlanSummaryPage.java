@@ -4408,6 +4408,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(drugSummaryLink);
 
 		}
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		return new DrugDetailsPage(driver);
 
@@ -5998,7 +5999,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
 	private WebElement viewSavedPlansBtn;
 
-	@FindBy(xpath = "(//h1[contains(text(),'Your Guest Profile')])[1]")
+	@FindBy(xpath = "//h2[contains(text(),'Your Guest Profile')]")
 	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])")

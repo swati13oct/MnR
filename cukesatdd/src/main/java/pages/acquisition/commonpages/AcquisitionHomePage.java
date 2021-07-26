@@ -436,8 +436,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[contains(@id,'email') and contains(@name, 'email')]")
 	private WebElement samChatEmailField;
 
-	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']//*[contains(@value,'Plan pricing ')]")
+	@FindBy(xpath = "//*[contains(@class,'commonFields')]//*[@class='option']/label[contains(text(),'Plan pricing')]")
 	private WebElement samChatOptions;
+	
+	@FindBy(id = "cancelPreChatForm")
+	private WebElement samChatCancel;
+	
 
 	// @FindBy(xpath
 	// ="//*[contains(@class,'prechat__action-buttons')]//*[contains(@class,'servicepatternBtn
@@ -653,7 +657,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
 	private WebElement CallSamModalMember;
 
-	@FindBy(xpath = "//*[@id='sam-call-modal__title']")
+	@FindBy(xpath = "//*[@id='sam-call-modal']//*[contains(@class,'modal-title')]")
 	private WebElement CallSamModalHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]/..")
@@ -665,7 +669,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[2]")
+	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[4]")
 	private WebElement footertextsectioncallusMedsupp;
 
 	// @FindBy(xpath =
@@ -726,6 +730,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
+	
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	private WebElement tfnHeaderRightRailOLE;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1268,7 +1275,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// while(validate(overlayFilm, 10)) {/**wait*/}
 		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-
+		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
@@ -3316,6 +3323,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(getStarted);
 		// getStarted.click();
 		jsClickNew(getStarted);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
@@ -3339,21 +3347,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		// WebElement DCELink =
-		// driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and
-		// contains(@title, 'prescription drug costs')]"));
+		 //WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 		validateNew(DCELink);
-		jsClickNew(DCELink);
-/*
+		//jsClickNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleCurrent);
-*/
 		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);
@@ -3381,6 +3385,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 10);
 		jsClickNew(DCELink);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
@@ -3430,9 +3435,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(samChatOptions);
 			samChatOptions.click();
 
-			validateNew(CloseChat);
-			CloseChat.click();
-
+			validate(CloseChat);
+			//jsClickNew(CloseChat);
+			samChatCancel.click();
 			driver.switchTo().defaultContent();
 			System.out.println("Page Title---" + driver.getTitle());
 
@@ -3513,7 +3518,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(searchTxtbox);
+		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
 		validateNew(visitorprofileicon);
 		validateVisitorProfileIcon();
@@ -3656,6 +3661,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Navigating to URL : " + NavigateToURL);
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
@@ -3916,111 +3922,102 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(backToTop);
 	}
 
-	public boolean openPRE() {
+	public boolean openPRE(String site) {
 		boolean offline_prod = false;
 		String browser = MRScenario.browserName;
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-devv2-aarp")) {
-				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-devv2-aarp", "digital-devv2").replace(".com/",
-						".com/plan-recommendation-engine.html"), browser);
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-devv2-aarp", "digital-devv2")
+				.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
-				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("team-f")) {
-				startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
-						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
+						.replace(".com/", ".com/plan-recommendation-engine.html#/get-started").replace("www.", ""), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
-				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html")
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started")
 						.replace("www.", ""), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
-						".com/plan-recommendation-engine.html"), browser);
+						".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
-						".com/plan-recommendation-engine.html"), browser);
+						".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
-				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
-				startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+				startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
-				startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+				startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+				startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 						browser);
 				offline_prod = true;
 			}
 		} else { // For jenkins job
-			String jenkinsRunnerFiles = MRScenario.getRunnerFileName();
+			String jenkinsTagLists = MRScenario.getTagLists();
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
+					|| MRScenario.environment.equalsIgnoreCase("team-f")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
-					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
-					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
-					|| MRScenario.environment.equalsIgnoreCase("team-f")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("ULAYER")) {
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1")
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")) {
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
-								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
-							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
-									.replace("www.", ""), browser);
+							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started").replace("www.", ""), browser);
 						else
 							startNewPRE(
-									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 									browser);
 					}
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("BLAYER")) {
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
-								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
-							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started")
 									.replace("www.", ""), browser);
 						else
-							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 									browser);
 					}
-
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("ULAYER"))
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
 						startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
-								".com/plan-recommendation-engine.html"), browser);
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("BLAYER"))
+								".com/plan-recommendation-engine.html#/get-started"), browser);
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
 						startNewPRE(
-								UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 								browser);
 				}
 				offline_prod = true;
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("ULAYER"))
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
 						startNewPRE(
-								AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 								browser);
-					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
-							&& rname.toUpperCase().contains("BLAYER"))
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
 						startNewPRE(
-								UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+								UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 								browser);
 				}
 				offline_prod = true;
@@ -5654,7 +5651,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 							+ ActualCallSamTFNMember);
 
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-		validateNew(ActualTFNelement);
+		validate(ActualTFNelement);
 
 		System.out.println("########Validating TFN No in Right Rail########");
 		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
@@ -5761,7 +5758,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateCallpopuponMedsupppage(String TFNXpath, String ExpecetdTFNNo) {
-
+		threadsleep(10);
 		System.out.println("########Validating TFN on Call SAM icon and Call popup for Medsupp#######");
 		CommonUtility.checkPageIsReady(driver);
 
@@ -6018,8 +6015,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -6189,8 +6187,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
-		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+		//validateNew(footertextsectioncallus);
+		validateNew(tfnHeaderRightRailOLE);
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -6499,7 +6498,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		case "When to Enroll":
 			Assertion.assertTrue("Navigation to Enrollment Basics page failed",
-					driver.getCurrentUrl().contains("when-to-enroll"));
+					driver.getCurrentUrl().contains("enrollment-and-changing-plans"));
 			break;
 
 		case "Medicare FAQ":

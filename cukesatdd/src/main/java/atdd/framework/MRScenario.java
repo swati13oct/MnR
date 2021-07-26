@@ -84,6 +84,7 @@ public class MRScenario {
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 
 	public static String environment = System.getProperty("environment");
+	//public static String environment = "prod";
 	public static String browsername = "chrome";
 	public static String browserName;
 	public static String isTestHarness;
@@ -125,6 +126,22 @@ public class MRScenario {
 	
 	public static void setRunnerFileName(String runnerFile) {
 		runnerFileName.set(runnerFile);
+	}
+	
+	public static String getTagLists() {
+		GlobalBeforeHook beforeHook = new GlobalBeforeHook();
+		List<String> tagsList = beforeHook.getTagsList();
+		 StringBuilder strbul=new StringBuilder();
+	        for(String str : tagsList)
+	        {
+	            strbul.append(str);
+	        }
+	        String tagsLists=strbul.toString();
+		return tagsLists;
+	}
+	
+	public static void setTagList(String tagName) {
+		runnerFileName.set(tagName);
 	}
 
 	public static final String USERNAME = "gpdadmin1";
@@ -325,10 +342,11 @@ public class MRScenario {
 
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
-
+			System.out.println("@@@propertyFilePath@@"+propertyFilePath);
 			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
 					.append(CommonConstants.PROPERTY_FILE_NAME);
 			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+			System.out.println("@@@IS@@"+is);
 			try {
 				prop.load(is);
 			} catch (IOException e) {

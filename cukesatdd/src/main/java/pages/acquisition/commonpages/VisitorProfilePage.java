@@ -112,7 +112,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
 	private WebElement profileCrntYrPlans;
 
-    @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	@FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[1]")
     public WebElement AddMyDrugsBtn;
 
 	// New Shopper profile page objects
@@ -321,7 +321,7 @@ public class VisitorProfilePage extends UhcDriver {
 		 * , savedDrugsAndDoctorsHeader.getText().trim());
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
-		CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
 	     Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
 	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
@@ -329,94 +329,10 @@ public class VisitorProfilePage extends UhcDriver {
 	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
 	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 	             savedDrugsAndDoctorsHeader.getText().trim());
-	     Assertion.assertTrue(pharmacyAddress.isDisplayed());
+	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		
 	}
-	 
-	/**
-	 * Select plans and compare
-	 * 
-	 * @param plans
-	 * @return
-	 */
-	public void compareAPlan(String plans) {
-		WebElement compareaPlan;
-		if (plans.equals("PDP")) {
-			compareaPlan = driver
-					.findElement(By.xpath("//*[contains(@dtmname,'Prescription Drug Plans:Compare Plan')]"));
-		} else if ((plans.equals("MAPD")) || (plans.equals("MA"))) {
-			compareaPlan = driver
-					.findElement(By.xpath("//*[contains(@dtmname,'Medicare Advantage Plans:Compare Plan')]"));
-			System.out.println("MAPD plan");
-		} else {
-			compareaPlan = driver.findElement(By.xpath("//*[contains(@dtmname,'Compare Plan')]"));
-		}
-
-		jsClickNew(compareaPlan);
-		System.out.println("adding plans to compare");
-
-	}
-
-
-	@FindBy(xpath = "//*[contains(@id,'ErrorMsg')][contains(text(),'Save at least two')]")
-	private WebElement errMsgCompareplans;
-
-	public void validateFailureMsg(String planType) {
-		
-		String errorMessage = errMsgCompareplans.getText();
-
-		if(planType.equals("PDP")) {
-			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Prescription Drug Plans to compare", errorMessage);
-				}
-		else if(planType.equals("MA") || planType.equals("MAPD")) {
-			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Medicare Advantage Plans to compare", errorMessage);
-		}
-		else
-		{Assertion.assertEquals("Error message text doesnot match", "*Save at least two ", errorMessage);
-		}
-	}
-
-		
-	@FindBy(xpath = "//*[contains(@dtmname,'Next')]")
-	private WebElement nextBtnMS;
-
-	public WelcomePage enrollInMSPlan(String planName) {
-
-		WebElement EnrolledPlan = driver.findElement(
-				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"));
-		jsClickNew(EnrolledPlan);
-
-		waitforElementDisapper(
-				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"), 5);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, nextBtnMS, 30);
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
-
-	}
-
-	public WelcomePage enrollInPlan(String planName) {
-
-		WebElement EnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Enroll " + planName + "']"));
-		jsClickNew(EnrolledPlan);
-
-		waitforElementDisapper(By.xpath("//button[@aria-label='Enroll " + planName + "']"), 5);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
-
-
-	}
-
+	
 	public void validateAddedPlans(String planNames) {
         String[] listOfTestPlans = planNames.split(",");
 
@@ -1349,6 +1265,89 @@ public class VisitorProfilePage extends UhcDriver {
 		jsClickNew(removeLink);
 	//	validateNew(DeleteYesBtn);
 		jsClickNew(DeleteYesBtn);
+	}
+	
+	/**
+	 * Select plans and compare
+	 * 
+	 * @param plans
+	 * @return
+	 */
+	public void compareAPlan(String plans) {
+		WebElement compareaPlan;
+		if (plans.equals("PDP")) {
+			compareaPlan = driver
+					.findElement(By.xpath("//*[contains(@dtmname,'Prescription Drug Plans:Compare Plan')]"));
+		} else if ((plans.equals("MAPD")) || (plans.equals("MA"))) {
+			compareaPlan = driver
+					.findElement(By.xpath("//*[contains(@dtmname,'Medicare Advantage Plans:Compare Plan')]"));
+			System.out.println("MAPD plan");
+		} else {
+			compareaPlan = driver.findElement(By.xpath("//*[contains(@dtmname,'Compare Plan')]"));
+		}
+
+		jsClickNew(compareaPlan);
+		System.out.println("adding plans to compare");
+
+	}
+
+
+	@FindBy(xpath = "//*[contains(@id,'ErrorMsg')][contains(text(),'Save at least two')]")
+	private WebElement errMsgCompareplans;
+
+	public void validateFailureMsg(String planType) {
+		
+		String errorMessage = errMsgCompareplans.getText();
+
+		if(planType.equals("PDP")) {
+			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Prescription Drug Plans to compare", errorMessage);
+				}
+		else if(planType.equals("MA") || planType.equals("MAPD")) {
+			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Medicare Advantage Plans to compare", errorMessage);
+		}
+		else
+		{Assertion.assertEquals("Error message text doesnot match", "*Save at least two ", errorMessage);
+		}
+	}
+
+		
+	@FindBy(xpath = "//*[contains(@dtmname,'Next')]")
+	private WebElement nextBtnMS;
+
+	public WelcomePage enrollInMSPlan(String planName) {
+
+		WebElement EnrolledPlan = driver.findElement(
+				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"));
+		jsClickNew(EnrolledPlan);
+
+		waitforElementDisapper(
+				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"), 5);
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, nextBtnMS, 30);
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+
+	}
+
+	public WelcomePage enrollInPlan(String planName) {
+
+		WebElement EnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Enroll " + planName + "']"));
+		jsClickNew(EnrolledPlan);
+
+		waitforElementDisapper(By.xpath("//button[@aria-label='Enroll " + planName + "']"), 5);
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+
 	}
  }
 

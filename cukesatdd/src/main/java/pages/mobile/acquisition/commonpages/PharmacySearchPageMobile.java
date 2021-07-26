@@ -1004,10 +1004,12 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		
 		if(!isFilterExpanded) {
 			jsClickNew(filterToggle);
+			CommonUtility.waitForPageLoad(driver, filterOptions, 10);
 		}
 		
 		jsClickNew(indian_tribal_label_filter);
 		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		
 		//CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		if (!noPharmaciesErrorMessage.isDisplayed()) {
 			//CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
