@@ -51,11 +51,11 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Enroll']")
 	private WebElement enrollLink;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Member Resources']")
 	private WebElement memberResourcesLink;
-	
-	@FindBy (css = "nav-zipcode")
+
+	@FindBy(css = "nav-zipcode")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
@@ -63,28 +63,28 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
-	
+
 	@FindBy(css = "#subnav_2 div[class*='section-1']")
 	private WebElement shopForPlanContainer;
-	
+
 	@FindBy(css = "#subnav_2 .nav-back")
 	private WebElement shopPlanBack;
-	
+
 	@FindBy(xpath = "//p[contains(@class,'dropdown-btn')][normalize-space()='Plan Types']")
 	private WebElement planTypesTab;
-	
+
 	@FindBy(css = "div[class*='mob-sctn section-2'] > div[class*='container']")
 	private WebElement planTypesContainer;
-	
+
 	@FindBy(css = "div[class*='mob-sctn section-2'] span[class='nav-srch-back']")
 	private WebElement planTypeBack;
-	
+
 	@FindBy(xpath = "//p[contains(@class,'dropdown-btn')][normalize-space()='Tools to help you choose a plan']")
 	public WebElement toolsToChoosePlanTab;
-	
+
 	@FindBy(css = "div[class*='mob-sctn section-3'] > div[class*='container']")
 	private WebElement toolsContainer;
-	
+
 	@FindBy(css = "div[class*='mob-sctn section-3'] span[class='nav-srch-back']")
 	private WebElement toolsToChooseBack;
 
@@ -96,25 +96,25 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "(//a[contains(@href,'/shop/prescription-drug-plans.html')])[2]")
 	private WebElement pdpLeanHowToshopLink;
-	
+
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
 	private WebElement maLeanHowToshopLink;
 
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[3]")
 	private WebElement msLeanHowToshopLink;
-	
+
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
-	
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation']")
 	private WebElement getPlanRecommendation;
-	
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	private WebElement drugCostEstimator;
-	
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
 	private WebElement pharmacySearch;
-	
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	private WebElement providerSearch;
 
@@ -126,13 +126,13 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
-	
+
 	@FindBy(css = "#nav-zipcode")
 	private WebElement zipcodeField;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'Find Plans')]/parent::button")
 	private WebElement findPlansButton;
-	
+
 	@FindBy(xpath = "//a[@class='visible-inline-block' and text()='Shop for Medicare Plans ']")
 	public WebElement shopForPlanBackButton;
 
@@ -144,19 +144,19 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, shopForPlanBackButton, 60);
-		validateNew(shopForPlanBackButton);
+		CommonUtility.waitForPageLoadNew(driver, ShopForaplan, 60);
+		validateNew(ShopForaplan);
 	}
 
 	public EnrollmentBasicsPageMobile enrollLinkOnShopPlan() throws Exception {
-		
+
 		selectShopOption("Enroll");
-		/*waitforElement(enrollLink);
-		scrollToView(enrollLink);
-		jsClickNew(enrollLink);*/
+		/*
+		 * waitforElement(enrollLink); scrollToView(enrollLink); jsClickNew(enrollLink);
+		 */
 		Thread.sleep(4000);
 		if (validate(maLeanHowToEnrollLink)) {
-//			waitforElement(maLeanHowToEnrollLink);
+			// waitforElement(maLeanHowToEnrollLink);
 			System.out.println("OLE Learn More Modal is Displayed");
 			return new EnrollmentBasicsPageMobile(driver);
 		}
@@ -164,11 +164,11 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
-		
+
 		selectShopOption("Shop");
-		/*scrollToView(shopLink);
-		waitforElement(shopLink);
-		jsClickNew(shopLink);*/
+		/*
+		 * scrollToView(shopLink); waitforElement(shopLink); jsClickNew(shopLink);
+		 */
 		Thread.sleep(4000);
 		return new ShopPage(driver);
 
@@ -247,13 +247,13 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='updates-email']")
 	private WebElement requestshoppageemailaddress;
-	
+
 	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
 	private WebElement requestplaninformationShopsubmit;
-	
+
 	@FindBy(xpath = "(//p[contains(text(),'Your guide will arrive in your inbox')])[2]")
 	private WebElement requestplaninformationshopsubmitpopup;
-	
+
 	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
 	private WebElement RequestPlanInformationShoppages_ErrorMessage;
 
@@ -282,7 +282,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		validateNew(requestshoppageemailaddress);
 		sendkeysMobile(requestshoppageemailaddress, EmailAddress);
 		System.out.println("Email Address is enetered : " + EmailAddress);
-		
+
 		scrollToView(requestplaninformationShopsubmit);
 		validateNew(requestplaninformationShopsubmit);
 		jsClickNew(requestplaninformationShopsubmit);
@@ -308,8 +308,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 			return null;
 		}
 	}
-	
-	
+
 	public void selectShopOption(String shopOption) {
 		switch (shopOption.toLowerCase()) {
 		case "shop":
@@ -330,8 +329,8 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public void selectPlanTypeOption(String planType, boolean classicUrl) {
-		
-		if(!planTypesContainer.isDisplayed()) {
+
+		if (!planTypesContainer.isDisplayed()) {
 			jsClickNew(planTypesTab);
 		}
 		switch (planType.toLowerCase()) {
@@ -348,7 +347,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 				jsClickNew(MedSuppClassicUrl);
 			else
 				jsClickNew(msLeanHowToshopLink);
-			
+
 			break;
 		case "pdp":
 			jsClickNew(pdpLeanHowToshopLink);
@@ -360,7 +359,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public void selectTool(String tool) {
-		if(!toolsContainer.isDisplayed()) {
+		if (!toolsContainer.isDisplayed()) {
 			jsClickNew(toolsToChoosePlanTab);
 		}
 		switch (tool.toLowerCase()) {
@@ -382,82 +381,80 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
-	
+
 	public boolean validateShopForPlanMenu() {
 		boolean validateMenuOptions = false;
-		
+
 		try {
 			scrollToView(shopLink);
 			validateMenuOptions = shopLink.isDisplayed();
-			
+
 			scrollToView(enrollLink);
 			validateMenuOptions = validateMenuOptions && enrollLink.isDisplayed();
-			
+
 			scrollToView(memberResourcesLink);
 			validateMenuOptions = validateMenuOptions && memberResourcesLink.isDisplayed();
-			
+
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
 		}
 		return validateMenuOptions;
-		
+
 	}
-	
+
 	public boolean validatePlanTypeMenu() {
 		boolean validatePlanTypeOptions = false;
 
-		if(!planTypesContainer.isDisplayed()) {
+		if (!planTypesContainer.isDisplayed()) {
 			jsClickNew(planTypesTab);
 		}
 		try {
 			validatePlanTypeOptions = maLeanHowToshopLink.isDisplayed();
-			validatePlanTypeOptions = validatePlanTypeOptions &&  dsnpLeanHowToshopLink.isDisplayed();
-			
-			validatePlanTypeOptions = validatePlanTypeOptions && (msLeanHowToshopLink.isDisplayed() || MedSuppClassicUrl.isDisplayed());
-			
+			validatePlanTypeOptions = validatePlanTypeOptions && dsnpLeanHowToshopLink.isDisplayed();
+
+			validatePlanTypeOptions = validatePlanTypeOptions
+					&& (msLeanHowToshopLink.isDisplayed() || MedSuppClassicUrl.isDisplayed());
+
 			validatePlanTypeOptions = validatePlanTypeOptions && pdpLeanHowToshopLink.isDisplayed();
-			
+
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Plan Types menu");
 		}
-		
+
 		jsClickNew(planTypeBack);
 		return validatePlanTypeOptions;
-		
+
 	}
-	
-	
+
 	public boolean validateToolsMenu() {
 		boolean validateToolsOptions = false;
 
-		if(!toolsContainer.isDisplayed()) {
+		if (!toolsContainer.isDisplayed()) {
 			jsClickNew(toolsToChoosePlanTab);
 		}
 		try {
 			validateToolsOptions = getPlanRecommendation.isDisplayed();
-			validateToolsOptions = validateToolsOptions &&  drugCostEstimator.isDisplayed();
-			
+			validateToolsOptions = validateToolsOptions && drugCostEstimator.isDisplayed();
+
 			validateToolsOptions = validateToolsOptions && pharmacySearch.isDisplayed();
-			
+
 			validateToolsOptions = validateToolsOptions && providerSearch.isDisplayed();
-			
+
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Tools menu");
 		}
 		jsClickNew(toolsToChooseBack);
 		return validateToolsOptions;
-		
+
 	}
-	
-	
+
 	public void searchPlanForZipcodeFromShopMenu(String zipcode) {
 		sendkeysMobile(zipcodeField, zipcode);
 		jsClickNew(findPlansButton);
 	}
-	
-	
+
 	public boolean checkForClassicURL(String state) {
-		//This list can be a constant rather than updating in each page class 
+		// This list can be a constant rather than updating in each page class
 		List<String> classicUrlStates = Arrays.asList("Oregon");
 		return classicUrlStates.contains(state);
 	}
