@@ -4539,11 +4539,40 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			jsClickNew(visitAARPHeaderLink);
-			proceedToLeaveAARP();
+			// waitForPageLoadSafari();
+			Set<String> winHandles = driver.getWindowHandles();
+			for (String win : winHandles) {
+				// if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
+				if (!win.equals(CommonConstants.getMainWindowHandle())) {
+					driver.switchTo().window(win);
+					proceedToLeaveAARP();
+					if (!driver.getCurrentUrl().contains("aarp.org")) {
+						Assertion.fail("Visit AARP link did not lead to the right page");
+					} else {
+						Assertion.assertTrue("Navigated to AARP org page", true);
+					}
+					driver.close();
+					break;
+				}
+			}
+			// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		}
+
+	}
+	public void clickVisitAARPHeaderLinkforcancel() {
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			jsClickNew(visitAARPHeaderLink);
+			//proceedToLeaveAARP();
+			cancelLeaveAARPRedirect();
 			// CommonUtility.checkPageIsReadyNew(driver);
-			if (!driver.getCurrentUrl().contains("aarp.org"))
+			if (driver.getCurrentUrl().contains("aarp.org")) {
 				Assertion.fail("Visit AARP link did not lead to the right page");
+			} else {
+				Assertion.assertTrue("Navigated to AARP org page", true);
+			}
 		}
 
 	}
@@ -4732,12 +4761,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
+		//validateNew(memberSignInPage);
+				//CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+				Actions action = new Actions(driver);
+				action.moveToElement(planMemberLink).perform();
+				validateNew(goToMemberSiteLink);
+				String parentWindow = driver.getWindowHandle();
+				jsClickNew(goToMemberSiteLink);
+				//jsClickNew(memberSignInPage);
+				sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -4762,19 +4794,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("****************member signin Page is not loaded ***************");
 		}
 		// ViewMedicareplanlinks.click();
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
+				validateNew(ViewMedicareplanlinks);
+				CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+				//String parentWindow1 = driver.getWindowHandle();
+				jsClickNew(ViewMedicareplanlinks);
+				sleepBySec(3);
+				//Set<String> tabs_windows1 = driver.getWindowHandles();
+				//Iterator<String> itr1 = tabs_windows1.iterator();
+				/*while (itr1.hasNext()) {
+					String window = itr1.next();
+					if (!parentWindow1.equals(window)) {
+						driver.switchTo().window(window);
+					}
+				}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
 		String prodURL = "https://www.aarpmedicareplans.com/";
