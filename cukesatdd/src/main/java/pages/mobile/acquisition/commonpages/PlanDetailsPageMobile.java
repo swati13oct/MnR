@@ -1102,7 +1102,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		Assertion.assertTrue("Default tab " + tabName + " not displayed", defaultSelectedTab.getText().equals(tabName));
 	}
 
-	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	@FindBy(css = ".currentpharmacy > p[class='ng-binding'][ng-show*='pharmacyName']")
 	private WebElement pharmacyPrescriptionDrugTab;
 
 	public void verifyPharmacyAdded(String pharmacyName) {
@@ -1111,10 +1111,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Pharmacy did not match on plan details page with DCE");
 	}
 
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	@FindBy(css = "table[class$='drug-list-table'] tr:nth-child(2) >td > strong")
 	private WebElement presDrugTabDrugInfoCell;
 
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
+	@FindBy(css = ".totals span:not([class$='hide']) > strong")
 	private WebElement presDrugTabAnnualCostValueCell;
 
 	public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {

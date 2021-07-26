@@ -689,24 +689,36 @@ public class DCEACQNewRunnerMobile {
 	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_build_your_drug_list_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		BuildYourDrugListMobile buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		BuildYourDrugListMobile buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();*/
+		System.out.println("Step header not displayed on mobile. Clicking 'Edit Your Drug List' link on Drug details page.");
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		BuildYourDrugListMobile buildDrugListPage = drugDetailsPage.clickEditYourDrugsLink();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Drug Details Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_drug_details_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		DrugDetailsPageMobile drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();
+		System.out.println("Step header not displayed on mobile. Clicking 'Review Drug Costs' button.");
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		DrugDetailsPageMobile drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();*/
+		
+		BuildYourDrugListMobile buildDrugListPage =  (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugDetailsPageMobile drugDetailsPage = buildDrugListPage.navigateToDrugDetailsPage();
+		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Drug Summary Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_drug_summary_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		DrugSummaryPageMobile drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
+		System.out.println("Step header not displayed on mobile. Clicking 'View drug costs for all plans in your area' link.");
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();*/
+		
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugSummaryPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 

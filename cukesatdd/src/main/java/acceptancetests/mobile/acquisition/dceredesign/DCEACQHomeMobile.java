@@ -169,14 +169,26 @@ public class DCEACQHomeMobile {
 	public void the_user_validates_default_view_for_Plan_Effective_Date() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateDefaultPED();
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=drugDetailsPage.getAcqTestEnvSysTime(testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envMonth=tmpDate[0];
+		System.out.println("TEST - sysTimeMonth = "+envMonth);
+		String envTimeYear=tmpDate[tmpDate.length-1];
+		System.out.println("TEST - sysTimeYear = "+envTimeYear);
+		drugDetailsPage.validateDefaultPED(envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_MONTH, envMonth);
 	}
 
 	@Then("^the user validates Reset effective date$")
 	public void the_user_validates_Reset_effective_date() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateResetEffectiveDate();
+		String envTimeYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+		drugDetailsPage.validateResetEffectiveDate(envTimeYear);
 	}
 
 	@Then("^the user validate no bar is displayed for November and December$")
@@ -301,6 +313,9 @@ public class DCEACQHomeMobile {
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
+		
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 		String drugName = memberAttributesMap.get("SelectDrugRecommendation");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()

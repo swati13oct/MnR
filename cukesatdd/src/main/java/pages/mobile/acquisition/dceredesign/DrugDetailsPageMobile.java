@@ -65,10 +65,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "button[id='changePharmacyLink'][class$='block']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
+	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link']")
 	public WebElement LinktoExitScenario;
 
 //	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -1053,14 +1053,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println("Monthly Value: " + monthlyValue.getText());
 	}
 
-	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
-	private WebElement breaCrumbLink;
-
+	@FindBy(css = "#drugdetails>div:nth-child(1) div>a[class^='uhc-link-button']")
+	private WebElement breadCrumbLink;
+	
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
-				breaCrumbLink.getText().trim().equals(breadCrumb));
+				breadCrumbLink.getText().trim().equals(breadCrumb));
 	}
-
+	
 	public void validatePharmacy() {
 		validateNew(pharmacyName);
 		assertTrue(pharmacyName.getText().contains("WALGREENS"));
@@ -1341,7 +1341,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		saveDrugBtn.click();
 	}
 
-	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")
+	@FindBy(css = "#drugdetails #buttoncontainer + div > span:nth-child(2)")
 	private WebElement PharmacyNameText;
 
 	public void validatePharmacyName(String PharmacyName) {
@@ -1380,11 +1380,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		saveDrugBtn.click();
 	}
 
-	public void validateResetEffectiveDate() {
+	public void validateResetEffectiveDate(String envYear) {
 		validateNew(ResetEffectiveDateLink);
-		ResetEffectiveDateLink.click();
+		jsClickNew(ResetEffectiveDateLink);
 		CommonUtility.waitForPageLoad(driver, BarChart, 30);
-		validateDefaultPED();
+		validateDefaultPED(envYear);
 	}
 
 	@FindBy(xpath = "//div[@id='monthlycostdetails']")
@@ -1437,14 +1437,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void validateNoBarChartDisplayforNovDec() {
 		validateNew(ChangePED_DropDown);
-		scrollToView(ChangePED_DropDown);
-		ChangePED_DropDown.click();
+		jsClickNew(ChangePED_DropDown);
 		validateNew(ChangePED_DropDown_List);
-		WebElement NovemberMonthOption = driver.findElement(By.xpath(
-				"//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'November')]"));
-		NovemberMonthOption.click();
-		scrollToView(ChangePED_ModalContinueBtn);
-		ChangePED_ModalContinueBtn.click();
+		WebElement NovemberMonthOption = driver.findElement(By.cssSelector("ul[aria-labelledby='changeeffective'] > li[aria-label^='November']"));
+		jsClickNew(NovemberMonthOption);
+		validateNew(ChangePED_ModalContinueBtn);
+		jsClickNew(ChangePED_ModalContinueBtn);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
 		if (validate(BarChart)) {
@@ -1452,14 +1450,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for November Effective Date Selection");
 		}
 		validateNew(ChangePED_DropDown);
-		scrollToView(ChangePED_DropDown);
-		ChangePED_DropDown.click();
+		jsClickNew(ChangePED_DropDown);
 		validateNew(ChangePED_DropDown_List);
-		WebElement DecemberMonthOption = driver.findElement(By.xpath(
-				"//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'December')]"));
-		DecemberMonthOption.click();
-		scrollToView(ChangePED_ModalContinueBtn);
-		ChangePED_ModalContinueBtn.click();
+		WebElement DecemberMonthOption = driver.findElement(By.cssSelector("ul[aria-labelledby='changeeffective'] > li[aria-label^='December']"));
+		jsClickNew(DecemberMonthOption);
+		jsClickNew(ChangePED_ModalContinueBtn);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
 		if (validate(BarChart)) {
@@ -1475,25 +1470,24 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//b")
 	public WebElement ChangePED_ModalText;
 
-	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'conti')]/span")
+	@FindBy(css = "button[dtmname$='monthly cost details modal:continue']")
 	public WebElement ChangePED_ModalContinueBtn;
 
-	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'close')]/img")
+	@FindBy(css = "#cancelicon")
 	public WebElement ChangePED_ModalCloseicon;
 
-	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'cancel')]/span")
+	@FindBy(css = "button[dtmname$='monthly cost details modal:cancel']")
 	public WebElement ChangePED_ModalCancelBtn;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'reset effective date')]")
+	@FindBy(css = "#reseteffective")
 	public WebElement ResetEffectiveDateLink;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
+	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
 	public WebElement EffectiveDateTextafterChange;
 
 	public void validateChangePEDandModalandChangeDisplay() {
 		validateNew(ChangePED_DropDown);
-		scrollToView(ChangePED_DropDown);
-		ChangePED_DropDown.click();
+		jsClickNew(ChangePED_DropDown);
 		validateNew(ChangePED_DropDown_List);
 		WebElement NextMonthOption = ChangePED_MonthNames.get(0);
 
@@ -1510,8 +1504,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assert.fail("Change Effective Modal Text validation Failed. DIsplayed Month Year - "
 					+ ChangePED_ModalText.getText());
 		}
-		scrollToView(ChangePED_ModalContinueBtn);
-		ChangePED_ModalContinueBtn.click();
+		jsClickNew(ChangePED_ModalContinueBtn);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
 		Month = Month.substring(0, 3);
@@ -2075,13 +2068,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				pharmacyName.getText().contains(defaultPharmacy));
 	}
 
-	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Annual Period') and contains(text(), '(January 1 Effective Date)')]")
+	@FindBy(xpath = "//*[contains(@id, 'monthlycostcontainer')]//span[contains(text(), 'Annual Period')]")
 	public WebElement PlanEffective_DefaultText;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]/*[contains(text(), 'Change Start Date')]")
+	@FindBy(css = "#changeeffective")
 	public WebElement ChangePED_DropDown;
 
-	@FindBy(xpath = "//*[contains(@id, 'monthlyCostDetailsImg')]//*[contains(text(), 'Bar Chart')]")
+	@FindBy(css = "#monthlyCostDetailsImg")
 	public WebElement BarChart;
 
 	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Jan')]")
@@ -2120,7 +2113,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Dec')]")
 	public WebElement BarChart_Dec;
 
-	public void validateDefaultPED() {
+	public void validateDefaultPED(String envYear) {
 		validateNew(PlanEffective_DefaultText);
 		validateNew(ChangePED_DropDown);
 		validateNew(BarChart_Jan);
@@ -2135,8 +2128,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(BarChart_Oct);
 		validateNew(BarChart_Nov);
 		validateNew(BarChart_Dec);
-		System.out.println(
-				"Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+		Assertion.assertTrue(">>>>>>> Plan Effective Default text does not display current year <<<<<<<<<<<   : "+PlanEffective_DefaultText.getText(),PlanEffective_DefaultText.getText().contains(envYear) );
+		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED -->>  "+PlanEffective_DefaultText.getText());
 	}
 
 	public String getMonthNameforMonthNo(int envMonth) {
@@ -2158,16 +2151,15 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		return MonthMap.get(month);
 	}
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]")
+	@FindBy(css = "ul[aria-labelledby='changeeffective']")
 	public WebElement ChangePED_DropDown_List;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li")
+	@FindBy(css = "ul[aria-labelledby='changeeffective'] > li")
 	private List<WebElement> ChangePED_MonthNames;
 
 	public void validateChangePEDDropDwn(String envMonth, String envTimeYear) {
 		validateNew(ChangePED_DropDown);
-		scrollToView(ChangePED_DropDown);
-		ChangePED_DropDown.click();
+		jsClickNew(ChangePED_DropDown);
 		// jsClickNew(ChangePED_DropDown);
 		validateNew(ChangePED_DropDown_List);
 		int monthNo = Integer.parseInt(envMonth);
@@ -2195,8 +2187,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			}
 			nextMonthNo++;
 		}
-		scrollToView(ChangePED_DropDown);
-		ChangePED_DropDown.click();
+		jsClickNew(ChangePED_DropDown);
 	}
 
 	public void validateDetailsForDrugInYourDrugs(String drugName, String drugQuantity, String drugFrequency,
@@ -2233,5 +2224,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		} else {
 			return null;
 		}
+	}
+	
+	public BuildYourDrugListMobile clickEditYourDrugsLink() {
+		validateNew(LinktoEditDrugList);
+		jsClickNew(LinktoEditDrugList);
+		return new BuildYourDrugListMobile(driver);
 	}
 }
