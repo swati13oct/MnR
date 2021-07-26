@@ -40,7 +40,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
     @getStartedNBA_PDP_UHC02 @authenticatedNBAPDPUHC02 @sanity
     Examples: 
-      | UHC | chargersqa@23 | Password@3 | NO | 10001 | New York County | PDP |
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      |
 
   @NBAAuthenticatedMAPD @authenticated @decRelease
   Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page for <plantype> plantype

@@ -31,10 +31,12 @@ public class SwitchToGenericMobile extends UhcDriver {
 	 * WebElement GenericDrugRadio;
 	 */
 
-	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+//	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	@FindBy(css = "#modal-label")
 	public WebElement SwitchPageHeader;
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+//	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	@FindBy(css = "#cancelicon")
 	public WebElement SwitchPageCloseBtn;
 	
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
@@ -74,8 +76,14 @@ public class SwitchToGenericMobile extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(SwitchPageHeader);
 		validateNew(SwitchPageCloseBtn);
+		
+		scrollToView(AddDrugBtn);
 		validateNew(AddDrugBtn);
+		
+		scrollToView(supplyLengthDrpDwn);
 		validateNew(supplyLengthDrpDwn);
+		
+		scrollToView(QuantityTxt);
 		validateNew(QuantityTxt);
 	}
 
@@ -145,7 +153,8 @@ public class SwitchToGenericMobile extends UhcDriver {
 	}
 	
 	
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile ClickSwitch_ReturnSummaryPage() {

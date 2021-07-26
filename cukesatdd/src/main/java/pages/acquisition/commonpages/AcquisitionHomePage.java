@@ -3519,7 +3519,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(searchTxtbox);
+		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
 		validateNew(visitorprofileicon);
 		validateVisitorProfileIcon();
@@ -3662,6 +3662,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Navigating to URL : " + NavigateToURL);
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
@@ -6498,7 +6499,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		case "When to Enroll":
 			Assertion.assertTrue("Navigation to Enrollment Basics page failed",
-					driver.getCurrentUrl().contains("when-to-enroll"));
+					driver.getCurrentUrl().contains("enrollment-and-changing-plans"));
 			break;
 
 		case "Medicare FAQ":

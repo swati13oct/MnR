@@ -26,11 +26,11 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SaveandReturnOLEModal;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 
 public class WelcomePageMobile extends UhcDriver {
 
@@ -470,13 +470,13 @@ public class WelcomePageMobile extends UhcDriver {
 	}
 
 
-	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+	public PharmacySearchPageMobile clickPharamcyLinkAndSwitchTab() {
 		/*
 		 * pharmacyLink.click(); switchToNewTab();
 		 */
 		switchToNewTabNew(pharmacyLink);
 		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageMobile(driver);
 		}
 		return null;
 	}
