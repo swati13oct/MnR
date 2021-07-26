@@ -1140,12 +1140,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validate twitter button from social share
     Then the user validate email button from social share
 
-    @validateSocialShareComponentAARP
+    @validateSocialShareComponentAARP @avengersRegressionAARP
     Examples:
       | site | geoState | path                                                                                                |
       | AARP | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
 
-    @validateSocialShareComponentUHC
+    @validateSocialShareComponentUHC @avengersRegressionUHC
     Examples:
       | site | geoState | path                                                                                                |
       | UHC  | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
