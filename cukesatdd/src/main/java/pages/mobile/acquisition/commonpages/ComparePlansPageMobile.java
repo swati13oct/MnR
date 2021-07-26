@@ -599,7 +599,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navigateBackToAllPlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
-		BackToAllPlan.click();
+		jsClickNew(BackToAllPlan);
 		System.out.println("Back to all plan is clicked");
 		try {
 			Thread.sleep(10000);

@@ -1056,10 +1056,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		/*
-		 * scrollToView(footerAboutUsLink); validateNew(footerAboutUsLink);
-		 * jsClickNew(footerAboutUsLink);
-		 */
 		accessFooterLinkFromMore("about");
 		pageloadcomplete();
 		// validateNew(footerLinkHeader, 30);
@@ -1085,8 +1081,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		validateNew(contactLink);
-		contactLink.click();
+		accessFooterLinkFromMore("contact");
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
