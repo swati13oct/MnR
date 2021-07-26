@@ -30,7 +30,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state  | code |
       | UHC  | Alaska | AK   |
 
-  @globalheaderULayer @sandy
+  @globalheaderULayer 
   Scenario Outline: To verify links displayed in the global header of <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
