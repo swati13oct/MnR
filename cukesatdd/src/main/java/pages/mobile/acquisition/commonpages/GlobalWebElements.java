@@ -341,6 +341,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
 	
+	@FindBy(css = ".mob-menu-header button[class^='icon-mob-btn'][onclick*='Search']")
+	private WebElement siteSearchButton;
+	
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
 	
@@ -491,6 +494,14 @@ public class GlobalWebElements extends UhcDriver {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
+	}
+	
+	
+	public void openSiteSearchFromMenu() {
+		jsClickNew(MenuMobile);
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(siteSearchButton);
 	}
 	
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
