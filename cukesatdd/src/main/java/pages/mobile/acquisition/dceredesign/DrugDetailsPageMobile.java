@@ -1053,14 +1053,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println("Monthly Value: " + monthlyValue.getText());
 	}
 
-	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
-	private WebElement breaCrumbLink;
-
+	@FindBy(css = "#drugdetails>div:nth-child(1) div>a[class^='uhc-link-button']")
+	private WebElement breadCrumbLink;
+	
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
-				breaCrumbLink.getText().trim().equals(breadCrumb));
+				breadCrumbLink.getText().trim().equals(breadCrumb));
 	}
-
+	
 	public void validatePharmacy() {
 		validateNew(pharmacyName);
 		assertTrue(pharmacyName.getText().contains("WALGREENS"));
