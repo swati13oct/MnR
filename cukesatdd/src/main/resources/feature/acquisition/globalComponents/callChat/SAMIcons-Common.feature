@@ -16,18 +16,269 @@ Feature: ACQ M&R- To test SAM Icons
       
       Examples: 
       | pagename | site |
-      |medicare-education/medicare-eligibility.html|               
- |medicare-education/medicare-parts-and-medigap-plans.html|   
- |medicare-education/medicare-benefits.html|  
- |medicare-education/medicare-advantage-plans.html|           
- |medicare-education/medicare-supplement-plans.html|          
- |medicare-education/medicare-part-d.html|                    
- |medicare-education/medicare-costs.html|                   
- |medicare-education/when-to-enroll.html|                     
- |medicare-education/medicare-faq.html|                       
- |medicare-education.html|                                    
- |medicare-education/medicare-medicaid-dual-eligibility.html| 
- |medicare-education/extra-help-program.html|
+      |medicare-education/medicare-eligibility.html|AARP|               
+ |medicare-education/medicare-parts-and-medigap-plans.html|AARP|   
+ |medicare-education/medicare-benefits.html|AARP|
+ |medicare-education/medicare-advantage-plans.html|AARP|           
+ |medicare-education/medicare-supplement-plans.html|AARP|          
+ |medicare-education/medicare-part-d.html|AARP|                    
+ |medicare-education/medicare-costs.html|AARP|                   
+ |medicare-education/when-to-enroll.html|AARP|                     
+ |medicare-education/medicare-faq.html|AARP|                       
+ |medicare-education.html|AARP|                                    
+ |medicare-education/medicare-medicaid-dual-eligibility.html|AARP| 
+ |medicare-education/extra-help-program.html|AARP|
+ | medicare-education/extra-help-program.html|AARP|                 
+ |shop.html|AARP|                                                 
+ |shop/connect|AARP|                                              
+ |shop/compare.html|AARP|                                         
+ |shop/estimate.html|AARP|                                        
+ |shop/switch.html|AARP|                                          
+ |shop/medicare-advantage-plans.html|AARP|                        
+ |shop/medicare-supplement-plans.html|AARP|                       
+ |shop/prescription-drug-plans.html|AARP|                         
+ |shop/dual-special-needs-plans.html|AARP|                        
+ |safe-shopping.html|AARP|                                        
+ |shop/compare/compare-pdp.html|AARP|                             
+ |shop/compare/compare-ma.html|AARP|                              
+ |shop/estimate/ma-costs.html|AARP|                               
+ |shop/estimate/pdp-costs.html|AARP|                              
+ |shop/medicare-advantage-plans/wellness-discounts.html|AARP|     
+ |shop/medicare-advantage-plans/health-care-management.html|AARP| 
+ |shop/medicare-advantage-plans/ma-plan-benefits.html|AARP|       
+ |shop/renew-active.html|AARP|                                    
+ |shop/medicare-advantage-veteran-plan.html|AARP|                 
+ |shop/estimate/ms-costs.html|AARP|                               
+ |shop/compare/compare-ma-ms.html|AARP|                           
+ |shop/compare/compare-ms.html|AARP|                              
+ |enroll.html|AARP|                                               
+ |enroll/ma-enrollment.html|AARP|                                 
+ |enroll/pdp-enrollment.html|AARP|                                
+ |enroll/ms-apply.html|AARP|                                      
+ |resources.html|AARP|                                               
+ |resources/medication-therapy-management-program.html|AARP|         
+ |resources/how-to-appoint-a-representative.html|AARP|               
+ |resources/prescription-drug-costs-help.html|AARP|                  
+ |resources/healthcare-fraud.html|AARP|                              
+ |resources/how-to-pay-your-premium.html|AARP|                       
+ |resources/mail-order-pharmacy.html|AARP|                           
+ |resources/prescription-drug-appeals.html|AARP|                     
+ |resources/prescription-drug-transition.html|AARP|                  
+ |resources/disenrollment-information.html|AARP|                     
+ |resources/ma-pdp-information-forms.html|AARP|                      
+ |resources/ma-pdp-information-forms/member-rights.html|AARP|        
+ |resources/ma-pdp-information-forms/medicare-appeal.html|AARP|      
+ |resources/ma-pdp-information-forms/explanation-benefits.html|AARP| 
+ |health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details|AARP| 
+ |health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details|AARP|   
+ |health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details|AARP| 
+ |health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details|AARP|   
+ |health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary|AARP|                                                                                                    
+ |health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary|AARP|                                                                                                                           
+ |profile/guest|AARP|                                                                                                                                                                                                                                                                                                                 
+|health-plans/aarp-pharmacy.html#/Pharmacy-Search-English|AARP|
+ |about-us.html|AARP|                                                                                                                                                                                                                                                                                                                 
+ |sitemap.html|AARP|                                                                                                                                                                                                                                                                                                                  
+ |terms-of-use.html|AARP|                                                                                                                                                                                                                                                                                                             
+ |disclaimer.html|AARP|                                                                                                                                                                                                                                                                                                               
+ |contact-us.html|AARP|                                                                                                                                                                                                                                                                                                               
+ |privacy-policy.html|AARP|                                                                                                                                                                                                                                                                                                           
+ |medicare-articles.html|AARP|                            
+ |medicare-articles/medicare-made-clear.html|AARP|        
+ |medicare-articles/eligibility-and-enrollment.html|AARP| 
+|medicare-articles/medicare-benefits-and-coverage.html|AARP|  
+ |medicare-articles/medicare-costs.html|AARP|             
+|about-our-plans.html|AARP|
+|shop-medicare-coverage.html|AARP|
+|health-insurance-brokers.html|AARP|
+|health-plans/medicare-advantage-plans/resources-plan-material.html|AARP|
+|shop/medicare-advantage-plans/california.html|AARP|
+|shop/medicare-advantage-plans/florida.html|AARP|
+|shop/medicare-advantage-plans/massachusetts.html|AARP|
+|shop/medicare-advantage-plans/northcarolina.html|AARP|
+|shop/medicare-advantage-plans/arizona.html|AARP|
+|shop/connect/agentebrc.html|AARP|
+|medicare-education/how-to-enroll-in-medicare.html|AARP|
+|medicare-education/changing-plans.html|AARP|
+|medicare-education/medicare-initial-enrollment-period.html|AARP|
+|medicare-education/medicare-while-working.html|AARP|
+|medicare-education/medicare-coverage-examples.html|AARP|
+|medicare-education/medicare-glossary.html|AARP|
+|medicare-education/wp65-guide.html|AARP|
+|medicare-education/iep-guide.html|AARP|
+|medicare-education/medicare-videos/working-past-65-when-you-may-be-able-to-delay-medicare.html|AARP|
+|medicare-education/medicare-videos/working-past-65-when-you-have-to-enroll-at-65.html|AARP|
+|medicare-education/medicare-videos/what-to-know-about-medicare-part-d-when-still-working.html|AARP|
+|medicare-education/medicare-videos/learn-what-happens-to-your-hsa-with-medicare.html|AARP|
+|medicare-education/medicare-videos/cobra-and-medicare.html|AARP|
+|medicare-education/medicare-videos/medicare-enrollment-when-retiring-at-65.html|AARP|
+|plan-documents.html|AARP|
+ |medicare-articles/medicare-benefits-and-coverage.html|AARP|                                                       
+ |medicare-articles/medicare-costs.html|AARP| 
+ |medicare-articles.html|AARP|                                                                                      
+ |medicare-articles/medicare-made-clear.html|AARP|                                                                  
+ |medicare-articles/eligibility-and-enrollment.html|AARP|                                                           
+ |medicare-articles/medicare-costs.html|AARP|                                                                       
+ |medicare-articles/shopping-for-medicare.html|AARP|                                                                
+ |medicare-articles/medicare-when-working-past-65.html|AARP|                                                        
+ |medicare-articles/medicare-tips-and-faqs.html|AARP|                                                               
+ |medicare-articles/how-to-avoid-the-medicare-part-b-late-penalty|AARP|                                             
+ |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65|AARP|                          
+ |medicare-articles/9-good-reasons-why-a-medicare-advantage-plan-might-be-right-for-you|AARP|                       
+ |medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period|AARP| 
+ |medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan|AARP|                                      
+ |medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud|AARP|                                            
+ |medicare-articles/what-will-medicare-cost-in-2020|AARP|                                                           
+ |medicare-articles/what-is-retiree-health-coverage|AARP|                                                           
+ |medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for|AARP|                                    
+ |medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options|AARP|                          
+ |medicare-articles/medicare-doesnt-cover-everything-what-you-need-know|AARP|                                       
+ |medicare-articles/6-timely-medicare-tips-for-turning-65|AARP|                                                     
+ |medicare-articles/should-i-get-part-b-if-im-working-past-65|AARP|                               
+ |medicare-articles/try-to-avoid-medicare-late-enrollment-premium-penalties|AARP|                 
+ |medicare-articles/what-is-the-difference-between-original-medicare-and-medicare-advantage|AARP| 
+ |medicare-articles/do-i-need-medicare-with-spouses-employer-plan|AARP|                           
+ |medicare-articles/5-ways-to-pay-your-medicare-part-b-premium|AARP|                              
+ |medicare-articles/5-medicare-myths-set-straight|AARP|                                           
+ |medicare-articles/when-can-you-start-getting-medicare|AARP|                                     
+ |medicare-articles/is-medicare-mandatory|AARP|                                                   
+ |medicare-articles/can-i-change-my-medicare-plan|AARP|                                           
+ |medicare-articles/medicare-coverage-for-non-working-spouses|AARP|                               
+ |medicare-articles/5-tips-for-enrolling-in-medicare-for-the-first-time|AARP|                     
+ |medicare-articles/decide-change-plan|AARP|                                                      
+ |medicare-articles/medicare-coverage-for-mammograms|AARP|                                        
+ |medicare-articles/have-diabetes-medicare-parts-b-and-d-have-you-covered|AARP|                   
+ |medicare-articles/how-to-get-ready-for-the-medicare-annual-enrollment-period|AARP|              
+ |medicare-articles/what-does-original-medicare-include|AARP|                                     
+ |medicare-articles/what-is-creditable-drug-coverage|AARP|                                        
+ |medicare-articles/safe-medicare-enrollment-during-COVID|AARP|                                   
+ |medicare-articles/what-is-the-medicare-annual-enrollment-period|AARP|                           
+ |medicare-articles/aep-change-or-renew|AARP|                                                     
+ |medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period|AARP| 
+ |medicare-articles/2-ways-to-prescription-drug-coverage|AARP|                                                                
+ |medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan|AARP|                                                        
+ |medicare-articles/the-difference-between-medicare-hmo-and-ppo-plans|AARP|                                                   
+ |medicare-articles/medicare-mistakes-that-could-be-costly|AARP|                                                              
+ |medicare-articles/5-savvy-shopper-tips-help-get-medicare|AARP|                                                              
+ |medicare-articles/which-vaccines-does-medicare-cover|AARP|                                                                  
+ |medicare-articles/what-if-i-missed-my-initial-enrollment-period|AARP|                                                       
+ |medicare-articles/4-basic-questions-to-ask-about-medicare-part-d-coverage|AARP|                                             
+ |medicare-articles/turn-65-retire-sign-up-for-medicare-or-not|AARP|                                                          
+ |medicare-articles/7-inside-tips-to-help-you-make-a-smooth-move-to-medicare|AARP|                                            
+ |medicare-articles/medicare-individuals-who-divorced-widowed|AARP|                                                           
+ |medicare-articles/medicare-and-durable-medical-equipment-dme|AARP|                                                          
+ |medicare-articles/3-simple-ways-to-change-medicare-plans|AARP|                                                              
+ |medicare-articles/prescription-discount-cards-other-money-saving-medicare-tips|AARP|                                        
+ |medicare-articles/does-medicare-coverage-change-if-you-return-to-work|AARP|                                                 
+ |medicare-articles/medicare-enrollment-for-veterans|AARP|                                                                    
+ |medicare-articles/retiring-in-2020-what-to-know-about-medicare|AARP|                                                        
+ |medicare-articles/like-to-travel-it-may-affect-which-medicare-plan-you-choose|AARP|                                         
+ |medicare-articles/how-do-tricare-and-medicare-work-together|AARP|                                                           
+ |medicare-articles/youre-65-working-medicare|AARP|                                                                           
+ |medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare|AARP|             
+ |medicare-articles/pharmacists-answering-your-medicare-prescription-drug-questions|AARP|               
+ |medicare-articles/why-you-and-your-spouse-might-need-different-medicare-plans|AARP|                   
+ |medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67|AARP|                     
+ |medicare-articles/renew-medicare-plan-open-enrollment|AARP|                                           
+ |medicare-articles/medicare-enrollment-checklist-helping-you-prepare-for-an-important-decision|AARP|   
+ |medicare-articles/should-you-change-your-medicare-plan|AARP|                                          
+ |medicare-articles/what-happens-to-your-medicare-plan-if-you-move|AARP|                                
+ |medicare-articles/help-i-have-a-disability-and-i-want-to-enroll-in-medicare|AARP|                     
+ |medicare-articles/what-is-the-medicare-special-enrollment-period|AARP|                                
+ |medicare-articles/wheres-my-original-medicare-card|AARP|                                              
+ |medicare-articles/the-truth-your-medicare-part-b-premium|AARP|                                        
+ |medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan|AARP|                            
+ |medicare-articles/outpatient-mental-health-care-services|AARP|                                        
+ |medicare-articles/medicare-increases-coverage-mental-health-care|AARP|                                
+ |medicare-articles/how-to-transition-from-the-health-marketplace-to-medicare|AARP|                     
+ |medicare-articles/what-should-i-look-for-in-a-medicare-prescription-drug-plan|AARP|                   
+ |medicare-articles/saving-on-medicare-when-self-employed|AARP|                                         
+ |medicare-articles/concrete-answers-10-common-medicare-questions|AARP|                                 
+ |medicare-articles/is-your-medicare-plan-the-best-one-for-you-this-checklist-can-help-you-decide|AARP| 
+ |medicare-articles/what-telehealth-services-does-medicare-offer|AARP|                                  
+ |medicare-articles/7-popular-medicare-questions-asked-during-national-medicare-education-week|AARP|    
+ |medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home|AARP|    
+ |medicare-articles/what-s-the-difference-between-medicare-and-medicaid|AARP|                           
+ |medicare-articles/how-to-appeal-a-medicare-decision|AARP|                                             
+ |medicare-articles/how-avoid-paying-more-prescription-drug-coverage|AARP|                           
+ |medicare-articles/3-ways-to-dispose-of-your-old-unused-medications-safely|AARP|                    
+ |medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me|AARP|                    
+ |medicare-articles/good-news-medicare-part-b-covers-cataract-surgery|AARP|                          
+ |medicare-articles/heart-healthy-help-medicare|AARP|                                                
+ |medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period|AARP|         
+ |medicare-articles/medicare-coverage-for-same-sex-couples|AARP|                                     
+ |medicare-articles/how-to-evaluate-medicare-plan-costs|AARP|                                        
+ |medicare-articles/6-point-checklist-to-rate-your-new-medicare-advantage-plan|AARP|                 
+ |medicare-articles/replacing-your-medicare-card-just-got-a-whole-lot-easier|AARP|                   
+ |medicare-articles/understanding-your-medicare-plan|AARP|                                           
+ |medicare-articles/how-to-save-on-prescription-drugs-with-medicare|AARP|                            
+ |medicare-articles/10-tips-choosing-primary-care-doctor|AARP|                                       
+ |medicare-articles/avoid-sticker-shock-medicare-billing|AARP|                                       
+ |medicare-articles/does-medicare-part-a-cost-anything|AARP|                                         
+ |medicare-articles/how-much-does-medicare-part-b-cost|AARP|                                         
+ |medicare-articles/what-is-co-insurance|AARP|                                                       
+ |medicare-articles/what-is-the-medicare-advantage-open-enrollment-period|AARP|                      
+ |medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit|AARP| 
+ |medicare-articles/what-medicare-medical-savings-account-plan|AARP|                                 
+ |medicare-articles/copd-medicare|AARP|                                                              
+ |medicare-articles/decoding-medicare|AARP|                                       
+ |medicare-articles/does-medicare-cover-a-colonoscopy|AARP|                       
+ |medicare-articles/does-medicare-cover-blood-tests-for-cholesterol|AARP|         
+ |medicare-articles/does-medicare-cover-diabetes-prevention-program|AARP|         
+ |medicare-articles/does-medicare-cover-emergency-room-visits|AARP|               
+ |medicare-articles/does-medicare-cover-home-blood-pressure-monitors|AARP|        
+ |medicare-articles/does-medicare-cover-melanoma-screenings|AARP|                 
+ |medicare-articles/home-health-care-those-medicare-who-cant-leave-home|AARP|     
+|medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear|AARP|       
+ |medicare-articles/medicare-transportation-services|AARP|                        
+ |medicare-articles/are-you-living-with-chronic-heart-failure|AARP|               
+ |medicare-articles/how-prepare-your-medicare-wellness-visit|AARP|                
+ |medicare-articles/will-medicare-cover-a-cpap-machine|AARP|                      
+ |medicare-articles/new-to-medicare-schedule-your-welcome-to-medicare-visit|AARP| 
+ |medicare-articles/how-to-become-a-medicare-authorized-representative|AARP|      
+ |medicare-articles/what-is-a-transition-refill|AARP|                             
+ |medicare-articles/got-coverage-for-the-new-year|AARP|                                 
+ |medicare-articles/medicare-and-your-private-medical-information|AARP|                 
+ |medicare-articles/medicare-memo-what-are-advance-directives|AARP|                     
+ |medicare-articles/getting-a-knee-replaced-with-Medicare|AARP|                         
+ |medicare-articles/2-ways-save-on-blood-sugar-test-strips|AARP|                        
+ |medicare-articles/are-glaucoma-screenings-covered-by-medicare|AARP|                   
+ |medicare-articles/colon-cancer-screening-tests-without-the-ouch|AARP|                 
+ |medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered|AARP|    
+ |medicare-articles/medicare-coverage-for-inpatient-rehabilitation|AARP|                
+ |medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy|AARP|       
+ |medicare-articles/medicare-coverage-for-prostate-cancer-screening|AARP|               
+ |medicare-articles/medicare-part-benefit-periods-deductibles|AARP|                     
+ |medicare-articles/reasons-you-should-schedule-an-annual-medicare-wellness-visit|AARP| 
+ |medicare-articles/does-medicare-cover-allergy-testing|AARP|                           
+ |medicare-articles/medicare-part-b-may-not-cover-hearing-aid-part-c-might|AARP|        
+ |medicare-articles/medicare-part-b-basics|AARP|                                        
+ |medicare-articles/medicare-part-d-basics|AARP|                                        
+ |medicare-articles/medicare-part-a-the-basics|AARP|                                    
+ |medicare-articles/medicare-part-c-basics|AARP|                                        
+ |medicare-articles/does-medicare-cover-a-chiropractor|AARP|                                                
+ |medicare-articles/what-does-medicare-cover-after-a-stroke|AARP|                                           
+ |medicare-articles/dual-special-needs-plans|AARP|                                                          
+ |medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid|AARP|                                   
+ |medicare-articles/cuatro-programas-de-asistencia-para-pagar-sus-costos-de-medicare|AARP|                  
+ |medicare-articles/guia-paso-paso-para-inscribirse-en-medicare-los-65-anos|AARP|                           
+ |medicare-articles/medicare-parte-c-conceptos-basicos|AARP|                                                
+ |medicare-articles/parte-a-de-medicare-conceptos-basicos|AARP|                                             
+ |medicare-articles/parte-b-de-medicare-conceptos-basicos|AARP|                                             
+ |medicare-articles/parte-d-de-medicare-conceptos-basicos|AARP|                                             
+ |medicare-articles/what-is-a-pdp-prescription-drug-plan|AARP|                                              
+ |medicare-articles/4-assistance-programs-could-help-pay-your-medicare-costs|AARP|                          
+ |medicare-articles/4-types-of-medicare-savings-programs-and-what-they-cover|AARP|                          
+ |medicare-articles/what-is-the-medicare-part-d-coverage-gap|AARP|                                          
+ |medicare-articles/4surefire-tips-for-picking-a-medicare-plan-that-fits-your-health-needs-and-budget|AARP| 
+ |medicare-articles/medicare-part-d-costs-you-may-not-know-about|AARP|                                      
+ |medicare-articles/new-medicare-follow-checklist-successful-start|AARP|                                    
+ |medicare-articles/medicare-coverage-for-cancer-screenings-chemo-and-radiation|AARP|                       
+ |medicare-articles/how-to-compare-medicare-advantage-plan-costs|AARP|                                      
+|medicare-education/getting-started.html|AARP|
+|medicare-education/keep-or-change-coverage.html|AARP|
+|resources/ma-pdp-information-forms.html|AARP|
+ 
       
     @samChatUHC @regressionUHC
     Examples: 
