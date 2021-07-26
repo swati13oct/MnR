@@ -69,7 +69,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
@@ -96,7 +96,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @zaid
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
       |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |

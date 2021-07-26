@@ -1062,6 +1062,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 */
 		accessFooterLinkFromMore("about");
 		pageloadcomplete();
+		jsClickNew(aboutLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
@@ -1085,8 +1088,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		validateNew(contactLink);
-		contactLink.click();
+		accessFooterLinkFromMore("contact");
+		pageloadcomplete();
+		//validateNew(contactLink);
+		jsClickNew(contactLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
@@ -1096,6 +1101,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public SiteMapAARPPageMobile siteMapFooterClick() {
+		scrollToView(footerSiteMapLink);
+		pageloadcomplete();
 		validateNew(footerSiteMapLink);
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
