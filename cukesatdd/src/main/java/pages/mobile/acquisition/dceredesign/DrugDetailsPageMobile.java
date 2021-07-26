@@ -68,7 +68,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(css = "a[dtmname$='return to home page']")
+	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link']")
 	public WebElement LinktoExitScenario;
 
 //	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
