@@ -75,23 +75,19 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
 	public WebElement selectBtn;
 
-	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
-	public WebElement addToDrugList;
-
-	// span[contains(text(),'Add to drug List')]
-
-	/*
-	 * @FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
-	 * public WebElement reviewDrugCost;
-	 */
+	@FindBy(css = "button[dtmname$='add to drug list']")
+	public WebElement addToDrugListButton;
 
 	@FindBy(css = "app-uhc-header h2")
 	public WebElement buildYourDrugListHeader;
 	
-	@FindBy(xpath = "//div[contains(@class,'lg-center')]/button[contains(@dtmname,'review drug')]")
+	@FindBy(css = "div[class*='adddrugpopup'] #cancelicon")
+	private WebElement addDrugModalCloseButton;
+	
+	@FindBy(css = "#previousButton + button[dtmname$='next: review drug']")
 	public WebElement reviewDrugCostButtonFooter;
 
-	@FindBy(xpath = "//button[contains(@class,'uhc-button') and contains(@dtmname,'review drug costs')]")
+	@FindBy(css = "div[class*='d-block'] button[dtmname$='review drug costs']")
 	public WebElement reviewDrugCostButtonHeader;
 
 	@FindBy(css = "#zip-code")
@@ -163,7 +159,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		Thread.sleep(2000);
 		//
 		// iosScroll(addToDrugList);
-		jsClickNew(addToDrugList);
+		jsClickNew(addToDrugListButton);
 
 	}
 
@@ -417,10 +413,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]")
 	public WebElement DrugRecommendationHeader;
 
-	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]//parent::div//following-sibling::ul//li//*")
+	@FindBy(css = "button[id^='recommand_mobile']")
 	public List<WebElement> DrugRecommendationDrugList;
 
 	public void validateDrugRecommendationSection(String druglist) {
+		jsClickNew(addDrugButton);
 		if (validate(DrugRecommendationHeader) && DrugRecommendationDrugList.size() > 0
 				&& DrugRecommendationDrugList.size() <= 5) {
 			System.out.println("Drug Recommendation section Displayed for Drugs Added");
@@ -456,6 +453,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				System.out.println(CurrentDrugRecommendation.getText());
 			}
 			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
+			jsClickNew(addDrugModalCloseButton);
+			
 		} else {
 			System.out.println(" ***************** Drug Recommendations section is not displayed *****************");
 
@@ -504,33 +503,37 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Add Drug']")
 	public WebElement AddDrugBtn;
 
-	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
-	public WebElement BuildDrugPage_EnterDrugNameTxt;
-
 	public boolean ClickAddDrugRecommended(String drugName) {
 		try {
+			if(addDrugButton.isDisplayed()) {
+				jsClickNew(addDrugButton);
+			}
+
+			pageloadcomplete();
+			validateNew(EnterDrugNameTxt);
+			
 			WebElement RecommendedDrug = driver
-					.findElement(By.xpath("//button[contains(@dtmname, '" + drugName + "')]"));
+					.findElement(By.cssSelector("button[id^='recommand_mobile_"+drugName.replaceAll(" ", "_")+"']"));
 
 			validateNew(RecommendedDrug);
 			jsClickNew(RecommendedDrug);
 			waitForPageLoadSafari();
 			// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-			WebElement SelectDrug = driver.findElement(
+			/*WebElement SelectDrug = driver.findElement(
 					By.xpath("(//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')])[1]"));
 			System.out.println("Drug Search results page is displayed");
 			validateNew(SelectDrug);
 			jsClickNew(SelectDrug);
-			threadsleep(2000);
+			threadsleep(2000);*/
 			waitForPageLoadSafari();
 			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 20);
 			if (validateNew(TellUsAboutHeader) && validateNew(TellUsAboutCloseBtn)) {
-				validateNew(AddDrugBtn);
-				jsClickNew(AddDrugBtn);
+				validateNew(addToDrugListButton);
+				jsClickNew(addToDrugListButton);
 				waitForPageLoadSafari();
-				CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-				if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+//				CommonUtility.waitForPageLoad(driver, buildYourDrugListHeader, 30);
+				if (validateNew(buildYourDrugListHeader)) {
 					Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 					return true;
 				}
@@ -581,7 +584,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			return null;
 		}
 	}
-
+	
 	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
 		if (!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
 			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
