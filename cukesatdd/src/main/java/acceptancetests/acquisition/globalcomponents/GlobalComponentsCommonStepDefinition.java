@@ -444,6 +444,14 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.clickVisitAARPHeaderLink();
 
 	}
+	
+	@And("^user clicks on visit aarp.org link in the header for cancel$")
+	public void click_visitAARP_Link_in_the_header_for_cancel() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickVisitAARPHeaderLinkforcancel();
+
+	}
 
 //	  @And("^user clicks on visit aarp.org link in the header$")
 //	  public void click_visitAARP_Link_in_the_header() { 
