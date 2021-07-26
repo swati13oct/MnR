@@ -1103,5 +1103,27 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateTfnInHeader();
 	}
 
+	@Then("^the user validate facebook button from social share$")
+	public void the_user_validate_facebook_button_from_social_share(){
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnFacebookShareButton();
+	}
+
+	@Then("^the user validate twitter button from social share$")
+	public void the_user_validate_twitter_button_from_social_share(){
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnTwitterShareButton();
+	}
+
+
+	@Then("^the user validate email button from social share$")
+	public void the_user_validate_email_button_from_social_share(){
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateSocialShareEmailButton();
+	}
+
 }
 

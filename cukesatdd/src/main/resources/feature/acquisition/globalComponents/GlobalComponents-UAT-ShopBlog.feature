@@ -1126,3 +1126,26 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+
+
+  Scenario Outline: <Scenario>- To verify social share component on <site> site <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
+    And the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validate facebook button from social share
+    Then the user validate twitter button from social share
+    Then the user validate email button from social share
+
+    @validateSocialShareComponentAARP
+    Examples:
+      | site | geoState | path                                                                                                |
+      | AARP | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
+
+    @validateSocialShareComponentUHC
+    Examples:
+      | site | geoState | path                                                                                                |
+      | UHC  | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
