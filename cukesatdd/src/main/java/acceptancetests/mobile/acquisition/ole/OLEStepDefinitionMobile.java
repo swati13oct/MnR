@@ -3167,27 +3167,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			Assertion.fail("Medicare Info data entry failed and user not navigated back to Review Page");
 	}
 	
-	
-/*	@Then("^the user validates TFN in Welcome OLE Right Rail PlanCompare$")
-	public void the_user_validates_TFN_in_Right_Rail_PlanCompare() throws Throwable {
-		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		String TFN ="";
-		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
 
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
-
-		if(Validation_Status){
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assertion.assertTrue(true);
-		}
-		else{
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
-			Assertion.fail();
-		}
-	}
-*/
-	
 	@Then("^the user validates Save Return Later modal for OLE Page$")
 	public void the_user_validates_save_return_later_for_OLE_pages() throws Throwable {
 		
