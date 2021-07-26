@@ -746,6 +746,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
 	private WebElement samChatPopupMsg;
+	
+	@FindBy(id = "proactive-chat-widget-new")
+	private WebElement proactiveChatModal;
+	
+	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
+	private WebElement proactiveChatMsg;
+	
+	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
+	private WebElement proactiveChatCloseIcon;
+	
+	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
+	private WebElement proactiveChatBtn;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6949,6 +6961,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Failed Due To-------" + e.getMessage());
 		}
 
+	}
+	
+	public void validateProactiveChat() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(proactiveChatModal);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Proative Chat Modal @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Proactive Chat not available @@@@@@@@@");
+
+		Assertion.assertTrue("Proactive chat modal message not found", proactiveChatMsg.getText().trim().contains("Message with UnitedHealthcare"));
+		validateNew(proactiveChatCloseIcon);
+		validateNew(proactiveChatBtn);
 	}
 
 }

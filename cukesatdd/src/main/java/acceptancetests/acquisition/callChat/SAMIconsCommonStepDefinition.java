@@ -425,5 +425,13 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateSamChatIcon();
 		aquisitionhomepage.validateChatPopup();		
 	}
+	
+	@Then("^the user validates the proactive chat")
+	public void the_user_validates_proactive_chat() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateSamChatIcon();
+		aquisitionhomepage.validateChatPopup();		
+	}
 
 }

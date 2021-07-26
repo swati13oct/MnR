@@ -399,7 +399,7 @@ Feature: ACQ M&R- To test SAM Icons
       And the user clicks the plans of the below plan type
       | Plan Type | <planType> |
       
-      @samChatAARP123 @regressionAARP
+      @samChatAARP @regressionAARP
     Examples: 
       | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
@@ -408,3 +408,16 @@ Feature: ACQ M&R- To test SAM Icons
     Examples: 
       | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
       | UHC |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
+
+       Scenario Outline: To test the Proactive chat on Acq site on <site> <pagename>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user opens the page to validate M&R Sites
+      | pagename | <pagename> |
+    Then the user validates the proactive chat
+
+    @samChatAARP @regressionAARP
+    Examples: 
+      | pagename | site |
+      | /        | AARP |
+      
