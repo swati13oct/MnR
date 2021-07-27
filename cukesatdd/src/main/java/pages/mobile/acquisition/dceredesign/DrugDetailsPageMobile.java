@@ -869,9 +869,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
-		PharmacyFilterTxtBx.clear();
-		PharmacyFilterTxtBx.sendKeys(filterText);
-		System.out.println("FIlter text entered : " + filterText);
+		sendkeysMobile(PharmacyFilterTxtBx, filterText);
+		System.out.println("Filter text entered : " + filterText);
 		validateNew(PharmacyFilterApplyBtn);
 		jsClickNew(PharmacyFilterApplyBtn);
 		System.out.println("Apply button clicked for filter text" + filterText);
@@ -911,7 +910,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
 	public WebElement PharmacyFilterApplyBtn;
 
-	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
+	@FindBy(css = "#pharmacy-name-filter + button")
 	public WebElement PharmacyFilterClearTextX;
 
 	@FindBy(xpath = "//*[contains(@id, 'filterError')]")
@@ -921,8 +920,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
 		validateNew(PharmacyFilterApplyBtn);
-		PharmacyFilterTxtBx.sendKeys("a");
-		System.out.println("FIlter text entered : a");
+		
+		sendkeysMobile(PharmacyFilterTxtBx, "a");
+		System.out.println("Filter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
 		System.out.println("X button for Filter text clearing is Displayed");
 		jsClickNew(PharmacyFilterClearTextX);
@@ -1775,15 +1775,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
-	public WebElement Pharmacy_ZipCodeTxt;
-
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
-	public WebElement Pharmacy_SearchBtn;
-
-	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
-	public WebElement Pharmacy_DistanceDropDwn;
-
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '1 Mile')]")
 	public WebElement Pharmacy_Distance_Select1Mile;
 
@@ -1802,69 +1793,47 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '25 Mile')]")
 	public WebElement Pharmacy_Distance_Select25Mile;
 
-	@FindBy(xpath = "//h2[contains(@id, 'matchingLbl')]")
-	public WebElement PharmacyCountTxt;
-
 	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
-		validateNew(Pharmacy_DistanceDropDwn);
-		System.out.println("Pharmacy Seacth for default Zip " + Pharmacy_ZipCodeTxt.getText());
+		validateNew(distanceDrpDown);
+		System.out.println("Pharmacy Search for default Zip " + pharmacyZipcodeSearch.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		Pharmacy_Distance_Select1Mile.click();
-		// validateNew(Pharmacy_Distance_Select1Mile);
-		jsClickNew(Pharmacy_Distance_Select1Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "1 Mile", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + matchingPharmacyCount.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		Pharmacy_Distance_Select2Mile.click();
-		// validateNew(Pharmacy_Distance_Select2Mile);
-		jsClickNew(Pharmacy_Distance_Select2Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "2 Miles", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 2 Miles Distance for Zip : " + matchingPharmacyCount.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		// validateNew(Pharmacy_Distance_Select5Mile);
-		Pharmacy_Distance_Select5Mile.click();
-		jsClickNew(Pharmacy_Distance_Select5Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "5 Miles", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 5 Miles Distance for Zip : " + matchingPharmacyCount.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		// validateNew(Pharmacy_Distance_Select10Mile);
-		Pharmacy_Distance_Select10Mile.click();
-		jsClickNew(Pharmacy_Distance_Select10Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "10 Miles", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 10 Miles Distance for Zip : " + matchingPharmacyCount.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		// validateNew(Pharmacy_Distance_Select15Mile);
-		Pharmacy_Distance_Select15Mile.click();
-		jsClickNew(Pharmacy_Distance_Select15Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "15 Miles", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 15 Miles Distance for Zip : " + matchingPharmacyCount.getText());
 
-		// jsClickNew(Pharmacy_DistanceDropDwn);
-		Pharmacy_DistanceDropDwn.click();
-		// validateNew(Pharmacy_Distance_Select25Mile);
-		Pharmacy_Distance_Select25Mile.click();
-		jsClickNew(Pharmacy_Distance_Select25Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		mobileSelectOption(distanceDrpDown, "25 Miles", true);
+		jsClickNew(pharmacySearchBtn);
+		validateNew(matchingPharmacyCount);
+		System.out.println("Pharmacy Count for 25 Miles Distance for Zip : " + matchingPharmacyCount.getText());
 
-		validateNew(Pharmacy_ZipCodeTxt);
-		Pharmacy_ZipCodeTxt.clear();
-		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
-		validateNew(Pharmacy_SearchBtn);
-		Pharmacy_SearchBtn.click();
+		validateNew(pharmacyZipcodeSearch);
+		sendkeysMobile(pharmacyZipcodeSearch, pharmacyZipCode);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
-				+ Pharmacy_ZipCodeTxt.getText());
-		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
+				+ pharmacyZipcodeSearch.getText());
+		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + matchingPharmacyCount.getText());
 
 	}
 
@@ -1993,21 +1962,19 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		String pharmacyZipCode = "89405";
 		clickChangePharmacyLinkDetailsPage();
 		validateSelectPharmacyPage();
-		validateNew(Pharmacy_ZipCodeTxt);
-		Pharmacy_ZipCodeTxt.clear();
-		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
-		validateNew(Pharmacy_SearchBtn);
-		Pharmacy_SearchBtn.click();
+		sendkeysMobile(pharmacyZipcodeSearch, pharmacyZipCode);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
-				+ Pharmacy_ZipCodeTxt.getText());
+				+ pharmacyZipcodeSearch.getText());
 		validateNew(preferredMailPharmacy);
 		validateNew(noResultsMessage);
-		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+		if (validateNew(pharmacySearchBtn) && validateNew(noResultsMessage)) {
 			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
 			System.out.println("No results message displayed : " + noResultsMessage.getText());
 			validateNew(selectPharmacyModalCloseBtn);
 			System.out.println("Closing Pharmacy page");
-			selectPharmacyModalCloseBtn.click();
+			jsClickNew(selectPharmacyModalCloseBtn);
 			validateNew(DrugDetails_ChangePharmacyLnk);
 		} else
 			Assertion

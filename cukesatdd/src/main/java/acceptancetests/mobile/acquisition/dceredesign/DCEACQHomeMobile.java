@@ -107,7 +107,8 @@ public class DCEACQHomeMobile {
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
-		aquisitionhomepage.validateSubtitle();
+		if (site.equalsIgnoreCase("AARP")) 
+			aquisitionhomepage.validateSubtitle();
 	}
 
 	@Then("^the user clicks on Edit button on Drug List page on DCE$")
@@ -494,7 +495,7 @@ public class DCEACQHomeMobile {
 	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_AARP() {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.verifyDrugPricingText();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page$")
@@ -555,7 +556,8 @@ public class DCEACQHomeMobile {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String FilterText = memberAttributesMap.get("PharmacyFilterText");
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.ApplyPharmacyFilter(FilterText);
 	}
 
@@ -568,7 +570,7 @@ public class DCEACQHomeMobile {
 	@Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Summary page - Change Pharmacy Page$")
 	public void the_user_validates_Pharmacy_Filter_Error_message_and_x_cancel_function_is_working_on_Summary_page_Change_Pharmacy_Page()
 			throws Throwable {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validatePharmacyFilterErrormessage();
 		drugSummaryPage.validateXcleartextPharmacyFilter();
 	}

@@ -285,16 +285,16 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
 	public WebElement planRecommendationLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
 	public WebElement providerSearchLink;
 
 	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Introduction to Medicare']")
@@ -331,8 +331,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#ghn_lnk_2")
 	public WebElement shopForAPlan;
 
-	@FindBy(xpath = "//a[@class='visible-inline-block' and text()='Shop for Medicare Plans ']")
-	public WebElement shopForPlanBackButton;
+	@FindBy(xpath = "//h3/a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
+	public WebElement pharmacyOption;
 
 	@FindBy(css = "#_knon0g5x_mobile_mobile_mobile_mobile_mobile_mobile > span:nth-child(2)")
 	public WebElement medicareSupplimentPlans;
@@ -510,9 +510,9 @@ public class GlobalWebElements extends UhcDriver {
 		//
 		// jsClickNew(shopForAPlan);
 
-		MobileMenuToPlanTypes();
-		jsClickNew(medicareSupplimentPlans);
-		if (validate(shopForPlanBackButton)) {
+		MobileMenuToolsToHelp();
+		//jsClickNew(medicareSupplimentPlans);
+		if (validate(pharmacyOption)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}
 		return null;
