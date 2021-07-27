@@ -1605,7 +1605,7 @@ public class oleStepDefinition {
 		// }
 	}
 
-	@Then("^the user navigates to Coverage and Health Information Page$")
+	/*@Then("^the user navigates to Coverage and Health Information Page$")
 	public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
 		
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1618,7 +1618,7 @@ public class oleStepDefinition {
 		} else
 			Assertion.fail("OLE Coverage and Health Information Page is NOT Displayed");
 		// }
-	}
+	}*/
 
 	@Then("^the user validates the dispalyed sections for the Plan Type in Medicare Information Page$")
 	public void the_user_validates_the_dispalyed_sections_for_the_Plan_Type_in_Coverage_and_Health_Information_Page() throws Throwable {
@@ -3453,5 +3453,27 @@ public class oleStepDefinition {
 		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
 	medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
 	System.out.println("Widgets are displayed on welcome Pages");
+	}
+
+	@Then("^the user selects the following options for new medicare SEP Page$")
+	public void the_user_selects_the_following_options_for_NewMedicare_page(DataTable SEPoptions) throws Throwable {
+
+		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
+		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
+
+		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
+		String optionsData = SEPoptionsFlagMap.get("Option Data");
+
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		specialElectionPeriodPage = specialElectionPeriodPage.select_new_medicare_option(Selectoptions, optionsData);
+		if (specialElectionPeriodPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
+			System.out.println("OLE SEP page Options Selected : Next Button enabled");
+		} else
+			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
+
+
 	}
 }

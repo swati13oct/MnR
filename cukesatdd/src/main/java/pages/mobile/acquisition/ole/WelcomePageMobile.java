@@ -27,6 +27,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.acquisition.ole.SaveandReturnOLEModal;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
