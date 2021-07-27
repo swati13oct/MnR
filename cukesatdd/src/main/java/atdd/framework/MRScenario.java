@@ -365,7 +365,7 @@ public class MRScenario {
 			return props;
 		} else {
 			
-			if (environment.equals("stage-0"))
+			if (environment.equals("stage0"))
 				domain = "ocp-elr-dmz-nonprod.optum.com";
 			else if (environment.equals("stage") || environment.equals("stage-aarp")
 					|| environment.equals("offline-stage-aarp")|| environment.equals("offline-stage"))
