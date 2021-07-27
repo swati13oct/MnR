@@ -333,9 +333,15 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//h3/a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
 	public WebElement pharmacyOption;
+	
+	@FindBy(css = "#subnav_2 .nav-back")
+	public WebElement shopForPlanBackButton;
 
 	@FindBy(css = "#_knon0g5x_mobile_mobile_mobile_mobile_mobile_mobile > span:nth-child(2)")
 	public WebElement medicareSupplimentPlans;
+	
+	@FindBy(xpath="//h1/span[@class='heading-1']")
+	public WebElement planHeader;
 
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
@@ -511,8 +517,18 @@ public class GlobalWebElements extends UhcDriver {
 		// jsClickNew(shopForAPlan);
 
 		MobileMenuToolsToHelp();
-		//jsClickNew(medicareSupplimentPlans);
+		// jsClickNew(medicareSupplimentPlans);
 		if (validate(pharmacyOption)) {
+			return new ShopForPlanNavigationPageMobile(driver);
+		}
+		return null;
+	}
+
+	public ShopForPlanNavigationPageMobile openShopForPlanFrmMenu() {
+		
+		MobileMenuToPlanTypes();
+		jsClickNew(medicareSupplimentPlans);
+		if (validate(planHeader)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}
 		return null;
