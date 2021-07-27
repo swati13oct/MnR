@@ -365,10 +365,10 @@ public class MRScenario {
 			return props;
 		} else {
 			
-			if (environment.contains("stage-0"))
+			if (environment.equals("stage-0"))
 				domain = "ocp-elr-dmz-nonprod.optum.com";
-			else if (environment.contains("stage") || environment.equals("stage-aarp")
-					|| environment.equals("offline-stage-aarp"))
+			else if (environment.equals("stage") || environment.equals("stage-aarp")
+					|| environment.equals("offline-stage-aarp")|| environment.equals("offline-stage"))
 				domain = "uhc.com";
 			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")
 					|| environment.equals("team-e") || environment.equals("team-t") || environment.equals("team-v1")
@@ -380,8 +380,6 @@ public class MRScenario {
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else if (environment.contains("mnr-acq"))
 				domain = "origin-elr-dmz.optum.com";
-			else if( environment.equals("team-avengers"))
-				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			else
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			System.out.println("env chosen is: " + environment);
