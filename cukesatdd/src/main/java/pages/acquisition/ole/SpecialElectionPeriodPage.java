@@ -189,11 +189,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
-		/*//Plan Year commented for AEP validation
-		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;*/
+		
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
@@ -202,10 +198,6 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-/*		if(Premium.contains(Expected_PlanPremium)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;*/
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
@@ -371,9 +363,6 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	
 	validateNew(NextBtn);
 	jsClickNew(NextBtn);
-	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", NextBtn);
-*/
 	
 	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Coverage')]")))){
 		System.out.println("OLE Coverage and Health Information page is Displayed");
@@ -399,8 +388,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 	  ChangingCurrentMedicareRadio.isDisplayed();
 	  jsClickNew(ChangingCurrentMedicareRadio);
 	  
-	//validateNew(NextBtn);
-	//jsClickNew(NextBtn);
+	
 	validate(ChangingNewMedicareRadio);
 	if(ChangingNewMedicareRadio.isDisplayed()) {
 		jsClickNew(ChangingNewMedicareRadio);
@@ -416,24 +404,14 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 	ChangingCurrentMedicareRadio.isDisplayed();
 	jsClickNew(ChangingCurrentMedicareRadio);
 
-	//validateNew(NextBtn);
-	//jsClickNew(NextBtn);
+
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;
 	boolean Option_Selected_Flag = true;
 	for(String currentOption : options){
 		System.out.println("Option to select : "+currentOption);
-/*		if(currentOption.contains("None apply")){
-			try {
-				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), 'None apply')]//..//preceding-sibling::input"));
-				currentOptionChkBx.click();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Not able to select option");
-				return null;
-			}
-		}*/
+
 		try {
 			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
 			scrollToView(currentOptionChkBx);
@@ -538,4 +516,3 @@ public boolean validate_SEP_RadioButton_options() {
 	}
 
 }
-

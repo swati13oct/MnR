@@ -1605,7 +1605,7 @@ public class oleStepDefinition {
 		// }
 	}
 
-	@Then("^the user navigates to Coverage and Health Information Page$")
+	/*@Then("^the user navigates to Coverage and Health Information Page$")
 	public void the_user_navigates_to_Coverage_and_Health_Information_Page() throws Throwable {
 		
 		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1618,7 +1618,7 @@ public class oleStepDefinition {
 		} else
 			Assertion.fail("OLE Coverage and Health Information Page is NOT Displayed");
 		// }
-	}
+	}*/
 
 	@Then("^the user validates the dispalyed sections for the Plan Type in Medicare Information Page$")
 	public void the_user_validates_the_dispalyed_sections_for_the_Plan_Type_in_Coverage_and_Health_Information_Page() throws Throwable {
