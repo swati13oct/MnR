@@ -179,6 +179,8 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to add providers on the VPP summary page
     When user clicks on Find My Doctor button
     When user selects a provider and retuns to VPP page
@@ -219,6 +221,8 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to add providers on the VPP summary page
     When user clicks on Find My Doctor button
     When user selects a provider and retuns to VPP page
@@ -258,6 +262,8 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to add providers on the VPP summary page
     And the user views the plans of the below plan type
       | Plan Type | <plantype1> |
@@ -426,6 +432,8 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
     When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
@@ -462,6 +470,8 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
     And the user views the plans of the below plan type
       | Plan Type | <plantype1> |
