@@ -457,7 +457,8 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		validateNew(findAProviderBtn);
 		String parentWindow = driver.getWindowHandle();
-		jsClickNew(findAProviderBtn);
+		//jsClickNew(findAProviderBtn);
+		findAProviderBtn.click();
 		Thread.sleep(4000);
 		waitForPageLoadSafari();
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -472,7 +473,7 @@ public class ShopPage extends UhcDriver {
 			}
 		}
 
-		//driver.close();
+		driver.close();
 		driver.switchTo().window(parentWindow);
 		
 		

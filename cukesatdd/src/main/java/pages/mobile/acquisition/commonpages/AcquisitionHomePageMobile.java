@@ -349,7 +349,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement searchfield;
 
 	// @FindBy(id = "dupIconFlyOut")
-	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
+	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Global Header:Open']")
 	private WebElement shoppingCartIcon;
 
 	// @FindBy(xpath = "//h3[@id='guest-profile']")
@@ -2952,7 +2952,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		waitforElement(shoppingCartIcon);
+		pageloadcomplete();
+		scrollToView(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
@@ -4381,7 +4382,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
+	@FindBy(css="#accordion-3-button > div")
+	public WebElement learnAboutMedicareLinkFooter;
+	
 	public void clickLearnAboutMedicareNavLink(String linkName) {
+		scrollToView(learnAboutMedicareLinkFooter);
+		learnAboutMedicareLinkFooter.click();
 		WebElement link = driver.findElement(
 				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
 		waitforElement(link);
