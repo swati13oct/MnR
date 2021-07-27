@@ -397,17 +397,17 @@ public class OLEconfirmationPage extends UhcDriver{
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
+			 if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
 			 {
 			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
 			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
 			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
 			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
 				 } 
 			 if(connection!=null) {
