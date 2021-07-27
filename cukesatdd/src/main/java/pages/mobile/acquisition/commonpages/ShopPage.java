@@ -373,8 +373,11 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void comparePlans() {
+		pageloadcomplete();
+		scrollToView(comparePlanBtn);
 		validateNew(comparePlanBtn);
-		jsClickNew(comparePlanBtn);
+		//jsClickNew(comparePlanBtn);
+		comparePlanBtn.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/compare.html"))
@@ -382,8 +385,11 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void estimateCosts() {
+		pageloadcomplete();
+		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
-		jsClickNew(LearnEstimateCosts);
+		//jsClickNew(LearnEstimateCosts);
+		LearnEstimateCosts.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/estimate.html"))
@@ -391,8 +397,11 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void switchPlans() {
+		pageloadcomplete();
+		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
-		jsClickNew(howToSwitchPlans);
+		//jsClickNew(howToSwitchPlans);
+		howToSwitchPlans.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/switch.html"))
@@ -400,16 +409,22 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void safeShopping() {
+		pageloadcomplete();
+		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
-		jsClickNew(learnSafeShopping);
+		//jsClickNew(learnSafeShopping);
+		learnSafeShopping.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("safe-shopping.html"))
 			Assert.fail("Learn Safe Shopping of Plans page did not load properly");
 	}
 
 	public void memberResources() {
+		pageloadcomplete();
+		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
-		jsClickNew(getMemberResources);
+		//jsClickNew(getMemberResources);
+		getMemberResources.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("resources.html"))
@@ -417,6 +432,8 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void personalizeUrResults() {
+		pageloadcomplete();
+		scrollToView(personalizeUrResults);
 		validateNew(personalizeUrResults);
 		List<WebElement> list = driver
 				.findElements(By.xpath("//div[contains(@class,'NewCustomRTE')]//span[contains(@class,'heading-3')]"));
@@ -426,14 +443,18 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void navigatetoDCE() {
+		pageloadcomplete();
+		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
-		jsClickNew(checkDrugCostsBtn);
+		//jsClickNew(checkDrugCostsBtn);
+		checkDrugCostsBtn.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("estimate-drug-costs.html#/drug-cost-estimator"))
 			Assert.fail("DCE page did not load properly");
 	}
 
 	public void findAProvider() throws Exception {
+		pageloadcomplete();
 		validateNew(findAProviderBtn);
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(findAProviderBtn);
@@ -451,12 +472,16 @@ public class ShopPage extends UhcDriver {
 			}
 		}
 
-		driver.close();
+		//driver.close();
 		driver.switchTo().window(parentWindow);
+		
+		
 
 	}
 
 	public void locateAPharmacy() {
+		pageloadcomplete();
+		scrollToView(locatePharmacyBtn);
 		validateNew(locatePharmacyBtn);
 		jsClickNew(locatePharmacyBtn);
 		waitForPageLoadSafari();
