@@ -1176,7 +1176,7 @@ public class oleStepDefinition {
 	@Then("^the user enters following required information in Personal Information Page$")
 	public void the_user_enters_following_required_information_in_Personal_Information_Page(DataTable arg1)
 			throws Throwable {
-		
+		scenario.log("Sai - Change made 06/15 - Validate to personal information OLE Page from 1 to 4 --Aug Release");
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -1244,7 +1244,7 @@ public class oleStepDefinition {
 	@Then("^the user enters following information in Personal Information Page SNP Plans$")
 	public void the_user_enters_following__information_in_Personal_Information_Page_SNP_plans(DataTable arg1)
 			throws Throwable {
-		
+		scenario.log("Sai - Change made 06/15 - Validate to personal information OLE Page from 1 to 4 --Aug Release");
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -1825,6 +1825,8 @@ public class oleStepDefinition {
 	@Then("^the user navigates to Authorization Page$")
 	public void the_user_navigates_to_authorization() {
 		
+		scenario.log("Sai - Change made 07/27- Navigate to Authorization page--Aug Release");
+		
 			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 			AuthorizationPage authorizationPage = planPremiumPage.navigate_to_Authorization_Page();
 			if (authorizationPage != null) {
@@ -1856,6 +1858,8 @@ public class oleStepDefinition {
 
 	@Then("^the user validates required fields for Authorization Page Representative$")
 	public void the_user_validates_required_fields_for_Authorization_Page_Representative(DataTable arg1) throws Throwable {
+		
+		scenario.log("Sai - Change made 07/27- Validate Authorization page--Aug Release");
 		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -2442,7 +2446,9 @@ public class oleStepDefinition {
 
 	@Then("^the user validates the long term questions in Medicare Information Page$")
 	public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
-
+		
+		scenario.log("Sai - Change made 07/27- Validate ong term questions page--Aug Release");
+		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -2466,6 +2472,8 @@ public class oleStepDefinition {
 	public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page(DataTable arg1)
 			throws Throwable {
 
+		scenario.log("Sai - Change made 07/27- Validate to Predscription drug Coverage page   --Aug Release");
+		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -2971,7 +2979,7 @@ public class oleStepDefinition {
 	@Then("^the user validates Medicaid Number in OLE Page$")
 	public void the_user_validates_Medicaid_Number_OLE_Page(DataTable arg1) throws Throwable {
 		
-	//	scenario.log("Sai - Change made 06/17 - Validate Medicaid Number on OLE Page");
+		scenario.log("Sai - Change made 06/17 - Validate Medicaid Number on OLE Page--Aug Release");
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -3118,6 +3126,7 @@ public class oleStepDefinition {
 	@Then("^the user validate on Review Page and click on Edit information for Medicare Information Page$")
 	public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_Page(DataTable Medicareoptions)
 			throws Throwable {
+		scenario.log("Sai - Change made 07/27- Edit from Review Page --Aug Release");
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 
@@ -3149,6 +3158,7 @@ public class oleStepDefinition {
 
 	@Then("^the user validates cancellation and Save Return Later modal for OLE Page$")
 	public void the_user_validates_cancellation_save_return_later_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 07/27- Validate to cancellation and save return --Aug Release");
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		medicareInfoPage.OpenCancelOLEPages();
 		medicareInfoPage.OpensavereturnOLEPages();
@@ -3157,6 +3167,8 @@ public class oleStepDefinition {
 
 	@Then("^the user validates logo image on OLE Pages$")
 	public void the_user_validates_logo_image_for_OLE_pages() throws Throwable {
+		
+		scenario.log("Sai - Change made 07/27 - Validate logo image --Aug Release");
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		personalInformationPage.OpenLogoOLEPages();
 		System.out.println("OLE logo image is clicked on OLE Pages");
@@ -3223,7 +3235,7 @@ public class oleStepDefinition {
 
 	@Then("^the user selects payment type$")
 	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
-		scenario.log("Sai - Change made 06/15 - Validate Payment Page on  OLE Page");
+		scenario.log("Sai - Change made 06/15 - Validate Payment Page on  OLE Page--Aug Release");
 		boolean flag = false;
 		Map<String, String> paymentInformationMap = new HashMap<String, String>();
 		paymentInformationMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -3320,7 +3332,7 @@ public class oleStepDefinition {
 	
 	@Then("^the user validates Optional Benefits Page for following plans with available Riders in welcome page$")
 	public void the_user_validate_optional_rider_welcome_OLE_Page(DataTable Flags) {
-		scenario.log("Sai - Added on 06/15 - Validate optional Riders on Welcome OLE Page");
+		scenario.log("Sai - Added on 06/15 - Validate optional Riders on Welcome OLE Page--Aug Release");
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
@@ -3343,7 +3355,7 @@ public class oleStepDefinition {
 	
 	@Then("^the user validates Statement of Understanding Page$")
 	public void the_user_validates_SOA_Page(DataTable arg1) throws Throwable {
-		scenario.log("Sai - Added on 06/15 - Validate SOA on OLE Page");
+		scenario.log("Sai - Added on 06/15 - Validate SOA on OLE Page--Aug Release");
 		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -3364,7 +3376,7 @@ public class oleStepDefinition {
 	
 	@Then("^the user navigate to Use and Disclosure Authorization page for CSNP Plans$")
 	public void the_user_navigate_Use_Disclosure_Page() throws Throwable {
-		scenario.log("Sai - Added on 06/22 - Validate Use and Disclosure Authorization on OLE Page");
+		scenario.log("Sai - Added on 06/22 - Validate Use and Disclosure Authorization on OLE Page--Aug Release");
 		
 		MedicareInformationPage useanddisclosurePage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		UseAndDisclosureAuthorizationPage useranddisclosure = useanddisclosurePage.navigate_to_usedisclosure_Page();		
@@ -3382,6 +3394,7 @@ public class oleStepDefinition {
 	
 	@Then("^the user validates the Plan details on OLE CSNP Plans$")
 	public void the_user_validates_the_Plan_details_on_OLE_CSNP() throws Throwable {
+		scenario.log("Sai - Change made 06/15 - Validate to Plan details --Aug Release");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
