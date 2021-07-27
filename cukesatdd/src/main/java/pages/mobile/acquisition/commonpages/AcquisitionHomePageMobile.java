@@ -1061,8 +1061,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 * jsClickNew(footerAboutUsLink);
 		 */
 		accessFooterLinkFromMore("about");
-		pageloadcomplete();
-		jsClickNew(aboutLink);
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
@@ -2705,6 +2704,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);
 		jsClickNew(DCELink);
+		scrollToView(AddMyDrugsBtn);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
