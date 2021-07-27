@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
 
@@ -33,7 +34,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	String page = "Doctor";
 
 	PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
-	ArrayList<String> werallyResults = new ArrayList<String>();
+	public ArrayList<String> werallyResults = new ArrayList<String>();
 	static ArrayList<String> confirmationResults = new ArrayList<String>();
 	ArrayList<String> confirmationSpecialtyResults = new ArrayList<String>();
 
@@ -300,6 +301,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
 								"Non Prod Connected to Incorrect Rally");
 					werallyResults = werally.werallySearch(type, search, count, locationCount);
+					String curID = String.valueOf(Thread.currentThread().getId());
+					System.out.println("Current Thread ID is - "+curID+" for the flow "+werallyResults);
+					CommonConstants.PRE_Rally_Providers.put(curID, werallyResults);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
 				}
@@ -358,6 +362,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		werally = CommonConstants.PRE_Rally_Providers.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+werally+" ****");
 
 		if (werally.size() == confirm.size() && count == werally.size()) {
 			if (containsname(werally, confirm)) {

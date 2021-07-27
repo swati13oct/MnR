@@ -188,7 +188,6 @@ private WebElement signInLink;
 		checkContent("location");
 		checkContent("coverage");
 		checkContent("special");
-		checkContent("travel");
 		checkContent("doctor");
 		checkContent("drugs");
 		checkContent("additional");
@@ -197,7 +196,6 @@ private WebElement signInLink;
 		verifyClickEditButton("location", false);
 		verifyClickEditButton("coverage", false);
 		verifyClickEditButton("special", false);
-		verifyClickEditButton("travel", false);
 		verifyClickEditButton("doctor", false);
 		verifyClickEditButton("drugs", false);
 		verifyClickEditButton("additional", false);
@@ -359,11 +357,6 @@ private WebElement signInLink;
 				UIValue = "not sure".toLowerCase();
 		} else if (section.equalsIgnoreCase("special")) {
 			UIValue = inputValues.get("SNP Options");
-		} else if (section.equalsIgnoreCase("travel")) {
-
-			UIValue = inputValues.get("Travel Options");
-			UIValue = UIValue.replace("withinUS", "within").replace("OutsideUS", "another part").replace("regular",
-					"routine");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			UIValue = inputValues.get("Doctors");
 			UIValue = UIValue.replace("UHGNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
@@ -446,7 +439,6 @@ private WebElement signInLink;
 		mapd.put(0, "location");
 		mapd.put(1, "coverage");
 		mapd.put(2, "special");
-		mapd.put(3, "travel");
 		mapd.put(4, "doctor");
 		mapd.put(5, "drugs");
 		mapd.put(6, "additional");
@@ -457,7 +449,6 @@ private WebElement signInLink;
 		ma.put(0, "location");
 		ma.put(1, "coverage");
 		ma.put(2, "special");
-		ma.put(3, "travel");
 		ma.put(4, "doctor");
 		ma.put(5, "additional");
 		ma.put(6, "cost");
@@ -575,11 +566,6 @@ private WebElement signInLink;
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("travel")) {
-			PlanRecommendationEngineTravelPage travel = new PlanRecommendationEngineTravelPage(driver);
-			travel.edit_travel(inputValues.get("Travel Options"));
-			jsClickNew(saveBtn);
-			checkContent("travel");
 		} else if (section.equalsIgnoreCase("additional")) {
 			PlanRecommendationEngineAdditionalServicesPage add = new PlanRecommendationEngineAdditionalServicesPage(
 					driver);
