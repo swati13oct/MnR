@@ -11,7 +11,7 @@ Feature: 1.05.5. OLE Flow from Campaign URL
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     #Then the user clicks on Enroll Now for AARP site to start the OLE flow
     Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName>        |
@@ -127,7 +127,7 @@ Feature: 1.05.5. OLE Flow from Campaign URL
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     #Then the user clicks on Enroll Now for AARP site to start the OLE flow
     Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
      | Plan Name | <planName>        |

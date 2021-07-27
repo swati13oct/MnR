@@ -12,7 +12,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -135,7 +135,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
 		Then the user validates the Plan details on OLE
@@ -260,7 +260,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     # | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -377,7 +377,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
 Then the user validates the Plan details on OLE
@@ -498,7 +498,7 @@ Then the user validates the Plan details on OLE
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE CSNP Plans
