@@ -457,10 +457,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement GoBtnHealthPlans;
 
 	@FindBy(css = "#search-field-2")
+	private WebElement siteSearchInputTextField;
+	
+	@FindBy(css = "button[class^='srch-btn']")
+	private WebElement siteSearch_SearchButton;
+	
+	/*@FindBy(css = "#search-field-2")
 	private WebElement EnterSearch;
 
 	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button")
-	private WebElement SubmitBtn;
+	private WebElement SubmitBtn;*/
 
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
 	private WebElement enterSearchLable;
@@ -1056,10 +1062,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		/*
-		 * scrollToView(footerAboutUsLink); validateNew(footerAboutUsLink);
-		 * jsClickNew(footerAboutUsLink);
-		 */
 		accessFooterLinkFromMore("about");
 		pageloadcomplete();
 		// validateNew(footerLinkHeader, 30);
@@ -1085,9 +1087,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		jsClickNew(more);
-		validateNew(contactLink);
-		contactLink.click();
+
+		accessFooterLinkFromMore("contact");
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
@@ -2119,17 +2121,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void enterSearchtextvalue(String sv) {
 		System.out.println("@@@Inside search text value Method@@@");
 		threadsleep(5);
-		MobileMenuSiteSearch();
+//		MobileMenuSiteSearch();
+		openSiteSearchFromMenu();
 
 		// sendkeysMobile(EnterSearch, sv);
-		sendKeysByCharacter(EnterSearch, sv);
-		// sendkeysMobile(EnterSearch, sv);
+
+		sendKeysByCharacter(siteSearchInputTextField, sv);
+		//sendkeysMobile(EnterSearch, sv);
+
 
 		jsClickNew(enterSearchLable);
 		sleepBySec(4);
-		scrollToView(SubmitBtn);
-
-		jsClickNew(SubmitBtn);
+		jsClickNew(siteSearch_SearchButton);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}

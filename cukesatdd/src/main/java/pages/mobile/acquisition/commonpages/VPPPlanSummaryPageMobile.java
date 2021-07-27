@@ -838,12 +838,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='city']")
 	private WebElement cityInput;
 
-	/*@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
-	private List<WebElement> stateDropDownValues;*/
-	
+	/*
+	 * @FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+	 * private List<WebElement> stateDropDownValues;
+	 */
+
 	@FindBy(css = "#statedrpdwn")
 	private WebElement stateDropDown;
-	
+
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 	private WebElement findPlansButton;
 
@@ -1527,7 +1529,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		WebElement planCard = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]"));
 		scrollToView(planCard);
-		WebElement drugCost = planCard.findElement(By.xpath(".//*[contains(text(),'Estimated Annual')]/following-sibling::span"));
+		WebElement drugCost = planCard
+				.findElement(By.xpath(".//*[contains(text(),'Estimated Annual')]/following-sibling::span"));
 		scrollToView(drugCost);
 		System.out.println("Captured drug cost: " + capturedDrugCost);
 		System.out.println("Drug cost on plan summary : " + drugCost.getText());
@@ -1576,8 +1579,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public void clickCompareChkBox() {
 		WebElement Checkbox = driver.findElement(By
 				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", Checkbox);
+
+		jsClickNew(Checkbox);
 
 	}
 
@@ -1877,7 +1880,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public int checkAllMAPlans() {
 		pageloadcomplete();
-		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
@@ -4194,7 +4198,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void clickOnChangeZipCode() {
 		validateNew(changeLocationBtn);
-//		changeLocationBtn.click();
+		// changeLocationBtn.click();
 		jsClickNew(changeLocationBtn);
 
 	}
@@ -4208,7 +4212,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
-//		selectFromDropDown(stateDropDownValues, state.toUpperCase());
+		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
 	}
 
@@ -4264,7 +4268,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			providerNames.add(providername);
 		}
 
-		//Click again on provider list button for making enroll button visible
+		// Click again on provider list button for making enroll button visible
 		jsClickNew(ProviderSearchLink);
 		return providerNames;
 	}
@@ -5285,14 +5289,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		// ProviderSearchLink.click();
-		jsClickNew(ProviderSearchLink);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		scrollToView(ProviderSearchLink);
+		ProviderSearchLink.click();
+		// jsClickNew(ProviderSearchLink);
+		sleepBySec(5);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());

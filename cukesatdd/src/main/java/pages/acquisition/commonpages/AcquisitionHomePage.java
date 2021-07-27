@@ -3520,7 +3520,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(searchTxtbox);
+		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
 		validateNew(visitorprofileicon);
 		validateVisitorProfileIcon();

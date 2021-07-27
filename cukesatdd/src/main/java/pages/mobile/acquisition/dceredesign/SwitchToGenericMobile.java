@@ -211,10 +211,10 @@ public class SwitchToGenericMobile extends UhcDriver {
 		Assertion.assertTrue("Switch To Generic Page Validation Passed", true);
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(css = "div[class*='d-block'] #changePharmacyLink")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
+	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
 	public DrugDetailsPageMobile ClickSwitch_ReturnDetailsPage() {

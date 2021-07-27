@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,9 +21,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -244,6 +240,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public DrugSummaryPageMobile verifyPDPPlanToggle() {
 
 		jsClickNew(pdpPlanToggle);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(firstPlanCard);
 		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
 			return new DrugSummaryPageMobile(driver);
 		}
@@ -629,6 +627,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public DrugSummaryPageMobile verifySNPPlanToggle() {
 
 		jsClickNew(snpPlanToggle);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(firstPlanCard);
 		if (planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
 			return new DrugSummaryPageMobile(driver);
 		}
@@ -962,38 +962,29 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
 
-	// @FindBy(xpath =
-	// "//label[@for='ma-plans-radio']//span[contains(text(),'Medicare Advantage
-	// Plans')]")
 	@FindBy(css = "#mapd-plans-radio")
 	public WebElement mapdPlanToggle;
 
-	// @FindBy(xpath =
-	// "//label[@for='pdp-plans-radio']//span[contains(text(),'Medicare Prescription
-	// Drug Plans')]")
 	@FindBy(css = "#pdp-plans-radio")
 	public WebElement pdpPlanToggle;
 
-	// @FindBy(xpath =
-	// "//label[@for='snp-plans-radio']//span[contains(text(),'Medicare Special
-	// Needs Plans')]")
 	@FindBy(css = "#snp-plans-radio")
 	public WebElement snpPlanToggle;
+	
+	@FindBy(css = "#plansummarycontainer > div > div[class^='uhc-card']:nth-of-type(1)")
+	private WebElement firstPlanCard;
 
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
-			scrollToView(mapdPlanToggle);
-			// validateNew(mapdPlanToggle,10);
+			validateNew(mapdPlanToggle, 10);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 		} else if (plantype.equalsIgnoreCase("PDP")) {
-			scrollToView(pdpPlanToggle);
-			// validateNew(pdpPlanToggle,10);
+			validateNew(pdpPlanToggle, 10);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 		} else {
-			scrollToView(snpPlanToggle);
-			// validateNew(snpPlanToggle,10);
+			validateNew(snpPlanToggle, 10);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 		}
@@ -1098,16 +1089,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(pharmacySearchBtn);
 	}
 
-	public DrugSummaryPage verifyMAPDPlanToggle() {
+	public DrugSummaryPageMobile verifyMAPDPlanToggle() {
 
-		mapdPlanToggle.click();
+		jsClickNew(mapdPlanToggle);
 		System.out.println("MAPD Plans Toggle is displayed and is Clicked");
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(firstPlanCard);
 		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
 			System.out.println("MAPD Plans displayed for MAPD toggle click");
-			return new DrugSummaryPage(driver);
-		}
-		Assertion.fail("MAPD Plans NOT displayed for MAPD toggle click");
+			return new DrugSummaryPageMobile(driver);
+		} else
+			Assertion.fail("MAPD Plans NOT displayed for MAPD toggle click");
 		return null;
 	}
 
@@ -1120,12 +1112,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			verifySNPPlanToggle();
 		else
 			verifyMAPDPlanToggle();
+		
 		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//p[contains(text(), 'Average Monthly Drug Cost')]//preceding-sibling::p[contains(text(), '$')]"));
 		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//p[contains(text(), 'Monthly Premium')]/span[contains(text(), '$')]"));
 		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//p[contains(text(), 'Annual Estimated')]/span[contains(text(), '$')]"));
 
 		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();

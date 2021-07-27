@@ -136,7 +136,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[contains(@id,'SuccessPopUp')]//form//div[2]//button")
 	protected WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(css="#email-text")
+	@FindBy(xpath="//*[@id='emailComparison']/span")
 	protected WebElement validateemailbutton;
 	
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")

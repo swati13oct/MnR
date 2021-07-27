@@ -222,7 +222,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT, COVERED_DRUGS_COUNT);
 	}
 
 	@Then("^the user navigates to the plan details for the given plan type$")

@@ -229,7 +229,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// TODO Auto-generated method stub
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		GetStarted.click();
+		jsClickNew(GetStarted);
 
 		scrollToView(People);
 		//CommonUtility.waitForPageLoadNew(driver, People, 30);

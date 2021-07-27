@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class GlobalWebElements extends UhcDriver {
@@ -284,40 +285,40 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(xpath = "//*[@id='accordion-2-content']/nav/p[1]/a")
+	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
 	public WebElement planRecommendationLink;
 
-	@FindBy(xpath = "//*[@id='accordion-2-content']/nav/p[2]/a")
+	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(xpath = "//*[@id='accordion-2-content']/nav/p[3]/a")
+	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(xpath = "//*[@id='accordion-2-content']/nav/p[4]/a")
+	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
 	public WebElement providerSearchLink;
 
-	@FindBy(xpath = "//*[@id='accordion-3-content']/nav/p[1]/a")
+	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Introduction to Medicare']")
 	public WebElement introductionToMedicareLink;
 
-	@FindBy(xpath = "//*[@id='accordion-3-content']/nav/p[2]/a")
+	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Eligibility']")
 	public WebElement eligibilityLink;
 
-	@FindBy(xpath = "//*[@id='accordion-3-content']/nav/p[3]/a")
+	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Coverage Choices']")
 	public WebElement coverageChoiceLink;
 
-	@FindBy(xpath = "//*[@id='accordion-3-content']/nav/p[4]/a")
+	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Medicare FAQ']")
 	public WebElement medicareFaqLink;
 
-	@FindBy(xpath = "//*[@id='accordion-4-content']/nav/p[1]/a")
+	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:About']")
 	public WebElement aboutLink;
 
-	@FindBy(xpath = "//*[@id='accordion-4-content']/nav/p[2]/a")
+	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:Contact']")
 	public WebElement contactLink;
 
-	@FindBy(xpath = "//*[@id='accordion-4-content']/nav/p[3]/a")
+	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:Language Assistance']")
 	public WebElement languageAssistanceLink;
 
-	@FindBy(xpath = "//*[@id='accordion-4-content']/nav/p[4]/a")
+	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:AARP.org']")
 	public WebElement footerAARPLink;
 
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
@@ -338,6 +339,9 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
+
+	@FindBy(css = ".mob-menu-header button[class^='icon-mob-btn'][onclick*='Search']")
+	private WebElement siteSearchButton;
 
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
@@ -368,8 +372,7 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	public void accessFooterLinkFromShopPlans(String planType) {
-		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-1-button"));
-		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
+		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(shopPlansExpander, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(shopPlansExpander);
 		}
@@ -398,8 +401,7 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	public void accessFooterLinkFromToolsResources(String tool) {
-		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-2-button"));
-		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
+		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(toolsAndResources, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(toolsAndResources);
 		}
@@ -426,8 +428,8 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	public void accessFooterLinkFromLearnAboutMedicare(String option) {
-		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-3-button"));
-		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
+		boolean expanded = Boolean
+				.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(learnAboutMedicareFooterButton);
 		}
@@ -454,8 +456,8 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	public void accessFooterLinkFromMore(String option) {
-		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-4-button"));
-		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
+		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
+
 		if (!expanded) {
 			jsClickNew(more);
 		}
@@ -492,6 +494,13 @@ public class GlobalWebElements extends UhcDriver {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
+	}
+
+	public void openSiteSearchFromMenu() {
+		jsClickNew(MenuMobile);
+		validateNew(mobileNav, 5);
+
+		jsClickNew(siteSearchButton);
 	}
 
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {

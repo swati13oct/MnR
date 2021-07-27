@@ -126,8 +126,10 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		pageloadcomplete();
 
 		scrollToView(validateemailbutton);
+		driver.navigate().refresh();
+		waitforElementNew(validateemailbutton, 10);
 		jsClickNew(validateemailbutton);
-		//pageloadcomplete();
+		sleepBySec(3);
 		// Validating email popup
 		validate(leavingcomapreplansitepopup);
 		System.out.println("!!!Leaving site popup is displayed ===>");
