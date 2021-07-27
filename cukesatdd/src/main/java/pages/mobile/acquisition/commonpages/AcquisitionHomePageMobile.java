@@ -2955,7 +2955,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(shoppingCartIcon);
 		// shoppingCartIcon.click();
-		jsClickNew(shoppingCartIcon);
+		//jsClickNew(shoppingCartIcon);
+		shoppingCartIcon.click();
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
 		// icon
 		if (driver.getCurrentUrl().contains("profile")) {
@@ -3541,7 +3542,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Saved Plans modal not displayed");
 		}
 		waitforElement(shoppingCartIcon);
-		jsClickNew(shoppingCartIcon);
+		scrollToView(shoppingCartIcon);
+		//jsClickNew(shoppingCartIcon);
+		shoppingCartIcon.click();
 		// guestProfileLink.click();
 		// jsClickNew(guestProfileLink);
 		pageloadcomplete();
@@ -4382,14 +4385,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(css="#accordion-3-button > div")
+	@FindBy(xpath="//div[@class='uhc-accordion__header']//div[text()='Learn About Medicare']")
 	public WebElement learnAboutMedicareLinkFooter;
 	
 	public void clickLearnAboutMedicareNavLink(String linkName) {
 		scrollToView(learnAboutMedicareLinkFooter);
 		learnAboutMedicareLinkFooter.click();
+
 		WebElement link = driver.findElement(
-				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
+				By.xpath("//div[contains(@class,'uhc-accordion__content')]//a[contains(text(),'" + linkName + "')]"));
 		waitforElement(link);
 		jsClickNew(link);
 	}

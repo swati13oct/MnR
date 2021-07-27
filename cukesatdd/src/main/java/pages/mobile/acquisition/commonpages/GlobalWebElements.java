@@ -527,7 +527,9 @@ public class GlobalWebElements extends UhcDriver {
 	public ShopForPlanNavigationPageMobile openShopForPlanFrmMenu() {
 		
 		MobileMenuToPlanTypes();
-		jsClickNew(medicareSupplimentPlans);
+		scrollToView(medicareSupplimentPlans);
+		medicareSupplimentPlans.click();
+		pageloadcomplete();
 		if (validate(planHeader)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}

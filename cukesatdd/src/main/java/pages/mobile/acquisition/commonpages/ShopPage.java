@@ -459,7 +459,7 @@ public class ShopPage extends UhcDriver {
 		String parentWindow = driver.getWindowHandle();
 		//jsClickNew(findAProviderBtn);
 		findAProviderBtn.click();
-		Thread.sleep(4000);
+		Thread.sleep(10000);
 		waitForPageLoadSafari();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -470,11 +470,13 @@ public class ShopPage extends UhcDriver {
 				if (!driver.getCurrentUrl().contains("werally"))
 					Assert.fail("Provider Search page failed to load");
 				Thread.sleep(2000);
+				
 			}
+			driver.close();
 		}
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+//		driver.close();
+//		driver.switchTo().window(parentWindow);
 		
 		
 
