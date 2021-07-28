@@ -186,7 +186,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	}
 
 	/** Verifying the error message in pharmacy search tool */
-	@And("^the user verify error messages in pharmacy locator page$")
+	@And("^the user verify error messages in pharmacy locator page|the user verify error messages in Pharmacy locator page$")
 	public void verifyPharmacyErrorMessages(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
@@ -830,7 +830,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	 * Assertion.fail("Error in validating Pharmacy Results "); } }
 	 */
 	/** Verify tooltips on the filters */
-	@And("^the user validates tooltips on filters$")
+	@And("^the user validates tooltips on filters|the user validate tooltips on filters$")
 	public void verifyTooltips(DataTable inputData) {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
 		String language = inputDataMap.get("Language");

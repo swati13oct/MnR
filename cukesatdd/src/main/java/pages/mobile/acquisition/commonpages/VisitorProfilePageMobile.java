@@ -137,6 +137,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(css = "#printdetails")
+	private WebElement planDetailPrintButton;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
@@ -167,7 +170,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
 	
-    @FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
+    @FindBy(css = "nav[class*='profile-header-nav-mobile']>a[dtmname$='Your Saved Drugs & Pharmacy'] > span")
     public WebElement drugHeader;
 
     @FindBy(css = "h3#saved-drugs")
@@ -198,7 +201,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs and Pharmacy")));
+		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
 		jsClickNew(drugHeader);
@@ -251,8 +254,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();
-			Thread.sleep(20000);
+			jsClickNew(driver.findElement(By.xpath("//h3[normalize-space()='" + planName + "']")));
+			CommonUtility.waitForPageLoadNew(driver, planDetailPrintButton, 20);
 			if (driver.getCurrentUrl().contains("#/details")) {
 				return new PlanDetailsPageMobile(driver);
 			}
@@ -743,7 +746,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public ComparePlansPageMobile planCompare(String plans) {
 
-		comparePlans.click();
+		jsClickNew(comparePlans);
 		waitforElementVisibilityInTime(comparePlansPageControl, 10);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
