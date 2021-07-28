@@ -2402,35 +2402,33 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 
-		scrollToView(shopPlansExpander);
-		shopPlansExpander.click();
-		sleepBySec(2);
-
+		jsClickNew(shopPlansExpander);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
 
-		scrollToView(toolsAndResources);
-		toolsAndResources.click();
-
+		jsClickNew(toolsAndResources);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
-		scrollToView(learnAboutMedicareFooterButton);
-		learnAboutMedicareFooterButton.click();
-
+		jsClickNew(learnAboutMedicareFooterButton);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		validateNew(introductionToMedicareLink);
-
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
-		scrollToView(more);
-		more.click();
-
+		jsClickNew(more);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
@@ -2462,13 +2460,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateTFNelement(String tfnXpath) {
-		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-		validateNew(TFNelement);
+		List<WebElement> TFNelement = driver.findElements(By.xpath(tfnXpath));
+		boolean present = false;
+		for (WebElement tfn : TFNelement) {
+			if(validate(tfn)) {
+				System.out.println("TFN is Displayed on Page : " + tfn.getText());
+				present = true;
+			}
+		}
+		
+		if(!present) {
+			Assert.fail("TFN element is not found / displayed on page : " + tfnXpath);
+		}
+		
+		/*validateNew(TFNelement);
 		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
-			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
 		} else {
 			Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
-		}
+		}*/
 	}
 
 	private void CheckPageLoad() {
@@ -3235,7 +3244,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerTfn;
 
 	public void validateHeaderLinks() {
-		MobileMenuMain();
+		jsClickNew(MenuMobile);
 		pageloadcomplete();
 
 		validateNew(goToMemberSiteLink);
@@ -3250,9 +3259,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(visitorprofileicon);
 		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
+		jsClickNew(closeMenu);
 	}
 
-	@FindBy(css = "#mobile-nav > div.position-relative.mobile-mysaved-btn-wrap > div > button")
+	@FindBy(css = "div[class*='mobile-mysaved'] > div > button")
 	public WebElement visitorprofileicon;
 
 	public void validateVisitorProfileIcon() {
@@ -4808,7 +4818,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
 
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > div > div > div > a")
+	@FindBy(css = "#mobile-nav a[dtmname$='Go to the Member Site']")
 	private WebElement goToMemberSiteLink;
 
 	public void clickMemberSiteLink() {

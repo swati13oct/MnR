@@ -63,9 +63,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBys(value = { @FindBy(id = "footnotes1") })
 	public WebElement footnotesContent;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[1]/a")
-	public WebElement medicareAdvantagePlansLink;
-
 	@FindBy(css = "#accordion-1-button")
 	public WebElement shopPlansExpander;
 
@@ -78,18 +75,19 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-4-button")
 	public WebElement more;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Advantage Plans']")
+	public WebElement medicareAdvantagePlansLink;
+	
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Dual Special Needs Plans']")
 	public WebElement medicareSpecialNeedsPlansLink;
-	
-	
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[3]")
+	@FindBy(css = "#accordion-1-content [dtmname*='Medicare Supplement Insurance Plans']")
 	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
 	public WebElement medicareSupplementInsurancePlansHeader;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[4]/a")
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Prescription Drug Plans']")
 	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -140,7 +138,7 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement importantDisclosuresLink;
 
 	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
+	@FindBy(css = "#mobile-nav a[dtmname$='Visit AARP.org']")
 	public WebElement visitAARPLink;
 	
 
@@ -289,16 +287,16 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
 	public WebElement planRecommendationLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(xpath = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
+	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
 	public WebElement providerSearchLink;
 
 	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Introduction to Medicare']")
@@ -328,6 +326,9 @@ public class GlobalWebElements extends UhcDriver {
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
+	
+	@FindBy(css = "#mobile-nav button[class$='nav-close']")
+	public WebElement closeMenu;
 	
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
