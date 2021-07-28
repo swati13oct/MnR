@@ -336,13 +336,6 @@ public class DCEACQHomeMobile {
 
 	}
 
-	@When("^user clicks on Add drugs button globally on shopper profile page$")
-	public void user_clicks_on_add_drugs_button_globally() {
-		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.clickAddDrugsBtn();
-	}
-
 	@When("^user saves and updates pharmacy from list$")
 	public void user_saves_and_updates_pharmacy_from_list() {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
@@ -578,6 +571,7 @@ public class DCEACQHomeMobile {
 	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
 	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -594,6 +588,7 @@ public class DCEACQHomeMobile {
 	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
 	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -610,6 +605,7 @@ public class DCEACQHomeMobile {
 	@Then("^user saves MAPD plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1104,17 +1100,13 @@ public class DCEACQHomeMobile {
 		buildYourDrugsListPage.validateDrugRecommendationSectionNOTdisplayed(druglist);
 	}
 
+
 	@Then("^the user tries to add following drug over cabinet limit and validates error modal$")
 	public void the_user_searches_and_adds_and_validates_drug_cabinet_limit(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
