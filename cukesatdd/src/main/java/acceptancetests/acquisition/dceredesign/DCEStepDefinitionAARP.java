@@ -2239,6 +2239,12 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
+	
+	@Then("^user clicks on search button$")
+	public void user_clicks_on_search_button() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.ClickSearch();
+	}
 
 	@Then("^no results message should be displayed from drug details$")
 	public void no_results_message_should_be_displayed_from_drug_details(DataTable attributes) throws Throwable {

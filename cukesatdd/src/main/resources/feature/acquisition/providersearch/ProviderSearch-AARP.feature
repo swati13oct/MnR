@@ -114,8 +114,8 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                                | planyear |
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
+      | zipcode | isMultutiCounty | county          | plantype | planName                              | planyear |
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
 
   @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
