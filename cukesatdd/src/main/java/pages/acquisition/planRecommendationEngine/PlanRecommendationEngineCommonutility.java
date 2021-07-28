@@ -133,14 +133,13 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 		previousPagePercentage = new String();
 		nextPageName = new String();
 		nextPagePercentage = new String();
-		// Update the else as else if for each page
-		if (currentPageName.contains("LOCATION")) {
-			nextPageName = "Coverage";
-			nextPagePercentage = "11%";
-			currrentPagePercentage = "0%";
-		}
 		// Update the else and else if for each page
 		if (flow.equalsIgnoreCase("PDP")) {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
 			if (currentPageName.contains("COVERAGE")) {
 				previousPageName = "Location";
 				previousPagePercentage = "11%";
@@ -156,6 +155,11 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				currrentPagePercentage = "50%";
 			}
 		} else {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
 			if (currentPageName.contains("COVERAGE")) {
 				previousPageName = "Location";
 				previousPagePercentage = "11%";
