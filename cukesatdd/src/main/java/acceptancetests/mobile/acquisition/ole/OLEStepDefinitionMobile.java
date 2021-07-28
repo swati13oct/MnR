@@ -1381,7 +1381,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	}
 
 	@Then("^the user navigates to SEP Page$")
-	public void the_user_navigates_to_SEP_Page(DataTable Medicareoptions) throws Throwable {
+	public void the_user_navigates_to_SEP_Page() throws Throwable {
 		
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPageMobile specialElectionPeriodPage = personalInformationPage.validate_SEPPage();
@@ -1770,7 +1770,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	}
 
 	@Then("^the user navigates to Authorization Page$")
-	public void the_user_navigates_to_authorization(DataTable Flags) {
+	public void the_user_navigates_to_authorization() {
 		
 		PlanPremiumPageMobile  planPremiumPage = (PlanPremiumPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		AuthorizationPageMobile authorizationPage = planPremiumPage.navigate_to_Authorization_Page();
