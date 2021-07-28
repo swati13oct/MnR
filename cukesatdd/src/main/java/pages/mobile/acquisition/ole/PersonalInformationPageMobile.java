@@ -604,8 +604,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+		//	sendkeysMobile(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
 			//sendkeysMobileMobile(medicaidNumberField,MedicaidNo);
 		}
 		
