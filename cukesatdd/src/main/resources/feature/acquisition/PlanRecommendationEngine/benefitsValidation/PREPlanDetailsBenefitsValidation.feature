@@ -39,13 +39,19 @@ Feature: PRE Plans benefits validation
 
     @MA_SNP_PREBENEFITS_Temp_AARP
     Examples: 
-      | excelPath                    | workSheet        | site |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_Temp | AARP |
+      | excelPath                    | workSheet         | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_Temp  | AARP |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_Temp1 | AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS1 | AARP |
-      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS3 | AARP |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS1      | AARP |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS3      | AARP |
 
     @PREPlanBenefitsAARP @PDP_PREBENEFITS_AARP
     Examples: 
       | excelPath                  | workSheet   | site |
       | 2021 PDP_ Plan details_PRE | PREBENEFITS | AARP |
+
+    @PREPlanBenefitsAARP_UAT
+    Examples: 
+      | excelPath                    | workSheet       | site |
+      | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS_UAT | AARP |
+      | 2021 PDP_ Plan details_PRE   | PREBENEFITS_UAT | AARP |
