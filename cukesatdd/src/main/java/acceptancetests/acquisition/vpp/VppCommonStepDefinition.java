@@ -4497,4 +4497,24 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
+	
+
+	@Then("^user selects keepshopping on the pop-up$")
+	public void user_selects_keepshopping_on_popup(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.keepShopping();
+	}
+	
+	@Then("^agent saves a plans as favorite for user on plan compare page$")
+	public void agent_saves_a_plans_as_favorite_on_plan_compare_page(DataTable givenAttributes) {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanName = memberAttributesMap.get("PlanName");
+		comparePlansPage.saveaPlan(savePlanName);
+	}
+	
+	
 }
