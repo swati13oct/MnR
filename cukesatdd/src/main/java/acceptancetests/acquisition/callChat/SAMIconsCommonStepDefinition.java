@@ -423,7 +423,7 @@ public class SAMIconsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateSamChatIcon();
-		aquisitionhomepage.validateChatPopup();		
+		aquisitionhomepage.validateSamChatPopup();		
 	}
 	
 	@Then("^the user validates the proactive chat")
@@ -431,7 +431,7 @@ public class SAMIconsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateSamChatIcon();
-		aquisitionhomepage.validateChatPopup();		
+		aquisitionhomepage.validateProactiveChatPopup();		
 	}
 
 }

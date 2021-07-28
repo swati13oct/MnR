@@ -12,7 +12,7 @@ Feature: ACQ M&R- To test SAM Icons
     @samChatAARP @regressionAARP
     Examples: 
       | pagename | site |
-      | /        | AARP |
+      | [blank]        | AARP |
       
       Examples: 
       | pagename | site |

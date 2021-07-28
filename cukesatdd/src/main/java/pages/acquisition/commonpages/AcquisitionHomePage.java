@@ -735,7 +735,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement tfnHeaderRightRailOLE;
 	
 	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
-	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]")
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
 	private WebElement samChatIcon;
 	
 	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
@@ -758,6 +758,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
 	private WebElement proactiveChatBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+	private List<WebElement> chatSuggestionMsg;
+	
+	@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+	private WebElement chatPopupOptions;
+	
+	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+	private WebElement chatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6947,7 +6956,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 	
-	public void validateChatPopup() throws InterruptedException {
+	public void validateSamChatPopup() throws InterruptedException {
 		try {
 			jsClickNew(samChatIcon);
 			threadsleep(3);
@@ -6955,12 +6964,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			threadsleep(3);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
-
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(6).getText().contains("Other"));
+			
 		} catch (Exception e) {
 
 			System.out.println("Failed Due To-------" + e.getMessage());
 		}
-
+		closeChatPopup();
 	}
 	
 	public void validateProactiveChat() throws InterruptedException {
@@ -6980,6 +6996,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		Assertion.assertTrue("Proactive chat modal message not found", proactiveChatMsg.getText().trim().contains("Message with UnitedHealthcare"));
 		validateNew(proactiveChatCloseIcon);
 		validateNew(proactiveChatBtn);
+	}
+	
+	public void validateProactiveChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(proactiveChatBtn);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(6).getText().contains("Other"));
+			
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+		closeChatPopup();
+	}
+	
+	public void closeChatPopup() {
+		chatPopupOptions.click();
+		chatPopupEndChatOption.click();
 	}
 
 }
