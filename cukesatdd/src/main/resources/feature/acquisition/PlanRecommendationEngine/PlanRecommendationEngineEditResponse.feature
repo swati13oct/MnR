@@ -43,7 +43,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP123
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | 1stRecommendation | 2ndRecommendation |
       | AARP |   10001 | NO            | New York | None          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO                                 | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Doctors | SNP               | MA                |
@@ -129,11 +129,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @sanity
+    @regressionAARP123 @sanity
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities       |
       | AARP |   10002 | NO            | New York | MAPD          | Medicaid     | Lookup     | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                |     35035 | YES             | Bibb County | MAPD            | nursing        | Lookup    | julie         | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Month,1,YES,NO                                  | No,No,No,No                     | Higher                 | both             | Drug Cost, Doctors |
-      | AARP |   33143 | NO            | Miami    | None          | chronic      | UHGNetwork | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO                                 | No,No,No,No                   | Lower                |     10003 | NO              | New York    | MAPD            | Medicaid       | Lookup    | julie         | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Day,1,YES,NO                                    | Yes,Yes,Yes,Yes                 | Lower                  | 1st              | Vision, None       |
+      | AARP |   33143 | NO            | Miami    | None          | chronic      | UHGNetwork | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO                                 | No,No,No,No                   | Lower                |     10003 | NO              | New York    | MAPD            | Medicaid       | Lookup    | julie         | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Day,1,YES,NO                                    | Yes,Yes,Yes,Yes                 | Higher                 | 1st              | Vision, None       |
 
     @regressionUHC @prodRegression
     Examples: 
@@ -223,7 +223,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP123
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_doctors | E_DoctorsName |
       | AARP |   10001 | NO            | New York | MAPD          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                | Lookup    | julie         |
@@ -267,11 +267,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @EditResponsePage_MAPDtoMA @regressionAARP @EditResponsePage_IDKtoPDP
+    @EditResponsePage_MAPDtoMA @regressionAARP123 @EditResponsePage_IDKtoPDP
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
       | AARP |   33143 | NO            | Miami-Dade | MAPD          | Medicaid     | Lookup  | john        | NO            | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO             | Yes,Yes,Yes,Yes               | Lower                | MA              |
-      | AARP |   10005 | NO            | New York   | None          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Week,1,YES,NO                                  | Yes,Yes,Yes,Yes               | Lower                | PDP             |
+      #| AARP |   10005 | NO            | New York   | None          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Week,1,YES,NO                                  | Yes,Yes,Yes,Yes               | Lower                | PDP             |
 
     @EditResponsePage_MAPDtoMA @regressionUHC @EditResponsePage_IDKtoPDP
     Examples: 
@@ -315,11 +315,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionAARP
+    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionAARP123
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   32115 | NO            | Volusia  | MA            | Medicaid     | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
-      | AARP |   10004 | NO            | New York | MA            | Medicaid     | Lookup  | sue               | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Doctors, Health Care Premium | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                     |
+      #| AARP |   10004 | NO            | New York | MA            | Medicaid     | Lookup  | sue               | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Doctors, Health Care Premium | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                     |
 
     @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionUHC
     Examples: 
@@ -359,7 +359,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Preference Option | <E_costPreferenceOption> |
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP123
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | AARP |   33143 | NO            | Miami-Dade | PDP           | No             | PDPTOMAPD       | nursing        | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Week,1,YES,NO                                   | No,No,No,No                     | Higher                 |

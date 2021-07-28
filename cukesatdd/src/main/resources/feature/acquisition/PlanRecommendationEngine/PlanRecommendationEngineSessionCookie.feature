@@ -95,7 +95,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user verifies doctors session in Doctors page
       | Multi Doctor | <isMultiDoctor> |
 
-    @regressionAARP
+    @regressionAARP123
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
       | AARP |   10003 | NO            | New York | MAPD          | None         | sue         | NO            |

@@ -302,7 +302,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 								"Non Prod Connected to Incorrect Rally");
 					werallyResults = werally.werallySearch(type, search, count, locationCount);
 					String curID = String.valueOf(Thread.currentThread().getId());
-					System.out.println("Current Thread ID is - "+curID+" for the flow "+werallyResults);
+					System.out.println("Current Thread ID is - "+curID+" Provider saved in werally "+werallyResults);
 					CommonConstants.PRE_Rally_Providers.put(curID, werallyResults);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
@@ -364,7 +364,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
 		String curID = String.valueOf(Thread.currentThread().getId());
 		werally = CommonConstants.PRE_Rally_Providers.get(String.valueOf(Thread.currentThread().getId()));
-		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+werally+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" Provider saved in werally "+werally+" ****");
 
 		if (werally.size() == confirm.size() && count == werally.size()) {
 			if (containsname(werally, confirm)) {

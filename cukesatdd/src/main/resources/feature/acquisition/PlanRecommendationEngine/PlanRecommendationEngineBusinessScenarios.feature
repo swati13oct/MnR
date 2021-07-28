@@ -108,11 +108,11 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @prodRegression
+    @regressionAARP @prodRegression123
     Examples: 
       | site | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | AARP |   15537 | NO            | Bedford       | MA            | None             | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
-      | AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
+      #| AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
     @regressionUHC
     Examples: 
