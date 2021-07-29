@@ -755,7 +755,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
-	@Then("^the user validates error message displayed when filter results in no match$")
+	@Then("^the user validates error message displayed when filter results in no match|the user validate error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
@@ -843,7 +843,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validateAllTooltips(language, hasPrefRetailPharmacy);
 	}
 
-	@Then("^the user validates the question widget$")
+	@Then("^the user validate the question widget|the user validates the question widget$")
 	public void validateQuestionWidget() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
