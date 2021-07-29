@@ -26,7 +26,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.WelcomePage;
@@ -3399,5 +3401,41 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		}
 	}
 	
+	@Given("^the user navigates to following Campaign acquisition site page for External Links$")
+	public void the_user_navigates_to_following_medicare_acquisition_site_for_External_Links(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String path = memberAttributesMap.get("PagePath");
+		String plantype = memberAttributesMap.get("Plan Type");
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		aquisitionhomepage.navigateToPath(path);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+
 	
 }
