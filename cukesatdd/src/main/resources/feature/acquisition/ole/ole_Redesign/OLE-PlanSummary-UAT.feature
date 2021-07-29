@@ -105,6 +105,9 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validate on Review Page and click on Edit information for Medicare Information Page
+      | Medicare Number1 | <medicarenumber1> |
+      | Card Type        | <cardtype>        |
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
@@ -112,10 +115,10 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     #  | Auth Flag                | <authflag>               |
      # | Mailing Address Question | <mailingaddressquestion> |
 
-  @OLE_Redesign @OLE_UATRegression @prodRegression @UATRegression @regressionAARP @OLE 
+  @OLE_Redesign @OLE_UATRegression @prodRegression @UATRegression @regressionAARP @OLE  
     Examples: 
       | Scenario                    | site | TFNNo          |PlanType      | planyear | planYear | zipcode | isMultutiCounty | county      | plantype | planyear  | planName                                  | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | medicarenumber1 | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-      | MA- E2E Scenario 1_AARP     | AARP | 1-877-699-5710 |MA-MBI        | future   | future   |   76543 | NO              | Bell County | MA       | future    | AARP Medicare Advantage Patriot (HMO-POS) | MBI      | TEST_PORTALS_GOTTFRIED | TEST_PORTALS_GARRAND  | 5N69QY6ET34    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Irving      | TX           |      76543 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | true_yes      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456        |Valid          | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+     | MA- E2E Scenario 1_AARP     | AARP | 1-877-699-5710 |MA-MBI        | future   | future   |   76543 | NO              | Bell County | MA       | future    | AARP Medicare Advantage Patriot (HMO-POS) | MBI      | TEST_PORTALS_GOTTFRIED | TEST_PORTALS_GARRAND  | 5N69QY6ET34    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Irving      | TX           |      76543 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | true_yes      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456        |Valid          | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
       | MAPD - E2E Scenario 1_AARP  | AARP | 1-877-699-5710 |MAPD-PFFS-MBI | future   | future   |   66843 | Yes             | Chase County | MAPD     | future   | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK27    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles   | No                     | 123 Test      | Edison      | KS           |      66843 | test@test.com | None apply                                                                                                                                                                                                                                          | [blank]                 | yes     | yes          | false     | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456         | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
   @OLE_UATRegression @prodRegression @UATRegression @regressionUHC @OLE @OLE_Redesign
@@ -226,9 +229,9 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
-   #Then the user validate on Review Page and click on Edit information for Medicare Information Page
-     # | Medicare Number1 | <medicarenumber1> |
-    #  | Card Type        | <cardtype>        |
+   Then the user validate on Review Page and click on Edit information for Medicare Information Page
+      | Medicare Number1 | <medicarenumber1> |
+      | Card Type        | <cardtype>        |
     # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     Then the user clicks on Submit Enrollment to complete enrollment
    # Then the user validates the OLE Submission Details in GPS
@@ -354,6 +357,9 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validate on Review Page and click on Edit information for Medicare Information Page
+      | Medicare Number1 | <medicarenumber1> |
+      | Card Type        | <cardtype>        |
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
@@ -465,11 +471,9 @@ Then the user validates the Plan details on OLE
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
-     # Then the user validate on Review Page and click on Edit information for Medicare Information Page
-    #  | Medicare Number1 | <medicarenumber1> |
-    #  | Card Type        | <cardtype>        |
-    #   | PartA Date1     | <partadate1>      |
-     # | PartB Date1     | <partbdate2>      |
+    Then the user validate on Review Page and click on Edit information for Medicare Information Page
+      | Medicare Number1 | <medicarenumber1> |
+      | Card Type        | <cardtype>        |
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
@@ -609,11 +613,11 @@ Then the user validates the Plan details on OLE
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
+   Then the user validate on Review Page and click on Edit information for Medicare Information Page
+      | Medicare Number1 | <medicarenumber1> |
+      | Card Type        | <cardtype>        |
     Then the user clicks on Submit Enrollment to complete enrollment
-   # Then the user validates the OLE Submission Details in GPS
-     # | Plan Type                | <plantype>               |
-     # | Auth Flag                | <authflag>               |
-    #  | Mailing Address Question | <mailingaddressquestion> |
+  
 
   @OLE_Redesign @OLE_UATRegression @prodRegression @UATRegression @regressionAARP @OLE
     Examples: 

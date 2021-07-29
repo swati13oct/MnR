@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -63,7 +65,15 @@ public class OLEStepDefinitionMobile {
 		return loginScenario;
 	}
 
-	 AppiumDriver wd;
+
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+
+	// AppiumDriver wd;
 
 	@Given("^the user lands on OLE Welcome Page wity following Plan Details$")
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes)
@@ -2865,7 +2875,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		DetailsMap.put("Middle Name", (String) getLoginScenario().getBean(oleCommonConstants.MIDDLE_NAME));
 		DetailsMap.put("Card Type", (String) getLoginScenario().getBean(oleCommonConstants.CARD_TYPE));
 		DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
-	//	DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
+		//	DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 		//DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
 		String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
 		partAEffective = reviewSubmitPage.converttoReviewDate(partAEffective);
@@ -2877,7 +2887,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		DoB = reviewSubmitPage.converttoReviewDate(DoB);
 		DetailsMap.put("DOB", DoB);
 		//DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-	//	DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
+		//	DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
@@ -2950,7 +2960,6 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		//--------------------------Added for payment plan--------------------------------------------------------------
 
 		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
-
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
@@ -2964,9 +2973,10 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		}
 		// }
 	}
-	
-	@Then("^the user validates Medicaid Number in OLE Page$")
-	public void the_user_validates_Medicaid_Number_OLE_Page(DataTable arg1) throws Throwable {
+
+
+	@Then("^the user validates Medicaid Number in confirm Eligibility Page$")
+	public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -3238,16 +3248,17 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	
 	@Then("^the user validates the Plan details on OLE_CSNP Plans$")
 	public void the_user_validates_the_Plan_details_on_OLE_CSNP() throws Throwable {
-	
+		scenario.log("Sai - Change made 06/15 - Validate to Plan details --Aug Release");
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
-		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));		
-		String Premium;	
-		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));	
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		String Premium;
+		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));
+		//	boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		boolean Validation_Status = welcomePage.validate_plan_details_CSNP(PlanDetailsMap);
 		Premium = welcomePage.GetMonthlyPremiumValue();
 		if (Validation_Status) {
