@@ -250,7 +250,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public WebElement signIn;
 	
-	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
+	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	public WebElement menuShop;
 	
 	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
@@ -306,6 +306,9 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
 	public WebElement visitorProfileFlyoutSignInLink;
+	
+	@FindBy(id = "search-field")
+	public WebElement globalSiteSearchTxtBox;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
