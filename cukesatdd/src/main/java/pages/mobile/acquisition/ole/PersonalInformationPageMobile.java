@@ -388,7 +388,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		sendkeysMobile(MiddleNameField, MiddleName);
 		sendkeysMobile(lastNameField, LastName);
 		
-		sendkeysMobile(DOBtxtFld,DOB);
+		sendKeysByCharacter(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
 			jsClickNew(GenderSelectMale);
 		}

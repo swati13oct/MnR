@@ -30,6 +30,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -1229,7 +1230,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-	
+		
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_SNP_Plans(MemberDetailsMap);
 		if (isFormFilled) {
