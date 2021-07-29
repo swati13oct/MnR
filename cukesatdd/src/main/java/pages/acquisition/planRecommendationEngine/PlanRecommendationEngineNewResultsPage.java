@@ -330,7 +330,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public int findPlan(String uniqueName) {
 		System.out.println("Finding a Plan...");
 		waitforResultsPage();
+		threadsleep(3000);
 		String pageCount1 = pagenoLabel.getText().trim();
+		System.out.println("Total Page Count : "+pageCount1);
 		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
 		if(currentPage != 1) {
 			for(int c = 1; c < currentPage; c++) {
