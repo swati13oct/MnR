@@ -471,7 +471,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
 					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
-					|| doctorName.toLowerCase().contains("do not provide".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("do not include".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);

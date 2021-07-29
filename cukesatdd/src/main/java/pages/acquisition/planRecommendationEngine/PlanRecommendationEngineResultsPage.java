@@ -49,7 +49,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	
 	String flow;
 	ArrayList<String> DrugsInPRE;
-	ArrayList<String> DocInPRE;
+	public ArrayList<String> DocInPRE;
 	ArrayList<String> DrugsInDCE;
 	ArrayList<String> DrugsInVPP;
 	ArrayList<String> DrugsList = new ArrayList<String>();

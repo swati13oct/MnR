@@ -134,6 +134,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigate to Medicare Education and validate Plan Recommendation Engine Widget$")
 	public void navigate_MedicareEducation() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
 		headerAndFooter.navigationToPlanRecommendationEngineViaMedicareEducation();
 }
 	

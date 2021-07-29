@@ -86,7 +86,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends GlobalWebElement
 //		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
-		desktopCommonUtils.currentPageValidation(page.toUpperCase());
+//		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
 //		Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(coverageTitle);

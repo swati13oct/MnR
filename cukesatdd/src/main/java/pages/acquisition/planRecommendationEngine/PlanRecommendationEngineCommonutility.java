@@ -19,7 +19,7 @@ import pages.acquisition.commonpages.GlobalWebElements;
 
 public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 
-	Actions actions = new Actions(driver);
+	public Actions actions = new Actions(driver);
 
 	public PlanRecommendationEngineCommonutility(WebDriver driver) {
 		super(driver);
@@ -279,7 +279,10 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 
 	public void nextPageNameValidation(String pageName) {
 		System.out.println("Next page Validation Mobile");
-		findPagedetails(pageName);
+		if(pageName.contains("LOCATION"))
+			System.out.println("Plan Type not mentioned in flow");
+		else
+			findPagedetails(pageName);
 		if (nextPageName.contains("NULL") == false) {
 			try {
 				pageloadcomplete();

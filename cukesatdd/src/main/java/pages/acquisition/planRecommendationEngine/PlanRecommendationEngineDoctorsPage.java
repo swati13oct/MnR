@@ -230,9 +230,10 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		// Changing the count for multiple doc with : separated
 		if (search.contains(":")) {
 			count = search.split(":").length;
+			System.out.println("Searching doctor count is: "+count);
 		}
 		confirmationProviderResults = getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
+		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 		if (count > 2 && !search.contains(":")) {
 			removeDoctors();
 			count = count - 1;
