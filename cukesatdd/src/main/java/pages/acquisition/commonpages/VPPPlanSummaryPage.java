@@ -7167,8 +7167,7 @@ public String GetMonthlyPremiumValue() {
 		boolean Plannames = false;
 		CommonUtility.checkPageIsReadyNew(driver);
 
-			WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+			WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName+ "')"));
 			CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
 			jsClickNew(PREPlandetails);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
