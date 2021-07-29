@@ -1850,7 +1850,9 @@ public void validateDrugProvider() {
 	ArrayList<String> vpdrugs = new ArrayList<String>();
 	ArrayList<String> vpProviders = new ArrayList<String>();
 	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
-	DocInPRE = PlanRecommendationEngineDoctorsPage.confirmationResults;
+	String curID = String.valueOf(Thread.currentThread().getId());
+	DocInPRE = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));
+	System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+DocInPRE+" ****");
 	scrollToView(DrugCount);
 	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("&")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {

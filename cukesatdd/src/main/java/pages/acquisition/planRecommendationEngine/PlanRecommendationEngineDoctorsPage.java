@@ -35,7 +35,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 
 	PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
 	public ArrayList<String> werallyResults = new ArrayList<String>();
-	static ArrayList<String> confirmationResults = new ArrayList<String>();
+	public ArrayList<String> confirmationResults = new ArrayList<String>();
 	ArrayList<String> confirmationSpecialtyResults = new ArrayList<String>();
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
@@ -232,7 +232,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 			count = search.split(":").length;
 			System.out.println("Searching doctor count is: "+count);
 		}
-		confirmationProviderResults = getConfimationPopupResults(count);
+		String curID = String.valueOf(Thread.currentThread().getId());
+		confirmationProviderResults = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+confirmationProviderResults+" ****");
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 		if (count > 2 && !search.contains(":")) {
 			removeDoctors();
@@ -341,6 +343,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 			System.out.println("confirmationResults Content is : " + confirmationResults);
 			System.out.println("confirmationSpecialtyResults Size is : " + confirmationSpecialtyResults.size());
 			System.out.println("confirmationSpecialtyResults Content is : " + confirmationSpecialtyResults);
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - "+curID+" Provider saved in PRE "+ confirmationResults);
+			CommonConstants.PRE_Providers.put(curID, confirmationResults);
 
 		} else {
 			System.out.println("Modal Results Count mismatch");
