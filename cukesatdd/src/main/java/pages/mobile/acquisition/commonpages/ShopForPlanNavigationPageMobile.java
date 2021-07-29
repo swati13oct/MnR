@@ -106,6 +106,23 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
 
+	
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Advantage Plans']")
+	private WebElement shopForPlanSubNavMA;
+	
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Dual Special Needs Plans']")
+	private WebElement shopForPlanSubNavSNP;
+	
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Supplement Plans']:not([href$='classic.html'])")
+	private WebElement shopForPlanSubNavMS;
+	
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Supplement Plans'][href$='classic.html']")
+	private WebElement shopForPlanSubNavClassicMS;
+	
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Prescription Drug Plans']")
+	private WebElement shopForPlanSubNavPDP;
+	
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation']")
 	private WebElement getPlanRecommendation;
 
@@ -336,21 +353,23 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		switch (planType.toLowerCase()) {
 		case "ma":
 		case "mapd":
-			jsClickNew(maLeanHowToshopLink);
+			jsClickNew(shopForPlanSubNavMA);
 		case "dsnp":
 		case "snp":
-			jsClickNew(dsnpLeanHowToshopLink);
+			jsClickNew(shopForPlanSubNavSNP);
 			break;
 		case "medsupp":
 		case "ms":
 			if (classicUrl)
-				jsClickNew(MedSuppClassicUrl);
+				jsClickNew(shopForPlanSubNavClassicMS);
 			else
-				jsClickNew(msLeanHowToshopLink);
+
+				jsClickNew(shopForPlanSubNavMS);
+			
 
 			break;
 		case "pdp":
-			jsClickNew(pdpLeanHowToshopLink);
+			jsClickNew(shopForPlanSubNavPDP);
 			break;
 		default:
 			throw new IllegalArgumentException("Plan type " + planType + " is not available under 'Plan Types' menu");
@@ -407,15 +426,17 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 		if (!planTypesContainer.isDisplayed()) {
 			jsClickNew(planTypesTab);
+			CommonUtility.waitForPageLoadNew(driver, planTypeBack, 10);
 		}
 		try {
-			validatePlanTypeOptions = maLeanHowToshopLink.isDisplayed();
-			validatePlanTypeOptions = validatePlanTypeOptions && dsnpLeanHowToshopLink.isDisplayed();
 
-			validatePlanTypeOptions = validatePlanTypeOptions
-					&& (msLeanHowToshopLink.isDisplayed() || MedSuppClassicUrl.isDisplayed());
-
-			validatePlanTypeOptions = validatePlanTypeOptions && pdpLeanHowToshopLink.isDisplayed();
+			validatePlanTypeOptions = validate(shopForPlanSubNavMA);
+			validatePlanTypeOptions = validatePlanTypeOptions &&  validate(shopForPlanSubNavSNP);
+			
+			validatePlanTypeOptions = validatePlanTypeOptions && (validate(shopForPlanSubNavMS) || validate(shopForPlanSubNavClassicMS));
+			
+			validatePlanTypeOptions = validatePlanTypeOptions && validate(shopForPlanSubNavPDP);
+			
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Plan Types menu");
@@ -431,14 +452,17 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 		if (!toolsContainer.isDisplayed()) {
 			jsClickNew(toolsToChoosePlanTab);
+			CommonUtility.waitForPageLoadNew(driver, toolsToChooseBack, 10);
 		}
 		try {
-			validateToolsOptions = getPlanRecommendation.isDisplayed();
-			validateToolsOptions = validateToolsOptions && drugCostEstimator.isDisplayed();
 
-			validateToolsOptions = validateToolsOptions && pharmacySearch.isDisplayed();
-
-			validateToolsOptions = validateToolsOptions && providerSearch.isDisplayed();
+			validateToolsOptions = validateNew(getPlanRecommendation);
+			validateToolsOptions = validateToolsOptions &&  validateNew(drugCostEstimator);
+			
+			validateToolsOptions = validateToolsOptions && validateNew(pharmacySearch);
+			
+			validateToolsOptions = validateToolsOptions && validateNew(providerSearch);
+			
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Tools menu");

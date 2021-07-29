@@ -179,10 +179,15 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_Medicare_Education_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		if (aquisitionhomepage != null) {
-			aquisitionhomepage.validateSubNavMedEdLinks();
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = aquisitionhomepage.openLearnAboutMedicareFromMenu();
+		
+		if (learnAboutMedicareHomePageMobile != null) {
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateIntroductionMenu(), "Introduction to Medicare menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validatePlanTypeMenu(), "Types of Plan menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateMedicareEnrollmentMenu(), "Medicare Enrollment menu validation failed");
+			learnAboutMedicareHomePageMobile.closeLearnAboutMedicareSubNav();
 		} else {
-			Assertion.fail("Home Page not Loading");
+			Assertion.fail("Learn About Medicare sub nav did not open");
 		}
 	}
 

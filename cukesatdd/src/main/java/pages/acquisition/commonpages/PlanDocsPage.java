@@ -18,10 +18,10 @@ import atdd.framework.Assertion;
  */
 public class PlanDocsPage extends GlobalWebElements{	
 
-	@FindBy(xpath = "//h1")
+	@FindBy(xpath = "//*[@id='uhcheader']/div/div/div/h1")
 	public WebElement header;
 	
-	@FindBy(xpath = "//h2")
+	@FindBy(xpath = "//*[@id='uhc-plandocumentsApp']/div[2]/div[1]/div/div/div/div/div/h2")
 	public WebElement subtitle;
 	
 	@FindBy( xpath= ".//label[@for='zip-code']")
@@ -48,7 +48,7 @@ public class PlanDocsPage extends GlobalWebElements{
 	@FindBy(xpath = ".//*[@id='plan']/option[2]")
 	private WebElement planName;
 	
-	@FindBy(xpath = "//button//span[contains(@class,'uhc-button__text')]")
+	@FindBy(xpath = "//*[@id='planDocForm']/div[3]/div/button")
 	private WebElement continueButton;
 	
 	@FindBy(xpath = "//*[@id='planDocuments']/h3")

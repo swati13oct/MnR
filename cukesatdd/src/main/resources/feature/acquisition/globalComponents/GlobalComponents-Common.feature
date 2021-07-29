@@ -30,7 +30,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state  | code |
       | UHC  | Alaska | AK   |
 
-  @globalheaderULayer
+  @globalheaderULayer 
   Scenario Outline: To verify links displayed in the global header of <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -44,6 +44,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarp.org link in the header for cancel
 
     @globalheader
     Examples: 

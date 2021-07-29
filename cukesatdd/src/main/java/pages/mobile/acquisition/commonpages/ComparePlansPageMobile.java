@@ -816,7 +816,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
-		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		List<WebElement> allMAPlans = driver.findElements(By.cssSelector("th[ng-repeat*='plan in count'] > div > span"));
 		String[] plan = plans.split(",");
 		for (int i = 0; i < allMAPlans.size(); i++) {
 			Assertion.assertEquals(plan[i], allMAPlans.get(i).getText().trim());

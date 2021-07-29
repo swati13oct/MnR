@@ -787,4 +787,16 @@ public class ProviderSearchPage extends UhcDriver {
 
 		return new VisitorProfilePage(driver);
 	}
+	
+	@FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
+    private WebElement addDoctor;
+	
+	public ProviderSearchPage addDoctor() {
+		switchToNewTabNew(addDoctor);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+    }
 }

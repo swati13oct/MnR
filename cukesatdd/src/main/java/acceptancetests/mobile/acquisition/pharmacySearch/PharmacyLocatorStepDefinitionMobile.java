@@ -1,7 +1,10 @@
 package acceptancetests.mobile.acquisition.pharmacySearch;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -149,32 +152,41 @@ public class PharmacyLocatorStepDefinitionMobile {
 	}
 
 	/** Filter criteria verification in pharmacy tool page */
-	@And("the user enters following details for pharmacy search mobile")
+	@And("the user enters following details for pharmacy search")
 	public void enterZipCodeForNewSearchMobile(DataTable inputData) {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputData);
+		Map<String, String> inputAttributesMap=parseInputArguments(inputData);
 		String zipcode = inputAttributesMap.get("Zip Code");
 		String distance = inputAttributesMap.get("Distance");
-		String county = inputAttributesMap.get("County");
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY, county);
-
+		String county = inputAttributesMap.get("County Name");
+		if (county==null)
+			county="None";
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE,zipcode);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE,distance);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY,county);
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		System.out
-				.println("Zip Code is '" + zipcode + "' | Distance is '" + distance + "' | County is '" + county + "'");
-		if (county == null) {
-			System.out.println("TEST - no county");
-		} else {
-			System.out.println("TEST - has county"); // TODO: do something about it if county input is supplied
-		}
-		System.out.println("***** entered******");
-		pharmacySearchPage = pharmacySearchPage.enterDistanceZipDetails(distance, zipcode);
-		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page", pharmacySearchPage != null);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	
+		List<String> noteList=new ArrayList<String>();
+		noteList.add("");
+		noteList.add("===== TEST NOTE ================================================");
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		noteList.add("test run at stage time ="+currentEnvTime);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envTimeYear=tmpDate[tmpDate.length-1];
+		System.out.println("TEST - sysTimeYear="+envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		
+		List<String> testNote=pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
+
 	}
 
 	/** Verifying the error message in pharmacy search tool */
-	@And("^the user verify error messages in Pharmacy locator page$")
+	@And("^the user verify error messages in pharmacy locator page|the user verify error messages in Pharmacy locator page$")
 	public void verifyPharmacyErrorMessages(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
@@ -326,21 +338,17 @@ public class PharmacyLocatorStepDefinitionMobile {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Then("^the user validates the pharmacies available mobile$")
+	@Then("^the user validates the pharmacies available$")
 	public void validatesPharmaciesAvailable(DataTable inputAttributes) throws InterruptedException {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		String planName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
-		String testPlanYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
-		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
-		String testPdfLinkTextDate = (String) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE);
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-		System.out.println(planName + testPlanYear + testSiteUrl + testPdfLinkTextDate + "Total Pharmacy Count 2");
-		pharmacySearchPage.searchesPharmacy(language, planName, testPlanYear, testSiteUrl, testPdfLinkTextDate, wd);
+		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		String testPlanYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String testPdfLinkTextDate=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE);
+		pharmacySearchPage.searchesPharmacy(language,planName,testPlanYear, testSiteUrl, testPdfLinkTextDate);
 	}
 
 	/** Verify search results based on plan type */
@@ -747,12 +755,12 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
-	@Then("^the user validate error message displayed when filter results in no match$")
+	@Then("^the user validates error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		boolean isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
-		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
+		boolean isPharmacySelected= pharmacySearchPage.validateNoPharmaciesErrorMessage();
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!",isPharmacySelected);
 	}
 
 	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
@@ -824,14 +832,12 @@ public class PharmacyLocatorStepDefinitionMobile {
 	 * Assertion.fail("Error in validating Pharmacy Results "); } }
 	 */
 	/** Verify tooltips on the filters */
-	@And("^the user validate tooltips on filters$")
+	@And("^the user validates tooltips on filters|the user validate tooltips on filters$")
 	public void verifyTooltips(DataTable inputData) {
-		Map<String, String> inputDataMap = parseInputArguments(inputData);
+		Map<String, String> inputDataMap=parseInputArguments(inputData);
 		String language = inputDataMap.get("Language");
-		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assertion.assertTrue(
-				"PROBLEM - input 'Has Preferred Retail Pharmacy network Plan' should be True or False. Actual='" + tmp
-						+ "'",
+		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network Plan' should be True or False. Actual='"+tmp+"'", 
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
@@ -839,7 +845,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validateAllTooltips(language, hasPrefRetailPharmacy);
 	}
 
-	@Then("^the user validate the question widget$")
+	@Then("^the user validates the question widget$")
 	public void validateQuestionWidget() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
@@ -1017,7 +1023,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		} else
 			Assertion.fail("Navigation to Pharmacy Page for Language - " + Language + " FAILED");
 	}
-
+	
 	/***********************************************************************************************************************/
 
 	/** Verifying the pharmacy search tool in different languages */

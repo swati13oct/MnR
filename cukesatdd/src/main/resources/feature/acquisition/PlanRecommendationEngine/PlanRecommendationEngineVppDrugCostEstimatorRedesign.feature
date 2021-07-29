@@ -1,7 +1,7 @@
- @PlanRecommendationEngineVPPDCE
+# @PlanRecommendationEngineVPPDCE
 Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with VPP validation and DCE Redesign
 
-  @PRE_VPP_DCE_E2E
+ # @PRE_VPP_DCE_E2E
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <plantype>, <planname>, <drug1> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -46,14 +46,14 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @regressionAARP @prodRegression
+   # @regressionAARP @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             |
       | AARP |   33143 | No            | Miami-Dade | MAPD          | None         | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
 
     #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None           | AcceptsMedicare |  [blank]       |  [blank]    | No             | Yes,No,No,No                  | Higher               |
     
-    @regressionUHC @prodRegression
+   # @regressionUHC @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             |
       | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
