@@ -571,15 +571,15 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | County Name     | <Changecounty>        |
       | Click on Enter  | <ClickEnter>          |
 
-    @vppPlanCompareCommon_UHC03 @regressionUHC
+    @vppPlanCompareCommon_UHC03 @regressionUHC @test1
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | Click on Enter            |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | ClickEnter           |
       | 00027 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         78006 | YES                 | Bexar County       | Click on Find Plan button |
       | 00028 | UHC  |   78006 | Yes           | Bexar County       | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         90210 | NO                  | Los Angeles County | Click Enter               |
 
     @vppPlanCompareCommon_AARP03 @regressionAARP
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | Click on Enter            |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | ClickEnter            |
       | 00029 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         78006 | YES                 | Bexar County       | Click on Find Plan button |
       | 00030 | AARP |   78006 | Yes           | Bexar County       | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         90210 | NO                  | Los Angeles County | Click Enter               |
 

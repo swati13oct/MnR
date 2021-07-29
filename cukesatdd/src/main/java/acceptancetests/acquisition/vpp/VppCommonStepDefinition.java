@@ -4498,65 +4498,23 @@ public class VppCommonStepDefinition {
 
 	}
 	
-	@Then("Verify Change Zip Code Link is displayed on compare Page")
-	public void verify_Change_Zip_Code() {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateChangeZipCode();
+
+	@Then("^user selects keepshopping on the pop-up$")
+	public void user_selects_keepshopping_on_popup(){
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.keepShopping();
 	}
-
-	@When("^the user performs zip search using following information on Plan Compare Page$")
-	public void zipcode_Search_Plan_compare(DataTable givenAttributes) throws InterruptedException {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-
-		String Changezipcode = memberAttributesMap.get("Zip Code");
-		String Changecounty = memberAttributesMap.get("County Name");
-		String ChangeisMultiCounty = memberAttributesMap.get("Is Multi County");
-		String ClickEnter = memberAttributesMap.get("Click on Enter");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, Changezipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, Changecounty);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, ChangeisMultiCounty);
-
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+	
+	@Then("^agent saves a plans as favorite for user on plan compare page$")
+	public void agent_saves_a_plans_as_favorite_on_plan_compare_page(DataTable givenAttributes) {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		if (("NO").equalsIgnoreCase(ChangeisMultiCounty.trim())) {
-			planComparePage.searchPlansWithOutCounty(Changezipcode, ClickEnter);
-		} else {
-			planComparePage.searchPlans(Changezipcode, Changecounty, ClickEnter);
-		}
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
-		} else {
-			Assertion.fail("Error in loading the compare plans page");
-		}
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanName = memberAttributesMap.get("PlanName");
+		comparePlansPage.saveaPlan(savePlanName);
 	}
-
-	@When("^the user searches for zip code using following information on Plan Compare Page$")
-	public void zip_Search_Plan_compare(DataTable givenAttributes) throws InterruptedException {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-
-		String Changezipcode = memberAttributesMap.get("Zip Code");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, Changezipcode);
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.searchZipCode(Changezipcode);
-	}
-
-	@Then("Verify Invalid Zip Code Error message is displayed")
-	public void verify_Invalid_Zip_Code() throws InterruptedException {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.VerifyInvalidZipCodeErrorMessage();
-	}
-
-	@Then("Verify Zip Code with zero plans Error message is displayed")
-	public void verify_Zip_Code_No_Plans() throws InterruptedException {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.VerifyZipErrorMessageNoPlans();
-	}
+	
+	
 }
-
