@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 
 
@@ -501,5 +502,28 @@ public boolean validate_SEP_RadioButton_options() {
 		
 		return Validation_Flag;
 }	
-	
+public SpecialElectionPeriodPageMobile select_new_medicare_option(String selectoptions, String optionsData) {
+	validate(ChangingNewMedicareRadio);
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
+
+		} else {
+
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+		}
+	}
+
+	jsClickNew(ChangingNewMedicareRadio);
+
+	if(NextBtn.isEnabled()){
+		System.out.println("SEP options selected :  Next button is enabled");
+		return new SpecialElectionPeriodPageMobile(driver);
+	}
+
+	return null;
+}
+
+		
 }

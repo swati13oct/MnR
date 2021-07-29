@@ -26,6 +26,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
@@ -3350,5 +3353,49 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	System.out.println("Widgets are displayed on welcome Pages");
 	}
 	
+	@Then("^the user validates Medicaid Number in OLE Page$")
+	public void the_user_validates_Medicaid_Number_OLE_Page(DataTable arg1) throws Throwable {
+		
+		scenario.log("Sai - Change made 06/17 - Validate Medicaid Number on OLE Page--Aug Release");
+
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+		boolean MedicaidInformationStatus = medicareInfoPage.validate_Medicaid_Number_CEP(MemberDetailsMap);
+		if (MedicaidInformationStatus) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+			getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("OLE Medicaid Questions in Medicare Information Page -  Medicaid Member Details Failed");
+	}
+	
+	@Then("^the user selects the following options for new medicare SEP Page$")
+	public void the_user_selects_the_following_options_for_NewMedicare_page(DataTable SEPoptions) throws Throwable {
+
+		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
+		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
+
+		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
+		String optionsData = SEPoptionsFlagMap.get("Option Data");
+
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		specialElectionPeriodPage = specialElectionPeriodPage.select_new_medicare_option(Selectoptions, optionsData);
+		if (specialElectionPeriodPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
+			System.out.println("OLE SEP page Options Selected : Next Button enabled");
+		} else
+			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
+
+
+	}
 	
 }
