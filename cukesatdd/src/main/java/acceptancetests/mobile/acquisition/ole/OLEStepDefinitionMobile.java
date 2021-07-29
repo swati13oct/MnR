@@ -26,6 +26,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.WelcomePage;
@@ -308,26 +309,24 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		
-		String PlanName = givenAttributesMap.get("Plan Name");
-		String PlanType = givenAttributesMap.get("Plan Type");
+		String PlanName = givenAttributesMap.get("Plan Name");		
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-
-		String ZipCode = givenAttributesMap.get("Zip Code");
-		// (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = "";
-		// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanPremium = "";
-		// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WelcomePageMobile welcomePage;
-		if (PlanType.contains("MAPD")) {
+		if(PlanType.contains("MAPD")){
 			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
-			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
-		} else {
+			welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
+			PlanPremium=comparePlansPage.GetMonthlyPremiumValue();
+		}else {
 			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
-			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
+			welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
+			PlanPremium=comparePlansPage.GetMonthlyPremiumValue();
 		}
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
@@ -336,7 +335,8 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
@@ -351,9 +351,9 @@ String PlanName = givenAttributesMap.get("Plan Name");
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Error in validating the OLE Welcome Page");
-
+		
 	}
-
+	
 	/**
 	 * @toDo:user validates the available plans for selected plan types
 	 */

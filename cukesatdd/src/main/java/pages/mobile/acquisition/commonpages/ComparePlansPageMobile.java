@@ -295,7 +295,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_PDP;
-
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
+	
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1760,4 +1763,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(viewlocationsLink);
 		System.out.println("Verified Edit Doctors Section");
 	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
+
 }
