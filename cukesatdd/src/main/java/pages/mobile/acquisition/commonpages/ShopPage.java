@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
@@ -350,14 +351,13 @@ public class ShopPage extends UhcDriver {
 							break;
 						}
 					}
-				} else {
+				}
+				else {
 					driver.navigate().back();
 				}
 				zipCodeNumber++;
-				/*
-				 * driver.navigate().refresh(); //Adding refresh since element are not located
-				 * in Safari browser after using navigate back threadsleep(2000);
-				 */
+				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
+				threadsleep(2000);*/
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -376,7 +376,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(comparePlanBtn);
 		validateNew(comparePlanBtn);
-		//jsClickNew(comparePlanBtn);
+		// jsClickNew(comparePlanBtn);
 		comparePlanBtn.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -388,7 +388,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
-		//jsClickNew(LearnEstimateCosts);
+		// jsClickNew(LearnEstimateCosts);
 		LearnEstimateCosts.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -400,7 +400,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
-		//jsClickNew(howToSwitchPlans);
+		// jsClickNew(howToSwitchPlans);
 		howToSwitchPlans.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -412,7 +412,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
-		//jsClickNew(learnSafeShopping);
+		// jsClickNew(learnSafeShopping);
 		learnSafeShopping.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("safe-shopping.html"))
@@ -423,7 +423,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
-		//jsClickNew(getMemberResources);
+		// jsClickNew(getMemberResources);
 		getMemberResources.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
@@ -446,7 +446,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
-		//jsClickNew(checkDrugCostsBtn);
+		// jsClickNew(checkDrugCostsBtn);
 		checkDrugCostsBtn.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("estimate-drug-costs.html#/drug-cost-estimator"))
@@ -456,30 +456,27 @@ public class ShopPage extends UhcDriver {
 	public void findAProvider() throws Exception {
 		pageloadcomplete();
 		validateNew(findAProviderBtn);
-		String parentWindow = driver.getWindowHandle();
-		//jsClickNew(findAProviderBtn);
-		findAProviderBtn.click();
-		Thread.sleep(10000);
-		waitForPageLoadSafari();
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-				if (!driver.getCurrentUrl().contains("werally"))
-					Assert.fail("Provider Search page failed to load");
-				Thread.sleep(2000);
-				
-			}
-			driver.close();
-		}
+		// String parentWindow = driver.getWindowHandle();
 
-//		driver.close();
-//		driver.switchTo().window(parentWindow);
-		
-		
+		switchToNewTabNew(findAProviderBtn);
+		// jsClickNew(findAProviderBtn);
+		// findAProviderBtn.click();
+		// Thread.sleep(10000);
+		// waitForPageLoadSafari();
+		// Set<String> tabs_windows = driver.getWindowHandles();
+		// Iterator<String> itr = tabs_windows.iterator();
+		// while (itr.hasNext()) {
+		// String window = itr.next();
+		// if (!parentWindow.equals(window)) {
+		// driver.switchTo().window(window);
+		if (!driver.getCurrentUrl().contains("werally"))
+			Assert.fail("Provider Search page failed to load");
+		Thread.sleep(2000);
 
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// driver.close();
 	}
 
 	public void locateAPharmacy() {
