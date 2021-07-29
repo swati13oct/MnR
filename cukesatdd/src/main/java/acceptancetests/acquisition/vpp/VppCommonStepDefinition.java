@@ -1265,7 +1265,7 @@ private Scenario scenario;
 			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	//	String planType = givenAttributesMap.get("Plan Type");
 	//	String SiteName = givenAttributesMap.get("Site");
-		String planName = givenAttributesMap.get(" Plan Name");
+		String planName = givenAttributesMap.get("Plan Name");
 		PlanDetailsPage  plandetailsPage;
 
 	PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
