@@ -270,7 +270,11 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-
+		/*if (null == druglist) {
+			druglist = "";
+		}
+		druglist = druglist + "&" + drugName;*/
+		
 		if(StringUtils.isEmpty(druglist)) {
 			druglist = drugName;
 		} else {
@@ -1158,6 +1162,7 @@ public class DCEStepDefinitionAARP {
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		System.out.println(PharmacytoSelect);
 		drugSummaryPage.SelectPharmacy(PharmacytoSelect);
 		drugSummaryPage.validatePharmacyName(PharmacytoSelect);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -2234,6 +2239,12 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
+	
+	@Then("^user clicks on search button$")
+	public void user_clicks_on_search_button() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.ClickSearch();
+	}
 
 	@Then("^no results message should be displayed from drug details$")
 	public void no_results_message_should_be_displayed_from_drug_details(DataTable attributes) throws Throwable {
@@ -2905,6 +2916,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+
     @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
     public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
 		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
@@ -3017,5 +3029,76 @@ public class DCEStepDefinitionAARP {
             drugDetailsPage.validateModalText_DeductibleStage(deductibleFlag);
     }
 
+	
+	@When("^user should be able to click on plan and view drug cost$")
+	public void user_should_be_able_to_click_plantype_and_view_drugcost_for_plan(DataTable givenAttributes) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String planType = memberAttributesMap.get("planType");
+		String planName = memberAttributesMap.get("planName");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		
+		drugSummaryPage.selectAndVerifyPlanType(planType, planName);
+		
+	}
+	
+	@Then("^user should be able to save drugs$")
+	public void user_saves_drud_cost(){
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
+		
+		drugDetailPage.saveDrug();
+				
+	}
+
+	@And("^the user clicks on the shopping cart icon from DCE$")
+	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		AcquisitionHomePage acqHomePage = new AcquisitionHomePage(driver);
+
+		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+    
+	@Then("^the user validates Get Started Page vp$")
+	public void the_user_validates_Get_Started_Page_vp(DataTable givenAttributes) throws Throwable {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String site = memberAttributesMap.get("Site");
+		
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+
+		aquisitionhomepage.navigateToURL(site);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+
+	}
+	
+	@Then("^remove drug from the saved profile$")
+	public void remove_drug_from_saved_profile(DataTable givenAttributes) {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String drugName = memberAttributesMap.get("DrugName");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.deleteDrugProfile(drugName);
+		//button[contains(@aria-label,"Edit ")]
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
+	}
 
 }
