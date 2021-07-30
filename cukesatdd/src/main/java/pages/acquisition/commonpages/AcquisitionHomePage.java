@@ -5512,7 +5512,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public void openExternalLinkPRE(String site) {
+	public boolean openExternalLinkPRE(String site) {
+		boolean offline_prod = true;
 		String browser = MRScenario.browserName;
 		if (site.equalsIgnoreCase("Myuhcplans")) {
 			startNewPRE("https://myuhcplans.com/steelcase", browser);
@@ -5532,6 +5533,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (site.equalsIgnoreCase("aarpmedicareplans")) {
 			startNewPRE("https://www.aarpmedicareplans.com/", browser);
 		}
+		return offline_prod;
 	}
 
 	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {

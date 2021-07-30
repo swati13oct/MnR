@@ -135,7 +135,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 
-		@FunctionalAARP1234
+		@FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName | isMultiDoctor |
       | AARP |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | John        | YES           |

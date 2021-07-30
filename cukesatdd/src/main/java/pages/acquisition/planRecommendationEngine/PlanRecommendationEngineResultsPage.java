@@ -316,7 +316,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> SNPPlansSaveIcon;
 	
-	@FindBy(css = "#pop-btn-1 span")
+	@FindBy(css = "button[dtmname*='Keep Shopping Plans']")
 	//	@FindBy(css = ".modal-footer #popupClose")
 	private WebElement keepshoppingPlansBtn;
 	
@@ -1516,13 +1516,13 @@ public void validateSNPPlanName() {
 }
 
 public void verifyPlanNameinOLE() {
-	String snpPlanName= planNameVPPDetailsPage.getText().trim();
+	String PlanName= planNameVPPDetailsPage.getText().trim();
 	String planNameinOLE = "";
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
 	planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
-	Assert.assertTrue(planNameinOLE.contains(snpPlanName), "--- Plan name are not matches---");	
+	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
@@ -1724,6 +1724,13 @@ public void validateSavePlan(String planInfo, String year) {
 	for (int i = 0; i < planslist.length; i++) {
 		plan = planslist[i];
 		saveplans(plan);
+		if(i==1) {
+			validate(keepshoppingPlansBtn);
+			keepshoppingPlansBtn.click();
+			threadsleep(3000);
+		}
+			
+	}
 	Collections.sort(vppPlans);
 	System.out.println(vppPlans);
 	threadsleep(3000);
@@ -1732,11 +1739,12 @@ public void validateSavePlan(String planInfo, String year) {
 	validate(guestViewSavedBtn);
 	guestViewSavedBtn.click();
 	verifySavePlans(year, vppPlans);
-}
+	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
 
+
 public ArrayList<String> comboPlanNames = new ArrayList<String>();
-public void validateCombineSavePlan(String year) {
+public void validateCombineSavePlan_old(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
 	threadsleep(5000);
@@ -1982,6 +1990,12 @@ public void PREStage(String primaryWindow, String aarp) {
 }
 
 public void validatePDPPlanNamesAndEnroll() {
+	System.out.println("Validating PDP Plan Names in Details pages : ");
+	plansLoader();
+	verifyPlanNameinOLE();
+}
+
+public void validatePDPPlanNamesAndEnroll_old() {
 	System.out.println("Validating PDP Plan Names in Details pages : ");
 	plansLoader();
 	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());

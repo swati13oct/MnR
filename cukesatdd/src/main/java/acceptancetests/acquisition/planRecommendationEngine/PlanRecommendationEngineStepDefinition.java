@@ -741,10 +741,11 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validate MA Plan Names in VPP Summary VS Details in results page$")
-   	public void verify_MA_Plan_names_results_page() {
-		checkpopup();
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.validateMAPlanNamesSummaryAndDetails();
+   	public void verify_MA_Plan_names_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.browserBack();
 	}
 	
 	@Then("^user validate PDP Plan Names in VPP Summary VS Details in results page$")
@@ -762,7 +763,8 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validate SNP Plan in Enroll page$")
-   	public void verify_SNP_Plan_names() {
+   	public void verify_SNP_Plan_names(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -875,7 +877,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
-		planSelectorResultspage.validateCombineSavePlan(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Info"),inputValues.get("Plan Year"));
 	}
 	
 	@Then("^user save 2 MA plans in vpp summary and Validate in Visitor profile page$")
@@ -897,7 +899,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE");
-		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
+		if_offline_prod = aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
@@ -927,15 +929,19 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user validate PDP Plan Names in VPP Details and Click Enroll button in Plan Details page$")
-   	public void verify_Plan_names_Enroll_page() {
+   	public void verify_Plan_names_Enroll_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 	
 	@When("^user navigate to Drug Cost Estimator page$")
 	public void navigate_DCE() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
 		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
 	}
 	
