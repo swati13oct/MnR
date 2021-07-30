@@ -284,7 +284,8 @@ public class VisitorProfileMobileStepDefinition {
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlans(savePlanNames);
+//		visitorProfile.validateAddedPlans(savePlanNames);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
 	}
 
 	@And("^user validates the added Ms plans on visitor profile page$")
@@ -389,10 +390,6 @@ public class VisitorProfileMobileStepDefinition {
 
 		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
-
-		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);

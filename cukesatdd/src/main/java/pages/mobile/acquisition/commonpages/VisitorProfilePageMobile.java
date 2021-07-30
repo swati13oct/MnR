@@ -114,7 +114,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "button.cta-button.create-profile")
 	private WebElement comparePlansOnPopup;
 	
-	@FindBy(css = "div[class^='uhc-compare-header']")
+	@FindBy(css = "div[class='uhc-compare-header__controls']")
 	private WebElement comparePlansHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
