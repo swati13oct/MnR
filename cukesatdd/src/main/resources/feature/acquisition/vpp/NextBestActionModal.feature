@@ -529,12 +529,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     #  | Plan Year | <planyear> |
     Then user verify NBA is not displayed on the VPP page
 
-    @NBA_PRE_AARP01 @regressionAARP
+    @NBA_PRE_AARP01
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear | prioritiesOption | priorities    |
       | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next     | 1st              | Doctors, None |
 
-    @NBA_PRE_UHC01 @regressionUHC
+    @NBA_PRE_UHC01
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear | prioritiesOption | priorities    |
       | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next     | 1st              | Doctors, None |

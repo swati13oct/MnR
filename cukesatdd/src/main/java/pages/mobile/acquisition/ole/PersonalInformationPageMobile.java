@@ -247,6 +247,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}
+		jsClickNew(NextBtn);
 		// sendkeys(PermanentAdd_Street, Perm_Street);
 		sendkeysMobile(PermanentAdd_Street, Perm_Street);
 		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
@@ -264,7 +265,10 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 			// sendkeysNew(MailingAdd_Zip, Mailing_Zip);
 			sendKeysByCharacter(MailingAdd_Zip, Mailing_Zip);
+			jsClickNew(NextBtn);
+
 		}
+		
 		// sendkeys(Email, EmailAddress);
 		sendkeysMobile(Email, EmailAddress);
 
@@ -443,11 +447,15 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		// sendkeysMobile(MobileNumberField, MobileNumber);
 		sendKeysByCharacter(MobileNumberField, MobileNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
-		sendkeysMobile(MiddleNameField, MiddleName);
+		//scrollToView(MiddleNameField);
+		//sendkeysMobile(MiddleNameField, MiddleName);
+		scrollToView(emailConfirmationYesBtn);
+
 		if (emailConfirmation.equalsIgnoreCase("YES")) {
 			jsClickNew(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
 		} else
 			jsClickNew(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
+		scrollToView(goGreenYesBtn);
 
 		if (goGreen.equalsIgnoreCase("YES")) {
 			// goGreenYesBtn.click();
@@ -455,6 +463,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		} else
 			// goGreenNoBtn.click();
 			jsClickNew(goGreenNoBtn);
+		jsClickNew(NextBtn);
+
 
 		// if(emailConfirmation.equalsIgnoreCase("YES") &&
 		// goGreen.equalsIgnoreCase("YES"))

@@ -1812,6 +1812,12 @@ public class DrugDetailsPage extends UhcDriver {
 		distanceDrpDown.click();
 		Select distance = new Select(distanceDrpDown);
 		distance.selectByVisibleText(distanceValue);
+		Thread.sleep(2000);
+		
+	}
+	
+	public void ClickSearch() {
+		pharmacySearchBtn.click();
 	}
 
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {

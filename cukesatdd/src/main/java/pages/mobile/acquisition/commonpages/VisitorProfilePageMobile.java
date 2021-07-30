@@ -252,8 +252,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();
-			Thread.sleep(20000);
+			WebElement plan = driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName + "')]"));
+           scrollToView(plan);
+			jsClickNew(plan);
+           Thread.sleep(20000);
 			if (driver.getCurrentUrl().contains("#/details")) {
 				return new PlanDetailsPageMobile(driver);
 			}
