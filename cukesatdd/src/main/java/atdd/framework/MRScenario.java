@@ -208,7 +208,11 @@ public class MRScenario {
 	
 	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
-	private synchronized AppiumDriver getThreadSafeMobileDriver() {
+	public synchronized void setThreadSafeMobileDriver(AppiumDriver driver){
+		threadSafeMobileDriver.set(driver);
+	}
+	
+	private static synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
 	}
 	
@@ -722,7 +726,7 @@ public class MRScenario {
 		} else {
 			JobURL.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
 		}
-		System.out.println("JobURL ---" + returnJobURL());
+		System.out.println("JobURL --- " + returnJobURL());
 	}
 
 /*	public void getJobURL(String jobID) {
@@ -824,7 +828,14 @@ public class MRScenario {
 				capabilities.setCapability("enablePerformanceLogging", true);
 				browserName="Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
-				threadSafeMobileDriver.set(new AndroidDriver(new URL(SauceLabsURL), capabilities));
+				
+				AppiumDriver mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
+				//Adding the below condition to debug NPE for driver
+				if(mobileDriver == null) {
+					Assertion.fail("Android driver was not created !");
+				} else {
+					setThreadSafeMobileDriver(mobileDriver);
+				}
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
@@ -834,7 +845,13 @@ public class MRScenario {
 				capabilities.setCapability("locationServicesAuthorized", "true");
 				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
-				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));
+				AppiumDriver mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
+				//Adding the below condition to debug NPE for driver
+				if(mobileDriver == null) {
+					Assertion.fail("iOS driver was not created !");
+				} else {
+					setThreadSafeMobileDriver(mobileDriver);
+				}
 			}
 //			System.out.println("Session ID --- " + mobileDriver.getSessionId());
 			System.out.println("Session ID --- " + getThreadSafeMobileDriver().getSessionId().toString());
