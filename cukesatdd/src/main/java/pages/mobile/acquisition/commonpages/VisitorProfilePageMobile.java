@@ -167,13 +167,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
 	
-    @FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
+    @FindBy(css = "#landrover > main > app-dashboard-header > header.uhc-profile-header-mobile.position-relative.pt-20.mb-40 > div:nth-child(2) > nav > a:nth-child(2) > span")
     public WebElement drugHeader;
 
     @FindBy(css = "h3#saved-drugs")
     public WebElement savedDrugsHeader;
 
-	public void validateAddedDrugAndPharmacy(String drug) {
+	public void validateAddedDrugAndPharmacy(String drug) throws InterruptedException {
 
 		/*
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
@@ -198,7 +198,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs and Pharmacy")));
+		
+		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
 		jsClickNew(drugHeader);
@@ -251,8 +252,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();
-			Thread.sleep(20000);
+			WebElement plan = driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName + "')]"));
+           scrollToView(plan);
+			jsClickNew(plan);
+           Thread.sleep(20000);
 			if (driver.getCurrentUrl().contains("#/details")) {
 				return new PlanDetailsPageMobile(driver);
 			}
