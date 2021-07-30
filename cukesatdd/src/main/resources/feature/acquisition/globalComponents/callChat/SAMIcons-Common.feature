@@ -283,7 +283,7 @@ Feature: ACQ M&R- To test SAM Icons
     @samChatUHC @regressionUHC
     Examples: 
       | pagename | site |
-      | /        | UHC |
+      | [blank]  | UHC |
 
   Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, Compare, OLE
     Given the user is on medicare acquisition site landing page
