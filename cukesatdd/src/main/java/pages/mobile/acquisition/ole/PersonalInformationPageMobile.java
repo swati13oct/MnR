@@ -637,9 +637,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
+		scrollToView(goGreenYesBtn);
 
 					 if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
 					  System.out.println("OLE otherhealth insurance Page  or Chronic Page is Displayed"); } else {
+		jsClickNew(NextBtn);
 
 					  System.out.println("OLE otherhealth insurance Page or Chronic Page is Displayed"); }
 					 return new ConfirmYourEligibilityPageMobile(driver);
