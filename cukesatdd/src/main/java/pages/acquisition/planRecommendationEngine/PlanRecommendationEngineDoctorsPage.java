@@ -232,8 +232,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 			count = search.split(":").length;
 			System.out.println("Searching doctor count is: "+count);
 		}
+		getConfimationPopupResults(count);
 		String curID = String.valueOf(Thread.currentThread().getId());
-		confirmationProviderResults = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));
+		confirmationProviderResults = CommonConstants.PRE_Providers.get(curID);
 		System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+confirmationProviderResults+" ****");
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 		if (count > 2 && !search.contains(":")) {

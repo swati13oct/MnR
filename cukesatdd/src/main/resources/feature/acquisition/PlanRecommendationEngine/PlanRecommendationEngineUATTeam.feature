@@ -30,12 +30,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Priorities      | <priorities>     |
     Then user save 2 MA plans in vpp summary and Validate in Visitor profile page
       | Plan Year | <PlanYear> |
+      |Plan Info|<PlanInfo> |
     Then user Validate Drug and Provider details in Visitor profile page
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear |
-      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear |PlanInfo|
+      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  |Prime (HMO):Prime (HMO)|
 
     @uatE2EUHC
     Examples: 
@@ -68,6 +69,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate SNP Plan in Enroll page
+    | planInfo | <planInfo> |
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page //deleted in PRE stepdefinition
@@ -79,8 +81,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 |
-      | AARP |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 |planInfo|
+      | AARP |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            |Complete (HMO D-SNP),Link       |
 
     @uatE2EUHC
     Examples: 

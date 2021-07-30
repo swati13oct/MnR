@@ -763,8 +763,10 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate SNP Plan in Enroll page$")
    	public void verify_SNP_Plan_names() {
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
 		planSelectorResultspage.validateSNPPlanName();
 	}
 	
@@ -881,7 +883,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
-		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Info"),inputValues.get("Plan Year"));
 	}
 	
 	@Then("^user Validate Drug and Provider details in Visitor profile page$")
