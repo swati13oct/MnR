@@ -1725,7 +1725,9 @@ public void validateSavePlan(String planInfo, String year) {
 	String[] planslist = planInfo.split(":");
 	for (int i = 0; i < planslist.length; i++) {
 		plan = planslist[i];
+		threadsleep(3000);
 		saveplans(plan);
+		threadsleep(3000);
 		if(i==1) {
 			validate(keepshoppingPlansBtn);
 			keepshoppingPlansBtn.click();
@@ -1800,6 +1802,8 @@ public ArrayList<String> saveplans(String plan) {
 	System.out.println("Plans Index is :" +planIndex);
 	vppPlans.add(plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim());
 	threadsleep(3000);
+	WebElement planSaveBtn = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton"));
+	scrollToView(planSaveBtn);
 	String save = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton")).getText().trim();;
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		threadsleep(3000);
