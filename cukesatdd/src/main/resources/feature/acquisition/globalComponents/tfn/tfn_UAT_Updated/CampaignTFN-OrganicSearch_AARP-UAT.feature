@@ -41,7 +41,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     #	| Zip Code        | <zipcode>|
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxPath> |
+      | TFN Xpath | <TFNxpath> |
     #Then the user navigates to plan tab for any plan
     #  | Plan Type | <MSplantype> |
     # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -67,26 +67,26 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Request a Free Decision Guide
       | TFN No    | <MedsuppTFNNo> |
-      | TFN Xpath | <TFNxPath>     |
+      | TFN Xpath | <TFNxpath>     |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxPath> |
+      | TFN Xpath | <TFNxpath> |
     Then the user navigates to shop pages Page and validates Federal TFN
       | SHOPPAGES URL | <shoppages> |
     Then the user validates PSC code
       | PSC Code | <Precedence1PSC> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxPath> |
+      | TFN Xpath | <TFNxpath> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareeduUrl> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxPath> |
+      | TFN Xpath | <TFNxpath> |
 
     Examples: 
       | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                          | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         |
