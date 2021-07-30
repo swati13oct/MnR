@@ -75,7 +75,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                     |
       | AARP |   10003 | NO            | New York | PDP           | Yes            | Plan 1 (HMO),You haven't added any drugs,N/A |
 
-    @regressionUHC
+    @regressionUHC @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                     |
       | UHC  |   10003 | NO            | New York | PDP           | Yes            | Plan 1 (HMO),You haven't added any drugs,N/A |
@@ -296,6 +296,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | AARP |   90210 | NO            | Los Angeles | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),Medicare and Medicaid,False:Advantage Assure (HMO),Medicare and Medicaid,True |
       | AARP |   90210 | NO            | Los Angeles | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage Assure (HMO),chronic,False:Advantage Assure (HMO),nursing,False                                |
       | AARP |   10001 | NO            | New York    | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),Medicare and Medicaid,False:Plan 1 (HMO),chronic,False:Plan 1 (HMO),nursing,False           |
+      
+    @prodRegression
+    Examples: 
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | snpInfo                                                                                                  |
+      | AARP |   90210 | NO            | Los Angeles | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),Medicare and Medicaid,False:Advantage Assure (HMO),Medicare and Medicaid,True |
 
     @regressionUHC
     Examples: 
