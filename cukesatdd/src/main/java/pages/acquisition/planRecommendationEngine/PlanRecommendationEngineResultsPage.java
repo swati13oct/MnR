@@ -1516,7 +1516,7 @@ public void validateSNPPlanName() {
 }
 
 public void verifyPlanNameinOLE() {
-	String PlanName= planNameVPPDetailsPage.getText().trim();
+	String PlanName= planNameVPPDetailsPage.getText().trim().toUpperCase();
 	String planNameinOLE = "";
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
@@ -1807,7 +1807,7 @@ public ArrayList<String> saveplans(String plan) {
 	String save = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton")).getText().trim();;
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		threadsleep(3000);
-		plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton")).click();
+		jsClickNew(planSaveBtn);
 	}
 	return vppPlans;
 }

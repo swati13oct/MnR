@@ -640,8 +640,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	
 	public void plansLoader() {
 		pageloadcomplete();
-		validate(planLoaderscreen, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		if(validate(planLoaderscreen, 60))
+			waitforElementInvisibilityInTime(planLoaderscreen,60);
 		threadsleep(5000);// Plan loader
 	}
 
