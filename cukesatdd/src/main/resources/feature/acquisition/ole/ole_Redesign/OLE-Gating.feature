@@ -18,8 +18,8 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
    # Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-      | Rider Flag | <riderflag> |
+   # Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+     # | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -118,8 +118,8 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-      | Rider Flag | <riderflag> |
+   # Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+    #  | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following information in Personal Information Page SNP Plans
       | First Name               | <firstname>              |
@@ -220,8 +220,8 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
     Then the user validates the Plan details on OLE
-   Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-      | Rider Flag | <riderflag> |
+  # Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+    #  | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -319,8 +319,8 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Plan Name | <planName> |
     #Then the user validates the Plan details on OLE
     Then the user validates the Plan details on OLE CSNP Plans
-     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-      | Rider Flag | <riderflag> |
+   #  Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+    #  | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following information in Personal Information Page SNP Plans
       | First Name               | <firstname>              |
