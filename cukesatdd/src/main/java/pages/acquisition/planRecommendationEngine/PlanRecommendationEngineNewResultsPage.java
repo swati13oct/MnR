@@ -631,5 +631,18 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		}
 		
 	}
+	
+	public void browserBack() {
+
+		driver.navigate().back();
+		plansLoader();
+	}
+	
+	public void plansLoader() {
+		pageloadcomplete();
+		validate(planLoaderscreen, 60);
+		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		threadsleep(5000);// Plan loader
+	}
 
 }
