@@ -1245,9 +1245,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		
 		scrollToView(ProviderSearchLink);
-		validateNew(ProviderSearchLink);
-		// iosScroll(ProviderSearchLink);
+        validateNew(ProviderSearchLink);		
+        // iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
