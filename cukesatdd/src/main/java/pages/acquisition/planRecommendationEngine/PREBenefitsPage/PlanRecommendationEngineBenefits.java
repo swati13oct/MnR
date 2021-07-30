@@ -91,13 +91,13 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 	String value = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div.premiumValues p.monthlyPremium strong")).getText());
 	preResult.put(formatString("Monthly Premium : "), value);
 	
-	value = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div.premiumValues p[class*='outOfPocket'] strong")).getText());
-	preResult.put(formatString("Out-of-Pocket Maximum : "), value);
-	
 	if(planName.contains("(PDP)"))
 	{
 		return preResult;
 	}
+	
+	value = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div.premiumValues p[class*='outOfPocket'] strong")).getText());
+	preResult.put(formatString("Out-of-Pocket Maximum : "), value);
 	
 	// Additional Serivce
 	int additional_Service_Count = 4;
