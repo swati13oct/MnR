@@ -529,6 +529,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
 
+	@FindBy(css = "#upgradeVersionBarNew")
+	private WebElement upgradeBrowserVersionBanner;
+	
+	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateLater")
+	private WebElement updateLaterButton;
+	
+	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateNow")
+	private WebElement updateNowButton;
+	
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
 	String CallSam = "1-877";
@@ -584,7 +593,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public String MicroAppSiteUrl;
 
-	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+//	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
 	public AcquisitionHomePageMobile(WebDriver driver) {
 		super(driver);
@@ -995,6 +1004,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
+		
+		clickUpdateLaterBrowserButton();
 	}
 
 	public void checkForSecurityPage() {
@@ -1011,7 +1022,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
-
+	
+	/**
+	 * Click update later browser button.
+	 * 
+	 * This method is for lower version of Chrome browser on Android
+	 */
+	public void clickUpdateLaterBrowserButton() {
+		if(validate(upgradeBrowserVersionBanner)) {
+			System.out.println("Update browser banner shown !");
+			jsClickNew(updateLaterButton);
+			System.out.println("Clicked 'Update later' button");
+			sleepBySec(2);
+			if(!upgradeBrowserVersionBanner.isDisplayed()) {
+				System.out.println("Update browser banner disappeared.");
+			}
+		}
+	}
+	
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		scrollToView(footerAgentsnBrokersLink);
 		validate(footerAgentsnBrokersLink);
