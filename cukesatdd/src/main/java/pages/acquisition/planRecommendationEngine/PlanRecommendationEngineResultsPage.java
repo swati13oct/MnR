@@ -1651,7 +1651,7 @@ public void userPreDCE() {
 
 public boolean changePlanyear(String year) {
 	threadsleep(5000);
-	jsClickNew(MAViewPlansLink);
+	if(validate(currentPlanYear, 15) || validate(futurePlanYear, 15)) {
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
@@ -1673,8 +1673,10 @@ public boolean changePlanyear(String year) {
 			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
 		}
 	}
+	}
+	System.out.println("PlanYear Toggle is not displaying in PRE Result page");
 	return false;
-}
+	}
 
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection

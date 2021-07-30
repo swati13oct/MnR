@@ -744,7 +744,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void verify_MA_Plan_names_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
 		planSelectorNewResultspage.browserBack();
 	}
 	
@@ -768,7 +768,7 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
 		planSelectorResultspage.validateSNPPlanName();
 	}
 	
@@ -934,7 +934,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 	
@@ -1096,7 +1096,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void viewDetails_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
    	}
 	
 	@Then("^user views learn more from results page$")
