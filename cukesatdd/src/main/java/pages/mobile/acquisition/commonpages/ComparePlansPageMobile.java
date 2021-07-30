@@ -596,7 +596,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		jsClickNew(planAvailableText);
 	}
 
-	public VPPPlanSummaryPageMobile navigateBackToAllPlans() {
+	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
 		jsClickNew(BackToAllPlan);
@@ -608,6 +608,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
+		Thread.sleep(5000);
 		if (driver.getCurrentUrl().contains("#/plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
