@@ -289,7 +289,33 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		return validation_Flag;
 	}
 
-
-
+public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws InterruptedException {
+	
+	boolean validation_Flag = true;
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	
+	if(validateNew(driver.findElement(By.xpath("(//*[contains(@class, 'formset')]//*[contains(@id, 'StatementOfUnderstandingCheck')])[1]")))){
+		System.out.println("SOA page is Displayed");
+	
+		if(NextBtn.isEnabled()){
+		System.out.println("Next Button is Enabled : Radio buttons are validated for SOA Page");
+		//validateNew(SoU_DisagreeRadio);
+		jsClickNew(SoU_DisagreeRadio);
+		if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
+			System.out.println("Error message and Cancel Enrollment Button are displayed for Disagree to SoU selection");
+			validation_Flag = true;
+		}
+		else{
+			System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
+			validation_Flag = false;
+		}
+		
+		jsClickNew(SoU_AgreeRadio);		
+		Thread.sleep(6000);
+		}
+	}
+	return validation_Flag;
+}
 
 }

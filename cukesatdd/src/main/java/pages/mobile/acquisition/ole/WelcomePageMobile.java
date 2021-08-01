@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,9 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.acquisition.ole.SaveandReturnOLEModal;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class WelcomePageMobile extends UhcDriver {
 
@@ -103,6 +108,45 @@ public class WelcomePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
+	
+	@FindBy(xpath = "(//input[contains(@id,'DentalPlatinum_selectedRiders')]/../label)[1]")
+	private WebElement Ridersoption_Yes;
+	
+	@FindBy(xpath = "(//input[contains(@id,'N_selectedRiders')]/../label)[1]")
+	private WebElement Ridersoption_No;
+	
+	@FindBy(xpath = "(//a[contains(@class,'sitelogo')])[1]")
+	private WebElement LogoImage;
+	
+	@FindBy(xpath = "//button[contains(@id,'proceed')]")
+	private WebElement LeaveOnlineApplication;
+	
+	@FindBy(xpath = "//button[contains(@id,'leaveOleAlertBack')]")
+	private WebElement OLEImageBackButton;
+	
+	@FindBy(xpath = "(//div[contains(@id,'leavingSite')])[1]")
+	private WebElement LogoModalOLE;
+	
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;		
+	
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
+
+	@FindBy(xpath = "//*[contains(@class,'sticky-planname')]")
+	private WebElement OLEStickyPlanName;
+
+	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
+	private WebElement OLEProgressBar;
 
 	public WelcomePageMobile(WebDriver driver) {
 
@@ -476,5 +520,120 @@ public class WelcomePageMobile extends UhcDriver {
 
 		}
 	}
+	
+	
+	public SaveandReturnOLEModal OpensavereturnOLEPages() {
+		validate(SaveEnrollmentLinkOLE);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(SaveModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfilesave);
+			CreateProfilesave.isDisplayed();
+			validate(SaveSignIn);
+			SaveSignIn.isDisplayed();
+			Saveclosepopup.isDisplayed();
+			//Saveclosepopup.click();
+			jsClickNew(Saveclosepopup);
+			return new SaveandReturnOLEModal(driver);
+		}
+		return null;
+	}
+	
+	public Map<Boolean, String> validate_Supplemental_Riders(String riderflag) {
+		boolean flag=false;
+		String riderText = null;
+		HashMap map = new HashMap<Boolean,String>();
+		String elementPath = "//*[contains(text(),'Optional Supplemental Benefits')]";
+		WebElement benefit = driver.findElement(By.xpath(elementPath));
+		flag = validateNew(benefit);
+		if(flag){
+			flag = validateNew(Ridersoption_Yes) && validateNew(Ridersoption_No);
+			if(flag && riderflag.equalsIgnoreCase("true_yes")){
+				jsClickNew(Ridersoption_Yes);
+				riderText = Ridersoption_Yes.getText().trim();
+			}else{
+				jsClickNew(Ridersoption_No);
+				riderText = Ridersoption_No.getText().trim();
+			}
+		}
+		map.put(flag,riderText);
+		return map;
+	}
+	
+	public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
+		return null;
+	}
+
+	public boolean validate_plan_details_CSNP(Map<String, String> planDetailsMap) throws InterruptedException {
+		boolean flag = false;
+		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
+		String Zip_County_Text = ZipCode_County.getText();
+		String Premium = PremiumDisplay.getText();
+		String StickyPlanName = OLEStickyPlanName.getText();
+		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
+		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
+		System.out.println("OLE Sticky PlanName on Welcome OLE Page : "+StickyPlanName);
+
+		String Expected_PlanName = planDetailsMap.get("Plan Name");
+		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String Expected_Premium = planDetailsMap.get("Plan Premium");
+		String Expected_PlanType = planDetailsMap.get("Plan Type");
+
+
+
+		flag = driver.getCurrentUrl().contains("welcome");
+		if (flag){
+			flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
+					&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
+		}
+
+		System.out.println("WELCOME OLE Page are Validated : "+flag);
+		return flag;
+
+	}
+
+	public WelcomePage ValidateLogoonWelcomeOLE() {
+		validate(LogoImage);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", LogoImage);
+		
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		if(validate(LogoModalOLE)){
+			System.out.println("OLE logo modalis Displayed");
+			validate(LeaveOnlineApplication);
+			LeaveOnlineApplication.isDisplayed();
+			validate(OLEImageBackButton);
+			OLEImageBackButton.isDisplayed();			
+			jsClickNew(OLEImageBackButton);
+			
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
 }
