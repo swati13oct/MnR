@@ -1,4 +1,4 @@
-#@vbfGate
+@vbfGate
 Feature: 1.10 <----OLE common tool E2E flow for gating---->
 
 
@@ -70,16 +70,9 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
- #   Then the user validates Proposed Effective Date is Displayed
+    Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user navigates to Monthly Plan Premium Page
-    Then the user selects payment type
-      | Payment Type           | <paymentType>         |
-      | Card No                | <cardno>              |
-      | Card Expiration Month  | <cardexpirationmonth> |
-      | Card Expiration Year   | <cardexpirationyear>  |
-      | Card Holder First Name | <firstname>           |
-      | Card Holder Last Name  | <lastname>            |
     Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
@@ -166,16 +159,9 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
-  #  Then the user validates Proposed Effective Date is Displayed
+    Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
    Then the user navigates to Monthly Plan Premium Page
-    Then the user selects payment type
-      | Payment Type           | <paymentType>         |
-      | Card No                | <cardno>              |
-      | Card Expiration Month  | <cardexpirationmonth> |
-      | Card Expiration Year   | <cardexpirationyear>  |
-      | Card Holder First Name | <firstname>           |
-      | Card Holder Last Name  | <lastname>            |
     Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
@@ -190,12 +176,7 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
-    Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates the OLE Submission Details in GPS
-      | Plan Type                | <plantype>               |
-      | Auth Flag                | <authflag>               |
-      | Mailing Address Question | <mailingaddressquestion> |
+   Then the user clicks on Submit Enrollment to complete enrollment
 
     #@SNP_OLE_AARP_Future @OLE @regressionAARP @OLE @sanity @OLE_Redesign @OLE_Redesign_DSNP1 @ole_Redesign_Gating
     Examples:
@@ -265,18 +246,11 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
-  #  Then the user validates Proposed Effective Date is Displayed
+    Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
   #  Then the user validates PCP page for MA and MAPD PFFS plans
     #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then the user selects payment type
-      | Payment Type           | <paymentType>         |
-      | Card No                | <cardno>              |
-      | Card Expiration Month  | <cardexpirationmonth> |
-      | Card Expiration Year   | <cardexpirationyear>  |
-      | Card Holder First Name | <firstname>           |
-      | Card Holder Last Name  | <lastname>            |
     Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
@@ -297,7 +271,7 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
   ##@PDP_OLE_Ulayer_Future @regressionAARP @sanity @prodRegression @OLE @OLE_Redesign @ole_Redesign_Gating
     Examples:
       | TID   | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county        | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | rxBinnumber|inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-      | 15526 | AARP | PDP-MBI  | future   | future   |   80210 | NO              | Denver County | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK27    | false   |  04012021 |  04052021 |     0123456789 | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | No                     | 802 MailingSt | Mailing LA  | CO           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |156789| InValid       | K          | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+      | 15526 | UHC | PDP-MBI  | future   | future   |   80210 | NO              | Denver County | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK27    | false   |  04012021 |  04052021 |     0123456789 | false    | 01011902 | Female | 002 Morris Rd | Los Angeles | No                     | 802 MailingSt | Mailing LA  | CO           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |156789| InValid       | K          | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
 
 
@@ -387,16 +361,9 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
-  #  Then the user validates Proposed Effective Date is Displayed
+    Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user navigates to Monthly Plan Premium Page
-    Then the user selects payment type
-      | Payment Type           | <paymentType>         |
-      | Card No                | <cardno>              |
-      | Card Expiration Month  | <cardexpirationmonth> |
-      | Card Expiration Year   | <cardexpirationyear>  |
-      | Card Holder First Name | <firstname>           |
-      | Card Holder Last Name  | <lastname>            |
     Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
@@ -416,4 +383,4 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
   #@CSNP_OLE_AARP_Future @regressionAARP @OLE @OLE_Redesign @ole_Redesign_Gating
     Examples:
       | TID   | PlanType | site | planyear | planYear | zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | rxBinnumber|inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | diabetesQ1 | diabetesQ2 | chronicQ1 | chronicQ2 | chronicQ3 | cardioQ1 | cardioQ2 | cardioQ3 | cardioQ4 | cardioQ5 | cardioQ6 | authflag | paymentType                                    | cardno  | cardexpirationmonth | cardexpirationyear |
-      | 15587 | CSNP-MBI | AARP | future   | future   |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET32    | false   |  09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Mcgee st  | IRVING      | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |135617      | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | yes        | No         | No        | No        | No        | No       | No       | No       | No       | No       | No       | true     | Pay By Mail                                    | [blank] | [blank]             | [blank]            |
+      | 15587 | CSNP-MBI | UHC | future   | future   |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET32    | false   |  09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Mcgee st  | IRVING      | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |135617      | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | yes        | No         | No        | No        | No        | No       | No       | No       | No       | No       | No       | true     | Pay By Mail                                    | [blank] | [blank]             | [blank]            |
