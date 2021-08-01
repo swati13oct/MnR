@@ -4490,17 +4490,6 @@ private Scenario scenario;
 
 	}
 	
-	@Then("^the user Select PCP popup modal on Plan Compare page")
-	public void user_select_PCP_modal_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		String pcps = givenAttributesMap.get("PCPs");
-		planComparePage.validatePCPModal(pcps);
-		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-
-	}
 	
 
 	@Then("^user selects keepshopping on the pop-up$")
@@ -4519,6 +4508,20 @@ private Scenario scenario;
 		String savePlanName = memberAttributesMap.get("PlanName");
 		comparePlansPage.saveaPlan(savePlanName);
 	}
+	
+	@Then("^the user Select PCP popup modal on Plan Compare page")
+	public void user_select_PCP_modal_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pcps = givenAttributesMap.get("PCPs");
+		planComparePage.validatePCPModal(pcps);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
+	
+
 	
 	@Then("Verify Change Zip Code Link is displayed on compare Page")
 	public void verify_Change_Zip_Code() {

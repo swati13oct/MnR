@@ -11,7 +11,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+   # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -102,7 +102,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Plan Type                | <plantype>               |
       | Auth Flag                | <authflag>               |
       | Mailing Address Question | <mailingaddressquestion> |
-   @MAPD_OLE_Ulayer_Future @regressionAARP @OLE @OLE_Redesign @ole_Redesign_Gating @OLE_Redesign_MAPD
+   @MAPD_OLE_Ulayer_Future @regressionAARP @OLE @OLE_Redesign @ole_Redesign_Gating 
     Examples: 
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planName                                            | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag     | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
       | 15501 | AARP | MAPD-RRID-MBI | future   | future   |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK20    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York    | No                     | 801 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true_yes      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456         | Valid         | Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
@@ -131,7 +131,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     When user selects a multiple providers and retuns to VPP page
     Then User store the information provided from rally to vpp page
       | PlanName | <planName> |
-    And the user validates the available plans for selected plan types
+    #And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
 		Then the user validates the Plan details on OLE

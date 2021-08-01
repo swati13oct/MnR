@@ -12,7 +12,7 @@ Feature: 1.05.2 OLE common tool flow E2E for Sanity Check
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
+    #And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE

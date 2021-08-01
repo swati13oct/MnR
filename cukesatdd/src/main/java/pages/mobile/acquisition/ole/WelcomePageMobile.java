@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -30,41 +31,40 @@ import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.acquisition.ole.SaveandReturnOLEModal;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 
 public class WelcomePageMobile extends UhcDriver {
 
-	// OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(xpath = "//button[@id='enrollment-next-button']")
 	private WebElement NextBtn;
 
-	// @FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	@FindBy(id = "cancel-enrollment")
+	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	@FindBy(xpath = "//*[contains(@id,'cancel-enrollment') or contains(@id,'ole-form-cancel-button')]")
 	private WebElement CancelEnrollmentLink;
 
 	// WebElements for Welcome Page
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
 
-//	@FindBy(id = "view-learn-enrollment")
-	@FindBy(css = "#view-learn-enrollment")
+	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(xpath = "//*[(contains(@id,'ole-cancel-confirm') or contains(@id,'enroll-cancel-profile')) and contains(@class,'active')]")
 	private WebElement CancellationModal;
 
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	@FindBy(xpath = "//*[@id='ole-plan-name']")
+	@FindBy(xpath = "//*[contains(@class,'h3-welcome-class')]")
 	private WebElement PlanYear_PlanName;
 
-	@FindBy(xpath = "//*[contains(text(), 'Zip:')]/..")
+	@FindBy(xpath = "//strong[contains(text(),'ZIP Code:')]/..")
 	private WebElement ZipCode_County;
 
-	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
 
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
@@ -73,20 +73,24 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(),'Medicare Insurance Information')]")
 	private WebElement welcomepageHeader;
 
-	/*
-	 * @FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']") private
-	 * WebElement DisclaimerAgreeCheckBx;
+	/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
+	private WebElement DisclaimerAgreeCheckBx;
 	 */
-	// @FindBy(xpath =
-	// "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
+	//@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
 	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeSelect;
 
-	// Right Rail Elements
+	//Right Rail Elements
 
-//	@FindBy(id = "tty-number")
-	@FindBy(css = "#tty-number")
-	private WebElement RightRailTFN;
+	//	@FindBy(id = "//*[contains(text(),'Need Help? Call')]/u")
+	@FindBy(xpath = "//*[contains(@class,'tel tfn')]")
+	private WebElement TFNNoWidget;
+	
+	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	private WebElement TFNNoNeedHelp;
+	
+	@FindBy(xpath = "(//u[contains(@class,'tel')])[2]")
+	private WebElement TFNNoSaveWelcomeOLE;	
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
@@ -103,11 +107,42 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
 	private WebElement HearingImg;
 
+	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
+	private WebElement pharmacyLink;
+
 	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
 	private WebElement EnrollmentChecklistLink;
 
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
+	
+	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
+	private WebElement PrivacyPolicy;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
+	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+	public WebElement AccessibilityButton;
+	
+	//@FindBy(xpath="//*[contains(text(),'View Plan Details')]")
+	@FindBy(xpath="//*[contains(@class,'view-plan-link')]")
+	public WebElement ViewPlanDetails;
+	
+	
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;		
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
 	
 	@FindBy(xpath = "(//input[contains(@id,'DentalPlatinum_selectedRiders')]/../label)[1]")
 	private WebElement Ridersoption_Yes;
@@ -127,21 +162,9 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@id,'leavingSite')])[1]")
 	private WebElement LogoModalOLE;
 	
-	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
-	private WebElement SaveEnrollmentLinkOLE;		
+	@FindBy(xpath = "//*[contains(@id,'olesections')]")
+	private WebElement WidgetsImage;
 	
-	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
-	private WebElement SaveModalOLE;
-
-	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
-	private WebElement CreateProfilesave;
-
-	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
-	private WebElement SaveSignIn;
-
-	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
-	private WebElement Saveclosepopup;
-
 	@FindBy(xpath = "//*[contains(@class,'sticky-planname')]")
 	private WebElement OLEStickyPlanName;
 
@@ -176,53 +199,48 @@ public class WelcomePageMobile extends UhcDriver {
 		 * else checkModelPopup(driver,10);
 		 */
 		validateNew(WelcomePageHeader);
-		validateNew(PlanYear_PlanName);
+		//validateNew(PlanYear_PlanName);
 	}
 
-	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
+	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
+		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
-		System.out.println("Plan Year and Plan Name Displayed on OLE : " + PlanYear_PlanName_Text);
-		System.out.println("Zip Code and County Displayed on OLE : " + Zip_County_Text);
-		System.out.println("Monthly Premium for Plan Displayed on OLE : " + Premium);
+		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
+		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		// String Expected_PlanYear = planDetailsMap.get("Plan Year");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
-		String Expected_County = planDetailsMap.get("County");
-		// String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
-		boolean flag = false;
+		String Expected_Premium = planDetailsMap.get("Plan Premium");
+		String Expected_PlanType = planDetailsMap.get("Plan Type");
+		
+		scrollToView(ViewPlanDetails);
+		
+		if(validateNew(ViewPlanDetails)){
+			ViewPlanDetails.click();
+			Thread.sleep(500);
+			flag = driver.getCurrentUrl().contains("details");
+			if(flag){
+				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
+				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+				enrollInPlan.click();
+				Thread.sleep(500);
+				flag = driver.getCurrentUrl().contains("welcome");
+				if (flag){
+					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
+							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
+				}
 
-		if (PlanYear_PlanName_Text.contains(Expected_PlanName)) {
-			flag = true;
-			System.out.println("Plan Name is Validated : " + flag);
-		} else
-			flag = false;
-		// Plan Year commented for AEP validation
-		/*
-		 * if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){ flag =
-		 * (flag==false)?false:true;
-		 * System.out.println("Plan Year is Validated : "+flag); }else flag =false;
-		 */
-		if (Zip_County_Text.contains(Expected_County)) {
-			flag = (flag == false) ? false : true;
-			System.out.println("Plan County is Validated : " + flag);
-		} else
-			flag = false;
-		if (Zip_County_Text.contains(Expected_ZipCode)) {
-			flag = (flag == false) ? false : true;
-			System.out.println("Plan ZIP CODE is Validated : " + flag);
-		} else
-			flag = false;
-		/*
-		 * if(Premium.contains(Expected_PlanPremium)){ flag = (flag==false)?false:true;
-		 * System.out.println("Plan Premium is Validated : "+flag); }else flag =false;
-		 */
-		System.out.println("Plan Details are Validated : " + flag);
+			}
+		}
+		
+		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
+			
 	}
 
-	public boolean ValidateTFN(String TFN) {
+	/*public boolean ValidateTFN(String TFN) {
 		// iosScroll(RightRailTFN);
 		scrollToView(RightRailTFN);
 		if (validateNew(RightRailTFN)) {
@@ -241,14 +259,14 @@ public class WelcomePageMobile extends UhcDriver {
 		}
 		System.out.println("TFN not displayed in OLE right rail");
 		return false;
-	}
+	}*/
 
 	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))) {
+		if (validateNew(driver.findElement(By.xpath("//*[contains(text(),'Personal')]")))) {
 			System.out.println("OLE Personal Information Page is Displayed");
 			return new PersonalInformationPageMobile(driver);
 		}
@@ -458,8 +476,6 @@ public class WelcomePageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
-	private WebElement pharmacyLink;
 
 	public PharmacySearchPageMobile clickPharamcyLinkAndSwitchTab() {
 		/*
@@ -636,4 +652,94 @@ public class WelcomePageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public boolean ValidateTFNonWelcomeOLE(String ExpectedTFNNo) {
+		//TFN no  above the continue button
+		
+		boolean flag = false;
+		
+		String TFNWidget_OLE = TFNNoWidget.getText();
+		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
+			
+		
+		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
+		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		
+		//String Expected_TFN = planDetailsMap.get("TFN");
+		
+		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+				flag = driver.getCurrentUrl().contains("welcome");
+				if (flag){
+					flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
+				}			
+		
+		System.out.println("TFN not displayed in OLE right rail"+flag);
+		return flag;
+		
+		
+	}
+	
+	public boolean ValidateTFNOLEPages(Map<String, String> planDetailsMap) {
+		//TFN no  above the continue button
+		
+		boolean flag = false;
+		
+		String TFNWidget_OLE = TFNNoWidget.getText();
+		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		
+		String Expected_TFN = planDetailsMap.get("TFN");
+		
+		System.out.println("TFN in VPP page : "+Expected_TFN);
+			//	flag = driver.getCurrentUrl().contains("welcome");
+				if (flag){
+					flag = TFNWidget_OLE.contains(Expected_TFN);
+				}			
+		
+		System.out.println("TFN not displayed in OLE right rail"+flag);
+		return flag;		
+		
+	}
+	public WelcomePage ValidateWidgetsonWelcomeOLE(String ExpectedTFNNo) {
+		validate(WidgetsImage);
+		if(validate(WidgetsImage)){
+			System.out.println("OLE Widgets Image is Displayed");
+			String TFNNoWidget_OLE = TFNNoWidget.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
+		
+			System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
+			validateNew(PrivacyPolicy);
+			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(PrivacyPolicy);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+					break;
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentPageURL = driver.getCurrentUrl();
+			System.out.println(" Page is displayed : " + CurrentPageURL);
+			
+			if (CurrentPageURL.contains("privacy-policy.html")) {
+				System.out.println("****************privacy policy is displayed  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail("****************privacy policy is not loaded ***************");
+			}
+			driver.close();
+			driver.switchTo().window(parentWindow);
+			
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+	
 }
