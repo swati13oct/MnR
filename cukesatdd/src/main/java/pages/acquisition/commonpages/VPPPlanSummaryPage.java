@@ -7161,5 +7161,19 @@ public String GetMonthlyPremiumValue() {
 		validateNew(savedplanHeading);
 		jsClickNew(keepshopping);
 	}
+	
+	public boolean validatePlanNamesPRE(String planName) {
+
+		boolean Plannames = false;
+		CommonUtility.checkPageIsReadyNew(driver);
+
+			WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName+ "')"));
+			CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+			jsClickNew(PREPlandetails);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		return Plannames;
+		
+	}
 
 }
