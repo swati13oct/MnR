@@ -892,7 +892,7 @@ public class CampaignTFNPage extends UhcDriver {
 					e.printStackTrace();
 				}
 				WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-				validateNew(ActualTFNelement);	
+				validate(ActualTFNelement);	
 			//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 					if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
 					System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());

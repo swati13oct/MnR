@@ -44,17 +44,18 @@ public class oleCommonStepDefinition {
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String ZipCode = givenAttributesMap.get("Zip Code");
 		String County = givenAttributesMap.get("County Name");
-		String premium = givenAttributesMap.get("Monthly Premium");
+		//String premium = givenAttributesMap.get("Monthly Premium");
+		String SiteName;
+		String PlanPremium = "";
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, premium);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		String SiteName;
-		String PlanPremium = "";
+		
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
@@ -106,30 +107,19 @@ public class oleCommonStepDefinition {
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-				//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = "";
-				//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String County =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
-		// String SiteName= (String)
-		// getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-
-		/*
-		 * WelcomePage welcomePage; if(SiteName.contains("UHC_ACQ")){ PlanDetailsPage
-		 * vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_DETAILS_PAGE); TFN =
-		 * vppPlanDetailsPage.GetTFNforPlanType(); welcomePage =
-		 * vppPlanDetailsPage.Enroll_OLE_Plan(PlanName); } else{
-		 */
+		String PlanPremium = "";
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		TFN = vppPlanDetailsPage.GetTFNforPlanType();
 		WelcomePage welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
-		// }
-		String PlanPremium = "";
-				//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		
+		PlanPremium=vppPlanDetailsPage.GetMonthlyPremiumValue();
+		
+		getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM,PlanPremium);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
