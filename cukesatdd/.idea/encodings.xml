@@ -6,7 +6,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/atdd/runners/RunMRATDDAcquisitionCampaignExternalLinksNewLPM.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/config.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/feature/acquisition/CampaignExternalLinksE2E_New_LPM" charset="UTF-8" />
   </component>
 </project>

@@ -1265,6 +1265,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
 		//viewPlansButton.click();
+		validateNew(viewPlansButton);
 		jsClickNew(viewPlansButton);
 		// }
 		// while(validate(overlayFilm, 10)) {/**wait*/}

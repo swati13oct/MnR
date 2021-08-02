@@ -202,7 +202,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		continueButton.click();
 		selectYear(planYear);
 		List<WebElement> topicDropDownValues = driver
-				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+				.findElements(By.xpath("//div[@data-ui-section='plan-listing']//ul//li"));
 
 		return topicDropDownValues.size();
 	}
