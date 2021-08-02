@@ -82,6 +82,7 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		String ProviderNumber = MedicareDetailsMap.get("Provider Phone Number");
 		String Mailing_State = MedicareDetailsMap.get("Mailing_State");
 		
+	    
 		sendkeysNew(ProviderName, Providername);
 		sendkeysNew(ProviderStreetAddress, ProviderAddress);
 		sendkeysNew(ProviderCity, Providercity);
@@ -97,12 +98,13 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		    System.out.println("Disclosure is displayed and clicked");
 		    	    
 		    validate(NextButton);
-		    NextButton.click();
+		    	jsClickNew(NextButton);
 	}
 		  else{
 			  System.out.println("Disclosure is not displayed"); 
 		  }
 	//	return new PersonalInformationPage(driver);
+		  
 		  return new SpecialElectionPeriodPage(driver);
 
 	}
