@@ -165,9 +165,9 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | County Name     | <county>         |
       | Monthly Premium | <monthlyPremium> |
     Then the user validates the Plan details on OLE
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
