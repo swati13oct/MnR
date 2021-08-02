@@ -1,17 +1,19 @@
 package pages.mobile.acquisition.commonpages;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -290,6 +292,30 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	private WebElement proactiveChatExitBtn;
+	
+	@FindBy(css = "div[class^='plan-compare-heading'] > a[class*='change-zip']")
+	private WebElement ChangeZipCodeLink;
+
+	@FindBy(css = "#zipcode")
+	private WebElement ChangeZipCodeField;
+
+	@FindBy(css = "#zipcode + button#submit")
+	private WebElement FindPlans;
+
+	@FindBy(css = "[aria-labelledby='CountySelect'] .modal-title")
+	private WebElement countyModal;
+
+	@FindBy(css = "#no-results-dialog")
+	private WebElement zeroPlanPopup;
+
+	@FindBy(css = "#no-results-dialog .uhc-modal__content h3")
+	private WebElement zeroPlanErrorPopup;
+
+	@FindBy(css = "#no-results-dialog button[ng-click^='zeroPlanCount']")
+	private WebElement ViewAllPlansButton;
+
+	@FindBy(xpath = "//*[@id='zipFormError']/..//*[contains(text(), 'Please enter a valid ZIP Code')]")
+	private WebElement InvalidZipError;
 
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
@@ -1767,4 +1793,112 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(viewlocationsLink);
 		System.out.println("Verified Edit Doctors Section");
 	}
+	
+	public void validateChangeZipCode() {
+		validateNew(ChangeZipCodeLink);
+		System.out.println("Validated Change zipcode link on compare");
+
+	}
+	
+	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		validateNew(ChangeZipCodeLink);
+		jsClickNew(ChangeZipCodeLink);
+		sendkeysMobile(ChangeZipCodeField, zipcode);
+		if (ClickEnter.equalsIgnoreCase("Click on Find Plan button")) {
+			jsClickNew(FindPlans);
+		} else {
+			driver.findElement(By.xpath("//*[@name = 'formZipCode']")).sendKeys(Keys.ENTER);
+			System.out.println("Pressed through Enter");
+		}
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		WebElement ComparePage = driver.findElement(
+				By.xpath("//div[@class = 'plan-compare-heading-holder']/h1[contains(text(), ' " + zipcode + "')]"));
+		validateNew(ComparePage, 30);
+		System.out.println("Compared Plans for " + zipcode);
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			driver.switchTo().window(window);
+			System.out.println(driver.getTitle());
+		}
+
+	}
+
+	public void searchPlans(String zipcode, String countyName, String ClickEnter) {
+		waitForPageLoadSafari();
+		validateNew(ChangeZipCodeLink);
+		jsClickNew(ChangeZipCodeLink);
+		sendkeysMobile(ChangeZipCodeField, zipcode);
+
+		if (ClickEnter.equalsIgnoreCase("Click on Find Plan button")) {
+			jsClickNew(FindPlans);
+		} else {
+			driver.findElement(By.xpath("//*[@name = 'formZipCode']")).sendKeys(Keys.ENTER);
+			System.out.println("Pressed through Enter");
+		}
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			driver.switchTo().window(window);
+			System.out.println(driver.getTitle());
+		}
+		WebElement ComparePage = driver.findElement(
+				By.xpath("//div[@class = 'plan-compare-heading-holder']/h1[contains(text(), ' " + zipcode + "')]"));
+		CommonUtility.waitForPageLoadNew(driver, ComparePage, 30);
+
+	}
+
+	public void searchZipCode(String zipcode) throws InterruptedException {
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		validateNew(ChangeZipCodeLink);
+		jsClickNew(ChangeZipCodeLink);
+		sendkeysNew(ChangeZipCodeField, zipcode);
+		jsClickNew(FindPlans);
+		waitForPageLoadSafari();
+		pageloadcomplete();
+	}
+
+	public void VerifyInvalidZipCodeErrorMessage() throws InterruptedException {
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		validateNew(InvalidZipError);
+		pageloadcomplete();
+	}
+
+	public void VerifyZipErrorMessageNoPlans() throws InterruptedException {
+
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		validateNew(zeroPlanPopup);
+		pageloadcomplete();
+		validateNew(zeroPlanErrorPopup);
+		validateNew(ViewAllPlansButton);
+		jsClickNew(ViewAllPlansButton);
+		waitForPageLoadSafari();
+		pageloadcomplete();
+
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+
+		} else {
+			Assertion.fail("Error in loading the Plan Summary page");
+		}
+	}
+
 }
