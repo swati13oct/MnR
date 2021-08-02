@@ -765,7 +765,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
 	private WebElement chatPopupOptions;
 	
-	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 	private WebElement chatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
@@ -7094,12 +7094,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().contains("Questions about My Plan"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().contains("Lost Member ID Card"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().contains("Looking for a Plan"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().contains("Medicare Questions"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().contains("Ready to Enroll"));
-			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(6).getText().contains("Other"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(0).getText().trim().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().trim().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().trim().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().trim().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().trim().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().trim().contains("Other"));
 			
 		} catch (Exception e) {
 
