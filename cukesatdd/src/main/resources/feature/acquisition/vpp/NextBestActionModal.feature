@@ -1,5 +1,5 @@
 @vppNBAValidations_unauthenticatedUser @nextBestAction @vpp
-Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
+Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 	
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added in <site> site
     Given the user is on medicare acquisition site landing page

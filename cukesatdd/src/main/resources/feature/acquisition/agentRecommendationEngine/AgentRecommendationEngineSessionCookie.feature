@@ -1,5 +1,5 @@
 @agentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP
-Feature: Agent Recommendation Engine - Verify ARE functionality with Session Cookies
+Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
   @ARE @ClearedSessionNewCloakIn @F457409
   Scenario Outline: - <Email> To Verify agent login and validating clearing session storage in ARE
