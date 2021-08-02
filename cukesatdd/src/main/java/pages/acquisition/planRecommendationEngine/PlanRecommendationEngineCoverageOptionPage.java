@@ -78,7 +78,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends GlobalWebElement
 
 //Coverage Option Page Element Verification Method 
 
-	public void coverageOptionpage() {
+	public void coverageOptionpage(String plantype) {
 		System.out.println("Coverage Option Validating Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");

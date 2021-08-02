@@ -1805,7 +1805,7 @@ public ArrayList<String> saveplans(String plan) {
 	WebElement planSaveBtn = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton"));
 	scrollToView(planSaveBtn);
 	String save = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton")).getText().trim();;
-	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
+	if (save.contains("Save") || save.contains("Save Plan")) { 
 		threadsleep(3000);
 		jsClickNew(planSaveBtn);
 	}

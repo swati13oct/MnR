@@ -278,9 +278,11 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 	}
 
 	public void nextPageNameValidation(String pageName) {
-		System.out.println("Next page Validation Mobile");
-		if(pageName.contains("LOCATION"))
+		System.out.println("Next page Validation Desktop");
+		if(pageName.equalsIgnoreCase("LOCATION")) {
 			System.out.println("Plan Type not mentioned in flow");
+			nextPageName = "Coverage";
+			nextPagePercentage = "11%";}
 		else
 			findPagedetails(pageName);
 		if (nextPageName.contains("NULL") == false) {
