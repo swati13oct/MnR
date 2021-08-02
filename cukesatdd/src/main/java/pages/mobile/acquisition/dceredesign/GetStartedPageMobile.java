@@ -34,7 +34,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//div/h2[text()='Get Started ']")
@@ -140,6 +140,16 @@ public class GetStartedPageMobile extends UhcDriver {
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
 				breadCrumbLink.getText().equals(breadCrumb));
+	}
+	
+	public VPPPlanSummaryPageMobile ClickReturnToPlanSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 
 }

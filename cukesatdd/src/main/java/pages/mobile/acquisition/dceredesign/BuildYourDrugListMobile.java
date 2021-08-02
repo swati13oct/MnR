@@ -1,23 +1,19 @@
 package pages.mobile.acquisition.dceredesign;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumFluentWait;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 
@@ -307,12 +303,18 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		sleepBySec(5);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-		WebElement SelectDrug = driver
-				.findElement(By.xpath("//p[normalize-space()='" + drugName +"']/following-sibling::button"));
+		
+		
+		List<WebElement> searchedDrugList = driver.findElements(By.cssSelector("div[class*='searchdrugpopup'] div > ul > li > p"));
+		
+		WebElement selectDrug = searchedDrugList.stream()
+				.filter(listedDrug -> listedDrug.getText().equalsIgnoreCase(drugName))
+				.map(listedDrug -> listedDrug.findElement(By.xpath("./following-sibling::button")))
+				.findFirst().get();
+		/*WebElement SelectDrug = driver
+				.findElement(By.xpath("//p[normalize-space()='" + drugName +"']/following-sibling::button"));*/
 
-		scrollToView(SelectDrug);
-
-		jsClickNew(SelectDrug);
+		jsClickNew(selectDrug);
 		pageloadcomplete();
 
 		threadsleep(2000);
@@ -375,29 +377,27 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void ValidateAddedDrugsList(String druglist) {
-		String[] DrugListItems = druglist.split("&");
-		int i;
-		String currentDrug;
-		int DrugCount_Total = DrugListItems.length - 1;
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
-			currentDrug = DrugListItems[i];
-			System.out.println("Current Added Drug Name : " + currentDrug);
-			WebElement DrugName = driver
-					.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + currentDrug + "')]"));
-			WebElement DrugEditBtn = driver.findElement(
-					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"
-							+ currentDrug + "')]"));
-			WebElement DrugRemoveBtn = driver.findElement(
-					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"
-							+ currentDrug + "')]"));
-
-			if (validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
-				Assertion.assertTrue("Validated Drug List for Drug : " + currentDrug, true);
-			} else
-				Assertion.fail("Drug List Validation FAILED for Drug : " + currentDrug);
-		}
+		//Get the name for all the drugs in a list
+		List<WebElement> addedDrugList = driver.findElements(By.cssSelector("#buildyourdruglist uhc-list-item[class*='selectDrug'] h4"));
+		List<String> addedDrugNames = addedDrugList.stream().map(drugName -> drugName.getText().trim()).collect(Collectors.toList());
+		
+		//Validate if the added drugs are the same as in druglist variable
+		Stream.of(druglist.split("&")).forEach(drugName -> {
+			boolean isDrugAdded = addedDrugNames.stream().anyMatch(actualDrugName -> actualDrugName.toLowerCase().contains(drugName.toLowerCase()));
+			System.out.println(drugName + " is present - " + isDrugAdded);
+			Assertion.assertTrue(drugName + " is not displayed in list", isDrugAdded);
+		});
+		
+		//Based on the drug name validate the edit and remove button for each drug
+		addedDrugNames.forEach(addedDrug -> {
+			String addedDrugName = addedDrug.split(" ")[0];
+			System.out.println("Validating edit and remove buttons for "+ addedDrugName);
+			WebElement editDrugButton = driver.findElement(By.cssSelector("[aria-label^='Edit " + addedDrugName + "']"));
+			WebElement removeDrugButton = driver.findElement(By.cssSelector("[aria-label^='Remove " + addedDrugName + "']"));
+			Assertion.assertTrue("Edit button not displayed for " + addedDrug, validateNew(editDrugButton) );
+			Assertion.assertTrue("Remove button not displayed for " + addedDrug, validateNew(removeDrugButton));
+		});
+		
 	}
 
 	public void deleteDrug(String deleteDrug) {

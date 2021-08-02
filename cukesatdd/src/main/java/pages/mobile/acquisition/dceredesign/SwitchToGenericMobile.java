@@ -76,14 +76,8 @@ public class SwitchToGenericMobile extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(SwitchPageHeader);
 		validateNew(SwitchPageCloseBtn);
-		
-		scrollToView(AddDrugBtn);
 		validateNew(AddDrugBtn);
-		
-		scrollToView(supplyLengthDrpDwn);
 		validateNew(supplyLengthDrpDwn);
-		
-		scrollToView(QuantityTxt);
 		validateNew(QuantityTxt);
 	}
 
@@ -216,12 +210,15 @@ public class SwitchToGenericMobile extends UhcDriver {
 
 	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
+	
+	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link']")
+	public WebElement LinktoExitScenario;
 
 	public DrugDetailsPageMobile ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPageMobile(driver);
 		}
