@@ -623,8 +623,8 @@ public class WelcomePage extends UhcDriver{
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-		/*	String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
-			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);*/
+		String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			jsClickNew(Saveclosepopup);
 			validate(OLEStickyHeader);
 			OLEStickyHeader.isDisplayed();
