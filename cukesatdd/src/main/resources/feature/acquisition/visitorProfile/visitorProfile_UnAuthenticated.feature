@@ -360,7 +360,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user selects four plans to compare from visitor Profile
       | Test Plans | <testPlans> |
     Then verify the plans on plan compare page
-      | Test Plans | <testPlans> |
+     | Test Plans | <testPlans> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
     Examples: 
