@@ -198,6 +198,7 @@ public class WelcomePageMobile extends UhcDriver {
 		/*
 		 * else checkModelPopup(driver,10);
 		 */
+		
 		validateNew(WelcomePageHeader);
 		//validateNew(PlanYear_PlanName);
 	}
