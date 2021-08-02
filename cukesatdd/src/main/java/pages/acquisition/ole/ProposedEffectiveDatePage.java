@@ -34,7 +34,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "//*[contains(@id, 'ProposedEffectiveDateFieldSet')]")
 	private WebElement ProposedEffectiveDatePageHeader;
 
 	@FindBy(xpath = "//*[@type='radio']//following-sibling::label")
@@ -73,6 +74,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	public boolean validate_proposed_effective_date_options(){
 		boolean validation_Flag = true;
+		validate(ProposedEffectiveDatePageHeader);
+	//	jsClickNew(ProposedEffectiveDatePageHeader);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -124,7 +127,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(planType.contentEquals("PDP")){
-			if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+			//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+				if(validateNew(driver.findElement(By.xpath("(//*[contains(@id,'planWith')])[1]")))){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");
 				return new PlanPremiumPage(driver);
 			}
@@ -134,7 +138,8 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 			}
 		}
 		else{
-			if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
+		//	if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
+			if (validateNew(driver.findElement(By.xpath("(//*[contains(@id,'primaryCare')])[1]")))){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
 				return new PrimaryCarePhysicianPage(driver);
 			}

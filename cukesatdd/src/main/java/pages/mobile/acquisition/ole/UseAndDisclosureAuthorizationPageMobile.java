@@ -22,33 +22,41 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
-
-	@FindBy(id = "providerName")
+	
+	//@FindBy(id = "providerName")
+	@FindBy(xpath = "//input[@id='providerName']")
 	private WebElement ProviderName;
-
-	@FindBy(id = "providerStreetAddress")
+	
+	//@FindBy(id = "providerStreetAddress")
+	@FindBy(xpath= "//input[@id='providerStreetAddress']")
 	private WebElement ProviderStreetAddress;
+	
+//	@FindBy(id = "providerCity")
+	@FindBy(xpath = "//input[@id='providerCity']")
+	private WebElement ProviderCity;	
 
-	@FindBy(id = "providerCity")
-	private WebElement ProviderCity;
-
-	@FindBy(id = "state")
+	//@FindBy(id = "state")
+	@FindBy(xpath = "//select[@id='state']")
 	private WebElement StateDropDown;
-
-	@FindBy(id = "providerZip")
+	
+	
+//	@FindBy(id = "providerZip")
+	@FindBy(xpath = "//input[@id='providerZip']")
 	private WebElement ZipCode;
-
-	@FindBy(id = "providePhoneNumber")
+	
+	//@FindBy(id = "providePhoneNumber")
+	@FindBy(xpath = "//input[@id='providePhoneNumber']")
 	private WebElement ProvidePhoneNumber;
-
+	
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackButton;
-
+	
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextButton;
-
+	
 	@FindBy(id = "ole-form-cancel-button")
 	private WebElement CancelEnrolButton;
+	
 
 	public UseAndDisclosureAuthorizationPageMobile(WebDriver driver) {
 		super(driver);

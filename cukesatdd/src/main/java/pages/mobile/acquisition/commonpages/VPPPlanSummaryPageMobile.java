@@ -838,12 +838,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='city']")
 	private WebElement cityInput;
 
-	/*@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
-	private List<WebElement> stateDropDownValues;*/
-	
+	/*
+	 * @FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+	 * private List<WebElement> stateDropDownValues;
+	 */
+
 	@FindBy(css = "#statedrpdwn")
 	private WebElement stateDropDown;
-	
+
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
 	private WebElement findPlansButton;
 
@@ -886,6 +888,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(css = "div.signupCTA.signupContainer a")
 	private WebElement signOut;
+
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
 
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -1245,10 +1250,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		
+
 		scrollToView(ProviderSearchLink);
-        validateNew(ProviderSearchLink);		
-        // iosScroll(ProviderSearchLink);
+		validateNew(ProviderSearchLink);
+		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1528,7 +1533,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		WebElement planCard = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]"));
 		scrollToView(planCard);
-		WebElement drugCost = planCard.findElement(By.xpath(".//*[contains(text(),'Estimated Annual')]/following-sibling::span"));
+		WebElement drugCost = planCard
+				.findElement(By.xpath(".//*[contains(text(),'Estimated Annual')]/following-sibling::span"));
 		scrollToView(drugCost);
 		System.out.println("Captured drug cost: " + capturedDrugCost);
 		System.out.println("Drug cost on plan summary : " + drugCost.getText());
@@ -1878,7 +1884,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public int checkAllMAPlans() {
 		pageloadcomplete();
-		List<WebElement> allMAPlans = driver.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
@@ -3228,7 +3235,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// enter zipcode
 		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
@@ -4196,7 +4203,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void clickOnChangeZipCode() {
 		validateNew(changeLocationBtn);
-//		changeLocationBtn.click();
+		// changeLocationBtn.click();
 		jsClickNew(changeLocationBtn);
 
 	}
@@ -4210,7 +4217,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
-//		selectFromDropDown(stateDropDownValues, state.toUpperCase());
+		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
 	}
 
@@ -4266,7 +4273,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			providerNames.add(providername);
 		}
 
-		//Click again on provider list button for making enroll button visible
+		// Click again on provider list button for making enroll button visible
 		jsClickNew(ProviderSearchLink);
 		return providerNames;
 	}
@@ -4366,11 +4373,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			System.out.println(
 					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
 			Thread.sleep(5000);
-			
-			listOfTestPlans.stream().forEach(plan -> jsClickNew(driver.findElement(By.xpath("//*[contains(text(),'" + plan
+
+			listOfTestPlans.stream().forEach(plan -> jsClickNew(driver.findElement(By.xpath("//*[contains(text(),'"
+					+ plan
 					+ "')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"))));
-			
-			
+
 			if (validate(closeProfilePopup)) {
 				jsClickNew(closeProfilePopup);
 			}
@@ -6128,4 +6135,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		Assertion.assertTrue("NBA modal should not be displayed", validateNonPresenceOfElement(nextBestActionModal));
 	}
 
+	public String GetMonthlyPremiumValue() {
+
+		if (validateNew(PremiumDisplay, 45)) {
+			// System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" + Monthly_Premium);
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
 }

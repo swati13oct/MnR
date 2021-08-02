@@ -36,7 +36,9 @@ public class AuthorizationPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 
 	//Right Rail Elements
@@ -191,24 +193,7 @@ public class AuthorizationPage extends UhcDriver{
 		
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : Required fields present");
-			//validateNew(SoU_DisagreeRadio);
-			jsClickNew(SoU_DisagreeRadio);
-			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
-				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
-				validation_Flag = true;
-			}
-			else{
-				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
-				validation_Flag = false;
-			}
-/*			if(validate(SoU_AgreeRadio)){
-				SoU_AgreeRadio.click();
-			}
-			if(validate(AuthorizedRepresentativeRadio)){
-				AuthorizedRepresentativeRadio.click();
-			}*/
-			jsClickNew(SoU_AgreeRadio);
+			
 			AuthorizedRepresentativeRadio.click();
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
@@ -260,7 +245,8 @@ public class AuthorizationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
+		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
+			if(validateNew(driver.findElement(By.xpath("//*[contains(@class,'ole-form')]//*[contains(@class,'only-review ')]")))){
 			return new ReviewSubmitPage(driver);
 		}
 		else{
@@ -268,6 +254,36 @@ public class AuthorizationPage extends UhcDriver{
 		}
 	}
 
-
-
+public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws InterruptedException {
+		
+		boolean validation_Flag = true;
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		
+	//	if(validateNew(driver.findElement(By.xpath("(//*[contains(@class, 'formset')]//*[contains(@id, 'StatementOfUnderstandingCheck')])[1]")))){
+			//if(validateNew(driver.findElement(By.xpath("(//*[contains(text(),'Statement of Understanding')])[1]")))){
+				if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+			System.out.println("SOA page is Displayed");
+		
+			if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : Radio buttons are validated for SOA Page");
+			//validateNew(SoU_DisagreeRadio);
+			jsClickNew(SoU_DisagreeRadio);
+			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
+				System.out.println("Error message and Cancel Enrollment Button are displayed for Disagree to SoU selection");
+				validation_Flag = true;
+			}
+			else{
+				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
+				validation_Flag = false;
+			}
+			
+			jsClickNew(SoU_AgreeRadio);		
+			Thread.sleep(6000);
+			}
+		}
+		return validation_Flag;
+	}
+	
+	
 }
