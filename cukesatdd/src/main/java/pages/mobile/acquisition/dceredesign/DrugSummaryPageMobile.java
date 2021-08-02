@@ -181,7 +181,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "app-dcedisclaimer[header$='Estimated Drug Total?'] div[id$='content'] p")
 	private WebElement annualEstimatedTotalText;
 	
-	@FindBy(id = "cancelicon")
+	@FindBy(css = "#cancelicon")
 	private WebElement drugClose;
 	
 	public static String LIS_MESSAGE_DRUG_PRICING = "If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
@@ -655,7 +655,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private WebElement drugNames;
 
-	@FindBy(id = "modal-label")
+	@FindBy(css = "#modal-label")
 	private WebElement drugTitle;
 
 	public void clickViewPricing() {

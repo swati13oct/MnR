@@ -483,10 +483,14 @@ public class DCEACQNewRunnerMobile {
 		String InsulinDrug = memberAttributesMap.get("Insulin Drug");
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
-		drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
-		drugDetailsPage.validateInsulinText_ImportantInfo();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		if (null == InsulinCopay || InsulinCopay.isEmpty()) {
+			System.out.println("Insulin Benefit not available for the plan");
+		} else {
+			drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
+			drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
+			drugDetailsPage.validateInsulinText_ImportantInfo();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		}
 
 	}
 

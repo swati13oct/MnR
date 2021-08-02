@@ -494,7 +494,7 @@ public class DCEACQHomeMobile {
 
 	@When("^user should verify the drug extra qualification in drug pricing popup$")
 	public void user_should_verify_the_drug_extra_qualification_in_drug_pricing_popup_in_AARP() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.verifyDrugPricingText();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
