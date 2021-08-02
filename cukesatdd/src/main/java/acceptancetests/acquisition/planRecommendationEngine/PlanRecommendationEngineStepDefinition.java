@@ -190,11 +190,11 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@And("^user validate elements in coverage options page$")
-	public void elements_coverage_page() {
+	public void elements_coverage_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-//		headerAndFooter.breadCrumbs();
-		planSelectorCoverageepage.coverageOptionpage();
+		String plantype = inputValues.get("Plan Type");
+		planSelectorCoverageepage.coverageOptionpage(plantype);
 		
 	}
 	
