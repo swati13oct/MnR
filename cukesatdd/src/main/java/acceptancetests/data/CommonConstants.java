@@ -1019,6 +1019,10 @@ public class CommonConstants {
 	
 	public static LinkedHashMap<String,ArrayList<String>> PRE_Providers = new LinkedHashMap<String,ArrayList<String>>();
 	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> DCE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
+	
 	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
 	
 	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();

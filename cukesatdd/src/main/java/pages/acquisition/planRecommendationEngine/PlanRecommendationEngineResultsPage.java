@@ -516,6 +516,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".c-banner__cta>a")
 	private WebElement startNowBtn;
 	
+	@FindBy(css = ".modal-dialog a.modal-close")
+	private WebElement modelclose;
 	
 	// New Results Page
 		@FindBy(css = "uhc-plan-info a")
@@ -1904,8 +1906,10 @@ public void validateDrugProvider() {
 	System.out.println("Validate Drug and provider details in VP ");
 	ArrayList<String> vpdrugs = new ArrayList<String>();
 	ArrayList<String> vpProviders = new ArrayList<String>();
-	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	String curID = String.valueOf(Thread.currentThread().getId());
+	DrugsInPRE = CommonConstants.PRE_Drugs.get(String.valueOf(Thread.currentThread().getId()));
+	System.out.println("**** Current Thread ID is - "+curID+" Drugs in PRE "+DrugsInPRE+" ****");
+	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));
 	System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+DocInPRE+" ****");
 	scrollToView(DrugCount);
@@ -1946,7 +1950,7 @@ public void Pharmacytype() {
 }
 
 public void navigatePRE(HashMap<String, String> inputdata) {
-	System.out.println("Validate Drug and provider details in VP ");
+	System.out.println("Navigating PRE from External Site ");
 	String curWindow = driver.getWindowHandle();
 	String site = inputdata.get("Site Name");
 	System.out.println(curWindow);
@@ -1961,6 +1965,8 @@ public void navigatePRE(HashMap<String, String> inputdata) {
 		PREStage(curWindow, site);
 	}
 	if (site.equalsIgnoreCase("mauhcmedicaresolutions") || site.equalsIgnoreCase("maaarpmedicareplans")) {
+		if(validate(modelclose))
+			modelclose.click();
 		validate(startNowBtn);
 		startNowBtn.click();
 		PREStage(curWindow, site);

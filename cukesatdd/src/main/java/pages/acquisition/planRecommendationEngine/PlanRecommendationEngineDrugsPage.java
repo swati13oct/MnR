@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.GlobalWebElements;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
@@ -343,8 +344,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 
 	public void comparingDrugwithDCE() {
 		System.out.println("Validating " + page + " page druglist with VPP drugs");
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
-		DrugsInDCE = dce.DCEDrugsResults;
+		String curID = String.valueOf(Thread.currentThread().getId());
+		DrugsInDCE = CommonConstants.DCE_Drugs.get(curID);
 		threadsleep(2000);
 		drugnamesList();
 		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
@@ -410,10 +411,13 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	public ArrayList<String> drugnamesList() {
 		int count = drugNameList.size();
 		drugNames = new ArrayList<String>();
+		String curID = String.valueOf(Thread.currentThread().getId());
 		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() );
 		}
+		System.out.println("Current Thread ID is - "+curID+" Drugs in PRE flow "+drugNames);
+		CommonConstants.PRE_Drugs.put(curID, drugNames);
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
 		return drugNames;

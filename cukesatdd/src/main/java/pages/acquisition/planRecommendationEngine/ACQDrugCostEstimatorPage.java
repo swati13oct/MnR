@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -250,11 +251,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public ArrayList<String> getDrugNamesDCE() {
 		threadsleep(5000);
+		String curID = String.valueOf(Thread.currentThread().getId());
 		int count = drugsNamesinDCE.size();
 		DCEDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
 			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div>h4")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
+		System.out.println("Current Thread ID is - "+curID+" Drugs in DCE flow "+DCEDrugsResults);
+		CommonConstants.DCE_Drugs.put(curID, DCEDrugsResults);
 		Collections.sort(DCEDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
 		System.out.println("DrugList in DCE Content is : "+DCEDrugsResults);
