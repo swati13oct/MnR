@@ -297,7 +297,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "(//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')])[1]//following-sibling::*")
 	private WebElement AuthState;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip') or contains(text(), 'ZIP code')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip') or contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement AuthZip;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Phone Number') or contains(text(), 'Phone number')]//following-sibling::*")
