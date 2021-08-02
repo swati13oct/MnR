@@ -594,7 +594,7 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     Then the user validates the proactive chat
 
-    @samChatAARP123 @regressionAARP
+    @samChatAARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
