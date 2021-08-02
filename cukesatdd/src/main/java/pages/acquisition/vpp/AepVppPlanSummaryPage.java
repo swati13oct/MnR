@@ -646,13 +646,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 	}
 	
-	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex, String highOpDental, String dentalPl) throws InterruptedException {
 		this.sheetName = sheetName;
 		this.rowIndex = rowIndex;
 
 		HashMap<String, String> result=new HashMap<String, String>();
         
-        result = collectInfoOLEpg(planName,sheetName,rowIndex);
+        result = collectInfoOLEpg(planName,sheetName,rowIndex,highOpDental,dentalPl);
         
         System.out.println(sheetName);
         System.out.println(rowIndex);
@@ -661,48 +661,66 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         return result;
     }
 
-    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
-		//driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+	public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex, String highOptionalDental, String dentalPlatinum) throws InterruptedException {
+		WebElement highOptionalDentalElement = null, dentalPlantinumMonthlyElement = null,dentalPlantinumElement = null,highOptionalDentalMonthlyElement = null;
+		String highOptionalDentaltext = null, dentalPlatinumtext = null, headerPremiumText = null, headerPlanNameText = null, headerZipText = null,dentalPlantinumMonthlyElementtext=null,highOptionalDentalMonthlyElementtext=null;
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
-
 		HashMap<String, String> result=new HashMap<String, String>();
-		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
-		System.out.println("Plan card xpath : "+ planCard);
-		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
+		String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
+		String headerPremiumXpath = planCard+"/parent::div/ul/li[1]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
-		String headerPremiumText = null;
 		headerPremiumText = driver.findElement(By.xpath(headerPremiumXpath)).getText();
 		String [] headerPremiumArray = headerPremiumText.split(" ");
-		if(headerPremiumArray[1].substring(3, 5).equalsIgnoreCase("0.00"))
+		if(headerPremiumArray[2].substring(3, 5).equalsIgnoreCase("0.00"))
 		{
-		String updatedHeaderPremium = headerPremiumArray[1].substring(0, 2) ;
+		String updatedHeaderPremium = headerPremiumArray[2].substring(0, 2) ;
 		result.put(headerPrem, updatedHeaderPremium);
 		}
 		else {
-			result.put(headerPrem, headerPremiumArray[1]);	
+			result.put(headerPrem, headerPremiumArray[2]);
 		}
 		
-		String headerPlanName = "Plan Name"; //this variable will be stored as key for the header plan name
-		String headerPlanNameText= null;
+		String headerPlanName = "plan name"; //this variable will be stored as key for the header plan name
 		headerPlanNameText = driver.findElement(By.xpath(planCard)).getText();
-		result.put(headerPlanName, headerPlanNameText);	
-		
-		String headerZipXpath = planCard+"/parent::div/ul/li[1]";
+		result.put(headerPlanName, headerPlanNameText);
+		String headerZipXpath = planCard+"/parent::div/ul/li[2]";
 		String headerZip = "ZipCode"; //this variable will be stored as key for the header zip
-		String headerZipText= null;
 		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
 		String [] headerZipArray = headerZipText.split(" ");
-		result.put(headerZip, headerZipArray[1]);
+		result.put(headerZip, headerZipArray[2]);
+		if(!planName.contains("PDP")) {
+			try {
+				highOptionalDentalMonthlyElement = driver.findElement(By.xpath("//input[@id='HighOptionDental_selectedRiders']//parent::span"));
+				highOptionalDentalElement = driver.findElement(By.xpath("(//input[@id='HighOptionDental_selectedRiders']//parent::span//following-sibling::div[@class='opt-benefit-list']/ul)[1]"));
 
-		System.out.println("================ Premium Map Values ================");
-		result.entrySet().forEach(entry -> {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		});
-
-
-
-
-		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the OLE Info on Welcome OLE Pages - " + result.size());
+			} catch (Exception e) {
+				System.out.println("No high dental option rider for Plan :"+planName);
+			}
+			try {
+				dentalPlantinumMonthlyElement = driver.findElement(By.xpath("//input[@id='DentalPlatinum_selectedRiders']//parent::span"));
+				dentalPlantinumElement = driver.findElement(By.xpath("(//input[@id='DentalPlatinum_selectedRiders']//parent::span//following-sibling::div[@class='opt-benefit-list']/ul)[1]"));
+			} catch (Exception e) {
+				System.out.println("No dental platinum rider for Plan :"+planName);
+			}
+			if (highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
+				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText().trim();
+				dentalPlatinumtext = dentalPlantinumElement.getText().trim();
+				//dentalPremiumValue=dentalPlatinumtext + dentalPlantinumMonthlyElementtext;
+				result.put("high option dental", highOptionalDental);
+				result.put("dental platinum", dentalPlantinumMonthlyElementtext +  dentalPlatinumtext);
+				} else if (!highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
+				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText().trim();
+				highOptionalDentalMonthlyElementtext = highOptionalDentalMonthlyElement.getText().trim();
+				highOptionalDentaltext = highOptionalDentalElement.getText().trim();
+				dentalPlatinumtext = dentalPlantinumElement.getText().trim();
+				result.put("high option dental",highOptionalDentalMonthlyElementtext + highOptionalDentaltext);
+				result.put("dental platinum", dentalPlantinumMonthlyElementtext +  dentalPlatinumtext);
+			} else if (highOptionalDental.equalsIgnoreCase("NA") && dentalPlatinum.equalsIgnoreCase("NA")) {
+			result.put("high option dental", highOptionalDental);
+			result.put("dental platinum", dentalPlatinum);
+			}
+		}
+		System.out.println("================ Finished collecting info on Welcome OLE Page================");
 		return result;
 	}
     
@@ -739,6 +757,5 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		return flag;
 		}
 	}
-
 
 	
