@@ -3780,7 +3780,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// a[contains(@class, 'EBRC')]
 
 	// @FindBy(xpath = "//a[contains(@class, 'EBRC')]")
-	@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+	@FindBy(xpath = "//a[contains(text(),'here to get your Decision Guide')]")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
