@@ -3786,8 +3786,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assertion.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
 				validate(DecisionGuideLink));
-		// jsClickNew(DecisionGuideLink);
-		switchToNewTabNew(DecisionGuideLink);
+		 jsClickNew(DecisionGuideLink);
+	//	switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
