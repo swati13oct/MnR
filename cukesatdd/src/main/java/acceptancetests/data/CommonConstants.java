@@ -914,23 +914,26 @@ public class CommonConstants {
 			"DAYTIME_PHONE_NUM,\n" + 
 			"EVENING_PHONE_NUM,\n" + 
 			"PAPERLESS_PREFERENCE_IND,\n" + 
-			"EMAIL,\n" + 
+			"EMAIL,\n" + 			
 			"LANGUAGE_PREFERENCE,\n" + 
 			"MEDICARE_NUMBER,\n" + 
+			"SSN,\n" + 
 			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
 			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
 			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
 			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
 			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
-			"OTHER_HEALTH_INSURANCE_ID,\n" + 
+			"OTHER_HEALTH_INSURANCE_ID,\n" +
+			"DO_YOU_HAVE_OTHER_RX_COVERAGE,\n" +
+			"OTHER_RX_COVERAGE_NAME,\n" +
 			"SECONDARY_RX_COVERAGE_NAME,\n" + 
 			"OTHER_RX_COVERAGE_NAME,\n" + 
 			"SECONDARY_RX_GROUP,\n" + 
 			"SECONDARY_RX_ID,\n" + 
+			"SECONDARY_RX_BIN,\n" +
 			"NOTE,\n" + 
 			"REQUESTED_EFFECTIVE_DATE,\n" + 
 			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
-			"XEROX_STAGE_ID,\n" +
 			"PRIMARY_CARE_PHYSICIAN,\n" + 
 			"DENTAL_PLATINUM,\n" +
 			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
@@ -951,8 +954,25 @@ public class CommonConstants {
 			"CREDIT_CARD_NUMBER,\n" +
 			"CREDIT_CARD_NAME_ON_CARD,\n" +
 			"CREDIT_CARD_EXPIRATION_DATE,\n" +
-			"XEROX_STAGE_ID\n" + 
-			"from Xerox_stage where xerox_stage_id = ";
+			"ASMENT_DIAB1_DOC_INFORMED_DIAB,\n" +
+			"ASMENT_DIAB2_PRESCRIBED_INSULN,\n" + 
+			"CHRONIC_AUTH_HEART_FAILURE,\n" + 
+			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA,\n" + 
+			"ASMENT_HEART2_CARDC_BYPASS,\n" + 
+			"CHRONIC_AUTH_VASCULAR_DISEASE,\n" + 
+			"ASMENT_HEART1_HEART_ATTACK,\n" +
+			"ASMENT_HEART10_ANGINA,\n" +
+			"ASMENT_HBP2_MEDICATION_FOR_HBP,\n"+
+			"ASMENT_HEART7_PACEMKR_R_DEFIB,\n" + 
+			"ASMENT_HEART3_ANGIOPLASTY,\n" + 
+			"ASMENT_SIGN_PRESENCE_ENROLLEE,\n" + 
+			"CHRONIC_PHYSICIAN_NAME,\n" + 
+			"CHRONIC_PHYSICIAN_PHONE_NUM,\n" + 
+			"ASMENT_FULL_ADDR_FOR_PHYSICIAN,\n" +
+			"APPLICATION_RECEIPT_DATE,\n"+
+			"SIGNATURE_DATE,\n" +
+            "XEROX_STAGE_ID\n" +
+            "from Xerox_stage where xerox_stage_id = ";
 	
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
@@ -990,13 +1010,13 @@ public class CommonConstants {
 	
 	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality (LEP) you will receive a bill in the email.";
 	
-	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount (Part D-IRMAA) Social Security (SS) will send you a letter and ask you how you want to pay it:";
+	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
 	
 	public static String SS_TEXT  = "You can pay it from your SS check";
 	
 	public static String MEDICARE_TEXT  = "Medicare can bill you";
 	
-	public static String RAILROAD_TEXT   = "The Railroad Retirement Board (RRB) can bill you";
+	public static String RAILROAD_TEXT   = "The Railroad Retirement Board(RRB) can bill you";
 	//
 	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
 	

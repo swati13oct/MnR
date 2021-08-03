@@ -34,6 +34,8 @@ import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -58,6 +60,8 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 
@@ -80,6 +84,12 @@ public class VppCommonStepDefinition {
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
+private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 //	@Given("^the user is on medicare acquisition site landing page$")
 //	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
@@ -105,6 +115,7 @@ public class VppCommonStepDefinition {
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
+		scenario.log("Sai - 06/15------Need to remove  line 135 later");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -123,8 +134,10 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
 
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-		if (site.equalsIgnoreCase("AARP"))
-			aquisitionhomepage.validateSubtitle();
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))){
+		if (site.equalsIgnoreCase("AARP")) 
+		aquisitionhomepage.validateSubtitle();
+		}
 	}
 
 	@When("^the user performs plan search using following information$")
@@ -1228,16 +1241,8 @@ public class VppCommonStepDefinition {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-
+		
 		String planYear = givenAttributesMap.get("Plan Year");
-		// VPPPlanSummaryPage plansummaryPage = null;
-		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(
 				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -1255,31 +1260,30 @@ public class VppCommonStepDefinition {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+	
+	//	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	//	String planType = givenAttributesMap.get("Plan Type");
+	//	String SiteName = givenAttributesMap.get("Site");
+		String planName = givenAttributesMap.get("Plan Name");
+		PlanDetailsPage  plandetailsPage;
 
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planType = givenAttributesMap.get("Plan Type");
-		String site = givenAttributesMap.get("Site");
+	PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+			// TFN = planSummaryPage.GetTFNforPlanType();
 
-		// String planType = (String)
-		// getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType)) {
-			// String SiteName = "AARP_ACQ";
-			// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
-			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+			plandetailsPage = planSelectorNewResultspage.validatePlanNamesPRE(planName);
 
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailsPage);
+	
+		if (plandetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailsPage);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+			System.out.println("User navigates from PRE Page to Plan details page in VPP is Displayed");
 			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
-		}
-	}
+		} else
+			Assertion.fail("Error in validating User navigates from PRE Page to Plan details page in VPP is Displayed");
+	
+}
 
 	@Then("^the user validates the Cancel button for Multi County Pop-up lands on enter Zip code Page$")
 	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_Page()
@@ -4486,17 +4490,6 @@ public class VppCommonStepDefinition {
 
 	}
 	
-	@Then("^the user Select PCP popup modal on Plan Compare page")
-	public void user_select_PCP_modal_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		String pcps = givenAttributesMap.get("PCPs");
-		planComparePage.validatePCPModal(pcps);
-		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-
-	}
 	
 
 	@Then("^user selects keepshopping on the pop-up$")
@@ -4515,6 +4508,20 @@ public class VppCommonStepDefinition {
 		String savePlanName = memberAttributesMap.get("PlanName");
 		comparePlansPage.saveaPlan(savePlanName);
 	}
+	
+	@Then("^the user Select PCP popup modal on Plan Compare page")
+	public void user_select_PCP_modal_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pcps = givenAttributesMap.get("PCPs");
+		planComparePage.validatePCPModal(pcps);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
+	
+
 	
 	@Then("Verify Change Zip Code Link is displayed on compare Page")
 	public void verify_Change_Zip_Code() {

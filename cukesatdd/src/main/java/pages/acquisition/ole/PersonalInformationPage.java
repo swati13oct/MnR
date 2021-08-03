@@ -37,7 +37,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
-	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
+	@FindBy(xpath = "//*[@id='ole-form-cancel-button1' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 
 	@FindBy(id = "view-learn-enrollment")
@@ -110,7 +110,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
 
-	@FindBy(id = "address2")
+	@FindBy(xpath = "//input[@id='address2']")
 	private WebElement PermanentAdd_Aptno;
 
 	@FindBy(id = "city")
@@ -186,7 +186,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(css="a#visitor-profile-header")
     private WebElement lnkProfile;
 	
-	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[1]")
 	private WebElement logoimageOLE;
 
 	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
@@ -206,6 +206,17 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
+	
+//	@FindBy(xpath="//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id, 'sepRadio')]")
+	@FindBy(xpath="(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")
+	public WebElement SEPPageHeader;
+	
+	@FindBy(xpath = "(//a[contains(text(),'No thanks, leave online application')])[1]")
+	private WebElement LeaveOnlineApplicationforLogo;
+	
+	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	private WebElement TFNNoNeedHelp;
+	
 	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -239,66 +250,194 @@ public class PersonalInformationPage extends UhcDriver{
 	}
 	
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
+		
 
 		String FirstName = memberDetailsMap.get("First Name");
+		String MiddleName = memberDetailsMap.get("Middle Name");
 		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
-		//String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
+		String Perm_Aptno = memberDetailsMap.get("Perm_AptNo");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
-		String Mailing_Aptno = memberDetailsMap.get("Mailing_Aptno");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_AptNo");
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
+		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
+		String goGreen = memberDetailsMap.get("Go Green");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
 		
 		CheckPageLoad();
 		CheckiPerseptions();
 		
 		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysNew(lastNameField, LastName);
 		
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
-			//GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
 		}
 		else{
-			//GenderSelectFemale.click();
+			
 			jsClickNew(GenderSelectFemale);
 		}	
+				
+		//call method click on CONTINUE BUtton
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		//Code for Personal Information page 2 begin
 		sendkeys(PermanentAdd_Street,Perm_Street);
-		//sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			jsClickNew(SameMailingAddressNo);
-			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
+			
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
-			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
+					}
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		//Code for Personal Information page 3 begin
+		if(result) {
+			validateNew(HomephoneNumberField);
+			sendkeys(HomephoneNumberField, HomeNumber);
+			  validateNew(MobileNumberField);
+			sendkeys(MobileNumberField, MobileNumber);
+
+					if(emailConfirmation.equalsIgnoreCase("YES")){
+				jsClickNew(emailConfirmationYesBtn);	
+			}else
+				jsClickNew(emailConfirmationNoBtn); 
+			if(goGreen.equalsIgnoreCase("YES")){
+				//goGreenYesBtn.click();
+				jsClickNew(goGreenYesBtn);
+			}else
+			//	goGreenNoBtn.click();
+			jsClickNew(goGreenNoBtn);
+
+			sendkeys(Email,EmailAddress);
 		}
-		sendkeys(Email,EmailAddress);
+		result= Clickoncontinuebutton("language-preference");
 		
-		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : All Required Details are entered");
-			return true;
+		if(result) {
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
 		}
-		return false;
+		
+		return result;
 	}
+
 	
-	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
+	public boolean Clickoncontinuebutton(String expectedPageURL) {
+		boolean flag=false;
+		
+		if(NextBtn.isEnabled())
+		{
+			System.out.println("Conitnue Button is Enabled : All Required Details are entered");
+			jsClickNew(NextBtn);
+			String ActualPageURL=driver.getCurrentUrl();
+			if(ActualPageURL.contains(expectedPageURL)) 
+			{
+				
+				flag=true;
+			}
+		}	
+		return flag;
+		
+		}
+	
+	public boolean enter_member_details_SNP_Plans(Map<String, String> memberDetailsMap) throws InterruptedException {
+
+		String FirstName = memberDetailsMap.get("First Name");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+		String LastName = memberDetailsMap.get("Last Name");	
+		String DOB = memberDetailsMap.get("DOB");
+		String Gender = memberDetailsMap.get("Gender");
+		String Perm_Street = memberDetailsMap.get("Perm_Street");
+		String Perm_Aptno = memberDetailsMap.get("Perm_AptNo");
+		String Perm_city = memberDetailsMap.get("Perm_city");
+		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
+		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_AptNo");
+		String Mailing_City = memberDetailsMap.get("Mailing_City");
+		String Mailing_State = memberDetailsMap.get("Mailing_State");
+		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
+		String EmailAddress = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		
+		CheckPageLoad();
+		CheckiPerseptions();
+		
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(MiddleNameField, MiddleName);
+		sendkeysNew(lastNameField, LastName);
+		
+		sendkeys(DOBtxtFld,DOB);
+		if(Gender.contains("Male")){
+			jsClickNew(GenderSelectMale);
+		}
+		else{
+			
+			jsClickNew(GenderSelectFemale);
+		}	
+				
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		
+		sendkeys(PermanentAdd_Street,Perm_Street);
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_City,Perm_city);
+		System.out.println("Mailing Question : "+MailingQuestion);
+		if(MailingQuestion.equalsIgnoreCase("no")){
+			jsClickNew(SameMailingAddressNo);
+			
+			sendkeysNew(MailingAdd_Street,Mailing_Street);
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeys(MailingAdd_City,Mailing_City);
+			Select SelectState = new Select(MailingAdd_State_DropDown);
+			SelectState.selectByValue(Mailing_State);
+			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
+					}
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		if(result) {
+			validateNew(HomephoneNumberField);
+			sendkeys(HomephoneNumberField, HomeNumber);
+			  validateNew(MobileNumberField);
+			sendkeys(MobileNumberField, MobileNumber);
+
+			sendkeys(Email,EmailAddress);
+		}
+		result= Clickoncontinuebutton("language-preference");
+		
+		if(result) {
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+		}
+		
+		return result;
+	}
+
+	
+/*	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String EmailAddress = memberDetailsMap.get("Email");
-		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
-		String goGreen = memberDetailsMap.get("Go Green");
-		//String email = memberDetailsMap.get("Email");
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber =memberDetailsMap.get("Mobile Number");
 		String MiddleName = memberDetailsMap.get("Middle Name");
@@ -308,22 +447,6 @@ public class PersonalInformationPage extends UhcDriver{
 		  validateNew(MobileNumberField);
 		sendkeys(MobileNumberField, MobileNumber);
 		sendkeysNew(MiddleNameField, MiddleName);
-		if(emailConfirmation.equalsIgnoreCase("YES")){
-			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();
-		}else
-			jsClickNew(emailConfirmationNoBtn); //emailConfirmationNoBtn.click();
-		
-	if(goGreen.equalsIgnoreCase("YES")){
-		//goGreenYesBtn.click();
-		jsClickNew(goGreenYesBtn);
-	}else
-	//	goGreenNoBtn.click();
-	jsClickNew(goGreenNoBtn);
-	
-	//if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
-	//sendkeysNew(emailAddressField, email);
-	
-		
 		sendkeys(Email,EmailAddress);
 		
 		if(NextBtn.isEnabled()){
@@ -332,26 +455,7 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		return false;
 	}
-	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
-
-		String EmailAddress = memberDetailsMap.get("Email");
-		String HomeNumber = memberDetailsMap.get("Home Number");
-		String MobileNumber =memberDetailsMap.get("Mobile Number");
-		String MiddleName = memberDetailsMap.get("Middle Name");
-		
-		validateNew(HomephoneNumberField);
-		sendkeys(HomephoneNumberField, HomeNumber);
-		  validateNew(MobileNumberField);
-		sendkeys(MobileNumberField, MobileNumber);
-		sendkeysNew(MiddleNameField, MiddleName);
-		sendkeys(Email,EmailAddress);
-		
-		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : All Required Details are entered");
-			return true;
-		}
-		return false;
-	}
+	*/
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
@@ -469,30 +573,24 @@ public class PersonalInformationPage extends UhcDriver{
 //		NextBtn.click();
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+	//	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+			if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){		
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
 		return null;
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public ConfirmYourEligibilityPage navigate_to_ConfirmYourEligibility_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		
-		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			System.out.println("OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
-		}
-		*/
 		
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
+		//Updated the get url title SEP Page with Other Health insurance...OLERedesign
+			if(driver.getCurrentUrl().contains("other-health-insurance")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE Other HealthInsurance or Chronic Page Page is Displayed");
+			return new ConfirmYourEligibilityPage(driver);
 			
 			}
 		else if(driver.getCurrentUrl().contains("eligibility"))
@@ -506,10 +604,10 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
-					  System.out.println("OLE SEP Page is not Displayed"); }
-					 return new SpecialElectionPeriodPage(driver);	
+					 if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+					  System.out.println("OLE Other HealthInsurance or Chronic  Page is Displayed"); } else {
+					  System.out.println("OLE Other HealthInsurance  or Chronic  Page is not Displayed"); }
+					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
 		return null;
@@ -522,7 +620,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -533,7 +631,7 @@ public class PersonalInformationPage extends UhcDriver{
 		return new ConfirmYourEligibilityPage(driver);
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public ConfirmYourEligibilityPage navigate_to_ConfirmYourEligibility_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -541,9 +639,9 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		Thread.sleep(3000);
 			//if(driver.getCurrentUrl().contains("special")){
-			if(driver.getCurrentUrl().contains("special-election-period")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
+			if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE otherhealth insurance Page or Chronic Page is Displayed");
+			return new ConfirmYourEligibilityPage(driver);
 			
 			}
 		else if(driver.getCurrentUrl().contains("eligibility"))
@@ -558,11 +656,11 @@ public class PersonalInformationPage extends UhcDriver{
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
 
-					 if(driver.getCurrentUrl().contains("special-election-period")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
+					 if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+					  System.out.println("OLE otherhealth insurance Page  or Chronic Page is Displayed"); } else {
 
-					  System.out.println("OLE SEP Page is not Displayed"); }
-					 return new SpecialElectionPeriodPage(driver);	
+					  System.out.println("OLE otherhealth insurance Page or Chronic Page is Displayed"); }
+					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
 		return null;
@@ -575,7 +673,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -720,7 +818,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -752,11 +850,30 @@ public class PersonalInformationPage extends UhcDriver{
 			CreateProfile.isDisplayed();
 			validate(SignIn);
 			SignIn.isDisplayed();
-			validate(LeaveOnlineApplication);
-			LeaveOnlineApplication.isDisplayed();
+			validate(LeaveOnlineApplicationforLogo);
+			LeaveOnlineApplicationforLogo.isDisplayed();
+			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
+			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
 			closepopup.click();
 			return new CancelOLEModal(driver);
 		}
 		return null;
 	}
+	
+	
+	public SpecialElectionPeriodPage validate_SEPPage() {
+		
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		
+		if(validateNew(SEPPageHeader,45)){
+			System.out.println("OLE SEP page is Displayed : Navigation from Prescription Drug  Coverage page Passed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		else{
+			System.out.println("OLE SEP page is Displayed : Navigation from Prescription Drug  Coverage page Failed");
+			return null;
+		}
+	}
+	
 }

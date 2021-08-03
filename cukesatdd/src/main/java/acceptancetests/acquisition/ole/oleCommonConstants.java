@@ -15,6 +15,7 @@ public class oleCommonConstants {
 	public static final String OLE_PLAN_TYPE = "planType";
 	public static final String OLE_ZIPCODE = "zipcode";
 	public static final String OLE_COUNTY = "county";
+	public static final String OPTIONAL_RIDER_TEXT = "optionalrider";
 	public static final String OLE_PLAN_YEAR = "planyear";
 	public static final String OLE_PLAN_PREMIUM = "premium";
 	public static final String OLE_TFN = "tfn";
@@ -50,6 +51,7 @@ public class oleCommonConstants {
 	public static final String PRESCRIPTION_COVERAGE_NAME = "prescriptioncoveragename";
 	public static final String PRESCRIPTION_GROUP_NUMBER = "pdgroupnumber";
 	public static final String PRESCRIPTION_MEMBER_NUMBER = "pdmembernumber";
+	public static final String PRESCRIPTION_RXBIN_NUMBER = "rxbinnumber";
 	
 	public static final String HEALTH_INSURANCE = "healthinsurance";
 	public static final String PRESCRIPTION_DRUG = "prescriptiondrug";
@@ -79,6 +81,7 @@ public class oleCommonConstants {
 	public static final String AUTHORIZATION_RELATIONSHIP = "authorizationrealtionship";
 	public static final String AUTHORIZATION_REPRESENTATIVE_INDICATOR = "authorizationrepresentativeindicator";
 	public static final String PROPOSED_EFF_DATE = "proposedeffectivedate";
+	public static final String SOA_AGREE = "soaagree";
 	
 	
 	public static final String DIABETES_QUESTION_1 = "diabetesquestion1";
