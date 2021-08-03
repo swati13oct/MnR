@@ -35,13 +35,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
-	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
+	@FindBy(css = "[aria-labelledby='guest-flow-widget-head']")
 	public WebElement dceNBAModal;
 
 	@FindBy(xpath = "//*[@id='guest-flow-widget-head' and text()='Save your work for later']")
 	public WebElement dceNBAModalMsg;
 
-	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
+	@FindBy(css = "button[dtmid$='nba'][dtmname$='Create Account']")
 	public WebElement dceNBAModalBtn;
 
 	@FindBy(id = "SignIn")
@@ -168,7 +168,24 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(css = "#snp-plans-radio")
 	private WebElement snpPlanRadioButton;
+	
+	@FindBy(css = "app-dcedisclaimer[header$='Monthly Drug Cost?'] div[id$='button']")
+	private WebElement whyMonthlyDrugCostButton;
+	
+	@FindBy(css = "app-dcedisclaimer[header$='Estimated Drug Total?'] div[id$='button']")
+	private WebElement annualEstimatedTotalButton;
+	
+	@FindBy(css = "app-dcedisclaimer[header$='Monthly Drug Cost?'] div[id$='content'] p")
+	private WebElement whyMonthlyDrugCostText;
 
+	@FindBy(css = "app-dcedisclaimer[header$='Estimated Drug Total?'] div[id$='content'] p")
+	private WebElement annualEstimatedTotalText;
+	
+	@FindBy(css = "#cancelicon")
+	private WebElement drugClose;
+	
+	public static String LIS_MESSAGE_DRUG_PRICING = "If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
+	
 	@Override
 	public void openAndValidate() {
 		// validateNew(reviewDrugCostPageHeading);
@@ -407,10 +424,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateLISBanner_LISBuydownPlan_DrugSummary(String planName) {
-		WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+		WebElement LISBanner = driver.findElement(By.xpath("//h4//span[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
 		if (validateNew(LISBanner)) {
-			WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+			WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4//span[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
 			System.out.println("Clicking on learn more about extra help link");
 			switchToNewTabNew(ExtraHelpLink);
@@ -429,8 +446,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void viewDrugPricingModal(String planName) {
-		WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
+		WebElement viewDrugPricingLink = driver.findElement(By.cssSelector("p button[aria-label^='View Drug Pricing'][aria-label$='"+planName+"']"));
 		validateNew(viewDrugPricingLink);
 		jsClickNew(viewDrugPricingLink);
 		validateNew(DrugPricing_Header);
@@ -440,10 +456,27 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void captureFunctionalToolTips(String planName) {
-		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+		
+		String monthlyDrugCostText = "The average monthly drug cost represents the amount you would pay if you had the same drug costs each month. The actual cost each month could be higher or lower than this amount depending on the coverage stage you"+String.valueOf(Character.toChars(8217))+"re in.";
+		String estimatedDrugTotalText = "The estimated annual drug cost includes the copays, coinsurance, deductibles, and out-of-pocket costs you would pay each year for the drugs you"+String.valueOf(Character.toChars(8217))+"ve entered with coverage from the plan you selected.";
+		
+		validateNew(whyMonthlyDrugCostButton);
+		validateNew(annualEstimatedTotalButton);
+		
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(whyMonthlyDrugCostButton, "aria-expanded"))) {
+			jsClickNew(whyMonthlyDrugCostButton);
+			Assertion.assertEquals(monthlyDrugCostText, whyMonthlyDrugCostText.getText().trim());
+		}
+		
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(annualEstimatedTotalButton, "aria-expanded"))) {
+			jsClickNew(annualEstimatedTotalButton);
+			Assertion.assertEquals(estimatedDrugTotalText, annualEstimatedTotalText.getText().trim());
+		}
+		
+		/*WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
-		/*
+		
 		 * scrollToView(WhyAverage); jsMouseOver(WhyAverage); jsClickNew(WhyAverage);
 		 * WebElement WhyAverageContent =
 		 * driver.findElement(By.xpath("//h4[contains(text(), '" + planName+
@@ -454,12 +487,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * +WhyAverageContentText); } else
 		 * Assertion.fail("Why Average ToolTip text is not present");
 		 * jsMouseOut(WhyAverageContent);
-		 */
+		 
 		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
-		/*
+		
 		 * jsMouseOver(WhatsIncluded); jsClickNew(WhatsIncluded); WebElement
 		 * WhatsIncludedContent = driver.findElement(By.xpath("//h4[contains(text(), '"
 		 * + planName+
@@ -622,11 +655,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private WebElement drugNames;
 
-	@FindBy(id = "drugPricingTitleTxt")
+	@FindBy(css = "#modal-label")
 	private WebElement drugTitle;
 
 	public void clickViewPricing() {
-		validate(drugPricingLink);
+		validateNew(drugPricingLink);
 
 		jsClickNew(drugPricingLink);
 	}
@@ -719,7 +752,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
 	private WebElement clickSnpplan;
 
-	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	@FindBy(xpath = "(//div[contains(@class,'d-flex align-items-lg-center')]//p[contains(text(), ' level of Extra Help')])[1]")
 	private WebElement alertTextImg;
 
 	public void clickOnPDPPlan() {
@@ -734,13 +767,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
+	@FindBy(xpath = "//span[contains(text(),'If you receive')]")
 	public WebElement drugPricingDeductText;
 
 	public void verifyTheTextAlert() {
 
 		validate(alertTextImg);
-		validate(viewProceBtn);
 	}
 
 	public void verifyDrugPricingText() {
@@ -752,8 +784,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		validate(drugTitle);
-		validate(switchToGenericBtn);
+//		validate(switchToGenericBtn);
 		validate(drugPricingDeductText);
+		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+//		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
+		validateNew(drugClose);
+		jsClickNew(drugClose);
 
 	}
 
@@ -1230,8 +1267,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void clickReturnToPlanSummary() {
-		// returnToPlanSummaryLink.click();
 		jsClickNew(returnToPlanSummaryLink);
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 	}
 

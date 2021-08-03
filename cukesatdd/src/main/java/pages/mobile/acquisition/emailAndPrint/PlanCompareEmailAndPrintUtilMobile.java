@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.emailAndPrint;
 
 import java.util.ArrayList;
@@ -126,11 +127,8 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		pageloadcomplete();
 
 		scrollToView(validateemailbutton);
-		waitforElementNew(validateemailbutton, 10);
-		checkElementisEnabled(validateemailbutton);
 		jsClickNew(validateemailbutton);
-	
-		sleepBySec(3);
+		//pageloadcomplete();
 		// Validating email popup
 		validate(leavingcomapreplansitepopup);
 		System.out.println("!!!Leaving site popup is displayed ===>");
@@ -296,3 +294,4 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 }
+

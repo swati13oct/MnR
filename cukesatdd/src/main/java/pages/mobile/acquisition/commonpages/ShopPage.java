@@ -250,7 +250,7 @@ public class ShopPage extends GlobalWebElements {
 
 	public void clickOnPDPShopButton() {
 		waitForPageLoadSafari();
-		MobileMenuToShopToolToShop();
+		//MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		scrollToView(pdpShopLink);
 		validateNew(pdpShopLink);
@@ -265,7 +265,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void clickOnSNPShopButton() {
-		MobileMenuToShopToolToShop();
+		//MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);

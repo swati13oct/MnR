@@ -532,7 +532,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	public ShopForPlanNavigationPageMobile openShopForPlanFrmMenu() {
 		
-		MobileMenuToPlanTypes();
+		//MobileMenuToPlanTypes();
 		scrollToView(medicareSupplimentPlans);
 		medicareSupplimentPlans.click();
 		pageloadcomplete();

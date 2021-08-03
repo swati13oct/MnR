@@ -20,6 +20,7 @@ import org.testng.Assert;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+//import sun.misc.Cache;
 
 /**
  *@author sdwaraka
@@ -67,22 +68,24 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement PremiumDisplay;
 
 	//Plan Details Display
-	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//h3")
+	//@FindBy(xpath = "//*[contains(@class, 'plan-information')]//h3")
+	@FindBy(xpath = "//*[contains(@class, 'h3-welcome-class')]")
 	private WebElement PlanYear_NameDisplay;
 
-	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//li")
+	//@FindBy(xpath = "//*[contains(@class, 'plan-information')]//li")
+	@FindBy(xpath = "//*[contains(@class, 'premium-zip')]//*[contains(@class, 'review-premium-zip-second')]")
 	private WebElement PlanZipDisplay;
 
 	//Member Details Display
 //	@FindBy(xpath = "//*[contains(text(), 'First Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
 	private WebElement FirstNameDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name/Middle Initial')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name')]//following-sibling::*")
 	private WebElement MiddleNameDisplay;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
 	@FindBy(xpath = "//*[contains(text(), 'Medicare Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
@@ -146,7 +149,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement DisclosureProviderState;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'ZIP')]//following-sibling::*")
 	private WebElement DisclosureProviderZipcode;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Provider Phone Number')]//following-sibling::*")
@@ -201,7 +204,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'mailing address')]//..//following-sibling::*//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
+//	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
@@ -210,10 +214,10 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*")
 	private WebElement MobilePhoneNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to get email confirmation')]//following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
 	private WebElement EmailConfirmationNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
 	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -252,8 +256,11 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Group ID Number')]//following-sibling::*")
 	private WebElement PrescriptionDrugGroupNo;
 	
-	@FindBy(xpath = "//*[contains(text(), ' Member ID Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Member ID Number')]//following-sibling::*")
 	private WebElement PrescriptionDrugMemberNo;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Rx BIN')]//following-sibling::*")
+	private WebElement PrescriptionRXBINMemberNo;
 	
 
 	@FindBy(xpath = "//*[contains(text(), 'Provider or PCP Full Name')]//following-sibling::*")
@@ -296,7 +303,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Phone Number') or contains(text(), 'Phone number')]//following-sibling::*")
 	private WebElement AuthPhoneNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Have you read and do you agree to the ') or contains(text(), 'Have you read, and do you agree to the Statement')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Statement of Understanding')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Have you read and do you agree to the ') or contains(text(), 'Have you read, and do you agree to the Statement')]//following-sibling::*")
 	private WebElement AuthAgree;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
@@ -315,8 +322,21 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 	
-	@FindBy(xpath = "//span[text()='How would you like to pay for your plan?']//following-sibling::span")
+	@FindBy(xpath = "//span[contains(text(),'How would you like to pay for your plan?')]//following-sibling::span")
 	private WebElement paymentPlanDisplay;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
+	private WebElement OptionalRiders;
+	
+	@FindBy(xpath = "//*[contains(@class, 'premium-zip')]//*[contains(@class, 'review-premium-zip-first')]")
+	private WebElement MonthlyPremium;
+	
+	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
+	private WebElement partAStartDateField;
+
+	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
+	private WebElement partBStartDateField;
+	
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -331,219 +351,17 @@ public class ReviewSubmitPage extends UhcDriver{
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
-	public boolean all_plan_and_member_details(Map<String, String> detailsMap) {
-
-		String DOB = detailsMap.get("DOB");
-		String Gender = detailsMap.get("Gender");
-		String Perm_Street = detailsMap.get("Perm_Street");
-		String Perm_city = detailsMap.get("Perm_city");
-		String MailingQuestion = detailsMap.get("MAILING_QUESTION");
-		String Mailing_Street = detailsMap.get("Mailing_Street");
-		String Mailing_City = detailsMap.get("Mailing_City");
-		String Mailing_State = detailsMap.get("Mailing_State");
-		String Mailing_Zip = detailsMap.get("Mailing_Zip");
-		String EmailAddress = detailsMap.get("Email");
-		String FirstName = detailsMap.get("First Name");
-		String LastName = detailsMap.get("Last Name");
-		String MedicareNumber = detailsMap.get("Medicare Number");
-		String PartAeffectiveDate = detailsMap.get("PartA Date");
-		String PartBeffectiveDate = detailsMap.get("PartB Date");
-		String CardType = detailsMap.get("Card Type");
-		String Expected_PlanName = detailsMap.get("Plan Name");
-		String Expected_PlanYear = detailsMap.get("Plan Year");
-		String Expected_ZipCode = detailsMap.get("Zip Code");
-		String Expected_County = detailsMap.get("County");
-		String Expected_PlanPremium = detailsMap.get("Plan Premium");
-		
-		
-	/*	HealthInsuranceName
-		HealthInsuranceGroupNo
-		HealthInsuranceMemberNo
-		PrescriptionDrugName
-		PrescriptionDrugGroupNo
-		PrescriptionDrugMemberNo
-		*/
-		
-		String prescriptionDrugName= detailsMap.get("Prescription Name");
-		String prescriptionGroupNumber = detailsMap.get("PD Group Number");
-		String prescriptionMemberNumber = detailsMap.get("PD Member Number");
-		String healthInsuranceName = detailsMap.get("Health Insurance Name");
-		String healthInsuranceGroupNo = detailsMap.get("Group Number");
-		String healthInsuranceMemberNo = detailsMap.get("Member Number");
-		
-		
-		
-
-		//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*
-		
-		/*try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		//String phoneNumber = Phone_Number.getText();
-		
-		boolean flag = true;
-		validateNew(PlanYear_NameDisplay);
-		String PlanNameDisplayed = PlanYear_NameDisplay.getText();
-		if(PlanNameDisplayed.contains(Expected_PlanName)){
-			flag = (!flag)?false:true;
-			System.out.println(Expected_PlanName+" : "+PlanNameDisplayed+" : "+flag);
-		}else flag =false;
-		String PlanZipDisplayed = PlanZipDisplay.getText();
-		if(PlanZipDisplayed.contains(Expected_ZipCode)){
-			flag = (!flag)?false:true;
-			System.out.println(Expected_ZipCode+" : "+PlanZipDisplayed+" : "+flag);
-		}else flag =false;
-		
-		String FirstNameDisplayed = FirstNameDisplay.getText();
-		if(FirstNameDisplayed.contains(FirstName)){
-			flag = (!flag)?false:true;
-			System.out.println(FirstName+" : "+FirstNameDisplayed+" : "+flag);
-		}else flag =false;
-		String LastNameDisplayed = LastNameDisplay.getText();
-		if(LastNameDisplayed.contains(LastName)){
-			flag = (!flag)?false:true;
-			System.out.println(LastName+" : "+LastNameDisplayed+" : "+flag);
-		}else flag =false;
-
-		if(CardType.contains("HICN") || CardType.contains("RRID") ){
-			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText().replaceAll("-", "");
-			if(MedicareNumberDisplayed.contains(MedicareNumber)){
-				flag = (!flag)?false:true;
-				System.out.println(MedicareNumber+" : "+MedicareNumberDisplayed+" : "+flag);
-			}else flag =false;
-		}
-		else{
-			String MedicareNumberDisplayed = MedicareNumberDisplay.getText().replaceAll("-", "");
-			if(MedicareNumberDisplayed.contains(MedicareNumber)){
-				flag = (!flag)?false:true;
-				System.out.println(MedicareNumber+" : "+MedicareNumberDisplayed+" : "+flag);
-			}else flag =false;
-
-		}
-		if (StringUtils.isEmpty(PartAeffectiveDate)) {
-			System.out.println("PartAeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Hospital (Part A) Effective Date')]//following-sibling::*"))!=null) {
-			
-			String PartADisplayed = PartADisplay.getText().replaceAll("-", "");
-			if (PartADisplayed.contains(PartAeffectiveDate)) {
-				flag = (!flag) ? false : true;
-				System.out.println(PartAeffectiveDate + " : " + PartADisplayed + " : " + flag);
-			} else
-				flag = false;
-		}
-		else {
-			System.out.println("PartAeffectiveDate is not present for User");
-		}
-		if (StringUtils.isEmpty(PartBeffectiveDate)) {
-			System.out.println("PartBeffectiveDate is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*"))!=null) {
-			String PartBDisplayed = PartBDisplay.getText().replaceAll("-", "");
-			if (PartBDisplayed.contains(PartBeffectiveDate)) {
-				flag = (!flag) ? false : true;
-				System.out.println(PartBeffectiveDate + " : " + PartBDisplayed + " : " + flag);
-			} else
-				flag = false;
-		}
-		else {
-			System.out.println("PartBeffectiveDate is not present for User");
-		}
-		
-		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
-		if(DOBDisplayed.contains(DOB)){
-			flag = (!flag)?false:true;
-			System.out.println(DOB+" : "+DOBDisplayed+" : "+flag);
-		}else flag =false;
-		
-		String GenderDisplayed = GenderDisplay.getText();
-		if(GenderDisplayed.contains(Gender)){
-			flag = (!flag)?false:true;
-			System.out.println(Gender+" : "+GenderDisplayed+" : "+flag);
-		}else flag =false;
-		
-        if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
-        	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
-        }else{
-        	String PermStreetDisplayed = StreetDisplays.get(0).getText();
-    		if(PermStreetDisplayed.contains(Perm_Street)){
-    			flag = (!flag)?false:true;
-    			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
-    		}else flag =false;
-    		
-    		String PermCityDisplayed = CityDisplays.get(0).getText();
-    		if(PermCityDisplayed.contains(Perm_city)){
-    			flag = (!flag)?false:true;
-    			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
-    		}else flag =false;
-
-    		
-    		String MailAddQuestionDisplayed = MailingQiuestionDisplay.getText();
-    		if(MailAddQuestionDisplayed.contains(MailingQuestion)){
-    			flag = (!flag)?false:true;
-    			System.out.println(MailingQuestion+" : "+MailAddQuestionDisplayed+" : "+flag);
-    		}else flag =false;
-
-    		if(MailingQuestion.equalsIgnoreCase("no")){
-    			String StateDisplayed = MailStateDisplay.getText();
-    			if(StateDisplayed.contains(Mailing_State)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Mailing_State+" : "+StateDisplayed+" : "+flag);
-    			}else flag =false;
-    			
-    			String ZipDisplayed = MailZipDisplay.getText();
-    			if(ZipDisplayed.contains(Mailing_Zip)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Mailing_Zip+" : "+ZipDisplayed+" : "+flag);
-    			}else flag =false;
-    			
-    			String MailStreetDisplayed = StreetDisplays.get(1).getText();
-    			if(MailStreetDisplayed.contains(Mailing_Street)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Mailing_Street+" : "+MailStreetDisplayed+" : "+flag);
-    			}else flag =false;
-
-    			String MailCityDisplayed = CityDisplays.get(1).getText();
-    			if(MailCityDisplayed.contains(Mailing_City)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
-    			}else flag =false;
-    			
-    		}
-    		
-    		
-        }
-
-		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
-			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
-				flag = (!flag)?false:true;
-				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
-			}
-			else flag = false;
-		}else flag = false;
-
-		if(validate(SubmitApplicationBtn)){
-			if(SubmitApplicationBtn.isEnabled()){
-				flag = (!flag)?false:true;
-				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
-			}
-			else flag = false;
-		}else flag = false;
-
-		
-		return flag;
-	}
-
-	public OLEconfirmationPage submitEnrollment() {
+	
+	public OLEconfirmationPage submitEnrollment() throws InterruptedException {
 		
 
 		validateNew(SubmitApplicationBtn);
 		scrollToView(SubmitApplicationBtn);
+		Thread.sleep(2000);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
-		threadsleep(3000);
+		//threadsleep(3000);
+		Thread.sleep(2000);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
@@ -608,18 +426,11 @@ public class ReviewSubmitPage extends UhcDriver{
 				String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
 				//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
 				String Paperless_Delivery = detailsMap.get("Paperless Delivery");
-				//String Email_Address = detailsMap.get("Email Address");
-			/*	HealthInsuranceName
-				HealthInsuranceGroupNo
-				HealthInsuranceMemberNo
-				PrescriptionDrugName
-				PrescriptionDrugGroupNo
-				PrescriptionDrugMemberNo
-				*/
 				
 				String prescriptionDrugName= detailsMap.get("Prescription Name");
 				String prescriptionGroupNumber = detailsMap.get("PD Group Number");
 				String prescriptionMemberNumber = detailsMap.get("PD Member Number");
+				String rxBINNumber = detailsMap.get("RX BIN Number");
 				String healthInsuranceName = detailsMap.get("Health Insurance Name");
 				String healthInsuranceGroupNo = detailsMap.get("Group Number");
 				String healthInsuranceMemberNo = detailsMap.get("Member Number");
@@ -662,7 +473,10 @@ public class ReviewSubmitPage extends UhcDriver{
 				String DisclosureProviderStateDisplay= detailsMap.get("Disclosure Provider State");
 				String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
 				String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
-				
+
+				String OptionalRidersDisplay= detailsMap.get("Optional Rider");
+				String expectedOptionalRidersText = "Dental Platinum";
+				String expectedOptionalHighRidersText = "High Option Dental";
 				String expectedText = "0.00";
 				
 				String paymentPlan = detailsMap.get("Payment Plan");
@@ -671,7 +485,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				
 				String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
 				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
-				String Zip = "ZIP: "+Expected_ZipCode;
+				String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
 				flag&=validateText(PlanZipDisplay,Zip);
 				flag&=validateText(FirstNameDisplay,FirstName);
 				flag&=validateText(LastNameDisplay,LastName);
@@ -710,6 +524,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
 				flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
+				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
+				
 				if(!Expected_PlanName.contains("PDP")) {
 				flag&=validateText(PCPName,PCP_Name);		
 				flag&=validateText(PCPNumber,PCP_Number);
@@ -728,6 +544,10 @@ public class ReviewSubmitPage extends UhcDriver{
 				//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 				flag&=validateText(MailCityDisplay,Mailing_City);
 				
+				if(!expectedOptionalRidersText.contains("Dental Platinum") || !expectedOptionalHighRidersText.contains("High Option Dental")) {
+					String OptionalRidersdisplay = OptionalRidersDisplay.replace(".", "");
+					flag&=validateText(OptionalRiders,OptionalRidersdisplay);
+				}
 				
 				if(!expectedText.contains("0.00")) {
 					flag&=validateText(paymentPlanDisplay,paymentPlan);
@@ -837,6 +657,16 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 		return result;
 	}
+	
+	public String converttoReviewDate(String intputDate) {
+		String date = intputDate.substring(2, 4);
+		String month = intputDate.substring(0, 2);;
+		String year = intputDate.substring(4,8);      
+		String outputDate= month+"/"+date+"/"+year; 
+		System.out.println("Output Date====================== "+outputDate);
+		return outputDate;	
+	}
+	
 	public boolean Review_page_enter_required_Medicare_details(Map<String, String> MedicareDetailsMap) throws InterruptedException{
 		
 		boolean result = true;
@@ -845,6 +675,8 @@ public class ReviewSubmitPage extends UhcDriver{
 //		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date1");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date1"); 
 		
 		validate(EditMedicareInformation);
 		jsClickNew(EditMedicareInformation);
@@ -853,15 +685,30 @@ public class ReviewSubmitPage extends UhcDriver{
 		claimNumberField.clear();
 		validateNew(claimNumberField);
 		sendkeysNew(claimNumberField, MedicareNumber1);
-		Thread.sleep(2000);
-		sendkeysNew(medicaidNumberField,"12345876");
-		Thread.sleep(2000);
-		jsClickNew(ReviewEditSavechanges);
+		Thread.sleep(5000);
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
+	//	sendkeysNew(medicaidNumberField,"12345876");
+		Thread.sleep(5000);
+	/*try {
+		if (partAStartDateField.isDisplayed() || partBStartDateField.isDisplayed()) {
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			Thread.sleep(2000);
+			//jsClickNew(ReviewEditSavechanges);
+			//validateNew(ReviewEditSavechanges);
+			jsClickNew(ReviewEditSavechanges);
+			System.out.println(" MedicareNumber Details and part a , Part b are edited from Review Page");
+		}
+	}
+	catch (Exception e){
 
-		System.out.println(" MedicareNumber Details are entered");
-		/*
+				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
+
+			}
+		*/	
+		
+			/*
 		if(ReviewEditSavechanges.isEnabled()){
 			System.out.println("User navigate back to Review Page");
 			return true;

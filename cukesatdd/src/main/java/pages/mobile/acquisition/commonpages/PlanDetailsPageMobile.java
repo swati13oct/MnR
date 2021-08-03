@@ -287,6 +287,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
 	private WebElement dentalPopupPlanLabel;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
+	
 
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -1030,10 +1034,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver
+				WebElement AdditionalBenefitType1 = driver
 						.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
+				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType1.getText());
 				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 						+ additionalBenefits.get(i).get(1)
 						+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
@@ -1044,10 +1048,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				AdditionalBenefitType = driver
+				WebElement AdditionalBenefitType1 = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
+				scrollToView(AdditionalBenefitType1);
+				//System.out.println("The additional Benefit to Valuidate : ");
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
@@ -1699,6 +1704,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
+		return null;
+	}
+	
+	public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
 		return null;
 	}
 

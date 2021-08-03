@@ -27,9 +27,11 @@ import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEn
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.DCEMobilePage;
@@ -1641,5 +1643,18 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 		return null;
 
+	}
+
+	public PlanDetailsPageMobile validatePlanNamesPRE(String planName) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName
+				+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+		jsClickNew(PREPlandetails);
+		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		
+		return new PlanDetailsPageMobile(driver);
+	
 	}
 }

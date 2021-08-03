@@ -20,7 +20,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
