@@ -58,10 +58,12 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -69,12 +71,12 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
-      | Option Data    | <optiondata>    |
+     | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+   Then the user validates PCP page for MA and MAPD PFFS plans
+   Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -100,10 +102,10 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-   # Then the user validates the OLE Submission Details in GPS
-     # | Plan Type                | <plantype>               |
-    #  | Auth Flag                | <authflag>               |
-     # | Mailing Address Question | <mailingaddressquestion> |
+    Then the user validates the OLE Submission Details in GPS
+      | Plan Type                | <plantype>               |
+      | Auth Flag                | <authflag>               |
+      | Mailing Address Question | <mailingaddressquestion> |
     @ShopPage_OLE_Future_AARP @regressionAARP @OLE @OLE_Redesign
     Examples: 
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | planName                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
@@ -137,7 +139,7 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Save Return Later modal for OLE Page
+Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
@@ -172,11 +174,13 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the long term questions in Medicare Information Page
+   Then the user validates the long term questions in Medicare Information Page
+      | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -212,11 +216,11 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+   # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
    # Then the user validates the OLE Submission Details in GPS
-     # | Plan Type                | <plantype>               |
-     # | Auth Flag                | <authflag>               |
+    #  | Plan Type                | <plantype>               |
+    #  | Auth Flag                | <authflag>               |
     #  | Mailing Address Question | <mailingaddressquestion> |
 
     @ShopPage_OLE_Future_AARP @regressionAARP @OLE @OLE_Redesign

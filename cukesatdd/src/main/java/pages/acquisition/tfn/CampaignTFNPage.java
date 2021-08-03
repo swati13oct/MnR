@@ -1159,15 +1159,17 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				driver.switchTo().window(winHandleNew);
 			}
 			
-			@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
-			private WebElement DecisionGuideLink;
+			//@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+			//@FindBy(xpath = "//*[contains(@class,'decisionGuide')//a)]")
+			@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+			private WebElement FindAnAgentMedsupp;
 			
-			public void clickOnRequestADecisionGuide(String TFNXpath,String ExpecetdTFNNo) {
+			public void clickOnAgentLinkMedSup(String TFNXpath,String ExpecetdTFNNo) {
 				
-				validateNew(DecisionGuideLink);
-				CommonUtility.waitForPageLoadNew(driver, DecisionGuideLink, 30);
+				validateNew(FindAnAgentMedsupp);
+				CommonUtility.waitForPageLoadNew(driver, FindAnAgentMedsupp, 30);
 				String parentWindow = driver.getWindowHandle();
-				DecisionGuideLink.click();
+				FindAnAgentMedsupp.click();
 				sleepBySec(3);
 				Set<String> tabs_windows = driver.getWindowHandles();
 				Iterator<String> itr = tabs_windows.iterator();
@@ -1182,7 +1184,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				String CurrentRailURL = driver.getCurrentUrl();
 				System.out.println("Actual  URL: " + CurrentRailURL);
 
-				if (CurrentRailURL.contains("medicare-information.html")) {
+				if (CurrentRailURL.contains("myuhcagent")) {
 					System.out.println("****************  ***************");
 
 					Assertion.assertTrue(true);
@@ -1354,4 +1356,13 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 					validateNew(lnkBackToAllPlans);
 					jsClickNew(lnkBackToAllPlans);
 				}
+
+
+@FindBy(xpath = "//*[contains(@class,'decisionGuide')]//a")
+private WebElement decisionGuideClick;
+
+public void decisionGuide() {
+	validateNew(decisionGuideClick);
+	jsClickNew(decisionGuideClick);
+}
 }
