@@ -17,7 +17,7 @@ Feature: 1.05.1.E2E for DCE to OLE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
-    Then the user validates the Plan details on OLE
+    #Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page

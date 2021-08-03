@@ -219,6 +219,8 @@ public class WelcomePage extends UhcDriver{
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
+		CheckiPerseptions();
+		
 		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
@@ -623,8 +625,7 @@ public class WelcomePage extends UhcDriver{
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-			//Saveclosepopup.click();
-			String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
+		String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			jsClickNew(Saveclosepopup);
 			validate(OLEStickyHeader);
