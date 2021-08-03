@@ -746,7 +746,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public ComparePlansPageMobile planCompare(String plans) {
 
-		comparePlans.click();
+		jsClickNew(comparePlans);
 		waitforElementVisibilityInTime(comparePlansPageControl, 10);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
