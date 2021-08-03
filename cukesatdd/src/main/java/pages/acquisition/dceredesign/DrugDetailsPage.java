@@ -1840,7 +1840,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
-	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-radio-tab')]")
+	@FindBy(xpath = "//input[contains(@name,'pharmacy-filters') and contains(@value, 'PP')]//following-sibling::span[2]")
 	public WebElement preferredPharmacyTab;
 
 	// @FindBy(xpath =

@@ -1,5 +1,5 @@
 @PlanRecommendationEngine
-Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
+Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
 
   @PRE @EditResponsePage @EditResponsePageValidation
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate responses in edit preference page in PRE

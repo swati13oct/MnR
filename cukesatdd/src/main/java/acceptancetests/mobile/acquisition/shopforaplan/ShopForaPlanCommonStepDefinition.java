@@ -401,7 +401,7 @@ public class ShopForaPlanCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		String stateSelected = (String) getLoginScenario().getBean(CommonConstants.STATE_SELECTED);
 
-		ShopForPlanNavigationPageMobile shopForPlan = acquisitionHomePage.openShopForPlanFrmMenu();
+		ShopForPlanNavigationPageMobile shopForPlan = acquisitionHomePage.openShopForPlanFromMenu();
 
 		if (shopForPlan != null) {
 			boolean classicUrl = shopForPlan.checkForClassicURL(stateSelected);

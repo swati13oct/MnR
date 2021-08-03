@@ -24,7 +24,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
-
+	
 	@FindBy(xpath = "//a[text()='Home']")
 	public WebElement breadCrumbHomeLink;
 
@@ -137,29 +137,30 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
-
 	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
 	@FindBy(css = "#mobile-nav a[dtmname$='Visit AARP.org']")
 	public WebElement visitAARPLink;
+	
 
+	
 	@FindBy(id = "search-field")
 	public WebElement searchTxtbox;
-
+	
 	@FindBy(id = "header-tfn-link")
 	public WebElement headerTfn;
-
+	
 	@FindBy(id = "guest-profile")
 	public WebElement visitorProfileFlyoutTitle;
-
+	
 	@FindBy(id = "guest-saved-items-button")
 	public WebElement visitorProfileFlyoutViewSavedItemBtn;
-
+	
 	@FindBy(id = "flyout-drug-button")
 	public WebElement visitorProfileFlyoutAddDrugBtn;
-
+	
 	@FindBy(id = "flyout-plan-button")
 	public WebElement visitorProfileFlyoutAddPlansBtn;
-
+	
 	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
 	public WebElement visitorProfileFlyoutSignInLink;
 
@@ -275,7 +276,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
 	public WebElement UHCLogo;
 
-	// @FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	public WebElement visitorprofileicon;
 
@@ -325,51 +326,40 @@ public class GlobalWebElements extends UhcDriver {
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
-
 	
 	@FindBy(css = "#mobile-nav button[class$='nav-close']")
 	public WebElement closeMenu;
 	
-
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
-
+	
 	@FindBy(css = "#ghn_lnk_2")
 	public WebElement shopForAPlan;
-
-	@FindBy(xpath = "//h3/a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
-	public WebElement pharmacyOption;
 	
 	@FindBy(css = "#subnav_2 .nav-back")
 	public WebElement shopForPlanBackButton;
-
-	@FindBy(css = "#_knon0g5x_mobile_mobile_mobile_mobile_mobile_mobile > span:nth-child(2)")
-	public WebElement medicareSupplimentPlans;
 	
-	@FindBy(xpath="//h1/span[@class='heading-1']")
-	public WebElement planHeader;
-
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
-
+	
 	@FindBy(css = ".mob-menu-header button[class^='icon-mob-btn'][onclick*='Search']")
 	private WebElement siteSearchButton;
-
+	
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
-
+	
 	@FindBy(css = "#ghn_lnk_3")
 	public WebElement learnAboutMedicareNavButton;
-
+	
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
-
+	
 	@FindBy(css = "#accordion-1-button > svg")
 	public WebElement shopPlans;
-
+	
 	@FindBy(xpath = "//*[@id='accordion-2-button']/div")
 	public WebElement tools;
-
+	
 	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
 	public WebElement learnMedicare;
 
@@ -440,8 +430,7 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	public void accessFooterLinkFromLearnAboutMedicare(String option) {
-		boolean expanded = Boolean
-				.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
+		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(learnAboutMedicareFooterButton);
 		}
@@ -469,7 +458,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	public void accessFooterLinkFromMore(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
-
+		
 		if (!expanded) {
 			jsClickNew(more);
 		}
@@ -492,66 +481,52 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
-
+		
 		pageloadcomplete();
 	}
 
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
-
+		
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(home);
 		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
 	}
-
+	
+	
 	public void openSiteSearchFromMenu() {
 		jsClickNew(MenuMobile);
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(siteSearchButton);
 	}
-
+	
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
-		// jsClickNew(MenuMobile);
-		//
-		// validateNew(mobileNav, 5);
-		//
-		// jsClickNew(shopForAPlan);
-
-		MobileMenuToolsToHelp();
-		// jsClickNew(medicareSupplimentPlans);
-		if (validate(pharmacyOption)) {
-			return new ShopForPlanNavigationPageMobile(driver);
-		}
-		return null;
-	}
-
-	public ShopForPlanNavigationPageMobile openShopForPlanFrmMenu() {
+		jsClickNew(MenuMobile);
 		
-		//MobileMenuToPlanTypes();
-		scrollToView(medicareSupplimentPlans);
-		medicareSupplimentPlans.click();
-		pageloadcomplete();
-		if (validate(planHeader)) {
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(shopForAPlan);
+		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}
 		return null;
 	}
-
+	
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
-
+		
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(learnAboutMedicareNavButton);
 		if (validate(learnAboutMedicareBackButton)) {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		}
 		return null;
 	}
-
+	
 }
