@@ -12,7 +12,6 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 
-
 public class SwitchToGenericMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='drugPopHeading']")
@@ -31,12 +30,15 @@ public class SwitchToGenericMobile extends UhcDriver {
 	 * WebElement GenericDrugRadio;
 	 */
 
-	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	// @FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to
+	// Generic')]")
+	@FindBy(css = "#modal-label")
 	public WebElement SwitchPageHeader;
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	// @FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	@FindBy(css = "#cancelicon")
 	public WebElement SwitchPageCloseBtn;
-	
+
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
@@ -48,19 +50,19 @@ public class SwitchToGenericMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
-	
+
 	@FindBy(xpath = "//select[contains(@id, 'selectdosage')]")
 	public WebElement SelectDosageDrpDwn;
-	
+
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-packaging')]")
 	public WebElement SelectPackageDrpDwn;
-	
+
 	@FindBy(xpath = "//input[contains(@id, 'drugquantity')]")
 	public WebElement QuantityTxt;
-	
+
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
 	public WebElement FrequentyDrpDwn;
-	
+
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
 	public WebElement supplyLengthDrpDwn;
 
@@ -95,7 +97,8 @@ public class SwitchToGenericMobile extends UhcDriver {
 		 * println("Brand Name and Generic Drug Options are displayed and Brand Name Option is Selected by default"
 		 * );
 		 * 
-		 * } else { Assertion.fail("Brand Name and Generic Drug options NOT Validated"); }
+		 * } else { Assertion.fail("Brand Name and Generic Drug options NOT Validated");
+		 * }
 		 */
 
 	}
@@ -143,9 +146,9 @@ public class SwitchToGenericMobile extends UhcDriver {
 				.findElement(By.xpath("//select[@id='selectdosage']//option[contains(text(), '" + Dosage + "')]"));
 		jsClickNew(Drug);
 	}
-	
-	
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+
+	// @FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile ClickSwitch_ReturnSummaryPage() {
@@ -153,7 +156,7 @@ public class SwitchToGenericMobile extends UhcDriver {
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
-		if(validateNew(reviewDrugCostPageHeading)) {
+		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 		Assertion.fail("DCE - Drug Summary Page is not displayed");
@@ -192,27 +195,31 @@ public class SwitchToGenericMobile extends UhcDriver {
 	}
 
 	public void validateSwitchPage(String genericDrug, String brandDrug) {
-		WebElement GenericDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+genericDrug+"')]"));
-		WebElement BrandDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+brandDrug+"')]"));
-		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
+		WebElement GenericDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '" + genericDrug + "')]"));
+		WebElement BrandDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '" + brandDrug + "')]"));
+		WebElement SavingsText = driver.findElement(By.xpath(
+				"//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
 		openAndValidate();
-		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
+		if (!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
 			Assertion.fail("Switch To Generic Page Validation Failed");
 		}
 		Assertion.assertTrue("Switch To Generic Page Validation Passed", true);
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(css = "div[class*='d-block'] #changePharmacyLink")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
+	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
+
+	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link']")
+	public WebElement LinktoExitScenario;
 
 	public DrugDetailsPageMobile ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPageMobile(driver);
 		}

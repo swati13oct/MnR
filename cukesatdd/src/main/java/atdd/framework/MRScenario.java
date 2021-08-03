@@ -84,6 +84,7 @@ public class MRScenario {
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 
 	public static String environment = System.getProperty("environment");
+	//public static String environment = "prod";
 	public static String browsername = "chrome";
 	public static String browserName;
 	public static String isTestHarness;
@@ -125,6 +126,22 @@ public class MRScenario {
 	
 	public static void setRunnerFileName(String runnerFile) {
 		runnerFileName.set(runnerFile);
+	}
+	
+	public static String getTagLists() {
+		GlobalBeforeHook beforeHook = new GlobalBeforeHook();
+		List<String> tagsList = beforeHook.getTagsList();
+		 StringBuilder strbul=new StringBuilder();
+	        for(String str : tagsList)
+	        {
+	            strbul.append(str);
+	        }
+	        String tagsLists=strbul.toString();
+		return tagsLists;
+	}
+	
+	public static void setTagList(String tagName) {
+		runnerFileName.set(tagName);
 	}
 
 	public static final String USERNAME = "gpdadmin1";
@@ -191,7 +208,11 @@ public class MRScenario {
 	
 	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
-	private synchronized AppiumDriver getThreadSafeMobileDriver() {
+	public synchronized void setThreadSafeMobileDriver(AppiumDriver driver){
+		threadSafeMobileDriver.set(driver);
+	}
+	
+	private static synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
 	}
 	
@@ -325,10 +346,11 @@ public class MRScenario {
 
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
-
+			System.out.println("@@@propertyFilePath@@"+propertyFilePath);
 			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
 					.append(CommonConstants.PROPERTY_FILE_NAME);
 			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+			System.out.println("@@@IS@@"+is);
 			try {
 				prop.load(is);
 			} catch (IOException e) {
@@ -706,7 +728,7 @@ public class MRScenario {
 		} else {
 			JobURL.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
 		}
-		System.out.println("JobURL ---" + returnJobURL());
+		System.out.println("JobURL --- " + returnJobURL());
 	}
 
 /*	public void getJobURL(String jobID) {
@@ -808,7 +830,14 @@ public class MRScenario {
 				capabilities.setCapability("enablePerformanceLogging", true);
 				browserName="Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
-				threadSafeMobileDriver.set(new AndroidDriver(new URL(SauceLabsURL), capabilities));
+				
+				AppiumDriver mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
+				//Adding the below condition to debug NPE for driver
+				if(mobileDriver == null) {
+					Assertion.fail("Android driver was not created !");
+				} else {
+					setThreadSafeMobileDriver(mobileDriver);
+				}
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
@@ -818,7 +847,13 @@ public class MRScenario {
 				capabilities.setCapability("locationServicesAuthorized", "true");
 				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
-				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));
+				AppiumDriver mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
+				//Adding the below condition to debug NPE for driver
+				if(mobileDriver == null) {
+					Assertion.fail("iOS driver was not created !");
+				} else {
+					setThreadSafeMobileDriver(mobileDriver);
+				}
 			}
 //			System.out.println("Session ID --- " + mobileDriver.getSessionId());
 			System.out.println("Session ID --- " + getThreadSafeMobileDriver().getSessionId().toString());

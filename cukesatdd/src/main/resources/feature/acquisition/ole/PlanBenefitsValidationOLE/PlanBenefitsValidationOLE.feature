@@ -8,6 +8,17 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | Site          | <site>	    |
 
 
+  @OLEplanBenefits_Failed_MA_SNP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet2021_fail_TC  | AARP |
+
+  @OLEplanBenefits_Failed_MA_SNP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet2021_fail_TC  | UHC |
+
+
   @OLEplanBenefitsPDPAARP1 @OLEBenefits @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |

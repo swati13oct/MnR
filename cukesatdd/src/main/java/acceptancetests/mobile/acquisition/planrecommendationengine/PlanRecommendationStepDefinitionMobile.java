@@ -2,6 +2,7 @@ package acceptancetests.mobile.acquisition.planrecommendationengine;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -19,6 +20,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
@@ -33,6 +44,7 @@ import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.NewResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 
@@ -64,29 +76,30 @@ public class PlanRecommendationStepDefinitionMobile {
 		}
 	}
 	
-	@Given("^the user is on UHC medicare acquisition site mobile$")
-	public void the_user_on_uhc_medicaresolutions_site_mobile() {
+	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		wd = getLoginScenario().getMobileDriver();
+		readfeaturedataMobile(inputdata);
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openPRE();
+		aquisitionhomepage.openPRE(inputValues.get("Site"));
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
-
+	
 	@When("^user navigates to PRE landing page mobile$")
 	public void user_navigates_PRE_landingpage_mobile() {
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
 		preheaderfootermobile.navigatePRELandingpageMobile();
 	}
 
-	@When("^user navigates to PRE landing page via shop tool mobile$")
+	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
 	public void user_navigates_PRE_landingpage_shoptool_mobile() {
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
 		preheaderfootermobile.navigationToPREViaShopToolsMobile();
 	}
 
-	@When("^user navigates to Zip Code page mobile$")
+	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigates_to_zipcode_page_mobile() {
 		HeaderFooterMobile header = new HeaderFooterMobile(wd);
 		header.navigatePRELandingpageMobile();
@@ -94,33 +107,26 @@ public class PlanRecommendationStepDefinitionMobile {
 		prelandingpage.navigatezipcodepagemobile();
 	}
 
-	@When("^user navigates to \"([^\\\"]*)\" page mobile$")
-	public void user_navigates_to_given_page_mobile(String pageName, DataTable inputdata) {
-		// LandingAndZipcodeMobilePage prelandingpage = new
-		// LandingAndZipcodeMobilePage(wd);
-		// prelandingpage.navigatepagemobile(pageName);
-	}
-
-	@Then("^user validate elements on landing page of Plan Recommendation Engine mobile$")
+	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
 	public void user_check_landing_page_Plan_Selector_tool_mobile() {
 		// System.out.println("Device Type "+inputValues.get("Device Type"));
 		LandingAndZipcodeMobilePage prelandingpagemobile = new LandingAndZipcodeMobilePage(wd);
 		prelandingpagemobile.landingpageElementsmobile();
 	}
 
-	@Then("^user validate presence of Header elements on landing page mobile$")
+	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_header_mobile() {
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
 		preheaderfootermobile.headerElementsMobile();
 	}
 
-	@Then("^user validate presence of Footer elements on landing page mobile$")
+	@Then("^user validate Footer elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_Footer_mobile() {
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
 		preheaderfootermobile.footerElementsMobile();
 	}
 
-	@Then("^user validate Header Functionality of Plan Recommendation Engine mobile$")
+	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_functionalities_mobile(DataTable inputdata) {
 		readfeaturedataMobile(inputdata);
 		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
@@ -128,52 +134,34 @@ public class PlanRecommendationStepDefinitionMobile {
 		preheaderfootermobile.emailFunctionInShopforaplanMobile(inputValues.get("EMail"));
 		//preheaderfootermobile.enterSearchFunctionHeaderMobile(inputValues.get("Search Key"));
 	}
-
-	@Then("^user validate Footer Functionality of Plan Recommendation Engine mobile$")
-	public void user_check_Footer_functionalities_mobile() {
-		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
-		preheaderfootermobile.backtoTopFunctionMobile();
-	}
-
-	@Then("^user validates all Links from header mobile$")
-	public void user_check_header_link_validation_mobile() {
-		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
-		preheaderfootermobile.headerLinkvalidationMobile();
-	}
-
-	@Then("^user validates all Links from footer mobile$")
-	public void user_check_Footer_link_validation_mobile() {
-		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
-		preheaderfootermobile.footerLinkvalidationMobile();
-	}
-
+	
 	@Then("^user validates zipcode page elements mobile$")
 	public void user_check_zipcodepage_elements_mobile() {
 		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
 		prezipcodemobile.zipcodepageElementsmobile();
 	}
 
-	@And("^runs questionnaire at zipcode page mobile$")
+	@And("^clicks on get started button and runs questionnaire$")
 	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) {
 		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
 		readfeaturedataMobile(inputdata);
 		prezipcodemobile.zipcodepageValidationmobile(inputValues);
 	}
 
-	@Then("^runs questionnaire at zipcode page with invalid data mobile$")
+	@Then("^clicks on get started button and check error scenarios$")
 	public void user_runs_questionnaire_zipcodepage_invalid_data_mobile(DataTable inputdata) {
 		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
 		readfeaturedataMobile(inputdata);
 		prezipcodemobile.zipcodescreenErrorValidationmobile(inputValues);
 	}
 
-	@Then("^user validate elements in coverage options page mobile$")
+	@Then("^user validate elements in coverage options page$")
 	public void user_check_coveragepage_elements_mobile() {
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
 		coveragepage.coverageOptionpageElementsMobile();
 	}
 
-	@Then("^user selects plan type in coverage options page mobile$")
+	@Then("^user selects plan type in coverage options page$")
 	public void select_plan_type_coverage_page_mobile(DataTable inputdata) throws Throwable {
 		readfeaturedataMobile(inputdata);
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
@@ -185,7 +173,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		}
 	}
 
-	@And("^user select planType and continous the page back to previous page mobile$")
+	@And("^user select planType and continous the page back to previous page$")
 	public void previous_coverage_page_mobile(DataTable inputdata) throws Throwable {
 		readfeaturedataMobile(inputdata);
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
@@ -193,13 +181,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		coveragepage.previouspageValidation();
 	}
 
-	@Then("^user validate elements in Special Needs page mobile$")
+	@Then("^user validate elements in Special Needs page$")
 	public void elements_special_page_mobile() {
 		SpecialNeedsMobilePage specialneedspage = new SpecialNeedsMobilePage(wd);
 		specialneedspage.specialNeedspageElements();
 	}
 
-	@And("^user selects SNP options in Special Needs Page mobile$")
+	@And("^user selects SNP options in Special Needs Page$")
 	public void select_special_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		SpecialNeedsMobilePage specialneedspage = new SpecialNeedsMobilePage(wd);
@@ -207,7 +195,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		specialneedspage.specialneedspage(inputValues.get("SNP Options"), status);
 	}
 
-	@And("^user selects SNP options in Special Needs Page and validate errors mobile$")
+	@And("^user validating error scenario in Special Needs Page$")
 	public void select_special_needs_page_errorvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		SpecialNeedsMobilePage specialneedspage = new SpecialNeedsMobilePage(wd);
@@ -215,35 +203,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		specialneedspage.specialneedspage(inputValues.get("SNP Options"), status);
 	}
 
-	@Then("^user validate elements in Travel page mobile$")
-	public void elements_travel_page_mobile() {
-		TravelMobilePage careawaypage = new TravelMobilePage(wd);
-		careawaypage.travelpageElements();
-	}
-
-	@And("^user selects Travel options in Travel Page mobile$")
-	public void select_travel_page_mobile(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		TravelMobilePage careawaypage = new TravelMobilePage(wd);
-		String status = "Positive";
-		careawaypage.travelpage(inputValues.get("Travel Options"), status);
-	}
-
-	@And("^user selects Travel options in Travel Page and validate errors mobile$")
-	public void select_travel_page_errorvalidation_mobile(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		TravelMobilePage careawaypage = new TravelMobilePage(wd);
-		String status = "Negative";
-		careawaypage.travelpage(inputValues.get("Travel Options"), status);
-	}
-
-	@Then("^user validate elements in Doctors page mobile$")
+	@Then("^user validate elements in Doctors page$")
 	public void elements_doctors_page_mobile() {
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
 		doctorpage.doctorspageElements();
 	}
 
-	@Then("^user selects Doctors in Doctors page mobile$")
+	@Then("^user selects doctors in doctors page$")
 	public void select_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
@@ -252,36 +218,27 @@ public class PlanRecommendationStepDefinitionMobile {
 				inputValues.get("Multi Doctor"), status);
 	}
 
-	@And("^user selects Doctors in Doctors page and validate errors mobile$")
-	public void select_doctors_page_errorvalidation_mobile(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
-		String status = "Negative";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
-				inputValues.get("Multi Doctor"), status);
-	}
-
-	@And("^user selects Doctors in Doctors page and cancels the selection mobile$")
+	@And("^user selects Doctors in Doctors page and cancels the selection$")
 	public void select_doctors_page_cancelvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
 		doctorpage.doctorspageCancel(inputValues.get("Doctors Search Text"), inputValues.get("Multi Doctor"));
 	}
 
-	@Then("^user validate elements in Drug page mobile$")
+	@Then("^user validate elements in drugs page$")
 	public void elements_drug_page_mobile() {
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.drugspageElements();
 	}
 
-	@Then("^user selects skip option in Drug page mobile$")
+	@Then("^user selects skip option in Drug page$")
 	public void elements_drugskip_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.skipDrugs(inputValues.get("Drug Selection"));
 	}
 
-	@Then("^user selects add drug option in Drug page mobile$")
+	@Then("^user selects add drug option in Drug page$")
 	public void add_drugs_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -290,7 +247,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.continueNextpage();
 	}
 
-	@Then("^user selects add drug option and cancels the modals in Drug page mobile$")
+	@Then("^user selects add drug option and cancels the modals in Drug page$")
 	public void add_drugs_page_cancelvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -298,14 +255,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.drugspageCancel(inputValues.get("Drug Details"));
 	}
 
-	@Then("^user validates errors in Drug page mobile$")
+	@Then("^user validates errors in Drug page$")
 	public void add_drugs_page_errorvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
 		drugpage.drugpagesError(inputValues.get("Drug Details"));
 	}
 
-	@Then("^user search and choose a drug in Drug page mobile$")
+	@Then("^user search and choose a drug in Drug page$")
 	public void choose_drugs_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -314,7 +271,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.continueNextpage();
 	}
 	
-	@Then("^user selects add drug option without drugs in Drug page mobile$")
+	@Then("^user selects add drug option without drugs in Drug page$")
 	public void add_NoDrug_drugs_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -322,7 +279,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.continueNextpageZeroDrug();
 	}
 	
-	@Then("^user search and not found a drug in Drug page mobile$")
+	@Then("^user search and not found a drug in Drug page$")
 	public void notfound_drugs_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -330,69 +287,47 @@ public class PlanRecommendationStepDefinitionMobile {
 		drugpage.drugNotFound(inputValues.get("Search Text"));
 	}
 	
-	@Then("^user validate elements in Pharmacy page mobile$")
-	public void elements_pharmacy_page_mobile() {
-		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
-		pharmacypage.pharmacypageElements();
-	}
-	
-	@Then("^user selects Pharmacy in Pharmacy page mobile$")
-	public void select_pharmacy_page_mobile(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
-		String status = "Positive";
-		pharmacypage.pharmacyFunctional(inputValues.get("Pharmacy Selection"),status);
-	}
-	
-	@And("^user selects Pharmacy in Pharmacy page and validate errors mobile$")
-	public void select_pharmacy_page_errorvalidation_mobile(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		PharmacyMobilePage pharmacypage =  new PharmacyMobilePage(wd);
-		String status = "Negative";
-		pharmacypage.pharmacyFunctional(inputValues.get("Pharmacy Selection"),status);	
-	}
-	
-	@Then("^user validate elements in additional services page mobile$")
+	@Then("^user validate elements in additional services page$")
    	public void elements_additional_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
    		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
    		additionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
-	@Then("^user selects additional services option in additional services page mobile$")
+	@Then("^user selects additional services option in additional services page$")
    	public void select_additionalServiceOption_additional_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
    		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
    		additionalpage.additionalpageFunctional(inputValues.get("Additional Option"));
    	}
 	
-	@Then("^user validates additional services error function in additional services page mobile$")
+	@Then("^user validates additional services error function in additional services page$")
    	public void select_additional_page_errorvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
    		AdditionalServicesMobilePage additionalpage =  new AdditionalServicesMobilePage(wd);
    		additionalpage.additionalpageerror(inputValues.get("Additional Option"));
    	}
 
-	@Then("^user validate elements in cost preferences page mobile$")
+	@Then("^user validate elements in cost preferences page$")
    	public void elements_costpreferences_page_mobile() {
 		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
    		costpage.costpreferencepage();
    	}
 	
-	@Then("^user selects cost preferences option in cost preferences page mobile$")
+	@Then("^user selects cost preferences option in cost preferences page$")
    	public void select_costPreferenceOption_costpreferences_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
    		costpage.costPreferencepageFunctional(inputValues.get("Preference Option"));
    	}
 	
-	@Then("^user validates cost preferences error function in cost preferences page mobile$")
+	@Then("^user validates cost preferences error function in cost preferences page$")
    	public void select_costpreferences_page_errorvalidation_mobile() {
 		CostPreferencesMobilePage costpage =  new CostPreferencesMobilePage(wd);
    		costpage.costPreferencepageerror();
    	}
 	
-	@Then("^user validate elements in loading page mobile$")
+	@Then("^user validate elements in loading results page$")
    	public void elements_loading_page_mobile() {
 		LoadingMobilePage loadingpage =  new LoadingMobilePage(wd);
 		loadingpage.loadingresultspage();
@@ -420,21 +355,21 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.resultsUI(zip,county,r1,r2,true);
    	}
 	
-	@Given("^user navigates to vpp summary page mobile$")
+	@Given("^user navigates to vpp summary page$")
    	public void navigate_vpp_summary_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
 		resultpage.navigateVPP(inputValues);
    	}
 	
-	@Then("^user adds Doctors in vpp summary page mobile$")
+	@Then("^user adds Doctors in vpp summary page$")
    	public void add_providers_vpp_summary_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
 		resultpage.addProviderVPP(inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"));
    	}
 	
-	@Then("^user navigate Doctors lookup session in Doctors page mobile$")
+	@Then("^user navigate Doctors lookup session in Doctors page$")
 	public void navigate_doctors_lookup_session_mobile() {
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
 		doctorpage.navigateDoctorsmodalsession();
@@ -485,7 +420,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.verifyDrugPREVPP();
    	}
 	
-	@Then("^user edits Doctors in Doctors page mobile$")
+	@Then("^user edits Doctors in Doctors page$")
 	public void edit_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
@@ -493,7 +428,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				inputValues.get("Doctors Search Text2"), inputValues.get("Multi Doctor2"));
 	}
 	
-	@When("^user navigates to Zip Code page from vpp plans mobile$")
+	@When("^user navigates to Zip Code page from vpp plans$")
 	public void user_navigates_to_zipcode_page_fromvpp_pdp_mobile() {
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
 		resultpage.navigateVPPPRE();
@@ -533,6 +468,7 @@ public class PlanRecommendationStepDefinitionMobile {
    	}
 
 	@Then("^user validte error function in drug option selection page mobile$")
+	@Then("^user not selects prescription options in drug page$")
 	public void drugs_option_page_errorvalidation_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DrugMobilePage drugpage = new DrugMobilePage(wd);
@@ -548,7 +484,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		resultpage.validateRankingPlans(recom,plansorder);
    	}
 	
-	@Then("^verify continue function on \"([^\"]*)\" page mobile$")
+	@Then("^verify continue function on \"([^\"]*)\" page$")
    	public void proceed_next_page_mobile(String page) {
 		CommonutilitiesMobile mobiletutli =  new CommonutilitiesMobile(wd);
 		mobiletutli.continueNextpage(page.trim().toUpperCase(),false);
@@ -563,14 +499,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		docpage.nextPageNameValidationDoctor();
    	}
 	
-	@And("^user verifies exisitng PRE drug session using startnow mobile$")
+	@And("^user verifies exisitng PRE drug session using startnow$")
    	public void verify_exisitng_pre_drugs_session_drug_startnow_page_mobile() {
 		DrugMobilePage drugpage =  new DrugMobilePage(wd);
 		drugpage.verifyExisitngPREDruglist();
 		drugpage.continueNextpageNameDrug();
    	}
 	
-	@When("^user validate email plan list from vpp mobile$")
+	@When("^user validate email plan list from vpp$")
 	public void user_sendPlanEmail_fromvpp_pdp_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		String recom = inputValues.get("Recommendation");
@@ -588,14 +524,14 @@ public class PlanRecommendationStepDefinitionMobile {
 				inputValues.get("Multi Doctor"), status);
 	}
 	
-	@Then("^user validate UI and API recommendation rankings in results page mobile$")
+	@Then("^user validate UI and API recommendation rankings in results page$")
    	public void verify_UIAPI_rankings_results_page_mobile() {
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
 		resultpage.validateUIAPIRecommendations();
 		resultpage.validateUIAPIRankingPlans();
    	}
 	
-	@Then("^user adds Drugs in vpp summary page mobile$")
+	@Then("^user adds Drugs in vpp summary page$")
    	public void add_drugs_vpp_summary_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
@@ -624,62 +560,62 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 	
 	// Edit Page Mobile
-	@Then("^user validate saved values in edit response page mobile$")
+	@Then("^user validate saved values in edit response page$")
    	public void check_saved_value_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.editResponsepage(inputValues);
    	}
 	
-	@Then("^user return to vpp page using \"([^\"]*)\" from edit response page mobile$")
+	@Then("^user return to vpp page using \"([^\"]*)\" from edit response page$")
    	public void check_saved_value_editResponse_page(String button) {
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.returnVPP(button);
    	}
 	
-	@Then("^user edits values in edit response page mobile$")
+	@Then("^user edits values in edit response page$")
    	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.editUserResponse(inputValues);
    	}
 	
-	@Then("^user adds doctor in edit response page mobile$")
+	@Then("^user adds doctor in edit response page$")
    	public void add_doctor_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.addDoctorEditResponse(inputValues);
    	}
 	
-	@Then("^user navigates to edit response page mobile$")
+	@Then("^user navigates to edit response page$")
    	public void navigate_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.navigateEditResponsePageMobile(inputValues);
    	}
 
-	@Then("^user edits coverage value in edit response page mobile$")
+	@Then("^user edits coverage value in edit response page$")
    	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.changeCoverage(inputValues);
    	}
 	
-	@Then("^user validates coverage value in edit response page mobile$")
+	@Then("^user validates coverage value in edit response page$")
    	public void validate_coverage_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.checkCoveragevalue(inputValues);
    	}
 	
-	@Then("^user selects add drug option in drug page from edit response page mobile$")
+	@Then("^user selects add drug option in drug page from edit response page$")
    	public void add_drug_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.addDrugs(inputValues);
    	}
 	
-	@Then("^user selects priority in priorities page mobile$")
+	@Then("^user selects priority in priorities page$")
 	public void user_selects_priorities(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
@@ -687,10 +623,234 @@ public class PlanRecommendationStepDefinitionMobile {
 		prioritiesMobile.continuePriority();
 	}
 
-	@Then("^user validate elements in priorities page mobile$")
+	@Then("^user validate elements in priorities page$")
 	public void user_validate_prioritiesElements() {
 		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
 		prioritiesMobile.prioritiesElementsMobile();
 	}
+	
+/////////////////////////////////////////////////////// New Results Page //////////////////////////////
+	
+@Then("^user validate elements in PRE results page$")
+public void elements_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+}
+
+@Then("^user validate pagination in PRE results page$")
+public void pagination_new_results_page_mobile() {
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validatePagination();
+}
+
+@Then("^user validate drugDetails in PRE results page$")
+public void drugDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"tile");
+}
+
+@Then("^user validate doctors info in PRE results page$")
+	public void doctorDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"tile");
+	}
+
+@Then("^user validate snp info in PRE results page$")
+	public void snpDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateSNPInfo(inputValues.get("SNPInfo"));
+	}
+
+@Then("^user views plan details from results page$")
+	public void viewDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.viewPlanInfo(inputValues.get("planInfo"));
+	}
+
+@Then("^user views learn more from results page$")
+	public void learnMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.learnMore(inputValues.get("Learn More"));
+	}
+
+@Then("^user validate drugCostModal in PRE results page$")
+	public void drugDetailsModel_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"model");
+	}
+
+@Then("^user validate showmoreDrug in PRE results page$")
+	public void drugShowMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"show");
+	}
+
+@Then("^user validate showmoreDoctor in PRE results page$")
+	public void doctorShowMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"show");
+	}
+
+@Then("^user clicks on GetStarted button in PRE page$")
+	public void PRE_GetStarted_mobile() {
+	LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+	prelandingpage.navigatezipcodepagemobile();
+}
+
+@Then("^user navigate to PRE from vpp page$")
+	public void PRE_VPP_page_mobile() {
+	ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+	resultpage.navigatePRE();
+	}
+
+@Then("^user save recommendation results and validate in VP$")
+	public void save_results_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+	preEditMobile.validateSaveResults();
+}
+
+@Then("^user navigate to visitor profile and open PRE Widget$")
+public void pre_Widget_open(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+	preEditMobile.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+}
+
+@Then("^user validate recommendation section in PRE Widget on VP$")
+public void pre_Widget_recom() {
+	ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+	resultpage.recomPREWidget();
+}
+
+@Then("^user do browser back from current page$")
+	public void browser_back_mobile() {
+	System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@When("^user navigate Plan Recommendation Engine Using Get Started From Medicare Articles$")
+	public void navigate_PRE_tool_MedicareArticles_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+}
+	
+	@When("^user navigate to Medicare Education and validate Plan Recommendation Engine Widget$")
+	public void navigate_MedicareEducation_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+}
+	@And("^user not selects plan type in coverage options page$")
+	public void notselect_plan_type_coverage_page_mobile(DataTable givenAttributes) throws Throwable {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@And("^user select planType and Click previous button to check previous page$")
+	public void previous_zipcode_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate MA Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_MA_Plan_names_results_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate PDP Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_PDP_Plan_names_results_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate SNP Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_SNP_Plan_names_results_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
+   	public void verify_Future_UI_API_rankings_results_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+   	}
+	
+	@Then("^user save 2 MA plans in vpp summary and Validate in Visitor profile page$")
+	public void user_saveplan_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user Validate Drug and Provider details in Visitor profile page$")
+	public void user_verify_drug_provider_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate SNP Plan in Enroll page$")
+   	public void verify_SNP_Plan_names_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@When("^user navigate to Plan Recommendation Engine Tool$")
+	public void the_user_external_PRE_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate PDP Plan Names in VPP Details and Click Enroll button in Plan Details page$")
+   	public void verify_Plan_names_Enroll_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user save plans in vpp summary and Validate in Visitor profile page$")
+	public void user_verify_saveplan_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user adds SNP options and Location in edit response page$")
+   	public void add_snp_editResponse_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+   	}
+	
+	@And("^user verifies doctors and continue to next page$")
+   	public void verify_doctors_continue_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+   	}
+	
+	@Then("^user selects add drug option and comparing DCE and Drug page$")
+  	public void verify_drugs_dce_drug_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+  	}
+	
+	@Then("^user select plans in VPP Summary and navigate to Plan Compare page$")
+   	public void verify_Plans_compare_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@When("^user navigate to Drug Cost Estimator page$")
+	public void navigate_DCE_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@And("^user validate druglist in Drug Cost Estimator page$")
+	public void Druglist_DCE_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate drugs details from VPP to DCE page$")
+	public void drugs_VPP_DCE_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate drugs details from DCE to PRE page$")
+	public void drugs_DCE_VPP_PRE_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate a \"([^\"]*)\" buttons from PRE$")
+   	public void btn_tab_mobile(String tabtype) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+   	}
+	
+	
 
 }

@@ -202,7 +202,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		continueButton.click();
 		selectYear(planYear);
 		List<WebElement> topicDropDownValues = driver
-				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+				.findElements(By.xpath("//div[@data-ui-section='plan-listing']//ul//li"));
 
 		return topicDropDownValues.size();
 	}
@@ -231,13 +231,16 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
 
-		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		scrollToView(People);
+		//CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		scrollToView(Primary);
+		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
+		scrollToView(AllPrimaryCare);
+		//CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 
 		AllPrimaryCare.click();
 		// CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);

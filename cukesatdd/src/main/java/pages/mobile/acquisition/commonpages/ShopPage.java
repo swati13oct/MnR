@@ -17,7 +17,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
 
-public class ShopPage extends UhcDriver {
+public class ShopPage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
@@ -236,8 +236,7 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void clickOnMAShopButton() {
-		validateNew(MAShopLink);
-		jsClickNew(MAShopLink);
+		openShopForPlanFromMenu().selectPlanTypeOption("ma", false);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans")) {

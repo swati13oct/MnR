@@ -38,7 +38,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+//	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "(//*[contains(@id,'primaryCare')])[1]")
 	private WebElement PCPPageHeader;
 
 	//Right Rail Elements
@@ -67,11 +68,16 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	//Rally - ProviderLookup
 	
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
+	//@FindBy(xpath = "//button[contains(text(), 'Select PCP')]")
 	private WebElement SelectPCPLink;
 
 	@FindBy(xpath = "//span[@class='pcp']//button")
+	//@FindBy(xpath = "//button[contains(text(), 'Select PCP')]")
 	private List <WebElement> AssinPCPLinks;
 
+	@FindBy(xpath = "//button[contains(text(), 'Assign PCP')]")
+	private WebElement AssinPCP;
+	
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
 	private WebElement SelectPCPAddress;
 	
@@ -100,10 +106,12 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
 	private WebElement CurrentPCP_Question;
 	
-	@FindBy(id = "hasCurrentPatientOfPcpYes")
+//	@FindBy(id = "hasCurrentPatientOfPcpYes")
+	@FindBy(xpath = "//input[contains(@id,'hasCurrentPatientOfPcpYes')]")
 	private WebElement CurrentPCP_Question_Yes;
 
-	@FindBy(id = "hasCurrentPatientOfPcpNo")
+//	@FindBy(id = "hasCurrentPatientOfPcpNo")
+	@FindBy(xpath = "//input[contains(@id,'hasCurrentPatientOfPcpNo')]")
 	private WebElement CurrentPCP_Question_No;
 
 	//Provider Contact Information Section - PFFS plans Only
@@ -352,6 +360,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	}
 
+
 	public PlanPremiumPage navigate_to_Plan_Premium_Page() {
 
 		validateNew(NextBtn);
@@ -360,7 +369,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+		//if(validateNew(driver.findElement(By.xpath("(//*[contains(@id,'planWith')])[1]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
 		System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}
@@ -380,9 +390,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
-		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
-		Assertion.assertTrue("PCP is not highlighted by blue colour", flag);
+		//WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
+			WebElement radioBtn = driver.findElement(By.xpath("	//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[contains(@class,'ng-star-inserted active')]"));
+		flag = radioBtn.getAttribute("class").equalsIgnoreCase("ng-star-inserted active");
+		//Assertion.assertTrue("PCP is not highlighted by blue colour", flag);
 		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText();
 		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider or PCP Full Name: ']//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
 		String PCPNumber= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
@@ -405,7 +416,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			
 			String pcp_name=ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
 			String pcp_number=ProviderNumberDisplay_PCPpage.getText().trim();
-			CurrentPCP_Question_Yes.click();
+			//CurrentPCP_Question_Yes.click();
+			jsClickNew(CurrentPCP_Question_Yes);
 			String pcp_question_text = "Yes";
 			pcp.add(pcp_name);
 			pcp.add(pcp_number);

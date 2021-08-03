@@ -3,6 +3,10 @@
  */
 package pages.mobile.acquisition.ole;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +17,7 @@ import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -35,10 +40,11 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+//	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
 	private WebElement PageHeader;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Authorization')]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement authPageHeader;
 
 	//Right Rail Elements
@@ -61,6 +67,8 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath=".//*[@id='ole-form-content']//*[contains(@for,'premiumAgree')]")
 	private WebElement agreeBtn;
 	
+	//@FindBy(id = "premiumPaymentQstnPBM")
+	
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnPBM')])[1]")
 	private WebElement payByMail;
 	
@@ -77,13 +85,13 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnSSRRB')])[1]")
 	private WebElement socialSecurity;
 	
-	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")
 	private WebElement payByMailText;
 	
 	@FindBy(id = "div_cardInfo")
 	private WebElement creditCardText;
 	
-	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")
 	private WebElement socialSecurityText;
 	
 	@FindBy(xpath="//span[@id='acceptedCardsSpan']")
@@ -119,7 +127,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath="//p[contains(text(),'enrollment penality')]")
 	private WebElement lastEnrollmentPenalty;
 	
-	@FindBy(xpath="//p[contains(text(),'Part D-Income Related Monthly Adjustment Amount (Part D-IRMAA)')]")
+	@FindBy(xpath="//p[contains(text(),'Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA)')]")
 	private WebElement partdincome;
 	
 	@FindBy(xpath="//ul[@class='zeroPremium']/li[1]")
@@ -142,19 +150,15 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-//		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
-		validateNew(ZipCode_County, 30);
+		//CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
 		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
 	public SupplementalBenefitsPageMobile navigate_to_Supplemental_Riders_Page() {
-	//	agreeBtn.click();
-		//jsClickNew(agreeBtn);
+		
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Supplemental')]")))){
 			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//label[contains(text(),'Yes, I want to add')]"))), "unable to find Yes option available for rider");
@@ -170,12 +174,9 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	public AuthorizationPageMobile navigate_to_Authorization_Page() {
 		//agreeBtn.click();
-//		jsClickNew(agreeBtn);
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-//		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
 		if(validateNew(authPageHeader,45)){
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
 			return new AuthorizationPageMobile(driver);
@@ -184,20 +185,22 @@ public class PlanPremiumPageMobile extends UhcDriver{
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Failed");
 			return null;
 		}
-	}	
-
+	}
+	
 	public boolean validatePayByMail() {
 		boolean flag = false;
 		String actualText = null;
 		String expectedText = null;
 		try {
 		if(payByMail.isDisplayed())	{
-			scrollToView(payByMail);
+			System.out.println("Pay By Mail radio button is diplayed or not" +payByMail.isDisplayed());
 			jsClickNew(payByMail);
 			Thread.sleep(1000);
-			actualText = payByMailText.getText().trim();
+			actualText = payByMailText.getText().replaceAll("\u00A0"," ").trim();
+			System.out.println("Actual text for pay by mail is " +actualText);			
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
-			flag = actualText.equalsIgnoreCase(expectedText);
+			System.out.println("expected text for pay by mail is " +expectedText);
+			flag = actualText.contains(expectedText);
 			
 		}
 			
@@ -261,9 +264,9 @@ public class PlanPremiumPageMobile extends UhcDriver{
 						flag = actualText.equalsIgnoreCase(expectedText);
 							if(flag) {
 							System.out.println("Enter Account Information");
-							sendKeysByCharacter(accountNumber, cardNo);
-							sendKeysByCharacter(cardExpirationMonth, month);
-							sendKeysByCharacter(cardExpirationYear, year);
+							jsSendkeys(accountNumber, cardNo);
+							jsSendkeys(cardExpirationMonth, month);
+							jsSendkeys(cardExpirationYear, year);
 							jsClickNew(btnSubmit);
 							Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
@@ -294,12 +297,11 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		
 		try {
 			if(socialSecurity.isDisplayed())	{
-				scrollToView(socialSecurity);
 				jsClickNew(socialSecurity);
 				Thread.sleep(1000);
-				actualText = socialSecurityText.getText().trim();
+				actualText = socialSecurityText.getText().replaceAll("\u00A0"," ").trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
-				flag = actualText.equalsIgnoreCase(expectedText);
+				flag = actualText.contains(expectedText);
 				
 			}
 				
@@ -313,21 +315,23 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		
 		}
 	
-	public boolean validatePremiumValue() {
+	public boolean validatePremiumValue(Map<String, String> paymentInformationMap) {
+	
 		boolean flag = false;
-		String actualText = null;
-		String expectedText = "0.00";
-		try {
-			actualText = premium.getText();
-			flag = actualText.contains(expectedText);
+		//String actualText = null;
+		
+	//	try {
+			String Actual_Premium = paymentInformationMap.get("PlanPremium");
+			System.out.println("=====Premium value from Welcome OLE Page: "+Actual_Premium);
+			String expectedText = "$0.00";
+			//actualText = premium.getText();
+			flag = Actual_Premium.contains(expectedText);
 			if(!flag) {
 			System.out.println("=====Premium is greater than 0=====");
-			}
-		} catch (Exception e) {
-			
 		}
-
+			//	} catch (Exception e) {
 			
+	//	}		
     return flag;
 	
 	}
@@ -338,38 +342,40 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		String expectedText = null;
 		try {
 			System.out.println("Validate no monthly premium text");
-			actualText = noMonthlyPremium.getText();
+			actualText = noMonthlyPremium.getText().replaceAll("\u00A0"," ").trim();
 			expectedText = CommonConstants.NO_MONTHLY_PREMIUM_TEXT;
 			flag = actualText.contains(expectedText);
 				if(flag) {
 					System.out.println("Validate last enrollment penalty text");
-					actualText = lastEnrollmentPenalty.getText();
+					actualText = lastEnrollmentPenalty.getText().replaceAll("\u00A0"," ").trim();
 					expectedText = CommonConstants.LAST_ENROLLMENT_PENALITY_TEXT;
 					flag = actualText.contains(expectedText);
 					if(flag) {
 						System.out.println("Validate part d income text");
-						actualText = partdincome.getText();
+						actualText = partdincome.getText().replaceAll("\u00A0"," ").trim();
 						expectedText = CommonConstants.PART_D_INCOME_TEXT;
 						flag = actualText.contains(expectedText);
 						if(flag) {
 							System.out.println("Validate ss text");
-							actualText = ss.getText();
+							actualText = ss.getText().replaceAll("\u00A0"," ").trim();
 							expectedText = CommonConstants.SS_TEXT;
 							flag = actualText.contains(expectedText);
 							if(flag) {
 								System.out.println("Validate medicare text");
-								actualText = medicare.getText();
+								actualText = medicare.getText().replaceAll("\u00A0"," ").trim();
 								expectedText = CommonConstants.MEDICARE_TEXT;
 								flag = actualText.contains(expectedText);
 								if(flag) {
 									System.out.println("Validate railroad text");
-									actualText = raildroad.getText().replaceAll("\u00A00", " ").trim();
+									actualText = raildroad.getText().replaceAll("\u00A0"," ").trim();
 									expectedText = CommonConstants.RAILROAD_TEXT;
 									flag = actualText.contains(expectedText);
 									if(flag) {
 										System.out.println("Validate partdirmaa tex");
-										actualText = partdirmaa.getText();
+										actualText = partdirmaa.getText().replaceAll("\u00A0"," ").trim();
+										System.out.println("Validate partdirmaa tex"+actualText);
 										expectedText = CommonConstants.PARTDIRMAA_TEXT;
+										System.out.println("Validate partdirmaa tex"+expectedText);
 										flag = actualText.contains(expectedText);
 							
 									}
@@ -392,8 +398,31 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	
 	}
 	
-
-
-
-
+	public boolean validateNoPremium() {
+		boolean flag = false;
+		
+		String actualText = noMonthlyPremium.getText();
+		String LastEnrollmentPenaltyText = lastEnrollmentPenalty.getText();
+		
+			System.out.println("Validate no monthly premium text");
+		//	actualText = noMonthlyPremium.getText().replaceAll("\u00A0"," ").trim();
+		//	LastEnrollmentPenaltyText = lastEnrollmentPenalty.getText().replaceAll("\u00A0"," ").trim();
+			System.out.println("Validate no monthly premium text:" +actualText);
+			System.out.println("Validate Last Enrollment Penalty premium text:" +LastEnrollmentPenaltyText);
+			
+			String expectedText = CommonConstants.NO_MONTHLY_PREMIUM_TEXT;
+			String expectedLastEnrollmentPenaltyText = CommonConstants.LAST_ENROLLMENT_PENALITY_TEXT;
+			
+			System.out.println("Expected no monthly premium text:" +expectedText);
+			System.out.println("Expected Last Enrollment Penalty premium text:" +expectedLastEnrollmentPenaltyText);
+			flag = (actualText.equals(expectedText) && (LastEnrollmentPenaltyText.equals(expectedLastEnrollmentPenaltyText)));
+			if (flag){	
+			
+			}
+			return flag;
+	
+	}
+	
 }
+
+

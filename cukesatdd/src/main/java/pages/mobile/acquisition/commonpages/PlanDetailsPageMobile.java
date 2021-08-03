@@ -287,6 +287,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
 	private WebElement dentalPopupPlanLabel;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
+	
 
 	public WebElement getLnkBackToAllPlans() {
 		return lnkBackToAllPlans;
@@ -474,9 +478,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(editDrugLinkPlanCost, 20);
 		jsClickNew(editDrugLinkPlanCost);
 
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+		if (validateNew(BuildDrugPageHeader)) {
+			Assertion.assertTrue("Navigated to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -488,21 +491,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
+	@FindBy(css = "#DrugListDetails")
 	private WebElement editDrugLink;
 
-	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
-	public WebElement BuildDrugPage_EnterDrugNameTxt;
+	@FindBy(xpath = "//h2[normalize-space()='Build Your Drug List']")
+	public WebElement BuildDrugPageHeader;
 
 	public BuildYourDrugListMobile navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+		jsClickNew(editDrugLink);
+		if (validateNew(BuildDrugPageHeader)) {
+			Assertion.assertTrue("Navigated to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -586,8 +587,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		// presDrugTab.get(0).click();
 		jsClickNew(presDrugTab.get(0));
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		jsClickNew(estimateDrugBtn);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -981,9 +981,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public ProviderSearchPageMobile validateLookUpYourProviderButton() throws InterruptedException {
-		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
-		iosScroll(lookUpYourProviderTitle);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		Thread.sleep(5000);
@@ -1028,12 +1026,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
-	 * @author bnaveen4
-	 * @param additionalBenefits
-	 *            --> Data table which has the different benefit types To validate
-	 *            all the additional benefits given in the feature file
-	 */
 	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
 		// boolean validationFlag = true;
 		WebElement AdditionalBenefitType;
@@ -1042,10 +1034,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver
+				WebElement AdditionalBenefitType1 = driver
 						.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
+				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType1.getText());
 				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 						+ additionalBenefits.get(i).get(1)
 						+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
@@ -1056,10 +1048,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				AdditionalBenefitType = driver
+				WebElement AdditionalBenefitType1 = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
+				scrollToView(AdditionalBenefitType1);
+				//System.out.println("The additional Benefit to Valuidate : ");
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
 								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
@@ -1114,7 +1107,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		Assertion.assertTrue("Default tab " + tabName + " not displayed", defaultSelectedTab.getText().equals(tabName));
 	}
 
-	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	@FindBy(css = ".currentpharmacy > p[class='ng-binding'][ng-show*='pharmacyName']")
 	private WebElement pharmacyPrescriptionDrugTab;
 
 	public void verifyPharmacyAdded(String pharmacyName) {
@@ -1123,10 +1116,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Pharmacy did not match on plan details page with DCE");
 	}
 
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	@FindBy(css = "table[class$='drug-list-table'] tr:nth-child(2) >td > strong")
 	private WebElement presDrugTabDrugInfoCell;
 
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
+	@FindBy(css = ".totals span:not([class$='hide']) > strong")
 	private WebElement presDrugTabAnnualCostValueCell;
 
 	public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
@@ -1676,20 +1669,23 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	// LearnMore changes Start
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(css = "div[class*='d-block'] > #changePharmacyLink")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
+	
+	@FindBy(css = "div[class='uhc-card__content']")
+	public WebElement DrugDetails_DrugCostsCard;
 
-	@FindBy(xpath = "//a[@class='cta-button ng-scope' and text()='Learn More']")
+	@FindBy(css = ".waystosave > a[dtmname$='Learn More']")
 	private WebElement learnMore;
 
 	public DrugDetailsPageMobile clickLearnMore() {
 		validateNew(learnMore);
 		jsClickNew(learnMore);
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+//		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsCard)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assertion.fail("Drug Details Page is NOT Displayed");
@@ -1708,6 +1704,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
+		return null;
+	}
+	
+	public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
 		return null;
 	}
 

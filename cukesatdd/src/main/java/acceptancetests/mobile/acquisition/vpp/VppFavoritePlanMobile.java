@@ -212,14 +212,14 @@ public class VppFavoritePlanMobile {
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
-//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType="SNP";
-//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
