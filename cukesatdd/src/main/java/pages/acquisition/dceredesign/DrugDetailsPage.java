@@ -1812,6 +1812,12 @@ public class DrugDetailsPage extends UhcDriver {
 		distanceDrpDown.click();
 		Select distance = new Select(distanceDrpDown);
 		distance.selectByVisibleText(distanceValue);
+		Thread.sleep(2000);
+		
+	}
+	
+	public void ClickSearch() {
+		pharmacySearchBtn.click();
 	}
 
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
@@ -1834,7 +1840,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
-	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-radio-tab')]")
+	@FindBy(xpath = "//input[contains(@name,'pharmacy-filters') and contains(@value, 'PP')]//following-sibling::span[2]")
 	public WebElement preferredPharmacyTab;
 
 	// @FindBy(xpath =

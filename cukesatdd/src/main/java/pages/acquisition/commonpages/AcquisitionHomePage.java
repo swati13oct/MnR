@@ -735,41 +735,41 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement tfnHeaderRightRailOLE;
 	
 	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
-	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
-	private WebElement samChatIcon;
-	
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
-	private WebElement samChatPopup;
-	
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
-	private WebElement samChatPopupHeader;
-	
-	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
-	private WebElement samChatPopupMsg;
-	
-	@FindBy(id = "proactive-chat-widget-new")
-	private WebElement proactiveChatModal;
-	
-	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
-	private WebElement proactiveChatMsg;
-	
-	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
-	private WebElement proactiveChatCloseIcon;
-	
-	@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
-	private WebElement proactiveChatBtn;
-	
-	@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
-	private List<WebElement> chatSuggestionMsg;
-	
-	@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
-	private WebElement chatPopupOptions;
-	
-	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
-	private WebElement chatPopupEndChatOption;
-	
-	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
-	private WebElement proactiveChatPopupEndChatOption;
+		@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+		private WebElement samChatIcon;
+		
+		@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+		private WebElement samChatPopup;
+		
+		@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+		private WebElement samChatPopupHeader;
+		
+		@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+		private WebElement samChatPopupMsg;
+		
+		@FindBy(id = "proactive-chat-widget-new")
+		private WebElement proactiveChatModal;
+		
+		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
+		private WebElement proactiveChatMsg;
+		
+		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
+		private WebElement proactiveChatCloseIcon;
+		
+		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
+		private WebElement proactiveChatBtn;
+		
+		@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+		private List<WebElement> chatSuggestionMsg;
+		
+		@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+		private WebElement chatPopupOptions;
+		
+		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+		private WebElement chatPopupEndChatOption;
+		
+		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+		private WebElement proactiveChatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1307,6 +1307,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
 		//viewPlansButton.click();
+		validateNew(viewPlansButton);
 		jsClickNew(viewPlansButton);
 		// }
 		// while(validate(overlayFilm, 10)) {/**wait*/}
@@ -3442,7 +3443,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String pageURL = driver.getCurrentUrl() + page;
 		System.out.println("==pageURL==" + pageURL);
 		driver.navigate().to(pageURL);
-		driver.navigate().refresh();
+
 	}
 
 	public void verifyChatpopup() throws InterruptedException {
@@ -6975,7 +6976,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(tfnHeaderPopupClose);
 		
 	}
-
 	public AcquisitionHomePage navigateToURL(String site) {
 
 		String CurrentURL = driver.getCurrentUrl();
@@ -7071,7 +7071,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new AcquisitionHomePage(driver);
 	}
 	
-
 	public void validateSamChatIcon() throws InterruptedException {
 		boolean present;
 		try {

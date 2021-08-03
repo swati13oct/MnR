@@ -231,7 +231,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement MALandingHeading;
 
 	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -1061,7 +1061,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 * jsClickNew(footerAboutUsLink);
 		 */
 		accessFooterLinkFromMore("about");
-		pageloadcomplete();
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
@@ -1085,8 +1087,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		validateNew(contactLink);
-		contactLink.click();
+		accessFooterLinkFromMore("contact");
+		pageloadcomplete();
+		//validateNew(contactLink);
+		jsClickNew(contactLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
@@ -1096,6 +1100,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public SiteMapAARPPageMobile siteMapFooterClick() {
+		scrollToView(footerSiteMapLink);
+		pageloadcomplete();
 		validateNew(footerSiteMapLink);
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
@@ -2698,6 +2704,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);
 		jsClickNew(DCELink);
+		scrollToView(AddMyDrugsBtn);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

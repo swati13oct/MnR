@@ -1,5 +1,5 @@
 @campaignTFN @regressionAARP @campaignTFNProd
-Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
+Feature: 1.19.2 UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
   #######################Script 3: Organic Search via Google and Bing##########################################
   @Scenario3_1_GoogleBingSearch_AARP_UAT @UATRegression
@@ -28,26 +28,29 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
-    #Then the user enter zipcode in homepage
-    # | Zip Code  | <zipcode>    |
-    #| Plan Type | <MAplantype> |
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-      | Zip Code | <zipcode> |
+    Then the user enter zipcode in homepage
+     | Zip Code  | <zipcode>    |
+    | Plan Type | <MAplantype> |
+    #Then the user navigates to MA Plan Details Page and validates Federal TFN
+     # | Zip Code | <zipcode> |
     #Then the user navigates to plan tab for any plan
     #| Plan Type | <MAplantype> |
-    #Then the user navigates to Plan Details Page for any plan and validates Federal TFN
-    #| Plan Type | <MAplantype> |
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN
+    | Plan Type | <MAplantype> |
     # Then the user navigates to MA Plan Details Page and validates Federal TFN
     #	| Zip Code        | <zipcode>|
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxpath> |
+      | TFN Xpath | <TFNxPath> |
     #Then the user navigates to plan tab for any plan
     #  | Plan Type | <MSplantype> |
     # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
     #| Plan Type | <MSplantype> |
-    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-      | Zip Code | <zipcode> |
+    Then user clicks on back to plans link to navigate plan summary
+    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+     # | Zip Code | <zipcode> |
+      Then the user navigates to plan tab for any plan
+     | Plan Type | <MSplantype> |
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>    |
       | TFN Xpath | <MedsuppTFNxpath> |
@@ -64,26 +67,26 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Request a Free Decision Guide
       | TFN No    | <MedsuppTFNNo> |
-      | TFN Xpath | <TFNxpath>     |
+      | TFN Xpath | <TFNxPath>     |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxpath> |
+      | TFN Xpath | <TFNxPath> |
     Then the user navigates to shop pages Page and validates Federal TFN
       | SHOPPAGES URL | <shoppages> |
     Then the user validates PSC code
       | PSC Code | <Precedence1PSC> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxpath> |
+      | TFN Xpath | <TFNxPath> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareeduUrl> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
-      | TFN Xpath | <TFNxpath> |
+      | TFN Xpath | <TFNxPath> |
 
     Examples: 
       | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                          | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         |

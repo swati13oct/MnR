@@ -295,7 +295,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_PDP;
-
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
+	
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -588,7 +591,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		jsClickNew(planAvailableText);
 	}
 
-	public VPPPlanSummaryPageMobile navigateBackToAllPlans() {
+	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
 		BackToAllPlan.click();
@@ -600,6 +603,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
+		Thread.sleep(5000);
 		if (driver.getCurrentUrl().contains("#/plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1760,4 +1764,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(viewlocationsLink);
 		System.out.println("Verified Edit Doctors Section");
 	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
+
 }

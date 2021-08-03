@@ -148,7 +148,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	@FindBy(xpath = "//*[contains(@dtmname,'Add Drugs') and contains(@dtmid, 'visitor_profile')]")
+	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
 	public WebElement addDrugsGlobal;
 
 	@FindBy(xpath = "(//button[contains(@dtmname,'Add drugs') and contains(@dtmid, 'visitor_profile')]/*[contains(text(), 'Add')])[1]")
@@ -322,7 +322,7 @@ public class VisitorProfilePage extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-	     Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
+	     Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
 	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
