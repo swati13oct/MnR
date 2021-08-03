@@ -107,9 +107,9 @@ public class DCEACQHomeMobile {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
-
-		if (site.equalsIgnoreCase("AARP") || !MRScenario.environment.equalsIgnoreCase("team-acme"))
-			aquisitionhomepage.validateSubtitle();
+		if (site.equalsIgnoreCase("AARP")) 
+				aquisitionhomepage.validateSubtitle();
+				}
 	}
 
 	@Then("^the user clicks on Edit button on Drug List page on DCE$")

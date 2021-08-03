@@ -17,7 +17,7 @@ Feature: 1.05.1.E2E for DCE to OLE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
-    Then the user validates the Plan details on OLE
+    #Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -98,7 +98,7 @@ Feature: 1.05.1.E2E for DCE to OLE Flows
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+   # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
