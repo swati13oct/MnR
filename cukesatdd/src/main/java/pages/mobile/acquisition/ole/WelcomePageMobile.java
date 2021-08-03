@@ -42,7 +42,7 @@ public class WelcomePageMobile extends UhcDriver {
 	private WebElement NextBtn;
 
 	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	@FindBy(xpath = "//*[contains(@id,'cancel-enrollment') or contains(@id,'ole-form-cancel-button')]")
+	@FindBy(css = "a[id^='ole-form-cancel-button']")
 	private WebElement CancelEnrollmentLink;
 
 	// WebElements for Welcome Page
@@ -52,7 +52,7 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(xpath = "//*[(contains(@id,'ole-cancel-confirm') or contains(@id,'enroll-cancel-profile')) and contains(@class,'active')]")
+	@FindBy(css = "#enroll-cancel-profile")
 	private WebElement CancellationModal;
 
 	@FindBy(id = "leavingSite-linkrouter")
@@ -267,7 +267,8 @@ public class WelcomePageMobile extends UhcDriver {
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (validateNew(driver.findElement(By.xpath("//*[contains(text(),'Personal')]")))) {
+//		if (validateNew(driver.findElement(By.xpath("//*[contains(text(),'Personal')]")))) {
+		if (validateNew(driver.findElement(By.cssSelector("h3#personalInfoQues")))) {
 			System.out.println("OLE Personal Information Page is Displayed");
 			return new PersonalInformationPageMobile(driver);
 		}
@@ -306,8 +307,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 	public CancelOLEModalMobile OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
+		jsClickNew(CancelEnrollmentLink);
 
 		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
 		// CancelEnrollmentLink);
