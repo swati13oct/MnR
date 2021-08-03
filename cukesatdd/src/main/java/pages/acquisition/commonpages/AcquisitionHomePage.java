@@ -768,7 +768,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 		private WebElement chatPopupEndChatOption;
 		
-		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+		//@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+		
+		//@FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
+		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 		private WebElement proactiveChatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
@@ -3491,12 +3494,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("@@here@@@");
 		threadsleep(20);
 		// waitTillElementClickableInTime(proactiveChatExitBtn, 30);
-		if (proactiveChatExitBtn != null) {
+		//if (proactiveChatExitBtn != null) {
 			System.out.println("@@@proactive chat popup is displayed@@@@");
 			waitTillElementClickableInTime(proactiveChatChatBtn, 30);
 			jsClickNew(proactiveChatChatBtn);
 			System.out.println("@@@clciked@@@@");
-		} // driver.switchTo().defaultContent();
+		 // driver.switchTo().defaultContent();
 		driver.switchTo().frame("sp-chat-iframe");
 		validateNew(samChatFirstNameField);
 		samChatFirstNameField.sendKeys("tester");
