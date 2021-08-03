@@ -573,17 +573,17 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     Then the user validates the proactive chat
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-    And I access the DCE Redesign from Plan Summary for mentioned plan
-      | Plan Type | <plantype> |
-      | Plan Name | <planName> |
-    Then the user validates Get Started Page
-    Then the user validates whether call icon is visible
-    And the user validates the chat icon
-    Then the user validates the proactive chat
-    Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
-    Then the user validates whether call icon is visible
-    And the user validates the chat icon
-    Then the user validates the proactive chat
+    #And I access the DCE Redesign from Plan Summary for mentioned plan
+     # | Plan Type | <plantype> |
+     # | Plan Name | <planName> |
+    #Then the user validates Get Started Page
+    #Then the user validates whether call icon is visible
+    #And the user validates the chat icon
+    #Then the user validates the proactive chat
+    #Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
+    #Then the user validates whether call icon is visible
+    #And the user validates the chat icon
+    #Then the user validates the proactive chat
     And I select "<plantype>" plans to compare and click on compare plan link
     Then the user clicks on back on all plan link in Plan Compare page
     Then the user validates whether call icon is visible
