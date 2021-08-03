@@ -19,20 +19,11 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.vpp.VPPTestHarnessPage;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
