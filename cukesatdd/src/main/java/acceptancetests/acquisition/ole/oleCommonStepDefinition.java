@@ -127,6 +127,7 @@ public class oleCommonStepDefinition {
 		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM,PlanPremium);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
