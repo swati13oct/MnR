@@ -2,6 +2,8 @@ package pages.acquisition.commonpages;
 
 import static org.testng.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +31,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
@@ -733,7 +736,105 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	private WebElement tfnHeaderRightRailOLE;
+	
+//	Locators for redesigned home page
+	
+//	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "(//span[contains(text(),'Shop Plans')])[1]")
+	private WebElement ShopPlansBtn;
+	
+	@FindBy(xpath = "//*[contains(text(),'Please enter a valid zip code')]")
+	private WebElement ZipcodeErrormsg;
+	
+	@FindBy(xpath = "//label[contains(text(),'Your ZIP Code')])[1]/following::div[2]/input")
+	private WebElement Enterzipcode;
+	
+	@FindBy(xpath = "(//span[@class='heading-4']//a[@class='tel tfn desktop']/u)[1]")
+	private WebElement Needhelpcontent;
+	
+	@FindBy(xpath = "//a[@title='Get Started']")
+	private WebElement getStartedLink;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Get a Plan Recommendation')]")
+	private WebElement getaplanrecommendationheader;
+	
+	@FindBy(xpath = "//a[@title='Learn More']")
+	private WebElement learnmorelink;
+	
+	@FindBy(xpath = "//span[contains(text(),'When to Enroll in Medicare')]")
+	private WebElement Enrollheading;
+	
+	@FindBy(xpath = "//span[contains(text(),'Shop for Part C Plans')]")
+	private WebElement shopForPartCPlans;
+	
+	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	private WebElement shopForPlanCHeader;
+	
+	@FindBy(xpath = "//span[contains(text(),'Shop for Medigap Plans')]")
+	private WebElement shopForMedigapPlans;
+	
+	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	private WebElement shopForMedigapHeader;
+	
+	@FindBy(xpath = "//span[contains(text(),'Shop for Part D Plans')]")
+	private WebElement shopForPartD;
+	
+	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	private WebElement shopForPartDHeader;
+	
+	@FindBy(xpath = "//span[contains(text(),'Shop for D-SNPs')]")
+	private WebElement shopForDSNP;
+	
+	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	private WebElement shopForDSNPHeader;
+	
+	@FindBy(xpath = "//a[contains(text(),'Shop All Plans')]")
+	private WebElement shopAllPlansBtn;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Find Medicare-related plans in your area')]")
+	private WebElement shopAllPlansHeader;
+	
+	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	private WebElement learnMoreBtn;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')])[1]")
+	private WebElement learnMoreHeader;
+	
+	@FindBy(xpath = "//span[contains(text(),'Estimate Drug Costs')]")
+	private WebElement estimateDrugCost;
+	
+	@FindBy(xpath = "//span[contains(text(),'Estimate Drug Costs')]")
+	private WebElement drugCostHeader;
+	
+	@FindBy(xpath = "//span[contains(text(),'Find a Provider')]")
+	private WebElement findAprovider;
+	
+	@FindBy(xpath = "//span[contains(text(),'Enter your ZIP code to find a plan.')]")
+	private WebElement findAproviderHead;
+	
+	@FindBy(xpath = "//span[@class='heading-3'])[1]")
+	private WebElement questionsText;
+	
+	@FindBy(xpath = "//button[@class='uhc-email-button uhc-email-button--primary w-full-four  md-10-four-ename-only--button emailBtnFour']/span")
+	private WebElement emailSubmit;
+	
+	@FindBy(xpath = "//p[contains(text(),'Error: Please enter a valid email address')]")
+	private WebElement emailErrorMessage;
+	
+	@FindBy(xpath = "//input[@class='uhc-input uhc-input--four-block field-ename']")
+	private WebElement emailInput;
+	
+	@FindBy(xpath = "//span[@class='heading-3']//a[@class='tel tfn desktop']//u[@data-bind='tfn']")
+	private WebElement qTfntime;
 
+	@FindBy(xpath = "//a[@data-asset-name='TFN']/u/u[1]")
+	private WebElement TFNonhomepage;
+
+	@FindBy(xpath = "//div[@class='confirmationtext']/p")
+	private WebElement yup;
+	
+	
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -744,6 +845,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
+	private static String AMP_ACQISITION_PAGE_URL_NEW=MRConstants.AMP_URL;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
 
@@ -798,7 +900,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			} else {
+			} else if(site.contains("/dolphin-authoring/redesigned-home-page.html")) {
+				start(UMS_ACQISITION_PAGE_URL_NEW); 
+			 {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
@@ -833,6 +937,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
+			} else if (MRScenario.environment.equals("stage")) {
+				startNew(AMP_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
 			} else {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
@@ -843,6 +950,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
 																									// part of AARP/UHC
 																									// cleanup
+		}else if(site.contains("/dolphin-authoring/redesigned-home-page.html")) {
+			startNew(AMP_ACQISITION_PAGE_URL_NEW);
+//			System.out.println(AMP_ACQISITION_PAGE_URL_NEW+"xyz");
+			
 		}
 
 		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
@@ -862,6 +973,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} catch (Exception e) {
 				System.out.println("Proactive chat popup not displayed");
 			}
+		}
 		}
 	}
 
@@ -6915,4 +7027,165 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 
+
+	//	Redesigned home page
+	
+	
+	public void enterAndValidateZipCode() throws AWTException {
+		sleepBySec(6);
+		scrollToView(ShopPlansBtn);
+		/*JavascriptExecutor js=(JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", ShopPlansBtn);*/
+		sleepBySec(5);
+		scrollToView(ShopPlansBtn);
+		CommonUtility.waitForPageLoad(driver, ShopPlansBtn, 30);
+		ShopPlansBtn.click();
+		sleepBySec(2);
+		scrollToView(ZipcodeErrormsg);
+		CommonUtility.waitForPageLoad(driver, ZipcodeErrormsg, 30);
+		Assert.assertEquals(ZipcodeErrormsg.getText(), "Please enter a valid zip code");
+		Enterzipcode.sendKeys("90210");
+		ShopPlansBtn.click();
+		sleepBySec(5);
+		String str="https://www.stage-aarpmedicareplans.uhc.com/health-plans.html#/plan-summary";
+		Assert.assertEquals(driver.getCurrentUrl(), str);
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, ShopPlansBtn, 30);
+		sleepBySec(3);
+		
+		
+	}
+	
+	public void needHelpContentValidation() {
+		sleepBySec(6);
+	Assert.assertEquals(Needhelpcontent.getText(), "1-877-699-5710");
+	}
+	
+	public void getStartedvalidation() {
+		CommonUtility.waitForPageLoad(driver, getStartedLink, 30);
+		jsClickNew(getStartedLink);
+		CommonUtility.waitForPageLoad(driver,getaplanrecommendationheader, 30);
+		Assert.assertEquals(getaplanrecommendationheader.getText(), "Get a Plan Recommendation");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, getStartedLink, 30);
+		
+	}
+	
+	public void learnMorevalidation() {
+		CommonUtility.waitForPageLoad(driver, learnmorelink, 30);
+		jsClickNew(learnmorelink);
+		CommonUtility.waitForPageLoad(driver,Enrollheading, 30);
+		Assert.assertEquals(Enrollheading.getText(), "When to Enroll in Medicare");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, learnmorelink, 30);
+	}
+	
+	public void validateShopC() {
+		CommonUtility.waitForPageLoad(driver, shopForPartCPlans, 30);
+		jsClickNew(shopForPartCPlans);
+		CommonUtility.waitForPageLoad(driver,shopForPlanCHeader, 30);
+		Assert.assertEquals(shopForPlanCHeader.getText(), "Medicare Advantage (Part C) Plans from UnitedHealthcare");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, shopForPartCPlans, 30);
+		
+	}
+	public void validateMedigap() {
+		CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
+		jsClickNew(shopForMedigapPlans);
+		CommonUtility.waitForPageLoad(driver,shopForMedigapHeader, 30);
+		Assert.assertEquals(shopForMedigapHeader.getText(), "AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
+		
+	}
+	public void validateShopforPartD() {
+		CommonUtility.waitForPageLoad(driver, shopForPartD, 30);
+		jsClickNew(shopForPartD);
+		CommonUtility.waitForPageLoad(driver,shopForPartDHeader, 30);
+		Assert.assertEquals(shopForPartDHeader.getText(), "Medicare Prescription Drug (Part D) Plans from UnitedHealthcare");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, shopForPartD, 30);
+		
+	}
+	
+	public void validateShopForDSNP() {
+		CommonUtility.waitForPageLoad(driver, shopForDSNP, 30);
+		jsClickNew(shopForDSNP);
+		CommonUtility.waitForPageLoad(driver,shopForDSNPHeader, 30);
+		Assert.assertEquals(shopForDSNPHeader.getText(), "Dual Special Needs Plans (D-SNP) from UnitedHealthcare");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, shopForDSNP, 30);
+		
 }
+	public void validateShopAll() {
+		CommonUtility.waitForPageLoad(driver, shopAllPlansBtn, 30);
+		shopAllPlansBtn.click();
+		sleepBySec(5);
+		String str="https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html#/plan-summary";
+		Assert.assertEquals(driver.getCurrentUrl(), str);
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, shopAllPlansBtn, 30);
+		
+	}
+	
+	public void validateLearnMoreBtn() {
+		CommonUtility.waitForPageLoad(driver, learnMoreBtn, 30);
+		jsClickNew(learnMoreBtn);
+		CommonUtility.waitForPageLoad(driver, learnMoreHeader, 30);
+		Assert.assertEquals(learnMoreHeader.getText(), "Medicare Made Clear");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, learnMoreBtn, 30);
+		
+		
+	}
+	
+	public void validateestimateDrugCost() {
+		CommonUtility.waitForPageLoad(driver, estimateDrugCost, 30);
+		jsClickNew(estimateDrugCost);
+		CommonUtility.waitForPageLoad(driver, drugCostHeader, 30);
+		Assert.assertEquals(drugCostHeader.getText(), "Drug Cost Estimator");
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, estimateDrugCost, 30);
+		
+		
+	}
+	
+	public void validateFindAProvider() {
+		CommonUtility.waitForPageLoad(driver, findAprovider, 30);
+		jsClickNew(findAprovider);
+		CommonUtility.waitForPageLoad(driver, findAproviderHead, 30);
+		String str="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false";
+		Assert.assertEquals(driver.getCurrentUrl(), str);
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, findAprovider, 30);
+	}
+	
+public void validateQtFNTiming() {
+	CommonUtility.waitForPageLoad(driver, qTfntime, 30);
+	Assert.assertEquals(qTfntime.getText(), "8 a.m. – 8 p.m., in your time zone, 7 days a week");
+	
+	
+}
+
+public void validateTFN(String str) {
+	Assert.assertEquals(TFNonhomepage.getText(), str);
+}
+public void validateEMail() {
+	CommonUtility.waitForPageLoad(driver, emailSubmit, 30);
+	jsClickNew(emailSubmit);
+	CommonUtility.waitForPageLoad(driver, emailErrorMessage, 30);
+	Assert.assertEquals(emailErrorMessage.getText(), "Error: Please enter a valid email address");
+	emailInput.sendKeys("test@gmail.com");
+	emailSubmit.click();
+	sleepBySec(5);
+	Assert.assertEquals(yup.getText(), "Yup        ");
+}
+
+public void openUrl(String url) {
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+	driver.get(url);
+}
+	
+}	
+

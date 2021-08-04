@@ -1,5 +1,6 @@
 package acceptancetests.acquisition.globalcomponents;
 
+import java.awt.AWTException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.GlobalBeforeHook;
@@ -84,6 +86,7 @@ public class GlobalComponentsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		String site = memberAttributesMap.get("Site");
+		System.out.println("@@site@@"+site);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
@@ -101,6 +104,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateSubtitle();
 		
 	}
+	
 
 	@When("^user accesses global footer of the Medicare Plans All page$")
 	public void access_global_footer_aarp_all_pages() {
@@ -1103,5 +1107,104 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateTfnInHeader();
 	}
 
+	
+	//Redesigned home page
+	
+	@When("user enters zipcode and navigates to VPP")
+	public void user_enters_zipcode_and_navigates_to_vpp() throws AWTException {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndValidateZipCode();
+	   
+	    
+	}
+	@When("user validates TFN within feature box of hero component")
+	public void user_validates_tfn_within_feature_box_of_hero_component() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.needHelpContentValidation();
+	}
+	@When("user clicks on get started link and navigates to PRE")
+	public void user_clicks_on_get_started_link_and_navigates_to_pre() {
+	    AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.getStartedvalidation();
+	}
+	@When("user clicks on learn more link")
+	public void user_clicks_on_learn_more_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.learnMorevalidation();
+	}
+	@When("user clicks on shop for Part C plans")
+	public void user_clicks_on_shop_for_part_c_plans() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.learnMorevalidation();
+	}
+	@When("user clicks on shop for Medigap plans")
+	public void user_clicks_on_shop_for_medigap_plans() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateMedigap();
+	}
+	@When("user clicks on shop for Part D plans")
+	public void user_clicks_on_shop_for_part_d_plans() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateShopforPartD();
+	}
+	@When("user clicks on shop for D-SNPs plans")
+	public void user_clicks_on_shop_for_d_sn_ps_plans() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateShopForDSNP();
+	}
+	
+	@When("user clicks on shop all plans")
+	public void user_clicks_on_shop_all_plans() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateShopAll();
+	}
+	
+	@When("user clicks on learn more button link and navigates to Medicare Education Home page")
+	public void user_clicks_on_learn_more_button_link_and_navigates_to_medicare_education_home_page() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateLearnMoreBtn();
+	}
+	
+	@When("user clicks on Estimate drug costs and navigates to DCE")
+	public void user_clicks_on_estimate_drug_costs_and_navigates_to_dce() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateestimateDrugCost();
+	}
+	
+	@When("user clicks on find a provider link")
+	public void user_clicks_on_find_a_provider_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateFindAProvider();
+	}
+	
+	@When("user validates TFN on page")
+	public void user_validates_tfn_on_page(DataTable givenAttributes) {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String tfn = memberAttributesMap.get("TFN");
+		aquisitionhomepage.validateQtFNTiming();
+		aquisitionhomepage.validateTFN(tfn);
+	}
+	
+	@When("user validates Email capture component")
+	public void user_validates_email_capture_component() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateEMail();
+	}
 }
 

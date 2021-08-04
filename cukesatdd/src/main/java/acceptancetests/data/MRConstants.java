@@ -146,7 +146,11 @@ public class MRConstants {
 			+ "-mypcpmedicare.uhc.com/guest/login/username-and-password-assistance.html";
 
 	public static final String MEM_AUTH_URL = "https://awe-stage-generic.uhc.com/content/medicare/memberauth.html";
+	
+	public static final String AMP_URL = "https://www.stage-aarpmedicareplans.uhc.com/dolphin-authoring/redesigned-home-page.html";
 
+	public static final String UMS_URL = "https://www.stage-uhcmedicaresolutions.uhc.com/dolphin-authoring/redesigned-home-page.html";
+	
 	public static final String PCP_PAGE_URL = "https://www.awe-" + MRScenario.environment + "-mypcpmedicare.uhc.com/";
 
 	public static final String MEDICA_PAGE_URL = "https://www.awe-" + MRScenario.environment
