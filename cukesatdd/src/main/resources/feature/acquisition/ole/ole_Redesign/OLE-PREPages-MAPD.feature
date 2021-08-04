@@ -35,6 +35,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
      # | Plan Year | <planyear> |
     And the user validates the available plans for selected plan types PRE
      | Plan Name | <planName> |
+     | Plan Type | <plantype> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
    # Then the user validates the Plan details on OLE
     Then the user validates Save Return Later modal for OLE Page
@@ -116,10 +117,10 @@ Feature: 1.05.8. OLE PRE Integration Flow
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+ #   Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-  
+
     @PRE_E2E_AARP_future @OLE_Redesign @OLE @OLE_Redesign_PRE1
     Examples: 
       | site | PlanType      | planyear | planYear | Zipcode | isMultiCounty | county          | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | zipcode | plantype | planName                                                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | priorityOption | priorities   | paymentType                                    | cardno  | cardexpirationmonth | cardexpirationyear | middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag |rxBinnumber |phoneno |mobileno|
