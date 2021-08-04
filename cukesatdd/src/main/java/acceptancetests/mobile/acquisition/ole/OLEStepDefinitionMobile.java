@@ -31,6 +31,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.PersonalInformationPage;
+import pages.acquisition.ole.ReviewSubmitPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -2869,6 +2870,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 	@Then("^the user validates the Online Enrollment details on Review and Submit Page$")
 	public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submit_Page() throws Throwable {
+		
 		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -2881,7 +2883,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		DetailsMap.put("Middle Name", (String) getLoginScenario().getBean(oleCommonConstants.MIDDLE_NAME));
 		DetailsMap.put("Card Type", (String) getLoginScenario().getBean(oleCommonConstants.CARD_TYPE));
 		DetailsMap.put("Medicare Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER));
-		//	DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
+	//	DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 		//DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
 		String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
 		partAEffective = reviewSubmitPage.converttoReviewDate(partAEffective);
@@ -2893,7 +2895,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		DoB = reviewSubmitPage.converttoReviewDate(DoB);
 		DetailsMap.put("DOB", DoB);
 		//DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-		//	DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
+	//	DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
@@ -2966,6 +2968,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		//--------------------------Added for payment plan--------------------------------------------------------------
 
 		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
+
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
