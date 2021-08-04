@@ -190,7 +190,7 @@ private WebElement signInLink;
 		checkContent("special");
 		checkContent("doctor");
 		checkContent("drugs");
-		checkContent("additional");
+		checkContent("Services");
 		checkContent("cost");
 		checkContent("priorities");
 		verifyClickEditButton("location", false);
@@ -198,7 +198,7 @@ private WebElement signInLink;
 		verifyClickEditButton("special", false);
 		verifyClickEditButton("doctor", false);
 		verifyClickEditButton("drugs", false);
-		verifyClickEditButton("additional", false);
+		verifyClickEditButton("Services", false);
 		verifyClickEditButton("cost", false);
 		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
@@ -364,8 +364,8 @@ private WebElement signInLink;
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("additional")) {
-			UIValue = inputValues.get("Additional Option");
+		} else if (section.equalsIgnoreCase("Services")) {
+			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
@@ -441,7 +441,7 @@ private WebElement signInLink;
 		mapd.put(2, "special");
 		mapd.put(3, "doctor");
 		mapd.put(4, "drugs");
-		mapd.put(5, "additional");
+		mapd.put(5, "Services");
 		mapd.put(6, "cost");
 		mapd.put(7, "priorities");
 
@@ -450,7 +450,7 @@ private WebElement signInLink;
 		ma.put(1, "coverage");
 		ma.put(2, "special");
 		ma.put(3, "doctor");
-		ma.put(4, "additional");
+		ma.put(4, "Services");
 		ma.put(5, "cost");
 		ma.put(6, "priorities");
 
@@ -566,12 +566,12 @@ private WebElement signInLink;
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("additional")) {
+		} else if (section.equalsIgnoreCase("Services")) {
 			PlanRecommendationEngineAdditionalServicesPage add = new PlanRecommendationEngineAdditionalServicesPage(
 					driver);
-			add.edit_additional(inputValues.get("Additional Option"));
+			add.edit_Services(inputValues.get("Services Option"));
 			jsClickNew(saveBtn);
-			checkContent("additional");
+			checkContent("Services");
 		} else if (section.equalsIgnoreCase("cost")) {
 			PlanRecommendationEngineCostPreferencesPage cost = new PlanRecommendationEngineCostPreferencesPage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
