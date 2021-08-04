@@ -2188,6 +2188,32 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	}
 	
+	public void validateResetEffectiveDate() {
+		validateNew(ResetEffectiveDateLink);
+		ResetEffectiveDateLink.click();
+		CommonUtility.waitForPageLoad(driver, BarChart, 30);
+		validateDefaultPED();
+	}
+	
+	public void validateDefaultPED() {
+		validateNew(PlanEffective_DefaultText);
+		validateNew(ChangePED_DropDown);
+		validateNew(BarChart_Jan);
+		validateNew(BarChart_Feb);
+		validateNew(BarChart_Mar);
+		validateNew(BarChart_Apr);
+		validateNew(BarChart_May);
+		validateNew(BarChart_Jun);
+		validateNew(BarChart_Jul);
+		validateNew(BarChart_Aug);
+		validateNew(BarChart_Sep);
+		validateNew(BarChart_Oct);
+		validateNew(BarChart_Nov);
+		validateNew(BarChart_Dec);
+		System.out.println(
+				"Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+	}
+	
 	
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
 		validateNew(DrugCosts_PlanDetailsBtn);
