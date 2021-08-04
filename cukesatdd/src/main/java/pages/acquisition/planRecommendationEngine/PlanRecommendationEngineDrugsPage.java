@@ -348,6 +348,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		DrugsInDCE = CommonConstants.DCE_Drugs.get(curID);
 		threadsleep(2000);
 		drugnamesList();
+		drugNames = CommonConstants.PRE_Drugs.get(curID);
 		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
 	}
 	

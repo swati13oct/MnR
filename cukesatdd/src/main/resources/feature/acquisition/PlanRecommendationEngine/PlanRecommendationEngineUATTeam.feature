@@ -35,13 +35,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                |
-      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO)|
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
+      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                |
-      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO)|
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
+      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
   @PRE @PRE_UAT_DCE_VPP_Scenario-4 @F550383
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs in VPP page when MA flow complete in PRE and Add drugs in DCE
@@ -81,13 +81,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo                  |
-      | AARP |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | Complete (HMO D-SNP),Link |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            |
+      | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo                  |
-      | UHC  |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | Complete (HMO D-SNP),Link |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            |
+      | UHC  |   53202 | NO            | Milwaukee | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link |
 
   @PRE @PRE_UAT_ExternalLink_PRE_Enroll_Scenario-2
   Scenario Outline: <site>  - To validate drug and doctors in Visitor profile
