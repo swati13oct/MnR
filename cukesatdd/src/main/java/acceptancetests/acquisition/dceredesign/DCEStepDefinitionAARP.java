@@ -1269,9 +1269,9 @@ public class DCEStepDefinitionAARP {
 		 * if(druglist.isEmpty()) { druglist = "";
 		 * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
 		 */
-		BuildYourDrugList DCEbuildDrugList = planComparepage.navigateToDCERedesign();
-		if (null != DCEbuildDrugList) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
+		GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}

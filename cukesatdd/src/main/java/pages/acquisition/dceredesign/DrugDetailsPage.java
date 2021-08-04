@@ -50,7 +50,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Average Monthly Drug Cost')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Average Monthly Drug Cost')]")
 	public WebElement DrugCosts_AvgMonDrugCost;
 
 	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Monthly Premium')]")
