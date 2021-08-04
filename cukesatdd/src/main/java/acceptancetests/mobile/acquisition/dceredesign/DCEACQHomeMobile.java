@@ -76,18 +76,17 @@ public class DCEACQHomeMobile {
 
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		/*
-		 * AppiumDriver wd = getLoginScenario().getMobileDriver();
-		 * AcquisitionHomePageMobile aquisitionhomepage = new
-		 * AcquisitionHomePageMobile(wd); aquisitionhomepage.openMobileURL(); //
-		 * aquisitionhomepage.openPRE();
-		 * 
-		 * aquisitionhomepage.fixPrivateConnectionMobile();
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-		 * aquisitionhomepage);
-		 */
+		/*AppiumDriver wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openMobileURL();
+		// aquisitionhomepage.openPRE();
 
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);*/
+		
+		
+		
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -1228,17 +1227,15 @@ public class DCEACQHomeMobile {
 	}
 
 	@Then("^the user searches and adds the following Drug to Drug List$")
-	public void the_user_searches_and_adds_the_following_Drug_to_Drug_Lists(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_searches_and_adds_the_following_Drug_to_Drug_Lists(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
