@@ -109,8 +109,8 @@ public class DCEACQHomeMobile {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 		if (site.equalsIgnoreCase("AARP")) 
 				aquisitionhomepage.validateSubtitle();
-				}
 	}
+
 
 	@Then("^the user clicks on Edit button on Drug List page on DCE$")
 	public void the_user_clicks_on_EditButton(DataTable Attributes) throws Throwable {
