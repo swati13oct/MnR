@@ -3876,7 +3876,7 @@ public class VppPlanDetailMobile {
 	
 	//	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	//	String planType = givenAttributesMap.get("Plan Type");
+		String planType = givenAttributesMap.get("Plan Type");
 	//	String SiteName = givenAttributesMap.get("Site");
 		String planName = givenAttributesMap.get("Plan Name");
 		PlanDetailsPage  plandetailsPage;
@@ -3891,6 +3891,7 @@ public class VppPlanDetailMobile {
 		if (PlanDetailsPageMobile != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, PlanDetailsPageMobile);
 			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, planType);
 			System.out.println("User navigates from PRE Page to Plan details page in VPP is Displayed");
 			Assertion.assertTrue(true);
 		} else
