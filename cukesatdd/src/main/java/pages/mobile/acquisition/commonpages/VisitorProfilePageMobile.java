@@ -477,14 +477,18 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @return
 	 */
 	public boolean providerinfo(String planName) {
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		String mproviderinfo = ProviderSearchLink.getText();
+		WebElement ViewProviderbtn = driver.findElement(By.xpath("//*[@id=\"landrover\"]/main/div[3]/div[2]/div[2]/div[2]/div[4]/button"));
+		//WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+		//		+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
+		//WebElement providerin = driver.findElement(By.xpath("//*[@id=\"ProviderName-noplan-0\"]"));
+		scrollToView(ViewProviderbtn);
+		//jsClickNew(ViewProviderbtn);
+		String mproviderinfo = ViewProviderbtn.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
+		if (mproviderinfo.toLowerCase().contains("View Providers")) {
+			return false;
 		}
-		return false;
+		return true;
 
 	}
 
