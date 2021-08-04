@@ -1,7 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-
+import static acceptancetests.data.CommonConstants.SHOPFORPLAN_PLANTYPES.MAPD;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +14,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ShopPage extends GlobalWebElements {
@@ -236,7 +235,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void clickOnMAShopButton() {
-		openShopForPlanFromMenu().selectPlanTypeOption("ma", false);
+		openShopForPlanFromMenu().selectPlanTypeOption(MAPD, false);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans")) {

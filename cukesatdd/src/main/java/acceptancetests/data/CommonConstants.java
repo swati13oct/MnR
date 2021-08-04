@@ -1037,6 +1037,30 @@ public class CommonConstants {
 	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
 	
 	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
+	
+	public static enum SHOPFORPLAN {
+		SHOP, ENROLL, MEMBERRESOURCES
+	}
+
+	public static enum SHOPFORPLAN_PLANTYPES {
+		MAPD, PDP, SNP, MEDSUPP
+	}
+	
+	public static enum SHOPFORPLAN_TOOLS {
+		PRE, DCE, PHARMACYSEARCH, SEARCHDOCTORS, SEARCHDENTISTS
+	}
+	
+	public static enum LEARNABOUTMEDICARE_INTRODUCTION {
+		INTRODUCTION, ELIGIBILITY, COVERAGEOPTIONS, BENEFITS, COSTBASICS, ARTICLES
+	}
+	
+	public static enum LEARNABOUTMEDICARE_PLANTYPES {
+		OVERVIEW, MAPD, PDP, SNP, MEDSUPP, FAQ, GLOSSARY
+	}
+	
+	public static enum LEARNABOUTMEDICARE_MEDICAREENROLLMENT {
+		WHENTOENROLL, HOWTOENROLL, CHANGINGPLANS, WORKINGPAST65
+	}
 }
 
 

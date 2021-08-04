@@ -373,6 +373,11 @@ public class GlobalWebElements extends UhcDriver {
 
 	}
 
+	/**
+	 * Access footer link from shop plans tab.
+	 *
+	 * @param planType the plan type
+	 */
 	public void accessFooterLinkFromShopPlans(String planType) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(shopPlansExpander, "aria-expanded"));
 		if (!expanded) {
@@ -402,6 +407,11 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from Tools Resources tab.
+	 *
+	 * @param tool the tool
+	 */
 	public void accessFooterLinkFromToolsResources(String tool) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(toolsAndResources, "aria-expanded"));
 		if (!expanded) {
@@ -429,6 +439,11 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from Learn About Medicare tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromLearnAboutMedicare(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
 		if (!expanded) {
@@ -456,6 +471,11 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from More tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromMore(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
 		
@@ -485,6 +505,13 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Open home from menu.
+	 * 
+	 * Clicks on the Home option from right nav menu
+	 *
+	 * @return the acquisition home page mobile
+	 */
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
 		
@@ -498,6 +525,10 @@ public class GlobalWebElements extends UhcDriver {
 	}
 	
 	
+	/**
+	 * Open site search from menu.
+	 * 
+	 */
 	public void openSiteSearchFromMenu() {
 		jsClickNew(MenuMobile);
 		validateNew(mobileNav, 5);
@@ -505,6 +536,14 @@ public class GlobalWebElements extends UhcDriver {
 		jsClickNew(siteSearchButton);
 	}
 	
+	/**
+	 * Open Shop for Plan from menu.
+	 *
+	 * @return the object of ShopForPlanNavigationPageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in ShopForPlanNavigationPageMobile
+	 */
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
 		jsClickNew(MenuMobile);
 		
@@ -517,6 +556,14 @@ public class GlobalWebElements extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Open Learn about Medicare from menu.
+	 *
+	 * @return the object of LearnAboutMedicareHomePageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in LearnAboutMedicareHomePageMobile
+	 */
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
 		
