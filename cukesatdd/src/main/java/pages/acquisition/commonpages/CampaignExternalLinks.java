@@ -330,6 +330,9 @@ public class CampaignExternalLinks extends UhcDriver {
 			
 	public String parentWindow;
 	
+
+
+	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1542,6 +1545,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		InputZipCode.clear();
 		InputZipCode.sendKeys(zipcodeMulti);
 		jsClickNew(LocationBtn);
+		threadsleep(3);
 		FirstZipCode.click();
 		jsClickNew(LocationBtn);
 		

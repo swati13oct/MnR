@@ -5,20 +5,19 @@ Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take
   Scenario Outline: TID: <Scenario> To verify zipcode,TFN,form,links on Take Advantage Page
     Given user is on campaign external Links page
       | External Link | <externallink> |
-    #Then user verify TFN on AARP external links page
-      #| TFN No      | <TFNNo>      |
-      #| TFN Xpath   | <TFNxpath1>  |
-      #| Working hrs | <workingHrs> |
-    #Then user validates error messages on get more information
-    #Then user enters the details on get more information
-    Then user clicks on find a doctor and validates the page
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
+    Then user validates error messages on get more information
+    Then user enters the details on get more information
     Then user clicks on privacy policy link
     Then user clicks on accessibility link
     Then user validates Current location and change location
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
-    @CampaignExternal_Scenario8_AARP @StageLPP
+    @CampaignExternal_Scenario8_AARP @StageLP
     Examples: 
       | Scenario                                     | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                            | defaultPharmacy                                                                            | externallink                                                       |
       | Campaign External Links - E2E Scenario 8_AMP |        65656 |         33111 | Yes           | Stone County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.) | https://www.stage-aarpmedicareplans.uhc.com/lp/take-advantage.html |
