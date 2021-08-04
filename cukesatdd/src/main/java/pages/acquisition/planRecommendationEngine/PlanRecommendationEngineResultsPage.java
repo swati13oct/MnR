@@ -1522,6 +1522,7 @@ public void verifyPlanNameinOLE() {
 	String planNameinOLE = "";
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
+	System.out.println(driver.getCurrentUrl());
 	planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
 	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");	
@@ -1839,7 +1840,7 @@ public void verifyPlansVPandPDP(List<WebElement> plansName) {
 	System.out.println(plansName.size());
 	for (int i = 0; i < plansName.size(); i++) {
 		exceptedplanName = plansName.get(i).getText().trim();
-		System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
+		System.out.println("Plan Name in Visitor Profile Page: " + exceptedplanName);
 		plansName.get(i).click();
 		threadsleep(30000);
 		actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
