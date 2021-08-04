@@ -73,7 +73,8 @@ public class PlanRecommendationEngineStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		if_offline_prod = aquisitionhomepage.openPRE(inputValues.get("Site"));
-//		aquisitionhomepage.fixPrivateConnection();
+		if (MRScenario.environment.contains("digital-devv2"))
+			aquisitionhomepage.fixPrivateConnection();
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
