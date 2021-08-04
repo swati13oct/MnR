@@ -89,7 +89,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
+	@FindBy(css = "div[class^='builddrug']>div[class*='d-block'] button[dtmname$='Return to Compare']")
 	public WebElement returnToCompareBtn;
 	
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='remove drug:yes']")
@@ -112,6 +112,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateNoDrug_ErrorMsg() {
+		if(addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
+		
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		if (validateNew(BlankDrugError) && BlankDrugError.getText().contains("enter at least 4 characters ")) {

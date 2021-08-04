@@ -2,10 +2,14 @@ package pages.mobile.acquisition.dceredesign;
 
 import static atdd.framework.Assertion.assertTrue;
 
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,7 +72,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link']")
+	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link'][dtmname*='return']")
 	public WebElement LinktoExitScenario;
 
 //	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -274,18 +278,25 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	// MonthlyDrugCost Changes Start
 	@FindBy(xpath = "//h2//*[contains(text(),'Monthly Drug Cost Details')]")
 	public WebElement MonthlyCostDetails_Header;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'Total Drug Price')]")
-	public WebElement MonthlyDrug_TotalDrugPrice_heading;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'Plan Pay')]")
-	public WebElement MonthlyDrug_PlanPay_heading;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'You Pay')]")
-	public WebElement MonthlyDrug_YouPay_heading;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][1]")
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[contains(text(), 'Total Drug Price')]")
+	public List<WebElement> MonthlyDrug_TotalDrugPrice_heading;
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[contains(text(), 'Plan Pay')]")
+	public List<WebElement> MonthlyDrug_PlanPay_heading;
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[contains(text(), 'You Pay')]")
+	public List<WebElement> MonthlyDrug_YouPay_heading;
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[text()= 'January']/following-sibling::div[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month1;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][2]")
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[text()= 'January']/following-sibling::div[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month1;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][3]")
+	
+	@FindBy(xpath = "//div[@class='monthlycostdetailsmobile']//div[text()= 'January']/following-sibling::div[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month1;
+	
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 2']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month2;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 2']//following-sibling::td[contains(text(), '$')][2]")
@@ -1203,8 +1214,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		String[] Drugs_YouPay = drugYouPaylist.split("&");
 
 		int i;
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
+		System.out.println("Total Added Drug Count : " + Drugs.length);
+		for (i = 0; i <= DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
@@ -1217,7 +1228,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			String currentDrugYouPay = DrugYouPay.getText().trim().replace(",", "");
 
 			String ExpectedYouPay = Drugs_YouPay[i];
-			System.out.println("Current Added Drug Name : " + currentAddedDrug);
+//			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			System.out.println("Displayed Current Drug You Pay : " + currentDrugYouPay);
 			System.out.println("Expected Current Drug You Pay : " + ExpectedYouPay);
 
@@ -1628,48 +1639,22 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	// MonthlyDrugCost Changes Start
 	public void validateMonthlyCost() {
-		scrollToView(MonthlyCostDetails_Header);
-		scrollToView(MonthlyDrug_TotalDrugPrice_heading);
-		scrollToView(MonthlyDrug_PlanPay_heading);
-		scrollToView(MonthlyDrug_YouPay_heading);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month1);
-		scrollToView(MonthlyDrug_PlanPay_month1);
-		scrollToView(MonthlyDrug_YouPay_month1);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month2);
-		scrollToView(MonthlyDrug_PlanPay_month2);
-		scrollToView(MonthlyDrug_YouPay_month2);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month3);
-		scrollToView(MonthlyDrug_PlanPay_month3);
-		scrollToView(MonthlyDrug_YouPay_month3);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month4);
-		scrollToView(MonthlyDrug_PlanPay_month4);
-		scrollToView(MonthlyDrug_YouPay_month4);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month5);
-		scrollToView(MonthlyDrug_PlanPay_month5);
-		scrollToView(MonthlyDrug_YouPay_month5);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month6);
-		scrollToView(MonthlyDrug_PlanPay_month6);
-		scrollToView(MonthlyDrug_YouPay_month6);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month7);
-		scrollToView(MonthlyDrug_PlanPay_month7);
-		scrollToView(MonthlyDrug_YouPay_month7);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month8);
-		scrollToView(MonthlyDrug_PlanPay_month8);
-		scrollToView(MonthlyDrug_YouPay_month8);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month9);
-		scrollToView(MonthlyDrug_PlanPay_month9);
-		scrollToView(MonthlyDrug_YouPay_month9);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month10);
-		scrollToView(MonthlyDrug_PlanPay_month10);
-		scrollToView(MonthlyDrug_YouPay_month10);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month11);
-		scrollToView(MonthlyDrug_PlanPay_month11);
-		scrollToView(MonthlyDrug_YouPay_month11);
-		scrollToView(MonthlyDrug_TotalDrugPrice_month12);
-		scrollToView(MonthlyDrug_PlanPay_month12);
-		scrollToView(MonthlyDrug_YouPay_month12);
-		threadsleep(20);
-		scrollToView(Graph_svg);
+		String[] monthNames = new DateFormatSymbols().getMonths();
+		
+		validateNew(MonthlyCostDetails_Header);
+		MonthlyDrug_TotalDrugPrice_heading.stream().forEach(monthlyTotalDrugPrice -> validateNew(monthlyTotalDrugPrice));
+		MonthlyDrug_PlanPay_heading.stream().forEach(monthlyPlanPay -> validateNew(monthlyPlanPay));
+		MonthlyDrug_YouPay_heading.stream().forEach(monthlyYouPay -> validateNew(monthlyYouPay));
+		
+		Stream.of(monthNames).filter(month -> !month.isEmpty()).forEach(month -> {
+			validateNew(driver.findElement(By.xpath("//div[@id='monthlycostdetails']//div[text()='" + month
+					+ "']/following-sibling::div[contains(text(),'Total Drug Price: $')]")));
+			validateNew(driver.findElement(By.xpath("//div[@id='monthlycostdetails']//div[text()= '" + month
+					+ "']/following-sibling::div[contains(text(), 'Plan Pay: $')]")));
+			validateNew(driver.findElement(By.xpath("//div[@id='monthlycostdetails']//div[text()= '" + month
+					+ "']/following-sibling::div[contains(text(), 'You Pay: $')]")));
+		});
+		validateNew(Graph_svg);
 
 	}
 
@@ -1939,7 +1924,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		if (validate(YourDrugs_Table) || validate(LinktoEditDrugList) || validate(MonthlyDrugStage_Header)
 				|| validate(MonthlyDrugStage_InitialCoverageStagerTbl)
 				|| validate(MonthlyDrugStage_CoverageGapStagerTbl) || validate(MonthlyDrugStage_CatastropheStagerTbl)
-				|| validate(MonthlyDrug_YouPay_heading) || validate(ImportantInfo_Header) || validate(CopaySection)) {
+				|| validate(MonthlyDrug_YouPay_heading.get(0)) || validate(ImportantInfo_Header) || validate(CopaySection)) {
 			Assertion.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
 		}
 		System.out.println("***** DCE Details Page validation for Not Covered Pharmacy View Passed *****");
@@ -2091,7 +2076,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validateDefaultPED(String envYear) {
 		validateNew(PlanEffective_DefaultText);
 		validateNew(ChangePED_DropDown);
-		validateNew(BarChart_Jan);
+		
+		String[] monthNames = new DateFormatSymbols().getShortMonths();
+		
+		Stream.of(monthNames).filter(month -> !month.isEmpty()).forEach(month -> validateNew(
+				driver.findElement(By.xpath("//*[contains(@class, 'x axis')]//*[contains(text(), '" + month + "')]"))));
+		
+		/*validateNew(BarChart_Jan);
 		validateNew(BarChart_Feb);
 		validateNew(BarChart_Mar);
 		validateNew(BarChart_Apr);
@@ -2102,7 +2093,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(BarChart_Sep);
 		validateNew(BarChart_Oct);
 		validateNew(BarChart_Nov);
-		validateNew(BarChart_Dec);
+		validateNew(BarChart_Dec);*/
 		Assertion.assertTrue(">>>>>>> Plan Effective Default text does not display current year <<<<<<<<<<<   : "+PlanEffective_DefaultText.getText(),PlanEffective_DefaultText.getText().contains(envYear) );
 		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED -->>  "+PlanEffective_DefaultText.getText());
 	}

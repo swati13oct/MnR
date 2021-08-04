@@ -24,7 +24,7 @@ public class CancelOLEModalMobile extends UhcDriver {
 	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
 	
-	@FindBy(xpath = "//*[contains(@class,'leaveApp')]")
+	@FindBy(css = "[aria-labelledby^='enroll-cancel-popup'] a[class^='leaveApp']")
 	private WebElement leaveAppBtn;
 
 	public CancelOLEModalMobile(WebDriver driver) {
