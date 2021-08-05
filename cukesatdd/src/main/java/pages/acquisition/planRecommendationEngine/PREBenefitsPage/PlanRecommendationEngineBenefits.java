@@ -112,10 +112,14 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 	}
 	
 	// Plan Benefits
-	int benefits_Count = 5,j=1;
-	for(int i=1;i<=benefits_Count;i++) {
-		String header = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='planInfoContent'] div:nth-child("+String.valueOf(j)+")>h4")).getText());
-		List<WebElement> data = plantiles.get(planIndex).findElements(By.cssSelector("div[class*='planInfoContent'] div:nth-child("+String.valueOf(j)+")>p"));
+	int provider_max_benefits_Count = 3,j=1;
+	for(int i=1;i<=provider_max_benefits_Count;i++) {
+		
+		if(i==3 && planName.toLowerCase().contains("medicare supplement insurance plan"))
+			break;
+		
+		String header = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='planInfoContent'] div[class*='provider-section'] div:nth-child("+String.valueOf(j)+")>h4")).getText());
+		List<WebElement> data = plantiles.get(planIndex).findElements(By.cssSelector("div[class*='planInfoContent'] div[class*='provider-section'] div:nth-child("+String.valueOf(j)+")>p"));
 		String content = "";
 		for(WebElement e:data) {
 			content = content + e.getText();
@@ -123,6 +127,19 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 		preResult.put(header,formatString(content));
 		j=j+2;//+2 for - empty div tag of new line
 	}
+	
+	String header = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='planInfoContent'] div[class*='referral-content']>h4")).getText());
+	String content = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='planInfoContent'] div[class*='referral-content']>p")).getText();
+	preResult.put(header,formatString(content));
+	
+	header = formatString(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='planInfoContent'] div[class*='inpatient-hospital']>h4")).getText());
+	List<WebElement> data = plantiles.get(planIndex).findElements(By.cssSelector("div[class*='planInfoContent'] div[class*='inpatient-hospital']>p"));
+	content = "";
+	for(WebElement e:data) {
+		content = content + e.getText();
+	}
+	preResult.put(header,formatString(content));
+	
     return preResult;
 }
 
@@ -132,6 +149,7 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 				.replace("in-network", "").replace("out-of-network", "")
 				.replace(":", "").replace("  ", "").
 				replace("\n", "").replace("\",\"", "").replace("\"", "").replace(",", "").replace("-", "")
+				.replace("**", "").replace("***", "")
 				.trim();
 	}
 
