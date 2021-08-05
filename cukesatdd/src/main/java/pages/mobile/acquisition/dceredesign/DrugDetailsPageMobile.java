@@ -1255,7 +1255,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[@id='changepharmacymobile']//*[normalize-space()='Retail Chain Pharmacy']")
+	@FindBy(xpath = "//span[contains(text(),'Pharmacy:')]/parent::div[contains(@class,'d-block')]//span[starts-with(@class,'text-normal')]")
 	private WebElement retailChainPharmacy;
 
 	public void validateRetailChainPharmacy() {

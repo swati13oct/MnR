@@ -243,6 +243,20 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 		}
 	}
+	
+	public void validateAddedPlansNew(String planNames) {
+        String[] listOfTestPlans = planNames.split(",");
+        CommonUtility.checkPageIsReadyNew(driver);
+        for (String plan : listOfTestPlans) {
+            System.out.println("Checking Saved Plan on VP for : " + plan);
+            WebElement addedPlan = driver
+                    .findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+            validateNew(addedPlan);
+            System.out.println(addedPlan.getText());
+            Assertion.assertEquals(plan, addedPlan.getText().trim());
+            System.out.println("Verified plans are added on visitior profile page");
+        }
+    }
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
