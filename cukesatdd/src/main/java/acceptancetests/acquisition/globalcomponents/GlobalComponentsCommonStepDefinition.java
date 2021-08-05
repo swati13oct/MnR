@@ -40,6 +40,7 @@ import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
 import pages.acquisition.commonpages.MedicareEligibilityPage;
 import pages.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
+import pages.acquisition.commonpages.MultiCountyModalPage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
@@ -1131,10 +1132,20 @@ public class GlobalComponentsCommonStepDefinition {
 	    
 	}
 	@When("user validates TFN within feature box of hero component")
-	public void user_validates_tfn_within_feature_box_of_hero_component() {
+	public void user_validates_tfn_within_feature_box_of_hero_component(DataTable givenAttributes) {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String TFN = memberAttributesMap.get("TFN");
+		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.needHelpContentValidation();
+		aquisitionhomepage.needHelpContentValidation(TFN);
 	}
 	
 	@When("user clicks on shop for Part C plans")
@@ -1243,5 +1254,66 @@ public class GlobalComponentsCommonStepDefinition {
 		System.out.println("@@site@@"+site);
 		aquisitionhomepage.sendZipCodeAndValidateUrl(zipcode,site);
 	}
+	
+	@When("^the user performs Change Location on Plan Summary Page using following MultiCounty Zip information from HomePage$")
+	public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information_from_HomePage(
+			DataTable givenAttributes) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		System.out.println("@@zip code @@"+zipcode);
+		aquisitionhomepage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
+
+	}
+	@Then("^the user validates the Cancel button for Multi County Pop-up lands on enter Zip code HomePage$")
+	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_HomePage()
+			throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		boolean Validation_Flag = aquisitionhomepage.validateMultiCounty_CancelButton();
+		Assertion.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",
+				Validation_Flag);
+
+	}
+	
+	@When("^the user clicks on Find plans on vpp using following information from Homepage$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information_from_Homepage(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assertion.assertTrue(true);
+			else
+				Assertion.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
+
 }
 

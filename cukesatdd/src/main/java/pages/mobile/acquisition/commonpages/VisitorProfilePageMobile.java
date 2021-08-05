@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 package pages.mobile.acquisition.commonpages;
 
 import java.util.Arrays;
@@ -176,14 +176,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public void validateAddedDrugAndPharmacy(String drug) throws InterruptedException {
 
-		/*
+		
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 		 * "Pennsylvania") ||
 		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
 		 * {
-		 */
-		/*
+		 
+		
 		 * String State = CommonConstants.getSelectedState(); if
 		 * (StringUtils.equalsIgnoreCase(State, "Virginia")) {
 		 * jsClickNew(expandDrugBlock);
@@ -197,7 +197,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)"
 		 * , savedDrugsAndDoctorsHeader.getText().trim());
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
-		 */
+		 
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
 		
 		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
@@ -216,13 +216,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 
 		String State = CommonConstants.getSelectedState();
-		/*
+		
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 		 * "Pennsylvania") ||
 		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
 		 * {
-		 */
+		 
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			for (String plan : listOfTestPlans) {
@@ -276,13 +276,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public GetStartedPageMobile addDrug_DCERedesign() {
 
 		String State = CommonConstants.getSelectedState();
-		/*
+		
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 		 * "Pennsylvania") ||
 		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
 		 * {
-		 */
+		 
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			// jsClickNew(addrugs);
@@ -337,13 +337,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public GetStartedPageMobile addDrug_DCERedesigns() {
 
 		String State = CommonConstants.getSelectedState();
-		/*
+		
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 		 * "Pennsylvania") ||
 		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
 		 * {
-		 */
+		 
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			scrollToView(addrugs);
@@ -358,11 +358,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * Deletes the specified plans
 	 * 
 	 * @param plans
-	 */
+	 *//*
 	public void deletePlans(String plans) {
 		if (validate(profileMultiYear, 10)) {
 			// profileNxtYrPlans.click();
@@ -380,18 +380,18 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 		try {
-			/*
+			
 			 * if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
 			 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 			 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 			 * "Puerto Rico") ||
 			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {
-			 */
+			 
 			String State = CommonConstants.getSelectedState();
-			/*
+			
 			 * if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
 			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			 */
+			 
 			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
@@ -415,23 +415,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
 	}
 
-	/**
+	*//**
 	 * Delete all the drugs from the profile
-	 */
+	 *//*
 	public void deleteAllDrugs() {
 		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
 		driver.findElement(By.xpath("//li[@class='drug']//button")).click();
-		/*
+		
 		 * for (WebElement drug: savedDrugs) {
 		 * drug.findElement(By.xpath("//button")).click(); }
-		 */
+		 
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
 		Assertion.assertTrue(addrugs.isDisplayed());
 	}
 
-	/**
+	*//**
 	 * Delete all the providers from the profile
-	 */
+	 *//*
 	public void deleteProviders(String planName) {
 		WebElement ProviderSearchLink = driver
 				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName
@@ -443,21 +443,21 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		jsClickNew(removeProvider);
 	}
 
-	/**
+	*//**
 	 * Validate the enrolled plan details on profile page
 	 * 
 	 * @param oleDetails
-	 */
+	 *//*
 	public void validateOLEDetails(Map<String, String> givenAttributesMap) {
 		// Handled data table in step definition
-		/*
+		
 		 * List<DataTableRow> givenAttributesRow = oleDetails.getGherkinRows();
 		 * Map<String, String> givenAttributesMap = new HashMap<String, String>(); for
 		 * (int i = 0; i < givenAttributesRow.size(); i++) {
 		 * 
 		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		 
 		String planName = givenAttributesMap.get("Plan Name");
 		String zipCode = givenAttributesMap.get("Zip Code");
 		String status = givenAttributesMap.get("Status");
@@ -471,12 +471,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
-	/**
+	*//**
 	 * Get the added provider information
 	 * 
 	 * @param planName
 	 * @return
-	 */
+	 *//*
 	public boolean providerinfo(String planName) {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
@@ -500,9 +500,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * Delete all the providers from the profile
-	 */
+	 *//*
 	public void deleteAllProviders() {
 		if (!(driver.findElements(By.cssSelector("div.no-providers")).size() > 0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
@@ -520,9 +520,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a[dlassetid^='vp_add_drug']")
 	public WebElement AddDrugsGlobal;
 
-	/**
+	*//**
 	 * click edit drugs globally
-	 */
+	 *//*
 	public void clickAddDrugsBtn() {
 		jsClickNew(AddDrugsGlobal);
 	}
@@ -535,15 +535,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public void clearProvider() {
 		try {
-			/*
+			
 			 * if (expandProvidersPlanCard.isDisplayed()) { expandProvidersPlanCard.click();
-			 */
+			 
 
 			while (removeProviders.size() != 0) {
-				/*
+				
 				 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
 				 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
-				 */
+				 
 				waitforElementNew(removeProviders.get(0));
 				validateNew(removeProviders.get(0));
 				removeProviders.get(0).click();
@@ -572,9 +572,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, VPHeader_DrugsLinks, 20);
 		jsClickNew(VPHeader_DrugsLinks);
 		try {
-			/*
+			
 			 * if (expandDrugsPlanCard.isDisplayed()) { expandDrugsPlanCard.click();
-			 */
+			 
 			System.out.println(removeDrugs.size());
 			while (removeDrugs.size() != 0) {
 				waitforElementNew(removeDrugs.get(0));
@@ -586,7 +586,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				System.out.println("Removed drugs");
 
 			}
-			/*
+			
 			 * while (removeDrugsPlanCard.size() != 0) {
 			 *
 			 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
@@ -594,28 +594,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			 *
 			 * removeDrugsPlanCard.get(0).click(); System.out.println("Removed drugs");
 			 * validate(addrugs); }
-			 */
+			 
 			// }
 		} catch (Exception e) {
 			System.out.println("No existing drugs found");
 		}
 	}
 
-	/**
+	*//**
 	 * Sign In with Optum Id credentials
 	 * 
 	 * @param username
 	 * @param password
-	 */
+	 *//*
 	public void signIn(String username, String password) {
 		try {
-			/*
+			
 			 * if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
 			 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 			 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
 			 * "Puerto Rico") ||
 			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
-			 */
+			 
 			String State = CommonConstants.getSelectedState();
 			// if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
 			// StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
@@ -672,12 +672,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			return null;
 	}
 
-	/**
+	*//**
 	 * Enroll in a plan
 	 * 
 	 * @param planName
 	 * @return
-	 */
+	 *//*
 	public WelcomePageMobile Enroll_OLE_Plan(String planName) {
 
 		WebElement enrollForPlan = null;
@@ -698,11 +698,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * Validate Enroll plan is Clickable or not
 	 * 
 	 * @return
-	 */
+	 *//*
 	public boolean validateEnrollInPlanIsClickable() {
 		boolean enrollInNotPossible = false;
 		try {
@@ -716,11 +716,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 	}
 
-	/**
+	*//**
 	 * Validate the plan count on the shopping cart icon
 	 * 
 	 * @param plancount
-	 */
+	 *//*
 	public void validatePlanCountOnCartIcon(String plancount) {
 		Assertion.assertEquals(plancount, shoppingCartNumber.getText());
 		System.out.println("count mapped on Shopping cart icon with : " + plancount);
@@ -739,22 +739,22 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * Select plans and compare
 	 * 
 	 * @param plans
 	 * @return
-	 */
+	 *//*
 	public ComparePlansPageMobile planCompare(String plans) {
 
 		jsClickNew(comparePlans);
 		waitforElementVisibilityInTime(comparePlansPageControl, 10);
-		/*
+		
 		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
 		 * = plans.split(","); for(int i=0;i<4;i++) {
 		 * driver.findElement(By.xpath("//label[text()='"+plan[i]+
 		 * "']/preceding-sibling::input")).click(); } comparePlansOnPopup.click();
-		 */
+		 
 		validateNew(enrollButton);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 
@@ -766,9 +766,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * Back to VPP
-	 */
+	 *//*
 	public VPPPlanSummaryPageMobile backToPlans() {
 		try {
 			// Thread.sleep(10000);
@@ -795,11 +795,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
-	/**
+	*//**
 	 * This method is to cancel the given enrollment
 	 * 
 	 * @param planName
-	 */
+	 *//*
 	public void cancelEnrollment(String planName) {
 
 		if (driver.findElements(By.xpath("//button[@aria-label='Remove " + planName + "']")).size() > 0) {
@@ -830,9 +830,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'plan-drug-doctor')]//a[contains(@dtmname, 'Update your drugs')]")
     private WebElement DrugPricingModal_EditDrugslink;
 
-	/**
+	*//**
 	 * click edit drugs from plan card
-	 */
+	 *//*
 	public void clickEditDrugsPlancard() {
 		validateNew(viewDrugPricingLink);
         viewDrugPricingLink.click();
@@ -848,9 +848,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "(//div[@role='list']/div[starts-with(@class,'d-inline-block')]//a[contains(@dtmname,'Add Drugs')])[1]")
 	public WebElement addDrugLinkFirstPlanCard;
 
-	/**
+	*//**
 	 * click add drugs from plan card
-	 */
+	 *//*
 	public void clickAddDrugsPlancardNew() {
 //		enterDrugInfoPlanCard.click();
 		jsClickNew(addDrugLinkFirstPlanCard);
@@ -911,11 +911,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		System.out.println("Added Drug Count : " + DrugListItems.length);
 		for (String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			/*
+			
 			 * List<WebElement> DrugName = driver.findElements(By.xpath(
 			 * "//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"
 			 * ));
-			 */
+			 
 
 			List<WebElement> DrugName = driver
 					.findElements(By.xpath("//ul[@class='drugs-list']//*[contains(@id,'DrugName')]"));
@@ -1024,7 +1024,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 }
-=======
+=======*/
 package pages.mobile.acquisition.commonpages;
 
 import java.util.Arrays;
@@ -2067,4 +2067,4 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 }
->>>>>>> 2dd4d79bfa0128f9fc70b44d946f1e869dade21a
+

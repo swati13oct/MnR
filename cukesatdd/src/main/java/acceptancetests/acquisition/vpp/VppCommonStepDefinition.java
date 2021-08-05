@@ -965,10 +965,11 @@ private Scenario scenario;
 		 */
 
 		String zipcode = memberAttributesMap.get("Zip Code");
+		System.out.println("@@zip code @@"+zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		MultiCountyModalPage multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
+	MultiCountyModalPage multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
 
 		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
