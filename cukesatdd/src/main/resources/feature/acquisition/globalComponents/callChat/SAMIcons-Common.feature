@@ -9,12 +9,12 @@ Feature: ACQ M&R- To test SAM Icons
     Then the user validates whether call icon is visible
     And the user validates the chat icon
 
-    @samChatAARP @regressionAARP
+    @samIconsAARP123 @regressionAARP
     Examples: 
       | pagename | site |
       | [blank]        | AARP |
       
-      @samChatAARP
+      @samIconsAARP
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -281,11 +281,12 @@ Feature: ACQ M&R- To test SAM Icons
 |resources/ma-pdp-information-forms.html|AARP|
  
       
-    @samChatUHC @regressionUHC
+    @samIconsUHC @regressionUHC
     Examples: 
       | pagename | site |
       | [blank]  | UHC |
-      
+     
+     @samIconsUHC 
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
@@ -594,22 +595,22 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     Then the user validates the proactive chat
 
-    @samChatAARP @regressionAARP
+    @samIconsAARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-    @samChatUHC @regressionUHC
+    @samIconsUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-    @samChatAARP @regressionAARP
+    @samIconsAARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | planName                        |
       | AARP |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @samChatUHC @regressionAARP
+    @samIconsUHC @regressionAARP
     Examples: 
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
@@ -644,21 +645,23 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     And the user validates the proactive chat
 
-    @samChatAARP @regressionAARP
+    @samIconsAARP @regressionAARP
     Examples: 
       | site | zipCode | planType | planName                                            |drug1|
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|
 
-    @samChatUHC @regressionUHC
+    @samIconsUHC @regressionUHC
     Examples: 
       | site | zipCode | planType | planName                                            |drug1|
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|
       
       Scenario Outline: To test the SAM icons on PRE pages
-    Given the user is on medicare acquisition site landing page
+    Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
-    When user opens the page to validate M&R Sites
-      | pagename | <pagename> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    Then the user validates whether call icon is visible
+    And the user validates the chat icon
+    And the user validates the proactive chat
     And user clicks on get started to start questionnaire
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -674,12 +677,12 @@ Feature: ACQ M&R- To test SAM Icons
       And the user clicks the plans of the below plan type
       | Plan Type | <planType> |
       
-      @samChatAARP @regressionAARP
+      @samIconsAARP 
     Examples: 
       | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
 
-    @samChatUHC @regressionUHC
+    @samIconsUHC 
     Examples: 
       | site | zipcode | planType | planName                                            |drug1|pagename|isMultiCounty | county            |isCoverageOpt|Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|
       | UHC |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|plan-recommendation-engine.html#/get-started|No            | Miami-Dade County |PDP           |Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
@@ -691,12 +694,12 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | <pagename> |
     Then the user validates the proactive chat
 
-    @samChatAARP @regressionAARP
+    @samIconsAARP @regressionAARP
     Examples: 
       | pagename | site |
       | [blank] | AARP |
       
-      @samChatAARP
+      @samIconsAARP
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -963,11 +966,12 @@ Feature: ACQ M&R- To test SAM Icons
 |resources/ma-pdp-information-forms.html|AARP|
  
       
-    @samChatUHC @regressionUHC
+    @samIconsUHC @regressionUHC
     Examples: 
       | pagename | site |
       | [blank]  | UHC |
       
+      @samIconsUHC
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
