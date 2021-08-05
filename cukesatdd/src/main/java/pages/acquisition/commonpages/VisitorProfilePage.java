@@ -300,7 +300,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 *
 	 * }
 	 */
-	public void validateAddedDrugAndPharmacy(String drug) {
+	public void validateAddedDrugAndPharmacy(String drug,String user_state) {
 
 		/*
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
@@ -325,7 +325,14 @@ public class VisitorProfilePage extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+		if(user_state.equalsIgnoreCase("auth")) {
+			System.out.println(drugHeader.getText());
 	     Assertion.assertTrue((drugHeader.getText().trim().contains("Saved Drugs (1) / Pharmacy")));
+		}
+		else if(user_state.equalsIgnoreCase("unauth")){
+			System.out.println(drugHeader.getText());
+			Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
+		}
 	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
