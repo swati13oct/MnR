@@ -420,6 +420,14 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		System.out.println("part_B_Year_Displaye Displayed : "+part_B_Year_Displaye);
 		System.out.println("startDate_Displaye Displayed : "+startDate_Displaye);
 
+
+		System.out.println("part_A_Month_Expected Displayed : "+part_A_Month_Expected);
+		System.out.println("part_A_Month_Expected Displayed : "+part_A_Year_Expected);
+		System.out.println("part_B_Month_Expected Displayed : "+part_B_Month_Expected);
+		System.out.println("part_B_Year_Expected Displayed : "+part_B_Year_Expected);
+		System.out.println("start_Date_Expected Displayed : "+start_Date_Expected);
+
+
 		if(DOB_Displayed.contains(DOB_Formatted) && part_A_Month_Expected.contains(part_A_Month_Displaye)
 			&& part_A_Year_Expected.contains(part_A_Year_Displaye ) && part_B_Month_Expected.contains(part_B_Month_Displaye )
 					&&  part_B_Year_Expected.contains(part_B_Year_Displaye) &&  start_Date_Expected.contains(startDate_Displaye)) {
