@@ -192,14 +192,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
+		
+		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs & Pharmacy (1)")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
 		jsClickNew(drugHeader);
 		System.out.println("Drug Name in VP page: " + drugName.getText());
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 				savedDrugsAndDoctorsHeader.getText().trim());
 		// Assertion.assertTrue(pharmacyAddress.isDisplayed());
 	}
@@ -242,20 +243,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 		}
 	}
-	
-	public void validateAddedPlansNew(String planNames) {
-        String[] listOfTestPlans = planNames.split(",");
-        CommonUtility.checkPageIsReadyNew(driver);
-        for (String plan : listOfTestPlans) {
-            System.out.println("Checking Saved Plan on VP for : " + plan);
-            WebElement addedPlan = driver
-                    .findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
-            validateNew(addedPlan);
-            System.out.println(addedPlan.getText());
-            Assertion.assertEquals(plan, addedPlan.getText().trim());
-            System.out.println("Verified plans are added on visitior profile page");
-        }
-    }
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
