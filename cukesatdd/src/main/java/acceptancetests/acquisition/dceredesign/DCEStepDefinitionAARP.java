@@ -2826,22 +2826,32 @@ public class DCEStepDefinitionAARP {
 		getStartedPage.ValidateImportOptionDIspalyed();
 	}
 	@Then("^the user clicks on Import Drugs and validates Import Flow \\- Imports Get Started\\, Member NonMember Selection modals$")
-	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals() throws Throwable {
+	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals(DataTable attributes) throws Throwable {
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		getStartedPage.ClickImportValidateModals();
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String Authenticated_Flag = memberAttributesMap.get("AuthenticatedFlag");
+		getStartedPage.ClickImportValidateModals(Authenticated_Flag);
 	}
 
 	@Given("^the user selects Member and provides Member Details and proceeds to import$")
 	public void the_user_selects_Member_and_provides_Member_Details_and_proceeds_to_import(DataTable attributes) {
 		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String FirstName = "";
+		String LastName = "";
+		if(memberAttributesMap.get("AuthenticatedFlag").equalsIgnoreCase("false")){
+			 FirstName = memberAttributesMap.get("FirstName");
+			 LastName = memberAttributesMap.get("LastName");
+		}
+		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 		String Member_DOB = memberAttributesMap.get("DOB");
 		String Member_Zip = memberAttributesMap.get("ZipCode");
 		String Member_MBI = memberAttributesMap.get("MBI");
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		getStartedPage.EnterMemberDetailsAndImport(Member_DOB, Member_Zip, Member_MBI);
+		getStartedPage.EnterMemberDetailsAndImport(AuthenticatedFlag, FirstName, LastName, Member_DOB, Member_Zip, Member_MBI);
 	}
 
 	@Given("^the user validates Import Success/Failure modal as follows$")
