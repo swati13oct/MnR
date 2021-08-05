@@ -1384,7 +1384,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
-		if (!LinktoExitScenario.getText().contains("Compare"))
+		if (!LinktoExitScenario.getText().contains("ompare"))
 			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
 
 		jsClickNew(LinktoExitScenario);
