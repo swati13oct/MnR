@@ -319,6 +319,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#state-select")
 	private WebElement stateDropDown;
+	
+	@FindBy(xpath = "//*[@id='shop-scroll']/div[2]/div[3]/div/div[1]/button")
+	private WebElement mobileMenuClose;
+	
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
@@ -4461,12 +4465,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath="//div[@class='uhc-accordion__header']//div[text()='Learn About Medicare']")
+	@FindBy(xpath="//*[@id='accordion-3-button']")
 	public WebElement learnAboutMedicareLinkFooter;
 	
 	public void clickLearnAboutMedicareNavLink(String linkName) {
-		scrollToView(learnAboutMedicareLinkFooter);
-		learnAboutMedicareLinkFooter.click();
+		jsClickNew(learnAboutMedicareLinkFooter);
 
 		WebElement link = driver.findElement(
 				By.xpath("//div[contains(@class,'uhc-accordion__content')]//a[contains(text(),'" + linkName + "')]"));
@@ -4701,6 +4704,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatestatedropDown(String state, String code) {
+		
+		//below if loop added because when browser back action executes previous mobile menu is still open to close that 
+		if(mobileMenuClose.isDisplayed())
+			mobileMenuClose.click();
+			
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*

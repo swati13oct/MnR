@@ -284,10 +284,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")
 	private WebElement EnrollinPlanCompare_MAPD;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
