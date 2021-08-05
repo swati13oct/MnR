@@ -1,4 +1,4 @@
-@globalComponent @samIcons
+@globalComponent
 Feature: 1.15 ACQ M&R- To test SAM Icons
 
   Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> <pagename>
