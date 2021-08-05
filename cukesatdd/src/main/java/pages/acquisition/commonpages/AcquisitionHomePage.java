@@ -754,25 +754,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(text(),'Shop for Part C Plans')]")
 	private WebElement shopForPartCPlans;
 	
-	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForPlanCHeader;
 	
 	@FindBy(xpath = "//span[contains(text(),'Shop for Medigap Plans')]")
 	private WebElement shopForMedigapPlans;
 	
-	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForMedigapHeader;
 	
 	@FindBy(xpath = "//span[contains(text(),'Shop for Part D Plans')]")
 	private WebElement shopForPartD;
 	
-	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForPartDHeader;
 	
 	@FindBy(xpath = "//span[contains(text(),'Shop for D-SNPs')]")
 	private WebElement shopForDSNP;
 	
-	@FindBy(xpath = "//span[@class='heading-1'])[2]")
+	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForDSNPHeader;
 	
 	@FindBy(xpath = "//a[contains(text(),'Shop All Plans')]")
@@ -7171,19 +7171,19 @@ public void enterAndValidateZipCode() throws AWTException {
 	}
 	
 	public void needHelpContentValidation() {
-		sleepBySec(6);
-	Assert.assertEquals(Needhelpcontent.getText(), "1-877-699-5710");
+	sleepBySec(6);
+   	Assert.assertEquals(Needhelpcontent.getText(), "1-877-699-5710");
+	
 	}
 	
-
 	
 	public void validateShopC() {
 		CommonUtility.waitForPageLoad(driver, shopForPartCPlans, 30);
 		jsClickNew(shopForPartCPlans);
 		CommonUtility.waitForPageLoad(driver,shopForPlanCHeader, 30);
 		Assert.assertEquals(shopForPlanCHeader.getText(), "Medicare Advantage (Part C) Plans from UnitedHealthcare");
-		driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, shopForPartCPlans, 30);
+//		driver.navigate().back();
+//		CommonUtility.waitForPageLoad(driver, shopForPartCPlans, 30);
 		
 	}
 	public void validateMedigap() {
@@ -7191,8 +7191,8 @@ public void enterAndValidateZipCode() throws AWTException {
 		jsClickNew(shopForMedigapPlans);
 		CommonUtility.waitForPageLoad(driver,shopForMedigapHeader, 30);
 		Assert.assertEquals(shopForMedigapHeader.getText(), "AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
-		driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
+//		driver.navigate().back();
+//		CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
 		
 	}
 	public void validateShopforPartD() {
@@ -7200,8 +7200,8 @@ public void enterAndValidateZipCode() throws AWTException {
 		jsClickNew(shopForPartD);
 		CommonUtility.waitForPageLoad(driver,shopForPartDHeader, 30);
 		Assert.assertEquals(shopForPartDHeader.getText(), "Medicare Prescription Drug (Part D) Plans from UnitedHealthcare");
-		driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, shopForPartD, 30);
+//		driver.navigate().back();
+//		CommonUtility.waitForPageLoad(driver, shopForPartD, 30);
 		
 	}
 	
@@ -7210,8 +7210,8 @@ public void enterAndValidateZipCode() throws AWTException {
 		jsClickNew(shopForDSNP);
 		CommonUtility.waitForPageLoad(driver,shopForDSNPHeader, 30);
 		Assert.assertEquals(shopForDSNPHeader.getText(), "Dual Special Needs Plans (D-SNP) from UnitedHealthcare");
-		driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, shopForDSNP, 30);
+//		driver.navigate().back();
+//		CommonUtility.waitForPageLoad(driver, shopForDSNP, 30);
 		
 }
 	public void validateShopAll() {
@@ -7241,8 +7241,8 @@ public void enterAndValidateZipCode() throws AWTException {
 		jsClickNew(learnmorelink);
 		CommonUtility.waitForPageLoad(driver,Enrollheading, 30);
 		Assert.assertEquals(Enrollheading.getText(), "When to Enroll in Medicare");
-		/*driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, learnmorelink, 30);*/
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, learnmorelink, 30);
 	}
 	
 	public void validateLearnMoreBtn() {

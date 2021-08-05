@@ -1141,8 +1141,9 @@ public class GlobalComponentsCommonStepDefinition {
 	public void user_clicks_on_shop_for_part_c_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.learnMorevalidation();
+		aquisitionhomepage.validateShopC();
 	}
+	
 	@When("user clicks on shop for Medigap plans")
 	public void user_clicks_on_shop_for_medigap_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()

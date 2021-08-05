@@ -20,17 +20,17 @@ Feature: 1.12 homePage flows
       | County Name2     | <county>        |
       | Is Multi County2 | <isMultiCounty> |
 
-    @homePage_AARPVPP
-    Examples: 
-      | E2E_Scenario_1                                | site|pageName | path                                        |MultiCOuntyzipcode| ZipCodeOnPlan|SiteOnPlan                                                                 | isMultiCounty | county           |  address            | city      | state       |
+  @homePage_AARPVPP
+   Examples: 
+      | E2E_Scenario_1                                | site|pageName | path                                        |MultiCOuntyzipcode| ZipCodeOnPlan|SiteOnPlan                                                                 | isMultiCounty |  county           |  address            | city      | state       |
       | UAT_Home Page E2E Regression 1_Hero Component | AARP|Homepage | dolphin-authoring/redesigned-home-page.html |78006             | 33410        |https://www.stage-aarpmedicareplans.uhc.com/health-plans.html#/plan-summary| 33410          | Palm Beach County|584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |
 
-  #@homePage_VPPUHC
-  #Examples:
-  #| E2E_Scenario_1                                | site                                                                                       |address                    | city      | state       |
-  #| UAT_Home Page E2E Regression 1_Hero Component | https://www.stage-uhcmedicaresolutions.uhc.com/dolphin-authoring/redesigned-home-page.html |584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT|
- 
- 
+  @homePage_VPPUHC
+   Examples: 
+      | E2E_Scenario_1                                | site|pageName | path                                         |MultiCOuntyzipcode| ZipCodeOnPlan|SiteOnPlan                                                                   | isMultiCounty | county           |  address            | city      | state       |
+      | UAT_Home Page E2E Regression 1_Hero Component | UHC |Homepage | dolphin-authoring/redesigned-home-page.html |78006             | 33410        |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.html#/plan-summary| 33410          | Palm Beach County|584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |
+
+
   @homePage
   Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage
     Given the user is on medicare acquisition site landing page
@@ -40,23 +40,17 @@ Feature: 1.12 homePage flows
       | PagePath | <path>     |
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
-    And user clicks on shop for Part C plans
-    And the user navigates to following medicare acquisition site page
-    | PageName | <pageName1> |
-    | PagePath | <path1>     |
-    Then the user validate ZipCode Components on page using ZipCode "55410"
-    Then the user validates TFN on need help section of Shop pages
-    | TFNxpath | <tfnXpath> |
-    | TFNflag  | <tfnFlag>  |
-    Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
-    When the user clicks on Agent link and validates the correct URL is loaded from article page
-    | UHC Agent URL | <UHCUrl> |
-    Then the user clicks on browser back button
+    #And user clicks on shop for Part C plans
+    #Then the user validate ZipCode Components on page using ZipCode "55410"
+    #Then the user validates TFN on need help section of Shop pages
+    #| TFNxpath | <tfnXpath> |
+    #| TFNflag  | <tfnFlag>  |
+    #Then the user validates whether call icon is visible
+    #Then the user validates whether chat icon is visible
+    #When the user clicks on Agent link and validates the correct URL is loaded from article page
+    #| UHC Agent URL | <UHCUrl> |
+    #Then the user clicks on browser back button
     And user clicks on shop for Medigap plans
-    And the user navigates to following medicare acquisition site page
-    | PageName | <pageName> |
-    | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates TFN on need help section of Shop pages
     | TFNxpath | <tfnXpath> |
@@ -67,9 +61,6 @@ Feature: 1.12 homePage flows
     | UHC Agent URL | <UHCUrl> |
     Then the user clicks on browser back button
     And user clicks on shop for Part D plans
-    And the user navigates to following medicare acquisition site page
-    | PageName | <pageName> |
-    | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates TFN on need help section of Shop pages
     | TFNxpath | <tfnXpath> |
@@ -80,9 +71,6 @@ Feature: 1.12 homePage flows
     | UHC Agent URL | <UHCUrl> |
     Then the user clicks on browser back button
     And user clicks on shop for D-SNPs plans
-    And the user navigates to following medicare acquisition site page
-    | PageName | <pageName> |
-    | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates TFN on need help section of Shop pages
     | TFNxpath | <tfnXpath> |
@@ -109,13 +97,12 @@ Feature: 1.12 homePage flows
     
     @homePage_AARPshop
     Examples: 
-      | E2E_Scenario_2                                  | site | geoState | path                                        | pageName  | path1                              | pageName1              | tfnXpath                                                           | tfnFlag | UHCUrl                      | TFN            | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                          |
-      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | shop/medicare-advantage-plans.html | ShopPlan: Shop MA Plan | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 1-877-699-5710 |          33410 | https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html#/plan-summary |
-
-  #| UAT_Home Page E2E Regression 2_Layout Container | https://www.stage-aarpmedicareplans.uhc.com/dolphin-authoring/redesigned-home-page.html | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |https://www.myuhcagent.com/ | 1-877-699-5710|
-  #| UAT_Home Page E2E Regression 2_Layout Container | https://www.stage-aarpmedicareplans.uhc.com/dolphin-authoring/redesigned-home-page.html | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |https://www.myuhcagent.com/ | 1-877-699-5710 |
-  #| UAT_Home Page E2E Regression 2_Layout Container | https://www.stage-aarpmedicareplans.uhc.com/dolphin-authoring/redesigned-home-page.html | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |https://www.myuhcagent.com/ | 1-877-699-5710|
-  
+      | E2E_Scenario_2                                  | site | geoState | path                                        |  pageName | tfnXpath                                                             | tfnFlag | UHCUrl                      |                                                                                                           
+      #| UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page |  (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |https://www.myuhcagent.com/  | 
+      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |https://www.myuhcagent.com/  | 
+      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |https://www.myuhcagent.com/  | 
+      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |https://www.myuhcagent.com/  | 
+  #
   #@homePage_UHC_Shopplans
   #Examples:
   #| E2E_Scenario_2                                  | site                                                                                       | path                                | pageName                     |tfnXpath                                                            | tfnFlag |UHCUrl                      |
