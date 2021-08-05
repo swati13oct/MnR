@@ -406,7 +406,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugDetails_ChangePharmacyLnk);
         validateNew(DrugDetails_DrugCostsHeading);
         validateNew(LinktoExitScenario);
-        if(!LinktoExitScenario.getText().contains("Compare")) {
+        if(!LinktoExitScenario.getText().contains("ompare")) {
             validateNew(LinkToDrugSummary);
         }
         /*
