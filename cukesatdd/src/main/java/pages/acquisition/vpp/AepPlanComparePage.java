@@ -297,7 +297,7 @@ public class AepPlanComparePage extends UhcDriver {
                 String key = "";
                 String value = "";
 
-                List<WebElement> headerCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("td")));
+                List<WebElement> headerCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("th")));
                 List<WebElement> planCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("td")));
 
                 if (headerCellXpathList.size() != 0) {
@@ -305,7 +305,7 @@ public class AepPlanComparePage extends UhcDriver {
                 }
 
                 if (planCellXpathList.size() != 0) {
-                    value = planCellXpathList.get(1).getText();
+                    value = planCellXpathList.get(0).getText();
                 }
 
                 result.put(key + keyword, value);

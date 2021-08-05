@@ -120,7 +120,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
+	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")
@@ -217,6 +217,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
 	private List<WebElement> savedDrugsList;
+	
+	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
+	private WebElement savedDrug;
 
 	@FindAll({ @FindBy(xpath = "//div[contains(@id,'ProviderName')]") })
 	private List<WebElement> savedProvidersList;
@@ -297,7 +300,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 *
 	 * }
 	 */
-	public void validateAddedDrugAndPharmacy(String drug) {
+	public void validateAddedDrugAndPharmacy(String drug,String user_state) {
 
 		/*
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
@@ -322,7 +325,14 @@ public class VisitorProfilePage extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-	     Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
+		if(user_state.equalsIgnoreCase("auth")) {
+			System.out.println(drugHeader.getText());
+	     Assertion.assertTrue((drugHeader.getText().trim().contains("Saved Drugs (1) / Pharmacy")));
+		}
+		else if(user_state.equalsIgnoreCase("unauth")){
+			System.out.println(drugHeader.getText());
+			Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
+		}
 	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
@@ -1121,17 +1131,23 @@ public class VisitorProfilePage extends UhcDriver {
      * Delete all the drugs from the profile
      */
     public void deleteAllDrugs(String drugList) {
-        CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
-        if (drugList.contains(",")) {
-            String[] drugs = drugList.split(",");
-            for (String drugName : drugs) {
-                driver.findElement(By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']")).click();
-                removeDrugBtn.click();
-            }
-        } else {
-            driver.findElement(By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']")).click();
-            removeDrugBtn.click();
-        }
+		if (validate(savedDrug, 45)) {
+			CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
+			if (drugList.contains(",")) {
+				String[] drugs = drugList.split(",");
+				for (String drugName : drugs) {
+					driver.findElement(
+							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
+							.click();
+					removeDrugBtn.click();
+				}
+			} else {
+				driver.findElement(
+						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
+						.click();
+				removeDrugBtn.click();
+			}
+		}
 
 
         CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
