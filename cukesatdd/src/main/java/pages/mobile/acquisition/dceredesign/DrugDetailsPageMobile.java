@@ -439,10 +439,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal') and (contains(@id,'modal'))]")
 	public WebElement StageInfo_Modal;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(text(), 'Done')]")
+	@FindBy(css = "[class^='uhc-modal__content'] button[class$='donebutton']")
 	public WebElement StageInfo_Modal_DoneBtn;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'cancelicon')]")
+	@FindBy(css = "[class^='uhc-modal__header'] button#cancelicon")
 	public WebElement StageInfo_Modal_Close;
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Initial')]")
@@ -457,6 +457,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validateDrugStageInfoModals() {
 		validateNew(MonthlyDrugStage_InitialCoverageLink);
 		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		CommonUtility.waitForPageLoadNew(driver, StageInfo_Modal_DoneBtn, 15);
 		if (validateNew(StageInfo_Modal) && validateNew(StageInfo_Modal_DoneBtn) && validateNew(StageInfo_Modal_Close)
 				&& validateNew(InitialCoverage_Modal_Header)) {
 			System.out.println(
@@ -468,6 +469,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		validateNew(MonthlyDrugStage_CoverageGapLink);
 		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		CommonUtility.waitForPageLoadNew(driver, StageInfo_Modal_DoneBtn, 15);
 		if (validateNew(StageInfo_Modal) && validateNew(StageInfo_Modal_DoneBtn) && validateNew(StageInfo_Modal_Close)
 				&& validateNew(CoverageGap_Modal_Header)) {
 			System.out.println(
@@ -479,6 +481,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		validateNew(MonthlyDrugStage_CatastropheLink);
 		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		CommonUtility.waitForPageLoadNew(driver, StageInfo_Modal_DoneBtn, 15);
 		if (validateNew(StageInfo_Modal) && validateNew(StageInfo_Modal_DoneBtn) && validateNew(StageInfo_Modal_Close)
 				&& validateNew(Catastrophe_Modal_Header)) {
 			System.out.println(
@@ -528,29 +531,28 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length - 1;
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath(
-				"//h2[contains(text(), '" + DrugCount_Total + " Covered)') and contains(text(), 'Your Drugs')]"));
+				"//span[contains(text(), '" + DrugCount_Total + " Covered)') and contains(text(), 'Your Drugs')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
+		for (i = 0; i <= DrugCount_Total - 1; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			WebElement DrugName = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentDrug + "')]"));
+			WebElement DrugName = driver
+					.findElement(By.xpath("//*[@buttonid='edityourdrug']//p[contains(text(), '" + currentDrug + "')]"));
 			// WebElement DrugIntlCoverText =
 			// driver.findElement(By.xpath("//caption[contains(text(), 'Your
 			// Drugs')]/ancestor::table//span[contains(text(),
 			// '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(),
 			// 'Initial Coverage Cost')]"));
-			WebElement DrugYouPay = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@buttonid='edityourdrug']//p[contains(text(), '"
+					+ currentDrug
+					+ "')]//following-sibling::ul//span[contains(text(),'You Pay')]/parent::li[contains(text(),'$')]"));
 
-			if (scrollToView(DrugName) && scrollToView(DrugYouPay)) {
+			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out.println(
 						"Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "
 								+ currentDrug);
@@ -785,13 +787,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void ValidatesDrugsList_MonthlyDrugStage(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length - 1;
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
 		for (String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			WebElement DrugName = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Initial Coverage')]/ancestor::table//td[contains(text(), '"
-							+ currentDrug + "')]"));
+			WebElement DrugName = driver
+					.findElement(By.xpath("//*[@id='initialmobile']//h4[contains(text(),'" + currentDrug + "')]"));
 
 			if (validateNew(DrugName)) {
 				System.out
