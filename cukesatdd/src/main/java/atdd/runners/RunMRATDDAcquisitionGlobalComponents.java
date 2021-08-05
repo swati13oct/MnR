@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionGlobalComponents.json",
 						"timeline:target" },
-				tags = "@regressionAARP")
+				tags = "@homePage_AARPshop")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{

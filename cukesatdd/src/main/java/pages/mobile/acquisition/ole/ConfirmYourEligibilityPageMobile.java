@@ -64,7 +64,9 @@ public class ConfirmYourEligibilityPageMobile extends UhcDriver{
 	
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(id = "confirmEligibilityh3")
+	@FindBy(xpath = "(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")
 	public WebElement MedicalInfoPageHeader;
 	
 	//Select Medicare Card Type - A 0r B

@@ -35,10 +35,9 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	ArrayList<String> DrugsInDCE;
-	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	public static ArrayList<String> drugNames = new ArrayList<String>();
-	public static ArrayList<String> drugNamesStartOver = new ArrayList<String>();
-	public static ArrayList<String> drugNamesinPRE = new ArrayList<String>();
+	public ArrayList<String> drugNamesStartOver = new ArrayList<String>();
+	public ArrayList<String> drugNamesinPRE = new ArrayList<String>();
 	
 
 
@@ -345,7 +344,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	public void comparingDrugwithDCE() {
 		System.out.println("Validating " + page + " page druglist with VPP drugs");
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
-		DrugsInDCE = dce.vppDrugsResults;
+		DrugsInDCE = dce.DCEDrugsResults;
 		threadsleep(2000);
 		drugnamesList();
 		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
@@ -413,9 +412,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		drugNames = new ArrayList<String>();
 		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
-			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
-					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() );
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);

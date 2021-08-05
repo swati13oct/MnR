@@ -92,7 +92,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(xpath = "//*[@id='modal-label'][contains(text(),'Select a Pharmacy')]")
+	@FindBy(xpath = "(//button[contains(@aria-label,'View Drug Costs')])[1]")
 	public WebElement selectPharmacyHeader;
 
 //	@FindBy(id = "selectPharmcyModalCloseLink")
@@ -651,7 +651,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public DrugSummaryPage validateSelectPharmacyPage() {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
-				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
+				&& validateNew(preferredMailPharmacy)/* && validateNew(pharmacyListSection)*/
 				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
 			return new DrugSummaryPage(driver);
@@ -661,7 +661,6 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public DrugDetailsPage clickViewDrugCostBtn() {
 		jsClickNew(viewDrugCostBtn);
-		//viewDrugCostBtn.click();
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
@@ -798,8 +797,9 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement DrugsCoveredText;
 
 	public void ValidateNCPharmacyCoveredDrugs() {
-        pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver,planCardHeader, 30 );
+		pageloadcomplete();
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, planCardHeader, 30);
 		if (validateNew(DrugsCoveredText)) {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
@@ -1123,7 +1123,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validateNoResultsMsg(String expectedMsg) {
-	    pageloadcomplete();
+	pageloadcomplete();
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
 		System.out.println(expectedMsg);
@@ -1291,6 +1291,7 @@ public class DrugSummaryPage extends UhcDriver {
 		System.out.println("All Pharmacy have filter text");
 	}
 
+
     @FindBy(xpath = "//button[contains(@dtmname, 'drug pricing:edit drug list')]")
     public WebElement DrugPricingModal_EditDrugs;
 
@@ -1312,4 +1313,36 @@ public class DrugSummaryPage extends UhcDriver {
         Assertion.fail("Did not Navigate to Build Drug List Page");
         return null;
     }
+	
+	@FindBy(xpath = "//*[@id='pdp-plans-radio']")
+	public WebElement pdpTabHeading;
+	
+	@FindBy(xpath = "//*[@id='snp-plans-radio']")
+	public WebElement snpTabHeading;
+	
+	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	public WebElement headingPlantype;
+	
+	public void selectAndVerifyPlanType(String planType, String PlanName) {
+		
+		if(planType.contains("Medicare Prescription Drug Plans")) 
+		{
+			validateNew(pdpTabHeading);
+			jsClickNew(pdpTabHeading);
+			
+		}else if(planType.contains("Medicare Special Needs Plans")) 
+		{
+			validateNew(snpTabHeading);
+			jsClickNew(snpTabHeading);
+		}
+	
+		WebElement DrugCost;
+		
+			DrugCost = driver.findElement(By.xpath("//button[contains(@aria-label,'View Drug Costs "+PlanName+"')]"));
+            validateNew(DrugCost);
+            jsClickNew(DrugCost);
+
+		}
+
+
 }

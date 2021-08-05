@@ -5,9 +5,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -22,11 +22,11 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
-		@sanity @vbfGate
-		Examples: 
+    @sanity @vbfGate
+    Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |
-      
+
     @vppPlanCompareCommon_UHC01 @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
@@ -34,9 +34,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00002 | UHC  |   10001 | NO            | New York  County | SNP      | future   |
       | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
-      
+
     @sanity
-		Examples: 
+    Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00002 | UHC  |   10001 | NO            | New York  County | SNP      | future   |
 
@@ -44,9 +44,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -70,9 +70,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -86,9 +86,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     #And user clicks on termsOfuse link of privacypolicy page
     And user clicks on disclaimers link of terms & conditions page
     And user clicks on agents & brokers link of disclaimers page
+
     #And user clicks on Request Assistance and validates modal window ulayer
     #And user verifies home link of agents & brokers page
-
     @vppPlanCompareCommon_AARP01 @regressionAARP
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
@@ -98,14 +98,15 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
-	#1a
+
+  #1a
   Scenario Outline: TID: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -122,14 +123,15 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
-	#1b
+
+  #1b
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -149,14 +151,15 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | future   |
-	#1c
+
+  #1c
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget on <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -181,9 +184,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -214,9 +217,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -231,7 +234,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     When user selects a provider from medical group and retuns to plan compare page
     Then verify Your doctors is loaded with all added doctor summary on Plan Compare page
 
-    @vppPlanCompareCommon_AARP02 @regressionAARP 
+    @vppPlanCompareCommon_AARP02 @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
@@ -245,9 +248,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -278,9 +281,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -310,9 +313,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -336,9 +339,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -346,28 +349,28 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     Then remove "<removePlanIndices>" plan from new plan compare page
-    #Then validate all available plans are shown on click of view all plans
 
+    #Then validate all available plans are shown on click of view all plans
     @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | AARP |   55343 | NO            | Hennepin County 		| MAPD     |             3,1,2 | future   |           5 |
-      | 00016 | AARP |   33111 | NO            | Miami-Dade County 	| SNP    	 |             2,1   | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | future   |           5 |
+      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | future   |           4 |
 
     @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| MAPD     |               2,1 | future   |           5 |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| PDP      |               2,1 | future   |           3 |
-      | 00016 | UHC  |   33111 | NO            | Miami-Dade County 	| SNP	     |             	 2,1 | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County   | MAPD     |               2,1 | future   |           5 |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County   | PDP      |               2,1 | future   |           3 |
+      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | future   |           4 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -392,9 +395,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -417,9 +420,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -442,9 +445,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -469,9 +472,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -494,9 +497,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -523,9 +526,9 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
+      | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>          |
+      | County Name     | <county>        |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -547,4 +550,91 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00026 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
-   
+
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Change Zip Code on Plan Compare Screen using <Click on Enter> on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>        |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then Verify Change Zip Code Link is displayed on compare Page
+    When the user performs zip search using following information on Plan Compare Page
+      | Zip Code        | <Changezipcode>       |
+      | Is Multi County | <ChangeisMultiCounty> |
+      | County Name     | <Changecounty>        |
+      | Click on Enter  | <ClickEnter>          |
+
+    @vppPlanCompareCommon_UHC03 @regressionUHC @test1
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | ClickEnter           |
+      | 00027 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         78006 | YES                 | Bexar County       | Click on Find Plan button |
+      | 00028 | UHC  |   78006 | Yes           | Bexar County       | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         90210 | NO                  | Los Angeles County | Click Enter               |
+
+    @vppPlanCompareCommon_AARP03 @regressionAARP
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | ClickEnter            |
+      | 00029 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         78006 | YES                 | Bexar County       | Click on Find Plan button |
+      | 00030 | AARP |   78006 | Yes           | Bexar County       | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         90210 | NO                  | Los Angeles County | Click Enter               |
+
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Invalid Zip Code on Plan Compare Screen on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>        |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then Verify Change Zip Code Link is displayed on compare Page
+    When the user searches for zip code using following information on Plan Compare Page
+      | Zip Code | <Changezipcode> |
+    Then Verify Invalid Zip Code Error message is displayed
+
+    @vppPlanCompareCommon_UHC03 @regressionUHC
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
+      | 00031 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         00000 |
+
+    @vppPlanCompareCommon_AARP03 @regressionAARP
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
+      | 00032 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         00000 |
+
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify  Searching plans with Zip Code containing zero plans on Plan Compare Screen on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>        |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then Verify Change Zip Code Link is displayed on compare Page
+    When the user searches for zip code using following information on Plan Compare Page
+      | Zip Code | <Changezipcode> |
+    Then Verify Zip Code with zero plans Error message is displayed
+
+    @vppPlanCompareCommon_UHC03 @regressionUHC 
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
+      | 00033 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         96799 |
+
+    @vppPlanCompareCommon_AARP03 @regressionAARP 
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
+      | 00034 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |         96799 |

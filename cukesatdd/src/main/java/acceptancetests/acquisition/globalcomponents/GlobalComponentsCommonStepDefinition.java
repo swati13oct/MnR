@@ -76,7 +76,7 @@ public class GlobalComponentsCommonStepDefinition {
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
 		
-		//scenario.log("Aayush Shah - Change made 5/13 - test");
+		scenario.log("Sai - 06/15------Need to remove  line 100 later");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -100,9 +100,13 @@ public class GlobalComponentsCommonStepDefinition {
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))){
+				
+				//aquisitionhomepage.validateSubtitle();
+		//}
 		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
-		
+		}
 	}
 	
 
@@ -446,6 +450,14 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickVisitAARPHeaderLink();
+
+	}
+	
+	@And("^user clicks on visit aarp.org link in the header for cancel$")
+	public void click_visitAARP_Link_in_the_header_for_cancel() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickVisitAARPHeaderLinkforcancel();
 
 	}
 
@@ -1124,18 +1136,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.needHelpContentValidation();
 	}
-	@When("user clicks on get started link and navigates to PRE")
-	public void user_clicks_on_get_started_link_and_navigates_to_pre() {
-	    AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.getStartedvalidation();
-	}
-	@When("user clicks on learn more link")
-	public void user_clicks_on_learn_more_link() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.learnMorevalidation();
-	}
+	
 	@When("user clicks on shop for Part C plans")
 	public void user_clicks_on_shop_for_part_c_plans() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -1168,6 +1169,18 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateShopAll();
 	}
 	
+	@When("user clicks on get started link and navigates to PRE")
+	public void user_clicks_on_get_started_link_and_navigates_to_pre() {
+	    AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.getStartedvalidation();
+	}
+	@When("user clicks on learn more link")
+	public void user_clicks_on_learn_more_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.learnMorevalidation();
+	}
 	@When("user clicks on learn more button link and navigates to Medicare Education Home page")
 	public void user_clicks_on_learn_more_button_link_and_navigates_to_medicare_education_home_page() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -1205,6 +1218,29 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateEMail();
+	}
+	
+	@Then("user clicks on cancel link on shop for a plan")
+	public void user_clicks_on_cancel_link_on_shop_for_a_plan() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnCancel();
+	}
+	@Then("user enters the zipcode and validates the URL")
+	public void user_enters_the_zipcode_and_validates_the_url(DataTable givenAttributes) {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String site = memberAttributesMap.get("SiteOnPlan");
+		String zipcode = memberAttributesMap.get("ZipCodeOnPlan");
+		System.out.println("@@site@@"+site);
+		aquisitionhomepage.sendZipCodeAndValidateUrl(zipcode,site);
 	}
 }
 

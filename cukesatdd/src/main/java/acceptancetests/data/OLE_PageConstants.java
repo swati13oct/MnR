@@ -26,7 +26,7 @@ public class OLE_PageConstants {
 	public static final String OLE_SPECIAL_ELECTION_PERIOD_PAGE = "olespecialelectionperiodpage";
 	public static final String OLE_SUPPLEMENTAL_BENEFITS_PAGE = "olesupplementalbenefitspage";
 	public static final String OLE_CONFIRM_YOUR_ELIGIBILITY_PAGE = "confirmyoureligibilitypage";
-		
+	public static final String OLE_SOA_PAGE= "soapage";	
 	//Pop-up Modal Pages
 	public static final String OLE_LEAVING_MODAL_PAGE = "oleleavingmodalpage";
 	public static final String OLE_CANCELLATION_MODAL_PAGE = "olecancellationmodalpage";
@@ -39,4 +39,5 @@ public class OLE_PageConstants {
 	public static final String PROVIDER_NUMBER = "providernumber";
 	public static final String MEDICAID_NUMBER  = "medicaidnumber";
 	public static final String CONFIRMATION_NUMBER = "confirmationnumber";
+
 }

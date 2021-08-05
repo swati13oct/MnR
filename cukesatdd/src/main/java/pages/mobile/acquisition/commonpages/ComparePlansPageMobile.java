@@ -221,6 +221,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 //	@FindBy(xpath = "//th//*[contains(@class,'provider-name')]")
 	@FindBy(xpath = "//*[@id='your-doctors-table']//tr[3]/th/span")
 	private WebElement FirstProviderName;
+	
+//	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/td[1]/span")
+	@FindBy(css = "#your-doctors-table tr[ng-repeat^='provider']:nth-child(3) > th[class$='mobile-heading'] > span")
+	private WebElement FirstProviderNameAfterAddition;
+	
+//	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/td[1]/span")
+	@FindBy(css = "#your-doctors-table tr[ng-repeat^='provider']:nth-child(4) > th[class$='mobile-heading'] > span")
+	private WebElement SecondProviderName;
 
 	@FindBy(xpath = "//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;
@@ -287,7 +295,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_PDP;
-
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
+	
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -580,7 +591,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		jsClickNew(planAvailableText);
 	}
 
-	public VPPPlanSummaryPageMobile navigateBackToAllPlans() {
+	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
 		BackToAllPlan.click();
@@ -592,6 +603,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
+		Thread.sleep(5000);
 		if (driver.getCurrentUrl().contains("#/plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1740,4 +1752,30 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public void validateAllDoctors() {
+		validateNew(backToAllPlansLink);
+		validateNew(yourDoctorsBanner);
+		validateNew(editDoctorsLink);
+		validateNew(providerSumamryHeader);
+		validateNew(providerSumamryHeaderCount);
+		validateNew(FirstProviderNameAfterAddition);
+		validateNew(SecondProviderName);
+		validateNew(viewlocationsLink);
+		System.out.println("Verified Edit Doctors Section");
+	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
+
 }

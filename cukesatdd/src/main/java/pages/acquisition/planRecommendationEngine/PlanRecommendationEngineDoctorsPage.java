@@ -200,7 +200,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		doctorspageOptions(doctor);
 		if (radioselect.isDisplayed()) {
 			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("40% Complete"));
+			Assert.assertTrue(pageProgressPercentage.getText().contains("33% Complete"));
 		} else {
 			System.out.println("Doctor Type not selected in Doctors Page");
 		}
@@ -293,7 +293,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 							|| browser.equalsIgnoreCase("IE"))
 						driver.manage().window().maximize();
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline"))
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline") || env.contains("digital-uatv2") )
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
 								"Prod Connected to Incorrect Rally");
 					else
@@ -563,6 +563,18 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		System.out.println(curWindow);
 		validateLinksanotherWindow(curWindow, "Doctors", search, 1, locationCount);
 		threadsleep(5000);
+	}
+	
+	public void addZeroProviders(String doctorsName) {
+		jsClickNew(doctorLookupOption);
+		System.out.println("Lookup Type Clicked");
+		jsClickNew(continueBtn);
+		providerlookup(doctorsName, 1);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[class*='secondary']")));
+		threadsleep(2000);
+		jsClickNew(modalContinuedoctors);
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 }

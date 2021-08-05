@@ -11,10 +11,12 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import pages.acquisition.commonpages.GlobalWebElements;
 
 public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements {
@@ -58,26 +60,29 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "button[class*='button-primary']")
 	private WebElement saveButton;
-
-	@FindBy(css = "#plan-list-1 button#editMyAnswers")
-	private WebElement mapdEditResponseButton;
-
-	@FindBy(css = "#plan-list-3 button#editMyAnswers")
-	private WebElement pdpEditResponseButton;
-
-	@FindBy(css = "#plan-list-4 button#editMyAnswers")
-	private WebElement snpEditResponseButton;
 	
+	@FindBy(css = ".editPref button")
+	private WebElement editYourResponse;
+	
+	@FindBy(css = "div[data-rel='#plan-list-1'] a")
+	private WebElement MAViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-3'] a")
+	private WebElement PDPViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-4'] a")
+	private WebElement SNPViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-1'] span.ng-binding")
+	private WebElement MAPlanCount;
+	
+	@FindBy(css = "div[data-rel='#plan-list-4'] span.ng-binding")
+	private WebElement SNPPlanCount;
+
 	//Save Results elements
 	
-	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
-	private WebElement mapdSaveResultsButton;
-
-	@FindBy(css = "#plan-list-3 button#updateSaveRecommendationBtn")
-	private WebElement pdpSaveResultsButton;
-
-	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
-	private WebElement snpSaveResultsButton;
+	@FindBy(css = ".saveRes button")
+	private WebElement saveYourResults;
 	
 	@FindBy(css = "#saveResultConfirmationTitle")
 	private WebElement saveResultsTitle;
@@ -85,11 +90,40 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "#saveResultPopupClose")
 	private WebElement saveResultsPopupClose;
 	
+	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
+	private WebElement SignInButton;
+	
+	@FindBy(css = "#cancelButton")
+	private WebElement cancelLink;
+	
 	@FindBy(css = "button#keepShoppingBtn")
 	private WebElement KeepShoppingPlansButton;
 	
 	@FindBy(css = "button#viewPlanBtn")
 	private WebElement ViewProfileButton;
+	
+	@FindBy(css = "li.planTileGrid")
+	private List<WebElement> plantiles;
+	
+	@FindBy(xpath = "//button[contains(text(),'Create Profile')]")
+	private WebElement CreateProfileButton;
+	
+	//Shopping Cart elements
+	
+	@FindBy(css = "button[class*='saved-items-button']")
+	private WebElement mySavedItems ;
+	
+	@FindBy(css = "img[alt*='Shopping Cart']")
+	private WebElement ShoppingCartImg;
+		
+	@FindBy(css = "h3#guest-profile")
+	private WebElement guestProfileLink;
+		
+	@FindBy(css = "h3#auth-profile")
+	private WebElement AuthProfileLink;
+		
+	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+	private WebElement signOut;
 
 	// Edit Responses page Elements
 
@@ -122,6 +156,15 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "#modal button[class*='primary']")
 	private WebElement locationModalConfirm;
+	
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card .uhc-pre-card__label")
+	private WebElement FirstRecommendationSectionTag;
+
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
+	private WebElement FirstRecommendationSectionPlanName;
+
+@FindBy(css = "div[class*='log-in'] a")
+private WebElement signInLink;	
 
 	// Variables
 
@@ -168,31 +211,118 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	public void navigateEditResponsePage(String flow) {
 		waitForPageLoadSafari();
-		if (flow.equalsIgnoreCase("pdp")) {
-			pdpEditResponseButton.click();
-		} else {
-			if (validate(mapdEditResponseButton, 10))
-				mapdEditResponseButton.click();
-			else
-				snpEditResponseButton.click();
-		}
+		validate(editYourResponse, 10);
+		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
 	
-	public void navigateSaveResultsPage(String flow) {
-		if (flow.equalsIgnoreCase("pdp")) {
-			pdpSaveResultsButton.click();
-		} else {
-			if (validate(mapdSaveResultsButton, 10))
-				mapdSaveResultsButton.click();
-			else
-				snpSaveResultsButton.click();
-		}
+	
+	public String firstRecomPlanName = "";
+	public String planType = "";
+	public String navigateSaveResultsPage() {
+		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
+		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
+		CommonConstants.firstRecommentionplanType.put(curID, planType);
+		validate(saveYourResults, 10);
+		saveYourResults.click();
 		validate(saveResultsTitle);
 		validate(saveResultsPopupClose, 30);
-		validate(KeepShoppingPlansButton, 30);
-		validate(ViewProfileButton, 30);
+		return firstRecomPlanName;
+	}
+	
+	public void ValidatePREWidget(String userType,String plantype, String username, String password) {
+		if(userType.equalsIgnoreCase("Guest")){
+			cancelLink.click();
+			shoppingcartNavigation(userType,plantype, username, password);
+		}else {
+			if(validate(SignInButton)) {
+				SignInButton.click();
+				signIn(username, password);
+			}else
+				System.out.println("Authenciated profile already Signed In");
+		}
+		
+		
+	}
+	
+	Actions actions = new Actions(driver);
+	public void shoppingcartNavigation(String userType, String plantype, String username, String password) {
+		if(userType.equalsIgnoreCase("Guest")){
+			scrollToView(ShoppingCartImg);
+			actions.clickAndHold(ShoppingCartImg).build().perform();
+//			desktopCommonUtils.MouseOver(ShoppingCartImg, Browsername);
+			guestProfileLink.click();
+			threadsleep(3000);
+		}else {
+			navigatePlanTypeFromMS(plantype);
+			navigateSaveResultsPage();
+			validateSaveResultModel(userType);
+			SignInButton.click();
+			signIn(username, password);
+			threadsleep(3000);
+		}
+	}
+	
+	public void SignIn(String username, String password) {
+		System.out.println("Signin the profile:");
+		actions.clickAndHold(mySavedItems).build().perform();
+		validate(signInLink,10);
+		signInLink.click();
+		signIn(username, password);
+		threadsleep(3000);
+	}
+	
+	public void navigatePlanTypeFromMS(String flow) {
+		if(flow.equalsIgnoreCase("pdp")) 
+			PDPViewPlansLink.click();
+		else if(flow.equalsIgnoreCase("pdp"))
+				MAViewPlansLink.click();
+		else
+				SNPViewPlansLink.click();
+		threadsleep(3000);
+	}
+	
+
+	
+	public void validateSaveResultModel(String usertype) {
+		if(usertype.equalsIgnoreCase("Authenticated")) {
+			validate(saveResultsTitle, 30);
+			validate(saveResultsPopupClose, 30);
+			validate(KeepShoppingPlansButton, 30);
+			if (validate(ViewProfileButton, 30))
+				ViewProfileButton.click();
+		}else {
+			validate(saveResultsTitle, 30);
+			validate(saveResultsPopupClose, 30);
+			validate(SignInButton, 30);
+			validate(CreateProfileButton, 30);
+			validate(cancelLink, 30);
+		}
+	}
+	
+	public void PRESaveResultModelBtn() {
+		SignInButton.click();
+		threadsleep(2000);
+		Assert.assertTrue(driver.getCurrentUrl().contains("/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
+		browserBack();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+		CreateProfileButton.click();
+		threadsleep(2000);
+		Assert.assertTrue(driver.getCurrentUrl().contains("/registration"),"***Create One Healthcare ID Page Not Opened***");
+		browserBack();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+	}
+	
+	public void browserBack() {
+		driver.navigate().back();
+		threadsleep(2000);
 	}
 
 	public void checkContent(String section) {
@@ -540,14 +670,101 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		editValue("drugs");
 	}
 	
-	public void validateSaveResults(String plantype) {
+	public void validateSaveResults() {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
 		waitForPageLoadSafari();
-		navigateSaveResultsPage(plantype);
-		jsClickNew(ViewProfileButton);
+		navigateSaveResultsPage();
 		threadsleep(5000);
-//		savedrecommendationVP();
+	}
+	
+	public void signIn(String username, String password) {
+		try {
+			Thread.sleep(3000);
+			waitForPageLoadSafari();
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+//			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+
+	}
+	
+	public void recomPREWidget() {
+		System.out.println("Validating Recommendation on UI Page: ");
+		pageloadcomplete();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(String.valueOf(Thread.currentThread().getId()));
+		String R1PlanType = CommonConstants.firstRecommentionplanType.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanName+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanType+" ****");
+		String R1 = "";
+//		String R1PlanType = planType;
+//		String R1PlanName = firstRecomPlanName;
+		if(R1PlanType.contains("Prescription Drug Plans")) 
+			R1 = "PDP";
+		else if(R1PlanType.contains("Advantage Plans"))
+			R1 = "MA";
+		else if(R1PlanType.contains("Special Needs Plans"))
+			R1 = "SNP";
+		else
+			R1 = "MS";
+		waitForPageLoadSafari();
+		String recom1 = "#1 Recommendation";
+			validateRecommVP(R1, recom1, R1PlanName);
+
+	}
+
+	public void validateRecommVP(String R1, String rcom1, String R1PlanName) {
+		System.out.println("Validating Recommendations in Visitor Profile Page");
+
+		// Verify 1st Recommendation in PRE Widget
+		if (R1.equalsIgnoreCase("MA")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"MA Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("PDP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"PDP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("SNP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("MS")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "MS PlanName Invalid");
+		}
 	}
 
 }

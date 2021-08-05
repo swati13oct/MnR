@@ -128,6 +128,7 @@ public class MRConstants {
 
 	public static final String UHC_URL_OFFLINE = "https://offline.uhcmedicaresolutions.com/";
 
+
 	public static final String MEDICA_REGISTRATION_URL = "https://www.awe-" + MRScenario.environment
 			+ "-mymedicamedicare.uhc.com/guest/registration.html";
 

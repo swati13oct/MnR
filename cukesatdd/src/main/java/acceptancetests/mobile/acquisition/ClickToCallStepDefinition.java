@@ -33,7 +33,7 @@ public class ClickToCallStepDefinition {
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openPRE();
+		aquisitionhomepage.openPRE("AARP");
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

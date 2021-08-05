@@ -283,6 +283,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     When user search with zipcode with no pharamacies from drug details
       | ZipCode | <zipCode1> |
     When user updates the distance to "2 Miles" from drug details
+    Then user clicks on search button
     Then no results message should be displayed from drug details
       | NoResultsMessage | <message> |
 
@@ -378,7 +379,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user verify details page change pharmacy modal for preferred tab
     Then user click on standard tab from drug details
 
-    @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_AARP @drugDetailschangePharmacyAARP @regressionAARP
+    @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_AARP @drugDetailschangePharmacyAARP @regressionAARP 
     Examples: 
       | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
       | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |

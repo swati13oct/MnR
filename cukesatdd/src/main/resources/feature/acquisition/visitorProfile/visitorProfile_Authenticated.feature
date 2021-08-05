@@ -46,6 +46,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
+    Then the user deletes all the added drugs from profile page
+      | DrugName | <drug1> |
     And the user clicks on the add drugs button in the profile
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
