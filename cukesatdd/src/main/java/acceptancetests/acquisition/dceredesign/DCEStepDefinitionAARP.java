@@ -3101,4 +3101,36 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
+
+	@Then("the user clicks edit drugs on Compare page to land on Build Drug List Page")
+	public void the_user_clicks_edit_drugs_on_compare_page_to_land_on_build_drug_list_page() {
+		ComparePlansPage planComparepage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		BuildYourDrugList buildYourDrugList = planComparepage.clickonEdityourDrugs();
+		if (null != buildYourDrugList) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugList);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
+
+	}
+
+
+	@Then("the user validates default Plan type on DCE Summary page as follows")
+	public void the_user_validates_default_plan_type_on_dce_summary_page_as_follows(DataTable givenAttributes) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String planType = memberAttributesMap.get("Plan Type");
+		System.out.println(planType);
+
+		drugSummaryPage.VerifyDefautTab(planType);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+
+	}
+
+	@Then("the user clicks Return to Compare on DCE Summary Page to return to Compare page")
+	public void the_user_clicks_return_to_compare_on_dce_summary_page_to_return_to_compare_page() {
+	}
+
 }

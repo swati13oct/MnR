@@ -218,6 +218,8 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
+
+
 	/*
 	 * @FindBy(xpath="//*[normalize-space(text())='Edit Drugs']") private WebElement
 	 * editDrugsLink;
@@ -2051,4 +2053,5 @@ public void saveaPlan(String plans) {
 		}
 
 	}
+
 }
