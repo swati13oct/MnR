@@ -25,12 +25,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.WelcomePage;
 
@@ -218,6 +218,8 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
+
+
 	/*
 	 * @FindBy(xpath="//*[normalize-space(text())='Edit Drugs']") private WebElement
 	 * editDrugsLink;
@@ -525,18 +527,19 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
-	public BuildYourDrugList navigateToDCERedesign() {
+	@FindBy(xpath = "//h1[contains(text(),'Drug Cost Estimator')]")
+	private WebElement dceHeader;
+
+	public GetStartedPage navigateToDCERedesign() {
 
 		validateNew(addDrugsLink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);
 		jsClickNew(addDrugsLink);
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
-			return new BuildYourDrugList(driver);
-		}
-		Assertion.fail("Did not Navigate to Build Drug List Page");
+		CommonUtility.waitForPageLoad(driver, dceHeader, 30);
+		if (validateNew(dceHeader))
+			return new GetStartedPage(driver);
+		Assertion.fail("Did not Navigate to DCE Get Started Page");
 		return null;
 	}
 
@@ -1919,7 +1922,7 @@ public void saveaPlan(String plans) {
 	/**
 	 * Validate PCP modal on plan compare page
 	 * 
-	 * @param drugName
+	 * @param
 	 */
 	public void validatePCPModal(String providers) {
 		
@@ -2050,4 +2053,5 @@ public void saveaPlan(String plans) {
 		}
 
 	}
+
 }
