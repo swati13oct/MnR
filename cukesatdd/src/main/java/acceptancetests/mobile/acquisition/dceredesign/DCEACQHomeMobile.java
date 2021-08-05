@@ -107,7 +107,7 @@ public class DCEACQHomeMobile {
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
-		if (site.equalsIgnoreCase("AARP") || !MRScenario.environment.equalsIgnoreCase("team-acme"))
+		if (site.equalsIgnoreCase("AARP"))
 			aquisitionhomepage.validateSubtitle();
 	}
 
@@ -354,8 +354,11 @@ public class DCEACQHomeMobile {
 
 	@When("^user saves and updates pharmacy from list$")
 	public void user_saves_and_updates_pharmacy_from_list() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.saveAndUpdatePharmacy();
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String selectedPharmacy = drugSummaryPage.saveAndUpdatePharmacy();
+		getLoginScenario().saveBean(DCERedesignCommonConstants.SELECTED_PHARMACY, selectedPharmacy);
 	}
 
 	@Then("^user clears the existing drugs in Visitor profile$")
@@ -666,14 +669,21 @@ public class DCEACQHomeMobile {
 
 	@When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal$")
 	public void user_click_on_keep_using_pharmacy_link_on_change_pharmacy_modal() throws InterruptedException {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
+		
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickKeepUsingPharmacyLink();
 	}
 
 	@Then("^the pharmacy name should be updated on summary page$")
 	public void the_pharmacy_name_should_be_updated_on_summary_page() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.validateSelectedPharmacy();
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String selectedPharmacyName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.SELECTED_PHARMACY);
+		drugSummaryPage.validateSelectedPharmacy(selectedPharmacyName);
 	}
 
 	@When("^user search with correct zipcode$")
@@ -688,7 +698,9 @@ public class DCEACQHomeMobile {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String zipCode = memberAttributesMap.get("ZipCode");
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
 	}
 
@@ -703,6 +715,7 @@ public class DCEACQHomeMobile {
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String tabName = memberAttributesMap.get("TabName");
 		PlanDetailsPageMobile planDetails = new PlanDetailsPageMobile(wd);
 		planDetails.validateDefaultTab(tabName);

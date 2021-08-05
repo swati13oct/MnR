@@ -185,7 +185,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(css = "div[class*='changepharmacy'] div[class^='uhc-list'][role='tabpanel']")
+	@FindBy(css = "div[class*='changepharmacy'] [class^='uhc-list'][role='tabpanel']")
 	public WebElement pharmacyListSection;
 
 	@FindBy(css = "div[class*='changepharmacy'] div[class*='mobile-filter']")
@@ -227,7 +227,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	public WebElement selectRockPharm;
 
-	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
+	@FindBy(css = "button[dtmname$='save and update drug costs']")
 	public WebElement saveDrugBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'ROCK PHARMACY, the')]")
@@ -1381,7 +1381,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-filter')]//*[contains(text(), ' Standard Pharmacies ')]")
+	@FindBy(css = "input[name='pharmacy-filters'][value='SP']")
 	public WebElement StandardPharmacyFilter;
 
 	public void SelectStandardPharmacy(String standardPharmacytoSelect) {
@@ -1393,7 +1393,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(PharmacyName);
 		// TODO Auto-generated method stub
 		validateNew(saveDrugBtn);
-		saveDrugBtn.click();
+		jsClickNew(saveDrugBtn);
 	}
 
 	public void validateResetEffectiveDate(String envYear) {
