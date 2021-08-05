@@ -13,9 +13,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
-import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_PLANTYPES;
+import acceptancetests.data.CommonConstants.PLANTYPE;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
@@ -804,11 +805,11 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 	
 	/**
-	 * Select options from Learn About Medicare, Types of Plans and FAQ menu.
+	 * Select options from Learn About Medicare, Types of Plans.
 	 *
 	 * @param planType the plan type
 	 */
-	public void selectTypesOfPlansOption(LEARNABOUTMEDICARE_PLANTYPES planType) {
+	public void selectTypesOfPlansOption(LEARNABOUTMEDICARE_TYPESOFPLANS planType) {
 		if (!typesOfPlansBackButton.isDisplayed()) {
 			jsClickNew(typesOfPlansButton);
 			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
@@ -818,7 +819,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		case OVERVIEW:
 			jsClickNew(overviewOfPlansLink);
 			break;
-		case MAPD:
+		case MA:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
 		case MEDSUPP:
@@ -830,14 +831,31 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		case SNP:
 			jsClickNew(specialNeedsPlansLink);
 			break;
-		case FAQ:
+		default:
+			throw new IllegalArgumentException(planType.name() + " is not available under 'Types of Plan' menu.");
+		}
+	}
+	
+	/**
+	 * Select options from Learn About Medicare, Types of Plans -> FAQ menu.
+	 *
+	 * @param faqOption the faq option
+	 */
+	public void selectFAQOption(LEARNABOUTMEDICARE_TYPESOFPLANS faqOption) {
+		if (!typesOfPlansBackButton.isDisplayed()) {
+			jsClickNew(typesOfPlansButton);
+			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
+		}
+
+		switch (faqOption) {
+		case MEDICAREFAQ:
 			jsClickNew(medicareFAQLink);
 			break;
 		case GLOSSARY:
 			jsClickNew(glossaryLink);
 			break;
 		default:
-			throw new IllegalArgumentException(planType.name() + " is not available under 'Types of Plan' menu.");
+			throw new IllegalArgumentException(faqOption.name() + " is not available under 'FAQ' menu.");
 		}
 	}
 	

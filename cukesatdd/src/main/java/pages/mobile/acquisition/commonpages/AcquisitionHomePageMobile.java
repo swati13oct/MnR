@@ -1,8 +1,8 @@
 package pages.mobile.acquisition.commonpages;
 
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
-import static acceptancetests.data.CommonConstants.SHOPFORPLAN_PLANTYPES.PDP;
-import static acceptancetests.data.CommonConstants.SHOPFORPLAN_TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.PLANTYPE.PDP;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -940,7 +940,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
@@ -975,7 +975,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as

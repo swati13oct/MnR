@@ -1,6 +1,5 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.TOOLS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -378,31 +379,28 @@ public class GlobalWebElements extends UhcDriver {
 	 *
 	 * @param planType the plan type
 	 */
-	public void accessFooterLinkFromShopPlans(String planType) {
+	public void accessFooterLinkFromShopPlans(PLANTYPE planType) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(shopPlansExpander, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(shopPlansExpander);
 		}
 
-		planType = planType.toLowerCase();
-
 		switch (planType) {
-		case "ma":
-		case "mapd":
+		case MA:
+		case MAPD:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
-		case "snp":
-		case "dsnp":
+		case SNP:
 			jsClickNew(medicareSpecialNeedsPlansLink);
 			break;
-		case "medsupp":
+		case MEDSUPP:
 			jsClickNew(medicareSupplementInsurancePlansLink);
 			break;
-		case "pdp":
+		case PDP:
 			jsClickNew(medicarePrescriptionDrug_PlansLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid link for plan type " + planType);
+			throw new IllegalArgumentException("Invalid link for plan type " + planType.name());
 		}
 		pageloadcomplete();
 	}
@@ -412,29 +410,27 @@ public class GlobalWebElements extends UhcDriver {
 	 *
 	 * @param tool the tool
 	 */
-	public void accessFooterLinkFromToolsResources(String tool) {
+	public void accessFooterLinkFromToolsResources(TOOLS tool) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(toolsAndResources, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(toolsAndResources);
 		}
 
-		tool = tool.toLowerCase();
-
 		switch (tool) {
-		case "pre":
+		case PRE:
 			jsClickNew(planRecommendationLink);
 			break;
-		case "dce":
+		case DCE:
 			jsClickNew(drugCostEstimatorLink);
 			break;
-		case "pharmacy search":
+		case PHARMACYSEARCH:
 			jsClickNew(pharmacySearchLink);
 			break;
-		case "provider search":
+		case PROVIDERSEARCH:
 			jsClickNew(providerSearchLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid tool " + tool);
+			throw new IllegalArgumentException("Invalid tool " + tool.name());
 		}
 		pageloadcomplete();
 	}

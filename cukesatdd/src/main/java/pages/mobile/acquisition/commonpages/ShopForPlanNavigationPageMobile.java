@@ -9,12 +9,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static acceptancetests.data.CommonConstants.SHOPFORPLAN.*;
-import static acceptancetests.data.CommonConstants.SHOPFORPLAN_PLANTYPES.*;
-import static acceptancetests.data.CommonConstants.SHOPFORPLAN_TOOLS.*;
+import static acceptancetests.data.CommonConstants.PLANTYPE.*;
+import static acceptancetests.data.CommonConstants.TOOLS.*;
 
 import acceptancetests.data.CommonConstants.SHOPFORPLAN;
-import acceptancetests.data.CommonConstants.SHOPFORPLAN_PLANTYPES;
-import acceptancetests.data.CommonConstants.SHOPFORPLAN_TOOLS;
+import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.TOOLS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
@@ -363,12 +363,13 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	 * @param planType the plan type
 	 * @param classicUrl the classic url
 	 */
-	public void selectPlanTypeOption(SHOPFORPLAN_PLANTYPES planType, boolean classicUrl) {
+	public void selectPlanTypeOption(PLANTYPE planType, boolean classicUrl) {
 		
 		if(!planTypesContainer.isDisplayed()) {
 			jsClickNew(planTypesTab);
 		}
 		switch (planType) {
+		case MA:
 		case MAPD:
 			jsClickNew(shopForPlanSubNavMA);
 		case SNP:
@@ -395,7 +396,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	 *
 	 * @param tool the tool
 	 */
-	public void selectTool(SHOPFORPLAN_TOOLS tool) {
+	public void selectTool(TOOLS tool) {
 		if(!toolsContainer.isDisplayed()) {
 			jsClickNew(toolsToChoosePlanTab);
 		}

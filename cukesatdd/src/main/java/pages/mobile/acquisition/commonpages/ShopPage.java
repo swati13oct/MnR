@@ -1,7 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-import static acceptancetests.data.CommonConstants.SHOPFORPLAN_PLANTYPES.MAPD;
+import static acceptancetests.data.CommonConstants.PLANTYPE.MAPD;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
