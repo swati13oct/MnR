@@ -15,6 +15,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
@@ -128,5 +129,20 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.validateProActiveChatpopupconnect();
 		
 		
+	}
+	
+	@Then("^user opens the page to validate$")
+	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
+		
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String pagename = memberAttributesMap.get("pagename");
+		
+		System.out.println(pagename);
+	
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPage(pagename);
 	}
 }
