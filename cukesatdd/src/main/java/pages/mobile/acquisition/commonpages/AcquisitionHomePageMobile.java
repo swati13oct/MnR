@@ -1505,6 +1505,45 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		actions.perform();
 
 	}
+	
+	@FindBy(id = "header-tfn-link")
+	private WebElement tfnHeaderLink;
+	
+	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
+	private WebElement tfnHeaderPopup;
+	
+	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
+	private WebElement tfnHeaderPopupClose;
+	
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	private WebElement tfnHeaderRightRailOLE;
+	
+	public void validateTfnInHeader() throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		CheckiPerseptions();
+		validateNew(tfnHeaderLink);
+		String ActualCallSAMTFN = tfnHeaderLink.getText().trim();
+		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+		jsClickNew(tfnHeaderLink);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		validate(tfnHeaderPopup);
+		String ExpectedCallSAMTFN = tfnHeaderPopup.getText();
+		System.out.println("TFN No displayed on the Modal" + ExpectedCallSAMTFN);
+		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+			System.out
+					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
+					+ ExpectedCallSAMTFN);
+		}
+		
+		validate(tfnHeaderPopupClose);
+		jsClickNew(tfnHeaderPopupClose);
+		
+	}
 
 	public Boolean cookieValid() {
 		validateNew(signInButton);

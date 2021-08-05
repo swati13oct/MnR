@@ -16,10 +16,13 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
@@ -53,6 +56,13 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Given("^the user hovers over the learn about medicare$")
 	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
@@ -73,6 +83,14 @@ public class GlobalComponentsCommonStepDefinition {
 			}
 			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 		}
+	}
+	
+	@When("user validates TFN in header")
+	public void user_clicks_on_tfn_in_header() throws InterruptedException {
+		scenario.log("Changes made on 7/06- Step added for new Header redesign");
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateTfnInHeader();
 	}
 
 	@Then("^the user hover over Shop for a Plan and validates zipcode component$")

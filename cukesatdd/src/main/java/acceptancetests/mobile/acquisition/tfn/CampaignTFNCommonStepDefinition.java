@@ -173,7 +173,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 
 		String url = "https://www.google.com/";
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().deleteAllCookies();
+		//wd.manage().deleteAllCookies();
 		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		tfnPage.openUrl(url);
