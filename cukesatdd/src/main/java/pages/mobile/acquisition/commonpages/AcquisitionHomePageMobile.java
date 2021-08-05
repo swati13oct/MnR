@@ -327,7 +327,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
 
-	@FindBy(xpath = "//a[contains(@dtmname, 'Footer:Visit AARP')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']/nav/p[4]")
 	private WebElement visitAARPFooterLink;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -3685,6 +3685,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			MobileMenuMain();
 			jsClickNew(visitAARPHeaderLink);
 			proceedToLeaveAARP();
 			if (!driver.getCurrentUrl().contains("aarp.org"))
@@ -3820,6 +3821,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPFooterLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			jsClickNew(more);
 			switchToNewTabNew(visitAARPFooterLink);
 			proceedToLeaveAARP();
 			if (!driver.getCurrentUrl().contains("aarp.org")) {

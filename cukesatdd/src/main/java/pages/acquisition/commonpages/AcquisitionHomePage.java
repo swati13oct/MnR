@@ -2963,6 +2963,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			// Actions action = new Actions(driver);
 			// action.moveToElement(ShopForaplan).build().perform();
 			jsMouseOver(ShopForaplan);
+			
 			return new ShopForPlanNavigationPage(driver);
 		} else {
 			return null;
