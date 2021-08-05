@@ -5188,6 +5188,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(dceLink);
 
 		}
+		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

@@ -1,5 +1,10 @@
 package pages.mobile.acquisition.commonpages;
 
+import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
+import static acceptancetests.data.CommonConstants.PLANTYPE.PDP;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static org.testng.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,19 +33,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
-import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.commonpages.TermsnConditionsAARPPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
-
-import static org.testng.Assert.assertTrue;
 
 /**
  * @author pperugu
@@ -173,7 +170,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	@FindBy(css = "a[data-asset-name='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
@@ -943,7 +940,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
@@ -978,7 +975,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
@@ -1837,7 +1834,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void navigateToMedEdPresDrugPage() {
 
 		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = openLearnAboutMedicareFromMenu();
-		learnAboutMedicareHomePageMobile.selectIntroductionToMedicareOption("benefits");
+		learnAboutMedicareHomePageMobile.selectIntroductionToMedicareOption(BENEFITS);
 
 	}
 
@@ -2474,7 +2471,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
-		shopForPlan.selectTool("Pharmacy Search");
+		shopForPlan.selectTool(PHARMACYSEARCH);
 
 		/*
 		 * jsClickNew(Menu); waitforElement(ShopForaplan); if
@@ -2739,7 +2736,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
-		shopForPlan.selectPlanTypeOption("pdp", false);
+		shopForPlan.selectPlanTypeOption(PDP, false);
 		WebElement DCELink = driver.findElement(
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);
@@ -4214,7 +4211,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
 		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
-		shopForPlanNavigationPageMobile.selectPlanTypeOption("PDP", false);
+		shopForPlanNavigationPageMobile.selectPlanTypeOption(PDP, false);
 
 		jsClickNew(pdpPharmacyLink);
 		CommonUtility.checkPageIsReadyNew(driver);

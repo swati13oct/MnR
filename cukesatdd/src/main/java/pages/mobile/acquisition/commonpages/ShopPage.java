@@ -1,7 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-
+import static acceptancetests.data.CommonConstants.PLANTYPE.MAPD;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +15,6 @@ import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ShopPage extends GlobalWebElements {
@@ -237,7 +236,7 @@ public class ShopPage extends GlobalWebElements {
 
 	public void clickOnMAShopButton() {
 
-		openShopForPlanFromMenu().selectPlanTypeOption("ma", false);
+		openShopForPlanFromMenu().selectPlanTypeOption(MAPD, false);
 
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -250,7 +249,7 @@ public class ShopPage extends GlobalWebElements {
 
 	public void clickOnPDPShopButton() {
 		waitForPageLoadSafari();
-		//MobileMenuToShopToolToShop();
+		// MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		scrollToView(pdpShopLink);
 		validateNew(pdpShopLink);
@@ -265,7 +264,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void clickOnSNPShopButton() {
-		//MobileMenuToShopToolToShop();
+		// MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
@@ -351,13 +350,14 @@ public class ShopPage extends GlobalWebElements {
 							break;
 						}
 					}
-				}
-				else {
+				} else {
 					driver.navigate().back();
 				}
 				zipCodeNumber++;
-				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
-				threadsleep(2000);*/
+				/*
+				 * driver.navigate().refresh(); //Adding refresh since element are not located
+				 * in Safari browser after using navigate back threadsleep(2000);
+				 */
 			}
 		} catch (Exception e) {
 			System.out.println(e);

@@ -4,7 +4,7 @@
 package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.Set;
-
+import static acceptancetests.data.CommonConstants.SHOPFORPLAN.SHOP;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -900,7 +900,7 @@ public class HeaderFooterMobile extends GlobalWebElements {
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		waitForPageLoadSafari();
 		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
-		shopForPlanNavigationPageMobile.selectShopOption("shop");
+		shopForPlanNavigationPageMobile.selectShopOption(SHOP);
 		
 		scrollToView(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
