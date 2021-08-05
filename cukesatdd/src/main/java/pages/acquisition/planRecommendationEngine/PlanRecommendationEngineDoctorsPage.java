@@ -298,7 +298,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 							|| browser.equalsIgnoreCase("IE"))
 						driver.manage().window().maximize();
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline") || env.contains("digital-uatv2") )
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline") || env.contains("digital-uat") || env.contains("digital-dev")  )
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
 								"Prod Connected to Incorrect Rally");
 					else

@@ -1721,6 +1721,7 @@ public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
 		return null;
 		
 }
+PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(driver);
 
 public void validateSavePlan(String planInfo, String year) {
 	System.out.println("Validate PRE Save Plans functionality");
@@ -1846,6 +1847,7 @@ public void verifyPlansVPandPDP(List<WebElement> plansName) {
 		actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
 		System.out.println("Plan Name in VPP Details Page: "+actualplanName);
 		Assert.assertTrue(exceptedplanName.equalsIgnoreCase(actualplanName), "--- Plan name are not matches---");
+		planSelectorhomepage.close_Popup();
 		backtoProfile.get(0).click();
 		pageloadcomplete();
 	}

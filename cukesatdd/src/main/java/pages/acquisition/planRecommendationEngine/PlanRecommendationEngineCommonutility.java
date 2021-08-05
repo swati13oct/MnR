@@ -195,7 +195,7 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				if (flow.equalsIgnoreCase("MA")) {
 					previousPagePercentage = "38%";
 					currrentPagePercentage = "38%";
-					nextPageName = "Additional";
+					nextPageName = "Services";
 					nextPagePercentage = "50%";
 				}
 				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
@@ -205,9 +205,9 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				previousPageName = "Doctor";
 				previousPagePercentage = "44%";
 				currrentPagePercentage = "44%";
-				nextPageName = "Additional";
+				nextPageName = "Services";
 				nextPagePercentage = "56%";
-			} else if (currentPageName.contains("ADDITIONAL")) {
+			} else if (currentPageName.contains("SERVICES")) {
 				previousPageName = "Drug";
 				previousPagePercentage = "56%";
 				nextPageName = "Cost";
@@ -220,7 +220,7 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 					nextPagePercentage = "63%";
 				}
 			} else if (currentPageName.contains("COST")) {
-				previousPageName = "Additional";
+				previousPageName = "Services";
 				previousPagePercentage = "67%";
 				nextPageName = "Priorities";
 				nextPagePercentage = "78%";
