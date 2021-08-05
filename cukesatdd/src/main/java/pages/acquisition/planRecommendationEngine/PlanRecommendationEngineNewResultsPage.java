@@ -486,7 +486,14 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			}
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all Doctors covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
-		} else {
+		}else if(doctorStatus.toLowerCase().contains("MSCoverage")) {
+			Assert.assertTrue(
+					doctorText.toLowerCase().replace(" ", "").replace("\n", "")
+							.contains(doctorName.toLowerCase().replace(" ", "") + "Accept Medicare Patient".toLowerCase()),
+					"Doctor details Invalid in plan - " + planName);
+			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all Doctors covered for a plan");
+			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
+		}else {
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero Doctors");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero Doctors");
 		}
