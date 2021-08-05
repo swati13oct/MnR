@@ -83,6 +83,8 @@ public class DGR_ThankYouPage extends UhcDriver{
 	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
 	private WebElement FindPlansAreaButton;
 	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement Zipcode;
 	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
 		//	if( validate(FindPlansAreaButton)){
 			validateNew(FindPlansAreaButton);
@@ -97,7 +99,8 @@ public class DGR_ThankYouPage extends UhcDriver{
 			CommonUtility.checkPageIsReadyNew(driver);	
 			String checkUrl=driver.getCurrentUrl();
 			if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
-				System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+				System.out.println("Submit Button Clicked : Plan summary Page is Displayed with zipcode to enter in the page");
+				Zipcode.isDisplayed();
 				return new VPPPlanSummaryPage(driver);
 			}
 			return null;	
