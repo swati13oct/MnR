@@ -133,9 +133,17 @@ public class VisitorProfileStepDefinition {
 		 */
 		List<List<String>> memberAttributesRow = data.asLists();
 		String drug = memberAttributesRow.get(0).get(1);
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedDrugAndPharmacy(drug);
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		String user_state;
+		getLoginScenario().getBean(VisitorProfileCommonConstants.VP_USER_TYPE);
+		if(null	!= getLoginScenario().getBean(VisitorProfileCommonConstants.VP_USER_TYPE)) {
+			user_state="auth";
+		}
+		else {
+			user_state="unauth";
+		}
+			
+		visitorProfile.validateAddedDrugAndPharmacy(drug,user_state);
 	}
 
 	@And("^user validates the added plans on visitor profile page$")
@@ -316,6 +324,7 @@ public class VisitorProfileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+		getLoginScenario().saveBean(VisitorProfileCommonConstants.VP_USER_TYPE, username);
 	}
 
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode$")
