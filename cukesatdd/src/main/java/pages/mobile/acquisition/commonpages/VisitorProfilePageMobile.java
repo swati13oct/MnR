@@ -199,14 +199,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
 		
-		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved (1) Drugs & Pharmacy")));
+		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs & Pharmacy (1)")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
 		jsClickNew(drugHeader);
 		System.out.println("Drug Name in VP page: " + drugName.getText());
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 				savedDrugsAndDoctorsHeader.getText().trim());
 		// Assertion.assertTrue(pharmacyAddress.isDisplayed());
 	}
@@ -477,14 +477,18 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @return
 	 */
 	public boolean providerinfo(String planName) {
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		String mproviderinfo = ProviderSearchLink.getText();
+		WebElement ViewProviderbtn = driver.findElement(By.xpath("//*[@id=\"landrover\"]/main/div[3]/div[2]/div[2]/div[2]/div[4]/button"));
+		//WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+		//		+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
+		//WebElement providerin = driver.findElement(By.xpath("//*[@id=\"ProviderName-noplan-0\"]"));
+		scrollToView(ViewProviderbtn);
+		//jsClickNew(ViewProviderbtn);
+		String mproviderinfo = ViewProviderbtn.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
+		if (mproviderinfo.toLowerCase().contains("View Providers")) {
+			return false;
 		}
-		return false;
+		return true;
 
 	}
 
