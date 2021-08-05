@@ -843,6 +843,7 @@ public class MRScenario {
 				capabilities.setCapability("safariAllowPopups", "true");
 				capabilities.setCapability("locationServicesEnabled", "true");
 				capabilities.setCapability("locationServicesAuthorized", "true");
+				capabilities.setCapability("webviewConnectTimeout", "90000");
 				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 				AppiumDriver mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);

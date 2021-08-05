@@ -48,8 +48,11 @@ public class CampaignTFNPageMobile extends UhcDriver {
 
 	// @FindBy(xpath = "//*[contains(@title,'Search')]")
 
-	@FindBy(xpath = "//*[contains(@class,'gLFyf gsfi')]")
+	@FindBy(xpath ="//*[contains(@class,'gLFyf gsfi')]")
 	public WebElement GoogleSearchField;
+	
+	@FindBy(xpath="//img[@alt='Google']")
+	public WebElement GoogleImg;
 
 	@FindBy(xpath = "//*[@id='tsf']/div[2]/div/div[3]/center/input[1]")
 	public WebElement GoogleSearchButton;
@@ -254,7 +257,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 
 	public void openUrl(String url) {
 		// TODO Auto-generated method stub
-		start(url);
+	//	start(url);
+		startNewMobile(url);
 	}
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -455,7 +459,9 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	}
 
 	public void googleSearchAARP() {
-		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
+		//CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
+		pageloadcomplete();
+		jsClickNew(GoogleImg);
 		validateNew(GoogleSearchField);
 		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
 		System.out.println("Google Search entered for : AARP Medicare Advantage Plan");
