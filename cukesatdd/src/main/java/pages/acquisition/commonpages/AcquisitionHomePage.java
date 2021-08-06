@@ -30,6 +30,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
@@ -41,8 +42,19 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  *
  */
 public class AcquisitionHomePage extends GlobalWebElements {
+	@FindBy(xpath = "//button[contains(@dtmname,'review drug costs') and contains(@class, 'uhc-button')]/span")
+	public WebElement continueBtn;
+
+	@FindBy(xpath = "//input[@id='zip-code']")
+	public WebElement zipCodeTxtbox;
 
 
+	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+	public WebElement addToDrugList;
+
+	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
+	public WebElement reviewDrugCost;
+	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
@@ -127,6 +139,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBys(value = { @FindBy(id = "selectCounty") })
 	List<WebElement> countyRows;
+	
+	@FindBy(xpath = "//select[@id='county']/option")
+	public WebElement countyRows1;
+
 
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
 	WebElement zipCodebtn;
@@ -189,8 +205,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
 	private WebElement county;
 
-	@FindBy(xpath = "//*[@id='ole-county-select']/option[@value=1]")
+	@FindBy(xpath = "//*[@id='county']")
 	private WebElement countyDropdown;
+	
+	@FindBy(xpath = "//span[contains(text(),'Next: Review Drug Costs')]")
+	private WebElement nestReviewDrugCost;
+	
+	
+	@FindBy(xpath = "//span[contains(text(),'Return to home page')]")
+	private WebElement returnToHomePage;
+	
 
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//optgroup[1]/option[@value=0]")
 	private WebElement selectFirstOptionOnPlanSelect;
@@ -7398,6 +7422,45 @@ public void searchPlansCounty(String countyName, String ismultiCounty) {
 	} else {
 		System.out.println("No County to be selected ");
 	}
+}
+public void navigateToDrugDetailsPage() {
+	validateNew(reviewDrugCost);
+	jsClickNew(reviewDrugCost);
+	waitForPageLoadSafari();
+	threadsleep(2000);
+	pageloadcomplete();
+	//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
+	
+}
+public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
+	validateNew(zipCodeTxtbox);
+	sendkeys(zipCodeTxtbox, zipcode);
+	Thread.sleep(3000);
+	try {
+		if (countyDropdown.isDisplayed()) {
+			countyDropdown.click();
+			CommonUtility.waitForPageLoad(driver,countyRows1 , 30);
+			List<WebElement> Counties = driver.findElements(By.xpath("//select[@id='county']/option"));
+			int CountiesCnt = Counties.size();
+			System.out.println("Counties Dropdown count --> "+CountiesCnt);
+			System.out.println("Last Object in counties dropdown --> "+Counties.get(CountiesCnt-1));
+			Counties.get(CountiesCnt-1).click();
+			driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+			nestReviewDrugCost.click();
+			CommonUtility.waitForPageLoad(driver, returnToHomePage, 30);
+			if(returnToHomePage.isDisplayed()) {
+				Assert.assertTrue(true, "Element displayed");
+				returnToHomePage.click();
+				CommonUtility.waitForPageLoad(driver, countyDropdown, 30);
+			}
+			
+		}
+	} catch (Exception e) {
+		System.out.println("county box not found");
+		Assertion.fail(">>>>> County Dropdown is NOT Dispalyed <<<<<");
+	}
+//	validateNew(continueBtn);
+	//continueBtn.click();
 }
 }
 	

@@ -33,16 +33,16 @@ Feature: 1.12 homePage flows
            
     @homePage_AARP
     Examples: 
-      |  Scenario                              | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                 | isMultiCounty2| county2           | address              | city      | state       |TFN|
+      | Scenario          | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                 | isMultiCounty2| county2           | address              | city      | state       |TFN|
       | E2E Scenario_1_AMP | AARP | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-aarpmedicareplans.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-699-5710|
 
     @homePage_UHC
     Examples: 
-      | Scenario                                | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                     | isMultiCounty | county            | address              | city      | state       |TFN|
+      | Scenario           | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                     | isMultiCounty | county            | address              | city      | state       |TFN|
       | E2E Scenario_1_UMS | UHC  | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-596-3258|
 
 
-  Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage <pageName> : <path>
+  Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -109,13 +109,13 @@ Feature: 1.12 homePage flows
     Examples: 
       | Scenario            | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |
       | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
-      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigne-home-page.html  | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
       | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
       | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
 
   @homePage_UHC
     Examples: 
-      | Scenario          | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |
+      | Scenario          | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                          | TFN            |
       | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
       | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
       | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
@@ -163,25 +163,29 @@ Feature: 1.12 homePage flows
       | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
-     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug5> |
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug6> |
+      | DrugName | <drug5> |
     Then the user validates all added drugs in DrugList
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    When user enters valid zipcode and county
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+     When user enters valid zipcode and county on HomePage
       | ZipCode | <zipCode> |
-    Then the user Captures Drug costs on Drug Details Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details HomePage
+     Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
     And user clicks on find a provider link
+     Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
     And user clicks on get started link and navigates to PRE
+      Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
     And user clicks on learn more link
 
     @homePage_AARP
     Examples: 
-      | Scenario            | geoState | site | path                                        | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
-      | E2E Scenario_4_AMP  | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|
+      | Scenario            | geoState | site | path                                        | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | zipCode | county      |Zipcode1|isMultutiCounty1|
+      | E2E Scenario_4_AMP  | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | 78006   | Bexar County|78006|NO|
       
     @homePage_UHC
     Examples: 
-      | Scenario            | geoState | site | path                                       | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
-      | E2E Scenario_4_UMS | Alabama  | UHC | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|
+      | Scenario            | geoState | site | path                                      | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | zipCode | county |
+      | E2E Scenario_4_UMS | Alabama  | UHC | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | 78006   | Bexar County|

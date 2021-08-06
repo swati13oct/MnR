@@ -46,6 +46,9 @@ import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.TermsnConditionsAARPPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 
 public class GlobalComponentsCommonStepDefinition {
 
@@ -1315,5 +1318,22 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 
+	@Then("^the user clicks on Review Drug Costs to Land on Drug Details HomePage$")
+	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Drug_DetailsP_HomePage() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		 aquisitionhomepage.navigateToDrugDetailsPage();
+	}
+	
+	@Then("^user enters valid zipcode and county on HomePage$")
+	public void user_enter_valid_zipcode_and_county_on_HomePage(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("ZipCode");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		 aquisitionhomepage.enterZipCodeandcounty(zipcode);
+	}
 }
 
