@@ -1,8 +1,8 @@
 @F625004 @UATRegression @GlobalcomponentshomePage
 Feature: 1.12 homePage flows
 
-  @homePage
-  Scenario Outline: <Scenario> : To verify hero component displayed on home page and navigate to VPP
+  @GlobalcomponentshomePage
+  Scenario Outline: <Scenario> : To verify hero component displayed on home page and navigate to VPP <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -33,16 +33,16 @@ Feature: 1.12 homePage flows
            
     @homePage_AARP
     Examples: 
-      | E2E_Scenario_1                                | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                 | isMultiCounty2| county2           | address              | city      | state       |TFN|
-      | UAT_Home Page E2E Regression 1_Hero Component | AARP | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-aarpmedicareplans.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-699-5710|
+      |  Scenario                              | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                 | isMultiCounty2| county2           | address              | city      | state       |TFN|
+      | E2E Scenario_1_AMP | AARP | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-aarpmedicareplans.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-699-5710|
 
     @homePage_UHC
     Examples: 
-      | E2E_Scenario_1                                | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                     | isMultiCounty | county            | address              | city      | state       |TFN|
-      | UAT_Home Page E2E Regression 1_Hero Component | UHC  | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-596-3258|
+      | Scenario                                | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                     | isMultiCounty | county            | address              | city      | state       |TFN|
+      | E2E Scenario_1_UMS | UHC  | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-596-3258|
 
-  @homePage
-  Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage
+
+  Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -107,23 +107,23 @@ Feature: 1.12 homePage flows
 
    @homePage_AARP
     Examples: 
-      | E2E_Scenario_2                                  | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |                
-      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
-      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigne-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |                
-      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |               
-      | UAT_Home Page E2E Regression 2_Layout Container | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
+      | Scenario            | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |
+      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigne-home-page.html  | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_AMP  | AARP | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/#plan-summary | 1-877-699-5710 |
 
   @homePage_UHC
     Examples: 
-      | E2E_Scenario_2                                  | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |                
-      | UAT_Home Page E2E Regression 2_Layout Container | UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
-      | UAT_Home Page E2E Regression 2_Layout Container | UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |                
-      | UAT_Home Page E2E Regression 2_Layout Container | UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |               
-      | UAT_Home Page E2E Regression 2_Layout Container | UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
+      | Scenario          | site | geoState | path                                        | pageName  | tfnXpath                                                           | tfnFlag | UHCUrl                      | address              | city      | state       | ZipCodeOnPlan1 | SiteOnPlan1                                                                                                         | TFN            |
+      | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
+      | E2E Scenario_2_UMS| UHC  | Alabama  | dolphin-authoring/redesigned-home-page.html | Home page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | 33410          |https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html/plan-summary | 1-877-699-5710 |
 
 
-  @homePage
-  Scenario Outline: <Scenario> : To verify Email capture component on homepage
+
+  Scenario Outline: <Scenario> : To verify Email capture component on homepage <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -135,16 +135,16 @@ Feature: 1.12 homePage flows
 
     @homePage_AARP
     Examples: 
-      | Scenario                                      | geoState | site | path                                        | pageName  |
-      | UAT_Home Page E2E Regression 3_Medicare Guide | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |
+      | Scenario           | geoState | site | path                                        | pageName  |
+      | E2E Scenario_3_AMP | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |
 
     @homePage_UHC
     Examples: 
-      | Scenario                                      | geoState | site | path                                        | pageName  |
-      | UAT_Home Page E2E Regression 3_Medicare Guide | Alabama  | UHC  | dolphin-authoring/redesigned-home-page.html | Home page |
+      | Scenario            | geoState | site | path                                        | pageName  |
+      | E2E Scenario_3_UMS  | Alabama  | UHC  | dolphin-authoring/redesigned-home-page.html | Home page |
 
-  @homePage
-  Scenario Outline: <Scenario> : To verify DCE flow from homepage
+
+  Scenario Outline: <Scenario> : To verify DCE flow from homepage <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -178,10 +178,10 @@ Feature: 1.12 homePage flows
 
     @homePage_AARP
     Examples: 
-      | Scenario                                      | geoState | site | path                                        | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
-      | UAT_Home Page E2E Regression 3_Medicare Guide | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|
+      | Scenario            | geoState | site | path                                        | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
+      | E2E Scenario_4_AMP  | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|
       
     @homePage_UHC
     Examples: 
-      | Scenario                                      | geoState | site | path                                        | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
-      | UAT_Home Page E2E Regression 3_Medicare Guide | Alabama  | UHC | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|
+      | Scenario            | geoState | site | path                                       | pageName  |drug1   | drug2     | drug3    | drug4  | drug5 | drug6     | zipCode | county |
+      | E2E Scenario_4_UMS | Alabama  | UHC | dolphin-authoring/redesigned-home-page.html | Home page |Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam| 78006   | Bexar County|

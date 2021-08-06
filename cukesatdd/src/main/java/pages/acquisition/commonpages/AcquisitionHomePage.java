@@ -815,7 +815,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(text(),'Estimate Drug Costs')]")
 	private WebElement estimateDrugCost;
 	
-	@FindBy(xpath = "//span[contains(text(),'Estimate Drug Costs')]")
+	@FindBy(xpath = "//h1[contains(text(),'Drug Cost Estimator')]")
 	private WebElement drugCostHeader;
 	
 	@FindBy(xpath = "//span[contains(text(),'Find a Provider')]")
