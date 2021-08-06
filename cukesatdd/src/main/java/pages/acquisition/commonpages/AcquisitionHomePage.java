@@ -7077,6 +7077,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateSamChatIcon() throws InterruptedException {
 		boolean present;
 		try {
+			threadsleep(5);
 			validateNew(samChatIcon);
 			present = true;
 		} catch (NoSuchElementException e) {
