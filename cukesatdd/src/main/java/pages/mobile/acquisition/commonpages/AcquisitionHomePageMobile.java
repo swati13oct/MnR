@@ -308,7 +308,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='']")
 	private WebElement searchIcon;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -1896,7 +1896,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * return null; }
 	 */
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
 	public WebElement ProviderSearch;
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
@@ -1934,8 +1934,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		MobileMenuToolsToHelp();
-		validateNew(providerSearchFromHomeScreen);
+		scrollToView(providerSearchFromHomeScreen);
 
+		//jsClickNew(providerSearchFromHomeScreen);
 		switchToNewTabNew(providerSearchFromHomeScreen);
 
 		pageloadcomplete();
@@ -4903,5 +4904,4 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.switchTo().window(base);
 	}
-
 }
