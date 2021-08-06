@@ -776,9 +776,9 @@ public class DrugSummaryPage extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {	
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '" + currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"(//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '"+ currentAddedDrug +"')]//following::span[contains(text(), 'Initial Coverage')]//following-sibling::span[contains(text(), '$')])[1]"));
+					"(//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+ currentAddedDrug +"')]//following::span[contains(text(), 'Initial Coverage')]//following-sibling::span[contains(text(), '$')])[1]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
