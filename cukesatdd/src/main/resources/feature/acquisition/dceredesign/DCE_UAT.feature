@@ -346,10 +346,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planname> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+    Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user navigates to Personal Information Page
     And the user cancels enrollment and navigates to homepage
 
