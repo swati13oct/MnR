@@ -87,7 +87,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement whatsIncludedLink;
 
 	// @FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
-	@FindBy(css = "div[class*='d-block'] button[id*='priceLinkBtn']")
+	@FindBy(css = "#plansummarycontainer div[class^='uhc-card border']:nth-of-type(1) div[class*='d-block'] button[id*='priceLinkBtn']")
 	public WebElement drugPricingLink;
 
 	// @FindBy(xpath = "//button/span[text()='View Drug Costs']")
@@ -967,7 +967,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("SNP Plan Toggle Clicked");
 		}
 		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//div[contains(@class,'d-block')]//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
 		validateNew(PremiumforPlan);
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
