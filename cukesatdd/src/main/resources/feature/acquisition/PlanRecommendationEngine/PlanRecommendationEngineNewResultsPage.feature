@@ -468,7 +468,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | UHC  |   10001 | NO            | New York    | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD           | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
       | UHC  |   35035 | YES           | Bibb County | MAPD          | Chronic      | Lookup  | Taylor Burnestine P MD:Watkins Roschanda NP:Preston Loretta NP:Gantt Emily NP | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan K,Burnestine P Taylor MD,N/A        |
 
-  @PRE @planrecommendation @MSshowMoreDrug @MSviewIndividualDrug
+  @PRE @planrecommendation @MSshowMoreDrug @MSviewIndividualDrug @MSWhySeparateModel
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -499,6 +499,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | DrugInfo | <DrugInfo> |
     Then user validate showmoreDrug in PRE results page
       | DrugInfo | <DrugInfo1> |
+    Then user validate WhySeparateModel plan in PRE results page
+    	| DrugInfo | <DrugInfo1> |
 
     @regressionAARP @PREMSPlanTile
     Examples: 

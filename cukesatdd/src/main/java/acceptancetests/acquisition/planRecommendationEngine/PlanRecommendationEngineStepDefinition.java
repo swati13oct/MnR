@@ -1121,6 +1121,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"show");
    	}
 	
+	@Then("^user validate WhySeparateModel plan in PRE results page$")
+   	public void WhySeparateModel_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"whyseparatemodel");
+   	}
+	
 	@Then("^user validate showmoreDoctor in PRE results page$")
    	public void doctorShowMore_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);

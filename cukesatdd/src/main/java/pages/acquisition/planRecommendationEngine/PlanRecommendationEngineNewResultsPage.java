@@ -155,6 +155,20 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
+	
+// Why is a separate Plan required Model elements
+	
+	@FindBy(css = "div.modal-inner h2#modal-label")
+	private WebElement modelTiltle;
+	
+	@FindBy(css = "div.modal-inner button[class*='modal-close']")
+	private WebElement modelCloseICon;
+	
+	@FindBy(css = "div.modal-inner .bodyContent p")
+	private WebElement modelPara;
+	
+	@FindBy(css = "div.modal-inner div[class*='separatePlanImages']")
+	private WebElement modelImage;
 
 	// Bottom Result page Elements
 
@@ -386,6 +400,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					verifyDrugdataModel(planName, drugName, drugStatus);
 				if (location.toLowerCase().contains("show"))
 					verifyDrugShowMore(planName, drugName);
+				if (location.toLowerCase().contains("whyseparatemodel"))
+					verifyDrugWhySeparateMdel(planName);
 			}
 		}
 	}
@@ -440,7 +456,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int planIndex = findPlan(planName);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
-		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
+		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()), "Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
 		covered = plantiles.get(planIndex)
@@ -586,7 +602,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText().trim();
 		threadsleep(2000);
 		if(planType.contains("Supplement")) 
-			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(1)")).click();
+			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
 		else
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
 		threadsleep(2000);
@@ -619,6 +635,18 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				.trim();
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDrugsId']")).click();
+	}
+	
+	public void verifyDrugWhySeparateMdel(String planName) {
+		int planIndex = findPlan(planName);
+		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+		threadsleep(2000);
+		Assert.assertTrue(modelTiltle.getText().trim().contains("required"), "Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelPara.getText().trim().contains("Part D"), "Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelImage.getText().trim().contains("Supplement"), "Why is a separate model not found in plan - " + planName);
+		validate(modelCloseICon);
+		modelCloseICon.click();
+		threadsleep(2000);
 	}
 	
 	public void verifyDoctorShowMore(String planName, String doctorName) {
