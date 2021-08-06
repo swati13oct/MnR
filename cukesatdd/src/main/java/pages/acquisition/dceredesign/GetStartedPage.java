@@ -250,12 +250,17 @@ public void yahooSearch(String searchParameter) {
 	public WebElement ImportModal_NonMemberRadio;
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'next')]")
 	public WebElement ImportModal_NextBtn;
+	@FindBy(xpath = "//span[contains(text(), 'Already have a profile ?')]/../a[contains(text(), 'Sign In')]")
+	public WebElement SignIn_Link;
 
-	public void ClickImportValidateModals() {
+	public void ClickImportValidateModals(String Authenticated_Flag) {
 		validateNew(ImportBtn);
 		jsClickNew(ImportBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
 		validateNew(ImportModal_GetStartedBtn);
+		if(Authenticated_Flag.equalsIgnoreCase("false")){
+			validateNew(SignIn_Link);
+		}
 		jsClickNew(ImportModal_GetStartedBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);
 		validateNew(ImportModal_MemberRadio);
@@ -275,15 +280,31 @@ public void yahooSearch(String searchParameter) {
 	public WebElement Member_NameDisplay;
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@class, 'data-import-popup')]")
 	public WebElement DataImportStatusPopup;
+	@FindBy(xpath = "//input[@id='member-first-name']")
+	public WebElement First_Nametxtbx;
+	@FindBy(xpath = "//input[@id='member-last-name']")
+	public WebElement Last_Nametxtbx;
+	@FindBy(xpath = "//*[contains(@id, 'member-attestation-field')]/../span[@class='uhc-checkbox__visual']")
+	public WebElement attestation_ckbx;
 
-	public void EnterMemberDetailsAndImport(String member_dob, String member_zip, String member_mbi) {
+	public void EnterMemberDetailsAndImport(String authenticated_flag, String first_name, String last_name, String member_dob, String member_zip, String member_mbi) {
 		validateNew(ImportModal_MemberRadio);
 		jsClickNew(ImportModal_MemberRadio);
 		validateNew(ImportModal_NextBtn);
 		jsClickNew(ImportModal_NextBtn);
-		CommonUtility.waitForPageLoadNew(driver, Member_NameDisplay, 20);
-		validateNew(Member_NameDisplay);
-		System.out.println("Member Name Displayed - "+Member_NameDisplay);
+		if(authenticated_flag.equalsIgnoreCase("false")){
+			validateNew(First_Nametxtbx);
+			validateNew(Last_Nametxtbx);
+			sendkeys(First_Nametxtbx, first_name);
+			sendkeys(Last_Nametxtbx, last_name);
+			validateNew(attestation_ckbx);
+			jsClickNew(attestation_ckbx);
+		}
+		if(authenticated_flag.equalsIgnoreCase("true")){
+			CommonUtility.waitForPageLoadNew(driver, Member_NameDisplay, 20);
+			validateNew(Member_NameDisplay);
+			System.out.println("Member Name Displayed - "+Member_NameDisplay);
+		}
 		validateNew(Member_DOBtxtbx);
 		validateNew(Member_Ziptxtbx);
 		validateNew(Member_MBItxtbx);

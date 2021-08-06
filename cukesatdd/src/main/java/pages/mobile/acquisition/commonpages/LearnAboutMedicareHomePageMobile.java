@@ -77,6 +77,12 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(6) > p")
 	private WebElement medicareEnrollmentButton;
 	
+	@FindBy(css = "[class*='learnMore'][class*='mobile-subnav'] [class$='mob-nav-head'] > .nav-back")
+	private WebElement learnAboutMedicareBackButton;
+	
+	@FindBy(css = "[class*='learnMore'][class*='mobile-subnav'] [class$='mob-nav-head'] > .nav-close")
+	private WebElement learnAboutMedicareCloseSubNavButton;
+	
 	// Introduction to medicare hamburger flyout locators
 	@FindBy(css = "#learnmore-scroll div[class^='mob-sctn']:nth-of-type(2) .nav-srch-back")
 	private WebElement introductionAboutMedicareBackButton;
@@ -855,6 +861,74 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		default:
 			throw new IllegalArgumentException(option + " is not available under 'Medicare Enrollment' menu.");
 		}
+	}
+	
+	public boolean validateIntroductionMenu() {
+		if (!introductionAboutMedicareBackButton.isDisplayed()) {
+			jsClickNew(introductionAboutMedicareButton);
+			CommonUtility.waitForPageLoadNew(driver, introductionAboutMedicareBackButton, 10);
+		}
+		boolean validateMenuOptions = false;
+		try {
+			
+			validateMenuOptions = validateNew(eligibilityLink);
+
+			validateMenuOptions = validateMenuOptions && validateNew(coverageOptionsLink);
+
+			validateMenuOptions = validateMenuOptions && validateNew(prescriptionProviderBenefitsLink);
+			
+			validateMenuOptions = validateMenuOptions && validateNew(medicareCostBasicsLink);
+
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
+		}
+		jsClickNew(introductionAboutMedicareBackButton);
+		return validateMenuOptions;
+	}
+	
+	public boolean validatePlanTypeMenu() {
+		if (!typesOfPlansBackButton.isDisplayed()) {
+			jsClickNew(typesOfPlansButton);
+			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
+		}
+		boolean validateMenuOptions = false;
+		try {
+			
+			validateMenuOptions = validateNew(medicareAdvantagePlansLink);
+
+			validateMenuOptions = validateMenuOptions && validateNew(medicareSupplementInsuranceLink);
+
+			validateMenuOptions = validateMenuOptions && validateNew(medicarePrescriptionDrugPlansLink);
+
+			validateMenuOptions = validateMenuOptions && validateNew(medicareFAQLink);
+			
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
+		}
+		jsClickNew(typesOfPlansBackButton);
+		return validateMenuOptions;
+	}
+	
+	public boolean validateMedicareEnrollmentMenu() {
+		if (!medicareEnrollmentBackButton.isDisplayed()) {
+			jsClickNew(medicareEnrollmentButton);
+			CommonUtility.waitForPageLoadNew(driver, medicareEnrollmentBackButton, 10);
+		}
+		boolean validateMenuOptions = false;
+		try {
+			
+			validateMenuOptions = validateNew(whenToEnrollLink);
+
+			
+		} catch (Exception e) {
+			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
+		}
+		jsClickNew(medicareEnrollmentBackButton);
+		return validateMenuOptions;
+	}
+	
+	public void closeLearnAboutMedicareSubNav() {
+		jsClickNew(learnAboutMedicareCloseSubNavButton);
 	}
 
 

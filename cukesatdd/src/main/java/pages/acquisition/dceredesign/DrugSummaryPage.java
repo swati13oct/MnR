@@ -74,7 +74,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-1-button' and contains(text(), 'Disclaimer')]")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//p)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//h3)[1]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
@@ -1345,4 +1345,11 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 
 
+	public void VerifyDefautTab(String planType) {
+
+		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plan")) {
+			System.out.println("PDP Plans displayed for PDP toggle click");
+		}
+		Assertion.fail("PDP Plans NOT displayed for PDP toggle click");
+	}
 }
