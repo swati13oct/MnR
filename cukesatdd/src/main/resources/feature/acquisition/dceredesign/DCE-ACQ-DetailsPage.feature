@@ -70,6 +70,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user clicks PrescriptionBenifit Tab on Plan Details Page
     Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     Then the user validates planName on LearnMore page matches plan Name in VPP
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page
 
     @dce_DrugDetailsValidation_AARP @regressionAARP
     Examples: 
