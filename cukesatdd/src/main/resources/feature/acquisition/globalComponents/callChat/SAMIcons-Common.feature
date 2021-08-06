@@ -43,7 +43,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/medication-therapy-management-program.html|AARP|         
  |resources/how-to-appoint-a-representative.html|AARP|                            
       
-      @samIconsAARP
+      @samIconsAARP_1
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -322,7 +322,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/how-to-appoint-a-representative.html|UHC|               
  |resources/prescription-drug-costs-help.html|UHC|  
      
-     @samIconsUHC 
+     @samIconsUHC_1
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
@@ -701,12 +701,12 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | <pagename> |
     Then the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP
+    @ProactiveChatAARP @regressionAARP
     Examples: 
       | pagename | site |
       | [blank] | AARP |
       
-     @samIconsAARP  @regressionAARP
+     @ProactiveChatAARP  @regressionAARP
       Examples: 
       | pagename | site |
       |profile/guest|AARP|                                                                                                                                                                                                                                                                                                                 
@@ -735,7 +735,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/medication-therapy-management-program.html|AARP|         
  |resources/how-to-appoint-a-representative.html|AARP|                            
       
-      @samIconsAARP
+      @ProactiveChatAARP_1
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -976,12 +976,12 @@ Feature: ACQ M&R- To test SAM Icons
 |resources/ma-pdp-information-forms.html|AARP|
  
       
-    @samIconsUHC @regressionUHC
+    @ProactiveChatUHC @regressionUHC
     Examples: 
       | pagename | site |
       | [blank]  | UHC |
      
-     @samIconsUHC @regressionUHC
+     @ProactiveChatUHC @regressionUHC
      Examples: 
       | pagename | site |
       |profile/guest|UHC|                                                                                                                                                                                                                                                                                                                 
@@ -1014,7 +1014,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/how-to-appoint-a-representative.html|UHC|               
  |resources/prescription-drug-costs-help.html|UHC|  
      
-     @samIconsUHC 
+     @ProactiveChatUHC_1 
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
