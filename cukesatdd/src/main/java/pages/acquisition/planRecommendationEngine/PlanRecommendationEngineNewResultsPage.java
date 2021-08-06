@@ -488,8 +488,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
 		}else if(doctorStatus.toLowerCase().contains("mscoverage")) {
 			Assert.assertTrue(
-					doctorText.toLowerCase().replace(" ", "").replace("\n", "")
-							.contains(doctorName.toLowerCase().replace(" ", "") + "Accept Medicare Patient".toLowerCase()),
+					doctorText.toLowerCase().replace("\n", "").contains(doctorName.toLowerCase()+ "Accept Medicare Patient".toLowerCase()),
 					"Doctor details Invalid in plan - " + planName);
 			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all Doctors covered for a plan");
 			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
@@ -529,9 +528,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("Validating SNP Coverage...");
 		if (snpStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered.");
-			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered");
 		} else if (snpStatus.toLowerCase().contains("false")) {
-			Assert.assertTrue(covered < 1, "Mismatch in Covered.");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered.");
 		} else if (snpStatus.toLowerCase().contains("noicon")) {
 			System.out.println("No Coverage Icon for Non-SNP plans");
@@ -587,10 +584,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
 		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText().trim();
-		if(planType.contains("Supplement"))
+		threadsleep(2000);
+		if(planType.contains("Supplement")) 
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(1)")).click();
 		else
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
+		threadsleep(2000);
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
