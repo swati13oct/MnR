@@ -730,7 +730,31 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
+    When user click on "How to Enroll" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Changing Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Working Past 65" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Overview of Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Special Needs Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
     When user click on "Medicare FAQ" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Glossary" link under learn about medicare
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
