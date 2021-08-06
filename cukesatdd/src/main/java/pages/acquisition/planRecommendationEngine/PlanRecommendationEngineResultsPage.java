@@ -400,6 +400,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".uhc-container a[class*='back-to-plans']")
 	private List<WebElement> backtoProfile;
 	
+	@FindBy(css = ".segment div[class*='content p-b-0'] h3")
+	private WebElement planNameEnrollPageExternal;
+	
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
 	
@@ -1523,7 +1526,10 @@ public void verifyPlanNameinOLE() {
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
-	planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
+	if(validate(planNameEnrollPageExternal)) {
+		planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
+	}else
+		planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
 	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
