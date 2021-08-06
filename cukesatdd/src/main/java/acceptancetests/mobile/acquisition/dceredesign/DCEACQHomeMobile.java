@@ -385,19 +385,19 @@ public class DCEACQHomeMobile {
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
 
-	@Then("^the user cancels enrollment and navigates to homepage$")
-	public void the_user_cancels_enrollment() throws Throwable {
-		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		CancelOLEModalMobile cancelOLEmodal = welcomePage.OpenCancelOLE();
-		if (cancelOLEmodal != null) {
-
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
-			System.out.println("OLE Cancellation Modal is Displayed");
-			cancelOLEmodal.leaveApplication();
-		} else
-			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
-	}
+//	@Then("^the user cancels enrollment and navigates to homepage$")
+//	public void the_user_cancels_enrollment() throws Throwable {
+//		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
+//				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+//		CancelOLEModalMobile cancelOLEmodal = welcomePage.OpenCancelOLE();
+//		if (cancelOLEmodal != null) {
+//
+//			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
+//			System.out.println("OLE Cancellation Modal is Displayed");
+//			cancelOLEmodal.leaveApplication();
+//		} else
+//			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
+//	}
 
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes)
