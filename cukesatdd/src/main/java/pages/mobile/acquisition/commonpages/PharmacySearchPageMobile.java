@@ -848,7 +848,11 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); // note: let the page settle down
 		// searchbtn.click();
-		jsClickNew(searchbtn);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			grantPermissionOnAndroidChrome(searchbtn);
+		} else {
+			jsClickNew(searchbtn);
+		}
 
 		// let the plans load, wait for the loading symbol to disappear
 		if (!loadingBlock.isEmpty())
@@ -1038,6 +1042,103 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					"Anchor link and Messaging NOT Displayed for No Pharmacy Results for ITU/HS/LTC filter selection - >>>>Validation FAILED <<<<");
 		}
 		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
+	}
+	
+	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
+		int total=0;
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementDisapper(loadingSpinner, 90);
+		int PharmacyCount = 0;
+		if (!pharmacyValidate(noResultMsg)) {
+			PharmacyCount = PharmacyResultList.size();
+		}		
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
+					pharmacyValidate(pharmaciesAvailable));
+			if (total >10) {
+				WebElement contactUsLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contactUsLink)) {
+					contactUsLink=contactUnitedHealthCare_ol;
+				}
+				Assertion.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
+						pharmacyValidate(contactUsLink));
+				jsClickNew(contactUsLink);
+				Thread.sleep(2000); //note: keep this for the page to load
+				CommonUtility.checkPageIsReadyNew(driver);
+				String currentURL=driver.getCurrentUrl();
+				String expectedURL="contact-us.html";
+				Assertion.assertTrue("PROBLEM - unable to go to contact us page. "
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
+						currentURL.contains(expectedURL));
+				driver.navigate().back();
+				driver.navigate().refresh();	//Added since select plan dropdown element was not located after navigating back from contact us page
+				CommonUtility.checkPageIsReadyNew(driver);
+				waitforElementDisapper(loadingSpinner, 90);
+				currentURL=driver.getCurrentUrl();
+				//System.out.println(currentURL);
+				expectedURL="Pharmacy-Search";
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+						currentURL.contains(expectedURL));
+				//note: if year dropdown is available, handle it with current year
+				if (isPlanYear()) {
+					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
+					selectsPlanYear(testPlanYear);
+					sleepBySec(2);
+					CommonUtility.checkPageIsReady(driver);
+				}
+				selectsPlanName(planName, testSiteUrl);
+				
+				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
+				WebElement pdfElement=pdf_otherPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
+				pdfElement=pdf_WalgreenPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				scrollToView(contactUsLink);
+				jsMouseOver(contactUsLink);
+				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", 
+						pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", 
+						pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", 
+						pharmacyValidate(rightArrow));
+				try {
+					jsClickNew(rightArrow);
+					CommonUtility.checkPageIsReady(driver);
+					jsClickNew(leftArrow);
+					CommonUtility.checkPageIsReady(driver);
+				} catch (Exception e) {
+					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
+				}
+
+			} else {
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!pharmacyValidate(rightArrow));
+			}
+		} else {
+			WebElement contactUsLink=contactUnitedHealthCare;
+			if (!pharmacyValidate(contactUnitedHealthCare)) 
+				contactUsLink=contactUnitedHealthCare_ol;
+			Assertion.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!pharmacyValidate(contactUsLink));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
+					!pharmacyValidate(pdf_otherPlans));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
+					!pharmacyValidate(pdf_WalgreenPlans));
+			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
+		}
 	}
 
 }

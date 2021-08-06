@@ -300,7 +300,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 *
 	 * }
 	 */
-	public void validateAddedDrugAndPharmacy(String drug) {
+	public void validateAddedDrugAndPharmacy(String drug,String user_state) {
 
 		/*
 		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
@@ -325,12 +325,21 @@ public class VisitorProfilePage extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-	     Assertion.assertTrue((drugHeader.getText().trim().contains("Saved Drugs (1) / Pharmacy")));
+		if (user_state.equalsIgnoreCase("auth")) {
+			System.out.println(drugHeader.getText().trim().replace("\n", " "));
+			Assertion.assertTrue(
+					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+		} else if (user_state.equalsIgnoreCase("unauth")) {
+			System.out.println(drugHeader.getText());
+			Assertion.assertTrue(
+					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+		}
 	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
 	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+	     System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
+	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 	             savedDrugsAndDoctorsHeader.getText().trim());
 	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		
@@ -547,7 +556,7 @@ public class VisitorProfilePage extends UhcDriver {
     public void validteProviderinfo(String planName) {
         try {
             WebElement viewProviders = driver.findElement(By.xpath(
-                    "//h3[contains(text(),'" + planName + "')]/following::button[text()=' View Providers '][1]"));
+                    "//h3[contains(text(),'" + planName + "')]/following::button[text()=' View Doctors & Dentists '][1]"));
             viewProviders.click();
             Thread.sleep(2000);
             String mproviderinfo = driver
