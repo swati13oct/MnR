@@ -1144,6 +1144,14 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.ValidatePREWithoutMSPlan(inputValues.get("User Type"));
     }
 	
+	@Then("^user validate zipcode saved in PRE session	and reflected in home page$")
+    public void zipcode_home_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+        PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        headerAndFooter.storedZipcode(inputValues.get("Zip Code"));
+                    
+    }
+	
 	@Then("^the user do poc$")
    	public void poc_new_results_page() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));

@@ -601,8 +601,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int planIndex = findPlan(planName);
 		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText().trim();
 		threadsleep(2000);
-		if(planType.contains("Supplement")) 
+		if(planType.contains("Supplement")) {
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
+			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText().trim();
+		}
 		else
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
 		threadsleep(2000);
