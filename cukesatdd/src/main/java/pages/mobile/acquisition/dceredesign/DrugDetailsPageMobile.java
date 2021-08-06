@@ -387,7 +387,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_DrugCostsCard);
 		validateNew(LinktoExitScenario);
-		if(!LinktoExitScenario.getText().contains("Compare")) {
+		if(!LinktoExitScenario.getText().toLowerCase().contains("compare")) {
             validateNew(LinkToDrugSummary);
         }
         /*
@@ -1032,7 +1032,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
 		mobileSelectOption(distanceDrpDown, distanceValue, true);
-		jsClickNew(pharmacySearchBtn);
+//		jsClickNew(pharmacySearchBtn);
 	}
 
 	public void changePharmacyAndSave() {
@@ -1358,7 +1358,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(saveDrugBtn);
 	}
 
-	@FindBy(css = "#drugdetails #buttoncontainer + div > span:nth-child(2)")
+	@FindBy(css = "#drugdetails #buttoncontainer ~ div span[class^='text-normal']")
 	private WebElement PharmacyNameText;
 
 	public void validatePharmacyName(String PharmacyName) {
@@ -1996,7 +1996,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
-		if (!LinktoExitScenario.getText().contains("Compare"))
+		if (!LinktoExitScenario.getText().toLowerCase().contains("compare"))
 			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
 
 		jsClickNew(LinktoExitScenario);
@@ -2188,5 +2188,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(LinktoEditDrugList);
 		jsClickNew(LinktoEditDrugList);
 		return new BuildYourDrugListMobile(driver);
+	}
+	
+	public void clickSearch() {
+		jsClickNew(pharmacySearchBtn);
 	}
 }

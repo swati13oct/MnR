@@ -89,7 +89,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(css = "div[class^='builddrug']>div[class*='d-block'] button[dtmname$='Return to Compare']")
+	@FindBy(css = "#buildyourdruglist a[dtmname$='return to compare']")
 	public WebElement returnToCompareBtn;
 	
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='remove drug:yes']")

@@ -339,8 +339,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(css = "a[title='Estimate your prescription drug costs']")
-	public WebElement EstimateYourDrugCost;
+	@FindBy(css = "a[data-asset-name='Estimate Your Drug Costs']")
+	public WebElement estimateYourDrugCostButton;
 
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
@@ -1819,15 +1819,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-//		jsClickNew(EstimateYourDrugCost);
-		switchToNewTabNew(EstimateYourDrugCost);
+//		switchToNewTabNew(estimateYourDrugCostButton);
+		jsClickNew(estimateYourDrugCostButton);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
-
-	@FindBy(xpath = "//div[.='MENU']")
-	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
 

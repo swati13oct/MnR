@@ -893,7 +893,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 //	@FindBy(xpath = "//*[text()='Return to Profile']")
-	@FindBy(css = "a[dtmname='dce:return to profile']")
+	@FindBy(css = "a[dtmname$='return to profile']")
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {

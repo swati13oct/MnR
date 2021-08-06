@@ -17,6 +17,9 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(css = "div[class^='d-block'] #importDrug")
+	private WebElement importDrugsLink;
 
 	@FindBy(css = "#adddrug")
 	public WebElement addDrugButton;
@@ -58,11 +61,13 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(getStartedTab);
+//		validateNew(getStartedTab);
+		validateNew(AddMyDrugsBtn);
+		validateNew(importDrugsLink);
 	}
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
-		if (validateNew(AddMyDrugsBtn))
+		if (validate(AddMyDrugsBtn))
 			jsClickNew(AddMyDrugsBtn);
 
 		CommonUtility.waitForPageLoadNew(driver, addDrugButton, 5);
