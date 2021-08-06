@@ -49,7 +49,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
-	@FindBy(css = "div[class='uhc-radio-tabs']")
+	@FindBy(css = "#tabcontainer [class^='radio-group']")
 	public WebElement planTypeToggle;
 
 	// @FindBy(xpath = "//span[text()='Pharmacy:']/..")
@@ -166,10 +166,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#adddrug")
 	private WebElement addDrugButton;
 
-	@FindBy(css = "#pdp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	private WebElement pdpPlanRadioButton;
 
-	@FindBy(css = "#snp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='SNP']")
 	private WebElement snpPlanRadioButton;
 	
 	@FindBy(css = "app-dcedisclaimer[header$='Monthly Drug Cost?'] div[id$='button']")
@@ -940,13 +940,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
 
-	@FindBy(css = "#mapd-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='MAPD']")
 	public WebElement mapdPlanToggle;
 
-	@FindBy(css = "#pdp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	public WebElement pdpPlanToggle;
 
-	@FindBy(css = "#snp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='SNP']")
 	public WebElement snpPlanToggle;
 	
 	@FindBy(css = "#plansummarycontainer > div > div[class^='uhc-card']:nth-of-type(1)")
