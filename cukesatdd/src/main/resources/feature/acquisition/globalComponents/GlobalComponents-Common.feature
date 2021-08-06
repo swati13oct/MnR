@@ -765,7 +765,7 @@ Feature: 1.12 ACQ - Global Components Validation
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
 
-    @learnAboutMedicareNav_AARP123 @regressionAARP
+    @learnAboutMedicareNav_AARP @regressionAARP
     Examples: 
       | site |
       | AARP |
