@@ -1345,4 +1345,11 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 
 
+	public void VerifyDefautTab(String planType) {
+
+		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plan")) {
+			System.out.println("PDP Plans displayed for PDP toggle click");
+		}
+		Assertion.fail("PDP Plans NOT displayed for PDP toggle click");
+	}
 }
