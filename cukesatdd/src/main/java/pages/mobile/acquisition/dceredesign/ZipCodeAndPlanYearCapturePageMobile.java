@@ -151,7 +151,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
 		pageloadcomplete();
-		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(reviewDrugCostsButton)) {
 			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		} else {
 			Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");

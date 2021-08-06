@@ -385,6 +385,20 @@ public class DCEACQHomeMobile {
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
 
+	@Then("^the user cancels enrollment and navigates to homepage$")
+	public void the_user_cancels_enrollment() throws Throwable {
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		CancelOLEModalMobile cancelOLEmodal = welcomePage.OpenCancelOLE();
+		if (cancelOLEmodal != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
+			System.out.println("OLE Cancellation Modal is Displayed");
+			cancelOLEmodal.leaveApplication();
+		} else
+			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
+	}
+
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes)
 			throws Throwable {
@@ -579,12 +593,13 @@ public class DCEACQHomeMobile {
 	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
 	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
@@ -596,35 +611,38 @@ public class DCEACQHomeMobile {
 	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
 	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.clickOnPDPPlan();
 		drugSummaryPage.savePlan(PlanName);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^user saves MAPD plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.clickOnMAPDPlan();
 		drugSummaryPage.savePlan(PlanName);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 		/*
 		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); List<DataTableRow>
@@ -1600,7 +1618,6 @@ public class DCEACQHomeMobile {
 
 		drugDetailsPage.clickOnBacktoDrugBtn();
 	}
-
 
 
 }

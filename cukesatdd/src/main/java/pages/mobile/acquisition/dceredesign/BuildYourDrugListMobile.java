@@ -351,10 +351,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//uhc-modal[contains(@modalheader, 'Drug List Limit')]")
+	@FindBy(xpath = "//div[starts-with(@class,'uhc-modal__header')]//h2[normalize-space()='Drug List Limit']")
 	public WebElement DrugListModal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__close')]")
+	@FindBy(css = "button#cancelicon")
 	public WebElement DrugListModal_Close;
 
 	@FindBy(xpath = "//button[contains(text(), 'Got it')]")
@@ -364,8 +364,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement DrugListModal_Message;
 
 	public void SearchValidate_DrugCountError(String drugName) {
-		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.sendKeys(drugName);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 
