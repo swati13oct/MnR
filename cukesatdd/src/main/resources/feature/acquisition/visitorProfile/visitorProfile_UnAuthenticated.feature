@@ -22,7 +22,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
+        @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
