@@ -336,7 +336,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
 	private WebElement ReturntoEnrollment;
 	
-	@FindBy(xpath = "//u[contains(@class,'tel')]")
+	@FindBy(xpath = "(//a[contains(@class,'tel')])[3]")
 	private WebElement TFNNoNeedHelp;
 	
 	@FindBy(xpath = "//*[contains(@id,'olesections')]")

@@ -50,22 +50,22 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Average Monthly Drug Cost')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Average Monthly Drug Cost')]")
 	public WebElement DrugCosts_AvgMonDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Monthly Premium')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Annual Estimated')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Annual Estimated')]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_AvgMonDrugCost_Amount;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Monthly Premium')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Monthly Premium')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_MonthlyPremium_Amount;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Annual Estimated')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Annual Estimated')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
@@ -406,7 +406,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugDetails_ChangePharmacyLnk);
         validateNew(DrugDetails_DrugCostsHeading);
         validateNew(LinktoExitScenario);
-        if(!LinktoExitScenario.getText().contains("Compare")) {
+        if(!LinktoExitScenario.getText().contains("ompare")) {
             validateNew(LinkToDrugSummary);
         }
         /*
@@ -1384,7 +1384,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
-		if (!LinktoExitScenario.getText().contains("Compare"))
+		if (!LinktoExitScenario.getText().contains("ompare"))
 			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
 
 		jsClickNew(LinktoExitScenario);
