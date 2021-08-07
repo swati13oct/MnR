@@ -6842,7 +6842,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		case "Drug Cost Estimator":
 			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed",
-					driver.getCurrentUrl().contains("estimate-drug-costs"));
+					driver.getCurrentUrl().contains("drug-cost-estimator"));
 			break;
 
 		case "Pharmacy Search":
@@ -6850,7 +6850,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					driver.getCurrentUrl().contains("Pharmacy-Search"));
 			break;
 
-		case "Provider Search":
+		case "Doctors Search":
+			for (String s : all) {
+				driver.switchTo().window(s);
+				// sleepBySec(5);
+				flag = driver.getCurrentUrl().contains("werally");
+				if (!base.equals(s)) {
+					driver.close();
+					break;
+				}
+			}
+			driver.switchTo().window(base);
+			Assertion.assertTrue("Navigation to Provider Search page failed", flag);
+			break;
+
+		case "Dentists Search":
 			for (String s : all) {
 				driver.switchTo().window(s);
 				// sleepBySec(5);
