@@ -830,7 +830,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | State | <state> |
     And user clicks on View all disclaimer information link on the home page
 
-    @footerLinksAARP @vbfGate123
+    @footerLinksAARP @vbfGate
     Examples: 
       | site | state  |
       | AARP | Alaska |
