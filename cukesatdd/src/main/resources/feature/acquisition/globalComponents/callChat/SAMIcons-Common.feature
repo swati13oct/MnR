@@ -7,7 +7,7 @@ Feature: ACQ M&R- To test SAM Icons
     When user opens the page to validate M&R Sites
       | pagename | <pagename> |
     Then the user validates whether call icon is visible
-    #And the user validates the chat icon
+    And the user validates the chat icon
 
     @samIconsAARP123 @regressionAARP
     Examples: 
