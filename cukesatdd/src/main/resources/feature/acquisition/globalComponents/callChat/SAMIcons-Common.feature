@@ -289,7 +289,7 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | site |
       | [blank]  | UHC |
      
-     @samIconsUHC
+     @samIconsUHC @regressionUHC
      Examples: 
       | pagename | site |
       |profile/guest|UHC|                                                                                                                                                                                                                                                                                                                 
