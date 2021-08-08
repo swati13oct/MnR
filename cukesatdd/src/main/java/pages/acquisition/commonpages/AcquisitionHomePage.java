@@ -6884,17 +6884,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					driver.getCurrentUrl().contains("plan-recommendation-engine"));
 			break;
 
-		case "Drug Cost Estimator":
+		case "Estimate Drug Costs":
 			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed",
 					driver.getCurrentUrl().contains("drug-cost-estimator"));
 			break;
 
-		case "Pharmacy Search":
+		case "Search for a Pharmacy":
 			Assertion.assertTrue("Navigation to Pharmacy Search page failed",
 					driver.getCurrentUrl().contains("Pharmacy-Search"));
 			break;
 
-		case "Doctors Search":
+		case "Search Doctors":
 			for (String s : all) {
 				driver.switchTo().window(s);
 				// sleepBySec(5);
@@ -6908,7 +6908,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Provider Search page failed", flag);
 			break;
 
-		case "Dentists Search":
+		case "Search Dentists":
 			for (String s : all) {
 				driver.switchTo().window(s);
 				// sleepBySec(5);
