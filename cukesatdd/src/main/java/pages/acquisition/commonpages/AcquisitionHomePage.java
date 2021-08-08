@@ -733,6 +733,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	private WebElement tfnHeaderRightRailOLE;
+	
+	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+			@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+			private WebElement samChatIcon;
+			
+			@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+			private WebElement samChatPopup;
+			
+			@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+			private WebElement samChatPopupHeader;
+			
+			@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+			private WebElement samChatPopupMsg;
+			
+			@FindBy(id = "proactive-chat-widget-new")
+			private WebElement proactiveChatModal;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
+			private WebElement proactiveChatMsg;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
+			private WebElement proactiveChatCloseIcon;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
+			private WebElement proactiveChatBtn;
+			
+			@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+			private List<WebElement> chatSuggestionMsg;
+			
+			@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+			private WebElement chatPopupOptions;
+			
+			@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+			private WebElement chatPopupEndChatOption;
+			
+			//@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+			
+			//@FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
+			@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+			private WebElement proactiveChatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -7078,6 +7118,97 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new AcquisitionHomePage(driver);
 	}
 	
+	public void validateSamChatIcon() throws InterruptedException {
+		boolean present;
+		try {
+			threadsleep(5);
+			validateNew(samChatIcon);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Chat Icon not available @@@@@@@@@");
+
+	}
 	
+	public void validateSamChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(samChatIcon);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(0).getText().trim().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().trim().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().trim().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().trim().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().trim().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().trim().contains("Other"));
+			
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+		closeChatPopup();
+	}
+	
+	public void validateProactiveChat() throws InterruptedException {
+		boolean present;
+		try {
+			waitforElementNew(proactiveChatModal, 10);
+			validateNew(proactiveChatModal);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Proative Chat Modal @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Proactive Chat not available @@@@@@@@@");
+
+		Assertion.assertTrue("Proactive chat modal message not found", proactiveChatMsg.getText().trim().contains("Message with UnitedHealthcare"));
+		validateNew(proactiveChatCloseIcon);
+		validateNew(proactiveChatBtn);
+	}
+	
+	public void validateProactiveChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(proactiveChatBtn);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(0).getText().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().contains("Other"));
+			
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+		closeProactiveChatPopup();
+	}
+	
+	public void closeChatPopup() {
+		chatPopupOptions.click();
+		chatPopupEndChatOption.click();
+	}
+	
+	public void closeProactiveChatPopup() {
+		chatPopupOptions.click();
+		proactiveChatPopupEndChatOption.click();
+	}
 
 }
