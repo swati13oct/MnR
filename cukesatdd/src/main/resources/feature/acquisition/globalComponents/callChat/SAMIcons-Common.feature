@@ -9,7 +9,7 @@ Feature: ACQ M&R- To test SAM Icons
     Then the user validates whether call icon is visible
     And the user validates the chat icon
 
-    @samIconsAARP123 @regressionAARP
+    @samIconsAARP @regressionAARP
     Examples: 
       | pagename | site |
       | [blank]        | AARP |
@@ -43,7 +43,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/medication-therapy-management-program.html|AARP|         
  |resources/how-to-appoint-a-representative.html|AARP|                            
       
-      @samIconsAARP_1
+      @samIconsAARP
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -322,7 +322,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/how-to-appoint-a-representative.html|UHC|               
  |resources/prescription-drug-costs-help.html|UHC|  
      
-     @samIconsUHC_1
+     @samIconsUHC
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
@@ -735,7 +735,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/medication-therapy-management-program.html|AARP|         
  |resources/how-to-appoint-a-representative.html|AARP|                            
       
-      @ProactiveChatAARP_1
+      @ProactiveChatAARP
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|AARP|               
@@ -1014,7 +1014,7 @@ Feature: ACQ M&R- To test SAM Icons
  |resources/how-to-appoint-a-representative.html|UHC|               
  |resources/prescription-drug-costs-help.html|UHC|  
      
-     @ProactiveChatUHC_1 
+     @ProactiveChatUHC 
       Examples: 
       | pagename | site |
       |medicare-education/medicare-eligibility.html|UHC|               
@@ -1249,4 +1249,3 @@ Feature: ACQ M&R- To test SAM Icons
 |medicare-education/getting-started.html|UHC|
 |medicare-education/keep-or-change-coverage.html|UHC|
 |resources/ma-pdp-information-forms.html|UHC|
- 
