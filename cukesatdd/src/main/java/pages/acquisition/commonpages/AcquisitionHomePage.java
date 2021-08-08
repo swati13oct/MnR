@@ -3805,8 +3805,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'drug-cost-estimator')]"));
 		WebElement PharmacySearchLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
-		WebElement ProviderSearchLink = driver
-				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Provider Search')]"));
+		WebElement searchDoctors = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Search Doctors')]"));
+		
+		WebElement searchDentists = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Search Dentists')]"));
 
 		validateNew(ZipCodeTxt);
 		validateNew(FindPlansBtn);
@@ -3824,13 +3827,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(PlanSelectorLink);
 		validateNew(DCELink);
 		validateNew(PharmacySearchLink);
-		validateNew(ProviderSearchLink);
+		validateNew(searchDoctors);
+		validateNew(searchDentists);
 
 		if (ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
 				&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
 				&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed() && SNPplansLink.isDisplayed()
 				&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed()
-				&& ProviderSearchLink.isDisplayed()) {
+				&& searchDoctors.isDisplayed()&& searchDentists.isDisplayed()) {
 			Assertion.assertTrue(true);
 			System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
 			// Actions actions = new Actions(driver);
