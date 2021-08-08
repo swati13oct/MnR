@@ -735,44 +735,44 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement tfnHeaderRightRailOLE;
 	
 	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
-		@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
-		private WebElement samChatIcon;
-		
-		@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
-		private WebElement samChatPopup;
-		
-		@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
-		private WebElement samChatPopupHeader;
-		
-		@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
-		private WebElement samChatPopupMsg;
-		
-		@FindBy(id = "proactive-chat-widget-new")
-		private WebElement proactiveChatModal;
-		
-		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
-		private WebElement proactiveChatMsg;
-		
-		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
-		private WebElement proactiveChatCloseIcon;
-		
-		@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
-		private WebElement proactiveChatBtn;
-		
-		@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
-		private List<WebElement> chatSuggestionMsg;
-		
-		@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
-		private WebElement chatPopupOptions;
-		
-		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
-		private WebElement chatPopupEndChatOption;
-		
-		//@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
-		
-		//@FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
-		@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
-		private WebElement proactiveChatPopupEndChatOption;
+			@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+			private WebElement samChatIcon;
+			
+			@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+			private WebElement samChatPopup;
+			
+			@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+			private WebElement samChatPopupHeader;
+			
+			@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+			private WebElement samChatPopupMsg;
+			
+			@FindBy(id = "proactive-chat-widget-new")
+			private WebElement proactiveChatModal;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-header-text')]")
+			private WebElement proactiveChatMsg;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-cross')]//*[@role='presentation']")
+			private WebElement proactiveChatCloseIcon;
+			
+			@FindBy(xpath = "//*[@id='proactive-chat-widget-new']//*[contains(@class,'proactive-chat-button-text')]")
+			private WebElement proactiveChatBtn;
+			
+			@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+			private List<WebElement> chatSuggestionMsg;
+			
+			@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+			private WebElement chatPopupOptions;
+			
+			@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+			private WebElement chatPopupEndChatOption;
+			
+			//@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
+			
+			//@FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
+			@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+			private WebElement proactiveChatPopupEndChatOption;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -3494,12 +3494,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("@@here@@@");
 		threadsleep(20);
 		// waitTillElementClickableInTime(proactiveChatExitBtn, 30);
-		//if (proactiveChatExitBtn != null) {
+		if (proactiveChatExitBtn != null) {
 			System.out.println("@@@proactive chat popup is displayed@@@@");
 			waitTillElementClickableInTime(proactiveChatChatBtn, 30);
 			jsClickNew(proactiveChatChatBtn);
 			System.out.println("@@@clciked@@@@");
-		 // driver.switchTo().defaultContent();
+		} // driver.switchTo().defaultContent();
 		driver.switchTo().frame("sp-chat-iframe");
 		validateNew(samChatFirstNameField);
 		samChatFirstNameField.sendKeys("tester");
@@ -6570,8 +6570,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 
 		case "When to Enroll":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed",
-					driver.getCurrentUrl().contains("enrollment-and-changing-plans"));
+			Assertion.assertTrue("Navigation to When to Enroll page failed",
+					driver.getCurrentUrl().contains("enrollment-and-changing-plans")||driver.getCurrentUrl().contains("when-to-enroll"));
+			break;
+			
+		case "Working Past 65":
+			Assertion.assertTrue("Navigation to Working Past 65 page failed",
+					driver.getCurrentUrl().contains("medicare-while-working"));
+			break;
+			
+		case "Changing Plans":
+			Assertion.assertTrue("Navigation to Changing Plans page failed",
+					driver.getCurrentUrl().contains("changing-plans"));
+			break;
+			
+		case "How to Enroll":
+			Assertion.assertTrue("Navigation to How to Enroll page failed",
+					driver.getCurrentUrl().contains("how-to-enroll-in-medicare"));
+			break;
+			
+		case "Overview of Plans":
+			Assertion.assertTrue("Navigation to Overview of Plans page failed",
+					driver.getCurrentUrl().contains("medicare-plans-overview"));
+			break;
+			
+		case "Special Needs Plans":
+			Assertion.assertTrue("Navigation to Special Needs Plans page failed",
+					driver.getCurrentUrl().contains("special-needs-plans"));
 			break;
 
 		case "Medicare FAQ":
@@ -6582,6 +6607,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		case "Articles and Special Topics":
 			Assertion.assertTrue("Navigation to Articles and Special Topics page failed",
 					driver.getCurrentUrl().contains("medicare-articles"));
+			break;
+			
+		case "Glossary":
+			Assertion.assertTrue("Navigation to Glossary page failed",
+					driver.getCurrentUrl().contains("medicare-glossary"));
 			break;
 
 		default:
@@ -6852,7 +6882,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		case "Drug Cost Estimator":
 			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed",
-					driver.getCurrentUrl().contains("estimate-drug-costs"));
+					driver.getCurrentUrl().contains("drug-cost-estimator"));
 			break;
 
 		case "Pharmacy Search":
@@ -6860,7 +6890,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					driver.getCurrentUrl().contains("Pharmacy-Search"));
 			break;
 
-		case "Provider Search":
+		case "Doctors Search":
+			for (String s : all) {
+				driver.switchTo().window(s);
+				// sleepBySec(5);
+				flag = driver.getCurrentUrl().contains("werally");
+				if (!base.equals(s)) {
+					driver.close();
+					break;
+				}
+			}
+			driver.switchTo().window(base);
+			Assertion.assertTrue("Navigation to Provider Search page failed", flag);
+			break;
+
+		case "Dentists Search":
 			for (String s : all) {
 				driver.switchTo().window(s);
 				// sleepBySec(5);
