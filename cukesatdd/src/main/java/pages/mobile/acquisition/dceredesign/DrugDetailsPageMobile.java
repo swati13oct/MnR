@@ -203,7 +203,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "button[class*='keepPharmacyLink']")
 	public WebElement keepUsingPharmBtn;
 
-	@FindBy(css = "#buttoncontainer + div > span:nth-child(2)")
+	@FindBy(css = "#drugdetails #buttoncontainer ~ div span[class^='text-normal']")
 	public WebElement pharmacyName;
 
 	@FindBy(xpath = "//*[@id='editPharmacyLink']")
@@ -1358,15 +1358,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(saveDrugBtn);
 	}
 
-	@FindBy(css = "#drugdetails #buttoncontainer ~ div span[class^='text-normal']")
-	private WebElement PharmacyNameText;
-
 	public void validatePharmacyName(String PharmacyName) {
 
-		if (validateNew(PharmacyNameText) && PharmacyNameText.getText().contains(PharmacyName)) {
-			Assertion.assertTrue("Correct Pharmacy Name is Displayed : " + PharmacyNameText.getText(), true);
+		if (validateNew(pharmacyName) && pharmacyName.getText().contains(PharmacyName)) {
+			Assertion.assertTrue("Correct Pharmacy Name is Displayed : " + pharmacyName.getText(), true);
 		} else {
-			Assertion.fail("Correct Pharmacy Name is NOT Displayed : " + PharmacyNameText.getText());
+			Assertion.fail("Correct Pharmacy Name is NOT Displayed : " + pharmacyName.getText());
 		}
 	}
 
