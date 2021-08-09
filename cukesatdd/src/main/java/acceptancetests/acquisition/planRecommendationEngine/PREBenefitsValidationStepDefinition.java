@@ -199,6 +199,9 @@ public class PREBenefitsValidationStepDefinition {
 
 							int planIndex = resultsPage.findPlan(planName);
 							int planYear = 2021; // Not using now
+							
+							if(planIndex<0)
+								break;// If No plan in UI then no record in Result excel
 
 							benefitsMapPRE = preBenefits.collectInfoPREResultsPage(planName, planIndex, planYear,
 									sheetName, rowIndex);
@@ -298,7 +301,7 @@ public class PREBenefitsValidationStepDefinition {
 			jsonObj = (JSONObject) parser.parse(sessionObj);
 			System.out.println(jsonObj.get("location"));
 			locationValues = jsonObj.get("location").toString();
-			System.out.println("mmmeeedddsssubb   "+jsonObj.get("medsuppUserInfo"));
+			//System.out.println("mmmeeedddsssubb   "+jsonObj.get("medsuppUserInfo"));
 			if(jsonObj.get("medsuppUserInfo")!=null)
 				medsubValues = jsonObj.get("medsuppUserInfo").toString();
 		} catch (ParseException e) {
