@@ -33,6 +33,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class ComparePlansPageMobile extends UhcDriver {
@@ -1391,16 +1392,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
 	public WebElement viewAllplansButton;
 
-	@FindBy(css = "#adddrug")
-	public WebElement addDrugButton;
+	@FindBy(css = "#addDrug")
+	public WebElement addMyDrugsButton;
 
-	public BuildYourDrugListMobile navigateToDCERedesign() {
+	public GetStartedPageMobile navigateToDCERedesign() {
 
 		validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
-		if (validateNew(addDrugButton)) {
+		if (validateNew(addMyDrugsButton)) {
 			System.out.println("User is on DCE Get started Page");
-			return new BuildYourDrugListMobile(driver);
+			return new GetStartedPageMobile(driver);
 		} else
 			return null;
 	}

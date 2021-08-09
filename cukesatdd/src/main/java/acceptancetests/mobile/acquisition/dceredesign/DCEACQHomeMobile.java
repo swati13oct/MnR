@@ -385,19 +385,7 @@ public class DCEACQHomeMobile {
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
 
-//	@Then("^the user cancels enrollment and navigates to homepage$")
-//	public void the_user_cancels_enrollment() throws Throwable {
-//		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
-//				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-//		CancelOLEModalMobile cancelOLEmodal = welcomePage.OpenCancelOLE();
-//		if (cancelOLEmodal != null) {
-//
-//			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
-//			System.out.println("OLE Cancellation Modal is Displayed");
-//			cancelOLEmodal.leaveApplication();
-//		} else
-//			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
-//	}
+
 
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes)
@@ -1263,13 +1251,15 @@ public class DCEACQHomeMobile {
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 
 		System.out.println("Drugs List : " + druglist);
+		
+		druglist = StringUtils.isEmpty(druglist) ? drugName : druglist + "&" + drugName;
 
 		// if (druglist.isEmpty()) {
-		if (StringUtils.isEmpty(druglist)) {
+		/*if (StringUtils.isEmpty(druglist)) {
 			druglist = drugName;
 		} else {
 			druglist = druglist + "&" + drugName;
-		}
+		}*/
 		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
@@ -1618,6 +1608,67 @@ public class DCEACQHomeMobile {
 
 		drugDetailsPage.clickOnBacktoDrugBtn();
 	}
+	
+	/**
+	 * Adding Steps for Drugs and providers Imports Validation for DCE - Authenticated Profiles
+	 * @throws Throwable
+	 */
+	@Then("^the user validates Import Option is displayed$")
+	public void the_user_validates_Import_Option_is_displayed() throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportOptionDispalyed();
+	}
+	
+	@Then("^the user clicks on Import Drugs and validates Import Flow \\- Imports Get Started\\, Member NonMember Selection modals$")
+	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals(DataTable attributes) throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String Authenticated_Flag = memberAttributesMap.get("AuthenticatedFlag");
+		getStartedPage.ClickImportValidateModals(Authenticated_Flag);
+	}
+	
+	@Given("^the user selects Member and provides Member Details and proceeds to import$")
+	public void the_user_selects_Member_and_provides_Member_Details_and_proceeds_to_import(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String FirstName = "";
+		String LastName = "";
+		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 
+
+		if(AuthenticatedFlag.equalsIgnoreCase("false")){
+			 FirstName = memberAttributesMap.get("FirstName");
+			 LastName = memberAttributesMap.get("LastName");
+		}
+		String Member_DOB = memberAttributesMap.get("DOB");
+		String Member_Zip = memberAttributesMap.get("ZipCode");
+		String Member_MBI = memberAttributesMap.get("MBI");
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.EnterMemberDetailsAndImport(AuthenticatedFlag, FirstName, LastName, Member_DOB, Member_Zip, Member_MBI);
+	}
+
+	@Given("^the user validates Import Success/Failure modal as follows$")
+	public void the_user_validates_Success_Failure_modal_as_follows(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String DrugsFlag = memberAttributesMap.get("DrugsFlag");
+		String ProvidersFlag = memberAttributesMap.get("ProvidersFlag");
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportCompleteModal(DrugsFlag, ProvidersFlag);
+	}
+	
+	@Then("^the user clicks on Review Imported Drugs and lands on Build your Drug List Page$")
+	public void the_user_clicks_on_Review_Imported_Drugs_and_lands_on_Build_your_Drug_List_Page() throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		BuildYourDrugListMobile buildYourDrugList = getStartedPage.ClickReviewAddDrugsBtn();
+		getLoginScenario()
+				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
+	}
 
 }
