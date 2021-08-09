@@ -725,7 +725,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "header-tfn-link")
 	private WebElement tfnHeaderLink;
 	
-	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
+	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//a")
 	private WebElement tfnHeaderPopup;
 	
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
