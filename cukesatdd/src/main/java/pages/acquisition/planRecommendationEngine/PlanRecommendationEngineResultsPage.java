@@ -1308,18 +1308,20 @@ public void waitforResultsPage() {
 }
 
 public List<String> getAPIPlansRanking(String rankingJSON) {
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[2]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
 	JSONObject jsonObject = null;
 	try {
 		//jarray = (JSONArray) parser.parse(rankingJSON);
-		jsonObject = (JSONObject) parser.parse(rankingJSON);;
+		jsonObject = (JSONObject) parser.parse(rankingJSON);
 		jarray = (JSONArray) jsonObject.get("plans");
 		System.out.println("API Plans Count "+jarray.size());
-		for (int i = 0; i < jarray.size(); i++) {
+		System.out.println("UI Plans Count "+uiPlanCount);
+		for (int i = 0; i < uiPlanCount; i++) {
 			// System.out.println(jarray.get(i));
-			for(int j=0;j< jarray.size();j++)
+			for(int j=0;j< uiPlanCount;j++)
 			{
 			JSONObject jsonObj = (JSONObject) jarray.get(j);
 			// String playtype = (String) jsonObj.get("planType");

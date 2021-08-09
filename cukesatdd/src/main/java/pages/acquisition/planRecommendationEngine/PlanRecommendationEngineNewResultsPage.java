@@ -261,8 +261,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
-		Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results button");
-		Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans button");
+//		Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results button");
+//		Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans button");
 		// Assert.assertTrue(sortByLabel.getText().contains("Sort By :"), "Invalid Sort
 		// Text");
 		// Assert.assertTrue(resourcesTitle.getText().contains("Resources"), "Invalid
@@ -280,7 +280,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		// Supplement Insurance Plans (Medigap)"),
 		// "Invalid MADSUP Text");
 		// validate(madsupPlanTypesPara, 60);
-		Assert.assertFalse(validate(madsupPlanTypesPara, 10), "Medsub section should not display for July release");
+		Assert.assertFalse(validate(madsupPlanTypesPara, 10), "Medsub section should not display for PDP flow/Non-approved states");
 		// Assert.assertTrue(madsupPlanTypesLearnmoreLink.getText().contains("Learn More
 		// About"),
 		// "Learn More About link not displayed");
