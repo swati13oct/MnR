@@ -1340,7 +1340,7 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 		e.printStackTrace();
 	}
 	System.out.println(rankingOrder);
-	Assert.assertTrue(rankingOrder.size() == jarray.size(), "API ranking count is not in sync with plans count");
+	Assert.assertTrue(rankingOrder.size() == uiPlanCount, "API ranking count is not in sync with plans count");
 	return rankingOrder;
 }
 
