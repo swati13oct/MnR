@@ -181,6 +181,8 @@ public class PREBenefitsValidationStepDefinition {
 							PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
 									wd);
 							zip.navigateToCoveragePage(zipcode, countyName);
+							
+							Thread.sleep(5000);
 
 							String recomObj = zip.getSessionValue("Session Storage", "ucp_planRecommendationObj");
 
@@ -217,7 +219,9 @@ public class PREBenefitsValidationStepDefinition {
 								|| currentColName.equalsIgnoreCase("zipcode")
 								|| currentColName.equalsIgnoreCase("zip code")
 								|| currentColName.equalsIgnoreCase("drug name")
-								|| currentColName.equalsIgnoreCase("fips"))) {
+								|| currentColName.equalsIgnoreCase("fips")
+								|| currentColName.equalsIgnoreCase("Plan code")
+								|| currentColName.equalsIgnoreCase("State"))){
 
 							resultMap = preBenefits.comparePREBenefits(currentColName, currentCellValue,
 									benefitsMapPRE);
@@ -281,23 +285,28 @@ public class PREBenefitsValidationStepDefinition {
 		String planYear = "2021";
 		String pYear = "\"planYear\":" + planYear + ",";
 		String locationObj = "\"location\":";
+		String msObj = "\"medsuppUserInfo\":";
+		String plansObj = "\"plans\":[],";
 		// {\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New
 		// York
 		// County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
 
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = new JSONObject();
-		String locationValues = "";
+		String locationValues = "",medsubValues = "null";
 		try {
 			jsonObj = (JSONObject) parser.parse(sessionObj);
 			System.out.println(jsonObj.get("location"));
 			locationValues = jsonObj.get("location").toString();
+			System.out.println("mmmeeedddsssubb   "+jsonObj.get("medsuppUserInfo"));
+			if(jsonObj.get("medsuppUserInfo")!=null)
+				medsubValues = jsonObj.get("medsuppUserInfo").toString();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		//System.out.println(preferencePRE + pYear + locationObj + locationValues + "}");
-		return preferencePRE + pYear + locationObj + locationValues + "}";
+		System.out.println(preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj+ medsubValues + "}");
+		return preferencePRE + plansObj + pYear + locationObj + locationValues + "," +msObj+ medsubValues+"}";
 	}
 	
 	public void checkpopup() {
