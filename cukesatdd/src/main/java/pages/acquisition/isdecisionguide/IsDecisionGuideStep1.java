@@ -450,6 +450,9 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		}
 	}
 	
+	@FindBy(xpath = "//*[contains(@class,'backToPrevPage')]")
+	private WebElement backtoPreviousbutton;
+	
 	public void enterUserInfoStep1(Map<String, String> memberAttributesMap) {
 		String FirstName = memberAttributesMap.get("FirstName");
 		String LastName = memberAttributesMap.get("LastName");
@@ -461,6 +464,8 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		driver.navigate().refresh();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
+		backtoPreviousbutton.isDisplayed();
+		
 		if(DistributionMethod.equalsIgnoreCase("email")){
 //			EmailOptionSelection.click();
 			jsClickNew(EmailOptionSelection);
