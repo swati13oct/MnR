@@ -13,14 +13,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
+import acceptancetests.data.CommonConstants.PLANTYPE;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import pages.acquisition.commonpages.CostBasicsPage;
-import pages.acquisition.commonpages.CoverageChoicesPage;
-import pages.acquisition.commonpages.EnrollmentBasicsPage;
-import pages.acquisition.commonpages.MedicareEligibilityPage;
-import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
-import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 
 @SuppressWarnings({ "deprecation" })
 public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
@@ -770,99 +768,132 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	
-	public void selectIntroductionToMedicareOption(String option) {
+	/**
+	 * Select options from Learn About Medicare, Introduction to Medicare and More about Medicare menu.
+	 *
+	 * @param option the option
+	 */
+	public void selectIntroductionToMedicareOption(LEARNABOUTMEDICARE_INTRODUCTION option) {
 		if (!introductionAboutMedicareBackButton.isDisplayed()) {
 			jsClickNew(introductionAboutMedicareButton);
 			CommonUtility.waitForPageLoadNew(driver, introductionAboutMedicareBackButton, 10);
 		}
 
-		option = option.toLowerCase();
 
 		switch (option) {
-		case "introduction":
+		case INTRODUCTION:
 			jsClickNew(introductionLink);
 			break;
-		case "eligibility":
+		case ELIGIBILITY:
 			jsClickNew(eligibilityLink);
 			break;
-		case "coverage options":
+		case COVERAGEOPTIONS:
 			jsClickNew(coverageOptionsLink);
 			break;
-		case "benefits":
+		case BENEFITS:
 			jsClickNew(prescriptionProviderBenefitsLink);
 			break;
-		case "cost basics":
+		case COSTBASICS:
 			jsClickNew(medicareCostBasicsLink);
 			break;
-		case "articles":
+		case ARTICLES:
 			jsClickNew(articlesAndSpecialTopicsLink);
 			break;
 		default:
-			throw new IllegalArgumentException(option + " is not available under 'Introduction to Medicare' menu.");
+			throw new IllegalArgumentException(option.name() + " is not available under 'Introduction to Medicare' menu.");
 		}
 	}
 	
-	public void selectTypesOfPlansOption(String planType) {
+	/**
+	 * Select options from Learn About Medicare, Types of Plans.
+	 *
+	 * @param planType the plan type
+	 */
+	public void selectTypesOfPlansOption(LEARNABOUTMEDICARE_TYPESOFPLANS planType) {
 		if (!typesOfPlansBackButton.isDisplayed()) {
 			jsClickNew(typesOfPlansButton);
 			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
 		}
 
-		planType = planType.toLowerCase();
-
 		switch (planType) {
-		case "overview of plans":
+		case OVERVIEW:
 			jsClickNew(overviewOfPlansLink);
 			break;
-		case "ma":
-		case "mapd":
+		case MA:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
-		case "medsupp":
-		case "ms":
+		case MEDSUPP:
 			jsClickNew(medicareSupplementInsuranceLink);
 			break;
-		case "pdp":
+		case PDP:
 			jsClickNew(medicarePrescriptionDrugPlansLink);
 			break;
-		case "snp":
+		case SNP:
 			jsClickNew(specialNeedsPlansLink);
 			break;
-		case "medicare faq":
+		default:
+			throw new IllegalArgumentException(planType.name() + " is not available under 'Types of Plan' menu.");
+		}
+	}
+	
+	/**
+	 * Select options from Learn About Medicare, Types of Plans -> FAQ menu.
+	 *
+	 * @param faqOption the faq option
+	 */
+	public void selectFAQOption(LEARNABOUTMEDICARE_TYPESOFPLANS faqOption) {
+		if (!typesOfPlansBackButton.isDisplayed()) {
+			jsClickNew(typesOfPlansButton);
+			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
+		}
+
+		switch (faqOption) {
+		case MEDICAREFAQ:
 			jsClickNew(medicareFAQLink);
 			break;
+		case GLOSSARY:
+			jsClickNew(glossaryLink);
+			break;
 		default:
-			throw new IllegalArgumentException(planType + " is not available under 'Types of Plan' menu.");
+			throw new IllegalArgumentException(faqOption.name() + " is not available under 'FAQ' menu.");
 		}
 	}
 	
 	
-	public void selectMedicareEnrollmentOption(String option) {
+	/**
+	 * Select option from Learn About Medicare, Medicare Enrollment menu.
+	 *
+	 * @param option the option
+	 */
+	public void selectMedicareEnrollmentOption(LEARNABOUTMEDICARE_MEDICAREENROLLMENT option) {
 		if (!medicareEnrollmentBackButton.isDisplayed()) {
 			jsClickNew(medicareEnrollmentButton);
 			CommonUtility.waitForPageLoadNew(driver, medicareEnrollmentBackButton, 10);
 		}
 
-		option = option.toLowerCase();
-
 		switch (option) {
-		case "when to enroll":
+		case WHENTOENROLL:
 			jsClickNew(whenToEnrollLink);
 			break;
-		case "how to enroll":
+		case HOWTOENROLL:
 			jsClickNew(howToEnrollLink);
 			break;
-		case "changing plans":
+		case CHANGINGPLANS:
 			jsClickNew(changingPlansLink);
 			break;
-		case "working past 65":
+		case WORKINGPAST65:
 			jsClickNew(workingPast65Link);
 			break;
 		default:
-			throw new IllegalArgumentException(option + " is not available under 'Medicare Enrollment' menu.");
+			throw new IllegalArgumentException(option.name() + " is not available under 'Medicare Enrollment' menu.");
 		}
 	}
 	
+	/**
+	 * Validate options from Learn About Medicare, Introduction to Medicare menu.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean validateIntroductionMenu() {
 		if (!introductionAboutMedicareBackButton.isDisplayed()) {
 			jsClickNew(introductionAboutMedicareButton);
@@ -886,6 +917,11 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		return validateMenuOptions;
 	}
 	
+	/**
+	 * Validate options from Learn About Medicare, Types of Plan menu.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean validatePlanTypeMenu() {
 		if (!typesOfPlansBackButton.isDisplayed()) {
 			jsClickNew(typesOfPlansButton);
@@ -909,6 +945,11 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		return validateMenuOptions;
 	}
 	
+	/**
+	 * Validate options from Learn About Medicare, Types of Plan menu.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean validateMedicareEnrollmentMenu() {
 		if (!medicareEnrollmentBackButton.isDisplayed()) {
 			jsClickNew(medicareEnrollmentButton);
@@ -927,6 +968,9 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		return validateMenuOptions;
 	}
 	
+	/**
+	 * Close Learn about Medicare sub nav.
+	 */
 	public void closeLearnAboutMedicareSubNav() {
 		jsClickNew(learnAboutMedicareCloseSubNavButton);
 	}
