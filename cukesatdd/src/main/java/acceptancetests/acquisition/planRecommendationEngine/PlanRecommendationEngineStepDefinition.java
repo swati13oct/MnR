@@ -1121,6 +1121,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"show");
    	}
 	
+	@Then("^user validate WhySeparateModel plan in PRE results page$")
+   	public void WhySeparateModel_new_results_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"whyseparatemodel");
+   	}
+	
 	@Then("^user validate showmoreDoctor in PRE results page$")
    	public void doctorShowMore_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -1135,6 +1142,14 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
 		planSelectorResultspage.ValidatePREWithoutMSPlan(inputValues.get("User Type"));
+    }
+	
+	@Then("^user validate zipcode saved in PRE session	and reflected in home page$")
+    public void zipcode_home_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+        PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+        headerAndFooter.storedZipcode(inputValues.get("Zip Code"));
+                    
     }
 	
 	@Then("^the user do poc$")

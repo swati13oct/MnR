@@ -104,6 +104,18 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 	@FindBy(css = "button#nav_search_icon")
 	private WebElement headerNavigationBarSearchIconTab;
 	
+	@FindBy(css = "input#zipcodemeded-0")
+	private WebElement ZipcodeHomepage;
+	
+	@FindBy(css = "button[class*='uhc-zip-button']")
+	private WebElement homePageFindPlans;
+	
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	private WebElement planZipInfo;
+	
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+	
 //Inside Shop for a Plan Elements
 	
 	@FindBy(css = "#subnav_2 > div.scroll-wrapper > div > div:nth-child(1) > label")
@@ -856,6 +868,19 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
+	}
+	
+	public void storedZipcode(String zipcode) {
+		System.out.println("Validating Zipcode stored in PRE session");
+		headerNavigationBarHomeTab.click();
+		threadsleep(2000);
+		validate(ZipcodeHomepage);
+//		Assert.assertTrue(ZipcodeHomepage.getText().trim().contains(zipcode), "Zipcode is Invalid ");
+		jsClickNew(homePageFindPlans);
+		validate(planZipInfo, 60);
+        waitforElementInvisibilityInTime(planLoaderscreen,60);
+        threadsleep(5000);// Plan loader
+        Assert.assertTrue(planZipInfo.getText().contains(zipcode),"Invalid Zip");
 	}
 
 	public void browserBack() {

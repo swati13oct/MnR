@@ -155,6 +155,20 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
+	
+// Why is a separate Plan required Model elements
+	
+	@FindBy(css = "div.modal-inner h2#modal-label")
+	private WebElement modelTiltle;
+	
+	@FindBy(css = "div.modal-inner button[class*='modal-close']")
+	private WebElement modelCloseICon;
+	
+	@FindBy(css = "div.modal-inner .bodyContent p")
+	private WebElement modelPara;
+	
+	@FindBy(css = "div.modal-inner div[class*='separatePlanImages']")
+	private WebElement modelImage;
 
 	// Bottom Result page Elements
 
@@ -386,6 +400,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					verifyDrugdataModel(planName, drugName, drugStatus);
 				if (location.toLowerCase().contains("show"))
 					verifyDrugShowMore(planName, drugName);
+				if (location.toLowerCase().contains("whyseparatemodel"))
+					verifyDrugWhySeparateMdel(planName);
 			}
 		}
 	}
@@ -440,7 +456,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int planIndex = findPlan(planName);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
-		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
+		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()), "Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
 		covered = plantiles.get(planIndex)
@@ -488,8 +504,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
 		}else if(doctorStatus.toLowerCase().contains("mscoverage")) {
 			Assert.assertTrue(
-					doctorText.toLowerCase().replace(" ", "").replace("\n", "")
-							.contains(doctorName.toLowerCase().replace(" ", "") + "Accept Medicare Patient".toLowerCase()),
+					doctorText.toLowerCase().replace("\n", "").contains(doctorName.toLowerCase()+ "Accept Medicare Patient".toLowerCase()),
 					"Doctor details Invalid in plan - " + planName);
 			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all Doctors covered for a plan");
 			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
@@ -529,9 +544,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("Validating SNP Coverage...");
 		if (snpStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered.");
-			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered");
 		} else if (snpStatus.toLowerCase().contains("false")) {
-			Assert.assertTrue(covered < 1, "Mismatch in Covered.");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered.");
 		} else if (snpStatus.toLowerCase().contains("noicon")) {
 			System.out.println("No Coverage Icon for Non-SNP plans");
@@ -587,10 +600,14 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
 		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText().trim();
-		if(planType.contains("Supplement"))
-			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(1)")).click();
+		threadsleep(2000);
+		if(planType.contains("Supplement")) {
+			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
+			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText().trim();
+		}
 		else
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
+		threadsleep(2000);
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -620,6 +637,18 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				.trim();
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDrugsId']")).click();
+	}
+	
+	public void verifyDrugWhySeparateMdel(String planName) {
+		int planIndex = findPlan(planName);
+		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+		threadsleep(2000);
+		Assert.assertTrue(modelTiltle.getText().trim().contains("required"), "Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelPara.getText().trim().contains("Part D"), "Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelImage.getText().trim().contains("Supplement"), "Why is a separate model not found in plan - " + planName);
+		validate(modelCloseICon);
+		modelCloseICon.click();
+		threadsleep(2000);
 	}
 	
 	public void verifyDoctorShowMore(String planName, String doctorName) {
