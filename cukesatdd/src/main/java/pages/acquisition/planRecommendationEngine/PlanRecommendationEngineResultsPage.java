@@ -109,7 +109,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
     @FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
     private List<WebElement> planNamesOnlyComparepage;
 	
-	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
 	
 	@FindBy(css = "body>div#overlay")
@@ -1308,18 +1308,20 @@ public void waitforResultsPage() {
 }
 
 public List<String> getAPIPlansRanking(String rankingJSON) {
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
 	JSONObject jsonObject = null;
 	try {
 		//jarray = (JSONArray) parser.parse(rankingJSON);
-		jsonObject = (JSONObject) parser.parse(rankingJSON);;
+		jsonObject = (JSONObject) parser.parse(rankingJSON);
 		jarray = (JSONArray) jsonObject.get("plans");
 		System.out.println("API Plans Count "+jarray.size());
-		for (int i = 0; i < jarray.size(); i++) {
+		System.out.println("UI Plans Count "+uiPlanCount);
+		for (int i = 0; i < uiPlanCount; i++) {
 			// System.out.println(jarray.get(i));
-			for(int j=0;j< jarray.size();j++)
+			for(int j=0;j< uiPlanCount;j++)
 			{
 			JSONObject jsonObj = (JSONObject) jarray.get(j);
 			// String playtype = (String) jsonObj.get("planType");
@@ -1338,7 +1340,7 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 		e.printStackTrace();
 	}
 	System.out.println(rankingOrder);
-	Assert.assertTrue(rankingOrder.size() == jarray.size(), "API ranking count is not in sync with plans count");
+	Assert.assertTrue(rankingOrder.size() == uiPlanCount, "API ranking count is not in sync with plans count");
 	return rankingOrder;
 }
 
