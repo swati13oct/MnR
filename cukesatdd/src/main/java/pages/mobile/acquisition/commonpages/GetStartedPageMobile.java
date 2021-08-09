@@ -115,15 +115,4 @@ public class GetStartedPageMobile extends UhcDriver {
 		}
 		return new AddDrugPageMobile(driver);
 	}
-
-	public VPPPlanSummaryPageMobile ClickReturnToPlanSummary() {
-		validateNew(LinktoExitScenario);
-		jsClickNew(LinktoExitScenario);
-		waitForPageLoadSafari();
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPageMobile(driver);
-		}
-		return null;
-	}
-
 }

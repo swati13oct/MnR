@@ -183,7 +183,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		if (cost.trim().contains(EstimatedDrugCosts))
@@ -200,15 +200,12 @@ public class DCEACQVPPPlanDetailsMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		PlanDetailsPageMobile plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
 		if (null != plandetailspage) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		} else
 			Assertion.fail("VPP Plan Details not loaded");
-		
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,drugDetailsPage);
-
 	}
 
 	@Then("^the user Captures Drug costs on Drug Details Page$")
@@ -225,7 +222,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT, COVERED_DRUGS_COUNT);
 	}
 
 	@Then("^the user navigates to the plan details for the given plan type$")
@@ -244,8 +241,8 @@ public class DCEACQVPPPlanDetailsMobile {
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		} else
 			Assertion.fail("VPP Plan Details not loaded");
 	}

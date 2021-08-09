@@ -1,4 +1,4 @@
-@globalComponent @samIcons
+@globalComponent
 Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
 
   Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> - <pagename>
