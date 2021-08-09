@@ -1155,7 +1155,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(2);
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			//CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
@@ -3048,8 +3048,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
-				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-						+ "']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
+				WebElement savePlan = driver.findElement(By.xpath("(//button[@planName='"+plan+"']//img)[1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				threadsleep(2);
