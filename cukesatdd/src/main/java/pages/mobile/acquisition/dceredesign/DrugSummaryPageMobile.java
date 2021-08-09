@@ -286,8 +286,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h3[contains(text(), '" + currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h3[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
