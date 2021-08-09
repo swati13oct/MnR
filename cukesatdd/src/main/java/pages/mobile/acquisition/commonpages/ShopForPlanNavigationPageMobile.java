@@ -20,7 +20,7 @@ import atdd.framework.Assertion;
 
 public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']/span")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
@@ -198,6 +198,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
+		ShopForaplan.click();
 
 		selectShopOption(SHOP);
 		/*

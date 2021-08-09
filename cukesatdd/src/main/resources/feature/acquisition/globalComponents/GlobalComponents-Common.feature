@@ -512,7 +512,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP
+    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP @HPA
     Examples: 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |

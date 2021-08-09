@@ -319,10 +319,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#state-select")
 	private WebElement stateDropDown;
-	
+
 	@FindBy(xpath = "//*[@id='shop-scroll']/div[2]/div[3]/div/div[1]/button")
 	private WebElement mobileMenuClose;
-	
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
@@ -459,15 +458,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#search-field-2")
 	private WebElement siteSearchInputTextField;
-	
+
 	@FindBy(css = "button[class^='srch-btn']")
 	private WebElement siteSearch_SearchButton;
-	
-	/*@FindBy(css = "#search-field-2")
-	private WebElement EnterSearch;
 
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button")
-	private WebElement SubmitBtn;*/
+	/*
+	 * @FindBy(css = "#search-field-2") private WebElement EnterSearch;
+	 * 
+	 * @FindBy(css =
+	 * "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button"
+	 * ) private WebElement SubmitBtn;
+	 */
 
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
 	private WebElement enterSearchLable;
@@ -532,13 +533,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#upgradeVersionBarNew")
 	private WebElement upgradeBrowserVersionBanner;
-	
+
 	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateLater")
 	private WebElement updateLaterButton;
-	
+
 	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateNow")
 	private WebElement updateNowButton;
-	
+
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
 	String CallSam = "1-877";
@@ -1005,7 +1006,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
-		
+
 		clickUpdateLaterBrowserButton();
 	}
 
@@ -1023,24 +1024,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
-	
+
 	/**
 	 * Click update later browser button.
 	 * 
 	 * This method is for lower version of Chrome browser on Android
 	 */
 	public void clickUpdateLaterBrowserButton() {
-		if(validate(upgradeBrowserVersionBanner)) {
+		if (validate(upgradeBrowserVersionBanner)) {
 			System.out.println("Update browser banner shown !");
 			jsClickNew(updateLaterButton);
 			System.out.println("Clicked 'Update later' button");
 			sleepBySec(2);
-			if(!upgradeBrowserVersionBanner.isDisplayed()) {
+			if (!upgradeBrowserVersionBanner.isDisplayed()) {
 				System.out.println("Update browser banner disappeared.");
 			}
 		}
 	}
-	
+
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		scrollToView(footerAgentsnBrokersLink);
 		validate(footerAgentsnBrokersLink);
@@ -1092,7 +1093,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
 		accessFooterLinkFromMore("about");
-
+		sleepBySec(10);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
@@ -1509,19 +1510,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		actions.perform();
 
 	}
-	
+
 	@FindBy(id = "header-tfn-link")
 	private WebElement tfnHeaderLink;
-	
+
 	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//*[contains(@data-bind,'tfn')]")
 	private WebElement tfnHeaderPopup;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
-	
+
 	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	private WebElement tfnHeaderRightRailOLE;
-	
+
 	public void validateTfnInHeader() throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
@@ -1543,10 +1544,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		
+
 		validate(tfnHeaderPopupClose);
 		jsClickNew(tfnHeaderPopupClose);
-		
+
 	}
 
 	public Boolean cookieValid() {
@@ -2197,8 +2198,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// sendkeysMobile(EnterSearch, sv);
 
 		sendKeysByCharacter(siteSearchInputTextField, sv);
-		//sendkeysMobile(EnterSearch, sv);
-
+		// sendkeysMobile(EnterSearch, sv);
 
 		jsClickNew(enterSearchLable);
 		sleepBySec(4);
@@ -2481,7 +2481,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		jsClickNew(shopPlansExpander);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
@@ -2489,7 +2489,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		jsClickNew(toolsAndResources);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
@@ -2497,7 +2497,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		jsClickNew(learnAboutMedicareFooterButton);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
@@ -2505,7 +2505,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		jsClickNew(more);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
@@ -2540,21 +2540,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		List<WebElement> TFNelement = driver.findElements(By.xpath(tfnXpath));
 		boolean present = false;
 		for (WebElement tfn : TFNelement) {
-			if(validate(tfn)) {
+			if (validate(tfn)) {
 				System.out.println("TFN is Displayed on Page : " + tfn.getText());
 				present = true;
 			}
 		}
-		
-		if(!present) {
+
+		if (!present) {
 			Assert.fail("TFN element is not found / displayed on page : " + tfnXpath);
 		}
-		
-		/*validateNew(TFNelement);
-		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		} else {
-			Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
-		}*/
+
+		/*
+		 * validateNew(TFNelement); if (validateNew(TFNelement) &&
+		 * TFNelement.isDisplayed()) { } else {
+		 * Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath); }
+		 */
 	}
 
 	private void CheckPageLoad() {
@@ -3034,7 +3034,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(shoppingCartIcon);
 		// shoppingCartIcon.click();
-		//jsClickNew(shoppingCartIcon);
+		// jsClickNew(shoppingCartIcon);
 		shoppingCartIcon.click();
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
 		// icon
@@ -3623,7 +3623,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		waitforElement(shoppingCartIcon);
 		scrollToView(shoppingCartIcon);
-		//jsClickNew(shoppingCartIcon);
+		// jsClickNew(shoppingCartIcon);
 		shoppingCartIcon.click();
 		// guestProfileLink.click();
 		// jsClickNew(guestProfileLink);
@@ -3886,11 +3886,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
+//		Actions actions = new Actions(driver);
+//		PageFactory.initElements(driver, this);
+//		actions.moveToElement(ourPlansHoverLink);
+//		actions.moveToElement(moreHelpInfoLink);
+//		actions.click().build().perform();
+		MobileMenuShopTool();
+		moreHelpInfoLink.click();
 		waitForPageLoadSafari();
 		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
@@ -4467,9 +4469,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath="//*[@id='accordion-3-button']")
+	@FindBy(xpath = "//*[@id='accordion-3-button']")
 	public WebElement learnAboutMedicareLinkFooter;
-	
+
 	public void clickLearnAboutMedicareNavLink(String linkName) {
 		jsClickNew(learnAboutMedicareLinkFooter);
 
@@ -4706,11 +4708,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatestatedropDown(String state, String code) {
-		
-		//below if loop added because when browser back action executes previous mobile menu is still open to close that 
-		if(mobileMenuClose.isDisplayed())
+
+		// below if loop added because when browser back action executes previous mobile
+		// menu is still open to close that
+		if (mobileMenuClose.isDisplayed())
 			mobileMenuClose.click();
-			
+
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*

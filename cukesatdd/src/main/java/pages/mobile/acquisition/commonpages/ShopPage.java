@@ -25,6 +25,9 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
+	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
+	private WebElement GetStartedShopPage;
+
 	@FindBy(id = "updates-email")
 	private WebElement updatesemail;
 
@@ -146,7 +149,7 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
 	private WebElement personalizeUrResults;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Costs')]")
+	@FindBy(xpath = "//a[contains(text(),'Check Drug Costs')]")
 	private WebElement checkDrugCostsBtn;
 
 	@FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
@@ -302,13 +305,17 @@ public class ShopPage extends GlobalWebElements {
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
-				Thread.sleep(3000);
-				ZipCodeText.get(zipCodeNumber - 1).clear();
-				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
-				waitForPageLoadSafari();
-				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
-				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
-				System.out.println("Validating VPP page for Zip code " + zipCode);
+//				Thread.sleep(3000);
+//				ZipCodeText.get(zipCodeNumber - 1).clear();
+//				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
+//				waitForPageLoadSafari();
+//				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
+//				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
+//				System.out.println("Validating VPP page for Zip code " + zipCode);
+				scrollToView(zipcodeFieldShopPage);
+				sendkeysMobile(zipcodeFieldShopPage, zipCode);
+				jsClickNew(GetStartedShopPage);
+
 				Thread.sleep(20000);
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
@@ -321,6 +328,7 @@ public class ShopPage extends GlobalWebElements {
 				}
 
 				System.out.println("Actual : " + vppPageTitle);
+				System.out.println("Curent URL *****" + driver.getCurrentUrl());
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);

@@ -242,6 +242,9 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "nav-zipcode")
 	public WebElement zipcodeField;
+	
+	@FindBy(xpath = "//*[@id='zipcodemeded-0']")
+	public WebElement zipcodeFieldShopPage;
 
 	@FindBy(className = "zip-button")
 	public WebElement findPlansButton;
