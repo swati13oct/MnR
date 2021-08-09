@@ -291,13 +291,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
 	public WebElement viewAllplansButton;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
 	public WebElement medicalBenefitsOONToggle;
 
 	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
 	public WebElement medicalBenefitsOONLabel;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider'][1]")
 	public WebElement additionalBenefitsOONToggle;
 
 	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
