@@ -1499,7 +1499,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#reseteffective")
 	public WebElement ResetEffectiveDateLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
+	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::h3[contains(text(), 'Dec 31')]")
 	public WebElement EffectiveDateTextafterChange;
 
 	public void validateChangePEDandModalandChangeDisplay() {
