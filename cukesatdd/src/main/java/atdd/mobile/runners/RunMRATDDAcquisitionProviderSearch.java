@@ -16,7 +16,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionProviderSearch.json",
 						"timeline:target" },
-				tags = "@zaid", dryRun=false)
+				tags = "@regressionAARPmobile", dryRun=false)
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionProviderSearch extends BaseTestConfig {
