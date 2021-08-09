@@ -143,7 +143,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
 	private WebElement personalizeUrResults;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Costs')]")
+	@FindBy(xpath = "//a[contains(text(),'Check Drug Costs')]")
 	private WebElement checkDrugCostsBtn;
 
 	@FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
