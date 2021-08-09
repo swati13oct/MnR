@@ -3,6 +3,7 @@
  */
 package pages.acquisition.isdecisionguide;
 
+import atdd.framework.Assertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,21 +84,25 @@ public class DGR_ThankYouPage extends UhcDriver{
 	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
 	private WebElement FindPlansAreaButton;
 	
+	@FindBy(xpath = "//*[contains(@id,'submit')]")
+	private WebElement FindPlans;
+	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement Zipcode;
 	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
 		//	if( validate(FindPlansAreaButton)){
 			validateNew(FindPlansAreaButton);
 			//FindPlansAreaButton.click();
 			jsClickNew(FindPlansAreaButton);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			CommonUtility.checkPageIsReadyNew(driver);	
 			String checkUrl=driver.getCurrentUrl();
 			if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
-				System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+				System.out.println("Submit Button Clicked : Plan summary Page is Displayed with zipcode to enter in the page");
+				Zipcode.isDisplayed();
+				FindPlans.isDisplayed();
+				Assertion.assertTrue(true);
+
 				return new VPPPlanSummaryPage(driver);
 			}
 			return null;	
