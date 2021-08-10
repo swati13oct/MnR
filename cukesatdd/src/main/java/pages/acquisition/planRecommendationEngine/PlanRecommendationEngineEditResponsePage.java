@@ -190,7 +190,7 @@ private WebElement signInLink;
 		checkContent("special");
 		checkContent("doctor");
 		checkContent("drugs");
-		checkContent("Services");
+		checkContent("services");
 		checkContent("cost");
 		checkContent("priorities");
 		verifyClickEditButton("location", false);
@@ -364,7 +364,7 @@ private WebElement signInLink;
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("Services")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
@@ -441,7 +441,7 @@ private WebElement signInLink;
 		mapd.put(2, "special");
 		mapd.put(3, "doctor");
 		mapd.put(4, "drugs");
-		mapd.put(5, "Services");
+		mapd.put(5, "services");
 		mapd.put(6, "cost");
 		mapd.put(7, "priorities");
 
@@ -450,7 +450,7 @@ private WebElement signInLink;
 		ma.put(1, "coverage");
 		ma.put(2, "special");
 		ma.put(3, "doctor");
-		ma.put(4, "Services");
+		ma.put(4, "services");
 		ma.put(5, "cost");
 		ma.put(6, "priorities");
 
@@ -566,7 +566,7 @@ private WebElement signInLink;
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("Services")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			PlanRecommendationEngineAdditionalServicesPage add = new PlanRecommendationEngineAdditionalServicesPage(
 					driver);
 			add.edit_Services(inputValues.get("Services Option"));
