@@ -80,11 +80,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "div[class*='adddrugpopup'] #cancelicon")
 	private WebElement addDrugModalCloseButton;
 	
-<<<<<<< .mine
-	@FindBy(css = "#buildyourdruglist > div.row.mb-100 > div > div > div > button")
-=======
+
 	@FindBy(css = "#previousButton + div > button[dtmname$='review drug costs']")
->>>>>>> .theirs
+
 	public WebElement reviewDrugCostButtonFooter;
 
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='review drug costs']")
