@@ -152,7 +152,9 @@ public class MRScenario {
 
 	public final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
 	public final String RealDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
-	public final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+	public final String VirtualDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
+	
+	//https://gpdadmin1:e4345a14-7675-429a-a93c-0d9bbd8409cc@ondemand.us-west-1.saucelabs.com:80/wd/hub
 
 	
 	private static final ThreadLocal<WeakHashMap<String, Object>> scenarioObjectMap = new ThreadLocal<WeakHashMap<String, Object>>() {
