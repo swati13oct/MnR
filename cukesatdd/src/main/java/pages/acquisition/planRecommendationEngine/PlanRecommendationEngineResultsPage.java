@@ -1440,8 +1440,9 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 	
 	List<String> vppPlans = new ArrayList<String>();
 	System.out.println(plansId.size());
-	for (WebElement e : plansId)
-		vppPlans.add(getplanId(e));
+	for (WebElement e : plansId) {
+		System.out.println("plan in loop" +e);
+		vppPlans.add(getplanId(e));}
 	for (int i = 0; i < APIRankings.size(); i++) {
 		Assert.assertTrue(vppPlans.get(i).toUpperCase().contains(APIRankings.get(i).toUpperCase()),
 				"Invalid Plan Ranking between API and UI : " + vppPlans.get(i) + "<-> " + APIRankings.get(i));
@@ -1454,7 +1455,7 @@ public String getplanId(WebElement plan) {
 	String planId="";
 	planName = plan.getText().trim();
 	threadsleep(3000);
-	if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan D") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N"))
+	if( planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan D") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N") )
 		planId = planName.split("Plan ")[1].trim() + "01";
 	else
 		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
