@@ -1,8 +1,8 @@
 @planCompare_ExcelValidation
 Feature: ACQ-Plan benefits validation
 
-  @2020_AARP @current_year
-  Scenario Outline: 2020 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
+  @2022_AARP @current_year
+  Scenario Outline: 2022 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
       | WorkSheetName | <workSheet>                |
@@ -11,85 +11,85 @@ Feature: ACQ-Plan benefits validation
     @planCompareBenefitsAARP01
     Examples: 
       | workSheet   |
-      | Sheet2020_1 |
+      | Sheet2022_1 |
 
     @planCompareBenefitsAARP02
     Examples: 
       | workSheet   |
-      | Sheet2020_2 |
+      | Sheet2022_2 |
 
     @planCompareBenefitsAARP03
     Examples: 
       | workSheet   |
-      | Sheet2020_3 |
+      | Sheet2022_3 |
 
     @planCompareBenefitsAARP04
     Examples: 
       | workSheet   |
-      | Sheet2020_4 |
+      | Sheet2022_4 |
 
     @planCompareBenefitsAARP05
     Examples: 
       | workSheet   |
-      | Sheet2020_5 |
+      | Sheet2022_5 |
 
     @planCompareBenefitsAARP06
     Examples: 
       | workSheet   |
-      | Sheet2020_6 |
+      | Sheet2022_6 |
 
     @planCompareBenefitsAARP07
     Examples: 
       | workSheet   |
-      | Sheet2020_7 |
+      | Sheet2022_7 |
 
     @planCompareBenefitsAARP08
     Examples: 
       | workSheet   |
-      | Sheet2020_8 |
+      | Sheet2022_8 |
 
     @planCompareBenefitsAARP09
     Examples: 
       | workSheet   |
-      | Sheet2020_9 |
+      | Sheet2022_9 |
 
     @planCompareBenefitsAARP10
     Examples: 
       | workSheet    |
-      | Sheet2020_10 |
+      | Sheet2022_10 |
 
     @planCompareBenefitsAARP11
     Examples: 
       | workSheet    |
-      | Sheet2020_11 |
+      | Sheet2022_11 |
 
     @planCompareBenefitsAARP12
     Examples: 
       | workSheet    |
-      | Sheet2020_12 |
+      | Sheet2022_12 |
 
     @planCompareBenefitsAARP13
     Examples: 
       | workSheet    |
-      | Sheet2020_13 |
+      | Sheet2022_13 |
 
     @planCompareBenefitsPDPAARP01
     Examples: 
       | workSheet      |
-      | PDPSheet2020_1 |
+      | PDPSheet2022_1 |
 
     @planCompareBenefitsPDPAARP02
     Examples: 
       | workSheet      |
-      | PDPSheet2020_2 |
+      | PDPSheet2022_2 |
 
     @planCompareBenefitsPDPAARP03
     Examples: 
       | workSheet      |
-      | PDPSheet2020_3 |
+      | PDPSheet2022_3 |
 
-  @2020_UHC @current_year
-  Scenario Outline: 2020 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
+  @2022_UHC @current_year
+  Scenario Outline: 2022 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
       | WorkSheetName | <workSheet>                |
@@ -98,82 +98,82 @@ Feature: ACQ-Plan benefits validation
     @planCompareBenefitsUHC01
     Examples: 
       | workSheet   |
-      | Sheet2020_1 |
+      | Sheet2022_1 |
 
     @planCompareBenefitsUHC02
     Examples: 
       | workSheet   |
-      | Sheet2020_2 |
+      | Sheet2022_2 |
 
     @planCompareBenefitsUHC03
     Examples: 
       | workSheet   |
-      | Sheet2020_3 |
+      | Sheet2022_3 |
 
     @planCompareBenefitsUHC04
     Examples: 
       | workSheet   |
-      | Sheet2020_4 |
+      | Sheet2022_4 |
 
     @planCompareBenefitsUHC05
     Examples: 
       | workSheet   |
-      | Sheet2020_5 |
+      | Sheet2022_5 |
 
     @planCompareBenefitsUHC06
     Examples: 
       | workSheet   |
-      | Sheet2020_6 |
+      | Sheet2022_6 |
 
     @planCompareBenefitsUHC07
     Examples: 
       | workSheet   |
-      | Sheet2020_7 |
+      | Sheet2022_7 |
 
     @planCompareBenefitsUHC08
     Examples: 
       | workSheet   |
-      | Sheet2020_8 |
+      | Sheet2022_8 |
 
     @planCompareBenefitsUHC09
     Examples: 
       | workSheet   |
-      | Sheet2020_9 |
+      | Sheet2022_9 |
 
     @planCompareBenefitsUHC10
     Examples: 
       | workSheet    |
-      | Sheet2020_10 |
+      | Sheet2022_10 |
 
     @planCompareBenefitsUHC11
     Examples: 
       | workSheet    |
-      | Sheet2020_11 |
+      | Sheet2022_11 |
 
     @planCompareBenefitsUHC12
     Examples: 
       | workSheet    |
-      | Sheet2020_12 |
+      | Sheet2022_12 |
 
     @planCompareBenefitsUHC13
     Examples: 
       | workSheet    |
-      | Sheet2020_13 |
+      | Sheet2022_13 |
 
     @planCompareBenefitsPDPUHC01
     Examples: 
       | workSheet      |
-      | PDPSheet2020_1 |
+      | PDPSheet2022_1 |
 
     @planCompareBenefitsPDPUHC02
     Examples: 
       | workSheet      |
-      | PDPSheet2020_2 |
+      | PDPSheet2022_2 |
 
     @planCompareBenefitsPDPUHC03
     Examples: 
       | workSheet      |
-      | PDPSheet2020_3 |
+      | PDPSheet2022_3 |
 
   @2021_AARP @next_year @2021CompareAARP
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
@@ -487,7 +487,7 @@ Feature: ACQ-Plan benefits validation
       | PDPSheet2021_3 |
 
   @2021_AARP @current_year @2021CompareProd
-  Scenario Outline: 2020 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
+  Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
       | WorkSheetName | <workSheet>                |
