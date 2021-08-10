@@ -1453,7 +1453,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidatesDrugsList(druglist);
 
 	}
-	
+
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 	@Then("^the user validates View Drug Pricing modal for the given plan$")
 	public void user_validates_ViewDrugPricing_modal(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

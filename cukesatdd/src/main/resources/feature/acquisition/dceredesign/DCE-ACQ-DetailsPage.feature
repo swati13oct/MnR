@@ -285,7 +285,8 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     And user should verify the Extra help on SNP plan type
-    And user click on View Drug Pricing Modal
+    And the user Clicks View Drug Pricing for the given plan
+      | Plan Name | <planName> |
     And user should verify the drug extra qualification in drug pricing popup
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |

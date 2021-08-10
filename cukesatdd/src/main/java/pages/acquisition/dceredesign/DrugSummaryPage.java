@@ -669,6 +669,14 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Drug Details Page is NOT Displayed");
 			return null;
 		}	}
+
+	public void ClickviewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Pricing') and contains(@aria-label,'" + planName + "') and contains(@class, 'ng-star-inserted')]"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+	}
 	
 	public void viewDrugPricingModal(String planName){
 	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Pricing') and contains(@aria-label,'"+planName+"') and contains(@class, 'ng-star-inserted')]"));
