@@ -916,6 +916,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
 	private List<WebElement> savePlanImgList;
 
+
 //	@FindBy(xpath = "//span[@id='header-number']")
 	@FindBy(xpath = "(//span[contains(@class,'cart-plans-count')])[1]")
 	private WebElement savedPlanHeaderCount;
@@ -1032,6 +1033,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//label[@for='GI30dayBday_1']")
 	public WebElement	BirthdayEnrollment;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -3776,14 +3780,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// a[contains(@class, 'EBRC')]
 
 	// @FindBy(xpath = "//a[contains(@class, 'EBRC')]")
-	@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+	@FindBy(xpath = "//a[contains(text(),'here to get your Decision Guide')]")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assertion.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
 				validate(DecisionGuideLink));
-		// jsClickNew(DecisionGuideLink);
-		switchToNewTabNew(DecisionGuideLink);
+		 jsClickNew(DecisionGuideLink);
+	//	switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -7132,4 +7136,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		validateNew(groupPlanMarkettingBullets);
 	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
+	
+	@FindBy(id = "savePlanheading")
+	private WebElement savedplanHeading;
+	
+	@FindBy(xpath = "//*[contains(@dtmname,'Keep Shopping')]")
+	private WebElement keepshopping;
+	
+	public void keepShopping() {
+		// TODO Auto-generated method stub
+		validateNew(savedplanHeading);
+		jsClickNew(keepshopping);
+	}
+	
+	public boolean validatePlanNamesPRE(String planName) {
+
+		boolean Plannames = false;
+		CommonUtility.checkPageIsReadyNew(driver);
+
+			WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName+ "')"));
+			CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+			jsClickNew(PREPlandetails);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		return Plannames;
+		
+	}
+
 }

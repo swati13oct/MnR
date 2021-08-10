@@ -16,6 +16,8 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -54,6 +56,13 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Given("^the user hovers over the learn about medicare$")
 	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
@@ -75,6 +84,14 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 		}
 	}
+	
+//	@When("user validates TFN in header")
+//	public void user_clicks_on_tfn_in_header() throws InterruptedException {
+//		scenario.log("Changes made on 7/06- Step added for new Header redesign");
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateTfnInHeader();
+//	}
 
 	@Then("^the user hover over Shop for a Plan and validates zipcode component$")
 	public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
@@ -179,10 +196,15 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_Medicare_Education_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		if (aquisitionhomepage != null) {
-			aquisitionhomepage.validateSubNavMedEdLinks();
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = aquisitionhomepage.openLearnAboutMedicareFromMenu();
+		
+		if (learnAboutMedicareHomePageMobile != null) {
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateIntroductionMenu(), "Introduction to Medicare menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validatePlanTypeMenu(), "Types of Plan menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateMedicareEnrollmentMenu(), "Medicare Enrollment menu validation failed");
+			learnAboutMedicareHomePageMobile.closeLearnAboutMedicareSubNav();
 		} else {
-			Assertion.fail("Home Page not Loading");
+			Assertion.fail("Learn About Medicare sub nav did not open");
 		}
 	}
 

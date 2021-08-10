@@ -182,7 +182,8 @@ public class SAMIconsCommonStepDefinition {
 
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
-		aquisitionhomepage.validateChatSam();
+		//aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateSamChatIcon();
 		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
 
 	}
@@ -416,6 +417,22 @@ public class SAMIconsCommonStepDefinition {
 
 		aquisitionhomepage.validateTFNNoonSNPRightRailForOLE(TFNXpath, ExpectedTFNNo);
 	
+	}
+	
+	@Then("^the user validates the chat icon")
+	public void the_user_validates_chat_icon() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateSamChatIcon();
+		aquisitionhomepage.validateSamChatPopup();		
+	}
+	
+	@Then("^the user validates the proactive chat")
+	public void the_user_validates_proactive_chat() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateProactiveChat();
+		aquisitionhomepage.validateProactiveChatPopup();		
 	}
 
 }

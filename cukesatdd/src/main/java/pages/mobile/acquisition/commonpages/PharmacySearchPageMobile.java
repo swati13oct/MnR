@@ -316,50 +316,50 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 
 		String targetTooltipName = "Standard Network Pharmacy";
-		String testXpath = "//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
+		String testXpath = "//*[@id='pharmacy-standard-label']//*[local-name()='svg']";
 		String expTxt = "Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
 
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		if (hasPrefRetailPharmacyWidget) {
 			targetTooltipName = "Preferred Retail Pharmacy";
-			testXpath = "//input[@id='pharmacy-preffered']/../span//*[local-name() = 'svg']";
+			testXpath = "//*[@id='pharmacy-preffered-label']//*[local-name()='svg']";
 			expTxt = "Preferred Retail Pharmacy: Preferred retail pharmacies may help you save money on your prescription copays.";
 			validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 		}
 		targetTooltipName = "E-Prescribing";
-		testXpath = "//input[@id='ePrescribing']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='ePrescribing-label']//*[local-name() = 'svg']";
 		expTxt = "E-Prescribing Some of our network pharmacies use electronic prescribing, or e-prescribing. The pharmacy receives your prescriptions electronically, directly from your doctor. Your prescription may be sent before you even leave your doctor.s office.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName = "Open 24 Hours";
-		testXpath = "//input[@id='24-hours']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='24-hours-label']//*[local-name() = 'svg']";
 		expTxt = "Open 24 Hours This store is open to serve your pharmacy needs 24 hours a day, 7 days a week.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName = "Home Infusion and Specialty";
-		testXpath = "//input[@id='home-specialty']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='home-specialty-label']//*[local-name() = 'svg']";
 		expTxt = "Home Infusion and Specialty Medication therapies and services used to treat complex health conditions can be purchased at this location.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName = "Retail Pharmacy (90-day)";
-		testXpath = "//input[@id='StandardNightyDays']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='StandardNightyDays-label']//*[local-name() = 'svg']";
 		expTxt = "Retail Pharmacy \\(90-day\\) You can fill a 90-day supply of prescription drugs at this retail pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName = "Indian/Tribal/Urban";
-		testXpath = "//input[@id='indian-tribal']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='indian-tribal-label']//*[local-name() = 'svg']";
 		expTxt = "Indian/Tribal/Urban \\(I/T/U\\) This location is an Indian health service, Tribal or Urban Indian health program pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		targetTooltipName = "Long-Term Care";
-		testXpath = "//input[@id='long-term']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='long-term-label']//*[local-name() = 'svg']";
 		expTxt = "Long-Term Care Products and services for long-term care facilities are available at this location.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		// targetTooltipName="Preferred Mail Home Delivery through OptumRx";
 		targetTooltipName = "Mail Order Pharmacy";
-		testXpath = "//input[@id='mail-order']/../span//*[local-name() = 'svg']";
+		testXpath = "//label[@id='mail-order-label']//*[local-name() = 'svg']";
 		expTxt = "Mail Order Pharmacy: You can have at least a 3-month supply of medications you take regularly shipped directly to your home through a mail order pharmacy.";
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 	}
@@ -848,7 +848,11 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); // note: let the page settle down
 		// searchbtn.click();
-		jsClickNew(searchbtn);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			grantPermissionOnAndroidChrome(searchbtn);
+		} else {
+			jsClickNew(searchbtn);
+		}
 
 		// let the plans load, wait for the loading symbol to disappear
 		if (!loadingBlock.isEmpty())
@@ -1038,6 +1042,103 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					"Anchor link and Messaging NOT Displayed for No Pharmacy Results for ITU/HS/LTC filter selection - >>>>Validation FAILED <<<<");
 		}
 		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
+	}
+	
+	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
+		int total=0;
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementDisapper(loadingSpinner, 90);
+		int PharmacyCount = 0;
+		if (!pharmacyValidate(noResultMsg)) {
+			PharmacyCount = PharmacyResultList.size();
+		}		
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
+					pharmacyValidate(pharmaciesAvailable));
+			if (total >10) {
+				WebElement contactUsLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contactUsLink)) {
+					contactUsLink=contactUnitedHealthCare_ol;
+				}
+				Assertion.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
+						pharmacyValidate(contactUsLink));
+				jsClickNew(contactUsLink);
+				Thread.sleep(2000); //note: keep this for the page to load
+				CommonUtility.checkPageIsReadyNew(driver);
+				String currentURL=driver.getCurrentUrl();
+				String expectedURL="contact-us.html";
+				Assertion.assertTrue("PROBLEM - unable to go to contact us page. "
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
+						currentURL.contains(expectedURL));
+				driver.navigate().back();
+				driver.navigate().refresh();	//Added since select plan dropdown element was not located after navigating back from contact us page
+				CommonUtility.checkPageIsReadyNew(driver);
+				waitforElementDisapper(loadingSpinner, 90);
+				currentURL=driver.getCurrentUrl();
+				//System.out.println(currentURL);
+				expectedURL="Pharmacy-Search";
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+						currentURL.contains(expectedURL));
+				//note: if year dropdown is available, handle it with current year
+				if (isPlanYear()) {
+					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
+					selectsPlanYear(testPlanYear);
+					sleepBySec(2);
+					CommonUtility.checkPageIsReady(driver);
+				}
+				selectsPlanName(planName, testSiteUrl);
+				
+				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
+				WebElement pdfElement=pdf_otherPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
+				pdfElement=pdf_WalgreenPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				scrollToView(contactUsLink);
+				jsMouseOver(contactUsLink);
+				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", 
+						pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", 
+						pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", 
+						pharmacyValidate(rightArrow));
+				try {
+					jsClickNew(rightArrow);
+					CommonUtility.checkPageIsReady(driver);
+					jsClickNew(leftArrow);
+					CommonUtility.checkPageIsReady(driver);
+				} catch (Exception e) {
+					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
+				}
+
+			} else {
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!pharmacyValidate(rightArrow));
+			}
+		} else {
+			WebElement contactUsLink=contactUnitedHealthCare;
+			if (!pharmacyValidate(contactUnitedHealthCare)) 
+				contactUsLink=contactUnitedHealthCare_ol;
+			Assertion.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!pharmacyValidate(contactUsLink));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
+					!pharmacyValidate(pdf_otherPlans));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
+					!pharmacyValidate(pdf_WalgreenPlans));
+			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
+		}
 	}
 
 }

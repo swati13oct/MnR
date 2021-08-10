@@ -48,8 +48,9 @@ public class CampaignTFNPageMobile extends UhcDriver {
 
 	// @FindBy(xpath = "//*[contains(@title,'Search')]")
 
-	@FindBy(xpath = "//*[contains(@class,'gLFyf gsfi')]")
+	@FindBy(xpath ="//input[@aria-label='Search']")
 	public WebElement GoogleSearchField;
+	
 
 	@FindBy(xpath = "//*[@id='tsf']/div[2]/div/div[3]/center/input[1]")
 	public WebElement GoogleSearchButton;
@@ -76,7 +77,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	// @FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
 
-	@FindBy(xpath = "//h3[contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//*[@id=\"rso\"]/div[1]/div/div/div/div[1]/a/div[2]/div")
 
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
@@ -110,14 +111,13 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
 	public WebElement UHCSearchLinkfromGoogle1;
 
-	// @FindBy(xpath = "//*[@id='uh-search-box']")
-	// @FindBy(xpath = "//input[@id='header-search-input']")
-	@FindBy(xpath = "//label[text()='Search query']//following-sibling::input[1]")
+	
+	@FindBy(xpath = "//span[text()='Search']")
 	public WebElement YahooSearchField;
 
 	// @FindBy(xpath = "//*[@id='uh-search-button']")
 	// @FindBy(xpath = "//button[contains(@id,'search-button')]")
-	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	@FindBy(xpath = "//*[@id=\"header-search-button\"]/div/span[2]")
 	public WebElement YahooSearchBttn;
 
 	// @FindBy(xpath = "//h3//a[contains(text(),'AARP� Medicare Advantage (Part C)
@@ -150,7 +150,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	// "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-ad')]")
 	// @FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
-	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html') or contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//*[text()='AARP Medicare Plans from UnitedHealthcare']")
 	public WebElement AARPSearchLinkfromBing;
 
 	// @FindBy(xpath =
@@ -254,7 +254,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 
 	public void openUrl(String url) {
 		// TODO Auto-generated method stub
-		start(url);
+	//	start(url);
+		startNewMobile(url);
 	}
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -285,17 +286,17 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		if ("ULayer".equalsIgnoreCase(site)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				////driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				////driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				////driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			}
@@ -304,17 +305,17 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		} else if ("BLayer".equalsIgnoreCase(site)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PAGE_URL + path;
 				driver.get(testSiteUrl);
 			}
@@ -455,9 +456,10 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	}
 
 	public void googleSearchAARP() {
-		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
-		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
+		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan");
+		GoogleSearchField.submit();
 		System.out.println("Google Search entered for : AARP Medicare Advantage Plan");
 		validateNew(AARPSearchLinkfromGoogle_alternative);
 		AARPSearchLinkfromGoogle_alternative.click();
@@ -468,13 +470,14 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	public void YahooSearchAARP() {
 
 		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
-		YahooSearchField.sendKeys("AARP Medicare Advantage Plan");
+		YahooSearchField.sendKeys("AARP Medicare Advantage Plan", Keys.ENTER);
+	
 		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
-		YahooSearchBttn.click();
+		//YahooSearchBttn.click();
 		System.out.println("Yahoo Search entered for : AARP Medicare Advantage Plan");
 
 		CommonUtility.waitForPageLoad(driver, YahooSearchResult, 30);
-		if (YahooSearchResult.isDisplayed())
+		if (validateNew(YahooSearchResult))
 			System.out.println("Yahoo search result found");
 		else {
 			System.out.println("yahoo search result not found");
@@ -482,7 +485,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		}
 		YahooSearchResult.click();
 		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
-		switchToNewTab();
+		//switchToNewTab();
 		CheckPageLoad();
 	}
 
@@ -521,7 +524,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		else {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
-		AARPSearchLinkfromBing.click();
+		//AARPSearchLinkfromBing.click();
+		jsClickNew(AARPSearchLinkfromBing);
 		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
@@ -920,6 +924,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		pageloadcomplete();
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {

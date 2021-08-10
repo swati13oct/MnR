@@ -1,7 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-
+import static acceptancetests.data.CommonConstants.PLANTYPE.MAPD;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -13,17 +13,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
 
-public class ShopPage extends UhcDriver {
+public class ShopPage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
+
+	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
+	private WebElement GetStartedShopPage;
 
 	@FindBy(id = "updates-email")
 	private WebElement updatesemail;
@@ -146,7 +149,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
 	private WebElement personalizeUrResults;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Costs')]")
+	@FindBy(xpath = "//a[contains(text(),'Check Drug Costs')]")
 	private WebElement checkDrugCostsBtn;
 
 	@FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
@@ -235,9 +238,9 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void clickOnMAShopButton() {
-		MobileMenuToShopToolToShop();
-		scrollToView(MAShopLink);
-		jsClickNew(MAShopLink);
+
+		openShopForPlanFromMenu().selectPlanTypeOption(MAPD, false);
+
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/medicare-advantage-plans")) {
@@ -249,7 +252,7 @@ public class ShopPage extends UhcDriver {
 
 	public void clickOnPDPShopButton() {
 		waitForPageLoadSafari();
-		MobileMenuToShopToolToShop();
+		// MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		scrollToView(pdpShopLink);
 		validateNew(pdpShopLink);
@@ -264,7 +267,7 @@ public class ShopPage extends UhcDriver {
 	}
 
 	public void clickOnSNPShopButton() {
-		MobileMenuToShopToolToShop();
+		// MobileMenuToShopToolToShop();
 		pageloadcomplete();
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
@@ -302,13 +305,17 @@ public class ShopPage extends UhcDriver {
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
-				Thread.sleep(3000);
-				ZipCodeText.get(zipCodeNumber - 1).clear();
-				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
-				waitForPageLoadSafari();
-				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
-				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
-				System.out.println("Validating VPP page for Zip code " + zipCode);
+//				Thread.sleep(3000);
+//				ZipCodeText.get(zipCodeNumber - 1).clear();
+//				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
+//				waitForPageLoadSafari();
+//				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
+//				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
+//				System.out.println("Validating VPP page for Zip code " + zipCode);
+				scrollToView(zipcodeFieldShopPage);
+				sendkeysMobile(zipcodeFieldShopPage, zipCode);
+				jsClickNew(GetStartedShopPage);
+
 				Thread.sleep(20000);
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
@@ -321,6 +328,7 @@ public class ShopPage extends UhcDriver {
 				}
 
 				System.out.println("Actual : " + vppPageTitle);
+				System.out.println("Curent URL *****" + driver.getCurrentUrl());
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
@@ -376,7 +384,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(comparePlanBtn);
 		validateNew(comparePlanBtn);
-		//jsClickNew(comparePlanBtn);
+		// jsClickNew(comparePlanBtn);
 		comparePlanBtn.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -388,7 +396,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
-		//jsClickNew(LearnEstimateCosts);
+		// jsClickNew(LearnEstimateCosts);
 		LearnEstimateCosts.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -400,7 +408,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
-		//jsClickNew(howToSwitchPlans);
+		// jsClickNew(howToSwitchPlans);
 		howToSwitchPlans.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
@@ -412,7 +420,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
-		//jsClickNew(learnSafeShopping);
+		// jsClickNew(learnSafeShopping);
 		learnSafeShopping.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("safe-shopping.html"))
@@ -423,7 +431,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
-		//jsClickNew(getMemberResources);
+		// jsClickNew(getMemberResources);
 		getMemberResources.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
@@ -446,7 +454,7 @@ public class ShopPage extends UhcDriver {
 		pageloadcomplete();
 		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
-		//jsClickNew(checkDrugCostsBtn);
+		// jsClickNew(checkDrugCostsBtn);
 		checkDrugCostsBtn.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("estimate-drug-costs.html#/drug-cost-estimator"))
@@ -456,28 +464,27 @@ public class ShopPage extends UhcDriver {
 	public void findAProvider() throws Exception {
 		pageloadcomplete();
 		validateNew(findAProviderBtn);
-		String parentWindow = driver.getWindowHandle();
-		//jsClickNew(findAProviderBtn);
-		findAProviderBtn.click();
-		Thread.sleep(4000);
-		waitForPageLoadSafari();
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-				if (!driver.getCurrentUrl().contains("werally"))
-					Assert.fail("Provider Search page failed to load");
-				Thread.sleep(2000);
-			}
-		}
+		// String parentWindow = driver.getWindowHandle();
+
+		switchToNewTabNew(findAProviderBtn);
+		// jsClickNew(findAProviderBtn);
+		// findAProviderBtn.click();
+		// Thread.sleep(10000);
+		// waitForPageLoadSafari();
+		// Set<String> tabs_windows = driver.getWindowHandles();
+		// Iterator<String> itr = tabs_windows.iterator();
+		// while (itr.hasNext()) {
+		// String window = itr.next();
+		// if (!parentWindow.equals(window)) {
+		// driver.switchTo().window(window);
+		if (!driver.getCurrentUrl().contains("werally"))
+			Assert.fail("Provider Search page failed to load");
+		Thread.sleep(2000);
 
 		driver.close();
-		driver.switchTo().window(parentWindow);
-		
-		
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
+		// driver.close();
 	}
 
 	public void locateAPharmacy() {

@@ -28,15 +28,15 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
-    #Then the user enter zipcode in homepage
-    # | Zip Code  | <zipcode>    |
-    #| Plan Type | <MAplantype> |
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-      | Zip Code | <zipcode> |
+    Then the user enter zipcode in homepage
+     | Zip Code  | <zipcode>    |
+    | Plan Type | <MAplantype> |
+    #Then the user navigates to MA Plan Details Page and validates Federal TFN
+     # | Zip Code | <zipcode> |
     #Then the user navigates to plan tab for any plan
     #| Plan Type | <MAplantype> |
-    #Then the user navigates to Plan Details Page for any plan and validates Federal TFN
-    #| Plan Type | <MAplantype> |
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN
+    | Plan Type | <MAplantype> |
     # Then the user navigates to MA Plan Details Page and validates Federal TFN
     #	| Zip Code        | <zipcode>|
     Then the user validates TFN Number
@@ -46,8 +46,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     #  | Plan Type | <MSplantype> |
     # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
     #| Plan Type | <MSplantype> |
-    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-      | Zip Code | <zipcode> |
+    Then user clicks on back to plans link to navigate plan summary
+    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+     # | Zip Code | <zipcode> |
+      Then the user navigates to plan tab for any plan
+     | Plan Type | <MSplantype> |
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>    |
       | TFN Xpath | <MedsuppTFNxpath> |
@@ -60,11 +63,17 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>    |
       | TFN Xpath | <MedsuppTFNxpath> |
-    When the user clicks on Agent link for MedsuppPage
-      | UHC Agent URL | <UHCUrl> |
-    Then the user clicks on Request a Free Decision Guide
-      | TFN No    | <MedsuppTFNNo> |
-      | TFN Xpath | <TFNxpath>     |
+    #When the user clicks on Agent link for MedsuppPage
+      #| UHC Agent URL | <UHCUrl> |
+    Then the user clicks on decision guide for MedsuppPge
+     Then the user validates TFN Number
+      | TFN No    | <MedsuppTFNNo>    |
+      | TFN Xpath | <decisionGuideTFN> |
+    Then the user navigates back to page
+      Then  the user clicks on on Agent link for MedsuppPage
+      | TFN No    | <agentTFN> |
+      | TFN Xpath | <agentXpath>     |
+      
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -86,8 +95,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN Xpath | <TFNxpath> |
 
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                          | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         |
-      | Sc. 3.08 - AMP |  810106 |         810104 |   90210 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[1] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[1] | 1-800-850-6807 | (//a[contains(@class, 'tel')])[1] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 |
+      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                          | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         |agentTFN|agentXpath|
+      | Sc. 3.08 - AMP |  810106 |         810104 |   90210 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | (//a[contains(@class, 'tel')])[3] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 |1-877-596-3258 |//*[contains(@class,'headline')]//a|
 
   #######################Script 6a: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT
@@ -212,7 +221,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | scenario                              | site   | zipcode | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | Precedence7PSC | Precedence8PSC | medSuppUrl                          | medSuppTFN                                                   | campaign2Url                                                      | campaign3Url                                         | campaign4Url                                                                                                   | connect                             | connectTFN                                                   | TFNxpath                          | MedSuppTFNxpath                   | TFNNo          | TFNNo1         | TFNNo2         | TFNNo3         | TFNNo4         | TFNNo5         | TFNNo6         | TFNNo7         | TFNNo8         | TFNxpath2                                                                                  |
-      | Scenario 6a: Campaign Precedence- AMP | ulayer |   90210 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[1] | (//a[contains(@class, 'tel')])[1] | (//a[contains(@class, 'tel')])[2] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |
+      | Scenario 6a: Campaign Precedence- AMP | ulayer |   90210 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |
 
   #######################Script 6b: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT
@@ -237,4 +246,4 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
       | scenario                              | site   | zipcode | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | Precedence7PSC | Precedence8PSC | medSuppUrl                          | medSuppTFN                                                   | campaign2Url                                                      | campaign3Url                                         | campaign4Url                                                                                                   | connect                             | connectTFN                                                   | TFNxpath                          | MedSuppTFNxpath                   | TFNNo          | TFNNo1         | TFNNo2         | TFNNo3         | TFNNo4         | TFNNo5         | TFNNo6         | TFNNo7         | TFNNo8         | TFNxpath2                         |
-      | Scenario 6b: Campaign Precedence- AMP | ulayer |   10001 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[1] | (//a[contains(@class, 'tel')])[1] | (//a[contains(@class, 'tel')])[2] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | (//a[contains(@class, 'tel')])[3] |
+      | Scenario 6b: Campaign Precedence- AMP | ulayer |   10001 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | (//a[contains(@class, 'tel')])[3] |

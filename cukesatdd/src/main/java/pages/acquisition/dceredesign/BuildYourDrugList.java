@@ -61,7 +61,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'search')]//following-sibling::button[contains(@dtmname,'Return to Compare')]")
+	@FindBy(xpath = "(//button[contains(@dtmname, 'search')]//following::button[contains(@dtmname,'return to compare')])[1]")
 	public WebElement returnToCompareBtn;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
@@ -471,4 +471,6 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 		return false;
 	}
+
+
 }

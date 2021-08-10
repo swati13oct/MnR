@@ -8,12 +8,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static acceptancetests.data.CommonConstants.SHOPFORPLAN.*;
+import static acceptancetests.data.CommonConstants.PLANTYPE.*;
+import static acceptancetests.data.CommonConstants.TOOLS.*;
+
+import acceptancetests.data.CommonConstants.SHOPFORPLAN;
+import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.TOOLS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
 public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
+	@FindBy(xpath = "//*[@id='ghn_lnk_2']/span")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
@@ -106,17 +113,43 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
 
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Advantage Plans']")
+	private WebElement shopForPlanSubNavMA;
+
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Dual Special Needs Plans']")
+	private WebElement shopForPlanSubNavSNP;
+
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Supplement Plans']:not([href$='classic.html'])")
+	private WebElement shopForPlanSubNavMS;
+
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Supplement Plans'][href$='classic.html']")
+	private WebElement shopForPlanSubNavClassicMS;
+
+	@FindBy(css = "[class^='mob-sctn'] a[dtmname='NavLinks:Shop for a Plan:Plan Types:Medicare Prescription Drug Plans']")
+	private WebElement shopForPlanSubNavPDP;
+
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation']")
 	private WebElement getPlanRecommendation;
 
-	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
+	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Estimate Drug Costs']")
+
 	private WebElement drugCostEstimator;
 
-	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
+	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search for a Pharmacy']")
+
 	private WebElement pharmacySearch;
 
-	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
-	private WebElement providerSearch;
+	/*
+	 * @FindBy(css =
+	 * "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']") private
+	 * WebElement providerSearch;
+	 */
+
+	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
+	private WebElement searchDoctors;
+
+	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search Dentists']")
+	private WebElement searchDentists;
 
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
@@ -150,10 +183,11 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	public EnrollmentBasicsPageMobile enrollLinkOnShopPlan() throws Exception {
 
-		selectShopOption("Enroll");
+		selectShopOption(ENROLL);
 		/*
 		 * waitforElement(enrollLink); scrollToView(enrollLink); jsClickNew(enrollLink);
 		 */
+
 		Thread.sleep(4000);
 		if (validate(maLeanHowToEnrollLink)) {
 			// waitforElement(maLeanHowToEnrollLink);
@@ -164,11 +198,13 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
+		ShopForaplan.click();
 
-		selectShopOption("Shop");
+		selectShopOption(SHOP);
 		/*
 		 * scrollToView(shopLink); waitforElement(shopLink); jsClickNew(shopLink);
 		 */
+
 		Thread.sleep(4000);
 		return new ShopPage(driver);
 
@@ -309,78 +345,105 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		}
 	}
 
-	public void selectShopOption(String shopOption) {
-		switch (shopOption.toLowerCase()) {
-		case "shop":
-			jsClickNew(shopForAPlan);
+	/**
+	 * Select default options from Shop For a Plan menu.
+	 *
+	 * @param shopOption the shop option
+	 */
+	public void selectShopOption(SHOPFORPLAN shopOption) {
+		switch (shopOption) {
+		case SHOP:
+
 			jsClickNew(shopLink);
 			break;
-		case "enroll":
+		case ENROLL:
 			jsClickNew(enrollLink);
 			break;
-		case "member resources":
+		case MEMBERRESOURCES:
 			jsClickNew(memberResourcesLink);
 			break;
 		default:
 			throw new IllegalArgumentException(
-					"Option " + shopOption + " is not available under 'Shop for a Plan' menu");
+					"Option " + shopOption.name() + " is not available under 'Shop for a Plan' menu");
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
-	public void selectPlanTypeOption(String planType, boolean classicUrl) {
+	/**
+	 * Select any plan type option from Shop For a Plan, Plan Type menu.
+	 *
+	 * @param planType   the plan type
+	 * @param classicUrl the classic url
+	 */
+	public void selectPlanTypeOption(PLANTYPE planType, boolean classicUrl) {
 
 		if (!planTypesContainer.isDisplayed()) {
+
 			jsClickNew(planTypesTab);
 		}
-		switch (planType.toLowerCase()) {
-		case "ma":
-		case "mapd":
-			jsClickNew(maLeanHowToshopLink);
-		case "dsnp":
-		case "snp":
-			jsClickNew(dsnpLeanHowToshopLink);
+		switch (planType) {
+		case MA:
+		case MAPD:
+			jsClickNew(shopForPlanSubNavMA);
+		case SNP:
+			jsClickNew(shopForPlanSubNavSNP);
 			break;
-		case "medsupp":
-		case "ms":
+		case MEDSUPP:
 			if (classicUrl)
-				jsClickNew(MedSuppClassicUrl);
+				jsClickNew(shopForPlanSubNavClassicMS);
 			else
-				jsClickNew(msLeanHowToshopLink);
+
+				jsClickNew(shopForPlanSubNavMS);
 
 			break;
-		case "pdp":
-			jsClickNew(pdpLeanHowToshopLink);
-			break;
-		default:
-			throw new IllegalArgumentException("Plan type " + planType + " is not available under 'Plan Types' menu");
-		}
-		CommonUtility.checkPageIsReadyNew(driver);
-	}
-
-	public void selectTool(String tool) {
-		if (!toolsContainer.isDisplayed()) {
-			jsClickNew(toolsToChoosePlanTab);
-		}
-		switch (tool.toLowerCase()) {
-		case "pre":
-			jsClickNew(getPlanRecommendation);
-			break;
-		case "dce":
-			jsClickNew(drugCostEstimator);
-			break;
-		case "pharmacy search":
-			jsClickNew(pharmacySearch);
-			break;
-		case "provider search":
-			jsClickNew(providerSearch);
+		case PDP:
+			jsClickNew(shopForPlanSubNavPDP);
 			break;
 		default:
 			throw new IllegalArgumentException(
-					"Tool " + tool + " is not available under 'Tools to help you choose a plan' menu");
+					"Plan type " + planType.name() + " is not available under 'Plan Types' menu");
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
+
+	/**
+	 * Select any tool from Shop For a Plan, tool menu.
+	 *
+	 * @param tool the tool
+	 */
+	public void selectTool(TOOLS tool) {
+		if (!toolsContainer.isDisplayed()) {
+
+			jsClickNew(toolsToChoosePlanTab);
+		}
+		switch (tool) {
+		case PRE:
+			jsClickNew(getPlanRecommendation);
+			break;
+		case DCE:
+			jsClickNew(drugCostEstimator);
+			break;
+		case PHARMACYSEARCH:
+			jsClickNew(pharmacySearch);
+			break;
+		case SEARCHDOCTORS:
+			jsClickNew(searchDoctors);
+			break;
+		case SEARCHDENTISTS:
+			jsClickNew(searchDentists);
+			break;
+		default:
+			throw new IllegalArgumentException(
+					"Tool " + tool.name() + " is not available under 'Tools to help you choose a plan' menu");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+	/**
+	 * Validate default options from Shop For a Plan menu.
+	 *
+	 * @return true, if successful
+	 */
 
 	public boolean validateShopForPlanMenu() {
 		boolean validateMenuOptions = false;
@@ -402,20 +465,28 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	}
 
+	/**
+	 * Validate options from Shop For a Plan, Plan Types menu.
+	 *
+	 * @return true, if successful
+	 */
+
 	public boolean validatePlanTypeMenu() {
 		boolean validatePlanTypeOptions = false;
 
 		if (!planTypesContainer.isDisplayed()) {
 			jsClickNew(planTypesTab);
+			CommonUtility.waitForPageLoadNew(driver, planTypeBack, 10);
 		}
 		try {
-			validatePlanTypeOptions = maLeanHowToshopLink.isDisplayed();
-			validatePlanTypeOptions = validatePlanTypeOptions && dsnpLeanHowToshopLink.isDisplayed();
+
+			validatePlanTypeOptions = validate(shopForPlanSubNavMA);
+			validatePlanTypeOptions = validatePlanTypeOptions && validate(shopForPlanSubNavSNP);
 
 			validatePlanTypeOptions = validatePlanTypeOptions
-					&& (msLeanHowToshopLink.isDisplayed() || MedSuppClassicUrl.isDisplayed());
+					&& (validate(shopForPlanSubNavMS) || validate(shopForPlanSubNavClassicMS));
 
-			validatePlanTypeOptions = validatePlanTypeOptions && pdpLeanHowToshopLink.isDisplayed();
+			validatePlanTypeOptions = validatePlanTypeOptions && validate(shopForPlanSubNavPDP);
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Plan Types menu");
@@ -426,19 +497,26 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	}
 
+	/**
+	 * Validate options from Shop For a Plan, Tools menu.
+	 *
+	 * @return true, if successful
+	 */
+
 	public boolean validateToolsMenu() {
 		boolean validateToolsOptions = false;
 
 		if (!toolsContainer.isDisplayed()) {
 			jsClickNew(toolsToChoosePlanTab);
+			CommonUtility.waitForPageLoadNew(driver, toolsToChooseBack, 10);
 		}
 		try {
-			validateToolsOptions = getPlanRecommendation.isDisplayed();
-			validateToolsOptions = validateToolsOptions && drugCostEstimator.isDisplayed();
 
-			validateToolsOptions = validateToolsOptions && pharmacySearch.isDisplayed();
-
-			validateToolsOptions = validateToolsOptions && providerSearch.isDisplayed();
+			validateToolsOptions = validateNew(getPlanRecommendation);
+			validateToolsOptions = validateToolsOptions && validateNew(drugCostEstimator);
+			validateToolsOptions = validateToolsOptions && validateNew(pharmacySearch);
+			validateToolsOptions = validateToolsOptions && validateNew(searchDoctors);
+			validateToolsOptions = validateToolsOptions && validateNew(searchDentists);
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the Tools menu");
@@ -448,13 +526,29 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	}
 
+	/**
+	 * Search plan for zipcode from shop menu.
+	 *
+	 * @param zipcode the zipcode
+	 */
+
 	public void searchPlanForZipcodeFromShopMenu(String zipcode) {
 		sendkeysMobile(zipcodeField, zipcode);
 		jsClickNew(findPlansButton);
 	}
 
+	/**
+	 * Check for classic URL.
+	 *
+	 * @param state the state
+	 * @return true, if successful
+	 */
+
 	public boolean checkForClassicURL(String state) {
+
+		// TODO
 		// This list can be a constant rather than updating in each page class
+
 		List<String> classicUrlStates = Arrays.asList("Oregon");
 		return classicUrlStates.contains(state);
 	}

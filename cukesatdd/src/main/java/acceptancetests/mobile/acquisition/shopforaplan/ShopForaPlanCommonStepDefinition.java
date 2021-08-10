@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstants.PLANTYPE;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -401,11 +402,11 @@ public class ShopForaPlanCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		String stateSelected = (String) getLoginScenario().getBean(CommonConstants.STATE_SELECTED);
 
-		ShopForPlanNavigationPageMobile shopForPlan = acquisitionHomePage.openShopForPlanFrmMenu();
+		ShopForPlanNavigationPageMobile shopForPlan = acquisitionHomePage.openShopForPlanFromMenu();
 
 		if (shopForPlan != null) {
 			boolean classicUrl = shopForPlan.checkForClassicURL(stateSelected);
-			shopForPlan.selectPlanTypeOption("Medsupp", classicUrl);
+			shopForPlan.selectPlanTypeOption(PLANTYPE.MEDSUPP, classicUrl);
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shopForPlan);
 		} else
 			Assertion.fail("Shop for a Plan menu did not open");

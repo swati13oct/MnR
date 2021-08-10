@@ -15,6 +15,7 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class ClickToCallStepDefinition {
@@ -125,5 +126,14 @@ public class ClickToCallStepDefinition {
 		aquisitionhomepage.validateTFN(tfn_xpath);
 
 
+	}
+	
+	@Then("^the user validates the chat icon")
+	public void the_user_validates_chat_icon() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		System.out.println("Chat icon is not available on mobile hence skipping this step");
+//		aquisitionhomepage.validateSamChatIcon();
+//		aquisitionhomepage.validateSamChatPopup();		
 	}
 }

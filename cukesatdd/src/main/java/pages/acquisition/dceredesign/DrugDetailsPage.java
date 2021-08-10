@@ -50,22 +50,22 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Average Monthly Drug Cost')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Average Monthly Drug Cost')]")
 	public WebElement DrugCosts_AvgMonDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Monthly Premium')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Annual Estimated')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Annual Estimated')]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_AvgMonDrugCost_Amount;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Monthly Premium')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Monthly Premium')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_MonthlyPremium_Amount;
 
-	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//p[contains(text(), 'Annual Estimated')]//following-sibling::p[contains(text(), '$')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Annual Estimated')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
@@ -406,7 +406,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugDetails_ChangePharmacyLnk);
         validateNew(DrugDetails_DrugCostsHeading);
         validateNew(LinktoExitScenario);
-        if(!LinktoExitScenario.getText().contains("Compare")) {
+        if(!LinktoExitScenario.getText().contains("ompare")) {
             validateNew(LinkToDrugSummary);
         }
         /*
@@ -414,7 +414,7 @@ public class DrugDetailsPage extends UhcDriver {
          */
 
 		validateNew(LinktoExitScenario);
-		validateNew(LinktoEditDrugList);
+		//validateNew(LinktoEditDrugList);
 	}
 
 	public void validatePlanName(String planName) {
@@ -1384,7 +1384,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
-		if (!LinktoExitScenario.getText().contains("Compare"))
+		if (!LinktoExitScenario.getText().contains("ompare"))
 			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
 
 		jsClickNew(LinktoExitScenario);
@@ -1812,6 +1812,12 @@ public class DrugDetailsPage extends UhcDriver {
 		distanceDrpDown.click();
 		Select distance = new Select(distanceDrpDown);
 		distance.selectByVisibleText(distanceValue);
+		Thread.sleep(2000);
+		
+	}
+	
+	public void ClickSearch() {
+		pharmacySearchBtn.click();
 	}
 
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
@@ -1834,7 +1840,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
-	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-radio-tab')]")
+	@FindBy(xpath = "//input[contains(@name,'pharmacy-filters') and contains(@value, 'PP')]//following-sibling::span[2]")
 	public WebElement preferredPharmacyTab;
 
 	// @FindBy(xpath =
@@ -2273,7 +2279,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmname, 'reset effective date')]")
 	public WebElement ResetEffectiveDateLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
+	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::h3[contains(text(), 'Dec 31')]")
 	public WebElement EffectiveDateTextafterChange;
 
 
@@ -2443,9 +2449,9 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
+
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//p[contains(@class, 'normal')]")
 	private WebElement CoverageStage_Modal_Text;
-
     private static String INITIAL_COVERAGE_TEXT = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,130 you then move to the Coverage Gap Stage.";
 	private static String COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $6,550 in year-to-date out-of-pocket costs.";
 	private static String CATASTROPHIC_TEXT = "You enter the Catastrophic Coverage Stage after $6,550 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.70 copay for generic drugs, $9.20 copay for brand name drugs or a 5% coinsurance, whichever is greater.";
@@ -2566,4 +2572,16 @@ public class DrugDetailsPage extends UhcDriver {
 			Assertion.fail(
 					">>>>> Expected Deductible Stage text - "+DEDUCTIBLE_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
 		jsClickNew(StageInfo_Modal_DoneBtn);	}
+
+	
+	@FindBy(xpath = "//button[contains(@dtmname, 'drug costs:save')]")
+	public WebElement saveDrugs;
+			
+	public void saveDrug() {
+		validateNew(saveDrugs);
+		jsClickNew(saveDrugs);
+			}
+		
+
+
 }

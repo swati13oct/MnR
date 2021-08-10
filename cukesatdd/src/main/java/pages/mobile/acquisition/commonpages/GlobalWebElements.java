@@ -1,6 +1,5 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.TOOLS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -24,7 +25,7 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
-
+	
 	@FindBy(xpath = "//a[text()='Home']")
 	public WebElement breadCrumbHomeLink;
 
@@ -63,9 +64,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBys(value = { @FindBy(id = "footnotes1") })
 	public WebElement footnotesContent;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[1]/a")
-	public WebElement medicareAdvantagePlansLink;
-
 	@FindBy(css = "#accordion-1-button")
 	public WebElement shopPlansExpander;
 
@@ -78,16 +76,19 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-4-button")
 	public WebElement more;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[2]/a")
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Advantage Plans']")
+	public WebElement medicareAdvantagePlansLink;
+	
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Dual Special Needs Plans']")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[3]")
+	@FindBy(css = "#accordion-1-content [dtmname*='Medicare Supplement Insurance Plans']")
 	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
 	public WebElement medicareSupplementInsurancePlansHeader;
 
-	@FindBy(xpath = "//*[@id='accordion-1-content']/nav/p[4]/a")
+	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Prescription Drug Plans']")
 	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -137,28 +138,30 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
-	// @FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
+	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	@FindBy(css = "#mobile-nav a[dtmname$='Visit AARP.org']")
 	public WebElement visitAARPLink;
+	
 
+	
 	@FindBy(id = "search-field")
 	public WebElement searchTxtbox;
-
+	
 	@FindBy(id = "header-tfn-link")
 	public WebElement headerTfn;
-
+	
 	@FindBy(id = "guest-profile")
 	public WebElement visitorProfileFlyoutTitle;
-
+	
 	@FindBy(id = "guest-saved-items-button")
 	public WebElement visitorProfileFlyoutViewSavedItemBtn;
-
+	
 	@FindBy(id = "flyout-drug-button")
 	public WebElement visitorProfileFlyoutAddDrugBtn;
-
+	
 	@FindBy(id = "flyout-plan-button")
 	public WebElement visitorProfileFlyoutAddPlansBtn;
-
+	
 	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
 	public WebElement visitorProfileFlyoutSignInLink;
 
@@ -239,6 +242,9 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(id = "nav-zipcode")
 	public WebElement zipcodeField;
+	
+	@FindBy(xpath = "//*[@id='zipcodemeded-0']")
+	public WebElement zipcodeFieldShopPage;
 
 	@FindBy(className = "zip-button")
 	public WebElement findPlansButton;
@@ -274,7 +280,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
 	public WebElement UHCLogo;
 
-	// @FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	public WebElement visitorprofileicon;
 
@@ -324,46 +330,40 @@ public class GlobalWebElements extends UhcDriver {
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
-
+	
+	@FindBy(css = "#mobile-nav button[class$='nav-close']")
+	public WebElement closeMenu;
+	
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
-
+	
 	@FindBy(css = "#ghn_lnk_2")
 	public WebElement shopForAPlan;
-
-	@FindBy(xpath = "//h3/a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
-	public WebElement pharmacyOption;
 	
 	@FindBy(css = "#subnav_2 .nav-back")
 	public WebElement shopForPlanBackButton;
-
-	@FindBy(css = "#_knon0g5x_mobile_mobile_mobile_mobile_mobile_mobile > span:nth-child(2)")
-	public WebElement medicareSupplimentPlans;
 	
-	@FindBy(xpath="//h1/span[@class='heading-1']")
-	public WebElement planHeader;
-
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
-
+	
 	@FindBy(css = ".mob-menu-header button[class^='icon-mob-btn'][onclick*='Search']")
 	private WebElement siteSearchButton;
-
+	
 	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
 	private WebElement getStartedButton;
-
+	
 	@FindBy(css = "#ghn_lnk_3")
 	public WebElement learnAboutMedicareNavButton;
-
+	
 	@FindBy(css = "#subnav_3 .nav-back")
 	private WebElement learnAboutMedicareBackButton;
-
+	
 	@FindBy(css = "#accordion-1-button > svg")
 	public WebElement shopPlans;
-
+	
 	@FindBy(xpath = "//*[@id='accordion-2-button']/div")
 	public WebElement tools;
-
+	
 	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
 	public WebElement learnMedicare;
 
@@ -377,65 +377,74 @@ public class GlobalWebElements extends UhcDriver {
 
 	}
 
-	public void accessFooterLinkFromShopPlans(String planType) {
+	/**
+	 * Access footer link from shop plans tab.
+	 *
+	 * @param planType the plan type
+	 */
+	public void accessFooterLinkFromShopPlans(PLANTYPE planType) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(shopPlansExpander, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(shopPlansExpander);
 		}
 
-		planType = planType.toLowerCase();
-
 		switch (planType) {
-		case "ma":
-		case "mapd":
+		case MA:
+		case MAPD:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
-		case "snp":
-		case "dsnp":
+		case SNP:
 			jsClickNew(medicareSpecialNeedsPlansLink);
 			break;
-		case "medsupp":
+		case MEDSUPP:
 			jsClickNew(medicareSupplementInsurancePlansLink);
 			break;
-		case "pdp":
+		case PDP:
 			jsClickNew(medicarePrescriptionDrug_PlansLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid link for plan type " + planType);
+			throw new IllegalArgumentException("Invalid link for plan type " + planType.name());
 		}
 		pageloadcomplete();
 	}
 
-	public void accessFooterLinkFromToolsResources(String tool) {
+	/**
+	 * Access footer link from Tools Resources tab.
+	 *
+	 * @param tool the tool
+	 */
+	public void accessFooterLinkFromToolsResources(TOOLS tool) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(toolsAndResources, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(toolsAndResources);
 		}
 
-		tool = tool.toLowerCase();
-
 		switch (tool) {
-		case "pre":
+		case PRE:
 			jsClickNew(planRecommendationLink);
 			break;
-		case "dce":
+		case DCE:
 			jsClickNew(drugCostEstimatorLink);
 			break;
-		case "pharmacy search":
+		case PHARMACYSEARCH:
 			jsClickNew(pharmacySearchLink);
 			break;
-		case "provider search":
+		case PROVIDERSEARCH:
 			jsClickNew(providerSearchLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid tool " + tool);
+			throw new IllegalArgumentException("Invalid tool " + tool.name());
 		}
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from Learn About Medicare tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromLearnAboutMedicare(String option) {
-		boolean expanded = Boolean
-				.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
+		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(learnAboutMedicareFooterButton);
 		}
@@ -461,9 +470,14 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from More tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromMore(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
-
+		
 		if (!expanded) {
 			jsClickNew(more);
 		}
@@ -486,64 +500,79 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
-
+		
 		pageloadcomplete();
 	}
 
+	/**
+	 * Open home from menu.
+	 * 
+	 * Clicks on the Home option from right nav menu
+	 *
+	 * @return the acquisition home page mobile
+	 */
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
-
+		
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(home);
 		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
 	}
-
+	
+	
+	/**
+	 * Open site search from menu.
+	 * 
+	 */
 	public void openSiteSearchFromMenu() {
 		jsClickNew(MenuMobile);
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(siteSearchButton);
 	}
-
+	
+	/**
+	 * Open Shop for Plan from menu.
+	 *
+	 * @return the object of ShopForPlanNavigationPageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in ShopForPlanNavigationPageMobile
+	 */
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
-		// jsClickNew(MenuMobile);
-		//
-		// validateNew(mobileNav, 5);
-		//
-		// jsClickNew(shopForAPlan);
-
-		MobileMenuToolsToHelp();
-		// jsClickNew(medicareSupplimentPlans);
-		if (validate(pharmacyOption)) {
-			return new ShopForPlanNavigationPageMobile(driver);
-		}
-		return null;
-	}
-
-	public ShopForPlanNavigationPageMobile openShopForPlanFrmMenu() {
+		jsClickNew(MenuMobile);
 		
-		MobileMenuToPlanTypes();
-		jsClickNew(medicareSupplimentPlans);
-		if (validate(planHeader)) {
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(shopForAPlan);
+		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Open Learn about Medicare from menu.
+	 *
+	 * @return the object of LearnAboutMedicareHomePageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in LearnAboutMedicareHomePageMobile
+	 */
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
-
+		
 		validateNew(mobileNav, 5);
-
+		
 		jsClickNew(learnAboutMedicareNavButton);
 		if (validate(learnAboutMedicareBackButton)) {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		}
 		return null;
 	}
-
+	
 }
