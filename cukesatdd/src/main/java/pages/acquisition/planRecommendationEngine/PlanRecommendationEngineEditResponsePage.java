@@ -392,7 +392,7 @@ private WebElement signInLink;
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
 		for (WebElement elem : allQuestionSection) {
-			String tempTxt = questionSectionTitle.getText().trim();
+			String tempTxt = elem.findElement(By.cssSelector("h2")).getText().toLowerCase();
 			String editbutton = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
 			if (tempTxt.contains(section)) {
