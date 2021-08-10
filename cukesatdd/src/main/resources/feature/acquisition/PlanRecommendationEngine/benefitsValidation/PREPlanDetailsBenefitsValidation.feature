@@ -41,6 +41,11 @@ Feature: PRE Plans benefits validation
     Examples: 
       | excelPath                 | workSheet   | site |
       | 2021 PDP_Plan details_PRE | PREBENEFITS | AARP |
+      
+    @PREPlanBenefitsAARP @MS_PREBENEFITS_AARP
+    Examples: 
+      | excelPath                | workSheet   | site |
+      | 2021 MS_Plan Details_PRE | PREBENEFITS | AARP |
 
     @PREPlanBenefitsAARP_UAT
     Examples: 
@@ -58,12 +63,7 @@ Feature: PRE Plans benefits validation
       | excelPath                 | workSheet        | site |
       | 2021 PDP_Plan details_PRE | PREBENEFITS_Temp | AARP |
 
-    @PREPlanBenefitsAARP @MS_PREBENEFITS_AARP
-    Examples: 
-      | excelPath                | workSheet   | site |
-      | 2021 MS_Plan Details_PRE | PREBENEFITS | AARP |
-
-    @PREPlanBenefitsAARP @MS_PREBENEFITS_Temp_AARP
+    @PREPlanBenefitsAARP_Temp @MS_PREBENEFITS_Temp_AARP
     Examples: 
       | excelPath                | workSheet        | site |
       | 2021 MS_Plan Details_PRE | PREBENEFITS_Temp | AARP |
