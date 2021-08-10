@@ -220,7 +220,7 @@ public class WelcomePageMobile extends UhcDriver {
 		scrollToView(ViewPlanDetails);
 		
 		if(validateNew(ViewPlanDetails)){
-			ViewPlanDetails.click();
+			jsClickNew(ViewPlanDetails);
 			Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
