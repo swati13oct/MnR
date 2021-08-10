@@ -3392,13 +3392,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 		validateNew(DCELink);
-		//jsClickNew(DCELink);
-		String winHandleBefore = driver.getWindowHandle();
-		switchToNewTabNew(DCELink);
-		String winHandleCurrent = driver.getWindowHandle();
-		driver.switchTo().window(winHandleBefore);
-		driver.close();
-		driver.switchTo().window(winHandleCurrent);
+		jsClickNew(DCELink);
+		//String winHandleBefore = driver.getWindowHandle();
+		//switchToNewTabNew(DCELink);
+		//String winHandleCurrent = driver.getWindowHandle();
+		//driver.switchTo().window(winHandleBefore);
+		//driver.close();
+		//driver.switchTo().window(winHandleCurrent);
 		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);

@@ -34,6 +34,7 @@ import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.*;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -817,6 +818,15 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
+	public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable{
+	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+	    WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+	    if (null != welcomepage) {
+		  getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, welcomepage);
+	    } else
+		Assertion.fail("Welcome page  not loaded");
+    }
 
 	@Then("^the user verify and edit the Pharmacy from vpp detail page$")
 	public void the_user_verify_and_edit_the_Pharmacy_from_vpp_detail_page() throws Throwable {
@@ -1443,7 +1453,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidatesDrugsList(druglist);
 
 	}
-	
+
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 	@Then("^the user validates View Drug Pricing modal for the given plan$")
 	public void user_validates_ViewDrugPricing_modal(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

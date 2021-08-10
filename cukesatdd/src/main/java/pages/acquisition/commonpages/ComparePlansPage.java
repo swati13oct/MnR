@@ -227,13 +227,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@dtmname,'Edit Drugs')]")
 	private WebElement editDrugsLink;
 
-	@FindBy(xpath = "//td//*[normalize-space(text())='Drug Summary']")
+	@FindBy(xpath = "//tbody//th/span[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
 	private WebElement DrugSummaryCoverageHeader;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[1]//td//span[contains(@class,'drugtext')]//span")
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[contains(@ng-repeat, 'drug in') and contains(@class, 'desktop')]//th//span[contains(@class,'drugtext')]//span")
 	private WebElement DrugName;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
@@ -1542,7 +1542,7 @@ public class ComparePlansPage extends UhcDriver {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
 			WebElement DrugName = driver.findElement(
-					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr/td//*[contains(text(), '"
+					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr[contains(@class, 'desktop')]/th//*[contains(text(), '"
 							+ currentDrug + "')]"));
 
 			if (validateNew(DrugName)) {
