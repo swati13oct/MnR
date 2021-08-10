@@ -1453,6 +1453,7 @@ public String getplanId(WebElement plan) {
 	String planName = "";
 	String planId="";
 	planName = plan.getText().trim();
+	threadsleep(3000);
 	if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan D") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N"))
 		planId = planName.split("Plan ")[1].trim() + "01";
 	else

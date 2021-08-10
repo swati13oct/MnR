@@ -570,6 +570,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void viewPlanInfo(String planInfo) {
+		threadsleep(5000);
 		System.out.println("Navigating Plans Info...");
 		String planName = "", planAction = "";
 		String[] planDetails = planInfo.split(",");

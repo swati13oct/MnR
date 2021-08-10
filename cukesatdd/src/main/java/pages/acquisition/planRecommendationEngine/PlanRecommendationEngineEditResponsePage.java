@@ -135,6 +135,9 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "uhc-list-item.list-item")
 	private List<WebElement> allQuestionSection;
+	
+	@FindBy(css = "uhc-list-item.list-item h2")
+	private WebElement questionSectionTitle;
 
 	@FindBy(css = "div.viewUpdateSection:nth-of-type(1)>button")
 	private WebElement viewUpdateButton;
@@ -198,7 +201,7 @@ private WebElement signInLink;
 		verifyClickEditButton("special", false);
 		verifyClickEditButton("doctor", false);
 		verifyClickEditButton("drugs", false);
-		verifyClickEditButton("Services", false);
+		verifyClickEditButton("services", false);
 		verifyClickEditButton("cost", false);
 		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
@@ -389,7 +392,8 @@ private WebElement signInLink;
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
 		for (WebElement elem : allQuestionSection) {
-			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
+			String tempTxt = questionSectionTitle.getText().trim();
+			String editbutton = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
 			if (tempTxt.contains(section)) {
 				editButton = true;
