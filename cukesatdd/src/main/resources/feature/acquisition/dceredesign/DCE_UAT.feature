@@ -478,7 +478,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       #| E2E Scenario 3_UMS | UHC  |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
 
-  @dce_E2E_Scenario4_UAT
+  @dce_E2E_Scenario7_UAT
   Scenario Outline: <Scenario> : Verify that user get started from home page and can do a import for unauthenticated user, verify the drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -510,12 +510,12 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And user clicks on continue button in Zip Entry Page
     And user verify the drug summary page
 
-    @dce_E2E_Scenario4_UAT_AARP @regressionAARP
+    @dce_E2E_Scenario7_UAT_AARP @regressionAARP
     Examples:
       | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
       | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
 
-    @dce_E2E_Scenario4_UAT_UHC @regressionUHC
+    @dce_E2E_Scenario7_UAT_UHC @regressionUHC
     Examples:
       | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
       | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |

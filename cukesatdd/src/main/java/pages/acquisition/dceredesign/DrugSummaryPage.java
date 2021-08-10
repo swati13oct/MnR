@@ -162,7 +162,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::div[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::*[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
 	private WebElement pharmacyNameSelected;
 
 	@FindBy(xpath = "//*[contains(@class,'d-lg-block')]//h3[contains(text(), 'Pharmacy')]/span")
@@ -272,7 +272,7 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	public void captureFunctionalToolTips(String planName) {
 		CommonUtility.waitForPageLoadNew(driver, planTypeHeading,20);
-		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@dtmname , 'why average') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
 /*
 		scrollToView(WhyAverage);
@@ -287,7 +287,7 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Why Average ToolTip text is not present");
 		jsMouseOut(WhyAverageContent);
 		*/
-		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@dtmname , 'included') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
 /*		jsMouseOver(WhatsIncluded);
