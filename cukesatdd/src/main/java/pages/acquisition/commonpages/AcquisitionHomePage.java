@@ -795,15 +795,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 				checkModelPopup(driver, 45);
-			} else if (MRScenario.environment.equals("stagezero")) {
+			} else if (MRScenario.environment.equals("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				//checkModelPopup(driver, 20);
-				System.out.println("^^^^^^Inside stage-0 "+MRScenario.environment+" - "+ UMS_ACQISITION_PAGE_URL_NEW);
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				System.out.println("^^^^^Inside else "+MRScenario.environment+" - "+UMS_ACQISITION_PAGE_URL);
 				// checkModelPopup(driver, 10);
 			}
 
@@ -832,14 +830,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 				checkModelPopup(driver, 45);
-			} else if (MRScenario.environment.toString().equals("stagezero")) {
+			} else if (MRScenario.environment.equals("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
-				System.out.println("^^^^^^Inside stage-0 "+MRScenario.environment+" - "+ AARP_ACQISITION_PAGE_URL_NEW);
-
 				//checkModelPopup(driver, 20);
 			} else {
 				start(AARP_ACQISITION_PAGE_URL);
-				System.out.println("^^^^^Inside else "+MRScenario.environment+" - "+AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
 				// checkModelPopup(driver, 10);
