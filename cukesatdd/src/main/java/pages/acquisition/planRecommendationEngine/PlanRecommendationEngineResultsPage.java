@@ -1440,11 +1440,12 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 	
 	List<String> vppPlans = new ArrayList<String>();
 	System.out.println(plansId.size());
+		int c=1;
 	for (WebElement e : plansId) {
-		int i = 1;
-		System.out.println("planName in loop count: " +i);
+		System.out.println("planName in loop count: " +c);
+		System.out.println("planName in loop: " +e.getText().trim());
 		vppPlans.add(getplanId(e));
-		i++;
+		c++;
 		}
 	for (int i = 0; i < APIRankings.size(); i++) {
 		Assert.assertTrue(vppPlans.get(i).toUpperCase().contains(APIRankings.get(i).toUpperCase()),
@@ -1458,7 +1459,6 @@ public String getplanId(WebElement plan) {
 	String planId="";
 	planName = plan.getText().trim();
 	threadsleep(3000);
-	System.out.println("planName in loop: " +planName);
 	if( planName.contains("AARP Medicare Supplement Insurance"))
 		planId = planName.split("Plan ")[1].trim() + "01";
 	else
