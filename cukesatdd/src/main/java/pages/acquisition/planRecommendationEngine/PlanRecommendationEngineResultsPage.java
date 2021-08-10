@@ -535,6 +535,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = "li.planTileGrid")
 		private List<WebElement> plantiles;
 		
+		@FindBy(css = "li.planTileGrid uhc-plan-info")
+		private List<WebElement> plantilesMS;
+		
 		@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview h3>a")
 		private List<WebElement> PlanName;
 		
@@ -1435,17 +1438,14 @@ public String getAPIPlansRecommendation(String rankingJSON, String givenPlanType
 	}
 	return recom.trim();
 }
-
+int value=1;
 public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings) {
-	
 	List<String> vppPlans = new ArrayList<String>();
 	System.out.println(plansId.size());
-		int c=1;
 	for (WebElement e : plansId) {
-		System.out.println("planName in loop count: " +c);
-		System.out.println("planName in loop: " +e.getText().trim());
+		System.out.println("planName in loop count: " +value);
 		vppPlans.add(getplanId(e));
-		c++;
+		value++;
 		}
 	for (int i = 0; i < APIRankings.size(); i++) {
 		Assert.assertTrue(vppPlans.get(i).toUpperCase().contains(APIRankings.get(i).toUpperCase()),
@@ -1461,9 +1461,12 @@ public String getplanId(WebElement plan) {
 	threadsleep(3000);
 	if( planName.contains("AARP Medicare Supplement Insurance"))
 		planId = planName.split("Plan ")[1].trim() + "01";
+	if(planName.contains(""))
+		planId = plantilesMS.get(value-1).getAttribute("ng-reflect-plan-name").trim().split("Plan ")[1].trim() + "01";
 	else
 		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
 	//System.out.println("UI Plan Name : "+planName);
+	System.out.println("planName in loop: " +planId);
 	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 	System.out.println("UI Plan ID : "+planId);
 	return planId;
