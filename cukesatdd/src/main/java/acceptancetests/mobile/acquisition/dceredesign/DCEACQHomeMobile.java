@@ -76,18 +76,17 @@ public class DCEACQHomeMobile {
 
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		/*
-		 * AppiumDriver wd = getLoginScenario().getMobileDriver();
-		 * AcquisitionHomePageMobile aquisitionhomepage = new
-		 * AcquisitionHomePageMobile(wd); aquisitionhomepage.openMobileURL(); //
-		 * aquisitionhomepage.openPRE();
-		 * 
-		 * aquisitionhomepage.fixPrivateConnectionMobile();
-		 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-		 * aquisitionhomepage);
-		 */
+		/*AppiumDriver wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openMobileURL();
+		// aquisitionhomepage.openPRE();
 
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);*/
+		
+		
+		
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -107,10 +106,10 @@ public class DCEACQHomeMobile {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
-		if (site.equalsIgnoreCase("AARP")) 
-				aquisitionhomepage.validateSubtitle();
-	}
 
+		if (site.equalsIgnoreCase("AARP"))
+			aquisitionhomepage.validateSubtitle();
+	}
 
 	@Then("^the user clicks on Edit button on Drug List page on DCE$")
 	public void the_user_clicks_on_EditButton(DataTable Attributes) throws Throwable {
@@ -355,8 +354,11 @@ public class DCEACQHomeMobile {
 
 	@When("^user saves and updates pharmacy from list$")
 	public void user_saves_and_updates_pharmacy_from_list() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.saveAndUpdatePharmacy();
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String selectedPharmacy = drugSummaryPage.saveAndUpdatePharmacy();
+		getLoginScenario().saveBean(DCERedesignCommonConstants.SELECTED_PHARMACY, selectedPharmacy);
 	}
 
 	@Then("^user clears the existing drugs in Visitor profile$")
@@ -380,20 +382,6 @@ public class DCEACQHomeMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
-	}
-
-	@Then("^the user cancels enrollment and navigates to homepage$")
-	public void the_user_cancels_enrollment() throws Throwable {
-		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		CancelOLEModalMobile cancelOLEmodal = welcomePage.OpenCancelOLE();
-		if (cancelOLEmodal != null) {
-
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
-			System.out.println("OLE Cancellation Modal is Displayed");
-			cancelOLEmodal.leaveApplication();
-		} else
-			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 	}
 
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
@@ -590,12 +578,13 @@ public class DCEACQHomeMobile {
 	@Then("^user save SNP plan as favorite on drug summary page AARP site$")
 	public void user_saves_snp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
@@ -607,35 +596,38 @@ public class DCEACQHomeMobile {
 	@Then("^user save PDP plan as favorite on drug summary page AARP site$")
 	public void user_saves_pdp_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.clickOnPDPPlan();
 		drugSummaryPage.savePlan(PlanName);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^user saves MAPD plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		 */
+		
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		List<List<String>> memberAttributesRow = givenAttributes.asLists();
 		String PlanName = memberAttributesRow.get(0).get(1);
 		System.out.println("Plan name" + PlanName);
 		drugSummaryPage.clickOnMAPDPlan();
 		drugSummaryPage.savePlan(PlanName);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 		/*
 		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); List<DataTableRow>
@@ -681,14 +673,21 @@ public class DCEACQHomeMobile {
 
 	@When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal$")
 	public void user_click_on_keep_using_pharmacy_link_on_change_pharmacy_modal() throws InterruptedException {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);*/
+		
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickKeepUsingPharmacyLink();
 	}
 
 	@Then("^the pharmacy name should be updated on summary page$")
 	public void the_pharmacy_name_should_be_updated_on_summary_page() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.validateSelectedPharmacy();
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String selectedPharmacyName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.SELECTED_PHARMACY);
+		drugSummaryPage.validateSelectedPharmacy(selectedPharmacyName);
 	}
 
 	@When("^user search with correct zipcode$")
@@ -703,7 +702,9 @@ public class DCEACQHomeMobile {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String zipCode = memberAttributesMap.get("ZipCode");
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+//		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
 	}
 
@@ -718,6 +719,7 @@ public class DCEACQHomeMobile {
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String tabName = memberAttributesMap.get("TabName");
 		PlanDetailsPageMobile planDetails = new PlanDetailsPageMobile(wd);
 		planDetails.validateDefaultTab(tabName);
@@ -1228,17 +1230,15 @@ public class DCEACQHomeMobile {
 	}
 
 	@Then("^the user searches and adds the following Drug to Drug List$")
-	public void the_user_searches_and_adds_the_following_Drug_to_Drug_Lists(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_searches_and_adds_the_following_Drug_to_Drug_Lists(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -1248,13 +1248,15 @@ public class DCEACQHomeMobile {
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 
 		System.out.println("Drugs List : " + druglist);
+		
+		druglist = StringUtils.isEmpty(druglist) ? drugName : druglist + "&" + drugName;
 
 		// if (druglist.isEmpty()) {
-		if (StringUtils.isEmpty(druglist)) {
+		/*if (StringUtils.isEmpty(druglist)) {
 			druglist = drugName;
 		} else {
 			druglist = druglist + "&" + drugName;
-		}
+		}*/
 		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
@@ -1603,5 +1605,65 @@ public class DCEACQHomeMobile {
 
 		drugDetailsPage.clickOnBacktoDrugBtn();
 	}
+	
+	/**
+	 * Adding Steps for Drugs and providers Imports Validation for DCE - Authenticated Profiles
+	 * @throws Throwable
+	 */
+	@Then("^the user validates Import Option is displayed$")
+	public void the_user_validates_Import_Option_is_displayed() throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportOptionDispalyed();
+	}
+	
+	@Then("^the user clicks on Import Drugs and validates Import Flow \\- Imports Get Started\\, Member NonMember Selection modals$")
+	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals(DataTable attributes) throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String Authenticated_Flag = memberAttributesMap.get("AuthenticatedFlag");
+		getStartedPage.ClickImportValidateModals(Authenticated_Flag);
+	}
+	
+	@Given("^the user selects Member and provides Member Details and proceeds to import$")
+	public void the_user_selects_Member_and_provides_Member_Details_and_proceeds_to_import(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String FirstName = "";
+		String LastName = "";
+		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 
+		if(AuthenticatedFlag.equalsIgnoreCase("false")){
+			 FirstName = memberAttributesMap.get("FirstName");
+			 LastName = memberAttributesMap.get("LastName");
+		}
+		String Member_DOB = memberAttributesMap.get("DOB");
+		String Member_Zip = memberAttributesMap.get("ZipCode");
+		String Member_MBI = memberAttributesMap.get("MBI");
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.EnterMemberDetailsAndImport(AuthenticatedFlag, FirstName, LastName, Member_DOB, Member_Zip, Member_MBI);
+	}
+
+	@Given("^the user validates Import Success/Failure modal as follows$")
+	public void the_user_validates_Success_Failure_modal_as_follows(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String DrugsFlag = memberAttributesMap.get("DrugsFlag");
+		String ProvidersFlag = memberAttributesMap.get("ProvidersFlag");
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportCompleteModal(DrugsFlag, ProvidersFlag);
+	}
+	
+	@Then("^the user clicks on Review Imported Drugs and lands on Build your Drug List Page$")
+	public void the_user_clicks_on_Review_Imported_Drugs_and_lands_on_Build_your_Drug_List_Page() throws Throwable {
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		BuildYourDrugListMobile buildYourDrugList = getStartedPage.ClickReviewAddDrugsBtn();
+		getLoginScenario()
+				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
+	}
 }

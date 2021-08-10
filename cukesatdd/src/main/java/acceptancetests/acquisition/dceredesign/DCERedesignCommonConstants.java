@@ -28,4 +28,5 @@ public class DCERedesignCommonConstants {
 	public static final String YOUPAYLIST_ALLDRUGS = "youpaylistalldrugs";
 	public static final String PLANTYPE = "plantype";
 	public static final String PLANNAME = "planname";
+	public static final String SELECTED_PHARMACY = "selectedPharmacy";
 }
