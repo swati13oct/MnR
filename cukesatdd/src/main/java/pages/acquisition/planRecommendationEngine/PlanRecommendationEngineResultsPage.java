@@ -112,6 +112,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
 	
+	@FindBy(css = "div[class*='overview-main'] h2")
+	private WebElement planZipInfoinVPP;
+	
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
 	
@@ -776,10 +779,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
                     selectMultiZip.get(1).click();
                 // mobileUtils.mobileLocateElementClick(selectMultiZip.get(1));
             }
-            validate(planZipInfo, 60);
+            validate(planZipInfoinVPP, 60);
             waitforElementInvisibilityInTime(planLoaderscreen,60);
             threadsleep(5000);// Plan loader
-            Assert.assertTrue(planZipInfo.getText().contains(inputdata.get("Zip Code")),"Invalid Zip");       
+            Assert.assertTrue(planZipInfoinVPP.getText().contains(inputdata.get("Zip Code")),"Invalid Zip");       
             jsClickNew(MAViewPlansLink);
             pageloadcomplete();
             waitForPageLoadSafari();
@@ -1117,11 +1120,11 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			validate(multiCountyDialog);
 			selectFromDropDown(multiCounty, county);
 		}
-		validate(planZipInfo,60);
+		validate(planZipInfoinVPP,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
-		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+		Assert.assertTrue(planZipInfoinVPP.getText().contains(zip),"Invalid Zip");
+		Assert.assertTrue(planZipInfoinVPP.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
+		Assert.assertTrue(Integer.parseInt(planZipInfoinVPP.getText().split(" ")[2])>0,"Total Plan count is less than 1");
 		jsClickNew(MAViewPlansLink);
 		pageloadcomplete();
 	}
@@ -1450,7 +1453,10 @@ public String getplanId(WebElement plan) {
 	String planName = "";
 	String planId="";
 	planName = plan.getText().trim();
-	planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
+	if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan D") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N"))
+		planId = planName.split("Plan ")[1].trim() + "01";
+	else
+		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
 	//System.out.println("UI Plan Name : "+planName);
 	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 	System.out.println("UI Plan ID : "+planId);

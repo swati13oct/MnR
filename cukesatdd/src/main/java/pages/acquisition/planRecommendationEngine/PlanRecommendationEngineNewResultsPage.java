@@ -282,7 +282,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		// Supplement Insurance Plans (Medigap)"),
 		// "Invalid MADSUP Text");
 		// validate(madsupPlanTypesPara, 60);
-		Assert.assertFalse(validate(madsupPlanTypesPara, 10),
+		Assert.assertTrue(validate(madsupPlanTypesPara, 10),
 				"Medsub section should not display for PDP flow/Non-approved states");
 		// Assert.assertTrue(madsupPlanTypesLearnmoreLink.getText().contains("Learn More
 		// About"),

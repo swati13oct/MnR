@@ -178,13 +178,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = ".desktop-sctn:nth-child(4) h3:nth-child(2)")
     private WebElement headerGetaPlanRecommendationLink;
     
-    @FindBy(linkText = "Drug Cost Estimator")
+    @FindBy(linkText = "Estimate Drug Costs")
     private WebElement headerDrugcostLink;
     
-    @FindBy(linkText = "Pharmacy Search")
+    @FindBy(linkText = "Search for a Pharmacy")
     private WebElement headerPharmacysearchLink;
     
-    @FindBy(linkText = "Provider Search")
+    @FindBy(linkText = "Search Doctors")
     private WebElement headerProvidersearchLink;
     
  //Learn about Medicare inner element
@@ -270,7 +270,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
 	private WebElement HeaderShopFromHomeInFindYourPlan;
     
-    @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+    @FindBy(xpath = "//a[contains(text(),'Plan Recommendation')]")
 	private WebElement HeaderGetRecommendationInShop;
 	
 //Footer Elements
