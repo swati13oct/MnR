@@ -1226,15 +1226,15 @@ public class ComparePlansPage extends UhcDriver {
 				for (int i = 0; i < provider.length; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
-								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
+								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
+								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(0).findElement(By.xpath("td/span")).getText().trim()
+						.contains(providersList.get(0).findElement(By.xpath("th/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(0).findElement(By.xpath("th/span")).getText().trim()
 						+ "#########");
 			}
 
@@ -1251,9 +1251,9 @@ public class ComparePlansPage extends UhcDriver {
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
 					Assertion.assertTrue(drugName[i]
-							.contains(drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()));
+							.contains(drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim()));
 					System.out.println("#########"
-							+ drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim() + "#########");
+							+ drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim() + "#########");
 				}
 			}
 
@@ -1311,15 +1311,15 @@ public class ComparePlansPage extends UhcDriver {
 				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
-								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
+								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
+								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+						.contains(providersList.get(0).findElement(By.xpath("th/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(1).findElement(By.xpath("th/span")).getText().trim()
 						+ "#########");
 			}
 
@@ -1334,7 +1334,7 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
-				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()
+				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim()
 						+ ",";
 			}
 			for (int i = 0; i < drugName.length; i++) {
