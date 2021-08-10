@@ -437,7 +437,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_MonthlyPremium);
 		validateNew(DrugCosts_AnnualEstTotal);
 
-        if(!LinktoExitScenario.getText().contains("Compare")) {
+        if(!LinktoExitScenario.getText().contains("ompare")) {
         	validateNew(DrugCosts_PlanDetailsBtn);
         }
 		//validateNew(DrugCosts_SaveBtn);

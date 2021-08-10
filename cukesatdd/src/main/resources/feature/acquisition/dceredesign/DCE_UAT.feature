@@ -225,7 +225,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And the user validates link to Drug Summary Page
     And user should verify the Extra help on SNP plan type
     And user click on View Drug Pricing Modal
-    And user should verify the drug extra qualification in drug pricing popup
+   #LIS message removed for LIS Buydown PLans
+    #And user should verify the drug extra qualification in drug pricing popup
     Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
       | Plan Name | <newplanname> |
     Then the user selects View Drug details for following plantype and PlanName
