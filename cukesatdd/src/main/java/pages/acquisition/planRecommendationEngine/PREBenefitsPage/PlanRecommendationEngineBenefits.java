@@ -149,7 +149,6 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 				.replace("in-network", "").replace("out-of-network", "")
 				.replace(":", "").replace("  ", "").
 				replace("\n", "").replace("\",\"", "").replace("\"", "").replace(",", "").replace("-", "")
-				.replace("**", "").replace("***", "")
 				.trim();
 	}
 
@@ -166,16 +165,14 @@ public HashMap<String, String> collectInfoPREResultsPage(String planName, int pl
 			columnName = columnName.toLowerCase().trim();
 			if(columnName.contains("%"))
 				System.out.println();
-			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
+			if((benefitValue.contains("NA"))) {
 				counter++;
 				if(key.contains(columnName)) {
 						flag= false;
 						tmpUIString2 = tmpUIString1;
 						break;
 				}
-				
-				
-			
+
 			}else if(key.contains(columnName)) {
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replace(" ", "").replaceAll("\\s+", "");

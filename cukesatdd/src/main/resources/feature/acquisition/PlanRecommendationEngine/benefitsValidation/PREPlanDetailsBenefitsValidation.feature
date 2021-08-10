@@ -7,32 +7,32 @@ Feature: PRE Plans benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS1_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS1_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS1 | AARP |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS2_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS2_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS2 | AARP |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS3_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS3_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS3 | AARP |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS4_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS4_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS4 | AARP |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS5_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS5_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS5 | AARP |
 
-    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS6_AARP
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS6_AARP
     Examples: 
       | excelPath                    | workSheet    | site |
       | 2021 MA_SNP_Plan Details_PRE | PREBENEFITS6 | AARP |
