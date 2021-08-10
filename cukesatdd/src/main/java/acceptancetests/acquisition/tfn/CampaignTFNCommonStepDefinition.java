@@ -1038,7 +1038,7 @@ public void the_user_close_reopen_broswer() {
 		tfnPage.closeOriginalTabAndOpenNewTab();
 	}
 
-@Then("^the user clicks on on Agent link for MedsuppPage$")
+@When("^the user clicks on Agent link for MedsuppPage$")
 public void the_user_clicks_on_Agent_Link_MedSup(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);

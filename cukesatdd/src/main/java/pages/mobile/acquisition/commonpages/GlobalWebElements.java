@@ -1,6 +1,5 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.TOOLS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -373,62 +374,72 @@ public class GlobalWebElements extends UhcDriver {
 
 	}
 
-	public void accessFooterLinkFromShopPlans(String planType) {
+	/**
+	 * Access footer link from shop plans tab.
+	 *
+	 * @param planType the plan type
+	 */
+	public void accessFooterLinkFromShopPlans(PLANTYPE planType) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(shopPlansExpander, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(shopPlansExpander);
 		}
 
-		planType = planType.toLowerCase();
-
 		switch (planType) {
-		case "ma":
-		case "mapd":
+		case MA:
+		case MAPD:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
-		case "snp":
-		case "dsnp":
+		case SNP:
 			jsClickNew(medicareSpecialNeedsPlansLink);
 			break;
-		case "medsupp":
+		case MEDSUPP:
 			jsClickNew(medicareSupplementInsurancePlansLink);
 			break;
-		case "pdp":
+		case PDP:
 			jsClickNew(medicarePrescriptionDrug_PlansLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid link for plan type " + planType);
+			throw new IllegalArgumentException("Invalid link for plan type " + planType.name());
 		}
 		pageloadcomplete();
 	}
 
-	public void accessFooterLinkFromToolsResources(String tool) {
+	/**
+	 * Access footer link from Tools Resources tab.
+	 *
+	 * @param tool the tool
+	 */
+	public void accessFooterLinkFromToolsResources(TOOLS tool) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(toolsAndResources, "aria-expanded"));
 		if (!expanded) {
 			jsClickNew(toolsAndResources);
 		}
 
-		tool = tool.toLowerCase();
-
 		switch (tool) {
-		case "pre":
+		case PRE:
 			jsClickNew(planRecommendationLink);
 			break;
-		case "dce":
+		case DCE:
 			jsClickNew(drugCostEstimatorLink);
 			break;
-		case "pharmacy search":
+		case PHARMACYSEARCH:
 			jsClickNew(pharmacySearchLink);
 			break;
-		case "provider search":
+		case PROVIDERSEARCH:
 			jsClickNew(providerSearchLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid tool " + tool);
+			throw new IllegalArgumentException("Invalid tool " + tool.name());
 		}
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from Learn About Medicare tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromLearnAboutMedicare(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(learnAboutMedicareFooterButton, "aria-expanded"));
 		if (!expanded) {
@@ -456,6 +467,11 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Access footer link from More tab.
+	 *
+	 * @param option the option
+	 */
 	public void accessFooterLinkFromMore(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
 		
@@ -485,6 +501,13 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	/**
+	 * Open home from menu.
+	 * 
+	 * Clicks on the Home option from right nav menu
+	 *
+	 * @return the acquisition home page mobile
+	 */
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
 		
@@ -498,6 +521,10 @@ public class GlobalWebElements extends UhcDriver {
 	}
 	
 	
+	/**
+	 * Open site search from menu.
+	 * 
+	 */
 	public void openSiteSearchFromMenu() {
 		jsClickNew(MenuMobile);
 		validateNew(mobileNav, 5);
@@ -505,6 +532,14 @@ public class GlobalWebElements extends UhcDriver {
 		jsClickNew(siteSearchButton);
 	}
 	
+	/**
+	 * Open Shop for Plan from menu.
+	 *
+	 * @return the object of ShopForPlanNavigationPageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in ShopForPlanNavigationPageMobile
+	 */
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
 		jsClickNew(MenuMobile);
 		
@@ -517,6 +552,14 @@ public class GlobalWebElements extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * Open Learn about Medicare from menu.
+	 *
+	 * @return the object of LearnAboutMedicareHomePageMobile
+	 * 
+	 * To access the options under Shop for Plan menu,
+	 * refer the methods in LearnAboutMedicareHomePageMobile
+	 */
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
 		

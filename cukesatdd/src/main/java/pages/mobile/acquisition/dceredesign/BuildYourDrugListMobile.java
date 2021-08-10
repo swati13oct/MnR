@@ -80,7 +80,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "div[class*='adddrugpopup'] #cancelicon")
 	private WebElement addDrugModalCloseButton;
 	
+<<<<<<< .mine
 	@FindBy(css = "#buildyourdruglist > div.row.mb-100 > div > div > div > button")
+=======
+	@FindBy(css = "#previousButton + div > button[dtmname$='review drug costs']")
+>>>>>>> .theirs
 	public WebElement reviewDrugCostButtonFooter;
 
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='review drug costs']")
@@ -89,7 +93,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
+	@FindBy(css = "#buildyourdruglist a[dtmname$='return to compare']")
 	public WebElement returnToCompareBtn;
 	
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='remove drug:yes']")
@@ -112,6 +116,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateNoDrug_ErrorMsg() {
+		if(addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
+		
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		if (validateNew(BlankDrugError) && BlankDrugError.getText().contains("enter at least 4 characters ")) {
@@ -348,10 +356,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//uhc-modal[contains(@modalheader, 'Drug List Limit')]")
+	@FindBy(xpath = "//div[starts-with(@class,'uhc-modal__header')]//h2[normalize-space()='Drug List Limit']")
 	public WebElement DrugListModal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__close')]")
+	@FindBy(css = "button#cancelicon")
 	public WebElement DrugListModal_Close;
 
 	@FindBy(xpath = "//button[contains(text(), 'Got it')]")
@@ -361,8 +369,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement DrugListModal_Message;
 
 	public void SearchValidate_DrugCountError(String drugName) {
-		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.sendKeys(drugName);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 
