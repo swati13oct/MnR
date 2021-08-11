@@ -1636,7 +1636,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public WebElement comparePlansLink;
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
-		scrollToView(addToCompareLabel);
 		jsClickNew(addToCompareLabel);
 		jsClickNew(comparePlansLink);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))

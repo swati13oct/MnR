@@ -74,7 +74,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-1-button' and contains(text(), 'Disclaimer')]")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//p)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//h3)[1]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
@@ -162,7 +162,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::div[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']//ancestor::*[contains(@role, 'listitem')]//span[contains(@class, 'text-bold')]")
 	private WebElement pharmacyNameSelected;
 
 	@FindBy(xpath = "//*[contains(@class,'d-lg-block')]//h3[contains(text(), 'Pharmacy')]/span")
@@ -272,7 +272,7 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	public void captureFunctionalToolTips(String planName) {
 		CommonUtility.waitForPageLoadNew(driver, planTypeHeading,20);
-		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@dtmname , 'why average') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
 /*
 		scrollToView(WhyAverage);
@@ -287,7 +287,7 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Why Average ToolTip text is not present");
 		jsMouseOut(WhyAverageContent);
 		*/
-		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@dtmname , 'included') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
 /*		jsMouseOver(WhatsIncluded);
@@ -669,6 +669,14 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Drug Details Page is NOT Displayed");
 			return null;
 		}	}
+
+	public void ClickviewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Pricing') and contains(@aria-label,'" + planName + "') and contains(@class, 'ng-star-inserted')]"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+	}
 	
 	public void viewDrugPricingModal(String planName){
 	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Pricing') and contains(@aria-label,'"+planName+"') and contains(@class, 'ng-star-inserted')]"));
@@ -776,9 +784,9 @@ public class DrugSummaryPage extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {	
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '" + currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"(//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '"+ currentAddedDrug +"')]//following::span[contains(text(), 'Initial Coverage')]//following-sibling::span[contains(text(), '$')])[1]"));
+					"//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+currentAddedDrug+"')]//ancestor::li//div[contains(@class, 'd-lg-block')]//li[contains(text(), 'Initial Coverage')]//following-sibling::li[contains(text(), '$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out

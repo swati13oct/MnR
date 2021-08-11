@@ -891,9 +891,9 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-			
-			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
-					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			CampaignExternalLinks campaignExternalLinkspage=new CampaignExternalLinks(wd);
+			//CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					//.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			campaignExternalLinkspage.startQuestionnaire(zipcode);
 		} else {

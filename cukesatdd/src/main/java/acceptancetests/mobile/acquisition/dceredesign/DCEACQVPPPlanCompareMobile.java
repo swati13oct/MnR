@@ -91,9 +91,9 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		BuildYourDrugListMobile buildYourDrugListMobile = planComparepage.navigateToDCERedesign();
-		if (null != buildYourDrugListMobile) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugListMobile);
+		GetStartedPageMobile getStartedPageMobile = planComparepage.navigateToDCERedesign();
+		if (null != getStartedPageMobile) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPageMobile);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
