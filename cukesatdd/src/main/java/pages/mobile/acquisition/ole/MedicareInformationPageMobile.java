@@ -381,12 +381,12 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 
-		sendkeysMobile(claimNumberField, MedicareNumber);
+		sendKeysByCharacter(claimNumberField, MedicareNumber);
 
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
 			// sendkeysMobileMobileNew(SSNField, SSNnumber);
-			sendkeysMobile(SSNField, SSNnumber);
+			sendKeysByCharacter(SSNField, SSNnumber);
 
 		}
 		System.out.println("All Medicare Details are entered");
@@ -995,8 +995,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String MemberNumber = memberDetailsMap.get("Member Number");
 
 			sendkeysMobile(healthInsuranceNameField, HealthInsuranceName);
-			sendkeysMobile(groupNumberField, GroupNumber);
-			sendkeysMobile(memberNumberField, MemberNumber);
+			sendKeysByCharacter(groupNumberField, GroupNumber);
+			sendKeysByCharacter(memberNumberField, MemberNumber);
 			}
 
 		if (NextBtn.isEnabled()) {
@@ -1042,9 +1042,9 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String RXBINNumber = memberDetailsMap.get("RX BIN Number");
 
 			sendkeysMobile(PrescriptionCoverageNameField, PrescriptionName);
-			sendkeysMobile(PrescriptionCoveragegroupNumberField, PDGroupNumber);
-			sendkeysMobile(PrescriptionCoveragememberNumberField, PDMemberNumber);
-			sendkeysMobile(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
+			sendKeysByCharacter(PrescriptionCoveragegroupNumberField, PDGroupNumber);
+			sendKeysByCharacter(PrescriptionCoveragememberNumberField, PDMemberNumber);
+			sendKeysByCharacter(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
 
 			}
 		if (NextBtn.isEnabled()) {

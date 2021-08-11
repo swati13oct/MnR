@@ -194,12 +194,13 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		
 		String PlanName = givenAttributesMap.get("Plan Name");
 		
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
-		String ZipCode = "";
-		String County = "";
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String County = givenAttributesMap.get("County Name");
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		String SiteName;
