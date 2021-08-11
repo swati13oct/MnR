@@ -80,7 +80,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "div[class*='adddrugpopup'] #cancelicon")
 	private WebElement addDrugModalCloseButton;
 	
+
 	@FindBy(css = "#previousButton + div > button[dtmname$='review drug costs']")
+
 	public WebElement reviewDrugCostButtonFooter;
 
 	@FindBy(css = "div[class*='d-block'] button[dtmname$='review drug costs']")
@@ -250,6 +252,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
 		// pageloadcomplete();
 		// iosScroll(reviewDrugCost);
+		scrollToView(reviewDrugCostButtonFooter);
 		jsClickNew(reviewDrugCostButtonFooter);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {

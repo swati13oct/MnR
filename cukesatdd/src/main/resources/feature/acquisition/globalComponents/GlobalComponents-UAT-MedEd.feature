@@ -62,7 +62,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     #Then the user come back to Med-ed page 71613
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
