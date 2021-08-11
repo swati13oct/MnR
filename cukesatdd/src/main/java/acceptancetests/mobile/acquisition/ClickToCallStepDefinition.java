@@ -130,7 +130,7 @@ public class ClickToCallStepDefinition {
 	
 	@Then("^the user validates the proactive chat")
 	public void the_user_validates_proactive_chat() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		System.out.println("Chat icon is not available on mobile hence skipping this step");
 //		aquisitionhomepage.validateProactiveChat();
