@@ -314,7 +314,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		
 		List<WebElement> searchedDrugList = driver.findElements(By.cssSelector("div[class*='searchdrugpopup'] div > ul > li > p"));
 		
-		WebElement selectDrug = searchedDrugList.stream()
+		WebElement selectDrug = (WebElement)searchedDrugList.stream()
 				.filter(listedDrug -> listedDrug.getText().contains(drugName))
 				.map(listedDrug -> listedDrug.findElement(By.xpath("./following-sibling::button")))
 				.findFirst().get();
