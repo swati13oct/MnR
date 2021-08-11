@@ -1143,9 +1143,25 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     @validateSocialShareComponentAARP @avengersRegressionAARP
     Examples:
       | site | geoState | path                                                                                                |
-      | AARP | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
+      | AARP | Alabama  | medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67.html                    |
+      | AARP | Alabama  | medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare.html            |
+      | AARP | Alabama  | medicare-articles/do-i-need-medicare-with-spouses-employer-plan.html                                |
+      | AARP | Alabama  | medicare-articles/medicare-coverage-for-inpatient-rehabilitation.html                               |
+      | AARP | Alabama  | medicare-articles/medicare-coverage-for-non-working-spouses.html                                    |
+      | AARP | Alabama  | medicare-articles/what-will-medicare-cost.html                                                      |
+      | AARP | Alabama  | medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit.html   |
+      | AARP | Alabama  | medicare-articles/should-i-get-part-b-if-im-working-past-65.html                                    |
+      | AARP | Alabama  | medicare-articles/youre-65-working-medicare.html                                                    |
 
     @validateSocialShareComponentUHC @avengersRegressionUHC
     Examples:
-      | site | geoState | path                                                                                                |
-      | UHC  | Alabama  | dolphin-authoring/anya/what-is-the-difference-between-original-medicare-and-medicare-advantage.html |
+      | site | geoState | path                                                                                              |
+      | UHC  | Alabama  | medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67.html                  |
+      | UHC  | Alabama  | medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare.html          |
+      | UHC  | Alabama  | medicare-articles/do-i-need-medicare-with-spouses-employer-plan.html                              |
+      | UHC  | Alabama  | medicare-articles/medicare-coverage-for-inpatient-rehabilitation.html                             |
+      | UHC  | Alabama  | medicare-articles/medicare-coverage-for-non-working-spouses.html                                  |
+      | UHC  | Alabama  | medicare-articles/what-will-medicare-cost.html                                                    |
+      | UHC  | Alabama  | medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit.html |
+      | UHC  | Alabama  | medicare-articles/should-i-get-part-b-if-im-working-past-65.html                                  |
+      | UHC  | Alabama  | medicare-articles/youre-65-working-medicare.html                                                  |

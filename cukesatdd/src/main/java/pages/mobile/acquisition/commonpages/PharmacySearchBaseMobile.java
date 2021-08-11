@@ -1,5 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,12 +9,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -453,27 +457,51 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"
 						+ testPlanYear + "' | Actual link text='" + pdfLink.getText() + "'",
 				pdfLink.getText().contains(testPdfLinkTextDate));
-		String winHandleBefore = driver.getWindowHandle();
+		
 		CommonUtility.checkPageIsReady(driver);
-		pdfLink.click();
-		Thread.sleep(2000); // note: keep this for the page to load
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs = afterClicked_tabs.size();
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
-		String currentURL = driver.getCurrentUrl();
-		String expectedURL = pdfType;
-		Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
-				+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
-		Assertion.assertTrue(
-				"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
-						+ testPdfLinkTextDate + "' | Actual URL='" + currentURL + "'",
-				currentURL.contains(testPdfLinkTextDate));
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		currentURL = driver.getCurrentUrl();
-		expectedURL = "Pharmacy-Search";
-		Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
-				currentURL.contains(expectedURL));
+		
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			String yearToVerifyInPdf = ", " +testPlanYear; 
+			grantPermissionOnAndroidChrome(pdfLink);
+			String pdfName = pdfType.split("\\.")[0];
+			byte[] pdfContent = getDownloadedPdfFileContentAndroid(pdfName);
+			try {
+				PDDocument document = PDDocument.load(pdfContent);
+				String PDFText = new PDFTextStripper().getText(document);
+				
+				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
+				
+				Assertion.assertTrue("PROBLEM - PDF  is not opening", PDFText.contains(ExpectedPDFText));
+				Assertion.assertTrue("PROBLEM - unable to locate expected year in the PDF. PDF should contain year '"
+						+ yearToVerifyInPdf + "'",PDFText.contains(yearToVerifyInPdf));
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			String winHandleBefore = driver.getWindowHandle();
+			jsClickNew(pdfLink);
+			Thread.sleep(2000); // note: keep this for the page to load
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs = afterClicked_tabs.size();
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
+			String currentURL = driver.getCurrentUrl();
+			String expectedURL = pdfType;
+			Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
+					+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
+			Assertion.assertTrue(
+					"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
+							+ testPlanYear + "' | Actual URL='" + currentURL + "'",
+					currentURL.contains(testPlanYear));
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			currentURL = driver.getCurrentUrl();
+			expectedURL = "Pharmacy-Search";
+			Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+					currentURL.contains(expectedURL));
+		}
 	}
 
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl,

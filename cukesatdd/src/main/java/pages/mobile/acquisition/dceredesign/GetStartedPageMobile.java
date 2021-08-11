@@ -20,7 +20,7 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@FindBy(css = "#adddrug")
 	public WebElement addDrugButton;
-	
+
 	@FindBy(xpath = "//*[@id='drugsearchmobile']")
 	public WebElement drugtSearchTextBox;
 
@@ -34,7 +34,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//div/h2[text()='Get Started ']")
@@ -64,7 +64,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	public BuildYourDrugListMobile clickAddsDrugs() {
 		if (validateNew(AddMyDrugsBtn))
 			jsClickNew(AddMyDrugsBtn);
-		
+
 		CommonUtility.waitForPageLoadNew(driver, addDrugButton, 5);
 		jsClickNew(addDrugButton);
 
@@ -133,13 +133,23 @@ public class GetStartedPageMobile extends UhcDriver {
 		return null;
 
 	}
-	
+
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breadCrumbLink;
 
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
 				breadCrumbLink.getText().equals(breadCrumb));
+	}
+
+	public VPPPlanSummaryPageMobile ClickReturnToPlanSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 
 }

@@ -531,6 +531,7 @@ Feature:Medicare Education Pages flows for New Pages
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates email form component on new Medicare Education Page
+      | Endpoint | <endpoint> |
     Then the user validate ZipCode Components on the page using ZipCode "36117"
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
@@ -541,15 +542,17 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionAARP
     Examples:
-      | Scenario     | site | geoState | path            | pageName                        | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | Avengers AMP | AARP | Alabama  | iep-guide.html  | Initial Enrollment Period Guide | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | Avengers AMP | AARP | Alabama  | wp65-guide.html | Working Past 65 Guide           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario     | site | geoState | path                 | pageName                        | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
+      | Avengers AMP | AARP | Alabama  | iep-guide.html       | Initial Enrollment Period Guide | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
+      | Avengers AMP | AARP | Alabama  | wp65-guide.html      | Working Past 65 Guide           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | WP65     |
+      | Avengers AMP | AARP | Alabama  | getting-started.html | Get to Know Medicare            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | GTKM     |
 
     @avengersRegressionUHC
     Examples:
-      | Scenario     | site | geoState | path            | pageName                        | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | Avengers UMS | UHC  | Alabama  | iep-guide.html  | Initial Enrollment Period Guide | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | Avengers UMS | UHC  | Alabama  | wp65-guide.html | Working Past 65 Guide           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario     | site | geoState | path                 | pageName                        | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
+      | Avengers UMS | UHC  | Alabama  | iep-guide.html       | Initial Enrollment Period Guide | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
+      | Avengers UMS | UHC  | Alabama  | wp65-guide.html      | Working Past 65 Guide           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | WP65     |
+      | Avengers UMS | UHC  | Alabama  | getting-started.html | Get to Know Medicare            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | GTKM     |
 
 
   Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>

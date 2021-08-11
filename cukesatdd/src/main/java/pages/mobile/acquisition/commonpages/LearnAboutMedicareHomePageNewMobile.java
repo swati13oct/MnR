@@ -86,6 +86,26 @@ public class LearnAboutMedicareHomePageNewMobile extends GlobalWebElements {
     @FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
     private WebElement FindAnAgent;
 
+    @FindBy(xpath = "//input[@id='emailCaptureInputId-0']")
+    WebElement EmailtxtFirstName;
+    @FindBy(xpath = "//input[@id='emailCaptureInputId-1']")
+    WebElement EmailtxtLastName;
+    @FindBy(xpath = "//input[@id='emailCaptureInputId-2']")
+    WebElement EmailtxtEmail;
+    @FindBy(xpath = "//input[@id='emailCaptureInputId-3']")
+    WebElement EmailtxtDOB;
+
+    @FindBy(xpath = "//p[@id='emailCaptureErrorMsg-0']")
+    WebElement EmailErrFirstName;
+    @FindBy(xpath = "//p[@id='emailCaptureErrorMsg-1']")
+    WebElement EmailErrLastName;
+    @FindBy(xpath = "//p[@id='emailCaptureErrorMsg-2']")
+    WebElement EmailErrEmail;
+    @FindBy(xpath = "//p[@id='emailCaptureErrorMsg-3']")
+    WebElement EmailErrDOB;
+    @FindBy(xpath = "//fieldset//button[contains(@class,'email-button')]")
+    WebElement EmailbtnSubmit;
+
 
     //Note: Links under 'Let's Get to Know Medicare' Section
 
@@ -579,43 +599,56 @@ public class LearnAboutMedicareHomePageNewMobile extends GlobalWebElements {
         }
     }
 
-    public void validateEmailComponent() {
-        WebElement txtFirstName = driver.findElement(By.xpath("//input[@id='emailCaptureInputId-0']"));
-        WebElement txtLastName = driver.findElement(By.xpath("//input[@id='emailCaptureInputId-1']"));
-        WebElement txtEmail = driver.findElement(By.xpath("//input[@id='emailCaptureInputId-2']"));
-        WebElement txtDOB = driver.findElement(By.xpath("//input[@id='emailCaptureInputId-3']"));
-        WebElement btnSubmit = driver.findElement(By.xpath("//fieldset//button[contains(@class,'email-button')]"));
-
-        jsClickNew(btnSubmit);
+    public void validateEmailComponent(String endpoint) {
+        jsClickNew(EmailbtnSubmit);
         sleepBySec(2);
 
-        WebElement ErrFirstName = driver.findElement(By.xpath("//p[@id='emailCaptureErrorMsg-0']"));
-        WebElement ErrLastName = driver.findElement(By.xpath("//p[@id='emailCaptureErrorMsg-1']"));
-        WebElement ErrEmail = driver.findElement(By.xpath("//p[@id='emailCaptureErrorMsg-2']"));
-        WebElement ErrDOB = driver.findElement(By.xpath("//p[@id='emailCaptureErrorMsg-3']"));
+        if (endpoint.equalsIgnoreCase("IEP") || endpoint.equalsIgnoreCase("WP65")) {
+            if (EmailErrFirstName.isDisplayed() && EmailErrLastName.isDisplayed() && EmailErrEmail.isDisplayed() && EmailErrDOB.isDisplayed()) {
+                System.out.println("All Error Messages displayed in Email Form");
+            } else {
+                Assert.fail("All Error Messages not displayed in Email Form");
+            }
+            sleepBySec(1);
 
-        if (ErrFirstName.isDisplayed() && ErrLastName.isDisplayed() && ErrEmail.isDisplayed() && ErrDOB.isDisplayed()) {
-            System.out.println("All Error Messages displayed in Email Form");
-        } else {
-            Assert.fail("All Error Messages not displayed in Email Form");
-        }
-        sleepBySec(1);
+            EmailtxtFirstName.sendKeys("John");
+            EmailtxtLastName.sendKeys("Wick");
+            EmailtxtEmail.sendKeys("test@test.com");
+            EmailtxtDOB.sendKeys("02241955");
+            sleepBySec(1);
+            jsClickNew(EmailbtnSubmit);
+            sleepBySec(2);
+            WebElement confirmaitonBox = driver.findElement(By.xpath("//div[@class='confirmationtext']"));
+            if (confirmaitonBox.isDisplayed() && !confirmaitonBox.getText().isEmpty()) {
+                System.out.println("Details submission Successful");
+                System.out.println("Confirmation Message: " + confirmaitonBox.getText());
+            } else {
+                Assert.fail("Details submission not Successful");
+            }
+        } else if (endpoint.equalsIgnoreCase("GTKM")) {
+            if (EmailErrFirstName.isDisplayed() && EmailErrLastName.isDisplayed() && EmailErrEmail.isDisplayed()) {
+                System.out.println("All Error Messages displayed in Email Form");
+            } else {
+                Assert.fail("All Error Messages not displayed in Email Form");
+            }
+            sleepBySec(1);
 
-        txtFirstName.sendKeys("John");
-        txtLastName.sendKeys("Wick");
-        txtEmail.sendKeys("test@test.com");
-        txtDOB.sendKeys("02241955");
-        sleepBySec(1);
-        jsClickNew(btnSubmit);
-        sleepBySec(2);
-        WebElement confirmaitonBox = driver.findElement(By.xpath("//div[@class='confirmationtext']"));
-        if (confirmaitonBox.isDisplayed() && !confirmaitonBox.getText().isEmpty()) {
-            System.out.println("Details submission Successful");
-            System.out.println("Confirmation Message: " + confirmaitonBox.getText());
-        } else {
-            Assert.fail("Details submission not Successful");
+            EmailtxtFirstName.sendKeys("John");
+            EmailtxtLastName.sendKeys("Wick");
+            EmailtxtEmail.sendKeys("test@test.com");
+            sleepBySec(1);
+            jsClickNew(EmailbtnSubmit);
+            sleepBySec(2);
+            WebElement confirmaitonBox = driver.findElement(By.xpath("//div[@class='confirmationtext']"));
+            if (confirmaitonBox.isDisplayed() && !confirmaitonBox.getText().isEmpty()) {
+                System.out.println("Details submission Successful");
+                System.out.println("Confirmation Message: " + confirmaitonBox.getText());
+            } else {
+                Assert.fail("Details submission not Successful");
+            }
         }
     }
+
 
     public void clickOnPlanRecommendationButton() {
         CommonUtility.checkPageIsReadyNew(driver);

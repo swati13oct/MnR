@@ -2,6 +2,9 @@ package pages.acquisition.commonpages;
 
 import static org.testng.Assert.assertTrue;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -7081,15 +7084,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("Social Share Email button is not present on the page");
 		}
 		String href=btnEmail.getAttribute("href");
-		href=href.replace("%20"," ");
-		String pageTitle=driver.getTitle();
-		pageTitle=pageTitle.substring(0,pageTitle.lastIndexOf("|")).trim();
+		//href=href.replace("%20"," ");
+		try {
+			href= URLDecoder.decode(href, StandardCharsets.UTF_8.name());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String pageTitle=driver.findElement(By.xpath("//input[@id='pageTitle']")).getAttribute("value");
+		if(pageTitle.contains("|")) {
+			pageTitle = pageTitle.substring(0, pageTitle.lastIndexOf("|")).trim();
+		}
 		System.out.println("HREF: "+href);
 		System.out.println("Page Title: "+pageTitle);
 		if ( href.contains(driver.getCurrentUrl()) && href.contains(pageTitle)){
 			System.out.println("Email Button is working fine");
 		}else{
-			Assert.fail("Email Button is not working fine");
+			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
 		}
 	}
 }
