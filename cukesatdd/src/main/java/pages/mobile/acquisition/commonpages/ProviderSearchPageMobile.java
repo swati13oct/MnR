@@ -80,7 +80,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
+	@FindBy(xpath = "//*[contains(text(),'People')]")
 	private WebElement People;
 
 	@FindBy(xpath = "//*[contains(text(),'Places')][contains(@class,'option-title')]")
@@ -89,7 +89,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
 	private WebElement Hospitals;
 
-	@FindBy(xpath = "//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	@FindBy(xpath = "//*[contains(text(),'Primary Care')]")
 	private WebElement Primary;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
