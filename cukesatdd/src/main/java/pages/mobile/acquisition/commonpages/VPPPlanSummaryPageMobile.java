@@ -455,7 +455,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "#change-location")
 	private WebElement planOverviewChangeZipCodeLink;
 
-	@FindBy(css = "#zipcode")
+	@FindBy(xpath = "//*[@id='zipcode']")
 	private WebElement planOverviewZipCodeFieldBox;
 
 	@FindBy(css = ".zip-button#submit")
@@ -1856,8 +1856,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void clickonBackToPlanResults() {
 		if (validate(backToPlans)) {
-			Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
-					validate(backToPlans));
+			//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
+			
+			scrollToView(backToPlans);
 			jsClickNew(backToPlans);
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoadNew(driver, planOverviewChangeZipCodeLink, 15);
@@ -3226,6 +3227,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
 		try {
+			
 			clickonBackToPlanResults();
 			jsClickNew(planOverviewChangeZipCodeLink);
 			validateNew(planOverviewZipCodeFieldBox, 10);

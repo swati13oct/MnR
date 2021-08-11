@@ -560,7 +560,7 @@ Feature: ACQ M&R- To test SAM Icons
  
       
 
-  Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, Compare, OLE
+  Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, Compare, OLE <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user validates whether call icon is visible
@@ -622,7 +622,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
       
-    Scenario Outline: To test the SAM icons on DCE pages
+    Scenario Outline: To test the SAM icons on DCE pages <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user validates whether call icon is visible
@@ -662,7 +662,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipCode | planType | planName                                            |drug1|
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |Orkambi|
       
-      Scenario Outline: To test the SAM icons on PRE pages
+      Scenario Outline: To test the SAM icons on PRE pages <site>
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

@@ -247,6 +247,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
 		// pageloadcomplete();
 		// iosScroll(reviewDrugCost);
+		scrollToView(reviewDrugCostButtonFooter);
 		jsClickNew(reviewDrugCostButtonFooter);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {
