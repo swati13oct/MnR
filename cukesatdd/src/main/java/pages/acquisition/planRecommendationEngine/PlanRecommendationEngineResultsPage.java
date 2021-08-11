@@ -1451,7 +1451,7 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 	for (WebElement e : plansId) {
 		int currentPage = Integer.parseInt(pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
 		System.out.println("planName in loop count: " +value);
-		for(value=(currentPage*3)+1;value<=plansId.size();) {
+		if(value==(currentPage*3)+1) {
 			pageNextButton.click();
 			threadsleep(2000);
 			}
