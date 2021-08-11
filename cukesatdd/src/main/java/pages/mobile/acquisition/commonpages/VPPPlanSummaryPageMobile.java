@@ -85,7 +85,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='updates-email']")
 	private WebElement requestshoppageemailaddress;
-	@FindBy(xpath = "//p[contains(text(),'Submit')]")
+	
+	@FindBy(xpath = "//*[@id='signUp']")
 	private WebElement requestplaninformationsubmit;
 
 	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
