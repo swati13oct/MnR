@@ -112,6 +112,12 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
 	
+	@FindBy(css = ".returnSection span#viewMorePlans")
+	private WebElement pagenoLabel;
+	
+	@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+	private WebElement pageNextButton;
+	
 	@FindBy(css = "div[class*='overview-main'] h2")
 	private WebElement planZipInfoinVPP;
 	
@@ -1443,7 +1449,12 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 	List<String> vppPlans = new ArrayList<String>();
 	System.out.println(plansId.size());
 	for (WebElement e : plansId) {
+		int currentPage = Integer.parseInt(pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
 		System.out.println("planName in loop count: " +value);
+		for(value=(currentPage*3)+1;value<=plansId.size();) {
+			pageNextButton.click();
+			threadsleep(2000);
+			}
 		vppPlans.add(getplanId(e));
 		value++;
 		}
@@ -1461,8 +1472,8 @@ public String getplanId(WebElement plan) {
 	threadsleep(3000);
 	if( planName.contains("AARP Medicare Supplement Insurance"))
 		planId = planName.split("Plan ")[1].trim() + "01";
-	if(planName.contains(""))
-		planId = plantilesMS.get(value-1).getAttribute("ng-reflect-plan-name").trim().split("Plan ")[1].trim() + "01";
+//	if(planName.contains(""))
+//		planId = plantilesMS.get(value-1).getAttribute("ng-reflect-plan-name").trim().split("Plan ")[1].trim() + "01";
 	else
 		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
 	//System.out.println("UI Plan Name : "+planName);
