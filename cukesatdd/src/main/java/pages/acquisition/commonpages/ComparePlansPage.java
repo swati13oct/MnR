@@ -227,13 +227,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@dtmname,'Edit Drugs')]")
 	private WebElement editDrugsLink;
 
-	@FindBy(xpath = "//td//*[normalize-space(text())='Drug Summary']")
+	@FindBy(xpath = "//tbody//th/span[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
 	private WebElement DrugSummaryCoverageHeader;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[1]//td//span[contains(@class,'drugtext')]//span")
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[contains(@ng-repeat, 'drug in') and contains(@class, 'desktop')]//th//span[contains(@class,'drugtext')]//span")
 	private WebElement DrugName;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
@@ -291,13 +291,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
 	public WebElement viewAllplansButton;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
 	public WebElement medicalBenefitsOONToggle;
 
 	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
 	public WebElement medicalBenefitsOONLabel;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider'][1]")
 	public WebElement additionalBenefitsOONToggle;
 
 	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
@@ -1226,15 +1226,15 @@ public class ComparePlansPage extends UhcDriver {
 				for (int i = 0; i < provider.length; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
-								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
+								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
+								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(0).findElement(By.xpath("td/span")).getText().trim()
+						.contains(providersList.get(0).findElement(By.xpath("th/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(0).findElement(By.xpath("th/span")).getText().trim()
 						+ "#########");
 			}
 
@@ -1251,9 +1251,9 @@ public class ComparePlansPage extends UhcDriver {
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
 					Assertion.assertTrue(drugName[i]
-							.contains(drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()));
+							.contains(drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim()));
 					System.out.println("#########"
-							+ drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim() + "#########");
+							+ drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim() + "#########");
 				}
 			}
 
@@ -1311,15 +1311,15 @@ public class ComparePlansPage extends UhcDriver {
 				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
-								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
+								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
+								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+						.contains(providersList.get(0).findElement(By.xpath("th/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(1).findElement(By.xpath("th/span")).getText().trim()
 						+ "#########");
 			}
 
@@ -1334,7 +1334,7 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
-				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()
+				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim()
 						+ ",";
 			}
 			for (int i = 0; i < drugName.length; i++) {
@@ -1542,7 +1542,7 @@ public class ComparePlansPage extends UhcDriver {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
 			WebElement DrugName = driver.findElement(
-					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr/td//*[contains(text(), '"
+					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr[contains(@class, 'desktop')]/th//*[contains(text(), '"
 							+ currentDrug + "')]"));
 
 			if (validateNew(DrugName)) {

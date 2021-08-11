@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
@@ -109,7 +110,7 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user selects Mail Pharmacy and returns to DCE Details page$")
@@ -140,7 +141,7 @@ public class DCEACQNewRunnerMobile {
 		String StandardPharmacytoSelect = memberAttributesMap.get("SelectStandardPharmacy");
 		drugDetailsPage.SelectStandardPharmacy(StandardPharmacytoSelect);
 		drugDetailsPage.validatePharmacyName(StandardPharmacytoSelect);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
 
@@ -281,10 +282,7 @@ public class DCEACQNewRunnerMobile {
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugListMobile DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if (null == druglist) {
-			druglist = "";
-		}
-		druglist = druglist + "&" + drugName;
+		druglist = StringUtils.isEmpty(druglist) ? drugName : druglist + "&" + drugName;
 		System.out.println("Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 	}
