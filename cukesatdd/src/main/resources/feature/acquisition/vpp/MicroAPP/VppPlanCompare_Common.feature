@@ -386,7 +386,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               3,1 |
 
-    @vppPlanCompareCommon_UHC03 @regressionUHC @vbfGate
+    @vppPlanCompareCommon_UHC03 @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               1,3 |
