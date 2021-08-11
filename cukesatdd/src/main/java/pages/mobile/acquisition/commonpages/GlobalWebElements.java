@@ -76,20 +76,20 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-4-button")
 	public WebElement more;
 
-	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Advantage Plans']")
+	@FindBy(css = "#accordion-1-content [href*='medicare-advantage-plans']")
 	public WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Dual Special Needs Plans']")
+	@FindBy(css = "#accordion-1-content [href*='special-needs-plans']")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(css = "#accordion-1-content [dtmname*='Medicare Supplement Insurance Plans']")
+	@FindBy(css = "#accordion-1-content [href*='medicare-supplement-plans']")
 	public WebElement medicareSupplementInsurancePlansLink;
+
+	@FindBy(css = "#accordion-1-content [href*='prescription-drug-plans']")
+	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
 	public WebElement medicareSupplementInsurancePlansHeader;
-
-	@FindBy(css = "#accordion-1-content [dtmname='Footer:Shop Plans:Medicare Prescription Drug Plans']")
-	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
 	public WebElement learnAboutMedicareLink;
@@ -291,40 +291,43 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Plan Recommendation']")
+	@FindBy(css = "#accordion-2-content [href*='plan-recommendation-engine']")
 	public WebElement planRecommendationLink;
 
-	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Drug Cost Estimator']")
+	@FindBy(css = "#accordion-2-content [href*='drug-cost-estimator']")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Pharmacy Search']")
+	@FindBy(css = "#accordion-2-content [href*='Pharmacy-Search']")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(css = "#accordion-2-content [dtmname='Footer:Tool&Resources:Provider Search']")
-	public WebElement providerSearchLink;
+	@FindBy(css = "#accordion-2-content [onclick*='ProviderSearch']")
+	public WebElement searchDoctorsLink;
+	
+	@FindBy(css = "#accordion-2-content [title='Search Dentists']")
+	public WebElement searchDentistsLink;
 
-	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Introduction to Medicare']")
+	@FindBy(css = "#accordion-3-content [href*='medicare-education']")
 	public WebElement introductionToMedicareLink;
 
-	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Eligibility']")
+	@FindBy(css = "#accordion-3-content [href*='medicare-eligibility']")
 	public WebElement eligibilityLink;
 
-	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Coverage Choices']")
+	@FindBy(css = "#accordion-3-content [href*='medicare-parts-and-medigap-plans']")
 	public WebElement coverageChoiceLink;
 
-	@FindBy(css = "#accordion-3-content [dtmname='Footer:Learn About Medicare:Medicare FAQ']")
+	@FindBy(css = "#accordion-3-content [href*='medicare-faq']")
 	public WebElement medicareFaqLink;
 
-	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:About']")
+	@FindBy(css = "#accordion-4-content [href*='about-us']")
 	public WebElement aboutLink;
 
-	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:Contact']")
+	@FindBy(css = "#accordion-4-content [href*='contact-us']")
 	public WebElement contactLink;
 
-	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:Language Assistance']")
+	@FindBy(css = "#accordion-4-content [href*='language-assistance']")
 	public WebElement languageAssistanceLink;
 
-	@FindBy(css = "#accordion-4-content [dtmname='Footer:More:AARP.org']")
+	@FindBy(css = "#accordion-4-content [href*='aarp.org']")
 	public WebElement footerAARPLink;
 
 	// @FindBy(xpath = "//b[contains(text(),'MENU')]")
@@ -429,8 +432,11 @@ public class GlobalWebElements extends UhcDriver {
 		case PHARMACYSEARCH:
 			jsClickNew(pharmacySearchLink);
 			break;
-		case PROVIDERSEARCH:
-			jsClickNew(providerSearchLink);
+		case SEARCHDOCTORS:
+			jsClickNew(searchDoctorsLink);
+			break;
+		case SEARCHDENTISTS:
+			jsClickNew(searchDentistsLink);
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid tool " + tool.name());

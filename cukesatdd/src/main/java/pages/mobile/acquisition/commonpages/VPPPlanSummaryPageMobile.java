@@ -62,7 +62,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
 	WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
+	@FindBy(xpath = "//*[@id='card-updates']/a")
 	public WebElement backToPlans;
 
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")

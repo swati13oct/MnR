@@ -1258,5 +1258,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(returnToHomeBtn);
 		jsClickNew(returnToHomeBtn);
 	}
+	
+	public void ClickviewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver
+				.findElement(By.cssSelector("div[class*='d-block'] button[aria-label='View Drug Pricing " + planName + "']"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+	}
 
 }

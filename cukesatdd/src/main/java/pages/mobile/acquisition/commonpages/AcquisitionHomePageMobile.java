@@ -2441,7 +2441,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
-		validateNew(providerSearchLink);
+		validateNew(searchDoctorsLink);
+		validateNew(searchDentistsLink);
 
 		jsClickNew(learnAboutMedicareFooterButton);
 		CommonUtility.checkPageIsReadyNew(driver);

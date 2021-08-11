@@ -1671,4 +1671,17 @@ public class DCEACQHomeMobile {
 				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
 	}
 
+	
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 }
