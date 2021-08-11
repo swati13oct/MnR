@@ -7165,7 +7165,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateProactiveChat() throws InterruptedException {
 		boolean present;
 		try {
-			waitforElementNew(proactiveChatModal, 20);
+			waitforElementNew(proactiveChatModal, 30);
 			validateNew(proactiveChatModal);
 			present = true;
 		} catch (NoSuchElementException e) {
