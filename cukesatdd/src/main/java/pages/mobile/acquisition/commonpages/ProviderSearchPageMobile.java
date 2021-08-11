@@ -80,16 +80,16 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='People']")
 	private WebElement People;
 
-	@FindBy(xpath = "//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Places']")
 	private WebElement Places;
 
-	@FindBy(xpath = "//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Hospitals']")
 	private WebElement Hospitals;
 
-	@FindBy(xpath = "//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='PrimaryCare']")
 	private WebElement Primary;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")

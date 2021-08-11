@@ -1185,8 +1185,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * selectFromDropDownByValue(planToggleDropdown, planType);
 		 */
 		CommonUtility.waitForPageLoadNew(driver, planTypeToggle, 30);
-		String planType = plantype.toLowerCase();
-		WebElement planTypeOption = driver.findElement(By.cssSelector("input[id^='" + planType + "']"));
+		String planType = plantype.toUpperCase();
+		WebElement planTypeOption = driver
+				.findElement(By.cssSelector("input[name='plans-filter'][value='" + planType + "']"));
 		jsClickNew(planTypeOption);
 		System.out.println(planType + " Plan Toggle Clicked");
 
