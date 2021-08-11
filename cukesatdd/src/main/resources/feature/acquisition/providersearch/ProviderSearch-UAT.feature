@@ -117,7 +117,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
+       @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
