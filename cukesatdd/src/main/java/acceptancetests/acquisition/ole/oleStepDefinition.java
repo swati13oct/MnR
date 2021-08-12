@@ -1730,7 +1730,7 @@ public class oleStepDefinition {
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-		if(!planType.contentEquals("PDP") && planName.contains("PFFS")){
+		if(!planType.contentEquals("PDP") && planName.contains("PFFS") && !MRScenario.environment.contains("stage-0")){
 			System.out.println("Validating Provider Contact Information for PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_contact_info_in_PCP();
 			if(Validation_Status){
@@ -1756,7 +1756,7 @@ public class oleStepDefinition {
 		if(!planType.contentEquals("PDP") && !planName.contains("PFFS")
 				//Amey: Adding the environment logic since gate is failing because of a Rally issue.
 				// An incident is logged with the external Rally team. Remove this condition once fixed.
-				&& !MRScenario.environment.contains("mnr-acq-ci")){
+				&& !MRScenario.environment.contains("mnr-acq-ci")&& !MRScenario.environment.contains("stage-0")){
 			System.out.println("Validating Provider Look Up Provider for MA, MAPD, DSNP non-PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_Lookup(planType);
 			if(Validation_Status){
