@@ -724,7 +724,7 @@ public abstract class UhcDriver {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
 		} catch (Exception e) {
-			Assertion.fail("The element " + element + " is not found for scrolling into view");
+			Assertion.fail("The element " + element + " is not found for scrolling into view. Reason - " + e.getMessage());
 			return false;
 		}
 		return true;
