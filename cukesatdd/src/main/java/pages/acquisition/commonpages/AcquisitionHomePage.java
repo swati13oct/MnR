@@ -6817,7 +6817,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} else {
 			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
 				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName + "')]")).size();
+						+ "')]")).size();
 				if (size != 0) {
 					System.out.println("AARP.org link is not displaying");
 				} else {
@@ -6826,7 +6826,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 			} else {
 				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName + "')]"));
+						+ "')]"));
 				waitforElement(link);
 				jsClickNew(link);
 				pageloadcomplete();
@@ -7165,7 +7165,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateProactiveChat() throws InterruptedException {
 		boolean present;
 		try {
-			waitforElementNew(proactiveChatModal, 20);
+			waitforElementNew(proactiveChatModal, 30);
 			validateNew(proactiveChatModal);
 			present = true;
 		} catch (NoSuchElementException e) {
