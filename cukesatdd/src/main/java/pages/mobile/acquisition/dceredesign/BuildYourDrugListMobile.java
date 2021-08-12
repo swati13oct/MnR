@@ -292,6 +292,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
+		
+		pageloadcomplete();
 
 		if (addDrugButton.isDisplayed()) {
 			jsClickNew(addDrugButton);
