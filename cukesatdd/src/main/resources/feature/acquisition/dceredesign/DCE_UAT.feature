@@ -305,11 +305,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates all added drugs in DrugList
     Then the user clicks on return to compare link on build drug list page to returns to plan compare
     Then the user validates all added Drugs on Plan Compare
-#    Then the user clicks edit drugs on Compare page to land on Build Drug List Page
-#    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
-#    Then the user validates default Plan type on DCE Summary page as follows
-#      | Plan Type | <plantype> |
-#    Then the user clicks Return to Compare on DCE Summary Page to return to Compare page
+    Then the user clicks edit drugs on Compare page to land on Build Drug List Page
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then the user validates default Plan type on DCE Summary page as follows
+      | Plan Type | <plantype> |
+    Then the user clicks Return to Compare on DCE Summary Page to return to Compare page
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
     Then the user validates planName matches plan Name in VPP
