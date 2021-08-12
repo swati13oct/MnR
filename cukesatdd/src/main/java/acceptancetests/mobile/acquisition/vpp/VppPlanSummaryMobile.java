@@ -85,7 +85,7 @@ public class VppPlanSummaryMobile {
 
 	
 	@Then("^user changes zipcode within VPP page$")
-	public void User_Change_ZipCode_VPP_pages(DataTable givenAttributes) {
+	public void User_Change_ZipCode_VPP_pages(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -106,6 +106,7 @@ public class VppPlanSummaryMobile {
 		
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
+			Thread.sleep(5000);
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
 		} else {
 			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
