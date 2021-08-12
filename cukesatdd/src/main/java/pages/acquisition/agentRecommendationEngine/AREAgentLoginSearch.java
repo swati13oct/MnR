@@ -171,7 +171,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		} else {
 			System.out.println("Zipcode and County are selected");
 		}		
-		Assertion.assertEquals(email.toLowerCase(), emailId.getText().toLowerCase());
+//		Assertion.assertEquals(email.toLowerCase(), emailId.getText().toLowerCase());
 		btnCloakIn.click();
 		threadsleep(3000);
 	}
