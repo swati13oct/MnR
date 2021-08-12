@@ -131,8 +131,9 @@ public class AREAgentLoginSearch extends UhcDriver {
 		waitforElement(searchResults.get(0));
 		Assert.assertTrue(searchResults.size()>0);
 		cloakProfile();
-		
+		threadsleep(2000);
 		String curWind = driver.getWindowHandle();
+		validateCloakInForm(email);
 		switchAnotherWindow(curWind);
 		commonUtils.plansLoader();
 		// Assertion.assertTrue(validate(stausTxt, 60), "Search not success");
