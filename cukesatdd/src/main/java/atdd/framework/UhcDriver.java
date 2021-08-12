@@ -618,9 +618,9 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			// checkElementisEnabled(element);
-			//scrollToView(element);
-			iosScroll(element);
+			//checkElementisEnabled(element);
+			scrollToView(element);
+			//iosScroll(element);
 			element.click();
 			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
