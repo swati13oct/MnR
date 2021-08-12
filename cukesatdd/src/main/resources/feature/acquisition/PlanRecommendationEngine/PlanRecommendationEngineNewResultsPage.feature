@@ -324,7 +324,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
     And user views plan details from results page
-      | planInfo | <planInfo> |
+      | Plan Info | <planInfo> |
 
     @regressionAARP
     Examples: 
