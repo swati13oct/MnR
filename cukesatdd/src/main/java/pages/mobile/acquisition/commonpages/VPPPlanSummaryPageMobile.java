@@ -6059,7 +6059,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void clickGetStartedBtnOnNba() {
-		nextBestActionModalGetStartedBtn.click();
+		jsClickNew(nextBestActionModalGetStartedBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void validateProviderNBA() {
