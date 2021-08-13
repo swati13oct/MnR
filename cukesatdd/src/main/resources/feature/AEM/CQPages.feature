@@ -68,3 +68,16 @@ Feature: To validate pages on AEM
     Examples: 
       | username | password |
       | admin    | admin    |
+
+
+  Scenario Outline: To Validate AEM Data Layer for Header and Footer
+    Given the user login in AEM
+      | Username | <username> |
+      | Password | <password> |
+    Then the user nagivates to Data Layer Page
+    Then the user validates the Header and Footer tab components
+
+    @AEM_DataLayer
+    Examples:
+      | username | password |
+      | admin    | admin    |

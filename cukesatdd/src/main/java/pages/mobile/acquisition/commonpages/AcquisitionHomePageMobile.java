@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
@@ -2443,7 +2444,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
-		validateNew(providerSearchLink);
+		validateNew(searchDoctorsLink);
+		validateNew(searchDentistsLink);
 
 		jsClickNew(learnAboutMedicareFooterButton);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -4415,6 +4417,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(link);
 	}
 
+
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
 		switch (linkName) {
 
@@ -4900,6 +4903,72 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.switchTo().window(base);
 	}
+
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+	private WebElement samChatIcon;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+	private WebElement samChatPopup;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	private WebElement samChatPopupHeader;
+	
+	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+	private WebElement samChatPopupMsg;
+
+	public void validateSamChatIcon() throws InterruptedException {
+		boolean present;
+		try {
+			threadsleep(5);
+			validateNew(samChatIcon);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Chat Icon not available @@@@@@@@@");
+
+	}
+	
+	public void closeChatPopup() {
+		chatPopupOptions.click();
+		chatPopupEndChatOption.click();
+	}
+	
+	@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+	private List<WebElement> chatSuggestionMsg;
+	
+	@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+	private WebElement chatPopupOptions;
+	
+	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+	private WebElement chatPopupEndChatOption;
+	
+	public void validateSamChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(samChatIcon);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(0).getText().trim().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().trim().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().trim().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().trim().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().trim().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().trim().contains("Other"));
+			
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+		closeChatPopup();
+	}
 	public void clickOnFacebookShareButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement btnFacebookShare=driver.findElement(By.xpath("//a[contains(@class,'facebook_social_share')]"));
@@ -4909,53 +4978,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Facebook Share button not present on page");
 		}
 		switchToNewTabNew(btnFacebookShare);
-		/*CommonUtility.checkPageIsReadyNew(driver);
-		WebElement txtEmail=driver.findElement(By.xpath("//input[@id='email']"));
-		WebElement txtPassword=driver.findElement(By.xpath("//input[@id='pass']"));
-		WebElement btnLogIn=driver.findElement(By.xpath("//label[@id='loginbutton']"));
-		if (validateNew(txtEmail) && validateNew(txtPassword)){
-			System.out.println("Facebook site opened successfully");
-		}else {
-			Assert.fail("Facebook site not opened successfully");
-		}
-		txtEmail.sendKeys("testteamavengers@gmail.com");
-		txtPassword.sendKeys("test@avengers");
-		jsClickNew(btnLogIn);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement shareDropDown=driver.findElement(By.xpath("(//a//span//span[contains(text(),'Share to News')])[1]"));
-		WebElement lblSite=driver.findElement(By.xpath("//div[contains(@class,'_6lz _6mb _1t62 ellipsis')]"));
-		if(validateNew(shareDropDown)){
-			System.out.println("Share Post Page opened successfully");
-		}else{
-			Assert.fail("Share Post Page not opened successfully");
-		}
-		String pageSite=lblSite.getText();
-		System.out.println("Site shared on Facebook: "+pageSite);
-		WebElement lblPageTitle=driver.findElement(By.xpath("//div[contains(@class,'mbs _6m6 _2cnj _5s6c')]"));
-		String pageTitle=lblPageTitle.getText();
-		System.out.println("Page Title: "+pageTitle);
-		WebElement lblPageDesc=driver.findElement(By.xpath("//div[contains(@class,'_6m7 _3bt9')]"));
-		String pageDesc=lblPageDesc.getText();
-		System.out.println("Page Description: "+pageDesc);
-		sleepBySec(2);
-
-		WebElement btnPostFacebook=driver.findElement(By.xpath("//button[contains(@class,'layerConfirm') and @name='__CONFIRM__']"));
-		jsClickNew(btnPostFacebook);
-		CommonUtility.checkPageIsReadyNew(driver);
-		sleepBySec(3);
-		WebElement postSite=driver.findElement(By.xpath("//div[contains(text(),'"+pageSite.toLowerCase()+"')]"));
-		WebElement postTitle=driver.findElement(By.xpath("//div[contains(text(),'"+pageTitle.substring(0,10)+"')]"));
-		WebElement postDesc=driver.findElement(By.xpath("//span[contains(text(),'"+pageDesc.substring(0,15)+"')]"));
-		if(!validateNew(postTitle) || !validateNew(postDesc)){
-			Assert.fail("Post not successfull");
-		}
-		sleepBySec(3);
-		System.out.println("Post Title: "+postSite.getText());
-		System.out.println("Post Title: "+postTitle.getText());
-		System.out.println("Post Title: "+postDesc);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);*/
 		if(driver.getCurrentUrl().contains("www.facebook.com")){
 			System.out.println("Facebook share opened successfully");
 		}else{
@@ -4976,52 +4998,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Twitter Share button not present on page");
 		}
 		switchToNewTabNew(btnTwitterShare);
-/*		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement txtEmail=driver.findElement(By.xpath("//input[contains(@name,'username_or_email')]"));
-		WebElement txtPassword=driver.findElement(By.xpath("//input[contains(@name,'password')]"));
-		WebElement btnLogIn=driver.findElement(By.xpath("//div[contains(@role,'dialog')]//span[contains(text(),'Log in')]"));
-		if (validateNew(txtEmail) && validateNew(txtPassword)){
-			System.out.println("Twitter site opened successfully");
-		}else {
-			Assert.fail("Twitter site not opened successfully");
-		}
-		txtEmail.sendKeys("testteamavengers@gmail.com");
-		txtPassword.sendKeys("test@avengers");
-		jsClickNew(btnLogIn);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-
-		WebElement shareDropDown=driver.findElement(By.xpath("//span[contains(text(),'Everyone can reply')]"));
-		WebElement lblSite=driver.findElement(By.xpath("(//div//span[contains(@data-text,'true')])[3]"));
-		if(validateNew(shareDropDown)){
-			System.out.println("Share Tweet Page opened successfully");
-		}else{
-			Assert.fail("Share Tweet Page not opened successfully");
-		}
-		String pageSite=lblSite.getText();
-		System.out.println("Site shared on Twitter: "+pageSite);
-		WebElement lblPageTitle=driver.findElement(By.xpath("(//div//span[contains(@data-text,'true')])[1]"));
-		String pageTitle=lblPageTitle.getText();
-		System.out.println("Page Title: "+pageTitle);
-		sleepBySec(2);
-
-		Random randomString= new Random();
-		lblPageTitle.sendKeys(" "+randomString.nextInt(10000));
-
-		WebElement btnPostTwitter=driver.findElement(By.xpath("//div[@role='dialog']//span[contains(text(),'Tweet')]"));
-		jsClickNew(btnPostTwitter);
-		CommonUtility.checkPageIsReadyNew(driver);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement postSite=driver.findElement(By.xpath("//a[contains(text(),'"+pageSite.toLowerCase().substring((pageSite.lastIndexOf("www.")+4),(pageSite.lastIndexOf("www.")+10))+"')]"));
-		WebElement postTitle=driver.findElement(By.xpath("//span[contains(text(),'"+pageTitle.substring(0,10)+"')]"));
-		if(!validateNew(postTitle) || !validateNew(postTitle)){
-			Assert.fail("Post not successfull");
-		}
-		System.out.println("Post Title: "+postSite.getText());
-		System.out.println("Post Title: "+postTitle.getText());
-		sleepBySec(3);*/
 		if(driver.getCurrentUrl().contains("twitter.com")){
 			System.out.println("Twitter share opened successfully");
 		}else{
@@ -5055,7 +5031,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		System.out.println("HREF: "+href);
 		System.out.println("Page Title: "+pageTitle);
-		if ( href.contains(driver.getCurrentUrl()) && href.contains(pageTitle)){
+		if ( href.contains(driver.getCurrentUrl()) && href.contains(pageTitle) && !href.contains("Master") && !href.contains("master")){
 			System.out.println("Email Button is working fine");
 		}else{
 			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
