@@ -2506,7 +2506,7 @@ public class oleStepDefinition {
 		String[] dateArray = null;
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0"))) {
 
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
@@ -2866,6 +2866,7 @@ public class oleStepDefinition {
 		
 		ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
+	//	String planYear = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
@@ -2961,7 +2962,7 @@ public class oleStepDefinition {
 		//--------------------------Added for payment plan--------------------------------------------------------------
 
 		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
-
+	//	if(planYear.contains("current")) {
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
@@ -2973,7 +2974,7 @@ public class oleStepDefinition {
 			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
 			Assertion.fail();
 		}
-		// }
+		//}
 	}
 
 	@Then("^the user validates Medicaid Number in OLE Page$")
