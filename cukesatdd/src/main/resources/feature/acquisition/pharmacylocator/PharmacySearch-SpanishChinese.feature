@@ -50,14 +50,14 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
-  @PharmacyLocatorChinese1_AARP
+  @PharmacyLocatorChinese1_AARP @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @PharmacyLocatorChinese1_UHC
+  @PharmacyLocatorChinese1_UHC @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
@@ -92,14 +92,14 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
-  @PharmacyLocatorChinese2_AARP
+  @PharmacyLocatorChinese2_AARP @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @PharmacyLocatorChinese2_UHC
+  @PharmacyLocatorChinese2_UHC @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
@@ -144,14 +144,14 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-  @PharmacyLocatorSpanish1_AARP
+  @PharmacyLocatorSpanish1_AARP @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @PharmacyLocatorSpanish1_UHC
+  @PharmacyLocatorSpanish1_UHC @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
@@ -186,14 +186,14 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
-  @PharmacyLocatorSpanish2_AARP
+  @PharmacyLocatorSpanish2_AARP @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
-  @PharmacyLocatorSpanish2_UHC
+  @PharmacyLocatorSpanish2_UHC @regressionAARP
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
