@@ -114,11 +114,11 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 
 	public void validatePrintOptionExistOnSummaryPage(String planType) {
 		WebElement printElement = null;
-		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			printElement = summary_maPrintOption;
-		} else if (planType.equalsIgnoreCase("pdp")) {
+		} else if (planType.equalsIgnoreCase("PDP")) {
 			printElement = summary_pdpPrintOption;
-		} else if (planType.equalsIgnoreCase("snp")) {
+		} else if (planType.equalsIgnoreCase("SNP")) {
 			printElement = summary_snpPrintOption;
 		} else {
 

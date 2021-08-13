@@ -217,17 +217,17 @@ public class WelcomePageMobile extends UhcDriver {
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
-		scrollToView(ViewPlanDetails);
-		
 		if(validateNew(ViewPlanDetails)){
 			jsClickNew(ViewPlanDetails);
-			Thread.sleep(500);
+//			Thread.sleep(500);
+			CommonUtility.checkPageIsReadyNew(driver);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
-				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
-				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-				enrollInPlan.click();
-				Thread.sleep(500);
+				String elementPath = "[class^='module-plan-summary']:nth-of-type(1) a[dtmname='Plans Detail:Tab:Enroll in Plan']";
+				WebElement enrollInPlan = driver.findElement(By.cssSelector(elementPath));
+				jsClickNew(enrollInPlan);
+//				Thread.sleep(500);
+				CommonUtility.checkPageIsReadyNew(driver);
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
