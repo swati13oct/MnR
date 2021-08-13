@@ -347,7 +347,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planname> |
     Then the user validates the Plan details on OLE
-    Then the user validates cancellation and Save Return Later modal for OLE Page
+#    Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user navigates to Personal Information Page
     And the user cancels enrollment and navigates to homepage
 
@@ -499,24 +499,22 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | DrugsFlag     | <drugFlag>      |
       | ProvidersFlag | <providersFlag> |
     Then the user clicks on Review Imported Drugs and lands on Build your Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     And user verify the drug summary page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page
 
     @dce_E2E_Scenario7_UAT_AARP @regressionAARP
     Examples:
-      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
-      | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
+      | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
+      | AARP |   78006 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @dce_E2E_Scenario7_UAT_UHC @regressionUHC
+  @dce_E2E_Scenario7_UAT_UHC @regressionUHC
     Examples:
-      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
-      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
+      | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
+      | UHC |   78006 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
