@@ -1822,6 +1822,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
 //		switchToNewTabNew(estimateYourDrugCostButton);
 		jsClickNew(estimateYourDrugCostButton);
+		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 30);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
