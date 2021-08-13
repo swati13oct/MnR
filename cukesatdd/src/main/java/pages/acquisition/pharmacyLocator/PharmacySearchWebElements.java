@@ -321,10 +321,10 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath="//div[contains(@ng-show,'evaluateAEM_Segment') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]")
+	@FindBy(xpath="//div[@class='']//div[@class='pharmacywidgets section']//*[contains(@class,'card-header')]//h2[contains(text(), 'Walgreens')]")
 	protected WebElement widget_walgreens;
 
-	@FindBy(xpath="//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]//h2[contains(text(),'Preferred Retail Pharmacy Network')]")
+	@FindBy(xpath="//div[@class='pharmacywidgets section']//*[contains(@dtmname,'pharmacy locator:preferred')]")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
 	@FindBy(xpath="//div[@id='noResultsFoundErrorMessage']")
@@ -333,8 +333,9 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath = "//img[@alt='callus']")
 	protected WebElement callUsIcon;
 
-	@FindBy(xpath = "//p[contains(text(),'Call UnitedHealthcare toll-free at')]")
+	@FindBy(xpath = "//*[contains(@ng-controller, 'contactTFNcontroller')]")
 	protected WebElement callUnitedHealthCareText;
+
 
 	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
 	protected WebElement widget_preferredMailServicePharmacy;

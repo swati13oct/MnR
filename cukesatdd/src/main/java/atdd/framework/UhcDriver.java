@@ -1,3 +1,4 @@
+
 package atdd.framework;
 
 import java.text.DecimalFormat;
@@ -87,7 +88,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
+	@FindBy(xpath = "//*[@id='shop-scroll']/div[2]/div[5]/div/div[3]/h3[2]/a")
 	public WebElement DCERedesignLink;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
@@ -617,8 +618,9 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			// checkElementisEnabled(element);
+			//checkElementisEnabled(element);
 			scrollToView(element);
+			//iosScroll(element);
 			element.click();
 			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
@@ -1751,3 +1753,4 @@ public abstract class UhcDriver {
 	}
 
 }
+

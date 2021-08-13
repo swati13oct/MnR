@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
@@ -383,6 +384,8 @@ public class DCEACQHomeMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
+
+
 
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes)
@@ -1635,6 +1638,7 @@ public class DCEACQHomeMobile {
 		String LastName = "";
 		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 
+
 		if(AuthenticatedFlag.equalsIgnoreCase("false")){
 			 FirstName = memberAttributesMap.get("FirstName");
 			 LastName = memberAttributesMap.get("LastName");
@@ -1666,6 +1670,7 @@ public class DCEACQHomeMobile {
 		getLoginScenario()
 				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
 	}
+
 	
 	@Then("^the user Clicks View Drug Pricing for the given plan$")
 	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
@@ -1678,4 +1683,5 @@ public class DCEACQHomeMobile {
 		drugSummaryPage.clickOnSNPPlan();
 		drugSummaryPage.ClickviewDrugPricingModal(planName);
 	}
+
 }
