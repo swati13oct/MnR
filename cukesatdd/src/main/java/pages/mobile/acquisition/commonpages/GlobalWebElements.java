@@ -278,7 +278,7 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement UHCLogo;
 
 	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
-	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
+	@FindBy(css = ".saved_items_container > button[dtmname^='Visitor Profile:Global Header']")
 	public WebElement visitorprofileicon;
 
 	// @FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")

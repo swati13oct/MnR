@@ -1039,7 +1039,7 @@ public class CommonConstants {
 	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
 	
 	public static enum PLANTYPE {
-		MA, MAPD, PDP, SNP, MEDSUPP
+		MA, MAPD, PDP, DSNP, SNP, MEDSUPP
 	}
 
 	public static enum TOOLS {
