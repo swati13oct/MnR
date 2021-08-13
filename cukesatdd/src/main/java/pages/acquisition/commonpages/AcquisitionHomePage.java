@@ -57,7 +57,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// @FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company
 	// (UnitedHealthcare)')]")
-	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company')]")
 	private WebElement UHCICSubTitle;
 
 	// @FindBy(xpath =
