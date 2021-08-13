@@ -508,6 +508,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page
+    Then the user navigates to Personal Information Page
+    And the user cancels enrollment and navigates to homepage
 
     @dce_E2E_Scenario7_UAT_AARP @regressionAARP
     Examples:

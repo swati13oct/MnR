@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import acceptancetests.data.OLE_PageConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -823,7 +824,7 @@ public class DCEStepDefinitionAARP {
 	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 	    WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
 	    if (null != welcomepage) {
-		  getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, welcomepage);
+		  getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
 	    } else
 		Assertion.fail("Welcome page  not loaded");
     }
