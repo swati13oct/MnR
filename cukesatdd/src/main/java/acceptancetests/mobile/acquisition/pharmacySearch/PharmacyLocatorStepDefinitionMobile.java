@@ -332,7 +332,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Then("^the user validates the pharmacies available$")
+	@Then("^the user validates the pharmacies available|the user validates the Pharmacies available$")
 	public void validatesPharmaciesAvailable(DataTable inputAttributes) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
