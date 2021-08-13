@@ -22,6 +22,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class DrugSummaryPage extends UhcDriver {
@@ -206,6 +207,9 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[text()='Return to plan summary']")
 	public WebElement returnToPlanSummaryLink;
+
+	@FindBy(xpath = "//*[text()='Return to plan compare']")
+	public WebElement returnToCompareLink;
 
 	@FindBy(xpath = "//*[text()='Return to home page']")
 	public WebElement returnToHomePageLink;
@@ -1359,5 +1363,13 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("PDP Plans displayed for PDP toggle click");
 		}
 		Assertion.fail("PDP Plans NOT displayed for PDP toggle click");
+	}
+
+	public ComparePlansPage ClickReturnToCompare() {
+		validateNew(returnToCompareLink);
+		jsClickNew(returnToCompareLink);
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		return new ComparePlansPage(driver);
 	}
 }
