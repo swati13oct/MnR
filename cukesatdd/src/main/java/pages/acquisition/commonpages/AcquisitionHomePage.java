@@ -401,7 +401,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+	
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
 	private WebElement chatsam;
 
 	@FindBy(xpath = "//div[@class='sam']")
@@ -7131,8 +7133,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateSamChatIcon() throws InterruptedException {
 		boolean present;
 		try {
-			threadsleep(5);
-			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
+			threadsleep(10);
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(35))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {
