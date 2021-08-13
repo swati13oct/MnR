@@ -138,15 +138,9 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | TFN Xpath | <TFNxpath> |
     Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
       | Plan Type | <MAplantype> |
-    # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
-    #| Plan Type | <MAplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>          |
       | TFN Xpath | <EnrollTFNxpath> |
-    #Then the user navigates back to page
-    #Then the user navigates to refresh page
-    #Then the user navigates back to page
-    #Then the user navigates to refresh page
     Then the user navigates to homepage validates Federal TFN
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
