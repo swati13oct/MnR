@@ -22,7 +22,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | County Name     | <county>          |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user should be able to see "Medicare Prescription Drug Plans" expanded by default
+    And the user should be able to see "Medicare Prescription Drug (Part D) Plans" expanded by default
     And the user view plan details of the above selected plan in site vpp
       | Plan Name | <PDPplanname> |
       | Plan Type | <PDPplantype> |
@@ -259,7 +259,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | County Name     | <county>          |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user should be able to see "Medicare Prescription Drug Plans" expanded by default
+    And the user should be able to see "Medicare Prescription Drug (Part D) Plans" expanded by default
     And the user view plan details of the above selected plan in site vpp
       | Plan Name | <PDPplanname> |
       | Plan Type | <PDPplantype> |

@@ -637,7 +637,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
 	private WebElement rightRailsectionTFNtimezoneMedsupp;
 
-	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
+	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[4]")
 	private WebElement rightRailsectionTFNtimezoneOLE;
 
 	@FindBy(xpath = "(//div[@class='uhc-container']//h2)[1]")
@@ -735,7 +736,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
 	
-	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[2]")
 	private WebElement tfnHeaderRightRailOLE;
 	
 	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
@@ -6094,11 +6096,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println(rightRailSectionTFNHeader1.getText());
 		}
 
-		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		//validateNew(footertextsectioncallus);
 		validateNew(tfnHeaderRightRailOLE);
-		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().replace("\n", " ");
+		String ActualCallSamTFNMember = tfnHeaderRightRailOLE.getText().trim().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
@@ -7140,8 +7142,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			});
 			validateNew(samChatIcon);
 			present = true;
-		} catch (NoSuchElementException e) {
+		} catch (Exception e) {
 			present = false;
+			if(driver.getCurrentUrl().contains("welcome"));
+			driver.navigate().refresh();
+			present= validateNew(samChatIcon);
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
