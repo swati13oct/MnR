@@ -140,17 +140,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam | 80002   | 10001           | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
   @dce_E2E_Scenario6_UAT
-  Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
+  Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link, LIS Buydown validation, Covered and not covered drugs You pay, Details Switch to generic, NBA
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following Campaign acquisition site page
       | PagePath | <path> |
-    #And the user views the plans of the below plan type
-    #| Plan Type | <plantype> |
-    #When the user performs plan search using following information
-    #| Zip Code        | <zipcode>         |
-    #| County Name     | <county>          |
-    #| Is Multi County | <isMultutiCounty> |
     And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -182,8 +176,6 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
       | Brand Drug   | <brandDrug2>   |
       | Generic Drug | <genericDrug2> |
-    # Then the user validates following expected Premium on DCE Details Page
-    #| Premium | <premium> |
     Then the user verify the Retail chain pharmacy on detail page
     Then the user Captures Drug costs on Drug Details Page
     And the user validates link to Drug Summary Page
@@ -206,7 +198,6 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <newplantype> |
       | Plan Name | <newplanname> |
     Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
-#    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug4> |
@@ -224,11 +215,22 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | NotCoveredDrug | <drug6> |
     And the user validates link to Drug Summary Page
     And user should verify the Extra help on SNP plan type
-   # And user click on View Drug Pricing Modal
-   #LIS message removed for LIS Buydown PLans
-    #And user should verify the drug extra qualification in drug pricing popup
-   # Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
-    #  | Plan Name | <newplanname> |
+    Then the user Clicks View Drug Pricing for the given plan
+      | Plan Type | <newplantype> |
+      | Plan Name | <newplanname> |
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | CoveredDrug | <genericDrug1> |
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | CoveredDrug | <genericDrug2> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | NotCoveredDrug | <drug2> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | NotCoveredDrug | <drug3> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | NotCoveredDrug | <drug7> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal
+      | NotCoveredDrug | <drug6> |
+    Then the user Closes Drug Pricing modal
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <plantype0>      |
       | Plan Name | <updateplanname> |
@@ -487,14 +489,14 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Get Started Page
     Then the user validates Import Option is displayed
     Then the user clicks on Import Drugs and validates Import Flow - Imports Get Started, Member NonMember Selection modals
-      | AuthenticatedFlag     | <authenticatedflag>|
+      | AuthenticatedFlag | <authenticatedflag> |
     Then the user selects Member and provides Member Details and proceeds to import
-      | AuthenticatedFlag     | <authenticatedflag> |
-      | FirstName     | <firstname>     |
-      | LastName      | <lastname>      |
-      | DOB           | <dob>           |
-      | ZipCode       | <importZipCode> |
-      | MBI           | <mbi>           |
+      | AuthenticatedFlag | <authenticatedflag> |
+      | FirstName         | <firstname>         |
+      | LastName          | <lastname>          |
+      | DOB               | <dob>               |
+      | ZipCode           | <importZipCode>     |
+      | MBI               | <mbi>               |
     Then the user validates Import Success/Failure modal as follows
       | DrugsFlag     | <drugFlag>      |
       | ProvidersFlag | <providersFlag> |
@@ -511,12 +513,12 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user navigates to Personal Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @dce_E2E_Scenario7_UAT_AARP @regressionAARP
+  @dce_E2E_Scenario7_UAT_AARP @regressionAARP
     Examples:
       | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | AARP |   78006 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
   @dce_E2E_Scenario7_UAT_UHC @regressionUHC
     Examples:
       | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | UHC |   78006 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
