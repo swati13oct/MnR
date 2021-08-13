@@ -85,8 +85,8 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
 
     @dce_DrugSummary_Page_UHC @regressionUHC @sanity
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |	dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
+      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |	10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
 
   ############# END - DCE Summary Regression Scenario #################
   @dceRedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
