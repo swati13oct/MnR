@@ -604,7 +604,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		chineseLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+		//selectFromDropDownByValue(languageDropDown, "zh");
+		mobileSelectOption(languageDropDown, "中文", true);
+		//chineseLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -614,7 +617,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectspanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		SpanishLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+		//selectFromDropDownByValue(languageDropDown, "es");
+		mobileSelectOption(languageDropDown, "español", true);
+		//SpanishLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Spanish language selected");
 		return new PharmacySearchPageMobile(driver);
