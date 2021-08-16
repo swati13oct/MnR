@@ -872,6 +872,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
+				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
 				checkModelPopup(driver, 20);
 			} else {
 				start(AARP_ACQISITION_PAGE_URL);
