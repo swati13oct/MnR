@@ -292,7 +292,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
-		
+
 		pageloadcomplete();
 
 		if (addDrugButton.isDisplayed()) {
@@ -321,9 +321,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 */
 
 		jsClickNew(selectDrug);
-		pageloadcomplete();
 
-		threadsleep(2000);
+		threadsleep(6000);
 		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 30);
