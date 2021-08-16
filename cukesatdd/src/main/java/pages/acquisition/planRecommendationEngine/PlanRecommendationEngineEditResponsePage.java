@@ -93,7 +93,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
 	private WebElement SignInButton;
 	
-	@FindBy(css = "#cancelButton")
+	@FindBy(xpath = "//button[contains(text(),'Cancel')]")
 	private WebElement cancelLink;
 	
 	@FindBy(css = "button#keepShoppingBtn")
@@ -105,7 +105,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "li.planTileGrid")
 	private List<WebElement> plantiles;
 	
-	@FindBy(xpath = "//button[contains(text(),'Create Profile')]")
+	@FindBy(xpath = "//button[contains(text(),'Create an Account')]")
 	private WebElement CreateProfileButton;
 	
 	//Shopping Cart elements

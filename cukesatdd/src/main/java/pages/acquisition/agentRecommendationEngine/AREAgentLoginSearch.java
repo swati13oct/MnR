@@ -72,7 +72,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 	@FindBy(id = "shopperMbi")
 	private WebElement shopperMbi;
 	
-	@FindBy(xpath="button[class*='btn-info']")
+	@FindBy(css="button[class*='btn-info']")
 	private WebElement cloakIn;
 	
 	@FindBy(id = "shopperZipCode")
@@ -167,11 +167,15 @@ public class AREAgentLoginSearch extends UhcDriver {
 		String zipCode = "10001";
 		String county = "New York County";
 		
-		if (zipcode.getText().isEmpty() || selectedResidenceCounty.getText().equalsIgnoreCase("Select County")) {
+		if (zipcode.getText().isEmpty()) {
 			zipcode.sendKeys(zipCode);
 			Select multicounty = new Select(selectedResidenceCounty);
 			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(county),"Invalid County Name");
-		} else {
+		} else if(selectedResidenceCounty.getText().equalsIgnoreCase("Select County")){
+			Select multicounty = new Select(selectedResidenceCounty);
+			String countyName =  multicounty.getFirstSelectedOption().getText().trim();
+			Assert.assertTrue(countyName.equalsIgnoreCase("Select County"),"County Name not selected");
+		}else {
 			System.out.println("Zipcode and County are selected");
 		}		
 //		Assertion.assertEquals(email.toLowerCase(), emailId.getText().toLowerCase());

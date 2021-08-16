@@ -189,7 +189,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = ".modal-body #multiCountyCancelBtn")
 	private WebElement confrimButton;
 
-	@FindBy(css = "select#plan-year")
+	@FindBy(css = ".uhc-toggle button")
 	private WebElement planYear;
 
 	@FindBy(css = "#addanotherplanbutton")
@@ -201,11 +201,17 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "div[class*='compare-box'] button")
 	private List<WebElement> vppCompareButton;
 
-	@FindBy(css = ".multi-year-select button:nth-child(1)")
+	@FindBy(css = "#currentYearToggle")
 	private WebElement currentPlanYear;
 
-	@FindBy(css = ".multi-year-select button:nth-child(2)")
+	@FindBy(css = "#nextYearToggle")
 	private WebElement futurePlanYear;
+	
+	@FindBy(css = ".multi-year-select button:nth-child(1)")
+	private WebElement currentPlanYearInVP;
+
+	@FindBy(css = ".multi-year-select button:nth-child(2)")
+	private WebElement futurePlanYearInVP;
 	
 	@FindBy(css = "#plan-summary-table tr:nth-child(8)")
 	private WebElement estimateMedicalCost;
@@ -650,30 +656,22 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void changePlanyear(String year) {
-		String curYear = getCurrentYear();
 		// Checking and Changing to Current Year
 		if (year.equalsIgnoreCase("current")) {
-			if (validate(planYear, 10)) {
-				Select planYearSelect = new Select(planYear);
-				if (!planYearSelect.getFirstSelectedOption().toString().trim().equalsIgnoreCase(curYear)) {
-					planYearSelect.selectByVisibleText(curYear);
-					confirmAlert();
-				}
-			}
+			if (validate(planYear, 10)) 
+				currentPlanYear.click();
 		}
 
 		// Checking and Changing Future Year
 		if (year.equalsIgnoreCase("future")) {
-			if (validate(planYear, 10)) {
-				Select planYearSelect = new Select(planYear);
-				if (planYearSelect.getFirstSelectedOption().toString().trim().equalsIgnoreCase(curYear)) {
-					planYearSelect.selectByVisibleText(String.valueOf(Integer.valueOf(curYear) + 1));
-					confirmAlert();
-				}
-			} else {
-				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
-			}
-		}
+			if (validate(planYear, 10)) 
+				futurePlanYear.click();
+			} 		
+		else
+			Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
+		
+		threadsleep(5000);
+			
 	}
 
 	public void checkYear(String year) {
@@ -681,28 +679,30 @@ public class AREPlanRanking extends UhcDriver {
 		// Checking Year
 		if (year.equalsIgnoreCase("current")) {
 			if (validate(planYear, 10)) {
-				Select planYearSelect = new Select(planYear);
-				Assert.assertTrue(planYearSelect.getFirstSelectedOption().toString().trim().equalsIgnoreCase(curYear),
+				if(currentPlanYear.getAttribute("aria-selected").equalsIgnoreCase("true") )
+					Assert.assertTrue(currentPlanYear.findElement(By.cssSelector(">div")).getText().trim().contains(curYear),
 						" Current Year is not Selected by Default");
 			}
 		}
 		if (year.equalsIgnoreCase("future")) {
 			if (validate(planYear, 10)) {
-				Select planYearSelect = new Select(planYear);
-				Assert.assertTrue(Integer.parseInt(planYearSelect.getFirstSelectedOption().getText().toString().trim()) == (Integer.parseInt(curYear) + 1),
+				int nxtYear = Integer.parseInt(curYear) + 1;
+				if(futurePlanYear.getAttribute("aria-selected").equalsIgnoreCase("true") )
+					Assert.assertTrue(futurePlanYear.findElement(By.cssSelector(">div")).getText().trim().contains(String.valueOf(nxtYear)),
 						"Future Year is not set by default");
-			} else {
-				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
 			}
 		}
+		 else {
+				Assert.assertTrue(false, "Plan Year Toggle is Needed to set Future Year");
+			}
 	}
 
 	public boolean changePlanyearVisitorProfile(String year) {
 		// Checking Current year selection
 		if (year.equalsIgnoreCase("current")) {
-			if (validate(currentPlanYear, 15)) {
-				currentPlanYear.click();
-				Assert.assertTrue(currentPlanYear.getAttribute("class").length() > 0,
+			if (validate(currentPlanYearInVP, 15)) {
+				currentPlanYearInVP.click();
+				Assert.assertTrue(currentPlanYearInVP.getAttribute("class").length() > 0,
 						"Current Plan Year is not Selected");
 				return true;
 			}
@@ -710,9 +710,9 @@ public class AREPlanRanking extends UhcDriver {
 
 		// Checking and Changing Future Year
 		if (year.equalsIgnoreCase("future")) {
-			if (validate(futurePlanYear, 15)) {
-				futurePlanYear.click();
-				Assert.assertTrue(futurePlanYear.getAttribute("class").length() > 0,
+			if (validate(futurePlanYearInVP, 15)) {
+				futurePlanYearInVP.click();
+				Assert.assertTrue(futurePlanYearInVP.getAttribute("class").length() > 0,
 						"Future Plan Year is not Selected");
 				return true;
 			} else {
