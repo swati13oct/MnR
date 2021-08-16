@@ -409,11 +409,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		validate(headerGetaPlanRecommendationLink, 30);
 		Assert.assertTrue(headerGetaPlanRecommendationLink.getText().contains("Get a Plan Recommendation"));
 		validate(headerDrugcostLink, 30);
-		Assert.assertTrue(headerDrugcostLink.getText().contains("Drug Cost Estimator"));
+		Assert.assertTrue(headerDrugcostLink.getText().contains("Estimate Drug Costs"));
 		validate(headerPharmacysearchLink, 30);
-		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Pharmacy Search"));
+		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Search for a Pharmacy"));
 		validate(headerProvidersearchLink, 30);
-		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
+		Assert.assertTrue(headerProvidersearchLink.getText().contains("Search Doctors"));
 		validate(headerShopForaPlanMedicareGuide, 30);
 		validate(headerShopForaPlanMedicareGuideText, 30);
 		validate(headerShopForaPlanEmailBox, 30);

@@ -47,6 +47,9 @@ public class AREAgentLoginSearch extends UhcDriver {
 
 	@FindBy(css = "button[type='submit']")
 	private WebElement searchBtn;
+	
+	@FindBy(xpath="//i[@title='Cloak In']")
+	private WebElement btnCloakIn;
 
 	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
 	private List<WebElement> searchResults;
@@ -69,8 +72,8 @@ public class AREAgentLoginSearch extends UhcDriver {
 	@FindBy(id = "shopperMbi")
 	private WebElement shopperMbi;
 	
-	@FindBy(xpath="//i[@title='Cloak In']")
-	private WebElement btnCloakIn;
+	@FindBy(xpath="button[class*='btn-info']")
+	private WebElement cloakIn;
 	
 	@FindBy(id = "shopperZipCode")
 	private WebElement zipcode;
@@ -172,7 +175,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 			System.out.println("Zipcode and County are selected");
 		}		
 //		Assertion.assertEquals(email.toLowerCase(), emailId.getText().toLowerCase());
-		btnCloakIn.click();
+		cloakIn.click();
 		threadsleep(3000);
 	}
 
