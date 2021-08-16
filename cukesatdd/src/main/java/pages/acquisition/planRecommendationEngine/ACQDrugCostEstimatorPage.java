@@ -238,12 +238,15 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);
+		String curID = String.valueOf(Thread.currentThread().getId());
 		int count = drugsListinDCE.size();
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
 			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
+		System.out.println("Current Thread ID is - "+curID+" Drugs in DCE flow "+vppDrugsResults);
+		CommonConstants.DCE_Drugs.put(curID, vppDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
 		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
 		return vppDrugsResults;

@@ -238,7 +238,7 @@ public class AREPlanRanking extends UhcDriver {
 		Assert.assertTrue(validate(hearingCheckLabel), "Hearing Checkbox is missing");
 		Assert.assertTrue(validate(fitnessCheckLabel), "Fitness Checkbox is missing");
 		Assert.assertTrue(validate(lowPremiumCheckLabel), "Low Premium Checkbox is missing");
-		Assert.assertTrue(validate(travelCheckLabel), "Travel Checkbox is missing");
+//		Assert.assertTrue(validate(travelCheckLabel), "Travel Checkbox is missing");
 		Assert.assertTrue(validate(drugCheckLabel), "Drug Checkbox is missing");
 		Assert.assertTrue(validate(doctorCheckLabel), "Doctor Checkbox is missing");
 		Assert.assertTrue(validate(applyBtn), "Apply button is missing");
@@ -248,7 +248,7 @@ public class AREPlanRanking extends UhcDriver {
 
 		// Deselect All
 		validate(applyBtn);
-		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,drug,doctor", false);
 		applyBtn.click();
 		threadsleep(3000);
 		boolean dropClose = validate(applyBtn, 10);
@@ -258,7 +258,7 @@ public class AREPlanRanking extends UhcDriver {
 		// Select All
 		planRankingDropdown.click();
 		validate(applyBtn);
-		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", true);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,drug,doctor", true);
 		applyBtn.click();
 		threadsleep(3000);
 		dropClose = validate(applyBtn, 10);
@@ -310,10 +310,6 @@ public class AREPlanRanking extends UhcDriver {
 		if (checkOption.equalsIgnoreCase("lowpremium")) {
 			elemCheck = lowPremiumCheck;
 			elemClick = lowPremiumCheckLabel;
-		}
-		if (checkOption.equalsIgnoreCase("travel")) {
-			elemCheck = travelCheck;
-			elemClick = travelCheckLabel;
 		}
 		if (checkOption.equalsIgnoreCase("drug")) {
 			elemCheck = drugCheck;
@@ -502,7 +498,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
-		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,drug,doctor", false);
 		optionSelection(rankOptions, true);
 		jsClickNew(applyBtn);
 		threadsleep(3000);
@@ -933,7 +929,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		planRankingDropdown.click();
 		validate(applyBtn);
-		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,drug,doctor", false);
 		optionSelection(rankOptions, true);
 		applyBtn.click();
 		threadsleep(3000);
@@ -996,7 +992,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		planRankingDropdown.click();
 		validate(applyBtn);
-		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
+		optionSelection("dental,vision,hearing,fitness,lowpremium,drug,doctor", false);
 		optionSelection(rankOptions, true);
 		applyBtn.click();
 		threadsleep(3000);

@@ -573,7 +573,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);
 		System.out.println("Navigating Plans Info...");
 		String planName = "", planAction = "";
-		String[] planDetails = planInfo.split(",");
+		String[] planDetails = planInfo.split(",");		   
 		planName = planDetails[0];
 		planAction = planDetails[1];
 		int planIndex = findPlan(planName);
