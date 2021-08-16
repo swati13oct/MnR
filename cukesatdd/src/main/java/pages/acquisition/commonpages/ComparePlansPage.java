@@ -171,7 +171,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a//span[contains(text(),'Edit Hospitals')]")
 	private WebElement editHospitalsLink;
 
-	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/th")
 	private WebElement HospitalSummaryHeader;
 
 	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/td[2]/div")
@@ -195,7 +195,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a//span[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
 
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/th/span")
 	private WebElement providerSumamryHeader;
 
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
@@ -294,13 +294,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
 	public WebElement medicalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(xpath = "//*[@id='uhc-slide-table-all']/div[10]/div/div[1]/label/span[2]")
 	public WebElement medicalBenefitsOONLabel;
 
 	@FindBy(xpath = "//*[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider'][1]")
 	public WebElement additionalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(xpath = "//*[@id='uhc-slide-table-all']/div[12]/div/div[1]/label/span[2]")
 	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
