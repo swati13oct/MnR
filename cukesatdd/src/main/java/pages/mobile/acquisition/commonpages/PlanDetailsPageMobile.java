@@ -904,6 +904,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 	
 	public PharmacySearchPageMobile planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
 		if(language.equalsIgnoreCase("English")){
 			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
