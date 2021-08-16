@@ -1025,7 +1025,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "back-to-plans")
 	private WebElement backToPlanComparePage;
 
-	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1 ng-scope')]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
