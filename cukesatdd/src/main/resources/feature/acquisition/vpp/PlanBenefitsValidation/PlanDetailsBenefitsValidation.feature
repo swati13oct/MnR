@@ -8,75 +8,101 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @planDetailsBenefitsAARP01
+    @planDetailsBenefitsAARP01 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_1 | AARP |
 
-    @planDetailsBenefitsAARP02
+    @planDetailsBenefitsAARP02 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_2 | AARP |
 
-    @planDetailsBenefitsAARP03
+    @planDetailsBenefitsAARP03 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_3 | AARP |
 
-    @planDetailsBenefitsAARP04
+    @planDetailsBenefitsAARP04 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_4 | AARP |
 
-    @planDetailsBenefitsAARP05
+    @planDetailsBenefitsAARP05 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_5 | AARP |
 
-    @planDetailsBenefitsAARP06
+    @planDetailsBenefitsAARP06 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_6 | AARP |
 
-    @planDetailsBenefitsAARP07
+    @planDetailsBenefitsAARP07 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_7 | AARP |
 
-    @planDetailsBenefitsAARP08
+    @planDetailsBenefitsAARP08 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_8 | AARP |
 
-    @planDetailsBenefitsAARP09
+    @planDetailsBenefitsAARP09 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Details Benefits_Data | Sheet2022_9 | AARP |
 
-    @planDetailsBenefitsAARP10
+    @planDetailsBenefitsAARP10 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Details Benefits_Data | Sheet2022_10 | AARP |
 
-    @planDetailsBenefitsAARP11
+    @planDetailsBenefitsAARP11 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Details Benefits_Data | Sheet2022_11 | AARP |
 
-    @planDetailsBenefitsAARP12
+    @planDetailsBenefitsAARP12 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Details Benefits_Data | Sheet2022_12 | AARP |
 
-    @planDetailsBenefitsAARP13
+    @planDetailsBenefitsAARP13 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Details Benefits_Data | Sheet2022_13 | AARP |
 
-    @planDetailsBenefitsAARP14
+    @planDetailsBenefitsAARP14 @planDetailsMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Details Benefits_Data | Sheet2022_14 | AARP |
+      
+    @planDetailsBenefitsAARP15 @planDetailsMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Details Benefits_Data | Sheet2022_15 | AARP |
+      
+      
+      @planDetailsBenefitsAARP16 @planDetailsMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Details Benefits_Data | Sheet2022_16 | AARP |
+      
+      @planDetailsBenefitsAARP17 @planDetailsMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Details Benefits_Data | Sheet2022_17 | AARP |
+      
+      @planDetailsBenefitsAARP18 @planDetailsMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Details Benefits_Data | Sheet2022_18 | AARP |
+      
+      @planDetailsBenefitsAARP19 @planDetailsMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Details Benefits_Data | Sheet2022_19 | AARP |
 
     @planDetailsBenefitsPDPAARP01
     Examples: 
