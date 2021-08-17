@@ -23,9 +23,9 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User    | Pass         | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
-      | ocpuser | Password@123 | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                           | YES                | YES           | [blank]                                                                                                                                 |
-      | ocpuser | Password@123 | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,travel,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
+      | User    | Pass         | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
+      | ocpuser | Password@123 | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]                                                                                                                                 |
+      | ocpuser | Password@123 | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
 
   @ARE @EstimateMedicalCostFuture @F441593 @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in AEP ARE for MCE
