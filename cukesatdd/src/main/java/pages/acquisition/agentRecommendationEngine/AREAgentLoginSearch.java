@@ -136,7 +136,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		cloakProfile();
 		threadsleep(2000);
 		String curWind = driver.getWindowHandle();
-		validateCloakInForm(email);
+		validateCloakInForm();
 		switchAnotherWindow(curWind);
 		commonUtils.plansLoader();
 		// Assertion.assertTrue(validate(stausTxt, 60), "Search not success");
@@ -162,12 +162,13 @@ public class AREAgentLoginSearch extends UhcDriver {
 		
 	}
 	
-	public void validateCloakInForm(String email) {
+	public void validateCloakInForm() {
 		System.out.println("Validating profile fields");
 		String zipCode = "10001";
 		String county = "New York County";
 		
 		if (zipcode.getText().isEmpty()) {
+			zipcode.clear();
 			zipcode.sendKeys(zipCode);
 			Select multicounty = new Select(selectedResidenceCounty);
 			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(county),"Invalid County Name");

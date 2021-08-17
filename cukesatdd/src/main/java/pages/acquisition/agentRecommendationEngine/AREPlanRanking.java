@@ -158,6 +158,12 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "div h3[class*='plan-name']")
 	private List<WebElement> planNamesVisitorPrf;
+	
+	@FindBy(css = "button[class*='saved-items-button']")
+	private WebElement mySavedItems ;
+	
+	@FindBy(css = "#guest-saved-items-button")
+	private WebElement guestViewSavedBtn;
 
 	@FindBy(css = "#landrover div[class*='justify-content-between'] a[dtmid*='acq_visitor_profile']")
 	private WebElement comparePlansBtn;
@@ -516,7 +522,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+			String elemPlan = planTile.get(3).findElement(By.cssSelector(" div >span")).getText().trim().replace(" ", "").toUpperCase()+" "+ driver.findElement(By.cssSelector("#enroll-row th:nth-child(1)")).getText().trim().replace(" ", "").toUpperCase();
+			Assert.assertTrue(elemPlan.contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
@@ -578,6 +585,7 @@ public class AREPlanRanking extends UhcDriver {
 
 	public void verifySavePlans(List<WebElement> plansName, int saveplans, List<WebElement> saveplanComparepage,
 			String year) {
+		Actions action = new Actions(driver);
 		List<String> vppPlans = new ArrayList<String>();
 		System.out.println(plansName.size());
 		System.out.println(saveplanComparepage.size());
@@ -590,10 +598,10 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(heartIcon);
-			heartIcon.click();
-			threadsleep(3000);
-			viewSavedItems.click();
+			scrollToView(mySavedItems);
+			action.clickAndHold(mySavedItems).build().perform();
+			validate(guestViewSavedBtn);
+			guestViewSavedBtn.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
@@ -605,10 +613,10 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(heartIcon);
-			heartIcon.click();
-			threadsleep(3000);
-			viewSavedItems.click();
+			scrollToView(mySavedItems);
+			action.clickAndHold(mySavedItems).build().perform();
+			validate(guestViewSavedBtn);
+			guestViewSavedBtn.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
