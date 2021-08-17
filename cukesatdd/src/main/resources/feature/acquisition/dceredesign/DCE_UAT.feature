@@ -513,12 +513,12 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user navigates to Personal Information Page
     And the user cancels enrollment and navigates to homepage
 
-  @dce_E2E_Scenario7_UAT_AARP @regressionAARP
+  @dce_E2E_Scenario7_UAT_AARP @regressionAARP @visitorProfileAuthenticated
     Examples:
       | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
       | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-  @dce_E2E_Scenario7_UAT_UHC @regressionUHC
+  @dce_E2E_Scenario7_UAT_UHC @regressionUHC @visitorProfileAuthenticated
     Examples:
       | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
       | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
