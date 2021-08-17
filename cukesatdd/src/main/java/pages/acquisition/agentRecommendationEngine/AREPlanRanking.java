@@ -974,8 +974,9 @@ public class AREPlanRanking extends UhcDriver {
 		List<String> plansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planTile) {
-			// String val = elem.getText().trim().toUpperCase().replace(" ", "");
-			String planName = (String) js.executeScript("return arguments[0].innerText;", elem.findElement(By.cssSelector("div >span")).getText());
+			WebElement elemPlan = elem.findElement(By.cssSelector("div >span"));
+			String planName = (String) (js.executeScript("return arguments[0].textContent;", elemPlan).toString());
+			System.out.println("PlanName in PlanCompare page: "+planName);
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails.add(val);
 		}
