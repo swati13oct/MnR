@@ -22,7 +22,7 @@ public class CancelOLEModal extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(xpath = "//*[contains(@class,'leaveApp')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal-content')]//*[contains(@class,'leaveApp') and contains(@dtmname, 'Leave')]")
 	private WebElement leaveAppBtn;
 	
 	@FindBy(id = "backBtn")
