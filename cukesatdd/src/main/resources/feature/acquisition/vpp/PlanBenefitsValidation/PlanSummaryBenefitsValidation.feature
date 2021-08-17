@@ -8,62 +8,62 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @planSummaryBenefitsAARP01
+    @planSummaryBenefitsAARP01 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_1 | AARP |
 
-    @planSummaryBenefitsAARP02
+    @planSummaryBenefitsAARP02 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_2 | AARP |
 
-    @planSummaryBenefitsAARP03
+    @planSummaryBenefitsAARP03 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_3 | AARP |
 
-    @planSummaryBenefitsAARP04
+    @planSummaryBenefitsAARP04 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_4 | AARP |
 
-    @planSummaryBenefitsAARP05
+    @planSummaryBenefitsAARP05 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_5 | AARP |
 
-    @planSummaryBenefitsAARP06
+    @planSummaryBenefitsAARP06 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_6 | AARP |
 
-    @planSummaryBenefitsAARP07
+    @planSummaryBenefitsAARP07 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_7 | AARP |
 
-    @planSummaryBenefitsAARP08
+    @planSummaryBenefitsAARP08 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_8 | AARP |
 
-    @planSummaryBenefitsAARP09
+    @planSummaryBenefitsAARP09 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet   | site |
       | Plan Summary Benefits_Data | Sheet2022_9 | AARP |
 
-    @planSummaryBenefitsAARP10
+    @planSummaryBenefitsAARP10 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_10 | AARP |
 
-    @planSummaryBenefitsAARP11
+    @planSummaryBenefitsAARP11 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_11 | AARP |
 
-    @planSummaryBenefitsAARP12
+    @planSummaryBenefitsAARP12 @planSummaryBenefitsAARPMA
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_12 | AARP |
