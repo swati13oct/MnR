@@ -426,7 +426,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	
 	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) throws SQLException {
 		boolean flag = false;
-		//try {
+		try {
 			String confirmation_no = confirmationNumber.getText();
 			System.out.println("OLE confirmation number is  " +confirmation_no);
 			map.put("Confirmation No", confirmation_no);
@@ -480,10 +480,10 @@ public class OLEconfirmationPage extends UhcDriver{
 
 			}
 			
-/*		} catch (Exception e) {
+	} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
     return flag;
 	//return Validation_Status;
 	}
