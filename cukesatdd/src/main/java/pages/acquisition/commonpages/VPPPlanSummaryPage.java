@@ -155,7 +155,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
 
-	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+	@FindBy(xpath = "//div[contains(@dtmname,'Plan Year Toggle:2021')]")
 	private WebElement CurrentYearPlansBtn;
 
 	// @FindBy(xpath =
@@ -589,12 +589,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	@FindBy(xpath = "//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+	@FindBy(xpath = "//div[@class='uhc-modal__content']//h3[@id='modalTitle']")
 	// @FindBy(xpath="//div[@class='popup-modal
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+	@FindBy(xpath = "//button[@id='currentYearPlans']")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
@@ -1025,7 +1025,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "back-to-plans")
 	private WebElement backToPlanComparePage;
 
-	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1 ng-scope')]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
@@ -1139,6 +1139,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
+			handlePlanYearSelectionPopup();
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1146,6 +1147,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 
 			jsClickNew(maPlansViewLink);
+			handlePlanYearSelectionPopup();
 			// sleepBySec(2);
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
@@ -1164,6 +1166,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
+			handlePlanYearSelectionPopup();
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -3959,8 +3962,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				currentYearSelection.click();
 			}
 			waitForPageLoadSafari();
-			validateNew(planYearPopupGoButton);
-			planYearPopupGoButton.click();
+			//validateNew(planYearPopupGoButton);
+			//planYearPopupGoButton.click();
 		} else { // if the plan year popup is not displayed
 			if (validate(CurrentYearPlansBtn, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());

@@ -1,4 +1,10 @@
+
 package pages.mobile.acquisition.commonpages;
+
+import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
+import static acceptancetests.data.CommonConstants.PLANTYPE.PDP;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,19 +34,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
-import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.commonpages.TermsnConditionsAARPPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
-
-import static org.testng.Assert.assertTrue;
 
 /**
  * @author pperugu
@@ -342,8 +340,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(css = "a[title='Estimate your prescription drug costs']")
-	public WebElement EstimateYourDrugCost;
+	@FindBy(css = "a[data-asset-name='Estimate Your Drug Costs']")
+	public WebElement estimateYourDrugCostButton;
 
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
@@ -943,7 +941,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
@@ -978,7 +976,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
@@ -1822,20 +1820,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-//		jsClickNew(EstimateYourDrugCost);
-		switchToNewTabNew(EstimateYourDrugCost);
+//		switchToNewTabNew(estimateYourDrugCostButton);
+		jsClickNew(estimateYourDrugCostButton);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
 
-	@FindBy(xpath = "//div[.='MENU']")
-	private WebElement Menu;
-
 	public void navigateToMedEdPresDrugPage() {
 
 		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = openLearnAboutMedicareFromMenu();
-		learnAboutMedicareHomePageMobile.selectIntroductionToMedicareOption("benefits");
+		learnAboutMedicareHomePageMobile.selectIntroductionToMedicareOption(BENEFITS);
 
 	}
 
@@ -1934,9 +1929,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		MobileMenuToolsToHelp();
-		scrollToView(providerSearchFromHomeScreen);
+		validateNew(providerSearchFromHomeScreen);
 
-		//jsClickNew(providerSearchFromHomeScreen);
 		switchToNewTabNew(providerSearchFromHomeScreen);
 
 		pageloadcomplete();
@@ -2447,7 +2441,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
-		validateNew(providerSearchLink);
+		validateNew(searchDoctorsLink);
+		validateNew(searchDentistsLink);
 
 		jsClickNew(learnAboutMedicareFooterButton);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2468,7 +2463,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
-		shopForPlan.selectTool("Pharmacy Search");
+		shopForPlan.selectTool(PHARMACYSEARCH);
 
 		/*
 		 * jsClickNew(Menu); waitforElement(ShopForaplan); if
@@ -2733,7 +2728,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
-		shopForPlan.selectPlanTypeOption("pdp", false);
+		shopForPlan.selectPlanTypeOption(PDP, false);
 		WebElement DCELink = driver.findElement(
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);
@@ -4201,7 +4196,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
 		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
-		shopForPlanNavigationPageMobile.selectPlanTypeOption("PDP", false);
+		shopForPlanNavigationPageMobile.selectPlanTypeOption(PDP, false);
 
 		jsClickNew(pdpPharmacyLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -4418,6 +4413,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(link);
 		jsClickNew(link);
 	}
+
 
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
 		switch (linkName) {
@@ -4903,5 +4899,71 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		driver.switchTo().window(base);
+	}
+
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+	private WebElement samChatIcon;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
+	private WebElement samChatPopup;
+	
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	private WebElement samChatPopupHeader;
+	
+	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
+	private WebElement samChatPopupMsg;
+
+	public void validateSamChatIcon() throws InterruptedException {
+		boolean present;
+		try {
+			threadsleep(5);
+			validateNew(samChatIcon);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Chat Icon not available @@@@@@@@@");
+
+	}
+	
+	public void closeChatPopup() {
+		chatPopupOptions.click();
+		chatPopupEndChatOption.click();
+	}
+	
+	@FindBy(xpath = "//*[contains(@class,'chips-row')]//button[contains(@class,'chips-item')]")
+	private List<WebElement> chatSuggestionMsg;
+	
+	@FindBy(xpath = "//*[contains(@class,'lpc_maximized-header__menu-button-asset')]")
+	private WebElement chatPopupOptions;
+	
+	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+	private WebElement chatPopupEndChatOption;
+	
+	public void validateSamChatPopup() throws InterruptedException {
+		try {
+			jsClickNew(samChatIcon);
+			threadsleep(3);
+			validateNew(samChatPopup);
+			threadsleep(3);
+			validateNew(samChatPopupHeader);
+			validateNew(samChatPopupMsg);
+			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals("Hi, I'm UnitedHealthcare's online guide. I'm here to transfer you to our team. How can I help you today?"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(0).getText().trim().contains("Questions about My Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(1).getText().trim().contains("Lost Member ID Card"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(2).getText().trim().contains("Looking for a Plan"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(3).getText().trim().contains("Medicare Questions"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(4).getText().trim().contains("Ready to Enroll"));
+			Assertion.assertTrue("Expected chat message sugesstion not found",chatSuggestionMsg.get(5).getText().trim().contains("Other"));
+			
+		} catch (Exception e) {
+
+			System.out.println("Failed Due To-------" + e.getMessage());
+		}
+		closeChatPopup();
 	}
 }

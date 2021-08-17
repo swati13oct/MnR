@@ -275,4 +275,10 @@ public class DCEACQVPPPlanDetailsMobile {
 		} else
 			Assertion.fail("VPP Plan Details not loaded");
 	}
+	
+	@Then("^user clicks on search button$")
+	public void user_clicks_on_search_button() {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.clickSearch();
+	}
 }
