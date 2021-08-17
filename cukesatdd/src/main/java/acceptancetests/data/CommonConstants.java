@@ -1,7 +1,11 @@
 
 package acceptancetests.data;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.stream.Stream;
+
+import io.cucumber.messages.internal.com.google.protobuf.EnumValue;
 
 /**
  * @author pjaising
@@ -1051,16 +1055,78 @@ public class CommonConstants {
 	}
 	
 	public static enum LEARNABOUTMEDICARE_INTRODUCTION {
-		INTRODUCTION, ELIGIBILITY, COVERAGEOPTIONS, BENEFITS, COSTBASICS, ARTICLES
+		INTRODUCTION("Introduction"), 
+		ELIGIBILITY("Eligibility"), 
+		COVERAGEOPTIONS("Coverage Options"), 
+		BENEFITS("Prescriptions, Providers & Benefits"), 
+		COSTBASICS("Medicare Cost Basics"),
+		ARTICLES("Articles and Special Topics");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_INTRODUCTION(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_INTRODUCTION getIntroductionEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_INTRODUCTION learnAboutMedicareOption : LEARNABOUTMEDICARE_INTRODUCTION.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+		
 	}
 	
 	public static enum LEARNABOUTMEDICARE_TYPESOFPLANS {
-		OVERVIEW, MA, PDP, SNP, MEDSUPP, MEDICAREFAQ, GLOSSARY
+		OVERVIEW ("Overview of Plans"),
+		MA ("Medicare Advantage Plans"), 
+		PDP ("Medicare Prescription Drug Plans"),
+		SNP ("Special Needs Plans"),
+		MEDSUPP ("Medicare Supplement Insurance"),
+		MEDICAREFAQ ("Medicare FAQ"),
+		GLOSSARY ("Glossary");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_TYPESOFPLANS(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_TYPESOFPLANS getTypesOfPlansEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_TYPESOFPLANS learnAboutMedicareOption : LEARNABOUTMEDICARE_TYPESOFPLANS.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
 	}
 	
 	public static enum LEARNABOUTMEDICARE_MEDICAREENROLLMENT {
-		WHENTOENROLL, HOWTOENROLL, CHANGINGPLANS, WORKINGPAST65
+		WHENTOENROLL ("When to Enroll"),
+		HOWTOENROLL ("How to Enroll"),
+		CHANGINGPLANS ("Changing Plans"),
+		WORKINGPAST65 ("Working Past 65");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_MEDICAREENROLLMENT(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_MEDICAREENROLLMENT getMedicareEnrollmentEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_MEDICAREENROLLMENT learnAboutMedicareOption : LEARNABOUTMEDICARE_MEDICAREENROLLMENT.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+		
 	}
+	
 }
 
 

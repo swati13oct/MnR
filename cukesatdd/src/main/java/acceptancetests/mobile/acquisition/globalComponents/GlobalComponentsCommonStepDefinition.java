@@ -22,7 +22,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
@@ -69,20 +68,8 @@ public class GlobalComponentsCommonStepDefinition {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		if (wd.getClass().toString().toUpperCase().contains("ANDROID")
-				|| wd.getClass().toString().toUpperCase().contains("IOS")) {
-			System.out.println("Hove Action skipped on Mobile");
-		} else {
-			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
-			if (learnAboutMedicareHomePage != null) {
-				System.out.println("learn about medicare drop down is opened");
-				getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-			} else {
-				Assert.fail("Issue in selecting a learn about medicare drop down");
-			}
-			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-		}
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.openLearnAboutMedicareFromMenu();
+		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 	}
 	
 //	@When("user validates TFN in header")
@@ -1105,9 +1092,8 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
 	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
-		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		acqusitionHomePage.clickLearnAboutMedicareNavLink(linkName);
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickLearnAboutMedicareNavLink(linkName);
 		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
 	}
 

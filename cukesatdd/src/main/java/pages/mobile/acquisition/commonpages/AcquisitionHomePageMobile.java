@@ -4438,15 +4438,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public void clickLearnAboutMedicareNavLink(String linkName) {
-		WebElement link = driver.findElement(
-				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
-		waitforElement(link);
-		jsClickNew(link);
-	}
-
-
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		switch (linkName) {
 
 		case "Introduction":
@@ -4654,24 +4647,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(id = "learnmore-email-address")
+	@FindBy(css = "#learnmore-email-address")
 	private WebElement learnMoreMedicareEmailTxtBox;
 
-	@FindBy(xpath = "//*[@id='learnmore-email-address']/../button")
+	@FindBy(css = "button[class$='submitEmailForm']")
 	private WebElement learnMoreMedicareEmailSubmitBtn;
 
-	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
+	@FindBy(css = "[class*='thankYouMsg']")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 
 	public void validateLearnAboutMedicareEmailSection() {
-		learnMoreMedicareEmailTxtBox.sendKeys("abc@abc.com");
-		learnMoreMedicareEmailSubmitBtn.click();
+		sendkeysMobile(learnMoreMedicareEmailTxtBox, "abc@abc.com");
+		jsClickNew(learnMoreMedicareEmailSubmitBtn);
 	}
 
 	public void validateEmailSubmissionMessage(String expectedMsg) {
 		waitforElement(learnMoreMedicareEmailSubmissionMsg);
-		System.out.println(learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", ""));
 		String actualMsg = learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", "");
+		System.out.println(actualMsg);
 		System.out.println(expectedMsg);
 		Assertion.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
 	}

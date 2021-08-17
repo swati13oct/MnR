@@ -39,7 +39,7 @@ public class ShopForaPlanCommonStepDefinition {
 	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopForPlanNavigationPageMobile shop = acqusitionHomePage.Hoveronaplan();
+		ShopForPlanNavigationPageMobile shop = acqusitionHomePage.openShopForPlanFromMenu();
 		if (shop != null) {
 			System.out.println("Shop for a plan drop down is opened");
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
