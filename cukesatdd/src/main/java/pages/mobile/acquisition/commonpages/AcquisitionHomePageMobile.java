@@ -3629,15 +3629,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
-	private WebElement visitAARPHeaderLink;
-
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			jsClickNew(MenuMobile);
-			CommonUtility.checkPageIsReadyNew(driver);
 			
-			jsClickNew(visitAARPHeaderLink);
+			jsClickNew(visitAARPLink);
+			CommonUtility.checkPageIsReadyNew(driver);
 			Set<String> winHandles = driver.getWindowHandles();
 			for (String win : winHandles) {
 				// if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
@@ -4438,15 +4436,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public void clickLearnAboutMedicareNavLink(String linkName) {
-		WebElement link = driver.findElement(
-				By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'" + linkName + "')]"));
-		waitforElement(link);
-		jsClickNew(link);
-	}
-
-
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		switch (linkName) {
 
 		case "Introduction":
@@ -4654,24 +4645,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(id = "learnmore-email-address")
+	@FindBy(css = "#learnmore-email-address")
 	private WebElement learnMoreMedicareEmailTxtBox;
 
-	@FindBy(xpath = "//*[@id='learnmore-email-address']/../button")
+	@FindBy(css = "button[class$='submitEmailForm']")
 	private WebElement learnMoreMedicareEmailSubmitBtn;
 
-	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
+	@FindBy(css = "[class*='thankYouMsg']")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 
 	public void validateLearnAboutMedicareEmailSection() {
-		learnMoreMedicareEmailTxtBox.sendKeys("abc@abc.com");
-		learnMoreMedicareEmailSubmitBtn.click();
+		sendkeysMobile(learnMoreMedicareEmailTxtBox, "abc@abc.com");
+		jsClickNew(learnMoreMedicareEmailSubmitBtn);
 	}
 
 	public void validateEmailSubmissionMessage(String expectedMsg) {
 		waitforElement(learnMoreMedicareEmailSubmissionMsg);
-		System.out.println(learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", ""));
 		String actualMsg = learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", "");
+		System.out.println(actualMsg);
 		System.out.println(expectedMsg);
 		Assertion.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
 	}
@@ -4917,21 +4908,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// validateNew(headerRegisterLink);
 //		jsMouseOver(navigationSectionHomeLink);
 		jsClickNew(MenuMobile);
-		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
+		CommonUtility.checkPageIsReadyNew(driver);
 		String base = driver.getWindowHandle();
 		Set<String> all = driver.getWindowHandles();
-		Iterator<String> I = all.iterator();
-		while (I.hasNext()) {
-			String childWindow = I.next();
-			if (!base.equals(childWindow)) {
-				driver.switchTo().window(childWindow);
-				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
-				driver.close();
+		if (all.size() > 1) {
+			Iterator<String> I = all.iterator();
+			while (I.hasNext()) {
+				String childWindow = I.next();
+				if (!base.equals(childWindow)) {
+					driver.switchTo().window(childWindow);
+					Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+					driver.close();
+				}
 			}
+			driver.switchTo().window(base);
+		} else {
+			Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+			clickBrowserBackButton();
 		}
-		driver.switchTo().window(base);
 	}
 
 	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")

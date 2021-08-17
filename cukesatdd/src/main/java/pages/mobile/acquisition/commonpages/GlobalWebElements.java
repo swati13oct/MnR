@@ -396,6 +396,7 @@ public class GlobalWebElements extends UhcDriver {
 		case MAPD:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
+		case DSNP:
 		case SNP:
 			jsClickNew(medicareSpecialNeedsPlansLink);
 			break;
@@ -406,7 +407,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(medicarePrescriptionDrug_PlansLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid link for plan type " + planType.name());
+			throw new IllegalArgumentException("Invalid link for plan type - " + planType.name());
 		}
 		pageloadcomplete();
 	}
@@ -439,7 +440,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(searchDentistsLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid tool " + tool.name());
+			throw new IllegalArgumentException("Invalid tool - " + tool.name());
 		}
 		pageloadcomplete();
 	}
@@ -471,7 +472,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(medicareFaqLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid Learn about Medicare option" + option);
+			throw new IllegalArgumentException("Invalid Learn about Medicare option - " + option);
 		}
 		pageloadcomplete();
 	}

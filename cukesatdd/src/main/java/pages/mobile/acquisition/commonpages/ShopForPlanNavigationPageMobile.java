@@ -198,7 +198,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	}
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
-		ShopForaplan.click();
+//		ShopForaplan.click();
 
 		selectShopOption(SHOP);
 		/*
@@ -353,7 +353,6 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	public void selectShopOption(SHOPFORPLAN shopOption) {
 		switch (shopOption) {
 		case SHOP:
-
 			jsClickNew(shopLink);
 			break;
 		case ENROLL:
