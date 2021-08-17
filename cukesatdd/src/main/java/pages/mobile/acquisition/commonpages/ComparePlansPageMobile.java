@@ -285,10 +285,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")
 	private WebElement EnrollinPlanCompare_MAPD;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
@@ -856,7 +856,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
 		List<WebElement> allMAPlans = driver
-				.findElements(By.cssSelector("th[ng-repeat*='plan in count'] > div > span"));
+				.findElements(By.xpath("//button[contains(@dtmname,'Plan Compare:Remove')]/preceding-sibling::div"));
 		String[] plan = plans.split(",");
 		for (int i = 0; i < allMAPlans.size(); i++) {
 			Assertion.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
