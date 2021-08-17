@@ -135,6 +135,7 @@ public class VppPlanValidationStepDefinition {
 				             
 		                	 try {
 		                		 currentCellValue = cell.getStringCellValue();
+		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~]", "");
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
 		                	 }catch (Exception e) {
 		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
