@@ -388,6 +388,7 @@ public class PlanRecommendationEngineStepDefinition {
       		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
       		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
       		planSelectorDrugspage.comparingDrugwithDCE();
+      		planSelectorDrugspage.continueNextpage();
       	}
       	
       	@Then("^user verify drug list are same in DCE VS Drug page$")

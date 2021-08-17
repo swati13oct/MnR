@@ -1946,7 +1946,7 @@ public void validateDrugProvider() {
 	String curID = String.valueOf(Thread.currentThread().getId());
 	DrugsInPRE = CommonConstants.PRE_Drugs.get(String.valueOf(Thread.currentThread().getId()));
 	System.out.println("**** Current Thread ID is - "+curID+" Drugs in PRE "+DrugsInPRE+" ****");
-	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+//	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));
 	System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+DocInPRE+" ****");
 	scrollToView(DrugCount);
