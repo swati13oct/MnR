@@ -3629,15 +3629,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-links-sctn > a")
-	private WebElement visitAARPHeaderLink;
-
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			jsClickNew(MenuMobile);
-			CommonUtility.checkPageIsReadyNew(driver);
 			
-			jsClickNew(visitAARPHeaderLink);
+			jsClickNew(visitAARPLink);
+			CommonUtility.checkPageIsReadyNew(driver);
 			Set<String> winHandles = driver.getWindowHandles();
 			for (String win : winHandles) {
 				// if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
