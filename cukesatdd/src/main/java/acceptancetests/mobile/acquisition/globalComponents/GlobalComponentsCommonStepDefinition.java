@@ -785,7 +785,7 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@When("^user hover over for plan member to click to go to member site$")
 	public void hover_plan_Member_to_Click_membersite() {
-		// scenario.log("Changes made on 6/30- Step added for new Header redesign");
+		scenario.log("Changes made on 6/30- Step added for new Header redesign");
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {

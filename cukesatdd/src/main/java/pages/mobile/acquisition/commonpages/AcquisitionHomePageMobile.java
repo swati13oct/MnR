@@ -4910,21 +4910,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// validateNew(headerRegisterLink);
 //		jsMouseOver(navigationSectionHomeLink);
 		jsClickNew(MenuMobile);
-		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
+		CommonUtility.checkPageIsReadyNew(driver);
 		String base = driver.getWindowHandle();
 		Set<String> all = driver.getWindowHandles();
-		Iterator<String> I = all.iterator();
-		while (I.hasNext()) {
-			String childWindow = I.next();
-			if (!base.equals(childWindow)) {
-				driver.switchTo().window(childWindow);
-				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
-				driver.close();
+		if (all.size() > 1) {
+			Iterator<String> I = all.iterator();
+			while (I.hasNext()) {
+				String childWindow = I.next();
+				if (!base.equals(childWindow)) {
+					driver.switchTo().window(childWindow);
+					Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+					driver.close();
+				}
 			}
+			driver.switchTo().window(base);
+		} else {
+			Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+			clickBrowserBackButton();
 		}
-		driver.switchTo().window(base);
 	}
 
 	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
