@@ -254,7 +254,7 @@ public class ShopPage extends GlobalWebElements {
 	public void clickOnPDPShopButton() {
 		waitForPageLoadSafari();
 		// MobileMenuToShopToolToShop();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
 		waitForPageLoadSafari();
@@ -269,7 +269,7 @@ public class ShopPage extends GlobalWebElements {
 
 	public void clickOnSNPShopButton() {
 		// MobileMenuToShopToolToShop();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
 		waitForPageLoadSafari();
@@ -383,7 +383,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void comparePlans() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(comparePlanBtn);
 		validateNew(comparePlanBtn);
 		// jsClickNew(comparePlanBtn);
@@ -395,7 +395,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void estimateCosts() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
 		 jsClickNew(LearnEstimateCosts);
@@ -407,7 +407,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void switchPlans() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
 		jsClickNew(howToSwitchPlans);
@@ -419,7 +419,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void safeShopping() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
 		jsClickNew(learnSafeShopping);
@@ -430,7 +430,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void memberResources() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
 		jsClickNew(getMemberResources);
@@ -442,7 +442,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void personalizeUrResults() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(personalizeUrResults);
 		validateNew(personalizeUrResults);
 		List<WebElement> list = driver
@@ -453,7 +453,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void navigatetoDCE() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
 		jsClickNew(checkDrugCostsBtn);
@@ -464,7 +464,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void findAProvider() throws Exception {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(findAProviderBtn);
 		// String parentWindow = driver.getWindowHandle();
 
@@ -490,7 +490,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void locateAPharmacy() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(locatePharmacyBtn);
 		validateNew(locatePharmacyBtn);
 		jsClickNew(locatePharmacyBtn);

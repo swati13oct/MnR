@@ -753,7 +753,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validatePlanComparePage() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(backToAllPlansLink);
 		validateNew(backToAllPlansLink);
 
@@ -805,7 +805,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		scrollToView(backToAllPlansLink);
 		validateNew(backToAllPlansLink);
 		jsClickNew(backToAllPlansLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Clicked on Back to plans");
 	}
 
@@ -1831,7 +1831,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(ChangeZipCodeLink);
 		jsClickNew(ChangeZipCodeLink);
 		sendkeysMobile(ChangeZipCodeField, zipcode);
@@ -1843,7 +1843,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement ComparePage = driver.findElement(
 				By.xpath("//div[@class = 'plan-compare-heading-holder']/h1[contains(text(), ' " + zipcode + "')]"));
 		validateNew(ComparePage, 30);
@@ -1872,7 +1872,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
@@ -1893,34 +1893,34 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public void searchZipCode(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(ChangeZipCodeLink);
 		jsClickNew(ChangeZipCodeLink);
 		sendkeysNew(ChangeZipCodeField, zipcode);
 		jsClickNew(FindPlans);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void VerifyInvalidZipCodeErrorMessage() throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(InvalidZipError);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void VerifyZipErrorMessageNoPlans() throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zeroPlanPopup);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zeroPlanErrorPopup);
 		validateNew(ViewAllPlansButton);
 		jsClickNew(ViewAllPlansButton);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 

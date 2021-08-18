@@ -97,7 +97,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(AddMyDrugsBtn);
 		System.out.println("clicked add drugs");
 		// CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			if (BuildDrugPage_verificationTxt.isDisplayed()) {
 				System.out.println("Navigated to Build Drug List Page");
@@ -137,7 +137,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public DrugSummaryPageMobile clickContinueBtn() {
 		jsClickNew(reviewDrugCostsButton);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
@@ -150,7 +150,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public void validateZipCodePlanYearCapturePageNonAEP() {
 
 		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(reviewDrugCostsButton)) {
 			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		} else {

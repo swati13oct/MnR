@@ -1125,35 +1125,35 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			scrollToView(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			validate(maPlansViewLink, 10);
 			// iosScroll(maPlansViewLink);
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// iosScroll(msPlansViewLink);
 			scrollToView(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// iosScroll(snpPlansViewLink);
 			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
@@ -1192,7 +1192,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// if (driver.getCurrentUrl().contains(expectedUrl)) {
 		if (validate(backToPlanResults)) {
 			jsClickNew(backToPlanResults);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		// }
 
@@ -1895,7 +1895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public int checkAllMAPlans() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		List<WebElement> allMAPlans = driver
 				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 		int plansForCompare = allMAPlans.size();
@@ -2000,7 +2000,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 
 		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -2221,7 +2221,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public boolean compareTextAfterclickingAddtoCompareinAARP(String planName) throws InterruptedException {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
 		if (compareText.getText().contains("1 plan added")) {
@@ -2384,7 +2384,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validatePrimaryCarePhysicianBenefit(String planType, String planName, String primaryCarePhysician) {
 		WebElement PrimaryCarePhysicianForPlan = null;
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (planName.contains("SNP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -2494,7 +2494,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validatePrescriptionDrugsTier1(String planName, String planType, String prescriptionDrugsTier1) {
 		WebElement drugsForPlan = null;
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (!prescriptionDrugsTier1.contains("No drug coverage")) {
 			if (planType.equalsIgnoreCase("SNP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
@@ -2577,7 +2577,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * }
 	 */
 	public void toolTipForPremium0(String planName) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='svg']"));
 
@@ -3167,7 +3167,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		Assertion.assertTrue(
 				"PROBLEM - total saved plan icons not as expected.  Expect number of match='" + expMatch
 						+ "' | Actual number of match='" + listOfAppearedSavedPlanIcons.size() + "'",
@@ -5089,7 +5089,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		scrollToView(compareLinks.get(1));
 		jsClickNew(compareLinks.get(1));
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -5108,7 +5108,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(compareLinks.get(1));
 
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -5136,7 +5136,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
 			// compareLinks2.click();
 			jsClickNew(compareLinks2);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 
 		try {
@@ -5242,7 +5242,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		//CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPageMobile(driver, planType);

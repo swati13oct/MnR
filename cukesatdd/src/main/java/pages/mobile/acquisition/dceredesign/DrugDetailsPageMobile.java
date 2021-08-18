@@ -1025,7 +1025,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void clickChangePharmacyLinkDetailsPage() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		jsClickNew(DrugDetails_ChangePharmacyLnk);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(pharmacyZipcodeSearch);
 		validateSelectPharmacyPage();
 	}

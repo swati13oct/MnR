@@ -322,7 +322,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	private WebElement remove;
 
 	public void removeAddedDrugsFromVP() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		try {
 
@@ -829,7 +829,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public WebElement addDrugsGlobal;
 
 	public void clickAddDrugsGlobal() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(addDrugsGlobal);
 		// addDrugsGlobal.click();
 		jsClickNew(addDrugsGlobal);

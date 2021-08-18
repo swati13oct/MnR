@@ -409,7 +409,7 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException("Invalid link for plan type - " + planType.name());
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	/**
@@ -442,7 +442,7 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException("Invalid tool - " + tool.name());
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	/**
@@ -474,7 +474,7 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException("Invalid Learn about Medicare option - " + option);
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	/**
@@ -508,7 +508,7 @@ public class GlobalWebElements extends UhcDriver {
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
 		
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	/**

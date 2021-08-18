@@ -924,7 +924,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {

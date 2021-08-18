@@ -720,7 +720,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				threadsleep(1000);
 				driver.findElement(By.cssSelector("a#proceed-link")).click();
 				threadsleep(1000);
-				pageloadcomplete();
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		} catch (Exception e) {
 			System.out.println("No SSL error / Exception");
@@ -776,7 +776,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PAGE_URL + testharurl;
 			}
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		} else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
@@ -798,7 +798,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PAGE_URL + testharurl;
 			}
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
 	}
@@ -806,7 +806,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void openAndValidate(boolean alreadyOnSite) {
 		if (alreadyOnSite) {
 
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
 			checkModelPopup(driver);
@@ -946,7 +946,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
 			isHealthPlan = true;
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
 			checkModelPopup(driver, 15);
@@ -986,7 +986,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
 																				// bypass PRE/ARE flows
-			// pageloadcomplete();
+			// CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			// checkModelPopup(driver,15);
 			// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
@@ -1068,7 +1068,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerHomeLink);
 		// footerHomeLink.click();
 		jsClickNew(footerHomeLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(zipCodeField)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
@@ -1080,7 +1080,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(breadCrumbHomeLink);
 		// footerHomeLink.click();
 		jsClickNew(breadCrumbHomeLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(zipCodeField)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
@@ -1102,7 +1102,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// public SiteMapUMSPageMobile siteMapFooterClick() {
 	// validateNew(footerSiteMapLink);
 	// footerSiteMapLink.click();
-	// pageloadcomplete();
+	// CommonUtility.checkPageIsReadyNew(driver);
 	// validateNew(siteMapHeader);
 	// if (driver.getCurrentUrl().contains("sitemap.html")) {
 	// return new SiteMapUMSPageMobile(driver);
@@ -1142,7 +1142,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerPrivacyPolicyLink);
 		// footerPrivacyPolicyLink.click();
 		jsClickNew(footerPrivacyPolicyLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
 			return new PrivacyPolicyUmsPageMobile(driver);
 		}
@@ -1167,7 +1167,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPageMobile(driver);
 		}
@@ -1179,7 +1179,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * @SuppressWarnings("deprecation") public void openAndValidate(boolean
 	 * alreadyOnSite) { if (alreadyOnSite) {
 	 * 
-	 * pageloadcomplete();
+	 * CommonUtility.checkPageIsReadyNew(driver);
 	 * System.out.println("Current page URL: "+driver.getCurrentUrl());
 	 * testSiteUrl=driver.getCurrentUrl(); checkModelPopup(driver);
 	 * CommonUtility.waitForPageLoadNew(driver, zipCodeField, 45); try{
@@ -1192,7 +1192,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public void openAndValidate(int visitorProfile) { if (visitorProfile>0) {
 	 * 
-	 * pageloadcomplete();
+	 * CommonUtility.checkPageIsReadyNew(driver);
 	 * System.out.println("Current page URL: "+driver.getCurrentUrl());
 	 * testSiteUrl=driver.getCurrentUrl(); checkModelPopup(driver,30);
 	 * CommonUtility.waitForPageLoadNew(driver, zipCode, 45); try{
@@ -1213,7 +1213,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * startNew(UMS_ACQISITION_PROD_PAGE_URL);
 	 * testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL; } else {
 	 * startNew(UMS_ACQISITION_PAGE_URL); testSiteUrl=UMS_ACQISITION_PAGE_URL; }
-	 * pageloadcomplete();
+	 * CommonUtility.checkPageIsReadyNew(driver);
 	 * System.out.println("Current page URL: "+driver.getCurrentUrl());
 	 * checkModelPopup(driver,30); CommonUtility.waitForPageLoadNew(driver,
 	 * navigationSectionHomeLink, 45); CommonUtility.waitForPageLoad(driver,
@@ -1223,7 +1223,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * }catch(Exception e){
 	 * System.out.println("Proactive chat popup not displayed"); } } else
 	 * if("health-plans".equalsIgnoreCase(siteOrPage)){ isHealthPlan = true;
-	 * pageloadcomplete();
+	 * CommonUtility.checkPageIsReadyNew(driver);
 	 * System.out.println("Current page URL: "+driver.getCurrentUrl());
 	 * testSiteUrl=driver.getCurrentUrl(); checkModelPopup(driver,30);
 	 * CommonUtility.waitForPageLoadNew(driver, zipCode, 45); try{
@@ -1703,7 +1703,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 
 		scrollToView(zipCodeField);
@@ -1755,7 +1755,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	/*
 	 * public AboutUsAARPPage aboutUsFooterClick() { validateNew(footerAboutUsLink);
-	 * footerAboutUsLink.click(); pageloadcomplete(); if
+	 * footerAboutUsLink.click(); CommonUtility.checkPageIsReadyNew(driver); if
 	 * (getTitle().contains("About UnitedHealthcare")) { return new
 	 * AboutUsAARPPage(driver); } return null; }
 	 * 
@@ -1777,24 +1777,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public ContactUsAARPPage contactUsFooterClick() {
 	 * validateNew(footerContactUsLink); footerContactUsLink.click();
-	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("contact-us")) {
+	 * CommonUtility.checkPageIsReadyNew(driver); if (driver.getCurrentUrl().contains("contact-us")) {
 	 * return new ContactUsAARPPage(driver); } return null; }
 	 * 
 	 * 
 	 * 
 	 * public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 	 * validateNew(footerPrivacyPolicyLink); footerPrivacyPolicyLink.click();
-	 * pageloadcomplete(); validateNew(privacyHeader); if
+	 * CommonUtility.checkPageIsReadyNew(driver); validateNew(privacyHeader); if
 	 * (driver.getCurrentUrl().contains("privacy-policy.html")) { return new
 	 * PrivacyPolicyAARPPage(driver); } return null; }
 	 * 
 	 * public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 	 * validate(footerTermsnConditionsLink); footerTermsnConditionsLink.click();
-	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("terms-of-use")) {
+	 * CommonUtility.checkPageIsReadyNew(driver); if (driver.getCurrentUrl().contains("terms-of-use")) {
 	 * return new TermsnConditionsAARPPage(driver); } return null; }
 	 * 
 	 * public AcquisitionHomePageMobile homeFooterClick() {
-	 * validateNew(footerHomeLink); footerHomeLink.click(); pageloadcomplete(); if
+	 * validateNew(footerHomeLink); footerHomeLink.click(); CommonUtility.checkPageIsReadyNew(driver); if
 	 * (validateNew(zipCodeField)) { return new AcquisitionHomePageMobile(driver,
 	 * true); } return null; }
 	 * 
@@ -1837,7 +1837,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(StandaloneZipcode);
 
 		sendkeysMobile(StandaloneZipcode, zipcode);
@@ -1854,7 +1854,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		// ViewPlansPricingButton.click();
 		jsClickNew(ViewPlansPricingButton);
 
@@ -1904,7 +1904,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// ProviderSearch.click();
 		switchToNewTabNew(ProviderSearch);
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
 			return new ProviderSearchPageMobile(driver);
@@ -1920,7 +1920,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
 			return new pages.mobile.acquisition.commonpages.ProviderSearchPageMobile(driver);
@@ -1935,7 +1935,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
 			return new ProviderSearchPageMobile(driver);
@@ -2190,7 +2190,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		// selectFromDropDownByValue(stateDropDown, state);
 		// mobileSelectOption(stateDropDown, state, true); //For iOS selecting value
 		// from drop down is not working with XCUIPickerWheel
@@ -2412,7 +2412,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateGlobalFooterLinks() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(footerSiteMapLink);
 		// validateNew(footerHomeLink);
 		// validateNew(footerAboutUsLink);
@@ -2509,7 +2509,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	private void CheckPageLoad() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		checkModelPopup(driver, 30);
 
@@ -2618,7 +2618,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 		}
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(MobileMenuBackBtn);
 
 		jsClickNew(MobileMenuCloseNavigationBtn);
@@ -2651,7 +2651,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				threadsleep(1000);
 				driver.findElement(By.cssSelector("a#proceed-link")).click();
 				threadsleep(1000);
-				pageloadcomplete();
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		} catch (Exception e) {
 			System.out.println("No SSL error / Exception");
@@ -2915,7 +2915,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAboutUsLink);
 		// footerAboutUsLink.click();
 		jsClickNew(footerAboutUsLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (getTitle().contains("About")) {
 			return new AboutUsPageMobile(driver);
 		}
@@ -2961,7 +2961,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerContactUsLink);
 		// footerContactUsLink.click();
 		jsClickNew(footerContactUsLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsUmsPageMobile(driver);
 		}
@@ -2973,7 +2973,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		// footerAgentsnBrokersLink.click();
 		jsClickNew(footerAgentsnBrokersLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
 			return new AgentsAndBrokersPageMobile(driver);
 		}
@@ -3127,7 +3127,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatevisitorprofile() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 //		clickBrowserBackButton();
 
 		if (visitorprofileicon.isDisplayed()) {
@@ -3278,7 +3278,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 	public void validateHeaderLinks() {
 		jsClickNew(MenuMobile);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		validateNew(goToMemberSiteLink);
 
@@ -3324,7 +3324,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerSiteMapLink);
 		scrollToView(footerSiteMapLink);
 		jsClickNew(footerSiteMapLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
 			return new SiteMapAARPPageMobile(driver);
@@ -3450,7 +3450,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void Accessibility() {
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String base = driver.getWindowHandle();
 		jsClickNew(Accessibility);
 		threadsleep(5000);
@@ -3471,7 +3471,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateAssistancelink(String language) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement lnkAssistance = null;
 		if (language.equalsIgnoreCase("english")) {
 			lnkAssistance = driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[1]"));
@@ -3493,7 +3493,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.close();
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	// method to click Hide Disclaimer Information link present in Footer
@@ -3579,7 +3579,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(shoppingCartIcon);
 		// guestProfileLink.click();
 		// jsClickNew(guestProfileLink);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("profile")) {
 			System.out.println("Navigated to Visitor profile page");
 			return new VisitorProfilePageMobile(driver);
@@ -3710,7 +3710,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
 			return new ProviderSearchPageMobile(driver);
@@ -3749,7 +3749,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		/*
-		 * pageloadcomplete(); String CurrentUHCAgentURL = driver.getCurrentUrl();
+		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL = driver.getCurrentUrl();
 		 * System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
 		 * System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
 		 * 
@@ -3760,7 +3760,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		 * Assert.fail("****************myuhcagent Page is not loaded ***************");
 		 * }
 		 */
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
 		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
 		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
@@ -3834,7 +3834,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
 		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
 		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
@@ -3862,7 +3862,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
 			return new RequestHelpAndInformationPageMobile(driver);
@@ -3955,7 +3955,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickUnitedHealthcareMedicareSolutions() {
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
 
@@ -3983,7 +3983,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public boolean checkZipCompErrorInSubNav() {
 		hoverOverShopForPlan();
 		sleepBySec(3);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(OurPlans_zipfield);
 		validateNew(FindPlansButton1);
 		WebElement errorMsg = driver.findElement(By.xpath("//span[@class='field-error-msg']"));
@@ -4739,7 +4739,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					By.xpath("//*[@class='uhc-footer']//span[contains(text(),'Medicare Supplement Insurance Plans')]"));
 			waitforElement(link);
 			jsClickNew(link);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
 				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
@@ -4755,7 +4755,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 						+ "') and contains(@dtmname,'" + linkName + "')]"));
 				waitforElement(link);
 				jsClickNew(link);
-				pageloadcomplete();
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
 

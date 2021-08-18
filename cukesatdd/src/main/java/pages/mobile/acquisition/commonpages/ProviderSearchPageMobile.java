@@ -347,7 +347,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
 		Hospitals.click();
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
@@ -424,7 +424,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public void selectsProviderFromGlobaHeader() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		// CommonUtility.waitForPageLoadNew(driver, People, 30);
 		scrollToView(People);
@@ -595,7 +595,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	
 	public int entersZipcodeAndPlancount(String zipcode, String year) {
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitforElementVisibilityInTime(zipCodeTextfield, 10);
 		zipCodeTextfield.sendKeys(zipcode);
 		//sendkeysMobile(zipCodeTextfield, zipcode);

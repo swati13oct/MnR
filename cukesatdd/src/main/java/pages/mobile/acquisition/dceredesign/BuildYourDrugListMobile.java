@@ -1,7 +1,6 @@
 package pages.mobile.acquisition.dceredesign;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,7 +32,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']/parent::button")
 	public WebElement SearchBtn;
-
+	
+	@FindBy(xpath = "//*[@id='modal-label']")
+	public WebElement searchDrugHeader;
+	
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
 	public WebElement enterDrugTitle;
 
@@ -143,7 +145,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		scrollToView(SearchBtn);
 		// SearchBtn.click();
 		jsClickNew(SearchBtn);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		/*
 		 * WebElement SelectDrug = driver .findElement(By.
 		 * xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName +
@@ -245,7 +247,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
-		// pageloadcomplete();
+		// CommonUtility.checkPageIsReadyNew(driver);
 		// iosScroll(reviewDrugCost);
 		scrollToView(reviewDrugCostButtonFooter);
 		jsClickNew(reviewDrugCostButtonFooter);
@@ -277,7 +279,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		scrollToView(SelectDrug);
 
 		jsClickNew(SelectDrug);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		threadsleep(2000);
 		// waitForPageLoadSafari();
@@ -293,13 +295,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (addDrugButton.isDisplayed()) {
 			jsClickNew(addDrugButton);
 		}
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 
@@ -307,6 +309,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		sleepBySec(5);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+		
+		waitforElementVisibilityInTime(searchDrugHeader, 20);
 
 		List<WebElement> searchedDrugList = driver
 				.findElements(By.cssSelector("div[class*='searchdrugpopup'] div > ul > li > p"));
@@ -518,7 +522,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				jsClickNew(addDrugButton);
 			}
 
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(EnterDrugNameTxt);
 
 			WebElement RecommendedDrug = driver.findElement(
@@ -584,7 +588,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 		waitForPageLoadSafari();
 		threadsleep(2000);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		} else {

@@ -790,7 +790,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			scrollToView(mapdPlanToggle);
 			// validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
@@ -1219,7 +1219,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement SearchBtn;
 
 	public BuildYourDrugListMobile clickEditDrugs_DrugPricingModal() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(DrugPricingModal_EditDrugs);
 		jsClickNew(DrugPricingModal_EditDrugs);
 		waitForPageLoadSafari();

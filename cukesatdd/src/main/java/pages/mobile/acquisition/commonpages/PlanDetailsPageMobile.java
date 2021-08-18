@@ -1665,7 +1665,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	// LearnMore changes Start
 	public DrugDetailsPageMobile clickPrescriptionBenifitTab() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(prescriptionTab);
 		return null;
 
