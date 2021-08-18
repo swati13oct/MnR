@@ -1,4 +1,3 @@
-
 package pages.acquisition.planRecommendationEngine;
 
 import java.text.DateFormat;
@@ -348,6 +347,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	
 	@FindBy(css = "a#selector")
 	private  WebElement StartNowButton;
+	
+	@FindBy(css = "#buildyourdruglist button[dtmname*='review drug costs']:nth-child(1)")
+	private List<WebElement> reviewDrugCostButtons;
 
 // Start Over Popup
 	
@@ -853,6 +855,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			Collections.sort(drugsName);
 			System.out.println("DrugList in DCE: "+drugsName);
 			verifyConfirmationmodalResults(count,DrugsInDCE,drugsName);
+			reviewDrugCostButtons.get(0).click();
+			Assert.assertTrue(driver.getCurrentUrl().contains("dcezipinformation"),"ReviewDrugCost Page is not loaded");
 		}
 		
 	
