@@ -198,7 +198,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
 	private List<WebElement> planNamesOnly;
 
-	@FindBy(css = "#compare-table div[class*='flex'][class*='scope'] button[class*='delete']")
+	@FindBy(css = "#printPlans th[class*='text-blue-primary'] a[class*='uhc-link-button']")
 	private List<WebElement> plandeleteButtons;
 
 	@FindBy(css = "div.plan-ranking-message")
@@ -571,7 +571,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		// Check current Plan is not changed and no BestMatch text
 		if (planStartCount == 1) {
-			Assert.assertTrue(newplansDetails.get(0).contains("CURRENTPLAN"), "Change is Current plan position");
+			String elemPlan = planTile.get(3).findElement(By.cssSelector(" div >span")).getText().trim().replace(" ", "").toUpperCase()+" "+ driver.findElement(By.cssSelector("#enroll-row th:nth-child(1)")).getText().trim().replace(" ", "").toUpperCase();
+			Assert.assertTrue(elemPlan.contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 			Assert.assertFalse(newplansDetails.get(0).contains("BEST"), "Current plan is with Best Match text");
 		}
 
