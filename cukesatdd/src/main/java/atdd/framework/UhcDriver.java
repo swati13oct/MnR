@@ -62,7 +62,7 @@ public abstract class UhcDriver {
 
 	public WebDriver driver;
 
-	private long defaultTimeoutInSec = 30;
+	private long defaultTimeoutInSec = 20;
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public WebElement IPerceptionsFrame;

@@ -543,7 +543,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void openAndValidate() {
 
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 20);
 		else
 			checkModelPopup(driver, 10);
 		validateNew(addDrug);

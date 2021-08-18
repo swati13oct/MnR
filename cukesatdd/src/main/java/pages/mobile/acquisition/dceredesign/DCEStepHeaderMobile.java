@@ -37,7 +37,7 @@ public class DCEStepHeaderMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 20);
 		/*else
 			checkModelPopup(driver, 10);*/
 		validateNew(StepHeader);

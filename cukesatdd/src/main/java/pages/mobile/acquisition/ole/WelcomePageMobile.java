@@ -194,7 +194,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 20);
 		// Commenting modal check for stage environment
 		/*
 		 * else checkModelPopup(driver,10);
