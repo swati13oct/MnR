@@ -415,8 +415,9 @@ public class ReviewSubmitPage extends UhcDriver{
 				String PartBeffectiveDate = detailsMap.get("PartB Date");
 				String CardType = detailsMap.get("Card Type");
 				String Expected_PlanName = detailsMap.get("Plan Name");
-				//String Expected_PlanYear = detailsMap.get("Plan Year");
-				String Expected_PlanYear = "2021";
+				String Expected_PlanYear = detailsMap.get("Plan Year");
+				String Expected_Current_PlanYear = "2021";
+				String Expected_Future_PlanYear = "2022";
 				String Expected_ZipCode = detailsMap.get("Zip Code");
 				String Expected_County = detailsMap.get("County");
 				String Expected_PlanPremium = detailsMap.get("Plan Premium");
@@ -481,10 +482,16 @@ public class ReviewSubmitPage extends UhcDriver{
 				
 				String paymentPlan = detailsMap.get("Payment Plan");
 				
+				System.out.println("Expected Plan Year Displayed  : "+Expected_PlanYear);
 				boolean flag = true;
-				
-				String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
+				if(Expected_PlanYear.contains("current")) {
+				String Expected_PlanYear_PlanName = Expected_Current_PlanYear+" "+Expected_PlanName;
 				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+				}else {
+						String Expected_PlanYear_PlanName = Expected_Future_PlanYear+" "+Expected_PlanName;
+						flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);	
+						
+				}
 				String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
 				flag&=validateText(PlanZipDisplay,Zip);
 				flag&=validateText(FirstNameDisplay,FirstName);
@@ -526,7 +533,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
 				
-				if(!Expected_PlanName.contains("PDP")) {
+				if(!Expected_PlanName.contains("PDP") && !Expected_PlanYear.contains("future")) {
 				flag&=validateText(PCPName,PCP_Name);		
 				flag&=validateText(PCPNumber,PCP_Number);
 				flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);

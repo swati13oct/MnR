@@ -10,19 +10,7 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user validates Import Option is displayed
-    Then the user clicks on Import Drugs and validates Import Flow - Imports Get Started, Member NonMember Selection modals
-       | AuthenticatedFlag     | <authenticatedflag>|
-    Then the user selects Member and provides Member Details and proceeds to import
-      | AuthenticatedFlag     | <authenticatedflag> |
-      | FirstName     | <firstname>     |
-      | LastName      | <lastname>      |
-      | DOB           | <dob>           |
-      | ZipCode       | <importZipCode> |
-      | MBI           | <mbi>           |
-    Then the user validates Import Success/Failure modal as follows
-      | DrugsFlag     | <drugFlag>      |
-      | ProvidersFlag | <providersFlag> |
-    Then the user clicks on Review Imported Drugs and lands on Build your Drug List Page
+    When the user clicks on Add drugs button
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List
@@ -80,13 +68,13 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
 
     @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
-      | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
+      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
     @dce_DrugSummary_Page_UHC @regressionUHC @sanity
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |	dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname |
-      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |	10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  |
+      | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   ############# END - DCE Summary Regression Scenario #################
   @dceRedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
