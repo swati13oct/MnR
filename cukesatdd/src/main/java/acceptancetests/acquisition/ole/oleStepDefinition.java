@@ -122,7 +122,7 @@ public class oleStepDefinition {
 		if (SiteName.contains("UHC_ACQ")) {
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
+		//	TFN = planSummaryPage.GetTFNforPlanType();
 
 			
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
@@ -135,7 +135,7 @@ public class oleStepDefinition {
 			 * ,(new VPPPlanSummaryPage((WebDriver)getLoginScenario()
 			 * .getBean(CommonConstants.WEBDRIVER))));
 			 */
-			TFN = planSummaryPage.GetTFNforPlanType();
+		//	TFN = planSummaryPage.GetTFNforPlanType();
 
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
@@ -150,13 +150,13 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+	//	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
+	//	System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
@@ -434,7 +434,7 @@ public class oleStepDefinition {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 	//	Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 	//	PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
-		
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
@@ -447,6 +447,7 @@ public class oleStepDefinition {
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
 			Assertion.fail();
+		}
 		}
 	}
 
@@ -3161,20 +3162,22 @@ public class oleStepDefinition {
 	public void the_user_validates_cancellation_save_return_later_for_OLE_pages() throws Throwable {
 		scenario.log("Sai - Change made 07/27- Validate to cancellation and save return --Aug Release");
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		medicareInfoPage.OpenCancelOLEPages();
 		medicareInfoPage.OpensavereturnOLEPages();
 		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+		}
 	}
-
 	@Then("^the user validates logo image on OLE Pages$")
 	public void the_user_validates_logo_image_for_OLE_pages() throws Throwable {
 		
 		scenario.log("Sai - Change made 07/27 - Validate logo image --Aug Release");
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		personalInformationPage.OpenLogoOLEPages();
 		System.out.println("OLE logo image is clicked on OLE Pages");
+		}
 	}
-
 	// note: added code to print test results note in jenkins report at the end of
 	// test for successful cases
 	@After
@@ -3327,10 +3330,11 @@ public class oleStepDefinition {
 		scenario.log("Sai - Change made 06/15 - Validate Save and Return Later  on OLE Pages");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 	//	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		welcomePage.OpensavereturnOLEPages();
 		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+		}
 	}
-	
 	@Then("^the user validates Optional Benefits Page for following plans with available Riders in welcome page$")
 	public void the_user_validate_optional_rider_welcome_OLE_Page(DataTable Flags) {
 		scenario.log("Sai - Added on 06/15 - Validate optional Riders on Welcome OLE Page--Aug Release");
@@ -3422,9 +3426,11 @@ public class oleStepDefinition {
 	@Then("^the user validates Logo Image on Welcome OLE$")
 	public void the_user_validates_Leave_OLE_modal_for_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		welcomePage.ValidateLogoonWelcomeOLE();
 		System.out.println("Click on LogoImage ->> Leave Online Application Back Buttons are displayed on welcome Pages");
 		}
+	}
 	
 	@Then("^the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans$")
 	public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page_PDP_Plans(DataTable arg1)
@@ -3455,20 +3461,23 @@ public class oleStepDefinition {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
 		System.out.println("Widgets are displayed on welcome Pages");
 		}
-	
+	}
 	@Then("^the user validate widgets on OLE Pages$")
 	public void the_user_validates_widgtes_OLE_Pages(DataTable planAttributes) throws Throwable {
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
 	System.out.println("Widgets are displayed on welcome Pages");
 	}
-
+	}
+	
 	@Then("^the user selects the following options for new medicare SEP Page$")
 	public void the_user_selects_the_following_options_for_NewMedicare_page(DataTable SEPoptions) throws Throwable {
 
