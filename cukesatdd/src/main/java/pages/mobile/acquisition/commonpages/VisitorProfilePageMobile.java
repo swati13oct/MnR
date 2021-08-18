@@ -206,7 +206,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		
+		CommonUtility.checkPageIsReadyNew(driver);
 		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs & Pharmacy (1)")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
@@ -234,7 +234,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			for (String plan : listOfTestPlans) {
 				Assertion.assertEquals(plan,
-						driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText().trim());
+						driver.findElement(By.xpath("//h3[contains(text(),'" + plan + "')]")).getText().trim());
 				Assertion.assertTrue(driver.findElement(By.xpath(
 						"//h4[contains(text(),'" + plan + "')]/following::a[contains(@class,'add-provider')][1]"))
 						.isDisplayed());
@@ -404,7 +404,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
-					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
+					jsClickNew(driver.findElement(By.xpath("//h3[text()='" + plan + "']/preceding::button[1]")));
 					Thread.sleep(5000);
 				}
 

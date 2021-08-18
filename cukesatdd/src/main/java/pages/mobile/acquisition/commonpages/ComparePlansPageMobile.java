@@ -770,7 +770,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnNewRemoveLink() {
-		scrollToView(Newremove3rdplan);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		validateNew(Newremove3rdplan);
 		String PlanName = Newremove3rdplanName.getText();
 		System.out.println("3rd plan name is : " + PlanName);
@@ -1486,8 +1488,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
-			ele = driver.findElement(
-					By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
+			ele = driver.findElement(By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
 			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
@@ -1699,7 +1700,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
 			}
-			
+
 //			drugYouPaylist = drugYouPaylist + "&" + drugYouPay;
 			drugYouPaylist = StringUtils.isNullOrEmpty(drugYouPaylist) ? drugYouPay : drugYouPaylist + "&" + drugYouPay;
 //			System.out.println("Current Added Drug Name : " + currentAddedDrug);

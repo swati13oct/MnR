@@ -551,7 +551,9 @@ public class GlobalWebElements extends UhcDriver {
 	 * refer the methods in ShopForPlanNavigationPageMobile
 	 */
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(MenuMobile);
+
 		
 		validateNew(mobileNav, 5);
 		
