@@ -104,6 +104,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#yourdoctorsheading")
 	private WebElement DocName;
+	
+	@FindBy(css = "button#adddrug")
+	private WebElement AddMyDrugsInDCE;
 
 	@FindBy(css = "a[dtmname*=' Drugs']")
 	private WebElement AddDrugsLink;
@@ -162,8 +165,8 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "button[class*='saved-items-button']")
 	private WebElement mySavedItems ;
 	
-	@FindBy(css = "#guest-saved-items-button")
-	private WebElement guestViewSavedBtn;
+	@FindBy(css = "#auth-saved-items-button span")
+	private WebElement AuthViewSavedBtn;
 
 	@FindBy(css = "#landrover div[class*='justify-content-between'] a[dtmid*='acq_visitor_profile']")
 	private WebElement comparePlansBtn;
@@ -366,6 +369,8 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Validate Adding Drugs from Plan Compare page : ");
 		validate(AddDrugsLink);
 		jsClickNew(AddDrugsLink);
+		validate(AddMyDrugsInDCE);
+		jsClickNew(AddMyDrugsInDCE);
 		DCEPage dceobj = new DCEPage(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
 		returnToPlanCompare();
@@ -464,7 +469,9 @@ public class AREPlanRanking extends UhcDriver {
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
 		String actualplanName = "";
 		String exceptedplanName = plan.getText().toUpperCase().trim();
-		planInPDP.click();
+		System.out.println("MoreOption in Plan Compare Page: " + planInPDP.getText());
+		threadsleep(2000);
+		jsClickNew(planInPDP);
 		String VIew = viewPlanOption.getText().trim();
 		System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 //		System.out.println("View " + VIew);
@@ -539,7 +546,8 @@ public class AREPlanRanking extends UhcDriver {
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+			String Plan = newplansDetails.get(i)+ "#" + String.valueOf(j) + "BESTMATCH";
+			Assert.assertTrue(Plan.contains("#" + String.valueOf(j) + "BESTMATCH"),
 					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
 			j++;
 		}
@@ -600,8 +608,8 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			scrollToView(mySavedItems);
 			action.clickAndHold(mySavedItems).build().perform();
-			validate(guestViewSavedBtn);
-			guestViewSavedBtn.click();
+			validate(AuthViewSavedBtn);
+			AuthViewSavedBtn.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
@@ -615,8 +623,8 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			scrollToView(mySavedItems);
 			action.clickAndHold(mySavedItems).build().perform();
-			validate(guestViewSavedBtn);
-			guestViewSavedBtn.click();
+			validate(AuthViewSavedBtn);
+			AuthViewSavedBtn.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
 			comparePlansBtn.click();
@@ -680,6 +688,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		confirmAlert(60);
 		changePlanyear(year);
+		threadsleep(5000);
 	}
 
 	public void changePlanyear(String year) {
@@ -967,7 +976,8 @@ public class AREPlanRanking extends UhcDriver {
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+			String Plan = newplansDetails.get(i)+ "#" + String.valueOf(j) + "BESTMATCH";
+			Assert.assertTrue(Plan.contains("#" + String.valueOf(j) + "BESTMATCH"),
 					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
 			j++;
 		}
@@ -983,7 +993,8 @@ public class AREPlanRanking extends UhcDriver {
 		j = 1;
 		k = planStartCount;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+			String Plan = newplansDetails.get(i)+ "#" + String.valueOf(j) + "BESTMATCH";
+			Assert.assertTrue(Plan.contains("#" + String.valueOf(j) + "BESTMATCH"),
 					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
 			j++;
 		}
@@ -1015,7 +1026,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+			String elemPlan = planTile.get(3).findElement(By.cssSelector(" div >span")).getText().trim().replace(" ", "").toUpperCase()+" "+ driver.findElement(By.cssSelector("#enroll-row th:nth-child(1)")).getText().trim().replace(" ", "").toUpperCase();
+			Assert.assertTrue(elemPlan.contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		planRankingDropdown.click();
 		validate(applyBtn);
@@ -1031,7 +1043,8 @@ public class AREPlanRanking extends UhcDriver {
 		// Validate best match Text max of 4
 		int j = 1, k = planStartCount;
 		for (int i = k; i < newplansDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(newplansDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+			String Plan = newplansDetails.get(i)+ "#" + String.valueOf(j) + "BESTMATCH";
+			Assert.assertTrue(Plan.contains("#" + String.valueOf(j) + "BESTMATCH"),
 					"Expected Best Match Text is not applied : " + newplansDetails.get(i));
 			j++;
 		}
@@ -1048,7 +1061,8 @@ public class AREPlanRanking extends UhcDriver {
 		j = 1;
 		k = planStartCount;
 		for (int i = k; i < afterDeleteDetails.size() && j <= 4; i++) {
-			Assert.assertTrue(afterDeleteDetails.get(i).contains("#" + String.valueOf(j) + "BESTMATCH"),
+			String Plan = afterDeleteDetails.get(i)+ "#" + String.valueOf(j) + "BESTMATCH";
+			Assert.assertTrue(Plan.contains("#" + String.valueOf(j) + "BESTMATCH"),
 					"Expected Best Match Text is not applied : " + afterDeleteDetails.get(i));
 			j++;
 		}

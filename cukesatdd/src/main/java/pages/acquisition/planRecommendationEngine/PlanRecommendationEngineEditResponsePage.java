@@ -213,7 +213,8 @@ private WebElement signInLink;
 	public void navigateEditResponsePage(String flow) {
 		waitForPageLoadSafari();
 		validate(editYourResponse, 10);
-		editYourResponse.click();
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
