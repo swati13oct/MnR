@@ -175,7 +175,9 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user validates Get Started Page
     Then the user validates Import Option is displayed
     Then the user clicks on Import Drugs and validates Import Flow - Imports Get Started, Member NonMember Selection modals
+      | AuthenticatedFlag | <authenticatedflag> |
     Then the user selects Member and provides Member Details and proceeds to import
+      | AuthenticatedFlag | <authenticatedflag> |
       | DOB     | <dob>           |
       | ZipCode | <importZipCode> |
       | MBI     | <mbi>           |
@@ -209,15 +211,15 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @dceImportDrugs_AuthMember_AARP
     Examples:
-      | site | zipCode | drug2  | planType | planName                                            | userName | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          |
+      | site | zipCode | drug2  | planType | planName                                            | userName | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |authenticatedflag |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true  |
 
 
   @dceImportDrugs_AuthMember_UHC
     Examples:
-      | site | zipCode | drug2  | planType | planName                        | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |
-      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD1 | Password@1 | 06/11/1943 | 06383         | 3AA6TD4UY48 | true     | false         |
- #     | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD2 | Password@1 | 05/11/1953 | 06052         | 3WD2PU1GE94 | false    | true          |
+      | site | zipCode | drug2  | planType | planName                        | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag |
+      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD1 | Password@1 | 06/11/1943 | 06383         | 3AA6TD4UY48 | true     | false         | true              |
+ #     | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD2 | Password@1 | 05/11/1953 | 06052         | 3WD2PU1GE94 | false    | true          | true |
 
 
   @dceImportDrugs_AuthNonMember
@@ -234,6 +236,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user validates Get Started Page
     Then the user validates Import Option is displayed
     Then the user clicks on Import Drugs and validates Import Flow - Imports Get Started, Member NonMember Selection modals
+      | AuthenticatedFlag | <authenticatedflag> |
     Then the user selects NonMember, validates disclsimer page and provides following NonMember Details and proceeds to import
       | DOB     | <dob>           |
       | ZipCode | <importZipCode> |
