@@ -1112,6 +1112,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickBrowserBackButton() {
 		driver.navigate().back();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
