@@ -3292,7 +3292,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(menuMySavedItemsButton);
 		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
-		jsClickNew(closeMenu);
+		jsClickNew(mainMenuNavCloseButton);
 	}
 
 	public void validateVisitorProfileIcon() {
@@ -3784,6 +3784,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPFooterLink() {
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+		
+		if(mainMenuNavCloseButton.isDisplayed()) {
+			jsClickNew(mainMenuNavCloseButton);
+		}
+		
 		accessFooterLinkFromMore("AARP");
 		// waitForPageLoadSafari();
 		Set<String> winHandles = driver.getWindowHandles();

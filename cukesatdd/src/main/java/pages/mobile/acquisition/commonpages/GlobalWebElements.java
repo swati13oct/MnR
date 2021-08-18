@@ -334,8 +334,11 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
 	
-	@FindBy(css = "#mobile-nav button[class$='nav-close']")
-	public WebElement closeMenu;
+	@FindBy(css = ".mob-menu-header > div > button[class*='nav-close']")
+	public WebElement mainMenuNavCloseButton;
+	
+	@FindBy(css = "[class$='mob-menu-search'] button[class$='nav-close']")
+	public WebElement siteSearchCloseButton;
 	
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
