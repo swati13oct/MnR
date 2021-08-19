@@ -1,5 +1,6 @@
 package acceptancetests.data;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
