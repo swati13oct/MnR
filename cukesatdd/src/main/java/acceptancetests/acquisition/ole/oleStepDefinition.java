@@ -1730,7 +1730,7 @@ public class oleStepDefinition {
 		PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-		if(!planType.contentEquals("PDP") && planName.contains("PFFS")){
+		if(!planType.contentEquals("PDP") && planName.contains("PFFS") && !MRScenario.environment.contains("stage-0")){
 			System.out.println("Validating Provider Contact Information for PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_contact_info_in_PCP();
 			if(Validation_Status){
@@ -1756,7 +1756,7 @@ public class oleStepDefinition {
 		if(!planType.contentEquals("PDP") && !planName.contains("PFFS")
 				//Amey: Adding the environment logic since gate is failing because of a Rally issue.
 				// An incident is logged with the external Rally team. Remove this condition once fixed.
-				&& !MRScenario.environment.contains("mnr-acq-ci")){
+				&& !MRScenario.environment.contains("mnr-acq-ci")&& !MRScenario.environment.contains("stage-0")){
 			System.out.println("Validating Provider Look Up Provider for MA, MAPD, DSNP non-PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_Lookup(planType);
 			if(Validation_Status){
@@ -2506,7 +2506,7 @@ public class oleStepDefinition {
 		String[] dateArray = null;
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0")|| MRScenario.environment.equalsIgnoreCase("stage")|| MRScenario.environment.equalsIgnoreCase("offline-stage"))) {
 
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
@@ -2866,6 +2866,7 @@ public class oleStepDefinition {
 		
 		ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
+	//	String planYear = (String)getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
@@ -2961,7 +2962,7 @@ public class oleStepDefinition {
 		//--------------------------Added for payment plan--------------------------------------------------------------
 
 		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
-
+	//	if(planYear.contains("current")) {
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
@@ -2973,7 +2974,7 @@ public class oleStepDefinition {
 			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
 			Assertion.fail();
 		}
-		// }
+		//}
 	}
 
 	@Then("^the user validates Medicaid Number in OLE Page$")
