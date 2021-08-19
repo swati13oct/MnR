@@ -960,7 +960,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 20);
+			checkModelPopup(driver, 30);
 		/*
 		 * else checkModelPopup(driver, 30);
 		 */
