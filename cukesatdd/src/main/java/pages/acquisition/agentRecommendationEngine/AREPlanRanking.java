@@ -50,6 +50,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#printComparison")
 	private WebElement print;
+	
+	@FindBy(css = "#printPlans th[class*='headerinPrint']:nth-child(2) #viewallplansBtnId")
+	private WebElement showAllPlansLink;
 
 	@FindBy(css = "div#multiSelect label[for='as_dental']")
 	private WebElement dentalCheckLabel;
@@ -129,7 +132,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
 	private List<WebElement> viewplandetailslink;
 
-	@FindBy(css = "#enroll-row th button[class*='moreOptionsbtn']")
+	@FindBy(css = "#enroll-row th")
 	private List<WebElement> enrollBtn;
 	
 	@FindBy(css = "#highlights a[dtmid*='cta_acq_plans_detail']")
@@ -198,7 +201,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
 	private List<WebElement> planNamesOnly;
 
-	@FindBy(css = "#compare-table div[class*='flex'][class*='scope'] button[class*='delete']")
+	@FindBy(css = "#printPlans th[class*='text-blue-primary'] a[class*='uhc-link-button']")
 	private List<WebElement> plandeleteButtons;
 
 	@FindBy(css = "div.plan-ranking-message")
@@ -469,6 +472,7 @@ public class AREPlanRanking extends UhcDriver {
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
 		String actualplanName = "";
 		String exceptedplanName = plan.getText().toUpperCase().trim();
+		planInPDP = planInPDP.findElement(By.cssSelector(" button[class*='moreOptionsbtn']"));
 		System.out.println("MoreOption in Plan Compare Page: " + planInPDP.getText());
 		threadsleep(2000);
 		jsClickNew(planInPDP);
@@ -571,7 +575,8 @@ public class AREPlanRanking extends UhcDriver {
 
 		// Check current Plan is not changed and no BestMatch text
 		if (planStartCount == 1) {
-			Assert.assertTrue(newplansDetails.get(0).contains("CURRENTPLAN"), "Change is Current plan position");
+			String elemPlan = planTile.get(3).findElement(By.cssSelector(" div >span")).getText().trim().replace(" ", "").toUpperCase()+" "+ driver.findElement(By.cssSelector("#enroll-row th:nth-child(1)")).getText().trim().replace(" ", "").toUpperCase();
+			Assert.assertTrue(elemPlan.contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 			Assert.assertFalse(newplansDetails.get(0).contains("BEST"), "Current plan is with Best Match text");
 		}
 
@@ -1067,7 +1072,10 @@ public class AREPlanRanking extends UhcDriver {
 			j++;
 		}
 
-		addPlan();
+//		addPlan();
+		if(validate(showAllPlansLink))
+			showAllPlansLink.click();
+		
 		validate(planRankingDropdown, 60);
 
 		List<String> afterAddDetails = getPlanSectionDetails();

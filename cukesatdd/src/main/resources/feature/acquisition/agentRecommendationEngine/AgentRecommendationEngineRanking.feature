@@ -32,9 +32,9 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down not displaying in plancompare page
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | ocpuser | Password@123 | ATDD4STG@MEMBERDD.COM | None          | current  |
-      | ocpuser | Password@123 | SPOP@NONMEMBER.COM    | None          | current  |
+      | User    | Pass         | Email                  | IfMultiCounty | PlanYear |
+      | ocpuser | Password@123 | ATDD4STG@MEMBERDD.COM  | None          | current  |
+      | ocpuser | Password@123 | EMILYN@MACIEJEWSKI.COM | None          | current  |
 
   @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
@@ -177,4 +177,4 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User    | Pass         | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
       | ocpuser | Password@123 | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
-      | ocpuser | Password@123 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            | 
+      | ocpuser | Password@123 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
