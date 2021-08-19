@@ -80,16 +80,16 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='People']")
 	private WebElement People;
 
-	@FindBy(xpath = "//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Places']")
 	private WebElement Places;
 
-	@FindBy(xpath = "//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Hospitals']")
 	private WebElement Hospitals;
 
-	@FindBy(xpath = "//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='PrimaryCare']")
 	private WebElement Primary;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
@@ -202,7 +202,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		continueButton.click();
 		selectYear(planYear);
 		List<WebElement> topicDropDownValues = driver
-				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+				.findElements(By.xpath("//div[@data-ui-section='plan-listing']//ul//li"));
 
 		return topicDropDownValues.size();
 	}
@@ -229,15 +229,18 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// TODO Auto-generated method stub
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		GetStarted.click();
+		jsClickNew(GetStarted);
 
-		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		scrollToView(People);
+		//CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		scrollToView(Primary);
+		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
+		scrollToView(AllPrimaryCare);
+		//CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 
 		AllPrimaryCare.click();
 		// CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);

@@ -1,5 +1,5 @@
 @PlanRecommendationEngine
-Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
+Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
 
   @PRE @EditResponsePage @EditResponsePageValidation
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate responses in edit preference page in PRE
@@ -181,7 +181,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
       | AARP |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Vision,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
@@ -228,7 +228,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_doctors | E_DoctorsName |
       | AARP |   10001 | NO            | New York | MAPD          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                | Lookup    | julie         |
 
-    @regressionUHC
+    @regressionUHC @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_doctors | E_DoctorsName |
       | UHC  |   10001 | NO            | New York | MAPD          | Medicaid     | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                | Lookup    | julie         |

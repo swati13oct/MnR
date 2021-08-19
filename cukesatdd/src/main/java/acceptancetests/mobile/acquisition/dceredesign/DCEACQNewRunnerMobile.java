@@ -2,28 +2,32 @@ package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
-
 import pages.mobile.acquisition.dceredesign.DCEStepHeaderMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -43,8 +47,15 @@ public class DCEACQNewRunnerMobile {
 		return loginScenario;
 	}
 
-	private Scenario scenario;
 	AppiumDriver wd;
+	
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
 
 	@Then("^the user edits supply length to three months for following drug$")
 	public void the_user_edits_supply_length_to_three_months_for_following_drug(DataTable givenAttributes)
@@ -99,7 +110,7 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user selects Mail Pharmacy and returns to DCE Details page$")
@@ -130,7 +141,7 @@ public class DCEACQNewRunnerMobile {
 		String StandardPharmacytoSelect = memberAttributesMap.get("SelectStandardPharmacy");
 		drugDetailsPage.SelectStandardPharmacy(StandardPharmacytoSelect);
 		drugDetailsPage.validatePharmacyName(StandardPharmacytoSelect);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
 
@@ -198,6 +209,8 @@ public class DCEACQNewRunnerMobile {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		DCEbuildDrugList.validateDrugNotFound_ErrorMsg();
 	}
+	
+	
 
 	@Then("^user enter the following drug info and validates drug autocomplete$")
 	public void user_enter_the_following_drug_info_and_validates_drug_autocomplete(DataTable givenAttributes)
@@ -269,10 +282,7 @@ public class DCEACQNewRunnerMobile {
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugListMobile DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if (null == druglist) {
-			druglist = "";
-		}
-		druglist = druglist + "&" + drugName;
+		druglist = StringUtils.isEmpty(druglist) ? drugName : druglist + "&" + drugName;
 		System.out.println("Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 	}
@@ -339,7 +349,8 @@ public class DCEACQNewRunnerMobile {
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		System.out.println("Drug List before Delete Drug : " + druglist);
-		druglist = druglist.replace("&" + DeleteDrug, "");
+		
+		druglist = Stream.of(druglist.split("&")).filter(drugName -> !drugName.equalsIgnoreCase(DeleteDrug)).collect(Collectors.joining("&"));
 		System.out.println("Updated Drugs List after Delete Drug : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -380,38 +391,39 @@ public class DCEACQNewRunnerMobile {
 	}
 
 	@When("^the user saves plan from drug details page$")
-	public void the_user_saves_plan_from_drug_details_page(DataTable givenAttributes) {
+	public void the_user_saves_plan_from_drug_details_page() {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
-		String PlanName = memberAttributesMap.get("planname");
-		System.out.println(PlanName);
-		drugDetailsPage.savePlan(PlanName);
+		drugDetailsPage.savePlan();
 	}
 
 	@And("^user validates the plans on new visitor profile page of AARP site$")
 	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
-		 * i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String savePlanNames = givenAttributesMap.get("Test Plans");
+		
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String mapdPlanName = givenAttributesMap.get("Test Plans");*/
+		
+		List<List<String>> givenAttributesMap = planNames.asLists();
+		List<String> favPlans = givenAttributesMap.stream().map(planDetails -> planDetails.get(1)).collect(Collectors.toList());
+		
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlansNew(savePlanNames);
+		visitorProfile.validateAddedPlansNew(favPlans);
 	}
 
 	@Then("^the user validates planName on LearnMore page matches plan Name in VPP$")
@@ -419,7 +431,7 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanNameLearnMore(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
@@ -469,10 +481,14 @@ public class DCEACQNewRunnerMobile {
 		String InsulinDrug = memberAttributesMap.get("Insulin Drug");
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
-		drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
-		drugDetailsPage.validateInsulinText_ImportantInfo();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		if (null == InsulinCopay || InsulinCopay.isEmpty()) {
+			System.out.println("Insulin Benefit not available for the plan");
+		} else {
+			drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
+			drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
+			drugDetailsPage.validateInsulinText_ImportantInfo();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		}
 
 	}
 
@@ -550,19 +566,22 @@ public class DCEACQNewRunnerMobile {
 
 	@And("^user validates the added plans on new visitor profile page$")
 	public void user_validates_the_added_plans_on_new_visitor_profile_page(DataTable planNames) {
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
+		
 		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
 		 * i = 0; i < givenAttributesRow.size(); i++) {
 		 * 
 		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String savePlanNames = givenAttributesMap.get("Test Plans");
+		 
+		String savePlanNames = givenAttributesMap.get("Test Plans"); */
+		List<List<String>> givenAttributesMap = planNames.asLists();
+		List<String> favPlans = givenAttributesMap.stream().map(planDetails -> planDetails.get(1)).collect(Collectors.toList());
+		
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlansNew(savePlanNames);
+		visitorProfile.validateAddedPlansNew(favPlans);
 	}
 
 	@And("^user click on view saved plans button$")
@@ -601,7 +620,9 @@ public class DCEACQNewRunnerMobile {
 	public void user_clicks_on_Back_to_profile_button() {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.clickBackToProfileBtn();
+//		drugSummaryPage.clickBackToProfileBtn();
+		System.out.println("Clicking 'Return To Profile' link.");
+		drugSummaryPage.clickReturnToProfileLink();
 	}
 
 	@Then("^Back to profile button should be displayed for each plan card$")
@@ -658,34 +679,48 @@ public class DCEACQNewRunnerMobile {
 		scenario.log(
 				"Sneha Dwarakanath - Change made 06/07/2021 - Step Header validation Added --> C for Current, E for Enabled, D for Disabled ");
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 		String StepHeaderFlag = memberAttributesMap.get("Flags");
 		System.out.println("Flags -->>" + StepHeaderFlag);
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		dceStepHeader.validateStepHeader(StepHeaderFlag);
+		System.out.println(">>> Skipping validation on mobile <<< Step headers are not displayed on mobile.");
+//		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+//		dceStepHeader.validateStepHeader(StepHeaderFlag);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_build_your_drug_list_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		BuildYourDrugListMobile buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		BuildYourDrugListMobile buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();*/
+		System.out.println("Step header not displayed on mobile. Clicking 'Edit Your Drug List' link on Drug details page.");
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		BuildYourDrugListMobile buildDrugListPage = drugDetailsPage.clickEditYourDrugsLink();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Drug Details Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_drug_details_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		DrugDetailsPageMobile drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();
+		System.out.println("Step header not displayed on mobile. Clicking 'Review Drug Costs' button.");
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		DrugDetailsPageMobile drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();*/
+		
+		BuildYourDrugListMobile buildDrugListPage =  (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugDetailsPageMobile drugDetailsPage = buildDrugListPage.navigateToDrugDetailsPage();
+		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("the user clicks on Step Header Step {int} to land on Drug Summary Page")
 	public void the_user_clicks_on_step_header_step_to_land_on_drug_summary_page(Integer int1) {
 		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
-		DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
-		DrugSummaryPageMobile drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
+		System.out.println("Step header not displayed on mobile. Clicking 'View drug costs for all plans in your area' link.");
+		/*DCEStepHeaderMobile dceStepHeader = new DCEStepHeaderMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();*/
+		
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugSummaryPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
@@ -695,7 +730,7 @@ public class DCEACQNewRunnerMobile {
 				"Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
 		scenario.log(
 				"Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
-
+		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		BuildYourDrugListMobile buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);

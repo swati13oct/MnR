@@ -1,5 +1,5 @@
 @PlanRecommendationEngine @SaveResultsPREWidget
-Feature: Plan Recommendation Engine flow - Verify Save Results functionality and Verify PRE widget in Visitor page
+Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functionality and Verify PRE widget in Visitor page
 
   @PRE @SaveResultWithoutMS @SaveResult @F543314
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection>, <UserType>  - To Visitor Profile without MS Plans

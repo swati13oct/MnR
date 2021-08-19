@@ -80,8 +80,10 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		// ----- failure cases ------------------
 		System.out.println("Proceed to validate email popup screen for send option for failure case 1");
 		emailButton.click();
+		validateNew(emailPopupPlanSummary);
 		String testEmailAddresss = "bademailformat";
 		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
 		emailPlanSummaryFieldBox.clear();
 
@@ -98,6 +100,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Proceed to validate email popup screen for send option for failure case 2 ");
 		testEmailAddresss = "bademailformat@";
 		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
 		emailPlanSummaryFieldBox.clear();
 
@@ -114,6 +117,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Proceed to validate email popup screen for send option for failure case 3");
 		testEmailAddresss = "bademailformat@test.";
 		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
 		emailPlanSummaryFieldBox.clear();
 
@@ -131,6 +135,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Proceed to validate email popup screen for send option for successful case");
 		testEmailAddresss = "test@optum.com";
 		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		jsClickNew(emailPlanSummarySendButton);
 		Assertion.assertTrue("PROBLEM - uable to locate success message after clicking send button",
 				validate(emailPlanSummarySuccessText, 15));
@@ -299,9 +304,12 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void clickOnBackToAllPlansFromCompareBackToSummaryPage() {
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
-		iosScroll(backToAllPlansLnk);
+		//scrollToView(backToAllPlansLnk);
+		//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
+	
 		jsClickNew(backToAllPlansLnk);
+		sleepBySec(10);
+		//backToAllPlansLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			Thread.sleep(3000);

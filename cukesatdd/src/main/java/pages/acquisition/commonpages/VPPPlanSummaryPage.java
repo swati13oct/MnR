@@ -155,7 +155,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
 
-	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+	@FindBy(xpath = "//div[contains(@dtmname,'Plan Year Toggle:2021')]")
 	private WebElement CurrentYearPlansBtn;
 
 	// @FindBy(xpath =
@@ -589,12 +589,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	@FindBy(xpath = "//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
+	@FindBy(xpath = "//div[@class='uhc-modal__content']//h3[@id='modalTitle']")
 	// @FindBy(xpath="//div[@class='popup-modal
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='current_Year']")
+	@FindBy(xpath = "//button[@id='currentYearPlans']")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
@@ -916,6 +916,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
 	private List<WebElement> savePlanImgList;
 
+
 //	@FindBy(xpath = "//span[@id='header-number']")
 	@FindBy(xpath = "(//span[contains(@class,'cart-plans-count')])[1]")
 	private WebElement savedPlanHeaderCount;
@@ -1024,7 +1025,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "back-to-plans")
 	private WebElement backToPlanComparePage;
 
-	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1 ng-scope')]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
@@ -1032,6 +1033,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//label[@for='GI30dayBday_1']")
 	public WebElement	BirthdayEnrollment;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1135,6 +1139,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
+			handlePlanYearSelectionPopup();
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1142,6 +1147,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 
 			jsClickNew(maPlansViewLink);
+			handlePlanYearSelectionPopup();
 			// sleepBySec(2);
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
@@ -1160,6 +1166,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
+			handlePlanYearSelectionPopup();
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -3776,14 +3783,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// a[contains(@class, 'EBRC')]
 
 	// @FindBy(xpath = "//a[contains(@class, 'EBRC')]")
-	@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+	@FindBy(xpath = "//a[contains(text(),'here to get your Decision Guide')]")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assertion.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
 				validate(DecisionGuideLink));
-		// jsClickNew(DecisionGuideLink);
-		switchToNewTabNew(DecisionGuideLink);
+		 jsClickNew(DecisionGuideLink);
+	//	switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3955,8 +3962,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				currentYearSelection.click();
 			}
 			waitForPageLoadSafari();
-			validateNew(planYearPopupGoButton);
-			planYearPopupGoButton.click();
+			//validateNew(planYearPopupGoButton);
+			//planYearPopupGoButton.click();
 		} else { // if the plan year popup is not displayed
 			if (validate(CurrentYearPlansBtn, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
@@ -7132,4 +7139,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		validateNew(groupPlanMarkettingBullets);
 	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
+	}
+	
+	@FindBy(id = "savePlanheading")
+	private WebElement savedplanHeading;
+	
+	@FindBy(xpath = "//*[contains(@dtmname,'Keep Shopping')]")
+	private WebElement keepshopping;
+	
+	public void keepShopping() {
+		// TODO Auto-generated method stub
+		validateNew(savedplanHeading);
+		jsClickNew(keepshopping);
+	}
+	
+	public boolean validatePlanNamesPRE(String planName) {
+
+		boolean Plannames = false;
+		CommonUtility.checkPageIsReadyNew(driver);
+
+			WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName+ "')"));
+			CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+			jsClickNew(PREPlandetails);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		return Plannames;
+		
+	}
+
 }

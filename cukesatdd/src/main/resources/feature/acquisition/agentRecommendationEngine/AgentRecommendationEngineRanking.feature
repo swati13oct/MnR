@@ -1,5 +1,5 @@
 @agentRecommendationEngine @ARERegression @regressionAARP
-Feature: Agent Recommendation Engine - Verify ARE elements
+Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
   @ARE @AREElements @dropdownUI @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI

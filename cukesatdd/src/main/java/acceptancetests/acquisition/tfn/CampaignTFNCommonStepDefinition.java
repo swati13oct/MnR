@@ -30,6 +30,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.tfn.CampaignTFNPage;
 
 public class CampaignTFNCommonStepDefinition {
@@ -1037,30 +1038,30 @@ public void the_user_close_reopen_broswer() {
 		tfnPage.closeOriginalTabAndOpenNewTab();
 	}
 
-@Then("^the user clicks on Request a Free Decision Guide$")
-public void the_user_clicks_on_Request_a_Free_Decision(DataTable arg1) throws Throwable {
+@When("^the user clicks on Agent link for MedsuppPage$")
+public void the_user_clicks_on_Agent_Link_MedSup(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String TFNXpath = inputAttributesMap.get("TFN Xpath");
 	String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
 //	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	//tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
-	tfnPage.clickOnRequestADecisionGuide(TFNXpath,ExpecetdTFNNo);
+	tfnPage.clickOnAgentLinkMedSup(TFNXpath,ExpecetdTFNNo);
 	
 	
 	}
 
 
-@When("^the user clicks on Agent link for MedsuppPage$")
-public void User_navigate_through_Medsupp_EBRC(DataTable arg1) throws InterruptedException {
-	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+@Then("^the user clicks on decision guide for MedsuppPge$")
+public void User_navigate_through_Medsupp_EBRC() throws Throwable {
+	//Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	//String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
-	if(myUHCAgentURL!=null){
-		tfnPage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
-		Assertion.assertTrue(true);
-	}else
-		Assertion.fail("Error in loading the UHC Agent Page");
+	//if(myUHCAgentURL!=null){
+		tfnPage.decisionGuide();
+		//Assertion.assertTrue(true);
+	//}else
+	//	Assertion.fail("Error in loading the UHC Agent Page");
 }
 
 @When("^the user performs plan search using Shop Pages for Medsupp Page$")

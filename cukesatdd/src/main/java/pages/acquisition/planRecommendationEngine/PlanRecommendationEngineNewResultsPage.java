@@ -32,6 +32,7 @@ import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEn
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
@@ -708,4 +709,18 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);// Plan loader
 	}
 
+	public PlanDetailsPage validatePlanNamesPRE(String planName) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName
+				+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+		jsClickNew(PREPlandetails);
+		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		
+		return new PlanDetailsPage(driver);
+	
+	}
+	
+	
 }

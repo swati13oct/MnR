@@ -224,7 +224,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	//@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	
+	@FindBy(xpath="//*[contains(@class, 'proactive-chat-button-text')]")
 	public WebElement proactiveChatChatBtn;
 	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
@@ -250,7 +252,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public WebElement signIn;
 	
-	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
+	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	public WebElement menuShop;
 	
 	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
@@ -286,7 +288,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
 	
-	@FindBy(id = "search-field")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn")
 	public WebElement searchTxtbox;
 	
 	@FindBy(id = "header-tfn-link")
@@ -306,6 +308,9 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
 	public WebElement visitorProfileFlyoutSignInLink;
+	
+	@FindBy(id = "search-field")
+	public WebElement globalSiteSearchTxtBox;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

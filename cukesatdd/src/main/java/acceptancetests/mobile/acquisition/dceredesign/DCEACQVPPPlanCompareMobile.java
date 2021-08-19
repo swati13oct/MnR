@@ -71,9 +71,7 @@ public class DCEACQVPPPlanCompareMobile {
 	@When("^user clicks view drug cost button$")
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		/*drugSummaryPage.clickViewDrugCostBtn();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);*/
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		DrugDetailsPageMobile drugDetailsPage = drugSummaryPage.clickViewDrugCostBtn();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
@@ -93,9 +91,9 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		GetStartedPageMobile getStartedPage = planComparepage.navigateToDCERedesign();
-		if (null != getStartedPage) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		GetStartedPageMobile getStartedPageMobile = planComparepage.navigateToDCERedesign();
+		if (null != getStartedPageMobile) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPageMobile);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}

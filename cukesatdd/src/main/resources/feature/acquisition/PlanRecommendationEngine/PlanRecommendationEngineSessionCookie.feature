@@ -1,5 +1,5 @@
 @PlanRecommendationEngine
-Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
+Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
 
   @PRE @DrugPREtoVPPtoDCE @F375045 @F583139
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs details from PRE to VPP Page

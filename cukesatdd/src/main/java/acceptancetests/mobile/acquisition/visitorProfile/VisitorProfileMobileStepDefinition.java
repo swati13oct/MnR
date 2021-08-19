@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.visitorProfile;
 
 import java.util.HashMap;
@@ -258,7 +259,7 @@ public class VisitorProfileMobileStepDefinition {
 	}
 
 	@And("^the user should be able to see the Drug information in the guest profile page$")
-	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
+	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) throws InterruptedException {
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
 		 * memberAttributesRow.get(0).getCells().get(1);
@@ -283,6 +284,7 @@ public class VisitorProfileMobileStepDefinition {
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+//		visitorProfile.validateAddedPlans(savePlanNames);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 
@@ -388,10 +390,6 @@ public class VisitorProfileMobileStepDefinition {
 
 		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
-
-		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
@@ -656,4 +654,12 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.cancelEnrollment(planName);
 	}
+	
+	@When("^user clicks on Add drugs button globally on shopper profile page$")
+	public void user_clicks_on_add_drugs_button_globally() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsBtn();
+	}
 }
+

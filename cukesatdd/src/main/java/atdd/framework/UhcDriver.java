@@ -1,3 +1,4 @@
+
 package atdd.framework;
 
 import java.text.DecimalFormat;
@@ -69,13 +70,13 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
 	public WebElement IPerceptionNoBtn;
 
-	@FindBy(xpath = "//*[@id='Wrapper']/header/div[2]/div[1]/div[4]/span/img")
+	@FindBy(css = "#Wrapper > header > div.brandandnavigation.iparsys.parsys > div.brand.parbase.section > div.nav-toggle > span > p.menu-txt-mob")
 	public WebElement MenuMobile;
 
-	@FindBy(xpath = "//button[@class='icon-mob-btn dropdown-btn']")
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > button.icon-mob-btn.dropdown-btn")
 	public WebElement siteSearchTextBox;
 
-	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']/span")
 	public WebElement LearnAboutMedicare;
 
 	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")
@@ -87,7 +88,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
+	@FindBy(xpath = "//*[@id='shop-scroll']/div[2]/div[5]/div/div[3]/h3[2]/a")
 	public WebElement DCERedesignLink;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
@@ -210,8 +211,7 @@ public abstract class UhcDriver {
 	}
 
 	public void startNewMobile(String url) {
-
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
@@ -618,8 +618,9 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			// checkElementisEnabled(element);
+			//checkElementisEnabled(element);
 			scrollToView(element);
+			//iosScroll(element);
 			element.click();
 			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
@@ -725,7 +726,7 @@ public abstract class UhcDriver {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
 		} catch (Exception e) {
-			Assertion.fail("The element " + element + " is not found for scrolling into view");
+			Assertion.fail("The element " + element + " is not found for scrolling into view. Reason - " + e.getMessage());
 			return false;
 		}
 		return true;
@@ -863,10 +864,13 @@ public abstract class UhcDriver {
 	 * @return : boolean
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
-		// scrollToView(element);
-
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-50)", "");
+		if (driver.getClass().toString().toUpperCase().contains("IOS")
+				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			scrollToView(element);
+		} else {
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-50)", "");
+		}
 		try {
 			waitforElementNew(element, timeoutInSec);
 			if (element.isDisplayed()) {
@@ -1689,6 +1693,9 @@ public abstract class UhcDriver {
 		
 		jsClickNew(pdfLink);
 		
+		WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/button1")));
+		
 		Set<String> contexts = mobileDriver.getContextHandles();
 
 		for (String context : contexts) {
@@ -1699,11 +1706,12 @@ public abstract class UhcDriver {
 					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
 					break;
 				} catch (NoSuchElementException e) {
-					System.out.println("Memory permission was already granted. File downloaded !");
+					System.out.println("Permission was already granted.");
 				}
 			}
 		}
 		
+		sleepBySec(3);						//Added sleep for letting a file to get downloaded.
 		mobileDriver.context(webContext);
 	}
 	
@@ -1745,3 +1753,4 @@ public abstract class UhcDriver {
 	}
 
 }
+

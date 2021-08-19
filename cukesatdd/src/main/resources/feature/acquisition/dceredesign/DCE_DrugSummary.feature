@@ -9,7 +9,8 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user validates Import Option is displayed
+    When the user clicks on Add drugs button
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List

@@ -1,5 +1,5 @@
 @PlanRecommendationEngine
-Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
+Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
   @PRE @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE

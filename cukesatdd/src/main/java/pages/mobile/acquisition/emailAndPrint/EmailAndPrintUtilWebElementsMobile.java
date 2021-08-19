@@ -25,19 +25,19 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
 	protected WebElement firstSaveHeartOnActiveSummaryPlanPage;
 	
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_maPrintOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_maEmailOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_pdpPrintOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_pdpEmailOption;
 
-	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_snpPrintOption;
 
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
@@ -124,7 +124,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[contains(@id,'printComparison')]")
 	protected WebElement compare_validateprintbutton;
 
-	@FindBy(xpath=".//*[@id='emailComparison']")
+	@FindBy(css="#email-text")
 	protected WebElement compare_validateemailbutton;
 
 	@FindBy(xpath="//*[@id='backtoplansummarypage']")
@@ -136,7 +136,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[contains(@id,'SuccessPopUp')]//form//div[2]//button")
 	protected WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath="//*[@id='email-text']")
+	@FindBy(xpath="//span[@class='align-items-center mobilePrintEmail']")
 	protected WebElement validateemailbutton;
 	
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")
@@ -155,7 +155,13 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	protected WebElement validateEmailButtonOnPlanDetails;
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
-	protected WebElement emailPopup;
+	protected WebElement emailPopupPlanDetail;
+	
+	@FindBy(css = "#emailPlanSummaryPopUp")
+	protected WebElement emailPopupPlanSummary;
+	
+	@FindBy(css = ".modal-title")
+	protected WebElement emailModalTitle;
 
 	@FindBy(xpath = ".//*[@id='closepopup']")
 	protected WebElement cancelButtonEmailPlanDetailsPopUp;
