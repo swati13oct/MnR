@@ -783,7 +783,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
 	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 	private WebElement proactiveChatPopupEndChatOption;
-
+	
+	@FindBy(xpath = "//*[@id='ip-no']")
+	private WebElement surveyPopup;
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -3558,9 +3561,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return present;
 	}
 
+	
+	
 	public void validateHeaderLinks() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
+		
+		try {
+			validate(surveyPopup, 20);
+			if (surveyPopup.isDisplayed())
+				jsClickNew(surveyPopup);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		
 		Actions action = new Actions(driver);
 		action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
