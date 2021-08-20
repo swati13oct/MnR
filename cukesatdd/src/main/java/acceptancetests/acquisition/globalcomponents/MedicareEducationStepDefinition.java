@@ -514,10 +514,13 @@ public class MedicareEducationStepDefinition {
     }
 
     @Then("^the user validates email form component on new Medicare Education Page$")
-    public void the_user_validates_email_form_component_on_new_Medicare_Education_Page() {
+    public void the_user_validates_email_form_component_on_new_Medicare_Education_Page(DataTable givenAttributes) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String endpoint = memberAttributesMap.get("Endpoint");
         LearnAboutMedicareHomePageNew learnAboutMedicareHomePageNew = (LearnAboutMedicareHomePageNew) getLoginScenario()
                 .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-        learnAboutMedicareHomePageNew.validateEmailComponent();
+        learnAboutMedicareHomePageNew.validateEmailComponent(endpoint);
     }
 
     @Then("^the user clicks on How to Enroll link in Read Next section$")
