@@ -190,7 +190,7 @@ public class ShopPage extends GlobalWebElements {
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
 		waitforElement(enrollShopLink);
-		enrollShopLink.click();
+		jsClickNew(enrollShopLink);
 		Thread.sleep(4000);
 		if (validate(dsnpShopLink)) {
 			waitforElement(dsnpShopLink);
@@ -239,9 +239,10 @@ public class ShopPage extends GlobalWebElements {
 
 	public void clickOnMAShopButton() {
 
-		openShopForPlanFromMenu().selectPlanTypeOption(MAPD, false);
-
+		validateNew(MAShopLink);
+		jsClickNew(MAShopLink);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/medicare-advantage-plans")) {
 			Assert.fail("MA plans page did not load properly");
@@ -254,10 +255,10 @@ public class ShopPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		// MobileMenuToShopToolToShop();
 		pageloadcomplete();
-		scrollToView(pdpShopLink);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assert.fail("PDP plans page did not load properly");
@@ -272,6 +273,7 @@ public class ShopPage extends GlobalWebElements {
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/dual-special-needs-plans")) {
 			Assert.fail("SNP plans page did not load properly");
@@ -385,7 +387,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(comparePlanBtn);
 		validateNew(comparePlanBtn);
 		// jsClickNew(comparePlanBtn);
-		comparePlanBtn.click();
+		jsClickNew(comparePlanBtn);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/compare.html"))
@@ -396,8 +398,8 @@ public class ShopPage extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
-		// jsClickNew(LearnEstimateCosts);
-		LearnEstimateCosts.click();
+		 jsClickNew(LearnEstimateCosts);
+//		LearnEstimateCosts.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/estimate.html"))
@@ -408,8 +410,8 @@ public class ShopPage extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
-		// jsClickNew(howToSwitchPlans);
-		howToSwitchPlans.click();
+		jsClickNew(howToSwitchPlans);
+//		howToSwitchPlans.click();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/switch.html"))
@@ -420,8 +422,8 @@ public class ShopPage extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
-		// jsClickNew(learnSafeShopping);
-		learnSafeShopping.click();
+		jsClickNew(learnSafeShopping);
+//		learnSafeShopping.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("safe-shopping.html"))
 			Assert.fail("Learn Safe Shopping of Plans page did not load properly");
@@ -431,8 +433,8 @@ public class ShopPage extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
-		// jsClickNew(getMemberResources);
-		getMemberResources.click();
+		jsClickNew(getMemberResources);
+//		getMemberResources.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("resources.html"))
@@ -454,8 +456,8 @@ public class ShopPage extends GlobalWebElements {
 		pageloadcomplete();
 		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
-		// jsClickNew(checkDrugCostsBtn);
-		checkDrugCostsBtn.click();
+		jsClickNew(checkDrugCostsBtn);
+//		checkDrugCostsBtn.click();
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("estimate-drug-costs.html#/drug-cost-estimator"))
 			Assert.fail("DCE page did not load properly");
