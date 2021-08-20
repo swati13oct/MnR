@@ -25,10 +25,10 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@id,'plan-list') and contains(@class,'active')]//div[contains(@class,'plan-card') or contains(@class,'swiper-slide')][1]//a[@aria-selected='false']")
 	protected WebElement firstSaveHeartOnActiveSummaryPlanPage;
 	
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
+	@FindBy(xpath = "(//a[contains(@class,'printsummary')])[1]")
 	protected WebElement summary_maPrintOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "(//a[contains(@class,'emailsummary')])[1]")
 	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
