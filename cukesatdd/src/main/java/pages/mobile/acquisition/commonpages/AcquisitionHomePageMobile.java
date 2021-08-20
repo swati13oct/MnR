@@ -1096,7 +1096,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
-		if (getTitle().contains("About UnitedHealthcare")) {
+		if (getTitle().contains("About us | UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
 		return null;
