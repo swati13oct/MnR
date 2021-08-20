@@ -46,7 +46,8 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded') or
+	// contains(@id,'cta-zipcode')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -402,8 +403,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
-	
+	// @FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+
 	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
 	private WebElement chatsam;
 
@@ -639,7 +640,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
 	private WebElement rightRailsectionTFNtimezoneMedsupp;
 
-	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
+	// @FindBy(xpath =
+	// "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
 	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[4]")
 	private WebElement rightRailsectionTFNtimezoneOLE;
 
@@ -737,8 +739,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
-	
-	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+
+	// @FindBy(xpath =
+	// "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[2]")
 	private WebElement tfnHeaderRightRailOLE;
 
@@ -775,6 +778,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 	private WebElement chatPopupEndChatOption;
+
+	@FindBy(xpath = "//*[@id='ip-no']")
+	private WebElement surveyPopup;
 
 	// @FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
 
@@ -1315,7 +1321,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		pageloadcomplete();
 		validateNew(zipCodeField);
-//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
 		// viewPlansButton.click();
@@ -2987,7 +2993,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
-//		jsClickNew(providerSearchFromHomeScreen);
+		// jsClickNew(providerSearchFromHomeScreen);
 		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3559,6 +3565,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateHeaderLinks() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
+
+		CommonUtility.waitForPageLoad(driver, surveyPopup, 20);
+		try {
+			if (surveyPopup.isDisplayed())
+				jsClickNew(surveyPopup);
+		} catch (Exception e) {
+			System.out.println("Survey popup not displayed");
+		}
 		Actions action = new Actions(driver);
 		action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
@@ -6835,8 +6849,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			pageloadcomplete();
 		} else {
 			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
-				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "')]")).size();
+				int size = driver
+						.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "')]"))
+						.size();
 				if (size != 0) {
 					System.out.println("AARP.org link is not displaying");
 				} else {
@@ -6844,8 +6859,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					Assert.assertFalse(size == 0);
 				}
 			} else {
-				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "')]"));
+				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "')]"));
 				waitforElement(link);
 				jsClickNew(link);
 				pageloadcomplete();
@@ -7149,17 +7163,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {
-			     public WebElement apply(WebDriver driver) {
-			         return driver.findElement(By.xpath("//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]"));
-			       }
+				public WebElement apply(WebDriver driver) {
+					return driver
+							.findElement(By.xpath("//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]"));
+				}
 			});
 			validateNew(samChatIcon);
 			present = true;
 		} catch (Exception e) {
 			present = false;
-			if(driver.getCurrentUrl().contains("welcome"));
+			if (driver.getCurrentUrl().contains("welcome"))
+				;
 			driver.navigate().refresh();
-			present= validateNew(samChatIcon);
+			present = validateNew(samChatIcon);
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
@@ -7202,14 +7218,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateProactiveChat() throws InterruptedException {
 		boolean present;
 		try {
-			//waitforElementNew(proactiveChatModal, 30);
+			// waitforElementNew(proactiveChatModal, 30);
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {
-			     public WebElement apply(WebDriver driver) {
-			         return driver.findElement(By.id("proactive-chat-widget-new"));
-			       }
+				public WebElement apply(WebDriver driver) {
+					return driver.findElement(By.id("proactive-chat-widget-new"));
+				}
 			});
 			validateNew(proactiveChatModal);
 			present = true;
