@@ -281,7 +281,7 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement UHCLogo;
 
 	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
-	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
+	@FindBy(css = ".saved_items_container > button[dtmname^='Visitor Profile:Global Header']")
 	public WebElement visitorprofileicon;
 
 	// @FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
@@ -334,8 +334,11 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "div[aria-label='menu navigation']")
 	public WebElement MenuMobile;
 	
-	@FindBy(css = "#mobile-nav button[class$='nav-close']")
-	public WebElement closeMenu;
+	@FindBy(css = ".mob-menu-header > div > button[class*='nav-close']")
+	public WebElement mainMenuNavCloseButton;
+	
+	@FindBy(css = "[class$='mob-menu-search'] button[class$='nav-close']")
+	public WebElement siteSearchCloseButton;
 	
 	@FindBy(css = "#mobile-nav")
 	public WebElement mobileNav;
@@ -396,6 +399,7 @@ public class GlobalWebElements extends UhcDriver {
 		case MAPD:
 			jsClickNew(medicareAdvantagePlansLink);
 			break;
+		case DSNP:
 		case SNP:
 			jsClickNew(medicareSpecialNeedsPlansLink);
 			break;
@@ -406,7 +410,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(medicarePrescriptionDrug_PlansLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid link for plan type " + planType.name());
+			throw new IllegalArgumentException("Invalid link for plan type - " + planType.name());
 		}
 		pageloadcomplete();
 	}
@@ -439,7 +443,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(searchDentistsLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid tool " + tool.name());
+			throw new IllegalArgumentException("Invalid tool - " + tool.name());
 		}
 		pageloadcomplete();
 	}
@@ -471,7 +475,7 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(medicareFaqLink);
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid Learn about Medicare option" + option);
+			throw new IllegalArgumentException("Invalid Learn about Medicare option - " + option);
 		}
 		pageloadcomplete();
 	}

@@ -278,23 +278,23 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		boolean result = false; 
 		 result= Clickoncontinuebutton("/mailing-address");
 		
-		if(result) {
-		//Code for Personal Information page 2 begin
-			sendkeysMobile(PermanentAdd_Street,Perm_Street);
-			sendkeysMobile(PermanentAdd_Aptno,Perm_Aptno);
-			sendkeysMobile(PermanentAdd_City,Perm_city);
-		System.out.println("Mailing Question : "+MailingQuestion);
-		if(MailingQuestion.equalsIgnoreCase("no")){
-			jsClickNew(SameMailingAddressNo);
-			
-			sendkeysMobile(MailingAdd_Street,Mailing_Street);
-			sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
-			sendkeysMobile(MailingAdd_City,Mailing_City);
-//			Select SelectState = new Select(MailingAdd_State_DropDown);
-//			SelectState.selectByValue(Mailing_State);
-			mobileSelectOption(MailingAdd_State_DropDown, Mailing_State, true);
-			sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
-					}
+		if (result) {
+			// Code for Personal Information page 2 begin
+			sendkeysMobile(PermanentAdd_Street, Perm_Street);
+			sendkeysMobile(PermanentAdd_Aptno, Perm_Aptno);
+			sendkeysMobile(PermanentAdd_City, Perm_city);
+			System.out.println("Mailing Question : " + MailingQuestion);
+			if (MailingQuestion.equalsIgnoreCase("no")) {
+				jsClickNew(SameMailingAddressNo);
+
+				sendkeysMobile(MailingAdd_Street, Mailing_Street);
+				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
+				sendkeysMobile(MailingAdd_City, Mailing_City);
+				// Select SelectState = new Select(MailingAdd_State_DropDown);
+				// SelectState.selectByValue(Mailing_State);
+				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+			}
 		}		
 		result= Clickoncontinuebutton("phone-number");
 		//Code for Personal Information page 3 begin

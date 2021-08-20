@@ -10,9 +10,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +30,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -46,8 +48,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded') or
-	// contains(@id,'cta-zipcode')]")
+//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -403,8 +404,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	// @FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
-
+	//@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
+	
 	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
 	private WebElement chatsam;
 
@@ -640,8 +641,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
 	private WebElement rightRailsectionTFNtimezoneMedsupp;
 
-	// @FindBy(xpath =
-	// "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
+	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
 	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[4]")
 	private WebElement rightRailsectionTFNtimezoneOLE;
 
@@ -739,9 +739,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
 	private WebElement tfnHeaderPopupClose;
-
-	// @FindBy(xpath =
-	// "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
+	
+	//@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::p/span)[1]")
 	@FindBy(xpath = "(//*[contains(@class,'layout-container')])[3]//p[2]")
 	private WebElement tfnHeaderRightRailOLE;
 
@@ -778,9 +777,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 	private WebElement chatPopupEndChatOption;
-
-	@FindBy(xpath = "//*[@id='ip-no']")
-	private WebElement surveyPopup;
 
 	// @FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
 
@@ -1321,7 +1317,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		pageloadcomplete();
 		validateNew(zipCodeField);
-		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
 		// viewPlansButton.click();
@@ -2993,7 +2989,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
-		// jsClickNew(providerSearchFromHomeScreen);
+//		jsClickNew(providerSearchFromHomeScreen);
 		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3565,14 +3561,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateHeaderLinks() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
-
-		CommonUtility.waitForPageLoad(driver, surveyPopup, 20);
-		try {
-			if (surveyPopup.isDisplayed())
-				jsClickNew(surveyPopup);
-		} catch (Exception e) {
-			System.out.println("Survey popup not displayed");
-		}
 		Actions action = new Actions(driver);
 		action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
@@ -6849,9 +6837,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			pageloadcomplete();
 		} else {
 			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
-				int size = driver
-						.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "')]"))
-						.size();
+				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
+						+ "')]")).size();
 				if (size != 0) {
 					System.out.println("AARP.org link is not displaying");
 				} else {
@@ -6859,7 +6846,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					Assert.assertFalse(size == 0);
 				}
 			} else {
-				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "')]"));
+				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
+						+ "')]"));
 				waitforElement(link);
 				jsClickNew(link);
 				pageloadcomplete();
@@ -7163,19 +7151,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {
-				public WebElement apply(WebDriver driver) {
-					return driver
-							.findElement(By.xpath("//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]"));
-				}
+			     public WebElement apply(WebDriver driver) {
+			         return driver.findElement(By.xpath("//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]"));
+			       }
 			});
 			validateNew(samChatIcon);
 			present = true;
 		} catch (Exception e) {
 			present = false;
-			if (driver.getCurrentUrl().contains("welcome"))
-				;
+			if(driver.getCurrentUrl().contains("welcome"));
 			driver.navigate().refresh();
-			present = validateNew(samChatIcon);
+			present= validateNew(samChatIcon);
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
@@ -7218,14 +7204,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateProactiveChat() throws InterruptedException {
 		boolean present;
 		try {
-			// waitforElementNew(proactiveChatModal, 30);
+			//waitforElementNew(proactiveChatModal, 30);
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 			fwait.until(new Function<WebDriver, WebElement>() {
-				public WebElement apply(WebDriver driver) {
-					return driver.findElement(By.id("proactive-chat-widget-new"));
-				}
+			     public WebElement apply(WebDriver driver) {
+			         return driver.findElement(By.id("proactive-chat-widget-new"));
+			       }
 			});
 			validateNew(proactiveChatModal);
 			present = true;
@@ -7282,6 +7268,77 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void closeProactiveChatPopup() {
 		chatPopupOptions.click();
 		proactiveChatPopupEndChatOption.click();
+	}
+
+	public void clickOnFacebookShareButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnFacebookShare=driver.findElement(By.xpath("//a[contains(@class,'facebook_social_share')]"));
+		if(validateNew(btnFacebookShare)){
+			System.out.println("Facebook Share button present on page");
+		}else{
+			Assert.fail("Facebook Share button not present on page");
+		}
+		switchToNewTabNew(btnFacebookShare);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("www.facebook.com")){
+			System.out.println("Facebook share opened successfully");
+		}else{
+			Assert.fail("Facebook share did not opened successfully");
+		}
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		sleepBySec(2);
+
+	}
+
+	public void clickOnTwitterShareButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnTwitterShare=driver.findElement(By.xpath("//a[contains(@class,'twitter_social_share')]"));
+		if(validateNew(btnTwitterShare)){
+			System.out.println("Twitter Share button present on page");
+		}else{
+			Assert.fail("Twitter Share button not present on page");
+		}
+		switchToNewTabNew(btnTwitterShare);
+		sleepBySec(3);
+		if(driver.getCurrentUrl().contains("twitter.com")){
+			System.out.println("Twitter share opened successfully");
+		}else{
+			Assert.fail("Twitter share did not opened successfully");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		sleepBySec(2);
+	}
+
+	public void validateSocialShareEmailButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		WebElement btnEmail=driver.findElement(By.xpath("//a[contains(@class,'email_social_share')]"));
+		if(validateNew(btnEmail)){
+			System.out.println("Social Share Email button is present on the page");
+		}else{
+			Assert.fail("Social Share Email button is not present on the page");
+		}
+		String href=btnEmail.getAttribute("href");
+		//href=href.replace("%20"," ");
+		try {
+			href= URLDecoder.decode(href, StandardCharsets.UTF_8.name());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String pageTitle=driver.findElement(By.xpath("//input[@id='pageTitle']")).getAttribute("value");
+		if(pageTitle.contains("|")) {
+			pageTitle = pageTitle.substring(0, pageTitle.lastIndexOf("|")).trim();
+		}
+		System.out.println("HREF: "+href);
+		System.out.println("Page Title: "+pageTitle);
+		if ( href.contains(driver.getCurrentUrl()) && href.contains(pageTitle) && !href.contains("Master") && !href.contains("master")){
+			System.out.println("Email Button is working fine");
+		}else{
+			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
+		}
 	}
 
 }
