@@ -2,6 +2,7 @@
 package pages.acquisition.commonpages;
 
 import static org.testng.Assert.assertTrue;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7339,4 +7340,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
 		}
 	}
+
 }
