@@ -24,7 +24,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression
+    @visitorProfile_AARP @VP_ProdRegression_AARP
     Examples: 
       | state        | drug1   | zipCode | site |
       | Pennsylvania | Lipitor |   15001 | AARP |
@@ -59,7 +59,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | state    | drug1   | zipCode | site |
       | Virginia | Lipitor |   22320 | AARP |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression
+    @visitorProfile_UHC @VP_ProdRegression_UHC
     Examples: 
       | state    | drug1   | zipCode | site |
       | Virginia | Lipitor |   22320 | UHC  |
@@ -92,7 +92,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @visitorProfile_AARP @prodRegression @VP_ProdRegression_AARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                 |
       | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) |
@@ -141,7 +141,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county          | testPlans                                                                 | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
-    @visitorProfile_UHC @prodRegression
+    @visitorProfile_UHC
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county          | testPlans                                                                 | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
@@ -173,7 +173,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | AARP | Puerto Rico |   00641 | NO            | MS       | future   | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression
+    @visitorProfile_UHC @VP_ProdRegression_UHC
     Examples: 
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Puerto Rico |   00641 | NO            | MS       | future   | 11/11/1949 | Utuado Municipio | Plan G,Plan A |

@@ -2,7 +2,6 @@
 package pages.acquisition.commonpages;
 
 import static org.testng.Assert.assertTrue;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,9 +9,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +29,6 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -7268,4 +7269,74 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		proactiveChatPopupEndChatOption.click();
 	}
 
+	public void clickOnFacebookShareButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnFacebookShare=driver.findElement(By.xpath("//a[contains(@class,'facebook_social_share')]"));
+		if(validateNew(btnFacebookShare)){
+			System.out.println("Facebook Share button present on page");
+		}else{
+			Assert.fail("Facebook Share button not present on page");
+		}
+		switchToNewTabNew(btnFacebookShare);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("www.facebook.com")){
+			System.out.println("Facebook share opened successfully");
+		}else{
+			Assert.fail("Facebook share did not opened successfully");
+		}
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		sleepBySec(2);
+
+	}
+
+	public void clickOnTwitterShareButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnTwitterShare=driver.findElement(By.xpath("//a[contains(@class,'twitter_social_share')]"));
+		if(validateNew(btnTwitterShare)){
+			System.out.println("Twitter Share button present on page");
+		}else{
+			Assert.fail("Twitter Share button not present on page");
+		}
+		switchToNewTabNew(btnTwitterShare);
+		sleepBySec(3);
+		if(driver.getCurrentUrl().contains("twitter.com")){
+			System.out.println("Twitter share opened successfully");
+		}else{
+			Assert.fail("Twitter share did not opened successfully");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		sleepBySec(2);
+	}
+
+	public void validateSocialShareEmailButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		WebElement btnEmail=driver.findElement(By.xpath("//a[contains(@class,'email_social_share')]"));
+		if(validateNew(btnEmail)){
+			System.out.println("Social Share Email button is present on the page");
+		}else{
+			Assert.fail("Social Share Email button is not present on the page");
+		}
+		String href=btnEmail.getAttribute("href");
+		//href=href.replace("%20"," ");
+		try {
+			href= URLDecoder.decode(href, StandardCharsets.UTF_8.name());
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String pageTitle=driver.findElement(By.xpath("//input[@id='pageTitle']")).getAttribute("value");
+		if(pageTitle.contains("|")) {
+			pageTitle = pageTitle.substring(0, pageTitle.lastIndexOf("|")).trim();
+		}
+		System.out.println("HREF: "+href);
+		System.out.println("Page Title: "+pageTitle);
+		if ( href.contains(driver.getCurrentUrl()) && href.contains(pageTitle) && !href.contains("Master") && !href.contains("master")){
+			System.out.println("Email Button is working fine");
+		}else{
+			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
+		}
+	}
 }
