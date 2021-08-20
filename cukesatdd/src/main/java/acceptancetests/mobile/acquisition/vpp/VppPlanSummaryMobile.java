@@ -24,6 +24,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -1474,5 +1475,12 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNBAModalNotDisplayed();
+	}
+	
+	@When("^user removes provider from plan card$")
+	public void user_removes_provider_from_plan_card() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeProvidersFromPlanCard();
 	}
 }

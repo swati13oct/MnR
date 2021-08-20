@@ -416,7 +416,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 //		moveMouseToElement(testTooltip);//note: then move mouse over to target element
 
 		jsMouseOver(testTooltip); // note: then move mouse over to target element
-
+		CommonUtility.waitForPageLoadNew(driver, tooltip, 10);
 		Assertion.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt = Pattern.compile(expTxt);

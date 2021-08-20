@@ -1855,18 +1855,27 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void clickonBackToPlanResults() {
-		if (validate(backToPlans)) {
-			//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
-			
-			scrollToView(backToPlans);
-			jsClickNew(backToPlans);
-			CommonUtility.checkPageIsReady(driver);
-			CommonUtility.waitForPageLoadNew(driver, planOverviewChangeZipCodeLink, 15);
+		WebDriverWait wait = new WebDriverWait(driver, 15);
+		WebElement backToPlans = wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#card-updates > .back-to-plans")));
+		if (backToPlans != null) {
 			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				// Check if back to plans link is displayed
+				// If not, scrollToView and verify again
+				// before proceeding to click it.
+				if(!backToPlans.isDisplayed()) {
+					scrollToView(backToPlans);
+				}
+				if (backToPlans.isDisplayed()) {
+					jsClickNew(backToPlans);
+					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.waitForPageLoadNew(driver, planOverviewChangeZipCodeLink, 15);
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println("'Back to plan results' link is not displayed");
 			}
+		} else {
+			System.out.println("'Back to plan results' link is not present");
 		}
 	}
 
@@ -3227,7 +3236,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
 		try {
-			
 			clickonBackToPlanResults();
 			jsClickNew(planOverviewChangeZipCodeLink);
 			validateNew(planOverviewZipCodeFieldBox, 10);
@@ -6059,7 +6067,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void clickGetStartedBtnOnNba() {
-		nextBestActionModalGetStartedBtn.click();
+		jsClickNew(nextBestActionModalGetStartedBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void validateProviderNBA() {
@@ -6154,5 +6163,18 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+	
+	public void removeProvidersFromPlanCard() {
+		try {
+			jsClickNew(providerListPlanCard);
+			while (removeProviderListPlanCard.size() != 0) {
+				jsClickNew(removeProviderListPlanCard.get(0));
+				// jsClickNew(removeProviderListPlanCard.get(0));
+				System.out.println("Removed providers in plan card");
+			}
+		} catch (Exception e) {
+			System.out.println("No providers in plan card");
+		}
 	}
 }

@@ -1711,7 +1711,7 @@ public abstract class UhcDriver {
 			}
 		}
 		
-		sleepBySec(3);						//Added sleep for letting a file to get downloaded.
+		sleepBySec(5);						//Added sleep for letting a file to get downloaded.
 		mobileDriver.context(webContext);
 	}
 	
