@@ -114,7 +114,7 @@ Feature: 1.12 UAT - Header and Footer flows
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
     @globalfooter_AARP @regressionAARP
