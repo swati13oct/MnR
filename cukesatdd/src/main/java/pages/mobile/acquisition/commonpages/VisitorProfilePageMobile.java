@@ -1079,7 +1079,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-//	@FindBy(id = "dupIconFlyOut")
+	// @FindBy(id = "dupIconFlyOut")
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
@@ -1141,6 +1141,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "button.cta-button.create-profile")
 	private WebElement comparePlansOnPopup;
 
+
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement comparePlansPageControl;
 
@@ -1164,6 +1165,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
+
+
 
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
@@ -1193,12 +1196,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(css = "h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
+
 	
     @FindBy(css = "#landrover > main > app-dashboard-header > header.uhc-profile-header-mobile.position-relative.pt-20.mb-40 > div:nth-child(2) > nav > a:nth-child(2) > span")
     public WebElement drugHeader;
 
-    @FindBy(css = "h3#saved-drugs")
-    public WebElement savedDrugsHeader;
+
+//	@FindBy(css = "nav[class*='profile-header-nav-mobile']>a[dtmname$='Your Saved Drugs & Pharmacy'] > span")
+//	public WebElement drugHeader;
+
+	@FindBy(css = "h3#saved-drugs")
+	public WebElement savedDrugsHeader;
 
 	public void validateAddedDrugAndPharmacy(String drug) throws InterruptedException {
 
@@ -1233,7 +1241,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		System.out.println("Drug Name in VP page: " + drugName.getText());
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
+		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 				savedDrugsAndDoctorsHeader.getText().trim());
 		// Assertion.assertTrue(pharmacyAddress.isDisplayed());
 	}
@@ -1276,6 +1284,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 		}
 	}
+
+
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
@@ -1504,18 +1514,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @return
 	 */
 	public boolean providerinfo(String planName) {
-		WebElement ViewProviderbtn = driver.findElement(By.xpath("//*[@id=\"landrover\"]/main/div[3]/div[2]/div[2]/div[2]/div[4]/button"));
-		//WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-		//		+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		//WebElement providerin = driver.findElement(By.xpath("//*[@id=\"ProviderName-noplan-0\"]"));
-		scrollToView(ViewProviderbtn);
-		//jsClickNew(ViewProviderbtn);
-		String mproviderinfo = ViewProviderbtn.getText();
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
+		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("View Providers")) {
-			return false;
+		if (mproviderinfo.toLowerCase().contains("providers covered")) {
+			return true;
 		}
-		return true;
+		return false;
 
 	}
 
@@ -1778,6 +1784,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public ComparePlansPageMobile planCompare(String plans) {
 
 		jsClickNew(comparePlans);
+
 		waitforElementVisibilityInTime(comparePlansPageControl, 10);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
@@ -1785,6 +1792,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * driver.findElement(By.xpath("//label[text()='"+plan[i]+
 		 * "']/preceding-sibling::input")).click(); } comparePlansOnPopup.click();
 		 */
+
 		validateNew(enrollButton);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 
@@ -1855,26 +1863,26 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
-    private WebElement viewDrugPricingLink;
+	private WebElement viewDrugPricingLink;
 
 	@FindBy(xpath = "//*[contains(@class, 'plan-drug-doctor')]//a[contains(@dtmname, 'Update your drugs')]")
-    private WebElement DrugPricingModal_EditDrugslink;
+	private WebElement DrugPricingModal_EditDrugslink;
 
 	/**
 	 * click edit drugs from plan card
 	 */
 	public void clickEditDrugsPlancard() {
 		validateNew(viewDrugPricingLink);
-        viewDrugPricingLink.click();
-        System.out.println("View Drug Pricing is clicked for Plan Card");
-        validateNew(DrugPricingModal_EditDrugslink);
-        jsClickNew(DrugPricingModal_EditDrugslink);
-        System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
+		viewDrugPricingLink.click();
+		System.out.println("View Drug Pricing is clicked for Plan Card");
+		validateNew(DrugPricingModal_EditDrugslink);
+		jsClickNew(DrugPricingModal_EditDrugslink);
+		System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
 	}
 
 	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
 	public WebElement enterDrugInfoPlanCard;
-	
+
 	@FindBy(xpath = "(//div[@role='list']/div[starts-with(@class,'d-inline-block')]//a[contains(@dtmname,'Add Drugs')])[1]")
 	public WebElement addDrugLinkFirstPlanCard;
 
@@ -1882,7 +1890,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * click add drugs from plan card
 	 */
 	public void clickAddDrugsPlancardNew() {
-//		enterDrugInfoPlanCard.click();
+		// enterDrugInfoPlanCard.click();
 		jsClickNew(addDrugLinkFirstPlanCard);
 	}
 
@@ -2008,7 +2016,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'identity-confirm')]//button[contains(@class, 'close')]")
 	public WebElement ConfirmIdentity_ModalClose;
 
-//	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	// @FindBy(xpath =
+	// "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	@FindBy(css = "header[class*='uhc-profile-header-mobile'] a[dtmname$='Sign Out']")
 	public WebElement signOutLink;
 

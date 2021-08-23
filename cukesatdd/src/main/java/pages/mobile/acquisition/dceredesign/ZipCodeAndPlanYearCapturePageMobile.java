@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
@@ -17,7 +18,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "//span[@id='zipError']")
+	@FindBy(css = "#zipError > p")
 	public WebElement zipCodeErrorMsg;
 
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
@@ -38,7 +39,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
 	
-	@FindBy(xpath = "//button[contains(@dtmname,'zip information:review drug costs')]")
+	@FindBy(css = "button[dtmname$='zip information:review drug costs']")
 	public WebElement reviewDrugCostsButton;
 	
 	@FindBy(css = "#previousButton2")
@@ -150,7 +151,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
 		pageloadcomplete();
-		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(reviewDrugCostsButton)) {
 			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		} else {
 			Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
@@ -199,38 +200,21 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		// String[] zip = zipcode.split(",");
 		// for(String code: zip) {
 
-		if (returnToPage.isDisplayed()) {
-			jsClickNew(returnToPage);
-			System.out.println("New Popup for wrong zipcode displayed");
-			return new ZipCodeAndPlanYearCapturePageMobile(driver);
-		} else
-			validateNew(zipCodeTxtbox);
+		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
-		validateNew(continueBtn);
+		validateNew(reviewDrugCostsButton);
 
-		jsClickNew(continueBtn);
-		// continueBtn.click();
+		jsClickNew(reviewDrugCostsButton);
 		// countyDropdown.click();
-		CommonUtility.waitForPageLoad(driver, ReturnToPagePopup, 30);
-		if (validateNew(ReturnToPagePopup)) {
+		CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
+		if (validateNew(zipCodeErrorMsg)) {
 			System.out.println("Error message is Displaying");
-			// For Mobile
-			jsClickNew(ReturnToPagePopup);
-			zipCodeTxtbox.clear();
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
-
-		//
-		// CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
-		// if (validateNew(zipCodeErrorMsg)) {
-		// System.out.println("Error message is Displaying");
-		// // For Mobile
-		// jsClickNew(AlmostThereHeader);
-		// zipCodeTxtbox.clear();
-		// return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		// }
 		Assertion.fail("Error Message is not displaying for invalid zipcode");
 		return null;
+
 	}
 
 	public void verifyReviewDrugCostPageDisplayed() {

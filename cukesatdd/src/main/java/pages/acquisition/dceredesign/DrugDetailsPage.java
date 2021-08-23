@@ -25,6 +25,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.ole.WelcomePage;
 
 
 public class DrugDetailsPage extends UhcDriver {
@@ -67,6 +68,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Annual Estimated')]//following-sibling::p[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
+
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement DrugCosts_EnrollInPlanBtn;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
@@ -433,7 +437,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_MonthlyPremium);
 		validateNew(DrugCosts_AnnualEstTotal);
 
-        if(!LinktoExitScenario.getText().contains("Compare")) {
+        if(!LinktoExitScenario.getText().contains("ompare")) {
         	validateNew(DrugCosts_PlanDetailsBtn);
         }
 		//validateNew(DrugCosts_SaveBtn);
@@ -1401,7 +1405,17 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
-
+    public WelcomePage clickEnrollinPlanbtn() {
+		validateNew(DrugCosts_EnrollInPlanBtn);
+		jsClickNew(DrugCosts_EnrollInPlanBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page displayed ");
+			return new WelcomePage(driver);
+		} else {
+			return null;
+		}
+	}
 	public PlanDetailsPage clickViewPlanDetailsBtn() {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
@@ -2279,7 +2293,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmname, 'reset effective date')]")
 	public WebElement ResetEffectiveDateLink;
 
-	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
+	@FindBy(xpath = "//*[contains(text(), 'Monthly Drug Cost Details')]//following::h3[contains(text(), 'Dec 31')]")
 	public WebElement EffectiveDateTextafterChange;
 
 
@@ -2582,6 +2596,4 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(saveDrugs);
 			}
 		
-
-
 }
