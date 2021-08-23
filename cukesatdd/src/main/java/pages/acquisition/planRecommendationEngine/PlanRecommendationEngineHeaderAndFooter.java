@@ -104,6 +104,18 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 	@FindBy(css = "button#nav_search_icon")
 	private WebElement headerNavigationBarSearchIconTab;
 	
+	@FindBy(css = "input#zipcodemeded-0")
+	private WebElement ZipcodeHomepage;
+	
+	@FindBy(css = "button[class*='uhc-zip-button']")
+	private WebElement homePageFindPlans;
+	
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	private WebElement planZipInfo;
+	
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+	
 //Inside Shop for a Plan Elements
 	
 	@FindBy(css = "#subnav_2 > div.scroll-wrapper > div > div:nth-child(1) > label")
@@ -166,13 +178,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = ".desktop-sctn:nth-child(4) h3:nth-child(2)")
     private WebElement headerGetaPlanRecommendationLink;
     
-    @FindBy(linkText = "Drug Cost Estimator")
+    @FindBy(linkText = "Estimate Drug Costs")
     private WebElement headerDrugcostLink;
     
-    @FindBy(linkText = "Pharmacy Search")
+    @FindBy(linkText = "Search for a Pharmacy")
     private WebElement headerPharmacysearchLink;
     
-    @FindBy(linkText = "Provider Search")
+    @FindBy(linkText = "Search Doctors")
     private WebElement headerProvidersearchLink;
     
  //Learn about Medicare inner element
@@ -258,7 +270,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
 	private WebElement HeaderShopFromHomeInFindYourPlan;
     
-    @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+    @FindBy(xpath = "//a[contains(text(),'Plan Recommendation')]")
 	private WebElement HeaderGetRecommendationInShop;
 	
 //Footer Elements
@@ -397,11 +409,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		validate(headerGetaPlanRecommendationLink, 30);
 		Assert.assertTrue(headerGetaPlanRecommendationLink.getText().contains("Get a Plan Recommendation"));
 		validate(headerDrugcostLink, 30);
-		Assert.assertTrue(headerDrugcostLink.getText().contains("Drug Cost Estimator"));
+		Assert.assertTrue(headerDrugcostLink.getText().contains("Estimate Drug Costs"));
 		validate(headerPharmacysearchLink, 30);
-		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Pharmacy Search"));
+		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Search for a Pharmacy"));
 		validate(headerProvidersearchLink, 30);
-		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
+		Assert.assertTrue(headerProvidersearchLink.getText().contains("Search Doctors"));
 		validate(headerShopForaPlanMedicareGuide, 30);
 		validate(headerShopForaPlanMedicareGuideText, 30);
 		validate(headerShopForaPlanEmailBox, 30);
@@ -856,6 +868,19 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 			threadsleep(1000);
 			Assert.assertTrue(false);
 		}
+	}
+	
+	public void storedZipcode(String zipcode) {
+		System.out.println("Validating Zipcode stored in PRE session");
+		headerNavigationBarHomeTab.click();
+		threadsleep(2000);
+		validate(ZipcodeHomepage);
+//		Assert.assertTrue(ZipcodeHomepage.getText().trim().contains(zipcode), "Zipcode is Invalid ");
+		jsClickNew(homePageFindPlans);
+		validate(planZipInfo, 60);
+        waitforElementInvisibilityInTime(planLoaderscreen,60);
+        threadsleep(5000);// Plan loader
+        Assert.assertTrue(planZipInfo.getText().contains(zipcode),"Invalid Zip");
 	}
 
 	public void browserBack() {

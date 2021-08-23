@@ -92,7 +92,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
-// Results loading page Elements
+	// Results loading page Elements
 
 	@FindBy(css = "#loadingText")
 	private WebElement resultsloadingTitle;
@@ -156,6 +156,20 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
+
+	// Why is a separate Plan required Model elements
+
+	@FindBy(css = "div.modal-inner h2#modal-label")
+	private WebElement modelTiltle;
+
+	@FindBy(css = "div.modal-inner button[class*='modal-close']")
+	private WebElement modelCloseICon;
+
+	@FindBy(css = "div.modal-inner .bodyContent p")
+	private WebElement modelPara;
+
+	@FindBy(css = "div.modal-inner div[class*='separatePlanImages']")
+	private WebElement modelImage;
 
 	// Bottom Result page Elements
 
@@ -221,7 +235,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.content h2")
 	private WebElement planNameDetailsPage;
 
-//Result Loading Page Element Verification Method 
+	// Result Loading Page Element Verification Method
 
 	public void resultsloadingpage() {
 		System.out.println("Validating Results loading Page: ");
@@ -232,7 +246,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		validate(loadingImage);
 	}
 
-//Results Page Element Verification Method	
+	// Results Page Element Verification Method
 
 	public void waitforResultsPage() {
 		pageloadcomplete();
@@ -248,8 +262,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
-		Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results button");
-		Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans button");
+		// Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results
+		// button");
+		// Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans
+		// button");
 		// Assert.assertTrue(sortByLabel.getText().contains("Sort By :"), "Invalid Sort
 		// Text");
 		// Assert.assertTrue(resourcesTitle.getText().contains("Resources"), "Invalid
@@ -267,7 +283,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		// Supplement Insurance Plans (Medigap)"),
 		// "Invalid MADSUP Text");
 		// validate(madsupPlanTypesPara, 60);
-		Assert.assertFalse(validate(madsupPlanTypesPara, 10), "Medsub section should not display for July release");
+		Assert.assertTrue(validate(madsupPlanTypesPara, 10),
+				"Medsub section should not display for PDP flow/Non-approved states");
 		// Assert.assertTrue(madsupPlanTypesLearnmoreLink.getText().contains("Learn More
 		// About"),
 		// "Learn More About link not displayed");
@@ -299,16 +316,19 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(validate(pagenoLabel, 20), " Page count is not available");
 		String pageCount1 = pagenoLabel.getText().trim();
 		Assert.assertTrue(validate(pagePreviousButtonDisabled, 60), " Previous button Enabled in pagination");
-//		Assert.assertFalse(validate(returnToBeginning, 3), " Return to Beginning is displayed");
+		// Assert.assertFalse(validate(returnToBeginning, 3), " Return to Beginning is
+		// displayed");
 		Assert.assertTrue(validate(pageNextButton, 60), "Next button is not available in pagination");
 		pageNextButton.click();
 		threadsleep(2000);
 		Assert.assertFalse(validate(pagePreviousButtonDisabled, 60), " Previous button Disabled in pagination");
-//		Assert.assertTrue(returnToBeginning.getText().contains("Return to beginning"), "Invalid Return to beginning Text");
+		// Assert.assertTrue(returnToBeginning.getText().contains("Return to
+		// beginning"), "Invalid Return to beginning Text");
 		pagePreviousButton.click();
 		threadsleep(2000);
 		Assert.assertTrue(validate(pagePreviousButtonDisabled, 60), " Previous button Enabled in pagination");
-//		Assert.assertFalse(validate(returnToBeginning, 3), " Return to Beginning is displayed");
+		// Assert.assertFalse(validate(returnToBeginning, 3), " Return to Beginning is
+		// displayed");
 		String pageCount2 = pagenoLabel.getText().trim();
 		Assert.assertEquals(pageCount1, pageCount2, "Page count in not matching");
 		int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
@@ -320,7 +340,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertEquals(i, currentPage, "Page count is mismatch after pagenation");
 			if (i == totalPage) {
 				Assert.assertTrue(validate(pageNextButtonDisabled, 60), " Next button Enabled in pagination");
-//				Assert.assertTrue(returnToBeginning.getText().contains("Return to beginning"),"Invalid Return to beginning Text");
+				// Assert.assertTrue(returnToBeginning.getText().contains("Return to
+				// beginning"),"Invalid Return to beginning Text");
 			} else {
 				pageNextButton.click();
 				threadsleep(2000);
@@ -329,43 +350,51 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public int findPlan(String uniqueName) {
-		System.out.println("Finding a Plan...");
+		System.out.println("Finding a Plan... " + uniqueName);
 		waitforResultsPage();
-		String pageCount1 = pagenoLabel.getText().trim();
-		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
-		if(currentPage != 1) {
-			for(int c = 1; c < currentPage; c++) {
-				pagePreviousButton.click();
-				threadsleep(2000);
+		threadsleep(3000);
+		try {
+			String pageCount1 = pagenoLabel.getText().trim();
+			System.out.println("Total Page Count : " + pageCount1);
+			int currentPage = Integer
+					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+			if (currentPage != 1) {
+				for (int c = 1; c < currentPage; c++) {
+					pagePreviousButton.click();
+					threadsleep(2000);
+				}
 			}
-		}
-		boolean planAvailable = false;
-		// String uniqueName = "Plan 1 (Regional PPO)";
-		// int totalPlans = plantiles.size();
-//		String pageCount1 = pagenoLabel.getText().trim();
-		int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
-		int i = 1, planIndex = 0;
-		do {
-			// 3 plans per page
-			for (int k = 0; k < 3; k++) {
-				String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
-				if (planName.contains(uniqueName.trim())) {
-					planAvailable = true;
+			boolean planAvailable = false;
+			// String uniqueName = "Plan 1 (Regional PPO)";
+			// int totalPlans = plantiles.size();
+			// String pageCount1 = pagenoLabel.getText().trim();
+			int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+			int i = 1, planIndex = 0;
+			do {
+				// 3 plans per page
+				for (int k = 0; k < 3; k++) {
+					String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
+					if (planName.contains(uniqueName.trim())) {
+						planAvailable = true;
+						break;
+					}
+					planIndex++;
+				}
+				if (i == totalPage || planAvailable) {
 					break;
 				}
-				planIndex++;
-			}
-			if (i == totalPage || planAvailable) {
-				break;
-			}
-			pageNextButton.click();
-			threadsleep(2000);
-			i++;
-		} while (i <= totalPage);
-		System.out.println("planAvailable - " + planAvailable);
-		if (!planAvailable)
-			planIndex = -1;
-		return planIndex;
+				pageNextButton.click();
+				threadsleep(2000);
+				i++;
+			} while (i <= totalPage);
+			System.out.println("planAvailable - " + planAvailable);
+			if (!planAvailable)
+				planIndex = -1;
+			return planIndex;
+		} catch (Exception e) {
+			System.out.println("Unable to find Plan : " + uniqueName);
+			return -1;
+		}
 	}
 
 	public void validateDrugInfo(String drugsInfo, String location) {
@@ -385,6 +414,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					verifyDrugdataModel(planName, drugName, drugStatus);
 				if (location.toLowerCase().contains("show"))
 					verifyDrugShowMore(planName, drugName);
+				if (location.toLowerCase().contains("whyseparatemodel"))
+					verifyDrugWhySeparateMdel(planName);
 			}
 		}
 	}
@@ -427,7 +458,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				planName = doctorDetails[0];
 				doctorName = doctorDetails[1];
 				doctorStatus = doctorDetails[2];
-				if(location.toLowerCase().contains("tile"))
+				if (location.toLowerCase().contains("tile"))
 					verifyDoctordata(planName, doctorName, doctorStatus);
 				else
 					verifyDoctorShowMore(planName, doctorName);
@@ -439,7 +470,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int planIndex = findPlan(planName);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
-		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
+		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()),
+				"Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
 		covered = plantiles.get(planIndex)
@@ -452,7 +484,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			if (doctorName.toLowerCase().contains("Access to doctors".toLowerCase())
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
-					|| doctorName.toLowerCase().contains("any provider".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -470,7 +503,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
 					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
-					|| doctorName.toLowerCase().contains("do not provide".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("do not include".toLowerCase())
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -483,6 +517,13 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			}
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all Doctors covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
+		} else if (doctorStatus.toLowerCase().contains("mscoverage")) {
+			Assert.assertTrue(
+					doctorText.toLowerCase().replace("\n", "")
+							.contains(doctorName.toLowerCase() + "Accept Medicare Patient".toLowerCase()),
+					"Doctor details Invalid in plan - " + planName);
+			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all Doctors covered for a plan");
+			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
 		} else {
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero Doctors");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero Doctors");
@@ -519,10 +560,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("Validating SNP Coverage...");
 		if (snpStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered.");
-			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered");
 		} else if (snpStatus.toLowerCase().contains("false")) {
-			Assert.assertTrue(covered < 1, "Mismatch in Covered.");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered.");
+		} else if (snpStatus.toLowerCase().contains("noicon")) {
+			System.out.println("No Coverage Icon for Non-SNP plans");
 		} else {
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be No coverage icon");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be No coverage icon");
@@ -530,9 +571,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void viewPlanInfo(String planInfo) {
+		threadsleep(5000);
 		System.out.println("Navigating Plans Info...");
 		String planName = "", planAction = "";
-		String[] planDetails = planInfo.split(",");
+		String[] planDetails = planInfo.split(",");		   
 		planName = planDetails[0];
 		planAction = planDetails[1];
 		int planIndex = findPlan(planName);
@@ -574,7 +616,16 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
+		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText()
+				.trim();
+		threadsleep(2000);
+		if (planType.contains("Supplement")) {
+			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
+			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
+					.trim();
+		} else
+			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
+		threadsleep(2000);
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -596,7 +647,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		drugModelClose.click();
 		threadsleep(2000);
 	}
-	
+
 	public void verifyDrugShowMore(String planName, String drugName) {
 		int planIndex = findPlan(planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
@@ -605,7 +656,22 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDrugsId']")).click();
 	}
-	
+
+	public void verifyDrugWhySeparateMdel(String planName) {
+		int planIndex = findPlan(planName);
+		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+		threadsleep(2000);
+		Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
+				"Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelPara.getText().trim().contains("Part D"),
+				"Why is a separate model not found in plan - " + planName);
+		Assert.assertTrue(modelImage.getText().trim().contains("Supplement"),
+				"Why is a separate model not found in plan - " + planName);
+		validate(modelCloseICon);
+		modelCloseICon.click();
+		threadsleep(2000);
+	}
+
 	public void verifyDoctorShowMore(String planName, String doctorName) {
 		int planIndex = findPlan(planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDoctorsId']")).click();
@@ -614,21 +680,33 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDoctorsId']")).click();
 	}
-	
+
 	String sampleJson = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness membership\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],\"planYear\":2021,\"location\":{\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New York County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
-	
+
 	public void poc() {
 		System.out.println("Doing POC.....");
-		String StorageKey = "ucp_planRecommendationObj",value = sampleJson;
+		String StorageKey = "ucp_planRecommendationObj", value = sampleJson;
 		JavascriptExecutor js = ((JavascriptExecutor) driver);
 		threadsleep(5000);
 		try {
-		js.executeScript(String.format("window.sessionStorage.setItem('%s','%s');", StorageKey,value));
-		}
-		catch(Exception e1) {
+			js.executeScript(String.format("window.sessionStorage.setItem('%s','%s');", StorageKey, value));
+		} catch (Exception e1) {
 			System.out.println("data");
 		}
-		
+
+	}
+
+	public void browserBack() {
+
+		driver.navigate().back();
+		plansLoader();
+	}
+
+	public void plansLoader() {
+		pageloadcomplete();
+		if (validate(planLoaderscreen, 60))
+			waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		threadsleep(5000);// Plan loader
 	}
 
 	public PlanDetailsPage validatePlanNamesPRE(String planName) {
