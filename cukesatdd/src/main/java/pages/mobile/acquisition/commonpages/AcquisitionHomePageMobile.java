@@ -174,7 +174,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	@FindBy(css = "a[title='Estimate Drug Costs']")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
@@ -232,7 +232,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement MALandingHeading;
 
 	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(css = "form[class$='zipCompForm-0'] button[class^='uhc-zip-button']")
+	@FindBy(css = "form[class='zipForm'] button[class^='uhc-zip-button']")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
