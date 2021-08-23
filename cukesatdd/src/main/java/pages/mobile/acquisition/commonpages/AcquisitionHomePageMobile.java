@@ -239,7 +239,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
 	private WebElement findPlansBtn;
 
-	@FindBy(xpath = "//button[@class='zip-button' and text()='Go']")
+	@FindBy(xpath = "//span[text()='Shop Plans' and @zipcompindex='0']")
 	public WebElement btnGO;
 
 	/*
