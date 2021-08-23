@@ -62,6 +62,12 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
+	
+	@FindBy(css = "#searchcontainer button[dtmname*='return to compare']")
+	private WebElement returntoCompare;
+	
+	@FindBy(css = "#modal div[class*='column-12'] button[dtmname*='drug:yes']")
+	private WebElement yesRemoveDrug;
 
 	// Dosage Modal
 
@@ -194,8 +200,8 @@ public class DCEPage extends UhcDriver {
 	}
 
 	public void returnToCompare() {
-		validate(drugpageButtons.get(0));
-		drugpageButtons.get(0).click();
+		validate(returntoCompare);
+		returntoCompare.click();
 		pageloadcomplete();
 		threadsleep(2000);
 	}
@@ -230,6 +236,7 @@ public class DCEPage extends UhcDriver {
 		for (int i = 0; i < drugLimit; i++) {
 			drugDeleteButtons.get(0).click();
 			threadsleep(2000);
+			yesRemoveDrug.click();
 		}
 	}
 

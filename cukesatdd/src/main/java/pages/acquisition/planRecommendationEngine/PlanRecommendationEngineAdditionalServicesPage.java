@@ -25,7 +25,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends GlobalWebEle
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
-	String page = "Additional Services";
+	String page = "Services and Discounts";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -242,7 +242,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends GlobalWebEle
 	desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
-	public void edit_additional(String additionalOptions) {
+	public void edit_Services(String additionalOptions) {
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 	}
 	
