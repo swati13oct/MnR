@@ -1,6 +1,7 @@
 
 package acceptancetests.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.stream.Stream;
@@ -1037,6 +1038,14 @@ public class CommonConstants {
 	public static final String FOOTER_LINK = "linkName";
 	
 	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Rally_Providers = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Providers = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> DCE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
 	
 	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
 	
