@@ -19,7 +19,7 @@ import pages.acquisition.commonpages.GlobalWebElements;
 
 public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 
-	Actions actions = new Actions(driver);
+	public Actions actions = new Actions(driver);
 
 	public PlanRecommendationEngineCommonutility(WebDriver driver) {
 		super(driver);
@@ -133,14 +133,13 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 		previousPagePercentage = new String();
 		nextPageName = new String();
 		nextPagePercentage = new String();
-		// Update the else as else if for each page
-		if (currentPageName.contains("LOCATION")) {
-			nextPageName = "Coverage";
-			nextPagePercentage = "11%";
-			currrentPagePercentage = "0%";
-		}
 		// Update the else and else if for each page
 		if (flow.equalsIgnoreCase("PDP")) {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
 			if (currentPageName.contains("COVERAGE")) {
 				previousPageName = "Location";
 				previousPagePercentage = "11%";
@@ -156,6 +155,11 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				currrentPagePercentage = "50%";
 			}
 		} else {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
 			if (currentPageName.contains("COVERAGE")) {
 				previousPageName = "Location";
 				previousPagePercentage = "11%";
@@ -191,7 +195,7 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				if (flow.equalsIgnoreCase("MA")) {
 					previousPagePercentage = "38%";
 					currrentPagePercentage = "38%";
-					nextPageName = "Additional";
+					nextPageName = "Services";
 					nextPagePercentage = "50%";
 				}
 				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
@@ -201,9 +205,9 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 				previousPageName = "Doctor";
 				previousPagePercentage = "44%";
 				currrentPagePercentage = "44%";
-				nextPageName = "Additional";
+				nextPageName = "Services";
 				nextPagePercentage = "56%";
-			} else if (currentPageName.contains("ADDITIONAL")) {
+			} else if (currentPageName.contains("SERVICES")) {
 				previousPageName = "Drug";
 				previousPagePercentage = "56%";
 				nextPageName = "Cost";
@@ -216,7 +220,7 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 					nextPagePercentage = "63%";
 				}
 			} else if (currentPageName.contains("COST")) {
-				previousPageName = "Additional";
+				previousPageName = "Services";
 				previousPagePercentage = "67%";
 				nextPageName = "Priorities";
 				nextPagePercentage = "78%";
@@ -274,8 +278,13 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 	}
 
 	public void nextPageNameValidation(String pageName) {
-		System.out.println("Next page Validation Mobile");
-		findPagedetails(pageName);
+		System.out.println("Next page Validation Desktop");
+		if(pageName.equalsIgnoreCase("LOCATION")) {
+			System.out.println("Plan Type not mentioned in flow");
+			nextPageName = "Coverage";
+			nextPagePercentage = "11%";}
+		else
+			findPagedetails(pageName);
 		if (nextPageName.contains("NULL") == false) {
 			try {
 				pageloadcomplete();

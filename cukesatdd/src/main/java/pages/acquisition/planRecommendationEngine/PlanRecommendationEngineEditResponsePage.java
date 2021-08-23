@@ -93,7 +93,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
 	private WebElement SignInButton;
 	
-	@FindBy(css = "#cancelButton")
+	@FindBy(xpath = "//button[contains(text(),'Cancel')]")
 	private WebElement cancelLink;
 	
 	@FindBy(css = "button#keepShoppingBtn")
@@ -105,7 +105,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "li.planTileGrid")
 	private List<WebElement> plantiles;
 	
-	@FindBy(xpath = "//button[contains(text(),'Create Profile')]")
+	@FindBy(xpath = "//button[contains(text(),'Create an Account')]")
 	private WebElement CreateProfileButton;
 	
 	//Shopping Cart elements
@@ -135,6 +135,9 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "uhc-list-item.list-item")
 	private List<WebElement> allQuestionSection;
+	
+	@FindBy(css = "uhc-list-item.list-item h2")
+	private WebElement questionSectionTitle;
 
 	@FindBy(css = "div.viewUpdateSection:nth-of-type(1)>button")
 	private WebElement viewUpdateButton;
@@ -188,19 +191,17 @@ private WebElement signInLink;
 		checkContent("location");
 		checkContent("coverage");
 		checkContent("special");
-		checkContent("travel");
 		checkContent("doctor");
 		checkContent("drugs");
-		checkContent("additional");
+		checkContent("services");
 		checkContent("cost");
 		checkContent("priorities");
 		verifyClickEditButton("location", false);
 		verifyClickEditButton("coverage", false);
 		verifyClickEditButton("special", false);
-		verifyClickEditButton("travel", false);
 		verifyClickEditButton("doctor", false);
 		verifyClickEditButton("drugs", false);
-		verifyClickEditButton("additional", false);
+		verifyClickEditButton("services", false);
 		verifyClickEditButton("cost", false);
 		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
@@ -212,7 +213,8 @@ private WebElement signInLink;
 	public void navigateEditResponsePage(String flow) {
 		waitForPageLoadSafari();
 		validate(editYourResponse, 10);
-		editYourResponse.click();
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
@@ -309,12 +311,14 @@ private WebElement signInLink;
 		SignInButton.click();
 		threadsleep(2000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
+		threadsleep(3000);
 		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 		CreateProfileButton.click();
 		threadsleep(2000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/registration"),"***Create One Healthcare ID Page Not Opened***");
+		threadsleep(3000);
 		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
@@ -357,11 +361,6 @@ private WebElement signInLink;
 				UIValue = "not sure".toLowerCase();
 		} else if (section.equalsIgnoreCase("special")) {
 			UIValue = inputValues.get("SNP Options");
-		} else if (section.equalsIgnoreCase("travel")) {
-
-			UIValue = inputValues.get("Travel Options");
-			UIValue = UIValue.replace("withinUS", "within").replace("OutsideUS", "another part").replace("regular",
-					"routine");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			UIValue = inputValues.get("Doctors");
 			UIValue = UIValue.replace("UHGNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
@@ -369,8 +368,8 @@ private WebElement signInLink;
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("additional")) {
-			UIValue = inputValues.get("Additional Option");
+		} else if (section.equalsIgnoreCase("services")) {
+			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
@@ -394,7 +393,8 @@ private WebElement signInLink;
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
 		for (WebElement elem : allQuestionSection) {
-			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
+			String tempTxt = elem.findElement(By.cssSelector("h2")).getText().toLowerCase();
+			String editbutton = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
 			if (tempTxt.contains(section)) {
 				editButton = true;
@@ -444,22 +444,20 @@ private WebElement signInLink;
 		mapd.put(0, "location");
 		mapd.put(1, "coverage");
 		mapd.put(2, "special");
-		mapd.put(3, "travel");
-		mapd.put(4, "doctor");
-		mapd.put(5, "drugs");
-		mapd.put(6, "additional");
-		mapd.put(7, "cost");
-		mapd.put(8, "priorities");
+		mapd.put(3, "doctor");
+		mapd.put(4, "drugs");
+		mapd.put(5, "services");
+		mapd.put(6, "cost");
+		mapd.put(7, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
 		ma.put(1, "coverage");
 		ma.put(2, "special");
-		ma.put(3, "travel");
-		ma.put(4, "doctor");
-		ma.put(5, "additional");
-		ma.put(6, "cost");
-		ma.put(7, "priorities");
+		ma.put(3, "doctor");
+		ma.put(4, "services");
+		ma.put(5, "cost");
+		ma.put(6, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -573,17 +571,12 @@ private WebElement signInLink;
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("travel")) {
-			PlanRecommendationEngineTravelPage travel = new PlanRecommendationEngineTravelPage(driver);
-			travel.edit_travel(inputValues.get("Travel Options"));
-			jsClickNew(saveBtn);
-			checkContent("travel");
-		} else if (section.equalsIgnoreCase("additional")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			PlanRecommendationEngineAdditionalServicesPage add = new PlanRecommendationEngineAdditionalServicesPage(
 					driver);
-			add.edit_additional(inputValues.get("Additional Option"));
+			add.edit_Services(inputValues.get("Services Option"));
 			jsClickNew(saveBtn);
-			checkContent("additional");
+			checkContent("Services");
 		} else if (section.equalsIgnoreCase("cost")) {
 			PlanRecommendationEngineCostPreferencesPage cost = new PlanRecommendationEngineCostPreferencesPage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
