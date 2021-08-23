@@ -5,11 +5,11 @@ Feature: 1.12 homePage flows
   Scenario Outline: <Scenario> : To verify hero component displayed on home page and navigate to VPP <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+    #And the user navigates to following medicare acquisition site page
+      #| PageName | <pageName> |
+      #| PagePath | <path>     |
     Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
+    Then the user validates the chat icon
     And user validates TFN within feature box of hero component
       |TFN|<TFN>|
     When user enters zipcode and navigates to VPP
@@ -133,7 +133,7 @@ Feature: 1.12 homePage flows
       | GeoState | <geoState> |
     And user validates Email capture component
 
-    @homePage_AARP
+    @homePage_AARP123
     Examples: 
       | Scenario           | geoState | site | path                                        | pageName  |
       | E2E Scenario_3_AMP | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |

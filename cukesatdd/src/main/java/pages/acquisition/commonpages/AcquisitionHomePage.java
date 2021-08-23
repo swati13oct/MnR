@@ -3434,10 +3434,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			present = false;
 		}
 		if (present) {
-			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			System.out.println("@@@@@@@@@ Able to find chat widget @@@@@@@@@");
 
 		} else
-			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+			System.out.println("@@@@@@@@@ No chat widget @@@@@@@@@");
 
 	}
 
