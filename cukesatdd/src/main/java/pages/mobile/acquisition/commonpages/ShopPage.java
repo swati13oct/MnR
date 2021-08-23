@@ -384,10 +384,8 @@ public class ShopPage extends GlobalWebElements {
 
 	public void comparePlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		scrollToView(comparePlanBtn);
-		validateNew(comparePlanBtn);
-		// jsClickNew(comparePlanBtn);
 		jsClickNew(comparePlanBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/compare.html"))
@@ -399,7 +397,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(LearnEstimateCosts);
 		validateNew(LearnEstimateCosts);
 		 jsClickNew(LearnEstimateCosts);
-//		LearnEstimateCosts.click();
+		 CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/estimate.html"))
@@ -411,7 +409,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(howToSwitchPlans);
 		validateNew(howToSwitchPlans);
 		jsClickNew(howToSwitchPlans);
-//		howToSwitchPlans.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/switch.html"))
@@ -423,7 +421,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(learnSafeShopping);
 		validateNew(learnSafeShopping);
 		jsClickNew(learnSafeShopping);
-//		learnSafeShopping.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("safe-shopping.html"))
 			Assert.fail("Learn Safe Shopping of Plans page did not load properly");
@@ -434,7 +432,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(getMemberResources);
 		validateNew(getMemberResources);
 		jsClickNew(getMemberResources);
-//		getMemberResources.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("resources.html"))
@@ -457,7 +455,7 @@ public class ShopPage extends GlobalWebElements {
 		scrollToView(checkDrugCostsBtn);
 		validateNew(checkDrugCostsBtn);
 		jsClickNew(checkDrugCostsBtn);
-//		checkDrugCostsBtn.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (!driver.getCurrentUrl().contains("estimate-drug-costs.html#/drug-cost-estimator"))
 			Assert.fail("DCE page did not load properly");
