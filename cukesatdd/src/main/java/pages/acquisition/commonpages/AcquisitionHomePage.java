@@ -789,7 +789,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement proactiveChatPopupEndChatOption;
 	
 	@FindBy(xpath = "//*[@id='ip-no']")
-	private WebElement surveyPopup;
+	private WebElement surveyPopupNoBtn;
 	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -3572,9 +3572,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// jsMouseOver(planMemberLink);
 		
 		try {
-			validate(surveyPopup, 20);
-			if (surveyPopup.isDisplayed())
-				jsClickNew(surveyPopup);
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
 		} catch (Exception e) {
 			System.out.println("survey popup not displayed");
 		}
