@@ -142,5 +142,10 @@ public class CQStepDefinition {
 		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
 		cqPage.validateDataLayerDynamicTab();		
 	}
-	
+
+	@Then("^the user validates the Header and Footer tab components$")
+	public void the_user_validates_the_Header_and_Footer_tab_components(){
+		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
+		cqPage.validateHeaderandFooterTab();
+	}
 }

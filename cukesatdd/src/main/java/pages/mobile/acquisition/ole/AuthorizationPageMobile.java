@@ -210,7 +210,7 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			
-			AuthorizedRepresentativeRadio.click();
+			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
