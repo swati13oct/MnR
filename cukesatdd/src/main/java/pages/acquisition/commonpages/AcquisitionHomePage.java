@@ -5613,7 +5613,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public void openExternalLinkPRE(String site) {
+	public boolean openExternalLinkPRE(String site) {
 		String browser = MRScenario.browserName;
 		if (site.equalsIgnoreCase("Myuhcplans")) {
 			startNewPRE("https://myuhcplans.com/steelcase", browser);
@@ -5629,10 +5629,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		if (site.equalsIgnoreCase("uhcmedicaresolutions")) {
 			startNewPRE("https://www.uhcmedicaresolutions.com/", browser);
+			return true;
 		}
 		if (site.equalsIgnoreCase("aarpmedicareplans")) {
 			startNewPRE("https://www.aarpmedicareplans.com/", browser);
+			return true;
 		}
+		return false;
 	}
 
 	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
