@@ -518,8 +518,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile ClickLinktoNavigatetoDrugSummary() {
-		validateNew(LinkToDrugSummary);
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(LinkToDrugSummary);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
