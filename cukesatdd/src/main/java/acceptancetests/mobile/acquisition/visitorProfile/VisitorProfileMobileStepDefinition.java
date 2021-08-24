@@ -285,7 +285,7 @@ public class VisitorProfileMobileStepDefinition {
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 //		visitorProfile.validateAddedPlans(savePlanNames);
-		visitorProfile.validateAddedPlansNew(savePlanNames);
+		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 
 	@And("^user validates the added Ms plans on visitor profile page$")

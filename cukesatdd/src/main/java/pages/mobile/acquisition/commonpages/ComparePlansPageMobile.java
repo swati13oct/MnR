@@ -285,10 +285,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")
 	private WebElement EnrollinPlanCompare_MAPD;
 
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
@@ -856,7 +856,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
 		List<WebElement> allMAPlans = driver
-				.findElements(By.cssSelector("th[ng-repeat*='plan in count'] > div > span"));
+				.findElements(By.xpath("//button[contains(@dtmname,'Plan Compare:Remove')]/preceding-sibling::div"));
 		String[] plan = plans.split(",");
 		for (int i = 0; i < allMAPlans.size(); i++) {
 			Assertion.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
@@ -1406,16 +1406,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return null;
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(css = "#medicareBenefitsSlider")
 	public WebElement medicalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(css = "#medicareBenefitsSlider ~ span[class^='uhc-switch__label']")
 	public WebElement medicalBenefitsOONLabel;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(css = "#additionalBenefitsStartSlider")
 	public WebElement additionalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(css = "#additionalBenefitsStartSlider ~ span[class^='uhc-switch__label']")
 	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
@@ -1478,7 +1478,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		WebElement ele;
 		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
 		for (String index : (TreeSet<String>) mySet.descendingSet()) {
-			if (Integer.parseInt(index) > 3) {
+			if (Integer.parseInt(index) > 2) {
 				jsClickNew(forwardArrow);
 			} else {
 				jsClickNew(backArrow);
@@ -1487,7 +1487,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
 			ele = driver.findElement(
-					By.xpath("//*[@id='printPlans']/th[contains(@ng-repeat,'plan in count')][" + index + "]/div/a"));
+					By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
 			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}

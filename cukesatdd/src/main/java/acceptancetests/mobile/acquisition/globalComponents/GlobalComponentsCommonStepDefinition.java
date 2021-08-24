@@ -16,6 +16,8 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -53,27 +55,30 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
+	private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Given("^the user hovers over the learn about medicare$")
 	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		if (wd.getClass().toString().toUpperCase().contains("ANDROID")
-				|| wd.getClass().toString().toUpperCase().contains("IOS")) {
-			System.out.println("Hove Action skipped on Mobile");
-		} else {
-			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
-			if (learnAboutMedicareHomePage != null) {
-				System.out.println("learn about medicare drop down is opened");
-				getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-			} else {
-				Assert.fail("Issue in selecting a learn about medicare drop down");
-			}
-			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-		}
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.openLearnAboutMedicareFromMenu();
+		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 	}
+	
+//	@When("user validates TFN in header")
+//	public void user_clicks_on_tfn_in_header() throws InterruptedException {
+//		scenario.log("Changes made on 7/06- Step added for new Header redesign");
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateTfnInHeader();
+//	}
 
 	@Then("^the user hover over Shop for a Plan and validates zipcode component$")
 	public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
@@ -780,7 +785,7 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@When("^user hover over for plan member to click to go to member site$")
 	public void hover_plan_Member_to_Click_membersite() {
-		// scenario.log("Changes made on 6/30- Step added for new Header redesign");
+		scenario.log("Changes made on 6/30- Step added for new Header redesign");
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {
@@ -1087,9 +1092,8 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
 	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
-		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		acqusitionHomePage.clickLearnAboutMedicareNavLink(linkName);
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickLearnAboutMedicareNavLink(linkName);
 		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
 	}
 
@@ -1153,6 +1157,27 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateFooterLinksNavigation(linkName);
+	}
+
+	@Then("^the user validate facebook button from social share$")
+	public void the_user_validate_facebook_button_from_social_share(){
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnFacebookShareButton();
+	}
+
+	@Then("^the user validate twitter button from social share$")
+	public void the_user_validate_twitter_button_from_social_share(){
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnTwitterShareButton();
+	}
+
+	@Then("^the user validate email button from social share$")
+	public void the_user_validate_email_button_from_social_share(){
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateSocialShareEmailButton();
 	}
 
 }

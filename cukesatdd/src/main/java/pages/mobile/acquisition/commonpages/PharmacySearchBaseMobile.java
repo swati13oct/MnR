@@ -470,7 +470,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				String PDFText = new PDFTextStripper().getText(document);
 				
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
 				
 				Assertion.assertTrue("PROBLEM - PDF  is not opening", PDFText.contains(ExpectedPDFText));
@@ -823,8 +823,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
 			//steps for scrolling element in mobile view
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+			/*JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);*/
 			
 			if (element.isDisplayed()) {
 				System.out.println("Element '" + element.toString() + "' found!!!!");

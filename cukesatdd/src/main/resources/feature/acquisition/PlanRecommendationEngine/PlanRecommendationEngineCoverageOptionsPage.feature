@@ -10,16 +10,17 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
     And user validate elements in coverage options page
+      | Plan Type | <isCoverageOpt> |
 
     @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty |
-      | AARP |   90201 | NO            |
+      | site | Zipcode | isMultiCounty | isCoverageOpt |
+      | AARP |   90201 | NO            | PDP           |
 
     @FunctionalUHC
     Examples: 
-      | site | Zipcode | isMultiCounty |
-      | UHC  |   90201 | NO            |
+      | site | Zipcode | isMultiCounty | isCoverageOpt |
+      | UHC  |   90201 | NO            | PDP           |
 
   @PRE @coveragepage @coveragepageoptionselection
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Selecting coverage options using Single County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
