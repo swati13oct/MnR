@@ -179,7 +179,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement vppTop;
 
 	// Updated xpath for DCE link on Home Page
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	//@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Estimate Drug Costs')]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -578,6 +579,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
+	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
+	private WebElement learnMoreMMCHomeScreen;
+
 	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'medicare-advantage-plans')]")
 	private WebElement MedicareAdvantagePlans;
 
@@ -783,7 +787,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
 	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
 	private WebElement proactiveChatPopupEndChatOption;
-
+	
+	@FindBy(xpath = "//*[@id='ip-no']")
+	private WebElement surveyPopupNoBtn;
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -3558,9 +3565,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return present;
 	}
 
+	
+	
 	public void validateHeaderLinks() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
+		
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		
 		Actions action = new Actions(driver);
 		action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
@@ -5610,7 +5628,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public void openExternalLinkPRE(String site) {
+	public boolean openExternalLinkPRE(String site) {
 		String browser = MRScenario.browserName;
 		if (site.equalsIgnoreCase("Myuhcplans")) {
 			startNewPRE("https://myuhcplans.com/steelcase", browser);
@@ -5626,10 +5644,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		if (site.equalsIgnoreCase("uhcmedicaresolutions")) {
 			startNewPRE("https://www.uhcmedicaresolutions.com/", browser);
+			return true;
 		}
 		if (site.equalsIgnoreCase("aarpmedicareplans")) {
 			startNewPRE("https://www.aarpmedicareplans.com/", browser);
+			return true;
 		}
+		return false;
 	}
 
 	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
@@ -6798,9 +6819,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public LearnAboutMedicareHomePageNew clickLearnMoreAboutMedicareOnHomePage() {
 
-		validateNew(learnAboutMedicareHomeScreen);
-		scrollToView(learnAboutMedicareHomeScreen);
-		jsClickNew(learnAboutMedicareHomeScreen);
+		validateNew(learnMoreMMCHomeScreen);
+		scrollToView(learnMoreMMCHomeScreen);
+		jsClickNew(learnMoreMMCHomeScreen);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education.html")) {
