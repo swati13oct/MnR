@@ -2197,8 +2197,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	
 	
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
-		validateNew(DrugCosts_PlanDetailsBtn);
-		jsClickNew(DrugCosts_PlanDetailsBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		//jsClickNew(DrugCosts_PlanDetailsBtn);
+		scrollToView(DrugCosts_PlanDetailsBtn);
+		DrugCosts_PlanDetailsBtn.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("details")) {
 			System.out.println("Plan Details Page displayed ");

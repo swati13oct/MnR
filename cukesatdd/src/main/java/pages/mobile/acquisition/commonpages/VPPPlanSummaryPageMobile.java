@@ -85,7 +85,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='updates-email']")
 	private WebElement requestshoppageemailaddress;
-	
+
 	@FindBy(xpath = "//*[@id='signUp']")
 	private WebElement requestplaninformationsubmit;
 
@@ -1245,14 +1245,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
-		sleepBySec(5);
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
-		
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
@@ -1331,7 +1328,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
-		//ProviderSearchLink.click();
+		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
@@ -1862,7 +1859,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				// Check if back to plans link is displayed
 				// If not, scrollToView and verify again
 				// before proceeding to click it.
-				if(!backToPlans.isDisplayed()) {
+				if (!backToPlans.isDisplayed()) {
 					scrollToView(backToPlans);
 				}
 				if (backToPlans.isDisplayed()) {
@@ -4037,8 +4034,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
-		//scrollToView(startDrpDwnOption);
-		//startDrpDwnOption.click();
+		// scrollToView(startDrpDwnOption);
+		// startDrpDwnOption.click();
 		jsClickNew(startDrpDwnOption);
 
 		System.out.println("Plan to start date selected");
@@ -5096,15 +5093,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public ComparePlansPageMobile clickOnCompareLink(String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (planType.contains("MAPD")) {
 			List<WebElement> compareLinks = driver.findElements(
 					By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-			scrollToView(compareLinks.get(1));
+			//scrollToView(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
 		} else {
 			List<WebElement> compareLinks = driver.findElements(
 					By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
-			scrollToView(compareLinks.get(1));
+			//scrollToView(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
 
 		}
@@ -5243,7 +5241,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPageMobile(driver, planType);
 		}
@@ -5326,12 +5324,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("Provider Search Page is displayed");
 			Assertion.assertTrue(true);
-			
-			System.out.println("*******Current window handle is : " +driver.getWindowHandle());
-			if(driver.getWindowHandle().equalsIgnoreCase(currentHandle))
-			driver.switchTo().window(parentHandle);
-			System.out.println("*******Current window handle is : " +driver.getWindowHandle());
-			
+
+			System.out.println("*******Current window handle is : " + driver.getWindowHandle());
+			if (driver.getWindowHandle().equalsIgnoreCase(currentHandle))
+				driver.switchTo().window(parentHandle);
+			System.out.println("*******Current window handle is : " + driver.getWindowHandle());
+
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back to VPP Plan Summary Page");
 				Assertion.assertTrue(true);
@@ -6068,7 +6066,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void clickGetStartedBtnOnNba() {
-		jsClickNew(nextBestActionModalGetStartedBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		nextBestActionModalGetStartedBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
@@ -6102,7 +6101,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
 			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+				//allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+				allPlanNames.add(plan.getText().trim());
 			} else {
 				allPlanNames.add(plan.getText().trim());
 			}
@@ -6165,7 +6165,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		return null;
 	}
-	
+
 	public void removeProvidersFromPlanCard() {
 		try {
 			jsClickNew(providerListPlanCard);

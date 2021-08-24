@@ -174,7 +174,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = "//a[@title='Estimate Drug Costs']")
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
@@ -2737,6 +2737,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
 		shopForPlan.selectPlanTypeOption(PDP, false);
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement DCELink = driver.findElement(
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);

@@ -1398,7 +1398,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public WebElement addMyDrugsButton;
 
 	public GetStartedPageMobile navigateToDCERedesign() {
-
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
 		if (validateNew(addMyDrugsButton)) {
