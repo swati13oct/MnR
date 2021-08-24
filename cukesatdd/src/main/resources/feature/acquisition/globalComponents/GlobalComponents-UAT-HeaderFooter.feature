@@ -29,7 +29,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user validate links in disclaimer information section
     And the user clicks on Complaint Form link in footer
     And the user clicks on Hide all disclaimer information link in footer
-    And the user validates Language assistance links
+    #And the user validates Language assistance links
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user hover over for plan member to click to go to member site
