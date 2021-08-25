@@ -305,8 +305,12 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - "+str);
-		String[] arrOfStr = str.split("%2C"); 
-		
+		String sep=str.contains(",")?",":"%2C";
+		//String[] arrOfStr = str.split("%2C");
+		String[] arrOfStr = str.split(sep);
+		/*if (str.contains(",")) {
+			arrOfStr = str.split(",");
+		}*/
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN ;
