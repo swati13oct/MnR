@@ -1389,31 +1389,33 @@ public class CampaignExternalLinks extends UhcDriver {
     }
 
     public void enterdetais() {
-
-        threadsleep(8);
-        validateNew(FirstName);
-        FirstName.clear();
-        FirstName.sendKeys("test_MR_optum_R");
-        LastName.clear();
-        LastName.sendKeys("test_MR_optum_M");
-        Address1Input.clear();
-        Address1Input.sendKeys("455 Flatbush Ave");
-        Address1Input.sendKeys(Keys.TAB);
-        CityInput.clear();
-        CityInput.sendKeys("Brooklyn");
-        threadsleep(8);
-        selectFromDropDownByText(driver, SelectState, "New York");
-        ZipInput.clear();
-        ZipInput.sendKeys("11238");
-        EmailInput.clear();
-        EmailInput.sendKeys("test@test.com");
-        phoneInput.clear();
-        phoneInput.sendKeys("800-800-8000");
-        validateNew(ReqAppsubmitBtn);
-        ReqAppsubmitBtn.click();
-        threadsleep(5);
-        driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
-
+        if(MRScenario.environment.equalsIgnoreCase("stage")||MRScenario.environment.equalsIgnoreCase("offline-stage")||MRScenario.environment.contains("team")){
+            threadsleep(8);
+            validateNew(FirstName);
+            FirstName.clear();
+            FirstName.sendKeys("test-MR-optum-R");
+            LastName.clear();
+            LastName.sendKeys("test-MR-optum-M");
+            Address1Input.clear();
+            Address1Input.sendKeys("455 Flatbush Ave");
+            Address1Input.sendKeys(Keys.TAB);
+            CityInput.clear();
+            CityInput.sendKeys("Brooklyn");
+            threadsleep(8);
+            selectFromDropDownByText(driver, SelectState, "New York");
+            ZipInput.clear();
+            ZipInput.sendKeys("11238");
+            EmailInput.clear();
+            EmailInput.sendKeys("test@test.com");
+            phoneInput.clear();
+            phoneInput.sendKeys("800-800-8000");
+            validateNew(ReqAppsubmitBtn);
+            ReqAppsubmitBtn.click();
+            threadsleep(5);
+            driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+        }else{
+            System.out.println("LP Form submission not configured for Offline Prod and Prod");
+        }
     }
 
     public void validateFindPlansInyourArea() {
