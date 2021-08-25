@@ -374,7 +374,8 @@ public class MRScenario {
 					|| environment.equals("team-acme") || environment.equals("team-voc")
 					|| environment.equals("team-acme") || environment.contains("digital-uat")
 					|| environment.equals("team-chargers") || environment.contains("chargers")
-					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx"))
+					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx")
+					|| environment.contains("digital-dev"))
 
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else if (environment.contains("mnr-acq"))
