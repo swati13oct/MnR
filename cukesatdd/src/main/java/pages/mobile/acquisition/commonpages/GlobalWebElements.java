@@ -540,7 +540,8 @@ public class GlobalWebElements extends UhcDriver {
 	 */
 	public void openSiteSearchFromMenu() {
 		jsClickNew(MenuMobile);
-		validateNew(mobileNav, 5);
+		
+		//validateNew(mobileNav, 5);
 		
 		jsClickNew(siteSearchButton);
 	}
