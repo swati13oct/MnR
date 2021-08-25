@@ -940,6 +940,13 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateYourDrugs();
 	}
 
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+	public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validate100DayInYourDrugs();
+	}
+
 	@Then("^the user validates Monthly Drug Costs by Stage Section$")
 	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Section() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()

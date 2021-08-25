@@ -387,6 +387,9 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Back To Profile']")
 	private WebElement backToProfileBtn;
 
+	@FindBy(xpath = "//*[contains(text(), '100-day supply at a 90-day')]")
+	public WebElement _100DaysSupplyHeader;
+
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -452,6 +455,10 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(YourDrugs_YouPayTxt);
 		// validateNew(YourDrugs_InitlCoverageTxt);
 		validateNew(LinktoEditDrugList);
+	}
+
+	public void validate100DayInYourDrugs() {
+		validateNew(_100DaysSupplyHeader);
 	}
 
 	public void validateMonthlyCostStage() {
