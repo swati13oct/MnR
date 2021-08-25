@@ -836,7 +836,7 @@ public class MRScenario {
 				capabilities.setCapability("safariAllowPopups", "true");
 				capabilities.setCapability("locationServicesEnabled", "true");
 				capabilities.setCapability("locationServicesAuthorized", "true");
-				capabilities.setCapability("webviewConnectTimeout", "90000");
+				//capabilities.setCapability("webviewConnectTimeout", "90000");
 				// capabilities.setCapability("enablePerformanceLogging", true); This capability
 				// was required for deep link validation but for iOS it not working so
 				// commenting out
