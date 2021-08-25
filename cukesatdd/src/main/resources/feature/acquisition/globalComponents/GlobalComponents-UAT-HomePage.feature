@@ -34,12 +34,12 @@ Feature: 1.12 homePage flows
     @homePage_AARP
     Examples: 
       | Scenario          | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                 | isMultiCounty2| county2           | address              | city      | state       |TFN|
-      | E2E Scenario_1_AMP | AARP | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-aarpmedicareplans.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-699-5710|
+      | E2E Scenario_1_AMP | AARP | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-699-5710|
 
     @homePage_UHC
     Examples: 
       | Scenario           | site | pageName | path                                        | MultiCOuntyzipcode | ZipCodeOnPlan | SiteOnPlan                                                                     | isMultiCounty | county            | address              | city      | state       |TFN|
-      | E2E Scenario_1_UMS | UHC  | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-596-3258|
+      | E2E Scenario_1_UMS | UHC  | Homepage | dolphin-authoring/redesigned-home-page.html |              78006 |         33410 | health-plans.html/plan-summary |         NO | Palm Beach County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT |1-877-596-3258|
 
 
   Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage 

@@ -937,6 +937,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
 		public WebElement reviewDrugCost;
+		
+		@FindBy(xpath = "//a[contains(@dtmid,'cta_acq_county_modal')]")
+		public WebElement selectCounty;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -7511,7 +7514,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 //	Redesigned home page
 
-public void enterAndValidateZipCode() {
+public VPPPlanSummaryPage enterAndValidateZipCode() {
 		sleepBySec(6);
 		scrollToView(ShopPlansBtn);
 		/*JavascriptExecutor js=(JavascriptExecutor) driver;
@@ -7527,8 +7530,10 @@ public void enterAndValidateZipCode() {
 		Enterzipcode.sendKeys("90210");
 		ShopPlansBtn.click();
 		sleepBySec(5);
-		String str="https://www.stage-aarpmedicareplans.uhc.com/health-plans.html#/plan-summary";
-		Assert.assertEquals(driver.getCurrentUrl(), str);
+		if(driver.getCurrentUrl().contains("/plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 //		driver.navigate().back();
 //		CommonUtility.waitForPageLoad(driver, ShopPlansBtn, 30);
 //		sleepBySec(3);
@@ -7672,6 +7677,7 @@ public void clickOnCancel() {
 
 public void sendZipCodeAndValidateUrl(String zipcode,String url) {
 	CommonUtility.waitForPageLoad(driver, zipCodeOnShopForPlans, 30);
+	zipCodeOnShopForPlans.clear();
 	zipCodeOnShopForPlans.sendKeys(zipcode);
 	sleepBySec(2);
 	findPlansOnShopForPlans.click();
@@ -7770,6 +7776,10 @@ public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 	}
 //	validateNew(continueBtn);
 	//continueBtn.click();
+}
+
+public void clickViewPlansLink() {
+	jsClickNew(viewPlansButton);
 }
 
 }

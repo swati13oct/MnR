@@ -1153,8 +1153,8 @@ public class GlobalComponentsCommonStepDefinition {
 	public void user_enters_zipcode_and_navigates_to_vpp() throws AWTException {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.enterAndValidateZipCode();
-	   
+		VPPPlanSummaryPage plansummaryPage=aquisitionhomepage.enterAndValidateZipCode();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	    
 	}
 	@When("user validates TFN within feature box of hero component")
@@ -1278,6 +1278,7 @@ public class GlobalComponentsCommonStepDefinition {
 		String site = memberAttributesMap.get("SiteOnPlan");
 		String zipcode = memberAttributesMap.get("ZipCodeOnPlan");
 		System.out.println("@@site@@"+site);
+		System.out.println("@@zipcode@@"+zipcode);
 		aquisitionhomepage.sendZipCodeAndValidateUrl(zipcode,site);
 	}
 	
@@ -1329,15 +1330,19 @@ public class GlobalComponentsCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		plansummaryPage.searchPlansWithCounty(county2, isMultiCounty2);
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			if (plansummaryPage.validateVPPPlanSummaryPage())
+			if (plansummaryPage.validateVPPPlanSummaryPage()) {
+				aquisitionhomepage.clickViewPlansLink();
 				Assertion.assertTrue(true);
-			else
+			}
+			else {
 				Assertion.fail("Error in validating the Plan Summary Page");
-
+			}
 		}
 	}
 
