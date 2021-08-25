@@ -164,3 +164,30 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
       | UHC  |   35035 | YES           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
+
+  @PRE @planrecommandonation @PREVPPPage @F527967 @PREZipcodeSession
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , - To validate Saved Zipcode in PRE session
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects skip option in Drug page
+      | Drug Selection | <Drug Selection> |
+    Then user validate elements in loading results page
+    Then user validate zipcode saved in PRE session	and reflected in home page
+      | Zip Code | <Zipcode> |
+
+    @regressionAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
+      | AARP |   37902 | NO            | Knox County | PDP           | No             |
+
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
+      | UHC  |   10003 | NO            | New York | PDP           | No             |
