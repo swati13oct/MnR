@@ -759,7 +759,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama  | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      #| AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
@@ -797,7 +797,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      #| UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
