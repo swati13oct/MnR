@@ -48,10 +48,11 @@ public class EnterZipCodePage extends UhcDriver {
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
 				waitForPageLoadSafari();
+				Thread.sleep(3000);
 				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);

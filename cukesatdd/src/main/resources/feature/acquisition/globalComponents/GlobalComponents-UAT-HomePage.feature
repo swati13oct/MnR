@@ -45,9 +45,9 @@ Feature: 1.12 homePage flows
   Scenario Outline: <Scenario> : To check E2E flows of Shop plans from Homepage 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+    #And the user navigates to following medicare acquisition site page
+      #| PageName | <pageName> |
+      #| PagePath | <path>     |
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     And user clicks on shop for Part C plans
@@ -63,7 +63,7 @@ Feature: 1.12 homePage flows
     And user clicks on shop for Medigap plans
     Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates TFN on need help section of Shop pages
-    | TFNxpath | <tfnXpath> |
+    | TFNxpath | <tfnXpath1> |
     | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
