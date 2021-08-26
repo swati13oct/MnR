@@ -93,7 +93,8 @@ public class DCEACQHomeMobile {
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		aquisitionhomepage.fixPrivateConnectionMobile();

@@ -52,11 +52,16 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import atdd.framework.GlobalBeforeHook;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.Scenario;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.FlagsmithLoginPage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+
 import java.security.*;
 import javax.crypto.*;
 
@@ -112,6 +117,8 @@ public class MRScenario {
 	public static String mobileDeviceName = "";
 	public static String mobileDeviceOSName = "";
 	public static String mobileDeviceOSVersion = "";
+	public static boolean AEP = false;
+	public static String flagSmithUser = "";
 	public static String desktopBrowserName;
 //	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
@@ -302,7 +309,15 @@ public class MRScenario {
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: (null == props ? System.getProperty(CommonConstants.APPIUM_VERSION)
 						: props.get(CommonConstants.APPIUM_VERSION));
-
+		
+		AEP = null != System.getProperty(CommonConstants.AEP)
+				? Boolean.parseBoolean(System.getProperty(CommonConstants.AEP))
+				: null != props ? Boolean.parseBoolean(props.get(CommonConstants.AEP)) : false;
+		System.out.println("AEP set to " + AEP);
+		flagSmithUser = null != System.getProperty(CommonConstants.FLAGSMITH_USER)
+				? System.getProperty(CommonConstants.FLAGSMITH_USER)
+				: null != props ? props.get(CommonConstants.FLAGSMITH_USER) : "";
+		System.out.println("Flagsmith user is " + flagSmithUser);
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
 		 * CommonConstants.APPIUM_DEFAULT_VERSION :
@@ -893,6 +908,22 @@ public class MRScenario {
 
 	public static Map<String, String> getProps() {
 		return props;
+	}
+	
+	private FlagsmithLoginPage openFlagSmithLoginPage(WebDriver driver, String site) {
+		String flagSmithURL = site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		driver.get(flagSmithURL);
+		return new FlagsmithLoginPage(driver);
+	}
+	
+	public Object openApplicationURL(WebDriver driver, String site) {
+		if(AEP) {
+			FlagsmithLoginPage flagsmithLoginPage = openFlagSmithLoginPage(driver, site);
+			return flagsmithLoginPage.startFlagSmithUserTest(flagSmithUser);
+		} else {
+			String driverType = driver.getClass().toString().toUpperCase();
+			return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver, site) : new AcquisitionHomePage(driver, site);
+		}
 	}
 
 }

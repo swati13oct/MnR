@@ -1011,6 +1011,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		
 		clickUpdateLaterBrowserButton();
 	}
+	
+	public void openAndValidate() {
+		long modelPopupTimeout = !MRScenario.environment.equals("stage") ? MRScenario.environment.equals("stage-0") ? 20 : 45 : 10;
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
+		checkModelPopup(driver, modelPopupTimeout);
+		clickUpdateLaterBrowserButton();
+	}
 
 	public void checkForSecurityPage() {
 		if (!MRScenario.domain.contains("uhc.com")) {
