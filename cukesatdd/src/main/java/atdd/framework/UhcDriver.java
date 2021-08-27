@@ -144,6 +144,11 @@ public abstract class UhcDriver {
 
 	}
 
+	public void MobileLearnAboutMedicareMenu() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		jsClickNew(LearnAboutMedicare);}
+	
 	public void MobileLearnAboutMedicarePrescProvBenefit() {
 		scrollToView(MenuMobile);
 		jsClickNew(MenuMobile);

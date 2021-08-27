@@ -3600,33 +3600,47 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
 		Thread.sleep(2000);
-		part_A_monthDrpDwn.click();
-		Thread.sleep(2000);
-		Part_A_monthDrpDwnOption.click();
+//		part_A_monthDrpDwn.click();
+//		Thread.sleep(2000);
+//		Part_A_monthDrpDwnOption.click();
+		String Part_A_monthDrpDwnOptionText = Part_A_monthDrpDwnOption.getText().toString();
+		mobileSelectOption(part_A_monthDrpDwn, Part_A_monthDrpDwnOptionText, true);
+
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
-		part_A_yearDrpDwn.click();
+//		part_A_yearDrpDwn.click();
+//		Thread.sleep(2000);
+//		Part_A_yearDrpDwnOption.click();
+//		System.out.println("Effective date- year value selected");
+//		Thread.sleep(2000);
+		String Part_A_yearDrpDwnOptionText = Part_A_yearDrpDwnOption.getText().toString();
+		mobileSelectOption(part_A_yearDrpDwn, Part_A_yearDrpDwnOptionText, true);
+
+//		jsClickNew(part_B_monthDrpDwn);
+//		Thread.sleep(2000);
+//		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
-		Part_A_yearDrpDwnOption.click();
-		System.out.println("Effective date- year value selected");
+
+		String Part_B_monthDrpDwnOptionText = Part_B_monthDrpDwnOption.getText().toString();
+		mobileSelectOption(part_B_monthDrpDwn, Part_B_monthDrpDwnOptionText, true);
+
+//		jsClickNew(part_B_yearDrpDwn);
+//		Thread.sleep(2000);
+//		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
-		// part_B_monthDrpDwn.click();
-		jsClickNew(part_B_monthDrpDwn);
+
+		String Part_B_yearDrpDwnOptionText = Part_B_yearDrpDwnOption.getText().toString();
+		mobileSelectOption(part_B_yearDrpDwn, Part_B_yearDrpDwnOptionText, true);
+
+//		jsClickNew(startDrpDwn);
+//		Thread.sleep(2000);
+//		jsClickNew(startDrpDwnOption);
+//		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		Part_B_monthDrpDwnOption.click();
-		Thread.sleep(2000);
-		// part_B_yearDrpDwn.click();
-		jsClickNew(part_B_yearDrpDwn);
-		Thread.sleep(2000);
-		Part_B_yearDrpDwnOption.click();
-		Thread.sleep(2000);
-		// startDrpDwn.click();
-		jsClickNew(startDrpDwn);
-		Thread.sleep(2000);
-		startDrpDwnOption.click();
-		System.out.println("Plan to start date selected");
-		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+		String startDrpDwnOptionText = startDrpDwnOption.getText().toString();
+		mobileSelectOption(startDrpDwn, startDrpDwnOptionText, true);
+		
+		jsClickNew(ViewPlanMedSupPage);
 	}
 
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth) {
@@ -5097,12 +5111,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planType.contains("MAPD")) {
 			List<WebElement> compareLinks = driver.findElements(
 					By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-			//scrollToView(compareLinks.get(1));
+			// scrollToView(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
 		} else {
 			List<WebElement> compareLinks = driver.findElements(
 					By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
-			//scrollToView(compareLinks.get(1));
+			// scrollToView(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
 
 		}
@@ -5666,11 +5680,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * println("****************Request information is displayed  ***************");
 		 * }
 		 */
-		// requestemailaddress.clear();
-		// requestemailaddress.sendKeys("(*^*_asb@t.c");
+
 		sendkeysMobile(requestemailaddress, "(*^*_asb@t.c");
-		// requestplaninformationsubmit.click();
 		jsClickNew(requestplaninformationsubmit);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
 		if (validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()) {
 			if (!RequestPlanInformation_ErrorMessage.getText()
 					.contains("Please enter a valid email address in the format 'user@company.com'")) {
@@ -5698,6 +5712,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(requestlastName, LastName);
 		validateNew(requestplaninformationsubmit);
 		jsClickNew(requestplaninformationsubmit);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (requestplaninformationsubmitpopup.getText().contains(
 				"Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
@@ -5705,6 +5720,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			Assertion.assertTrue(true);
 			validateNew(requestplaninformationclose);
 			jsClickNew(requestplaninformationclose);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			System.out.println("****************Request information is displayed  ***************");
 		}
@@ -6101,7 +6117,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
 			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				//allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+				// allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
 				allPlanNames.add(plan.getText().trim());
 			} else {
 				allPlanNames.add(plan.getText().trim());

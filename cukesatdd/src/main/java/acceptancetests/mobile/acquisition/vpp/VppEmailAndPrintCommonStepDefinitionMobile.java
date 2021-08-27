@@ -368,7 +368,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void the_user_hovers_screen_over_the_learnmedicare_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.goToLearnMedicare();
 		if (learnAboutMedicareHomePage != null) {
 			System.out.println("learn about medicare drop down is opened");
 			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);

@@ -2017,6 +2017,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
+	public LearnAboutMedicareHomePageMobile goToLearnMedicare() throws InterruptedException {
+		MobileLearnAboutMedicareMenu();
+		return new LearnAboutMedicareHomePageMobile(driver);
+
+	}
+
 	public WelcomePageMobile ZipcodeSearchToOLEWithCounty(String zipcode, String countyName, String planName)
 			throws Exception {
 		try {
@@ -2158,7 +2164,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// sendkeysMobile(EnterSearch, sv);
 		sendKeysByCharacter(siteSearchInputTextField, sv);
-		
 
 		jsClickNew(enterSearchLable);
 		sleepBySec(4);
@@ -2992,8 +2997,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitforElement(shoppingCartIcon);
-		// shoppingCartIcon.click();
+
 		jsClickNew(shoppingCartIcon);
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
 		// icon
@@ -3875,11 +3881,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
+//		Actions actions = new Actions(driver);
+//		PageFactory.initElements(driver, this);
+//		actions.moveToElement(ourPlansHoverLink);
+//		actions.moveToElement(moreHelpInfoLink);
+//		actions.click().build().perform();
+		MobileMenuShopTool();
+		jsClickNew(moreHelpInfoLink);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
