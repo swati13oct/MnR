@@ -126,9 +126,9 @@ Feature: 1.12 homePage flows
   Scenario Outline: <Scenario> : To verify Email capture component on homepage <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+    #And the user navigates to following medicare acquisition site page
+    #   | PageName | <pageName> |
+    #  | PagePath | <path>     |
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     And user validates Email capture component
@@ -147,9 +147,9 @@ Feature: 1.12 homePage flows
   Scenario Outline: <Scenario> : To verify DCE flow from homepage <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+    #And the user navigates to following medicare acquisition site page
+     # | PageName | <pageName> |
+      #| PagePath | <path>     |
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     And user clicks on Estimate drug costs and navigates to DCE
@@ -167,7 +167,8 @@ Feature: 1.12 homePage flows
       | DrugName | <drug5> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-     When user enters valid zipcode and county on HomePage
+     #When user enters valid zipcode and county on HomePage
+     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     Then the user clicks on Review Drug Costs to Land on Drug Details HomePage
      Then the user select state for geotargeting from dropdown

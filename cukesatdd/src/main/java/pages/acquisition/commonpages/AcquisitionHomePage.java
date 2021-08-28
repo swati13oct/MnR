@@ -806,19 +806,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//input[contains(@id, 'zipcodemeded-0')]")
 	private WebElement Enterzipcode;
 	
-	@FindBy(xpath = "//span[contains(text(),'Shop for Part C Plans')]")
+	@FindBy(xpath = "//span[contains(text(),'Shop for Part C plans')]")
 	private WebElement shopForPartCPlans;
 	
 	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForPlanCHeader;
 	
-	@FindBy(xpath = "//span[contains(text(),'Shop for Medigap Plans')]")
+	@FindBy(xpath = "//span[contains(text(),'Shop for Medigap plans')]")
 	private WebElement shopForMedigapPlans;
 	
 	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForMedigapHeader;
 	
-	@FindBy(xpath = "//span[contains(text(),'Shop for Part D Plans')]")
+	@FindBy(xpath = "//span[contains(text(),'Shop for Part D plans')]")
 	private WebElement shopForPartD;
 	
 	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
@@ -7603,8 +7603,8 @@ public VPPPlanSummaryPage enterAndValidateZipCode() {
 		jsClickNew(getStartedLink);
 		CommonUtility.waitForPageLoad(driver,getaplanrecommendationheader, 30);
 		Assert.assertEquals(getaplanrecommendationheader.getText(), "Get a Plan Recommendation");
-		/*driver.navigate().back();
-		CommonUtility.waitForPageLoad(driver, getStartedLink, 30);*/
+		driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, getStartedLink, 30);
 		
 	}
 	
@@ -7642,17 +7642,29 @@ public VPPPlanSummaryPage enterAndValidateZipCode() {
 	public void validateFindAProvider() {
 		CommonUtility.waitForPageLoad(driver, findAprovider, 30);
 		jsClickNew(findAprovider);
-		CommonUtility.waitForPageLoad(driver, findAproviderHead, 30);
-		String str="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false";
-		Assert.assertEquals(driver.getCurrentUrl(), str);
-		driver.navigate().back();
+		
+		String mainwindow = driver.getWindowHandle();
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		Iterator<String> ite = allWindowHandles.iterator();
+		while(ite.hasNext()) {
+			String childWindow = ite.next();
+			if(!mainwindow.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				CommonUtility.waitForPageLoad(driver, findAproviderHead, 30);
+				String str="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false";
+				Assert.assertEquals(driver.getCurrentUrl(), str);
+				System.out.println("Child window is opened");
+				driver.close();
+			}
+		}
+		
+		driver.switchTo().window(mainwindow);
 		CommonUtility.waitForPageLoad(driver, findAprovider, 30);
 	}
 	
 public void validateQtFNTiming() {
 	CommonUtility.waitForPageLoad(driver, qTfntime, 30);
 	Assert.assertEquals(qTfntime.getText(), "8 a.m. – 8 p.m., in your time zone, 7 days a week");
-	
 	
 }
 
@@ -7738,12 +7750,17 @@ public void searchPlansCounty(String countyName, String ismultiCounty) {
 		System.out.println("No County to be selected ");
 	}
 }
+@FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+public WebElement returnToHomeBtn;
+
 public void navigateToDrugDetailsPage() {
 	validateNew(reviewDrugCost);
 	jsClickNew(reviewDrugCost);
 	waitForPageLoadSafari();
 	threadsleep(2000);
 	pageloadcomplete();
+	validateNew(returnToHomeBtn);
+	returnToHomeBtn.click();
 	//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 	
 }
