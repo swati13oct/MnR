@@ -15,15 +15,16 @@ import atdd.framework.UhcDriver;
 
 public class EnterZipCodePage extends UhcDriver {
 
-	//@FindBy(xpath = "//form[contains(@class,'zip-form')]")
+	// @FindBy(xpath = "//form[contains(@class,'zip-form')]")
 	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]")
 	List<WebElement> zipForm;
 
-	//@FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
+	// @FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
 	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]//input[(contains(@class,'zip-input') or contains(@id,'zipcodemed'))]")
 	List<WebElement> ZipCodeText;
 
-	//@FindBy(xpath = "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
+	// @FindBy(xpath =
+	// "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
 	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]//button[(contains(@class,'zip-button'))]")
 	List<WebElement> ZipcodeButton;
 
