@@ -3288,6 +3288,7 @@ public class oleStepDefinition {
 			if (flag) {
 				System.out.println("No Monthly Premium validation is passed");
 			//	Assertion.assertTrue(true);
+			
 			}
 			else {
 				System.out.println("No Monthly Premium validation is failed");
