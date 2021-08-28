@@ -94,7 +94,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	protected WebElement snpPlansCount;
 
-	@FindBy(xpath="//div[contains(@class,'zipcodePrint')]")
+	@FindBy(xpath="//h1[contains(@class,'zipcodePrint')]")
 	protected WebElement cmpPgHeader;
 
 	@FindBy(xpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']")

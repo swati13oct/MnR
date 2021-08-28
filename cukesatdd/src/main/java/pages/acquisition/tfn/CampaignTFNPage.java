@@ -81,7 +81,8 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plan')])[3]")
 	
 	//@FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - UHC ..')]")
-	@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')])/..")
+	//@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')])/..")
+	@FindBy(xpath = "(//h3[contains(text(),'Medicare Advantage (Part C) Plans from UnitedHealthcare')])/..")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -304,8 +305,12 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - "+str);
-		String[] arrOfStr = str.split("%2C"); 
-		
+		String sep=str.contains(",")?",":"%2C";
+		//String[] arrOfStr = str.split("%2C");
+		String[] arrOfStr = str.split(sep);
+		/*if (str.contains(",")) {
+			arrOfStr = str.split(",");
+		}*/
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN ;
