@@ -408,8 +408,8 @@ public class WelcomePageMobile extends UhcDriver {
 	public ArrayList<String> validate_marketing_details(String planName) {
 
 		ArrayList<String> marketingBulletDetails = new ArrayList<String>();
-		List<WebElement> marketingBullets = driver.findElements(By.xpath(
-				"//*[@id='ole-form-content']//*[@class='bullet-div']//*[@id='bullets-sub-header']//following-sibling::div//ul[@class='marketing-bullets']//li"));
+		List<WebElement> marketingBullets = driver
+				.findElements(By.xpath("//*[@id='ole-form-content']//ul[@class='marketing-bullets']//li"));
 
 		for (WebElement element : marketingBullets) {
 			String marketingDetails = element.getText();
