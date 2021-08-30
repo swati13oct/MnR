@@ -307,10 +307,11 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		//scrollToView(backToAllPlansLnk);
 		//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
 	
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(backToAllPlansLnk);
-		sleepBySec(10);
+		CommonUtility.checkPageIsReadyNew(driver);
 		//backToAllPlansLnk.click();
-		CommonUtility.checkPageIsReady(driver);
+		
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {

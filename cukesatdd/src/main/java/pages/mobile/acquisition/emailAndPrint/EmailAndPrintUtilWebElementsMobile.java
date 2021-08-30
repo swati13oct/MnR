@@ -127,7 +127,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(css="#email-text")
 	protected WebElement compare_validateemailbutton;
 
-	@FindBy(xpath="//*[@id='backtoplansummarypage']")
+	@FindBy(css="#backtoplansummarypage")
 	protected WebElement backToAllPlansLnk;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
