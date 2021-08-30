@@ -18,6 +18,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -135,6 +136,18 @@ public class DCEACQMedEdMobile {
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 		
+	}
+	
+	@Then("^user enters valid zipcode and county$")
+	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("ZipCode");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 
 	@And("^enduser clicks on continue button in Zip Entry Page$")

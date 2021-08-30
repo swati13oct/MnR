@@ -384,17 +384,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsCard);
-		validateNew(LinktoExitScenario);
-		if(!LinktoExitScenario.getText().toLowerCase().contains("compare")) {
-            validateNew(LinkToDrugSummary);
-        }
-        /*
-         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
-         */
-
-		validateNew(LinktoEditDrugList);
+//		validateNew(DrugDetails_ChangePharmacyLnk);
+//		validateNew(DrugDetails_DrugCostsCard);
+//		validateNew(LinktoExitScenario);
+//		if(!LinktoExitScenario.getText().toLowerCase().contains("compare")) {
+//            validateNew(LinkToDrugSummary);
+//        }
+//        /*
+//         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+//         */
+//
+//		validateNew(LinktoEditDrugList);
 	}
 
 	public void validatePlanName(String planName) {
