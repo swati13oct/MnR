@@ -333,8 +333,11 @@ public class CQPage extends UhcDriver {
     }
 
     public void navigateToDataLayerUrl() {
-        String datalayerurl = "https://apvrd83493.uhc.com:8443/etc/analytics-tools/analytics-data-updater.html";
-        driver.navigate().to(datalayerurl);
+        String datalayerurl = "etc/analytics-tools/analytics-data-updater.html";
+        String curURL=driver.getCurrentUrl();
+        curURL=curURL.substring(0,curURL.lastIndexOf("aem"));
+        String finalURL=curURL+datalayerurl;
+        driver.navigate().to(finalURL);
         CommonUtility.checkPageIsReadyNew(driver);
         WebElement dataLayerHead = driver.findElement(By.xpath("//h1[contains(text(),'Data Layer Utility')]"));
 
