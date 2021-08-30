@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -87,9 +88,12 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#detailTabs .title")
 	private List<WebElement> planDetailTabs;
 	
-	@FindBy(xpath = "//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
 	private List<WebElement> presDrugTab1;
 
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
+	
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
@@ -360,20 +364,32 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void openAndValidate(String planType) {
-		if ((planType.equalsIgnoreCase("MA") || (planType.equalsIgnoreCase("MAPD")))) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 20);
-			Assertion.assertTrue("Prescription Drug tab not displayed for MA plans", 0 == presDrugTab1.size());
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver, 45);
+		/*else
+			checkModelPopup(driver, 10);*/
 
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement> of the different tabs on Plan detail page
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 20);
-			Assertion.assertTrue("Medical Benefit tab not displayed for PDP plans", 0 == medBenefitsTab.size());
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 20);
-			Assertion.assertTrue("Medical Benefit tab not displayed for SNP plans",
-					medBenefitsTab.get(0).isDisplayed());
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+					"Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
-		scrollToView(planCostsTab);
-		validate(planCostsTab);
+		validateNew(planCostsTab);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 	}
 
