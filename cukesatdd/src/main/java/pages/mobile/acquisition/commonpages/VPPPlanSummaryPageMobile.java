@@ -2727,9 +2727,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validatePlanSelectorPageInRightRail() throws Exception {
 		validateNew(StartPlanSelector);
-		// StartPlanSelector.click();
-		jsClickNew(StartPlanSelector);
-		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(StartPlanSelector);
+		StartPlanSelector.click();
+		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
 			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);
@@ -3639,7 +3639,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		Thread.sleep(2000);
 		String startDrpDwnOptionText = startDrpDwnOption.getText().toString();
 		mobileSelectOption(startDrpDwn, startDrpDwnOptionText, true);
-		
+
 		jsClickNew(ViewPlanMedSupPage);
 	}
 
@@ -3988,14 +3988,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		// Use this code next year 2022
 
-		// if(planYear.equalsIgnoreCase("current")) { // if the scenario is for current
-		// year
-		// if(validate(CurrentYearPlansBtn, 20)) {
-		// System.out.println("*****CLICKING ON Current Year button*****:
-		// "+CurrentYearPlansBtn.getText());
-		// jsClickNew(CurrentYearPlansBtn);
-		// }
-		// }
+//		 if(planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
+//		 if(validate(CurrentYearPlansBtn, 20)) {
+//		 System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+//		 jsClickNew(CurrentYearPlansBtn);
+//		 }
+//		 }
 
 	}
 
@@ -5320,10 +5318,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		scrollToView(ProviderSearchLink);
-		ProviderSearchLink.click();
-		// jsClickNew(ProviderSearchLink);
-		sleepBySec(5);
+		// ProviderSearchLink.click();
+		jsClickNew(ProviderSearchLink);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -5338,12 +5340,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("Provider Search Page is displayed");
 			Assertion.assertTrue(true);
-
-			System.out.println("*******Current window handle is : " + driver.getWindowHandle());
-			if (driver.getWindowHandle().equalsIgnoreCase(currentHandle))
-				driver.switchTo().window(parentHandle);
-			System.out.println("*******Current window handle is : " + driver.getWindowHandle());
-
+			driver.switchTo().window(parentHandle);
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back to VPP Plan Summary Page");
 				Assertion.assertTrue(true);
@@ -5684,7 +5681,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(requestemailaddress, "(*^*_asb@t.c");
 		jsClickNew(requestplaninformationsubmit);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		if (validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()) {
 			if (!RequestPlanInformation_ErrorMessage.getText()
 					.contains("Please enter a valid email address in the format 'user@company.com'")) {

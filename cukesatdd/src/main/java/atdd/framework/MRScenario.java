@@ -810,6 +810,7 @@ public class MRScenario {
 		capabilities.setCapability("appiumVersion", appiumVersion);
 		capabilities.setCapability("forceMjsonwp", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
+
 		try {
 
 			String SauceLabsURL = (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
@@ -836,7 +837,7 @@ public class MRScenario {
 				capabilities.setCapability("safariAllowPopups", "true");
 				capabilities.setCapability("locationServicesEnabled", "true");
 				capabilities.setCapability("locationServicesAuthorized", "true");
-				//capabilities.setCapability("webviewConnectTimeout", "90000");
+				// capabilities.setCapability("webviewConnectTimeout", "90000");
 				// capabilities.setCapability("enablePerformanceLogging", true); This capability
 				// was required for deep link validation but for iOS it not working so
 				// commenting out
