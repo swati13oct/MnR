@@ -1259,6 +1259,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile searchPlans(String zipcode, String countyName) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);

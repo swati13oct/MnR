@@ -148,10 +148,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 
-	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
+	@FindBy(xpath = "//div[contains(@src,'next')]//ancestor::a[@aria-label='Plan Year']")
 	private WebElement nextYrTile;
 
-	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
+	@FindBy(xpath = "//div[contains(@src,'current')]//ancestor::a[@aria-label='Plan Year']")
 	private WebElement currentYrTile;
 
 	@FindBy(xpath = "//button[text()='Continue Searching']")
@@ -430,31 +430,38 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public void entersZipcodeAndSelectPlanName(String zipcode, String planName, String year) {
 
 		validateNew(zipCodeTextfield);
-		zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+//		continueButton.click();
+		jsClickNew(continueButton);
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				currentYrTile.click();
+//				currentYrTile.click();
+				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
 			if (validate(nextYrTile))
-				nextYrTile.click();
+//				nextYrTile.click();
+				jsClickNew(nextYrTile);
 		}
-		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]"));
 		validateNew(planNameToBeSelected);
-		planNameToBeSelected.click();
-
+//		planNameToBeSelected.click();
+		jsClickNew(planNameToBeSelected);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public int entersZipcodeAndPlancount(String zipcode) {
 
 		validateNew(zipCodeTextfield);
-		zipCodeTextfield.sendKeys(zipcode);
+//		zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+//		continueButton.click();
+		jsClickNew(continueButton);
 
 		List<WebElement> topicDropDownValues = driver
 				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
