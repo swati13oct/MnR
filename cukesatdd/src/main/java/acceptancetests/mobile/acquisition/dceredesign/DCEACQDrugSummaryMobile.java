@@ -388,5 +388,17 @@ public class DCEACQDrugSummaryMobile {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
 		drugSummaryPage.clickReturnToPlanSummary();
 	}
+	
+	@Then("^the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_zero_costs_for_following_Covered_generic_drug_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
+	}
 
 }

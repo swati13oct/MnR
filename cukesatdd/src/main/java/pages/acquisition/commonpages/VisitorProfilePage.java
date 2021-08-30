@@ -339,7 +339,7 @@ public class VisitorProfilePage extends UhcDriver {
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
 	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
 	     System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
-	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
+	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 	             savedDrugsAndDoctorsHeader.getText().trim());
 	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		

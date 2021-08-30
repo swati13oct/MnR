@@ -56,7 +56,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP 
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
@@ -114,7 +114,7 @@ Feature: 1.12 UAT - Header and Footer flows
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
     @globalfooter_AARP @regressionAARP
@@ -534,21 +534,21 @@ Feature: 1.12 UAT - Header and Footer flows
     @globalheader_AARP_9 @regressionAARP
     Examples: 
       | Scenario           | site | path                          | pagename         |
-      | E2E Scenario_2 AMP | AARP | about-us.html                 | About Us         |
       | E2E Scenario_2 AMP | AARP | contact-us.html               | Contact Us       |
       | E2E Scenario_2 AMP | AARP | sitemap.html                  | Site Map         |
       | E2E Scenario_2 AMP | AARP | privacy_policy.html           | Privacy Policy   |
       | E2E Scenario_2 AMP | AARP | terms_and_conditions.html     | Terms of Use     |
       | E2E Scenario_2 AMP | AARP | disclaimer.html               | Disclaimers      |
       | E2E Scenario_2 AMP | AARP | health-insurance-brokers.html | Agents & Brokers |
+      #| E2E Scenario_2 AMP | AARP | about-us.html                 | About Us         |
 
     @globalheader_UHC_9 @regressionUHC
     Examples: 
       | Scenario           | site | path                          | pagename         |
-      | E2E Scenario_2 UMS | UHC  | about-us.html                 | About Us         |
       | E2E Scenario_2 UMS | UHC  | contact-us.html               | Contact Us       |
       | E2E Scenario_2 UMS | UHC  | sitemap.html                  | Site Map         |
       | E2E Scenario_2 UMS | UHC  | privacy_policy.html           | Privacy Policy   |
       | E2E Scenario_2 UMS | UHC  | terms_and_conditions.html     | Terms of Use     |
       | E2E Scenario_2 UMS | UHC  | disclaimer.html               | Disclaimers      |
       | E2E Scenario_2 UMS | UHC  | health-insurance-brokers.html | Agents & Brokers |
+      #| E2E Scenario_2 UMS | UHC  | about-us.html                 | About Us         |

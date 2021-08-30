@@ -171,7 +171,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a//span[contains(text(),'Edit Hospitals')]")
 	private WebElement editHospitalsLink;
 
-	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/th/span")
 	private WebElement HospitalSummaryHeader;
 
 	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/td[2]/div")
@@ -195,13 +195,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a//span[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
 
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/th/span")
 	private WebElement providerSumamryHeader;
 
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
 	private WebElement providerSumamryHeaderCount;
 
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[4]/td[1]/span")
+	@FindBy(xpath = "//*[@id=\"your-doctors-table\"]/tbody/tr[4]/th/span")
 	private WebElement FirstProviderName;
 	
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/td[1]/span")
@@ -227,13 +227,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@dtmname,'Edit Drugs')]")
 	private WebElement editDrugsLink;
 
-	@FindBy(xpath = "//td//*[normalize-space(text())='Drug Summary']")
+	@FindBy(xpath = "//tbody//th/span[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
 	private WebElement DrugSummaryCoverageHeader;
 
-	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[1]//td//span[contains(@class,'drugtext')]//span")
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[contains(@ng-repeat, 'drug in') and contains(@class, 'desktop')]//th//span[contains(@class,'drugtext')]//span")
 	private WebElement DrugName;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
@@ -291,16 +291,16 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
 	public WebElement viewAllplansButton;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
 	public WebElement medicalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(xpath = "//*[@id='uhc-slide-table-all']/div[10]/div/div[1]/label/span[2]")
 	public WebElement medicalBenefitsOONLabel;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath = "//*[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider'][1]")
 	public WebElement additionalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(xpath = "//*[@id='uhc-slide-table-all']/div[12]/div/div[1]/label/span[2]")
 	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
@@ -1311,15 +1311,15 @@ public class ComparePlansPage extends UhcDriver {
 				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
 						Assertion.assertTrue(provider[i].split(":")[0]
-								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
+								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
+								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+						.contains(providersList.get(0).findElement(By.xpath("th/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(1).findElement(By.xpath("th/span")).getText().trim()
 						+ "#########");
 			}
 
@@ -1334,7 +1334,7 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
-				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()
+				actualDrugs = actualDrugs + drugList.get(i).findElement(By.xpath("th/span/span")).getText().trim()
 						+ ",";
 			}
 			for (int i = 0; i < drugName.length; i++) {
@@ -1542,7 +1542,7 @@ public class ComparePlansPage extends UhcDriver {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
 			WebElement DrugName = driver.findElement(
-					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr/td//*[contains(text(), '"
+					By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr[contains(@class, 'desktop')]/th//*[contains(text(), '"
 							+ currentDrug + "')]"));
 
 			if (validateNew(DrugName)) {
@@ -1690,7 +1690,7 @@ public class ComparePlansPage extends UhcDriver {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i += 1;
 		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath(
-				"(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["
+				"(//table[not(contains(@class, 'ng-hide'))]//tr[contains(@class, 'uhc-slide-table__row') and not(@id='printHeadingHide')]//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["
 						+ i + "]"));
 
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();

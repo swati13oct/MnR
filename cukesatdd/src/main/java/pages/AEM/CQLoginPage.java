@@ -43,7 +43,8 @@ public class CQLoginPage extends UhcDriver {
 	private static String STAGE_SSO_TESTHANESS_URL = MRConstants.STAGE_SSO_TESTHANESS_URL;
 	
 	//private static String AVENGERS_AEM_URL= "http://author-team-avengers-6-5.ocp-ctc-dmz-nonprod.optum.com/";
-	private static String AVENGERS_AEM_URL= "https://apvrd83493.uhc.com:8443/";
+	//private static String AVENGERS_AEM_URL= "https://apvrd83493.uhc.com:8443/";
+	private static String AVENGERS_AEM_URL= "http://rn000032360:8080/";
 
 	 /*This method will open CQ SSO Test Harness page */
 	public CQLoginPage navigateToLoginURL(){

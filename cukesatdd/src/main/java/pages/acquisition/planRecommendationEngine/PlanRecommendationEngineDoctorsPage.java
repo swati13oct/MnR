@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
 
@@ -33,8 +34,8 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	String page = "Doctor";
 
 	PlanRecommendationEngineWerallyPage werally = new PlanRecommendationEngineWerallyPage(driver);
-	ArrayList<String> werallyResults = new ArrayList<String>();
-	static ArrayList<String> confirmationResults = new ArrayList<String>();
+	public ArrayList<String> werallyResults = new ArrayList<String>();
+	public ArrayList<String> confirmationResults = new ArrayList<String>();
 	ArrayList<String> confirmationSpecialtyResults = new ArrayList<String>();
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
@@ -229,9 +230,13 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		// Changing the count for multiple doc with : separated
 		if (search.contains(":")) {
 			count = search.split(":").length;
+			System.out.println("Searching doctor count is: "+count);
 		}
-		confirmationProviderResults = getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
+		getConfimationPopupResults(count);
+		String curID = String.valueOf(Thread.currentThread().getId());
+		confirmationProviderResults = CommonConstants.PRE_Providers.get(curID);
+		System.out.println("**** Current Thread ID is - "+curID+" Provider saved in PRE "+confirmationProviderResults+" ****");
+		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 		if (count > 2 && !search.contains(":")) {
 			removeDoctors();
 			count = count - 1;
@@ -293,13 +298,16 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 							|| browser.equalsIgnoreCase("IE"))
 						driver.manage().window().maximize();
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline") || env.contains("digital-uatv2") )
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline") || env.contains("digital-uat") || env.contains("digital-dev")  )
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
 								"Prod Connected to Incorrect Rally");
 					else
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
 								"Non Prod Connected to Incorrect Rally");
 					werallyResults = werally.werallySearch(type, search, count, locationCount);
+					String curID = String.valueOf(Thread.currentThread().getId());
+					System.out.println("Current Thread ID is - "+curID+" Provider saved in werally "+werallyResults);
+					CommonConstants.PRE_Rally_Providers.put(curID, werallyResults);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
 				}
@@ -336,6 +344,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 			System.out.println("confirmationResults Content is : " + confirmationResults);
 			System.out.println("confirmationSpecialtyResults Size is : " + confirmationSpecialtyResults.size());
 			System.out.println("confirmationSpecialtyResults Content is : " + confirmationSpecialtyResults);
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - "+curID+" Provider saved in PRE "+ confirmationResults);
+			CommonConstants.PRE_Providers.put(curID, confirmationResults);
 
 		} else {
 			System.out.println("Modal Results Count mismatch");
@@ -358,6 +369,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		werally = CommonConstants.PRE_Rally_Providers.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" Provider saved in werally "+werally+" ****");
 
 		if (werally.size() == confirm.size() && count == werally.size()) {
 			if (containsname(werally, confirm)) {

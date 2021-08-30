@@ -46,7 +46,7 @@ public class DCEACQShopPlanPDPMobile {
 		return loginScenario;
 	}
 
-	//AppiumDriver wd;
+	// AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -56,7 +56,7 @@ public class DCEACQShopPlanPDPMobile {
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -68,16 +68,18 @@ public class DCEACQShopPlanPDPMobile {
 			throws Throwable {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		getLoginScenario().getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_GetStarted);
+
 		GetStartedPageMobile getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
-		String plantype="PDP";
+		String plantype = "PDP";
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
-
-	
 
 	@Then("^end user validates GetStarted Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
@@ -103,11 +105,12 @@ public class DCEACQShopPlanPDPMobile {
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -121,7 +124,6 @@ public class DCEACQShopPlanPDPMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
 
-	
 	@Then("^user clicks on Review Drug Costs to Land on Zip Entry Page$")
 	public void the_user_clicks_on_Review_Drug_Costs_to_Land_on_Zip_Entry_Page() throws Throwable {
 		BuildYourDrugListMobile DCEbuildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -134,17 +136,19 @@ public class DCEACQShopPlanPDPMobile {
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("ZipCode");
 		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
+
 	@And("^user click on continue button in Zip Entry Page$")
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()

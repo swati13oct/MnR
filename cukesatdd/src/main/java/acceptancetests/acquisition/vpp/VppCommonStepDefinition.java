@@ -246,6 +246,7 @@ private Scenario scenario;
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
 	}
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")

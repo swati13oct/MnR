@@ -49,7 +49,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
-	@FindBy(css = "div[class='uhc-radio-tabs']")
+	@FindBy(css = "#tabcontainer [class^='radio-group']")
 	public WebElement planTypeToggle;
 
 	// @FindBy(xpath = "//span[text()='Pharmacy:']/..")
@@ -77,17 +77,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement annualEstimatedTotal;
 
 	// @FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
-	@FindBy(xpath = "//p[contains(text(), 'Drugs Covered')]/span/span")
+	@FindBy(css = "[class^='uhc-card border']:nth-of-type(1) div[class*='d-block'] p:nth-of-type(5) span[class*='inline-block']")
 	public WebElement drugsCovered;
 
-	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]")
+	@FindBy(css = "[header ='What is Average Monthly Drug Cost?'] #accordion-1-button")
 	public WebElement whyAverageLink;
 
-	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]")
+	@FindBy(css = "[header ='What is included in the Annual Estimated Drug Total?'] #accordion-1-button")
 	public WebElement whatsIncludedLink;
 
 	// @FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
-	@FindBy(css = "div[class*='d-block'] button[id*='priceLinkBtn']")
+	@FindBy(css = "#plansummarycontainer div[class^='uhc-card border']:nth-of-type(1) div[class*='d-block'] button[id*='priceLinkBtn']")
 	public WebElement drugPricingLink;
 
 	// @FindBy(xpath = "//button/span[text()='View Drug Costs']")
@@ -102,12 +102,15 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "div[class$='card__header'] button[id^='saveBtn']")
 	public WebElement saveBtn;
 
-	@FindBy(xpath = "//*[@id='accordion-1-button']")
+	@FindBy(css = "app-dcedisclaimer:not([header]) #accordion-1-button")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//p)[1]")
+	@FindBy(css = "div[class^='uhc-card border']:nth-of-type(1) > .uhc-card__header h3")
 	public WebElement planTypeHeading;
 
+	/*@FindBy(css = ".uhc-radio-tabs input[checked=true] ~ span[class$='tab__label']")
+	private WebElement selectedPlanTypeRadio;*/
+	
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
@@ -163,10 +166,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#adddrug")
 	private WebElement addDrugButton;
 
-	@FindBy(css = "#pdp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	private WebElement pdpPlanRadioButton;
 
-	@FindBy(css = "#snp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='SNP']")
 	private WebElement snpPlanRadioButton;
 	
 	@FindBy(css = "app-dcedisclaimer[header$='Monthly Drug Cost?'] div[id$='button']")
@@ -193,60 +196,24 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile validateDrugSummaryPage() throws InterruptedException {
-		boolean validation = false;
 		// Commented locators are no longer seen on ui
 		// && validateNew(whyAverageLink)
 		// && validateNew(whatsIncludedLink)
 
-		scrollToView(reviewDrugCostPageHeading);
-		validation = validateNew(reviewDrugCostPageHeading);
-
-		scrollToView(planTypeToggle);
-		validation = validation && validateNew(planTypeToggle);
-
-		scrollToView(pharmacyLink);
-		validation = validation && validateNew(pharmacyLink);
-
-		scrollToView(planCardHeader);
-		validation = validation && validateNew(planCardHeader);
-
-		scrollToView(avgMonthlyDrugCost);
-		validation = validation && validateNew(avgMonthlyDrugCost);
-
-		scrollToView(monthlyPremium);
-		validation = validation && validateNew(monthlyPremium);
-
-		scrollToView(annualEstimatedTotal);
-		validation = validation && validateNew(annualEstimatedTotal);
-
-		scrollToView(drugsCovered);
-		validation = validation && validateNew(drugsCovered);
-
-		scrollToView(drugPricingLink);
-		validation = validation && validateNew(drugPricingLink);
-
-		scrollToView(viewDrugCostBtn);
-		validation = validation && validateNew(viewDrugCostBtn);
-
-		scrollToView(viewPlanDetailsBtn);
-		validation = validation && validateNew(viewPlanDetailsBtn);
-
-		scrollToView(saveBtn);
-		validation = validation && validateNew(saveBtn);
-
-		scrollToView(disclaimer);
-		validation = validation && validateNew(disclaimer);
-
-		if (validation) {
+		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(changePharmacy)
+				&& validateNew(planCardHeader) && validateNew(avgMonthlyDrugCost) && validateNew(monthlyPremium)
+				&& validateNew(annualEstimatedTotal) && validateNew(drugsCovered) && validateNew(whyAverageLink)
+				&& validateNew(whatsIncludedLink) && validateNew(drugPricingLink) && validateNew(viewDrugCostBtn)
+				&& validateNew(viewPlanDetailsBtn) && validateNew(saveBtn) && validateNew(disclaimer)) {
 			return new DrugSummaryPageMobile(driver);
+		} else {
+			return null;
 		}
 
-		return null;
 	}
 
 	public DrugSummaryPageMobile verifyDefaultPlanType(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
-		scrollToView(planTypeHeading);
 		validateNew(planTypeHeading);
 		if (planTypeHeading.getText().contains(planType)) {
 			return new DrugSummaryPageMobile(driver);
@@ -284,11 +251,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		// saveDrugBtn.click();
 	}
 
-	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
+	@FindBy(css = "#changepharmacymobile h3 > span")
 	private WebElement pharmacyName;
 
-	public void validateSelectedPharmacy() {
-		String pharmacy = pharmacyName.getText().substring(9).trim();
+	public void validateSelectedPharmacy(String selectedPharmacyName) {
+//		String pharmacy = pharmacyName.getText().substring(9).trim();
+		String pharmacy = pharmacyName.getText().trim();
 		System.out.println(selectedPharmacyName);
 		System.out.println(pharmacy);
 		Assertion.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
@@ -318,9 +286,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//div/p[contains(text(), '" + currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"//div/p[contains(text(), '" + currentAddedDrug + "')]//following::*[contains(text(), '$')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
@@ -335,30 +302,31 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(DrugPricing_CloseBtn);
 	}
 
-	@FindBy(id = "selectPharmacyBtn0")
+	@FindBy(css = "#selectPharmacyBtn0")
 	private WebElement firstPharmacySelectBtn;
 
-	public static String selectedPharmacyName;
+//	public String selectedPharmacyName;
 
-	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	@FindBy(xpath = "//button[contains(@id,'selectPharmacyBtn') and @aria-pressed='true']/parent::div/preceding-sibling::div//address/h4")
 	private WebElement pharmacyNameSelected;
 
-	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
+	@FindBy(css = "button[dtmname$='save and update drug costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
 
-	public void saveAndUpdatePharmacy() {
-		firstPharmacySelectBtn.click();
-		selectedPharmacyName = pharmacyNameSelected.getText();
+	public String saveAndUpdatePharmacy() {
+		jsClickNew(firstPharmacySelectBtn);
+		String selectedPharmacyName = pharmacyNameSelected.getText();
 		System.out.println(selectedPharmacyName);
-		saveAndUpdateDrugCostBtn.click();
+		jsClickNew(saveAndUpdateDrugCostBtn);
+		return selectedPharmacyName;
 	}
 
-	@FindBy(xpath = "//*[contains(@class,'keepPharmacyLink')]")
+	@FindBy(css = "[class*='keepPharmacyLink']")
 	private WebElement keepUsingPharmacyLink;
 
 	public void clickKeepUsingPharmacyLink() {
 		validateNew(keepUsingPharmacyLink);
-		keepUsingPharmacyLink.click();
+		jsClickNew(keepUsingPharmacyLink);
 	}
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '1 Mile')]")
@@ -611,7 +579,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	private WebElement PharmacyNameText;
 
 	public void validatePharmacyName(String PharmacyName) {
-
+		CommonUtility.waitForPageLoadNew(driver, PharmacyNameText, 15);
 		if (validateNew(PharmacyNameText) && PharmacyNameText.getText().contains(PharmacyName)) {
 			Assertion.assertTrue("Correct Pharmacy Name is Displayed : " + PharmacyNameText.getText(), true);
 		} else {
@@ -621,12 +589,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	// @FindBy(xpath = "//h5[contains(text(), 'Drugs
 	// Covered')]//following-sibling::*[contains(text(), ' of ')]")
-	@FindBy(xpath = "//p[contains(text(), 'Drugs Covered')]//span[contains(text(), ' of ')]")
-	public WebElement DrugsCoveredText;
+	/*@FindBy(xpath = "//p[contains(text(), 'Drugs Covered')]//span[contains(text(), ' of ')]")
+	public WebElement DrugsCoveredText;*/
 
 	public void ValidateNCPharmacyCoveredDrugs() {
-
-		if (validateNew(DrugsCoveredText)) {
+		if (validateNew(drugsCovered)) {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
@@ -660,7 +627,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public void clickViewPricing() {
 		validateNew(drugPricingLink);
-
 		jsClickNew(drugPricingLink);
 	}
 
@@ -697,7 +663,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Pricing')]")
 	public WebElement DrugPricing_Header;
 
-	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
+	@FindBy(css = "#cancelicon")
 	public WebElement DrugPricing_CloseBtn;
 
 	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
@@ -927,7 +893,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 //	@FindBy(xpath = "//*[text()='Return to Profile']")
-	@FindBy(css = "a[dtmname='dce:return to profile']")
+	@FindBy(css = "a[dtmname$='return to profile']")
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {
@@ -974,13 +940,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
 
-	@FindBy(css = "#mapd-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='MAPD']")
 	public WebElement mapdPlanToggle;
 
-	@FindBy(css = "#pdp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	public WebElement pdpPlanToggle;
 
-	@FindBy(css = "#snp-plans-radio")
+	@FindBy(css = "input[name='plans-filter'][value='SNP']")
 	public WebElement snpPlanToggle;
 	
 	@FindBy(css = "#plansummarycontainer > div > div[class^='uhc-card']:nth-of-type(1)")
@@ -1001,7 +967,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("SNP Plan Toggle Clicked");
 		}
 		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//div[contains(@class,'d-block')]//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
 		validateNew(PremiumforPlan);
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
@@ -1041,7 +1007,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(preferredMailPharmacy);
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../preceding-sibling::div//p/span[@class='text-bold']")
+	@FindBy(css = "ul[role='tabpanel'] > li address>h4")
 	private List<WebElement> pharmacyNameList;
 
 	public void validatePharmaciesAscendingOrder() {
@@ -1061,7 +1027,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		System.out.println("After sort" + pharmacListAfterSort);
 		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
-		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+		Assertion.assertTrue("Pharmacies are not sorted in descending order", sorted);
 	}
 
 	public void clickNextButton() {
@@ -1134,7 +1100,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();
 		String ANNUAL_ESTIMATED_TOTAL = drugCosts_AnnualEstTotal_Amount.getText();
-		String COVERED_DRUGS_COUNT = drugsCovered.getText();
+		String COVERED_DRUGS_COUNT = drugsCovered.getText().trim().split("Drugs Covered: ")[1];
 		System.out.println("Covered Drug Text : " + COVERED_DRUGS_COUNT);
 		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
 		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
@@ -1166,10 +1132,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
+	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(css = "#pharmacyfilter > button[class*='searchbuttonmobile']")
 	public WebElement Pharmacy_SearchBtn;
 
 	public void validateOptumRxConsistentDisplay_PharmacyPage() {
@@ -1179,10 +1145,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		try {
 			validateSelectPharmacyPage();
 			validateNew(Pharmacy_ZipCodeTxt);
-			Pharmacy_ZipCodeTxt.clear();
-			Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+			sendkeysMobile(Pharmacy_ZipCodeTxt, pharmacyZipCode);
 			validateNew(Pharmacy_SearchBtn);
-			Pharmacy_SearchBtn.click();
+			jsClickNew(Pharmacy_SearchBtn);
 			System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
 					+ Pharmacy_ZipCodeTxt.getText());
 			validateNew(preferredMailPharmacy);
@@ -1192,7 +1157,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				System.out.println("No results message displayed : " + noResultsMessage.getText());
 				validateNew(selectPharmacyModalCloseBtn);
 				System.out.println("Closing Pharmacy page");
-				selectPharmacyModalCloseBtn.click();
+				jsClickNew(selectPharmacyModalCloseBtn);
 				validateDrugSummaryPage();
 			} else
 				Assertion.fail(
@@ -1220,8 +1185,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * selectFromDropDownByValue(planToggleDropdown, planType);
 		 */
 		CommonUtility.waitForPageLoadNew(driver, planTypeToggle, 30);
-		String planType = plantype.toLowerCase();
-		WebElement planTypeOption = driver.findElement(By.cssSelector("input[id^='" + planType + "']"));
+		String planType = plantype.toUpperCase();
+		WebElement planTypeOption = driver
+				.findElement(By.cssSelector("input[name='plans-filter'][value='" + planType + "']"));
 		jsClickNew(planTypeOption);
 		System.out.println(planType + " Plan Toggle Clicked");
 
@@ -1278,7 +1244,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
 	private WebElement savedPlansPopupCloseIcon;
 
-	@FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	@FindBy(css = "a[dtmname*='return to']")
 	public WebElement returnToHomeBtn;
 
 	public void clickOnReturnToHome() {
@@ -1289,9 +1255,34 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Saved Plans modal not displayed");
 		}
-		scrollToView(returnToHomeBtn);
 		validateNew(returnToHomeBtn);
 		jsClickNew(returnToHomeBtn);
 	}
+	
+	public void ClickviewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver
+				.findElement(By.cssSelector("div[class*='d-block'] button[aria-label='View Drug Pricing " + planName + "']"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+	}
 
+	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath(
+				"//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+coveredDrug+"')]//ancestor::li//following-sibling::li[contains(@class,'d-block')][contains(text(), '$')]"));
+		String DrugCost = DrugYouPay.getText();
+		int beginIndex = DrugCost.indexOf("$");
+		int endIndex = DrugCost.indexOf("(");
+		String currentDrugYouPay = DrugCost.substring(beginIndex, endIndex).trim();
+		System.out.println("Displayed Covered Drug - " + coveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Covered Drug -" + coveredDrug + " You Pay : $0");
+
+		if (validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
+	}
+	
 }

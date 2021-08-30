@@ -9,7 +9,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -25,25 +25,25 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then I click back to all plans button and verify that all plans are still selected on summary page on site
     Then user loads page using email deeplink and validate vpp compare page content on site
 
-    @vppEmailandPrintCommon_AARP_1 @regressionAARP
+    @vppEmailandPrintCommon_AARP_1 @regressionAARP 
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | AARP |   90210 | MA       | NO            | next     |
+      | 15523 | AARP |   90210 | MA       | NO            | current     |
 
     @vppEmailandPrintCommon_UHC_1 @regressionUHC
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | UHC  |   90210 | MA       | NO            | next     |
+      | 15523 | UHC  |   90210 | MA       | NO            | current     |
 
     @prodRegression @vppEmailandPrintCommon_AARP_1 @sanity
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | AARP |   90210 | PDP      | NO            | next     |
+      | 15523 | AARP |   90210 | PDP      | NO            | current     |
 
     #   @prodRegression @vppEmailandPrintCommon_UHC_1
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | UHC  |   90210 | PDP      | NO            | next     |
+      | 15523 | UHC  |   90210 | PDP      | NO            | current     |
 
   #@emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline: TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in <site> site
@@ -51,7 +51,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -66,25 +66,25 @@ Feature: 1.04 -ACQ-Print and email on VPP page
 
     @vppEmailandPrintCommon_AARP_2 @regressionAARP
     Examples: 
-      | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
-      | 15531 | AARP |   80001 | MA       | No              | Jefferson County | next     |
-      | 15531 | AARP |   80001 | PDP      | No              | Jefferson County | next     |
+      | TID   | site | zipcode | plantype | isMultiCounty | county           | planyear |
+      | 15531 | AARP |   80001 | MA       | No              | Jefferson County | current     |
+      | 15531 | AARP |   80001 | PDP      | No              | Jefferson County | current     |
 
     @vppEmailandPrintCommon_UHC_2 @regressionUHC
     Examples: 
-      | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
-      | 15531 | UHC  |   80001 | MA       | No              | Jefferson County | next     |
-      | 15531 | UHC  |   80001 | PDP      | No              | Jefferson County | next     |
+      | TID   | site | zipcode | plantype | isMultiCounty | county           | planyear |
+      | 15531 | UHC  |   80001 | MA       | No              | Jefferson County | current     |
+      | 15531 | UHC  |   80001 | PDP      | No              | Jefferson County | current     |
 
     #   @prodRegression @vppEmailandPrintCommon_AARP_2
     Examples: 
-      | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
-      | 15531 | AARP |   80001 | SNP      | No              | Jefferson County | next     |
+      | TID   | site | zipcode | plantype | isMultiCounty | county           | planyear |
+      | 15531 | AARP |   80001 | SNP      | No              | Jefferson County | current     |
 
     @prodRegression @vppEmailandPrintCommon_UHC_2 @sanity
     Examples: 
-      | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
-      | 15531 | UHC  |   80001 | SNP      | No              | Jefferson County | next     |
+      | TID   | site | zipcode | plantype | isMultiCounty | county           | planyear |
+      | 15531 | UHC  |   80001 | SNP      | No              | Jefferson County | current     |
 
   # @emailAndPrint_AARP3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on <site> site
@@ -92,7 +92,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -109,21 +109,21 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     @vppEmailandPrintCommon_AARP_3 @regressionAARP
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | next     |
-      | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | next     |
+      | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | current     |
+      | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | current     |
 
     @vppEmailandPrintCommon_UHC_3 @regressionUHC
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | next     |
-      | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | next     |
+      | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | current     |
+      | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | current     |
 
     @prodRegression @vppEmailandPrintCommon_AARP_3 @sanity
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next     |
+      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | current     |
 
     #   @prodRegression
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | UHC  | MA       |   80001 | NO            | Jefferson County | next     |
+      | 1598166 | UHC  | MA       |   80001 | NO            | Jefferson County | current     |

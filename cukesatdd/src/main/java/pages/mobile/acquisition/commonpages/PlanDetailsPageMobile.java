@@ -110,8 +110,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 
-	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
-	private WebElement EnrollinPlan;
+	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(1) a[dtmname='Plans Detail:Tab:Enroll in Plan']")
+	private WebElement EnrollinPlanButtonHeader;
+	
+	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(3) a[dtmname='Plans Detail:Tab:Enroll in Plan']")
+	private WebElement EnrollinPlanButtonFooter;
 
 	@FindBy(xpath = "//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
 	private WebElement PremiumForPlan;
@@ -786,7 +789,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		try {
-			if (validate(EnrollinPlan))
+			if (validate(EnrollinPlanButtonHeader))
 				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
 			else
 				System.out.println("Enroll in Plan Button is Not Displayed ");
@@ -797,7 +800,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		// EnrollinPlan.click();
 //		scrollToView(EnrollinPlan);
-		jsClickNew(EnrollinPlan);
+		jsClickNew(EnrollinPlanButtonHeader);
 
 		try {
 			Thread.sleep(5000);
@@ -901,6 +904,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 	
 	public PharmacySearchPageMobile planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(validatePrintButtonOnPlanDetails);
 		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
 		if(language.equalsIgnoreCase("English")){
 			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
@@ -1636,7 +1641,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public WebElement comparePlansLink;
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
-		scrollToView(addToCompareLabel);
 		jsClickNew(addToCompareLabel);
 		jsClickNew(comparePlansLink);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))

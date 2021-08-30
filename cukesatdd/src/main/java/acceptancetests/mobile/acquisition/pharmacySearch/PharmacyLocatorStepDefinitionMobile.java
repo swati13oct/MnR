@@ -332,7 +332,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Then("^the user validates the pharmacies available$")
+	@Then("^the user validates the pharmacies available|the user validates the Pharmacies available$")
 	public void validatesPharmaciesAvailable(DataTable inputAttributes) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
@@ -468,10 +468,11 @@ public class PharmacyLocatorStepDefinitionMobile {
 
 	@And("^user click on return to home on drug summary in AARP site$")
 	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
-		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
+		/*AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);*/
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickOnReturnToHome();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+//		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^user verify breadcrumb \"([^\"]*)\" on the visitor profile page$")
@@ -780,6 +781,8 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		
+		
 
 	}
 
