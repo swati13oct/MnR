@@ -4120,8 +4120,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
 				startNewPRE(UMS_ACQISITION_PAGE_URL
-						.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),
-						browser);
+						.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),	browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
 						".com/fsem/featuretest.html"), browser);

@@ -81,6 +81,22 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 	}
 	
+	@Given("^the user is on flagsmith UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_flagsmith_uhc_medicaresolutions_Site(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
+		if_offline_prod = aquisitionhomepage.openAEPPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		if (MRScenario.environment.contains("digital-uatv2")) 
+			aquisitionhomepage.fixPrivateConnection();
+		
+		aquisitionhomepage.loginflagSmithPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+		checkpopup();
+	}
+	
 		@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
 			readfeaturedata(givenAttributes);
