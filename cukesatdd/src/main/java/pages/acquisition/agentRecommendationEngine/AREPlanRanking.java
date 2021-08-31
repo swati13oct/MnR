@@ -114,7 +114,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "a[dtmname*=' Drugs']")
 	private WebElement AddDrugsLink;
 
-	@FindBy(css = "a[dtmname*=' Doctors']")
+	@FindBy(xpath = "//a//span[contains(text(),'Doctors')]")
 	private WebElement AddDoctorsLink;
 
 	@FindBy(css = "a[dtmname*=' Hospitals']")
@@ -454,7 +454,7 @@ public class AREPlanRanking extends UhcDriver {
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
-					vppPlans.add(verifygetplanName(plansName.get(i+1), viewplandetails.get(i)));
+					vppPlans.add(verifygetplanName(plansName.get(i+1), viewplandetails.get(i+1)));
 				}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
@@ -643,7 +643,7 @@ public class AREPlanRanking extends UhcDriver {
 		saveplan.click();
 		String save = saveplanOption.getText().trim();
 		if (save.equalsIgnoreCase("Save Plan")) {
-			saveplan.click();
+			saveplanOption.click();
 		} else {
 			saveplanOption.click();
 			threadsleep(2000);
