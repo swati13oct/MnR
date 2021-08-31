@@ -1043,13 +1043,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * This method is for lower version of Chrome browser on Android
 	 */
 	public void clickUpdateLaterBrowserButton() {
-		if(validate(upgradeBrowserVersionBanner)) {
-			System.out.println("Update browser banner shown !");
-			jsClickNew(updateLaterButton);
-			System.out.println("Clicked 'Update later' button");
-			sleepBySec(2);
-			if(!upgradeBrowserVersionBanner.isDisplayed()) {
-				System.out.println("Update browser banner disappeared.");
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (validate(upgradeBrowserVersionBanner)) {
+				System.out.println("Update browser banner shown !");
+				jsClickNew(updateLaterButton);
+				System.out.println("Clicked 'Update later' button");
+				sleepBySec(2);
+				if (!upgradeBrowserVersionBanner.isDisplayed()) {
+					System.out.println("Update browser banner disappeared.");
+				}
 			}
 		}
 	}
