@@ -4104,6 +4104,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		scrollToView(shoppingCartIcon);
 		waitforElement(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
