@@ -621,7 +621,9 @@ public abstract class UhcDriver {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
-					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
+					"var ele = arguments[0];"
+					+ "ele.addEventListener('click', function() "
+					+ "{ele.setAttribute('automationTrack','true');});",
 					element);
 			//checkElementisEnabled(element);
 			scrollToView(element);

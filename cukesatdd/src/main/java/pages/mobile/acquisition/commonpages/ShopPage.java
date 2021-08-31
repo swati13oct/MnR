@@ -385,7 +385,7 @@ public class ShopPage extends GlobalWebElements {
 	public void comparePlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(comparePlanBtn);
-		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/compare.html"))
