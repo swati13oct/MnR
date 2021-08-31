@@ -206,9 +206,8 @@ public class PREBenefitsValidationStepDefinition {
 
 							PlanRecommendationEngineNewResultsPage resultsPage = new PlanRecommendationEngineNewResultsPage(
 									wd);
-
-							if(AEP.equalsIgnoreCase("YES") && year== "2021"){
-								PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+							if(AEP.equalsIgnoreCase("YES") && year.equalsIgnoreCase("2021")){
+								PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 								planSelectorResultspage.changePlanyear("current");
 							}
 							
