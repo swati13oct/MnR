@@ -3500,4 +3500,13 @@ public class oleStepDefinition {
 
 
 	}
+	@Then("^the user validates Authorization Page Applicant$")
+	public void the_user_validates_Authorization_Page_Applicant() throws Throwable {
+		
+		scenario.log("Sai - Change made 07/27- Validate Authorization page--Aug Release");
+		
+		
+		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		 authorizationPage.validate_Authorized_Applicant();
+	}	
 }
