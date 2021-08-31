@@ -180,7 +180,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// Updated xpath for DCE link on Home Page
 	//@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Estimate Drug Costs')]")
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator')]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -3737,6 +3737,38 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
+	}
+
+	public void navigateToflagSmithPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		waitForPageLoadSafari();
+		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+
+	}
+
+	@FindBy(xpath = "//input[contains(@id, 'username')]")
+	public WebElement FlagSmith_UserInput;
+
+	@FindBy(xpath = "//a[contains(@role, 'button')]")
+	public WebElement FlagSmith_NavigateBtn;
+
+	public void enterUser_NavigatetoHomepage(String user) {
+		validateNew(FlagSmith_UserInput);
+		sendkeys(FlagSmith_UserInput, user);
+		validateNew(FlagSmith_NavigateBtn);
+		jsClickNew(FlagSmith_NavigateBtn);
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 	}
 
 	public void validateGlobalFooterLinks() {
