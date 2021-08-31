@@ -2217,7 +2217,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public boolean compareTextAfterclickingAddtoCompareinAARP(String planName) throws InterruptedException {
-		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
 		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
 		if (compareText.getText().contains("1 plan added")) {
@@ -2226,6 +2226,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else {
 			return false;
 		}
+		
+		
 	}
 
 	public void deselectAddToCompareinAARP(String planName) {
@@ -5988,8 +5990,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAndClickAddtoCompare(String planType, String planName) throws InterruptedException {
 		System.out.println("Choose Plan to Compare : " + planName);
-		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//label[contains(@for,'compare-plan')]"));
+		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//label[contains(@for,'compare-plan')]"));
 		scrollToView(addToCompare);
 		validateNew(addToCompare);
 		jsClickNew(addToCompare);
