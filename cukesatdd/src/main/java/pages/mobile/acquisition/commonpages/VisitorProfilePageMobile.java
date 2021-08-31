@@ -66,7 +66,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
-	@FindBy(xpath = "//button[@class='uhc-button uhc-button--outlined uhc-button--secondary mt-20']")
+	@FindBy(css = "app-add-plans > div[class^='uhc-card'] button[dlassetid^='vp_findplans']")
 	private WebElement addPlans;
 
 	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
@@ -156,13 +156,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public AcquisitionHomePageMobile addPlan() {
 		// addPlans.click();
-		scrollToView(addPlans);
+//		scrollToView(addPlans);
 		jsClickNew(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-
-			return new AcquisitionHomePageMobile(driver);
+			return new AcquisitionHomePageMobile(driver, page);
 		}
 		return null;
 	}
@@ -214,7 +213,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		System.out.println("Drug Name in VP page: " + drugName.getText());
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+		Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 				savedDrugsAndDoctorsHeader.getText().trim());
 		// Assertion.assertTrue(pharmacyAddress.isDisplayed());
 	}
