@@ -175,7 +175,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(css = "a[title='Estimate Drug Costs']")
+	@FindBy(css = "a[title='Estimate Drug Costs'], a[title^='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
