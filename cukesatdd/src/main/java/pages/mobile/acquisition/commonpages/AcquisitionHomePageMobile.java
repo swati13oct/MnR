@@ -52,7 +52,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	String CallSamPopupTitle = "Need Help? Call us.";
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(css = "input#zipcodemeded-0")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
@@ -233,7 +233,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement MALandingHeading;
 
 	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(css = "input#zipcodemeded-0 + button")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded'] + button")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
