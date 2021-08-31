@@ -350,6 +350,22 @@ public class PlanRecommendationEngineStepDefinition {
       		planSelectorDrugspage.drugnamesList();
       	}
        
+       @Then("^user selects edit drug options in Drug Page$")
+     	public void edit_drugs_page_WithoutContinue(DataTable givenAttributes) {
+     		readfeaturedata(givenAttributes);
+     		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+     		planSelectorDrugspage.editDrugs();
+     		planSelectorDrugspage.editdrugsHandlerWithdetails(inputValues.get("Edit Details"));
+     		planSelectorDrugspage.drugnamesList();
+     	}
+       
+       @Then("^user added drug Quantity number prefix with zeros in Drug page$")
+       public void qty_withzero(DataTable givenAttributes) {
+    	   readfeaturedata(givenAttributes);
+    	   PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+    	   planSelectorDrugspage.qtyNumberPrefixZero(inputValues.get("Edit Quantity"));
+       }
+       
        @Then("^user selects add drug option and cancels the modals in Drug page$")
    	public void add_drugs_page_cancelvalidation(DataTable givenAttributes) {
    		readfeaturedata(givenAttributes);
