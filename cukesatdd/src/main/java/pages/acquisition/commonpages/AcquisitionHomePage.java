@@ -29,6 +29,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -4097,7 +4098,136 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		return offline_prod;
 	}
+	
+	public boolean openAEPPRE(String site, String user) {
+		boolean offline_prod = false;
+		String browser = MRScenario.browserName;
+		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-devv2-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-devv2-aarp", "digital-devv2").replace(".com/",
+						".com/fsem/featuretest.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
+				startNewPRE(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("team-f")) {
+				startNewPRE(
+						AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
+						.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL
+						.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
+						".com/fsem/featuretest.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				startNewPRE(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
+						".com/fsem/featuretest.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+				startNewPRE(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html"),
+						browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+						".com/fsem/featuretest.html"), browser);
+				offline_prod = true;
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+				startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+						".com/fsem/featuretest.html"), browser);
+				offline_prod = true;
+			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+				startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com",
+						".com/fsem/featuretest.html"), browser);
+				offline_prod = true;
+			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com",
+						".com/fsem/featuretest.html"), browser);
+				offline_prod = true;
+			}
+		} else { // For jenkins job
+			String jenkinsTagLists = MRScenario.getTagLists();
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
+					|| MRScenario.environment.equalsIgnoreCase("team-f")
+					|| MRScenario.environment.equalsIgnoreCase("stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1")
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")) {
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
+							startNewPRE(AARP_ACQISITION_PAGE_URL
+									.replace(".com/", ".com/fsem/featuretest.html")
+									.replace("www.", ""), browser);
+						else
+							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com",
+									".com/fsem/featuretest.html"), browser);
+					}
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
+							startNewPRE(UMS_ACQISITION_PAGE_URL
+									.replace(".com", ".com/fsem/featuretest.html")
+									.replace("www.", ""), browser);
+						else
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com",
+									".com/fsem/featuretest.html"), browser);
+					}
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("offline")) {
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
+						startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+								".com/fsem/featuretest.html"), browser);
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
+						startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+								".com/fsem/featuretest.html"), browser);
+				}
+				offline_prod = true;
+			}
+			if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
+						startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com",
+								".com/fsem/featuretest.html"), browser);
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
+						startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com",
+								".com/fsem/featuretest.html"), browser);
+				}
+				offline_prod = true;
+			}
+		}
 
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		return offline_prod;
+	}
+
+	public void loginflagSmithPRE(String site,String user) {
+		driver.findElement(By.id("username")).sendKeys(user);
+		Select exp = new Select(driver.findElement(By.id("exp")));
+		exp.selectByVisibleText("8 hours");
+		driver.findElement(By.cssSelector("a[class*='btn-primary']")).click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		openPRE(site);
+	}
+	
 	public PlanDocsPage navigateToPlanDocsFromHome() {
 		navigateToMenuLinks(ShopForaplan, menuShop);
 

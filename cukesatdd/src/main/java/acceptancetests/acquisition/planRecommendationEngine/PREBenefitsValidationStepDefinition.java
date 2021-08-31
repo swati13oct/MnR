@@ -35,6 +35,7 @@ import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.*;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PREBenefitsPage.PlanRecommendationEngineBenefits;
 
 public class PREBenefitsValidationStepDefinition {
@@ -77,6 +78,9 @@ public class PREBenefitsValidationStepDefinition {
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
+		String AEP = givenAttributesMap.get("AEP");
+		String user = givenAttributesMap.get("USER");
+		String year = givenAttributesMap.get("YEAR");
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -172,11 +176,17 @@ public class PREBenefitsValidationStepDefinition {
 							System.out.println(siteType);
 							
 							//wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
-							
-							if_offline_prod = aquisitionhomepage.openPRE(siteType);
-							checkpopup();
-							
-							aquisitionhomepage.fixPrivateConnection();
+
+							if(AEP.equalsIgnoreCase("YES")) {
+								if_offline_prod = aquisitionhomepage.openAEPPRE(siteType,user);
+								aquisitionhomepage.fixPrivateConnection();
+								aquisitionhomepage.loginflagSmithPRE(siteType,user);
+								checkpopup();
+							}else {
+								if_offline_prod = aquisitionhomepage.openPRE(siteType);
+								aquisitionhomepage.fixPrivateConnection();
+								checkpopup();
+							}
 
 							PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
 									wd);
@@ -197,6 +207,11 @@ public class PREBenefitsValidationStepDefinition {
 							PlanRecommendationEngineNewResultsPage resultsPage = new PlanRecommendationEngineNewResultsPage(
 									wd);
 
+							if(AEP.equalsIgnoreCase("YES") && year== "2021"){
+								PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+								planSelectorResultspage.changePlanyear("current");
+							}
+							
 							int planIndex = resultsPage.findPlan(planName);
 							int planYear = 2021; // Not using now
 							
