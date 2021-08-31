@@ -1135,11 +1135,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
-		accessFooterLinkFromMore("contact");
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
-		if (driver.getCurrentUrl().contains("contact-us")) {
-			return new ContactUsAARPPageMobile(driver);
+
+		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
+			driver.navigate().back();
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else {
+			accessFooterLinkFromMore("contact");
+			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
+			if (driver.getCurrentUrl().contains("contact-us")) {
+				return new ContactUsAARPPageMobile(driver);
+			}
+
 		}
 		return null;
 	}

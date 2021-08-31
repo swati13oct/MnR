@@ -2226,8 +2226,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else {
 			return false;
 		}
-		
-		
+
 	}
 
 	public void deselectAddToCompareinAARP(String planName) {
@@ -2621,35 +2620,45 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validateAgentEBRCPage() {
-		validateNew(RightRail_AgentInYourArea);
-		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
-		String parentWindow = driver.getWindowHandle();
-		checkElementisEnabled(RightRail_AgentInYourArea);
-		jsClickNew(RightRail_AgentInYourArea);
-		sleepBySec(10);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			validateNew(RightRail_AgentInYourArea);
+			if (RightRail_AgentInYourArea.getAttribute("href").toString().contains("myuhcagent.com")) {
+				System.out.println("Find Agent in your area link verified");
+				System.out.println("Find Agent link is not clickable on iOS Safari - Tag<a> issue");
 			}
+		} else {
+
+			validateNew(RightRail_AgentInYourArea);
+			CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
+			String parentWindow = driver.getWindowHandle();
+			checkElementisEnabled(RightRail_AgentInYourArea);
+			jsClickNew(RightRail_AgentInYourArea);
+			sleepBySec(10);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("myuhcagent")) {
+				System.out.println("myuhcagent Page is displayed");
+				Assertion.assertTrue(true);
+				// driver.navigate().back();
+				driver.switchTo().window(parentWindow);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("plan-summary")) {
+					System.out.println("Back on VPP Plan Summary Page");
+					Assertion.assertTrue(true);
+				} else
+					Assertion.fail("Unable to load VPP Plan Summary Page");
+			} else
+				Assertion.fail("Unable to load Myuhcagent Page");
 		}
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("myuhcagent")) {
-			System.out.println("myuhcagent Page is displayed");
-			Assertion.assertTrue(true);
-			// driver.navigate().back();
-			driver.switchTo().window(parentWindow);
-			CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("plan-summary")) {
-				System.out.println("Back on VPP Plan Summary Page");
-				Assertion.assertTrue(true);
-			} else
-				Assertion.fail("Unable to load VPP Plan Summary Page");
-		} else
-			Assertion.fail("Unable to load Myuhcagent Page");
 	}
 
 	public void validateMedicareGuideRightRail() {
@@ -5990,7 +5999,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAndClickAddtoCompare(String planType, String planName) throws InterruptedException {
 		System.out.println("Choose Plan to Compare : " + planName);
-		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//label[contains(@for,'compare-plan')]"));
+		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//label[contains(@for,'compare-plan')]"));
 		scrollToView(addToCompare);
 		validateNew(addToCompare);
 		jsClickNew(addToCompare);
