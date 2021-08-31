@@ -181,7 +181,7 @@ public class WerallyPage extends UhcDriver {
 						for (int i = count - 1; i >= 0; i--) {
 							threadsleep(5000);
 							WebElement saveButton = searchResults.get(i)
-									.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
+									.findElement(By.cssSelector("div[class*='hidden-phone'] button"));
 							saveButton.click();
 							threadsleep(3000);
 							chooseFirstLocation();
