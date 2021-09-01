@@ -754,12 +754,13 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama  | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama  | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      #| AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
@@ -792,12 +793,13 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | shop/estimate/pdp-costs.html                                             | ShopPlan: Estimate PDP Plan                   | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | shop/medicare-advantage-plans/wellness-discounts.html                    | ShopPlan: Welness Discount                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | shop/medicare-advantage-plans/health-care-management.html                | ShopPlan: Healthcare management               | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | shop/medicare-advantage-plans/ma-dental-benefits.html                    | ShopPlan: MA Dental Benefits                  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | shop/renew-active.html                                                   | ShopPlan: Renew-Active                        | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll.html                                                              | ShopPlan: Enroll                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll/ma-enrollment.html                                                | ShopPlan: Enroll MA Plans                     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll/pdp-enrollment.html                                               | ShopPlan: Enroll PDP Plans                    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      #| UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
@@ -1142,16 +1144,16 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @validateSocialShareComponentAARP @avengersRegressionAARP
     Examples:
-      | site | geoState | path                                                                                                                       |
-      | AARP | Alabama  | medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67.html                                           |
-      | AARP | Alabama  | medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare.html                                   |
-      | AARP | Alabama  | medicare-articles/do-i-need-medicare-with-spouses-employer-plan.html                                                       |
-      | AARP | Alabama  | medicare-articles/medicare-coverage-for-inpatient-rehabilitation.html                                                      |
-      | AARP | Alabama  | medicare-articles/medicare-coverage-for-non-working-spouses.html                                                           |
-      | AARP | Alabama  | medicare-articles/what-will-medicare-cost.html                                                                             |
-      | AARP | Alabama  | medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit.html                          |
-      | AARP | Alabama  | medicare-articles/should-i-get-part-b-if-im-working-past-65.html                                                           |
-      | AARP | Alabama  | medicare-articles/youre-65-working-medicare.html                                                                           |
+      | site | geoState | path                                                                                              |
+      | AARP | Alabama  | medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67.html                  |
+      | AARP | Alabama  | medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare.html          |
+      | AARP | Alabama  | medicare-articles/do-i-need-medicare-with-spouses-employer-plan.html                              |
+      | AARP | Alabama  | medicare-articles/medicare-coverage-for-inpatient-rehabilitation.html                             |
+      | AARP | Alabama  | medicare-articles/medicare-coverage-for-non-working-spouses.html                                  |
+      | AARP | Alabama  | medicare-articles/what-will-medicare-cost.html                                                    |
+      | AARP | Alabama  | medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit.html |
+      | AARP | Alabama  | medicare-articles/should-i-get-part-b-if-im-working-past-65.html                                  |
+      | AARP | Alabama  | medicare-articles/youre-65-working-medicare.html                                                  |
 
     @validateSocialShareComponentUHC @avengersRegressionUHC
     Examples:
