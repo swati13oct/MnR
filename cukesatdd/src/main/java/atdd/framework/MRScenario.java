@@ -986,7 +986,7 @@ public class MRScenario {
 		LocalDate SEP_30 = LocalDate.parse(MRConstants.SERVER_DATE_SEP_30 + systemYear, formatter);
 		LocalDate OCT_15 = LocalDate.parse(MRConstants.SERVER_DATE_OCT_15 + systemYear, formatter);
 		
-		planYear = currentSystemDate.isBefore(OCT_15) ? "current" : "future";
+		planYear = currentSystemDate.isBefore(OCT_15) ? "current" : "next";
 		AEP = currentSystemDate.isAfter(SEP_30) || currentSystemDate.isBefore(JAN_1) ? true : false;
 //		saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 		return planYear;
