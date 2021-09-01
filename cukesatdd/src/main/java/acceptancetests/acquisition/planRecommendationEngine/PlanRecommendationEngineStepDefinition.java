@@ -826,13 +826,11 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.checkPlanyear("future");
-		planSelectorResultspage.validateUIAPIRecommendations();
-		planSelectorResultspage.validateUIAPIRankingPlans();
+		planSelectorResultspage.validateAEPUIAPIRankingPlans("future");
+//Toggling to Current year and checking UI vs API Ranking 	
 		planSelectorResultspage.changePlanyear("current");
-		// Toggling back and validating as future year only have values stored in storage
-		planSelectorResultspage.changePlanyear("future");
-		planSelectorResultspage.validateUIAPIRecommendations();
-		planSelectorResultspage.validateUIAPIRankingPlans();
+		planSelectorResultspage.validateAEPUIAPIRankingPlans("current");
+		
    	}
 	
 	public void checkpopup() {
