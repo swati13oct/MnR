@@ -704,7 +704,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		// Checking and Changing Future Year
-		if (year.equalsIgnoreCase("future")) {
+		else if (year.equalsIgnoreCase("future")) {
 			if (validate(planYear, 10)) 
 				futurePlanYear.click();
 			} 		
@@ -729,7 +729,7 @@ public class AREPlanRanking extends UhcDriver {
 			if (validate(planYear, 10)) {
 				int nxtYear = Integer.parseInt(curYear) + 1;
 				if(futurePlanYear.getAttribute("aria-selected").equalsIgnoreCase("true") )
-					Assert.assertTrue(futurePlanYear.findElement(By.cssSelector(">div")).getText().trim().contains(String.valueOf(nxtYear)),
+					Assert.assertTrue(futurePlanYear.findElement(By.cssSelector("div")).getText().trim().contains(String.valueOf(nxtYear)),
 						"Future Year is not set by default");
 			}
 		}

@@ -5828,6 +5828,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
 		}
 	}
+	
+	public void openTelesalesAgentPortalAEP() {
+		String browser = MRScenario.browserName;
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html"),browser);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/",".com/fsem/featuretest.html"), browser);
+		} else if (MRScenario.environment.contains("digital-uatv2")) {
+			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),browser);
+		}
+	}
 
 	public void fixPrivateConnection() {
 		try {
