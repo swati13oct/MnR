@@ -486,13 +486,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
+	@FindBy(css = "#secondarySearchInput + button[class*='clear-button']")
 	private WebElement SecondaryClearBtn;
 
-	@FindBy(xpath = "//input[@id='secondarySearchInput']")
+	@FindBy(css = "#secondarySearchInput")
 	private WebElement SecondarySearchInput;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]/following::button[1]")
+	@FindBy(css = "#secondarySearchBox button[class*='search-button']")
 	private WebElement SecondarySearchBtn;
 
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
@@ -2060,10 +2060,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void insertValueIntoSecondSearchBox(String inputValue) {
 		System.out.println("Click on clear button");
-		driver.findElement(By.className("clear-button")).click();
+		jsClickNew(SecondaryClearBtn);
+//		driver.findElement(By.className("clear-button")).click();
 		System.out.println("Insert value into secondary searchbox");
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+		sendKeysByCharacter(SecondarySearchInput, inputValue);
+		jsClickNew(SecondarySearchBtn);
+		/*driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);*/
 	}
 
 	public void validateErrorMsg(String inputValue, String newSearchValue) {
@@ -3001,7 +3004,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		waitforElement(shoppingCartIcon);
+//		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
