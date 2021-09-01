@@ -1363,5 +1363,15 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		 aquisitionhomepage.enterZipCodeandcounty(zipcode);
 	}
+	@Then("^the user validates MedSup TFN Number$")
+	public void the_user_validates_TFN(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+//		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		aquisitionhomepage.validateMedsupTFNNo(TFNXpath,ExpecetdTFNNo);
+	}
+
 }
 

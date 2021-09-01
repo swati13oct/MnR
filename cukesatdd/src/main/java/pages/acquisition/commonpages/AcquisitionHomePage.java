@@ -830,7 +830,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//span[@class='heading-1'])[2]")
 	private WebElement shopForDSNPHeader;
 	
-	@FindBy(xpath = "//a[contains(text(),'Shop All Plans')]")
+	@FindBy(xpath = "//a[contains(text(),'Shop all plans')]")
 	private WebElement shopAllPlansBtn;
 	
 	@FindBy(xpath = "//a[contains(text(),'Cancel')]")
@@ -3437,7 +3437,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateChatSam() throws InterruptedException {
 		boolean present;
 		try {
-			validateNew(chatsam);
+			validateNew(chatsam,30);
 			present = true;
 		} catch (NoSuchElementException e) {
 			present = false;
@@ -7590,8 +7590,8 @@ public VPPPlanSummaryPage enterAndValidateZipCode() {
 		CommonUtility.waitForPageLoad(driver, shopAllPlansBtn, 30);
 		shopAllPlansBtn.click();
 		sleepBySec(5);
-		String str="https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html#/plan-summary";
-		Assert.assertEquals(driver.getCurrentUrl(), str);
+		//String str="/plan-summary";
+		//Assert.assertEquals(driver.getCurrentUrl(), str);
 		
 		/*driver.navigate().back();
 		CommonUtility.waitForPageLoad(driver, shopAllPlansBtn, 30);*/
@@ -7798,5 +7798,31 @@ public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 public void clickViewPlansLink() {
 	jsClickNew(viewPlansButton);
 }
+public void validateMedsupTFNNo(String TFNXpath, String ExpecetdTFNNo) {
+	CheckPageLoad();
+	CheckiPerseptions();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+	validate(ActualTFNelement);	
+//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+	
+	}
+	
+	else {
+		Assertion.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+	}
+	
+}	
 
+public void validatebackpage() {
+	
+	driver.navigate().back();
+}
 }
