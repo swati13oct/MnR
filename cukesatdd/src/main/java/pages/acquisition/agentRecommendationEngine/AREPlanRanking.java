@@ -1198,7 +1198,7 @@ public class AREPlanRanking extends UhcDriver {
 		threadsleep(5000);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for(int i=1;i<=totalnumberofplans;i++) {
-			WebElement estimate = estimateMedicalCostvalue.get(i);
+			WebElement estimate = estimateMedicalCostvalue.get(i-1);
 			String estimateCost = (String) (js.executeScript("return arguments[0].textContent;", estimate).toString());
 			estimateMCE.add(estimateCost.trim());
 		}

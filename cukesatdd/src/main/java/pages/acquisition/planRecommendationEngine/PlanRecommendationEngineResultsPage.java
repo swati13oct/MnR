@@ -1506,6 +1506,7 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 			pageNextButton.click();
 			threadsleep(2000);
 			}
+		threadsleep(2000);
 		vppPlans.add(getplanId(e));
 		value++;
 		}
