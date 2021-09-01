@@ -110,10 +110,10 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP
+    @regressionAARPAEP @MSAEP
     Examples: 
       | site | Username |Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors    | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      | AARP | OCT-15   |  10001 | NO            | New York      | MA            | None             | UHGNetwork | [blank]                          | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
+#      | AARP | OCT-15   |  10001 | NO            | New York      | MA            | None             | UHGNetwork | [blank]                          | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
       | AARP | DEC-31   |  30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Dental, Doctors              |
 
     @regressionUHCAEP
@@ -203,7 +203,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP
+    @regressionAARPAEP @MSAEP
     Examples: 
       | site | Username |Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       | AARP | OCT-15   |  30012 | YES           | Walton County | MA            | Medicaid,nursing | Lookup  | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |

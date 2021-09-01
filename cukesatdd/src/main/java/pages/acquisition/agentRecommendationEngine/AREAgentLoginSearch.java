@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
@@ -142,13 +143,38 @@ public class AREAgentLoginSearch extends UhcDriver {
 		// Assertion.assertTrue(validate(stausTxt, 60), "Search not success");
 	}
 
-	public void switchAnotherWindow(String curWin) {
+	public String switchAnotherWindow(String curWin) {
 		threadsleep(3000);
+		String curID = String.valueOf(Thread.currentThread().getId());
 		for (String win : driver.getWindowHandles()) {
 			if (!win.equalsIgnoreCase(curWin))
 				driver.switchTo().window(win);
+			String URL = driver.getCurrentUrl().toString();
+			CommonConstants.Agent_URL.put(curID, URL);
+			System.out.println("**** Current Thread ID is - "+curID+" and Current page URL is: "+URL+" ****");
 		}
 		threadsleep(2000);
+		return curID;
+	}
+	
+	public void loginflagSmithARE(String username) {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String AREURL = CommonConstants.Agent_URL.get(String.valueOf(Thread.currentThread().getId()));
+		System.out.println("**** Current Thread ID is - "+curID+" and Current page URL is: "+AREURL+" ****");
+		driver.findElement(By.id("username")).sendKeys(username);
+		threadsleep(2000);
+		driver.findElement(By.cssSelector("input#testpage")).clear();
+		driver.findElement(By.cssSelector("input#testpage")).sendKeys(AREURL);
+		threadsleep(2000);
+		Select exp = new Select(driver.findElement(By.id("exp")));
+		exp.selectByVisibleText("8 hours");
+		driver.findElement(By.cssSelector("a[class*='btn-primary']")).click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void cloakProfile() {

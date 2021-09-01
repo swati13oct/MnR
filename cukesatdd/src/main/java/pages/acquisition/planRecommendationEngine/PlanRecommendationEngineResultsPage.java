@@ -1521,10 +1521,8 @@ public String getplanId(WebElement plan) {
 	String planId="";
 	planName = plan.getText().trim();
 	threadsleep(3000);
-	if( planName.contains("AARP Medicare Supplement Insurance"))
+	if(planName.contains("AARP Medicare Supplement Insurance"))
 		planId = planName.split("Plan ")[1].trim() + "01";
-//	if(planName.contains(""))
-//		planId = plantilesMS.get(value-1).getAttribute("ng-reflect-plan-name").trim().split("Plan ")[1].trim() + "01";
 	else
 		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
 	//System.out.println("UI Plan Name : "+planName);

@@ -1051,6 +1051,8 @@ public class CommonConstants {
 	
 	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
 	
+	public static LinkedHashMap<String,String> Agent_URL    = new LinkedHashMap<String,String>();
+	
 	public static enum PLANTYPE {
 		MA, MAPD, PDP, DSNP, SNP, MEDSUPP
 	}
