@@ -1310,6 +1310,17 @@ public void validateUIAPIRankingPlans() {
 	}
 }
 
+// UIAPI Ranking Validation for AEP Years
+public void validateAEPUIAPIRankingPlans(String year) {
+	System.out.println("Validating UI vs API Plans Ranking on PRE results page: ");
+	waitforResultsPage();
+	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationObj");
+	List<String> APIRankings = getAEPAPIPlansRanking(rankingJSON, year);
+	if (APIRankings.size() > 0) {
+		verifyAPIRankings(allPlansID, APIRankings);
+	}
+}
+
 public void waitforResultsPage() {
 	pageloadcomplete();
 	waitForPageLoadSafari();
@@ -1327,6 +1338,48 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 		//jarray = (JSONArray) parser.parse(rankingJSON);
 		jsonObject = (JSONObject) parser.parse(rankingJSON);
 		jarray = (JSONArray) jsonObject.get("plans");
+		System.out.println("API Plans Count "+jarray.size());
+		System.out.println("UI Plans Count "+uiPlanCount);
+		for (int i = 0; i < uiPlanCount; i++) {
+			// System.out.println(jarray.get(i));
+			for(int j=0;j< uiPlanCount;j++)
+			{
+			JSONObject jsonObj = (JSONObject) jarray.get(j);
+			// String playtype = (String) jsonObj.get("planType");
+			// System.out.println("playtype : " + playtype);
+			// String apiRank = (String) jsonObj.get("rank");
+			// System.out.println("Rank : " + apiRank);
+			// String planID = (String) jsonObj.get("planId");
+			// System.out.println(planID);
+			if(((String)jsonObj.get("rank")).equalsIgnoreCase(String.valueOf(i+1))) {
+				rankingOrder.add((String) jsonObj.get("planId"));
+				break;
+			}
+			}
+		}
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	System.out.println(rankingOrder);
+	Assert.assertTrue(rankingOrder.size() == uiPlanCount, "API ranking count is not in sync with plans count");
+	return rankingOrder;
+}
+
+//Fetching API Ranking Plan details for AEP Years
+
+public List<String> getAEPAPIPlansRanking(String rankingJSON, String Year) {
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
+	List<String> rankingOrder = new ArrayList<String>();
+	JSONParser parser = new JSONParser();
+	JSONArray jarray = new JSONArray();
+	JSONObject jsonObject = null;
+	try {
+		//jarray = (JSONArray) parser.parse(rankingJSON);
+		jsonObject = (JSONObject) parser.parse(rankingJSON);
+		if(Year.toLowerCase().equals("future"))
+			jarray = (JSONArray) jsonObject.get("plans");
+		else if(Year.toLowerCase().equals("current"))
+			jarray = (JSONArray) jsonObject.get("prevYearPlans");
 		System.out.println("API Plans Count "+jarray.size());
 		System.out.println("UI Plans Count "+uiPlanCount);
 		for (int i = 0; i < uiPlanCount; i++) {
@@ -1693,6 +1746,7 @@ public boolean changePlanyear(String year) {
 			jsClickNew(previousPlanYear);
 			Assert.assertTrue(previousPlanYear.getAttribute("aria-selected").contains("true"),"Current Plan Year is not Selected");
 			threadsleep(10000);
+			System.out.println("Toggling to Current Year");
 			return true;
 		}
 	}
@@ -1703,6 +1757,7 @@ public boolean changePlanyear(String year) {
 			jsClickNew(currentPlanYear);
 			Assert.assertTrue(currentPlanYear.getAttribute("aria-selected").contains("true"),"Future Plan Year is not Selected");
 			threadsleep(5000);
+			System.out.println("Toggling to Future Year");
 			return true;
 		} else {
 			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
