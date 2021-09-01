@@ -305,7 +305,7 @@ public class DCEACQVPPPlanSummaryMobile {
 
 		//plansummaryPage.viewPlanSummary(plantype);
 
-		pages.mobile.acquisition.commonpages.GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		pages.mobile.acquisition.dceredesign.GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		if (null != getStartedPage) {

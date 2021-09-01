@@ -1107,13 +1107,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		accessFooterLinkFromMore("about");
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
-		// validateNew(footerLinkHeader, 30);
-		if (getTitle().contains("About us | UnitedHealthcare")) {
-			return new AboutUsAARPPageMobile(driver);
+		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
+			driver.navigate().back();
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else {
+			accessFooterLinkFromMore("about");
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
+			// validateNew(footerLinkHeader, 30);
+			if (getTitle().contains("About us | UnitedHealthcare")) {
+				return new AboutUsAARPPageMobile(driver);
+			}
 		}
 		return null;
 	}

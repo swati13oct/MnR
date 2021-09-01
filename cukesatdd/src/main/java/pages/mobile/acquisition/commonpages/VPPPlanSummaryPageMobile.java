@@ -2737,9 +2737,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validatePlanSelectorPageInRightRail() throws Exception {
-		validateNew(StartPlanSelector);
-		scrollToView(StartPlanSelector);
-		StartPlanSelector.click();
+		
+		jsClickNew(StartPlanSelector);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
 			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
@@ -2768,8 +2767,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsSendkeys(firstNameField, FirstName);
 		jsSendkeys(lastNameField, LastName);
 		jsSendkeys(emailField, EmailAddress);
-		validateNew(Submitbutton);
+		//validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
+		sleepBySec(3);
 		if (validateNew(medicareGuidePopup)) {
 			System.out.println("Pop up message has been displayed");
 			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
@@ -5206,7 +5206,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='change-location']")
 	public WebElement changeZipCodeLink;
 
-	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
+	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -5222,9 +5222,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(dceLink);
 
 		}
-		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
+		sleepBySec(5);
+		//CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
 		if (validateNew(AddMyDrugsBtn))
-			return new GetStartedPageMobile(driver);
+			return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
 		return null;
 
 	}
@@ -5238,7 +5239,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			// mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			scrollToView(MAmoreDetailsLink);
+			//scrollToView(MAmoreDetailsLink);
 
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
@@ -5263,8 +5264,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		// CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(5);
 		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPageMobile(driver, planType);
 		}

@@ -239,7 +239,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		GetStarted.click();
+		//GetStarted.click();
+		jsClickNew(GetStarted);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
