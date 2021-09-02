@@ -284,6 +284,7 @@ public class SiteSearchMobile {
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
 		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}

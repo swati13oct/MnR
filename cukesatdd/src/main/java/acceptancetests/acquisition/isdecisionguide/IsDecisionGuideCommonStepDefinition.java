@@ -235,6 +235,9 @@ public class IsDecisionGuideCommonStepDefinition {
 	@Then("^the user clicks Submit to submit Decision Guide$")
 	public void the_user_clicks_Submit_to_submit_Decision_Guide() throws Throwable {
 		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0"))) {
+
 		DGR_ThankYouPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_DGRthankYouPage();
 		if (dgrThankYouPage != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
@@ -242,13 +245,15 @@ public class IsDecisionGuideCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.DGR_THANKYOU_PAGE,dgrThankYouPage);
 		} else {
 			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			}
 		}
-
 	}
 
 	@Then("^the user validates Thank You Page$")
 	public void the_user_validates_Thank_You_Page_on_AARP_site() throws Throwable {
-		
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0"))) {
+		}
 	}
 
 	@Then("^the user enters valid information errors for the following fields in IS Pages$")
@@ -274,12 +279,16 @@ public class IsDecisionGuideCommonStepDefinition {
 	public void the_user_validates_Thank_You_Page_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans() throws Throwable {
 		//IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		DGR_ThankYouPage dgrThankYouPage = (DGR_ThankYouPage) getLoginScenario().getBean(PageConstants.DGR_THANKYOU_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0"))) {
+
 		VPPPlanSummaryPage planSummaryPage = dgrThankYouPage.NavigateNext_vppMedsuppPage();
 		if (planSummaryPage != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,planSummaryPage);
 		} else {
 			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
 		}
 	}
 	

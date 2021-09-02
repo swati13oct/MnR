@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import acceptancetests.data.OLE_PageConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,6 +35,7 @@ import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.*;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -817,6 +819,15 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
+	public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable{
+	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+	    WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+	    if (null != welcomepage) {
+		  getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+	    } else
+		Assertion.fail("Welcome page  not loaded");
+    }
 
 	@Then("^the user verify and edit the Pharmacy from vpp detail page$")
 	public void the_user_verify_and_edit_the_Pharmacy_from_vpp_detail_page() throws Throwable {
@@ -1443,7 +1454,20 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidatesDrugsList(druglist);
 
 	}
-	
+
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		drugSummaryPage.clickPlanToggle(planType);
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 	@Then("^the user validates View Drug Pricing modal for the given plan$")
 	public void user_validates_ViewDrugPricing_modal(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1454,6 +1478,14 @@ public class DCEStepDefinitionAARP {
 		String planName = memberAttributesMap.get("Plan Name");
 		drugSummaryPage.viewDrugPricingModal(planName);
 	}
+
+	@Then("^the user Closes Drug Pricing modal$")
+	public void user_closes_ViewDrugPricing_modal() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.closeDrugPricingModal();
+	}
+
 
 	@Then("^the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page$")
 	public void the_user_clicks_Edit_Drug_on_Drug_Details_Page_and_validates_user_navigates_to_Build_your_drug_list_Page()
@@ -3127,20 +3159,53 @@ public class DCEStepDefinitionAARP {
 
 	@Then("the user validates default Plan type on DCE Summary page as follows")
 	public void the_user_validates_default_plan_type_on_dce_summary_page_as_follows(DataTable givenAttributes) {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		String planType = memberAttributesMap.get("Plan Type");
 		System.out.println(planType);
-
-		drugSummaryPage.VerifyDefautTab(planType);
+		String PlanTypeText = "";
+		if(planType.contains("MA")){
+			PlanTypeText = "Medicare Advantage Plan";
+		}
+		else if(planType.contains("PDP")){
+			PlanTypeText = "Prescription Drug Plan";
+		}
+		else{
+			PlanTypeText = "Special Needs Plan";
+		}
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.verifyDefaultPlanType(PlanTypeText);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
-
 	}
 
 	@Then("the user clicks Return to Compare on DCE Summary Page to return to Compare page")
 	public void the_user_clicks_return_to_compare_on_dce_summary_page_to_return_to_compare_page() {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		ComparePlansPage comparePlansPlans = drugSummaryPage.ClickReturnToCompare();
 	}
+
+	@Then("^the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_zero_costs_for_following_Covered_generic_drug_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
+	}
+
+	@Then("^the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_non_zero_costs_for_Not_covered_Drugs_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String NotCoveredDrug = memberAttributesMap.get("NotCoveredDrug");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
+	}
+
 
 }

@@ -23,12 +23,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Global Header
     Given the user is on medicare acquisition site landing page
@@ -43,12 +43,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | planname                             | year   |
-      |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | future |
+      |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | planname                             | year   |
-      |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | future |
+      |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | current |
 
   Scenario Outline: Verify Provider Search  in <site> site from plan summary page
     Given the user is on medicare acquisition site landing page
@@ -72,12 +72,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
     @ProviderSearchCommon_UHC @regressionUHC @sanity
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Plan Details page
     Given the user is on medicare acquisition site landing page
@@ -99,12 +99,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
-      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
+      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | current   |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
-      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
+      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
@@ -138,22 +138,22 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | future |
+      |   10001 | AARP |        12 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | future |
+      |   10001 | UHC  |        12 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         7 | future |
-      |   04011 | AARP |         6 | future |
+      |   55344 | AARP |         7 | current |
+      |   04011 | AARP |         6 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         7 | future |
-      |   04011 | UHC  |         6 | future |
+      |   55344 | UHC  |         7 | current |
+      |   04011 | UHC  |         6 | current |
 
   Scenario Outline: Verify Provider Search plan count in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
@@ -167,19 +167,19 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | future |
+      |   10001 | AARP |        12 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | future |
+      |   10001 | UHC  |        12 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         7 | future |
-      |   04011 | AARP |         6 | future |
+      |   55344 | AARP |         7 | current |
+      |   04011 | AARP |         6 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         7 | future |
-      |   04011 | UHC  |         6 | future |
+      |   55344 | UHC  |         7 | current |
+      |   04011 | UHC  |         6 | current |

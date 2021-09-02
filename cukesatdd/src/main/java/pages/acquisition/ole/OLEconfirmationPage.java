@@ -397,17 +397,17 @@ public class OLEconfirmationPage extends UhcDriver{
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))
 			 {
 			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
 			 }
-			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
 			 }
-			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
 			 }
-			if(MRScenario.environment.contains("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
 		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
 				 } 
 			 if(connection!=null) {
@@ -426,7 +426,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	
 	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) throws SQLException {
 		boolean flag = false;
-		//try {
+		try {
 			String confirmation_no = confirmationNumber.getText();
 			System.out.println("OLE confirmation number is  " +confirmation_no);
 			map.put("Confirmation No", confirmation_no);
@@ -480,10 +480,10 @@ public class OLEconfirmationPage extends UhcDriver{
 
 			}
 			
-/*		} catch (Exception e) {
+	} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
     return flag;
 	//return Validation_Status;
 	}

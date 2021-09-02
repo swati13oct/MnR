@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
-  @PRE @APIRanking @MAPDFlowRanking111
+  @PRE @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -41,7 +41,7 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       | UHC  |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
-  @PRE @APIRanking @MAPDFlowRanking
+  @PRE @APIRanking @MAPDFlowRanking 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -108,11 +108,11 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @prodRegression
     Examples: 
       | site | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | AARP |   15537 | NO            | Bedford       | MA            | None             | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
-      | AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
+      #| AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
     @regressionUHC
     Examples: 

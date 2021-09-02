@@ -286,8 +286,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h3[contains(text(), '" + currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h3[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
@@ -1185,8 +1185,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * selectFromDropDownByValue(planToggleDropdown, planType);
 		 */
 		CommonUtility.waitForPageLoadNew(driver, planTypeToggle, 30);
-		String planType = plantype.toLowerCase();
-		WebElement planTypeOption = driver.findElement(By.cssSelector("input[id^='" + planType + "']"));
+		String planType = plantype.toUpperCase();
+		WebElement planTypeOption = driver
+				.findElement(By.cssSelector("input[name='plans-filter'][value='" + planType + "']"));
 		jsClickNew(planTypeOption);
 		System.out.println(planType + " Plan Toggle Clicked");
 
@@ -1257,5 +1258,31 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(returnToHomeBtn);
 		jsClickNew(returnToHomeBtn);
 	}
+	
+	public void ClickviewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver
+				.findElement(By.cssSelector("div[class*='d-block'] button[aria-label='View Drug Pricing " + planName + "']"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+	}
 
+	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath(
+				"//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+coveredDrug+"')]//ancestor::li//following-sibling::li[contains(@class,'d-block')][contains(text(), '$')]"));
+		String DrugCost = DrugYouPay.getText();
+		int beginIndex = DrugCost.indexOf("$");
+		int endIndex = DrugCost.indexOf("(");
+		String currentDrugYouPay = DrugCost.substring(beginIndex, endIndex).trim();
+		System.out.println("Displayed Covered Drug - " + coveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Covered Drug -" + coveredDrug + " You Pay : $0");
+
+		if (validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
+	}
+	
 }

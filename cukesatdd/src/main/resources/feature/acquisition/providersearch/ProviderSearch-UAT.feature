@@ -117,7 +117,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
+       @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
@@ -238,7 +238,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     #Then the user validates the OLE Submission Details in GPS
     # | Plan Type | <plantype> |
-    @zaid
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | Scenario                                     | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate |
       | Provider Search - E2E Scenario 5_AMP_OLE_PCP | AARP | MA-MBI   | future   | future   |   10001 | NO              | New York County | MA       | future   | AARP Medicare Advantage Patriot (HMO) | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET31    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Edison      | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | M          | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             |

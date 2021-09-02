@@ -80,16 +80,16 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='People']")
 	private WebElement People;
 
-	@FindBy(xpath = "//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Places']")
 	private WebElement Places;
 
-	@FindBy(xpath = "//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='Hospitals']")
 	private WebElement Hospitals;
 
-	@FindBy(xpath = "//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	@FindBy(css = "button[data-test-id='PrimaryCare']")
 	private WebElement Primary;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
@@ -134,10 +134,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 
-	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
+	@FindBy(xpath = "//div[contains(@src,'next')]//ancestor::a[@aria-label='Plan Year']")
 	private WebElement nextYrTile;
 
-	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
+	@FindBy(xpath = "//div[contains(@src,'current')]//ancestor::a[@aria-label='Plan Year']")
 	private WebElement currentYrTile;
 
 	@FindBy(xpath = "//button[text()='Continue Searching']")
@@ -229,7 +229,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// TODO Auto-generated method stub
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		GetStarted.click();
+		jsClickNew(GetStarted);
 
 		scrollToView(People);
 		//CommonUtility.waitForPageLoadNew(driver, People, 30);
@@ -287,6 +287,12 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		AllPrimaryCare.click();
 		scrollToView(selectProviderBtn);
 		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		
+		WebElement providerNameLink = selectProviderBtn.findElement(By.xpath("./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
+		String providerSaved = providerNameLink.getText().trim();
+		System.out.println("Provider Name is : " + providerSaved);
+		MRConstants.PROV_NAME = providerSaved;
+		
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption, 10)) {
@@ -294,12 +300,14 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
 		}
-		threadsleep(10);
+		/*threadsleep(10);
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
+		MRConstants.PROV_NAME = providerSaved;*/
 
+		
+		
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -314,12 +322,12 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		 */
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
-			Checkcoverage.click();
+			jsClickNew(Checkcoverage);
 		} else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
 				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
-			FinishButton.click();
+			jsClickNew(FinishButton);
 		} else
 			System.out.println("Issue with Xpath");
 
@@ -391,31 +399,38 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public void entersZipcodeAndSelectPlanName(String zipcode, String planName, String year) {
 
 		validateNew(zipCodeTextfield);
-		zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+//		continueButton.click();
+		jsClickNew(continueButton);
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				currentYrTile.click();
+//				currentYrTile.click();
+				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
 			if (validate(nextYrTile))
-				nextYrTile.click();
+//				nextYrTile.click();
+				jsClickNew(nextYrTile);
 		}
-		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]"));
 		validateNew(planNameToBeSelected);
-		planNameToBeSelected.click();
-
+//		planNameToBeSelected.click();
+		jsClickNew(planNameToBeSelected);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public int entersZipcodeAndPlancount(String zipcode) {
 
 		validateNew(zipCodeTextfield);
-		zipCodeTextfield.sendKeys(zipcode);
+//		zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+//		continueButton.click();
+		jsClickNew(continueButton);
 
 		List<WebElement> topicDropDownValues = driver
 				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));

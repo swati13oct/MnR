@@ -457,7 +457,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 	
 	public HashMap<Boolean, String> comparePremium(String sheetName, int rowIndex, String columnName, String valueExcel, HashMap<String, String> premiumMap) {
-		boolean flag = true; int counter =0;
+		boolean flag = false; int counter =0;
 
 		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
@@ -505,7 +505,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							System.out.println(sheetName + "_" + rowIndex + " - HEADER PREMIUM VALUE MATCH WITH BOX FOR: " + columnName + " Excel: " + headerPremiumString + " | UI: " + valueUI);
 							break;
 						} else {
-							flag = false;
+						//	flag = false;
 							System.out.println("==============VERIFY PREMIUM FAILED==============");
 							System.out.println(sheetName + "_" + rowIndex + " - header premium value didn't match with the box for: " + columnName + " Excel: " + headerPremiumString + " | UI: " + valueUI);
 							tmpUIString2 = tmpUIString1 + " / Header Value: " + headerPremiumString;
@@ -513,7 +513,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						}
 
 					} else {
-						flag = false;
+						//flag = false;
 						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:1 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						tmpUIString2 = tmpUIString1 + " / Header Value: " + headerPremiumString;
 						break;
@@ -525,7 +525,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:2 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						break;
 					} else {
-						flag = false;
+					//	flag = false;
 						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:2 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						tmpUIString2 = tmpUIString1;
 						break;
@@ -538,7 +538,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:3 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						break;
 					} else {
-						flag = false;
+						//flag = false;
 						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:3 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						tmpUIString2 = tmpUIString1;
 						break;
@@ -679,7 +679,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		else {
 			result.put(headerPrem, headerPremiumArray[2]);
 		}
-		
+
 		String headerPlanName = "plan name"; //this variable will be stored as key for the header plan name
 		headerPlanNameText = driver.findElement(By.xpath(planCard)).getText();
 		result.put(headerPlanName, headerPlanNameText);
@@ -702,9 +702,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("No dental platinum rider for Plan :"+planName);
 			}
+			try {
+
+
+
+	//				String 	highOptionalDentalMonthlyElement1 = "//input[@id='HighOptionDental_selectedRiders']//parent::span";
+	//	String	highOptionalDentalElement1 = "(//input[@id='HighOptionDental_selectedRiders']//parent::span//following-sibling::div[@class='opt-benefit-list']/ul)[1]";
+
+			/*	WebElement estimatedTotalValue =null;
+				String estimatedTotalXpath = "//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//table//tr[not(contains(@class,'ng-hide'))]//*[contains(text(),'Estimated')]/ancestor::td//following-sibling::td";
+
+				if(listOfTabHeaders.get(tab).getText().contains("Plan Costs")) {
+					estimatedTotalValue=driver.findElement(By.xpath(estimatedTotalXpath));System.out.println(estimatedTotalValue.getText());
+					result.put("Estimated Annual Total No riders", estimatedTotalValue.getText());
+				}*/
 			if (highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
-				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText().trim();
-				dentalPlatinumtext = dentalPlantinumElement.getText().trim();
+				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText();
+				dentalPlatinumtext = dentalPlantinumElement.getText();
 				//dentalPremiumValue=dentalPlatinumtext + dentalPlantinumMonthlyElementtext;
 				result.put("high option dental", highOptionalDental);
 				result.put("dental platinum", dentalPlantinumMonthlyElementtext +  dentalPlatinumtext);
@@ -719,11 +733,16 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			result.put("high option dental", highOptionalDental);
 			result.put("dental platinum", dentalPlatinum);
 			}
+
+		} catch (Exception e) {
+			System.out.println("No dental platinum rider  and  No High Optional riders for Plan :"+planName);
 		}
+		}
+
 		System.out.println("================ Finished collecting info on Welcome OLE Page================");
 		return result;
 	}
-    
+
     
     public boolean Enroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
     	boolean flag = true;

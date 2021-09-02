@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
@@ -92,7 +93,8 @@ public class DCEACQHomeMobile {
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -383,6 +385,8 @@ public class DCEACQHomeMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
+
+
 
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes)
@@ -1635,6 +1639,7 @@ public class DCEACQHomeMobile {
 		String LastName = "";
 		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 
+
 		if(AuthenticatedFlag.equalsIgnoreCase("false")){
 			 FirstName = memberAttributesMap.get("FirstName");
 			 LastName = memberAttributesMap.get("LastName");
@@ -1666,4 +1671,18 @@ public class DCEACQHomeMobile {
 		getLoginScenario()
 				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
 	}
+
+	
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		drugSummaryPage.clickOnSNPPlan();
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 }

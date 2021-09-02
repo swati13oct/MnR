@@ -284,24 +284,24 @@ Feature: 1.12 ACQ - Global Components Validation
     @FooterLinks_GlobalCompsAARP @avengersRegressionAARP
     Examples: 
       | site | path                          | pageName                   | tfnXpath                     | tfnFlag |
-      | AARP | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
       | AARP | sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
       | AARP | terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
       | AARP | disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
       | AARP | health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
       | AARP | contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       | AARP | privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
+      #| AARP | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
 
     @FooterLinks_GlobalCompsUHC @avengersRegressionUHC
     Examples: 
       | site | path                          | pageName                   | tfnXpath                     | tfnFlag |
-      | UHC  | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
       | UHC  | sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
       | UHC  | terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
       | UHC  | disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
       | UHC  | health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
       | UHC  | contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       | UHC  | privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
+      #| UHC  | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
 
   @GlobalComponentsAARP_ISonlyPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
@@ -421,7 +421,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |
       | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
       | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
-      | AARP | about-us.html                                                                           | About Us Page                   |
+      #| AARP | about-us.html                                                                           | About Us Page                   |
 
     #| AARP | sitemap.html                                                                                                 | Site Map Page                   |
     #| AARP | privacy-policy.html                                                                                          | Privacy Policy Page             |
@@ -465,7 +465,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |
       | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
       | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
-      | UHC  | about-us.html                                                                           | About Us Page                   |
+      #| UHC  | about-us.html                                                                           | About Us Page                   |
 
   #| UHC  | sitemap.html                                                                                                 | Site Map Page                   |
   #| UHC  | privacy-policy.html                                                                                          | Privacy Policy Page             |
@@ -933,7 +933,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             | Alaska |
       | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 | Alaska |
       | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        | Alaska |
-      | AARP | about-us.html                                                                           | About Us Page                   | Alaska |
+      #| AARP | about-us.html                                                                           | About Us Page                   | Alaska |
 
     @Global_Comps_Footer_UHC
     Examples: 
@@ -968,7 +968,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             | Alaska |
       | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 | Alaska |
       | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        | Alaska |
-      | UHC  | about-us.html                                                                           | About Us Page                   | Alaska |
+      #| UHC  | about-us.html                                                                           | About Us Page                   | Alaska |
 
   @GlobalComponentsFooterAARPBlogPages
   Scenario Outline: To verify Global Components for the page mentioned on site - <site> -  <pageName> : <path>
@@ -1047,3 +1047,4 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                                                                                                                                  | Drug Cost Estimator         |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary           |
       | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                                                                                                                                    | Pharmacy Search             |
+
