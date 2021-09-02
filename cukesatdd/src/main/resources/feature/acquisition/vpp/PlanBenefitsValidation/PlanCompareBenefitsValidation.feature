@@ -18,7 +18,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet   |
       | Sheet2022_2 |
 
-    @planCompareBenefitsAARP03 @planCompareMA
+    @planCompareBenefitsAARP032 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_3 |
@@ -72,6 +72,36 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2022_13 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_14 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_15 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_16 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_17 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_18 |
+
+    @planCompareBenefitsAARP13 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_19 |
 
     @planCompareBenefitsPDPAARP01
     Examples: 
