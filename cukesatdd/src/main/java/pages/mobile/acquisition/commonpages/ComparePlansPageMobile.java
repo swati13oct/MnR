@@ -594,10 +594,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public WelcomePageMobile Enroll_OLE_Plancompare() throws InterruptedException {
 		WebElement enrollForPlan = null;
-		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
+		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/button/span"));
 		if (enrollForPlan != null) {
-			// validateNew(enrollForPlan);
-			// enrollForPlan.click();
+			
 			jsClickNew(enrollForPlan);
 			waitForPageLoadSafari();
 		}
@@ -1433,14 +1432,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(medicalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		jsClickNew(medicalBenefitsOONToggle);
 
 		scrollToView(medicalBenefitsOONLabel);
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1452,12 +1451,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());

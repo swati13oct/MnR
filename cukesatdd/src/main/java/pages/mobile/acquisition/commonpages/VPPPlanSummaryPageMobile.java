@@ -1891,7 +1891,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public int checkAllMAPlans() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		List<WebElement> allMAPlans = driver
 				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 		int plansForCompare = allMAPlans.size();
@@ -1901,9 +1906,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				scrollToView(allMAPlans.get(i));
 				jsClickNew(allMAPlans.get(i));
-				// allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -2737,7 +2740,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validatePlanSelectorPageInRightRail() throws Exception {
-		
+
 		jsClickNew(StartPlanSelector);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
@@ -2767,7 +2770,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsSendkeys(firstNameField, FirstName);
 		jsSendkeys(lastNameField, LastName);
 		jsSendkeys(emailField, EmailAddress);
-		//validateNew(Submitbutton);
+		// validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
 		sleepBySec(3);
 		if (validateNew(medicareGuidePopup)) {
@@ -5107,9 +5110,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		scrollToView(compareLinks.get(1));
+
 		jsClickNew(compareLinks.get(1));
-		CommonUtility.checkPageIsReadyNew(driver);
+
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -5206,7 +5209,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='change-location']")
 	public WebElement changeZipCodeLink;
 
-	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
+	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(
+			String plantype, String planName) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -5223,7 +5227,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		}
 		sleepBySec(5);
-		//CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
+		// CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
 		if (validateNew(AddMyDrugsBtn))
 			return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
 		return null;
@@ -5237,9 +5241,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
-			// mobileswipeHorizantal("50", true);
-			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			//scrollToView(MAmoreDetailsLink);
 
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
@@ -5247,20 +5248,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
-			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			// mobileswipeHorizantal("50", true);
-			scrollToView(PDPmoreDetailsLink);
-			// PDPmoreDetailsLink.click();
+
 			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
-			// CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			// mobileswipeHorizantal("50", true);
-			scrollToView(SNPmoreDetailsLink);
-			// SNPmoreDetailsLink.click();
+
 			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
@@ -5511,7 +5506,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void checkPlansForCompare(String counter, String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -5540,7 +5534,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
-
 				jsClickNew(allPlans.get(i));
 			}
 		}
@@ -6001,8 +5994,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Choose Plan to Compare : " + planName);
 		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//label[contains(@for,'compare-plan')]"));
-		scrollToView(addToCompare);
-		validateNew(addToCompare);
+
 		jsClickNew(addToCompare);
 	}
 

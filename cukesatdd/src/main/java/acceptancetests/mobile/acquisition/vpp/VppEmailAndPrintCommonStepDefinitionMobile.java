@@ -415,15 +415,21 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailFunctionOnSummaryPage(planType);
 
-		// note: collect page data for email deeplink validation
-		HashMap<String, Integer> vppSummaryPgInfo = util.collectInfoVppPlanSummaryPg();
+		if (wDriver.getClass().toString().toUpperCase().contains("IOS")) {
 
-		// note: if email is successfully sent, deepLink info should be available, save
-		// it for later use
-		String deepLinkStr = util.getEmailDeepLink(wDriver);
-		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
-		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
-		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+			System.out.println("Deeplink validation skipped on iOS");
+		} else {
+
+			// note: collect page data for email deeplink validation
+			HashMap<String, Integer> vppSummaryPgInfo = util.collectInfoVppPlanSummaryPg();
+
+			// note: if email is successfully sent, deepLink info should be available, save
+			// it for later use
+			String deepLinkStr = util.getEmailDeepLink(wDriver);
+			getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
+			getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
+			getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
