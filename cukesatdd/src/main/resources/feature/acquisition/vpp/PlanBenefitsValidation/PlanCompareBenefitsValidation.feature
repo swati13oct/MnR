@@ -8,67 +8,67 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet>                |
       | Site          | AARP                       |
 
-    @planCompareBenefitsAARP01
+    @planCompareBenefitsAARP01 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_1 |
 
-    @planCompareBenefitsAARP02
+    @planCompareBenefitsAARP02 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_2 |
 
-    @planCompareBenefitsAARP03
+    @planCompareBenefitsAARP03 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_3 |
 
-    @planCompareBenefitsAARP04
+    @planCompareBenefitsAARP04 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_4 |
 
-    @planCompareBenefitsAARP05
+    @planCompareBenefitsAARP05 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_5 |
 
-    @planCompareBenefitsAARP06
+    @planCompareBenefitsAARP06 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_6 |
 
-    @planCompareBenefitsAARP07
+    @planCompareBenefitsAARP07 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_7 |
 
-    @planCompareBenefitsAARP08
+    @planCompareBenefitsAARP08 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_8 |
 
-    @planCompareBenefitsAARP09
+    @planCompareBenefitsAARP09 @planCompareMA
     Examples: 
       | workSheet   |
       | Sheet2022_9 |
 
-    @planCompareBenefitsAARP10
+    @planCompareBenefitsAARP10 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_10 |
 
-    @planCompareBenefitsAARP11
+    @planCompareBenefitsAARP11 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_11 |
 
-    @planCompareBenefitsAARP12
+    @planCompareBenefitsAARP12 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_12 |
 
-    @planCompareBenefitsAARP13
+    @planCompareBenefitsAARP13 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_13 |
