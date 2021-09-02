@@ -29,6 +29,8 @@ import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
 import pages.acquisition.vpp.AepPlanComparePage;
 import pages.acquisition.vpp.AepPlanDetailsPage;
@@ -516,6 +518,7 @@ public class VppPlanValidationStepDefinition {
 			try {
 			
 				 AepVppPlanSummaryPage planSummaryPage = null;
+				 AcquisitionHomePage aquisitionhomepage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
 				// int countyCellNum = 8, planYearCellNum = 10, planNameCellNum = 6; //to be used when running a random row number
@@ -526,7 +529,7 @@ public class VppPlanValidationStepDefinition {
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
-					 	int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
+					 	int failureCounter = 0;int cellIndex = 0; int counter=0;System.out.println("INSIDE Row");
 					 	
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
@@ -565,6 +568,10 @@ public class VppPlanValidationStepDefinition {
 									  String planName = row.getCell(planNameCellNum).getStringCellValue();
 									  
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
+									  if(counter==0) {
+										  aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, siteType);
+										  counter++;
+									  }
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 									  //planSummaryPage.checkForMultiCountyPopup(countyName);

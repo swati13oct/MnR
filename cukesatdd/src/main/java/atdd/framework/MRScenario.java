@@ -932,9 +932,9 @@ public class MRScenario {
 	
 	public Object openApplicationURL(WebDriver driver, String site) {
 		
-		if(StringUtils.isEmpty(planYear)) {
+		/*if(StringUtils.isEmpty(planYear)) {
 			planYear = getPlanYear(site);
-		}
+		}*/
 		System.out.println("Plan Year selected " + planYear);
 		
 		if(flagSmith) {
