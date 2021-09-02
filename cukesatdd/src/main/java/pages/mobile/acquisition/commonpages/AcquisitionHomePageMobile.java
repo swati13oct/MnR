@@ -953,13 +953,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
 			isHealthPlan = true;
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
 			checkModelPopup(driver, 15);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try {
-				if (proactiveChatExitBtn != null) {
+				if (proactiveChatExitBtn.isDisplayed()) {
 					jsClickNew(proactiveChatExitBtn);
 				} else {
 					Assertion.fail("Please check booleanvalue");

@@ -3,6 +3,7 @@ package pages.mobile.acquisition.commonpages;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
@@ -139,7 +141,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
 
-
+	@FindBy(css = "div[class*='plan-drug-doctor-popup']")
+	private WebElement providerPopUp;
+	
+	@FindBy(css = "div[class*='plan-drug-doctor-popup'] div[class^='d-block'] div[id^='ProviderName']")
+	private List<WebElement> addedProviders;
+	
+	@FindBy(css = "div[class*='plan-drug-doctor-popup'] > div > button")
+	private WebElement addedProvidersModalCloseButton;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
@@ -485,15 +494,26 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @param planName
 	 * @return
 	 */
-	public boolean providerinfo(String planName) {
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		String mproviderinfo = ProviderSearchLink.getText();
-		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
+	public void validateProviderinfo(String planName) {
+		try {
+			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'plan-card')]//button[contains(@dtmname,'Doctors & Dentists')]"));
+			jsClickNew(ProviderSearchLink);
+			CommonUtility.waitForPageLoadNew(driver, providerPopUp, 10);
+
+			List<String> mproviderinfo = addedProviders.stream()
+					.map(providerName -> providerName.getText().replaceAll("\\.", "").replaceAll(",", ""))
+					.collect(Collectors.toList());
+			System.out.println(mproviderinfo);
+
+			String rallyProviderName = MRConstants.PROV_NAME;
+			rallyProviderName = rallyProviderName.replaceAll("\\.", "").replaceAll(",", "");
+			Assertion.assertTrue(mproviderinfo.contains(rallyProviderName));
+
+			jsClickNew(addedProvidersModalCloseButton);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return false;
 
 	}
 
