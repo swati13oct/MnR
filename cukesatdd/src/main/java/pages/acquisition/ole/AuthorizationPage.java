@@ -285,5 +285,11 @@ public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws In
 		return validation_Flag;
 	}
 	
-	
+public void validate_Authorized_Applicant() throws InterruptedException {
+
+	if(NextBtn.isEnabled()){	
+		jsClickNew(ApplicantRadio);
+		
+	}
+}
 }

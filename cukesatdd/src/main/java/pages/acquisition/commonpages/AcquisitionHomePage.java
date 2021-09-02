@@ -239,6 +239,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')]"
 
 	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+//	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[3]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -6227,7 +6228,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚- 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
