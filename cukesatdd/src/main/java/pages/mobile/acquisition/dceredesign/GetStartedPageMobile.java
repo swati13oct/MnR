@@ -1,5 +1,6 @@
 package pages.mobile.acquisition.dceredesign;
 
+import acceptancetests.data.CommonConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -195,9 +196,8 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public PrescriptionsProvidersBenefitsPageMobile clickReturnToAcqHomePAge() {
-		validateNew(LinktoExitScenario);
-		jsClickNew(LinktoExitScenario);
-
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			return new PrescriptionsProvidersBenefitsPageMobile(driver);

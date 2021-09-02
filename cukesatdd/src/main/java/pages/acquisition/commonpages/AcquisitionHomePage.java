@@ -352,7 +352,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")
 	private WebElement lnkProfile;
 
-	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
+	//@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
+	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop') or contains(@class,'invoca_swap_sam sam__button__text')]")
 	private WebElement callsam;
 
 	@FindBy(xpath = "(//div[@ng-show='fedTfn'])[2]/p/span/a/u")
