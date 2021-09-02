@@ -721,6 +721,10 @@ public class VppPlanValidationStepDefinition {
 									  String highOptionDental = row.getCell(highOptionDentalCellNum).getStringCellValue();
 									  String dentalPlatinum = row.getCell(dentalPlatinumCellNum).getStringCellValue();
 									 String monthlyPremium = row.getCell(monthlyPremiumCellNum).getStringCellValue();
+
+									 System.out.println("Excel VALUE for High Optional Dental :"+highOptionDental);
+									 System.out.println("Excel VALUE for dental Platinum  :"+dentalPlatinum);
+
 									System.out.println("Validating " + sheetName + " Plan " + rowIndex + " ************************************************************");
 									new VppCommonPage(wd, siteType, currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
