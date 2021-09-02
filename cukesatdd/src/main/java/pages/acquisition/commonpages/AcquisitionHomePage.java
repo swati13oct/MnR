@@ -1021,7 +1021,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 	}
 
 	public String getTestSiteUrl() {
