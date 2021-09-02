@@ -575,9 +575,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
 
-	// @FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn
-	// More About Medicare')]")
-	@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
+	@FindBy(xpath="//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+	//@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -6709,6 +6708,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		driver.switchTo().activeElement();
+		sleepBySec(5);
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
 		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
