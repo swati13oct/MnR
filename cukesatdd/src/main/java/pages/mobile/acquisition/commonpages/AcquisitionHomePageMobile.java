@@ -358,7 +358,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsam;
 
 	// String CallSam= "Call a Licensed Insurance Agent";
