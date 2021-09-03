@@ -368,7 +368,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -3195,6 +3195,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			/*WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));*/
+			validateNew(UHCLogo);
 			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPlogo.isDisplayed()) {
 //				scrollToView(UHCLogo);
 				Assertion.assertTrue(true);
@@ -3298,6 +3299,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class*='mobile-mysaved'] > div > button")
 	public WebElement menuMySavedItemsButton;
 	
+	@FindBy(css = ".mob-menu-header button[onclick^='openSearch']")
+	private WebElement siteSearchIcon;
+	
 	public void validateHeaderLinks() {
 		jsClickNew(MenuMobile);
 		pageloadcomplete();
@@ -3309,12 +3313,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
-		validateLogo();
 		// validateNew(searchTxtbox);
 		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(menuMySavedItemsButton);
+		validateNew(siteSearchIcon);
 		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
 		jsClickNew(mainMenuNavCloseButton);
+		validateLogo();
 	}
 
 	public void validateVisitorProfileIcon() {
