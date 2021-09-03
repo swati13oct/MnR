@@ -180,7 +180,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// Updated xpath for DCE link on Home Page
 	//@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator')]")
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Estimate Drug Costs')]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -239,6 +239,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')]"
 
 	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+//	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[3]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -576,7 +577,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// @FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn
 	// More About Medicare')]")
-	@FindBy(xpath = "//span[contains(text(),'Learn More About Medicare')]")
+	@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -732,7 +733,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
 
-	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[1]")
 	private WebElement goToMemberSiteLink;
 
 	@FindBy(id = "header-tfn-link")
@@ -1020,7 +1021,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 	}
 
 	public String getTestSiteUrl() {
@@ -1484,7 +1486,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
-		if (getTitle().contains("About UnitedHealthcare")) {
+		if (getTitle().contains("About us | UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
 		return null;
