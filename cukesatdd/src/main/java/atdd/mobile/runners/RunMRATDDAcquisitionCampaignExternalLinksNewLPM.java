@@ -1,4 +1,4 @@
-package atdd.runners;
+package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
 
@@ -8,18 +8,17 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },
-				features = {"src/main/resources/feature/acquisition/plandocs"},
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
+				features = {"src/main/resources/feature/acquisition/CampaignExternalLinksE2E_New_LPM"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDPlanDocs.json",
+						"json:target/cucumber-RunMRATDDAcquisitionCampaignExternalLinksNewLPM.json",
 						"timeline:target" },
-				tags = "@plandocument")
+				tags = "@StageLPP", dryRun=false)												
 
-@RetryCountIfFailed(1)
-public class RunMRATDDPlanDocs extends BaseTestConfig {
+@RetryCountIfFailed(0)
+public class RunMRATDDAcquisitionCampaignExternalLinksNewLPM extends BaseTestConfig{
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());

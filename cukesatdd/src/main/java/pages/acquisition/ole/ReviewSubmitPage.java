@@ -595,7 +595,6 @@ public class ReviewSubmitPage extends UhcDriver{
 					}
 					else flag = false;
 				}else flag = false;
-
 				if(validate(SubmitApplicationBtn)){
 					if(SubmitApplicationBtn.isEnabled()){
 						//flag = (!flag)?false:true;
@@ -709,9 +708,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 	}
 	catch (Exception e){
-
 				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
-
 			}
 		*/	
 		

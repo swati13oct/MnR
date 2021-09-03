@@ -1369,5 +1369,3 @@ public class VisitorProfilePage extends UhcDriver {
 	}
  }
 
-
-

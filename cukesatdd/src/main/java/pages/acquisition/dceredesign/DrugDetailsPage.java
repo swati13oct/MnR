@@ -2596,6 +2596,4 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(saveDrugs);
 			}
 		
-
-
 }
