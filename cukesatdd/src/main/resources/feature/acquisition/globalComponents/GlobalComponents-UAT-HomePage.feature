@@ -54,20 +54,20 @@ Feature: 1.12 homePage flows
     Then the user validates TFN on need help section of Shop pages
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-    Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
+    # Then the user validates whether call icon is visible
+    #Then the user validates whether chat icon is visible
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on browser back button
     And user clicks on shop for Medigap plans
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    Then the user validates TFN on need help section of Shop pages
-      | TFNxpath | <MedSupTFN>      |
-      | TFNflag  | <medSupTFNXpath> |
+    #Then the user validates TFN on need help section of Shop pages
+    # | TFNxpath | <MedSupTFN>      |
+    #| TFNflag  | <medSupTFNXpath> |
     #Then the user validates whether call icon is visible
-    Then the user validates MedSup TFN Number
-      | TFN No    | <MedSupTFN>      |
-      | TFN Xpath | <medSupTFNXpath> |
+    # Then the user validates MedSup TFN Number
+    #  | TFN No    | <MedSupTFN>      |
+    # | TFN Xpath | <medSupTFNXpath> |
     Then the user validates whether chat icon is visible
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
@@ -88,19 +88,18 @@ Feature: 1.12 homePage flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
-    #Then the user validates whether chat icon is visible
+    Then the user validates whether chat icon is visible
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on browser back button
     And user clicks on shop all plans
-    Then user clicks on Select by Address and Enter fileds
-      | Address | <address> |
-      | City    | <city>    |
-      | State   | <state>   |
-    Then user clicks on cancel link on shop for a plan
-    Then user enters the zipcode and validates the URL
-      | ZipCodeOnPlan | <ZipCodeOnPlan1> |
-      | SiteOnPlan    | <SiteOnPlan1>    |
+    Then the user validate ZipCode Components on page using ZipCode "55410"
+    Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
+    Then the user clicks on browser back button
+    #Then user enters the zipcode and validates the URL
+    # | ZipCodeOnPlan | <ZipCodeOnPlan1> |
+    #| SiteOnPlan    | <SiteOnPlan1>    |
     Then the user validates the Need Help Section in the right rail
     Then the user clicks on browser back button
     And user clicks on learn more button link and navigates to Medicare Education Home page

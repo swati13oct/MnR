@@ -7586,10 +7586,14 @@ public VPPPlanSummaryPage enterAndValidateZipCode() {
 //		CommonUtility.waitForPageLoad(driver, shopForDSNP, 30);
 		
 }
+	@FindBy(xpath = "//span[text()='Get Medicare with More.']")
+	private WebElement shopAllPlanHeader;
+	
 	public void validateShopAll() {
 		CommonUtility.waitForPageLoad(driver, shopAllPlansBtn, 30);
 		shopAllPlansBtn.click();
-		sleepBySec(5);
+		CommonUtility.waitForPageLoad(driver,shopAllPlanHeader, 30);
+		Assert.assertEquals(shopAllPlanHeader.getText(), "Get Medicare with More.");
 		//String str="/plan-summary";
 		//Assert.assertEquals(driver.getCurrentUrl(), str);
 		

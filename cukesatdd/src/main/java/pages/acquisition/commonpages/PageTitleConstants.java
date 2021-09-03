@@ -66,6 +66,7 @@ public class PageTitleConstants {
 	public static final String ULAYER_PRESCRIPTION_DRUG_DPLANS = "Shop AARP Medicare Prescription Drug Plans from UnitedHealthcare";
 	public static final String ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE="Shop for a Plan";
 	public static final String ULAYER_PRESCRIPTION_DRUG_SNPPLANS = "Shop Dual Special Needs Plans from UnitedHealthcare";
+	public static final String ULAYER_SHOP_ALL_PLANS ="Shop AARP Medicare Plans from UnitedHealthcare | AARP Medicare Plans";
 	public static final String ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE_MEDIGAP="Shop AARP Medicare Supplement Plans from UnitedHealthcare";
 	public static final String ULAYER_OUR_MEDICARE_PLANS = "Our Medicare Plans | AARP® Medicare Plans From UnitedHealthcare®";
 	public static final String ULAYER_HEALTH_INSURANCE_BROKER_AGENT_TOOLS = "Health Insurance Broker & Agent Tools | AARP® Medicare Plans from UnitedHealthcare®";
@@ -98,4 +99,5 @@ public class PageTitleConstants {
 	public static final String ULAYER_ENTER_ZIP_CODE = "Please enter your ZIP code as 5 numbers in the following format: 12345.";
 	public static final String ULAYER_LAST_NAME = "Your last name must contain at least 1 character and cannot be more than 35 characters. Please enter up to 35 characters of your last name.";
 	public static final String ULAYER_ENTER_DATE_OF_BIRTH = "Please enter your date of birth like this: MM/DD/YYYY";
+	public static final String BLAYER_SHOP_ALL_PLANS ="Shop AARP Medicare Plans from UnitedHealthcare | AARP Medicare Plans";
 }

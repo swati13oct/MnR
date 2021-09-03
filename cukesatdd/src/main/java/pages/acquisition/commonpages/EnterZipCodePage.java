@@ -89,6 +89,11 @@ public class EnterZipCodePage extends UhcDriver {
 					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
 							(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_SNPPLANS).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_SNPPLANS);
+					
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+							(PageTitleConstants.ULAYER_SHOP_ALL_PLANS).replaceAll("[^A-Za-z0-9:.]", "")))
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_SHOP_ALL_PLANS);
+					
 					else
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
