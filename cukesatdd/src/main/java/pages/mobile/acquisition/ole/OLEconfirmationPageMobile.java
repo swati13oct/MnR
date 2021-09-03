@@ -148,7 +148,6 @@ public class OLEconfirmationPageMobile extends UhcDriver{
 			   stmt = connection.createStatement();
 			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY + confirmation_no );
 			   while(rs.next()) {
-				   //Personal Information Page
 
 				   //Personal Information
 				   String firstName = rs.getString("FIRST_NAME");
@@ -234,12 +233,14 @@ public class OLEconfirmationPageMobile extends UhcDriver{
 				   //Prescription Drug Coverage
 				   String secondaryCoverage = rs.getString("DO_YOU_HAVE_OTHER_RX_COVERAGE");
 				   gpsData.put("Prescription Drug", secondaryCoverage); 
-				   String otherCoverageName = rs.getString("PDCNAME");
+				   String otherCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
 				   gpsData.put("Prescription Name", otherCoverageName); 
 				   String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
 				   gpsData.put("PD Group Number", secondaryGroup); 
 				   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
 				   gpsData.put("PD Member Number", secondaryMemberNumber); 
+				   String secondaryRXBINNumber =rs.getString("SECONDARY_RX_BIN");
+				   gpsData.put("RX BIN Number", secondaryRXBINNumber); 
 
 				   //Eligibility Page
 				   String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
@@ -369,7 +370,7 @@ public class OLEconfirmationPageMobile extends UhcDriver{
 				
 			
 			   }
-		   } catch (Exception e) {
+		  } catch (Exception e) {
 			   e.printStackTrace();
 		}
 		   finally {
@@ -387,7 +388,7 @@ public class OLEconfirmationPageMobile extends UhcDriver{
 			   }catch (SQLException e) {
 					e.printStackTrace();
 				}
-			   }
+			  }
 	return gpsData;
 	  
 }

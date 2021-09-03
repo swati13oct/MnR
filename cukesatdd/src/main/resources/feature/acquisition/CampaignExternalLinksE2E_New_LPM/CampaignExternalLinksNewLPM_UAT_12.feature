@@ -15,19 +15,18 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
-    @CampaignExternal_Scenario12_AARP  @StageLP
-    Examples:
+    @CampaignExternal_Scenario12_AARP @StageLP
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                                                         |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |
 
-
-    @CampaignExternal_Scenario12_AARP  @OfflineLP
-    Examples:
+    @CampaignExternal_Scenario12_AARP @OfflineLP
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                                                   |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP  @ProdLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                                               |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
@@ -41,8 +40,8 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
     Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |
       | TFN Xpath   | <TFNxpath1>  |
-      | Working hrs | <workingHrs> | 
-   #-------------------------PDP plantype---------------------------------------
+      | Working hrs | <workingHrs> |
+    #-------------------------PDP plantype---------------------------------------
     Then user clicks on view plans and pricing and navigates to VPP
     Then user should be navigated on Shop for a plan page
     Then user should be navigated on VPP summary page
@@ -88,8 +87,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
-   #Then user navigate back to external url for prescription drug plan
-    
+    #Then user navigate back to external url for prescription drug plan
     #-------------------------MAPD plantype---------------------------------------
     Then user go backs campaign external Links page
       | External Link | <externallink> |
@@ -192,20 +190,19 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | TFN Xpath | <TFNxpath2> |
 
     @CampaignExternal_Scenario12_AARP   @StageLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultutiCounty | county         | pscCode | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | planIndex | planIndex1 | PDPplantype | PDPplanname                     | SNPPlanType | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | TFNNo1         | pscCode | externallink                                                                         |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes             | Barbour County | 8012869 | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | 1         | 2          | PDP         | AARP MedicareRx Walgreens (PDP) | SNP         | future   | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 1-866-408-5545 | 8012871 | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @OfflineLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultutiCounty | county         | pscCode | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | SNPPlanType | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | TFNNo1         | pscCode | externallink                                                                   |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes             | Barbour County | 8012869 | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | 1         | 2          | PDP         | AARP MedicareRx Walgreens (PDP) | future   | SNP         | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 1-866-408-5545 | 8012871 | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @ProdLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultutiCounty | county         | pscCode | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | SNPPlanType | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | TFNNo1         | pscCode | externallink                                                               |
       | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes             | Barbour County | 8012869 | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | 1         | 2          | PDP         | AARP MedicareRx Walgreens (PDP) | future   | SNP         | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 1-866-408-5545 | 8012871 | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
-
 
   @Scenario12
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages - DCE
@@ -264,17 +261,17 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | TFN Xpath | <TFNxpath> |
 
     @CampaignExternal_Scenario12_AARP   @StageLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcode | county         | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath                                                                                   | drug1 | drug2   | drug3   | drug4   | defaultPharmacy       | externallink                                                                         |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog | Retail Chain Pharmacy | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @OfflineLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcode | county         | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath                                                                                   | drug1 | drug2   | drug3   | drug4   | defaultPharmacy       | externallink                                                                   |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog | Retail Chain Pharmacy | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @ProdLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcode | county         | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath                                                                                   | drug1 | drug2   | drug3   | drug4   | defaultPharmacy       | externallink                                                               |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog | Retail Chain Pharmacy | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
@@ -292,17 +289,17 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | TFN Xpath | <TFNxpath2> |
 
     @CampaignExternal_Scenario12_AARP   @StageLP
-    Examples:
+    Examples: 
       | Scenario                                      | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                                         |
       | Campaign External Links - E2E Scenario 12_AMP | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @OfflineLP
-    Examples:
+    Examples: 
       | Scenario                                      | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                                   |
       | Campaign External Links - E2E Scenario 12_AMP | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
     @CampaignExternal_Scenario12_AARP    @ProdLP
-    Examples:
+    Examples: 
       | Scenario                                      | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                               |
       | Campaign External Links - E2E Scenario 12_AMP | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html |
 
@@ -348,12 +345,13 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | TFN Xpath | <TFNxpath2> |
 
     @CampaignExternal_Scenario12_AARP   @StageLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcode | county         | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                                         | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-prescription-drug-plans.html | 15       | 2021        | AARP MedicareRx Walgreens (PDP) | 2021        | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |
 
+
     @CampaignExternal_Scenario12_AARP    @OfflineLP
-    Examples:
+    Examples: 
       | Scenario                                      | zipcode | county         | TFNNo          | TFNxpath1                   | workingHrs                              | TFNxpath2                                                                                          | externallink                                                                   | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Campaign External Links - E2E Scenario 12_AMP | 36016   | Barbour County | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://offline.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html | 15       | 2021        | AARP MedicareRx Walgreens (PDP) | 2021        | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |
 

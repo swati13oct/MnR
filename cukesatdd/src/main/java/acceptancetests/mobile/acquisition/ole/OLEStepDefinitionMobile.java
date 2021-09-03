@@ -2513,7 +2513,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		String[] dateArray = null;
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0")|| MRScenario.environment.equalsIgnoreCase("stage")|| MRScenario.environment.equalsIgnoreCase("offline-stage"))) {
 
 			OLEconfirmationPageMobile OLEGPSValidation = (OLEconfirmationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
