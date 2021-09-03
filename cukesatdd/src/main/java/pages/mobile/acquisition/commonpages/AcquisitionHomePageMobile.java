@@ -51,7 +51,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	String CallSamPopupTitle = "Need Help? Call us.";
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
@@ -174,7 +175,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	@FindBy(css = "a[title='Estimate Drug Costs'], a[title^='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
@@ -232,7 +233,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement MALandingHeading;
 
 	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded'] + button")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -357,7 +358,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsam;
 
 	// String CallSam= "Call a Licensed Insurance Agent";
@@ -485,13 +486,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
+	@FindBy(css = "#secondarySearchInput + button[class*='clear-button']")
 	private WebElement SecondaryClearBtn;
 
-	@FindBy(xpath = "//input[@id='secondarySearchInput']")
+	@FindBy(css = "#secondarySearchInput")
 	private WebElement SecondarySearchInput;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]/following::button[1]")
+	@FindBy(css = "#secondarySearchBox button[class*='search-button']")
 	private WebElement SecondarySearchBtn;
 
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
@@ -518,7 +519,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	@FindBy(xpath = "//span[contains(text(),'Learn More About Medicare')]")
+	@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -952,13 +953,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
 			isHealthPlan = true;
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
 			checkModelPopup(driver, 15);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try {
-				if (proactiveChatExitBtn != null) {
+				if (proactiveChatExitBtn.isDisplayed()) {
 					jsClickNew(proactiveChatExitBtn);
 				} else {
 					Assertion.fail("Please check booleanvalue");
@@ -1011,6 +1012,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		
 		clickUpdateLaterBrowserButton();
 	}
+	
+	public void openAndValidate() {
+		long modelPopupTimeout = !MRScenario.environment.equals("stage") ? MRScenario.environment.equals("stage-0") ? 20 : 45 : 10;
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
+		checkModelPopup(driver, modelPopupTimeout);
+		clickUpdateLaterBrowserButton();
+	}
 
 	public void checkForSecurityPage() {
 		if (!MRScenario.domain.contains("uhc.com")) {
@@ -1033,13 +1043,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * This method is for lower version of Chrome browser on Android
 	 */
 	public void clickUpdateLaterBrowserButton() {
-		if(validate(upgradeBrowserVersionBanner)) {
-			System.out.println("Update browser banner shown !");
-			jsClickNew(updateLaterButton);
-			System.out.println("Clicked 'Update later' button");
-			sleepBySec(2);
-			if(!upgradeBrowserVersionBanner.isDisplayed()) {
-				System.out.println("Update browser banner disappeared.");
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (validate(upgradeBrowserVersionBanner)) {
+				System.out.println("Update browser banner shown !");
+				jsClickNew(updateLaterButton);
+				System.out.println("Clicked 'Update later' button");
+				sleepBySec(2);
+				if (!upgradeBrowserVersionBanner.isDisplayed()) {
+					System.out.println("Update browser banner disappeared.");
+				}
 			}
 		}
 	}
@@ -1099,7 +1111,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		// validateNew(footerLinkHeader, 30);
-		if (getTitle().contains("About UnitedHealthcare")) {
+		if (getTitle().contains("About us | UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
 		return null;
@@ -1246,6 +1258,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile searchPlans(String zipcode, String countyName) {
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
@@ -1709,9 +1722,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		pageloadcomplete();
+//		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(zipCodeField);
 		// sendkeysNew(zipCodeField, zipcode);
 		sendkeysMobile(zipCodeField, zipcode);
@@ -2047,10 +2060,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void insertValueIntoSecondSearchBox(String inputValue) {
 		System.out.println("Click on clear button");
-		driver.findElement(By.className("clear-button")).click();
+		jsClickNew(SecondaryClearBtn);
+//		driver.findElement(By.className("clear-button")).click();
 		System.out.println("Insert value into secondary searchbox");
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+		sendKeysByCharacter(SecondarySearchInput, inputValue);
+		jsClickNew(SecondarySearchBtn);
+		/*driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);*/
 	}
 
 	public void validateErrorMsg(String inputValue, String newSearchValue) {
@@ -2988,7 +3004,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		waitforElement(shoppingCartIcon);
+//		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
@@ -3164,23 +3180,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateLogo() {
-		// TODO Auto-generated method stub
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(AARPlogo);
-			WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
-			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
-			if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
-				scrollToView(AARPLogo);
+			/*WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));*/
+			if (AARPlogo.isDisplayed() && AARPlogo.isEnabled() && !UHCLogo.isDisplayed()) {
+//				scrollToView(AARPlogo);
 				Assertion.assertTrue(true);
 				System.out.println("Correct AARP Logo is Displayed");
 			} else {
 				Assertion.fail("AARP logo is not dispalyed for Ulayer");
 			}
 		} else {
-			WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
-			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
-			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
-				scrollToView(UHCLogo);
+			/*WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));*/
+			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPlogo.isDisplayed()) {
+//				scrollToView(UHCLogo);
 				Assertion.assertTrue(true);
 				System.out.println("Correct UHC Logo is Displayed");
 			} else {
