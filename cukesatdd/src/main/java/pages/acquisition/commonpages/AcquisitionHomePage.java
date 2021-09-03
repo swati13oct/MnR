@@ -7686,7 +7686,7 @@ public void validateEMail() {
 	emailInput.sendKeys("test@gmail.com");
 	emailSubmit.click();
 	sleepBySec(5);
-	Assert.assertEquals(emailConfirmationMsg.getText(), "Yup        ");
+	Assert.assertEquals(emailConfirmationMsg.getText(), "Thank you!       ");
 }
 public void clickOnCancel() {
 	CommonUtility.waitForPageLoad(driver, cancelLink, 30);
