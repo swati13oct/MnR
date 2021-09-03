@@ -90,8 +90,8 @@ public class GlobalComponentsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		String site = memberAttributesMap.get("Site");
-		System.out.println("@@site@@"+site);
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+//		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
@@ -1145,7 +1145,6 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateSocialShareEmailButton();
 	}
-
 
 	//Redesigned home page
 	

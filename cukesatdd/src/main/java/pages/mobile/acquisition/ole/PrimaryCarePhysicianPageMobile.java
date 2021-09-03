@@ -384,7 +384,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		public PrimaryCarePhysicianPageMobile navigate_PCPPage() {
 		boolean flag;
 		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
-		PCPSearchLink.click();
+		jsClickNew(PCPSearchLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -432,7 +432,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 			WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
 			String mPCPinfo=PCPSearchLink.getText();
 			System.out.println(mPCPinfo);
-			PCPSearchLink.click();
+			jsClickNew(PCPSearchLink);
 	        ArrayList<String> PCPproviderNames = new ArrayList<String>();
 			List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
 			for(WebElement element:pcpproviders)

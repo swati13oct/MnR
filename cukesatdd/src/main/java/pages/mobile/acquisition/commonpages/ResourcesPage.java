@@ -1,5 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,9 @@ public class ResourcesPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'healthcare-fraud')]")
 	private WebElement GetInformedLink;
 
+	@FindBy(xpath = "//h1//span[text()='Member Resources']")
+	private WebElement pageHeading;
+
 	public ResourcesPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -40,16 +44,17 @@ public class ResourcesPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(searchNowLink);
-		validateNew(findInfoLink);
-		validateNew(GetInformedLink);
-		if (!driver.getCurrentUrl().contains("resources.html")) {
+		validateNew(pageHeading);
+		if (!driver.getCurrentUrl().contains("resources.html") && pageHeading.equals("Member Resources")) {
 			Assert.fail("Resource page did not load properly");
 		}
 	}
 
 	public void clickOnSearchNowPlanDoc() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement searchPlanDocAccordion=driver.findElement(By.xpath("//span[@class='uhc-accordion__title-wrapper']//span[contains(text(),'Plan Document')]"));
+		scrollToView(searchPlanDocAccordion);
+		jsClickNew(searchPlanDocAccordion);
 		scrollToView(searchNowLink);
 		jsClickNew(searchNowLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -64,6 +69,9 @@ public class ResourcesPage extends UhcDriver {
 
 	public void clickOnFindInfoButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement additionInfoAccordion=driver.findElement(By.xpath("//span[@class='uhc-accordion__title-wrapper']//span[contains(text(),'Information and Forms')]"));
+		scrollToView(additionInfoAccordion);
+		jsClickNew(additionInfoAccordion);
 		scrollToView(findInfoLink);
 		jsClickNew(findInfoLink);
 		CommonUtility.checkPageIsReadyNew(driver);

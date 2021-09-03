@@ -68,7 +68,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Privacy')]")
 	private WebElement privacylink;
 
-	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
+    //@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
+    @FindBy(xpath = "(//*[contains(text(),'Find Plans & Pricing') or contains(text(),'View Plans & Pricing')])[1]")
 	private WebElement findPlansPricing;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
@@ -271,8 +272,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement PhoneErroMsg;
 
 
-
-
 //Please enter  10 digit valid Phone Number
 
 
@@ -306,7 +305,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
 	private WebElement tfn;
 
-	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
+    //@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
+    @FindBy(xpath = "//a[contains(text(),'Find Plans in Your Area')]")
 	private WebElement clickFindPlansinyourArea;
 
 	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
@@ -333,7 +333,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement StartNowBtn;
 	
 	
-			
 			@FindBy(xpath = "(//a[contains(text(), 'View Plans & Pricing')])[2]")
 			private WebElement viewPricingBtn2;
 			
@@ -375,7 +374,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	/**
-	 * 
 	 * @param site - ulayer or blayer
 	 * @param path - path for the url To open Homepage+ path as per env,
 	 */
@@ -501,7 +499,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 
 	
-
 	public void sleepBySec(int sec) {
 		try {
 			Thread.sleep(sec * 1000);
@@ -638,6 +635,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 	}
+
 	public AcquisitionHomePage clickOnmedicareplans11PrivacyLink() {
 
 		validateNew(privacylink);
@@ -703,13 +701,23 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (driver.getCurrentUrl().contains("WT.mc_id=8012869")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
-		}
-		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+        } else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
+        } else if (driver.getCurrentUrl().contains("health-plans.html") || driver.getCurrentUrl().contains("/health-plans/")) {
+            System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+            return new AcquisitionHomePage(driver);
 		}
 		return null;
 	}
+
+    public VPPPlanSummaryPage validateVPPEntryPage() {
+        if (driver.getCurrentUrl().contains("/health-plans/") || driver.getCurrentUrl().contains("/health-plans.html")) {
+            System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+            return new VPPPlanSummaryPage(driver);
+        } else
+            return null;
+    }
 
 	public void validateMorganStanleyExternalPage(String tfnXpath, String expTfnNo) {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -777,6 +785,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
 		threadsleep(5);
+        sleepBySec(8);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		threadsleep(5);
@@ -802,14 +811,14 @@ public class CampaignExternalLinks extends UhcDriver {
 		}else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
 		threadsleep(8);
+        sleepBySec(4);
 		//validateNew(tfnHeader);
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 		String actualTfnNo = TFNelement.getText();
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
-
+            Assertion.fail("TFN element is not found / TFN no is not same on page:\nTFN: "+actualTfnNo);
 		//System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
 		if(validate(workingHrs)) {
@@ -1164,18 +1173,15 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
-	}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage"))
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
 				else if (env.equalsIgnoreCase("offline")){
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
 				}
 		}
@@ -1187,22 +1193,17 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
 		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
-		}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage")) {
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
 				}
 		}
@@ -1214,22 +1215,17 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
 		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
-		}
-		else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
 		}
-		}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage")) {
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
-				}
-				else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
 				}
 		}
@@ -1242,8 +1238,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1255,8 +1250,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1268,8 +1262,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1281,8 +1274,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1294,8 +1286,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1307,8 +1298,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		}
 	}
@@ -1320,8 +1310,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-aarpmedicareplans.uhc.com/health-plans.html')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('data-url','https://offline.aarpmedicareplans.com/health-plans.html')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.aarpmedicareplans.com/health-plans.html')", element);
 		}
 	}
@@ -1333,8 +1322,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8000158')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
 		}
 	}
@@ -1346,8 +1334,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		}
 	}
@@ -1359,8 +1346,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		}
 	}
@@ -1372,8 +1358,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('data-url','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		}
 	}
@@ -1407,13 +1392,13 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public void enterdetais() {
-
+        if(MRScenario.environment.equalsIgnoreCase("stage")||MRScenario.environment.equalsIgnoreCase("offline-stage")||MRScenario.environment.contains("team")){
 		threadsleep(8);
 		validateNew(FirstName);
 		FirstName.clear();
-		FirstName.sendKeys("test_MR_optum_R");
+            FirstName.sendKeys("test-MR-optum-R");
 		LastName.clear();
-		LastName.sendKeys("test_MR_optum_M");
+            LastName.sendKeys("test-MR-optum-M");
 		Address1Input.clear();
 		Address1Input.sendKeys("455 Flatbush Ave");
 		Address1Input.sendKeys(Keys.TAB);
@@ -1431,8 +1416,11 @@ public class CampaignExternalLinks extends UhcDriver {
 		ReqAppsubmitBtn.click();
 		threadsleep(5);
 		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+        }else{
+            System.out.println("LP Form submission not configured for Offline Prod and Prod");
+        }
+    }
 
-	}
 	public void validateFindPlansInyourArea() {
 		validateNew(FindPlanInyourArea);
 		FindPlanInyourArea.click();
@@ -1542,6 +1530,15 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
 		CommonUtility.checkPageIsReadyNew(driver);
+        CommonUtility.waitForPageLoad(driver, LocationLink, 30);
+        LocationLink.click();
+        threadsleep(8);
+        InputZipCode.clear();
+        InputZipCode.sendKeys(zipcodeMulti);
+        jsClickNew(LocationBtn);
+        FirstZipCode.click();
+        jsClickNew(LocationBtn);
+        driver.navigate().refresh();
 		validateNew(LocationLink);
 		LocationLink.click();
 		threadsleep(5);
@@ -1554,24 +1551,13 @@ public class CampaignExternalLinks extends UhcDriver {
 		threadsleep(8);
 		LocationBtn.click();
 		threadsleep(8);
-		driver.navigate().refresh();
-		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
-		LocationLink.click();
-		threadsleep(8);
-		InputZipCode.clear();
-		InputZipCode.sendKeys(zipcodeMulti);
-		jsClickNew(LocationBtn);
-		threadsleep(3);
-		FirstZipCode.click();
-		jsClickNew(LocationBtn);
-		
-			
 	}
 
 	public void validatezipcodecomponent() {
 		// TODO Auto-generated method stub
 		
 		waitforElementNew(viewplanspricing);
+        Zipinput.clear();
 		viewplanspricing.click();
 		
 		waitforElementNew(ziperrorMsg);
@@ -1603,6 +1589,8 @@ public class CampaignExternalLinks extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 		public void clickFindPlansLink() {
@@ -1643,13 +1631,30 @@ public class CampaignExternalLinks extends UhcDriver {
 			waitforElementNew(samTfn);
 		}
 
-		public void clickonStartNowAndNavigatesToPharmacyPage() {
+    public PharmacySearchPage clickonStartNowAndNavigatesToPharmacyPage() {
 			// TODO Auto-generated method stub
-			waitforElementNew(StartNowBtn);
+      /*  waitforElementNew(StartNowBtn);
 			StartNowBtn.click();
 			threadsleep(4);
 			waitforElementNew(samTfn);
+
+*/
+        parentWindow = driver.getWindowHandle();
+        StartNowBtn.click();
+        Set<String> tabs_windows = driver.getWindowHandles();
+        Iterator<String> itr = tabs_windows.iterator();
+        while (itr.hasNext()) {
+            String window = itr.next();
+            if (!parentWindow.equals(window)) {
+                driver.switchTo().window(window);
 		}
+        }
+        if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy Near You | UnitedHealthcare")) {
+            return new PharmacySearchPage(driver);
+        }
+        return null;
+    }
+
 
 		public void clickonViewPlanPricingBtnAndNavigatesToVPP() {
 			waitforElementNew(viewPricingBtn2);
@@ -2019,8 +2024,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		try {
 			if(selectCounty.isDisplayed())
 				jsClickNew(selectCounty);
-		}
-		catch(Exception e) {
+        } catch (Exception e) {
 			System.out.println("County popup not displayed");
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2030,12 +2034,14 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 	}
+
 	public void bypassABTest() {
 
 		if(MRScenario.environment.equalsIgnoreCase("Prod") && validate(clickBackToPlans)) {
 			ComparePlansPage planComparePage = new ComparePlansPage(driver);
 			planComparePage.backToVPPPage();
-			List<WebElement> compareCheckBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-box')]//label"));;
+            List<WebElement> compareCheckBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-box')]//label"));
+            ;
 
 			for(int i = 1; i<=compareCheckBoxes.size(); i++) {
 				jsClickNew(driver.findElement(By.xpath("(//div[contains(@class,'compare-box')]//label)["+i+"]")));
@@ -2226,6 +2232,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		return null;
 	}
+
 	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 
@@ -2268,4 +2275,12 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 	}
+
+    public void goBacktoExternalPage(String url) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        driver.navigate().to(url);
+        sleepBySec(2);
+        CommonUtility.checkPageIsReadyNew(driver);
+}
+
 }
