@@ -887,6 +887,10 @@ public class CommonConstants {
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
 	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
 	
+	public static final String FLAGSMITH = "flagSmith";
+	
+	public static final String FLAGSMITH_USER = "flagsmithUser";
+	
 	public static final String SCREEN_RESOLUTION = "screenResolution";
 	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +
 			  "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
@@ -1137,5 +1141,3 @@ public class CommonConstants {
 	}
 	
 }
-
-

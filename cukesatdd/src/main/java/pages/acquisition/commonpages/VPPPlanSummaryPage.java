@@ -594,7 +594,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//button[@id='currentYearPlans']")
+	@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
@@ -1036,6 +1036,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
+	
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
+	private WebElement findPlansOnShopForPlans;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1139,7 +1142,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup(); DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1147,7 +1150,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 
 			jsClickNew(maPlansViewLink);
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup(); DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			// sleepBySec(2);
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
@@ -1166,7 +1169,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup();  DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -3870,13 +3873,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(CurrentYearPlansBtn, 20)) {
-				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
-				jsClickNew(CurrentYearPlansBtn);
-				CommonUtility.checkPageIsReadyNew(driver);
-				waitForPageLoadSafari();
+			if (validate(currentYearSelection, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
+				jsClickNew(currentYearSelection);
+				
+			}
+		}else {
+			if(validate(nextYearSelection,20)) {
+				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
+				jsClickNew(nextYearSelection);
 			}
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 	}
 
 	// public void handlePlanYearSelectionPopup(String planType) {
@@ -7178,6 +7187,20 @@ public String GetMonthlyPremiumValue() {
 
 		return Plannames;
 		
+	}
+	
+	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
+		findPlansOnShopForPlans.click();
+
+		if (ismultiCounty.contains("YES") && validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
 	}
 
 }

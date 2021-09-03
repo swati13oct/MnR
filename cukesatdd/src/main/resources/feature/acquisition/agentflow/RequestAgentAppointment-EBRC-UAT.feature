@@ -58,7 +58,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
-    @agentFlowEBRCUlayer @UATRegression @regressionAARP @vbfGate @sanity
+    @agentFlowEBRCUlayer @UATRegression @regressionAARP  @sanity
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_AMP |   10001 | AARP |

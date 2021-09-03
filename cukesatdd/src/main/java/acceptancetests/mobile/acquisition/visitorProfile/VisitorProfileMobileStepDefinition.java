@@ -499,7 +499,7 @@ public class VisitorProfileMobileStepDefinition {
 
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		Assertion.assertTrue("Provider coverage Info not updated", visitorProfile.providerinfo(planName));
+		visitorProfile.validateProviderinfo(planName);
 	}
 
 	@And("^the user signs in with optum Id credentials$")
@@ -623,7 +623,6 @@ public class VisitorProfileMobileStepDefinition {
 		VPPPlanSummaryPageMobile planSummary = VisitorProfilePageMobile.backToPlans();
 
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
-		System.out.println("afaknfkanfklnasknfkanfklanssfka" + planSummary);
 	}
 
 	@And("^validate OLE details$")
