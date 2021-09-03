@@ -925,7 +925,9 @@ public class MRScenario {
 	}
 	
 	private FlagsmithLoginPage openFlagSmithLoginPage(WebDriver driver, String site) {
-		String flagSmithURL = site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		String flagSmithURL = site.equalsIgnoreCase("AARP") 
+				? !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_PROD_AARP_URL
+				: !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.FLAGSMITH_UHC_URL : MRConstants.FLAGSMITH_PROD_UHC_URL;
 		driver.get(flagSmithURL);
 		return new FlagsmithLoginPage(driver);
 	}
@@ -975,7 +977,9 @@ public class MRScenario {
 	private String getPlanYear(String site) {
 		String planYear;
 		
-		String systemDateUrl = site.equalsIgnoreCase("AARP") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.UHC_SYSTEM_DATE_URL;
+		String systemDateUrl = site.equalsIgnoreCase("AARP")
+				? !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.PROD_AARP_SYSTEM_DATE_URL
+				: !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.UHC_SYSTEM_DATE_URL : MRConstants.PROD_UHC_SYSTEM_DATE_URL;
 		String systemDate = getSystemDateForAEP(systemDateUrl);
 		String systemYear = systemDate.substring(systemDate.lastIndexOf("/"));
 		
