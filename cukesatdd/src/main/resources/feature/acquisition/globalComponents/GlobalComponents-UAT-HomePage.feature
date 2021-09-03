@@ -132,7 +132,7 @@ Feature: 1.12 homePage flows
       | GeoState | <geoState> |
     And user validates Email capture component
 
-    @homePage_AARP
+    @homePage_AARP123
     Examples: 
       | Scenario           | geoState | site | path                                        | pageName  |
       | E2E Scenario_3_AMP | Alabama  | AARP | dolphin-authoring/redesigned-home-page.html | Home page |
