@@ -73,7 +73,7 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'uhc-container')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need')]")
 	private WebElement needHelpHeader;
 	
-	@FindBy(xpath="//a[contains(@class,'tel')][contains(@class, 'tfn')]")
+	@FindBy(css="div[data-bind-class='{hidden : !fedTfn}'] span[class='invoca_swap heading-4']")
 	private WebElement needHelpTFN;
 	
 	@FindBy(id = "proceed")
@@ -87,10 +87,10 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(needHelpHeader);
+		//validateNew(needHelpHeader);
 		validateNew(needHelpTFN);
 		validateNew(zipCodeMedEd);
-		validateNew(lookUpZipLink);
+		//validateNew(lookUpZipLink);
 		
 
 	}
