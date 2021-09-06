@@ -827,7 +827,9 @@ public class VisitorProfileStepDefinition {
 	
 	@Then("^the user validates the Drugs and Doctors$")
 	public void the_user_validates_the_Drugs_and_Doctors() {
-		
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.ValidateDrugsProviders("true", "true");
 		
 	}
 }

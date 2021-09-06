@@ -372,7 +372,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | ZipCode   | <zipcode>   |
       | MBI       | <mbi>       |
       | Member    | <member>    |
-    Then the user validates the Drugs and Doctors
+    #Then the user validates the Drugs and Doctors
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @prodRegression @regressionAARP
     Examples: 
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
