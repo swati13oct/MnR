@@ -205,11 +205,11 @@ public class PlanPremiumPage extends UhcDriver{
 			System.out.println("Pay By Mail radio button is diplayed or not" +payByMail.isDisplayed());
 			jsClickNew(payByMail);
 			Thread.sleep(1000);
-			actualText = payByMailText.getText().replaceAll("\u00A0"," ").trim();
-			System.out.println("Actual text for pay by mail is " +actualText);			
+			actualText = payByMailText.getText();
+			System.out.println("Actual text for pay by mail  is : " +actualText);			
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
-			System.out.println("expected text for pay by mail is " +expectedText);
-			flag = actualText.contains(expectedText);
+			System.out.println("expected text for pay by mail is: " +expectedText);
+			flag = expectedText.contains(actualText);
 			
 		}
 			
