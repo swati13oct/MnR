@@ -826,7 +826,7 @@ public class VisitorProfileStepDefinition {
 	}
 	
 	@Then("^the user validates the Drugs and Doctors$")
-	public void the_user_validates_the_Drugs_and_Doctors(DataTable data) {
+	public void the_user_validates_the_Drugs_and_Doctors() {
 		
 		
 	}
