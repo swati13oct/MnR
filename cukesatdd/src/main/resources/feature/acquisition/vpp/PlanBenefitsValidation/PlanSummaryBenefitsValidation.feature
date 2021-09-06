@@ -68,6 +68,21 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_12 | AARP |
 
+    @planSummaryBenefitsAARP13 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_13 | AARP |
+
+    @planSummaryBenefitsAARP14 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_14 | AARP |
+
+    @planSummaryBenefitsAARP15 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_15 | AARP |
+
     @planSummaryBenefitsPDPAARP01
     Examples: 
       | excelPath                  | workSheet      | site |
@@ -145,6 +160,21 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_12 | UHC  |
+
+    @planSummaryBenefitsUHC13
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_13 | UHC  |
+
+    @planSummaryBenefitsUHC14
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_14 | UHC  |
+
+    @planSummaryBenefitsUHC15
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_15 | UHC  |
 
     @planSummaryBenefitsPDPUHC01
     Examples: 
