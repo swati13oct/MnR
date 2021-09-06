@@ -130,7 +130,7 @@ public class VisitorProfileStepDefinition {
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
 		 * memberAttributesRow.get(0).getCells().get(1);
-		 */jjhjh
+		 */
 		List<List<String>> memberAttributesRow = data.asLists();
 		String drug = memberAttributesRow.get(0).get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
