@@ -395,8 +395,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("ng-star-inserted active");
 		//Assertion.assertTrue("PCP is not highlighted by blue colour", flag);
 		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText();
-		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider or PCP Full Name: ']//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
-		String PCPNumber= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
+		String expectedProvider= driver.findElement(By.xpath("//p[contains(text(),'Provider or PCP Full Name:')]//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
+		String PCPNumber= driver.findElement(By.xpath("//p[contains(text(),'Provider/PCP Number:')]//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
 		
 		System.out.println("PCP Name is Displayed"+actualProvider);
 		System.out.println("PCP Name is Displayed"+expectedProvider);
