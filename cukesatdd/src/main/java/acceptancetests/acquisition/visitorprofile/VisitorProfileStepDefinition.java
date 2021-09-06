@@ -130,7 +130,7 @@ public class VisitorProfileStepDefinition {
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
 		 * memberAttributesRow.get(0).getCells().get(1);
-		 */
+		 */jjhjh
 		List<List<String>> memberAttributesRow = data.asLists();
 		String drug = memberAttributesRow.get(0).get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -815,5 +815,19 @@ public class VisitorProfileStepDefinition {
 		
 	}
 
+	@When("^the user Import Drugs and Doctors$")
+	public void the_user_clicks_on_Import_Drugs_and_Doctors(DataTable data) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		visitorProfilePage.importDrugsAndDoctors(data);
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 	
+	@Then("^the user validates the Drugs and Doctors$")
+	public void the_user_validates_the_Drugs_and_Doctors(DataTable data) {
+		
+		
+	}
 }
