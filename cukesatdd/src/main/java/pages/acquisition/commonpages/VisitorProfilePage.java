@@ -407,7 +407,7 @@ public class VisitorProfilePage extends UhcDriver {
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
 	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
 	     System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
-	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 	             savedDrugsAndDoctorsHeader.getText().trim());
 	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		
@@ -1252,7 +1252,7 @@ public class VisitorProfilePage extends UhcDriver {
         Assertion.assertEquals("welcome, " + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
         Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
         Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("Your Saved Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
