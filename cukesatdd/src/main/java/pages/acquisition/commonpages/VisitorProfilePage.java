@@ -253,6 +253,74 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
     private WebElement addDoctor;
+	
+	@FindBy(xpath = "//a[contains(text(),'Import')]")
+    private WebElement lnkImport;
+	
+	@FindBy(xpath = "(//span[contains(text(),'Get')])[2]")
+    private WebElement btnGetStarted;
+	
+	@FindBy(xpath = "//button[@dlassetid='vp_havemedicare_next']")
+    private WebElement btnNext;
+	
+	@FindBy(id = "member-firstName")
+    private WebElement txtFName;
+	
+	@FindBy(id = "member-lastName")
+    private WebElement txtLName;
+	
+	@FindBy(id = "member-date-of-birth")
+    private WebElement txtDOB;
+	
+	@FindBy(id = "member-zip-code")
+    private WebElement txtZipCode;
+	
+	@FindBy(id = "member-medicare-number")
+    private WebElement txtMedicareId;
+	
+	@FindBy(xpath = "//div[text()='UnitedHealthCare']/parent::label")
+	private WebElement chkUHC;
+	
+	@FindBy(xpath = "//div[contains(text(),'don')]/parent::label")
+	private WebElement chkMilliman;
+	
+	@FindBy(xpath = "//button[@dlassetid='vp_confimp_next']")
+	private WebElement btnNonMemNext;
+	
+	@FindBy(id = "agreementName")
+    private WebElement txtAgreementName;
+	
+	@FindBy(xpath = "//button[@dlassetid='vp_impcons_prev']")
+	private WebElement btnNonMemNext2;
+	
+	@FindBy(id = "non-member-firstName")
+    private WebElement txtNonMemFName;
+	
+	@FindBy(id = "non-member-lastName")
+    private WebElement txtNonMemLName;
+	
+	@FindBy(id = "non-member-date-of-birth")
+    private WebElement txtNonMemDOB;
+	
+	@FindBy(id = "non-member-zip-code")
+    private WebElement txtNonMemZipCode;
+	
+	@FindBy(xpath = "//label[@for='male']")
+    private WebElement genderMale;
+	
+	@FindBy(name = "isAttested")
+    private WebElement chkAttest;
+	
+	@FindBy(xpath  = "//button[@dlassetid='vp_imp_mem_det_next']")
+    private WebElement btnViewDrugsAndDocs;
+	
+	@FindBy(xpath  = "(//button[@dlassetid='vp_nonmemdetl_next'])[2]")
+    private WebElement btnNonMemViewDrugsAndDocs;
+	
+	
+	
+	
+	
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -334,12 +402,12 @@ public class VisitorProfilePage extends UhcDriver {
 			Assertion.assertTrue(
 					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
 		}
-	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
+	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy ï¿½", drugHeader.getText().trim());
 	     jsClickNew(drugHeader);
 	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
 	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
 	     System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
-	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
+	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
 	             savedDrugsAndDoctorsHeader.getText().trim());
 	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		
@@ -1184,7 +1252,7 @@ public class VisitorProfilePage extends UhcDriver {
         Assertion.assertEquals("welcome, " + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
         Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
         Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("Your Saved Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
@@ -1366,6 +1434,47 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 
+	}
+	
+	public void importDrugsAndDoctors(DataTable data) {
+        Map<String, String> testData = data.asMap(String.class, String.class);
+        jsClickNew(importLnk);
+        jsClickNew(btnGetStarted);
+        switch (testData.get("Member")) {
+		case "Aetna":
+			break;
+		case "UHC":
+			jsClickNew(chkUHC);
+	        jsClickNew(btnNext);
+			txtFName.sendKeys(testData.get("FirstName"));
+			txtLName.sendKeys(testData.get("LastName"));
+			txtDOB.sendKeys(testData.get("DOB"));
+			txtZipCode.sendKeys(testData.get("ZipCode"));
+			txtMedicareId.sendKeys(testData.get("MBI"));
+			jsClickNew(chkAttest);
+			jsClickNew(btnViewDrugsAndDocs);
+			waitforElementNew(savedDrugsAndDoctorsHeader);
+			break;
+		case "NonMember":
+			jsClickNew(chkMilliman);
+	        jsClickNew(btnNext);
+	        jsClickNew(btnNonMemNext);
+	        txtAgreementName.sendKeys(testData.get("FirstName")+" "+testData.get("LastName"));
+	        jsClickNew(btnNonMemNext2);
+			txtNonMemFName.sendKeys(testData.get("FirstName"));
+			txtNonMemLName.sendKeys(testData.get("LastName"));
+			txtNonMemDOB.sendKeys(testData.get("DOB"));
+			jsClickNew(genderMale);
+			txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
+			jsClickNew(chkAttest);
+			jsClickNew(btnNonMemViewDrugsAndDocs);
+			waitforElementNew(savedDrugsAndDoctorsHeader);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
  }
 
