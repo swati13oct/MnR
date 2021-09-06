@@ -6855,12 +6855,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CheckiPerseptions();
 		validate(callsamtooltip);
 		validate(callsam);
+		sleepBySec(7);
 		String ActualCallSAMTFN = callsam.getText();
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		driver.switchTo().activeElement();
-		sleepBySec(5);
+		sleepBySec(3);
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
 		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
@@ -6871,7 +6872,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
-					+ ExpectedCallSAMTFN);
+					+ "\nExpected: "+ExpectedCallSAMTFN+"\nActual: "+ActualCallSAMTFN);
 		}
 		if (driver.getCurrentUrl().contains("medicare-supplement-plans")
 				|| driver.getCurrentUrl().contains("/compare/compare-ms")
