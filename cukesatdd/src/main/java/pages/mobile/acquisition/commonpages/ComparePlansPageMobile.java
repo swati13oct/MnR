@@ -85,6 +85,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
+	
+	@FindBy(css = ".provider-cards")
+	private WebElement savedProviders;	
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -966,9 +969,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);*/
 
+		jsClickNew(editDoctorsLink);
+		
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
@@ -976,13 +981,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1009,14 +1014,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
 
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else

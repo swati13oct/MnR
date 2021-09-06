@@ -383,7 +383,8 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void comparePlans() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
 		jsClickNew(comparePlanBtn);
 		sleepBySec(3);
 		waitForPageLoadSafari();

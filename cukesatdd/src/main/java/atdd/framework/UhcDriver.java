@@ -1595,7 +1595,7 @@ public abstract class UhcDriver {
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
 
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari") && !driver.getClass().toString().toUpperCase().contains("IOS")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))

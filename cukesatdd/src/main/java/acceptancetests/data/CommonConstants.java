@@ -887,7 +887,7 @@ public class CommonConstants {
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
 	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
 	
-	public static final String AEP = "aep";
+	public static final String FLAGSMITH = "flagSmith";
 	
 	public static final String FLAGSMITH_USER = "flagsmithUser";
 	

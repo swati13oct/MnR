@@ -239,7 +239,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		//GetStarted.click();
+		// GetStarted.click();
 		jsClickNew(GetStarted);
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -325,8 +325,17 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 		jsClickNew(AllPrimaryCare);
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		scrollToView(AllPrimaryCare);
+		AllPrimaryCare.click();
+		scrollToView(selectProviderBtn);
+		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+
+		WebElement providerNameLink = selectProviderBtn.findElement(By.xpath(
+				"./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
+		String providerSaved = providerNameLink.getText().trim();
+		System.out.println("Provider Name is : " + providerSaved);
+		MRConstants.PROV_NAME = providerSaved;
+
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption, 10)) {
@@ -334,11 +343,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
 		}
-		threadsleep(10);
-		validateNew(providerNameText);
-		String providerSaved = providerNameText.getText().trim();
-		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
+		/*
+		 * threadsleep(10); validateNew(providerNameText); String providerSaved =
+		 * providerNameText.getText().trim(); System.out.println("Provider Name is : " +
+		 * providerSaved); MRConstants.PROV_NAME = providerSaved;
+		 */
 
 		/*
 		 * if(driver.findElements(By.xpath(

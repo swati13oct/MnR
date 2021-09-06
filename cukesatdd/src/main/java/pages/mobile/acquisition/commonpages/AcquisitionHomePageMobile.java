@@ -175,7 +175,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
-	@FindBy(xpath = "//a[contains(@title,'Estimate Drug Costs')]//span[contains(@class,'link-text')]")
+	@FindBy(css = "a[title='Estimate Drug Costs'], a[title^='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
 
 	@FindBy(id = "redirect_content")
@@ -357,7 +357,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsam;
 
 	// String CallSam= "Call a Licensed Insurance Agent";
@@ -367,7 +367,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -487,13 +487,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
+	@FindBy(css = "#secondarySearchInput + button[class*='clear-button']")
 	private WebElement SecondaryClearBtn;
 
-	@FindBy(xpath = "//input[@id='secondarySearchInput']")
+	@FindBy(css = "#secondarySearchInput")
 	private WebElement SecondarySearchInput;
 
-	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]/following::button[1]")
+	@FindBy(css = "#secondarySearchBox button[class*='search-button']")
 	private WebElement SecondarySearchBtn;
 
 	@FindBy(xpath = "//*[contains(@aria-label, 'Close') and contains(@id, 'sp-close-frame')]")
@@ -960,7 +960,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			checkModelPopup(driver, 15);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try {
-				if (proactiveChatExitBtn != null) {
+				if (proactiveChatExitBtn.isDisplayed()) {
 					jsClickNew(proactiveChatExitBtn);
 				} else {
 					Assertion.fail("Please check booleanvalue");
@@ -1046,13 +1046,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * This method is for lower version of Chrome browser on Android
 	 */
 	public void clickUpdateLaterBrowserButton() {
-		if (validate(upgradeBrowserVersionBanner)) {
-			System.out.println("Update browser banner shown !");
-			jsClickNew(updateLaterButton);
-			System.out.println("Clicked 'Update later' button");
-			sleepBySec(2);
-			if (!upgradeBrowserVersionBanner.isDisplayed()) {
-				System.out.println("Update browser banner disappeared.");
+
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (validate(upgradeBrowserVersionBanner)) {
+				System.out.println("Update browser banner shown !");
+				jsClickNew(updateLaterButton);
+				System.out.println("Clicked 'Update later' button");
+				sleepBySec(2);
+				if (!upgradeBrowserVersionBanner.isDisplayed()) {
+					System.out.println("Update browser banner disappeared.");
+				}
+
 			}
 		}
 	}
@@ -2079,10 +2083,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void insertValueIntoSecondSearchBox(String inputValue) {
 		System.out.println("Click on clear button");
-		driver.findElement(By.className("clear-button")).click();
+		jsClickNew(SecondaryClearBtn);
+//		driver.findElement(By.className("clear-button")).click();
 		System.out.println("Insert value into secondary searchbox");
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
-		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+		sendKeysByCharacter(SecondarySearchInput, inputValue);
+		jsClickNew(SecondarySearchBtn);
+		/*
+		 * driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		 * driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+		 */
 	}
 
 	public void validateErrorMsg(String inputValue, String newSearchValue) {
@@ -3020,8 +3029,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitforElement(shoppingCartIcon);
+
+//		waitforElement(shoppingCartIcon);
+		// shoppingCartIcon.click();
 
 		jsClickNew(shoppingCartIcon);
 		// jsClickNew(guestProfileLink); //This locator is seen after we hover on heart
@@ -3216,11 +3226,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Assertion.fail("AARP logo is not dispalyed for Ulayer");
 			}
 		} else {
+
 			/*
 			 * WebElement AARPLogo =
 			 * driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]")); WebElement
 			 * UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 			 */
+			validateNew(UHCLogo);
+
 			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPlogo.isDisplayed()) {
 //				scrollToView(UHCLogo);
 				Assertion.assertTrue(true);
@@ -3324,6 +3337,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class*='mobile-mysaved'] > div > button")
 	public WebElement menuMySavedItemsButton;
 
+	@FindBy(css = ".mob-menu-header button[onclick^='openSearch']")
+	private WebElement siteSearchIcon;
+
 	public void validateHeaderLinks() {
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3335,12 +3351,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
-		validateLogo();
 		// validateNew(searchTxtbox);
 		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(menuMySavedItemsButton);
+		validateNew(siteSearchIcon);
 		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
 		jsClickNew(mainMenuNavCloseButton);
+		validateLogo();
 	}
 
 	public void validateVisitorProfileIcon() {

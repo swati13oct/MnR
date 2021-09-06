@@ -30,7 +30,27 @@ public class MRConstants {
 	
 	public static final String FLAGSMITH_AARP_URL = "https://www." + MRScenario.environment + "-aarpmedicareplans." + getDomain() + "/fsem/featuretest.html";
 	
+	public static final String FLAGSMITH_PROD_AARP_URL = AARP_URL_PROD + "fsem/featuretest.html";
+	
 	public static final String FLAGSMITH_UHC_URL = "https://www." + MRScenario.environment + "-uhcmedicaresolutions." + getDomain() + "/fsem/featuretest.html";
+	
+	public static final String FLAGSMITH_PROD_UHC_URL = UHCM_URL_PROD + "fsem/featuretest.html";
+	
+	public static final String AARP_SYSTEM_DATE_URL = "https://www." + MRScenario.environment + "-aarpmedicareplans." + getDomain() + "/planbenefitsinfo/profiledetail/aarp";
+	
+	public static final String PROD_AARP_SYSTEM_DATE_URL = AARP_URL_PROD + "planbenefitsinfo/profiledetail/aarp";
+	
+	public static final String UHC_SYSTEM_DATE_URL = "https://www." + MRScenario.environment + "-uhcmedicaresolutions." + getDomain() + "/planbenefitsinfo/profiledetail/aarp";
+	
+	public static final String PROD_UHC_SYSTEM_DATE_URL = UHCM_URL_PROD + "planbenefitsinfo/profiledetail/aarp";
+	
+	public static final String SERVER_DATE_SEP_30 = "09/30";
+	public static final String SERVER_DATE_OCT_1 = "10/01";
+	public static final String SERVER_DATE_OCT_14 = "10/14";
+	public static final String SERVER_DATE_OCT_15 = "10/15";
+	public static final String SERVER_DATE_NOV_30 = "11/30";
+	public static final String SERVER_DATE_DEC_31 = "12/31";
+	public static final String SERVER_DATE_JAN_1 = "01/01";
 	
 	// public static final String UHC_URL =
 	// "https://www."+MRScenario.environment+"-uhcmedicarsolutions." + getDomain() +

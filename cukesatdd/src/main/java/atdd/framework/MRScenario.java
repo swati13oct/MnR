@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,13 +14,20 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.*;
-import java.util.Map.Entry;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -29,9 +35,13 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -42,8 +52,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -51,9 +59,9 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
-import atdd.framework.GlobalBeforeHook;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -61,9 +69,6 @@ import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.FlagsmithLoginPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-
-import java.security.*;
-import javax.crypto.*;
 
 /**
  * 
@@ -118,7 +123,9 @@ public class MRScenario {
 	public static String mobileDeviceOSName = "";
 	public static String mobileDeviceOSVersion = "";
 	public static boolean AEP = false;
+	public static boolean flagSmith = false;
 	public static String flagSmithUser = "";
+	public static String planYear = "";
 	public static String desktopBrowserName;
 //	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
@@ -310,14 +317,21 @@ public class MRScenario {
 				: (null == props ? System.getProperty(CommonConstants.APPIUM_VERSION)
 						: props.get(CommonConstants.APPIUM_VERSION));
 		
-		AEP = null != System.getProperty(CommonConstants.AEP)
-				? Boolean.parseBoolean(System.getProperty(CommonConstants.AEP))
-				: null != props ? Boolean.parseBoolean(props.get(CommonConstants.AEP)) : false;
-		System.out.println("AEP set to " + AEP);
+		flagSmith = null != System.getProperty(CommonConstants.FLAGSMITH)
+				? Boolean.parseBoolean(System.getProperty(CommonConstants.FLAGSMITH))
+				: null != props ? Boolean.parseBoolean(props.get(CommonConstants.FLAGSMITH)) : false;
+		System.out.println("Flagsmith flag is " + flagSmith);
+		
 		flagSmithUser = null != System.getProperty(CommonConstants.FLAGSMITH_USER)
 				? System.getProperty(CommonConstants.FLAGSMITH_USER)
 				: null != props ? props.get(CommonConstants.FLAGSMITH_USER) : "";
 		System.out.println("Flagsmith user is " + flagSmithUser);
+		
+		//If planYear is empty or null, it will be set in openApplicationURL
+		planYear = null != System.getProperty(VPPCommonConstants.PLAN_YEAR)
+				? System.getProperty(VPPCommonConstants.PLAN_YEAR)
+				: null != props ? props.get(VPPCommonConstants.PLAN_YEAR) : "";
+		
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
 		 * CommonConstants.APPIUM_DEFAULT_VERSION :
@@ -912,13 +926,21 @@ public class MRScenario {
 	}
 	
 	private FlagsmithLoginPage openFlagSmithLoginPage(WebDriver driver, String site) {
-		String flagSmithURL = site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		String flagSmithURL = site.equalsIgnoreCase("AARP") 
+				? !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_PROD_AARP_URL
+				: !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.FLAGSMITH_UHC_URL : MRConstants.FLAGSMITH_PROD_UHC_URL;
 		driver.get(flagSmithURL);
 		return new FlagsmithLoginPage(driver);
 	}
 	
 	public Object openApplicationURL(WebDriver driver, String site) {
-		if(AEP) {
+		
+		if(StringUtils.isEmpty(planYear)) {
+			planYear = getPlanYear(site);
+		}
+		System.out.println("Plan Year selected " + planYear);
+		
+		if(flagSmith) {
 			FlagsmithLoginPage flagsmithLoginPage = openFlagSmithLoginPage(driver, site);
 			return flagsmithLoginPage.startFlagSmithUserTest(flagSmithUser);
 		} else {
@@ -927,4 +949,51 @@ public class MRScenario {
 		}
 	}
 
+	public String getSystemDateForAEP(String systemDateUrl) {
+		String systemDate = null;
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(systemDateUrl);
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpGet);
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				String responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
+				JSONObject responseJson = new JSONObject(responseString);
+
+				JSONObject dataObj = responseJson.getJSONObject("data");
+				systemDate = dataObj.get("systemDate").toString().split(" ")[0];
+				/*int lastIndex = systemDate.lastIndexOf("/");
+				systemDate = systemDate.substring(0, lastIndex);*/
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return systemDate;
+	}
+	
+	private String getPlanYear(String site) {
+		String planYear;
+		
+		String systemDateUrl = site.equalsIgnoreCase("AARP")
+				? !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.PROD_AARP_SYSTEM_DATE_URL
+				: !MRScenario.environment.equalsIgnoreCase("prod") ? MRConstants.UHC_SYSTEM_DATE_URL : MRConstants.PROD_UHC_SYSTEM_DATE_URL;
+		String systemDate = getSystemDateForAEP(systemDateUrl);
+		String systemYear = systemDate.substring(systemDate.lastIndexOf("/"));
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+				
+		LocalDate currentSystemDate = LocalDate.parse(systemDate, formatter);
+		LocalDate JAN_1 = LocalDate.parse(MRConstants.SERVER_DATE_JAN_1 + systemYear, formatter);
+		LocalDate SEP_30 = LocalDate.parse(MRConstants.SERVER_DATE_SEP_30 + systemYear, formatter);
+		LocalDate OCT_15 = LocalDate.parse(MRConstants.SERVER_DATE_OCT_15 + systemYear, formatter);
+		
+		planYear = currentSystemDate.isBefore(OCT_15) ? "current" : "next";
+		AEP = currentSystemDate.isAfter(SEP_30) || currentSystemDate.isBefore(JAN_1) ? true : false;
+//		saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		return planYear;
+	}
 }

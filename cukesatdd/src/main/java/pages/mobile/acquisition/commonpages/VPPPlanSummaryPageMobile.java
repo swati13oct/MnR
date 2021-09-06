@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.Scrollable;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -19,7 +17,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -33,23 +30,15 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import io.cucumber.java.en.Then;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.ProviderSearchPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
@@ -856,7 +845,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#currPlansBanner>div>a")
 	private WebElement enrolledPlansBanner;
 
-	@FindBy(xpath = "//img[@class='mr-10 saved-item-icn']")
+	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(css = "a#visitor-profile-header")
@@ -1327,16 +1316,18 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sleepBySec(5);
 		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
+
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]/a"));
 		// ProviderSearchLink.click();
+
 		jsClickNew(ProviderSearchLink);
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 
 		String mproviderName = ProviderName.getText().trim().split("\n")[0];
 
-		mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
-		rallyProviderName = rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		mproviderName = mproviderName.replaceAll("\\.", "").replaceAll(",", "");
+		rallyProviderName = rallyProviderName.replaceAll("\\.", "").replaceAll(",", "");
 
 		Assertion.assertTrue(mproviderName.contains(rallyProviderName));
 
@@ -2029,9 +2020,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		if (enrollForPlan != null) {
 
-			scrollToView(enrollForPlan);
+//			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
 		}
 		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3986,19 +3977,32 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "#drugCostAlertTitle")
 	private WebElement HowMuchDrugCostBanner;
 
+	@FindBy(css = "[name='plan-years']")
+	private WebElement planYearToggle;
+
+	@FindBy(css = "button#currentyear")
+	private WebElement currentYearToggle;
+
+	@FindBy(css = "button#nextyear")
+	private WebElement nextYearToggle;
+
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		// CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 
-		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(IsMyDoctorCovereredBanner, 20)) {
-				System.out.println("***** Doctor banner verified ******");
-
-			} else {
-				validate(HowMuchDrugCostBanner, 10);
-				System.out.println("***** Drug cost banner verified ******");
-			}
+		if (planYearToggle.isDisplayed()) {
+			WebElement planYearToggle = planYear.equalsIgnoreCase("current") ? currentYearToggle : nextYearToggle;
+			jsClickNew(planYearToggle);
 		}
+
+		/*
+		 * if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current
+		 * year if (validate(IsMyDoctorCovereredBanner, 20)) {
+		 * System.out.println("***** Doctor banner verified ******");
+		 * 
+		 * } else { validate(HowMuchDrugCostBanner, 10);
+		 * System.out.println("***** Drug cost banner verified ******"); } }
+		 */
 
 		// Use this code next year 2022
 
@@ -5062,8 +5066,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		scrollToView(shoppingCartIcon);
-		shoppingCartIcon.click();
+//		scrollToView(shoppingCartIcon);
+		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePageMobile(driver);
@@ -5226,12 +5230,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(dceLink);
 
 		}
-		sleepBySec(5);
-		// CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
-		if (validateNew(AddMyDrugsBtn))
-			return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
-		return null;
 
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 15);
+
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
+
+		return null;
 	}
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName, String planType) {
@@ -5259,7 +5265,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
-		sleepBySec(5);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPageMobile(driver, planType);
 		}
@@ -5326,12 +5334,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		sleepBySec(5);
+
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -6007,8 +6012,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
 	public WebElement getStartedAddDrugNBA;
 
-	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType,
-			String planName) {
+	public GetStartedPageMobile navigateToDCEFromNBA(String planType, String planName) {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			if (validate(addDrugComponentWrap)) {
@@ -6032,7 +6036,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			Assertion.fail("NBA is not available for the Plantype: " + planType);
 
 		}
-		return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
+		return new GetStartedPageMobile(driver);
 	}
 
 	public void removeAddedDrugs(String planType, String planName) {
