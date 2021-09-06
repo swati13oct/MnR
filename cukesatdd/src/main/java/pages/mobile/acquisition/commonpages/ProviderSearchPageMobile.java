@@ -80,6 +80,15 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement Checkcoverage;
 
+	@FindBy(css = "button[data-test-id='MedicalDirectory']")
+	private WebElement MedicalDirectory;
+
+	@FindBy(css = "button[data-test-id='BehavioralHealthDirectory']")
+	private WebElement BehavioralHealthDirectory;
+
+	@FindBy(css = "button[data-test-id='DentalHealthDirectory']")
+	private WebElement DentalDirectory;
+
 	@FindBy(css = "button[data-test-id='People']")
 	private WebElement People;
 
@@ -273,18 +282,23 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		scrollToView(GetStarted);
 		jsClickNew(GetStarted);
 
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+		scrollToView(MedicalDirectory);
+		jsClickNew(MedicalDirectory);
+
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		scrollToView(People);
-		People.click();
+		jsClickNew(People);
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		scrollToView(Primary);
-		Primary.click();
+		jsClickNew(Primary);
 
 		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
-
 		scrollToView(AllPrimaryCare);
-		AllPrimaryCare.click();
+		jsClickNew(AllPrimaryCare);
+
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		scrollToView(selectProviderBtn);
 		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		
