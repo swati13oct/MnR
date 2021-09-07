@@ -3214,28 +3214,4 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
 	}
 
-    @Given("^the user navigates to following FlagSmith User Navigation site page$")
-    public void the_user_navigates_to_following_flagsmith_navigation_site_page()
-            throws Throwable {
-        String path = "fsem/featuretest.html";
-        System.out.print("Path to Acq page : " + path);
-        AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-                .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-        aquisitionhomepage.navigateToflagSmithPath(path);
-    }
-
-	@Then("the user enters FlagSmith user and navigates to Home Page")
-	public void the_user_enters_flag_smith_user_and_navigates_to_home_page(DataTable arg1) {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		String User = memberAttributesMap.get("User");
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.enterUser_NavigatetoHomepage(User);
-		getLoginScenario()
-				.saveBean(PageConstants.ACQUISITION_HOME_PAGE,aquisitionhomepage);
-
-	}
-
-
 }

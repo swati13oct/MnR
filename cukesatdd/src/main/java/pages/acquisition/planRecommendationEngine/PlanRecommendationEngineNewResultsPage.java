@@ -722,5 +722,4 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	
 	}
 	
-	
 }

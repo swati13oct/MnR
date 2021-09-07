@@ -1,4 +1,3 @@
-
 Feature: 1.05.8. OLE PRE Integration Flow
 
   Scenario Outline: To validate MA plans through PRE

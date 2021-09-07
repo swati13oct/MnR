@@ -466,7 +466,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 	/*@FindBy(css = "#search-field-2")
 	private WebElement EnterSearch;
-
 	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button")
 	private WebElement SubmitBtn;*/
 
@@ -4077,7 +4076,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("/compare/compare-ms.html")
 				|| driver.getCurrentUrl().contains("/enroll/ms-apply.html")
 				|| driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
-			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
+			String ExpectedCallSamTFNtimezone = "7 a.m. � 11 p.m. ET, Monday-Friday\n9 a.m. � 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -4105,7 +4104,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 								+ ActualCallSamTFNMember);
 			}
 		} else {
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m., 7 days a week.*\\n*Alaska and Hawaii: 8 a.m. Â- 8 p.m. Monday � Friday, 8 a.m. Â- 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
