@@ -423,7 +423,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div#toggleYearSection button[class*='prev-year']")
 	private WebElement previousPlanYear; // Current Year
 	
-	@FindBy(css = "#highlights a[class*='cta-button']:nth-child(1)")
+	@FindBy(css = "#highlights a[class*='cta-button']>span")
 	private List<WebElement> enrollBtnPlanDetails;
 	
 	@FindBy(css = "button#enrollment-next-button")

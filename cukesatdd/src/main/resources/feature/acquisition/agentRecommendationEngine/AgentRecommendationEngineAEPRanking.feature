@@ -53,4 +53,4 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User    | Pass         | Email                 | username | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | DEC-01   | None          | future   | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | DEC-01   | None          | future   | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
