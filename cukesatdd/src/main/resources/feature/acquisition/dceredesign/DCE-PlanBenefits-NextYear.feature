@@ -205,7 +205,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | NotCoveredDrug | <drug2> |
     Then the user validates LIS text for coverages stages popups on DCE details page
 
-  @dce_PlanBenefits_BuyDown
+  @dce_PlanBenefits_BuyDown_NextYear @NextYear
     Examples:
       | drug1  | drug2   | zipCode | county          | planType | planName                                   | site | premium |
       | Fanapt | Lipitor | 75002   | Collin County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP | $0      |
