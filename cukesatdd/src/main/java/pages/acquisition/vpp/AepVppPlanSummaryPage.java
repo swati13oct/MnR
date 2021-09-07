@@ -516,7 +516,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						break;
 					}
 				} else if (key.contains("plan name")) {
-					if (valueUI.contains(valueExcel)) {
+					if (valueUI.equalsIgnoreCase(valueExcel)) {
 						flag = true;
 						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
 						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:2 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
@@ -560,11 +560,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						if (valueExcel.contains(valueUI)) {
 							flag = true;
 							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							break;
 						} else {
 							flag = false;
-							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
@@ -576,11 +576,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						if (valueExcel.contains(valueUI)) {
 							flag = true;
 							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:6 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							break;
 						} else {
 							flag = false;
-							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:6 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
@@ -591,11 +591,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						if (valueExcel.contains(valueUI)) {
 							flag = true;
 							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:7 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							break;
 						} else {
 							flag = false;
-							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:7 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
@@ -733,6 +733,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 			String planYearValue = planYearArray[0];
 		System.out.println("Plan year coming as " +planYearValue);
+		try {
 		String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[1]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
@@ -755,7 +756,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
 		String [] headerZipArray = headerZipText.split(" ");
 		result.put(headerZip, headerZipArray[2]);
-		
+		} catch (Exception e) {
+			System.out.println("validation for plan name and zipcode on welcome ole page");
+		}
 		if(!planName.contains("PDP")) {
 			// HIGH OPTIONAL DENATL
 			try {
