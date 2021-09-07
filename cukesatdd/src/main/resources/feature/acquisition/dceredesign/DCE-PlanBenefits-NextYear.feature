@@ -87,6 +87,9 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    Given the user navigates to following FlagSmith User Navigation site page
+    Then the user enters FlagSmith user and navigates to Home Page
+      | User | <flagSmithUser> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -166,11 +169,11 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
   @dce_PlanBenefits_Preferred_NextYear @NextYear
     Examples:
-      | drug1     | drug2    | drug3      | drug4  | drug5      | InsulinDrug | zipCode | county             | planType | planName                                | site | premium | preferredT1 | preferredT2 | preferredT3 | preferredT4 | preferredT5 | insulin_Preferred | deductible | deductibleFlag | mailT1 | mailT2 | mailT3 | mailT4 | mailT5 | insulin_Mail | SelectStandardPharmacy | standardT1 | standardT2 | standardT3 | standardT4 | standardT5 | insulin_Standard |
-      | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80503   | Larimer County     | PDP      | AARP MedicareRx Saver Plus (PDP)        | AARP | $44     | $1          | $15         | $46         | 40%         | 25%         |                   | $480       | true           | $3     | $45    | $138   | 40%    | N/A    |              | CVS PHARMACY           | $6         | $20        | $47        | 40%        | 25%        |                  |
-      | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80503   | Larimer County     | PDP      | AARP MedicareRx Preferred (PDP)         | UHC  | $103.90 | $5          | $10         | $45         | 40%         | 33%         | $35               | $0         | false          | $0     | $0     | $120   | 40%    | N/A    | $105         | CVS PHARMACY           | $15        | $20        | $47        | 45%        | 33%        | $35              |
-      | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 90210   | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)         | AARP | $30.50  | $0          | $10         | $40         | 40%         | 27%         |                   | $310       | true           | $0     | $30    | $120   | 40%    | N/A    |              | CVS PHARMACY           | $15        | $20        | $45        | 45%        | 27%        |                  |
-      | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80002   | Adams County       | MAPD     | AARP Medicare Advantage Walgreens (PPO) | UHC  | $0      | $0          | $0          | $47         | $100        | 33%         | $35               | $0         | false          | $0     | $0     | $131   | $290   | N/A    | $95          | WALMART PHARMACY       | $10        | $20        | $47        | $100       | 33%        | $35              |
+      | flagSmithUser | drug1     | drug2    | drug3      | drug4  | drug5      | InsulinDrug | zipCode | county             | planType | planName                                | site | premium | preferredT1 | preferredT2 | preferredT3 | preferredT4 | preferredT5 | insulin_Preferred | deductible | deductibleFlag | mailT1 | mailT2 | mailT3 | mailT4 | mailT5 | insulin_Mail | SelectStandardPharmacy | standardT1 | standardT2 | standardT3 | standardT4 | standardT5 | insulin_Standard |
+      | OCT-15        | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80503   | Larimer County     | PDP      | AARP MedicareRx Saver Plus (PDP)        | AARP | $44     | $1          | $15         | $46         | 40%         | 25%         |                   | $480       | true           | $3     | $45    | $138   | 40%    | N/A    |              | CVS PHARMACY           | $6         | $20        | $47        | 40%        | 25%        |                  |
+      | OCT-15        | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80503   | Larimer County     | PDP      | AARP MedicareRx Preferred (PDP)         | UHC  | $103.90 | $5          | $10         | $45         | 40%         | 33%         | $35               | $0         | false          | $0     | $0     | $120   | 40%    | N/A    | $105         | CVS PHARMACY           | $15        | $20        | $47        | 45%        | 33%        | $35              |
+      | OCT-15        | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 90210   | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)         | AARP | $30.50  | $0          | $10         | $40         | 40%         | 27%         |                   | $310       | true           | $0     | $30    | $120   | 40%    | N/A    |              | CVS PHARMACY           | $15        | $20        | $45        | 45%        | 27%        |                  |
+      | OCT-15        | meloxicam | tramadol | febuxostat | Fanapt | vigabatrin | Humalog     | 80002   | Adams County       | MAPD     | AARP Medicare Advantage Walgreens (PPO) | UHC  | $0      | $0          | $0          | $47         | $100        | 33%         | $35               | $0         | false          | $0     | $0     | $131   | $290   | N/A    | $95          | WALMART PHARMACY       | $10        | $20        | $47        | $100       | 33%        | $35              |
 
 
   @dce_PlanBenefits_BuyDown
@@ -178,6 +181,9 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    Given the user navigates to following FlagSmith User Navigation site page
+    Then the user enters FlagSmith user and navigates to Home Page
+      | User | <flagSmithUser> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -207,15 +213,18 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
   @dce_PlanBenefits_BuyDown_NextYear @NextYear
     Examples:
-      | drug1  | drug2   | zipCode | county          | planType | planName                                   | site | premium |
-      | Fanapt | Lipitor | 75002   | Collin County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP | $0      |
-      | Fanapt | Lipitor | 10001   | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  | $0      |
+      | flagSmithUser | drug1  | drug2   | zipCode | county          | planType | planName                                   | site | premium |
+      | OCT-15        | Fanapt | Lipitor | 75002   | Collin County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP | $0      |
+      | OCT-15        | Fanapt | Lipitor | 10001   | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  | $0      |
 
   @dce_PlanBenefits_DefinedStandard
   Scenario Outline: To verify DCE Details Page <site> site - for LIS Non Buydown - Defined Standard Plans
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    Given the user navigates to following FlagSmith User Navigation site page
+    Then the user enters FlagSmith user and navigates to Home Page
+      | User | <flagSmithUser> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -250,9 +259,9 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
   @dce_PlanBenefits_DefinedStandard_NextYear @NextYear
     Examples:
-      | drug1  | drug2   | zipCode | county            | planType | planName                                                   | site | premium    | lisCopayGeneric                                  | lisCopayOthar                                    | nonLisCopay30days | nonLisCopay100days | deductible | deductibleFlag |
-      | Fanapt | Lipitor | 75002   | Collin County     | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0         | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
-      | Fanapt | Lipitor | 78006   | Bexar County      | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | UHC  | $0 - $3.70 | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
-      | Fanapt | Lipitor | 78006   | Bexar County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0         | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
-      | Fanapt | Lipitor | 33111   | Miami-Dade County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)             | AARP | $34.30     | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
+      | flagSmithUser | drug1  | drug2   | zipCode | county            | planType | planName                                                   | site | premium    | lisCopayGeneric                                  | lisCopayOthar                                    | nonLisCopay30days | nonLisCopay100days | deductible | deductibleFlag |
+      | OCT-15        | Fanapt | Lipitor | 75002   | Collin County     | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0         | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
+      | OCT-15        | Fanapt | Lipitor | 78006   | Bexar County      | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | UHC  | $0 - $3.70 | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
+      | OCT-15        | Fanapt | Lipitor | 78006   | Bexar County      | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0         | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
+      | OCT-15        | Fanapt | Lipitor | 33111   | Miami-Dade County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)             | AARP | $34.30     | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $445       | true           |
 
