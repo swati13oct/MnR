@@ -543,8 +543,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 				}
 
-				else if (key.equalsIgnoreCase("high option monthly")) {
-					if (valueExcel.contains(valueUI)) {
+				else if (key.equalsIgnoreCase("high option Dental rider")) {
+					//valueUI =45$_1000$;
+					String [] valueArry = valueUI.split("_");
+					String monthly = valueArry[0];
+					String annual1y = valueArry[1];
+					if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
 						flag = true;
 						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
 						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
@@ -556,8 +560,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						break;
 					}
 				}	
-					else if (key.equalsIgnoreCase("high option annual")) {
-						if (valueExcel.contains(valueUI)) {
+
+
+					else if (key.equalsIgnoreCase("dental platinum rider")) {
+						String [] valueArry = valueUI.split("_");
+						String monthly = valueArry[0];
+						String annual1y = valueArry[1];
+						if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
 							flag = true;
 							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
 							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
@@ -572,36 +581,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 				}
 
-					else if (key.equalsIgnoreCase("dental platinum monthly")) {
-						if (valueExcel.contains(valueUI)) {
-							flag = true;
-							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:6 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-							break;
-						} else {
-							flag = false;
-							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:6 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-							tmpUIString2 = tmpUIString1;
-							break;
-						}
-
-
-				}
-					else if (key.equalsIgnoreCase("dental platinum Annual")) {
-						if (valueExcel.contains(valueUI)) {
-							flag = true;
-							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:7 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-							break;
-						} else {
-							flag = false;
-							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:7 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-							tmpUIString2 = tmpUIString1;
-							break;
-						}
-
-
-				}
 			}
 		}
 		
@@ -810,18 +789,19 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				System.out.println("-----------------------------------------------------------------------");
 				System.out.println(" EXCEL Value dentalPlatinum :----------->"+dentalPlatinum);	
 				System.out.println("-----------------------------------------------------------------------");
-				System.out.println(" UI Value dentalMonthlyValue :----------->"+dentalMonthlyValue);
+				System.out.println(" UI Value dentalMonthlyValue :----------->"+highOptionalDental);
 				System.out.println("-----------------------------------------------------------------------");
 				System.out.println(" UI Value detalAnnualValue:----------->"+detalAnnualValue);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value detalAnnualValue:----------->"+dentalMonthlyValue);
+
 
 				
-				
+				result.put("high option Dental rider", highOptionalDental);
+				result.put("dental platinum rider", dentalMonthlyValue+"_"+detalAnnualValue);
 
-				result.put("high option monthly", highOptionalDental);
-				result.put("high option annual ", highOptionalDental);
-				
-				result.put("dental platinum monthly", dentalMonthlyValue);
-				result.put("dental platinum Annual", detalAnnualValue);
+				//result.put("dental platinum monthly", dentalMonthlyValue);
+				//result.put("dental platinum Annual", detalAnnualValue);
 				
 				} else if (!highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
 					System.out.println("#########################2nd scenario#######################################");
@@ -837,13 +817,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					System.out.println("-----------------------------------------------------------------------");
 					System.out.println(" UI Value HighdentalAnnualValue:----------->"+highdentalAnnualValue);
 
+					result.put("high option Dental rider", HIGHdentalMonthlyValue+"_"+highdentalAnnualValue);
+					result.put("dental platinum rider", dentalMonthlyValue+"_"+detalAnnualValue);
 					
-					result.put("high option monthly", HIGHdentalMonthlyValue);
-					result.put("high option annual ", highdentalAnnualValue);
+					//result.put("high option monthly", HIGHdentalMonthlyValue);
+					//result.put("high option annual ", highdentalAnnualValue);
 				
-					result.put("dental platinum monthly", dentalMonthlyValue);
-					result.put("dental platinum Annual", detalAnnualValue);
-	
 			} else if (highOptionalDental.equalsIgnoreCase("NA") && dentalPlatinum.equalsIgnoreCase("NA")) {
 				System.out.println("#########################3rd scenario#######################################");
 
@@ -855,12 +834,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				System.out.println("-----------------------------------------------------------------------");
 				System.out.println(" UI Value dental platinum Annual:----------->"+dentalPlatinum);
 
-				result.put("high option monthly", highOptionalDental);
-			result.put("high option annual ", highOptionalDental);
-			
-			result.put("dental platinum monthly", dentalPlatinum);
-			result.put("dental platinum Annual", dentalPlatinum);
-			
+				result.put("high option Dental rider", highOptionalDental);
+				result.put("dental platinum rider", dentalPlatinum);
+		
 			}
 			else if (!highOptionalDental.equalsIgnoreCase("NA") && dentalPlatinum.equalsIgnoreCase("NA")) {
 
@@ -872,12 +848,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				System.out.println(" UI Value dental platinum monthly :----------->"+dentalPlatinum);
 				System.out.println("-----------------------------------------------------------------------");
 				System.out.println(" UI Value dental platinum Annual:----------->"+dentalPlatinum);
-
-				result.put("high option monthly", HIGHdentalMonthlyValue);
-				result.put("high option annual ", highdentalAnnualValue);
-			
-				result.put("dental platinum monthly", dentalPlatinum);
-				result.put("dental platinum Annual", dentalPlatinum);
+				
+				result.put("high option Dental rider", HIGHdentalMonthlyValue+"_"+highdentalAnnualValue);
+				result.put("dental platinum rider", dentalPlatinum);
 			}
 			
 		}
