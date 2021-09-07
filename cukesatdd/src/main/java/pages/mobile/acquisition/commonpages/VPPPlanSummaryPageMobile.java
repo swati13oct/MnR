@@ -1316,9 +1316,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	}
 
-	public void verifyproviderName(String planName) {
+	public void verifyproviderName(String planName, String rallyProviderName) {
 		sleepBySec(5);
-		String rallyProviderName = MRConstants.PROV_NAME;
+//		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]/a"));
 		//ProviderSearchLink.click();
@@ -1336,7 +1336,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Rally provider name " + rallyProviderName);
 
 		Arrays.stream(rallyProviderName.split(" ")).forEach(name -> {
-			Assertion.assertTrue("Provider name on plan card does not contains " + name, Arrays.stream(mproviderName.split(" ")).anyMatch(vppProviderName -> vppProviderName.equals(name)));
+			Assertion.assertTrue("Provider name on plan card does not contains " + name,
+					Arrays.stream(mproviderName.split(" ")).anyMatch(vppProviderName -> vppProviderName.equals(name)));
 		});
 
 //		Assertion.assertTrue(mproviderName.contains(rallyProviderName));

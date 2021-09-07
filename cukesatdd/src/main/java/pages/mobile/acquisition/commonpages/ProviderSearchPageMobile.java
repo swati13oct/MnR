@@ -155,6 +155,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Finish')])[1]")
 	private WebElement Finish;
 
+	@FindBy(css = "div[class^='plan-list'][class$='active'] div[class*='plan-card']:nth-of-type(1)")
+	private WebElement vppFirstPlanCard;
+
 	public ProviderSearchPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -276,7 +279,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new PlanDetailsPageMobile(driver);
 	}
 
-	public VPPPlanSummaryPageMobile selectsProvider() {
+	public String selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		scrollToView(GetStarted);
 		jsClickNew(GetStarted);
@@ -348,9 +351,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-
-		return new VPPPlanSummaryPageMobile(driver);
+		validateNew(vppFirstPlanCard);
+//		return new VPPPlanSummaryPageMobile(driver);
+		return providerSaved;
 	}
+
 
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
