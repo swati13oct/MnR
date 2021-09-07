@@ -22,16 +22,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-        @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @vbfGate
+    @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @vbfGate
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
-
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile in <site> site - zip -<zipCode>
@@ -61,7 +60,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
 
-	#commenting this out as it is already there in the UAT feature file for VP
+  #commenting this out as it is already there in the UAT feature file for VP
   #@addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
@@ -93,7 +92,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-      #@visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @prodRegression
+    #@visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @prodRegression
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -130,7 +129,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
       | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
-        @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @vbfGate@VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP  
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @vbfGate @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
@@ -167,7 +166,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user validates the Plan details on OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-     	| Rider Flag | <riderflag> |
+      | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -185,15 +184,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | Email Confirmation | <emailConfirmation>            |
-      | Go Green           | <goGreen>                      |
-      | Home Number        | <phoneno>                      |
-      | Mobile Number      | <mobileno>                     |
+      | Email Confirmation       | <emailConfirmation>      |
+      | Go Green                 | <goGreen>                |
+      | Home Number              | <phoneno>                |
+      | Mobile Number            | <mobileno>               |
     Then the user navigates to Medicare Information Page
     Then the user enters following required Medicare Information
-      | Medicare Number    | <medicarenumber>    |
-      | SSN Flag           | <ssnflag>           |
-      | Card Type          | <cardtype>          |
+      | Medicare Number | <medicarenumber> |
+      | SSN Flag        | <ssnflag>        |
+      | Card Type       | <cardtype>       |
     Then the user validates Medicaid Number in OLE Page
       | MedicaidNumber | <medicaidnumber> |
       | Plan Year      | <planYear>       |
@@ -203,16 +202,16 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
     Then the user validates the long term questions in Medicare Information Page
-      | LongTerm Question | <longTermFlag> |
+      | LongTerm Question     | <longTermFlag>        |
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
       | Member Number         | <membernumber>        |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
-      | PDP Question      | <pdpFlag>      |
+      | PDP Question      | <pdpFlag>                  |
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
-      |	RX BIN Number     |	<rxBinnumber>              |
+      | RX BIN Number     | <rxBinnumber>              |
     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
@@ -234,8 +233,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | authorizationPhoneNo        | <authorizephonenumber>  |
       | authorizationRelationship   | <authorizeRelationship> |
       | authorizationStateDisplay   | <authorizestate>        |
-      Then the user validates Statement of Understanding Page
-      | soAAgree          | <authorizationagree>    |
+    Then the user validates Statement of Understanding Page
+      | soAAgree | <authorizationagree> |
     Then the user navigates to Review and Submit Page
     #Then the user validates the Plan and Member details on Review and Submit Page
     #Then the user validates the Online Enrollment details on Review and Submit Page
@@ -244,8 +243,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP
     Examples: 
-      | site | state   | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag |	middlename	|
-      | AARP | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     |	K						|
+      | site | state   | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
+      | AARP | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | K          |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC
     Examples: 
@@ -349,7 +348,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user selects four plans to compare from visitor Profile
       | Test Plans | <testPlans> |
     Then verify the plans on plan compare page
-     | Test Plans | <testPlans> |
+      | Test Plans | <testPlans> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
     Examples: 
@@ -360,3 +359,28 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
+
+  @importDrugsDocs
+  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    When the user Import Drugs and Doctors
+      | FirstName | <firstName> |
+      | LastName  | <lastName>  |
+      | DOB       | <dob>       |
+      | ZipCode   | <zipcode>   |
+      | MBI       | <mbi>       |
+      | Member    | <member>    |
+    #Then the user validates the Drugs and Doctors
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @prodRegression @regressionAARP
+    Examples: 
+      | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
+      | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
+      | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @prodRegression @regressionUHC
+    Examples: 
+      | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
+      | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
+      | UHC  | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
