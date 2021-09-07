@@ -280,6 +280,18 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public String selectsProvider() {
+		//Remove the while loop after rally page intermittent loading issue is fixed
+		int counter = 0;
+		while(counter < 5){
+			if(!GetStarted.isDisplayed()){
+				driver.navigate().refresh();
+				counter++;
+				sleepBySec(3);
+			} else{
+				break;
+			}
+		}
+
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		scrollToView(GetStarted);
 		jsClickNew(GetStarted);
