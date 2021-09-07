@@ -733,8 +733,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 			String planYearValue = planYearArray[0];
 		System.out.println("Plan year coming as " +planYearValue);
-		try {
-		String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
+	//	try {
+	//	String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
+		String planCard = "//h3[contains(@class,'h3-welcome')]";
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[1]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		headerPremiumText = driver.findElement(By.xpath(headerPremiumXpath)).getText();
@@ -756,9 +757,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
 		String [] headerZipArray = headerZipText.split(" ");
 		result.put(headerZip, headerZipArray[2]);
-		} catch (Exception e) {
+	/*	} catch (Exception e) {
 			System.out.println("validation for plan name and zipcode on welcome ole page");
-		}
+		}*/
 		if(!planName.contains("PDP")) {
 			// HIGH OPTIONAL DENATL
 			try {
