@@ -14,6 +14,13 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                | workSheet | site |
       | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Dummy | AARP |
 
+  @OLEBenefitsnextyear_PDP @OLEBenefitsnextyear_1
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_PDP_OLE | OLEPDP_Dummy  | AARP |
+
+
+
   @OLEBenefitsnextyear_PDP @OLEBenefitsnextyear
     Examples:
       | excelPath                | workSheet | site |
