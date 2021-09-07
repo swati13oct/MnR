@@ -366,7 +366,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
 			else if(key.endsWith("2"))
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
-			
+			else if(key.contains("fitness")) {
+				key = key.replace("\n", "").replaceAll("footnote", "");
+			}
 			
 			//removing all the footnote words from the UI string and the superscripts
 			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
@@ -501,7 +503,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
-
 				benefitValue = benefitValue.replace("-opensinnewwindow", "");
 					if(key.equalsIgnoreCase(columnName)) {
 						
