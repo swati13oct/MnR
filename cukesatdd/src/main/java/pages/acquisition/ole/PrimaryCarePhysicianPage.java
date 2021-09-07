@@ -370,8 +370,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		*/
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
 		//if(validateNew(driver.findElement(By.xpath("(//*[contains(@id,'planWith')])[1]")))){
-		if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
-		System.out.println("OLE Monthly Plan Premium Page is Displayed");
+		//if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+			if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+			System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}
 		else{
