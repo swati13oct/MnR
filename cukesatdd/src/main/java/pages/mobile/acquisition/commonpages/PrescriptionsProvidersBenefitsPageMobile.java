@@ -102,9 +102,8 @@ public void clickMedicareAnnualEnrollment() {
 	public ProviderSearchPageMobile clicksOnRallyToolFromMedEdPage() {
 		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
-
+		scrollToView(providerSearchFromMedEd);
 		switchToNewTabNew(providerSearchFromMedEd);
-
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
@@ -116,7 +115,7 @@ public void clickMedicareAnnualEnrollment() {
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink=driver.findElement(By.xpath("(//a[contains(@href,'drug-cost-estimator')])[3]"));
 		validateNew(DCELink);
-		jsClickNew(DCELink);
+		switchToNewTabNew(DCELink);
 		waitForPageLoadSafari();
 		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
