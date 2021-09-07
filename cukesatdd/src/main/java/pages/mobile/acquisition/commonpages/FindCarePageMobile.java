@@ -37,6 +37,15 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Change Location']")
 	public WebElement ChangeLocationButton;
 
+	@FindBy(css = "button[data-test-id='MedicalDirectory']")
+	private WebElement MedicalDirectory;
+
+	@FindBy(css = "button[data-test-id='BehavioralHealthDirectory']")
+	private WebElement BehavioralHealthDirectory;
+
+	@FindBy(css = "button[data-test-id='DentalHealthDirectory']")
+	private WebElement DentalDirectory;
+
 	@FindBy(xpath = "//*[contains(@data-ui-element-name,'Places')]")
 	public WebElement PlacesButton;
 	
@@ -334,6 +343,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
+		jsClickNew(MedicalDirectory);
+		CommonUtility.waitForPageLoadNew(driver, PeopleButton, 30);
 		jsClickNew(PeopleButton);
 		waitforElement(Whoareyoulookingfor);
 		jsClickNew(PrimaryCareButton);
@@ -393,6 +404,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
+		jsClickNew(MedicalDirectory);
+		CommonUtility.waitForPageLoadNew(driver, PlacesButton, 30);
 		jsClickNew(PlacesButton);
 		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
 		jsClickNew(HospitalsButton);
