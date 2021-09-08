@@ -523,13 +523,13 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				// int countyCellNum = 8, planYearCellNum = 10, planNameCellNum = 6; //to be used when running a random row number
 				// int countyCellNum =3, planYearCellNum = 5, planNameCellNum = 2; // to be used for PDP sheets when running a random row number on local
-				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0;
+				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, counter=0;
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
-					 	int failureCounter = 0;int cellIndex = 0; int counter=0;System.out.println("INSIDE Row");
+					 	int failureCounter = 0;int cellIndex = 0; System.out.println("INSIDE Row");
 					 	
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
