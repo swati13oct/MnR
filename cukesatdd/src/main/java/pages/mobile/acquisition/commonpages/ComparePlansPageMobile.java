@@ -204,10 +204,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 
-	@FindBy(xpath = "//span[text()='Add Doctors']/parent::a")
+	@FindBy(xpath = "//span[text()='Add Doctors & Dentist']/parent::a")
 	private WebElement addDoctorsLink;
 
-	@FindBy(xpath = "//span[text()='Edit Doctors']/parent::a")
+	@FindBy(xpath = "//span[text()='Edit Doctors & Dentist']/parent::a")
 	private WebElement editDoctorsLink;
 
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[1]/th/span")
