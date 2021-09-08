@@ -85,6 +85,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
+	
+	@FindBy(css = ".provider-cards")
+	private WebElement savedProviders;	
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -965,9 +968,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);*/
 
+		jsClickNew(editDoctorsLink);
+		
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
@@ -975,13 +980,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1008,14 +1013,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
 
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1431,14 +1436,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(medicalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		jsClickNew(medicalBenefitsOONToggle);
 
 		scrollToView(medicalBenefitsOONLabel);
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1450,12 +1455,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());

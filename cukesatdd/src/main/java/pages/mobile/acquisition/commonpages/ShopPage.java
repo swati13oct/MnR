@@ -87,16 +87,16 @@ public class ShopPage extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(@href,'/shop/dual-special-needs-plans.html')and
 	// contains(text(),'Shop')]")
-	@FindBy(xpath = "//a[contains(@href,'/shop/dual-special-needs-plans')and contains(text(),'Shop')]")
+	@FindBy(xpath = "(//a[contains(@href,'/shop/dual-special-needs-plans')])[3]")
 	private WebElement dsnpShopLink;
 
-	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans')and contains(text(),'Shop')]")
+	@FindBy(xpath = "(//*[contains(@href,'/shop/prescription-drug-plans')])[3]")
 	private WebElement pdpShopLink;
 
-	@FindBy(xpath = "//*[contains(@href,'/shop/medicare-advantage-plans') and contains(text(),'Shop')]")
+	@FindBy(xpath = "(//*[contains(@href,'/shop/medicare-advantage-plans')])[3]")
 	private WebElement MAShopLink;
 
-	@FindBy(xpath = "//a[contains(@href,'/shop/medicare-supplement-plans.html') and contains(text(),'Shop')]")
+	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[3]")
 	private WebElement medSupShopLink;
 
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
@@ -146,16 +146,16 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'/resources')])[2]")
 	private WebElement getMemberResources;
 
-	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
+	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize')]")
 	private WebElement personalizeUrResults;
 
-	@FindBy(xpath = "//a[contains(text(),'Check Drug Costs')]")
+	@FindBy(xpath = "(//a[contains(@href,'/health-plans/estimate-drug-costs.html#/drug-cost-estimator')])[3]")
 	private WebElement checkDrugCostsBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//a[contains(@href,'connect.werally.com/county-plan-selection/uhc.mnr/zip') and @title='Get Started']")
 	private WebElement findAProviderBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Locate a Pharmacy')]")
+	@FindBy(xpath = "(//a[contains(@href,'/health-plans/aarp-pharmacy.html')])[3]")
 	private WebElement locatePharmacyBtn;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
