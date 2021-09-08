@@ -134,7 +134,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 			searchParameter = s;
 			if(validate(warningMsg, 20)) {
 				jsClickNew(warningMsg);
-				driver.navigate().refresh();
+//				driver.navigate().refresh();
 				threadsleep(5000);
 				jsClickNew(findCarebutton);
 				threadsleep(2000);

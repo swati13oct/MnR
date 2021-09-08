@@ -153,7 +153,14 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		headerAndFooter.navigationToPlanRecommendationEngineViaMedicareEducation();
-}
+	}
+	
+	@When("^user navigate to PRE using Homepage PRE widget$")
+	public void navigate_Homepage() {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		headerAndFooter.navigationToPREViaHomePageWidget();
+	}
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_header_Plan_Selector_tool() {

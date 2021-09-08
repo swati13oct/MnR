@@ -423,7 +423,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div#toggleYearSection button[class*='prev-year']")
 	private WebElement previousPlanYear; // Current Year
 	
-	@FindBy(css = "#highlights a[class*='cta-button']>span")
+	@FindBy(css = "#highlights a[dtmname*='Enroll in Plan']")
 	private List<WebElement> enrollBtnPlanDetails;
 	
 	@FindBy(css = "button#enrollment-next-button")
@@ -1601,13 +1601,11 @@ public void validateSNPPlanName() {
 public void verifyPlanNameinOLE() {
 	String PlanName= planNameVPPDetailsPage.getText().trim().toUpperCase();
 	String planNameinOLE = "";
+	scrollToView(enrollBtnPlanDetails.get(0));
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
-	if(validate(planNameEnrollPageExternal)) {
-		planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
-	}else
-		planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
+	planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
 	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
@@ -2007,7 +2005,9 @@ public void validateDrugProvider() {
 				+ Druglist.get(i).findElement(By.cssSelector("div[id*='DrugQuantityFrequency-noplan']")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
 	}
 	Collections.sort(vpdrugs);
-	System.out.println(vpdrugs);
+	CommonConstants.VP_Drugs.put(curID, vpdrugs);
+	vpdrugs = CommonConstants.VP_Drugs.get(String.valueOf(Thread.currentThread().getId()));
+	System.out.println("**** Current Thread ID is - "+curID+" Drugs in Visitor Profile "+ vpdrugs +" ****");
 	verifyConfirmationmodalResults(drgcount,DrugsInPRE,vpdrugs);
 //	Assertion.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);

@@ -50,3 +50,21 @@ Feature: Plan Recommendation Engine flow - Verify landing page in plan Recommend
       Examples: 
       | site |
       | UHC  |
+      
+	@PRE @planrecommendation @PRENavigationViaHome @landingpage 
+  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Home page PRE Widget and Validate Landing Page Elements      
+  Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+  When user navigate to PRE using Homepage PRE widget
+  
+  @FunctionalAARP
+     Examples: 
+      | site |
+      | AARP |  
+      
+      @FunctionalUHC
+      Examples: 
+      | site |
+      | UHC  |
+  
+  
