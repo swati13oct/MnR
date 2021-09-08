@@ -570,30 +570,36 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
-		List<WebElement> Tier1Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 1')]"));
-		List<WebElement> Tier2Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 2')]"));
-		List<WebElement> Tier3Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 3')]"));
-		List<WebElement> Tier4Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 4')]"));
-		List<WebElement> Tier5Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 5')]"));
-		List<WebElement> NotCoveredDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Not Covered')]"));
-		List<WebElement> PADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Prior Authorization')]"));
-		List<WebElement> STDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Step Therapy')]"));
-		List<WebElement> QLDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Quantity Limit')]"));
-		List<WebElement> SevenDayDrugs = driver.findElements(By
-				.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Seven Day')]"));
-		List<WebElement> LADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Limited Access')]"));
-		List<WebElement> DLDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Dispensing Limits')]"));
+		WebElement yourDrugsAccordion = driver.findElement(By.xpath("//app-accordion[@buttonid='edityourdrug']/div[@id='accordion']"));
+
+		if(!CommonUtility.getElementAttribute(yourDrugsAccordion, "class").contains("expanded")){
+			jsClickNew(yourDrugsAccordion);
+		}
+
+		List<WebElement> Tier1Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 1')]"));
+		List<WebElement> Tier2Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 2')]"));
+		List<WebElement> Tier3Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 3')]"));
+		List<WebElement> Tier4Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 4')]"));
+		List<WebElement> Tier5Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 5')]"));
+		List<WebElement> NotCoveredDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Not Covered')]"));
+		List<WebElement> PADrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Prior Authorization')]"));
+		List<WebElement> STDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Step Therapy')]"));
+		List<WebElement> QLDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Quantity Limit')]"));
+		List<WebElement> SevenDayDrugs = yourDrugsAccordion.findElements(By
+				.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Seven Day')]"));
+		List<WebElement> LADrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Limited Access')]"));
+		List<WebElement> DLDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Dispensing Limits')]"));
 		if (Tier1Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 1 Drugs Added: " + Tier1Drugs.size());
 		} else
