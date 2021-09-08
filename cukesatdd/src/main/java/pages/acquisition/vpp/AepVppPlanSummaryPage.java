@@ -456,7 +456,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	public HashMap<Boolean, String> comparePremium(String sheetName, int rowIndex, String columnName, String valueExcel, HashMap<String, String> premiumMap) {
 		boolean flag = false; int counter =0;
 
-		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
+		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="", annual1y="", monthly="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = premiumMap.get("Monthly Premium"); //gets the value for the header premium that was stored from the UI
 		
@@ -544,28 +544,54 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				}
 
 				else if (key.equalsIgnoreCase("high option Dental rider")) {
-					//valueUI =45$_1000$;
-					String [] valueArry = valueUI.split("_");
-					String monthly = valueArry[0];
-					String annual1y = valueArry[1];
-					if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
-						flag = true;
-						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
-						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-						break;
-					} else {
-						flag = false;
-						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
-						tmpUIString2 = tmpUIString1;
-						break;
+					if (valueExcel.contains("NA")) {
+						if (valueUI.contains(valueExcel)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
 					}
-				}	
-
-
-					else if (key.equalsIgnoreCase("dental platinum rider")) {
+					if (!valueExcel.contains("NA")) {
+						String[] valueArry = valueUI.split("_");
+						monthly = valueArry[0];
+						annual1y = valueArry[1];
+						if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+					}
+				}
+					else if (key.equalsIgnoreCase("dental platinum rider")){
+					if (valueExcel.contains("NA")) {
+						if (valueUI.contains(valueExcel)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+					}
+					if (!valueExcel.contains("NA")) {
 						String [] valueArry = valueUI.split("_");
-						String monthly = valueArry[0];
-						String annual1y = valueArry[1];
+						monthly = valueArry[0];
+						annual1y = valueArry[1];
 						if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
 							flag = true;
 							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
@@ -577,7 +603,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
-
+						 }
 
 				}
 
