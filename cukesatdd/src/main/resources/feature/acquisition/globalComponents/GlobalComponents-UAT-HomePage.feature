@@ -61,13 +61,13 @@ Feature: 1.12 homePage flows
     Then the user clicks on browser back button
     And user clicks on shop for Medigap plans
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    #Then the user validates TFN on need help section of Shop pages
-    # | TFNxpath | <MedSupTFN>      |
-    #| TFNflag  | <medSupTFNXpath> |
-    #Then the user validates whether call icon is visible
-    # Then the user validates MedSup TFN Number
-    #  | TFN No    | <MedSupTFN>      |
-    # | TFN Xpath | <medSupTFNXpath> |
+    Then the user validates TFN on need help section of Shop pages
+     | TFNxpath | <MedSupTFN>      |
+    | TFNflag  | <medSupTFNXpath> |
+    Then the user validates whether call icon is visible
+    Then the user validates MedSup TFN Number
+     | TFN No    | <MedSupTFN>      |
+    | TFN Xpath | <medSupTFNXpath> |
     Then the user validates whether chat icon is visible
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
