@@ -1,7 +1,7 @@
 @planCompare_ExcelValidation
 Feature: ACQ-Plan benefits validation
 
-  @2022_AARP @current_year
+  @2022_AARP @current_year @2022PlanCompareAARP
   Scenario Outline: 2022 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
