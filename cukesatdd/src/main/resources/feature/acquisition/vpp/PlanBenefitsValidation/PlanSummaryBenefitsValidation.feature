@@ -83,6 +83,26 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet    | site |
       | Plan Summary Benefits_Data | Sheet2022_15 | AARP |
 
+    @planSummaryBenefitsAARP16 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_16 | AARP |
+
+    @planSummaryBenefitsAARP17 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_17 | AARP |
+
+    @planSummaryBenefitsAARP18 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_18 | AARP |
+
+    @planSummaryBenefitsAARP19 @planSummaryBenefitsAARPMA
+    Examples: 
+      | excelPath                  | workSheet    | site |
+      | Plan Summary Benefits_Data | Sheet2022_19 | AARP |
+
     @planSummaryBenefitsPDPAARP01
     Examples: 
       | excelPath                  | workSheet      | site |
@@ -92,6 +112,11 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                  | workSheet      | site |
       | Plan Summary Benefits_Data | PDPSheet2022_2 | AARP |
+
+    @planSummaryBenefitsPDPAARP02
+    Examples: 
+      | excelPath                  | workSheet      | site |
+      | Plan Summary Benefits_Data | PDPSheet2022_3 | AARP |
 
   # Below are examples for UHC plan Summary benefits
   @planSummary_ExcelValidation @2022planSummaryUHC
