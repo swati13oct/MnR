@@ -152,7 +152,7 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'/health-plans/estimate-drug-costs.html#/drug-cost-estimator')])[3]")
 	private WebElement checkDrugCostsBtn;
 
-	@FindBy(xpath = "(//a[contains(@href,'connect.werally.com/county-plan-selection/uhc.mnr/zip')])")
+	@FindBy(xpath = "//a[@rel='External']")
 	private WebElement findAProviderBtn;
 
 	@FindBy(xpath = "(//a[contains(@href,'/health-plans/aarp-pharmacy.html')])[3]")
@@ -302,6 +302,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void validateZipComp(String zipCode) {
+
 		try {
 			int zipCodeNumber = 1;
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
@@ -383,11 +384,15 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void comparePlans() {
-		//CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(3);
 		jsClickNew(comparePlanBtn);
+		// comparePlanBtn.click();
 		sleepBySec(3);
 		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("compare-ma.html")) {
+			driver.navigate().back();
+		}
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/compare.html"))
 			Assert.fail("Shop Plan Compare page did not load properly");
@@ -395,11 +400,12 @@ public class ShopPage extends GlobalWebElements {
 
 	public void estimateCosts() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		scrollToView(LearnEstimateCosts);
-		validateNew(LearnEstimateCosts);
-		 jsClickNew(LearnEstimateCosts);
-		 CommonUtility.checkPageIsReadyNew(driver);
+		jsClickNew(LearnEstimateCosts);
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("ma-costs.html")) {
+			driver.navigate().back();
+		}
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/estimate.html"))
 			Assert.fail("Shop Plan Estimate Costs page did not load properly");
@@ -407,10 +413,8 @@ public class ShopPage extends GlobalWebElements {
 
 	public void switchPlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		scrollToView(howToSwitchPlans);
-		validateNew(howToSwitchPlans);
 		jsClickNew(howToSwitchPlans);
-		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/switch.html"))
@@ -463,29 +467,28 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void findAProvider() throws Exception {
-		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(findAProviderBtn);
-		// String parentWindow = driver.getWindowHandle();
+		sleepBySec(3);
 
-		switchToNewTabNew(findAProviderBtn);
-		// jsClickNew(findAProviderBtn);
-		// findAProviderBtn.click();
-		// Thread.sleep(10000);
-		// waitForPageLoadSafari();
-		// Set<String> tabs_windows = driver.getWindowHandles();
-		// Iterator<String> itr = tabs_windows.iterator();
-		// while (itr.hasNext()) {
-		// String window = itr.next();
-		// if (!parentWindow.equals(window)) {
-		// driver.switchTo().window(window);
-		if (!driver.getCurrentUrl().contains("werally"))
-			Assert.fail("Provider Search page failed to load");
-		Thread.sleep(2000);
+		validateNew(findAProviderBtn);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(findAProviderBtn);
+		Thread.sleep(4000);
+		waitForPageLoadSafari();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				if (!driver.getCurrentUrl().contains("werally"))
+					Assert.fail("Provider Search page failed to load");
+				Thread.sleep(2000);
+			}
+
+		}
 
 		driver.close();
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-
-		// driver.close();
+		driver.switchTo().window(parentWindow);
 	}
 
 	public void locateAPharmacy() {
