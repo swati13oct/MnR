@@ -40,7 +40,7 @@ public class FlagsmithLoginPage extends UhcDriver {
 	public Object startFlagSmithUserTest(String userName) {
 		enterUserName(userName);
 		enterTestPage("/");	
-		selectExpiryTime("1");
+		selectExpiryTime("24");
 		jsClickNew(startTestingButton);
 		String driverType = driver.getClass().toString().toUpperCase();
 		return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver) : new AcquisitionHomePage(driver);
@@ -49,7 +49,7 @@ public class FlagsmithLoginPage extends UhcDriver {
 	public Object startFlagSmithUserTest(String userName, String testPageUrl) {
 		enterUserName(userName);
 		enterTestPage(testPageUrl);
-		selectExpiryTime("1");
+		selectExpiryTime("24");
 		jsClickNew(startTestingButton);
 		String driverType = driver.getClass().toString().toUpperCase();
 		return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver) : new AcquisitionHomePage(driver);
