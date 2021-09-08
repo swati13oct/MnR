@@ -499,7 +499,8 @@ public class VisitorProfileMobileStepDefinition {
 
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateProviderinfo(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		visitorProfile.validateProviderinfo(planName, providerFromRally);
 	}
 
 	@And("^the user signs in with optum Id credentials$")
