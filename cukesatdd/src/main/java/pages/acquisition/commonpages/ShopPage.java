@@ -147,7 +147,7 @@ public class ShopPage extends UhcDriver {
 	private WebElement checkDrugCostsBtn;
 
 	//@FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "(//a[contains(@href,'connect.werally.com/county-plan-selection/uhc.mnr/zip')])")
+	@FindBy(xpath = "//a[contains(@href,'connect.werally.com/county-plan-selection/uhc.mnr/zip') and @title='Get Started']")
 	private WebElement findAProviderBtn;
 
 	@FindBy(xpath = "(//a[contains(@href,'/health-plans/aarp-pharmacy.html')])[3]")
