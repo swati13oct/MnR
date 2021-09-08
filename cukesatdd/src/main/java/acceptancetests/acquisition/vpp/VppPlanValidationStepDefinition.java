@@ -759,8 +759,8 @@ public class VppPlanValidationStepDefinition {
 											currentColName.equalsIgnoreCase("plan type") ||
 											currentColName.equalsIgnoreCase("county") ||
 											currentColName.equalsIgnoreCase("Link parameters") ||
-											currentColName.equalsIgnoreCase("product") 
-											//currentColName.equalsIgnoreCase("Fips")
+											currentColName.equalsIgnoreCase("product")  ||
+											currentColName.equalsIgnoreCase("Fips")
 									)) {
                                         resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
 
