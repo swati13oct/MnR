@@ -1,10 +1,9 @@
 package pages.mobile.acquisition.commonpages;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import acceptancetests.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.UhcDriver;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -15,26 +14,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.vpp.VPPTestHarnessPage;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
@@ -149,6 +138,81 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	
 	@FindBy(css = "div[class*='plan-drug-doctor-popup'] > div > button")
 	private WebElement addedProvidersModalCloseButton;
+
+	@FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
+	private WebElement importLnk;
+
+	@FindBy(css = "#data-import-popup button[dtmname$='Get Started']")
+	private WebElement btnGetStarted;
+
+	@FindBy(css = "#member")
+	private WebElement uhcRadio;
+
+	@FindBy(css = "#aetna")
+	private WebElement aetnaRadio;
+
+	@FindBy(css = "#humana")
+	private WebElement humanaRadio;
+
+	@FindBy(css = "#other-mem")
+	private WebElement anotherInsuranceMedicareRadio;
+
+	@FindBy(css = "#non-member")
+	private WebElement dontHaveInsuranceMedicareRadio;
+
+	@FindBy(css = "button[dlassetid$='next']")
+	private WebElement importDrugNextButton;
+
+	@FindBy(css = "button[dtmname$='Previous']")
+	private WebElement importDrugPreviousButton;
+
+	@FindBy(css = "#member-firstName")
+	private WebElement firstNameText;
+
+	@FindBy(css = "#member-lastName")
+	private WebElement lastNameText;
+
+	@FindBy(css = "#member-date-of-birth")
+	private WebElement dateOfBirthText;
+
+	@FindBy(css = "#member-zip-code")
+	private WebElement zipcodeText;
+
+	@FindBy(css = "#member-medicare-number")
+	private WebElement medicareNumberText;
+
+	@FindBy(css = "input[name='isAttested']")
+	private WebElement attestCheckBox;
+
+	@FindBy(css = "button[dlassetid='vp_imp_mem_det_next']")
+	private WebElement viewDrugsAndDocsButton;
+
+	@FindBy(css = "button[dlassetid='vp_confimp_next']")
+	private WebElement nonMemberNextButton;
+
+	@FindBy(css = "#agreementName")
+	private WebElement agreementNameText;
+
+	@FindBy(css = "button[dtmname$='consent:Next']")
+	private WebElement nonMemberConsentNextButton;
+
+	@FindBy(css = "#non-member-firstName")
+	private WebElement nonMemberFirstNameText;
+
+	@FindBy(css = "#non-member-lastName")
+	private WebElement nonMemberLastNameText;
+
+	@FindBy(css = "#male")
+	private WebElement genderMale;
+
+	@FindBy(css = "#non-member-date-of-birth")
+	private WebElement nonMemberDateOfBirthText;
+
+	@FindBy(css = "#non-member-zip-code")
+	private WebElement nonMemberZipcodeText;
+
+	@FindBy(css = "button[dlassetid='vp_nonmemdetl_next'][dtmname*='View your Drugs & Doctors']")
+	private WebElement nonMemberViewDrugsAndDocsButton;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
@@ -1073,6 +1137,46 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+
+	}
+
+	public void importDrugsAndDoctors(Map<String, String> testData) {
+		jsClickNew(importLnk);
+		jsClickNew(btnGetStarted);
+		switch (testData.get("Member")) {
+			case "Aetna":
+				break;
+			case "UHC":
+				jsClickNew(uhcRadio);
+				jsClickNew(importDrugNextButton);
+				sendkeysMobile(firstNameText, testData.get("FirstName"));
+				sendkeysMobile(lastNameText, testData.get("LastName"));
+				sendkeysMobile(dateOfBirthText, testData.get("DOB"));
+				sendkeysMobile(zipcodeText, testData.get("ZipCode"));
+				sendkeysMobile(medicareNumberText, testData.get("MBI"));
+				jsClickNew(attestCheckBox);
+				jsClickNew(viewDrugsAndDocsButton);
+				waitforElementNew(savedDrugsAndDoctorsHeader);
+				break;
+			case "NonMember":
+				jsClickNew(dontHaveInsuranceMedicareRadio);
+				jsClickNew(importDrugNextButton);
+				jsClickNew(nonMemberNextButton);
+				sendkeysMobile(agreementNameText,testData.get("FirstName")+" "+testData.get("LastName"));
+				jsClickNew(nonMemberConsentNextButton);
+				sendkeysMobile(nonMemberFirstNameText, testData.get("FirstName"));
+				sendkeysMobile(nonMemberLastNameText, testData.get("LastName"));
+				sendkeysMobile(nonMemberDateOfBirthText, testData.get("DOB"));
+				jsClickNew(genderMale);
+				sendkeysMobile(nonMemberZipcodeText, testData.get("ZipCode"));
+				jsClickNew(attestCheckBox);
+				jsClickNew(nonMemberViewDrugsAndDocsButton);
+				waitforElementNew(savedDrugsAndDoctorsHeader);
+				break;
+
+			default:
+				break;
 		}
 
 	}
