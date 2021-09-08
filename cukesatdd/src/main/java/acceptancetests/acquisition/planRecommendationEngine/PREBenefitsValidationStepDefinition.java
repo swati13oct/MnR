@@ -238,6 +238,7 @@ public class PREBenefitsValidationStepDefinition {
 								|| currentColName.equalsIgnoreCase("drug name")
 								|| currentColName.equalsIgnoreCase("fips")
 								|| currentColName.equalsIgnoreCase("Plan code")
+								|| currentColName.equalsIgnoreCase("StateCode")
 								|| currentColName.equalsIgnoreCase("State"))){
 
 							resultMap = preBenefits.comparePREBenefits(currentColName, currentCellValue,
