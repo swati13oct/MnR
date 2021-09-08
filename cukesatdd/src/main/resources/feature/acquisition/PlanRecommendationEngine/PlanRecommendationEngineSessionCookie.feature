@@ -59,8 +59,8 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | Plan Type | <isCoverageOpt> |
     Then user selects add drug option and comparing DCE and Drug page
       | Drug Selection | <Drug Selection> |
-    Then user selects edit drug options in Drug Page
-      | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
+    #Then user selects edit drug options in Drug Page
+    #  | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
 
     @regressionAARP
     Examples: 

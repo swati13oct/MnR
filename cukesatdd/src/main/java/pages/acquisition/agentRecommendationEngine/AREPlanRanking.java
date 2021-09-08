@@ -132,7 +132,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
 	private List<WebElement> viewplandetailslink;
 
-	@FindBy(css = "#enroll-row th")
+	@FindBy(css = "button[class*='moreOptionsbtn']")
 	private List<WebElement> enrollBtn;
 	
 	@FindBy(css = "#highlights a[dtmid*='cta_acq_plans_detail']")
@@ -454,7 +454,7 @@ public class AREPlanRanking extends UhcDriver {
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
-					vppPlans.add(verifygetplanName(plansName.get(i+1), viewplandetails.get(i+1)));
+					vppPlans.add(verifygetplanName(plansName.get(i+1), viewplandetails.get(i)));
 				}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
@@ -472,7 +472,7 @@ public class AREPlanRanking extends UhcDriver {
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
 		String actualplanName = "";
 		String exceptedplanName = plan.getText().toUpperCase().trim();
-		planInPDP = planInPDP.findElement(By.cssSelector(" button[class*='moreOptionsbtn']"));
+//		planInPDP = planInPDP.findElement(By.cssSelector("button[class*='moreOptionsbtn']"));
 		System.out.println("MoreOption in Plan Compare Page: " + planInPDP.getText());
 		threadsleep(2000);
 		jsClickNew(planInPDP);

@@ -120,6 +120,7 @@ public class AREAgentLoginSearch extends UhcDriver {
                 securityAnswer.sendKeys("number1");
             }
             driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+            threadsleep(2000);
             CommonUtility.waitForPageLoadNew(driver, searchbox, 20);
             pageloadcomplete();
 		}
@@ -131,7 +132,7 @@ public class AREAgentLoginSearch extends UhcDriver {
 		System.out.println("Search Profle by Email");
 		searchbox.sendKeys(email);
 		searchBtn.click();
-		threadsleep(2000);
+		threadsleep(5000);
 		waitforElement(searchResults.get(0));
 		Assert.assertTrue(searchResults.size()>0);
 		cloakProfile();
