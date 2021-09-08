@@ -528,7 +528,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						break;
 					}
 
-				} else if (key.contains("zip")) {
+				} else if (key.contains("zip") || key.contains("Zip") ) {
 					if (valueUI.equalsIgnoreCase(valueExcel)) {
 						flag = true;
 						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
