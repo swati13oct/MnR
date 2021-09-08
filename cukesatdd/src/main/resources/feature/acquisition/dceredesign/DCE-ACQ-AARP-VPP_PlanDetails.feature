@@ -333,12 +333,17 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        | planyear |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) | future   |
 
-    @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
+    @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP @NextYear
     Examples: 
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | future   |
+
+  @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
+    Examples:
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
       | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
-    @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC
+  @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       | planyear |
       | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | future   |
