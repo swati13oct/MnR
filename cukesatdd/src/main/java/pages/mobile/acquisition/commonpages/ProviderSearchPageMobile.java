@@ -309,19 +309,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile selectsProvider() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		jsClickNew(People);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		jsClickNew(Primary);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+	
 		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 		jsClickNew(AllPrimaryCare);
 

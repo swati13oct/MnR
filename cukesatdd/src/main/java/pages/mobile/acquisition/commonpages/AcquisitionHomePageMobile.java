@@ -232,15 +232,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	//@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded'] + button")
-	
-	@FindBy(css = "#submit")
+	// @FindBy(css = "div[class$='newstyle_feature_toggle']
+	// input[id^='zipcodemeded'] + button")
+
+	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
 	private WebElement findPlansBtn;
 
-	@FindBy(xpath = "//span[text()='Shop Plans' and @zipcompindex='0']")
+	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
 	public WebElement btnGO;
 
 	/*
@@ -1151,13 +1152,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
 			driver.navigate().back();
 			CommonUtility.checkPageIsReadyNew(driver);
-		} else {
-			accessFooterLinkFromMore("contact");
-			CommonUtility.checkPageIsReadyNew(driver);
-			waitForPageLoadSafari();
-			if (driver.getCurrentUrl().contains("contact-us")) {
-				return new ContactUsAARPPageMobile(driver);
-			}
+		}
+		accessFooterLinkFromMore("contact");
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("contact-us")) {
+			return new ContactUsAARPPageMobile(driver);
 
 		}
 		return null;

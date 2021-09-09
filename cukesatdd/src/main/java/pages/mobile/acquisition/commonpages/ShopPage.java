@@ -302,6 +302,8 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void validateZipComp(String zipCode) {
+		
+		
 
 		try {
 			int zipCodeNumber = 1;

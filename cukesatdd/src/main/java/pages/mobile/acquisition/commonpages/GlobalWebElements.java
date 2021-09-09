@@ -523,10 +523,10 @@ public class GlobalWebElements extends UhcDriver {
 	 */
 	public AcquisitionHomePageMobile openHomeFromMenu() {
 		jsClickNew(MenuMobile);
-		
+		sleepBySec(2);
 		validateNew(mobileNav, 5);
-		
 		jsClickNew(home);
+		sleepBySec(2);
 		if (validate(getStartedButton)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
