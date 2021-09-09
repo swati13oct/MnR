@@ -19,7 +19,7 @@ Feature: Plan Recommendation Engine flow - Verify landing page in plan Recommend
       | UHC  |
   
   @PRE @planrecommendation @PRENavigationViaMedicareArticles @landingpage 
-  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Shop For a Plan-shop-->Get Help Choosing in Tools and Validate Landing Page Elements
+  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Shop For a Plan-->MedicareArticles and Validate Landing Page Elements
   Given the user is on UHC medicare acquisition site PRE landing page
   	| Site | <site> |
   When user navigate Plan Recommendation Engine Using Get Started From Medicare Articles
@@ -36,7 +36,7 @@ Feature: Plan Recommendation Engine flow - Verify landing page in plan Recommend
       | UHC  |
   
   @PRE @planrecommendation @PRENavigationViaMedicareEducation @landingpage 
-  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Shop For a Plan-shop-->Get Help Choosing in Tools and Validate Landing Page Elements
+  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Shop For a Plan-->MedicareEducation and Validate Landing Page Elements
   Given the user is on UHC medicare acquisition site PRE landing page
   	| Site | <site> |
   When user navigate to Medicare Education and validate Plan Recommendation Engine Widget

@@ -1144,6 +1144,12 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.learnMore(inputValues.get("Learn More"));
    	}
+	
+	@And("^user clicks on Medigap Plans Link in PRE Result page$")
+   	public void medigap_new_results_page() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.medigaplink();
+   	}
 
 	@Then("^user validate drugCostModal in PRE results page$")
    	public void drugDetailsModel_new_results_page(DataTable givenAttributes) {

@@ -725,6 +725,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			temp = new Select(MSPlanStartMonth);
 			temp.selectByVisibleText("January 1, " + nxtYear);
 			jsClickNew(MSViewPlanButton);
+			threadsleep(5000);
 		}
 		
 		int Year = Integer.parseInt(getCurrentYear()) +1;

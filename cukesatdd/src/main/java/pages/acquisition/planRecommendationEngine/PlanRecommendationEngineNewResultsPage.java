@@ -29,6 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -116,6 +117,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
+	
+	@FindBy(css = "li.view-ms-plans a.buttonLink")
+	private WebElement viewMedigapLink;
 
 	@FindBy(css = ".view-ms-plans a")
 	private WebElement viewMSPlans;
@@ -234,6 +238,17 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "div.content h2")
 	private WebElement planNameDetailsPage;
+	
+	//MS Plan Details page
+	
+	@FindBy(css = "#PlanDetails .back-to-plans")
+	private WebElement MSplanDetailsPage;
+	
+	@FindBy(css = "#PlanDetails h1.heading-1")
+	private WebElement MSplanNameInDetailsPage;
+	
+	@FindBy(css = "#msVppZipCode")
+	private WebElement zipcodeMSForm;
 
 	// Result Loading Page Element Verification Method
 
@@ -591,9 +606,24 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		if (planAction.toLowerCase().contains("viewbutton")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection>.sub-content button")).click();
+			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
+				if(validate(MSplanDetailsPage,20))
+				{
+					validate(MSplanNameInDetailsPage, 60);
+					Assert.assertTrue(planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+							"Not navigated to Plan details page");
+				}else {
+					validate(zipcodeMSForm, 60);
+					planSelectorResultspage.submitMSform();
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "MS Plan Summary page is not loaded");					
+				}	
+			}
+			else {
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
+			}
 		}
 	}
 
@@ -614,6 +644,16 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String newURL = driver.getCurrentUrl();
 		Assert.assertFalse(curURL.contains(newURL), "Invalid Navigation");
 
+	}
+	
+	public void medigaplink() {
+		waitforResultsPage();
+		Assert.assertTrue(validate(viewMedigapLink), "View Medigap link is not showing");
+		if(validate(viewMedigapLink))
+			viewMedigapLink.click();
+		threadsleep(5000);
+		driver.getCurrentUrl().contains("/plan-summary");
+		Assert.assertTrue(validate(zipcodeMSForm, 60), "Microform is not displaying in MS Summary page");
 	}
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
