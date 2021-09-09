@@ -42,6 +42,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
     And the user validates get direction link
     And the user validates more information content based on plan type
     And the user validates view search PDF link
+    And the user validates Front Matter PDF link
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
