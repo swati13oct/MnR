@@ -461,30 +461,21 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public void selectsProviderFromGlobaHeader() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
-		// CommonUtility.waitForPageLoadNew(driver, People, 30);
-		scrollToView(People);
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		jsClickNew(People);
-		// People.click();
 
-		// CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-		scrollToView(Primary);
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		jsClickNew(Primary);
-		// Primary.click();
 
-		// CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-		scrollToView(AllPrimaryCare);
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
 		jsClickNew(AllPrimaryCare);
-		// Physician.click();
 
-		// CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
-		scrollToView(PrimaryCarePhysician);
+		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		jsClickNew(PrimaryCarePhysician);
-		// PrimaryCarePhysician.click();
 
-		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
-		scrollToView(selectProviderBtn);
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {

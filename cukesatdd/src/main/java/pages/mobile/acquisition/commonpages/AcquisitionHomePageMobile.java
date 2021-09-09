@@ -4,6 +4,7 @@ package pages.mobile.acquisition.commonpages;
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
 import static acceptancetests.data.CommonConstants.PLANTYPE.*;
 import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -310,8 +311,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='']")
 	private WebElement searchIcon;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
-	private WebElement providerSearchFromHomeScreen;
+	@FindBy(css = "a[title='Find a Provider']")
+	private WebElement providerSearchLinkHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ShopForaplan;
@@ -1917,48 +1918,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
-		MobileMenuToolsToHelp();
+		/*MobileMenuToolsToHelp();
 
 		scrollToView(ProviderSearch);
 		// ProviderSearch.click();
-		switchToNewTabNew(ProviderSearch);
+		switchToNewTabNew(ProviderSearch);*/
 
-		pageloadcomplete();
+		openShopForPlanFromMenu().selectTool(SEARCHDOCTORS);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
 			return new ProviderSearchPageMobile(driver);
-
-		}
-		return null;
-	}
-
-	public pages.mobile.acquisition.commonpages.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
-		MobileMenu();
-		MobileMenuShopTool();
-		validateNew(providerSearchFromHomeScreen);
-
-		switchToNewTabNew(providerSearchFromHomeScreen);
-
-		pageloadcomplete();
-		if (driver.getCurrentUrl().contains("werally")) {
-
-			return new pages.mobile.acquisition.commonpages.ProviderSearchPageMobile(driver);
 
 		}
 		return null;
 	}
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
-		MobileMenuToolsToHelp();
-		validateNew(providerSearchFromHomeScreen);
-
-		switchToNewTabNew(providerSearchFromHomeScreen);
-
-		pageloadcomplete();
+		switchToNewTabNew(providerSearchLinkHomeScreen);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
-
 			return new ProviderSearchPageMobile(driver);
-
 		}
 		return null;
 	}
