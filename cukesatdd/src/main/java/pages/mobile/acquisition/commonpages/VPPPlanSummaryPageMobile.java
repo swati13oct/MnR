@@ -1181,7 +1181,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// if (driver.getCurrentUrl().contains(expectedUrl)) {
 		if (validate(backToPlanResults)) {
 			jsClickNew(backToPlanResults);
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		// }
 

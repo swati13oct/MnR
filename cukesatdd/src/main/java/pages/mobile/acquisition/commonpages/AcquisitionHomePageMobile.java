@@ -4361,7 +4361,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validate(zipCodeShopField, 30);
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
-		jsClickNew(ShopdsnpEnrollButton);
+//		jsClickNew(ShopdsnpEnrollButton);
+		jsClickNew(ShopEnrollButton);
 
 		validate(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -4373,7 +4374,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansShopDSNPEnroll(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 		sendkeys(zipCodeShopField, zipcode);
-		jsClickNew(ShopdsnpEnrollButton);
+//		jsClickNew(ShopdsnpEnrollButton);
+		jsClickNew(ShopEnrollButton);
 
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
