@@ -342,7 +342,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-
+		
 		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
 			columnName = columnName.replace(" Zero", "");
 		for(String key : benefitsMap.keySet()) {
@@ -516,6 +516,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 								tmpUIString2 = tmpUIString1;
 								break;
 							}
+					}else {
+						flag = false; 
+						System.out.println("Values did not match for col:8 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
 					}
 				
 			
