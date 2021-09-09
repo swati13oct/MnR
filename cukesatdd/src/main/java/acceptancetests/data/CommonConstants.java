@@ -1038,6 +1038,8 @@ public class CommonConstants {
 	public static final String FED_TFN="fedTfn";
 
 	public static final String MEDSUP_TFN="medsupTfn";
+
+	public static final String TFN="tfn";
 	
 	public static final String FOOTER_LINK = "linkName";
 	
