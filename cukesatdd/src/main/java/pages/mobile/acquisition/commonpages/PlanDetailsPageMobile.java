@@ -1579,10 +1579,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			if (optionalRider)
 				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
-				JavascriptExecutor jse = (JavascriptExecutor) driver;
-				jse.executeScript("arguments[0].click()", dentalPopupLink);
+				jsClickNew(dentalPopupLink);
 			}
 			System.out.println("Plan Name is : " + planName);
+			CommonUtility.waitForPageLoadNew(driver, dentalPopupPlanLabel, 10);
 			Assertion.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),
 					dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
