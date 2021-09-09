@@ -217,7 +217,7 @@ public class PREBenefitsValidationStepDefinition {
 							if(planIndex<0)
 								break;// If No plan in UI then no record in Result excel
 
-							benefitsMapPRE = preBenefits.collectInfoPREResultsPage(planName, planIndex, planYear,
+							benefitsMapPRE = preBenefits.collectInfoPREResultsPage(zipcode, planName, planIndex, planYear,
 									sheetName, rowIndex);
 						}
 
