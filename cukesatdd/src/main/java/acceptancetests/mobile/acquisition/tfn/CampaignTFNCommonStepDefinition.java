@@ -74,6 +74,8 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
 	}
+	
+	
 
 	@Then("^the user validates PSC code$")
 	public void the_user_validates_PSC_code(DataTable inputAttributes) throws Throwable {
@@ -878,8 +880,11 @@ public class CampaignTFNCommonStepDefinition {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		
 		String TFNXpath = inputAttributesMap.get("TFN Xpath");
-		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		
+		String ExpecetdTFNNo = tfnPage.getTFNFromHomePage();
 //	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		tfnPage.validateFederalTFNNo(TFNXpath, ExpecetdTFNNo);
 	}

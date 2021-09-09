@@ -467,7 +467,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "button[class^='srch-btn']")
 	private WebElement siteSearch_SearchButton;
 
-
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
 	private WebElement enterSearchLable;
 
@@ -517,7 +516,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
+	// @FindBy(xpath = "//span[contains(text(),'Learn more') or
+	// contains(text(),'Learn More About Medicare')]")
 	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
@@ -1017,7 +1017,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				? MRScenario.environment.equals("stage-0") ? 20 : 45
 				: 10;
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 		checkModelPopup(driver, modelPopupTimeout);
 		clickUpdateLaterBrowserButton();
@@ -1931,12 +1931,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
-		/*MobileMenuToolsToHelp();
-
-		scrollToView(ProviderSearch);
-		// ProviderSearch.click();
-		switchToNewTabNew(ProviderSearch);*/
-
+		/*
+		 * MobileMenuToolsToHelp();
+		 * 
+		 * scrollToView(ProviderSearch); // ProviderSearch.click();
+		 * switchToNewTabNew(ProviderSearch);
+		 */
 
 		openShopForPlanFromMenu().selectTool(SEARCHDOCTORS);
 
@@ -1948,8 +1948,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-
-
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 
@@ -2300,6 +2298,48 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		}
 		return null;
+	}
+
+	@FindBy(id = "header-tfn-link")
+	private WebElement tfnHeaderLink;
+
+	@FindBy(xpath = "(//*[contains(@data-bind-class,'hidden') and not(contains(@class,'hidden'))])[1]//a")
+	private WebElement tfnHeaderPopup;
+
+	@FindBy(xpath = "//*[contains(@id,'header-tfn')]//*[contains(@class,'modal-close')]")
+	private WebElement tfnHeaderPopupClose;
+
+	public void validateTfnInHeader() throws InterruptedException {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			System.out.println("This step is not valid for mobile flow.....");
+		} else {
+			CommonUtility.checkPageIsReady(driver);
+			CheckiPerseptions();
+			validateNew(tfnHeaderLink);
+			String ActualCallSAMTFN = tfnHeaderLink.getText().trim();
+			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+			jsClickNew(tfnHeaderLink);
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+			driver.switchTo().activeElement();
+			validate(tfnHeaderPopup);
+			String ExpectedCallSAMTFN = tfnHeaderPopup.getText();
+			System.out.println("TFN No displayed on the Modal" + ExpectedCallSAMTFN);
+			if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+				System.out.println(
+						"****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail(
+						"*****************TFN number was  not found macthing with the SAM call Popup ***************"
+								+ ExpectedCallSAMTFN);
+			}
+
+			validate(tfnHeaderPopupClose);
+			jsClickNew(tfnHeaderPopupClose);
+
+		}
 	}
 
 	public VPPPlanSummaryPageMobile searchPlansNoCounty() {

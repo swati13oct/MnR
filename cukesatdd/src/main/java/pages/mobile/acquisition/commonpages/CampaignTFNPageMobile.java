@@ -258,18 +258,15 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		startNewMobile(url);
 	}
 
-	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
-
+	
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to
-																			// CommonUtility.waitForPageLoadNew as we're
-																			// not trying to fail the test if it isn't
-																			// found
-		try {
-			if (proactiveChatExitBtn.isDisplayed())
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to CommonUtility.waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		try{
+			if(proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
-		} catch (Exception e) {
+		}catch(Exception e){
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}
@@ -371,6 +368,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		 */
 
 	}
+
+
 
 	public void validatePSCcode(String ExpectedpscCode, String actualPscCode) {
 
@@ -924,20 +923,19 @@ public class CampaignTFNPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-		validateNew(ActualTFNelement);
-		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
-
+		validate(ActualTFNelement);	
+	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			//if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+			//System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+		
+		//}
+		
+	//	else {
+		//	Assertion.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 		}
-
-		else {
-			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-		}
-
-	}
+		
+//	}	
 
 	public void validatebackpage() {
 
@@ -1301,6 +1299,16 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	@FindBy(xpath = "(//a[contains(@class, 'tel')])[3]")
+	private WebElement tFNHomePage;
+	
+	public String getTFNFromHomePage() {
+		validateNew(tFNHomePage);
+		String tfnNo = tFNHomePage.getText().trim();
+		System.out.println("TFN on HomePage was ..."+tfnNo);
+		return tfnNo;
+	}
 
 	public VPPPlanSummaryPageMobile searchPlansShopEnrollMedsupp(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
@@ -1336,13 +1344,15 @@ public class CampaignTFNPageMobile extends UhcDriver {
 
 		validateNew(ZipcodePharmacy);
 		CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
-		sendkeys(ZipcodePharmacy, zipcode);
+		//sendkeys(ZipcodePharmacy, zipcode);
+		sendkeysMobile(ZipcodePharmacy, zipcode);
 		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 		jsClickNew(seletPlandropdown);
 		sleepBySec(1);
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		//selectFromDropDownByText(driver, seletPlandropdown, planName);
+		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 		jsClickNew(ContinuePharmacy);
 		try {
