@@ -1,3 +1,4 @@
+
 package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
 						"timeline:target" },
-				tags = "@regressionAARP", dryRun=false)
+				tags = "@regressionAARPmobile", dryRun=false)
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
@@ -25,3 +26,4 @@ public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+

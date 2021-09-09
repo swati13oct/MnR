@@ -152,7 +152,9 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'/health-plans/estimate-drug-costs.html#/drug-cost-estimator')])[3]")
 	private WebElement checkDrugCostsBtn;
 
-	@FindBy(xpath = "//a[@rel='External']")
+	// @FindBy(xpath = "//a[@rel='External']")
+
+	@FindBy(xpath = "(//a[contains(@href,'connect.werally.com/county-plan-selection/uhc.mnr/zip')])[3]")
 	private WebElement findAProviderBtn;
 
 	@FindBy(xpath = "(//a[contains(@href,'/health-plans/aarp-pharmacy.html')])[3]")
@@ -302,8 +304,6 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void validateZipComp(String zipCode) {
-		
-		
 
 		try {
 			int zipCodeNumber = 1;

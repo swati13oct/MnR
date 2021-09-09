@@ -1312,24 +1312,34 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	}
 
-	public void verifyproviderName(String planName) {
+	public void verifyproviderName(String planName, String rallyProviderName) {
 		sleepBySec(5);
-		String rallyProviderName = MRConstants.PROV_NAME;
+//		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]/a"));
-		// ProviderSearchLink.click();
 
-		jsClickNew(ProviderSearchLink);
+		//ProviderSearchLink.click();
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(ProviderSearchLink,"aria-expanded"))){
+			jsClickNew(ProviderSearchLink);
+		}
+
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 
-		String mproviderName = ProviderName.getText().trim().split("\n")[0];
+		String mproviderName = ProviderName.getText().trim().split("\n")[0].replaceAll("\\.", "").replaceAll(",", "");
 
-		mproviderName = mproviderName.replaceAll("\\.", "").replaceAll(",", "");
+//		mproviderName = mproviderName.replaceAll("\\.", "").replaceAll(",", "");
 		rallyProviderName = rallyProviderName.replaceAll("\\.", "").replaceAll(",", "");
 
-		Assertion.assertTrue(mproviderName.contains(rallyProviderName));
+		System.out.println("Rally provider name " + rallyProviderName);
+
+		Arrays.stream(rallyProviderName.split(" ")).forEach(name -> {
+			Assertion.assertTrue("Provider name on plan card does not contains " + name,
+					Arrays.stream(mproviderName.split(" ")).anyMatch(vppProviderName -> vppProviderName.equals(name)));
+		});
+
+//		Assertion.assertTrue(mproviderName.contains(rallyProviderName));
 
 		System.out.println("Verified Hosptial Name matches " + mproviderName);
 	}

@@ -1,3 +1,4 @@
+
 package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
@@ -17,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regressionAARP", dryRun=false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionVisitorProfile extends BaseTestConfig{
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

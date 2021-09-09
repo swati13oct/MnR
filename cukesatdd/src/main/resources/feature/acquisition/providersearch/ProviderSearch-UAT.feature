@@ -12,12 +12,12 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @regressionAARP
+    @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @regressionUHC 
+    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
@@ -71,12 +71,12 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity
+    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @sanity
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
 
-    @ProviderSearchCommon_UHC @prodRegression @ProviderSearchFromGlobalHeaderBlayer @regressionUHC @sanity
+    @ProviderSearchCommon_UHC @prodRegression @ProviderSearchFromGlobalHeaderBlayer @sanity
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |

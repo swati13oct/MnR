@@ -659,8 +659,11 @@ public class WelcomePageMobile extends UhcDriver {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
-		
+
+		scrollToView(TFNNoWidget);
 		String TFNWidget_OLE = TFNNoWidget.getText();
+
+		scrollToView(TFNNoNeedHelp);
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
 			
 		

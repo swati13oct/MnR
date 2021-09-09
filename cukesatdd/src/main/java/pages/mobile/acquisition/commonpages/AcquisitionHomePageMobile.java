@@ -4,6 +4,7 @@ package pages.mobile.acquisition.commonpages;
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
 import static acceptancetests.data.CommonConstants.PLANTYPE.*;
 import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -312,8 +313,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='']")
 	private WebElement searchIcon;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
-	private WebElement providerSearchFromHomeScreen;
+	@FindBy(css = "a[title='Find a Provider']")
+	private WebElement providerSearchLinkHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ShopForaplan;
@@ -466,13 +467,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "button[class^='srch-btn']")
 	private WebElement siteSearch_SearchButton;
 
-	/*
-	 * @FindBy(css = "#search-field-2") private WebElement EnterSearch;
-	 * 
-	 * @FindBy(css =
-	 * "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button"
-	 * ) private WebElement SubmitBtn;
-	 */
 
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
 	private WebElement enterSearchLable;
@@ -523,7 +517,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
+	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
+	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -1936,11 +1931,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
-		MobileMenuToolsToHelp();
+		/*MobileMenuToolsToHelp();
 
 		scrollToView(ProviderSearch);
 		// ProviderSearch.click();
-		switchToNewTabNew(ProviderSearch);
+		switchToNewTabNew(ProviderSearch);*/
+
+
+		openShopForPlanFromMenu().selectTool(SEARCHDOCTORS);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1951,33 +1949,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public pages.mobile.acquisition.commonpages.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
-		MobileMenu();
-		MobileMenuShopTool();
-		validateNew(providerSearchFromHomeScreen);
 
-		switchToNewTabNew(providerSearchFromHomeScreen);
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("werally")) {
-
-			return new pages.mobile.acquisition.commonpages.ProviderSearchPageMobile(driver);
-
-		}
-		return null;
-	}
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
-		MobileMenuToolsToHelp();
-		validateNew(providerSearchFromHomeScreen);
 
-		switchToNewTabNew(providerSearchFromHomeScreen);
+		switchToNewTabNew(providerSearchLinkHomeScreen);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
-
 			return new ProviderSearchPageMobile(driver);
-
 		}
 		return null;
 	}
@@ -4125,7 +4105,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("/compare/compare-ms.html")
 				|| driver.getCurrentUrl().contains("/enroll/ms-apply.html")
 				|| driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
-			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
+			String ExpectedCallSamTFNtimezone = "7 a.m. � 11 p.m. ET, Monday-Friday\n9 a.m. � 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -4153,7 +4133,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 								+ ActualCallSamTFNMember);
 			}
 		} else {
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m., 7 days a week.*\\n*Alaska and Hawaii: 8 a.m. Â- 8 p.m. Monday � Friday, 8 a.m. Â- 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -4404,7 +4384,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validate(zipCodeShopField, 30);
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
-		jsClickNew(ShopdsnpEnrollButton);
+//		jsClickNew(ShopdsnpEnrollButton);
+		jsClickNew(ShopEnrollButton);
 
 		validate(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -4416,7 +4397,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansShopDSNPEnroll(String zipcode, String countyName) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 		sendkeys(zipCodeShopField, zipcode);
-		jsClickNew(ShopdsnpEnrollButton);
+//		jsClickNew(ShopdsnpEnrollButton);
+		jsClickNew(ShopEnrollButton);
 
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));

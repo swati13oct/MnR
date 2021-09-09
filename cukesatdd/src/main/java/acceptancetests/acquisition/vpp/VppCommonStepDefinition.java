@@ -126,8 +126,8 @@ private Scenario scenario;
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-
+	//	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");

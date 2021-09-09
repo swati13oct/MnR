@@ -23,6 +23,7 @@ import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 
@@ -491,7 +492,7 @@ public class VisitorProfileMobileStepDefinition {
 		/*
 		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
 		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
+		 *
 		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 		 * plannameAttributesRow.get(i).getCells().get(1)); }
 		 */
@@ -499,7 +500,8 @@ public class VisitorProfileMobileStepDefinition {
 
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateProviderinfo(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		visitorProfile.validateProviderinfo(planName, providerFromRally);
 	}
 
 	@And("^the user signs in with optum Id credentials$")
@@ -660,5 +662,15 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.clickAddDrugsBtn();
 	}
-}
 
+	@When("^the user Import Drugs and Doctors$")
+	public void the_user_clicks_on_Import_Drugs_and_Doctors(DataTable data) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(data);
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.importDrugsAndDoctors(givenAttributesMap);
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+}
