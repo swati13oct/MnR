@@ -34,6 +34,7 @@ import pages.acquisition.vpp.AepPlanComparePage;
 import pages.acquisition.vpp.AepPlanDetailsPage;
 import pages.acquisition.vpp.AepVppPlanSummaryPage;
 import pages.acquisition.vpp.VppCommonPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 /**
  * Functionality: VPP flow for Acquisition
@@ -665,9 +666,10 @@ public class VppPlanValidationStepDefinition {
 
 			try {
 			     AepVppPlanSummaryPage planSummaryPage = null;
+			     AcquisitionHomePage aquisitionhomepage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
-				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, planTypeCellNum = 0, highOptionDentalCellNum = 0, dentalPlatinumCellNum = 0, monthlyPremiumCellNum = 0;
+				 int counter=0,countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, planTypeCellNum = 0, highOptionDentalCellNum = 0, dentalPlatinumCellNum = 0, monthlyPremiumCellNum = 0;
 				 HashMap<String, String> premiumMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
@@ -726,6 +728,11 @@ public class VppPlanValidationStepDefinition {
 									 System.out.println("Excel VALUE for dental Platinum  :"+dentalPlatinum);
 
 									System.out.println("Validating " + sheetName + " Plan " + rowIndex + " ************************************************************");
+
+									 if(counter==0) {
+										 aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, siteType);
+										 counter++;
+									 }
 									new VppCommonPage(wd, siteType, currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
 									if (planType.equalsIgnoreCase("PDP")) {
@@ -752,8 +759,8 @@ public class VppPlanValidationStepDefinition {
 											currentColName.equalsIgnoreCase("plan type") ||
 											currentColName.equalsIgnoreCase("county") ||
 											currentColName.equalsIgnoreCase("Link parameters") ||
-											currentColName.equalsIgnoreCase("product") 
-											//currentColName.equalsIgnoreCase("Fips")
+											currentColName.equalsIgnoreCase("product")  ||
+											currentColName.equalsIgnoreCase("Fips")
 									)) {
                                         resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
 
