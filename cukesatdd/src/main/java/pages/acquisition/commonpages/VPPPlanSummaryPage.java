@@ -1040,7 +1040,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement findPlansOnShopForPlans;
 
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
