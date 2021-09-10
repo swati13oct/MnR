@@ -3734,7 +3734,7 @@ private Scenario scenario;
 																				// excel and appends it with the
 																				// environment URL and navigates to plan
 																				// details page
-							planDetailsPage = new PlanDetailsPage(wd);
+							planDetailsPage = new PlanDetailsPage("skip",wd);
 						}
 
 						// based on the column headers, determines the equivalent name of the pdf in the
