@@ -56,6 +56,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
+	@FindBy(css = "div[class*='hangingBoxMobile'] a[class^='tel tfn'] > u[class^='invoca']")
+	private WebElement telTFNLink;
+
 	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
 	private WebElement UHCICSubTitle;
 
@@ -5170,5 +5173,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			Assert.fail("Email Button is not working fine" + "\nExpected: " + pageTitle + "\nWhole HREF: " + href);
 		}
+	}
+
+	public String getTFNNumberFromLink(){
+		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
+		return telTFNLink.getText().trim();
 	}
 }

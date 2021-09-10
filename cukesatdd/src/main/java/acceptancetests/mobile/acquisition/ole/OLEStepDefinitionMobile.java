@@ -385,8 +385,8 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
 		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
@@ -3317,7 +3317,8 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
 		welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
 		System.out.println("Widgets are displayed on welcome Pages");
 		}
@@ -3327,8 +3328,9 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
 	System.out.println("Widgets are displayed on welcome Pages");
 	}
 	
