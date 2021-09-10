@@ -339,7 +339,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 	}
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
-		boolean flag = true; int counter =0;
+		boolean flag = false; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		
@@ -399,6 +399,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			//if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
 			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A"))) {
 				counter++;
+				flag = true;
 				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
 					if(key.contains(columnName)) { 
@@ -414,7 +415,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag= false;
 						tmpUIString2 = tmpUIString1;
 						 break;
-					}
+				}
 			
 			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					
@@ -516,11 +517,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 								tmpUIString2 = tmpUIString1;
 								break;
 							}
-					}else {
-						flag = false; 
-						System.out.println("Values did not match for col:8 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-						tmpUIString2 = tmpUIString1;
-						break;
 					}
 				
 			
