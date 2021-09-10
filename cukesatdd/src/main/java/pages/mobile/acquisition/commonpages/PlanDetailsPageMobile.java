@@ -111,7 +111,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	private WebElement prescriptiondrugTab;
 
 	// Right Rail Element - TFN
-	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(1) a[dtmname='Plans Detail:Tab:Enroll in Plan']")

@@ -53,6 +53,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded-1')]")
 	private WebElement zipCodeShopField;
 
 	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
@@ -73,9 +74,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopEnrollButton;
 
-	// @FindBy(xpath =
+	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
-	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopdsnpEnrollButton;
 
 	// @FindBy(xpath = "(//button[contains(@class,'zip-button')])")
@@ -1176,6 +1177,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public String getTestSiteUrl() {
+		if (null == testSiteUrl){
+			testSiteUrl = driver.getCurrentUrl().split(".com/")[0];
+			System.out.println("Test Site URL from current URL : "+testSiteUrl);
+			testSiteUrl = testSiteUrl+".com";
+			System.out.println("Test Site URL from current URL after appending <.com>: "+testSiteUrl);
+		}
 		return testSiteUrl;
 	}
 
