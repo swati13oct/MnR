@@ -71,9 +71,7 @@ import pages.acquisition.commonpages.FlagsmithLoginPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 /**
- * 
  * @author schak38
- *
  */
 
 @Component
@@ -309,29 +307,29 @@ public class MRScenario {
 
 		sauceLabsMobileTunnelIdentifier = (null == System
 				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER)
-						? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
-						: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
+				? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
+				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
 
 		appiumVersion = mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: (null == props ? System.getProperty(CommonConstants.APPIUM_VERSION)
-						: props.get(CommonConstants.APPIUM_VERSION));
-		
+				: props.get(CommonConstants.APPIUM_VERSION));
+
 		flagSmith = null != System.getProperty(CommonConstants.FLAGSMITH)
 				? Boolean.parseBoolean(System.getProperty(CommonConstants.FLAGSMITH))
 				: null != props ? Boolean.parseBoolean(props.get(CommonConstants.FLAGSMITH)) : false;
 		System.out.println("Flagsmith flag is " + flagSmith);
-		
+
 		flagSmithUser = null != System.getProperty(CommonConstants.FLAGSMITH_USER)
 				? System.getProperty(CommonConstants.FLAGSMITH_USER)
 				: null != props ? props.get(CommonConstants.FLAGSMITH_USER) : "";
 		System.out.println("Flagsmith user is " + flagSmithUser);
-		
+
 		//If planYear is empty or null, it will be set in openApplicationURL
 		planYear = null != System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				? System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				: null != props ? props.get(VPPCommonConstants.PLAN_YEAR) : "";
-		
+
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
 		 * CommonConstants.APPIUM_DEFAULT_VERSION :
@@ -486,17 +484,13 @@ public class MRScenario {
 
 		if (null != user && expectedDataMapBluelayer.containsKey(user)) {
 			return expectedDataMapBluelayer.get(user);
-		}
-
-		else {
+		} else {
 			System.out.println("Expected data not set for : " + user);
 			return null;
 		}
 	}
 
-	public void DriverQuit()
-
-	{
+	public void DriverQuit() {
 		// webDriver.quit();
 	}
 
@@ -758,7 +752,7 @@ public class MRScenario {
 	 * System.out.println("JobURL ---" + JobURL);
 	 * JobURL.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
 	 * System.out.println("JobURL ---" + returnJobURL()); }
-	 * 
+	 *
 	 * public void getVDJobURL(String jobID) { String digest = hmacDigest(jobID,
 	 * USERNAME + ":" + ACCESS_KEY, "HmacMD5"); // JobURLVD =
 	 * "https://saucelabs.com/tests/" + jobID + "?auth=" + digest; //
@@ -794,7 +788,7 @@ public class MRScenario {
 
 	/**
 	 * @author Murali - mmurugas This method will invoke the Appium driver for
-	 *         Mobile automation
+	 * Mobile automation
 	 */
 	public AppiumDriver getMobileDriver() {
 		if (props == null) {
@@ -923,28 +917,26 @@ public class MRScenario {
 	public static Map<String, String> getProps() {
 		return props;
 	}
-	
+
+	private String getFlagsmithApplicationUrl(String site) {
+		switch (MRScenario.environment.toLowerCase()) {
+			case "stage-0":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_STAGE0_AARP_URL : MRConstants.FLAGSMITH_STAGE0_UHC_URL;
+			case "offline":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_OFFLINE_PROD_AARP_URL : MRConstants.FLAGSMITH_OFFLINE_PROD_UHC_URL;
+			case "prod":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_PROD_AARP_URL : MRConstants.FLAGSMITH_PROD_UHC_URL;
+			default:
+				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		}
+	}
+
 	private FlagsmithLoginPage openFlagSmithLoginPage(WebDriver driver, String site) {
-		String flagSmithURL = site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		String flagSmithURL = getFlagsmithApplicationUrl(site);
 		driver.get(flagSmithURL);
 		return new FlagsmithLoginPage(driver);
 	}
-	
-	public Object openApplicationURL(WebDriver driver, String site) {
-		
-		if(StringUtils.isEmpty(planYear)) {
-			planYear = getPlanYear(site);
-		}
-		System.out.println("Plan Year selected " + planYear);
-		
-		if(flagSmith) {
-			FlagsmithLoginPage flagsmithLoginPage = openFlagSmithLoginPage(driver, site);
-			return flagsmithLoginPage.startFlagSmithUserTest(flagSmithUser);
-		} else {
-			String driverType = driver.getClass().toString().toUpperCase();
-			return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver, site) : new AcquisitionHomePage(driver, site);
-		}
-	}
+
 
 	public String getSystemDateForAEP(String systemDateUrl) {
 		String systemDate = null;
@@ -971,24 +963,56 @@ public class MRScenario {
 
 		return systemDate;
 	}
-	
+
+	private String getSystemAPIUrl(String site) {
+		switch (MRScenario.environment.toLowerCase()) {
+			case "stage-0":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.STAGE0_AARP_SYSTEM_DATE_URL : MRConstants.STAGE0_UHC_SYSTEM_DATE_URL;
+			case "offline":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.OFFLINE_PROD_AARP_SYSTEM_DATE_URL : MRConstants.OFFLINE_PROD_UHC_SYSTEM_DATE_URL;
+			case "prod":
+				return site.equalsIgnoreCase("AARP") ? MRConstants.PROD_AARP_SYSTEM_DATE_URL : MRConstants.PROD_UHC_SYSTEM_DATE_URL;
+			default:
+				return site.equalsIgnoreCase("AARP") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.UHC_SYSTEM_DATE_URL;
+		}
+	}
+
+
 	private String getPlanYear(String site) {
 		String planYear;
-		
-		String systemDateUrl = site.equalsIgnoreCase("AARP") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.UHC_SYSTEM_DATE_URL;
+
+		String systemDateUrl = getSystemAPIUrl(site);
 		String systemDate = getSystemDateForAEP(systemDateUrl);
 		String systemYear = systemDate.substring(systemDate.lastIndexOf("/"));
-		
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-				
+
 		LocalDate currentSystemDate = LocalDate.parse(systemDate, formatter);
 		LocalDate JAN_1 = LocalDate.parse(MRConstants.SERVER_DATE_JAN_1 + systemYear, formatter);
 		LocalDate SEP_30 = LocalDate.parse(MRConstants.SERVER_DATE_SEP_30 + systemYear, formatter);
 		LocalDate OCT_15 = LocalDate.parse(MRConstants.SERVER_DATE_OCT_15 + systemYear, formatter);
-		
+
 		planYear = currentSystemDate.isBefore(OCT_15) ? "current" : "next";
 		AEP = currentSystemDate.isAfter(SEP_30) || currentSystemDate.isBefore(JAN_1) ? true : false;
 //		saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 		return planYear;
 	}
+
+	public Object openApplicationURL(WebDriver driver, String site) {
+
+		//Commenting for now
+		/*if (StringUtils.isEmpty(planYear)) {
+			planYear = getPlanYear(site);
+		}
+		System.out.println("Plan Year selected " + planYear);*/
+
+		if (flagSmith) {
+			FlagsmithLoginPage flagsmithLoginPage = openFlagSmithLoginPage(driver, site);
+			return flagsmithLoginPage.startFlagSmithUserTest(flagSmithUser);
+		} else {
+			String driverType = driver.getClass().toString().toUpperCase();
+			return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver, site) : new AcquisitionHomePage(driver, site);
+		}
+	}
+
 }

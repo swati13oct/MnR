@@ -494,7 +494,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @param planName
 	 * @return
 	 */
-	public void validateProviderinfo(String planName) {
+	public void validateProviderinfo(String planName, String rallyProviderName) {
 		try {
 			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'plan-card')]//button[contains(@dtmname,'Doctors & Dentists')]"));
@@ -506,9 +506,19 @@ public class VisitorProfilePageMobile extends UhcDriver {
 					.collect(Collectors.toList());
 			System.out.println(mproviderinfo);
 
-			String rallyProviderName = MRConstants.PROV_NAME;
-			rallyProviderName = rallyProviderName.replaceAll("\\.", "").replaceAll(",", "");
-			Assertion.assertTrue(mproviderinfo.contains(rallyProviderName));
+			String RallyProviderName  = rallyProviderName.replaceAll("\\.", "").replaceAll(",", "");
+
+			System.out.println("Rally provider name " + RallyProviderName);
+
+//			String finalRallyProviderName = rallyProviderName;
+			mproviderinfo.stream().forEach(addedProvider -> {
+				System.out.println("Validating provider " + addedProvider);
+				Arrays.stream(addedProvider.split(" ")).forEach(providerName -> {
+					Assertion.assertTrue("Provider name on plan card does not contain " + providerName, 
+							Arrays.stream(RallyProviderName.split(" ")).anyMatch(rallyProvider -> rallyProvider.equals(providerName)));
+				});
+			});
+//			Assertion.assertTrue(mproviderinfo.contains(rallyProviderName));
 
 			jsClickNew(addedProvidersModalCloseButton);
 		} catch (Exception e) {
@@ -1068,3 +1078,4 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 }
+

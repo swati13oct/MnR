@@ -41,7 +41,8 @@ public class PlanPremiumPage extends UhcDriver{
 
 	//Page Header
 //	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
-	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
+//	@FindBy(xpath = "(//*[contains(@class, 'formset') or contains(@class,'form-row')]//*[contains(@class, 'ng-star-inserted')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 	
 	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
@@ -205,11 +206,11 @@ public class PlanPremiumPage extends UhcDriver{
 			System.out.println("Pay By Mail radio button is diplayed or not" +payByMail.isDisplayed());
 			jsClickNew(payByMail);
 			Thread.sleep(1000);
-			actualText = payByMailText.getText().replaceAll("\u00A0"," ").trim();
-			System.out.println("Actual text for pay by mail is " +actualText);			
+			actualText = payByMailText.getText();
+			System.out.println("Actual text for pay by mail  is : " +actualText);			
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
-			System.out.println("expected text for pay by mail is " +expectedText);
-			flag = actualText.contains(expectedText);
+			System.out.println("expected text for pay by mail is: " +expectedText);
+			flag = expectedText.contains(actualText);
 			
 		}
 			

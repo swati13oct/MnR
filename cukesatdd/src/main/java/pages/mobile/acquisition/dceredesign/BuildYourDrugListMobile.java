@@ -293,13 +293,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
 		
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (addDrugButton.isDisplayed()) {
 			jsClickNew(addDrugButton);
 		}
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 
@@ -314,6 +314,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		WebElement selectDrug = (WebElement) searchedDrugList.stream()
 				.filter(listedDrug -> listedDrug.getText().contains(drugName))
 				.map(listedDrug -> listedDrug.findElement(By.xpath("./following-sibling::button"))).findFirst().get();
+
 		/*
 		 * WebElement SelectDrug = driver
 		 * .findElement(By.xpath("//p[normalize-space()='" + drugName
@@ -321,7 +322,6 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 */
 
 		jsClickNew(selectDrug);
-		pageloadcomplete();
 
 		threadsleep(2000);
 		// waitForPageLoadSafari();
@@ -366,6 +366,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement DrugListModal_Message;
 
 	public void SearchValidate_DrugCountError(String drugName) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
+
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
