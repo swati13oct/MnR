@@ -1195,8 +1195,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	
 	public void plansLoader() {
 		pageloadcomplete();
-		validate(planLoaderscreen, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		if(validate(planLoaderscreen, 60))
+			waitforElementInvisibilityInTime(planLoaderscreen,60);
 		threadsleep(5000);// Plan loader
 	}
 	
@@ -1596,8 +1596,6 @@ public void validateSNPPlanName() {
 	verifyPlanNameinOLE();
 	browserBack();
 	plansLoader();
-	browserBack();
-	plansLoader();
 }
 
 public void verifyPlanNameinOLE() {
@@ -1725,6 +1723,13 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
+}
+
+public void useraddDrugsPREResult() {
+	threadsleep(10000);
+	System.out.println("Adding drugs from PRE Result page");
+	plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")).click();
+	threadsleep(3000);
 }
 
 public void userPreDCE() {

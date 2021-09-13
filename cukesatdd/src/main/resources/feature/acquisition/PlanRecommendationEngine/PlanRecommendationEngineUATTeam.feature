@@ -60,6 +60,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
+    Then user selects add drug option without drugs in Drug page
+      | Drug Selection | <Drug Selection> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -70,24 +72,22 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate elements in loading results page
     Then user validate SNP Plan in Enroll page
       | Plan Info | <PlanInfo> |
-    When user adds Drugs in vpp summary page
-      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    Then user validate drugs details from DCE to PRE page
-    Then user clicks on GetStarted button in PRE page
-    And verify continue function on "Location" page
-    And user selects plan type in coverage options page
-      | Plan Type | <isCoverageOpt1> |
-    And user verifies exisitng PRE drug session using startnow
+    When user navigate to Drug page to add drugs from PREResult page
+    Then user selects add drug option in drug page from edit response page
+      | Drug Selection | <E_Drug Selection>                                                               |
+      | Drug Details   | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user return to vpp page using "update" from edit response page
+    Then user validate UI and API recommendation rankings in results page
 
-    @uatE2EAARP @FinalRun
+    @uatE2EAARP @FinalRun123
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            |
-      | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | Drug Selection |
+      | AARP |   53202 | NO            | Milwaukee | MAPD          | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                  | PDP            | LP (HMO D-SNP),Link | Yes            |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            |
-      | UHC  |   53202 | NO            | Milwaukee | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | Drug Selection |
+      | UHC  |   53202 | NO            | Milwaukee | MAPD          | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                  | PDP            | LP (HMO D-SNP),Link | Yes            |
 
   @PRE @PRE_UAT_ExternalLink_PRE_Enroll_Scenario-2
   Scenario Outline: <site>  - To validate drug and doctors in Visitor profile
@@ -178,6 +178,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate elements in loading results page
     And user views learn more from results page
       | Learn More | <learnMore> |
+    Then user do browser back from current page
     And user views plan details from results page
       | Plan Info | <PlanInfo> |
     Then user do browser back from current page
@@ -255,13 +256,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP @FinalRun
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | DoctorsName          | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | PlanYear | DrugInfo                         | DrugInfo1                                          | doctorsInfo                                    | UserType | userName | password |
-      | AARP |   65656 | YES           | Christian | None          | None         | Higgins, Mina K, FNP | Multi         | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Drug Cost , Dental | current  | Choice (PPO),Lipotriad TAB,False | Plan 1 (HMO-POS),atorvastatin calcium TAB 40MG,N/A | Plan 2 (Regional PPO),Higgins, Mina K, FNP,N/A | Guest    | [blank]  | [blank]  |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | PlanYear | DrugInfo                         | DrugInfo1                                          | doctorsInfo                                    | UserType | userName | password |
+      | AARP |   65656 | YES           | Christian | None          | None         | Higgins, Mina K, NP | Multi         | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Drug Cost , Dental | current  | Choice (PPO),Lipotriad TAB,False | Plan 1 (HMO-POS),atorvastatin calcium TAB 40MG,N/A | Plan 2 (Regional PPO),Higgins, Mina K, FNP,N/A | Guest    | [blank]  | [blank]  |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | DoctorsName          | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | PlanYear | DrugInfo                         | DrugInfo1                                          | doctorsInfo                                    | UserType | userName | password |
-      | UHC  |   65656 | YES           | Christian | None          | None         | Higgins, Mina K, FNP | Multi         | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Drug Cost , Dental | current  | Choice (PPO),Lipotriad TAB,False | Plan 1 (HMO-POS),atorvastatin calcium TAB 40MG,N/A | Plan 2 (Regional PPO),Higgins, Mina K, FNP,N/A | Guest    | [blank]  | [blank]  |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | PlanYear | DrugInfo                         | DrugInfo1                                          | doctorsInfo                                    | UserType | userName | password |
+      | UHC  |   65656 | YES           | Christian | None          | None         | Higgins, Mina K, NP | Multi         | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Drug Cost , Dental | current  | Choice (PPO),Lipotriad TAB,False | Plan 1 (HMO-POS),atorvastatin calcium TAB 40MG,N/A | Plan 2 (Regional PPO),Higgins, Mina K, FNP,N/A | Guest    | [blank]  | [blank]  |
 
   @PRE @PRE_UAT_DCE_VPP_Scenario-4_Updated @F550383
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs in VPP page when MA flow complete in PRE and Add drugs in DCE
@@ -300,13 +301,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP @FinalRun
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds             | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds |
-      | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid,chronic,nursing | UHGNetwork | [blank]     | [blank]       | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds             | doctors | DoctorsName                                    | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds |
+      | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid,chronic,nursing | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds             | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds |
-      | UHC  |   53202 | NO            | Milwaukee | MA            | Medicaid,chronic,nursing | UHGNetwork | [blank]     | [blank]       | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds             | doctors | DoctorsName                                    | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds |
+      | UHC  |   53202 | NO            | Milwaukee | MA            | Medicaid,chronic,nursing | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |
 
   @PRE @PRE_UAT_E2E_Scenario-6
   Scenario Outline: - To validate user MS 1st Recommendation and View Plan will take to MicroForm for Non Approved states

@@ -821,6 +821,12 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@When("^user navigate to Drug page to add drugs from PREResult page$")
+   	public void add_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.useraddDrugsPREResult();
+   	}
+	
 	@Then("^user navigate from VPP to DCE tool$")
    	public void vpp_pre() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
