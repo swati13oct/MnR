@@ -1,7 +1,7 @@
 @planRecommendationEngine
 Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
-  @PRE @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139 
+  @PRE @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139
   Scenario Outline: <Zipcode> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <PlanYear>  - To validate drug and doctors in Visitor profile
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -33,7 +33,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Plan Info | <PlanInfo> |
     Then user Validate Drug and Provider details in Visitor profile page
 
-    @uatE2EAARP @FinalRun
+    @uatE2EAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
       | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
@@ -176,16 +176,14 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     Then user validate elements in loading results page
-#    Then user validate UI and API recommendation rankings in results page
-		Then user save recommendation results and validate in VP
-    And user views plan details from results page
-      | Plan Info | <planInfo> |
     And user views learn more from results page
       | Learn More | <learnMore> |
+    And user views plan details from results page
+      | Plan Info | <PlanInfo> |
+    Then user do browser back from current page
     And user clicks on Medigap Plans Link in PRE Result page
-    
-    
-    # Then user validate MA Plan Names in VPP Summary VS Details in results page
+
+    #Then user validate MA Plan Names in VPP Summary VS Details in results page
     #  | Plan Info | <PlanInfo> |
     #    Then user validate email plan list from vpp
     #      | Recommendation | <primaryRecommendation> |
@@ -197,17 +195,17 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     #| CountyDropDown  | <E_county>        |
     #| SNP Options     | <E_specialNeeds>  |
     #Then user return to vpp page using "update" from edit response page
-    
-
+    #    Then user validate UI and API recommendation rankings in results page
+    #Then user save recommendation results and validate in VP
     @uatE2EAARP @FinalRun
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | PlanYear | primaryRecommendation | Email                  | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds           | PlanInfo         |learnMore|
-      | AARP |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Dental, Doctors | current  | MA                    | julia_dowden@optum.com |     10003 | NO              | New York | MAPD            | Medicaid,chronic,nursing | Prime (HMO),Link |Supplement|
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo         | learnMore  |
+      | AARP |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Prime (HMO),Link | Supplement |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | PlanYear | primaryRecommendation | Email                  | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds           | PlanInfo         |
-      | UHC  |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Dental, Doctors | current  | MA                    | julia_dowden@optum.com |     10003 | NO              | New York | MAPD            | Medicaid,chronic,nursing | Prime (HMO),Link |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo         | learnMore  |
+      | UHC  |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Prime (HMO),Link | Supplement |
 
   @PRE @PRE_UAT_Provider_Drugs_StartNow_MAPD_PlanCompare_Scenario-5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans
@@ -341,7 +339,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     And user views plan details from results page
       | Plan Info | <planInfo> |
 
-    @uatE2EAARP @FinalRun
+    @uatE2EAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                     | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                 | planInfo          |
       | AARP |   19901 | NO            | Kent County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,20,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 50MG ER,,20,Week,3,NO,NO | Yes,Yes,Yes,Yes               | Higher               | 1st            | Health Care Premium , None | Plan G,ViewButton |

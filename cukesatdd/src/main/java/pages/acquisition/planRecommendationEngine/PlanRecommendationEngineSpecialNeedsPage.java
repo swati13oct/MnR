@@ -265,15 +265,18 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 			validate(snpMedicaid, 30);
 			jsClickNew(snpMedicaid);
 			threadsleep(2000);
-		}else if(validate(checkedSNPCSNPOption, 20)){
+		}
+		if(validate(checkedSNPCSNPOption, 20)){
 			validate(snpConditions, 30);
 			jsClickNew(snpConditions);
 			threadsleep(2000);
-		}else if(validate(checkedSNPISNPOption, 20)) {
+		}
+		if(validate(checkedSNPISNPOption, 20)) {
 			validate(snpNursinghome, 30);
 			jsClickNew(snpNursinghome);
 			threadsleep(2000);
-		}else if(validate(checkedSNPNoneOption, 20)) {
+		}
+		if(validate(checkedSNPNoneOption, 20)) {
 			validate(snpNone, 30);
 			jsClickNew(snpNone);
 			threadsleep(2000);

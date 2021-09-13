@@ -1608,10 +1608,10 @@ public void verifyPlanNameinOLE() {
 	enrollBtnPlanDetails.click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
-	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
-	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");
+	Assert.assertTrue(driver.getCurrentUrl().contains("/welcome"), "OLE page not loaded");
 	planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
+	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");
 }
 
 
