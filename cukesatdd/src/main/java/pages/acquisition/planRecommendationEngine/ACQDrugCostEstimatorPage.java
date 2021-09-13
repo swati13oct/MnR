@@ -144,7 +144,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		boolean threeeMonthfrequency = false;
 		boolean GenericDrug = false;
 		boolean switchGeneric = false;
-
+		jsClickNew(drugAddBtn);
+		threadsleep(2000);
 		String[] drugslist = drugsDetails.split(":");
 		for (int i = 0; i < drugslist.length; i++) {
 			String drugInfo = drugslist[i];
@@ -162,8 +163,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 					GenericDrug = true;
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
-				threadsleep(2000);
-				jsClickNew(drugAddBtn);
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);

@@ -1,7 +1,7 @@
 @planRecommendationEngine
 Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
-  @PRE @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139
+  @PRE @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139 
   Scenario Outline: <Zipcode> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <PlanYear>  - To validate drug and doctors in Visitor profile
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -33,7 +33,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Plan Info | <PlanInfo> |
     Then user Validate Drug and Provider details in Visitor profile page
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
       | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
@@ -79,7 +79,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Plan Type | <isCoverageOpt1> |
     And user verifies exisitng PRE drug session using startnow
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            |
       | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link |
@@ -199,7 +199,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     #Then user return to vpp page using "update" from edit response page
     
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | PlanYear | primaryRecommendation | Email                  | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds           | PlanInfo         |learnMore|
       | AARP |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Joseph, Jonathan Keith, MD:Fuhrer, Elliott, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Dental, Doctors | current  | MA                    | julia_dowden@optum.com |     10003 | NO              | New York | MAPD            | Medicaid,chronic,nursing | Prime (HMO),Link |Supplement|
@@ -255,7 +255,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | User Name | <userName>      |
       | Password  | <password>      |
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | DoctorsName          | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | PlanYear | DrugInfo                         | DrugInfo1                                          | doctorsInfo                                    | UserType | userName | password |
       | AARP |   65656 | YES           | Christian | None          | None         | Higgins, Mina K, FNP | Multi         | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Drug Cost , Dental | current  | Choice (PPO),Lipotriad TAB,False | Plan 1 (HMO-POS),atorvastatin calcium TAB 40MG,N/A | Plan 2 (Regional PPO),Higgins, Mina K, FNP,N/A | Guest    | [blank]  | [blank]  |
@@ -300,7 +300,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds             | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds |
       | AARP |   53202 | NO            | Milwaukee | MA            | Medicaid,chronic,nursing | UHGNetwork | [blank]     | [blank]       | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |
@@ -341,7 +341,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     And user views plan details from results page
       | Plan Info | <planInfo> |
 
-    @uatE2EAARP
+    @uatE2EAARP @FinalRun
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                     | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                 | planInfo          |
       | AARP |   19901 | NO            | Kent County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,20,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 50MG ER,,20,Week,3,NO,NO | Yes,Yes,Yes,Yes               | Higher               | 1st            | Health Care Premium , None | Plan G,ViewButton |

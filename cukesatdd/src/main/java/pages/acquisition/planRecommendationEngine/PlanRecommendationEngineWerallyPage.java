@@ -132,13 +132,13 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 		for (String s : searchParameterList) {
 			searchParameter = s;
-			if(validate(warningMsg, 20)) {
+		/*	if(validate(warningMsg, 20)) {
 				jsClickNew(warningMsg);
 //				driver.navigate().refresh();
 				threadsleep(5000);
 				jsClickNew(findCarebutton);
 				threadsleep(2000);
-			}
+			}*/
 			validate(searchBox, 30);
 			if (type.toUpperCase().contains("DOCTORS")) {
 				if(!validate(searchBox, 30)) {
