@@ -411,8 +411,8 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	String memberSignINOFFLINEURL = inputAttributesMap.get("Member Signin URL Offline");
 /*	if (!(MRScenario.environment.equalsIgnoreCase("offline")
 			|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage"))) {*/
-	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
-	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	//AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
 		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
