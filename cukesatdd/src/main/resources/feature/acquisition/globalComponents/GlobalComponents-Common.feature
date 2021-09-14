@@ -11,6 +11,7 @@ Feature: 1.12 ACQ - Global Components Validation
     And user clicks on View all disclaimer information link on the home page
     And user verifies visit aarp.org link on home page
     And user clicks on Aboutus link from footer of the Medicare Plans home page
+    And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And user clicks on sitemap link on contactus page
     And user clicks on privacypolicy link on sitemap page
