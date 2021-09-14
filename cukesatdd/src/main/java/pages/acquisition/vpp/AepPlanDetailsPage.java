@@ -367,7 +367,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			else if(key.endsWith("2"))
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			else if(key.contains("fitness")||key.contains("monthly premium")) {
-				key = key.replace("\n", "").replaceAll("footnote", "");
+				key = key.replace("\n", "").replaceAll("footnote", "").replaceAll("footnote1", "");
 			}
 			
 			//removing all the footnote words from the UI string and the superscripts
