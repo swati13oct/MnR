@@ -331,6 +331,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//select[@id='state-select']")
 	private WebElement stateDropDown;
 
+	@FindBy(xpath = "//*[@id='mobile-nav']/div[1]/div/div[1]/div[1]/button[2]")
+	public WebElement mobileMenuOpenCheck;
+
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
 
@@ -370,6 +373,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// String CallSam= "Call a Licensed Insurance Agent";
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
+	String CallSam1844 = "1-844";
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
@@ -519,9 +523,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	// @FindBy(xpath = "//span[contains(text(),'Learn more') or
-	// contains(text(),'Learn More About Medicare')]")
-	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+	// @FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn
+	// More About Medicare')]")
+	@FindBy(css = "#globalContentIdForSkipLink > div > div > div:nth-child(5) > div > div > div > div > div > div > div > div > div.layout-container.aem-GridColumn.aem-GridColumn--default--12 > div > div > div > div.layout-container.aem-GridColumn--tablet--11.aem-GridColumn--default--none.aem-GridColumn--phone--none.aem-GridColumn--phone--11.aem-GridColumn--tablet--none.aem-GridColumn.aem-GridColumn--default--6.aem-GridColumn--offset--phone--0.aem-GridColumn--offset--default--1.aem-GridColumn--offset--tablet--1 > div > div > div > div > div > div > div > div.layout-container.aem-GridColumn.aem-GridColumn--default--12 > div > div > div > div > div > div > div > a")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -2208,13 +2212,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		if (toolTipText.contains(CallSam1877)) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
-
 		} else if (toolTipText.contains(CallSam1855)) {
+			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
+		} else if (toolTipText.contains(CallSam1844)) {
 			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
 		}
 
 		else
-			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
+			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-844");
 
 	}
 
@@ -3820,8 +3825,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	@FindBy(xpath = "//div[@data-rel='#plan-list-1']" )
+	private WebElement maPlansViewLink;
 
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
+		
+		sleepBySec(10);
+		if(maPlansViewLink.isDisplayed()) {
+			jsClickNew(maPlansViewLink);
+		}
 
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
@@ -4796,6 +4809,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatestatedropDown(String state, String code) {
+		if (mobileMenuOpenCheck.isDisplayed()) {
+			jsClickNew(mobileMenuOpenCheck);
+		}
+
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*
@@ -5175,7 +5192,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	public String getTFNNumberFromLink(){
+	public String getTFNNumberFromLink() {
 		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
 		return telTFNLink.getText().trim();
 	}

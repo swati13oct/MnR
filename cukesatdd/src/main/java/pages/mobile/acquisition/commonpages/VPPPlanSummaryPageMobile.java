@@ -1110,8 +1110,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
-			// iosScroll(pdpPlansViewLink);
-			scrollToView(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -1120,16 +1118,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			CommonUtility.checkPageIsReadyNew(driver);
 			validate(maPlansViewLink, 10);
-			// iosScroll(maPlansViewLink);
-			scrollToView(maPlansViewLink);
+
 			jsClickNew(maPlansViewLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			CommonUtility.checkPageIsReadyNew(driver);
-			// iosScroll(msPlansViewLink);
-			scrollToView(msPlansViewLink);
+
 			jsClickNew(msPlansViewLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
@@ -1138,23 +1134,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			 * medSuppPlanList.get(0), 30);
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			CommonUtility.checkPageIsReadyNew(driver);
-			// iosScroll(snpPlansViewLink);
-			scrollToView(snpPlansViewLink);
+			sleepBySec(5);
+
 			jsClickNew(snpPlansViewLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sleepBySec(5);
 
+			// For prod checkout only
+			clickBackToViewAllPlans();
 		}
-
-		// For prod checkout only
-		clickBackToViewAllPlans();
 	}
 
 	/**
@@ -1319,8 +1308,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]/a"));
 
-		//ProviderSearchLink.click();
-		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(ProviderSearchLink,"aria-expanded"))){
+		// ProviderSearchLink.click();
+		if (!Boolean.parseBoolean(CommonUtility.getElementAttribute(ProviderSearchLink, "aria-expanded"))) {
 			jsClickNew(ProviderSearchLink);
 		}
 

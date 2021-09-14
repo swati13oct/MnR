@@ -306,10 +306,10 @@ public class ShopPage extends GlobalWebElements {
 	public void validateZipComp(String zipCode) {
 
 		try {
-			int zipCodeNumber = 1;
-			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
-
-			while (zipCodeNumber <= zipForm.size()) {
+//			int zipCodeNumber = 1;
+//			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
+//
+//			while (zipCodeNumber <= zipForm.size()) {
 //				Thread.sleep(3000);
 //				ZipCodeText.get(zipCodeNumber - 1).clear();
 //				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
@@ -353,25 +353,25 @@ public class ShopPage extends GlobalWebElements {
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				}
-				if (driver.getWindowHandles().size() > 1) {
-					String currentPage = driver.getWindowHandle();
-					Set<String> newWindow = driver.getWindowHandles();
-					for (String parentWindow : newWindow) {
-						if (!parentWindow.equalsIgnoreCase(currentPage)) {
-							driver.switchTo().window(currentPage).close();
-							vppPageTitle = driver.switchTo().window(parentWindow).getTitle();
-							break;
-						}
-					}
-				} else {
-					driver.navigate().back();
-				}
-				zipCodeNumber++;
-				/*
-				 * driver.navigate().refresh(); //Adding refresh since element are not located
-				 * in Safari browser after using navigate back threadsleep(2000);
-				 */
-			}
+//				if (driver.getWindowHandles().size() > 1) {
+//					String currentPage = driver.getWindowHandle();
+//					Set<String> newWindow = driver.getWindowHandles();
+//					for (String parentWindow : newWindow) {
+//						if (!parentWindow.equalsIgnoreCase(currentPage)) {
+//							driver.switchTo().window(currentPage).close();
+//							vppPageTitle = driver.switchTo().window(parentWindow).getTitle();
+//							break;
+//						}
+//					}
+//				} else {
+//					driver.navigate().back();
+//				}
+//				zipCodeNumber++;
+//				/*
+//				 * driver.navigate().refresh(); //Adding refresh since element are not located
+//				 * in Safari browser after using navigate back threadsleep(2000);
+//				 */
+//			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -469,28 +469,33 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void findAProvider() throws Exception {
-		sleepBySec(3);
 
-		validateNew(findAProviderBtn);
-		String parentWindow = driver.getWindowHandle();
-		jsClickNew(findAProviderBtn);
-		Thread.sleep(4000);
-		waitForPageLoadSafari();
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-				if (!driver.getCurrentUrl().contains("werally"))
-					Assert.fail("Provider Search page failed to load");
-				Thread.sleep(2000);
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			scrollToView(findAProviderBtn);
+			System.out.println("Control is not coming back to App from Rally page .. hence temp solution");
+		} else {
+
+			validateNew(findAProviderBtn);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(findAProviderBtn);
+			Thread.sleep(4000);
+			waitForPageLoadSafari();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+					if (!driver.getCurrentUrl().contains("werally"))
+						Assert.fail("Provider Search page failed to load");
+					Thread.sleep(2000);
+				}
 			}
 
-		}
+			driver.close();
+			driver.switchTo().window(parentWindow);
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		}
 	}
 
 	public void locateAPharmacy() {
