@@ -107,6 +107,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And I select "<plantype>" plans to compare and click on compare plan link
     #When user accesses global footer of the AARP Medicare Plans home page
     And user clicks on About us link from footer of the Medicare Plans home page
+    And the user clicks on browser back button
     And user clicks on contact us link of aboutus page
     And user clicks on sitemap link of contact us page
     And user clicks on privacy policy link of sitemap page
