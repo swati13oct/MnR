@@ -423,8 +423,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div#toggleYearSection button[class*='prev-year']")
 	private WebElement previousPlanYear; // Current Year
 	
-	@FindBy(css = "#highlights a[dtmname*='Enroll in Plan']")
-	private List<WebElement> enrollBtnPlanDetails;
+	@FindBy(xpath = "//span[contains(text(),'Enroll in plan')]")
+	private WebElement enrollBtnPlanDetails;
 	
 	@FindBy(css = "button#enrollment-next-button")
 	private WebElement nxtBtnOLEPage;
@@ -723,8 +723,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			temp.selectByVisibleText(nxtYear);
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
-			temp.selectByVisibleText("January 1, " + nxtYear);
+//			temp.selectByVisibleText("January 1, " + nxtYear);
+			temp.selectByIndex(1);
 			jsClickNew(MSViewPlanButton);
+			threadsleep(5000);
 		}
 		
 		int Year = Integer.parseInt(getCurrentYear()) +1;
@@ -887,10 +889,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			for (int i = count-1; i >= 0; i--) {
 				threadsleep(1000);
 				DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() );
-				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
+/*				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
 				WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
 				validate(RemoveIcon,20);
-				validate(coveredIcon,20);
+				validate(coveredIcon,20);*/
 			}
 			Collections.sort(DrugsList);
 			jsClickNew(drugCoveredeVPP);
@@ -1193,8 +1195,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	
 	public void plansLoader() {
 		pageloadcomplete();
-		validate(planLoaderscreen, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen,60);
+		if(validate(planLoaderscreen, 60))
+			waitforElementInvisibilityInTime(planLoaderscreen,60);
 		threadsleep(5000);// Plan loader
 	}
 	
@@ -1594,22 +1596,20 @@ public void validateSNPPlanName() {
 	verifyPlanNameinOLE();
 	browserBack();
 	plansLoader();
-	browserBack();
-	plansLoader();
 }
 
 public void verifyPlanNameinOLE() {
-	String PlanName= planNameVPPDetailsPage.getText().trim().toUpperCase();
+	String PlanName= planNameVPPDetailsPage.getText().trim().split("\n")[0].toUpperCase();
+	System.out.println("Plan Name in Plan Details Page: "+PlanName);
 	String planNameinOLE = "";
-	scrollToView(enrollBtnPlanDetails.get(0));
-	enrollBtnPlanDetails.get(0).click();
+	scrollToView(enrollBtnPlanDetails);
+	enrollBtnPlanDetails.click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
+	Assert.assertTrue(driver.getCurrentUrl().contains("/welcome"), "OLE page not loaded");
 	planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
-	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");	
-	System.out.println(driver.getCurrentUrl());
-	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
+	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");
 }
 
 
@@ -1723,6 +1723,13 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
+}
+
+public void useraddDrugsPREResult() {
+	threadsleep(10000);
+	System.out.println("Adding drugs from PRE Result page");
+	plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")).click();
+	threadsleep(3000);
 }
 
 public void userPreDCE() {
@@ -2001,8 +2008,7 @@ public void validateDrugProvider() {
 	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("&")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div[id*='DrugName-noplan']")).getText().trim()
-				.toUpperCase() + " "
-				+ Druglist.get(i).findElement(By.cssSelector("div[id*='DrugQuantityFrequency-noplan']")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
+				.toUpperCase() );
 	}
 	Collections.sort(vpdrugs);
 	CommonConstants.VP_Drugs.put(curID, vpdrugs);
@@ -2012,7 +2018,7 @@ public void validateDrugProvider() {
 //	Assertion.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
-	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
+	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Dentists ")[1].trim());
 	for(int i=0; i<prdcount;i++) {
 		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div[id*='ProviderName-noplan']")).getText().toUpperCase());
 	}
@@ -2108,7 +2114,7 @@ public void validatePDPPlanNamesAndEnroll_old() {
 	String actualplanName = planNameVPPDetailsPage.getText().split("\n")[0].toUpperCase();
 	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
 	Assert.assertTrue(exceptedplanName.equalsIgnoreCase(actualplanName), "--- Plan name are not matches---");
-	enrollBtnPlanDetails.get(0).click();
+	enrollBtnPlanDetails.click();
 	pageloadcomplete();
 	String planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);

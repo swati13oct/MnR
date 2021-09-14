@@ -821,6 +821,12 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@When("^user navigate to Drug page to add drugs from PREResult page$")
+   	public void add_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.useraddDrugsPREResult();
+   	}
+	
 	@Then("^user navigate from VPP to DCE tool$")
    	public void vpp_pre() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -1143,6 +1149,12 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.learnMore(inputValues.get("Learn More"));
+   	}
+	
+	@And("^user clicks on Medigap Plans Link in PRE Result page$")
+   	public void medigap_new_results_page() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.medigaplink();
    	}
 
 	@Then("^user validate drugCostModal in PRE results page$")
