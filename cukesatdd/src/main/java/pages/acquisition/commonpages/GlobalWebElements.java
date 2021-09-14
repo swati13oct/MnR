@@ -29,7 +29,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
 	public WebElement footerAboutUsLink;
 	
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//div[contains(@class,'footer')]//..//a[contains(@href,'contact-us')]")
 	public WebElement footerContactUsLink;
 
 	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'sitemap')]")
