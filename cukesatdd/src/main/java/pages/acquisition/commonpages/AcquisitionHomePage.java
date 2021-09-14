@@ -1177,6 +1177,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public String getTestSiteUrl() {
+		if (null == testSiteUrl){
+			testSiteUrl = driver.getCurrentUrl().split(".com/")[0];
+			System.out.println("Test Site URL from current URL : "+testSiteUrl);
+			testSiteUrl = testSiteUrl+".com";
+			System.out.println("Test Site URL from current URL after appending <.com>: "+testSiteUrl);
+		}
 		return testSiteUrl;
 	}
 
