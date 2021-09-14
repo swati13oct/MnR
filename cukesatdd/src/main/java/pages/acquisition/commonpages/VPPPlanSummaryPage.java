@@ -3196,6 +3196,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			driver.navigate().refresh();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(5);
+			waitForPageLoadSafari();
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
@@ -3203,6 +3204,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
 		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+		if (planType.equalsIgnoreCase("pdp")) {
+			appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and contains(@dlassetid,'lnk-1')]" + savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
@@ -3325,6 +3329,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
 				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 				+ savedPlanImgXpath;
+		if(planType.equals("PDP")) {
+			appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and contains(@dlassetid,'lnk-1')]"
+					+ savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		expMatch = 1;
@@ -3393,6 +3402,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
 						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 						+ savedPlanImgXpath;
+				if(planType.equals("PDP")) {
+					savedPlanIconXpath = "//*[contains(text(),'" + plan
+							+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')and contains(@dlassetid,'lnk-1')]"
+							+ savedPlanImgXpath;
+					
+				}
 				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
 				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
 				expMatch = 1;
