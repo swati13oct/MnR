@@ -889,10 +889,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			for (int i = count-1; i >= 0; i--) {
 				threadsleep(1000);
 				DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() );
-				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
+/*				WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
 				WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
 				validate(RemoveIcon,20);
-				validate(coveredIcon,20);
+				validate(coveredIcon,20);*/
 			}
 			Collections.sort(DrugsList);
 			jsClickNew(drugCoveredeVPP);

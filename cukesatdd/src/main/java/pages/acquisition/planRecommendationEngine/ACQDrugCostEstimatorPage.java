@@ -167,6 +167,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
 			}
+			threadsleep(2000);
 		}
 	}
 
