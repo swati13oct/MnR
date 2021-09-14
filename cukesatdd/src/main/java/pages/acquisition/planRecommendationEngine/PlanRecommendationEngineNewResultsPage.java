@@ -658,21 +658,22 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText().trim().toLowerCase();
+		String planType = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
+		System.out.println("PlanType is: "+planType);
+		
 		if (planType.contains("supplement")) {
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
 			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
 					.trim();
-		} 
-		else {
-			WebElement viewind = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button"));
-			scrollToView(viewind);
-			threadsleep(2000);
-			jsClickNew(viewind);
-			threadsleep(2000);
+		} else {
+			System.out.println("PlanIndex is: "+planIndex);
+		WebElement viewind = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
+		scrollToView(viewind);
+		threadsleep(2000);
+		jsClickNew(viewind);
+		threadsleep(2000);
 		}
-		
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -769,5 +770,11 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	
 	}
 	
+	public void addDoctorsLink() {
+	threadsleep(5000);
+	System.out.println("Adding doctors from PRE Result page");
+	plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
+	threadsleep(3000);
+	}
 	
 }

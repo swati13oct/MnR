@@ -223,13 +223,14 @@ private WebElement signInLink;
 	public String firstRecomPlanName = "";
 	public String planType = "";
 	public String navigateSaveResultsPage() {
+		scrollToView(saveYourResults);
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
 		String curID = String.valueOf(Thread.currentThread().getId());
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
 		validate(saveYourResults, 10);
 		saveYourResults.click();
 		validate(saveResultsTitle);

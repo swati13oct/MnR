@@ -1202,6 +1202,12 @@ public class PlanRecommendationEngineStepDefinition {
                     
     }
 	
+	@Then("^user navigates to PRE doctorpage to add providers$")
+	public void addDoctorLink() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.addDoctorsLink();
+	}
+	
 	@Then("^the user do poc$")
    	public void poc_new_results_page() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
