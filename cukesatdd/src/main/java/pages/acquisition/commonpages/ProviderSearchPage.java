@@ -99,7 +99,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//button[@data-test-id='People']")
 	private WebElement People;
 	
-	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]")
+	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]") 
 	private WebElement MedicalDirectory;
 
 	@FindBy(xpath = "//button[@data-test-id='Places']")
@@ -217,6 +217,9 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+		MedicalDirectory.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
