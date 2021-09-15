@@ -376,7 +376,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				
 				
 			
+			}else if(columnName.equalsIgnoreCase("prescription drugs")) {
+				if(key.equalsIgnoreCase(columnName)) {
+					counter++;
+					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;break;
+					}else {
+						flag = false; 
+						System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:5 "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+				}
+			
+			
+			
 			}else if(key.contains(columnName)) {
+			
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
