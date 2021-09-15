@@ -389,6 +389,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(), '100-day supply at a 90-day')]")
 	public WebElement _100DaysSupplyHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
+	public WebElement LIS_Extrahelp;
 
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -1593,19 +1596,11 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
 	
-	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
-	public WebElement LIS_Extrahelp;
-	
-	public void verifyLIS_Extrahelp()
-	{
-	if(LIS_Extrahelp.getText().contains("$0 or $99")||LIS_Extrahelp.getText().contains("$0 or $92"))
-	{
-	  System.out.println(LIS_Extrahelp.getText());
-	}
-	else
-	{
-		Assert.fail("LIS Deductible message is not displayed");
-	}
+	public void verifyLIS_Extrahelp() {
+		if (LIS_Extrahelp.getText().contains("$0 or $99") || LIS_Extrahelp.getText().contains("$0 or $92")) 
+			System.out.println(LIS_Extrahelp.getText());
+		else 
+			Assert.fail("LIS Deductible message is not displayed");
 	}
      
 	public void validateLISonly_CopaySection_LISAlert() {

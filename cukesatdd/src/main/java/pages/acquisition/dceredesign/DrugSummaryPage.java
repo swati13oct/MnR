@@ -231,6 +231,9 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
+	
+	@FindBy(xpath = "//span[contains(text(),'If you qualify')]")
+	public WebElement drugPricingDeductText;
 
 	public static String LIS_MESSAGE_DRUG_PRICING = "If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
 
@@ -492,19 +495,13 @@ public class DrugSummaryPage extends UhcDriver {
 		jsClickNew(mapdPlanToggle);
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'If you qualify')]")
-	public WebElement drugPricingDeductText;
 	
-	public void vdrugPricingDeductText()
-	{
-	if(drugPricingDeductText.getText().contains("$0 or $99")||drugPricingDeductText.getText().contains("$0 or $92"))
-	{
-	  System.out.println(drugPricingDeductText.getText());
-	}
-	else
-	{
-		Assert.fail("Expected Deductible LIS message not displayed");
-	}
+	public void vdrugPricingDeductText() {
+		if (drugPricingDeductText.getText().contains("$0 or $99")
+				|| drugPricingDeductText.getText().contains("$0 or $92")) 
+			System.out.println(drugPricingDeductText.getText());
+		else 
+			Assert.fail("Expected Deductible LIS message not displayed");
 	}
 
 	public void verifyTheTextAlert() {
