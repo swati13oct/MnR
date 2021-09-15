@@ -306,7 +306,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
 	private WebElement lnkLearnAboutMedicare;
 
-	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
+	@FindBy(xpath = "//*[contains(@class, 'section-3')]//a[contains(text(),'Search Doctors')]")
 	private WebElement providerSearchFromGlobalHeader;
 
 	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
