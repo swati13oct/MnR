@@ -1,7 +1,7 @@
 @vppBenefits
 Feature: ACQ-Plan benefits validation
 
-  @planSummary_ExcelValidation @2022planSummaryAARP
+  @planSummary_ExcelValidation @2022planSummaryAARP @2022planSummaryBenefits
   Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
@@ -119,99 +119,119 @@ Feature: ACQ-Plan benefits validation
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_3 | AARP |
 
   # Below are examples for UHC plan Summary benefits
-  @planSummary_ExcelValidation @2022planSummaryUHC
+  @planSummary_ExcelValidation @2022planSummaryBenefitsUHC @2022planSummaryBenefits
   Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @2022planSummaryBenefitsUHC01
+    @2022planSummaryBenefitsUHC01 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_1 | UHC  |
 
-    @2022planSummaryBenefitsUHC02
+    @2022planSummaryBenefitsUHC02 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_2 | UHC  |
 
-    @2022planSummaryBenefitsUHC03
+    @2022planSummaryBenefitsUHC03 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_3 | UHC  |
 
-    @2022planSummaryBenefitsUHC04
+    @2022planSummaryBenefitsUHC04 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_4 | UHC  |
 
-    @2022planSummaryBenefitsUHC05
+    @2022planSummaryBenefitsUHC05 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_5 | UHC  |
 
-    @2022planSummaryBenefitsUHC06
+    @2022planSummaryBenefitsUHC06 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_6 | UHC  |
 
-    @2022planSummaryBenefitsUHC07
+    @2022planSummaryBenefitsUHC07 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_7 | UHC  |
 
-    @2022planSummaryBenefitsUHC08
+    @2022planSummaryBenefitsUHC08 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_8 | UHC  |
 
-    @2022planSummaryBenefitsUHC09
+    @2022planSummaryBenefitsUHC09 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet   | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_9 | UHC  |
 
-    @2022planSummaryBenefitsUHC10
+    @2022planSummaryBenefitsUHC10 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_10 | UHC  |
 
-    @2022planSummaryBenefitsUHC11
+    @2022planSummaryBenefitsUHC11 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_11 | UHC  |
 
-    @2022planSummaryBenefitsUHC12
+    @2022planSummaryBenefitsUHC12 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_12 | UHC  |
 
-    @2022planSummaryBenefitsUHC13
+    @2022planSummaryBenefitsUHC13 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_13 | UHC  |
 
-    @2022planSummaryBenefitsUHC14
+    @2022planSummaryBenefitsUHC14 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_14 | UHC  |
 
-    @2022planSummaryBenefitsUHC15
+    @2022planSummaryBenefitsUHC15 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_15 | UHC  |
+      
+       @2022planSummaryBenefitsUHC16  @2022planSummaryBenefitsUHCMA
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_16 | AARP |
 
-    @2022planSummaryBenefitsPDPUHC01
+    @2022planSummaryBenefitsUHC17  @2022planSummaryBenefitsUHCMA
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_17 | AARP |
+
+    @2022planSummaryBenefitsUHC18 @2022planSummaryBenefitsUHCMA
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_18 | AARP |
+
+    @2022planSummaryBenefitsUHC19 @2022planSummaryBenefitsUHCMA
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_19 | AARP |
+
+    @2022planSummaryBenefitsPDPUHC01 @2022planSummaryBenefitsUHCPDP
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_1 | UHC  |
 
-    @2022planSummaryBenefitsPDPUHC02
+    @2022planSummaryBenefitsPDPUHC02 @2022planSummaryBenefitsUHCPDP
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_2 | UHC  |
 
-    @2022planSummaryBenefitsPDPUHC03
+    @2022planSummaryBenefitsPDPUHC03 @2022planSummaryBenefitsUHCPDP
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_3 | UHC  |
