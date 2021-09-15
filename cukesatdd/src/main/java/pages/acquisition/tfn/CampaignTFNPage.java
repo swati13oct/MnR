@@ -679,7 +679,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
 
-	public void ViewPlanSummary(String planType) {
+	public VPPPlanSummaryPage ViewPlanSummary(String planType) {
 		CheckPageLoad();
 		CheckiPerseptions();
 
@@ -690,6 +690,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 //			sleepBySec(2);
@@ -697,6 +698,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("MA Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			//sleepBySec(2);
@@ -705,6 +707,7 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("SNP")) {
 //			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
@@ -712,8 +715,9 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("SNP Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-	
-		}	
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;

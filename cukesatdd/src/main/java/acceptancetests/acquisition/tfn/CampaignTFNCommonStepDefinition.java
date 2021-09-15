@@ -866,8 +866,8 @@ public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String Zip = memberAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
-	tfnPage.ViewPlanSummary(PlanType);
-	
+	VPPPlanSummaryPage plansummaryPage=tfnPage.ViewPlanSummary(PlanType);
+	getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 }
 
 @Then("^the user navigates to Plan Details Page for DCE Flow$")
@@ -1179,6 +1179,21 @@ public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("Campaign URL");
 	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+}
+
+@Given("^the user is on UHC acquisition site from Campaign Traffic$")
+public void the_user_is_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+	//WebDriver wd = getLoginScenario().getWebDriverNew();
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrlsUMS();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
