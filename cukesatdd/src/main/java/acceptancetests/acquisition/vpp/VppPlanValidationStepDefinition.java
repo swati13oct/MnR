@@ -112,12 +112,13 @@ public class VppPlanValidationStepDefinition {
 			styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
 			try {
 				 AepPlanDetailsPage planDetailsPage = null;
+				 AcquisitionHomePage aquisitionhomepage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
 				  
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
-				 
+				 int counter =0;
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
@@ -152,6 +153,10 @@ public class VppPlanValidationStepDefinition {
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 									 
+									 if(counter==0) {
+										  aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, siteType);
+										  counter++;
+									  }
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
 									  planDetailsPage = new AepPlanDetailsPage(wd);
