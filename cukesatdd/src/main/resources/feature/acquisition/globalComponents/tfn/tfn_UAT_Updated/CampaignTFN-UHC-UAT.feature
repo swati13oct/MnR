@@ -227,8 +227,10 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
   #######################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT @UATRegression
   Scenario Outline: <scenario>  Verify TFN through External Links
-    Given the user Starts WebDriver
-    Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
+   # Given the user Starts WebDriver
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user is on AARP External Link and Land on MA Plans
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code

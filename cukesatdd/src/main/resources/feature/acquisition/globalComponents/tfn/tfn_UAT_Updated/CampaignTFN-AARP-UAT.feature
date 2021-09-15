@@ -521,8 +521,10 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
-    Given the user Starts WebDriver
-    Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
+    #Given the user Starts WebDriver
+     Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+     Given the user is on AARP External Link and Land on MA Plans
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -592,8 +594,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | PSC Code | <pscCode> |
 
     Examples: 
-      | scenario                      | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
-      | Scenerio 9-ExternalLink - AMP |   10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger3 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] |
+      | scenario                      | site|zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
+      | Scenerio 9-ExternalLink - AMP |  AARP| 10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger3 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] |
 
   @Scenario_2_CampaignTrafficdummy
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
