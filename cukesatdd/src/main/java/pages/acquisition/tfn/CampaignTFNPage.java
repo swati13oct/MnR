@@ -256,6 +256,7 @@ public class CampaignTFNPage extends UhcDriver {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
 				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+path;
+				System.out.println("Final URL"+testSiteUrl);
 				driver.get(testSiteUrl);
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

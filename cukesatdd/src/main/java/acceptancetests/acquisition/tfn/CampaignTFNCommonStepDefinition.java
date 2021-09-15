@@ -1157,6 +1157,18 @@ public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
 	tfnPage.navigateBackToPlanSummaryPageFromDetailsPage();
 }
 
+@Given("^the user is on AARP External Link and Land on MA Plans$")
+public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg1) throws Throwable  {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String Acq_Site = inputAttributesMap.get("Site");
+	String CampaignPath = inputAttributesMap.get("Campaign URL");
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.OpenPath(Acq_Site, CampaignPath);
+}
 }
 
 

@@ -65,7 +65,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
     #Then the user validates PSC code
     #| PSC Code | <Precedence2PSC> |
-    @campaignTFNProd
+    @campaignTFNProd123
     Examples: 
       | scenario         | site | zipcode | TFNNo          | memberTFNNo    |MedSupTFN| memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | userName        | password      |
       | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-855-349-3447 |1-866-408-5545 |https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | TiggerOptumID39 | TiggerTigger1 |
@@ -73,8 +73,11 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT_PROD @UATRegression @prodRegression_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
-    Given the user Starts WebDriver
-    Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
+    #Given the user Starts WebDriver
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    #Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
+    Given the user is on AARP External Link and Land on MA Plans
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -95,10 +98,10 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
 
-		@campaignTFNProd
+		@campaignTFNProd123
     Examples: 
-      | scenario                      | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
-      | Scenerio 9-ExternalLink - AMP |   10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] |
+      | scenario                      |site| zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
+      | Scenerio 9-ExternalLink - AMP |ULayer|   10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] |
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic__UHC_UAT_PROD @UATRegression
