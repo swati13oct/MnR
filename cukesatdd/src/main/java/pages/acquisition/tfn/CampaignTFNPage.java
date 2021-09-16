@@ -153,8 +153,10 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 	
-	@FindBy(id = "msVppZipCode")
-	private WebElement medSuppZipCode;
+	//@FindBy(id = "msVppZipCode")
+	@FindBy(xpath = "//h1[contains(text(),'Medicare Supplement Insurance Plans insured by')]")
+	private WebElement medsuppTitle;
+	//private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
@@ -704,7 +706,7 @@ public class CampaignTFNPage extends UhcDriver {
 			//sleepBySec(2);
 			msPlansViewLink.click();
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			CommonUtility.waitForPageLoadNew(driver, medsuppTitle, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 			return new VPPPlanSummaryPage(driver);
