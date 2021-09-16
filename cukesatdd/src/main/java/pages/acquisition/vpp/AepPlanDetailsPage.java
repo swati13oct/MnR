@@ -391,6 +391,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
 					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
 					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinnewwindow", "");
 				}
 
 				if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {

@@ -301,6 +301,8 @@ public class VppPlanValidationStepDefinition {
 		                	 try {
 		                		 currentCellValue = cell.getStringCellValue();
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue().trim();
+		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~]", "");
+		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~", "");
 		                	 }catch (Exception e) {
 		                		 System.out.println("Internal Error - Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
@@ -353,7 +355,7 @@ public class VppPlanValidationStepDefinition {
 
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") ||currentColName.equalsIgnoreCase("Business Area")|| currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") ||currentColName.equalsIgnoreCase("DSNP Sub type")||currentColName.equalsIgnoreCase("Business Area")|| currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
 								 	if(sheetName.contains("PDP") && currentColName.trim().equalsIgnoreCase("Drug Costs from Formulary"))
 									{
