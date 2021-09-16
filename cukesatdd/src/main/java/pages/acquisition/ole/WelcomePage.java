@@ -172,7 +172,8 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
 	private WebElement OLEProgressBar;
 	
-	
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	private WebElement VPPTFNNo;
 	
 	public WelcomePage(WebDriver driver) {
 
@@ -203,12 +204,15 @@ public class WelcomePage extends UhcDriver{
 		validateNew(PlanYear_PlanName);
 	}
 
+	
+	
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
 		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
 		String StickyPlanName = OLEStickyPlanName.getText();
+		
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
@@ -219,13 +223,18 @@ public class WelcomePage extends UhcDriver{
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
-		CheckiPerseptions();
 		
 		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
+				
+				validateNew(VPPTFNNo);
+				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
+				String VPPTFNNoActual = VPPTFNNo.getText();
+				System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
+				CheckiPerseptions();
 				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
 				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 				enrollInPlan.click();
@@ -245,7 +254,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	
-	public boolean ValidateTFNonWelcomeOLE(String ExpectedTFNNo) {
+	public boolean ValidateTFNonWelcomeOLE(String TFN) {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
@@ -259,12 +268,12 @@ public class WelcomePage extends UhcDriver{
 		
 		//String Expected_TFN = planDetailsMap.get("TFN");
 		
-		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+		System.out.println("TFN in VPP page : "+TFN);
 				flag = driver.getCurrentUrl().contains("welcome");
 				CheckPageLoad();
 				CheckiPerseptions();
 				if (flag){
-				//	flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
+					flag = TFNWidget_OLE.contains(TFN) && TFNNeedHelp_OLE.contains(TFN);
 				}			
 		
 		System.out.println("TFN not displayed in OLE right rail"+flag);
@@ -752,7 +761,7 @@ public class WelcomePage extends UhcDriver{
 			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
 		
 			System.out.println("TFN in VPP page : "+ExpectedTFNNo);
-		//	System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
+			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
 			validateNew(PrivacyPolicy);
 			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
 			String parentWindow = driver.getWindowHandle();

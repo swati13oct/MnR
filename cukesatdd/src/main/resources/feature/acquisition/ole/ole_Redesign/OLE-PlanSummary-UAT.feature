@@ -17,9 +17,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
      Then the user validates TFN on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
-    Then the user validate widgets on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
+   Then the user validate widgets on Welcome OLE Page
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -49,7 +47,6 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Medicare Information Page
 		Then the user validates cancellation and Save Return Later modal for OLE Page
 		Then the user validate widgets on OLE Pages
-			| TFN No    | <TFNNo>    |
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
@@ -115,10 +112,10 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     #  | Auth Flag                | <authflag>               |
      # | Mailing Address Question | <mailingaddressquestion> |
 
-  @OLE_Redesign @OLE_UATRegression @prodRegression @UATRegression @regressionAARP @OLE  
+  @OLE_Redesign @OLE_UATRegression @prodRegression @UATRegression @regressionAARP @OLE  @OLE_UATRegression_1
     Examples: 
       | Scenario                    | site | TFNNo          |PlanType      | planyear | planYear | zipcode | isMultutiCounty | county      | plantype | planyear  | planName                                  | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | medicarenumber1 | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-     | MA- E2E Scenario 1_AARP     | AARP | 1-888-510-0371 |MA-MBI        | current   | current  |   76543 | NO              | Bell County | MA       | current    | AARP Medicare Advantage Patriot (HMO-POS) | MBI      | TEST_PORTALS_GOTTFRIED |  COLEMAN      | 7WW9X41NT49    | false   |  03011999 |  03011999 |     0123456789 | true  | 08101960  | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Irving      | TX           |      76543 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | true_yes      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456        |Valid          | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+    	| MA- E2E Scenario 1_AARP     | AARP | 1-888-510-0371 |MA-MBI        | current   | current  |   76543 | NO              | Bell County | MA       | current    | AARP Medicare Advantage Patriot (HMO-POS) | MBI      | TEST_PORTALS_GOTTFRIED |  COLEMAN      | 7WW9X41NT49    | false   |  03011999 |  03011999 |     0123456789 | true  | 08101960  | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Irving      | TX           |      76543 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | true_yes      | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456        |Valid          | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
       | MAPD - E2E Scenario 1_AARP  | AARP | 1-888-510-0371 |MAPD-PFFS-MBI | current   | current   |   66843 | Yes             | Chase County | MAPD     | current   | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | TEST_PORTALS_John    |  COLEMAN      | 7WW9X41NT49    | false   |  03011999 |  03011999 |     0123456789 | true  | 08101960  | Female | 123 Perm Rd | Los Angeles   | No                     | 123 Test      | Edison      | KS           |      66843 | test@test.com | None apply                                                                                                                                                                                                                                          | [blank]                 | yes     | yes          | false     | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456         | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | 5N69QY6ET32     | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
   @OLE_UATRegression @prodRegression @UATRegression @regressionUHC @OLE @OLE_Redesign
@@ -156,9 +153,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Name | <planName> |
 		Then the user validates the Plan details on OLE
     Then the user validates TFN on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validate widgets on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
    Then the user validates Logo Image on Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -186,7 +181,6 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Medicare Information Page
     Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user validate widgets on OLE Pages
-    	| TFN No    | <TFNNo>    |
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
@@ -304,9 +298,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
      Then the user validates TFN on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validate widgets on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -349,7 +341,6 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
       Then the user validate widgets on OLE Pages
-      		| TFN No    | <TFNNo>    |
     Then the user validates the long term questions in Medicare Information Page
       | LongTerm Question | <longTermFlag> |
       | Health Insurance Name | <healthinsurancename> |
@@ -428,11 +419,9 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
    # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
-Then the user validates the Plan details on OLE
+		Then the user validates the Plan details on OLE
     Then the user validates TFN on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validate widgets on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -474,7 +463,6 @@ Then the user validates the Plan details on OLE
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
       Then the user validate widgets on OLE Pages
-      			| TFN No    | <TFNNo>    |
     Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
       | PDP Question      | <pdpFlag>      |
       | Prescription Name | <prescriptioncoveragename> |
@@ -561,9 +549,7 @@ Then the user validates the Plan details on OLE
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE CSNP Plans
      Then the user validates TFN on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validate widgets on Welcome OLE Page
-    	| TFN No    | <TFNNo>    |
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -595,7 +581,6 @@ Then the user validates the Plan details on OLE
       | SSN Flag           | <ssnflag>           |
       | Card Type          | <cardtype>          |
     Then the user validate widgets on OLE Pages
-    	| TFN No    | <TFNNo>    |
     Then the user validates Medicaid Number in OLE Page
       | MedicaidNumber | <medicaidnumber> |
       | Plan Year      | <planYear>       |  
