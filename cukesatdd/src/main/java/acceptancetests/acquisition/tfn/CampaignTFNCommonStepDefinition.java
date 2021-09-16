@@ -1198,6 +1198,20 @@ public void the_user_is_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Thro
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 }
+
+@Given("^user opens Google in new tab and search AARP Medicare Advantage Plan to navigate to AARP page$")
+public void user_opens_tab_to_access_AARP_page() throws Exception  {
+
+	String url = "https://www.google.com/";
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.openURLNewTab(url);
+	//tfnPage.googleSearchAARP();
+
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
 }
 
 

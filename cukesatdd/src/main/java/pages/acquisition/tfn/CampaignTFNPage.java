@@ -1382,4 +1382,35 @@ public void decisionGuide() {
 	validateNew(decisionGuideClick);
 	jsClickNew(decisionGuideClick);
 }
+
+public void openURLNewTab(String url) {
+	// get original tab handler
+	String winHandleBefore = driver.getWindowHandle();
+
+	System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+	// open new tab
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("window.open('about:blank','_blank');");
+	for (String winHandle : driver.getWindowHandles()) {
+		if (!winHandle.equals(winHandleBefore)) {
+			driver.switchTo().window(winHandle);
+		}
+	}
+	String winHandleTmp = driver.getWindowHandle();
+	System.out.println(
+			"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+	
+
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to open the acquisition url in new tab");
+	
+	
+	start(url);
+	googleSearchAARP();
+	driver.switchTo().window(winHandleBefore);
+	driver.close();
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to use this newly opened tab for remaining validation");
+
+}
 }
