@@ -353,7 +353,7 @@ public class VppPlanValidationStepDefinition {
 
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") || currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") ||currentColName.equalsIgnoreCase("Business Area")|| currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
 								 	if(sheetName.contains("PDP") && currentColName.trim().equalsIgnoreCase("Drug Costs from Formulary"))
 									{
