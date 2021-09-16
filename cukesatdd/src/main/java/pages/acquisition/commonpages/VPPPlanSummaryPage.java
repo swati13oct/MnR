@@ -741,7 +741,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
-	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide To AARP Medicare Select and Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
 	// @FindBy(xpath =
