@@ -66,7 +66,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @sanity
     Examples: 
       | site | state   | userName  | password   | drug1   | zipCode |
-      | AARP | Alabama | vdatdd_02 | Password@1 | Lipitor |   90210 |
+      | AARP | Alabama | vdatdd_02 | Password#1 | Lipitor |   90210 |
 
     @visitorProfile_UHC @regressionUHC
     Examples: 
