@@ -55,9 +55,9 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	private Scenario scenario;
-	
+
 	@Before
 	public void before(Scenario scenario) {
 		this.scenario = scenario;
@@ -68,10 +68,11 @@ public class GlobalComponentsCommonStepDefinition {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.openLearnAboutMedicareFromMenu();
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage
+				.openLearnAboutMedicareFromMenu();
 		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 	}
-	
+
 	@When("user validates TFN in header")
 	public void user_clicks_on_tfn_in_header() throws InterruptedException {
 		scenario.log("Changes made on 7/06- Step added for new Header redesign");
@@ -183,12 +184,16 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_Medicare_Education_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = aquisitionhomepage.openLearnAboutMedicareFromMenu();
-		
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePageMobile = aquisitionhomepage
+				.openLearnAboutMedicareFromMenu();
+
 		if (learnAboutMedicareHomePageMobile != null) {
-			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateIntroductionMenu(), "Introduction to Medicare menu validation failed");
-			Assert.assertTrue(learnAboutMedicareHomePageMobile.validatePlanTypeMenu(), "Types of Plan menu validation failed");
-			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateMedicareEnrollmentMenu(), "Medicare Enrollment menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateIntroductionMenu(),
+					"Introduction to Medicare menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validatePlanTypeMenu(),
+					"Types of Plan menu validation failed");
+			Assert.assertTrue(learnAboutMedicareHomePageMobile.validateMedicareEnrollmentMenu(),
+					"Medicare Enrollment menu validation failed");
 			learnAboutMedicareHomePageMobile.closeLearnAboutMedicareSubNav();
 		} else {
 			Assertion.fail("Learn About Medicare sub nav did not open");
@@ -1092,7 +1097,8 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
 	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
-		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 		learnAboutMedicareHomePage.clickLearnAboutMedicareNavLink(linkName);
 		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
 	}
@@ -1160,21 +1166,21 @@ public class GlobalComponentsCommonStepDefinition {
 	}
 
 	@Then("^the user validate facebook button from social share$")
-	public void the_user_validate_facebook_button_from_social_share(){
+	public void the_user_validate_facebook_button_from_social_share() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnFacebookShareButton();
 	}
 
 	@Then("^the user validate twitter button from social share$")
-	public void the_user_validate_twitter_button_from_social_share(){
+	public void the_user_validate_twitter_button_from_social_share() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnTwitterShareButton();
 	}
 
 	@Then("^the user validate email button from social share$")
-	public void the_user_validate_email_button_from_social_share(){
+	public void the_user_validate_email_button_from_social_share() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateSocialShareEmailButton();

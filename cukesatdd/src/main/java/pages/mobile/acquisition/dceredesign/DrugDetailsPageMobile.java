@@ -66,7 +66,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
 	public WebElement Tier5_MailPharmacy_Text;
 
-	@FindBy(css = "#changePharmacyLinkmobile")
+	@FindBy(css = "#changePharmacyLink")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(css = "a[dtmname$='plans in your area']")
@@ -103,7 +103,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "div[class='uhc-card__content'] > div[class*='d-block'] > div > p:nth-child(4) > span")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//*[@id='viewplan']/span")
+	@FindBy(xpath = "//*[@id='viewplan']/span[text()='View Plan Details']")
 	public WebElement DrugCosts_PlanDetailsBtn;
 	
 	@FindBy(css = "#printdetails")
@@ -1938,7 +1938,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement savedIcon;
 
 	public void savePlan() {
-		validateNew(saveIcon);
+		//validateNew(saveIcon);//Scrolling in validatenew and then scrolling again in jsclick creating issue in iOS - SauceLab issue
 		jsClickNew(saveUnsaveBtn);
 		validateNew(savedIcon);
 	}
@@ -1986,6 +1986,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		Thread.sleep(6000);
 		validateNew(prescriptiondrugTab);
 		jsClickNew(prescriptiondrugTab);
+		scrollToView(editLink);
 		validateNew(editLink);
 		jsClickNew(editLink);
 

@@ -240,7 +240,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void clickOnMAShopButton() {
-
+		waitforElementVisibilityInTime(MAShopLink, 20);
 		validateNew(MAShopLink);
 		jsClickNew(MAShopLink);
 		waitForPageLoadSafari();
@@ -317,42 +317,40 @@ public class ShopPage extends GlobalWebElements {
 //				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 //				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 //				System.out.println("Validating VPP page for Zip code " + zipCode);
-				scrollToView(zipcodeFieldShopPage);
-				sendkeysMobile(zipcodeFieldShopPage, zipCode);
-				jsClickNew(GetStartedShopPage);
+			scrollToView(zipcodeFieldShopPage);
+			sendkeysMobile(zipcodeFieldShopPage, zipCode);
+			jsClickNew(GetStartedShopPage);
 
-				Thread.sleep(20000);
-				String vppPageTitle = driver.getTitle();
-				if (driver.getWindowHandles().size() > 1) {
-					String currentPage = driver.getWindowHandle();
-					Set<String> newWindow = driver.getWindowHandles();
-					for (String tabs : newWindow) {
-						if (!tabs.equalsIgnoreCase(currentPage))
-							vppPageTitle = driver.switchTo().window(tabs).getTitle();
-					}
+			Thread.sleep(20000);
+			String vppPageTitle = driver.getTitle();
+			if (driver.getWindowHandles().size() > 1) {
+				String currentPage = driver.getWindowHandle();
+				Set<String> newWindow = driver.getWindowHandles();
+				for (String tabs : newWindow) {
+					if (!tabs.equalsIgnoreCase(currentPage))
+						vppPageTitle = driver.switchTo().window(tabs).getTitle();
 				}
+			}
 
-				System.out.println("Actual : " + vppPageTitle);
-				System.out.println("Curent URL *****" + driver.getCurrentUrl());
-				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
-						System.out
-								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
-					else
-						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
-				} else {
-					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
-						System.out
-								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
-					else
-						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
-				}
+			System.out.println("Actual : " + vppPageTitle);
+			System.out.println("Curent URL *****" + driver.getCurrentUrl());
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+				else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+				else
+					assertTrue("Not redirected to VPP page",
+							vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+			} else {
+				if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+				else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+				else
+					assertTrue("Not redirected to VPP page",
+							vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+			}
 //				if (driver.getWindowHandles().size() > 1) {
 //					String currentPage = driver.getWindowHandle();
 //					Set<String> newWindow = driver.getWindowHandles();

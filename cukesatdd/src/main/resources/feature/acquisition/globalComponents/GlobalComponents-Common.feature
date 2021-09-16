@@ -513,7 +513,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user validates whether call icon is visible
 
 
-    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP
+    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP 
     Examples:
 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
@@ -682,7 +682,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | ClassicUrl | <classicurl> |
       | GenericUrl | <url>        |
 
-    @GeoTarget_MedSup_GlobalCompsAARP @regressionAARP
+    @GeoTarget_MedSup_GlobalCompsAARP @regressionAARP 
     Examples:
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
@@ -767,7 +767,7 @@ Feature: 1.12 ACQ - Global Components Validation
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
 
-    @learnAboutMedicareNav_AARP @regressionAARP
+    @learnAboutMedicareNav_AARP @regressionAARP 
     Examples:
       | site |
       | AARP |

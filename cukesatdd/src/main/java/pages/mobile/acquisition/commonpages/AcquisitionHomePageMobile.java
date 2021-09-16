@@ -35,6 +35,9 @@ import org.testng.Assert;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -3626,6 +3629,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@class='back-to-top']")
 	private WebElement BackToTop;
+	
+	@FindBy(xpath = "//span[text()='Medicare Advantage (Part C) Plans from UnitedHealthcare']")
+	private WebElement MAHeaderonShopPage;
+	
 
 	public void MedicareAdvantagePlans() {
 		threadsleep(5000);
@@ -3633,6 +3640,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 //		jsClickNew(MedicareAdvantagePlans);
 		accessFooterLinkFromShopPlans(MA);
 		threadsleep(5000);
+		waitforElementVisibilityInTime(MAHeaderonShopPage, 20);
 		if (driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("MA Plan Page open: URL-->  " + driver.getCurrentUrl());
@@ -4807,6 +4815,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+
 
 	public void validatestatedropDown(String state, String code) {
 		if (mobileMenuOpenCheck.isDisplayed()) {

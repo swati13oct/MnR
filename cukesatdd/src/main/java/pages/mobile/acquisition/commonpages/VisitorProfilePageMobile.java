@@ -1070,7 +1070,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+	@FindBy(xpath = "//*[@dlassetid='vp_mlnk_signin']")
 	public WebElement loginLink;
 
 	@FindBy(xpath = "//input[contains(@id, 'agreeButton')]")

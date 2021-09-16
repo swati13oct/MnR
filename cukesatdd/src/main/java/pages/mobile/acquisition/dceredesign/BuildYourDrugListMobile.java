@@ -116,6 +116,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateNoDrug_ErrorMsg() {
+		
+		pageloadcomplete();
 		if (addDrugButton.isDisplayed()) {
 			jsClickNew(addDrugButton);
 		}

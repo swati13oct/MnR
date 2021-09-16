@@ -1304,7 +1304,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	private WebElement tFNHomePage;
 	
 	public String getTFNFromHomePage() {
-		validateNew(tFNHomePage);
+		scrollToView(tFNHomePage);
+		//validateNew(tFNHomePage);
 		String tfnNo = tFNHomePage.getText().trim();
 		System.out.println("TFN on HomePage was ..."+tfnNo);
 		return tfnNo;

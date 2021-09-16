@@ -1134,12 +1134,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			 * medSuppPlanList.get(0), 30);
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
+			CommonUtility.checkPageIsReadyNew(driver);
 
 			jsClickNew(snpPlansViewLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-			sleepBySec(5);
 
 			// For prod checkout only
 			clickBackToViewAllPlans();

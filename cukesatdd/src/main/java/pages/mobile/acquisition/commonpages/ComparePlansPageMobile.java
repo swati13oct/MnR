@@ -85,9 +85,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
-	
+
 	@FindBy(css = ".provider-cards")
-	private WebElement savedProviders;	
+	private WebElement savedProviders;
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -599,7 +599,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		WebElement enrollForPlan = null;
 		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/button/span"));
 		if (enrollForPlan != null) {
-			
+
 			jsClickNew(enrollForPlan);
 			waitForPageLoadSafari();
 		}
@@ -969,11 +969,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);*/
+		/*
+		 * JavascriptExecutor executor = (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].scrollIntoView(true);",
+		 * editDoctorsLink);
+		 */
 
 		jsClickNew(editDoctorsLink);
-		
+
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
@@ -1403,7 +1406,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public GetStartedPageMobile navigateToDCERedesign() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(addDrugsLink, 30);
+		// validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
 		if (validateNew(addMyDrugsButton)) {
 			System.out.println("User is on DCE Get started Page");

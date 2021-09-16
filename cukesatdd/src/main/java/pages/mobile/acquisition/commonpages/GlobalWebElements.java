@@ -558,8 +558,8 @@ public class GlobalWebElements extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(MenuMobile);
 
-		
-		validateNew(mobileNav, 5);
+		sleepBySec(5);
+		//validateNew(mobileNav, 5);
 		
 		jsClickNew(shopForAPlan);
 		if (validate(shopForPlanBackButton)) {
@@ -578,8 +578,8 @@ public class GlobalWebElements extends UhcDriver {
 	 */
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
 		jsClickNew(MenuMobile);
-		
-		validateNew(mobileNav, 5);
+		sleepBySec(5);
+		//validateNew(mobileNav, 5);
 		
 		jsClickNew(learnAboutMedicareNavButton);
 		if (validate(learnAboutMedicareBackButton)) {
