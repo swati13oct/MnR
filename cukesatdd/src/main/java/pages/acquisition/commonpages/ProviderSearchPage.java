@@ -410,7 +410,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
-
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
+		
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
 
