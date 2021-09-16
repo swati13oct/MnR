@@ -260,8 +260,17 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     #Then user navigate Doctors lookup session in Doctors page
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
-      | Doctors Search Text | <DoctorsName>   |
+      | Doctors Search Text | <DoctorsName1>   |
       | Multi Doctor        | <isMultiDoctor> |
+    Then user validate doctors info in PRE results page
+      | DoctorsInfo | <doctorsInfo1> |
+    Then user navigates to PRE doctorpage to edit providers
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName2>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user validate doctors info in PRE results page
+      | DoctorsInfo | <doctorsInfo2> |
     Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
