@@ -102,6 +102,9 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "button#viewPlanBtn")
 	private WebElement ViewProfileButton;
 	
+	@FindBy(css = ".modal-inner button[dtmname*='View Saved Plans']")
+	private WebElement ViewSavedPlansButton;
+	
 	@FindBy(css = "li.planTileGrid")
 	private List<WebElement> plantiles;
 	
@@ -113,7 +116,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "button[class*='saved-items-button']")
 	private WebElement mySavedItems ;
 	
-	@FindBy(css = "img[alt*='Shopping Cart']")
+	@FindBy(css = ".saved_items_container button[class*='mySavedItem']")
 	private WebElement ShoppingCartImg;
 		
 	@FindBy(css = "h3#guest-profile")
@@ -165,9 +168,18 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
 	private WebElement FirstRecommendationSectionPlanName;
+	
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card button>span")
+	private WebElement FirstRecommendationSectionButton;
 
-@FindBy(css = "div[class*='log-in'] a")
-private WebElement signInLink;	
+	@FindBy(css = "div[class*='log-in'] a")
+	private WebElement signInLink;	
+	
+	@FindBy(css = "input#agreeButton")
+	private WebElement agreeButton;	
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
+	private WebElement headerNavigationBarHomeTab;
 
 	// Variables
 
@@ -222,15 +234,17 @@ private WebElement signInLink;
 	
 	public String firstRecomPlanName = "";
 	public String planType = "";
+	ArrayList<String> savedplanName = new ArrayList<String>();
 	public String navigateSaveResultsPage() {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		scrollToView(headerNavigationBarHomeTab);
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
-		String curID = String.valueOf(Thread.currentThread().getId());
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
-		validate(saveYourResults, 10);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
+//		scrollToView(saveYourResults);
 		saveYourResults.click();
 		validate(saveResultsTitle);
 		validate(saveResultsPopupClose, 30);
@@ -245,8 +259,11 @@ private WebElement signInLink;
 			if(validate(SignInButton)) {
 				SignInButton.click();
 				signIn(username, password);
-			}else
+			}else {
+				validate(ViewSavedPlansButton);
+				ViewSavedPlansButton.click();
 				System.out.println("Authenciated profile already Signed In");
+			}
 		}
 		
 		
@@ -261,10 +278,11 @@ private WebElement signInLink;
 			guestProfileLink.click();
 			threadsleep(3000);
 		}else {
-			navigatePlanTypeFromMS(plantype);
+			browserBack();
+			threadsleep(3000);
 			navigateSaveResultsPage();
-			validateSaveResultModel(userType);
 			SignInButton.click();
+			threadsleep(2000);
 			signIn(username, password);
 			threadsleep(3000);
 		}
@@ -652,6 +670,14 @@ private WebElement signInLink;
 		Assert.assertTrue(WarningDocMsg.getText().contains("Warning:"), "Doctors Warning message is not displayed");
 		System.out.println("******  Add Location Completed ******");
 	}
+	
+	public void validateSaveResults() {
+		System.out.println("Validating Save Results : ");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+		threadsleep(5000);
+	}
 
 	public void checkCoveragevalue(HashMap<String, String> userInput) {
 		inputValues = userInput;
@@ -661,14 +687,6 @@ private WebElement signInLink;
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");
-	}
-	
-	public void validateSaveResults() {
-		System.out.println("Validating Save Results : ");
-		pageloadcomplete();
-		waitForPageLoadSafari();
-		navigateSaveResultsPage();
-		threadsleep(5000);
 	}
 	
 	public void signIn(String username, String password) {
@@ -698,6 +716,10 @@ private WebElement signInLink;
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
 //			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			if((validate(agreeButton)))
+					agreeButton.click();
+			threadsleep(2000);
+				
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -711,8 +733,8 @@ private WebElement signInLink;
 		String curID = String.valueOf(Thread.currentThread().getId());
 		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(String.valueOf(Thread.currentThread().getId()));
 		String R1PlanType = CommonConstants.firstRecommentionplanType.get(String.valueOf(Thread.currentThread().getId()));
-		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanName+" ****");
-		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanType+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" Recommendation in VP "+R1PlanName+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" PlanType in VP "+R1PlanType+" ****");
 		String R1 = "";
 //		String R1PlanType = planType;
 //		String R1PlanName = firstRecomPlanName;
@@ -739,24 +761,31 @@ private WebElement signInLink;
 					"MA Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"PDP Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"SNP Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("MS")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"SNP Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "MS PlanName Invalid");
+			Assert.assertTrue(R1PlanName.toUpperCase().contains(FirstRecommendationSectionPlanName.getText().trim().toUpperCase()), "MS PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Start Application"), "MS Plan does not have Start Application Button");
 		}
 	}
 

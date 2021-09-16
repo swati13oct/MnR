@@ -125,15 +125,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                              | DrugInfo                                                                                                                                                                              |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO                  | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A                                                     |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                            |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                               |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Complete (HMO D-SNP),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                              | DrugInfo                                                                                                                                                                              |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO                  | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A                                                     |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                            |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                               |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Complete (HMO D-SNP),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
 
   @PRE @planrecommendation @MAPDTile @PREVPPPageElementsMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
@@ -256,16 +256,33 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Priorities      | <priorities>     |
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo> |
+    Then user navigates to PRE doctorpage to add providers
+    #Then user navigate Doctors lookup session in Doctors page
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName1>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user validate doctors info in PRE results page
+      | DoctorsInfo | <doctorsInfo1> |
+    Then user navigates to PRE doctorpage to edit providers
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName2>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user validate doctors info in PRE results page
+      | DoctorsInfo | <doctorsInfo2> |
+    Then user return to vpp page using "return" from edit response page
+    Then user validate UI and API recommendation rankings in results page
 
     @regressionAARP @PREMSPlanTile
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                           |
-      | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),any doctors yet,N/A:Plan 3 (HMO),any doctors yet,N/A:Plan L,any doctors yet,N/A |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              |
+      | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                           |
-      | UHC  |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),any doctors yet,N/A:Plan 3 (HMO),any doctors yet,N/A:Plan L,any doctors yet,N/A |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              |
+      | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A |
 
   @PRE @planrecommendation @MAPDTile @PREResultsMAPDSNP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page

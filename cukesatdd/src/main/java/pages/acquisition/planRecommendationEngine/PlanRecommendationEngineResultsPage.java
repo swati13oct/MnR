@@ -423,7 +423,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "div#toggleYearSection button[class*='prev-year']")
 	private WebElement previousPlanYear; // Current Year
 	
-	@FindBy(xpath = "//span[contains(text(),'Enroll in plan')]")
+	@FindBy(xpath = "//*[contains(text(),'Enroll in plan')]")
 	private WebElement enrollBtnPlanDetails;
 	
 	@FindBy(css = "button#enrollment-next-button")
@@ -484,6 +484,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 
 		@FindBy(css = ".subheading-text a")
 		private WebElement EditMyResponsesLink;
+		
+		@FindBy(css = "li[class*='view-ms-plans']")
+		private WebElement viewMedigapPlansLink;
 
 		@FindBy(css = "div.uhc-pre-card")
 		private List<WebElement> RecommendationSection;
@@ -1732,6 +1735,7 @@ public void useraddDrugsPREResult() {
 	threadsleep(3000);
 }
 
+
 public void userPreDCE() {
 	if(validate(MAViewPlansLink,15) ) {
 		MAViewPlansLink.click();
@@ -1837,6 +1841,27 @@ public void validateSavePlan(String planInfo, String year) {
 	guestViewSavedBtn.click();
 	verifySavePlans(year, vppPlans);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
+}
+
+public void savingPlansInPRE(String planInfo, String year) {
+	System.out.println("Saving plans in PRE Results : ");
+	String plan = "";
+	String[] planslist = planInfo.split(":");
+	for (int i = 0; i < planslist.length; i++) {
+		plan = planslist[i];
+		threadsleep(3000);
+		saveplans(plan);
+		threadsleep(3000);
+		if(i==1) {
+			validate(keepshoppingPlansBtn);
+			keepshoppingPlansBtn.click();
+			threadsleep(3000);
+		}
+			
+	}
+	Collections.sort(vppPlans);
+	System.out.println(vppPlans);
+	threadsleep(3000);
 }
 
 
@@ -2180,7 +2205,7 @@ public void ValidatePREWithoutMSPlan(String userType) {
 		validate(PREImage, 30);
 	} else {
 		validate(SavedRecomTitle, 30);
-		validate(PREImage, 30);
+//		validate(PREImage, 30);
 		validate(EditMyResponsesLink, 30);
 	}
 }
@@ -2220,6 +2245,13 @@ public void SavingMsplan() {
 	threadsleep(2000);
 	validate(MS1stPlanSaveImg, 20);
 	MS1stPlanSaveImg.click();
+}
+
+public void NavigatingVPPMS() {
+	System.out.println("Clicking on View Medigap Plans in PRE ResultPage...");
+	validate(viewMedigapPlansLink);
+	viewMedigapPlansLink.click();
+	threadsleep(5000);
 }
 
 public boolean click_ViewPlanLink(WebElement plantype) {

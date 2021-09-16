@@ -827,6 +827,12 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsPREResult();
    	}
 	
+	@When("^user navigate to Drug page using edit drugs from PREResult page$")
+   	public void edit_drugs_preResult_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.useraddDrugsPREResult();
+   	}
+	
 	@Then("^user navigate from VPP to DCE tool$")
    	public void vpp_pre() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -1016,6 +1022,14 @@ public class PlanRecommendationEngineStepDefinition {
 		preEditpage.validateSaveResults();
 	}
 	
+	@Then("^user save Plans in PRE Result page$")
+   	public void save_plans(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		checkpopup();
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.savingPlansInPRE(inputValues.get("Plan Info"),inputValues.get("Plan Year"));
+	}
+	
 	@Then("^user navigate to visitor profile and open PRE Widget$")
     public void pre_Widget_open(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -1071,6 +1085,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.NavigatingVPPMS();
 		planSelectorResultspage.SavingMsplan();
 		preEditpage.shoppingcartNavigation(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
 		planSelectorResultspage.ValidatePREWithMSPlan();
@@ -1201,6 +1216,13 @@ public class PlanRecommendationEngineStepDefinition {
         headerAndFooter.storedZipcode(inputValues.get("Zip Code"));
                     
     }
+	
+	@Then("^user navigates to PRE doctorpage to add providers$")
+	@Then("^user navigates to PRE doctorpage to edit providers$")
+	public void addDoctorLink() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.addDoctorsLink();
+	}
 	
 	@Then("^the user do poc$")
    	public void poc_new_results_page() {

@@ -16,7 +16,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
 						"timeline:target" },
-				tags = "@PRE_UAT_DCE_VPP_Scenario-4")
+				tags = "@TestRun")
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {

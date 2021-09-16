@@ -502,6 +502,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		
 // Learn about medicare inner elements	
 //		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		backtoshopforaplan();
 		state();
 		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 		headerEligibilityLink.click();
