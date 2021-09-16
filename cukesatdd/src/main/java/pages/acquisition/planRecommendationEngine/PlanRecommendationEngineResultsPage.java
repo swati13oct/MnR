@@ -513,7 +513,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		private WebElement PREWidgetCallNum;
 	
 		
-		@FindBy(css = ".planNameMinHeight h2")
+		@FindBy(css = "div.content h2")
 		private WebElement planNameinPlanDetailsPage;
 	
 // External page elements
@@ -2270,13 +2270,13 @@ public void validateLinks(String function) {
 	if(function.equalsIgnoreCase("EditMyResponse button")) {
 	validate(EditMyResponsesLink, 10);
 	EditMyResponsesLink.click();
-	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html/editMyPreferences"), "***Edit My Response Page Not Opened***");
+	Assert.assertTrue(driver.getCurrentUrl().contains("/editmypreferences"), "***Edit My Response Page Not Opened***");
 	}else if(function.equalsIgnoreCase("Enroll In Plan")) {
 		String planName = FirstRecommendationSectionPlanName.getText().trim();
 		validate(FirstRecommendationSectionEnrollToPlanButton, 10);
 		FirstRecommendationSectionEnrollToPlanButton.click();
-		Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "***OLE Page Not Opened***");
-		Assert.assertTrue(planNameEnrollPage.getText().trim().contains(planName), "PlanName Invalid in OLE");
+		Assert.assertTrue(driver.getCurrentUrl().contains("/welcome"), "***OLE Page Not Opened***");
+		Assert.assertTrue(planNameEnrollPageExternal.getText().trim().contains(planName), "PlanName Invalid in OLE");
 	}else if(function.equalsIgnoreCase("View Plan Details")) {
 		String planName = FirstRecommendationSectionPlanName.getText().trim();
 		validate(FirstRecommendationSectionViewPlanDetails, 10);
@@ -2286,7 +2286,13 @@ public void validateLinks(String function) {
 	}else if(function.equalsIgnoreCase("View ranked list of plans")) {
 		validate(ViewRankedListOfPlanLinks, 10);
 		ViewRankedListOfPlanLinks.click();
-		Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html#/result"), "***PRE-Result Page Not Opened***");
+		Assert.assertTrue(driver.getCurrentUrl().contains("/result"), "***PRE-Result Page Not Opened***");
+	}
+}
+
+public void deeplinkforMSStates(String status) {
+	if(status.equalsIgnoreCase("Approved")) {
+		
 	}
 }
 
