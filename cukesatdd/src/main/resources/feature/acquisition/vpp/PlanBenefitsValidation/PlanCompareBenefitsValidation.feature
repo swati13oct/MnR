@@ -92,6 +92,16 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2022_17 |
+      
+      @planCompareBenefitsAARP18 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_18 |
+      
+      @planCompareBenefitsAARP19 @planCompareMA
+    Examples: 
+      | workSheet    |
+      | Sheet2022_19 |
 
     @planCompareBenefitsPDPAARP01
     Examples: 
