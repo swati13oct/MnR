@@ -72,13 +72,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                     |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | Plan 1 (HMO),You haven't added any drugs,N/A |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                                      |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                     |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Plan 1 (HMO),You haven't added any drugs,N/A |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                                      |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
 
   @PRE @planrecommandonation @PREResultsPage @PREPDPNoDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -260,14 +260,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     #Then user navigate Doctors lookup session in Doctors page
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
-      | Doctors Search Text | <DoctorsName1>   |
+      | Doctors Search Text | <DoctorsName1>  |
       | Multi Doctor        | <isMultiDoctor> |
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo1> |
     Then user navigates to PRE doctorpage to edit providers
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
-      | Doctors Search Text | <DoctorsName2>   |
+      | Doctors Search Text | <DoctorsName2>  |
       | Multi Doctor        | <isMultiDoctor> |
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo2> |

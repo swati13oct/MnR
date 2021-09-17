@@ -194,13 +194,13 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password    |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123456 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName          | password    |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DigitalDestroyer1 | DDpwd123456 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234 |
 
   @PRE @ViewRecommendationEditResponseBtn
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection> , <UserType>  - To Validate Scenario4 PRE Widget Reommendations in visitor profile page

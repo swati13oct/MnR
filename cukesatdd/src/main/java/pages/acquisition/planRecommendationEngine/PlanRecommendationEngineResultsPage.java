@@ -2196,6 +2196,7 @@ public String verifyplanNameCompare(WebElement plan,WebElement planCompare) {
 
 public void ValidatePREWithoutMSPlan(String userType) {
 	System.out.println("Checking PRE widget in VP without MS Plan saving...");
+	threadsleep(10000);
 	validate(PRESection, 30);
 	PRESection.click();
 	if (userType.equalsIgnoreCase("Guest")) {
@@ -2281,6 +2282,7 @@ public void validateLinks(String function) {
 		String planName = FirstRecommendationSectionPlanName.getText().trim();
 		validate(FirstRecommendationSectionViewPlanDetails, 10);
 		FirstRecommendationSectionViewPlanDetails.click();
+		threadsleep(5000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/details"), "***Plan Details Page Not Opened***");
 		Assert.assertTrue(planNameinPlanDetailsPage.getText().trim().contains(planName), "PlanName Invalid in PlanDetailsPage");
 	}else if(function.equalsIgnoreCase("View ranked list of plans")) {
