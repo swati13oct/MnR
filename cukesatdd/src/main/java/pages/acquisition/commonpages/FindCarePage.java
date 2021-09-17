@@ -321,6 +321,7 @@ public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	System.out.println("In find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PlacesButton);
 	waitforElement(Whichtypeofplace);
 	jsClickNew(ClinicsButton);
@@ -380,6 +381,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 	System.out.println("in find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PlacesButton);
 	CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
 	jsClickNew(HospitalsButton);
