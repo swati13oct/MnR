@@ -28,6 +28,9 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
 	private WebElement GetStartedShopPage;
 
+	@FindBy(xpath = "//*[@id='zipcodemeded-0']")
+	public WebElement zipcodeFieldShopPage;
+
 	@FindBy(id = "updates-email")
 	private WebElement updatesemail;
 

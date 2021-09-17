@@ -64,6 +64,10 @@ public class EnterZipCodePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
 	private WebElement GetStartedShopPage;
 	
+
+	@FindBy(xpath = "//*[@id='zipcodemeded-0']")
+	public WebElement zipcodeFieldShopPage;
+	
 	
 	public void validateZipComp(String zipCode) {
 		try {
@@ -79,7 +83,8 @@ public class EnterZipCodePageMobile extends UhcDriver {
 //				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 //				System.out.println("Validating VPP page for Zip code " + zipCode);
 			
-			
+			scrollToView(zipcodeFieldShopPage);
+			sendkeysMobile(zipcodeFieldShopPage, zipCode);
 			
 			jsClickNew(GetStartedShopPage);
 				Thread.sleep(20000);
