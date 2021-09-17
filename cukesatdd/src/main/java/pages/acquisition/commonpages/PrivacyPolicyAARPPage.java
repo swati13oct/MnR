@@ -17,7 +17,8 @@ import acceptancetests.util.CommonUtility;
 public class PrivacyPolicyAARPPage extends GlobalWebElements{
  
 	//@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	@FindBy(xpath="//span[contains(@class,'heading-1')]")
+	//@FindBy(xpath="//span[contains(@class,'heading-1')]")
+	@FindBy(xpath="(//span[contains(@class,'heading-1')])[2]")
 	public WebElement header;
 	
 	//@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")

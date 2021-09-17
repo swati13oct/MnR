@@ -1,5 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,6 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -78,32 +83,30 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		return null;
 	}
 
-	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
-		
-		sendkeysMobile(zipcodeField, zipcode);
-		//planTypeDropDownTitle.click();
-		System.out.println("zipcode entered");
-		jsClickNew(planTypeDropDownTitle);
+	public List<String> enterZipDistanceDetails(String zipcode, String distance, String county) {
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
-		// List<String> testNote=new ArrayList<String>();
+		List<String> testNote = new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
-		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
+		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option",
+				pharmacyValidate(distanceDropownID));
 		if (distance.equals("1"))
 			distance = distance + " mile";
 		else
 			distance = distance + " miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
+		scrollToView(distanceDropownID);
 		// selectFromDropDownByText(driver, distanceDropownID, distance);
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
+		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		// searchbtn.click();
+
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) {
@@ -118,7 +121,15 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					jsClickNew(countyOption);
+					CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
+																							// afterward
+				} else if (validate(countyModal)) {
+					pharmacyValidate(countyModal);
+					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
@@ -128,28 +139,29 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 							!pharmacyValidate(countyModal));
 				}
 			}
-			System.out.println("*****Zipcode, distance and County details are entered******");
+			System.out.println("*****County details are entered******");
 		} else {
-			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
+			System.out.println("*****Zip format is not right******");
 		}
-		// return testNote;
+		return testNote;
 	}
 
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-		scrollToView(zipcodeField);
-		zipcodeField.sendKeys(zipcode);
-		System.out.println("checking for the second time while entering zipcode");
-		//mobileactionsendkeys(zipcodeField, zipcode);
-		// if(zipcode.length()!=5){
-		// distanceOption_15miles.click();
-		jsClickNew(distanceOption_15miles);
-		// }
-		// searchbtn.click();
-		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
-		// pharmacyValidate(zipcodeErrorMessage));
+
+		sendkeysMobile(zipcodeField, zipcode);
+		if(zipcode.length()!=5){
+//			jsClickNew(zipCodeFieldLabel);
+			zipCodeFieldLabel.click();
+			sleepBySec(2);
+			/*jsMouseOver(distanceDropDownField);
+			distanceDropDownField.click();
+			distanceOption_15miles.click();*/
+		}
+		//searchbtn.click();
+		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**
@@ -178,8 +190,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * 
 	 * timeStr = (String) sysTimeJsonObj.get("systemtime"); } catch (ParseException
 	 * e) { e.printStackTrace();
-	 * Assertion.assertTrue("PROBLEM - unable to find out the system time", false); }
-	 * driver.close(); driver.switchTo().window(winHandleBefore); return timeStr; }
+	 * Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
+	 * } driver.close(); driver.switchTo().window(winHandleBefore); return timeStr;
+	 * }
 	 */
 
 	public List<String> getListOfAvailablePlanNames() {
@@ -198,12 +211,12 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 
-		// jsClickMobile(seletPlandropdown);
+		// jsClickNew(seletPlandropdown);
 		sleepBySec(1);
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/* To handle iOS dropdown */
 		jsClickNew(planTypeDropDownTitle);
-		//planTypeDropDownTitle.click();
+		// planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
@@ -212,7 +225,12 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); // note: let the page settle down
-		searchbtn.click();
+//		searchbtn.click();
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			grantPermissionOnAndroidChrome(searchbtn);
+		} else {
+			jsClickNew(searchbtn);
+		}
 		sleepBySec(50);
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
@@ -265,7 +283,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			if (total > 10) {
 				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
 				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", pharmacyValidate(leftArrow));
-				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", pharmacyValidate(rightArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element",
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -395,7 +414,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		jsClickMobile(yearDropdown);
+		jsClickNew(yearDropdown);
 		Select yearList = new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
@@ -438,27 +457,51 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"
 						+ testPlanYear + "' | Actual link text='" + pdfLink.getText() + "'",
 				pdfLink.getText().contains(testPdfLinkTextDate));
-		String winHandleBefore = driver.getWindowHandle();
+		
 		CommonUtility.checkPageIsReady(driver);
-		pdfLink.click();
-		Thread.sleep(2000); // note: keep this for the page to load
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs = afterClicked_tabs.size();
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
-		String currentURL = driver.getCurrentUrl();
-		String expectedURL = pdfType;
-		Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
-				+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
-		Assertion.assertTrue(
-				"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
-						+ testPdfLinkTextDate + "' | Actual URL='" + currentURL + "'",
-				currentURL.contains(testPdfLinkTextDate));
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		currentURL = driver.getCurrentUrl();
-		expectedURL = "Pharmacy-Search";
-		Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
-				currentURL.contains(expectedURL));
+		
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			String yearToVerifyInPdf = ", " +testPlanYear; 
+			grantPermissionOnAndroidChrome(pdfLink);
+			String pdfName = pdfType.split("\\.")[0];
+			byte[] pdfContent = getDownloadedPdfFileContentAndroid(pdfName);
+			try {
+				PDDocument document = PDDocument.load(pdfContent);
+				String PDFText = new PDFTextStripper().getText(document);
+				
+				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
+						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
+				
+				Assertion.assertTrue("PROBLEM - PDF  is not opening", PDFText.contains(ExpectedPDFText));
+				Assertion.assertTrue("PROBLEM - unable to locate expected year in the PDF. PDF should contain year '"
+						+ yearToVerifyInPdf + "'",PDFText.contains(yearToVerifyInPdf));
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			String winHandleBefore = driver.getWindowHandle();
+			jsClickNew(pdfLink);
+			Thread.sleep(2000); // note: keep this for the page to load
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int afterClicked_numTabs = afterClicked_tabs.size();
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
+			String currentURL = driver.getCurrentUrl();
+			String expectedURL = pdfType;
+			Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
+					+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
+			Assertion.assertTrue(
+					"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
+							+ testPlanYear + "' | Actual URL='" + currentURL + "'",
+					currentURL.contains(testPlanYear));
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			currentURL = driver.getCurrentUrl();
+			expectedURL = "Pharmacy-Search";
+			Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+					currentURL.contains(expectedURL));
+		}
 	}
 
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl,
@@ -494,7 +537,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		/*
 		 * wd.context("NATIVE_APP");
 		 * wd.findElement(By.xpath(".//android.widget.Button[@text='Allow']")).click();
-		 * jsClickMobile(contactUsLink);
+		 * jsClickNew(contactUsLink);
 		 */
 		// contactUsLink.click();
 		/*
@@ -635,14 +678,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void vppSelectFirstPlanViewDetail(String planType) {
-		WebElement testElementList = listOfMaPlans;
+		List<WebElement> testElementList = listOfMaPlans;
 		if (planType.equalsIgnoreCase("PDP"))
 			testElementList = listOfPdpPlans;
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList = listOfSnpPlans;
 		Assertion.assertTrue("PROBLEM - unable to locate plan for planType='" + planType + "'",
-				testElementList.isDisplayed());
-		jsClickNew(testElementList);
+				testElementList.size() > 0);
+		jsClickNew(testElementList.get(0));
 		CommonUtility.checkPageIsReady(driver);
 		waitForPageLoadSafari();
 	}
@@ -663,7 +706,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		Assertion.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
 		// vpp_onlinePharmacyDirectoryLnk.click();
-		jsClickMobile(vpp_onlinePharmacyDirectoryLnk);
+		jsClickNew(vpp_onlinePharmacyDirectoryLnk);
 		CommonUtility.checkPageIsReady(driver);
 		// Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -763,7 +806,6 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 */
 	public boolean pharmacyValidate(WebElement element) {
 		long timeoutInSec = 20;
-		scrollToView(element);
 		return pharmacyValidate(element, timeoutInSec);
 	}
 
@@ -780,6 +822,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// validate(element, timeoutInSec)
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
+			//steps for scrolling element in mobile view
+			/*JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);*/
+			
 			if (element.isDisplayed()) {
 				System.out.println("Element '" + element.toString() + "' found!!!!");
 				return true;

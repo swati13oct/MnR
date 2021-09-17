@@ -78,7 +78,7 @@ public class GlobalTearDown {
                 driver.quit();
                 System.out.println("---- Script Execution Completed ----");
             } else {
-                scenario.log("Teardown received a null object !");
+                scenario.log("Teardown received a null object ! SauceLab video link for the job=" + getLoginScenario().returnJobURL());
             }
         } catch (WebDriverException e) {
             if (null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)) {

@@ -14,9 +14,11 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -29,16 +31,23 @@ import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
+import pages.acquisition.tfn.CampaignTFNPage;
 
 /**
  * Functionality: Validate different Campaign External Links
  */
 
 public class CampaignExternalLinkStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
@@ -47,9 +56,9 @@ public class CampaignExternalLinkStepDefinition {
 	}
 
 	WebDriver wd;
-	
-	
-	
+
+
+
 	@Given("^user is on campaign external Links page$")
 	public void user_ison_externallinks(DataTable givenAttributes) throws Exception  {
 		wd = getLoginScenario().getWebDriverNew();
@@ -60,21 +69,21 @@ public class CampaignExternalLinkStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-	
+
 		String url = memberAttributesMap.get("External Link");
 		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
-		
+
 		campaignExternalLinkspage.openUrl(url);
-	
+
 	}
 	/*Added the below step for Scenario 6 in
 	 * */
 	@Then("^the user validate aarp medicare plans11 page external link$")
 	public void validate_linkson_aarp_ExternalPage_medicare_plans(DataTable givenAttributes) throws InterruptedException {
-	
+
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -85,13 +94,13 @@ public class CampaignExternalLinkStepDefinition {
 			String zipcode = memberAttributesMap.get("Zip Code");
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-			
-			
-			
+
+
+
 			AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 		}
-	
+
 	@Then("^the user validate links and other options on morganstanley external link page$")
 	public void validate_linkson_ExternalPage_morganstanley(DataTable givenAttributes) throws InterruptedException {
 
@@ -111,8 +120,8 @@ public class CampaignExternalLinkStepDefinition {
 		campaignExternalLinkspage.validateMorganStanleyExternalPage(TFNXpath, ExpectedTFNNo);
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
-	
-	
+
+
 	@Then("^the user validate links and other options on medicare prescription drug external link page$")
 	public void validate_linkson_ExternalPage_pdp(DataTable givenAttributes) throws InterruptedException {
 
@@ -132,7 +141,7 @@ public class CampaignExternalLinkStepDefinition {
 		campaignExternalLinkspage.validateMedicarePrescriptionDrugExternalPage(TFNXpath, ExpectedTFNNo);
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
-	
+
 	@Then("^User able to land on Shop for a plan page in new tab$")
 	public void the_user_clicks_on_plan_and_pricing_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -140,7 +149,7 @@ public class CampaignExternalLinkStepDefinition {
 		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnPlanandPricingBtn();
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
-	
+
 	@Then("^the user clicks on Estimate your drug costs to land on Drug cost page from External link$")
 	public void the_user_clicks_on_Estimate_Drug_Cost_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -151,7 +160,7 @@ public class CampaignExternalLinkStepDefinition {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-	
+
 	@When("^user click on Estimate your Drug Cost button under Look up your drugs title$")
 	public void the_user_clicks_on_Look_up_drug_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -162,7 +171,7 @@ public class CampaignExternalLinkStepDefinition {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-	
+
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11_page(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -175,12 +184,12 @@ public class CampaignExternalLinkStepDefinition {
 			String zipcode = memberAttributesMap.get("Zip Code");
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-	
+
 			AcquisitionHomePage acquisitionHomePage = 	campaignExternalLinkspage.clickOnmedicareplans11backLink(zipcode);
 
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 		}
-	
+
 	@When("^user clicks on Find Plans and Pricing to open a new tab$")
 	public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -203,7 +212,7 @@ public class CampaignExternalLinkStepDefinition {
 		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnLearnAboutMedicareBtn();
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
-	
+
 	@Then("^user verify TFN on AARP external links page$")
 	public void user_verify_TFN_on_AARP_external_links_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -222,17 +231,17 @@ public class CampaignExternalLinkStepDefinition {
 		campaignExternalLinkspage.validateAARPExternalPage(TFNXpath, ExpectedTFNNo,ExpectedWorkingHrs);
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
-	
+
 	@Then("^the user navigate back to aarp medicare plans11 page privacy link$")
 	public void navigate_aarp_medicare11_privacy_links() throws InterruptedException {
-	
+
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-			
+
 			AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 		}
-	
+
 	@Then("^the user validate links and other options on aarp medicare plans11 external link page$")
 	public void validate_linkson_ExternalPage_aarp_medicare_plans11(DataTable givenAttributes) throws InterruptedException {
 
@@ -252,7 +261,7 @@ public class CampaignExternalLinkStepDefinition {
 		campaignExternalLinkspage.validateAARPMedicarePlans11ExternalPage(TFNXpath, ExpectedTFNNo);
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
-	
+
 	@Then("^user navigate back to external url for medicare advatnatge plan$")
 	public void user_vavigate_Bakc_externallinks(DataTable givenAttributes) throws Exception  {
 		wd = getLoginScenario().getWebDriverNew();
@@ -263,23 +272,32 @@ public class CampaignExternalLinkStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-	
+
 		String url = memberAttributesMap.get("External Link");
 		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
-		
+
 		campaignExternalLinkspage.navigateBacktoExternalurl(url);
-	
+
 	}
+
+	@When("^user clicks on Find plans link in Plan Finder section and redirects to PRE page$")
+	public void user_clicks_on_Find_plans_link_in_Plan_Finder_section_and_redirects_to_PRE_page() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+	        .getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+     campaignExternalLinkspage.clickFindPlansLink();
+
+	}
+
 	@When("^user clicks on Find Plans in your area to open a new tab$")
 	public void user_clicks_on_Find_Plans_in_your_Area_to_open_a_new_tab() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickFindPlansinyourArea();
 	}
-	
+
 
 @Then("^user closes current tab and navigate to previous tab$")
 public void user_closes_current_tab_and_navigate_to_previous_tab() {
@@ -400,26 +418,26 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		noteList.add("");
 		noteList.add("===== TEST NOTE ================================================");
 
-		
-		
-		  String testSiteUrl = "https://www.aarpmedicareplans.com/"; 
+
+
+		  String testSiteUrl = "https://www.aarpmedicareplans.com/";
 		/*
 		 * String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
-		 * 
-		 * 
+		 *
+		 *
 		 * noteList.add("test run at stage time =" + currentEnvTime);
-		 * 
+		 *
 		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME,
 		 * currentEnvTime);
-		 * 
+		 *
 		 * String[] tmpDateAndTime = currentEnvTime.split(" "); String[] tmpDate =
 		 * tmpDateAndTime[0].split("/"); String envTimeYear = tmpDate[tmpDate.length -
 		 * 1]; System.out.println("TEST - sysTimeYear=" + envTimeYear);
-		 * 
+		 *
 		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR,
 		 * envTimeYear);
 		 */
-		  
+
 		  	String timeStr = "";
 			String winHandleBefore = wd.getWindowHandle();
 			System.out.println("Proceed to open a new blank tab to check the system time");
@@ -432,12 +450,12 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 			js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
 			//String winHandleAfter = wd.getWindowHandle();
 			for (String winHandle : wd.getWindowHandles()) {
-				
+
 				wd.switchTo().window(winHandle);
 				if(wd.getTitle().equalsIgnoreCase(""))
 					break;
 				}
-			
+
 			Thread.sleep(2000);
 			WebElement currentSysTimeElement = wd.findElement(By.xpath("//body"));
 			String currentSysTimeStr = currentSysTimeElement.getText();
@@ -456,12 +474,12 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 			}
 			wd.close();
 			wd.switchTo().window(winHandleBefore);
-		
-			String[] tmpDateAndTime = timeStr.split(" "); 
-			String[] tmpDate =tmpDateAndTime[0].split("/"); 
-			String envTimeYear = tmpDate[tmpDate.length - 1]; 
+
+			String[] tmpDateAndTime = timeStr.split(" ");
+			String[] tmpDate =tmpDateAndTime[0].split("/");
+			String envTimeYear = tmpDate[tmpDate.length - 1];
 			System.out.println("TEST - sysTimeYear=" + envTimeYear);
-		 
+
 
 		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 		noteList.addAll(testNote);
@@ -543,7 +561,7 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		}
 
 	}
-	
+
 
 @When("^user clicks on Find Plans and Pricing to open a new tab in lower env$")
 public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab_in_lower_env() {
@@ -640,7 +658,7 @@ public void the_user_clicks_on_View_Plans_and_Pricing_button_on_PDP_external_pag
 	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 	VPPPlanSummaryPage plansummaryPage = null;
-	
+
 	String env=MRScenario.environment;
 	campaignExternalLinkspage.updateHrefUrlVPP_Script7_1(env);
 	campaignExternalLinkspage.viewPlansAndPricing();
@@ -683,13 +701,13 @@ public void validate_linkson_aarp_medicare_plans11_page_lower_env(DataTable give
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
-		
+
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		
+
 		String env=MRScenario.environment;
 		campaignExternalLinkspage.updateHrefUrlVPP_Script6(env);
-		
+
 		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
@@ -748,7 +766,7 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 	String env=MRScenario.environment;
 	campaignExternalLinkspage.updateHrefUrlVPP_Script5(env);
-	
+
 	VPPPlanSummaryPage plansummaryPage = null;
 	campaignExternalLinkspage.enterZipcodeFindPlan(zipcode);
 
@@ -765,5 +783,416 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		Assert.fail("Error Loading VPP plan summary page");
 	}
 }
+
+	@Given("^user is on new campaign external Links page$")
+	public void user_ison_externallinksUAT(DataTable givenAttributes) throws Exception  {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String url = memberAttributesMap.get("External Link");
+		System.out.println("@@Url@@@"+url);
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+
+		campaignExternalLinkspage.openUrl(url);
+
+	}
+//
+//@Given("^the user navigates to new Campaign External links$")
+//public void the_user_navigates_to_new_Campaign_External_links(DataTable givenAttributes)
+//		throws Throwable {
+//	WebDriver wd = getLoginScenario().getWebDriverNew();
+//	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//	memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+//	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//	for (int i = 0; i < memberAttributesRow.size(); i++) {
+//		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//				memberAttributesRow.get(i).getCells().get(1));
+//	}*/
+//	String path = memberAttributesMap.get("PagePath");
+//	path = path.replace("!", "#");
+//	System.out.print("Path to Acq page : " + path);
+//	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+//			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+//	campaignExternalLinkspage.navigateToPath(path);
+//}
+
+	@Then("^user validates Current location and change location$")
+	public void user_validates_Current_location_and_change_location(DataTable givenAttributes) throws Throwable {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String zipcodeSingle = memberAttributesMap.get("zipcodeSingle");
+		String zipcodeMulti = memberAttributesMap.get("zipcodeMulti");
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateAARPExternalPageZipCode(zipcodeSingle, zipcodeMulti);
+	}
+
+
+	@Then("^user validates error messages on request an appointment$")
+	public void user_validates_error_messages_on_request_an_appointment() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateErrorMsg();
+	}
+
+	@Then("^user enters the details on request an appointment$")
+	public void user_enters_the_details_on_request_an_appointment() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.enterdetais();
+
+	}
+
+	@Then("^user clicks on find plans in your area and navigates to shop for a plan$")
+	public void user_clicks_on_find_plans_in_your_area_and_navigates_to_shop_for_a_plan() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateFindPlansInyourArea();
+		campaignExternalLinkspage.naviagteBack();
+	}
+
+	@When ("user clicks on Estimate Your Prescription Drug Costs from MA external page")
+	public void user_clicks_on_Estimate_Prescription_Drug_Costs_MA_External_page() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.validateDCEExternallinkMA();
 }
 
+	@And("^user clicks on get started to start questionnaire$")
+	public void clicks_on_get_started_button_to_start_questionaire(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			String zipcode = memberAttributesMap.get("Zip Code");
+			System.out.println("Zipcode is:"+zipcode);
+			String county = memberAttributesMap.get("CountyDropDown");
+			System.out.println("Email is:"+county);
+			String isMultiCounty = memberAttributesMap.get("Is Multi County");
+			System.out.println("Entered Search Key is:"+isMultiCounty);
+
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+			CampaignExternalLinks campaignExternalLinkspage=new CampaignExternalLinks(wd);
+			//CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					//.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		if (isMultiCounty.equalsIgnoreCase("NO")) {
+			campaignExternalLinkspage.startQuestionnaire(zipcode);
+		} else {
+			campaignExternalLinkspage.startQuestionnaireWithCounty(zipcode, county);
+		}
+	}
+
+
+	@Then("^user clicks on find a doctor and validates the page$")
+	public void user_clicks_on_find_a_doctor_and_validates_the_page() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateFindADoc();
+		campaignExternalLinkspage.naviagteBack();
+	}
+
+	@Then("^user clicks on privacy policy link$")
+	public void user_clicks_on_privacy_policy_link() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validatePrivacy();
+	}
+
+	@Then("^user clicks on accessibility link$")
+	public void user_clicks_on_accessibility_link() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateAccess();
+	}
+
+	@When ("user clicks on Drug cost estimator from external page")
+	public void user_clicks_on_Drug_cost_estimator_from_external_page() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.navigateToDCERedesignFromExternaltakeadvantagePage();
+	}
+
+	@When("^user clicks on Find Plans and Pricing on take advantage page$")
+	public void user_clicks_on_Find_Plans_and_Pricing_on_take_advantage_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansPricingtakeadvantage();
+	}
+
+	@Then("^user validates error messages on get more information$")
+	public void user_validates_error_messages_on_get_more_information() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateErrorMsgtakeadvantage();
+	}
+	@Then("^user enters the details on get more information$")
+	public void user_enters_the_details_on_get_more_information() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.enterdetailstakeadvantage();
+
+	}
+
+	@Then("user validates zipcode component and navigates to VPP")
+	public void user_validates_zipcode_component_and_navigates_to_vpp() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validatezipcodecomponent();
+	}
+
+	@Then("user clicks on view plans and pricing and navigates to VPP")
+	public void user_clicks_on_view_plans_and_pricing_and_navigates_to_vpp() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickonViewpricingAndNavigatesToVPP();
+	}
+
+	@Then("user clicks on estimate your prescription drug costs and navigates to DCE")
+	public void user_clicks_on_estimate_your_prescrption_drug_costs_and_navigates_to_dce() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickonPrescriptionDrugCostAndNavigatesToDCE();
+	}
+
+	@Then("user clicks on estimate drug costs button and navigates to DCE")
+	public void user_clicks_on_estimate_drug_costs_button_and_navigates_to_dce() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickonEstimateDrugCostBtnAndNavigatesToDCE();
+	}
+	@Then("user clicks on start now and navigates to pharmacy page")
+	public void user_clicks_on_start_now_and_navigates_to_pharmacy_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		PharmacySearchPage pharmacySearchPage = campaignExternalLinkspage.clickonStartNowAndNavigatesToPharmacyPage();
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+	}
+
+	@Then("user clicks on view plans and pricing button and navigates to VPP")
+	public void user_clicks_on_view_plans_and_pricing_button_and_navigates_to_vpp() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickonViewPlanPricingBtnAndNavigatesToVPP();
+	}
+
+	@Then("^user navigate back to external url for prescription drug plan$")
+	public void user_navigate_Back_prescription_drug_plan(DataTable givenAttributes) throws Exception  {
+		wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String url = memberAttributesMap.get("External Link");
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+
+		campaignExternalLinkspage.navigateBacktoExternalurl(url);
+
+	}
+
+	@When("^user clicks on Find Plans and Pricing to open in same tab$")
+	public void user_clicks_on_Find_Plans_and_Pricing_to_open_in_same_tab() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansPricing();
+	}
+
+	@When("^user clicks on Find Plans in your area on MA page$")
+	public void user_clicks_on_Find_Plans_in_your_area_on_MA_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansinyourArea();
+	}
+
+
+	@And("^user select plantype in the coverage options page$")
+	public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String plantype = memberAttributesMap.get("Plan Type");
+		if (!(plantype.isEmpty())) {
+			campaignExternalLinkspage.selectCoverageOption(plantype);
+		}
+	}
+
+	@Then("^user select add drug option in the Drug page$")
+		public void select_add_drugs_option(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.drugsInitiate(memberAttributesMap.get("Drug Selection"));
+		campaignExternalLinkspage.drugsHandlerWithdetails(memberAttributesMap.get("Drug Details"));
+		campaignExternalLinkspage.continueNextpage();
+		}
+
+	@Then("^user validate loading results page$")
+		public void user_validate_results_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.resultsloadingpage();
+		}
+
+	@Then("^user validates plan recommendations in the results page$")
+		public void view_recommendations_results_page(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String zip = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		campaignExternalLinkspage.resultsUI(zip,county);
+		}
+
+
+	@When("^the user click on view plan in results page$")
+	public void user_clicks_on_view_plans_in_results_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickViewResults();
+
+	}
+
+	@And("^User clicks on Back to Plans on detail page$")
+	public void user_clicks_on_Back_To_Plan() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.backToPlans();
+
+	}
+	@And("^the user clicks the plans of the below plan type$")
+	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+
+		campaignExternalLinkspage.viewPlanSummary(plantype);
+
+	}
+
+	@Then("^the user views plan details for selected plan and validates$")
+	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
+		String PlanName = givenAttributes.cell(0, 1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String PlanPremium = campaignExternalLinkspage.getPlanPremium(PlanName, planType);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		campaignExternalLinkspage.clickOnViewMoreForPlan(PlanName);
+		CampaignExternalLinks campaignExternalLinkspagevppDetails = campaignExternalLinkspage.navigateToPlanDetails(PlanName, planType);
+		if (campaignExternalLinkspage != null) {
+			getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE,  campaignExternalLinkspagevppDetails);
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^the user clicks on Enroll Now in Details Page to start the OLE flow on the site$")
+	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+				//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = "";
+				//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String TFN;
+		CampaignExternalLinks campaignExternalLinks = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		TFN = campaignExternalLinks.GetTFNforPlanType();
+		WelcomePage welcomePage = campaignExternalLinks.Enroll_OLE_Plan(PlanName);
+		// }
+		String PlanPremium = "";
+				//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("Plan Year is : " + PlanYear);
+		// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+		if (welcomePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Error in validating the OLE Welcome Page");
+
+	}
+	@Then("^user should be navigated on VPP summary page$")
+	public void user_should_be_navigated_on_VPP() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		VPPPlanSummaryPage planSummaryPage=campaignExternalLinkspage.validateVPPEntryPage();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
+
+	}
+
+	@Then("^user go backs campaign external Links page$")
+	public void user_go_backs_to_externallinks(DataTable givenAttributes) throws Exception  {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String url = memberAttributesMap.get("External Link");
+		CampaignExternalLinks campaignExternalLinkspage=(CampaignExternalLinks) getLoginScenario().getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.goBacktoExternalPage(url);
+
+	}
+
+	}

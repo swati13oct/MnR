@@ -1,22 +1,24 @@
 package pages.acquisition.commonpages;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import org.testng.Assert;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class CampaignExternalLinks extends UhcDriver {
@@ -59,14 +61,15 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
-
+	
 	@FindBy(xpath = "//a[contains(@href,'/medicare-education.html')]")
 	private WebElement LearnAboutMedicareBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Privacy')]")
 	private WebElement privacylink;
 
-	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
+    //@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
+    @FindBy(xpath = "(//*[contains(text(),'Find Plans & Pricing') or contains(text(),'View Plans & Pricing')])[1]")
 	private WebElement findPlansPricing;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
@@ -149,8 +152,194 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
 	
+	@FindBy(xpath = "//*[@class='modal-content']")
+	private WebElement externalPopupModal;
 	
+	@FindBy(xpath = "//*[@class='modal-content']//*[@class='modal-close']")
+	private WebElement externalPopupModalClose;
+	
+	//Locators for Scenario 10 - New LPM
+
+	@FindBy(xpath = "//*[contains(@href,'#modal--location-change')]")
+	private WebElement LocationLink;
+
+
+	@FindBy(xpath = "//button[contains(text(),'Change Location')]")
+	private WebElement LocationBtn;
+
+
+	@FindBy(xpath = "//p[contains(text(),'Please enter valid zip code')]")
+	private WebElement EnterValidZipCode;
+
+	@FindBy(xpath = "//input[@class='c-input js-state-zipcode']")
+	private WebElement InputZipCode;
+
+
+	@FindBy(xpath = "(//label[@class='c-input-control__label'])[1]")
+	private WebElement FirstZipCode;
+
+
+	@FindBy(xpath ="//button[contains(@id,'drawer')]")
+	private WebElement RequestAnAppointMent;
+
+
+	@FindBy(xpath ="//button[@type='submit']")
+	private WebElement ReqAppsubmitBtn;
+
+
+	@FindBy(xpath ="//p[@id='field-fname-error-msg']")
+	private WebElement FirstNameErroMsg;
+
+//Enter a first name and must contain only letters, spaces, hyphens and apostrophes
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-fname']")
+	private WebElement FirstName;
+
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-lname']")
+	private WebElement LastName;
+
+	@FindBy(xpath ="//p[@id='field-lname-error-msg']")
+	private WebElement LastNameErroMsg;
+
+//Enter a last name and must contain only letters, spaces, hyphens and apostrophes
+
+
+	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-lname pac-target-input']")
+	private WebElement Address1Input;
+
+	@FindBy(xpath ="//p[@id='field-address1-error-msg']")
+	private WebElement AddressErroMsg;
+	
+//Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space
+
+	@FindBy(xpath ="//input[@id='newsletter-input5']")
+	private WebElement CityInput;
+
+	@FindBy(xpath ="//p[@id='field-city-error-msg']")
+	private WebElement CityErroMsg;
+
+
+	@FindBy(xpath ="//a[contains(text(),'Find Plans in Your Area')]")
+	private WebElement FindPlanInyourArea;
+
+	@FindBy(xpath ="(//a[@class='tel ng-binding'])[1]")
+	private WebElement FindPlanTFN;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find plans']")
+	private WebElement FindPlansLink;
+
+	@FindBy(xpath ="//a[contains(text(),'Find Your Doctor')]")
+	private WebElement FindADoctor;
+
+	@FindBy(xpath ="//span[contains(text(),'Privacy Policy')]")
+	private WebElement PrivacyPolicy;
+
+
+	@FindBy(xpath ="//span[@class='heading-1' and contains(text(),'Privacy Policy')]")
+	private WebElement Heading;
+
+	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
+	private WebElement Accessibility;
+
+	@FindBy(xpath ="//input[@id='zipcode']")
+	private WebElement zip;
+
+	@FindBy(xpath ="//input[@id='location']")
+	private WebElement location;
+	
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Drug cost estimator')]")
+	private WebElement dceExternalLinktakeadvantage;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Prescription Drug Costs')]")
+	private WebElement dceexternallinkMA;
+
+
+//Enter a city that only contains non-numeric characters, apostrophe , hyphen or space
+
+	@FindBy(xpath ="//select[@id='newsletter-input6']")
+	private WebElement SelectState;
+
+	@FindBy(xpath ="//p[@id='field-state-error-msg']")
+	private WebElement SelectStateErroMsg;
+
+//Select a State
+
+	@FindBy(xpath ="//input[@id='newsletter-input9']")
+	private WebElement phoneInput;
+
+	@FindBy(xpath ="//p[@id='field-phoneNo-error-msg']")
+	private WebElement PhoneErroMsg;
+
+
+//Please enter  10 digit valid Phone Number
+
+
+	@FindBy(xpath ="//input[@id='newsletter-input8']")
+	private WebElement EmailInput;
+
+	@FindBy(xpath ="//p[@id='field-ename-error-msg']")
+	private WebElement EmailErroMsg;
+
+//Please enter a valid email address
+
+
+	@FindBy(xpath ="//input[@id='newsletter-input7']")
+	private WebElement ZipInput;
+
+	@FindBy(xpath ="//p[@id='field-zipCode-error-msg']")
+	private WebElement ZipErroMsg;
+
+//Enter a valid 5-digit ZIP code in the format 12345
+
+
+	@FindBy(xpath = "(//span[contains(text(),'View Plans & Pricing')])[1]")
+	private WebElement viewplanspricing;
+	
+	@FindBy(xpath = "//div[@id='zipErrorMessage-0']")
+	private WebElement ziperrorMsg;
+
+	@FindBy(xpath ="//input[@name='zipcodemeded-0']")
+	private WebElement Zipinput;
+	
+	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
+	private WebElement tfn;
+
+    //@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
+    @FindBy(xpath = "//a[contains(text(),'Find Plans in Your Area')]")
+	private WebElement clickFindPlansinyourArea;
+
+	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
+	private WebElement GetMoreInformation;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find Plans and Pricing']")
+	private WebElement findPlansPricingtakeadvantage;
+	
+	
+	@FindBy(xpath = "//a[@data-asset-name='View Plans & Pricing ']")
+	private WebElement viewPricingBtn;
+	
+	@FindBy(xpath = "//span[@class='sam__button__text desktop-tfn-text']")
+	private WebElement samTfn;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Estimate Your Prescription Drug Costs ']")
+	private WebElement PrescriptiondrugcostsBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	private WebElement EstimateDrugCost;
+
+	
+	@FindBy(xpath = "//a[contains(text(), 'Start Now')]")
+	private WebElement StartNowBtn;
+	
+	
+			@FindBy(xpath = "(//a[contains(text(), 'View Plans & Pricing')])[2]")
+			private WebElement viewPricingBtn2;
+			
 	public String parentWindow;
+	
+
+
 	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
@@ -185,7 +374,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	/**
-	 * 
 	 * @param site - ulayer or blayer
 	 * @param path - path for the url To open Homepage+ path as per env,
 	 */
@@ -311,7 +499,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 
 	
-
 	public void sleepBySec(int sec) {
 		try {
 			Thread.sleep(sec * 1000);
@@ -448,6 +635,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 	}
+
 	public AcquisitionHomePage clickOnmedicareplans11PrivacyLink() {
 
 		validateNew(privacylink);
@@ -491,6 +679,13 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void clickFindPlansPricing() {
 		parentWindow = driver.getWindowHandle();
+		try {
+		if(externalPopupModal.isDisplayed()) {
+			externalPopupModalClose.click();
+		}
+		}catch(Exception e) {
+			System.out.println("External popup modal not found");
+		}
 		findPlansPricing.click();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -506,13 +701,23 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (driver.getCurrentUrl().contains("WT.mc_id=8012869")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
-		}
-		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+        } else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
+        } else if (driver.getCurrentUrl().contains("health-plans.html") || driver.getCurrentUrl().contains("/health-plans/")) {
+            System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+            return new AcquisitionHomePage(driver);
 		}
 		return null;
 	}
+
+    public VPPPlanSummaryPage validateVPPEntryPage() {
+        if (driver.getCurrentUrl().contains("/health-plans/") || driver.getCurrentUrl().contains("/health-plans.html")) {
+            System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+            return new VPPPlanSummaryPage(driver);
+        } else
+            return null;
+    }
 
 	public void validateMorganStanleyExternalPage(String tfnXpath, String expTfnNo) {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -579,31 +784,49 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	
 	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
+		threadsleep(5);
+        sleepBySec(8);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		threadsleep(5);
+		
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
 		} else if (driver.getCurrentUrl().contains("ma.uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} else
+		} else if (driver.getCurrentUrl().contains("aarpmedicareplans.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("stage-aarpmedicareplans.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("stage-uhcmedicaresolutions.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		}else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
-		validateNew(tfnHeader);
-
+		threadsleep(8);
+        sleepBySec(4);
+		//validateNew(tfnHeader);
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 		String actualTfnNo = TFNelement.getText();
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
-
-		System.out.println(tfnHeader.getText());
+            Assertion.fail("TFN element is not found / TFN no is not same on page:\nTFN: "+actualTfnNo);
+		//System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
 		if(validate(workingHrs)) {
 			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
-	}
+		}
+	
+	
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -687,8 +910,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		start(url);
 	}
 	
-	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
-	private WebElement clickFindPlansinyourArea;
 	
 	public void clickFindPlansinyourArea() {
 		String parentWindow = driver.getWindowHandle();
@@ -952,18 +1173,15 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
-	}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage"))
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
 				else if (env.equalsIgnoreCase("offline")){
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
 				}
 		}
@@ -975,22 +1193,17 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
 		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
-		}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage")) {
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
 				}
 		}
@@ -1002,22 +1215,17 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
 		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
-		}
-		else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
-		}
-		else {
+            } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
 		}
-		}
-		else {
+        } else {
 			if(env.equalsIgnoreCase("stage")) {
 				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
-				}
-				else if (env.equalsIgnoreCase("offline")){
+            } else if (env.equalsIgnoreCase("offline")) {
 					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
-				}
-				else {
+            } else {
 					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
 				}
 		}
@@ -1030,8 +1238,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1043,8 +1250,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1056,8 +1262,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1069,8 +1274,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1082,8 +1286,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
 		}
 	}
@@ -1095,8 +1298,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		}
 	}
@@ -1108,8 +1310,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-aarpmedicareplans.uhc.com/health-plans.html')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('data-url','https://offline.aarpmedicareplans.com/health-plans.html')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.aarpmedicareplans.com/health-plans.html')", element);
 		}
 	}
@@ -1121,8 +1322,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8000158')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
 		}
 	}
@@ -1134,8 +1334,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		}
 	}
@@ -1147,8 +1346,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
 		}
 	}
@@ -1160,9 +1358,929 @@ public class CampaignExternalLinks extends UhcDriver {
 		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('data-url','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
-		}
-		else {
+        } else {
 			js.executeScript("arguments[0].setAttribute('data-url','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		}
 	}
+
+	public void validateErrorMsg() {
+		threadsleep(8);
+		validateNew(RequestAnAppointMent);
+		RequestAnAppointMent.click();
+		threadsleep(8);
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(8);
+		validateNew(FirstNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
+		validateNew(LastNameErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
+		validateNew(AddressErroMsg);
+		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
+		validateNew(CityErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
+		validateNew(SelectStateErroMsg);
+		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
+		validateNew(ZipErroMsg);
+		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
+		validateNew(EmailErroMsg);
+		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
+		validateNew(PhoneErroMsg);
+		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+	}
+
+	public void enterdetais() {
+        if(MRScenario.environment.equalsIgnoreCase("stage")||MRScenario.environment.equalsIgnoreCase("offline-stage")||MRScenario.environment.contains("team")){
+		threadsleep(8);
+		validateNew(FirstName);
+		FirstName.clear();
+            FirstName.sendKeys("test-MR-optum-R");
+		LastName.clear();
+            LastName.sendKeys("test-MR-optum-M");
+		Address1Input.clear();
+		Address1Input.sendKeys("455 Flatbush Ave");
+		Address1Input.sendKeys(Keys.TAB);
+		CityInput.clear();
+		CityInput.sendKeys("Brooklyn");
+		threadsleep(8);
+		selectFromDropDownByText(driver, SelectState, "New York");
+		ZipInput.clear();
+		ZipInput.sendKeys("11238");
+		EmailInput.clear();
+		EmailInput.sendKeys("test@test.com");
+		phoneInput.clear();
+		phoneInput.sendKeys("800-800-8000");
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(5);
+		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+        }else{
+            System.out.println("LP Form submission not configured for Offline Prod and Prod");
+        }
+    }
+
+	public void validateFindPlansInyourArea() {
+		validateNew(FindPlanInyourArea);
+		FindPlanInyourArea.click();
+		CommonUtility.waitForPageLoadNew(driver, zip, 30);
+		Assert.assertTrue(true);
+		Assert.assertEquals("1-855-264-3792", FindPlanTFN.getText());
+	}
+//	public void switchToNewTab() {
+//		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//		driver.switchTo().window(tabs.get(1));
+//	}
+
+	public void naviagteBack() {
+
+		driver.navigate().back();
+	}
+
+	public void  validateFindADoc() {
+		validateNew(FindADoctor);
+		FindADoctor.click();
+
+		CommonUtility.waitForPageLoadNew(driver, location, 30);
+		Assert.assertTrue(true);
+		Assert.assertEquals("https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode=AARP1&backBtn=false", driver.getCurrentUrl());
+	}
+
+	//https://www.uhc.com/legal/accessibility
+
+	public void validatePrivacy() {
+		validateNew(PrivacyPolicy);
+		String parentwindow=driver.getWindowHandle();
+		PrivacyPolicy.click();
+		switchToNewTab();
+		CommonUtility.waitForPageLoadNew(driver, Heading, 30);
+		Assert.assertEquals("Privacy Policy", Heading.getText());
+		driver.close();
+		driver.switchTo().window(parentwindow);
+
+	}
+
+	public void validateAccess() {
+		validateNew(Accessibility);
+		String parentwindow=driver.getWindowHandle();
+		Accessibility.click();
+		switchToNewTab();
+		threadsleep(8);
+		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
+		driver.close();
+		driver.switchTo().window(parentwindow);
+	}
+
+	public void validateErrorMsgtakeadvantage() {
+		threadsleep(8);
+		validateNew(GetMoreInformation);
+		GetMoreInformation.click();
+		threadsleep(8);
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(8);
+		validateNew(FirstNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
+		validateNew(LastNameErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
+		validateNew(AddressErroMsg);
+		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
+		validateNew(CityErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
+		validateNew(SelectStateErroMsg);
+		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
+		validateNew(ZipErroMsg);
+		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
+		validateNew(EmailErroMsg);
+		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
+		validateNew(PhoneErroMsg);
+		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+
+	}
+
+	public void enterdetailstakeadvantage() {
+		threadsleep(8);
+		validateNew(FirstName);
+		FirstName.clear();
+		FirstName.sendKeys("test-MR-optum-R");
+		LastName.clear();
+		LastName.sendKeys("test-MR-optum-M");
+		Address1Input.clear();
+		Address1Input.sendKeys("455 Flatbush Ave");
+		Address1Input.sendKeys(Keys.TAB);
+		CityInput.clear();
+		CityInput.sendKeys("Brooklyn");
+		threadsleep(8);
+		selectFromDropDownByText(driver, SelectState, "New York");
+		ZipInput.clear();
+		ZipInput.sendKeys("11238");
+		EmailInput.clear();
+		EmailInput.sendKeys("test@test.com");
+		phoneInput.clear();
+		phoneInput.sendKeys("800-800-8000");
+		validateNew(ReqAppsubmitBtn);
+		ReqAppsubmitBtn.click();
+		threadsleep(5);
+		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
+
+	}
+	
+	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
+		CommonUtility.checkPageIsReadyNew(driver);
+        CommonUtility.waitForPageLoad(driver, LocationLink, 30);
+        LocationLink.click();
+        threadsleep(8);
+        InputZipCode.clear();
+        InputZipCode.sendKeys(zipcodeMulti);
+        jsClickNew(LocationBtn);
+        FirstZipCode.click();
+        jsClickNew(LocationBtn);
+        driver.navigate().refresh();
+		validateNew(LocationLink);
+		LocationLink.click();
+		threadsleep(5);
+		validateNew(LocationBtn);
+		LocationBtn.click();
+		threadsleep(5);
+		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
+		InputZipCode.clear();
+		InputZipCode.sendKeys(zipcodeSingle);
+		threadsleep(8);
+		LocationBtn.click();
+		threadsleep(8);
+	}
+
+	public void validatezipcodecomponent() {
+		// TODO Auto-generated method stub
+		
+		waitforElementNew(viewplanspricing);
+        Zipinput.clear();
+		viewplanspricing.click();
+		
+		waitforElementNew(ziperrorMsg);
+		System.out.println("@@Zip error Message@@@"+ziperrorMsg.getText());
+		Assert.assertEquals(ziperrorMsg.getText(), "Please enter a valid zip code");
+		
+		Zipinput.clear();
+		Zipinput.sendKeys("33111");
+		viewplanspricing.click();
+		
+		waitforElementNew(tfn);
+		
+		System.out.println("@@tfn@@"+tfn.getText());
+		Assert.assertEquals(tfn.getText(), "1-855-264-3792");
+		
+//		//driver.navigate().back();
+		
+		
+	}
+
+	public void clickFindPlansPricingtakeadvantage() {
+		parentWindow = driver.getWindowHandle();
+		findPlansPricingtakeadvantage.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+		public void clickFindPlansLink() {
+			parentWindow = driver.getWindowHandle();
+			FindPlansLink.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
+
+		public void clickonViewpricingAndNavigatesToVPP() {
+			
+			waitforElementNew(viewPricingBtn);
+			viewPricingBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonPrescriptionDrugCostAndNavigatesToDCE() {
+			// TODO Auto-generated method stub
+			waitforElementNew(PrescriptiondrugcostsBtn);
+			PrescriptiondrugcostsBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonEstimateDrugCostBtnAndNavigatesToDCE() {
+			waitforElementNew(EstimateDrugCost);
+			EstimateDrugCost.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+		}
+
+    public PharmacySearchPage clickonStartNowAndNavigatesToPharmacyPage() {
+			// TODO Auto-generated method stub
+      /*  waitforElementNew(StartNowBtn);
+			StartNowBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+
+*/
+        parentWindow = driver.getWindowHandle();
+        StartNowBtn.click();
+        Set<String> tabs_windows = driver.getWindowHandles();
+        Iterator<String> itr = tabs_windows.iterator();
+        while (itr.hasNext()) {
+            String window = itr.next();
+            if (!parentWindow.equals(window)) {
+                driver.switchTo().window(window);
+		}
+        }
+        if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy Near You | UnitedHealthcare")) {
+            return new PharmacySearchPage(driver);
+        }
+        return null;
+    }
+
+
+		public void clickonViewPlanPricingBtnAndNavigatesToVPP() {
+			waitforElementNew(viewPricingBtn2);
+			viewPricingBtn2.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void navigateToPath(String path) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void navigateToDCERedesignFromExternaltakeadvantagePage() {
+			// TODO Auto-generated method stub
+			parentWindow = driver.getWindowHandle();
+			dceExternalLinktakeadvantage.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			
+		}
+		
+		public void validateDCEExternallinkMA() {
+			parentWindow = driver.getWindowHandle();
+			dceexternallinkMA.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
+		
+		
+		@FindBy(css = "div[class*='get-started-banner'] button")
+		private WebElement getStartedBtn;
+		
+		@FindBy(css = "div[class*='get-started-main-inner'] button")
+		private WebElement getStartedBtn1;
+		
+		@FindBy(id = "zip-code")
+		private WebElement zipCode;
+		
+		@FindBy(xpath = "//button[contains(text(),'Continue')]")
+		private WebElement continueBtn;
+		
+		@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(1)")
+		private WebElement coverageTitle;
+		
+		@FindBy(id = "MultipleCounty")
+		private WebElement countyDrpdown;
+		
+		public void startQuestionnaire(String zipcode) throws InterruptedException {
+			
+			waitTillElementClickableInTime(getStartedBtn, 45);
+			waitTillElementClickableInTime(getStartedBtn1, 45);
+			System.out.println("Before clicking GetStarted");
+			threadsleep(5000);
+			jsClickNew(getStartedBtn);
+			System.out.println("After clicking GetStarted");
+			waitforElementVisibilityInTime(zipCode, 45);
+			zipCode.sendKeys(zipcode);
+			threadsleep(5000);
+			jsClickNew(continueBtn);
+			waitforElementVisibilityInTime(coverageTitle, 30);
+		}
+		
+		public void startQuestionnaireWithCounty(String zipcode,String county) throws InterruptedException {
+			waitTillElementClickableInTime(getStartedBtn, 45);
+			waitTillElementClickableInTime(getStartedBtn1, 45);
+			System.out.println("Before clicking GetStarted");
+			threadsleep(5000);
+			jsClickNew(getStartedBtn);
+			System.out.println("After clicking GetStarted");
+			waitforElementVisibilityInTime(zipCode, 45);
+			zipCode.sendKeys(zipcode);
+			threadsleep(5000);
+			selectFromDropDownByText(driver,countyDrpdown, county);
+			jsClickNew(continueBtn);
+			waitforElementVisibilityInTime(coverageTitle, 30);
+		}
+		
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+		private WebElement plantypeMAPD;
+
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+		private WebElement plantypeMA;
+
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(4)>label")
+		private WebElement plantypePDP;
+
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(5)>label")
+		private WebElement plantypeNone;
+		
+		public void selectCoverageOption(String planType) {
+			if (planType.equalsIgnoreCase("MAPD")) {
+				validate(plantypeMAPD);
+				jsClickNew(plantypeMAPD);
+				System.out.println("Plan Type " + planType + " Clicked");
+			} else if (planType.equalsIgnoreCase("MA")) {
+				validate(plantypeMA);
+				jsClickNew(plantypeMA);
+				System.out.println("Plan Type " + planType + " Clicked");
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				validate(plantypePDP);
+				jsClickNew(plantypePDP);
+				System.out.println("Plan Type " + planType + " Clicked");
+			} else if (planType.equalsIgnoreCase("None")) {
+				validate(plantypeNone);
+				jsClickNew(plantypeNone);
+				System.out.println("Plan Type " + planType + " Clicked");
+			}
+			jsClickNew(continueBtn);
+		}
+		
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+		private WebElement yesOption;
+
+		@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+		private WebElement noOption;
+		
+		@FindBy(css = "input#drug")
+		private WebElement drugsearchBox;
+		
+		public void drugsInitiate(String drugSelection) {
+			threadsleep(3000);
+			System.out.println("Drugs Page Functional Operations");
+			if (drugSelection.equalsIgnoreCase("Yes")) {
+				validate(yesOption);
+				jsClickNew(yesOption);
+				System.out.println("Prescription Type " + drugSelection + " Clicked");
+			} else if (drugSelection.equalsIgnoreCase("No")) {
+				validate(noOption);
+				jsClickNew(noOption);
+				System.out.println("Prescription Type " + drugSelection + " Clicked");
+			}
+			jsClickNew(continueBtn);
+			validate(drugsearchBox);
+		}
+		
+		public void drugsHandlerWithdetails(String drugsDetails) {
+			String drugName = "";
+			boolean searchButtonClick = false;
+			String dosage = "";
+			String packageName = "";
+			String count = "";
+			String frequency = "";
+			boolean threeeMonthSLength = false;
+			boolean GenericDrug = false;
+			boolean switchGeneric = false;
+
+			String[] drugslist = drugsDetails.split(":");
+			for (int i = 0; i < drugslist.length; i++) {
+				String drugInfo = drugslist[i];
+				if (drugInfo.trim().length() > 0) {
+					String[] drugDetails = drugInfo.split(",");
+					drugName = drugDetails[0];
+					if (drugDetails[1].toUpperCase().equals("NO"))
+						searchButtonClick = true;
+					dosage = drugDetails[2];
+					packageName = drugDetails[3];
+					count = drugDetails[4];
+					frequency = drugDetails[5];
+					if (drugDetails[6].toUpperCase().equals("3"))
+						threeeMonthSLength = true;
+					if (drugDetails[7].toUpperCase().equals("YES"))
+						GenericDrug = true;
+					if (drugDetails[8].toUpperCase().equals("YES"))
+						switchGeneric = true;
+
+					addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
+							GenericDrug, switchGeneric);
+				}
+			}
+
+		}
+
+		@FindBy(css = "uhc-autocomplete button")
+		private WebElement drugsearchButton;
+		
+		@FindBy(css = "#modal uhc-radio[class*='checked']")
+		private WebElement modalSelcetedDrug;
+
+		@FindBy(css = "#modal uhc-radio-group uhc-radio")
+		private List<WebElement> modalSelcetedDrugsList;
+		
+		@FindBy(css = "#modal div>button[class*='primary button']")
+		private WebElement modalcontinue;
+		
+		@FindBy(css = "uhc-autocomplete uhc-menu-item")
+		private List<WebElement> drugsAutoList;
+		
+		@FindBy(css = "#modal #dosage-select")
+		private WebElement modalDosageSelect;
+		
+		@FindBy(css = "#modal legend")
+		private WebElement modalGenericDrug;
+		
+		@FindBy(css = "#modal #frequency-select")
+		private WebElement modalFrequencySelect;
+
+		@FindBy(css = "#modal #new-drug-refill")
+		private WebElement modalSLengthSelect;
+		
+		@FindBy(css = "#modal #package-select")
+		private WebElement modalPackageSelect;
+
+		@FindBy(css = "#modal #Quantity")
+		private WebElement modalQuantity;
+		
+		@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
+		private WebElement modalGenericSwitchLabel;
+		
+		@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+		private WebElement modalGenericSwitch;
+		
+		@FindBy(css = "uhc-list uhc-list-item")
+		private List<WebElement> drugsList;
+		
+		public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
+				String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+			try {
+				validate(drugsearchBox, 30);
+				threadsleep(2000);
+				drugsearchBox.clear();
+				drugsearchBox.sendKeys(drugName);
+				if (searchButtonClick) {
+					jsClickNew(drugsearchButton);
+					threadsleep(6000);
+					validate(modalSelcetedDrug, 30);
+					threadsleep(2000);
+					Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+							"Drug name is not Matched :" + drugName);
+					// Select modal
+					threadsleep(2000);
+					jsClickNew(modalcontinue);
+					threadsleep(2000);
+				} else {
+					jsClickNew(drugsAutoList.get(0));
+				}
+
+				validate(modalDosageSelect, 30);
+				threadsleep(2000);
+				Select dos = new Select(modalDosageSelect);
+				Select freq = new Select(modalFrequencySelect);
+				Select slen = new Select(modalSLengthSelect);
+				
+				if (!dosage.isEmpty())
+					dos.selectByVisibleText(dosage);
+				if (!packageName.isEmpty()) {
+					Select pack = new Select(modalPackageSelect);
+					pack.selectByVisibleText(packageName);
+				}
+				if (!count.isEmpty()) {
+					modalQuantity.clear();
+					modalQuantity.sendKeys(count);
+				}
+				
+				freq.selectByVisibleText(frequency);
+				
+				if (threeeMonthSLength)
+					slen.selectByVisibleText("Every 3 Months");
+
+				threadsleep(4000);
+				jsClickNew(modalcontinue);
+
+				if (GenericDrug) {
+					validate(modalGenericDrug, 30);
+					threadsleep(2000);
+					// Generic modal
+					if (switchGeneric) {
+						jsClickNew(modalGenericSwitchLabel);
+						threadsleep(2000);
+//						jsClickMobile(modalGenericSwitch);
+						jsClickNew(modalGenericSwitch);
+						drugName = modalGenericDrug.getText();
+					}
+					threadsleep(2000);
+					jsClickNew(modalcontinue);
+				}
+				Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
+						"Added drug name Mistmatch from selected one : " + drugName);
+			} catch (Exception e) {
+				System.out.println("Unable to add drug");
+			}
+		}
+		
+		public void continueNextpage() {
+			validate(drugsearchBox, 30);
+			threadsleep(2000);
+			jsClickNew(continueBtn);
+		}
+		
+		@FindBy(css = "#loadingText")
+		private WebElement resultsloadingTitle;
+
+		@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
+		private WebElement svgAnimation;
+
+		@FindBy(css = "div>img[alt*='Loading Plan Recommendations']")
+		private WebElement loadingImage;
+		
+		public void resultsloadingpage() {
+			System.out.println("Validating Results loading Page: ");
+			String currentPageUrl = driver.getCurrentUrl();
+			currentPageUrl.contains("/plan-recommendation-engine.html/");
+			validate(resultsloadingTitle);
+			validate(svgAnimation, 30);
+			validate(loadingImage, 30);
+		}
+		
+		@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+		private WebElement planZipInfo;
+		
+		@FindBy(css = "body>div#overlay")
+		private WebElement planLoaderscreen;
+		
+		@FindBy(css = ".plan-overview-wrapper div.plan-recommendation-summary")
+		private WebElement planBasedInfo;
+		
+		public void resultsUI(String zip,String county) {
+			System.out.println("Validating Results UI Page: ");
+			pageloadcomplete();
+			waitForPageLoadSafari();
+			validate(planZipInfo,60);
+			waitforElementInvisibilityInTime(planLoaderscreen,60);
+			Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
+			Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
+			Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+
+	}
+
+		//@FindBy(xpath = "//span[contains(text(),'Find Plans')]")
+		
+		@FindBy(xpath ="(//*[@class='enrollSection'])[1]/div/button")
+		private WebElement viewPlanButton;
+		
+	public void clickViewResults() {
+		//System.out.println("Validating Results UI Page: ");
+		//pageloadcomplete();
+		//waitForPageLoadSafari();
+		//validate(planZipInfo,60);
+		//waitforElementInvisibilityInTime(planLoaderscreen,60);
+		validate(viewPlanButton);
+		jsClickNew(viewPlanButton);
+		
+	}
+
+	@FindBy(id = "backToPlanSummaryTop")
+	private WebElement clickBackToPlans;
+
+	@FindBy(xpath= "//*[@id='selectCounty']/p[1]/a")
+	private WebElement selectCounty;
+
+	public CampaignExternalLinks backToPlans() {
+		validate(clickBackToPlans);
+		jsClickNew(clickBackToPlans);
+		try {
+			if(selectCounty.isDisplayed())
+				jsClickNew(selectCounty);
+        } catch (Exception e) {
+			System.out.println("County popup not displayed");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new CampaignExternalLinks(driver);
+			
+		}
+		return null;
+	}
+
+	public void bypassABTest() {
+
+		if(MRScenario.environment.equalsIgnoreCase("Prod") && validate(clickBackToPlans)) {
+			ComparePlansPage planComparePage = new ComparePlansPage(driver);
+			planComparePage.backToVPPPage();
+            List<WebElement> compareCheckBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-box')]//label"));
+            ;
+
+			for(int i = 1; i<=compareCheckBoxes.size(); i++) {
+				jsClickNew(driver.findElement(By.xpath("(//div[contains(@class,'compare-box')]//label)["+i+"]")));
+			}
+		}
+	}
+
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
+	private WebElement pdpPlansViewLink;
+
+
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+	private WebElement maPlansViewLink;
+
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
+	private WebElement snpPlansViewLink;
+
+	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
+	private WebElement planListContainer;
+	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-open']/following-sibling::a")
+	private WebElement msPlansViewLink;
+
+	@FindBy(id = "msVppZipCode")
+	private WebElement medSuppZipCode;
+
+
+	public void viewPlanSummary(String planType) {
+		
+		if (planType.equalsIgnoreCase("PDP")) {
+			// sleepBySec(2);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
+			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
+			// from
+			// waitForPageLoadNew but didn't work
+			jsClickNew(pdpPlansViewLink);
+			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+
+			jsClickNew(maPlansViewLink);
+			// sleepBySec(2);
+			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MS")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			// sleepBySec(2);
+			jsClickNew(msPlansViewLink);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			/*
+			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
+			 * medSuppPlanList.get(0), 30);
+			 */
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			// sleepBySec(5);
+			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
+			jsClickNew(snpPlansViewLink);
+			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
+			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			/*
+			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+			 * Auto-generated catch block e.printStackTrace(); }
+			 */
+
+		}
+	}
+		
+	public String getPlanPremium(String PlanName, String planType) {
+		System.out.println("Plan Name is : " + PlanName);
+		WebElement premiumForPlan = null;
+		if (planType.equalsIgnoreCase("PDP")) {
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+		} else
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		String PlanPremium = premiumForPlan.getText();
+
+		System.out.println("Premium for Plan : " + PlanPremium);
+		return PlanPremium;
+	}
+
+	public void clickOnViewMoreForPlan(String planName) {
+
+		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+
+		if (viewMoreLink.size() > 0) // if it finds the that the View More is shown then it will click on it
+			viewMoreLink.get(0).click();
+
+	}
+
+	public void openAndValidate(String planType) {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver, 45);
+		/*else
+			checkModelPopup(driver, 10);*/
+
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement> of the different tabs on Plan detail page
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+					"Medical Benefit tab not displayed for SNP plans");
+		} /* Added for SNP as well */
+		validateNew(planCostsTab);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+	}
+
+	@FindBy(id = "medicalbenefits")
+	private List<WebElement> medBenefitsTab;
+	@FindBy(id = "prescriptiondrug")
+	private List<WebElement> presDrugTab;
+	@FindBy(id = "plancosts")
+	private WebElement planCostsTab;
+
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+	// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+	// contains(@class,'active')]")
+	private List<WebElement> presDrugTab1;
+
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
+
+	public CampaignExternalLinks(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
+
+	public CampaignExternalLinks navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			jsClickNew(MAmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			jsClickNew(PDPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			jsClickNew(SNPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		return new CampaignExternalLinks(driver, planType);
+
+	}
+
+	public String GetTFNforPlanType() {
+		if (validate(RightRail_TFN)) {
+			System.out.println("TFN is displayed in Right Rail");
+			String TFN_Number = RightRail_TFN.getText();
+			return TFN_Number;
+		}
+		System.out.println("TFN is not Displayed for PlanType in VPP page");
+
+		return null;
+	}
+
+	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
+
+
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+
+	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		try {
+			if (validate(EnrollinPlan))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlan);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+    public void goBacktoExternalPage(String url) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        driver.navigate().to(url);
+        sleepBySec(2);
+        CommonUtility.checkPageIsReadyNew(driver);
+}
+
 }

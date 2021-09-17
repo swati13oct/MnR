@@ -112,7 +112,7 @@ public class ProfileSearch extends UhcDriver {
 		btnSearchShopper.click();
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
-			DeleteProfile deleteProfile = new DeleteProfile(driver);
+			DeleteProfileMobile deleteProfile = new DeleteProfileMobile(driver);
 			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -188,7 +188,7 @@ public class ProfileSearch extends UhcDriver {
 	 * Cloak In the Searched Profile
 	 * @return
 	 */
-	public ComparePlansPage doCloakIn() {
+	public ComparePlansPageMobile doCloakIn() {
 	//public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
@@ -214,7 +214,7 @@ public class ProfileSearch extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(AARPlogo);
 			if(driver.getCurrentUrl().contains("health-plans.html")) {
-				return new ComparePlansPage(driver);
+				return new ComparePlansPageMobile(driver);
 			}else {
 				System.out.println("Plan Compare page is not loaded");
 				return null;
@@ -266,7 +266,7 @@ public class ProfileSearch extends UhcDriver {
 		btnSearchShopper.click();
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
-			DeleteProfile deleteProfile = new DeleteProfile(driver);
+			DeleteProfileMobile deleteProfile = new DeleteProfileMobile(driver);
 			deleteProfile.deleteAProfile(emailID);
 			backToProfileSearch.click();
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);

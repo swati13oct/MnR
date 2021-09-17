@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
@@ -128,6 +129,7 @@ public class DCEACQMedEdMobile {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		String zipcode = memberAttributesMap.get("ZipCode");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);

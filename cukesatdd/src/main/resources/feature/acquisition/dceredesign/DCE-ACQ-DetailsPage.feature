@@ -1,5 +1,5 @@
-@dce @dce_redesign_DrugDetailsValidation1
-Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Details Page Flows
+@dce @dce_redesign_DrugDetailsValidation
+Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Page Flows
 
   @dce_DrugDetailsValidation
   Scenario Outline: To verify DCE Details Page  <site> site - All Sections, Switch, Edit Drug, Learm more link from VPP Details and Insulin Savings model info on DCE Details Page
@@ -46,6 +46,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates OptumRx consistently displays on DCE Details - Pharmacy Page
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
+    Then the user validates 100-day Supply Messaging for Eligible Plan
     Then the user validates qty, frequency and Supply Length for following drug in DCE Details Page
       | DrugName  | <drug2>      |
       | Quantity  | <quantity2>  |
@@ -70,6 +71,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user clicks PrescriptionBenifit Tab on Plan Details Page
     Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     Then the user validates planName on LearnMore page matches plan Name in VPP
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page
 
     @dce_DrugDetailsValidation_AARP @regressionAARP
     Examples: 
@@ -248,7 +250,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
-    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+    Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug1> |
@@ -284,7 +286,8 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     And user should verify the Extra help on SNP plan type
-    And user click on View Drug Pricing Modal
+    And the user Clicks View Drug Pricing for the given plan
+      | Plan Name | <planName> |
     And user should verify the drug extra qualification in drug pricing popup
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |

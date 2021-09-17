@@ -24,14 +24,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.mobile.acquisition.planrecommendationengine.DCEMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
 public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements {
@@ -672,10 +676,10 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	public void removedDrugsDetailsVPPtoPRE() {
 		System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
-		String plantype = PlanRecommendationStepDefinitionMobile.PlanType;
+		String plantype = "MA";
 
-		flow = PlanRecommendationStepDefinitionMobile.PREflow;
-		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
+		flow = "MAPD";
+		DrugsInPRE = DrugMobilePage.addedDrugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
 		drugsCoveredInVPP(count, plantype);
@@ -690,7 +694,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	public void startnowtilldrugs() {
 		System.out.println("Navigating to PRE Using StartNow: ");
-		flow = PlanRecommendationEngineStepDefinition.PREflow;
+		flow = "MA";//PlanRecommendationEngineStepDefinition.PREflow; // Need to change on HOLD
 		MobileMenuAndGetPlanRecom();
 		// vppToPre();
 		validateDrugPage(flow, false);
@@ -933,7 +937,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 	}
 
-	PlanRecommendationEngineDoctorsPageMobile docdesktop = new PlanRecommendationEngineDoctorsPageMobile(driver);
+	DoctorsMobilePage docdesktop = new DoctorsMobilePage(driver);
 	int count = 1;
 
 	public void addProviderVPP(String name, String multi) {
@@ -943,7 +947,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		jsClickNew(enterProvidersInfoMA1stPlan);
 		if (multi.equalsIgnoreCase("Yes"))
 			count = 1;
-		werallyResults = docdesktop.validateLinksanotherWindow(curdriverhandle, "Doctors", name, count);
+		werallyResults = docdesktop.validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", name, count);
 		ArrayList<String> vppResults = getProvidersVPP();
 		Assert.assertTrue(vppResults.size() == count, "Providers count mismatch in VPP");
 	}
@@ -1023,7 +1027,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
 		getProvidersVPP();
-		containsname(PlanRecommendationEngineDoctorsPageMobile.confirmationProviderResults, vppProviderResults);
+		containsname(DoctorsMobilePage.confirmationProviderResults, vppProviderResults);
 	}
 
 	public void countyandViewPlan(String zip, String county, String isMultiCounty) {
@@ -1226,7 +1230,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElement(PDPViewPlansLink);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -1238,7 +1242,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElement(SNPViewPlansLink);
-			jsClickMobile(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
@@ -1256,7 +1260,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		if (!checkElemPosition)
 			mobileUtils.mobileLocateElement(footerBackToTopLink);
 		try {//This single JSclick line is enough instead of this method
-			jsClickMobile(footerBackToTopLink);
+			jsClickNew(footerBackToTopLink);
 			//footerBackToTopLink.click();
 			threadsleep(2000);
 		} catch (Exception e) {
@@ -1545,14 +1549,14 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	}
 
 	public void DrugsDetailsVPPtoDCE() {
-		pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage dce = new pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage(
-				driver);
+		DCEMobilePage dce = new DCEMobilePage(driver);
 		System.out.println("Validating Pharmacy Details in DCE Page: ");
 		MobileMenuAccessDCE();
 		jsClickNew(adddrugbtn);
-		dce.Pharmacytype();
+		//Fix Below
+		//dce.Pharmacytype();
 		System.out.println("Validating Drugs Details from VPP to DCE Page: ");
-		DrugsInDCE = dce.DCEDrugsResults;
+		//DrugsInDCE = dce.DCEDrugsResults;
 		int count = DrugsInDCE.size();
 		verifyConfirmationmodalResults(count, DrugsInDCE, DrugsList);
 	}
@@ -1639,5 +1643,18 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 		return null;
 
+	}
+
+	public PlanDetailsPageMobile validatePlanNamesPRE(String planName) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName
+				+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
+		jsClickNew(PREPlandetails);
+		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		
+		return new PlanDetailsPageMobile(driver);
+	
 	}
 }

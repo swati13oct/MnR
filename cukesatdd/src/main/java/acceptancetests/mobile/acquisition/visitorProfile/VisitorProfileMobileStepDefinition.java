@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.visitorProfile;
 
 import java.util.HashMap;
@@ -20,11 +21,12 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
-import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.mobile.acquisition.commonpages.ShopperProfileAgentLogin;
@@ -43,7 +45,7 @@ public class VisitorProfileMobileStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	//AppiumDriver wd;
+	// AppiumDriver wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -135,15 +137,15 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
-
-	@And("^the user clicks on the shopping cart icon mobile$")
+	
+	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		VisitorProfilePageMobile VisitorProfilePageMobile = acqHomePage.navigateToVisitorProfilePage();
-
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, VisitorProfilePageMobile);
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")
@@ -248,7 +250,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user returns to the visitor profile page$")
 	public void the_user_returns_to_the_visitor_profile_page() {
 
-		DrugCostEstimatorPage dcePage = (DrugCostEstimatorPage) getLoginScenario()
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 
 		VisitorProfilePageMobile VisitorProfilePageMobile = dcePage.retrunToProfile();
@@ -257,7 +259,7 @@ public class VisitorProfileMobileStepDefinition {
 	}
 
 	@And("^the user should be able to see the Drug information in the guest profile page$")
-	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
+	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) throws InterruptedException {
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
 		 * memberAttributesRow.get(0).getCells().get(1);
@@ -282,6 +284,7 @@ public class VisitorProfileMobileStepDefinition {
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+//		visitorProfile.validateAddedPlans(savePlanNames);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 
@@ -384,11 +387,11 @@ public class VisitorProfileMobileStepDefinition {
 	@Then("^the user validates the following Additional Benefits of Plan for the plan$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(
 			DataTable givenAttributes) throws Throwable {
+
 		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		System.out.println("vpp plan details page" + PageConstants.VPP_PLAN_DETAILS_PAGE + vppPlanDetailsPage);
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
 	}
 
@@ -496,7 +499,8 @@ public class VisitorProfileMobileStepDefinition {
 
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		Assertion.assertTrue("Provider coverage Info not updated", visitorProfile.providerinfo(planName));
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		visitorProfile.validateProviderinfo(planName, providerFromRally);
 	}
 
 	@And("^the user signs in with optum Id credentials$")
@@ -620,7 +624,6 @@ public class VisitorProfileMobileStepDefinition {
 		VPPPlanSummaryPageMobile planSummary = VisitorProfilePageMobile.backToPlans();
 
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
-		System.out.println("afaknfkanfklnasknfkanfklanssfka" + planSummary);
 	}
 
 	@And("^validate OLE details$")
@@ -651,4 +654,12 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.cancelEnrollment(planName);
 	}
+	
+	@When("^user clicks on Add drugs button globally on shopper profile page$")
+	public void user_clicks_on_add_drugs_button_globally() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsBtn();
+	}
 }
+

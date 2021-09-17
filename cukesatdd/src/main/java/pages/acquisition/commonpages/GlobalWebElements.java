@@ -54,7 +54,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[@class='footer-bottom']//a[contains(@href,'accessibility')]")
 	public WebElement footerAccessibilitylink;
 	
-	@FindBys(value = { @FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'aarp.org')]") })
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'aarp.org')]")
 	public WebElement aarpOrgLink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
@@ -123,7 +123,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	 public WebElement importantDisclosuresLink;
 	
-	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	//@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	@FindBy(xpath = "//*[contains(@class,'visit-aarp-link')]")
 	 public WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
@@ -223,7 +224,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	//@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	
+	@FindBy(xpath="//*[contains(@class, 'proactive-chat-button-text')]")
 	public WebElement proactiveChatChatBtn;
 	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
@@ -241,14 +244,15 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//*[contains(@id,'uhcSVGLogo')]")
 	public  WebElement UHCLogo;
 	
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	//@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	@FindBy(xpath = "//*[contains(@class,'saved_items_container')]//span[contains(text(),'My Saved Items')]")
 	 public WebElement visitorprofileicon;
 	
 	//@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
 	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public WebElement signIn;
 	
-	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
+	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	public WebElement menuShop;
 	
 	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
@@ -283,6 +287,30 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
+	
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn")
+	public WebElement searchTxtbox;
+	
+	@FindBy(id = "header-tfn-link")
+	public WebElement headerTfn;
+	
+	@FindBy(id = "guest-profile")
+	public WebElement visitorProfileFlyoutTitle;
+	
+	@FindBy(id = "guest-saved-items-button")
+	public WebElement visitorProfileFlyoutViewSavedItemBtn;
+	
+	@FindBy(id = "flyout-drug-button")
+	public WebElement visitorProfileFlyoutAddDrugBtn;
+	
+	@FindBy(id = "flyout-plan-button")
+	public WebElement visitorProfileFlyoutAddPlansBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'log-in')]//a[contains(text(),'Sign In')]")
+	public WebElement visitorProfileFlyoutSignInLink;
+	
+	@FindBy(id = "search-field")
+	public WebElement globalSiteSearchTxtBox;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

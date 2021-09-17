@@ -17,7 +17,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @regressionUHC
+    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @regressionUHC 
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
@@ -71,7 +71,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity 
+    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
@@ -117,7 +117,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
+       @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1 @regressionAARP
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |

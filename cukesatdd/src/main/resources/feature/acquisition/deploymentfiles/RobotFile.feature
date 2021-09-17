@@ -1,9 +1,10 @@
-@robotTxtFile
+@regressionDeployentFiles
 Feature: 2.1 ACQ- To test robot txt file is loading correctly
 
-  @robotTxtFileAARP
+  @robotTxtFileAARP1
   Scenario Outline: To test the robot txt file is loading on AARP
-    Given the user is on the AARP medicare site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And user opens the page to validate on AARP
       | pagename | <pagename> |
     Then the user validates whether page load is loading on AARP
@@ -11,18 +12,8 @@ Feature: 2.1 ACQ- To test robot txt file is loading correctly
       | pagename | <pagename> |
 
     Examples: 
-      | pagename   |
-      | robots.txt |
+      | pagename   | site |
+      | robots.txt |AARP |
+      | robots.txt	|UHC |
 
-  @robotTxtFileUHC
-  Scenario Outline: To test the robot txt file is loading on UHC
-    Given user is on blue layer landing page
-    And user opens the page to validate on UHC
-      | pagename | <pagename> |
-    Then the user validates whether page load is loading on UHC
-    Then the user validates whether correct content is visible on UHC
-      | pagename | <pagename> |
-
-    Examples: 
-      | pagename   |
-      | robots.txt |
+  

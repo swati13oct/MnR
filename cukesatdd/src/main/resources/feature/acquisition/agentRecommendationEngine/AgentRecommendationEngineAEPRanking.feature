@@ -1,5 +1,5 @@
 @agentRecommendationEngine @AREAEPRegression
-Feature: Agent Recommendation Engine - Verify ARE elements
+Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
   @ARE @PlanYearAutoRanking @F472941
   Scenario Outline: - <Email> To Verify agent login and validate plan year Auto Ranking in ARE
@@ -23,9 +23,9 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
-      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                           | YES                | YES           | [blank]                                                                                                                                 |
-      | qavgogine | qavgogine | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,travel,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
+      | User    | Pass         | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
+      | ocpuser | Password@123 | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]                                                                                                                                 |
+      | ocpuser | Password@123 | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
 
   @ARE @EstimateMedicalCostFuture @F441593 @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in AEP ARE for MCE
@@ -48,5 +48,5 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | future   | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | None          | future   | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |

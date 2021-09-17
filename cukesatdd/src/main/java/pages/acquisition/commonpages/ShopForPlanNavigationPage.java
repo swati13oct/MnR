@@ -58,41 +58,39 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Enroll']")
 	private WebElement enrollLink;
-	
-	//@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
-	
+
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
 	private WebElement shopLink;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
-	
+
 	@FindBy(xpath = "(//a[contains(@href,'/shop/dual-special-needs-plans.html')])[2]")
 	private WebElement dsnpLeanHowToshopLink;
-	
+
 	@FindBy(xpath = "(//a[contains(@href,'/shop/prescription-drug-plans.html')])[2]")
 	private WebElement pdpLeanHowToshopLink;
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
 	private WebElement maLeanHowToshopLink;
-	
+
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[3]")
 	private WebElement msLeanHowToshopLink;
-	
+
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
-	
+
 	@FindBy(xpath = "//a[text()='Provider Search']")
 	private WebElement providerSearchLink;
-	
+
 	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
 	private WebElement MedicareSupplementLink;
 
-	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
+	@FindBy(xpath = "//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
-	
+
 	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -122,9 +120,9 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		jsClickNew(shopLink);
 		Thread.sleep(4000);
 		return new ShopPage(driver);
-		
+
 	}
-	
+
 	public void CheckShopLinkOnShopPlan() {
 		waitforElement(shopLink);
 		waitforElement(shopLinkMsg);
@@ -132,32 +130,28 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		String actualMsg = shopLinkMsg.getText();
 //		System.out.println("Message: "+actualMsg);
 		if (expMsg.equalsIgnoreCase(actualMsg))
-			System.out.println("Validated the content under the Shop link: "+actualMsg);
+			System.out.println("Validated the content under the Shop link: " + actualMsg);
 		else
 			System.out.println("content under the Shop link does not match");
-		}
+	}
 
-	
-	
-	
-	public void clickONshopLink(String plantype, String planName) throws Exception{
-		if(plantype.equals("SNP")){
+	public void clickONshopLink(String plantype, String planName) throws Exception {
+		if (plantype.equals("SNP")) {
 			waitforElement(dsnpLeanHowToshopLink);
 			jsClickNew(dsnpLeanHowToshopLink);
 			Thread.sleep(5000);
-		
-		}
-		else if(plantype.equals("PDP")){
+
+		} else if (plantype.equals("PDP")) {
 			waitforElement(pdpLeanHowToshopLink);
 			jsClickNew(pdpLeanHowToshopLink);
 			Thread.sleep(5000);
-		}	
-		
-		else if(plantype.equals("MAPD") || plantype.equals("MA")){
+		}
+
+		else if (plantype.equals("MAPD") || plantype.equals("MA")) {
 			waitforElement(maLeanHowToshopLink);
 			jsClickNew(maLeanHowToshopLink);
 			Thread.sleep(5000);
-		}	
+		}
 	}
 
 	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {
@@ -169,32 +163,31 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 			jsClickNew(msLeanHowToshopLink);
 			threadsleep(2000);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
-			//return new ShopPage(driver);
+			// return new ShopPage(driver);
 		}
-	//	return null;
+		// return null;
 		return null;
 	}
-	
+
 	public void providersearch() {
 		CommonUtility.waitForPageLoadNew(driver, providerSearchLink, 60);
 		validateNew(providerSearchLink);
 	}
-	
+
 	public ShopPage medicareductaionOnMedsuppPlan() throws Exception {
 		waitforElement(MedicareSupplementLink);
 		jsClickNew(MedicareSupplementLink);
 		Thread.sleep(4000);
-	/*	if (validate(msLeanHowToshopLink)) {
-			waitforElement(msLeanHowToshopLink);
-			jsClickNew(msLeanHowToshopLink);
-			threadsleep(2000);
-			System.out.println("Shop Page Medsupp Plan is Displayed");
-			//return new ShopPage(driver);
-		}*/
-	//	return null;
+		/*
+		 * if (validate(msLeanHowToshopLink)) { waitforElement(msLeanHowToshopLink);
+		 * jsClickNew(msLeanHowToshopLink); threadsleep(2000);
+		 * System.out.println("Shop Page Medsupp Plan is Displayed"); //return new
+		 * ShopPage(driver); }
+		 */
+		// return null;
 		return null;
 	}
-	
+
 	@FindBy(xpath = "//input[@id='updates-email']")
 	private WebElement requestshoppageemailaddress;
 	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
@@ -203,24 +196,22 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	private WebElement requestplaninformationshopsubmitpopup;
 	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
 	private WebElement RequestPlanInformationShoppages_ErrorMessage;
-	
-	
-	
-	public boolean RequestPlanIInformationshoppages(String EmailAddress)
-			throws InterruptedException {
+
+	public boolean RequestPlanIInformationshoppages(String EmailAddress) throws InterruptedException {
 
 		boolean RequestPlanIInformation_Validation = true;
 
 		boolean flag = true;
-		
+
 		requestshoppageemailaddress.clear();
 		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
 		requestplaninformationShopsubmit.click();
-		if (validate(RequestPlanInformationShoppages_ErrorMessage) && RequestPlanInformationShoppages_ErrorMessage.isDisplayed()) {
+		if (validate(RequestPlanInformationShoppages_ErrorMessage)
+				&& RequestPlanInformationShoppages_ErrorMessage.isDisplayed()) {
 			if (!RequestPlanInformationShoppages_ErrorMessage.getText()
 					.contains("Please enter a valid email address")) {
-				System.out.println(
-						"Email Invalid Error is Not  displayed : " + RequestPlanInformationShoppages_ErrorMessage.getText());
+				System.out.println("Email Invalid Error is Not  displayed : "
+						+ RequestPlanInformationShoppages_ErrorMessage.getText());
 				flag = false;
 			}
 			System.out.println("Email Invalid Error : " + RequestPlanInformationShoppages_ErrorMessage.getText());
@@ -235,8 +226,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		System.out.println("Email Address is enetered : " + EmailAddress);
 		validateNew(requestplaninformationShopsubmit);
 		jsClickNew(requestplaninformationShopsubmit);
-		if (requestplaninformationshopsubmitpopup.getText().contains(
-				"Your guide will arrive in your inbox shortly")) {
+		if (requestplaninformationshopsubmitpopup.getText().contains("Your guide will arrive in your inbox shortly")) {
 			System.out.println("****************Request  information is displayed  ***************");
 
 			Assertion.assertTrue(true);
@@ -251,9 +241,9 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		waitforElement(ResourcesLink);
 		jsClickNew(ResourcesLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("/resources.html")) {
+		if (driver.getCurrentUrl().contains("/resources.html")) {
 			return new ResourcesPage(driver);
-		}else {
+		} else {
 			return null;
 		}
 	}

@@ -20,15 +20,15 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     Then Verify X out of Y provider covered information is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    #@ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
-    #@ProviderSearchBlayerSmoke @ProviderSearchBlayerCurrentSmoke
+    @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Global Header
     Given the user is on medicare acquisition site landing page
@@ -40,15 +40,15 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>     |
     When user select a provider and save it
 
-    #@ProviderSearchFromGlobalHeaderUlayer
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | planname                             | year   |
-      |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | future |
+      |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | current |
 
-    #@ProviderSearchFromGlobalHeaderBlayer
+    @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | planname                             | year   |
-      |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | future |
+      |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | current |
 
   Scenario Outline: Verify Provider Search  in <site> site from plan summary page
     Given the user is on medicare acquisition site landing page
@@ -69,16 +69,15 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    #@ProviderSearchFromVppPlanSummaryPageUlayer
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
-    #@ProviderSearchFromVppPlanSummaryPageBlayer
-    @sanity
+    @ProviderSearchCommon_UHC @regressionUHC @sanity
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Plan Details page
     Given the user is on medicare acquisition site landing page
@@ -97,15 +96,15 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    #@ProviderSearchFromVppPlanDetailsPageUlayer
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
-      | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
-      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
+      | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
+      |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | current   |
 
-    #@ProviderSearchFromVppPlanDetailsPageBlayer
+    @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
-      | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
-      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
+      | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
+      |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | current   |
 
   Scenario Outline: Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
@@ -117,17 +116,16 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>     |
     When user select a provider and save it
 
-    # @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
+    @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | planname                             | year     |
       |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    # @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
+    @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | planname                             | year     |
       |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-  #@ProviderSearchFromGlobalHeaderUlayer1
   Scenario Outline: Verify Provider Search plan count in <site> site from Global Header -plan count-<plancount>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -137,31 +135,26 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
-    #@ProviderSearchFromGlobalHeaderUlayer1
-    @ProviderSearchCommon_AARP @regressionAARP @sanity 
+    @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | future |
+      |   10001 | AARP |        12 | current |
 
-    #@ProviderSearchFromGlobalHeaderBlayer1
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | future |
+      |   10001 | UHC  |        12 | current |
 
-    #	@ProviderSearchFromGlobalHeaderUlayer1
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         7 | future |
-      |   04011 | AARP |         6 | future |
+      |   55344 | AARP |         7 | current |
+      |   04011 | AARP |         6 | current |
 
-    #@ProviderSearchFromGlobalHeaderBlayer1
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         7 | future |
-      |   04011 | UHC  |         6 | future |
+      |   55344 | UHC  |         7 | current |
+      |   04011 | UHC  |         6 | current |
 
-  #@ProviderSearchFromWidgetUlayer
   Scenario Outline: Verify Provider Search plan count in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -171,26 +164,22 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
-    #@ProviderSearchFromWidgetUlayer
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        9 | future |
+      |   10001 | AARP |        12 | current |
 
-    #@ProviderSearchFromWidgetBlayer
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        9 | future |
+      |   10001 | UHC  |        12 | current |
 
-    #@ProviderSearchFromWidgetUlayer
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | AARP |         7 | future |
-      |   04011 | AARP |         6 | future |
+      |   55344 | AARP |         7 | current |
+      |   04011 | AARP |         6 | current |
 
-    #@ProviderSearchFromWidgetBlayer
     Examples: 
       | zipcode | site | plancount | year   |
-      |   55344 | UHC  |         7 | future |
-      |   04011 | UHC  |         6 | future |
+      |   55344 | UHC  |         7 | current |
+      |   04011 | UHC  |         6 | current |

@@ -66,18 +66,18 @@ public class DCEACQDrugSummaryMobile {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	@When("^I access the acquisition DCE tool from home page$")
+	/*@When("^I access the acquisition DCE tool from home page$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) acquisitionHomePage
-				.navigateToDCEToolFromHome();
-		if (null != dcePage) {
-			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) acquisitionHomePage
+				.navigateToDCERedesignFromHome();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE page object not loaded");
-	}
+	}*/
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -94,23 +94,7 @@ public class DCEACQDrugSummaryMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	@When("^the user navigates to following medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_page(DataTable givenAttributes)
-			throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String path = memberAttributesMap.get("PagePath");
-		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : " + path);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.navigateToPath(path);
-	}
+	
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
@@ -224,15 +208,15 @@ public class DCEACQDrugSummaryMobile {
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		drugSummaryPage.verifyDefaultPlanType();
+//		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		drugSummaryPage.verifyDefaultPlanType("Medicare Advantage");
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
 	@When("^user should be able to see \"([^\"]*)\" by default$")
 	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(wd);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -389,6 +373,50 @@ public class DCEACQDrugSummaryMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+	@Then("^user should be navigated to first step of DCE Page$")
+	public void the_user_navigated_to_first_step_of_DCE_Page() {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
+	}
+	
+	
+	@When("^user clicks on Return to plan summary page link in DCE$")
+	public void user_clicks_on_Return_to_plan_summary_page_link_in_DCE() {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
+		drugSummaryPage.clickReturnToPlanSummary();
+	}
+	
+	@Then("^the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_zero_costs_for_following_Covered_generic_drug_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
+	}
+
+	@Then("^the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_non_zero_costs_for_Not_covered_Drugs_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String NotCoveredDrug = memberAttributesMap.get("NotCoveredDrug");
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
+	}
+
+	@Then("^the user Closes Drug Pricing modal$")
+	public void user_closes_ViewDrugPricing_modal() throws Throwable {
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.closeDrugPricingModal();
+	}
 
 }

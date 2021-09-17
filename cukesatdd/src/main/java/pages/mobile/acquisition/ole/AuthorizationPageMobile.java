@@ -22,7 +22,6 @@ import atdd.framework.UhcDriver;
  */
 public class AuthorizationPageMobile extends UhcDriver{
 
-	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
@@ -36,7 +35,9 @@ public class AuthorizationPageMobile extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 
 	//Right Rail Elements
@@ -82,6 +83,9 @@ public class AuthorizationPageMobile extends UhcDriver{
 	@FindBy(id = "city0")
 	private WebElement Authorized_City;
 	
+	@FindBy(id = "address20")
+	private WebElement Authorized_Apartment;
+	
 	@FindBy(id = "state0")
 	private WebElement Authorized_State;
 	
@@ -90,9 +94,6 @@ public class AuthorizationPageMobile extends UhcDriver{
 	
 	@FindBy(id = "authorizedPersonPhone0")
 	private WebElement Authorized_PhNo;
-	
-	@FindBy(id = "address20")
-	private WebElement Authorized_Apartment;
 
 	//Read and Agree to the Statement of Understanding
 	@FindBy(xpath= "//input[contains(@id,'Agree')]")
@@ -129,7 +130,8 @@ public class AuthorizationPageMobile extends UhcDriver{
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
 			//validateNew(SoU_DisagreeRadio);
-			jsClickMobile(SoU_DisagreeRadio);
+//			jsClickNew(SoU_DisagreeRadio);
+			jsClickNew(SoU_DisagreeRadio);
 			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
 				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
 				validation_Flag = true;
@@ -144,8 +146,8 @@ public class AuthorizationPageMobile extends UhcDriver{
 			if(validate(AuthorizedRepresentativeRadio)){
 				AuthorizedRepresentativeRadio.click();
 			}*/
-			jsClickMobile(SoU_AgreeRadio);
-			AuthorizedRepresentativeRadio.click();
+			jsClickNew(SoU_AgreeRadio);
+			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
@@ -158,7 +160,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
-			jsClickMobile(ApplicantRadio);
+			jsClickNew(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
@@ -178,12 +180,12 @@ public class AuthorizationPageMobile extends UhcDriver{
 	public ReviewSubmitPageMobile navigate_to_Review_Submit_Page() {
 		validateNew(NextBtn);
 		scrollToView(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
+		if(validateNew(driver.findElement(By.xpath("//*[contains(@class,'ole-form')]//*[contains(@class,'only-review ')]")))){
 			return new ReviewSubmitPageMobile(driver);
 		}
 		else{
@@ -207,25 +209,8 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : Required fields present");
-			//validateNew(SoU_DisagreeRadio);
-			jsClickMobile(SoU_DisagreeRadio);
-			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
-				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
-				validation_Flag = true;
-			}
-			else{
-				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
-				validation_Flag = false;
-			}
-/*			if(validate(SoU_AgreeRadio)){
-				SoU_AgreeRadio.click();
-			}
-			if(validate(AuthorizedRepresentativeRadio)){
-				AuthorizedRepresentativeRadio.click();
-			}*/
-			jsClickMobile(SoU_AgreeRadio);
-			AuthorizedRepresentativeRadio.click();
+			
+			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
 					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
@@ -238,21 +223,34 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
-			//jsClickMobile(ApplicantRadio);
+			jsClickNew(AuthorizedRepresentativeRadio);
 			
-			jsClickMobile(AuthorizedRepresentativeRadio);
 			
-			Authorized_FirstName.sendKeys(AuthorizationFirstname);
-			Authorized_LastName.sendKeys(AuthorizationLastname);
-			Authorized_Relation.sendKeys(AuthorizationRelationship);
-			Authorized_Address.sendKeys(AuthorizationAddress);
-			Authorized_City.sendKeys(AuthorizationCity);
-			Select SelectState = new Select(Authorized_State);
-			SelectState.selectByValue(AuthorizationStateDisplay);
-			//sendkeys(Authorized_State,AuthorizationStateDisplay);
-			Authorized_ZipCode.sendKeys(AuthorizationZip);
-			Authorized_PhNo.sendKeys(AuthorizationPhoneNo);
-			Authorized_Apartment.sendKeys(AuthorizationApartmentSuite);
+//			scrollToView(Authorized_FirstName);
+			sendkeysMobile(Authorized_FirstName, AuthorizationFirstname);
+			
+//			scrollToView(Authorized_LastName);
+			sendkeysMobile(Authorized_LastName, AuthorizationLastname);
+			
+//			scrollToView(Authorized_Relation);
+			sendkeysMobile(Authorized_Relation, AuthorizationRelationship);
+			
+//			scrollToView(Authorized_Address);
+			sendkeysMobile(Authorized_Address, AuthorizationAddress);
+			
+//			scrollToView(Authorized_City);
+			sendkeysMobile(Authorized_City, AuthorizationCity);
+
+			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
+
+//			scrollToView(Authorized_ZipCode);
+			sendKeysByCharacter(Authorized_ZipCode, AuthorizationZip);
+			
+//			scrollToView(Authorized_PhNo);
+			sendKeysByCharacter(Authorized_PhNo, AuthorizationPhoneNo);
+			
+//			scrollToView(Authorized_Apartment);
+			sendkeysMobile(Authorized_Apartment, AuthorizationApartmentSuite);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
@@ -269,7 +267,33 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		return validation_Flag;
 	}
 
-
-
+public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws InterruptedException {
+	
+	boolean validation_Flag = true;
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	
+	if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+		System.out.println("SOA page is Displayed");
+	
+		if(NextBtn.isEnabled()){
+		System.out.println("Next Button is Enabled : Radio buttons are validated for SOA Page");
+		//validateNew(SoU_DisagreeRadio);
+		jsClickNew(SoU_DisagreeRadio);
+		if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
+			System.out.println("Error message and Cancel Enrollment Button are displayed for Disagree to SoU selection");
+			validation_Flag = true;
+		}
+		else{
+			System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
+			validation_Flag = false;
+		}
+		
+		jsClickNew(SoU_AgreeRadio);		
+		Thread.sleep(6000);
+		}
+	}
+	return validation_Flag;
+}
 
 }

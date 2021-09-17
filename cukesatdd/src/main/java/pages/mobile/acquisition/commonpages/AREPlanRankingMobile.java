@@ -347,13 +347,13 @@ public class AREPlanRankingMobile extends UhcDriver {
 		System.out.println("Validate Adding Drugs from Plan Compare page : ");
 		validate(AddDrugsLink);
 		jsClickNew(AddDrugsLink);
-		DCEPage dceobj = new DCEPage(driver);
+		DCEPageMobile dceobj = new DCEPageMobile(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
 		returnToPlanCompare();
 	}
 
 	public void returnToPlanCompare() {
-		DCEPage dceobj = new DCEPage(driver);
+		DCEPageMobile dceobj = new DCEPageMobile(driver);
 		dceobj.returnToCompare();
 		validate(planRankingDropdown, 60);
 	}
@@ -368,7 +368,7 @@ public class AREPlanRankingMobile extends UhcDriver {
 		System.out.println("Delete Added Drugs in DCE page : ");
 		validate(AddDrugsLink);
 		AddDrugsLink.click();
-		DCEPage dceobj = new DCEPage(driver);
+		DCEPageMobile dceobj = new DCEPageMobile(driver);
 		dceobj.deletedrugsHandlerWithdetails(drugDetails);
 	}
 
@@ -381,7 +381,7 @@ public class AREPlanRankingMobile extends UhcDriver {
 	}
 
 	public void doctorModellookup(String search) {
-		WerallyPage rallyobj = new WerallyPage(driver);
+		WerallyPageMobile rallyobj = new WerallyPageMobile(driver);
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 		rallyobj.validateLinksanotherWindow(curWindow, "Adding Doctors", search);
@@ -398,7 +398,7 @@ public class AREPlanRankingMobile extends UhcDriver {
 		System.out.println("Delete Added Doctors in Werally page : ");
 		validate(AddDoctorsLink);
 		AddDoctorsLink.click();
-		WerallyPage rallyobj = new WerallyPage(driver);
+		WerallyPageMobile rallyobj = new WerallyPageMobile(driver);
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 		rallyobj.validateLinksanotherWindow(curWindow, "Delete Doctors", docDetails);
@@ -1043,13 +1043,13 @@ public class AREPlanRankingMobile extends UhcDriver {
 	}
 
 	public void deletePlan(int planIndex) {
-		jsClickMobile(plandeleteButtons.get(planIndex - 1));
+		jsClickNew(plandeleteButtons.get(planIndex - 1));
 		threadsleep(5000);
 	}
 
 	public void addPlan() {
 		System.out.println("Adding Plan....");
-		jsClickMobile(addPlan);
+		jsClickNew(addPlan);
 		threadsleep(5000);
 		plansLoader();
 		for (WebElement elem : vppCompare)
@@ -1113,7 +1113,7 @@ public class AREPlanRankingMobile extends UhcDriver {
 		if (validate(editDrugs, 10)) {
 			editDrugs.click();
 			System.out.println("Deleting Existing Drugs");
-			DCEPage areDce = new DCEPage(driver);
+			DCEPageMobile areDce = new DCEPageMobile(driver);
 			areDce.deleteAllDrugs();
 			areDce.returnToCompare();
 			validate(planRankingDropdown, 60);
@@ -1125,7 +1125,7 @@ public class AREPlanRankingMobile extends UhcDriver {
 		if (validate(editDoctors, 10)) {
 			editDoctors.click();
 			System.out.println("Deleting Existing All Providers");
-			WerallyPage werally = new WerallyPage(driver);
+			WerallyPageMobile werally = new WerallyPageMobile(driver);
 			String curWindow = driver.getWindowHandle();
 			System.out.println(curWindow);
 			werally.validateLinksanotherWindow(curWindow, "Delete All", "");

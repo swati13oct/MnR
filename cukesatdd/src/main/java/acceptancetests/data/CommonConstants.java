@@ -1,6 +1,13 @@
 
 package acceptancetests.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.stream.Stream;
+
+import io.cucumber.messages.internal.com.google.protobuf.EnumValue;
+
 /**
  * @author pjaising
  *
@@ -870,7 +877,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
-	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";// or Optum-Prd;
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";
@@ -879,6 +886,10 @@ public class CommonConstants {
 	public static final String MOBILE_DEVICE_TYPE = "MOBILE_DEVICE_TYPE";
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
 	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
+	
+	public static final String FLAGSMITH = "flagSmith";
+	
+	public static final String FLAGSMITH_USER = "flagsmithUser";
 	
 	public static final String SCREEN_RESOLUTION = "screenResolution";
 	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +
@@ -890,7 +901,9 @@ public class CommonConstants {
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
-	public static final String GPS_QUERY = "Select MEDICAID_IND,\n" + 
+	
+	//GPS Query cannot be final variable, since a stage id is to be appended at runtime
+	public static String GPS_QUERY = "Select MEDICAID_IND,\n" + 
 			"MEDICAID_NUMBER,\n" + 
 			"MAILING_ZIP_CD,\n" + 
 			"MAILING_STATE_CD,\n" + 
@@ -910,23 +923,26 @@ public class CommonConstants {
 			"DAYTIME_PHONE_NUM,\n" + 
 			"EVENING_PHONE_NUM,\n" + 
 			"PAPERLESS_PREFERENCE_IND,\n" + 
-			"EMAIL,\n" + 
+			"EMAIL,\n" + 			
 			"LANGUAGE_PREFERENCE,\n" + 
 			"MEDICARE_NUMBER,\n" + 
+			"SSN,\n" + 
 			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
 			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
 			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
 			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
 			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
-			"OTHER_HEALTH_INSURANCE_ID,\n" + 
+			"OTHER_HEALTH_INSURANCE_ID,\n" +
+			"DO_YOU_HAVE_OTHER_RX_COVERAGE,\n" +
+			"OTHER_RX_COVERAGE_NAME,\n" +
 			"SECONDARY_RX_COVERAGE_NAME,\n" + 
 			"OTHER_RX_COVERAGE_NAME,\n" + 
 			"SECONDARY_RX_GROUP,\n" + 
 			"SECONDARY_RX_ID,\n" + 
+			"SECONDARY_RX_BIN,\n" +
 			"NOTE,\n" + 
 			"REQUESTED_EFFECTIVE_DATE,\n" + 
 			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
-			"XEROX_STAGE_ID,\n" +
 			"PRIMARY_CARE_PHYSICIAN,\n" + 
 			"DENTAL_PLATINUM,\n" +
 			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
@@ -947,8 +963,25 @@ public class CommonConstants {
 			"CREDIT_CARD_NUMBER,\n" +
 			"CREDIT_CARD_NAME_ON_CARD,\n" +
 			"CREDIT_CARD_EXPIRATION_DATE,\n" +
-			"XEROX_STAGE_ID\n" + 
-			"from Xerox_stage where xerox_stage_id = ";
+			"ASMENT_DIAB1_DOC_INFORMED_DIAB,\n" +
+			"ASMENT_DIAB2_PRESCRIBED_INSULN,\n" + 
+			"CHRONIC_AUTH_HEART_FAILURE,\n" + 
+			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA,\n" + 
+			"ASMENT_HEART2_CARDC_BYPASS,\n" + 
+			"CHRONIC_AUTH_VASCULAR_DISEASE,\n" + 
+			"ASMENT_HEART1_HEART_ATTACK,\n" +
+			"ASMENT_HEART10_ANGINA,\n" +
+			"ASMENT_HBP2_MEDICATION_FOR_HBP,\n"+
+			"ASMENT_HEART7_PACEMKR_R_DEFIB,\n" + 
+			"ASMENT_HEART3_ANGIOPLASTY,\n" + 
+			"ASMENT_SIGN_PRESENCE_ENROLLEE,\n" + 
+			"CHRONIC_PHYSICIAN_NAME,\n" + 
+			"CHRONIC_PHYSICIAN_PHONE_NUM,\n" + 
+			"ASMENT_FULL_ADDR_FOR_PHYSICIAN,\n" +
+			"APPLICATION_RECEIPT_DATE,\n"+
+			"SIGNATURE_DATE,\n" +
+            "XEROX_STAGE_ID\n" +
+            "from Xerox_stage where xerox_stage_id = ";
 	
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
@@ -970,7 +1003,7 @@ public class CommonConstants {
 		SELECTED_STATE.set(State);
 	}
 	
-	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 	
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
 	
@@ -1007,6 +1040,104 @@ public class CommonConstants {
 	public static final String MEDSUP_TFN="medsupTfn";
 	
 	public static final String FOOTER_LINK = "linkName";
+	
+	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Rally_Providers = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Providers = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,ArrayList<String>> DCE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
+	
+	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
+	
+	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
+	
+	public static enum PLANTYPE {
+		MA, MAPD, PDP, DSNP, SNP, MEDSUPP
+	}
+
+	public static enum TOOLS {
+		PRE, DCE, PHARMACYSEARCH, SEARCHDOCTORS, SEARCHDENTISTS
+	}
+
+	public static enum SHOPFORPLAN {
+		SHOP, ENROLL, MEMBERRESOURCES
+	}
+	
+	public static enum LEARNABOUTMEDICARE_INTRODUCTION {
+		INTRODUCTION("Introduction"), 
+		ELIGIBILITY("Eligibility"), 
+		COVERAGEOPTIONS("Coverage Options"), 
+		BENEFITS("Prescriptions, Providers & Benefits"), 
+		COSTBASICS("Medicare Cost Basics"),
+		ARTICLES("Articles and Special Topics");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_INTRODUCTION(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_INTRODUCTION getIntroductionEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_INTRODUCTION learnAboutMedicareOption : LEARNABOUTMEDICARE_INTRODUCTION.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+		
+	}
+	
+	public static enum LEARNABOUTMEDICARE_TYPESOFPLANS {
+		OVERVIEW ("Overview of Plans"),
+		MA ("Medicare Advantage Plans"), 
+		PDP ("Medicare Prescription Drug Plans"),
+		SNP ("Special Needs Plans"),
+		MEDSUPP ("Medicare Supplement Insurance"),
+		MEDICAREFAQ ("Medicare FAQ"),
+		GLOSSARY ("Glossary");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_TYPESOFPLANS(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_TYPESOFPLANS getTypesOfPlansEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_TYPESOFPLANS learnAboutMedicareOption : LEARNABOUTMEDICARE_TYPESOFPLANS.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+	}
+	
+	public static enum LEARNABOUTMEDICARE_MEDICAREENROLLMENT {
+		WHENTOENROLL ("When to Enroll"),
+		HOWTOENROLL ("How to Enroll"),
+		CHANGINGPLANS ("Changing Plans"),
+		WORKINGPAST65 ("Working Past 65");
+		
+		private String option;
+		
+		LEARNABOUTMEDICARE_MEDICAREENROLLMENT(String option){
+			this.option = option;
+		}
+		
+		public static LEARNABOUTMEDICARE_MEDICAREENROLLMENT getMedicareEnrollmentEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_MEDICAREENROLLMENT learnAboutMedicareOption : LEARNABOUTMEDICARE_MEDICAREENROLLMENT.values()) {
+				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+		
+	}
+	
 }
-
-

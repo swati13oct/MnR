@@ -12,6 +12,7 @@ import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -23,19 +24,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -58,26 +57,48 @@ public class VppPlanSummaryMobile {
 		return loginScenario;
 	}
 
-	//AppiumDriver wd;
-	
+	// AppiumDriver wd;
+
 	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNextBestActionModalForDrugCost();
 	}
 
-	
+	@Then("^the user validates the added drug name on plan summary page for the selected plan$")
+	public void verify_drugs_covered_AARP(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String planName = plannameAttributesMap.get("Plan Name");
+		String drugName = plannameAttributesMap.get("DrugName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assertion.assertTrue("Drugs coverage Info not updated",
+				plansummaryPage.verifyAddedDrugName(planName, drugName));
+	}
+
 	@Then("^user changes zipcode within VPP page$")
-	public void User_Change_ZipCode_VPP_pages(DataTable givenAttributes) {
+	public void User_Change_ZipCode_VPP_pages(DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -86,9 +107,10 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		
+
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
+			Thread.sleep(5000);
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
 		} else {
 			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
@@ -99,21 +121,21 @@ public class VppPlanSummaryMobile {
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		String planName = givenAttributesMap.get("Plan Name");
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String planName = givenAttributesMap.get("Plan Name").trim();
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
-		
-		
+
 	}
 
 	@Then("^the user validates marketing bullets of the plan$")
@@ -133,17 +155,19 @@ public class VppPlanSummaryMobile {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
+			plansummaryPage.validateAndClickAddtoCompare(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
-			plansummaryPage.deselectAddToCompareinAARP(planName);
+			plansummaryPage.deselectAddToCompare(planName);
 
 		}
 	}
 
 	@Then("^the user views plan details of the above selected plan and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) throws InterruptedException {
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
@@ -152,9 +176,8 @@ public class VppPlanSummaryMobile {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-
-		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
-				.navigateToPlanDetails(PlanName, planType);
+		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assertion.assertTrue(true);
@@ -169,10 +192,10 @@ public class VppPlanSummaryMobile {
 		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
-		if (plansummaryPage != null) {
-			Assertion.assertTrue(true);
-		} else
-			Assertion.fail("Error in validating the Plan Summary Page");
+		// if (plansummaryPage != null) {
+		// Assertion.assertTrue(true);
+		// } else
+		// Assertion.fail("Error in validating the Plan Summary Page");
 
 	}
 
@@ -182,12 +205,15 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		String plantype = memberAttributesMap.get("Plan Type");
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
 		String specialist = memberAttributesMap.get("Specialist");
@@ -197,6 +223,8 @@ public class VppPlanSummaryMobile {
 		String annualDeductible = memberAttributesMap.get("Annual Deductible");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.viewPlanSummary(plantype);
+
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validatePlanPremium(planName, monthlyPremium);
@@ -220,15 +248,15 @@ public class VppPlanSummaryMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			//plansummaryPage.toolTipForPremium0(planName);
-			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.toolTipForPremium0(planName);
+			// plansummaryPage.viewPlanSummary(planType);
 		} else if (planType.equals("PDP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-			//plansummaryPage.toolTipForAnnualDeductible(planName);
-			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.toolTipForAnnualDeductible(planName);
+			// plansummaryPage.viewPlanSummary(planType);
 		}
 	}
 
@@ -236,10 +264,9 @@ public class VppPlanSummaryMobile {
 	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted() {
 		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-	
-		
+
 		VPPPlanSummaryPageMobile plansummaryPage = getStartedPage.ClickReturnToBtnToVPPSummary();
-		
+
 		if (null != plansummaryPage) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else
@@ -253,10 +280,6 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		
-
-		
-	
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validateIsMyProviderCoveredLink(planType, planName);
 
@@ -268,7 +291,6 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
 		WelcomePageMobile welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName, planType);
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
@@ -294,12 +316,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
@@ -367,12 +390,13 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		plansummaryPage.enterRequiredFieldsForMedicareGuide(memberAttributesMap);
 
 	}
@@ -460,7 +484,7 @@ public class VppPlanSummaryMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DisclaimersPageMobile disclaimersPage = aquisitionhomepage.disclaimersClick();
+		DisclaimersAARPPageMobile disclaimersPage = aquisitionhomepage.disclaimersClick();
 		if (disclaimersPage != null) {
 			getLoginScenario().saveBean(PageConstants.DISCLAIMERS_PAGE, disclaimersPage);
 			Assertion.assertTrue(true);
@@ -482,12 +506,13 @@ public class VppPlanSummaryMobile {
 	public void user_performs_planSearch(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		String site = givenAttributesMap.get("Site");
@@ -555,7 +580,7 @@ public class VppPlanSummaryMobile {
 
 		// note: if email is successfully sent, deepLink info should be available, save
 		// it for later use
-		String deepLinkStr = util.getEmailDeepLink();
+		String deepLinkStr = util.getEmailDeepLink(wd);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
 	}
@@ -594,12 +619,13 @@ public class VppPlanSummaryMobile {
 	public void user_click_on_Providercoveredlink_ums(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -617,8 +643,9 @@ public class VppPlanSummaryMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			String savedProvider = providerSearchPage.selectsProvider();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -628,12 +655,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -646,17 +674,19 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 	@Given("^user is on blue layer landing page$")
@@ -676,12 +706,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
@@ -711,17 +742,18 @@ public class VppPlanSummaryMobile {
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_UMS_site(DataTable data)
 			throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		//wd.manage().window().maximize();
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);*/
+		// wd.manage().window().maximize();
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * planType = memberAttributesRow.get(0).getCells().get(1); String planName =
+		 * memberAttributesRow.get(1).getCells().get(1);
+		 */
 		String planType = data.cell(0, 1);
 		String planName = data.cell(1, 1);
 		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
 		// plansummaryPage.viewPlanSummary(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		PlanDetailsPageMobile plandetailspage = plansummaryPage
-				.navigateToPlanDetails(planName, planType);
+		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 		}
@@ -742,8 +774,10 @@ public class VppPlanSummaryMobile {
 	public void the_user_adds_below_drugs_to_drug_cost_estimator_flow_for_the_given_plan_name_on_UHC_site(
 			DataTable data) throws Throwable {
 
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(1).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
+		 * memberAttributesRow.get(1).getCells().get(1);
+		 */
 		String drug = data.cell(1, 1);
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
@@ -761,15 +795,17 @@ public class VppPlanSummaryMobile {
 	@Then("^selects drug details in UMS site$")
 	public void user_selects_drug_details(DataTable data) throws InterruptedException {
 
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);
-		String quantity = memberAttributesRow.get(1).getCells().get(1);
-		String frequency = memberAttributesRow.get(2).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
+		 * memberAttributesRow.get(0).getCells().get(1); String quantity =
+		 * memberAttributesRow.get(1).getCells().get(1); String frequency =
+		 * memberAttributesRow.get(2).getCells().get(1);
+		 */
 
 		String drug = data.cell(0, 1);
 		String quantity = data.cell(1, 1);
 		String frequency = data.cell(2, 1);
-		
+
 		AddDrugDetailsMobile DrugDetails = (AddDrugDetailsMobile) getLoginScenario()
 				.getBean(PageConstants.ADD_DRUG_DETAILS);
 
@@ -815,13 +851,15 @@ public class VppPlanSummaryMobile {
 
 	@When("^the user selects the pharmacy type and distance in UMS site$")
 	public void the_user_selects_the_pharmacy_type_and_distance_in_UMS_site(DataTable data) throws Throwable {
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String pharmacyType = memberAttributesRow.get(0).getCells().get(1);
-		String distance = memberAttributesRow.get(1).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * pharmacyType = memberAttributesRow.get(0).getCells().get(1); String distance
+		 * = memberAttributesRow.get(1).getCells().get(1);
+		 */
 
 		String pharmacyType = data.cell(0, 1);
 		String distance = data.cell(1, 1);
-		
+
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 
@@ -833,17 +871,19 @@ public class VppPlanSummaryMobile {
 	@Then("^the user selects a pharmacy from the list of pharmacies in UMS site$")
 	public void the_user_selects_a_pharmacy_from_the_list_of_pharmacies_in_UMS_site(DataTable data) throws Throwable {
 
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String pharmacyName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * pharmacyName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 
 		String pharmacyName = data.cell(0, 1);
-		
+
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				//dce.getLstSelectPharmacy().get(i).click();
+				// dce.getLstSelectPharmacy().get(i).click();
 				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
 				break;
 			}
@@ -867,7 +907,7 @@ public class VppPlanSummaryMobile {
 		 */
 
 		String drug = null;
-//		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		// List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		List<List<String>> memberAttributesRow = data.asLists();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			drug = memberAttributesRow.get(i).get(1).toLowerCase().trim();
@@ -910,11 +950,13 @@ public class VppPlanSummaryMobile {
 
 	@Then("^the user change the pharmacy type and select new pharmacy in UMS site$")
 	public void the_user_change_the_pharmacy_type_and_select_new_pharmacy_in_UMS_site(DataTable data) throws Throwable {
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String pharmacyType = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * pharmacyType = memberAttributesRow.get(0).getCells().get(1);
+		 */
 
 		String pharmacyType = data.cell(0, 1);
-		
+
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.selectPharmacyType(pharmacyType);
@@ -936,8 +978,10 @@ public class VppPlanSummaryMobile {
 	@Then("^user verifies annual drug cost in the Plan Cost tab of UMS site$")
 	public void user_verifies_annual_drug_cost_in_the_Plan_Cost_tab_of_UMS_site(DataTable data) throws Throwable {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String planType = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * planType = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String planType = data.cell(0, 1);
 		PlanDetailsPageMobile plandetailspage = new PlanDetailsPageMobile(wd, planType);
 
@@ -970,10 +1014,12 @@ public class VppPlanSummaryMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		 * 
+		 * String planName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 
-		String planName = memberAttributesRow.get(0).getCells().get(1);*/
-		
 		String planName = data.cell(0, 1);
 		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		System.out.println(cost);
@@ -988,12 +1034,13 @@ public class VppPlanSummaryMobile {
 	public void user_validates_plan_summary_ums1(DataTable planAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1009,12 +1056,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1022,18 +1070,19 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
 	}
-	
+
 	@Then("^the user clicks on Learn More for Rocky Mountain plans$")
 	public void the_user_clicks_on_Learn_More__for_Rocky_Mountain_plns(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1048,12 +1097,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1061,34 +1111,32 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
 	}
-	
-	@Given("^the user hovers screen over the shop for a plan$")
-	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
-		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopforaplanAARPlayerMobile shop = acqusitionHomePage.Hoveronaplan();
-		if (shop != null) {
-			System.out.println("Shop for a plan drop down is opened");
-			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
-		} else {
-			Assertion.fail("Issue in selecting a plan drop down");
-		}
-	}
-	
-	
-	@Given("^the user hovers screen over the learnabout Medicare for a plan$")
-	public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan() throws Throwable {	
-		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopForPlanNavigationPage shop = acqusitionHomePage.HoveronalearnaboutMedicare();
-//		if (shop!=null) {
-//			System.out.println("Medicare Education drop down is opened");
-//			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
-//		}
-//		else {
-//			Assertion.fail("Issue in selecting a plan drop down");
-//		}
-	}
-	
+
+	/*
+	 * @Given("^the user hovers screen over the shop for a plan$") public void
+	 * the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
+	 * AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile)
+	 * getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	 * ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan(); if (shop
+	 * != null) { System.out.println("Shop for a plan drop down is opened");
+	 * getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop); }
+	 * else { Assertion.fail("Issue in selecting a plan drop down"); } }
+	 */
+
+	/*
+	 * @Given("^the user hovers screen over the learnabout Medicare for a plan$")
+	 * public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan()
+	 * throws Throwable { AcquisitionHomePageMobile acqusitionHomePage =
+	 * (AcquisitionHomePageMobile)
+	 * getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	 * ShopForPlanNavigationPage shop =
+	 * acqusitionHomePage.HoveronalearnaboutMedicare(); // if (shop!=null) { //
+	 * System.out.println("Medicare Education drop down is opened"); //
+	 * getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
+	 * // } // else { // Assertion.fail("Issue in selecting a plan drop down"); // }
+	 * }
+	 */
+
 	@Then("^the site user validates the RightRails Links on Medsupp Page$")
 	public void user_validate_rightrail_links_medsupp_page() throws Throwable {
 		/*
@@ -1110,11 +1158,11 @@ public class VppPlanSummaryMobile {
 		// if(urGuideURL!=null){
 		plansummaryPage.medsuppOLERightRail();
 		plansummaryPage.medsuppOLERightRailGuideourhealth();
-	//	plansummaryPage.medsuppOLERightRailoutlinecoverage();
+		// plansummaryPage.medsuppOLERightRailoutlinecoverage();
 		plansummaryPage.medsuppOLERightRailplanoverview();
 		plansummaryPage.medsuppOLERightRailRulesDisclose();
 		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
-		//plansummaryPage.medsuppOLERightRailLearnmore();
+		// plansummaryPage.medsuppOLERightRailLearnmore();
 
 		// Assertion.assertTrue(true);
 		// }else
@@ -1122,36 +1170,36 @@ public class VppPlanSummaryMobile {
 
 	}
 
-
-	
 	@Then("^the site user clicks on View Plans Button proceed to View Plans Page$")
 	public void the_site_users_clicks_on_View_Plans_Button_proceed_to_View_Plans_Page_button(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 	}
-	
+
 	@When("the user selects plan year for PRE Flow$")
 	public void users_selects_plan_year_for_PRE_Flow(DataTable givenAttributes) {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planYear = givenAttributesMap.get("Plan Year");
 		// VPPPlanSummaryPage plansummaryPage = null;
@@ -1167,18 +1215,18 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
 
 	}
-	
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
 
@@ -1188,10 +1236,39 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
 
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-		if (site.equalsIgnoreCase("AARP")) 
-		aquisitionhomepage.validateSubtitle();
+		if (site.equalsIgnoreCase("AARP"))
+			aquisitionhomepage.validateSubtitle();
 	}
-	
+
+	@Given("^the user navigates to following Campaign acquisition site page$")
+	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String path = memberAttributesMap.get("PagePath");
+		// String plantype = memberAttributesMap.get("Plan Type");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VPPPlanSummaryPageMobile plansummaryPage = aquisitionhomepage.navigateToPathNew(path);
+		// Thread.sleep(5000);
+		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			// getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+
 	@Then("^the user clicks on the united health care medicare solutions link$")
 	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -1205,12 +1282,13 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1229,7 +1307,7 @@ public class VppPlanSummaryMobile {
 				Validation_Flag);
 
 	}
-	
+
 	@Then("^user verify the popup and content on the site$")
 	public void user_verify_the_popup_and_content_on_the_site() throws InterruptedException {
 
@@ -1237,7 +1315,7 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallpopup();
 	}
-	
+
 	@Then("^user saves two ms plans as favorite$")
 	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -1245,28 +1323,29 @@ public class VppPlanSummaryMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		
+
 		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
 
 		// ----- MS plan type ----------------------------
 		plansummaryPage.saveMSPlans(ms_savePlanNames);
 
 	}
-	@And ("^the user login with optum Id credentials$")
+
+	@And("^the user login with optum Id credentials$")
 	public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		
+
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		
+
 		System.out.println("credentials" + username + password);
 		visitorProfile.logIn(username, password);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
-	
+
 	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -1274,5 +1353,136 @@ public class VppPlanSummaryMobile {
 		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
 	}
 
+	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
+	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink(planType);
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
+		} else
+			Assertion.fail("Error in loading the compare plans page");
+	}
+
+	@And("^user validate Find a Provider NBA on VPP|user be able to see the Find a Provider NBA on VPP$")
+	public void user_validate_Find_a_Provider_NBA_on_VPP() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateProviderNBA();
+	}
+
+	@When("^user clicks on Find a Provider button on NBA$")
+	public void user_clicks_on_Find_a_provider_button_on_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+
+	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForProviderSearch();
+	}
+
+	@When("^user clicks on Find My Doctor button$")
+	public void user_clicks_on_Find_My_Doctor_button() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+
+	List<String> allPlanNames = null;
+
+	@When("^user clicks on Select a plan button on NBA$")
+	public void user_clicks_on_select_a_plan_button_on_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan ytpe" + planType);
+		allPlanNames = plansummaryPage.getAllPlanNames(planType);
+		plansummaryPage.clickSelectPlanButton();
+	}
+
+	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
+	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
+		String PlanName = givenAttributes.cell(0, 1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+	}
+
+	@When("^user clicks on Enroll in plan button on the select plan modal on vpp summary page$")
+	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_modal() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		WelcomePageMobile welcomepage = (WelcomePageMobile) plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+	}
+
+	@Then("^user should be navigated to OLE page$")
+	public void user_should_be_navigated_to_OLE_page() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateNavigatedToOle();
+	}
+
+	@Then("^user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page$")
+	public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans_in_UMS_site()
+			throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
+
+	}
+
+	@When("^user removes drugs from plan card$")
+	public void user_removes_drugs_from_plan_card() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeDrugsFromPlanCard();
+	}
+
+	@Then("^user should see the Get started NBA on VPP$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
+
+	@Then("^user verify NBA is not displayed on the VPP page$")
+	public void user_verify_NBA_is_not_displayed_on_the_VPP_page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNBAModalNotDisplayed();
+	}
+	
+	@When("^user removes provider from plan card$")
+	public void user_removes_provider_from_plan_card() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeProvidersFromPlanCard();
+	}
 }

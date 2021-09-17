@@ -18,7 +18,7 @@ import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 
 public class SAMIconsStepDefinitionAARPTablet {
 
@@ -114,12 +114,12 @@ public class SAMIconsStepDefinitionAARPTablet {
 		
 	}
 	
-	@And("^click on provider search link on shop pages$")
+	/*@And("^click on provider search link on shop pages$")
 	public void click_on_provider_search_link_on_shop_pages() throws Throwable {
-		ShopforaplanAARPlayerMobile shopaplan = (ShopforaplanAARPlayerMobile) getLoginScenario()
+		ShopForPlanNavigationPageMobile shopaplan = (ShopForPlanNavigationPageMobile) getLoginScenario()
 				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
 		shopaplan.providersearch();
-	}
+	}*/
 	
 	@Then("^the user validates proactive chat popup")
 	public void the_user_validates_proactive_chat_popup() throws Throwable {
@@ -129,5 +129,20 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.validateProActiveChatpopupconnect();
 		
 		
+	}
+	
+	@Then("^user opens the page to validate$")
+	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
+		
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String pagename = memberAttributesMap.get("pagename");
+		
+		System.out.println(pagename);
+	
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPage(pagename);
 	}
 }

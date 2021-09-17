@@ -115,7 +115,7 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
-	
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 	
@@ -132,8 +132,8 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		switchToNewTabNew(DCELink);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//h2[contains(text(),'How much will my drugs cost?')]"));
-		if (validateNew(AddMyDrugsBtn))
+		WebElement DCEHeader=driver.findElement(By.xpath("//h1[contains(text(),'Drug Cost Estimator')]"));
+		if (validateNew(DCEHeader))
 			return new GetStartedPage(driver);
 		return null;
 	}

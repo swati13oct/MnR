@@ -17,7 +17,7 @@ import pages.acquisition.commonpages.PageTitleConstants;
  * @author saduri
  *
  */
-public class AgentsAndBrokersPageMobile extends GlobalWebElementsMobile{
+public class AgentsAndBrokersPageMobile extends GlobalWebElements{
 
 	@FindBy(className = "med_cont")
 	private WebElement agentsAndBrokersTable;

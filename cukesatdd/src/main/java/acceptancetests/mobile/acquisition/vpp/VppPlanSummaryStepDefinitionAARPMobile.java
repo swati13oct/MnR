@@ -22,10 +22,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.commonpages.keywordSearchAARP;
+
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -76,7 +77,8 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 //	/**
@@ -217,7 +219,8 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType)) {
+		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
+		if (plansummaryPage.validatePlanNames(planType, planCount)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);
@@ -1016,7 +1019,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		KeywordSearchAARPMobile newkeywordsearchpage = new KeywordSearchAARPMobile(acquisitionHomePage.driver);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 
@@ -1024,7 +1027,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	public void I_land_on_result_page() {
 		{
 
-			keywordSearchAARP newkeywordsearchpage = (keywordSearchAARP) loginScenario
+			KeywordSearchAARPMobile newkeywordsearchpage = (KeywordSearchAARPMobile) loginScenario
 					.getBean(PageConstants.Keyword_Search);
 			newkeywordsearchpage.url();
 			if (newkeywordsearchpage != null)
@@ -1091,7 +1094,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
 	}
 	
 	@Then("^user clicks on Select by Address and Enter fileds$")

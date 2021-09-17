@@ -13,18 +13,17 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 
-
 public class GetStartedPageMobile extends UhcDriver {
-	
+
 	@FindBy(linkText = "Get started")
 	private WebElement getStartedLink;
-	
+
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/div/table/tbody/tr[2]/td/div/div/div/div[3]/div/div[3]/div[4]/div/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr/td[3]/div/div[2]/div/div/p/a")
 	WebElement enterDrugLink;
-	
-	@FindBy(xpath="//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
+
+	@FindBy(xpath = "//iframe[@src='/health-plans/dce.html#/estimate-drug-costs']")
 	WebElement dceToolFrame;
-	
+
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
@@ -33,25 +32,22 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
-	
+
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
-	
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-
 	public GetStartedPageMobile(WebDriver driver) {
-		 super(driver);
-	       PageFactory.initElements(driver, this);
-	       openAndValidate();
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
-	
 	public VisitorProfilePageMobile clickOnShoppingCart() {
 		shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {
@@ -61,32 +57,31 @@ public class GetStartedPageMobile extends UhcDriver {
 			return null;
 		}
 	}
+
 	public LocationSearchPageMobile getStarted() {
 		getStartedLink.click();
-		if(currentUrl().contains("enterZipCode"))
-		{
+		if (currentUrl().contains("enterZipCode")) {
 			return new LocationSearchPageMobile(driver);
-		}
-		else
+		} else
 			return null;
-		
+
 	}
 
 	@Override
 	public void openAndValidate() {
 		validate(getStartedLink);
-		
+
 	}
-	
-	public AddDrugPageMobile navigateToDCE(){
+
+	public AddDrugPageMobile navigateToDCE() {
 		enterDrugLink.click();
 		getStartedLink.click();
 		return new AddDrugPageMobile(driver);
-		
+
 	}
-	
+
 	public BuildYourDrugListMobile clickAddsDrugs() {
-		if(validate(AddMyDrugsBtn))
+		if (validate(AddMyDrugsBtn))
 			AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
@@ -96,7 +91,15 @@ public class GetStartedPageMobile extends UhcDriver {
 		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
-		  
+
+	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
+	private WebElement breaCrumbLink;
+
+	public void validateBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+				breaCrumbLink.getText().equals(breadCrumb));
+	}
+
 	public AddDrugPageMobile clicksOnGetStarted() {
 		try {
 			Thread.sleep(6000);
@@ -105,22 +108,11 @@ public class GetStartedPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		driver.switchTo().frame(dceToolFrame);
-		try{
+		try {
 			getStartedLink.click();
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("phantomjs doesn't support the element on switched iframe");
 		}
 		return new AddDrugPageMobile(driver);
-	}	 
-	public VPPPlanSummaryPageMobile ClickReturnToPlanSummary() {
-		validateNew(LinktoExitScenario);
-		jsClickNew(LinktoExitScenario);
-		waitForPageLoadSafari();
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPageMobile(driver);
-		}
-		return null;
 	}
-
-
 }

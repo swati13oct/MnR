@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
+import pages.mobile.acquisition.commonpages.Rallytool_PageMobile;
 
 /**
  * @author rkodumur
@@ -49,7 +49,7 @@ public class SiteMapAARPPageMobile extends GlobalWebElements {
 	private static String AARP_SITE_MAP_PAGE_URL = MRConstants.AARP_SITE_MAP_PAGE_URL;
 	private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
 	
-	public Rallytool_Page providerlinkonaarpsitemapClick() {
+	public Rallytool_PageMobile providerlinkonaarpsitemapClick() {
 		validate(providerlinkonaarpsitemaplink);
 		
 		providerlinkonaarpsitemaplink.click();
@@ -58,7 +58,7 @@ public class SiteMapAARPPageMobile extends GlobalWebElements {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 	}
 		
 		// TODO Auto-generated method stub

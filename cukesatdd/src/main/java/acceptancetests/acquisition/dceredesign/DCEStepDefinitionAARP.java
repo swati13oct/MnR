@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import acceptancetests.data.OLE_PageConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,19 +26,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.dceredesign.*;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -53,6 +51,13 @@ public class DCEStepDefinitionAARP {
 	}
 
 	private WebDriver driver;
+
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Then("^the user validates Get Started Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
@@ -211,11 +216,7 @@ public class DCEStepDefinitionAARP {
 	@Then("^user enter invalid zipcode$")
 	public void user_enter_invalid_zipcode_in_AARP(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String invalidzipcode = memberAttributesMap.get("inValidzipCode");
 		System.out.println("zipcode" + invalidzipcode);
@@ -228,11 +229,7 @@ public class DCEStepDefinitionAARP {
 	public void user_enter_the_following_drug_info_and_validates_drug_autocomplete(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String PartialDrug = memberAttributesMap.get("DrugNameAutoComplete");
@@ -245,11 +242,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Tell_Us_About_Drug_Brand_page_for_the_Drug(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String genericDrugName = memberAttributesMap.get("GenericName");
@@ -272,11 +265,7 @@ public class DCEStepDefinitionAARP {
 	@Then("^the user clicks on Add Drug to add drug to drug list$")
 	public void the_user_clicks_on_Add_Drug_to_add_drug_to_drug_list(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String drugName = memberAttributesMap.get("BrandDrugName");
 		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario()
@@ -302,11 +291,7 @@ public class DCEStepDefinitionAARP {
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String zipcode = memberAttributesMap.get("ZipCode");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
@@ -399,11 +384,7 @@ public class DCEStepDefinitionAARP {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -431,11 +412,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("EditDrug");
 		System.out.println(drugName);
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -451,11 +428,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -489,11 +462,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_searches_and_adds_the_following_Drug_for_following_quantity_frequency_and_Supplylength_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		String drugQuantity = memberAttributesMap.get("Quantity");
 		String drugFrequency = memberAttributesMap.get("Frequency");
@@ -529,11 +498,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		String drugQuantity = memberAttributesMap.get("Quantity");
 		String drugFrequency = memberAttributesMap.get("Frequency");
@@ -552,11 +517,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DCE_Details_Page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		String drugQuantity = memberAttributesMap.get("Quantity");
 		String drugFrequency = memberAttributesMap.get("Frequency");
@@ -614,11 +575,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_selects_the_following_drug_from_the_dropdown(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String DrugName = memberAttributesMap.get("BrandDrugName");
 		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
@@ -647,11 +604,7 @@ public class DCEStepDefinitionAARP {
 	public void adds_drugs_in_drug_list_page(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println("zipcode" + drugName);
 		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
@@ -761,7 +714,7 @@ public class DCEStepDefinitionAARP {
 		
 	}
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
-	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
+	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Druglist_page() throws Throwable {
 		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ComparePlansPage planComparePage = buildDrugListPage.returnToPlanComparePage();
@@ -801,6 +754,8 @@ public class DCEStepDefinitionAARP {
 	public void the_user_navigates_to_Med_Ed_Prescription_Drugs_Page() throws Throwable {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		System.out.println("Selecting State in Acq Home page so Med ED CLassic page is displayed...");
+		//acquisitionHomePage.selectState("Florida");
 		acquisitionHomePage.navigateToMedEdPresDrugPage();
 
 	}
@@ -864,6 +819,15 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
+	public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable{
+	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+	    WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+	    if (null != welcomepage) {
+		  getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+	    } else
+		Assertion.fail("Welcome page  not loaded");
+    }
 
 	@Then("^the user verify and edit the Pharmacy from vpp detail page$")
 	public void the_user_verify_and_edit_the_Pharmacy_from_vpp_detail_page() throws Throwable {
@@ -974,6 +938,13 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateYourDrugs();
+	}
+
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+	public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validate100DayInYourDrugs();
 	}
 
 	@Then("^the user validates Monthly Drug Costs by Stage Section$")
@@ -1207,12 +1178,9 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		System.out.println(PharmacytoSelect);
 		drugSummaryPage.SelectPharmacy(PharmacytoSelect);
 		drugSummaryPage.validatePharmacyName(PharmacytoSelect);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -1223,11 +1191,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
@@ -1306,11 +1270,7 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 
@@ -1327,9 +1287,9 @@ public class DCEStepDefinitionAARP {
 		 * if(druglist.isEmpty()) { druglist = "";
 		 * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
 		 */
-		BuildYourDrugList DCEbuildDrugList = planComparepage.navigateToDCERedesign();
-		if (null != DCEbuildDrugList) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
+		GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
@@ -1459,11 +1419,7 @@ public class DCEStepDefinitionAARP {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String BrandDrug = memberAttributesMap.get("Brand Drug");
 		String GenericDrug = memberAttributesMap.get("Generic Drug");
 		SwitchToGeneric switchToGenericPage = drugDetailsPage.clickSwitchGeneric(BrandDrug);
@@ -1482,12 +1438,6 @@ public class DCEStepDefinitionAARP {
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String BrandDrug = memberAttributesMap.get("Brand Drug");
 		String GenericDrug = memberAttributesMap.get("Generic Drug");
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
@@ -1511,21 +1461,38 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidatesDrugsList(druglist);
 
 	}
-	
+
+	@Then("^the user Clicks View Drug Pricing for the given plan$")
+	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		drugSummaryPage.clickPlanToggle(planType);
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
 	@Then("^the user validates View Drug Pricing modal for the given plan$")
 	public void user_validates_ViewDrugPricing_modal(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		String planName = memberAttributesMap.get("Plan Name");
 		drugSummaryPage.viewDrugPricingModal(planName);
 	}
+
+	@Then("^the user Closes Drug Pricing modal$")
+	public void user_closes_ViewDrugPricing_modal() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.closeDrugPricingModal();
+	}
+
 
 	@Then("^the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page$")
 	public void the_user_clicks_Edit_Drug_on_Drug_Details_Page_and_validates_user_navigates_to_Build_your_drug_list_Page()
@@ -1545,11 +1512,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String DeleteDrug = memberAttributesMap.get("DrugName");
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
@@ -1590,11 +1553,7 @@ public class DCEStepDefinitionAARP {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String PharmacyTypeSelected = memberAttributesMap.get("Pharmacy Selection");
 		if (PharmacyTypeSelected.contains("Preferred Retail")) {
 			drugDetailsPage.validatePreferredRetailCopaySection();
@@ -1639,11 +1598,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String StandardPharmacytoSelect = memberAttributesMap.get("SelectStandardPharmacy");
 		drugDetailsPage.SelectStandardPharmacy(StandardPharmacytoSelect);
 		drugDetailsPage.validatePharmacyName(StandardPharmacytoSelect);
@@ -1657,11 +1612,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		drugDetailsPage.validatePremium(Premium);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1672,11 +1623,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		String PlanType = memberAttributesMap.get("Plan Type");
 		String PlanName = memberAttributesMap.get("Plan Name");
@@ -1777,20 +1724,21 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String InsulinCopay = memberAttributesMap.get("InsulinCopay");
 		String InsulinDrug = memberAttributesMap.get("Insulin Drug");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
-		drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
-		drugDetailsPage.validateInsulinText_ImportantInfo();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		if(null==InsulinCopay || InsulinCopay.isEmpty()) {
+			System.out.println("Insulin Benefit not available for the plan");
+		}
+		else{
+			drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
+			drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
+			drugDetailsPage.validateInsulinText_ImportantInfo();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
+		}
 	}
 
 	@Then("^the user validates Covered Drug display for NC Pharmacy selection$")
@@ -1805,11 +1753,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-/*		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -1830,11 +1774,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -1956,8 +1896,9 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^Back to profile button should be displayed for each plan card$")
 	public void back_to_profile_button_for_each_plan_card() {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.verifyBackToProfileDisplayed();
+		System.out.println(">>> Validation skipped for mobile device. <<< ");
+//		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+//		drugSummaryPage.verifyBackToProfileDisplayed();
 	}
 
 	@And("^the user click on return to plan summary on DCE summary page$")
@@ -2056,11 +1997,7 @@ public class DCEStepDefinitionAARP {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String savePlanNames = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
 		plansummaryPage.savePlans(savePlanNames, planType);
@@ -2079,12 +2016,7 @@ public class DCEStepDefinitionAARP {
 	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
 		visitorProfile.validateAddedPlansNew(savePlanNames);
@@ -2200,12 +2132,7 @@ public class DCEStepDefinitionAARP {
 	public void user_search_with_zipcode_with_no_pharamacies(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String zipCode = memberAttributesMap.get("ZipCode");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
@@ -2215,12 +2142,7 @@ public class DCEStepDefinitionAARP {
 	public void no_results_message_should_be_displayed(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String message = memberAttributesMap.get("NoResultsMessage");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateNoResultsMsg(message);
@@ -2230,12 +2152,7 @@ public class DCEStepDefinitionAARP {
 	public void user_search_with_incorrect_zipcode(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String zipCode = memberAttributesMap.get("ZipCode");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
@@ -2244,12 +2161,6 @@ public class DCEStepDefinitionAARP {
 	public void user_search_with_correct_zipcode(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String zipCode = memberAttributesMap.get("ZipCode");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
@@ -2367,6 +2278,12 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
+	
+	@Then("^user clicks on search button$")
+	public void user_clicks_on_search_button() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.ClickSearch();
+	}
 
 	@Then("^no results message should be displayed from drug details$")
 	public void no_results_message_should_be_displayed_from_drug_details(DataTable attributes) throws Throwable {
@@ -2457,9 +2374,10 @@ public class DCEStepDefinitionAARP {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
-	@Then("^the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page$")
+	@Then("^the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page$")
 	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_Buydown_Plan_on_DCE_details_Page()
 			throws Throwable {
+        scenario.log("Sneha Dwarakanath - Change made 06/08/2021 - F608087 - DCE | Copay Buydown, Deductible Display Change");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
@@ -2508,11 +2426,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -2766,13 +2680,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_applies_pharmacy_filter_for_following_text_on_Summary_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
+		String FilterText = memberAttributesMap.get("PharmacyFilterText");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.ApplyPharmacyFilter(FilterText);
 	}
@@ -2789,11 +2697,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_applies_pharmacy_filter_for_following_text_on_Preferred_pharmacies_Tab_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -2822,11 +2726,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_selects_the_following_drug_recommendation_and_validates_Drug_Search_page_is_displayed_and_add_drug(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String drugName = memberAttributesMap.get("SelectDrugRecommendation");
 		System.out.println(drugName);
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -2860,12 +2760,6 @@ public class DCEStepDefinitionAARP {
 	throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow =attributes.getGherkinRows();
-		for(int i=0 ; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0) ,
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		
 		GetStartedPage drugDetailsPage = new GetStartedPage(driver);
 		boolean isDrugDetails = drugDetailsPage.homeLinkIsVisibleAndClicked();
 		if(isDrugDetails)
@@ -2879,12 +2773,6 @@ public class DCEStepDefinitionAARP {
 	public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String searchParameter = memberAttributesMap.get("searchParameter");
 		String searchengine = memberAttributesMap.get("searchengine");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -2900,17 +2788,26 @@ public class DCEStepDefinitionAARP {
 			dcepage.openUrl(url);
 			dcepage.googleSearch(searchParameter);
 		}
-		
-
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, dcepage);
-
 	}
 
 	@Then("^the user validates default view for Plan Effective Date$")
 	public void the_user_validates_default_view_for_Plan_Effective_Date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateDefaultPED();
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=drugDetailsPage.getAcqTestEnvSysTime(testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envMonth=tmpDate[0];
+		System.out.println("TEST - sysTimeMonth = "+envMonth);
+		String envTimeYear=tmpDate[tmpDate.length-1];
+		System.out.println("TEST - sysTimeYear = "+envTimeYear);
+		drugDetailsPage.validateDefaultPED(envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_MONTH, envMonth);
 	}
 
 	@Then("^the user validates Change effective date Dropdown$")
@@ -2944,7 +2841,9 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Reset_effective_date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateResetEffectiveDate();
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
+		String envTimeYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+		drugDetailsPage.validateResetEffectiveDate(envTimeYear);
 	}
 
 	@Then("^the user validate no bar is displayed for November and December$")
@@ -2966,22 +2865,32 @@ public class DCEStepDefinitionAARP {
 		getStartedPage.ValidateImportOptionDIspalyed();
 	}
 	@Then("^the user clicks on Import Drugs and validates Import Flow \\- Imports Get Started\\, Member NonMember Selection modals$")
-	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals() throws Throwable {
+	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals(DataTable attributes) throws Throwable {
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		getStartedPage.ClickImportValidateModals();
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String Authenticated_Flag = memberAttributesMap.get("AuthenticatedFlag");
+		getStartedPage.ClickImportValidateModals(Authenticated_Flag);
 	}
 
 	@Given("^the user selects Member and provides Member Details and proceeds to import$")
 	public void the_user_selects_Member_and_provides_Member_Details_and_proceeds_to_import(DataTable attributes) {
 		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String FirstName = "";
+		String LastName = "";
+		if(memberAttributesMap.get("AuthenticatedFlag").equalsIgnoreCase("false")){
+			 FirstName = memberAttributesMap.get("FirstName");
+			 LastName = memberAttributesMap.get("LastName");
+		}
+		String AuthenticatedFlag = memberAttributesMap.get("AuthenticatedFlag");
 		String Member_DOB = memberAttributesMap.get("DOB");
 		String Member_Zip = memberAttributesMap.get("ZipCode");
 		String Member_MBI = memberAttributesMap.get("MBI");
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		getStartedPage.EnterMemberDetailsAndImport(Member_DOB, Member_Zip, Member_MBI);
+		getStartedPage.EnterMemberDetailsAndImport(AuthenticatedFlag, FirstName, LastName, Member_DOB, Member_Zip, Member_MBI);
 	}
 
 	@Given("^the user validates Import Success/Failure modal as follows$")
@@ -3016,5 +2925,293 @@ public class DCEStepDefinitionAARP {
 		getStartedPage.EnterNonMemberDetailsAndImport(NonMember_DOB, NonMember_Zip, NonMember_Gender);
 	}
 
+	/**
+	 * Step Header Flags as follows
+	 * C - Current
+	 * E - Enabled
+	 * D - Disabled
+	 **/
+	@Then("the user validates the Step Header as follows")
+	public void the_user_validates_teh_step_header_as_follows(io.cucumber.datatable.DataTable attributes) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header validation Added --> C for Current, E for Enabled, D for Disabled ");
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String StepHeaderFlag = memberAttributesMap.get("Flags");
+		System.out.println("Flags -->>"+StepHeaderFlag);
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		dceStepHeader.validateStepHeader(StepHeaderFlag);
+	}
+	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_build_your_drug_list_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		BuildYourDrugList buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
+	}
+
+	@Then("the user clicks on Step Header Step {int} to land on Drug Details Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_details_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugDetailsPage drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("the user clicks on Step Header Step {int} to land on Drug Summary Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_summary_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugSummaryPage drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+
+    @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
+    public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+        BuildYourDrugList buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
+    }
+    @Then("the user clicks on Review Button on Build Drug Page to land on DCE Summary page")
+    public void the_user_clicks_on_review_button_on_build_drug_page_to_land_on_dce_summary_page() {
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+        DrugSummaryPage drugSummaryPage = buildDrugListPage.navigateToDrugSummaryPage();
+        drugSummaryPage.validateDrugSummaryPage();
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+    }
+
+	@When("user enters valid zipcode and county for Multi county as follows")
+	public void user_enters_valid_zipcode_and_county_for_multi_county_as_follows(io.cucumber.datatable.DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("ZipCode");
+		String County = memberAttributesMap.get("County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+		zipCodePlanYearPage.selectCounty(County);
+	}
+
+	@Then("the user validates Tier {int} Copay in copay section and in Your Drugs section")
+	public void the_user_validates_tier_copay_in_copay_section_and_in_your_drugs_section(Integer int1, io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String TierNo = "Tier "+String.valueOf(int1);
+		String TierCopay = memberAttributesMap.get("TierCopay");
+		System.out.println("Expected Tier - Copay : "+TierNo+" - "+TierCopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateTierCopay_CopaySection(TierNo,TierCopay);
+		drugDetailsPage.validateTierCopay_YourDrugsSection(TierNo,TierCopay);
+	}
+
+	@Then("the user validates the deductible as follows")
+	public void the_user_validates_the_deductible_as_follows(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String Deductible = memberAttributesMap.get("Deductible");
+		System.out.println("Expected Deductible : "+Deductible);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDeductible_CopaySection(Deductible);
+	}
+
+	@Then("the user validates the text for coverage stages modal popups for Non-LIS Plans")
+	public void the_user_validates_the_text_for_coverage_stages_modal_popups_for_NonLIS() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateCoveragestagePopUpText();
+	}
+
+
+	@Then("the user validates Copay Section for LIS for defined standard plan for following")
+	public void the_user_validates_copay_section_for_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String LIScopay = memberAttributesMap.get("LIScopay");
+		System.out.println("Expected LIS Copay for Defined Standard plan : "+LIScopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_LIScopay(LIScopay);
+	}
+
+	@Then("the user validates Copay Section for non-LIS for defined standard plan for following")
+	public void the_user_validates_copay_section_for_non_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String nonLIScopay = memberAttributesMap.get("NonLIScopay");
+		System.out.println("Expected LIS Copay for Defined Standard plan : "+nonLIScopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_nonLIScopay(nonLIScopay);
+
+	}
+
+	@Then("the user validates deductible as follows for Defined Standard plans")
+	public void the_user_validates_deductible_as_follows_for_defined_standard_plans(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String deductible = memberAttributesMap.get("Deductible");
+		System.out.println("Expected Deductible for Defined Standard plan : "+deductible);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_Deductible(deductible);
+	}
+
+
+    @Then("the user validates the deductible stage modal text for plans having deductible as follows")
+    public void the_user_validates_the_deductible_stage_modal_text_for_plans_having_deductible_as_follows(io.cucumber.datatable.DataTable givenAttributes) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String deductibleFlag = memberAttributesMap.get("DeductibleFlag");
+        System.out.println("Plan has a deductible and will show the deductible stage modal link : "+deductibleFlag);
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        if(deductibleFlag.equalsIgnoreCase("true") || deductibleFlag.equalsIgnoreCase("yes"))
+            drugDetailsPage.validateModalText_DeductibleStage(deductibleFlag);
+    }
+
+	
+	@When("^user should be able to click on plan and view drug cost$")
+	public void user_should_be_able_to_click_plantype_and_view_drugcost_for_plan(DataTable givenAttributes) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String planType = memberAttributesMap.get("planType");
+		String planName = memberAttributesMap.get("planName");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		
+		drugSummaryPage.selectAndVerifyPlanType(planType, planName);
+		
+	}
+	
+	@Then("^user should be able to save drugs$")
+	public void user_saves_drud_cost(){
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
+		
+		drugDetailPage.saveDrug();
+				
+	}
+
+	@And("^the user clicks on the shopping cart icon from DCE$")
+	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		AcquisitionHomePage acqHomePage = new AcquisitionHomePage(driver);
+
+		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+    
+	@Then("^the user validates Get Started Page vp$")
+	public void the_user_validates_Get_Started_Page_vp(DataTable givenAttributes) throws Throwable {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String site = memberAttributesMap.get("Site");
+		
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+
+		aquisitionhomepage.navigateToURL(site);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+
+	}
+	
+	@Then("^remove drug from the saved profile$")
+	public void remove_drug_from_saved_profile(DataTable givenAttributes) {
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String drugName = memberAttributesMap.get("DrugName");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.deleteDrugProfile(drugName);
+		//button[contains(@aria-label,"Edit ")]
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
+	}
+
+
+	@Then("the user clicks edit drugs on Compare page to land on Build Drug List Page")
+	public void the_user_clicks_edit_drugs_on_compare_page_to_land_on_build_drug_list_page() {
+		ComparePlansPage planComparepage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		BuildYourDrugList buildYourDrugList = planComparepage.clickonEdityourDrugs();
+		if (null != buildYourDrugList) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugList);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
+
+	}
+
+
+	@Then("the user validates default Plan type on DCE Summary page as follows")
+	public void the_user_validates_default_plan_type_on_dce_summary_page_as_follows(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String planType = memberAttributesMap.get("Plan Type");
+		System.out.println(planType);
+		String PlanTypeText = "";
+		if(planType.contains("MA")){
+			PlanTypeText = "Medicare Advantage Plan";
+		}
+		else if(planType.contains("PDP")){
+			PlanTypeText = "Prescription Drug Plan";
+		}
+		else{
+			PlanTypeText = "Special Needs Plan";
+		}
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.verifyDefaultPlanType(PlanTypeText);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("the user clicks Return to Compare on DCE Summary Page to return to Compare page")
+	public void the_user_clicks_return_to_compare_on_dce_summary_page_to_return_to_compare_page() {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		ComparePlansPage comparePlansPlans = drugSummaryPage.ClickReturnToCompare();
+	}
+
+	@Then("^the user validates zero costs for following Covered generic drug for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_zero_costs_for_following_Covered_generic_drug_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
+	}
+
+	@Then("^the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_non_zero_costs_for_Not_covered_Drugs_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String NotCoveredDrug = memberAttributesMap.get("NotCoveredDrug");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
+	}
 
 }

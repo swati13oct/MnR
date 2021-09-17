@@ -12,35 +12,40 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 
 /**
- *@author pdas101
+ * @author pdas101
  *
  */
-public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver{
-	
-	
-	
+public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
+
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
 	
-	@FindBy(id = "providerName")
+	//@FindBy(id = "providerName")
+	@FindBy(xpath = "//input[@id='providerName']")
 	private WebElement ProviderName;
 	
-	@FindBy(id = "providerStreetAddress")
+	//@FindBy(id = "providerStreetAddress")
+	@FindBy(xpath= "//input[@id='providerStreetAddress']")
 	private WebElement ProviderStreetAddress;
 	
-	@FindBy(id = "providerCity")
+//	@FindBy(id = "providerCity")
+	@FindBy(xpath = "//input[@id='providerCity']")
 	private WebElement ProviderCity;	
 
-	@FindBy(id = "state")
+	//@FindBy(id = "state")
+	@FindBy(xpath = "//select[@id='state']")
 	private WebElement StateDropDown;
 	
 	
-	@FindBy(id = "providerZip")
+//	@FindBy(id = "providerZip")
+	@FindBy(xpath = "//input[@id='providerZip']")
 	private WebElement ZipCode;
 	
-	@FindBy(id = "providePhoneNumber")
+	//@FindBy(id = "providePhoneNumber")
+	@FindBy(xpath = "//input[@id='providePhoneNumber']")
 	private WebElement ProvidePhoneNumber;
 	
 	@FindBy(id = "ole-form-back-button")
@@ -53,7 +58,6 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver{
 	private WebElement CancelEnrolButton;
 	
 
-	
 	public UseAndDisclosureAuthorizationPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -64,35 +68,40 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver{
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, disclosureBox, 30);
 	}
-	
-	
-	public PersonalInformationPageMobile Validate_and_Enter_Details_for_YourProvide_Section(Map<String, String> MedicareDetailsMap){
+
+	public SpecialElectionPeriodPageMobile Validate_and_Enter_Details_for_YourProvide_Section(
+			Map<String, String> MedicareDetailsMap) {
 		String Providername = MedicareDetailsMap.get("Provider Name");
 		String ProviderAddress = MedicareDetailsMap.get("Provider Street Address");
 		String Providercity = MedicareDetailsMap.get("City");
 		String ProviderZip = MedicareDetailsMap.get("Zip");
 		String ProviderNumber = MedicareDetailsMap.get("Provider Phone Number");
+		String Mailing_State = MedicareDetailsMap.get("Mailing_State");
 		
-		sendkeysNew(ProviderName, Providername);
-		sendkeysNew(ProviderStreetAddress, ProviderAddress);
-		sendkeysNew(ProviderCity, Providercity);
-		sendkeysNew(ProvidePhoneNumber, ProviderNumber);
-		sendkeysNew(ZipCode, ProviderZip);
-		
-		selectFromDropDownByValue(StateDropDown, "AK");
-		
-		  if (disclosureBox.isDisplayed()){	  
-		    disclosureBox.click();
-		    System.out.println("Disclosure is displayed and clicked");
-		    	    
-		    validate(NextButton);
-		    NextButton.click();
-	}
-		  else{
-			  System.out.println("Disclosure is not displayed"); 
-		  }
-		return new PersonalInformationPageMobile(driver);
-		  
+		sendkeysMobile(ProviderName, Providername);
+		sendkeysMobile(ProviderStreetAddress, ProviderAddress);
+		sendkeysMobile(ProviderCity, Providercity);
+		sendKeysByCharacter(ProvidePhoneNumber, ProviderNumber);
+		sendkeysMobile(ZipCode, ProviderZip);
+
+		selectFromDropDownByValue(StateDropDown, Mailing_State);
+//		mobileSelectOption(StateDropDown, Mailing_State, true);
+
+		if (disclosureBox.isDisplayed()) {
+			scrollToView(disclosureBox);
+			jsClickNew(disclosureBox);
+			// disclosureBox.click();
+			System.out.println("Disclosure is displayed and clicked");
+
+			validate(NextButton);
+			scrollToView(NextButton);
+			jsClickNew(NextButton);
+			// NextButton.click();
+		} else {
+			System.out.println("Disclosure is not displayed");
+		}
+//		return new PersonalInformationPageMobile(driver);
+		return new SpecialElectionPeriodPageMobile(driver);
 
 	}
 }

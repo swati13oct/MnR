@@ -305,13 +305,20 @@ public class DCEACQVPPPlanSummaryMobile {
 
 		//plansummaryPage.viewPlanSummary(plantype);
 
-		pages.mobile.acquisition.commonpages.GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
-
+	}
+	
+	
+	@And("^user clicks on get started button on NBA$")
+	public void user_click_Get_started_button_on_NBA() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickGetStartedBtnOnNba();
 	}
 }

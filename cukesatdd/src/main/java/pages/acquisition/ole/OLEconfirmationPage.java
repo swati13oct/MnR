@@ -30,7 +30,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 public class OLEconfirmationPage extends UhcDriver{
 	
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//span[@class='confirmation-number']")
 	private WebElement PlanYear_PlanName;
 	
 	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]/..")
@@ -55,7 +55,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	private WebElement lnkProfile;
 
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//span[@class='confirmation-number']")
 	private WebElement confirmationNumber;
 	
 	public OLEconfirmationPage(WebDriver driver) {
@@ -148,7 +148,6 @@ public class OLEconfirmationPage extends UhcDriver{
 			   stmt = connection.createStatement();
 			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY + confirmation_no );
 			   while(rs.next()) {
-				   //Personal Information Page
 
 				   //Personal Information
 				   String firstName = rs.getString("FIRST_NAME");
@@ -234,12 +233,14 @@ public class OLEconfirmationPage extends UhcDriver{
 				   //Prescription Drug Coverage
 				   String secondaryCoverage = rs.getString("DO_YOU_HAVE_OTHER_RX_COVERAGE");
 				   gpsData.put("Prescription Drug", secondaryCoverage); 
-				   String otherCoverageName = rs.getString("PDCNAME");
+				   String otherCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
 				   gpsData.put("Prescription Name", otherCoverageName); 
 				   String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
 				   gpsData.put("PD Group Number", secondaryGroup); 
 				   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
 				   gpsData.put("PD Member Number", secondaryMemberNumber); 
+				   String secondaryRXBINNumber =rs.getString("SECONDARY_RX_BIN");
+				   gpsData.put("RX BIN Number", secondaryRXBINNumber); 
 
 				   //Eligibility Page
 				   String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
@@ -369,7 +370,7 @@ public class OLEconfirmationPage extends UhcDriver{
 				
 			
 			   }
-		   } catch (Exception e) {
+		  } catch (Exception e) {
 			   e.printStackTrace();
 		}
 		   finally {
@@ -387,115 +388,16 @@ public class OLEconfirmationPage extends UhcDriver{
 			   }catch (SQLException e) {
 					e.printStackTrace();
 				}
-			   }
+			  }
 	return gpsData;
 	  
-}
-/*	 
-public Connection createDataBaseConnection() {
-		Connection connection = null;
-		try {
-			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
-			 if(connection!=null) {
-				 System.out.println("Connection successful.");
-			 }
-		} catch (Exception e) {
-			 e.printStackTrace();
-		}
-		return connection;
-		}	*/
-	
-/*	public Connection createDataBaseConnection() {
-		Connection connection = null;
-		try {
-			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
-			 {
-			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
-			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
-				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
-			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
-				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
-			 }
-			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
-		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
-				 } 
-			 if(connection!=null) {
-				 
-				 System.out.println("Connection successful");
-
-			 }
-		}
-			 catch (Exception e) {
-			 e.printStackTrace();
-		}
-		
-		return connection;
-			
-}*/
-	
-/*	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
-		boolean flag = false;
-		String confirmation_no = confirmationNumber.getText();
-		 System.out.println("OLE confirmation number is  " +confirmation_no);
-		map.put("Confirmation No", confirmation_no); //29/12
-		Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
-		if(map.equals(gpsdatamap)) {
-			flag = true;
-		} else {
-			Map <String, String> matched = new HashMap<>();
-			Map <String, String> mismatched = new HashMap<>();
-			for (String keySource : map.keySet()) {
-				String strSource = map.get(keySource);
-			    if (gpsdatamap.containsKey(keySource)) { // keys match
-			    	String strTarget = gpsdatamap.get(keySource);			    	
-		    		System.out.println(keySource +" #  "+ strTarget+ " # "+strSource);	
-		    		if((strSource.isEmpty() || null == strSource) && (strTarget.isEmpty() || null == strTarget)) {
-			            matched.put(keySource, strSource);
-		    		} else if ((!strSource.isEmpty() && null != strSource && !strTarget.isEmpty() && null != strTarget) && strSource.equals(strTarget)) { // values match
-			            matched.put(keySource, strSource);
-			        } else { // values don't match
-			            mismatched.put(keySource, strSource);
-			        }
-			    	
-			}
-			}
-
-			// print out matched
-			System.out.println("Matched values in OLE GPS");
-			System.out.println("============");  
-			System.out.println("Key\tValue");
-			System.out.println("============");
-			for (String key : matched.keySet()) {
-				String matchedValue = key + "\t" + matched.get(key);
-			    System.out.println(matchedValue);
-			  Assertion.assertTrue(matchedValue, flag);
-			}
-
-			// print out mismatched
-			System.out.println();
-			System.out.println("Mismatched values in OLE GPS");
-			System.out.println("============");
-			System.out.println("Key\tValue");
-			System.out.println("============");
-			for (String key : mismatched.keySet()) {
-				String mismatchedValue = key + "\t" + mismatched.get(key);
-			    System.out.println(mismatchedValue);
-			  Assertion.assertTrue(mismatchedValue, flag);
-			}
-		}
-		return flag;
 	}
-*/	
 	
 	public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))
 			 {
 			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
 			 }
@@ -522,9 +424,9 @@ public Connection createDataBaseConnection() {
 			
 }
 	
-	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) {
+	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) throws SQLException {
 		boolean flag = false;
-		//try {
+		try {
 			String confirmation_no = confirmationNumber.getText();
 			System.out.println("OLE confirmation number is  " +confirmation_no);
 			map.put("Confirmation No", confirmation_no);
@@ -578,10 +480,10 @@ public Connection createDataBaseConnection() {
 
 			}
 			
-/*		} catch (Exception e) {
+	} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
     return flag;
 	//return Validation_Status;
 	}
@@ -592,7 +494,7 @@ public Connection createDataBaseConnection() {
 		String date = intputDate.substring(2, 4);
 		String month = intputDate.substring(0, 2);;
 		String year = intputDate.substring(4,8);
-		String outputDate= year+"-"+month+"-"+date; 
+		String outputDate= year+"/"+month+"/"+date; 
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
 	}
@@ -601,7 +503,7 @@ public Connection createDataBaseConnection() {
 		String date = intputDate.substring(3,5);
         String month = intputDate.substring(0,2);
         String year = intputDate.substring(6,10);
-		String outputDate= year+"-"+month+"-"+date; 
+		String outputDate= year+"/"+month+"/"+date; 
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
 	}

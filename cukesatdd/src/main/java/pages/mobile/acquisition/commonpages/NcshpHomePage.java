@@ -42,7 +42,7 @@ public class NcshpHomePage extends UhcDriver{
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 }
-	public Rallytool_Page ncshphomepageproviderclick() {
+	public Rallytool_PageMobile ncshphomepageproviderclick() {
 		
 		validate(ncshpfindaproviderlink);
 			
@@ -51,7 +51,7 @@ public class NcshpHomePage extends UhcDriver{
 			driver.switchTo().window(tabs.get(1));
 			
 			if (getTitle().equalsIgnoreCase("Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 			// TODO Auto-generated method stub
 			return null;

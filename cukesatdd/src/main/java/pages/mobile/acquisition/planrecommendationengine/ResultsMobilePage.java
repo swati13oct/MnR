@@ -36,6 +36,7 @@ public class ResultsMobilePage extends UhcDriver {
 	String page = CommonutilitiesMobile.resultsPageName;
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	EditResponseMobilePage editRes =  new EditResponseMobilePage(driver);
 
 	@FindBy(css = "#selectCounty p>a")
 	private List<WebElement> selectMultiZip;
@@ -240,6 +241,18 @@ public class ResultsMobilePage extends UhcDriver {
 	
 	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
 	public WebElement footerBackToTopLink;
+	
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card .uhc-pre-card__label")
+	private WebElement FirstRecommendationSectionTag;
+
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
+	private WebElement FirstRecommendationSectionPlanName;
+
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) a[class*='plan-details-link']")
+	private WebElement FirstRecommendationSectionViewPlanDetails;
+	
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card button")
+	private WebElement FirstRecommendationSectionEnrollToPlanButton;
 
 	public void resultsUI(String zip, String county, String R1, String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
@@ -421,7 +434,7 @@ public class ResultsMobilePage extends UhcDriver {
 					 */
 					// This method is temporary solution
 					try {
-					jsClickMobile(enrollButton);
+					jsClickNew(enrollButton);
 					click = true;
 					}catch(Exception e1) {
 						System.out.println("Warning while clicking Enroll using JS");
@@ -555,7 +568,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Navigate from VPP to PRE using Startnow : ");
 		plansLoader();
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(startnowButton);
 		mobileUtils.mobileLocateElementClick(startnowButton);
 		pageloadcomplete();
@@ -566,7 +579,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Navigate from VPP to PRE using StartOver : ");
 		plansLoader();
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(pdpstartoverButton);
 		mobileUtils.mobileLocateElementClick(pdpstartoverButton);
 		modalstartoverButton.click();
@@ -808,7 +821,7 @@ public class ResultsMobilePage extends UhcDriver {
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElement(PDPViewPlansLink);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -820,7 +833,7 @@ public class ResultsMobilePage extends UhcDriver {
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElement(SNPViewPlansLink);
-			jsClickMobile(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
@@ -992,11 +1005,61 @@ public class ResultsMobilePage extends UhcDriver {
 		if (!checkElemPosition)
 			mobileUtils.mobileLocateElement(footerBackToTopLink);
 		try {//This single JSclick line is enough instead of this method
-			jsClickMobile(footerBackToTopLink);
+			jsClickNew(footerBackToTopLink);
 			//footerBackToTopLink.click();
 			threadsleep(2000);
 		} catch (Exception e) {
 
+		}
+	}
+	
+	public void recomPREWidget() {
+		System.out.println("Validating Recommendation on UI Page: ");
+		pageloadcomplete();
+		String R1 = "";
+		String R1PlanType = editRes.planType;
+		String R1PlanName = editRes.firstRecomPlanName;
+		if(R1PlanType.contains("Prescription Drug Plans")) 
+			R1 = "PDP";
+		else if(R1PlanType.contains("Advantage Plans"))
+			R1 = "MA";
+		else if(R1PlanType.contains("Special Needs Plans"))
+			R1 = "SNP";
+		else
+			R1 = "MS";
+		waitForPageLoadSafari();
+		String recom1 = "#1 Recommendation";
+			validateRecommVP(R1, recom1, R1PlanName);
+
+	}
+
+	public void validateRecommVP(String R1, String rcom1, String R1PlanName) {
+		System.out.println("Validating Recommendations in Visitor Profile Page");
+		
+		// Verify 1st Recommendation in PRE Widget
+		if (R1.equalsIgnoreCase("MA")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"MA Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("PDP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"PDP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("SNP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("MS")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
 		}
 	}
 

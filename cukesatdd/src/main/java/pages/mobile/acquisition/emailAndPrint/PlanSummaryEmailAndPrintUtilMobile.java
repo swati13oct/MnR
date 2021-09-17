@@ -54,8 +54,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 					false);
 		}
 		System.out.println("Proceed to validate email popup screen for cancel option");
-		
-		jsClickNew(emailButton);
+		emailButton.click();
 		Assertion.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",
 				validate(emailPlanSummaryPopupScreen));
 		String expectedEmailBoxHeader = emailPlanSummaryPopupScreenText.getText();
@@ -64,14 +63,13 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 				"PROBLEM - header text for the email popup screen is not as expected.  Expecte='"
 						+ expectedEmailBoxHeader + "' | Actual='" + actualEmailBoxHeader + "'",
 				expectedEmailBoxHeader.equals(actualEmailBoxHeader));
-		iosScroll(emailPlanSummaryFieldBox);
 		Assertion.assertTrue(
 				"PROBLEM - unable to locate email field box on email popup screen after email link is clicked",
 				validate(emailPlanSummaryFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
 				validate(emailPlanSummarySendButton));
-		iosScroll(emailPlanSummaryCancelButton);
-		Assertion.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
+		Assertion.assertTrue(
+				"PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
 				validate(emailPlanSummaryCancelButton));
 
 		System.out.println("Proceed to click cancel button on email screen, email screen should close");
@@ -82,9 +80,12 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		// ----- failure cases ------------------
 		System.out.println("Proceed to validate email popup screen for send option for failure case 1");
 		emailButton.click();
+		validateNew(emailPopupPlanSummary);
 		String testEmailAddresss = "bademailformat";
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
@@ -98,10 +99,10 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 		System.out.println("Proceed to validate email popup screen for send option for failure case 2 ");
 		testEmailAddresss = "bademailformat@";
-		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
-		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
@@ -115,10 +116,10 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 		System.out.println("Proceed to validate email popup screen for send option for failure case 3");
 		testEmailAddresss = "bademailformat@test.";
-		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
-		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
@@ -133,9 +134,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		// ----- success cases ------------------
 		System.out.println("Proceed to validate email popup screen for send option for successful case");
 		testEmailAddresss = "test@optum.com";
-		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
-		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
+		emailModalTitle.click();
 		jsClickNew(emailPlanSummarySendButton);
 		Assertion.assertTrue("PROBLEM - uable to locate success message after clicking send button",
 				validate(emailPlanSummarySuccessText, 15));
@@ -158,15 +158,23 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("Proceed to collect the plan counts on vpp summary page");
 
+		clickonBackToPlanResults();
+		
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
+		scrollToView(maPlansCount);
 		int maPlans = Integer.valueOf(maPlansCount.getText());
 		int msPlans = 0;
 		try {
+			scrollToView(msPlansCount);
 			msPlans = Integer.valueOf(msPlansCount.getText());
 		} catch (NumberFormatException e) {				
 			msPlans = 0;
-		}	
+		}
+		
+		scrollToView(pdpPlansCount);
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+		
+		scrollToView(snpPlansCount);
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
 
 		HashMap<String, Integer> result=new HashMap<String, Integer>();
@@ -296,14 +304,32 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void clickOnBackToAllPlansFromCompareBackToSummaryPage() {
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
-		iosScroll(backToAllPlansLnk);
+		//scrollToView(backToAllPlansLnk);
+		//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
+	
 		jsClickNew(backToAllPlansLnk);
+		sleepBySec(10);
+		//backToAllPlansLnk.click();
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void clickonBackToPlanResults() {
+		if (backToPlans.isDisplayed()) {
+			scrollToView(backToPlans);
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
+					validate(backToPlans));
+			jsClickNew(backToPlans);
+			CommonUtility.checkPageIsReady(driver);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -167,7 +167,8 @@ public class AepPlanComparePage extends UhcDriver {
 
     public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
 
-        threadsleep(2000);
+       
+        sleepBySec(5);
 
         //CommonUtility.checkPageIsReady(driver);
 
@@ -213,7 +214,7 @@ public class AepPlanComparePage extends UhcDriver {
         //Read Plan Summary table
         result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
 
-        if (planType.startsWith("MA")) {
+        if (planType.startsWith("MA") || planType.startsWith("SNP")) {
 
             //Read INN Benefits data
             result.putAll(readBenefitsData("medical-benefits-table", ""));
@@ -251,7 +252,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         HashMap<String, String> result = new HashMap<String, String>();
 
-        String planNameXPath = "//table[contains(@id,'compare-table')]//thead/tr/th[2]/div/div";
+        String planNameXPath = "//tr[contains(@id,'printPlans')]/th[3]/div";
         WebElement planNameElement = driver.findElement(By.xpath(planNameXPath));
 
         if (planNameElement == null ) {
@@ -281,7 +282,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         //validateNew(driver.findElement(By.id(tableId)));
 
-        String rowXpath = "//table[contains(@id,'" + tableId + "')]//tbody//tr[contains(@class,'uhc')]";
+        String rowXpath = "//table[contains(@id,'" + tableId + "')][1]//tbody//tr[not(contains(@id,'Hide'))]";
         List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
 
         if (listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0) {

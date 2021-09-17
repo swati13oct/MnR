@@ -34,7 +34,7 @@ public class SdceraHomePage extends UhcDriver {
 		openAndValidate();
 }
 
-	public Rallytool_Page sdcerahomepageproviderclick() {
+	public Rallytool_PageMobile sdcerahomepageproviderclick() {
 	validate(sdcerafindaproviderlink);
 		
 	sdcerafindaproviderlink.click();
@@ -43,7 +43,7 @@ public class SdceraHomePage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 	}
 		// TODO Auto-generated method stub
 		return null;

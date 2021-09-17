@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -444,7 +446,7 @@ public class CommonUtility {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-			for (int counter = 0; counter <= 23; counter++) {
+			for (int counter = 0; counter <= 30; counter++) {
 				if (js.executeScript("return document.readyState").toString().equals("complete")) {
 					System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
 					return true;
@@ -468,5 +470,23 @@ public class CommonUtility {
 			return false;
 		}
 		return false;
+	}
+	
+	/**
+	 * Gets the element attribute value.
+	 *
+	 * @param element the element
+	 * @param attribute the attribute
+	 * @return the attribute value
+	 */
+	public static String getElementAttribute(WebElement element, String attribute) {
+		String attributeValue = "";
+		try {
+			attributeValue = element.getAttribute(attribute);
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			System.out.println("The element " + element + " is not found");
+		}
+		
+		return attributeValue;
 	}
 }

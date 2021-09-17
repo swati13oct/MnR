@@ -200,7 +200,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'provider covered') and contains(text(),' Edit')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -371,6 +371,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
 	
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
@@ -958,9 +961,12 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editProviderButtonOnPlanDetails);
 		String editProviderButtonText = editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit my Doctor")) {
+		if (editProviderButtonText.contains("Edit my Doctors")) {
 			return true;
 		}
 		return false;
@@ -1501,7 +1507,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
@@ -1510,8 +1516,9 @@ public class PlanDetailsPage extends UhcDriver {
 	public DrugDetailsPage clickLearnMore() {
 		validateNew(learnMore);
 		jsClickNew(learnMore);
+		pageloadcomplete();
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPage(driver);
 		} else {
@@ -2063,5 +2070,18 @@ public class PlanDetailsPage extends UhcDriver {
 				}
 				return new WelcomePage(driver);
 				//return null;
+	}
+	
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
 	}
 }

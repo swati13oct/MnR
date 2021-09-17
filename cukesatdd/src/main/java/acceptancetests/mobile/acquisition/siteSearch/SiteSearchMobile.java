@@ -46,7 +46,7 @@ public class SiteSearchMobile {
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, siteName);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		System.out.println("TEST - testSiteUrl=" + testSiteUrl);
@@ -284,8 +284,10 @@ public class SiteSearchMobile {
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String savedProvider = providerSearchPage.selectsProvider();
+		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
 
 	/**
@@ -306,7 +308,8 @@ public class SiteSearchMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 	/**
@@ -327,7 +330,8 @@ public class SiteSearchMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 	@Then("^the user navigates to the plan details page$")

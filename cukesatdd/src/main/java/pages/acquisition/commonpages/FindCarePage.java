@@ -29,6 +29,9 @@ public class FindCarePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
+	
+	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]")
+	private WebElement MedicalDirectory;
 
 	@FindBy(xpath = "//*[@class='location']")
 	public WebElement LocationLink;
@@ -134,6 +137,7 @@ public class FindCarePage extends UhcDriver {
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
+		
 		PlacesButton.click();
 		waitforElement(Whichtypeofplace);
 		HospitalsButton.click();
@@ -257,6 +261,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 	System.out.println("in find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PeopleButton);
 	waitforElement(Whoareyoulookingfor);
 	jsClickNew(PrimaryCareButton);

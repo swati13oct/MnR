@@ -1,6 +1,5 @@
 package pages.mobile.acquisition.dceredesign;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,10 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
-
 import atdd.framework.Assertion;
-
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
@@ -20,7 +18,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "//span[@id='zipError']")
+	@FindBy(css = "#zipError > p")
 	public WebElement zipCodeErrorMsg;
 
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
@@ -29,19 +27,30 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
-	@FindBy(css = "#county")
+	@FindBy(xpath = "//select[@id='county']")
 	public WebElement countyDropdown;
+
+	@FindBy(xpath = "//label[contains(text(),'County')]")
+	public WebElement countyTitle;
 
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
 	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
+	
+	@FindBy(css = "button[dtmname$='zip information:review drug costs']")
+	public WebElement reviewDrugCostsButton;
+	
+	@FindBy(css = "#previousButton2")
+	public WebElement addDrugsButton;
+	
 
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
 	public WebElement ReturnToPagePopup;
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
@@ -102,38 +111,34 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
-	public WebElement FindPlans;
-
-	@FindBy(xpath = "//*[@id=\"county\"]/option[2]")
-	public WebElement firstCounty;
-
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
-		iosScroll(countyDropdown);
 		try {
 
-			if (countyDropdown.isDisplayed()) {
-				String countyValue = driver.findElements(By.cssSelector("#county")).get(1).getText().toString();
-				sleepBySec(5);
+			if (validate(countyDropdown)) {
+//				countyDropdown.click();
+				jsClickNew(countyDropdown);
+				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();
+				Select sl = new Select(countyDropdown);
+				String countyValue= sl.getOptions().get(1).getText().toString();
+				//countyDropdown.getTagName().contains("value=1");
+
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		validateNew(continueBtn);
-		// continueBtn.click();
+		validateNew(reviewDrugCostsButton);
+
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
-		validateNew(continueBtn);
-		jsClickNew(continueBtn);
+		jsClickNew(reviewDrugCostsButton);
 		pageloadcomplete();
-//		waitForPageLoadSafari();
-		// CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
@@ -142,19 +147,15 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
-	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
-		try {
+	public void validateZipCodePlanYearCapturePageNonAEP() {
 
-			mobileUtils.mobileLocateElement(zipCodeTxtbox);
-			mobileUtils.mobileLocateElement(countyDropdown);
-			// mobileUtils.mobileLocateElement(planYearDropdown);
-			mobileUtils.mobileLocateElement(continueBtn);
-			return new ZipCodeAndPlanYearCapturePageMobile(driver);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Element not found");
+		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
+		pageloadcomplete();
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(reviewDrugCostsButton)) {
+			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
+		} else {
+			Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
 		}
-		return null;
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {
@@ -199,38 +200,21 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		// String[] zip = zipcode.split(",");
 		// for(String code: zip) {
 
-		if (returnToPage.isDisplayed()) {
-			jsClickNew(returnToPage);
-			System.out.println("New Popup for wrong zipcode displayed");
-			return new ZipCodeAndPlanYearCapturePageMobile(driver);
-		} else
-			validateNew(zipCodeTxtbox);
+		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
-		validateNew(continueBtn);
+		validateNew(reviewDrugCostsButton);
 
-		jsClickNew(continueBtn);
-		// continueBtn.click();
+		jsClickNew(reviewDrugCostsButton);
 		// countyDropdown.click();
-		CommonUtility.waitForPageLoad(driver, ReturnToPagePopup, 30);
-		if (validateNew(ReturnToPagePopup)) {
+		CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
+		if (validateNew(zipCodeErrorMsg)) {
 			System.out.println("Error message is Displaying");
-			// For Mobile
-			jsClickNew(ReturnToPagePopup);
-			zipCodeTxtbox.clear();
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
-
-		//
-		// CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
-		// if (validateNew(zipCodeErrorMsg)) {
-		// System.out.println("Error message is Displaying");
-		// // For Mobile
-		// jsClickNew(AlmostThereHeader);
-		// zipCodeTxtbox.clear();
-		// return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		// }
 		Assertion.fail("Error Message is not displaying for invalid zipcode");
 		return null;
+
 	}
 
 	public void verifyReviewDrugCostPageDisplayed() {

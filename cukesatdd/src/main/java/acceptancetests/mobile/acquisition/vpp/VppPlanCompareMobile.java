@@ -32,7 +32,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -108,8 +107,9 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			String savedProvider = providerSearchPage.selectsProvider();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -134,7 +134,8 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 	@When("^user selects a Hospitals and retuns to VPP page in ulayer$")
@@ -719,7 +720,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		getLoginScenario().saveBean(planYear, plansummaryPage);
+//		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	}
 
@@ -910,9 +911,9 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType)) {
+		if (plansummaryPage.validatePlanNames(planType, planCount)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);
@@ -2184,7 +2185,8 @@ public class VppPlanCompareMobile {
 	public void user_closes_the_original_tab_and_open_new_tab_for_AARP_site() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.closeOriginalTabAndOpenNewTab();
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		plansummaryPage.closeOriginalTabAndOpenNewTab(testSiteUrl);
 	}
 
 	@Then("^user validates plans remain saved within same session for AARP site$")
@@ -3884,8 +3886,9 @@ public class VppPlanCompareMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		plansummaryPage.viewPlanSummary(plantype);
+		int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+//		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
@@ -3956,6 +3959,27 @@ public class VppPlanCompareMobile {
 		default:
 			break;
 		}
+	}
+	
+	
+	@Then("^user saves all plans as favorite$")
+	public void user_saves_all_plans_as_favorite(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		plansummaryPage.saveAllPlans(savePlanNames, planType);
 	}
 
 	@Then("^user saves all plans as favorite on AARP site$")
@@ -4469,7 +4493,8 @@ public class VppPlanCompareMobile {
 	public void click_home1() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+//		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeBreadCrumbClick();
 		Assertion.assertTrue("home page not found", aquisitionHomePageReload != null);
 	}
 
@@ -4631,8 +4656,6 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
 		planComparePage.validateDoctors();
-		planComparePage.clickPlanAvailableText();
-
 	}
 
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
@@ -4761,12 +4784,14 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(Counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
+		plansummaryPage.checkPlansForCompare(Counter,planType);
+		
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -4891,6 +4916,175 @@ public class VppPlanCompareMobile {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateViewLocation();
+	}
+	
+	@When("^the user performs plan search using Standalone information in EnrollPage$")
+	public void Standalone_Shop_details_in_aarp_site_Enroll(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@When("^the user performs plan search using Shop Pages$")
+	public void Standalone_zipcode_details(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShopEnroll(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShopEnroll(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@When("^the user performs plan search using Shop Pages for DSNP Plans$")
+	public void Standalone_zipcode_details_dsnp_plans(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShopDSNPEnroll(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShopDSNPEnroll(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
+	public void verify_all_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAllDoctors();
+	}
+	
+	@Then("Verify Change Zip Code Link is displayed on compare Page")
+	public void verify_Change_Zip_Code() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateChangeZipCode();
+	}
+	
+	
+	@When("^the user performs zip search using following information on Plan Compare Page$")
+	public void zipcode_Search_Plan_compare(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String Changezipcode = memberAttributesMap.get("Zip Code");
+		String Changecounty = memberAttributesMap.get("County Name");
+		String ChangeisMultiCounty = memberAttributesMap.get("Is Multi County");
+		String ClickEnter = memberAttributesMap.get("Click on Enter");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, Changezipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, Changecounty);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, ChangeisMultiCounty);
+
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		if (("NO").equalsIgnoreCase(ChangeisMultiCounty.trim())) {
+			planComparePage.searchPlansWithOutCounty(Changezipcode, ClickEnter);
+		} else {
+			planComparePage.searchPlans(Changezipcode, Changecounty, ClickEnter);
+		}
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else {
+			Assertion.fail("Error in loading the compare plans page");
+		}
+	}
+
+	@When("^the user searches for zip code using following information on Plan Compare Page$")
+	public void zip_Search_Plan_compare(DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String Changezipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, Changezipcode);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.searchZipCode(Changezipcode);
+	}
+
+	@Then("Verify Invalid Zip Code Error message is displayed")
+	public void verify_Invalid_Zip_Code() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.VerifyInvalidZipCodeErrorMessage();
+	}
+
+	@Then("Verify Zip Code with zero plans Error message is displayed")
+	public void verify_Zip_Code_No_Plans() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.VerifyZipErrorMessageNoPlans();
 	}
 
 }

@@ -1,4 +1,4 @@
-@acq_plandocs
+@acq_plandocs @plandocument
 Feature: 1.13 ACQ AARP- To test plandocs in AARP and UHC Site
 
   Scenario Outline: TID: <TID> - To test the plan documents are loading when zipcode county and plan are selected

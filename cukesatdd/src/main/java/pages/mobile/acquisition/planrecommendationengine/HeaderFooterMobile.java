@@ -4,16 +4,17 @@
 package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.Set;
-
+import static acceptancetests.data.CommonConstants.SHOPFORPLAN.SHOP;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.GlobalWebElements;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 
-public class HeaderFooterMobile extends UhcDriver {
+public class HeaderFooterMobile extends GlobalWebElements {
 
 	public HeaderFooterMobile(WebDriver driver) {
 		super(driver);
@@ -264,7 +265,13 @@ public class HeaderFooterMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(),'Get Recommendation')]")
 	private WebElement ShopToolsGetHelpRecommendationLink;
-
+	
+	@FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
+	private WebElement HeaderShopFromHomeInFindYourPlan;
+    
+    @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+	private WebElement HeaderGetRecommendationInShop;
+    
 	// Header Element Verification Method
 	public void headerElementsMobile() {
 		// Works only for Android due to prod issue in iphoneX
@@ -531,7 +538,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
 		//mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
-		jsClickMobile(footerBackToTopLink);
+		jsClickNew(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);
@@ -888,6 +895,23 @@ public class HeaderFooterMobile extends UhcDriver {
 		mobileactiontap(headerGetaplanrecommendationLink);
 		pageloadcomplete();
 		validate(landingpageHeader, 30);
+	}
+	
+	public void navigationToPlanRecommendationEngineViaShopTools() {
+		waitForPageLoadSafari();
+		ShopForPlanNavigationPageMobile shopForPlanNavigationPageMobile = openShopForPlanFromMenu();
+		shopForPlanNavigationPageMobile.selectShopOption(SHOP);
+		
+		scrollToView(HeaderShopFromHomeInFindYourPlan);
+		validate(HeaderShopFromHomeInFindYourPlan, 30);
+		jsClickNew(HeaderShopFromHomeInFindYourPlan);
+		
+		scrollToView(HeaderGetRecommendationInShop);
+		validate(HeaderGetRecommendationInShop, 30);
+		jsClickNew(HeaderGetRecommendationInShop);
+		
+		validate(landingpageHeader, 30);
+		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}
 
 }

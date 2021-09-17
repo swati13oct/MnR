@@ -35,7 +35,10 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+//	@FindBy(xpath = "//h3[contains(text(),'Other')]")
+	//@FindBy(xpath = "//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id,'sepRadio')]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement SEPPageHeader;
 
 	//Right Rail Elements
@@ -135,7 +138,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[@for = 'dualeligible']")
 	private WebElement DualEligible_DSNP;
 	
-	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	//@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	@FindBy(xpath = "//*[contains(@id,'ProposedEffectiveDateFieldSet')]")
 	private WebElement pedHeader;
 	
 
@@ -185,11 +189,7 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
-		/*//Plan Year commented for AEP validation
-		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;*/
+		
 		if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
@@ -198,10 +198,6 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-/*		if(Premium.contains(Expected_PlanPremium)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;*/
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 	}
@@ -279,7 +275,9 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 }
 
 public boolean validate_SEPoptions_for_planType(String planType) {
-	
+
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
 	boolean Validation_Flag = true;
 	if(ChangingNewMedicareRadio.isDisplayed()) {
 		jsClickNew(ChangingNewMedicareRadio);
@@ -302,13 +300,11 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	} catch (InterruptedException e) {
 		e.printStackTrace();
 	}
-	//validateNew(ChangingCurrentMedicareRadio);
-	//jsClickNew(ChangingCurrentMedicareRadio);
-	//ChangingCurrentMedicareRadio.click();
+	
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(Disaster) /*&& validate(DualSEP)*/ /*&& validate(ChangeDual)*/
-					&& validate(ChangeLIS) && validate(Assignment) /*&& validate(Both_Medicare_Medicaid)&& validate(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)*/){
+				&& validate(Into_LongTerm) && validate(Disaster) 
+					&& validate(ChangeLIS) && validate(Assignment)){
 			
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 
@@ -321,9 +317,9 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("MAPD")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				&& validate(Into_LongTerm)/* && validate(OutOf_LongTerm) */&& validate(Disaster)/* && validate(DualSEP)*/ /*&& validate(ChangeDual)*/
+				&& validate(Into_LongTerm)&& validate(Disaster)
 				  && validate(ChangeLIS) && validate(Assignment) 
-				 /*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug) && validate(LoSS_LIS)*/){
+				 ){
 			
 			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
@@ -335,9 +331,9 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	}
 	if(planType.contentEquals("PDP")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
-				 && validate(Disaster) /*&& validate(DualSEP) && validate(ChangeDual)*/ && validate(ChangeLIS) && validate(Assignment)
-				/*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)*/){// && validateNonPresenceOfElement(LoSS_LIS)
+				&& validate(Into_LongTerm)  && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
+				 && validate(Disaster) && validate(ChangeLIS) && validate(Assignment)
+				){
 			
 			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
 			Validation_Flag = true;
@@ -356,18 +352,17 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 			System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
+		//return new SpecialElectionPeriodPage(driver);
 	}
 
-	return Validation_Flag;
+	return true;
+	
 }
 
 public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	
 	validateNew(NextBtn);
 	jsClickNew(NextBtn);
-	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", NextBtn);
-*/
 	
 	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Coverage')]")))){
 		System.out.println("OLE Coverage and Health Information page is Displayed");
@@ -376,52 +371,81 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	return null;
 }
 
-public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData) {
+public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData, String planType) {
+		
+	validate(ChangingNewMedicareRadio);
+	  if(ChangingNewMedicareRadio.isDisplayed()) {
+		  jsClickNew(ChangingNewMedicareRadio); 
+		  if(!validate(OtherReason) && validate(NoneApply)){
+			  System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed"); 
+		  
+		 } else { 
+			 
+			 System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+		 } 
+	}
+	  
+	  ChangingCurrentMedicareRadio.isDisplayed();
+	  jsClickNew(ChangingCurrentMedicareRadio);
+	  
+	
+	validate(ChangingNewMedicareRadio);
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
+
+		} else {
+
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+		}
+	}
+
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+
+
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;
 	boolean Option_Selected_Flag = true;
 	for(String currentOption : options){
 		System.out.println("Option to select : "+currentOption);
-/*		if(currentOption.contains("None apply")){
-			try {
-				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), 'None apply')]//..//preceding-sibling::input"));
-				currentOptionChkBx.click();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Not able to select option");
-				return null;
-			}
-		}*/
+
 		try {
 			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-			currentOptionChkBx.click();
+			scrollToView(currentOptionChkBx);
+			jsClickNew(currentOptionChkBx);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.out.println("Not able to select option");
 			Option_Selected_Flag = false;
 		}
 		String currentOptionData = optiondata[i];
 		System.out.println("Entering data for option : "+currentOptionData);
 
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
-				if(validate(dataTextBx))
-					dataTextBx.sendKeys(currentOptionData);
-			} 
-			catch (Exception e) {
+		try {
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//..//*[@class='subquestionfield']//input"));
+			if(validate(dataTextBx)) {
+				scrollToView(dataTextBx);
+//					dataTextBx.sendKeys(currentOptionData);
+				sendKeysByCharacter(dataTextBx, currentOptionData);		//All date fields are of input tag and sometime enter incorrect values hence sending keys a character at a time
 			}
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
-				if(validate(dataTextBx))
-						dataTextBx.sendKeys(currentOptionData);
-			} catch (Exception e) {
-				System.out.println("No additional data required for Option selected");
+		}
+		catch (Exception e) {
+		}
+		try {
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//..//*[@class='subquestionfield']//textarea"));
+			if(validate(dataTextBx)) {
+				scrollToView(dataTextBx);
+				dataTextBx.sendKeys(currentOptionData);
 			}
+		} catch (Exception e) {
+			System.out.println("No additional data required for Option selected");
+		}
 
 		i++;
 	}
-	
+
 	if(NextBtn.isEnabled()){
 		System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 		System.out.println("SEP options selected :  Next button is enabled");
@@ -466,6 +490,29 @@ public boolean validate_SEP_RadioButton_options() {
 		//jsClickNew(NextBtn);
 		
 		return Validation_Flag;
-}	
-	
+}
+
+	public SpecialElectionPeriodPage select_new_medicare_option(String selectoptions, String optionsData) {
+		validate(ChangingNewMedicareRadio);
+		if(ChangingNewMedicareRadio.isDisplayed()) {
+			jsClickNew(ChangingNewMedicareRadio);
+			if(!validate(OtherReason) && validate(NoneApply)){
+				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
+
+			} else {
+
+				System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+			}
+		}
+
+		jsClickNew(ChangingNewMedicareRadio);
+
+		if(NextBtn.isEnabled()){
+			System.out.println("SEP options selected :  Next button is enabled");
+			return new SpecialElectionPeriodPage(driver);
+		}
+
+		return null;
+	}
+
 }
