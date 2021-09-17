@@ -626,6 +626,13 @@ public class CampaignTFNPage extends UhcDriver {
 		//action.moveToElement(OurPlansLink1).build().perform();
 		// action.click().build().perform();
 		//validateNew(OurPlansLink1);
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
 		validate(HomePage_EnterZip);
 		HomePage_EnterZip.click();
 		HomePage_EnterZip.sendKeys(zip);
