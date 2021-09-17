@@ -609,6 +609,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection>.sub-content button")).click();
 			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+				threadsleep(10000);
 				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
 				if(validate(MSplanDetailsPage,20))
 				{

@@ -667,8 +667,8 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		Assert.assertTrue(progressText.contains("location") && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
 		editValue("location");
-		validate(WarningDocMsg, 10);
-		Assert.assertTrue(WarningDocMsg.getText().contains("Warning:"), "Doctors Warning message is not displayed");
+		validate(WarningDocMsg, 10); 
+		Assert.assertTrue(WarningDocMsg.getText().trim().contains("Warning:"), "Doctors Warning message is not displayed");
 		System.out.println("******  Add Location Completed ******");
 	}
 	
