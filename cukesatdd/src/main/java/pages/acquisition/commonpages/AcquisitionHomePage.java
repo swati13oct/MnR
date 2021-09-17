@@ -7208,6 +7208,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 		validateNew(tfnHeaderLink);
+		threadsleep(5);
 		String ActualCallSAMTFN = tfnHeaderLink.getText().trim();
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(tfnHeaderLink);

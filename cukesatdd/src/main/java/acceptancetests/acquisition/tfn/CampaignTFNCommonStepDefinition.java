@@ -1193,7 +1193,19 @@ public void user_opens_tab_to_access_AARP_page() throws Exception  {
 	//wd.manage().deleteAllCookies();
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-	tfnPage.openURLNewTab(url);
+	tfnPage.openURLNewTabAARP(url);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
+
+@Given("^user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page$")
+public void user_opens_tab_to_access_UHC_page() throws Exception  {
+
+	String url = "https://www.google.com/";
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.openURLNewTabUHC(url);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 }
 }
