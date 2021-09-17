@@ -528,7 +528,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn
 	// More About Medicare')]")
-	@FindBy(css = "#globalContentIdForSkipLink > div > div > div:nth-child(5) > div > div > div > div > div > div > div > div > div.layout-container.aem-GridColumn.aem-GridColumn--default--12 > div > div > div > div.layout-container.aem-GridColumn--tablet--11.aem-GridColumn--default--none.aem-GridColumn--phone--none.aem-GridColumn--phone--11.aem-GridColumn--tablet--none.aem-GridColumn.aem-GridColumn--default--6.aem-GridColumn--offset--phone--0.aem-GridColumn--offset--default--1.aem-GridColumn--offset--tablet--1 > div > div > div > div > div > div > div > div.layout-container.aem-GridColumn.aem-GridColumn--default--12 > div > div > div > div > div > div > div > a")
+	@FindBy(css = "(//a[@role='button'])[4]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")

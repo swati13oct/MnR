@@ -66,7 +66,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
 	public WebElement Tier5_MailPharmacy_Text;
 
-	@FindBy(css = "#changePharmacyLink")
+	@FindBy(css = ".uhc-link-button.ml-0.mt-lg-0.mt-10.opensansfont.d-block")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(css = "a[dtmname$='plans in your area']")

@@ -210,7 +210,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
-		sendkeysMobile(EnterDrugNameTxt, "india");
+		sendkeysMobile(EnterDrugNameTxt, "iphone");
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 

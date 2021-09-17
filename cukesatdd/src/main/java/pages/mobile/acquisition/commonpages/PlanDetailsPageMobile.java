@@ -1008,7 +1008,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			PharmacyLink = driver.findElement(By.xpath(
 					"//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
 		}
-		CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
+		//CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(PharmacyLink);
 		String winHandleCurrent = driver.getWindowHandle();

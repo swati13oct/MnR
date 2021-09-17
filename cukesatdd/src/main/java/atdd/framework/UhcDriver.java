@@ -637,7 +637,7 @@ public abstract class UhcDriver {
 
 			if (!seleniumClick.equalsIgnoreCase("true")) {
 				System.out.println("Trying JSClick on IOS ..........");
-				//JavascriptExecutor js = (JavascriptExecutor) driver;
+				JavascriptExecutor js1 = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click();", element);
 			}
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
