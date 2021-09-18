@@ -171,7 +171,8 @@ Feature: 1.09. ACQ- Shopper Profile
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    And clicks on Review drug cost button
+    And user navigates to Review drug costs page
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
@@ -184,7 +185,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
-    @stage_AddDrugs @regressionSPStage @sanity @regressionAARP
+    @stage_AddDrugsTEST @regressionSPStage @sanity @regressionAARP
     Examples: 
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | 5240993c-4ca5-41f2-8e16-f05272590b43 | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
