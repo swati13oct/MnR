@@ -274,7 +274,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARPMEdsupptest
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
       | AARP | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
