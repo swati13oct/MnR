@@ -98,12 +98,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
-      | AARP | New York |   10001 | NO              | New York County | vdatdd_13 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | AARP | New York |   10010 | NO              | New York County | vdatdd_13 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |
-      | UHC  | New York |   10001 | NO              | New York County | vdatdd_13_uhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | UHC  | New York |   10010 | NO              | New York County | vdatdd_13_uhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @oleAuthenticatedValidations @authenticatedd
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
@@ -122,12 +122,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | AARP | New York |   10010 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | UHC  | New York |   10010 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vppartialOLEAndRemove @authenticated
   Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
@@ -173,7 +173,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
     Examples: 
       | site | state    | userName  | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | AARP | New York | vdatdd_15 | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | AARP | New York | vdatdd_15 | Password@1 |   10010 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
