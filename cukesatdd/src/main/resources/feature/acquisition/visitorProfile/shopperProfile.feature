@@ -51,8 +51,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                | pcps                                                                                                                                       |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 | David Joiner Knapp MD [1245 E South Blvd, Montgomery, AL, 36116];Margaret S Miklic MD [3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243] |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -99,8 +99,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stage123 @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
 
   @searchProfileAndAddPlans @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -171,6 +171,7 @@ Feature: 1.09. ACQ- Shopper Profile
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
@@ -362,9 +363,9 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username | password     | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
-      | ocpuser2 | Password@123 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      | ocpuser2 | Password@123 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | username | password     | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers |
+      | ocpuser2 | Password@123 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | No        |
+      | ocpuser2 | Password@123 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No        |
 
   @createProfileNonMemberSP @regressionSPStage @regressionAARP
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
