@@ -274,15 +274,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARPMEdsupptest
     Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
+      | AARP | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
+      | UHC  | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -361,7 +361,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @importDrugsDocs
-  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -372,6 +372,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | ZipCode   | <zipcode>   |
       | MBI       | <mbi>       |
       | Member    | <member>    |
+
     #Then the user validates the Drugs and Doctors
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @prodRegression @regressionAARP
     Examples: 
