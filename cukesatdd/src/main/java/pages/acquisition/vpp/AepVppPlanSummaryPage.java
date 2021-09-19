@@ -349,12 +349,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = benefitsMap.get("header premium"); //gets the value for the header premium that was stored from the UI
-		
+		benefitValue = benefitValue.replaceAll("\\s+", "");
 		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
 			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
 		
 		for(String key : benefitsMap.keySet()) {
-			 benefitValueUI = benefitsMap.get(key);
+			 benefitValueUI = benefitsMap.get(key).replaceAll("\\s+", "");
+			 
 			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
@@ -365,15 +366,36 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				columnName = columnName.replaceAll("\\s+", "");
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
-				if(key.contains(columnName)) {
+				
+				if(key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { //since we have two types of plan where we can see Prescription Drugs, Tier 1 or Prescription Drugs, we have to add this condition
 						flag= false;
 						tmpUIString2 = tmpUIString1;
 						break;
+				}else if(key.equalsIgnoreCase(columnName)) {
+					flag = false;
+					tmpUIString2 = tmpUIString1;
+					break;
 				}
 				
 				
 			
+			}else if(columnName.equalsIgnoreCase("prescription drugs")) {
+				if(key.equalsIgnoreCase(columnName)) {
+					counter++;
+					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;break;
+					}else {
+						flag = false; 
+						System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:5 "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+				}
+			
+			
+			
 			}else if(key.contains(columnName)) {
+			
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
