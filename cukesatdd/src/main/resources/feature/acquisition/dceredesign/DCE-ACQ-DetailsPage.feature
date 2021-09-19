@@ -46,6 +46,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user validates OptumRx consistently displays on DCE Details - Pharmacy Page
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
+    Then the user validates 100-day Supply Messaging for Eligible Plan
     Then the user validates qty, frequency and Supply Length for following drug in DCE Details Page
       | DrugName  | <drug2>      |
       | Quantity  | <quantity2>  |

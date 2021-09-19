@@ -1003,7 +1003,7 @@ public class CommonConstants {
 		SELECTED_STATE.set(State);
 	}
 	
-	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 	
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
 	
@@ -1141,5 +1141,3 @@ public class CommonConstants {
 	}
 	
 }
-
-

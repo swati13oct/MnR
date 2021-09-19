@@ -307,6 +307,18 @@ public class PharmacyLocatorStepDefinition {
 		System.out.println("PDF Result Page is Displayed");
 	}
 
+	@And("^the user validates Front Matter PDF link$")
+	public void the_user_validates_Front_Matter_PDF_link() throws InterruptedException {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateFrontMatterPdfResults(testPlanName);
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed",
+				pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+		System.out.println("Front Matter Result Page is Displayed");
+	}
+
 	@Then("^the user validates pharmacy widgets$")
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException { 
 		Map<String, String> inputDataMap=parseInputArguments(inputData);
