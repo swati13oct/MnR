@@ -200,26 +200,26 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                       | workSheet    | site |
       | Plan Summary Benefits_Data_2022 | Sheet2022_15 | UHC  |
-      
-       @2022planSummaryBenefitsUHC16  @2022planSummaryBenefitsUHCMA
-    Examples: 
-      | excelPath                       | workSheet    | site |
-      | Plan Summary Benefits_Data_2022 | Sheet2022_16 | AARP |
 
-    @2022planSummaryBenefitsUHC17  @2022planSummaryBenefitsUHCMA
+    @2022planSummaryBenefitsUHC16 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
-      | Plan Summary Benefits_Data_2022 | Sheet2022_17 | AARP |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_16 | UHC  |
+
+    @2022planSummaryBenefitsUHC17 @2022planSummaryBenefitsUHCMA
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_17 | UHC  |
 
     @2022planSummaryBenefitsUHC18 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
-      | Plan Summary Benefits_Data_2022 | Sheet2022_18 | AARP |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_18 | UHC  |
 
     @2022planSummaryBenefitsUHC19 @2022planSummaryBenefitsUHCMA
     Examples: 
       | excelPath                       | workSheet    | site |
-      | Plan Summary Benefits_Data_2022 | Sheet2022_19 | AARP |
+      | Plan Summary Benefits_Data_2022 | Sheet2022_19 | UHC  |
 
     @2022planSummaryBenefitsPDPUHC01 @2022planSummaryBenefitsUHCPDP
     Examples: 

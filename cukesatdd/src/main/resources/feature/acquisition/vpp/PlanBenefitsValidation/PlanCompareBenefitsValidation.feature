@@ -92,13 +92,13 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2022_17 |
-      
-      @planCompareBenefitsAARP18 @planCompareMA
+
+    @planCompareBenefitsAARP18 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_18 |
-      
-      @planCompareBenefitsAARP19 @planCompareMA
+
+    @planCompareBenefitsAARP19 @planCompareMA
     Examples: 
       | workSheet    |
       | Sheet2022_19 |
@@ -112,11 +112,6 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2022_2 |
-
-    @planCompareBenefitsPDPAARP03
-    Examples: 
-      | workSheet      |
-      | PDPSheet2022_3 |
 
   @2022_UHC @current_year
   Scenario Outline: 2022 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
@@ -219,11 +214,6 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2022_2 |
-
-    @planCompareBenefitsPDPUHC03
-    Examples: 
-      | workSheet      |
-      | PDPSheet2022_3 |
 
   @2021_AARP @next_year @2021CompareAARP
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
