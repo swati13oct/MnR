@@ -9,10 +9,17 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
 
 
 
-  @OLEBenefitsnextyear_MA_SNP_dummy @OLEBenefitsnextyear
+  @OLEBenefitsnextyear_MA_SNP_dummy
     Examples:
       | excelPath                | workSheet | site |
       | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Dummy | AARP |
+
+  @OLEBenefitsnextyear_PDP @OLEBenefitsnextyear_1
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_PDP_OLE | OLEPDP_Dummy  | AARP |
+
+
 
   @OLEBenefitsnextyear_PDP @OLEBenefitsnextyear
     Examples:
@@ -83,9 +90,50 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
      | excelPath                | workSheet | site |
       | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_8 | AARP |
 
- 
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_9 | AARP |
 
-@OLEBenefitsnextyear_MA_SNP_1 @OLEBenefitsnextyear
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_10 | AARP |
+
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_11 | AARP |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_12 | AARP |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_13 | AARP |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_14 | AARP |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_15 | AARP |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_16 | AARP |
+
+
+  @OLEBenefitsnextyear_MA_SNP_1 @OLEBenefitsnextyear
       Examples:
       | excelPath                | workSheet | site |
       | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_1 | UHC |
@@ -119,5 +167,45 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
     Examples:
      	| excelPath                | workSheet | site |
       | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_8 | UHC |
-      
-      
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_9 | UHC |
+
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_10 | UHC |
+
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_11 | UHC |
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_12 |UHC  |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_13 | UHC  |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_14 | UHC |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_15 |UHC  |
+
+  @OLEBenefitsnextyear_MA_SNP @OLEBenefitsnextyear
+    Examples:
+      | excelPath                | workSheet | site |
+      | 2022_Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_16 |UHC  |
+

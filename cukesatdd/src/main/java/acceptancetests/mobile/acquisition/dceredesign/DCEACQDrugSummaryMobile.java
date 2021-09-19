@@ -401,4 +401,22 @@ public class DCEACQDrugSummaryMobile {
 		drugSummaryPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
 	}
 
+	@Then("^the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE Summary Page View Drug Pricing Modal$")
+	public void the_user_validates_non_zero_costs_for_Not_covered_Drugs_for_LIS_Buydown_on_DCE_Summary_Page(
+			DataTable arg1) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		String NotCoveredDrug = memberAttributesMap.get("NotCoveredDrug");
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
+	}
+
+	@Then("^the user Closes Drug Pricing modal$")
+	public void user_closes_ViewDrugPricing_modal() throws Throwable {
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.closeDrugPricingModal();
+	}
+
 }

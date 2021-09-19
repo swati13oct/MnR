@@ -368,7 +368,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
+	@FindBy(css = "#sam-call-button-mobile")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -466,7 +466,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 	/*@FindBy(css = "#search-field-2")
 	private WebElement EnterSearch;
-
 	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > div > div.d-flex.flex-column.srch > div > button")
 	private WebElement SubmitBtn;*/
 
@@ -519,7 +518,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	@FindBy(xpath = "//span[contains(text(),'Learn more about Medicare') or contains(text(),'Learn More About Medicare')]")
+	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
+	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
@@ -3195,6 +3195,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			/*WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 			WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));*/
+			validateNew(UHCLogo);
 			if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPlogo.isDisplayed()) {
 //				scrollToView(UHCLogo);
 				Assertion.assertTrue(true);
@@ -3298,6 +3299,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class*='mobile-mysaved'] > div > button")
 	public WebElement menuMySavedItemsButton;
 	
+	@FindBy(css = ".mob-menu-header button[onclick^='openSearch']")
+	private WebElement siteSearchIcon;
+	
 	public void validateHeaderLinks() {
 		jsClickNew(MenuMobile);
 		pageloadcomplete();
@@ -3309,12 +3313,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
-		validateLogo();
 		// validateNew(searchTxtbox);
 		// validateNew(headerTfn);//not for mobile- confirmed with Rathulya
 		validateNew(menuMySavedItemsButton);
+		validateNew(siteSearchIcon);
 		// validateVisitorProfileIcon();//FlyOut opoup not valid for mobile
 		jsClickNew(mainMenuNavCloseButton);
+		validateLogo();
 	}
 
 	public void validateVisitorProfileIcon() {
@@ -4077,7 +4082,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("/compare/compare-ms.html")
 				|| driver.getCurrentUrl().contains("/enroll/ms-apply.html")
 				|| driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
-			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
+			String ExpectedCallSamTFNtimezone = "7 a.m. � 11 p.m. ET, Monday-Friday\n9 a.m. � 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -4105,7 +4110,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 								+ ActualCallSamTFNMember);
 			}
 		} else {
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m., 7 days a week.*\\n*Alaska and Hawaii: 8 a.m. Â- 8 p.m. Monday � Friday, 8 a.m. Â- 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);

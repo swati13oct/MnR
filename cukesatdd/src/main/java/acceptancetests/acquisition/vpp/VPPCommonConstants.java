@@ -84,5 +84,7 @@ public static final String PRIMARYCARE = "primarycare";
 	
 	public static final String PLAN_COUNT = "planCount";
 
+	public static final String SAVED_PROVIDER_RALLY = "savedProviderRally";
+
 }
 
