@@ -240,6 +240,7 @@ public class WelcomePage extends UhcDriver{
 				enrollInPlan.click();
 				Thread.sleep(500);
 				flag = driver.getCurrentUrl().contains("welcome");
+				CheckiPerseptions();
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
 							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
