@@ -53,16 +53,16 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
-      | Member Signin URL         | <memberSignIn>        |
-      | Member Signin URL STG     | <memberSignInstage>   |
-      | Member Signin URL Offline | <memberSignInOffline> |
-    Then the user navigates to refresh page
-    Then the user validates TFN Number
-      | TFN No    | <memberTFNNo> |
+    #Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
+      #| Member Signin URL         | <memberSignIn>        |
+      #| Member Signin URL STG     | <memberSignInstage>   |
+      #| Member Signin URL Offline | <memberSignInOffline> |
+    #Then the user navigates to refresh page
+    #Then the user validates TFN Number
+      #| TFN No    | <memberTFNNo> |
       #| TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath>    |
-
+      #| TFN Xpath | <TFNxpath>    |
+#------------------------------------------
     #Then the user validates PSC code
     #| PSC Code | <Precedence2PSC> |
     @campaignTFNProd
@@ -73,8 +73,11 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT_PROD @UATRegression @prodRegression_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
-    Given the user Starts WebDriver
-    Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
+    #Given the user Starts WebDriver
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    #Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
+    Given the user is on AARP External Link and Land on MA Plans
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -97,8 +100,8 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
 		@campaignTFNProd
     Examples: 
-      | scenario                      | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
-      | Scenerio 9-ExternalLink - AMP |   10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] |
+      | scenario                      |site| zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
+      | Scenerio 9-ExternalLink - AMP |ULayer|   10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] |
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic__UHC_UAT_PROD @UATRegression
@@ -169,8 +172,11 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
   #######################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT_PROD @UATRegression
   Scenario Outline: <scenario>  Verify TFN through External Links
-    Given the user Starts WebDriver
-    Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
+    #Given the user Starts WebDriver
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    #Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
+    Given the user is on UHC acquisition site from Campaign Traffic
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code

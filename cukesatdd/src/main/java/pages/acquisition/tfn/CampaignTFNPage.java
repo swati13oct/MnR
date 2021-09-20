@@ -155,6 +155,9 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
+	
+	//@FindBy(xpath = "//h1[contains(text(),'Medicare Supplement Insurance Plans insured by')]")
+		//private WebElement medsuppTitle;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
@@ -256,6 +259,7 @@ public class CampaignTFNPage extends UhcDriver {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				driver.manage().window().maximize();
 				testSiteUrl=AARP_ACQISITION_PROD_PAGE_URL+path;
+				System.out.println("Final URL"+testSiteUrl);
 				driver.get(testSiteUrl);
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -678,7 +682,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
 
-	public void ViewPlanSummary(String planType) {
+	public VPPPlanSummaryPage ViewPlanSummary(String planType) {
 		CheckPageLoad();
 		CheckiPerseptions();
 
@@ -689,6 +693,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 //			sleepBySec(2);
@@ -696,6 +701,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("MA Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			//sleepBySec(2);
@@ -704,6 +710,7 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("SNP")) {
 //			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
@@ -711,8 +718,9 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("SNP Plan Type Clicked");
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
-	
-		}	
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 	@FindBy(xpath="//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;
@@ -1376,5 +1384,36 @@ private WebElement decisionGuideClick;
 public void decisionGuide() {
 	validateNew(decisionGuideClick);
 	jsClickNew(decisionGuideClick);
+}
+
+public void openURLNewTab(String url) {
+	// get original tab handler
+	String winHandleBefore = driver.getWindowHandle();
+
+	System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+	// open new tab
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("window.open('about:blank','_blank');");
+	for (String winHandle : driver.getWindowHandles()) {
+		if (!winHandle.equals(winHandleBefore)) {
+			driver.switchTo().window(winHandle);
+		}
+	}
+	String winHandleTmp = driver.getWindowHandle();
+	System.out.println(
+			"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+	
+
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to open the acquisition url in new tab");
+	
+	
+	start(url);
+	googleSearchAARP();
+	driver.switchTo().window(winHandleBefore);
+	driver.close();
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to use this newly opened tab for remaining validation");
+
 }
 }
