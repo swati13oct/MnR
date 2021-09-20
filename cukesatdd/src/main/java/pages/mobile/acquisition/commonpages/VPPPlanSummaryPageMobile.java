@@ -504,7 +504,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	private String savePlanImgXpath = "//img[contains(@src,'ic_favorite-unfilled.png')]";
 	private String savedPlanLinkTextXpath = "//span[text()='Saved']";
 	private String savedPlanImgXpath = "//img[contains(@src,'ic_favorite-filled.png')]";
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
@@ -3977,6 +3977,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if(planYearToggle.isDisplayed()) {
 			WebElement planYearToggle = planYear.equalsIgnoreCase("current") ? currentYearToggle : nextYearToggle;
 			jsClickNew(planYearToggle);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		
 		
@@ -6090,15 +6091,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				validate(nextBestActionModalFindMyDoctorsBtn);
 				if (nextBestActionModalMsg.size() > 1) {
 					Assertion.assertTrue(
-							"The Provider NBA message is not displayed on NBA.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+							"The Provider NBA message is not displayed on NBA.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message "
 									+ nextBestActionModalMsg.get(1).getText().trim(),
 							nextBestActionModalMsg.get(1).getText().trim()
 									.equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 				} else {
 					Assertion.assertTrue(
-							"The Provider NBA message is not displayed on NBA.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+							"The Provider NBA message is not displayed on NBA.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message "
 									+ nextBestActionModalMsg.get(0).getText().trim(),
 							nextBestActionModalMsg.get(0).getText().trim()
 									.equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));

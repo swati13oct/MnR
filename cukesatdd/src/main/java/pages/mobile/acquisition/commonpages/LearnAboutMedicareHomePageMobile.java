@@ -404,13 +404,13 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	public PrescriptionsProvidersBenefitsPageMobile selectBenifitsEducation() {
-
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement medBenifits = driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
 		String checkUrl = driver.getCurrentUrl();
-		if (checkUrl.contains("medicare-education-classic/medicare-benefits-classic.html")) {
+		if (checkUrl.contains("medicare-education/medicare-benefits.html")||checkUrl.contains("/medicare-education-classic/medicare-benefits-classic.html")) {
 			return new PrescriptionsProvidersBenefitsPageMobile(driver);
 		} else {
 			return null;
@@ -556,8 +556,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 			WebElement additionBenefits = driver
 					.findElement(By.xpath("//a//span[contains(text(),'additional benefits')]"));
-			// backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to
-			// Top')])[3]"));
+			backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
 			System.out.println(
 					" Link Clicked: Will I have coverage for additional benefits like vision, dental, or hearing aids? ");
 			jsClickNew(additionBenefits);

@@ -523,7 +523,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement UHCICSubTiltle;
 
 	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
-	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+//	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
