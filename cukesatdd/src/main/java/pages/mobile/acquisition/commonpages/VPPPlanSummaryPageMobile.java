@@ -3368,6 +3368,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
 						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 						+ savedPlanImgXpath;
+				if(planType.equals("PDP")) {
+					savedPlanIconXpath = "//*[contains(text(),'" + plan
+							+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')and contains(@dlassetid,'lnk-1')]"
+							+ savedPlanImgXpath;
+					
+				}
 				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
 				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
 				expMatch = 1;
