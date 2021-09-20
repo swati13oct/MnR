@@ -1080,6 +1080,12 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorResultspage.validateLinks(tabtype);
    	}
 	
+	@Then("^user verify MS Plans Deeplink access for \"([^\"]*)\" States$")
+   	public void deeplink(String tabtype) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+			planSelectorResultspage.deeplinkforMSStates(tabtype);
+   	}
+	
 	@Then("^user navigate to visitor profile with saving MS plan$")
     public void Guest_Profile_MSPlan(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -1164,13 +1170,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.learnMore(inputValues.get("Learn More"));
-   	}
-	
-	@And("^user clicks on Medigap Plans Link in PRE Result page$")
-   	public void medigap_new_results_page() {
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.medigaplink();
-   	}
+	}
 
 	@Then("^user validate drugCostModal in PRE results page$")
    	public void drugDetailsModel_new_results_page(DataTable givenAttributes) {

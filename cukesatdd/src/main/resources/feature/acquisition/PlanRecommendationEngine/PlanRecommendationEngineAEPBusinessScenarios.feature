@@ -114,13 +114,13 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors    | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | AARP | OCT-15   |   10001 | NO            | New York         | MA            | None             | UHGNetwork | [blank]           | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
-      | AARP | DEC-31   |   35004 | NO            | St. Clair County | MA            | Medicaid,Nursing | Lookup     | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Dental, Doctors              |
+      | AARP | DEC-31   |   35004 | NO            | St. Clair County | MA            | Medicaid,Nursing | Lookup     | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher                | None           | Dental, Doctors              |
 
     @regressionUHCAEP
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors    | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | UHC  | OCT-15   |   10001 | NO            | New York         | MA            | None             | UHGNetwork | [blank]           | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
-      | UHC  | DEC-31   |   35004 | NO            | St. Clair County | MA            | Medicaid,Nursing | Lookup     | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Dental, Doctors              |
+      | UHC  | DEC-31   |   35004 | NO            | St. Clair County | MA            | Medicaid,Nursing | Lookup     | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher                | None           | Dental, Doctors              |
 
   @PRE @APIRanking @PDPFlowRanking @PDPFuture
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -206,12 +206,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     @regressionAARPAEP
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      | AARP | OCT-15   |   35004 | NO            | St. Clair County | MA            | Medicaid,nursing | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
+      | AARP | OCT-15   |   35004 | NO            | St. Clair County | MA            | Medicaid,nursing | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher                |
 
     @regressionUHCAEP
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      | UHC  | OCT-15   |   35004 | NO            | St. Clair County | MA            | Medicaid,nursing | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
+      | UHC  | OCT-15   |   35004 | NO            | St. Clair County | MA            | Medicaid,nursing | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher                |
 
   @PRE @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE

@@ -119,7 +119,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = ".saved_items_container button[class*='mySavedItem']")
 	private WebElement ShoppingCartImg;
 		
-	@FindBy(css = "h3#guest-profile")
+	@FindBy(css = "#guest-saved-items-button >span")
 	private WebElement guestProfileLink;
 		
 	@FindBy(css = "h3#auth-profile")
@@ -327,17 +327,18 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	public void PRESaveResultModelBtn() {
 		SignInButton.click();
-		threadsleep(2000);
+		threadsleep(6000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
-		threadsleep(3000);
+		driver.navigate().back();
 		browserBack();
+		threadsleep(3000);
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 		CreateProfileButton.click();
-		threadsleep(2000);
+		threadsleep(6000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/registration"),"***Create One Healthcare ID Page Not Opened***");
+		driver.navigate().back();
 		threadsleep(3000);
-		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 	}
@@ -666,8 +667,8 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		Assert.assertTrue(progressText.contains("location") && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
 		editValue("location");
-		validate(WarningDocMsg, 10);
-		Assert.assertTrue(WarningDocMsg.getText().contains("Warning:"), "Doctors Warning message is not displayed");
+		validate(WarningDocMsg, 10); 
+		Assert.assertTrue(WarningDocMsg.getText().trim().contains("Warning:"), "Doctors Warning message is not displayed");
 		System.out.println("******  Add Location Completed ******");
 	}
 	
@@ -722,6 +723,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 				
 
 		} catch (Exception e) {
+// Required access code to login in offline and online prod, so not possible....			
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 
