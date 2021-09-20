@@ -651,7 +651,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 			//result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
 			
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
-			
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				String rowXpath="";
 				if(tab==0)
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr";
