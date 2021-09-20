@@ -1041,6 +1041,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
+			CommonUtility.checkPageIsReadyNew(driver);
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}
