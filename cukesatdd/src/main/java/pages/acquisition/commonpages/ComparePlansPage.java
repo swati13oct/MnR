@@ -192,7 +192,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//a//span[text()='Add Doctors & Dentist']")
 	private WebElement addDoctorsLink;
 
-	@FindBy(xpath = "//a//span[text()='Edit Doctors & Dentist']")
+	@FindBy(xpath = "(//a//span[contains(text(),'Edit Doctors')])[1]")
 	private WebElement editDoctorsLink;
 
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/th/span")
@@ -1358,19 +1358,19 @@ public class ComparePlansPage extends UhcDriver {
 				String[] provider = providers.split(";");
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
-						.contains("number of providers loaded: " + provider.length));
+						.contains("number of doctors & dentists loaded: " + provider.length));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else if (!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("yes")) {
 				String[] provider = providers.split(";");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
-						.contains("number of providers loaded: " + provider.length));
+						.contains("number of doctors & dentists loaded: " + provider.length));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of drugs loaded: " + "0"));
 			} else if (!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")) {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
-						.contains("number of providers loaded: " + "0"));
+						.contains("number of doctors & dentists loaded: " + "0"));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
@@ -1935,7 +1935,7 @@ public void saveaPlan(String plans) {
 			if (providers.contains(";")) {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < provider.length; i++) {
-					Assertion.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'" + provider[i] + "')]"))
+					Assertion.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'" + provider[i].split(":")[0] + "')]"))
 							.isDisplayed());
 				}
 				btnCancelToMira.click();
