@@ -49,32 +49,33 @@ public class PREBenefitsValidationStepDefinition {
 	}
 
 	WebDriver wd;
-//	List<DataTableRow> inputRow;
+	// List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow = "";
 
 	boolean if_offline_prod = false, popup_clicked = false;
-	
+
 	public void readfeaturedata(DataTable data) {
 		inputValues = new HashMap<String, String>();
 		inputValues = DataTableParser.readDataTableAsMaps(data);
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
+			System.out.println("Current PRE Flow : " + PREflow);
 		}
 	}
 
 	@Then("^the user navigates to PRE results page and compares plan benefits value from excel to UI and reports into excel$")
 	public void preResults_exceldataValidation(DataTable givenAttributes) throws Throwable {
-//		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		// List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * for (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
@@ -86,9 +87,9 @@ public class PREBenefitsValidationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		// Getting Date
-        DateFormat dateFormat = new SimpleDateFormat("MMddyyyyHHmmss");
-        Date RunDate = new Date();
-        String DateCreated = dateFormat.format(RunDate);
+		DateFormat dateFormat = new SimpleDateFormat("MMddyyyyHHmmss");
+		Date RunDate = new Date();
+		String DateCreated = dateFormat.format(RunDate);
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory + "/src/main/resources/database/PREPlanDocs/" + ExcelName + ".xlsx";
@@ -101,9 +102,9 @@ public class PREBenefitsValidationStepDefinition {
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		XSSFSheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
-		System.out.println("Total Number of rows in " +sheetName +": " +lastRow);
+		System.out.println("Total Number of rows in " + sheetName + ": " + lastRow);
 
-		//lastRow = 1;
+		// lastRow = 1;
 
 		XSSFWorkbook ResultWorkbook = new XSSFWorkbook();
 		XSSFSheet ResultsSheet = ResultWorkbook.createSheet("PREPlanBenefitsResults");
@@ -122,7 +123,7 @@ public class PREBenefitsValidationStepDefinition {
 			String currentColName = "";
 			int zipCellNum = 0, countyCellNum = 0, planNameCellNum = 0;
 			HashMap<String, String> benefitsMapPRE = new HashMap<String, String>();
-			System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
+			System.out.println(sheetName + " SAUCE URL: " + getLoginScenario().returnJobURL());
 
 			PlanRecommendationEngineBenefits preBenefits = new PlanRecommendationEngineBenefits(wd);
 			// Looping over total rows with values
@@ -173,54 +174,60 @@ public class PREBenefitsValidationStepDefinition {
 
 							AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "PRE");
 
-							System.out.println(siteType);
-							
-							//wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
-
-							if(AEP.equalsIgnoreCase("YES")) {
-								if_offline_prod = aquisitionhomepage.openAEPPRE(siteType,user);
-								aquisitionhomepage.fixPrivateConnection();
-								aquisitionhomepage.loginflagSmithPRE(siteType,user);
-								checkpopup();
-							}else {
-								if_offline_prod = aquisitionhomepage.openPRE(siteType);
-								aquisitionhomepage.fixPrivateConnection();
-								checkpopup();
-							}
-
-							PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
-									wd);
-							zip.navigateToCoveragePage(zipcode, countyName);
-							
-							Thread.sleep(5000);
-
-							String recomObj = zip.getSessionValue("Session Storage", "ucp_planRecommendationObj");
-
-							// set session
-
-							String sessionValue = getSessionInfo(recomObj);
-
-							zip.setSession("Session Storage", "ucp_planRecommendationObj", sessionValue);
-
-							zip.navigateToPREResultsPage();
-
 							PlanRecommendationEngineNewResultsPage resultsPage = new PlanRecommendationEngineNewResultsPage(
 									wd);
-							if(AEP.equalsIgnoreCase("YES") && year.equalsIgnoreCase("2021")){
-								PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-								planSelectorResultspage.changePlanyear("current");
+
+							System.out.println(siteType);
+
+							// wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
+
+							try {
+
+								if (AEP.equalsIgnoreCase("YES")) {
+									if_offline_prod = aquisitionhomepage.openAEPPRE(siteType, user);
+									aquisitionhomepage.fixPrivateConnection();
+									aquisitionhomepage.loginflagSmithPRE(siteType, user);
+									checkpopup();
+								} else {
+									if_offline_prod = aquisitionhomepage.openPRE(siteType);
+									aquisitionhomepage.fixPrivateConnection();
+									checkpopup();
+								}
+
+								PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
+										wd);
+								zip.navigateToCoveragePage(zipcode, countyName);
+
+								Thread.sleep(5000);
+
+								String recomObj = zip.getSessionValue("Session Storage", "ucp_planRecommendationObj");
+
+								// set session
+
+								String sessionValue = getSessionInfo(recomObj);
+
+								zip.setSession("Session Storage", "ucp_planRecommendationObj", sessionValue);
+
+								zip.navigateToPREResultsPage();
+
+								if (AEP.equalsIgnoreCase("YES") && year.equalsIgnoreCase("2021")) {
+									PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
+											wd);
+									planSelectorResultspage.changePlanyear("current");
+								}
+							} catch (Exception flowerror) {
+								break; // If any exception in flow then no record in excel
 							}
-							
+
 							int planIndex = resultsPage.findPlan(planName);
 							int planYear = 2021; // Not using now
-							
-							if(planIndex<0)
+
+							if (planIndex < 0)
 								break;// If No plan in UI then no record in Result excel
 
-							benefitsMapPRE = preBenefits.collectInfoPREResultsPage(zipcode, planName, planIndex, planYear,
-									sheetName, rowIndex);
+							benefitsMapPRE = preBenefits.collectInfoPREResultsPage(zipcode, planName, planIndex,
+									planYear, sheetName, rowIndex);
 						}
-
 						if (!(currentColName.equalsIgnoreCase("plan year")
 								|| currentColName.equalsIgnoreCase("plan id qa script")
 								|| currentColName.equalsIgnoreCase("product focus")
@@ -239,7 +246,7 @@ public class PREBenefitsValidationStepDefinition {
 								|| currentColName.equalsIgnoreCase("fips")
 								|| currentColName.equalsIgnoreCase("Plan code")
 								|| currentColName.equalsIgnoreCase("StateCode")
-								|| currentColName.equalsIgnoreCase("State"))){
+								|| currentColName.equalsIgnoreCase("State"))) {
 
 							resultMap = preBenefits.comparePREBenefits(currentColName, currentCellValue,
 									benefitsMapPRE);
@@ -253,7 +260,6 @@ public class PREBenefitsValidationStepDefinition {
 								newCell.setCellStyle(styleFailed);
 								failureCounter++;
 							}
-
 						}
 
 						if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0)
@@ -311,25 +317,27 @@ public class PREBenefitsValidationStepDefinition {
 
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = new JSONObject();
-		String locationValues = "",medsubValues = "null";
+		String locationValues = "", medsubValues = "null";
 		try {
 			jsonObj = (JSONObject) parser.parse(sessionObj);
 			System.out.println(jsonObj.get("location"));
 			locationValues = jsonObj.get("location").toString();
-			//System.out.println("mmmeeedddsssubb   "+jsonObj.get("medsuppUserInfo"));
-			if(jsonObj.get("medsuppUserInfo")!=null)
+			// System.out.println("mmmeeedddsssubb "+jsonObj.get("medsuppUserInfo"));
+			if (jsonObj.get("medsuppUserInfo") != null)
 				medsubValues = jsonObj.get("medsuppUserInfo").toString();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj+ medsubValues + "}");
-		return preferencePRE + plansObj + pYear + locationObj + locationValues + "," +msObj+ medsubValues+"}";
+		System.out.println(
+				preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + "}");
+		return preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + "}";
 	}
-	
+
 	public void checkpopup() {
-		if(if_offline_prod && !popup_clicked) {
-			PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		if (if_offline_prod && !popup_clicked) {
+			PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodePages(
+					(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 			popup_clicked = planSelectorhomepage.close_Popup();
 		}
 	}
