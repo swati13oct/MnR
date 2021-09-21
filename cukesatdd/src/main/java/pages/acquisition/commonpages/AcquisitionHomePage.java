@@ -1172,7 +1172,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(viewPlansButton, 20);
 	}
 

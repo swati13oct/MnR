@@ -127,8 +127,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(backToAllPlans,30);
-		validate(plandetails,30);
+		//validate(backToAllPlans,30);
+		validate(plandetails,10);
 
 	}
 
@@ -633,7 +633,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
 			listOfTabHeaders.get(tab).click();
-			sleepBySec(5);
+			sleepBySec(3);
 			int tabIndex=(tab+1);
 			CommonUtility.checkPageIsReady(driver);
 
@@ -651,12 +651,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 			//result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
 			
 			for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				String rowXpath="";
 				if(tab==0)
 					rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr";
