@@ -49,8 +49,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
-	@FindBy(css = "div[class*='hangingBoxMobile'] a[class^='tel tfn'] > u[class^='invoca']," +
-			" div[class*='hangingBoxMobile'] a[class^='tel tfn'] > u[data-bind='tfn']")
+	@FindBy(css = "div[class*='hangingBoxMobile'] a[class^='tel tfn'] > u[class^='invoca']")
 	private WebElement telTFNLink;
 
 	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
