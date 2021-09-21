@@ -231,6 +231,9 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
+	
+	@FindBy(xpath = "//span[contains(text(),'If you qualify')]")
+	public WebElement drugPricingDeductText;
 
 	public static String LIS_MESSAGE_DRUG_PRICING = "If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
 
@@ -492,8 +495,14 @@ public class DrugSummaryPage extends UhcDriver {
 		jsClickNew(mapdPlanToggle);
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'If you receive')]")
-	public WebElement drugPricingDeductText;
+	
+	public void vdrugPricingDeductText() {
+		if (drugPricingDeductText.getText().contains("$0 or $99")
+				|| drugPricingDeductText.getText().contains("$0 or $92")) 
+			System.out.println(drugPricingDeductText.getText());
+		else 
+			Assert.fail("Expected Deductible LIS message not displayed");
+	}
 
 	public void verifyTheTextAlert() {
 
@@ -513,9 +522,10 @@ public class DrugSummaryPage extends UhcDriver {
 		waitForPageLoadSafari();
 		validateNew(drugTitle);
 		validateNew(drugPricingDeductText);
-		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+		vdrugPricingDeductText();
+		//String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
 //		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
-		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
+		//Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
 		validateNew(drugClose);
 		jsClickNew(drugClose);
 	}
@@ -579,6 +589,9 @@ public class DrugSummaryPage extends UhcDriver {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
+			verifyMAPDPlanToggle();
+            pageloadcomplete();
+            waitForPageLoadSafari();
 			System.out.println("MAPD Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
@@ -590,6 +603,8 @@ public class DrugSummaryPage extends UhcDriver {
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
+            pageloadcomplete();
+            waitForPageLoadSafari();
 			System.out.println("PDP Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
@@ -602,6 +617,8 @@ public class DrugSummaryPage extends UhcDriver {
 			validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
+			pageloadcomplete();
+			waitForPageLoadSafari();
 			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
