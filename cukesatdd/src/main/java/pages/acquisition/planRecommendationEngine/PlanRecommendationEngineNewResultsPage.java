@@ -456,7 +456,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all drugs covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
-			Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+			if(!planName.toUpperCase().contains("PATRIOT"))
+				Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
 			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
