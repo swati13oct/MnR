@@ -214,7 +214,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugSummaryPageMobile verifyDefaultPlanType(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(planTypeHeading);
+		CommonUtility.waitForPageLoadNew(driver, planTypeHeading, 20);
 		if (planTypeHeading.getText().contains(planType)) {
 			return new DrugSummaryPageMobile(driver);
 		}

@@ -1,37 +1,6 @@
 
 package pages.mobile.acquisition.commonpages;
 
-import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
-import static acceptancetests.data.CommonConstants.PLANTYPE.*;
-import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
-import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
-import static org.testng.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -41,11 +10,35 @@ import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
+import static acceptancetests.data.CommonConstants.PLANTYPE.*;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
+import static org.testng.Assert.assertTrue;
 
 /**
  * @author pperugu
@@ -526,9 +519,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	// @FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn
-	// More About Medicare')]")
-	@FindBy(css = "(//a[@role='button'])[4]")
+	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
+//	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
