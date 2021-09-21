@@ -19,203 +19,205 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet2021_fail_TC  | UHC |
 
 
-  @OLEplanBenefitsPDPAARP1 @OLEBenefits @OLEBenefits_PDP_1
+  @OLEplanBenefitsPDPAARP1 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | AARP |
    
-   @OLEplanBenefitsPDPAARP2 @OLEBenefits  @OLEBenefits_PDP
+   @OLEplanBenefitsPDPAARP2 @OLEBenefits  @OLEBenefits_2021_AARP
     Examples:
       | excelPath                	 | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | AARP |
     
-    @OLEplanBenefitsPDPAARP3 @OLEBenefits @OLEBenefits_PDP
+    @OLEplanBenefitsPDPAARP3 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
   
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_3  | AARP |
 
-  @OLEplanBenefitsPDPUHC01 @OLEBenefits @OLEBenefits_PDP
+  @OLEplanBenefitsPDPUHC01 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | UHC |
-  @OLEplanBenefitsUHCPDP02 @OLEBenefits  @OLEBenefits_PDP
+  @OLEplanBenefitsUHCPDP02 @OLEBenefits  @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | UHC |
    
-   @OLEplanBenefitsPDPUHC03 @OLEBenefits @OLEBenefits_PDP
+   @OLEplanBenefitsPDPUHC03 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_3  | UHC |
 
 
-  @OLEplanBenefitsMAAARP1 @OLEBenefits @OLEBenefits_MA
+  @OLEplanBenefitsMAAARP1 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_1  | AARP |
      
-     @OLEplanBenefitsMAAARP2 @OLEBenefits @OLEBenefits_MA
+     @OLEplanBenefitsMAAARP2 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_2  | AARP |
    
-    @OLEplanBenefitsMAAARP3 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP3 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_3  | AARP |
   
-  @OLEplanBenefitsMAAARP4 @OLEBenefits @OLEBenefits_MA
+  @OLEplanBenefitsMAAARP4 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_4  | AARP |
     
-    @OLEplanBenefitsMAAARP5 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP5 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_5  | AARP |
     
-    @OLEplanBenefitsMAAARP6 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP6 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_6  | AARP |
    
-   @OLEplanBenefitsMAAARP7 @OLEBenefits @OLEBenefits_MA
+   @OLEplanBenefitsMAAARP7 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_7  | AARP |
        
-        @OLEplanBenefitsMAAARP8 @OLEBenefits @OLEBenefits_MA
+        @OLEplanBenefitsMAAARP8 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_8  | AARP |
     
-    @OLEplanBenefitsMAAARP9 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP9 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_9  | AARP |
    
-   @OLEplanBenefitsMAAARP10 @OLEBenefits @OLEBenefits_MA
+   @OLEplanBenefitsMAAARP10 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_10  | AARP |
     
-    @OLEplanBenefitsMAAARP11 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP11 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_11 | AARP |
     
-    @OLEplanBenefitsMAAARP12 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAAARP12 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_12 | AARP |
      
-     @OLEplanBenefitsMAAARP13 @OLEBenefits @OLEBenefits_MA
+     @OLEplanBenefitsMAAARP13 @OLEBenefits @OLEBenefits_2021_AARP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_13  | AARP |
 
-  	@OLEplanBenefitsMAUHC1 @OLEBenefits @OLEBenefits_MA
+  @OLEplanBenefitsSNPAARP1 @OLEBenefits @OLEBenefits_2021_AARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_14  | AARP |
+
+  @OLEplanBenefitsSNPAARP2 @OLEBenefits @OLEBenefits_2021_AARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_15  | AARP |
+
+  @OLEplanBenefitsSNPAARP3 @OLEBenefits @OLEBenefits_2021_AARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_16  | AARP |
+
+  @OLEplanBenefitsSNPAARP4 @OLEBenefits @OLEBenefits_2021_AARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_17  | AARP |
+
+
+
+  @OLEplanBenefitsMAUHC1 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_1  | UHC |
      
-  	@OLEplanBenefitsMAUHC2 @OLEBenefits @OLEBenefits_MA
+  	@OLEplanBenefitsMAUHC2 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_2  | UHC |
       
-        	@OLEplanBenefitsMAUHC3 @OLEBenefits @OLEBenefits_MA
+        	@OLEplanBenefitsMAUHC3 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_3  | UHC |
     
-    @OLEplanBenefitsMAUHC4 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAUHC4 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_4  | UHC |
     
-    @OLEplanBenefitsMAUHC5 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAUHC5 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_5  | UHC |
      
-     @OLEplanBenefitsMAUHC6 @OLEBenefits @OLEBenefits_MA
+     @OLEplanBenefitsMAUHC6 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_6  | UHC |
      
-     @OLEplanBenefitsMAUHC7 @OLEBenefits @OLEBenefits_MA
+     @OLEplanBenefitsMAUHC7 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_7  | UHC |
       
-      @OLEplanBenefitsMAUHC8 @OLEBenefits @OLEBenefits_MA
+      @OLEplanBenefitsMAUHC8 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_8  | UHC |
         
-        @OLEplanBenefitsMAUHC9 @OLEBenefits @OLEBenefits_MA
+        @OLEplanBenefitsMAUHC9 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_9  | UHC |
    
-    @OLEplanBenefitsMAUHC10 @OLEBenefits @OLEBenefits_MA
+    @OLEplanBenefitsMAUHC10 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_10  | UHC |
         	
-        	@OLEplanBenefitsMAUHC11 @OLEBenefits @OLEBenefits_MA
+        	@OLEplanBenefitsMAUHC11 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_11 | UHC |
-        	@OLEplanBenefitsMAUHC12 @OLEBenefits @OLEBenefits_MA
+        	@OLEplanBenefitsMAUHC12 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_12 | UHC |
      
-     @OLEplanBenefitsMAUHC13 @OLEBenefits @OLEBenefits_MA
+     @OLEplanBenefitsMAUHC13 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_13  | UHC |
  
-  @OLEplanBenefitsSNPAARP1 @OLEBenefits @OLEBenefits_SNP
-    Examples:
-      | excelPath                | workSheet | site |
-      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_14  | AARP |
-   
-   @OLEplanBenefitsSNPAARP2 @OLEBenefits @OLEBenefits_SNP
-    Examples:
-      | excelPath                | workSheet | site |
-      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_15  | AARP |
-  
-   @OLEplanBenefitsSNPAARP3 @OLEBenefits @OLEBenefits_SNP
-    Examples:
-      | excelPath                | workSheet | site |
-      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_16  | AARP |
-   
-    @OLEplanBenefitsSNPAARP4 @OLEBenefits @OLEBenefits_SNP
-    Examples:
-      | excelPath                | workSheet | site |
-      | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_17  | AARP |
-      
 
-  @OLEplanBenefitsSNPUHC1 @OLEBenefits @OLEBenefits_SNP
+  @OLEplanBenefitsSNPUHC1 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_14  | UHC |
    
-   @OLEplanBenefitsSNPUHC2 @OLEBenefits @OLEBenefits_SNP
+   @OLEplanBenefitsSNPUHC2 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_15  | UHC |
     
-    @OLEplanBenefitsSNPUHC3 @OLEBenefits @OLEBenefits_SNP
+    @OLEplanBenefitsSNPUHC3 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_16  | UHC |
       
-     @OLEplanBenefitsSNPUHC4 @OLEBenefits @OLEBenefits_SNP
+     @OLEplanBenefitsSNPUHC4 @OLEBenefits @OLEBenefits_2021_UHC
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MA_SNP_Sheet_17  | UHC |
