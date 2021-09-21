@@ -999,6 +999,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@And("^user validate druglist in Drug Cost Estimator page$")
 	public void Druglist_DCE() {
 		ACQDrugCostEstimatorPage dceDrugs =  new ACQDrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		dceDrugs.clickDCEAddDrugBtn();
 		dceDrugs.getDruglist();
 	}
 	
@@ -1101,7 +1102,9 @@ public class PlanRecommendationEngineStepDefinition {
 	public void sign_vp(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.SignIn(inputValues.get("User Name"),inputValues.get("Password"));
+		planSelectorResultspage.removeDrugsInVP();
 	}
 	
 	@Then("^user do browser back from current page$")
@@ -1198,6 +1201,12 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"show");
+   	}
+	
+	@And("^user clicks on Medigap Plans Link in PRE Result page$")
+   	public void viewMedigap() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.medigaplink();
    	}
 	
 	@Then("^user navigate to visitor profile without saving MS plan$")

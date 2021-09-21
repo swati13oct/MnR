@@ -881,6 +881,17 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
     		}
 		}
 		
+		public void removeDrugsInVP() {
+			System.out.println("Removing Drugs in VP before processing PRE FLow");
+			int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("&")[0].split("Drugs")[1].trim());
+			for(int i=0; i<drgcount;i++) {
+				Druglist.get(i).findElement(By.cssSelector("button[aria-label*='Remove']")).click();
+				threadsleep(1000);
+				DrugRemove.click();
+				threadsleep(1000);
+			}
+		}
+		
 		public ArrayList<String> drugsCoveredInVPP(int count) {
 			System.out.println("Clicking on Drugs Details in Plan Type: "+count);
 			DrugsList = new ArrayList<String>();
@@ -1609,8 +1620,11 @@ public void verifyPlanNameinOLE() {
 	enrollBtnPlanDetails.click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
+	if(validate(planNameEnrollPage,20))
+		Assert.assertTrue(planNameEnrollPage.getText().trim().contains(PlanName), "PlanName Invalid in OLE");
 	Assert.assertTrue(driver.getCurrentUrl().contains("/welcome"), "OLE page not loaded");
-	planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
+	if(validate(planNameEnrollPageExternal,20))
+		planNameinOLE = planNameEnrollPageExternal.getText().trim().toUpperCase();
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
 	Assert.assertTrue(planNameinOLE.contains(PlanName), "--- Plan name are not matches---");
 }
