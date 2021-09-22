@@ -192,7 +192,7 @@ public class PREBenefitsValidationStepDefinition {
 									checkpopup();
 								}
 								
-								try {
+								//try {
 								PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
 										wd);
 								zip.navigateToCoveragePage(zipcode, countyName);
@@ -214,10 +214,10 @@ public class PREBenefitsValidationStepDefinition {
 											wd);
 									planSelectorResultspage.changePlanyear("current");
 								}
-							} catch (Exception flowerror) {
+							/*} catch (Exception flowerror) {
 								System.out.println("**** Flow Error *** "+flowerror);
 								break; // If any exception in flow then no record in excel
-							}
+							}*/
 
 							int planIndex = resultsPage.findPlan(planName);
 							int planYear = 2021; // Not using now
