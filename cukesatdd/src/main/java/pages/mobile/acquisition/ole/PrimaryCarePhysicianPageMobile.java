@@ -256,7 +256,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						validateNew(filterBtn);
+//						validateNew(filterBtn);
+						CommonUtility.waitForPageLoadNew(driver, filterBtn, 20);
 			
 						if (AssinPCPLinks.size()>0){
 						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
@@ -366,6 +367,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
