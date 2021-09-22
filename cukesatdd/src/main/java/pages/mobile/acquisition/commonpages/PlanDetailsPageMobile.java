@@ -114,7 +114,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
-	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(1) a[dtmname='Plans Detail:Tab:Enroll in Plan']")
+	@FindBy(css = "#highlights > div.align-left.content-secondary > div.ng-scope > div > a")
 	private WebElement EnrollinPlanButtonHeader;
 
 	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(3) a[dtmname='Plans Detail:Tab:Enroll in Plan']")
@@ -1008,7 +1008,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			PharmacyLink = driver.findElement(By.xpath(
 					"//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
 		}
-		//CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
+		// CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(PharmacyLink);
 		String winHandleCurrent = driver.getWindowHandle();
@@ -1123,6 +1123,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
 			CommonUtility.checkPageIsReadyNew(driver);
+			return new VPPPlanSummaryPageMobile(driver);
+
+		}
+		return null;
+	}
+
+	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailPage() {
+		scrollToView(lnkBackToAllPlans);
+		validateNew(lnkBackToAllPlans);
+		jsClickNew(lnkBackToAllPlans);
+
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}

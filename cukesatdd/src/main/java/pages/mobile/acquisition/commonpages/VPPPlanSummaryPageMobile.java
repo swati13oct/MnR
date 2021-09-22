@@ -1578,6 +1578,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void clickCompareChkBox() {
+		
 		WebElement Checkbox = driver.findElement(By
 				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
 
@@ -2521,24 +2522,19 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
-		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
-		/*
-		 * try {
-		 * 
-		 * System.out.println(" The text is "
-		 * +AnnualDeductibleForPlan.getAttribute("textContent").trim());
-		 * System.out.println(" The text from feature file is " +annualDeductible);
-		 * 
-		 * } catch (Exception e) { System.out.println(" The text is"
-		 * +AnnualDeductibleForPlan.getText()); }
-		 */
-		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
-			System.out.println("Annual Deductible for the plan is " + planDeductible);
-			Assertion.assertTrue(true);
-		} else
-			Assertion.fail("Annual Deductible for the plan is incorrect : " + planName);
+		
+		System.out.println("Plan benefit testing is validating actual $$ values hence skipping this as per discussion with Aayush");
+
+//		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+//				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
+//		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
+//		
+		
+//		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
+//			System.out.println("Annual Deductible for the plan is " + planDeductible);
+//			Assertion.assertTrue(true);
+//		} else
+//			Assertion.fail("Annual Deductible for the plan is incorrect : " + planName);
 	}
 
 	/*
@@ -2774,8 +2770,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sleepBySec(3);
 		if (validateNew(medicareGuidePopup)) {
 			System.out.println("Pop up message has been displayed");
-			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
-			closePopUp.click();
+			WebElement closePopUp = driver.findElement(By.xpath("//*[@href='#']"));
+			//closePopUp.click();
+			jsClickNew(closePopUp);
 			CommonUtility.checkPageIsReadyNew(driver);
 			Assertion.assertTrue(true);
 		} else

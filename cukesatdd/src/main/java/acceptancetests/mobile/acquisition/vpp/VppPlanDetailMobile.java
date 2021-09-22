@@ -3787,7 +3787,7 @@ public class VppPlanDetailMobile {
 		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
-		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailPage();
 		if (plansummaryPage != null) {
 			Assertion.assertTrue(true);
 		} else
@@ -3798,6 +3798,7 @@ public class VppPlanDetailMobile {
 	public void user_click_on_compare_checkbox_AARP() {
 		VPPPlanSummaryPageMobile vppplansummarypage = (VPPPlanSummaryPageMobile) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
 		vppplansummarypage.clickCompareChkBox();
 		PlanDetailsPageMobile planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
 		if (planDetailsPage != null) {
