@@ -321,13 +321,13 @@ Feature: ACQ-Plan benefits validation
 
     @2021planDetailsBenefitsPDPAARP01
     Examples: 
-      | excelPath                  | workSheet      | site |
-      | Plan Details Benefits_Data | PDPSheet2021_1 | AARP |
+      | excelPath                       | workSheet      | site |
+      | Plan Details Benefits_Data_2021 | PDPSheet2021_1 | AARP |
 
     @2021planDetailsBenefitsPDPAARP02
     Examples: 
-      | excelPath                  | workSheet      | site |
-      | Plan Details Benefits_Data | PDPSheet2021_2 | AARP |
+      | excelPath                       | workSheet      | site |
+      | Plan Details Benefits_Data_2021 | PDPSheet2021_2 | AARP |
 
   # 2021 UHC
   @PlanDetails_ExcelValidation @2021PlanDetialsUHC
