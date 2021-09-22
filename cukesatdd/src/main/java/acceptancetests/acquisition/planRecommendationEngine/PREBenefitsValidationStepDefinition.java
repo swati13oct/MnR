@@ -181,8 +181,6 @@ public class PREBenefitsValidationStepDefinition {
 
 							// wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
 
-							try {
-
 								if (AEP.equalsIgnoreCase("YES")) {
 									if_offline_prod = aquisitionhomepage.openAEPPRE(siteType, user);
 									aquisitionhomepage.fixPrivateConnection();
@@ -193,7 +191,8 @@ public class PREBenefitsValidationStepDefinition {
 									aquisitionhomepage.fixPrivateConnection();
 									checkpopup();
 								}
-
+								
+								try {
 								PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
 										wd);
 								zip.navigateToCoveragePage(zipcode, countyName);
@@ -216,6 +215,7 @@ public class PREBenefitsValidationStepDefinition {
 									planSelectorResultspage.changePlanyear("current");
 								}
 							} catch (Exception flowerror) {
+								System.out.println("**** Flow Error *** "+flowerror);
 								break; // If any exception in flow then no record in excel
 							}
 
