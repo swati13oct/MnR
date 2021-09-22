@@ -85,6 +85,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
+	
+	@FindBy(css = ".provider-cards")
+	private WebElement savedProviders;	
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -201,10 +204,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 
-	@FindBy(xpath = "//span[text()='Add Doctors']/parent::a")
+	@FindBy(xpath = "//span[text()='Add Doctors & Dentist']/parent::a")
 	private WebElement addDoctorsLink;
 
-	@FindBy(xpath = "//span[text()='Edit Doctors']/parent::a")
+	@FindBy(xpath = "//span[text()='Edit Doctors & Dentist']/parent::a")
 	private WebElement editDoctorsLink;
 
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[1]/th/span")
@@ -965,9 +968,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
+		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);*/
 
+		jsClickNew(editDoctorsLink);
+		
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
@@ -975,13 +980,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1008,14 +1013,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			waitforElement(savedProviders);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
 
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		waitforElement(savedProviders);
+		if (validate(savedProviders)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1406,16 +1411,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return null;
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(css = "#medicareBenefitsSlider")
 	public WebElement medicalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(css = "#medicareBenefitsSlider ~ span[class^='uhc-switch__label']")
 	public WebElement medicalBenefitsOONLabel;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(css = "#additionalBenefitsStartSlider")
 	public WebElement additionalBenefitsOONToggle;
 
-	@FindBy(xpath = "//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy(css = "#additionalBenefitsStartSlider ~ span[class^='uhc-switch__label']")
 	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
@@ -1431,14 +1436,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(medicalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		jsClickNew(medicalBenefitsOONToggle);
 
 		scrollToView(medicalBenefitsOONLabel);
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1450,12 +1455,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		scrollToView(additionalBenefitsOONLabel);
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1478,7 +1483,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		WebElement ele;
 		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
 		for (String index : (TreeSet<String>) mySet.descendingSet()) {
-			if (Integer.parseInt(index) > 3) {
+			if (Integer.parseInt(index) > 2) {
 				jsClickNew(forwardArrow);
 			} else {
 				jsClickNew(backArrow);
@@ -1487,7 +1492,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
 			ele = driver.findElement(
-					By.xpath("//*[@id='printPlans']/th[contains(@ng-repeat,'plan in count')][" + index + "]/div/a"));
+					By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
 			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}

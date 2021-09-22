@@ -77,7 +77,8 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 //	/**

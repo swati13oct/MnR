@@ -13,10 +13,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
-import acceptancetests.data.CommonConstants.PLANTYPE;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
@@ -790,6 +789,27 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		return new MedicareSupplementInsurancePlansPageMobile(driver);
 
 	}
+	
+	/**
+	 * Click learn about medicare nav link.
+	 * 
+	 * Can use explicit select methods below.
+	 *
+	 * @param navLink the nav link
+	 */
+	public void clickLearnAboutMedicareNavLink(String navLink) {
+		LEARNABOUTMEDICARE_INTRODUCTION introductionEnum = LEARNABOUTMEDICARE_INTRODUCTION.getIntroductionEnumFor(navLink);
+		LEARNABOUTMEDICARE_TYPESOFPLANS typesOfPlansEnum = LEARNABOUTMEDICARE_TYPESOFPLANS.getTypesOfPlansEnumFor(navLink);
+		LEARNABOUTMEDICARE_MEDICAREENROLLMENT medicareEnrollmentEnum = LEARNABOUTMEDICARE_MEDICAREENROLLMENT.getMedicareEnrollmentEnumFor(navLink);
+		
+		if(introductionEnum != null) {
+			selectIntroductionToMedicareOption(introductionEnum);
+		} else if (typesOfPlansEnum != null) {
+			selectTypesOfPlansOption(typesOfPlansEnum);
+		} else {
+			selectMedicareEnrollmentOption(medicareEnrollmentEnum);
+		}
+	}
 
 	/**
 	 * Select options from Learn About Medicare, Introduction to Medicare and More
@@ -829,7 +849,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	/**
-	 * Select options from Learn About Medicare, Types of Plans.
+	 * Select options from Learn About Medicare, Types of Plans and FAQ.
 	 *
 	 * @param planType the plan type
 	 */
@@ -855,23 +875,6 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		case SNP:
 			jsClickNew(specialNeedsPlansLink);
 			break;
-		default:
-			throw new IllegalArgumentException(planType.name() + " is not available under 'Types of Plan' menu.");
-		}
-	}
-
-	/**
-	 * Select options from Learn About Medicare, Types of Plans -> FAQ menu.
-	 *
-	 * @param faqOption the faq option
-	 */
-	public void selectFAQOption(LEARNABOUTMEDICARE_TYPESOFPLANS faqOption) {
-		if (!typesOfPlansBackButton.isDisplayed()) {
-			jsClickNew(typesOfPlansButton);
-			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
-		}
-
-		switch (faqOption) {
 		case MEDICAREFAQ:
 			jsClickNew(medicareFAQLink);
 			break;
@@ -879,7 +882,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 			jsClickNew(glossaryLink);
 			break;
 		default:
-			throw new IllegalArgumentException(faqOption.name() + " is not available under 'FAQ' menu.");
+			throw new IllegalArgumentException(planType.name() + " is not available under 'Types of Plan' menu.");
 		}
 	}
 

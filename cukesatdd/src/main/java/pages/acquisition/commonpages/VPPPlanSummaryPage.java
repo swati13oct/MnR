@@ -594,7 +594,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//button[@id='currentYearPlans']")
+	@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
@@ -741,7 +741,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
-	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide To AARP Medicare Select and Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
 	// @FindBy(xpath =
@@ -878,7 +878,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Add Doctors & Dentist ')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
@@ -1036,8 +1036,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
+	
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
+	private WebElement findPlansOnShopForPlans;
 
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
@@ -1139,7 +1142,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup(); DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1147,7 +1150,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 
 			jsClickNew(maPlansViewLink);
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup(); DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			// sleepBySec(2);
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
@@ -1166,7 +1169,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
-			handlePlanYearSelectionPopup();
+//			handlePlanYearSelectionPopup();  DO NOT USE THIS as we have a separate step created for plan year selection  - Aayush 9/1
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -2536,7 +2539,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Prescription Drugs')])"));
+                        + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -3193,6 +3196,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			driver.navigate().refresh();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(5);
+			waitForPageLoadSafari();
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
@@ -3200,6 +3204,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
 		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+		if (planType.equalsIgnoreCase("pdp")) {
+			appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and contains(@dlassetid,'lnk-1')]" + savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
@@ -3322,6 +3329,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
 				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 				+ savedPlanImgXpath;
+		if(planType.equals("PDP")) {
+			appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and contains(@dlassetid,'lnk-1')]"
+					+ savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		expMatch = 1;
@@ -3390,6 +3402,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
 						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 						+ savedPlanImgXpath;
+				if(planType.equals("PDP")) {
+					savedPlanIconXpath = "//*[contains(text(),'" + plan
+							+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')and contains(@dlassetid,'lnk-1')]"
+							+ savedPlanImgXpath;
+					
+				}
 				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
 				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
 				expMatch = 1;
@@ -3870,13 +3888,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(CurrentYearPlansBtn, 20)) {
-				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
-				jsClickNew(CurrentYearPlansBtn);
-				CommonUtility.checkPageIsReadyNew(driver);
-				waitForPageLoadSafari();
+			if (validate(currentYearSelection, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
+				jsClickNew(currentYearSelection);
+				
+			}
+		}else {
+			if(validate(nextYearSelection,20)) {
+				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
+				jsClickNew(nextYearSelection);
 			}
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 	}
 
 	// public void handlePlanYearSelectionPopup(String planType) {
@@ -4104,6 +4128,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		scrollToView(shoppingCartIcon);
 		waitforElement(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
@@ -5207,7 +5232,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "]/div/div[contains(@class,'provider-info')]"));
 				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
 
-				Assertion.assertEquals(provider[i], providerInfoTxt);
+				Assertion.assertTrue(providerInfoTxt.contains(provider[i]));
 				System.out.println("#########" + providerInfoTxt + "#########");
 				/*
 				 * Assertion.assertEquals(provider[i],
@@ -7177,6 +7202,20 @@ public String GetMonthlyPremiumValue() {
 
 		return Plannames;
 		
+	}
+	
+	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
+		findPlansOnShopForPlans.click();
+
+		if (ismultiCounty.contains("YES") && validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
 	}
 
 }

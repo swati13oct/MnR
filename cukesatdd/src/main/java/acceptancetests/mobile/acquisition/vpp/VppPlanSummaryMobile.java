@@ -24,6 +24,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -642,8 +643,9 @@ public class VppPlanSummaryMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			String savedProvider = providerSearchPage.selectsProvider();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -683,7 +685,8 @@ public class VppPlanSummaryMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyproviderName(planName);
+		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
+		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
 
 	@Given("^user is on blue layer landing page$")
@@ -1474,5 +1477,12 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNBAModalNotDisplayed();
+	}
+	
+	@When("^user removes provider from plan card$")
+	public void user_removes_provider_from_plan_card() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeProvidersFromPlanCard();
 	}
 }

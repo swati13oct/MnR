@@ -339,10 +339,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 	}
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
-		boolean flag = true; int counter =0;
+		boolean flag = false; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-
+		
 		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
 			columnName = columnName.replace(" Zero", "");
 		for(String key : benefitsMap.keySet()) {
@@ -362,11 +362,17 @@ public class AepPlanDetailsPage extends UhcDriver {
 			if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
 				key = key.replace(":","");
 			
+			if(key.contains("monthly premium")) {
+				key = key.replace("\n", "").replaceAll("footnote1", "").replaceAll("footnote", "");
+			}
+			
 			if(key.endsWith("1"))
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
 			else if(key.endsWith("2"))
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
-			
+			else if(key.contains("fitness")) {
+				key = key.replace("\n", "").replaceAll("footnote", "");
+			}
 			
 			//removing all the footnote words from the UI string and the superscripts
 			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
@@ -385,6 +391,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
 					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
 					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinnewwindow", "");
 				}
 
 				if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {
@@ -397,6 +404,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			//if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
 			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A"))) {
 				counter++;
+				flag = true;
 				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
 					if(key.contains(columnName)) { 
@@ -412,7 +420,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						flag= false;
 						tmpUIString2 = tmpUIString1;
 						 break;
-					}
+				}
 			
 			}else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					
@@ -489,7 +497,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				}
 			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Routine Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
 				
-				counter++;
+				
 				if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
 					if(benefitValueUI.contains("footnote1"))
 						benefitValueUI = benefitValueUI.replace("footnote1", "");
@@ -501,10 +509,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
-
 				benefitValue = benefitValue.replace("-opensinnewwindow", "");
 					if(key.equalsIgnoreCase(columnName)) {
-						
+						counter++;
 						benefitValueUI = benefitValueUI.replace("/", "");
 						
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {

@@ -940,6 +940,13 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateYourDrugs();
 	}
 
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+	public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validate100DayInYourDrugs();
+	}
+
 	@Then("^the user validates Monthly Drug Costs by Stage Section$")
 	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Section() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
@@ -1457,6 +1464,18 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user Clicks View Drug Pricing for the given plan$")
 	public void user_clicks_ViewDrugPricing_given_plan(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
+	@Then("^the user Clicks View Drug Pricing for the given plan and plantype$")
+	public void user_clicks_ViewDrugPricing_given_plan_and_plantype(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
@@ -3206,6 +3225,5 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
 	}
-
 
 }

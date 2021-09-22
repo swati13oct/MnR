@@ -1268,4 +1268,45 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(DrugPricing_CloseBtn);
 	}
 
+	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath(
+				"//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+coveredDrug+"')]//ancestor::li//following-sibling::li[contains(@class,'d-block')][contains(text(), '$')]"));
+		String DrugCost = DrugYouPay.getText();
+		int beginIndex = DrugCost.indexOf("$");
+		int endIndex = DrugCost.indexOf("(");
+		String currentDrugYouPay = DrugCost.substring(beginIndex, endIndex).trim();
+		System.out.println("Displayed Covered Drug - " + coveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Covered Drug -" + coveredDrug + " You Pay : $0");
+
+		if (validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
+	}
+
+	public void validateLISBuyDown_NotCoveredDrugCost(String notCoveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath(
+				"//*[contains(@class, 'uhc-modal__content')]//*[contains(text(), '"+notCoveredDrug+"')]//ancestor::li//following-sibling::li[contains(@class,'d-block')][contains(text(), '$')]"));
+		String DrugCost = DrugYouPay.getText();
+		int beginIndex = DrugCost.indexOf("$");
+		int endIndex = DrugCost.indexOf("(");
+		String currentDrugYouPay = DrugCost.substring(beginIndex, endIndex).trim();
+		System.out.println("Displayed Not Covered Drug - " + notCoveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Not Covered Drug - " + notCoveredDrug + " You Pay : Not $0");
+
+		if (validateNew(DrugYouPay) && !currentDrugYouPay.contains("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated Non $0 You Pay for Not Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
+	}
+
+	public void closeDrugPricingModal() {
+		validateNew(DrugPricing_CloseBtn);
+		jsClickNew(DrugPricing_CloseBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+	}
+	
 }
