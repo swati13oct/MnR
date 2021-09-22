@@ -143,8 +143,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -4348,8 +4350,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -4644,8 +4648,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
