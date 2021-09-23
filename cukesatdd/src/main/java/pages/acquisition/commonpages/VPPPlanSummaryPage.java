@@ -2541,7 +2541,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				System.out.println("\n2============="+planType+ "==========\n");
 //				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Prescription Drugs')])"));
-				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				 drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
