@@ -462,7 +462,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		String curID = String.valueOf(Thread.currentThread().getId());
 		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
-			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() );
+			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("h4")).getText().trim().toUpperCase() );
 		}
 		System.out.println("Current Thread ID is - "+curID+" Drugs in PRE flow "+drugNames);
 		CommonConstants.PRE_Drugs.put(curID, drugNames);
