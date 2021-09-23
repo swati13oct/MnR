@@ -3579,7 +3579,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("Saved Plans modal not displayed");
 		}
-		waitforElement(shoppingCartIcon);
+//		waitforElement(shoppingCartIcon);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		validateNew(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		// guestProfileLink.click();
 		// jsClickNew(guestProfileLink);
