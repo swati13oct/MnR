@@ -283,8 +283,9 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public void getDruglist(){
+		String curID = String.valueOf(Thread.currentThread().getId());
 		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
-		druglistPRE = drugPRE.drugnamesList();
+		druglistPRE = CommonConstants.PRE_Drugs.get(curID);
 		threadsleep(5000);
 		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
