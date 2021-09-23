@@ -389,6 +389,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(), '100-day supply at a 90-day')]")
 	public WebElement _100DaysSupplyHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
+	public WebElement LIS_Extrahelp;
 
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -1592,10 +1595,17 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
-
+	
+	public void verifyLIS_Extrahelp() {
+		if (LIS_Extrahelp.getText().contains("$0 or $99") || LIS_Extrahelp.getText().contains("$0 or $92")) 
+			System.out.println(LIS_Extrahelp.getText());
+		else 
+			Assert.fail("LIS Deductible message is not displayed");
+	}
+     
 	public void validateLISonly_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(NonLIS_CopayHeader) && validateNew(LIS_CopayHeader)
-				&& validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert)) {
+				&& validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert) && validateNew(LIS_Extrahelp)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS Non BuyDown Plan - Alert and LIS copay Section *****");
 			System.out.println("***** Copay section LIS and  NonLIS message for Covered Drugs text for LIS Non Buydown Plan *****");
@@ -1605,6 +1615,10 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println(LIS_Deductible.getText());
 			System.out.println("***** Page level Alert Displayed for LIS Non Buydown Plans *****");
 			System.out.println(LIS_Alert.getText());
+			System.out.println("***** LIS plan Extra help message *****");
+			System.out.println(LIS_Extrahelp.getText());
+			verifyLIS_Extrahelp();
+			
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");

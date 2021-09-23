@@ -388,6 +388,13 @@ public class PlanDetailsPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	public PlanDetailsPage(String skip, WebDriver driver) { // this constructor was created to bypass the openAndValidate method for doclog testing
+		super(driver);
+		PageFactory.initElements(driver, this);
+		
+	}
+	
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
 		super(driver);
