@@ -2540,7 +2540,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(text(),'Prescription Drugs')])"));
+                        + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -5233,7 +5233,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "]/div/div[contains(@class,'provider-info')]"));
 				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
 
-				Assertion.assertEquals(provider[i], providerInfoTxt);
+				Assertion.assertTrue(providerInfoTxt.contains(provider[i]));
 				System.out.println("#########" + providerInfoTxt + "#########");
 				/*
 				 * Assertion.assertEquals(provider[i],

@@ -54,12 +54,12 @@ public class AepPlanComparePage extends UhcDriver {
     }
 
     public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
-        boolean flag = true;
+        boolean flag = false;
         int counter = 0;
         String tmpUIString1 = "", tmpUIString2 = "", benefitValueUI = "";
         HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
         for (String key : benefitsMap.keySet()) {
-            benefitValueUI = benefitsMap.get(key);
+            benefitValueUI = benefitsMap.get(key).toLowerCase();
             tmpUIString1 = benefitValueUI;
             key = key.toLowerCase();
             key = key.replace(":", "");
@@ -68,16 +68,16 @@ public class AepPlanComparePage extends UhcDriver {
 //			if(columnName.contains("tier"))
 //				System.out.println();
 
-            benefitValue = benefitValue.trim();
+            benefitValue = benefitValue.trim().toLowerCase();
 
-            if (benefitValue.contains("NA") || benefitValue.contains("N/A")) {
+            if (benefitValue.equalsIgnoreCase("NA") || benefitValue.equalsIgnoreCase("N/A")) {
                 counter++;
                 if (!key.trim().equals(columnName.trim())) {
                     flag = true;
                     continue;
                 }
 
-                if ((key.trim().equals(columnName.trim())) && benefitValueUI.contains("N/A")) {
+                if ((key.trim().equals(columnName.trim())) && benefitValueUI.equalsIgnoreCase("N/A")) {
                     flag = true;
                     break;
                 }
@@ -110,6 +110,12 @@ public class AepPlanComparePage extends UhcDriver {
                     if (benefitValueUI.endsWith(".") && !benefitValue.endsWith("."))
                         benefitValueUI = StringUtils.trimTrailingCharacter(benefitValueUI, '.');
 
+                }
+                if(key.equalsIgnoreCase("Routine Dental")||key.equalsIgnoreCase("Routine DentalOON")) {
+					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
+					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinnewwindow", "");
                 }
                 benefitValueUI = benefitValueUI.trim();
                 benefitValue = benefitValue.trim();
