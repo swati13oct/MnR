@@ -363,19 +363,18 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		
-		scrollToView(Providericon);
-		validate(Providericon);
+		validateNew(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
-		
-		pageloadcomplete();
+
+		CommonUtility.checkPageIsReadyNew(driver);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
@@ -420,14 +419,15 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
-		validate(Facilityicon);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
-		
-		pageloadcomplete();
+
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
 		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();
