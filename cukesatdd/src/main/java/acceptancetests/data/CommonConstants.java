@@ -1002,9 +1002,11 @@ public class CommonConstants {
 	public static void setSelectedState(String State) {
 		SELECTED_STATE.set(State);
 	}
-	
-	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
-	
+
+	//Commented PAY_BY_MAIL_TEXT content is available on stage, but not on offline prod env. Will need later.
+//	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
 	
 	public static String SOCIAL_SECURITY_TEXT = "We will bill you directly until the Social Security Administration or Railroad Retirement Board approves the deduction. It could take up to 90 days after the approval for the first deduction to occur, so please continue to make payments. If the Social Security Administration or Railroad Retirement Board does not approve your request for automatic deduction, we will notify you and continue to send a paper bill for your monthly premiums.";
