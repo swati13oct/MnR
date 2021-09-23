@@ -1,4 +1,3 @@
-
 package atdd.framework;
 
 import java.text.DecimalFormat;
@@ -1083,7 +1082,15 @@ public abstract class UhcDriver {
 	public WebElement IPerceptionPopuNoBtn;
 
 	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
-
+		String environment = MRScenario.environment.toLowerCase();
+		switch (environment) {
+			case "offline" :
+				timeoutInSec = timeoutInSec > 20 ? 20 : timeoutInSec;
+				break;
+			case "prod" :
+				timeoutInSec = timeoutInSec > 30 ? 30 : timeoutInSec;
+				break;
+		}
 		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
 		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
 
@@ -1753,4 +1760,3 @@ public abstract class UhcDriver {
 	}
 
 }
-
