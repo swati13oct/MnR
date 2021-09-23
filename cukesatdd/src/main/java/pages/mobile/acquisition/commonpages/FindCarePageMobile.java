@@ -300,7 +300,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
 		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();

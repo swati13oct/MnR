@@ -1096,6 +1096,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			scrollToView(addProviderBanner);
 			waitforElement(addProviderBanner);
 		} else {
