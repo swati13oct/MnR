@@ -986,6 +986,7 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
+		checkpopup();
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 	

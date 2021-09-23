@@ -426,6 +426,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Enroll in plan')]")
 	private WebElement enrollBtnPlanDetails;
 	
+	@FindBy(xpath = "//span[contains(text(),'Enroll in plan')]")
+	private WebElement enrollBtnLPPlanDetails;
+	
 	@FindBy(css = "button#enrollment-next-button")
 	private WebElement nxtBtnOLEPage;
 	
@@ -1616,8 +1619,10 @@ public void verifyPlanNameinOLE() {
 	String PlanName= planNameVPPDetailsPage.getText().trim().split("\n")[0].toUpperCase();
 	System.out.println("Plan Name in Plan Details Page: "+PlanName);
 	String planNameinOLE = "";
-	scrollToView(enrollBtnPlanDetails);
-	enrollBtnPlanDetails.click();
+	if(validate(enrollBtnPlanDetails,20))
+		enrollBtnPlanDetails.click();
+	if(validate(enrollBtnLPPlanDetails,20))
+		enrollBtnLPPlanDetails.click();
 	pageloadcomplete();
 	System.out.println(driver.getCurrentUrl());
 	if(validate(planNameEnrollPage,20))
