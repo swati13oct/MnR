@@ -113,6 +113,16 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2022_2 |
 
+   @2022planCompareProd01
+    Examples: 
+      | workSheet    |
+      | ProdSheet2022_1 |
+
+     @2022planCompareProd02
+    Examples: 
+      | workSheet    |
+      | ProdSheet2022_2 |
+      
   @2022_UHC @current_year
   Scenario Outline: 2022 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
@@ -215,6 +225,16 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2022_2 |
 
+    @2022planCompareProd01
+    Examples: 
+      | workSheet    |
+      | ProdSheet2022_1 |
+
+     @2022planCompareProd02
+    Examples: 
+      | workSheet    |
+      | ProdSheet2022_2 |
+      
   @2021_AARP @next_year @2021CompareAARP
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
