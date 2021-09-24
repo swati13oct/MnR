@@ -404,7 +404,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
 	private WebElement FinishButton;
 
-	public VPPPlanSummaryPageMobile selectsHospitals() {
+	public String selectsHospitals() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
 
@@ -417,20 +417,28 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
 		jsClickNew(Hospitals);
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+
+		scrollToView(selectProviderBtn);
+
+		WebElement hospitalNameLink = selectProviderBtn.findElement(By.xpath("./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
+		String hospitalSaved = hospitalNameLink.getText().trim();
+		System.out.println("Selecting Hospital : " + hospitalSaved);
+		MRConstants.PROV_NAME = hospitalSaved;
+
 
 		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption)) {
+		if (validate(selectLocationOption, 10)) {
 			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
 		}
-		validateNew(providerNameText);
-		String providerSaved = providerNameText.getText().trim();
-		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
+		/*validateNew(providerNameText);
+		String hospitalSaved = providerNameText.getText().trim();
+		System.out.println("Hospital Name is : " + hospitalSaved);
+		MRConstants.PROV_NAME = hospitalSaved;*/
 
 		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
@@ -457,7 +465,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
-		return new VPPPlanSummaryPageMobile(driver);
+		validateNew(vppFirstPlanCard);
+//		return new VPPPlanSummaryPageMobile(driver);
+		return hospitalSaved;
 	}
 
 	public void entersZipcodeAndSelectPlanName(String zipcode, String planName, String year) {

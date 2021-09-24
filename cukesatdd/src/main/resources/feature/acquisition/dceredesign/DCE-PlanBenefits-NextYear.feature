@@ -218,14 +218,14 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
   @dce_PlanBenefits_BuyDown_PartialDSNP @NextYearPlanBenefits
     Examples:
-      | drug1  | drug2   | zipCode | county       | planType | planName                                                 | site | premium     |
-      | Fanapt | Lipitor | 72943   | Yell County  | SNP      | UnitedHealthcare Dual Complete Choice Select (PPO D-SNP) | AARP | $0 - $26.70 |
-      | Fanapt | Lipitor | 84415   | Weber County | SNP      | UnitedHealthcare Dual Complete Select (PPO D-SNP)        | UHC  | $0 - $38    |
-      | Fanapt | Lipitor | 35578   | Winston County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)        | UHC  | $0 - $31.50    |
-      | Fanapt | Lipitor | 19975   | Sussex County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)        | UHC  | $0 - $37    |
-      | Fanapt | Lipitor | 17408   | York County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)        | UHC  | $0 - $40.70    |
-      | Fanapt | Lipitor | 31796   | Worth County | SNP      | UnitedHealthcare Dual Complete Choice Select LP (PPO D-SNP) | UHC  | $0 - $32.40    |
-      | Fanapt | Lipitor | 99350   | Yakima County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)        | UHC  | $0 - $40.50    |
+      | drug1  | drug2   | zipCode | county         | planType | planName                                                    | site | premium     |
+      | Fanapt | Lipitor | 72943   | Yell County    | SNP      | UnitedHealthcare Dual Complete Choice Select (PPO D-SNP)    | AARP | $0 - $26.70 |
+      | Fanapt | Lipitor | 84415   | Weber County   | SNP      | UnitedHealthcare Dual Complete Select (PPO D-SNP)           | UHC  | $0 - $38    |
+      | Fanapt | Lipitor | 35578   | Winston County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $31.50 |
+      | Fanapt | Lipitor | 19975   | Sussex County  | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $37    |
+      | Fanapt | Lipitor | 17408   | York County    | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $40.70 |
+      | Fanapt | Lipitor | 31796   | Worth County   | SNP      | UnitedHealthcare Dual Complete Choice Select LP (PPO D-SNP) | UHC  | $0 - $32.40 |
+      | Fanapt | Lipitor | 99350   | Yakima County  | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $40.50 |
 
 
   @dce_PlanBenefits_DefinedStandard
@@ -268,10 +268,10 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
   @dce_PlanBenefits_DefinedStandard_NextYear @NextYearPlanBenefits
     Examples:
       | drug1  | drug2   | zipCode | county             | planType | planName                                              | site | premium     | lisCopayGeneric                                  | lisCopayOthar                                    | nonLisCopay30days | nonLisCopay100days | deductible | deductibleFlag |
-      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
 
   Scenario Outline: To verify DCE REDESIGN page <site> site - Plan Benefits for Standard network plans - MAPD and SNP
     #Given the user is on AARP medicare acquisition site landing page

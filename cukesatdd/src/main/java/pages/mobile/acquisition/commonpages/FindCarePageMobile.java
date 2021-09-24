@@ -225,9 +225,14 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("In find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
-		PeopleButton.click();
+
+		jsClickNew(MedicalDirectory);
+		waitforElement(PeopleButton);
+
+		jsClickNew(PeopleButton);
 		waitforElement(Whoareyoulookingfor);
-		MedicalGroupsButton.click();
+
+		jsClickNew(MedicalGroupsButton);
 		waitforElement(ResultsHeader);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("selected Provder Name is : " + HospName);
@@ -235,8 +240,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			
 		jsClickNew(selectProviderBtn);
 		if(validate(addressCheckBox)){
-			addressCheckBox.click();
-			addressSaveButton.click();
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
@@ -257,12 +262,12 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			//ParentWindow = driver.getTitle();
-			CheckProviderCoverageButton.click();
+			jsClickNew(CheckProviderCoverageButton);
 		}	
 		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 			//ParentWindow = driver.getTitle();
-			FinishButton.click();
+			jsClickNew(FinishButton);
 		}else
 			System.out.println("Issue with Xpath");
 	
@@ -279,6 +284,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("In find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
+		jsClickNew(MedicalDirectory);
+		waitforElement(PlacesButton);
 		jsClickNew(PlacesButton);
 		waitforElement(Whichtypeofplace);
 		jsClickNew(ClinicsButton);
@@ -358,8 +365,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		jsClickNew(FirstHospitalRecord);
 		CommonUtility.checkPageIsReadyNew(driver);
 		
-		scrollToView(Providericon);
-		validate(Providericon);
+		validateNew(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		
@@ -367,7 +373,9 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
-		
+
+
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
@@ -413,13 +421,15 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
-		validate(Facilityicon);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
-		
+
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
 		scrollToView(GreatHeaderText);
@@ -467,8 +477,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 	@Override
 	public void openAndValidate() {
 
-		//CommonUtility.waitForPageLoadNew(driver, FindCareLink, 30);
-		validateNew(FindUrgentCareLink);
+		CommonUtility.waitForPageLoadNew(driver, LocationLink, 30);
+		validateNew(LocationLink);
 
 	}
 

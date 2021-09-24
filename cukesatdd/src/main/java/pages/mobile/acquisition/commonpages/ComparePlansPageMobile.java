@@ -80,14 +80,23 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "#adddrug")
 	public WebElement addDrug;
 
-	@FindBy(xpath = "//span[text()='Find Care']")
+//	@FindBy(xpath = "//span[text()='Find Care']")
+	@FindBy(css = "a[data-ui-element-name='Find Care']")
 	public WebElement FindCareLink;
+
+	@FindBy(xpath = "//*[@class='location']")
+	public WebElement LocationLink;
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
 
 	@FindBy(css = ".provider-cards")
 	private WebElement savedProviders;
+
+
+	@FindBy(css = "button[class^='toggle']")
+	private WebElement rallyHamburgerMenu;
+
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -975,7 +984,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		 * editDoctorsLink);
 		 */
 
-		jsClickNew(editDoctorsLink);
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
@@ -989,8 +997,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(savedProviders);
-		if (validate(savedProviders)) {
+		jsClickNew(rallyHamburgerMenu);
+		waitforElement(FindCareLink);
+
+		jsClickNew(FindCareLink);
+
+		if (validate(LocationLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1014,7 +1026,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		switchToNewTabNew(editHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
-			System.out.println("We are on Find Care winodow opened");
+			System.out.println("We are on Find Care window opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(savedProviders);
@@ -1022,9 +1034,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
+		jsClickNew(rallyHamburgerMenu);
+		waitforElement(FindCareLink);
 
-		waitforElement(savedProviders);
-		if (validate(savedProviders)) {
+		jsClickNew(FindCareLink);
+
+		if (validate(LocationLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1052,8 +1067,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			scrollToView(addProviderBanner);
-			waitforElement(addProviderBanner);
+			CommonUtility.waitForPageLoadNew(driver, addProviderBanner, 30);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
@@ -1087,6 +1101,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			scrollToView(addProviderBanner);
 			waitforElement(addProviderBanner);
 		} else {

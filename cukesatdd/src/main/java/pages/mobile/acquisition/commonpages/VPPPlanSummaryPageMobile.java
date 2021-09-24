@@ -115,10 +115,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]/div/span[3]")
 	private WebElement showMaPlans;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']//span[@class='title']/span")
+	@FindBy(xpath = "//span[@id='maviewplans']/preceding-sibling::span[@class='title']/span")
 	private WebElement maPlansNumber;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
+	@FindBy(xpath = "//a[contains(@dtmname,'SNP:View Plans')]/preceding-sibling::span[@class='title']/span")
 	private WebElement snpPlansNumber;
 
 //	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
@@ -146,7 +146,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "a[dtmname$='MS:View Plans']")
 	private WebElement msPlansViewLink;
 
-	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
+	@FindBy(xpath = "//span[@id='pdpviewplans']/preceding-sibling::span[@class='title']/span")
 	private WebElement pdpPlansNumber;
 
 //	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
@@ -1179,9 +1179,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// if (driver.getCurrentUrl().contains(expectedUrl)) {
 		if (validate(backToPlanResults)) {
 			jsClickNew(backToPlanResults);
-			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		// }
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		switch (planType) {
 		case "ma":

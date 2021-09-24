@@ -1,5 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -274,7 +275,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
 	public WebElement headerRegisterLink;
 
-	@FindBy(id = "aarpSVGLogo")
+	@FindBy(css = "#aarpSVGLogo")
 	public WebElement AARPlogo;
 
 	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
@@ -437,10 +438,10 @@ public class GlobalWebElements extends UhcDriver {
 			jsClickNew(pharmacySearchLink);
 			break;
 		case SEARCHDOCTORS:
-			jsClickNew(searchDoctorsLink);
+			switchToNewTabNew(searchDoctorsLink);
 			break;
 		case SEARCHDENTISTS:
-			jsClickNew(searchDentistsLink);
+			switchToNewTabNew(searchDentistsLink);
 			break;
 		default:
 			throw new IllegalArgumentException("Invalid tool - " + tool.name());
@@ -510,7 +511,9 @@ public class GlobalWebElements extends UhcDriver {
 		default:
 			throw new IllegalArgumentException(option + " is not avaliable under More tab");
 		}
-		
+
+
+
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
@@ -522,6 +525,9 @@ public class GlobalWebElements extends UhcDriver {
 	 * @return the acquisition home page mobile
 	 */
 	public AcquisitionHomePageMobile openHomeFromMenu() {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 		jsClickNew(MenuMobile);
 		sleepBySec(2);
 		validateNew(mobileNav, 5);
@@ -539,6 +545,10 @@ public class GlobalWebElements extends UhcDriver {
 	 * 
 	 */
 	public void openSiteSearchFromMenu() {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
 		jsClickNew(MenuMobile);
 		
 		//validateNew(mobileNav, 5);
@@ -555,7 +565,12 @@ public class GlobalWebElements extends UhcDriver {
 	 * refer the methods in ShopForPlanNavigationPageMobile
 	 */
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
-		CommonUtility.checkPageIsReadyNew(driver);
+
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
+
 		jsClickNew(MenuMobile);
 
 		sleepBySec(5);
@@ -577,6 +592,10 @@ public class GlobalWebElements extends UhcDriver {
 	 * refer the methods in LearnAboutMedicareHomePageMobile
 	 */
 	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+
 		jsClickNew(MenuMobile);
 		sleepBySec(5);
 		//validateNew(mobileNav, 5);
