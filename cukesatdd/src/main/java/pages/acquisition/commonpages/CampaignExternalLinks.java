@@ -892,15 +892,15 @@ public class CampaignExternalLinks extends UhcDriver {
 	//	validateNew(locateZipcodeLink);
 		validateNew(tfnHeader);
 		
-		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
-		String actualTfnNo = TFNelement.getText();
-		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
-			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
-		else
-			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
+		//WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		//String actualTfnNo = TFNelement.getText();
+		//if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
+		//	System.out.println("TFN is Displayed on Page : " + actualTfnNo);
+		//else
+			//Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
-		System.out.println(tfnHeader.getText());
-		System.out.print(TFNelement.getText());
+		//System.out.println(tfnHeader.getText());
+		//System.out.print(TFNelement.getText());
 
 		validateNew(accessibilitylink);
 		validateNew(footerInfo);
