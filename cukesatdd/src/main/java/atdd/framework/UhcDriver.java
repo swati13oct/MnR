@@ -1084,7 +1084,7 @@ public abstract class UhcDriver {
 
 	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
 
-		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
+		//CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
 		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
 
 		try {
@@ -1092,10 +1092,11 @@ public abstract class UhcDriver {
 				// driver.switchTo().frame(IPerceptionsFrame);
 				IPerceptionPopuNoBtn.click();
 				// driver.switchTo().defaultContent();
+				System.out.println("IPerceptions Popup  found");
 			}
 		} catch (Exception e) {
-			System.out.println("IPerceptionsPopup not found");
-			try {
+			System.out.println("IPerceptions Popup not found");
+			/*try {
 				if (IPerceptionsFrame.isDisplayed()) {
 					System.out.println("IPerceptionsFrame found");
 					driver.switchTo().frame(IPerceptionsFrame);
@@ -1104,7 +1105,7 @@ public abstract class UhcDriver {
 				}
 			} catch (Exception e1) {
 				System.out.println("Iperceptions not found");
-			}
+			}*/
 		}
 	}
 
