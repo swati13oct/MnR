@@ -223,7 +223,7 @@ public class WelcomePage extends UhcDriver{
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
-		
+		CheckiPerseptions();
 		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
