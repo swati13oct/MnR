@@ -26,9 +26,18 @@ public class FindCarePage extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Find Care']")
 	public WebElement FindCareLink;
+	
+	@FindBy(xpath = "//*[@id='routerView']/content-hopper/div[1]/div[2]/div/div/ul/li[1]/guided-search-link/button/div[2]/div[1]")
+	public WebElement medicaldirectory;
+	
+	@FindBy(xpath = "//h2[text()='What type of ']")
+	public WebElement medicalcare;
 
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
+	
+	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]")
+	private WebElement MedicalDirectory;
 
 	@FindBy(xpath = "//*[@class='location']")
 	public WebElement LocationLink;
@@ -134,6 +143,7 @@ public class FindCarePage extends UhcDriver {
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
+		
 		PlacesButton.click();
 		waitforElement(Whichtypeofplace);
 		HospitalsButton.click();
@@ -197,10 +207,15 @@ public class FindCarePage extends UhcDriver {
 public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		
 		String ParentWindow = null;
-		System.out.println("In find care page");
-		validate(LocationLink);
+	
+		jsClickNew(FindCareLink);
+		waitforElement(ChangeLocationButton);		
 		validate(ChangeLocationButton);
-		jsClickNew(PeopleButton);
+		System.out.println("In find care page");
+		jsClickNew(medicaldirectory);
+		waitforElement(medicalcare);
+	
+		jsClickNew(PeopleButton); 
 		waitforElement(Whoareyoulookingfor);
 		jsClickNew(MedicalGroupsButton);
 		waitforElementNew(ResultsHeader, 20);
@@ -257,6 +272,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 	System.out.println("in find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PeopleButton);
 	waitforElement(Whoareyoulookingfor);
 	jsClickNew(PrimaryCareButton);
@@ -316,6 +332,7 @@ public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	System.out.println("In find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PlacesButton);
 	waitforElement(Whichtypeofplace);
 	jsClickNew(ClinicsButton);
@@ -375,6 +392,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 	System.out.println("in find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
+	MedicalDirectory.click();
 	jsClickNew(PlacesButton);
 	CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
 	jsClickNew(HospitalsButton);
