@@ -207,7 +207,7 @@ public class ReviewSubmitPage extends UhcDriver{
 //	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
 	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
-	
+
 	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number') or contains(text(), 'Home Phone Number')]//following-sibling::*")
 	private WebElement PrimaryPhoneNo;
 	
@@ -217,7 +217,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
 	private WebElement EmailConfirmationNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
 	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -529,6 +529,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
 				}
 				flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
+
 				flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
@@ -595,6 +596,7 @@ public class ReviewSubmitPage extends UhcDriver{
 					}
 					else flag = false;
 				}else flag = false;
+
 				if(validate(SubmitApplicationBtn)){
 					if(SubmitApplicationBtn.isEnabled()){
 						//flag = (!flag)?false:true;
@@ -709,6 +711,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	}
 	catch (Exception e){
 				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
+
 			}
 		*/	
 		
