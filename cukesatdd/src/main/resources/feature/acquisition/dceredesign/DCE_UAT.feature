@@ -56,11 +56,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
-    Then the user validates default view for Plan Effective Date
-    Then the user validates Change effective date Dropdown
-    Then the user validates Change effective date modal and display after changing effective date
-    Then the user validates Reset effective date
-    Then the user validate no bar is displayed for November and December
+#    Then the user validates default view for Plan Effective Date
+#    Then the user validates Change effective date Dropdown
+#    Then the user validates Change effective date modal and display after changing effective date
+#    Then the user validates Reset effective date
+#    Then the user validate no bar is displayed for November and December
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user verifies the drug information on prescription drug tab
       | DrugName | <drug2> |
@@ -334,11 +334,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
     Then the user validates Important information section
-    Then the user validates default view for Plan Effective Date
-    Then the user validates Change effective date Dropdown
-    Then the user validates Change effective date modal and display after changing effective date
-    Then the user validates Reset effective date
-    Then the user validate no bar is displayed for November and December
+#    Then the user validates default view for Plan Effective Date
+#    Then the user validates Change effective date Dropdown
+#    Then the user validates Change effective date modal and display after changing effective date
+#    Then the user validates Reset effective date
+#    Then the user validate no bar is displayed for November and December
     Then the user Captures Drug costs on Drug Details Page
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then the user closes the Drug Info Modal on Plan Compare page
