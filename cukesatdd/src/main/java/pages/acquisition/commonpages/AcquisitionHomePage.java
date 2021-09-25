@@ -6426,7 +6426,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
 		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
-		//System.out.println(
 		if (ExpectedCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
 				.equalsIgnoreCase(ActualCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
 
