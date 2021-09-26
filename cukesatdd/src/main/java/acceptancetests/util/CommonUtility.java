@@ -443,32 +443,32 @@ public class CommonUtility {
 	 * @return
 	 */
 	public static boolean checkPageIsReadyNew(WebDriver driver) {
-//		try {
-//			JavascriptExecutor js = (JavascriptExecutor) driver;
-//
-//			for (int counter = 0; counter <= 30; counter++) {
-//				if (js.executeScript("return document.readyState").toString().equals("complete")) {
-//					System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
-//					return true;
-//				}
-//				try {
-//					System.out.println(counter + " of 23 tries - wait 5 sec for document.readyState=complete... ");
-//					Thread.sleep(5000);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			Assertion.fail("TimeOut!!! Page not loaded");
-//		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
-//			Alert alert = driver.switchTo().alert();
-//			System.out.println("Alert text=" + alert.getText());
-//			if (alert.getText().contains("an error while processing your information")) {
-//				Assertion.assertTrue("***** Got Alert message: " + alert.getText(), false);
-//			}
-//		} catch (WebDriverException e) {
-//			Assertion.assertTrue("PROBLEM - got webdriver exception: " + e, false);
-//			return false;
-//		}
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			for (int counter = 0; counter <= 30; counter++) {
+				if (js.executeScript("return document.readyState").toString().equals("complete")) {
+					System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
+					return true;
+				}
+				try {
+					System.out.println(counter + " of 23 tries - wait 5 sec for document.readyState=complete... ");
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			Assertion.fail("TimeOut!!! Page not loaded");
+		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text=" + alert.getText());
+			if (alert.getText().contains("an error while processing your information")) {
+				Assertion.assertTrue("***** Got Alert message: " + alert.getText(), false);
+			}
+		} catch (WebDriverException e) {
+			Assertion.assertTrue("PROBLEM - got webdriver exception: " + e, false);
+			return false;
+		}
 		return false;
 	}
 	
