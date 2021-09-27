@@ -12,10 +12,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user validates the Step Header as follows
       | Flags | <DrugListPage_NoDrugs> |
+    Then the user validates Drug Recommendation section
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drugForRecommendation> |
+    #Then the user searches and adds the following Drug to Drug List
+    # | DrugName | <drugForRecommendation> |
     Then the user selects the following drug recommendation and validates Drug Search page is displayed and add drug
       | SelectDrugRecommendation | <selectDrugRecommendation> |
     Then the user validates Drug Recommendation section
