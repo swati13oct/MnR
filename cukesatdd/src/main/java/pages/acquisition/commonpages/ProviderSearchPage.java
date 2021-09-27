@@ -340,13 +340,15 @@ public class ProviderSearchPage extends UhcDriver {
 		continueButton.click();
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				currentYrTile.click();
+				//currentYrTile.click();
+				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
 			if (validate(nextYrTile))
-				nextYrTile.click();
+				//nextYrTile.click();
+			jsClickNew(nextYrTile);
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
 		validateNew(planNameToBeSelected);
