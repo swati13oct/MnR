@@ -48,6 +48,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'popup-modal active')]")
 	private WebElement countyModal;
+	
 
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
@@ -70,6 +71,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan_PlanDetails;
 	
+	@FindBy(xpath = "(//*[contains(@class,'favorite-plans-container')]//*[contains(@class,'unliked')])[1]")
+	private WebElement Saveaplan;
 	
 	String sheetName = "";
 	int rowIndex;
@@ -704,6 +707,17 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 
 	}
+	
+/*	public void SaveaPlan() throws InterruptedException{
+		//CommonUtility.waitForPageLoad(driver, countyModal, 10);
+		//Thread.sleep(5000);
+		
+			validateNew(Saveaplan);
+			scrollToView(Saveaplan);
+			Saveaplan.isEnabled();
+		}
+	
+	}*/
 
 	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
 		Thread.sleep(5000);
@@ -723,6 +737,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
+			validateNew(Saveaplan);
+			System.out.println("Save a Plan is enabled on Plan summary page : " +Saveaplan.isDisplayed());
 			jsClickNew(enrollForPlan);
 			validateNew(welcomePageHeader,60);
 
@@ -933,6 +949,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					}
 
 				if (enrollInPlan != null) {
+					validateNew(Saveaplan);
+					System.out.println("Save a Plan is enabled on Plan details page : " +Saveaplan.isDisplayed());
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 					validateNew(welcomePageHeader,60);

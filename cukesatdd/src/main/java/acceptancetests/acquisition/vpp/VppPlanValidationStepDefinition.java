@@ -753,7 +753,7 @@ public class VppPlanValidationStepDefinition {
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
 									if (planType.equalsIgnoreCase("PDP")) {
 										result = true;
-										planSummaryPage.selectCounty(countyName);
+										planSummaryPage.selectCounty(countyName);										
 										planSummaryPage.Enroll_OLE_Plan(planName, planType);
 										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										} else {
