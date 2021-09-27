@@ -1090,7 +1090,7 @@ public abstract class UhcDriver {
 			case "prod" :
 				timeoutInSec = timeoutInSec > 30 ? 30 : timeoutInSec;
 				break;
-
+		}
 		//CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
 		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
 
