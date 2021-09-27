@@ -3042,6 +3042,13 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateCoveragestagePopUpText();
 	}
 
+	@Then("the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year")
+	public void the_user_validates_the_text_for_coverage_stages_modal_popups_for_NonLIS_NextYear() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateCoveragestagePopUpTextNextYear();
+	}
+
 
 	@Then("the user validates Copay Section for LIS for defined standard plan for following")
 	public void the_user_validates_copay_section_for_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {

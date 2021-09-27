@@ -1061,4 +1061,22 @@ public class MedicareEducationStepDefinition {
 
 
     }
+
+    @Then("^the user validate the state selected is correct$")
+    public void the_user_validate_the_state_selected_is_correct(DataTable givenAttributes) {
+        AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+                .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String geoState = memberAttributesMap.get("GeoState");
+        String stateSelected= aquisitionhomepage.getSelectedState();
+
+        if (!geoState.equalsIgnoreCase(stateSelected)){
+            Assert.fail("State selected is not correct: "+stateSelected);
+        }
+        else {
+            System.out.println("State selected is correct: "+ stateSelected);
+            getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+        }
+    }
 }

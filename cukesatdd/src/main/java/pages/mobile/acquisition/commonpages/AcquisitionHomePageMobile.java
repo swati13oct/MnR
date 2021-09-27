@@ -519,10 +519,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement UHCICSubTiltle;
 
 	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
-	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
+	@FindBy(xpath = "(//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')])[2]")
 	private WebElement learnAboutMedicareHomeScreen;
 
-	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
+	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[5]")
 	private WebElement learnMoreMMCHomeScreen;
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
@@ -5096,4 +5096,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Email Button is not working fine"+"\nExpected: "+pageTitle+"\nWhole HREF: "+href);
 		}
 	}
+
+	public String getSelectedState() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		scrollToView(stateDropDown);
+		Select dropdown = new Select(stateDropDown);
+		String stateSelected=dropdown.getFirstSelectedOption().getText();
+		System.out.println("State Selected:" + stateSelected);
+		return stateSelected;
+	}
+
+
 }
