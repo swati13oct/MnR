@@ -1,3 +1,4 @@
+@NewMedEdPages
 Feature:Medicare Education Pages flows for New Pages
 
   Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
@@ -6,6 +7,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Medicare Eligibility page
     Then the user comes back to new Medicare Education Page from Medicare Eligibility Page
     Then the user navigates to new Coverage Choices page
@@ -55,6 +58,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Medicare Eligibility page
     Then the user validates inner links on new Medicare Eligibility Page
     Then the user validates Learn more about enrolling in Medicare link on Eligibility Page
@@ -87,6 +92,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to Initial Enrollment Period page
     Then the user validates inner links on new Initial Enrollment Period Page
     Then the user gather information through video
@@ -120,6 +127,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Coverage Choices page
     Then the user validates inner links on new Coverage Choices Page
     Then the user check plans link on new Coverage Choices Page
@@ -151,6 +160,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Benefits page
     Then the user validates inner links on new Benefits Page
     Then the user clicks on DCE link on new Medicare Education Page
@@ -183,6 +194,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Cost Basics page
     Then the user validates inner links on new Cost Basics Page
     Then the user gather information through video
@@ -222,6 +235,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Medicare Advantage Plans page
     Then the user gather information through video
     Then the user validates Get more information about Special Needs Plans link on Medicare Advantage Plans Page
@@ -254,6 +269,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Medicare Supplement Plans page
     Then the user clicks on Shop Now button on new Medicare Supplement Plans page
     Then the user validates Learn more about costs associated with Medicare supplement plans link on Medicare Supplement Plans page
@@ -283,6 +300,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Medicare Prescription Drugs Plans page
     Then the user validates Medicare Advantage Plans link on new Medicare Prescription Drugs Plans page
     Then the user gather information through video
@@ -313,6 +332,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Special Needs Plans page
     Then the user validates Learn more about Dual Special Needs coverage on Special Needs Plans Page
     Then the user validate ZipCode Components on the page using ZipCode "36117"
@@ -341,6 +362,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Enrollment page
     Then the user validates inner links on new Enrollment Page
     Then the user validates the Initial Enrollment Period links on new Enrollment page
@@ -377,6 +400,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Original Medicare page
     Then the user validates the Learn more about getting prescription drug coverage link on new Original Medicare page
     Then the user validates the Learn how to get coverage for dental, vision and other benefits with Medicare link on new Original Medicare page
@@ -408,6 +433,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Overview of Plan Types page
     Then the user validates all the plans links on new Overview of Plan Types page
     Then the user validate ZipCode Components on the page using ZipCode "36117"
@@ -436,6 +463,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Working Past 65 page
     Then the user validates the Learn about my Initial Enrollment Period & Medicare choices link on new Working Past 65 page
     Then the user validates the Find your Special Enrollment Period dates link on new Working Past 65 page
@@ -466,6 +495,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Enrollment page
     Then the user validates the Learn how to change Medicare plans link on new Enrollment page
     Then the user validates inner links on new How to Enroll Page
@@ -497,6 +528,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to new Enrollment page
     Then the user validates the Learn how to change Medicare plans link on new Enrollment page
     Then the user validates Changing Plan link on new How to Enroll Page
@@ -529,6 +562,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to following sub page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -563,6 +598,8 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     Then the user navigates to new Medicare Education homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to following sub page
       | PageName | <pageName> |
       | PagePath | <path>     |
