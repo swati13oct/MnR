@@ -8,6 +8,8 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to Prescriptions, Providers and Benefits page
     Then user check inner page links on the Medicare Education page
       | PageName | <pageName> |
@@ -43,9 +45,9 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
-    Then the user navigates to Medicare Eligibility page
-    Then the user select state for geotargeting from dropdown
+    Then the user validate the state selected is correct
       | GeoState | <geoState> |
+    Then the user navigates to Medicare Eligibility page
     Then user check inner page links on the Medicare Education page
       | PageName | <pageName> |
     Then the user gather medicare info through video
@@ -79,6 +81,8 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user clicks on Coverage Choices link
     Then user check inner page links on the Medicare Education page
       | PageName | <pageName> |
@@ -112,6 +116,8 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to Medicare Cost Basic page
     Then user check inner page links on the Medicare Education page
       | PageName | <pageName> |
@@ -144,6 +150,8 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to plan information page
       | planType | <plantype> |
     Then user click on see plan in your area link
@@ -184,6 +192,8 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
     When the user navigates to Medicare Education Page from homepage
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user navigates to Enrollment Basics Page
     Then the user check Social Security link on Enrollment Basic Page
     Then the user click on see all plan link on Enrollment Basic Page
