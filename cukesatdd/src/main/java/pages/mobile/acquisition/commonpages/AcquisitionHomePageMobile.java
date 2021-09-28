@@ -520,7 +520,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
 	private WebElement learnAboutMedicareHomeScreen;
 
-	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[4]")
+	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[5]")
 	private WebElement learnMoreMMCHomeScreen;
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
