@@ -1,7 +1,7 @@
 @PlanDetails_PlanDocumentsAARP
 Feature: test Plan Documents PDFs on Plan Deatils Page
 
-  @PlanDocs_ExcelValidation @pdfDocLogAARP
+  @PlanDocs_ExcelValidation2021 @pdfDocLogAARP
   Scenario Outline: Verify specific PDF Plan Documents in Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user picks each example from excel to validate Plan Document PDFs and reports into excel
       | ExcelFile     | <excelPath> |
