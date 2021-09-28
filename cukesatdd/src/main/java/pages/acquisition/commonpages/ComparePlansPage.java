@@ -204,10 +204,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"your-doctors-table\"]/tbody/tr[4]/th/span")
 	private WebElement FirstProviderName;
 	
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/th[1]/span")
 	private WebElement FirstProviderNameAfterAddition;
 	
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/th[1]/span")
 	private WebElement SecondProviderName;
 
 	@FindBy(linkText = "View Locations")
