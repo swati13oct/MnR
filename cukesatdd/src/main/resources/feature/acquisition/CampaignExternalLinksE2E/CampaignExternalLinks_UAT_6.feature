@@ -363,7 +363,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then user closes current tab and navigate to previous tab
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
     Then the user validate aarp medicare plans11 page external link in lower env
-      | Zip Code | <zipcode> |
+      | Zip Code | <zipcode1> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
