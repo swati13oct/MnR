@@ -31,16 +31,16 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(@class,'emailsummary')])[1]")
 	protected WebElement summary_maEmailOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='printsummary']")
+	@FindBy(xpath = "//div[contains(@class,'content-col-wrapper')]//*[contains(@ng-click,'printPlanSummary')]")
 	protected WebElement summary_pdpPrintOption;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//div[contains(@class,'content-col-wrapper')]//*[contains(@ng-click,'emailPlanSummary')]")
 	protected WebElement summary_pdpEmailOption;
 
-	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Print Saved Plan List')]")
+	@FindBy(xpath = "//div[contains(@class,'content-col-wrapper')]//*[contains(@ng-click,'printPlanSummary')]")
 	protected WebElement summary_snpPrintOption;
 
-	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
+	@FindBy(xpath = "//div[contains(@class,'content-col-wrapper')]//*[contains(@ng-click,'emailPlanSummary')]")
 	protected WebElement summary_snpEmailOption;
 
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
