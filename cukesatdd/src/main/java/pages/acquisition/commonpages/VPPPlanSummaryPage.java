@@ -2574,6 +2574,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
 		planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
+		
 		System.out.println("\n\n======="+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
