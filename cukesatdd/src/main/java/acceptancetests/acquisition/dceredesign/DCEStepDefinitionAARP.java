@@ -1471,6 +1471,18 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		String planName = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
+		drugSummaryPage.ClickviewDrugPricingModal(planName);
+	}
+
+	@Then("^the user Clicks View Drug Pricing for the given plan and plantype$")
+	public void user_clicks_ViewDrugPricing_given_plan_and_plantype(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
 		drugSummaryPage.clickPlanToggle(planType);
 		drugSummaryPage.ClickviewDrugPricingModal(planName);
 	}
@@ -3028,6 +3040,13 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateCoveragestagePopUpText();
+	}
+
+	@Then("the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year")
+	public void the_user_validates_the_text_for_coverage_stages_modal_popups_for_NonLIS_NextYear() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateCoveragestagePopUpTextNextYear();
 	}
 
 

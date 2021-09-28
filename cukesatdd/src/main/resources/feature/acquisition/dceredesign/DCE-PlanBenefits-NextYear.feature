@@ -65,7 +65,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinFlag_MailCopay> |
       | Insulin Drug | <InsulinDrug>           |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
 
   @dce_PlanBenefits_Standard_NextYear @NextYearPlanBenefits
     Examples:
@@ -77,6 +77,14 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | Preferred Medicare Assist Plan 1 (HMO D-SNP)      | UHC  | $0 - $34 | $0         | $0         | 25%        | 25%        | 25%        |                   | Tier 1, Tier 2: $0;Tier 3, Tier 4, Tier 5: $480 | true           | $0     | $0     | 25%    | 25%    | N/A    |                       |
       | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 80002   | Adams County      | SNP      | UnitedHealthcare Assisted Living Plan (PPO I-SNP) | UHC  | $39.80   | $2         | $12        | $47        | $100       | 29%        | $35               | Tier 1, Tier 2, Tier 3: $0;Tier 4, Tier 5: $200 | true           | $6     | $36    | $141   | $300   | N/A    | $105                  |
       | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP)     | UHC  | $0       | $0         | $0         | $15        | $45        | 33%        | $15               | All Tiers: $0                                   | false          | $0     | $0     | $45    | $135   | N/A    | $45                   |
+
+  @dce_PlanBenefits_Standard_NextYearPDP @NextYearPlanBenefits
+    Examples:
+      | drug1     | drug2                | drug3      | drug4  | drug5      | InsulinDrug | zipCode | county            | planType | planName                        | site | premium | standardT1 | standardT2 | standardT3 | standardT4 | standardT5 | insulinFlag_Copay | deductible      | deductibleFlag | mailT1 | mailT2 | mailT3 | mailT4 | mailT5 | insulinFlag_MailCopay |
+      | meloxicam | diclofenac potassium | febuxostat | Fanapt | vigabatrin | Humalog     | 96799   | Western District  | PDP      | AARP MedicareRx Preferred (PDP) | UHC  | $61.50  | $1         | $10        | $45        | 42%        | 25%        |                   | All Tiers: $480 | true           | $3     | $30    | $135   | 42%    | N/A    |                       |
+      | meloxicam | diclofenac potassium | febuxostat | Fanapt | vigabatrin | Humalog     | 96931   | Guam              | PDP      | AARP MedicareRx Preferred (PDP) | UHC  | $45.50  | $1         | $14        | $47        | 40%        | 25%        |                   | All Tiers: $480 | true           | $3     | $42    | $141   | 40%    | N/A    |                       |
+#      | meloxicam | diclofenac potassium | febuxostat | Fanapt | vigabatrin | Humalog     | 96950   | Saipan Municipality | PDP      | AARP MedicareRx Preferred (PDP) | UHC  | $0       | $0         | $0         | $15        | $45        | 33%        |                   | All Tiers: $480 | false          | $0     | $0     | $45    | $135   | N/A    |                    |
+      | meloxicam | diclofenac potassium | febuxostat | Fanapt | vigabatrin | Humalog     | 00802   | St. Thomas Island | PDP      | AARP MedicareRx Preferred (PDP) | UHC  | $80.30  | $1         | $18        | $44        | 44%        | 25%        |                   | All Tiers: $480 | false          | $3     | $54    | $132   | 44%    | N/A    |                       |
 
 
   @dce_PlanBenefits_Preferred
@@ -115,7 +123,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | Deductible | <deductible> |
     Then the user validates the deductible stage modal text for plans having deductible as follows
       | DeductibleFlag | <deductibleFlag> |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     Then the user validates Tier 1 Copay in copay section and in Your Drugs section
       | TierCopay | <preferredT1> |
     Then the user validates Tier 2 Copay in copay section and in Your Drugs section
@@ -204,9 +212,21 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
   @dce_PlanBenefits_BuyDown_NextYear @NextYearPlanBenefits
     Examples:
-      | drug1  | drug2   | zipCode | county          | planType | planName                                          | site | premium |
-      | Fanapt | Lipitor | 75002   | Collin County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)        | AARP | $0      |
-      | Fanapt | Lipitor | 10001   | New York County | SNP      | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | UHC  | $0      |
+      | drug1  | drug2   | zipCode | county          | planType | planName                                          | site | premium     |
+      | Fanapt | Lipitor | 75002   | Collin County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)        | AARP | $0 - $25.10 |
+      | Fanapt | Lipitor | 10001   | New York County | SNP      | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | UHC  | $0          |
+
+  @dce_PlanBenefits_BuyDown_PartialDSNP @NextYearPlanBenefits
+    Examples:
+      | drug1  | drug2   | zipCode | county         | planType | planName                                                    | site | premium     |
+      | Fanapt | Lipitor | 72943   | Yell County    | SNP      | UnitedHealthcare Dual Complete Choice Select (PPO D-SNP)    | AARP | $0 - $26.70 |
+      | Fanapt | Lipitor | 84415   | Weber County   | SNP      | UnitedHealthcare Dual Complete Select (PPO D-SNP)           | UHC  | $0 - $38    |
+      | Fanapt | Lipitor | 35578   | Winston County | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $31.50 |
+      | Fanapt | Lipitor | 19975   | Sussex County  | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $37    |
+      | Fanapt | Lipitor | 17408   | York County    | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $40.70 |
+      | Fanapt | Lipitor | 31796   | Worth County   | SNP      | UnitedHealthcare Dual Complete Choice Select LP (PPO D-SNP) | UHC  | $0 - $32.40 |
+      | Fanapt | Lipitor | 99350   | Yakima County  | SNP      | UnitedHealthcare Dual Complete Select (HMO D-SNP)           | UHC  | $0 - $40.50 |
+
 
   @dce_PlanBenefits_DefinedStandard
   Scenario Outline: To verify DCE Details Page <site> site - for LIS Non Buydown - Defined Standard Plans
@@ -239,7 +259,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | NonLIScopay | <nonLisCopay30days> |
     Then the user validates Copay Section for non-LIS for defined standard plan for following
       | NonLIScopay | <nonLisCopay100days> |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     Then the user validates deductible as follows for Defined Standard plans
       | Deductible | <deductible> |
     Then the user validates the deductible stage modal text for plans having deductible as follows
@@ -248,8 +268,83 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
   @dce_PlanBenefits_DefinedStandard_NextYear @NextYearPlanBenefits
     Examples:
       | drug1  | drug2   | zipCode | county             | planType | planName                                              | site | premium     | lisCopayGeneric                                  | lisCopayOthar                                    | nonLisCopay30days | nonLisCopay100days | deductible | deductibleFlag |
-      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.30, $3.70 copay, or 15% of the total cost | $0, $4.00, $9.20 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+
+  Scenario Outline: To verify DCE REDESIGN page <site> site - Plan Benefits for Standard network plans - MAPD and SNP
+    #Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug5> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <InsulinDrug> |
+    Then the user validates all added drugs in DrugList
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county for Multi county as follows
+      | ZipCode | <zipCode> |
+      | County  | <county>  |
+    And user clicks on continue button in Zip Entry Page
+    And user should verify the Extra help on SNP plan type
+    And the user Clicks View Drug Pricing for the given plan
+      | Plan Name | <planName> |
+    And user should verify the drug extra qualification in drug pricing popup
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user validates following expected Premium on DCE Details Page
+      | Premium | <premium> |
+    Then the user validates Tier 1 Copay in copay section and in Your Drugs section
+      | TierCopay | <standardT1> |
+    Then the user validates Tier 2 Copay in copay section and in Your Drugs section
+      | TierCopay | <standardT2> |
+    Then the user validates Tier 3 Copay in copay section and in Your Drugs section
+      | TierCopay | <standardT3> |
+    Then the user validates Tier 4 Copay in copay section and in Your Drugs section
+      | TierCopay | <standardT4> |
+    Then the user validates Tier 5 Copay in copay section and in Your Drugs section
+      | TierCopay | <standardT5> |
+    Then the user validates the deductible as follows
+      | Deductible | <deductible> |
+    Then the user validates the deductible stage modal text for plans having deductible as follows
+      | DeductibleFlag | <deductibleFlag> |
+    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+      | InsulinCopay | <insulinFlag_Copay> |
+      | Insulin Drug | <InsulinDrug>       |
+    And user clicks on change pharmacy link from details page
+    Then the user selects Mail Pharmacy and returns to DCE Details page
+    Then the user validates Tier 1 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT1> |
+    Then the user validates Tier 2 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT2> |
+    Then the user validates Tier 3 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT3> |
+    Then the user validates Tier 4 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT4> |
+    Then the user validates Tier 5 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT5> |
+    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+      | InsulinCopay | <insulinFlag_MailCopay> |
+      | Insulin Drug | <InsulinDrug>           |
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
+
+  @dce_PlanBenefits_DefinedStandardSplitTierLIS_NextYear @NextYearPlanBenefits
+    Examples:
+      | drug1     | drug2                | drug3      | drug4         | drug5      | InsulinDrug | zipCode | county            | planType | planName                                     | site | premium     | standardT1 | standardT2 | standardT3 | standardT4 | standardT5 | insulinFlag_Copay | deductible                                      | deductibleFlag | mailT1 | mailT2 | mailT3 | mailT4 | mailT5 | insulinFlag_MailCopay |
+      | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | Preferred Medicare Assist Plan 1 (HMO D-SNP) | AARP | $0 - $34    | $0         | $0         | 25%        | 25%        | 25%        |                   | Tier 1, Tier 2: $0;Tier 3, Tier 4, Tier 5: $480 | false          | $0     | $0     | 25%    | 25%    | N/A    |                       |
+      | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | MedicareMax Plus 1 (HMO D-SNP)               | AARP | $0 - $34.30 | $0         | $0         | 25%        | 25%        | 25%        |                   | Tier 1, Tier 2: $0;Tier 3, Tier 4, Tier 5: $480 | false          | $0     | $0     | 25%    | 25%    | N/A    |                       |
 

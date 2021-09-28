@@ -127,7 +127,8 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCostsTab;
 
 	// Right Rail Element - TFN
-	@FindBy(xpath = "//*[@class='tel ng-binding']")
+//	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	// @FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
@@ -388,6 +389,13 @@ public class PlanDetailsPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	public PlanDetailsPage(String skip, WebDriver driver) { // this constructor was created to bypass the openAndValidate method for doclog testing
+		super(driver);
+		PageFactory.initElements(driver, this);
+		
+	}
+	
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
 		super(driver);
