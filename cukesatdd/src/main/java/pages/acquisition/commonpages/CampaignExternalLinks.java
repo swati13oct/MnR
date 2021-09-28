@@ -531,7 +531,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (CurrentRailURL.contains("=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
 			CheckiPerseptions();
-			return new AcquisitionHomePage(driver);
+			return new AcquisitionHomePage(driver,true);
 		}
 		return null;
 		/*
@@ -1014,7 +1014,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (CurrentRailURL.contains("/plan-recommendation-engine.html")) {
 			System.out.println("****************PRE Page is displayed***************" + CurrentRailURL);
 			checkModelPopup(driver, 10);
-			return new AcquisitionHomePage(driver);
+			return new AcquisitionHomePage(driver,"PRE");
 		}
 		return null;
 	}
