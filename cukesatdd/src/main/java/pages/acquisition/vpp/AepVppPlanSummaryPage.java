@@ -957,6 +957,60 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				}
 		return flag;
 		}
+    
+    
+	public HashMap<String,Boolean> updatedEnroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
+    	HashMap<String,Boolean> resultMap = new HashMap<String,Boolean>();
+    	boolean enrollBtnflag = true;
+    	boolean saveBtnflag = true;
+
+    		System.out.println("Enroll in Plan for Plan : " + planName);
+
+				WebElement enrollInPlan = null;
+					try {
+						
+				if(planType.equalsIgnoreCase("MA")) {
+
+					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					scrollToView(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
+				}
+				if(planType.equalsIgnoreCase("SNP")){
+					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					scrollToView(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
+				}
+				}catch(Exception e){
+				System.out.println("This plan does not have enroll button");
+				enrollBtnflag = false;
+					}
+
+				if (enrollInPlan != null) {
+					saveBtnflag=validateSavePlanButton();
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+					validateNew(welcomePageHeader,60);
+				}
+				resultMap.put("EnrollBtnDisplayed", enrollBtnflag);
+				resultMap.put("SaveBtnDisplayed", saveBtnflag);
+		return resultMap;
+		}
+
+    public boolean validateSavePlanButton() throws InterruptedException {
+    	boolean savePlanFlag = true;
+
+    		System.out.println("Validating save plan button");
+    		if(Saveaplan.isDisplayed()) {
+    			System.out.println("Save plan button is displayed");
+    		}
+    		else {
+    			savePlanFlag = false;
+    			System.out.println("Save plan button is NOT displayed");
+    		}
+		
+    	return savePlanFlag;
+		}
+
 	}
 
 	
