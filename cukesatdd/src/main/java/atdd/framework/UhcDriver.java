@@ -1092,7 +1092,7 @@ public abstract class UhcDriver {
 				timeoutInSec = timeoutInSec > 30 ? 30 : timeoutInSec;
 				break;
 		}
-		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
+		//CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
 		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
 
 		try {
@@ -1102,8 +1102,8 @@ public abstract class UhcDriver {
 				// driver.switchTo().defaultContent();
 			}
 		} catch (Exception e) {
-			System.out.println("IPerceptionsPopup not found");
-			try {
+			System.out.println("IPerceptions Popup not found");
+			/*try {
 				if (IPerceptionsFrame.isDisplayed()) {
 					System.out.println("IPerceptionsFrame found");
 					driver.switchTo().frame(IPerceptionsFrame);
@@ -1112,7 +1112,7 @@ public abstract class UhcDriver {
 				}
 			} catch (Exception e1) {
 				System.out.println("Iperceptions not found");
-			}
+			}*/
 		}
 	}
 
@@ -1759,6 +1759,7 @@ public abstract class UhcDriver {
 		Map<String, Object> removePDFCmd = ImmutableMap.of("command","rm","args", removePDFArgs);
 		mobileDriver.executeScript("mobile: shell", removePDFCmd);
 	}
+
 
 }
 
