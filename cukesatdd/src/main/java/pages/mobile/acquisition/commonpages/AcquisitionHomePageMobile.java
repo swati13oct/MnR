@@ -5083,4 +5083,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
 		return telTFNLink.getText().trim();
 	}
+
+	public String getSelectedState() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		scrollToView(stateDropDown);
+		Select dropdown = new Select(stateDropDown);
+		String stateSelected=dropdown.getFirstSelectedOption().getText();
+		System.out.println("State Selected:" + stateSelected);
+		return stateSelected;
+	}
 }
