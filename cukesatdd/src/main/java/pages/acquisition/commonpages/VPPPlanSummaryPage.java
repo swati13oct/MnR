@@ -197,7 +197,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	// Right Rail Element - TFN
-	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
+	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id = "backToPlanSummaryTop")

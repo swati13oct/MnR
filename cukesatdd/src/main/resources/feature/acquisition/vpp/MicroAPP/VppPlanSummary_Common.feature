@@ -52,15 +52,15 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-   # Then the user validates below plan benefit values for the above selected plan
-   #  | Monthly Premium            | <monthlyPremium>         |
-   #   | Primary Care Physician     | <primaryCarePhysician>   |
-   #   | Specialist                 | <specialist>             |
-   #   | Referral Required          | <referralRequired>       |
-   #   | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-   #   | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-   #   | Plan Type                  | <plantype>               |
-   #   | Annual Deductible          | <annualDeductible>       |
+    Then the user validates below plan benefit values for the above selected plan
+      | Monthly Premium            | <monthlyPremium>         |
+      | Primary Care Physician     | <primaryCarePhysician>   |
+      | Specialist                 | <specialist>             |
+      | Referral Required          | <referralRequired>       |
+      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+      | Plan Type                  | <plantype>               |
+      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -99,7 +99,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | planyear |
       | 00001 |   90210 | UHC  | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              | [blank]          | current  |
 
-    @regressionAARP @nextYear 
+    @regressionAARP @nextYear
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                  | planyear |
       | 00001 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $0                 | $2  copay              |                                   | future   |

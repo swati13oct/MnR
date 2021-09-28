@@ -65,7 +65,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinFlag_MailCopay> |
       | Insulin Drug | <InsulinDrug>           |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
 
   @dce_PlanBenefits_Standard_NextYear @NextYearPlanBenefits
     Examples:
@@ -123,7 +123,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | Deductible | <deductible> |
     Then the user validates the deductible stage modal text for plans having deductible as follows
       | DeductibleFlag | <deductibleFlag> |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     Then the user validates Tier 1 Copay in copay section and in Your Drugs section
       | TierCopay | <preferredT1> |
     Then the user validates Tier 2 Copay in copay section and in Your Drugs section
@@ -259,7 +259,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | NonLIScopay | <nonLisCopay30days> |
     Then the user validates Copay Section for non-LIS for defined standard plan for following
       | NonLIScopay | <nonLisCopay100days> |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     Then the user validates deductible as follows for Defined Standard plans
       | Deductible | <deductible> |
     Then the user validates the deductible stage modal text for plans having deductible as follows
@@ -268,10 +268,10 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
   @dce_PlanBenefits_DefinedStandard_NextYear @NextYearPlanBenefits
     Examples:
       | drug1  | drug2   | zipCode | county             | planType | planName                                              | site | premium     | lisCopayGeneric                                  | lisCopayOthar                                    | nonLisCopay30days | nonLisCopay100days | deductible | deductibleFlag |
-      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
-      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.35, $3.95 copay, or 15% of the total cost | $0, $4.00, $9.85 copay, or 15% of the total cost | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | $0 - $32.70 | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | $0 - $3.70  | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 08502   | Somerset County    | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | UHC  | $0          | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
+      | Fanapt | Lipitor | 33111   | Miami-Dade County  | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)        | AARP | $34.30      | $0, $1.35, $3.95 copay, or 15% coinsurance | $0, $4.00, $9.85 copay, or 15% coinsurance | 25% of the cost   | 25% of the cost    | $480       | true           |
 
   Scenario Outline: To verify DCE REDESIGN page <site> site - Plan Benefits for Standard network plans - MAPD and SNP
     #Given the user is on AARP medicare acquisition site landing page
@@ -340,7 +340,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinFlag_MailCopay> |
       | Insulin Drug | <InsulinDrug>           |
-    Then the user validates the text for coverage stages modal popups for Non-LIS Plans
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
 
   @dce_PlanBenefits_DefinedStandardSplitTierLIS_NextYear @NextYearPlanBenefits
     Examples:

@@ -127,7 +127,8 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCostsTab;
 
 	// Right Rail Element - TFN
-	@FindBy(xpath = "//*[@class='tel ng-binding']")
+//	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	// @FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
