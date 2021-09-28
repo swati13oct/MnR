@@ -464,20 +464,20 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then remove "<removePlanIndices>" plan from new plan compare page
 
     #Then validate all available plans are shown on click of view all plans
-    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
+    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | current   |           5 |
       | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current   |           4 |
 
 
- @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @nextYear
+ @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | next   |           5 |
       | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next   |           4 |
 
-    @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
+    @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | MAPD     |               2,1 | current   |           5 |
@@ -485,7 +485,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current   |           4 |
 
 
- @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity @nextYear
+ @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | MAPD     |               2,1 | next   |           5 |
@@ -512,23 +512,23 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @vppPlanCompareCommon_AARP03 @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | current   |           4 |               3,1 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | current   |           4 |               4,1 |
       
      @vppPlanCompareCommon_AARP03 @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |           4 |               3,1 |  
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |           4 |               4,1 |  
 
     @vppPlanCompareCommon_UHC03 @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |           4 |               1,3 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |           4 |              4,1 |
       
       
     @vppPlanCompareCommon_UHC03 @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |           4 |               1,3 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |           4 |               4,1 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
@@ -694,31 +694,31 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | PDF LINK     | <pdfLink> |
       | DocumentCode | <docCode> |
 
-    @vppPlanCompareCommon_AARP03 @regressionAARP 
+    @vppPlanCompareCommon_AARP03 @regressionAARP
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
-      | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | current   |    1023 | 4866893 |
-      | 0023 | AARP |   78006 | YES           | Bexar County | MAPD     | current   |    1025 | 4805658 |
+      | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | current   |    1023 | 4805658 |
+     
       
       
     @vppPlanCompareCommon_AARP03 @regressionAARP @nextYear
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
-      | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |    1023 | 4866893 |
-      | 0023 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |    1025 | 4805658 |
+      | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |    1023 | 4805658 |
+      | 0023 | AARP |   78006 | YES           | Bexar County | MAPD     | next   |    1025 | 4875364 |
 
     @vppPlanCompareCommon_UHC03 @regressionUHC
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
-      | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |    1023 | 4866893 |
-      | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |    1025 | 4805658 |
+      | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |    1023 | 4805658 |
+      | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | current   |    1025 | 4875364 |
       
       
     @vppPlanCompareCommon_UHC03 @regressionUHC @nextYear
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
-      | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |    1023 | 4866893 |
-      | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |    1025 | 4805658 |
+      | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |    1023 | 4805658 |
+      | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | next   |    1025 | 4875364 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and view locations on plan compare page
     Given the user is on medicare acquisition site landing page
