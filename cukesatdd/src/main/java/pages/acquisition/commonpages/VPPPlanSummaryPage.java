@@ -1201,15 +1201,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
-
+	WebDriverWait wait;
 	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
 
 		sleepBySec(5);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
-
+		System.out.println(driver.getCurrentUrl());
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver,30);
+		
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+			+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
 //		ProviderSearchLink.click();
@@ -1526,7 +1529,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
-
+		System.out.println("\n\n===="+allPlans+"===="+maPlans+"===="+msPlans+"===="+pdpPlans+"===="+snpPlans+"====\n\n");
 		if (allPlans == maPlans + msPlans + pdpPlans + snpPlans) {
 			return true;
 		}
@@ -2540,8 +2543,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				System.out.println("\n2============="+planType+ "==========\n");
-//				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Prescription Drugs')])"));
-				 drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -2563,10 +2565,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div/div/button[1]/div")).click();
+		//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div[2]/div[1]/button/span")).click();
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
+		planDeductible = planDeductible.substring(0, 13) + ',' + planDeductible.substring(13);
+		System.out.println("\n\n-------------"+annualDeductible+"-------------"+planDeductible+"-------------\n\n");
 		/*
 		 * try {
 		 *
@@ -2577,7 +2581,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		System.out.println("\n\n-------------"+annualDeductible+"-------------"+planDeductible+"-------------\n\n");
+
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -3205,7 +3209,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
+		
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
 		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
@@ -3214,7 +3218,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Assertion.assertTrue(
 				"PROBLEM - total saved plan icons not as expected.  Expect number of match='" + expMatch
 						+ "' | Actual number of match='" + listOfAppearedSavedPlanIcons.size() + "'",
-				listOfAppearedSavedPlanIcons.size() == expMatch);
+				listOfAppearedSavedPlanIcons.size() == expMatch); 
 	}
 
 	public String determineSubpath(String planType) {
