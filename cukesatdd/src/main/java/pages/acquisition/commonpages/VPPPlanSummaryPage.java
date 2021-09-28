@@ -2573,9 +2573,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
-		
-		System.out.println("\n\n======="+annualDeductible+"========="+planDeductible+"============\n\n");
+		if(planName.equalsIgnoreCase("AARP MedicareRx Walgreens (PDP)"))
+			planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
+		System.out.println("\n\n======"+planName+"======"+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
