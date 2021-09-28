@@ -71,7 +71,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan_PlanDetails;
 	
-	@FindBy(xpath = "(//*[contains(@class,'favorite-plans-container')]//*[contains(@class,'unliked')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'favorite-plan')]//*[contains(@class,'unliked')])[1]")
 	private WebElement Saveaplan;
 	
 	String sheetName = "";
