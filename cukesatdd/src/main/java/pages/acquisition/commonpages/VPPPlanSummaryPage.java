@@ -2570,7 +2570,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		planDeductible = planDeductible.substring(0, 13) + ',' + planDeductible.substring(13);
-		System.out.println("\n\n-------------"+annualDeductible+"-------------"+planDeductible+"-------------\n\n");
 		/*
 		 * try {
 		 *
@@ -2581,7 +2580,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-
+		System.out.println("\n\n-------------"+annualDeductible+"-------------"+planDeductible+"-------------\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
