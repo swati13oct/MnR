@@ -696,6 +696,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -809,6 +811,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
+    Then the user validate the state selected is correct
+      | GeoState | <geoState> |
     Then the user validate facebook button from social share
     Then the user validate twitter button from social share
     Then the user validate email button from social share
