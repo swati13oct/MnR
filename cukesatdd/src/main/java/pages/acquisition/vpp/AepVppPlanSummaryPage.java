@@ -737,8 +737,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
-			validateNew(Saveaplan);
-			System.out.println("Save a Plan is enabled on Plan summary page : " +Saveaplan.isDisplayed());
+		//	validateNew(Saveaplan);
+		//	System.out.println("Save a Plan is enabled on Plan summary page : " +Saveaplan.isDisplayed());
 			jsClickNew(enrollForPlan);
 			validateNew(welcomePageHeader,60);
 
@@ -949,8 +949,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					}
 
 				if (enrollInPlan != null) {
-					validateNew(Saveaplan);
-					System.out.println("Save a Plan is enabled on Plan details page : " +Saveaplan.isDisplayed());
+				//	validateNew(Saveaplan);
+				//	System.out.println("Save a Plan is enabled on Plan details page : " +Saveaplan.isDisplayed());
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 					validateNew(welcomePageHeader,60);
