@@ -200,7 +200,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors/Providers')]/following::a[contains(@dtmname,'provider covered')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'provider covered') and contains(text(),' Edit')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -388,6 +388,13 @@ public class PlanDetailsPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
+	
+	public PlanDetailsPage(String skip, WebDriver driver) { // this constructor was created to bypass the openAndValidate method for doclog testing
+		super(driver);
+		PageFactory.initElements(driver, this);
+		
+	}
+	
 
 	public PlanDetailsPage(WebDriver driver, String planType) {
 		super(driver);

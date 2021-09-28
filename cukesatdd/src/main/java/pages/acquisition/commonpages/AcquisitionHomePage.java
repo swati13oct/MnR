@@ -306,7 +306,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
 	private WebElement lnkLearnAboutMedicare;
 
-	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
+	@FindBy(xpath = "//*[contains(@class, 'section-3')]//a[contains(text(),'Search Doctors')]")
 	private WebElement providerSearchFromGlobalHeader;
 
 	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
@@ -1173,10 +1173,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
+		validateNew(viewPlansButton, 20);
 	}
 
 	public String getTestSiteUrl() {
+		if (null == testSiteUrl){
+			testSiteUrl = driver.getCurrentUrl().split(".com/")[0];
+			System.out.println("Test Site URL from current URL : "+testSiteUrl);
+			testSiteUrl = testSiteUrl+".com";
+			System.out.println("Test Site URL from current URL after appending <.com>: "+testSiteUrl);
+		}
 		return testSiteUrl;
 	}
 

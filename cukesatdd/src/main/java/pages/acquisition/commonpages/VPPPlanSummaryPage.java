@@ -741,7 +741,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
-	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide To AARP Medicare Select and Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
 	// @FindBy(xpath =
@@ -878,7 +878,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Add Doctors & Dentist ')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
@@ -1040,7 +1040,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement findPlansOnShopForPlans;
 
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
@@ -1201,18 +1201,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
-	WebDriverWait wait;
+
 	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
 
 		sleepBySec(5);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
-		System.out.println(driver.getCurrentUrl());
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver,30);
-		
+
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-			+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
 //		ProviderSearchLink.click();
@@ -1529,7 +1526,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
-		System.out.println("\n\n===="+allPlans+"===="+maPlans+"===="+msPlans+"===="+pdpPlans+"===="+snpPlans+"====\n\n");
+
 		if (allPlans == maPlans + msPlans + pdpPlans + snpPlans) {
 			return true;
 		}
@@ -1886,7 +1883,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public String getPlanPremium(String PlanName, String planType) {
 		System.out.println("Plan Name is : " + PlanName);
 		WebElement premiumForPlan = null;
-		
 		if (planType.equalsIgnoreCase("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
@@ -2542,9 +2538,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
-				System.out.println("\n2============="+planType+ "==========\n");
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
+						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -2565,11 +2560,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div[2]/div[1]/button/span")).click();
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
-		planDeductible = planDeductible.substring(0, 13) + ',' + planDeductible.substring(13);
 		/*
 		 * try {
 		 *
@@ -2580,7 +2573,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		System.out.println("\n\n-------------"+annualDeductible+"-------------"+planDeductible+"-------------\n\n");
+		planDeductible = planDeductible.substring(0, 13) + ',' + planDeductible.substring(13);
+		System.out.println("\n\n======="+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -3204,20 +3198,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			driver.navigate().refresh();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(5);
+			waitForPageLoadSafari();
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-		
+
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
 		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+		if (planType.equalsIgnoreCase("pdp")) {
+			appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and contains(@dlassetid,'lnk-1')]" + savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
 		Assertion.assertTrue(
 				"PROBLEM - total saved plan icons not as expected.  Expect number of match='" + expMatch
 						+ "' | Actual number of match='" + listOfAppearedSavedPlanIcons.size() + "'",
-				listOfAppearedSavedPlanIcons.size() == expMatch); 
+				listOfAppearedSavedPlanIcons.size() == expMatch);
 	}
 
 	public String determineSubpath(String planType) {
@@ -3333,6 +3331,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
 				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 				+ savedPlanImgXpath;
+		if(planType.equals("PDP")) {
+			appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and contains(@dlassetid,'lnk-1')]"
+					+ savedPlanImgXpath;
+		}
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		expMatch = 1;
@@ -3401,6 +3404,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
 						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 						+ savedPlanImgXpath;
+				if(planType.equals("PDP")) {
+					savedPlanIconXpath = "//*[contains(text(),'" + plan
+							+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')and contains(@dlassetid,'lnk-1')]"
+							+ savedPlanImgXpath;
+					
+				}
 				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
 				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
 				expMatch = 1;
