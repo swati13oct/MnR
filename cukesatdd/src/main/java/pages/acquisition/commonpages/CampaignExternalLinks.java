@@ -700,7 +700,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	public AcquisitionHomePage validateShopForPlanLoaded() {
 		if (driver.getCurrentUrl().contains("WT.mc_id=8012869")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
-			return new AcquisitionHomePage(driver);
+			return new AcquisitionHomePage(driver,true);
         } else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);

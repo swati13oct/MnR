@@ -49,7 +49,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode') or @id='zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
