@@ -2579,7 +2579,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * }
 	 */
 	public void toolTipForPremium0(String planName) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='svg']"));
 

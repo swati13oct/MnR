@@ -248,15 +248,15 @@ public class VppPlanSummaryMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.toolTipForPremium0(planName);
-			// plansummaryPage.viewPlanSummary(planType);
 		} else if (planType.equals("PDP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.toolTipForAnnualDeductible(planName);
-			// plansummaryPage.viewPlanSummary(planType);
 		}
 	}
 
