@@ -2765,10 +2765,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsSendkeys(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
+		CommonUtility.waitForPageLoadNew(driver, medicareGuidePopup, 10);
 		if (validateNew(medicareGuidePopup)) {
 			System.out.println("Pop up message has been displayed");
 			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
-			closePopUp.click();
+//			closePopUp.click();
+			jsClickNew(closePopUp);
 			CommonUtility.checkPageIsReadyNew(driver);
 			Assertion.assertTrue(true);
 		} else
