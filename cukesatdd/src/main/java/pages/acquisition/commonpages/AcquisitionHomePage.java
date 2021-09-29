@@ -5971,28 +5971,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println(footertextsectionTFNHeader.getText());
 		}
 
-		String ExpectedCallSamTFNMember = "Call UnitedHealthcare: 1-877-755-5345 (TTY 711)";
+		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
+		+ " (TTY 711) toll free, 8 a.m. – 8 p.m., 7 days a week.";
 		validate(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
-		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+		if (ExpectedCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+
 			System.out.println(
-					"****************call us Content was found macthing with the SAM call Popup  ***************");
-			Assert.assertTrue(true);
+			"****************call us Content was found macthing with the SAM call Popup  ***************");
+	Assert.assertTrue(true);
 		} else
-			Assert.fail(
-					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
-							+ ActualCallSamTFNMember);
+		Assert.fail(
+				"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+						+ ActualCallSamTFNMember);
 
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
-
-		System.out.println("########Validating TFN No in Footer section########");
-		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
-		System.out.println("Actual TFN No: " + ActualTFNelement.getText());
 
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
@@ -6001,7 +6004,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -6015,6 +6018,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail(
 					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
+		}
 
 		/*
 		 * String ExpectedCallSamTFNtimezone1 = "7 days a week"; String
