@@ -3165,7 +3165,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
-		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+//		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and not(contains(@style,'display:none'))]" + savedPlanImgXpath;
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
