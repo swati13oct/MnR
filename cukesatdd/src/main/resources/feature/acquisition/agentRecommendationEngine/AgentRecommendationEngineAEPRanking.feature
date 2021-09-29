@@ -9,6 +9,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent use flagsmith to validate AEP plancompare page
+      | User Name | <username> |
     And agent selects county and plan year in plancompare page
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
@@ -23,9 +25,9 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User    | Pass         | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
-      | ocpuser | Password@123 | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]                                                                                                                                 |
-      | ocpuser | Password@123 | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
+      | User    | Pass         | Email                    | username | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
+      | ocpuser | Password@123 | ATDD5STG@MEMBERDD.COM    | OCT-15   | None          | future   |          10001 | fitness,lowpremium                    | NO                 | YES           | [blank]                                                                                                                                 |
+      | ocpuser | Password@123 | ATDD3STG@NONMEMBERDD.COM | DEC-31   | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Prime(HMO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan2(HMO),Plan1(HMO),Patriot(HMO) |
 
   @ARE @EstimateMedicalCostFuture @F441593 @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in AEP ARE for MCE
@@ -35,6 +37,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Password  | <Pass> |
     And agent is looking for an profile and cloaksIn
       | Email | <Email> |
+    And agent use flagsmith to validate AEP plancompare page
+      | User Name | <username> |
     And agent selects county and plan year in plancompare page
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
@@ -48,5 +52,5 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | None          | future   | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | User    | Pass         | Email                 | username | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | DEC-01   | None          | future   | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
