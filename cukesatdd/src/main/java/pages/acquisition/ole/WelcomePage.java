@@ -172,7 +172,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
 	private WebElement OLEProgressBar;
 	
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')] or //*[contains(@class,'tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding') or contains(@class,'tel ng-binding')]")
 	private WebElement VPPTFNNo;
 	
 	public WelcomePage(WebDriver driver) {
