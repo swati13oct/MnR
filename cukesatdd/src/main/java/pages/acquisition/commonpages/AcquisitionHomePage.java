@@ -3392,6 +3392,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
 		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
+		System.out.println("\n\n========"+ExpectedCallSAMTFN+"======"+ActualCallSAMTFN+"======\n\n");
 		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
 			System.out
 					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
