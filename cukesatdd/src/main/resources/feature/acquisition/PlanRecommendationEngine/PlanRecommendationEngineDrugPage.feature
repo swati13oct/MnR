@@ -392,3 +392,32 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds             | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Search Text |
       | UHC  |   90201 | NO            | [blank] | MAPD          | Medicaid,chronic,nursing | UHGNetwork | [blank]     | [blank]       | Yes            | fedp        |
+
+  @PRE @drugpage @editDrug @F562627 @F572450
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <Drug Selection> - To validate switch drug function in PRE
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    Then user selects add drug option in Drug page without continue next page
+      | Drug Selection | <Drug Selection>                                                               |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user selects edit drug options in Drug Page
+      | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
+    Then user added drug Quantity number prefix with zeros in Drug page
+      | Edit Quantity | <EditQty> |
+
+    @FunctionalAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |
+
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |

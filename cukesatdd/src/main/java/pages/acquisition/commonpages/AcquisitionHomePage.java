@@ -29,7 +29,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -1173,8 +1172,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-		//CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(viewPlansButton, 20);
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 	}
 
 	public String getTestSiteUrl() {
@@ -3392,7 +3391,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
 		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
-		System.out.println("\n\n========"+ExpectedCallSAMTFN+"======"+ActualCallSAMTFN+"======\n\n");
 		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
 			System.out
 					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
@@ -6870,7 +6868,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		driver.switchTo().activeElement();
-		sleepBySec(5);
+		sleepBySec(3);
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
 		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
@@ -7842,15 +7840,4 @@ public void validatebackpage() {
 	
 	driver.navigate().back();
 }
-
-	public String getSelectedState() {
-	CommonUtility.checkPageIsReadyNew(driver);
-	WebElement stateDropDown = driver.findElement(By.id("state-select"));
-	scrollToView(stateDropDown);
-	Select dropdown = new Select(stateDropDown);
-	String stateSelected=dropdown.getFirstSelectedOption().getText();
-	System.out.println("State Selected:" + stateSelected);
-	return stateSelected;
-	}
-
 }
