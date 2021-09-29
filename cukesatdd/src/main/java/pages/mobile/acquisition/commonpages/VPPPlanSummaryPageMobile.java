@@ -3285,7 +3285,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
-				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
+				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
 				+ savedPlanImgXpath;
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
@@ -3351,7 +3351,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 				System.out.println("Proceed to validate 'Saved Plan' icon is still there");
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
-						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
+						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
 						+ savedPlanImgXpath;
 				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
 				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
