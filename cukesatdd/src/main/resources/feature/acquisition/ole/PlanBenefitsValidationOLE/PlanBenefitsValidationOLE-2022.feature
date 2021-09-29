@@ -31,7 +31,7 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                	 | workSheet | site |
       | 2022_Plan Benefits_PDP_OLE | OLEPDPSheet_2  | AARP |
 
-    @OLEPlanBenefits_AARP_PDP @OLEPlanBenefits_AARP
+    @OLEPlanBenefits_AARP_PDP @OLEPlanBenefits_AARP @OLEPlanBenefits_14_AARP
     Examples:
       | excelPath                | workSheet | site |
   
