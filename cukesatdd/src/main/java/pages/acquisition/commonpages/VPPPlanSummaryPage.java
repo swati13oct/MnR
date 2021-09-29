@@ -1164,8 +1164,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(2);
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
-			//CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
-			CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
+			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			//CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);

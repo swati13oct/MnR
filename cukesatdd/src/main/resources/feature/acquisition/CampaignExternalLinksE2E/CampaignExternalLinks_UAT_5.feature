@@ -156,7 +156,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     Then the user clicks on Enroll Now in Details Page to start the OLE flow on the site
-    Then The User validates the Plan details on OLE page
+    #Then The User validates the Plan details on OLE page
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
