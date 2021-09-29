@@ -111,7 +111,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
 	private WebElement EnrollmentChecklistLink;
 
-	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
+	@FindBy(xpath = "//a[contains(text(),'Lista de VerificaciÃ³n de InscripciÃ³n (PDF)')]")
 	private WebElement ListaVerificationLink;
 	
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
@@ -172,7 +172,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
 	private WebElement OLEProgressBar;
 	
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')] or //*[contains(@class,'tel ng-binding')]")
 	private WebElement VPPTFNNo;
 	
 	public WelcomePage(WebDriver driver) {
