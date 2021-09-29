@@ -127,17 +127,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
       | PharmacyFilterText | <PharmacyFilterPreferred> |
     Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
-      | PharmacyFilterText | <SelectPharmacy> |
+      | PharmacyFilterText | <SelectPharmacy2> |
 
   @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples:
-      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam | 80002   | 10001           | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  |
 
   @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
     Examples:
-      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam | 80002   | 10001           | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  |
 
   @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link, LIS Buydown validation, Covered and not covered drugs You pay, Details Switch to generic, NBA
@@ -471,13 +471,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
   @dce_E2E_Scenario3_UAT_AARP @regressionAARP
     Examples:
       | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
       #| E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
   @dce_E2E_Scenario3_UAT_UHC @regressionUHC
     Examples:
       | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_UMS | UHC  | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | E2E Scenario 3_UMS | UHC  | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
       #| E2E Scenario 3_UMS | UHC  |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
 
@@ -515,10 +515,10 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_E2E_Scenario7_UAT_AARP @regressionAARP @visitorProfileAuthenticated
     Examples:
-      | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
+      | E2E_Scenario7_UAT_UHC | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
   @dce_E2E_Scenario7_UAT_UHC @regressionUHC @visitorProfileAuthenticated
     Examples:
-      | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
+      | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |

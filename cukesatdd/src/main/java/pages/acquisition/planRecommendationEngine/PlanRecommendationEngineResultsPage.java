@@ -2319,5 +2319,3 @@ public void deeplinkforMSStates(String status) {
 
 
 }
-
-

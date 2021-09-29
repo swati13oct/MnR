@@ -114,7 +114,7 @@ public class oleCommonStepDefinition {
 		String PlanPremium = "";
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		TFN = vppPlanDetailsPage.GetTFNforPlanType();
+	//	TFN = vppPlanDetailsPage.GetTFNforPlanType();
 		WelcomePage welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		
 		PlanPremium=vppPlanDetailsPage.GetMonthlyPremiumValue();
@@ -126,14 +126,14 @@ public class oleCommonStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+	//	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM,PlanPremium);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
+	//	System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 		if (welcomePage != null) {

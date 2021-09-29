@@ -111,7 +111,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
 	private WebElement EnrollmentChecklistLink;
 
-	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
+	@FindBy(xpath = "//a[contains(text(),'Lista de VerificaciÃ³n de InscripciÃ³n (PDF)')]")
 	private WebElement ListaVerificationLink;
 	
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
@@ -172,7 +172,8 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
 	private WebElement OLEProgressBar;
 	
-	
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding') or contains(@class,'tel ng-binding')]")
+	private WebElement VPPTFNNo;
 	
 	public WelcomePage(WebDriver driver) {
 
@@ -203,12 +204,15 @@ public class WelcomePage extends UhcDriver{
 		validateNew(PlanYear_PlanName);
 	}
 
+	
+	
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
 		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
 		String StickyPlanName = OLEStickyPlanName.getText();
+		
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
@@ -220,17 +224,23 @@ public class WelcomePage extends UhcDriver{
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
 		CheckiPerseptions();
-		
 		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
+				
+				validateNew(VPPTFNNo);
+				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
+				String VPPTFNNoActual = VPPTFNNo.getText();
+				System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
+				CheckiPerseptions();
 				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
 				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 				enrollInPlan.click();
 				Thread.sleep(500);
 				flag = driver.getCurrentUrl().contains("welcome");
+				CheckiPerseptions();
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
 							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
@@ -245,7 +255,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	
-	public boolean ValidateTFNonWelcomeOLE(String ExpectedTFNNo) {
+	public boolean ValidateTFNonWelcomeOLE(String TFN) {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
@@ -259,10 +269,12 @@ public class WelcomePage extends UhcDriver{
 		
 		//String Expected_TFN = planDetailsMap.get("TFN");
 		
-		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
+		System.out.println("TFN in VPP page : "+TFN);
 				flag = driver.getCurrentUrl().contains("welcome");
+				CheckPageLoad();
+				CheckiPerseptions();
 				if (flag){
-					flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
+					flag = TFNWidget_OLE.contains(TFN) && TFNNeedHelp_OLE.contains(TFN);
 				}			
 		
 		System.out.println("TFN not displayed in OLE right rail"+flag);
@@ -284,7 +296,7 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("TFN in VPP page : "+Expected_TFN);
 			//	flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
-					flag = TFNWidget_OLE.contains(Expected_TFN);
+				//	flag = TFNWidget_OLE.contains(Expected_TFN);
 				}			
 		
 		System.out.println("TFN not displayed in OLE right rail"+flag);

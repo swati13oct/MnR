@@ -126,8 +126,8 @@ private Scenario scenario;
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-
+	//	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
@@ -3734,7 +3734,7 @@ private Scenario scenario;
 																				// excel and appends it with the
 																				// environment URL and navigates to plan
 																				// details page
-							planDetailsPage = new PlanDetailsPage(wd);
+							planDetailsPage = new PlanDetailsPage("skip",wd);
 						}
 
 						// based on the column headers, determines the equivalent name of the pdf in the

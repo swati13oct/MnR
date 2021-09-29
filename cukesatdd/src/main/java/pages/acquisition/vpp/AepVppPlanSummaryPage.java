@@ -3,11 +3,8 @@
  */
 package pages.acquisition.vpp;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -51,6 +48,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'popup-modal active')]")
 	private WebElement countyModal;
+	
 
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
@@ -73,6 +71,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan_PlanDetails;
 	
+	@FindBy(xpath = "(//*[contains(@class,'favorite-plan')]//*[contains(@class,'unliked')])[1]")
+	private WebElement Saveaplan;
 	
 	String sheetName = "";
 	int rowIndex;
@@ -352,12 +352,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = benefitsMap.get("header premium"); //gets the value for the header premium that was stored from the UI
-		
+		benefitValue = benefitValue.replaceAll("\\s+", "");
 		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
 			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
 		
 		for(String key : benefitsMap.keySet()) {
-			 benefitValueUI = benefitsMap.get(key);
+			 benefitValueUI = benefitsMap.get(key).replaceAll("\\s+", "");
+			 
 			tmpUIString1 = benefitValueUI;
 			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
@@ -368,15 +369,36 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				columnName = columnName.replaceAll("\\s+", "");
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
-				if(key.contains(columnName)) {
+				
+				if(key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { //since we have two types of plan where we can see Prescription Drugs, Tier 1 or Prescription Drugs, we have to add this condition
 						flag= false;
 						tmpUIString2 = tmpUIString1;
 						break;
+				}else if(key.equalsIgnoreCase(columnName)) {
+					flag = false;
+					tmpUIString2 = tmpUIString1;
+					break;
 				}
 				
 				
 			
+			}else if(columnName.equalsIgnoreCase("prescription drugs")) {
+				if(key.equalsIgnoreCase(columnName)) {
+					counter++;
+					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;break;
+					}else {
+						flag = false; 
+						System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:5 "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+				}
+			
+			
+			
 			}else if(key.contains(columnName)) {
+			
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
@@ -457,9 +479,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 	
 	public HashMap<Boolean, String> comparePremium(String sheetName, int rowIndex, String columnName, String valueExcel, HashMap<String, String> premiumMap) {
-		boolean flag = true; int counter =0;
+		boolean flag = false; int counter =0;
 
-		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
+		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="", annual1y="", monthly="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = premiumMap.get("Monthly Premium"); //gets the value for the header premium that was stored from the UI
 		
@@ -505,7 +527,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							System.out.println(sheetName + "_" + rowIndex + " - HEADER PREMIUM VALUE MATCH WITH BOX FOR: " + columnName + " Excel: " + headerPremiumString + " | UI: " + valueUI);
 							break;
 						} else {
-							flag = false;
+						//	flag = false;
 							System.out.println("==============VERIFY PREMIUM FAILED==============");
 							System.out.println(sheetName + "_" + rowIndex + " - header premium value didn't match with the box for: " + columnName + " Excel: " + headerPremiumString + " | UI: " + valueUI);
 							tmpUIString2 = tmpUIString1 + " / Header Value: " + headerPremiumString;
@@ -513,25 +535,25 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						}
 
 					} else {
-						flag = false;
+						//flag = false;
 						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:1 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						tmpUIString2 = tmpUIString1 + " / Header Value: " + headerPremiumString;
 						break;
 					}
-				} else if (key.contains("plan name")) {
+				} else if (key.equalsIgnoreCase("plan name")) {
 					if (valueUI.contains(valueExcel)) {
 						flag = true;
 						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
 						System.out.println(sheetName + "_" + rowIndex + " - Values match for col:2 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						break;
 					} else {
-						flag = false;
+					//	flag = false;
 						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:2 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
 						tmpUIString2 = tmpUIString1;
 						break;
 					}
 
-				} else if (key.contains("zip")) {
+				} else if (key.contains("zip") || key.contains("Zip") ) {
 					if (valueUI.equalsIgnoreCase(valueExcel)) {
 						flag = true;
 						System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
@@ -545,6 +567,71 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					}
 
 				}
+
+				else if (key.equalsIgnoreCase("high option Dental rider")) {
+					if (valueExcel.contains("NA")) {
+						if (valueUI.contains(valueExcel)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+					}
+					if (!valueExcel.contains("NA")) {
+						String[] valueArry = valueUI.split("_");
+						monthly = valueArry[0];
+						annual1y = valueArry[1];
+						if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+					}
+				}
+					else if (key.equalsIgnoreCase("dental platinum rider")){
+					if (valueExcel.contains("NA")) {
+						if (valueUI.contains(valueExcel)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+					}
+					if (!valueExcel.contains("NA")) {
+						String [] valueArry = valueUI.split("_");
+						monthly = valueArry[0];
+						annual1y = valueArry[1];
+						if (valueExcel.contains(monthly) && valueExcel.contains(annual1y)) {
+							flag = true;
+							System.out.println("==============VERIFY " + key.toString() + " PASSED==============");
+							System.out.println(sheetName + "_" + rowIndex + " - Values match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							break;
+						} else {
+							flag = false;
+							System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 " + columnName + " Excel: " + valueExcel + " | UI: " + valueUI);
+							tmpUIString2 = tmpUIString1;
+							break;
+						}
+						 }
+
+				}
+
 			}
 		}
 		
@@ -620,6 +707,17 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 
 	}
+	
+/*	public void SaveaPlan() throws InterruptedException{
+		//CommonUtility.waitForPageLoad(driver, countyModal, 10);
+		//Thread.sleep(5000);
+		
+			validateNew(Saveaplan);
+			scrollToView(Saveaplan);
+			Saveaplan.isEnabled();
+		}
+	
+	}*/
 
 	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
 		Thread.sleep(5000);
@@ -639,6 +737,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
+		//	validateNew(Saveaplan);
+		//	System.out.println("Save a Plan is enabled on Plan summary page : " +Saveaplan.isDisplayed());
 			jsClickNew(enrollForPlan);
 			validateNew(welcomePageHeader,60);
 
@@ -662,11 +762,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
     }
 
 	public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex, String highOptionalDental, String dentalPlatinum) throws InterruptedException {
+		String dentalMonthlyValue = null;
+		String highdentalAnnualValue = null;
+		String HIGHdentalMonthlyValue = null;
+		String highOptionalDentalMonthlyElementText=null;
+		String detalAnnualValue = null;
 		WebElement highOptionalDentalElement = null, dentalPlantinumMonthlyElement = null,dentalPlantinumElement = null,highOptionalDentalMonthlyElement = null;
 		String highOptionalDentaltext = null, dentalPlatinumtext = null, headerPremiumText = null, headerPlanNameText = null, headerZipText = null,dentalPlantinumMonthlyElementtext=null,highOptionalDentalMonthlyElementtext=null;
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
 		HashMap<String, String> result=new HashMap<String, String>();
-		String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
+			WebElement  planYear = driver.findElement(By.xpath("//h3[@class='h3-welcome-class']"));
+			String[] planYearArray = planYear.getText().split(" ");
+
+			String planYearValue = planYearArray[0];
+		System.out.println("Plan year coming as " +planYearValue);
+	//	try {
+	//	String planCard = "(//*[contains(text(), '"+planName+"')])[2]";
+		String planCard = "//h3[contains(@class,'h3-welcome')]";
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[1]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		headerPremiumText = driver.findElement(By.xpath(headerPremiumXpath)).getText();
@@ -679,7 +791,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		else {
 			result.put(headerPrem, headerPremiumArray[2]);
 		}
-		
+
 		String headerPlanName = "plan name"; //this variable will be stored as key for the header plan name
 		headerPlanNameText = driver.findElement(By.xpath(planCard)).getText();
 		result.put(headerPlanName, headerPlanNameText);
@@ -688,42 +800,129 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
 		String [] headerZipArray = headerZipText.split(" ");
 		result.put(headerZip, headerZipArray[2]);
+	/*	} catch (Exception e) {
+			System.out.println("validation for plan name and zipcode on welcome ole page");
+		}*/
 		if(!planName.contains("PDP")) {
+			// HIGH OPTIONAL DENATL
 			try {
-				highOptionalDentalMonthlyElement = driver.findElement(By.xpath("//input[@id='HighOptionDental_selectedRiders']//parent::span"));
-				highOptionalDentalElement = driver.findElement(By.xpath("(//input[@id='HighOptionDental_selectedRiders']//parent::span//following-sibling::div[@class='opt-benefit-list']/ul)[1]"));
-
+				// Step 1 capturing the values for high optional dental
+				// STep 1.1 caputing monthly value
+				highOptionalDentalMonthlyElement = driver.findElement(By.cssSelector("label[for^='HighOptionDental'] > span"));
+				highOptionalDentalMonthlyElementText=highOptionalDentalMonthlyElement.getText().trim(); // for $45 a month
+				String [] HIGHdentalMonthlyArray= highOptionalDentalMonthlyElementText.split(" "); //{"for","$45","a","month"}
+				HIGHdentalMonthlyValue = HIGHdentalMonthlyArray[1];
+				//Step 1.2 capturing annual value
+				highOptionalDentalElement = driver.findElement(By.xpath("//*[contains(@id,'HighOptionDental')]//li[contains(text(), 'annual maximum')]"));
+				String [] annualHighText = highOptionalDentalElement.getText().split(" ");
+				highdentalAnnualValue = annualHighText[annualHighText.length-1];
 			} catch (Exception e) {
 				System.out.println("No high dental option rider for Plan :"+planName);
 			}
+			//DENTAL PLATINUM
 			try {
-				dentalPlantinumMonthlyElement = driver.findElement(By.xpath("//input[@id='DentalPlatinum_selectedRiders']//parent::span"));
-				dentalPlantinumElement = driver.findElement(By.xpath("(//input[@id='DentalPlatinum_selectedRiders']//parent::span//following-sibling::div[@class='opt-benefit-list']/ul)[1]"));
+
+				// Step 2 capturing the values for dental platinum
+				// STep 2.1 caputing monthly value
+				dentalPlantinumMonthlyElement = driver.findElement(By.cssSelector("label[for^='DentalPlatinum_selectedRiders'] > span"));
+				
+				dentalPlantinumMonthlyElementtext=dentalPlantinumMonthlyElement.getText().trim(); // for $45 a month
+				String [] dentalMonthlyArray= dentalPlantinumMonthlyElementtext.split(" "); //{"for","$45","a","month"}
+				dentalMonthlyValue = dentalMonthlyArray[1];
+				
+				//STep 2.2 caputing annual value
+				dentalPlantinumElement = driver.findElement(By.xpath("//*[contains(@id,'DentalPlatinum')]//li[1]"));
+					String [] annualText = dentalPlantinumElement.getText().split(" ");
+				 if(planYearValue.equalsIgnoreCase("2021")) {
+					detalAnnualValue = annualText[annualText.length-1];
+					}
+				else {
+					 detalAnnualValue = annualText[0];
+					
+				}
+				
+			
 			} catch (Exception e) {
 				System.out.println("No dental platinum rider for Plan :"+planName);
 			}
+			
+
 			if (highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
-				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText().trim();
-				dentalPlatinumtext = dentalPlantinumElement.getText().trim();
-				//dentalPremiumValue=dentalPlatinumtext + dentalPlantinumMonthlyElementtext;
-				result.put("high option dental", highOptionalDental);
-				result.put("dental platinum", dentalPlantinumMonthlyElementtext +  dentalPlatinumtext);
+				System.out.println("###########################1st scenario #####################################");
+				System.out.println(" EXCEL Value highOptionalDental :----------->"+highOptionalDental);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" EXCEL Value dentalPlatinum :----------->"+dentalPlatinum);	
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dentalMonthlyValue :----------->"+highOptionalDental);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value detalAnnualValue:----------->"+detalAnnualValue);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value detalAnnualValue:----------->"+dentalMonthlyValue);
+
+
+				
+				result.put("high option Dental rider", highOptionalDental);
+				result.put("dental platinum rider", dentalMonthlyValue+"_"+detalAnnualValue);
+
+				//result.put("dental platinum monthly", dentalMonthlyValue);
+				//result.put("dental platinum Annual", detalAnnualValue);
+				
 				} else if (!highOptionalDental.equalsIgnoreCase("NA") && !dentalPlatinum.equalsIgnoreCase("NA")) {
-				dentalPlantinumMonthlyElementtext = dentalPlantinumMonthlyElement.getText().trim();
-				highOptionalDentalMonthlyElementtext = highOptionalDentalMonthlyElement.getText().trim();
-				highOptionalDentaltext = highOptionalDentalElement.getText().trim();
-				dentalPlatinumtext = dentalPlantinumElement.getText().trim();
-				result.put("high option dental",highOptionalDentalMonthlyElementtext + highOptionalDentaltext);
-				result.put("dental platinum", dentalPlantinumMonthlyElementtext +  dentalPlatinumtext);
+					System.out.println("#########################2nd scenario#######################################");
+					System.out.println(" EXCEL Value highOptionalDental :----------->"+highOptionalDental);
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println(" EXCEL Value dentalPlatinum :----------->"+dentalPlatinum);	
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println(" UI Value dentalMonthlyValue :----------->"+dentalMonthlyValue);
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println(" UI Value detalAnnualValue:----------->"+detalAnnualValue);
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println(" UI Value HIGHdentalMonthlyValue :----------->"+HIGHdentalMonthlyValue);
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println(" UI Value HighdentalAnnualValue:----------->"+highdentalAnnualValue);
+
+					result.put("high option Dental rider", HIGHdentalMonthlyValue+"_"+highdentalAnnualValue);
+					result.put("dental platinum rider", dentalMonthlyValue+"_"+detalAnnualValue);
+					
+					//result.put("high option monthly", HIGHdentalMonthlyValue);
+					//result.put("high option annual ", highdentalAnnualValue);
+				
 			} else if (highOptionalDental.equalsIgnoreCase("NA") && dentalPlatinum.equalsIgnoreCase("NA")) {
-			result.put("high option dental", highOptionalDental);
-			result.put("dental platinum", dentalPlatinum);
+				System.out.println("#########################3rd scenario#######################################");
+
+				System.out.println(" UI Value HIGHdentalMonthlyValue :----------->"+highOptionalDental);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dentalAnnualHighValue:----------->"+highOptionalDental);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dental platinum monthly :----------->"+dentalPlatinum);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dental platinum Annual:----------->"+dentalPlatinum);
+
+				result.put("high option Dental rider", highOptionalDental);
+				result.put("dental platinum rider", dentalPlatinum);
+		
 			}
+			else if (!highOptionalDental.equalsIgnoreCase("NA") && dentalPlatinum.equalsIgnoreCase("NA")) {
+
+				System.out.println("#########################4th scenario#######################################");
+				System.out.println(" UI Value HIGHdentalMonthlyValue :----------->"+HIGHdentalMonthlyValue);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dentalAnnualHighValue:----------->"+highdentalAnnualValue);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dental platinum monthly :----------->"+dentalPlatinum);
+				System.out.println("-----------------------------------------------------------------------");
+				System.out.println(" UI Value dental platinum Annual:----------->"+dentalPlatinum);
+				
+				result.put("high option Dental rider", HIGHdentalMonthlyValue+"_"+highdentalAnnualValue);
+				result.put("dental platinum rider", dentalPlatinum);
+			}
+			
 		}
+
 		System.out.println("================ Finished collecting info on Welcome OLE Page================");
 		return result;
 	}
-    
+
     
     public boolean Enroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
     	boolean flag = true;
@@ -750,12 +949,68 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					}
 
 				if (enrollInPlan != null) {
+				//	validateNew(Saveaplan);
+				//	System.out.println("Save a Plan is enabled on Plan details page : " +Saveaplan.isDisplayed());
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 					validateNew(welcomePageHeader,60);
 				}
 		return flag;
 		}
+    
+    
+	public HashMap<String,Boolean> updatedEnroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
+    	HashMap<String,Boolean> resultMap = new HashMap<String,Boolean>();
+    	boolean enrollBtnflag = true;
+    	boolean saveBtnflag = true;
+
+    		System.out.println("Enroll in Plan for Plan : " + planName);
+
+				WebElement enrollInPlan = null;
+					try {
+						
+				if(planType.equalsIgnoreCase("MA")) {
+
+					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					scrollToView(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
+				}
+				if(planType.equalsIgnoreCase("SNP")){
+					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					scrollToView(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
+				}
+				}catch(Exception e){
+				System.out.println("This plan does not have enroll button");
+				enrollBtnflag = false;
+					}
+
+				if (enrollInPlan != null) {
+					saveBtnflag=validateSavePlanButton();
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+					validateNew(welcomePageHeader,60);
+				}
+				resultMap.put("EnrollBtnDisplayed", enrollBtnflag);
+				resultMap.put("SaveBtnDisplayed", saveBtnflag);
+		return resultMap;
+		}
+
+    public boolean validateSavePlanButton() throws InterruptedException {
+    	boolean savePlanFlag = true;
+
+    		System.out.println("Validating save plan button");
+    		if(Saveaplan.isDisplayed()) {
+    			System.out.println("Save plan button is displayed");
+    		}
+    		else {
+    			savePlanFlag = false;
+    			System.out.println("Save plan button is NOT displayed");
+    		}
+		
+    	return savePlanFlag;
+		}
+
 	}
 
 	

@@ -387,6 +387,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='Back To Profile']")
 	private WebElement backToProfileBtn;
 
+	@FindBy(xpath = "//*[contains(text(), '100-day supply at a 90-day')]")
+	public WebElement _100DaysSupplyHeader;
+	
+	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
+	public WebElement LIS_Extrahelp;
+
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -452,6 +458,10 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(YourDrugs_YouPayTxt);
 		// validateNew(YourDrugs_InitlCoverageTxt);
 		validateNew(LinktoEditDrugList);
+	}
+
+	public void validate100DayInYourDrugs() {
+		validateNew(_100DaysSupplyHeader);
 	}
 
 	public void validateMonthlyCostStage() {
@@ -1585,10 +1595,17 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
-
+	
+	public void verifyLIS_Extrahelp() {
+		if (LIS_Extrahelp.getText().contains("$0 or $99") || LIS_Extrahelp.getText().contains("$0 or $92")) 
+			System.out.println(LIS_Extrahelp.getText());
+		else 
+			Assert.fail("LIS Deductible message is not displayed");
+	}
+     
 	public void validateLISonly_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(NonLIS_CopayHeader) && validateNew(LIS_CopayHeader)
-				&& validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert)) {
+				&& validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert) && validateNew(LIS_Extrahelp)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS Non BuyDown Plan - Alert and LIS copay Section *****");
 			System.out.println("***** Copay section LIS and  NonLIS message for Covered Drugs text for LIS Non Buydown Plan *****");
@@ -1598,6 +1615,10 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println(LIS_Deductible.getText());
 			System.out.println("***** Page level Alert Displayed for LIS Non Buydown Plans *****");
 			System.out.println(LIS_Alert.getText());
+			System.out.println("***** LIS plan Extra help message *****");
+			System.out.println(LIS_Extrahelp.getText());
+			verifyLIS_Extrahelp();
+			
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
@@ -2513,6 +2534,55 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
 
+
+	private static String INITIAL_COVERAGE_TEXT_NextYear = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,430 you then move to the Coverage Gap Stage.";
+	private static String COVERAGE_GAP_TEXT_NextYear = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $7,050 in year-to-date out-of-pocket costs.";
+	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 15% coinsurance, whichever is greater.";
+
+	public void validateCoveragestagePopUpTextNextYear() {
+		validateNew(MonthlyDrugStage_InitialCoverageLink);
+		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		validateNew(CoverageStage_Modal_Text);
+		String[] ExpectedTexts = INITIAL_COVERAGE_TEXT_NextYear.split("--");
+		String ActualText = CoverageStage_Modal_Text.getText().trim();
+		System.out.println("Initial Coverage Stage Modal PopUp Text - "+ActualText);
+		if (ActualText.contains(ExpectedTexts[0]) && ActualText.contains(ExpectedTexts[1]) && ActualText.contains(ExpectedTexts[2])
+				&& validateNew(InitialCoverage_Modal_Header)) {
+			System.out.println("Correct Modal Text displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else {
+			Assertion.fail(
+					">>>>> Expected Initial Coverage Stage Text - "+INITIAL_COVERAGE_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		}
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CoverageGapLink);
+		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		validateNew(CoverageStage_Modal_Text);
+		System.out.println("Coverage Gap Stage Modal PopUp Text - "+CoverageStage_Modal_Text.getText().trim());
+		if (CoverageStage_Modal_Text.getText().trim().equalsIgnoreCase(COVERAGE_GAP_TEXT_NextYear)
+				&& validateNew(CoverageGap_Modal_Header)) {
+			System.out.println(
+					"Correct Modal Text displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Coverage Gap Stage text - "+COVERAGE_GAP_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CatastropheLink);
+		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		validateNew(CoverageStage_Modal_Text);
+		System.out.println("Catastrophic Stage Modal PopUp Text - "+CoverageStage_Modal_Text.getText().trim());
+		if (CoverageStage_Modal_Text.getText().trim().equalsIgnoreCase(CATASTROPHIC_TEXT_NextYear)
+				&& validateNew(Catastrophe_Modal_Header)) {
+			System.out.println(
+					"Correct Modal Text displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		jsClickNew(StageInfo_Modal_DoneBtn);
+	}
+
+
 	@FindBy(xpath = "//*[contains(@id,'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]//following-sibling::div//p")
 	private List<WebElement> DefStPlan_LISCopayTexts;
 
@@ -2596,6 +2666,4 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(saveDrugs);
 			}
 		
-
-
 }

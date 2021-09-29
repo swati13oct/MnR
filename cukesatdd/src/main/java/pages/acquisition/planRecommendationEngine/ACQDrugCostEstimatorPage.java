@@ -298,4 +298,3 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 
 }
-

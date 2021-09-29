@@ -887,6 +887,10 @@ public class CommonConstants {
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
 	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
 	
+	public static final String FLAGSMITH = "flagSmith";
+	
+	public static final String FLAGSMITH_USER = "flagsmithUser";
+	
 	public static final String SCREEN_RESOLUTION = "screenResolution";
 	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +
 			  "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
@@ -999,7 +1003,7 @@ public class CommonConstants {
 		SELECTED_STATE.set(State);
 	}
 	
-	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 	
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
 	
@@ -1143,5 +1147,3 @@ public class CommonConstants {
 	}
 	
 }
-
-

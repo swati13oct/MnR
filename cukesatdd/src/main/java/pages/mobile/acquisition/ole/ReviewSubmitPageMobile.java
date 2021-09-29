@@ -208,8 +208,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
-	private WebElement PrimaryPhoneNo;
+	@FindBy(xpath = "//*[contains(text(), 'Home Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
+	private WebElement HomePhoneNo;
 
 	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*")
 	private WebElement MobilePhoneNo;
@@ -217,7 +217,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
 	private WebElement EmailConfirmationNo;
 
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 
 	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -696,7 +696,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			flag&=validateText(MedicaidNo,Medicaid_No);
 		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
-		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
+		flag&=validateText(HomePhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
 		flag&=validateText(PaperlessDelivery,Paperless_Delivery);
 		flag&=validateText(EmailAddress,Email_Address);

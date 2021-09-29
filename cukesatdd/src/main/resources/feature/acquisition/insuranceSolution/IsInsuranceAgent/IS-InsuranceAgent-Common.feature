@@ -53,13 +53,13 @@ Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
      | PhNo       | <phNo>       |
     Then the user clicks Submit to submit Licensed Insurance Agent and validates Thank You Page
     
-	@insuranceSolution_InsuranceAgent_Common_AARP @insuranceSolution  @regressionAARP
+	@insuranceSolution_InsuranceAgent_Common_AARP @insuranceSolution  @regressionAARP @nonOffline
     Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | 
       |AARP| 11112    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 
     #  |AARP|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html|
     
-	@insuranceSolution_InsuranceAgent_Common_UHC @insuranceSolution  @regressionUHC
+	@insuranceSolution_InsuranceAgent_Common_UHC @insuranceSolution  @regressionUHC @nonOffline
 	Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | 
       |UHC| 11111    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 

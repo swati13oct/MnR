@@ -98,6 +98,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-test-id='People']")
 	private WebElement People;
+	
+	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]") 
+	private WebElement MedicalDirectory;
 
 	@FindBy(xpath = "//button[@data-test-id='Places']")
 	private WebElement Places;
@@ -214,6 +217,9 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+		MedicalDirectory.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
@@ -276,7 +282,10 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage selectsHospitals() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
-
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
+		
 		CommonUtility.waitForPageLoadNew(driver, Places, 30);
 		jsClickNew(Places);
 
@@ -331,13 +340,15 @@ public class ProviderSearchPage extends UhcDriver {
 		continueButton.click();
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				currentYrTile.click();
+				//currentYrTile.click();
+				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
 			if (validate(nextYrTile))
-				nextYrTile.click();
+				//nextYrTile.click();
+			jsClickNew(nextYrTile);
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
 		validateNew(planNameToBeSelected);
@@ -404,7 +415,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
-
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
+		
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
 
@@ -465,6 +479,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	public VPPTestHarnessPage selectsProviderNavigateBacktoTestharness() {
 		GetStarted.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
@@ -593,6 +610,9 @@ public class ProviderSearchPage extends UhcDriver {
 */
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
 
 		//CommonUtility.waitForPageLoadNew(driver, People, 30);
 		CommonUtility.waitForPageLoadNew(driver, People, 10);
@@ -729,6 +749,9 @@ public class ProviderSearchPage extends UhcDriver {
 	public VisitorProfilePage selectsProviderAndBackToVP() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
+		MedicalDirectory.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
