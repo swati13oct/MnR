@@ -5198,6 +5198,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 	
+
+
+	public String getTFNNumberFromLink() {
+		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
+		return telTFNLink.getText().trim();
+	}
+
 	public String getSelectedState() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement stateDropDown = driver.findElement(By.id("state-select"));
@@ -5206,10 +5213,5 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		String stateSelected=dropdown.getFirstSelectedOption().getText();
 		System.out.println("State Selected:" + stateSelected);
 		return stateSelected;
-		}
-
-	public String getTFNNumberFromLink() {
-		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
-		return telTFNLink.getText().trim();
 	}
 }

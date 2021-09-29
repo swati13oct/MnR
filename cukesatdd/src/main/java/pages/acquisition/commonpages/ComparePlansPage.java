@@ -204,10 +204,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"your-doctors-table\"]/tbody/tr[4]/th/span")
 	private WebElement FirstProviderName;
 	
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/th[1]/span")
 	private WebElement FirstProviderNameAfterAddition;
 	
-	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/td[1]/span")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/th[1]/span")
 	private WebElement SecondProviderName;
 
 	@FindBy(linkText = "View Locations")
@@ -1602,23 +1602,23 @@ public class ComparePlansPage extends UhcDriver {
 	public void validateOONDDisplayed() throws Exception {
 		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
 				medicalBenefitsOONToggle.isDisplayed());
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		medicalBenefitsOONToggle.click();
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
 		medicalBenefitsOONToggle.click();
 		Assertion.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
 				additionalBenefitsOONToggle.isDisplayed());
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 //		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
 //		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
@@ -1627,11 +1627,11 @@ public class ComparePlansPage extends UhcDriver {
 	public void validateOONNotDisplayed() {
 		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
 				driver.findElements(By.xpath(
-						"//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']"))
+						"//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]"))
 						.isEmpty());
 		Assertion.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
 				driver.findElements(By.xpath(
-						"//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']"))
+						"//*[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider'][1]"))
 						.isEmpty());
 	}
 
