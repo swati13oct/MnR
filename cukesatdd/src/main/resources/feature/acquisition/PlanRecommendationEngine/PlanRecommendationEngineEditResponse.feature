@@ -174,7 +174,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
       | Doctors             | <E_doctors>                       |
       | Doctors Search Text | <E_DoctorsName>                   |
       | Multi Doctor        | <E_isMultiDoctor>                 |
-      | Additional Option   | <E_Dental-Hearing-Vision-Fitness> |
+      | Services Option     | <E_Dental-Hearing-Vision-Fitness> |
       | Preference Option   | <E_costPreferenceOption>          |
       | Priority Option     | <E_priorityOption>                |
       | Priorities          | <E_priorities>                    |

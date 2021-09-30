@@ -2767,11 +2767,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsSendkeys(emailField, EmailAddress);
 		// validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
-		sleepBySec(3);
+
+		CommonUtility.waitForPageLoadNew(driver, medicareGuidePopup, 10);
+
 		if (validateNew(medicareGuidePopup)) {
 			System.out.println("Pop up message has been displayed");
-			WebElement closePopUp = driver.findElement(By.xpath("//*[@href='#']"));
-			//closePopUp.click();
+
+			WebElement closePopUp = driver.findElement(By.xpath("//*[contains(@class , 'emailsubmit_close')]"));
+//			closePopUp.click();
+
 			jsClickNew(closePopUp);
 			CommonUtility.checkPageIsReadyNew(driver);
 			Assertion.assertTrue(true);
@@ -3170,14 +3174,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
 
-		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
-		if (planType.equalsIgnoreCase("pdp")) {
-			appeared_savedPlanLIconXpath = planTypePath
-					+ "//*[contains(@class, 'added') and contains(@dlassetid,'lnk-1')]" + savedPlanImgXpath;
-		}
+//		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
+		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and not(contains(@style,'display:none'))]" + savedPlanImgXpath;
 
-		// String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class,
-		// 'added')]" + savedPlanImgXpath;
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		int expMatch = listOfTestPlans.size();
@@ -3296,7 +3295,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
-				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
+				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
 				+ savedPlanImgXpath;
 
 		if (planType.equals("PDP")) {
@@ -3375,7 +3374,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 				System.out.println("Proceed to validate 'Saved Plan' icon is still there");
 				String savedPlanIconXpath = "//*[contains(text(),'" + plan
-						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
+						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
 						+ savedPlanImgXpath;
 				if (planType.equals("PDP")) {
 					savedPlanIconXpath = "//*[contains(text(),'" + plan

@@ -379,22 +379,23 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	}
 
 	@Then("^the user validates TFN on Welcome OLE Page$")
-	public void the_user_validates_TFN_in_Right_Rail(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
 //		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
-		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
-		if (Validation_Status) {
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assertion.assertTrue(true);
-		} else {
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
-			Assertion.fail();
+			String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
+			boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
+			if (Validation_Status) {
+				System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
 		}
 	}
 
@@ -3313,25 +3314,29 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		}
 	}
 	@Then("^the user validate widgets on Welcome OLE Page$")
-	public void the_user_validates_widgtes_welcome_OLE(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_welcome_OLE() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
 //		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
-		System.out.println("Widgets are displayed on welcome Pages");
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+			welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
+			System.out.println("Widgets are displayed on welcome Pages");
 		}
+	}
 	
 	@Then("^the user validate widgets on OLE Pages$")
-	public void the_user_validates_widgtes_OLE_Pages(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_OLE_Pages() throws Throwable {
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
 //		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
-	System.out.println("Widgets are displayed on welcome Pages");
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+			medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
+			System.out.println("Widgets are displayed on welcome Pages");
+		}
 	}
 	
 	@Then("^the user validates Medicaid Number in OLE Page$")
