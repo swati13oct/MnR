@@ -208,8 +208,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 
-//	@FindBy(xpath = "//*[contains(text(), 'Home Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'Home Phone Number') or contains(text(), 'Primary Phone Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Home Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
+//	@FindBy(xpath = "//*[contains(text(), 'Home Phone Number') or contains(text(), 'Primary Phone Number')]//following-sibling::*")
 	private WebElement HomePhoneNo;
 
 	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*")
