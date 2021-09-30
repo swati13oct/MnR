@@ -402,6 +402,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath2> |
     Then user closes current tab and navigate to previous tab
     #---------------------Privacy link in Medicare plans 11 page--------------------
+    
     Then the user navigate back to aarp medicare plans11 privacy link in lower env
     Then the user validates SAM icons on privacy page
       | TFN No    | <TFNNo>    |
