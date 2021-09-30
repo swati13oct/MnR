@@ -72,17 +72,17 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 	String sheetName = "";
 	int rowIndex;
 
-	public HashMap<String, String> collectInfoPREResultsPage(String planName, int planIndex, int planYear,
+	public HashMap<String, String> collectInfoPREResultsPage(String zip, String planName, int planIndex, int planYear,
 			String sheetName, int rowIndex) {
 
 		HashMap<String, String> preresult = new HashMap<String, String>();
 
-		preresult = collectInfoPREResultsPage(planName, planIndex);
+		preresult = collectInfoPREResultsPage(zip, planName, planIndex);
 
 		return preresult;
 	}
 
-	public HashMap<String, String> collectInfoPREResultsPage(String planName, int planIndex) {
+	public HashMap<String, String> collectInfoPREResultsPage(String zip, String planName, int planIndex) {
 
 		HashMap<String, String> preResult = new HashMap<String, String>();
 
@@ -100,20 +100,24 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 				.findElement(By.cssSelector("div.premiumValues p[class*='outOfPocket'] strong")).getText());
 		preResult.put(formatString("Out-of-Pocket Maximum : "), value);
 
-		// Additional Serivce
-		int additional_Service_Count = 4;
-		for (int i = 1; i <= additional_Service_Count; i++) {
-			String header = formatString(plantiles.get(planIndex)
-					.findElement(By.cssSelector(
-							"div[class*='additionalServicesContent'] div:nth-child(" + String.valueOf(i) + ") h4"))
-					.getText());
-			List<WebElement> data = plantiles.get(planIndex).findElements(By.cssSelector(
-					"div[class*='additionalServicesContent'] div:nth-child(" + String.valueOf(i) + ") ul li"));
-			String content = "";
-			for (WebElement e : data) {
-				content = content + e.getText();
+		if (zip.contains("88042") && planName.contains("Medicare Supplement Insurance Plan")) {
+			// No Additional service for this state
+		} else {
+			// Additional Serivce
+			int additional_Service_Count = 4;
+			for (int i = 1; i <= additional_Service_Count; i++) {
+				String header = formatString(plantiles.get(planIndex)
+						.findElement(By.cssSelector(
+								"div[class*='additionalServicesContent'] div:nth-child(" + String.valueOf(i) + ") h4"))
+						.getText());
+				List<WebElement> data = plantiles.get(planIndex).findElements(By.cssSelector(
+						"div[class*='additionalServicesContent'] div:nth-child(" + String.valueOf(i) + ") ul li"));
+				String content = "";
+				for (WebElement e : data) {
+					content = content + e.getText();
+				}
+				preResult.put(header, formatString(content));
 			}
-			preResult.put(header, formatString(content));
 		}
 
 		// Plan Benefits
