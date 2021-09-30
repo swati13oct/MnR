@@ -28,15 +28,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
-      | Scenario           | site | geoState | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 3_AMP | AARP | New York | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 3_AMP | AARP | Puerto Rico | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 3_UMS | UHC  | New York | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 3_UMS | UHC  | Puerto Rico | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
@@ -64,7 +64,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     #Then the user come back to Med-ed page 71613
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -99,15 +99,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
-      | Scenario           | site | geoState | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 2_AMP | AARP | New York | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 2_AMP | AARP | Puerto Rico | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | New York | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 2_UMS | UHC  | Puerto Rico | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPPages
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
@@ -134,15 +134,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
-      | Scenario           | site | geoState | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 4_AMP | AARP | New York | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 4_AMP | AARP | Puerto Rico | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 4_UMS | UHC  | New York | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 4_UMS | UHC  | Puerto Rico | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site for plantype <plantype> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -176,15 +176,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | UHC Agent URL | <UHCUrl> |
     Then the user validates whether call icon is visible
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
-      | Scenario           | site | geoState | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_AMP | AARP | New York | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_AMP | AARP | Puerto Rico | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_UMS | UHC  | New York | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_UMS | UHC  | Puerto Rico | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site for plantype <plantype> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -206,12 +206,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | UHC Agent URL | <UHCUrl> |
     Then the user validates whether call icon is visible
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @check
     Examples:
-      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_AMP | AARP | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 6_AMP | AARP | Puerto Rico | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_UMS | UHC  | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState    | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 6_UMS | UHC  | Puerto Rico | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
