@@ -763,6 +763,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama     | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
       #| AARP | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama     | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
     Examples:
@@ -801,6 +802,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama     | enroll/ms-apply.html                                                     | ShopPlan: Enroll MS                           | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[6] | true    | https://www.myuhcagent.com/ |
       #| UHC  | Alabama  | about-us.html                                                            | Footer: About Us                              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama     | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
   Scenario Outline: <Scenario>- To verify social share component on <site> site <pageName> : <path>
