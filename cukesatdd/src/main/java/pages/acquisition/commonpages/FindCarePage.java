@@ -105,7 +105,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//Img[@alt='Medical group icon']")
 	public WebElement Medicalgroupicon;
 	
-	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	@FindBy(xpath = "(//button[@data-test-id='saved-provider-button'])")
 	private WebElement selectProviderBtn;
 	
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
@@ -329,6 +329,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 
 public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	String ParentWindow = null;
+	jsClickNew(FindCareLink);
 	System.out.println("In find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);

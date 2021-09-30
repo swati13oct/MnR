@@ -144,7 +144,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		boolean threeeMonthfrequency = false;
 		boolean GenericDrug = false;
 		boolean switchGeneric = false;
-
+		jsClickNew(drugAddBtn);
+		threadsleep(2000);
 		String[] drugslist = drugsDetails.split(":");
 		for (int i = 0; i < drugslist.length; i++) {
 			String drugInfo = drugslist[i];
@@ -163,11 +164,10 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				jsClickNew(drugAddBtn);
-				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
 			}
+			threadsleep(2000);
 		}
 	}
 
@@ -283,8 +283,9 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 	
 	public void getDruglist(){
+		String curID = String.valueOf(Thread.currentThread().getId());
 		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
-		druglistPRE = drugPRE.drugnamesList();
+		druglistPRE = CommonConstants.PRE_Drugs.get(curID);
 		threadsleep(5000);
 		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);

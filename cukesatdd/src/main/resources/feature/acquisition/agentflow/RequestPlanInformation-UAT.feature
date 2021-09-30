@@ -17,7 +17,7 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
       | Lastname  | <Lastname>  |
       | Email     | <email>     |
 
-    @requestPlanInformationUlayer @UATRegression @regressionAARP
+    @requestPlanInformationUlayer @UATRegression @regressionAARP @nonOffline
     Examples: 
       | scenario                                  | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _AARP | AARP | MA-MBI   | future   | future   |   10001 | NO              | New York County | MA       | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
@@ -48,7 +48,7 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
       | scenario                                  | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _AARP | AARP | PDP-MBI  | future   | future   |   10001 | NO              | New York County | PDP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
 
-    @requestPlanInformationBlayer @UATRegression @regressionUHC
+    @requestPlanInformationBlayer @UATRegression @regressionUHC @nonOffline
     Examples: 
       | scenario                                   | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _UHCMS | UHC  | PDP-MBI  | future   | future   |   10001 | NO              | New York County | PDP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com     |
@@ -69,12 +69,12 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
       | Lastname  | <Lastname>  |
       | Email     | <email>     |
 
-    @requestPlanInformationUlayer @UATRegression @regressionAARP
+    @requestPlanInformationUlayer @UATRegression @regressionAARP @nonOffline
     Examples: 
       | scenario                                  | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _AARP | AARP | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
 
-    @requestPlanInformationBlayer @UATRegression @regressionUHC
+    @requestPlanInformationBlayer @UATRegression @regressionUHC @nonOffline
     Examples: 
       | scenario                                   | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com |
@@ -108,12 +108,12 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
     Then the user enters following information in Request Plan Information Guide through medicare pages
       | Email | <email> |
 
-    @requestPlanInformationUlayer @UATRegression @regressionAARP
+    @requestPlanInformationUlayer @UATRegression @regressionAARP @nonOffline
     Examples: 
       | scenario                                       | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request Plan Information - E2E Scenario 3_AARP | AARP | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
 
-    @requestPlanInformationBlayer @UATRegression @regressionUHC
+    @requestPlanInformationBlayer @UATRegression @regressionUHC @nonOffline
     Examples: 
       | scenario                                        | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com |
