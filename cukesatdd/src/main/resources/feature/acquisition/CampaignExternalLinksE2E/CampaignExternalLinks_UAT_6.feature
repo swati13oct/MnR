@@ -174,10 +174,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans for below plan type
-      | Plan Type | <MSplantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
+       And the user views the plans for below plan type
+      | Plan Type | <MAplantype> |
      Then user clicks on Change Zip code link
     Then user clicks on Select by Address and Enter fileds
       | Address | <address> |
@@ -186,6 +184,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     When the user clicks on Find plans on vpp using following information
     | County Name2     | <county2>        |
      | Is Multi County2 | <isMultiCounty2> |  
+     And the user views the plans for below plan type
+      | Plan Type | <MSplantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user validates SAM icons on Medsupp page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -371,13 +373,23 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then user closes current tab and navigate to previous tab
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
     Then the user validate aarp medicare plans11 page external link in lower env
-      | Zip Code | <zipcode1> |
+      | Zip Code | <zipcode> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
+       And the user views the plans for below plan type
+      | Plan Type | <MAplantype> |
+     Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user clicks on Find plans on vpp using following information
+    | County Name2     | <county2>        |
+     | Is Multi County2 | <isMultiCounty2> |  
     And the user views the plans for below plan type
       | Plan Type | <MSplantype> |
     And the user selects plan year
@@ -398,5 +410,5 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     
     @CampaignExternalLink_E2E_Scenario_6_Stage @regressionAARP @campaignExternalStage
     Examples: 
-      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |TFNxpath4                          |pscCode|zipcode1|
-      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-877-850-2073 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] |         1 |          2 | (//*[contains(@class,'paragraph')]//a[contains(@class,'tel tfn desktop')])  |8000158|65656|
+      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |TFNxpath4                          |pscCode|address|city|state|county2|isMultiCounty2|
+      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-877-850-2073 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] |         1 |          2 | (//*[contains(@class,'paragraph')]//a[contains(@class,'tel tfn desktop')])  |8000158|584 MAIN AVE NORWALK |Albany|New York|New York County|no|
