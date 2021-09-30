@@ -64,3 +64,40 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
     Examples: 
       | excelPath                | workSheet | site |
       | PlanDocs_Validation_Data | Sheet5    | UHC  |
+
+  @2022PlanDocs_ExcelValidation @2022pdfDocLogUHC
+  Scenario Outline: Verify specific PDF Plan Documents in Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user picks each example from excel to validate Plan Document PDFs and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
+    @pdfDocLogUHC01
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_1 | UHC  |
+
+    @pdfDocLogUHC02
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_2 | UHC  |
+
+    @pdfDocLogUHC03
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_3 | UHC  |
+
+    @pdfDocLogUHC04
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_4 | UHC  |
+
+    @pdfDocLogUHC05
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_5 | UHC  |
+    
+    @pdfDocLogUHC06
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_6 | UHC  |
