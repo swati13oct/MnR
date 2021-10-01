@@ -119,16 +119,7 @@ public class oleStepDefinition {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
-		if (SiteName.contains("UHC_ACQ")) {
-			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
-
-			
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
-			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
-
-		} else {
+		
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			/*
@@ -141,7 +132,6 @@ public class oleStepDefinition {
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
 			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
 
-		} // --------------------------------------------------------------------------------------------------------------------
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
