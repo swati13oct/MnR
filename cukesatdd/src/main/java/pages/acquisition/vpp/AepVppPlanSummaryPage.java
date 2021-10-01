@@ -330,7 +330,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         for(int i=0;i<5;i++)
         {
             checkForMultiCountyPopup(countyName);
-            selectYearOption(planYear);
+           // selectYearOption(planYear);
             result = collectInfoVppPlanSummaryPg(planName);
             int benefitUICnt = result.size();
             System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
