@@ -48,6 +48,9 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "input#search")
 	private WebElement searchBox;
+	
+	@FindBy(css = "button[class*='action-btn']")
+	private WebElement warningMsg;
 
 	@FindBy(css = "button[name='primary-search-box-action']")
 	private WebElement searchButton;
@@ -111,6 +114,9 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	@FindBy(css = "a[track='Saved']")
 	private WebElement viewSavedbutton;
 	
+	@FindBy(css = "a[track='Find Care']")
+	private WebElement findCarebutton;
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count, int locationCount) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
@@ -126,8 +132,20 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 		for (String s : searchParameterList) {
 			searchParameter = s;
+		/*	if(validate(warningMsg, 20)) {
+				jsClickNew(warningMsg);
+//				driver.navigate().refresh();
+				threadsleep(5000);
+				jsClickNew(findCarebutton);
+				threadsleep(2000);
+			}*/
 			validate(searchBox, 30);
 			if (type.toUpperCase().contains("DOCTORS")) {
+				if(!validate(searchBox, 30)) {
+					validate(findCarebutton, 20);
+					jsClickNew(findCarebutton);
+					threadsleep(2000);
+				}
 				searchBox.sendKeys(searchParameter);
 				threadsleep(2000);
 
