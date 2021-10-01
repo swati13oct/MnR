@@ -1993,15 +1993,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public LearnAboutMedicareHomePageMobile HoveronaLearnMedicare() throws InterruptedException {
-		waitforElement(learnaboutMedicare);
-		if (learnaboutMedicare.isDisplayed()) {
-			// Actions action = new Actions(driver);
-			// action.moveToElement(ShopForaplan).build().perform();
-			jsMouseOver(learnaboutMedicare);
-			return new LearnAboutMedicareHomePageMobile(driver);
-		} else {
-			return null;
-		}
+		return openLearnAboutMedicareFromMenu();
 	}
 
 	public WelcomePageMobile ZipcodeSearchToOLEWithCounty(String zipcode, String countyName, String planName)

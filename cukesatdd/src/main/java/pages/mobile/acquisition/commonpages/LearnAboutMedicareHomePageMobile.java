@@ -1002,13 +1002,14 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
 	private WebElement requestshoppageemailaddress;
 
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	@FindBy(css = "button[class$='submitEmailForm']")
 	private WebElement requestplaninformationLearnMedicaresubmit;
 
-	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+//	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+	@FindBy(css = "div[class*='thankYouMsg'] > p")
 	private WebElement requestplaninformationLearnMedicaresubmitpopup;
 
-	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
+	@FindBy(css = "span[id^='learnmore-email-error']")
 	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
 
 	public boolean RequestPlanIInformationshoppages(String EmailAddress) throws InterruptedException {
@@ -1017,11 +1018,9 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 		boolean flag = true;
 
-		requestshoppageemailaddress.clear();
-		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
-		requestplaninformationLearnMedicaresubmit.click();
-		if (validate(RequestPlanInformationLearnMedicarepages_ErrorMessage)
-				&& RequestPlanInformationLearnMedicarepages_ErrorMessage.isDisplayed()) {
+		sendkeysMobile(requestshoppageemailaddress, "(*^*_asb@t.c");
+		jsClickNew(requestplaninformationLearnMedicaresubmit);
+		if (validate(RequestPlanInformationLearnMedicarepages_ErrorMessage)) {
 			if (!RequestPlanInformationLearnMedicarepages_ErrorMessage.getText()
 					.contains("Please enter a valid email address")) {
 				System.out.println("Email Invalid Error is Not  displayed : "
@@ -1036,18 +1035,15 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 		}
 		validateNew(requestshoppageemailaddress);
-		requestshoppageemailaddress.clear();
-		requestshoppageemailaddress.sendKeys(EmailAddress);
+		sendkeysMobile(requestshoppageemailaddress, EmailAddress);
 		System.out.println("Email Address is enetered : " + EmailAddress);
 		validateNew(requestplaninformationLearnMedicaresubmit);
 		jsClickNew(requestplaninformationLearnMedicaresubmit);
-		if (requestplaninformationLearnMedicaresubmitpopup.getText()
-				.contains("Your guide will arrive in your inbox shortly")) {
-			System.out.println("****************Request  information is displayed  ***************");
 
-			Assertion.assertTrue(true);
-		} else {
-			System.out.println("****************Request information is displayed  ***************");
+		if(validateNew(requestplaninformationLearnMedicaresubmitpopup)) {
+			Assertion.assertTrue("****************Request  information is not displayed  ***************",
+					requestplaninformationLearnMedicaresubmitpopup.getText()
+							.contains("Your guide will arrive in your inbox shortly"));
 		}
 		return RequestPlanIInformation_Validation;
 
