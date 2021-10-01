@@ -3867,14 +3867,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement requestAgentBtn;
 
 	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
+		openShopForPlanFromMenu();
+		jsClickNew(moreHelpInfoLink);
 
-		Actions actions = new Actions(driver);
-		PageFactory.initElements(driver, this);
-		actions.moveToElement(ourPlansHoverLink);
-		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
 			return new RequestHelpAndInformationPageMobile(driver);
@@ -4285,8 +4282,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(viewShopPlansButton);
+		CommonUtility.checkPageIsReadyNew(driver);
 
-		validate(zipcodeChangeLink, 30);
+		waitforElementNew(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else

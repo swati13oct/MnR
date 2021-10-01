@@ -5130,7 +5130,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(compareLinks.get(1));
 
 		}
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
