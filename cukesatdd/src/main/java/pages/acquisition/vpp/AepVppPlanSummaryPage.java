@@ -25,10 +25,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
 	private WebElement welcomePageHeader;
 
-	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+//	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+	@FindBy(xpath="//*[contains(@id,'currentyear')]")
 	private WebElement CurrentYearLink;
 
-	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+//	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+	@FindBy(xpath="//*[contains(@id,'nextyear')]")
 	private WebElement NextYearLink;
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
