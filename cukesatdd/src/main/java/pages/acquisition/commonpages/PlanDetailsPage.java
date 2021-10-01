@@ -763,12 +763,10 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		System.out.println("Plan Name is : " + PlanName);
 
 		String PlanPremium = PremiumForPlan.getText();
@@ -786,12 +784,12 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		try {
@@ -806,12 +804,12 @@ public class PlanDetailsPage extends UhcDriver {
 
 		jsClickNew(EnrollinPlan);
 
-		try {
+	/*	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		// if (driver.getCurrentUrl().contains("enrollment"))
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");

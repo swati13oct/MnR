@@ -197,7 +197,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			validation_Flag = false;
 		return validation_Flag;
 	}
-	public boolean validate_provider_Lookup(String planType) {
+	public boolean validate_provider_Lookup(String planType) throws InterruptedException {
 		boolean validation_Flag = true;
 		if(validate(LookUpProviderBtn)){
 			String PCPWindow = driver.getWindowHandle();
@@ -206,12 +206,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			executor.executeScript("arguments[0].click();", LookUpProviderBtn);
 			//LookUpProviderBtn.click();
 			//driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			/*
+			 * try { Thread.sleep(10000); } catch (InterruptedException e1) { // TODO
+			 * Auto-generated catch block e1.printStackTrace(); }
+			 */
 			for(String winHandle : driver.getWindowHandles()){
 				if(!winHandle.equals(PCPWindow)) {
 					driver.switchTo().window(winHandle);
@@ -226,12 +224,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					driver.close();
 					driver.switchTo().window(PCPWindow);
 					CurrentURL = driver.getCurrentUrl();
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					/*
+					 * try { Thread.sleep(2000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
 					System.out.println("Currnt URL - "+CurrentURL);
 					if(CurrentURL.contains("provider-search")){
 						validation_Flag = true;
@@ -249,12 +245,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
 						jsClickNew(SelectPCPLink);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+					/*
+					 * try { Thread.sleep(2000); } catch (InterruptedException e1) { // TODO
+					 * Auto-generated catch block e1.printStackTrace(); }
+					 */
 						validateNew(filterBtn);
 			
 						if (AssinPCPLinks.size()>0){
@@ -282,39 +276,18 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						}*/
 						//button[contains(text(),'Submit')]
 
-						//SelectPCPContinueBtn.click();
-						try {
-							Thread.sleep(2000);
-							if(validate(SelectMedicalGrp)){
+						//Thread.sleep(2000);
+						if(validate(SelectMedicalGrp)){
 //								SelectMedicalGrp.click();
-								jsClickNew(SelectMedicalGrp);
-								executor = (JavascriptExecutor)driver;
-								executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
+							jsClickNew(SelectMedicalGrp);
+							executor = (JavascriptExecutor)driver;
+							executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
 
-							}
-
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
-						try {
-							Thread.sleep(3000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						
-						try {
-							Thread.sleep(2000);
-							if(validate(ReviewPCPButton)){				
-								jsClickNew(ReviewPCPButton);
+					//	Thread.sleep(2000);
+						if(validate(ReviewPCPButton)){				
+							jsClickNew(ReviewPCPButton);
 
-							}
-
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
 						String PCPname = ProviderName.getText();					
 						executor = (JavascriptExecutor)driver;
@@ -322,12 +295,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							
 						//AddProvider.click();
 						System.out.println("PCP selected : "+PCPname);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					/*
+					 * try { Thread.sleep(2000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
 						driver.switchTo().window(PCPWindow);
 						if(driver.getCurrentUrl().contains("provider-search")){
 							System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
@@ -385,12 +356,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		boolean flag;
 		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
 		PCPSearchLink.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		//WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
 			WebElement radioBtn = driver.findElement(By.xpath("	//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[contains(@class,'ng-star-inserted active')]"));
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("ng-star-inserted active");

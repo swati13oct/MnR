@@ -413,7 +413,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
 	private WebElement yearDrpDwnOptionPartA;
 
-	@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	//@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	@FindBy(xpath="//*[contains(@id, 'nextyear')]")
 	private WebElement nextYearSelection;
 
 	@FindBy(id = "mpbed-month")
@@ -595,7 +596,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
+	//@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
+	@FindBy(xpath="//*[contains(@id, 'currentyear')]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
@@ -1909,7 +1911,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
 			// driver.navigate().refresh();
-			Thread.sleep(5000);
+			//Thread.sleep(5000);
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {

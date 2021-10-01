@@ -433,23 +433,19 @@ if(!Preliminary_Questions.isDisplayed())
 public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page() {
 	
 	NextBtn.click();
-	try {
-		Thread.sleep(3000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(3000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	
 	if(DiabetesSection.getText().contains("Diabetes"))	
 	    ESRD.click();
 				
 		NextBtn.click();
-				try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(2000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		if(driver.getCurrentUrl().contains("use-disclosure")){
 			System.out.println("OLE UseDisclosure page is Displayed");
 			return new PrelimineryQuestionsPage(driver);
@@ -518,12 +514,10 @@ public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
 public LearnMoreModal OpenLearnMore() {
 	validate(RightRail_LearnMoreLink);
 	RightRail_LearnMoreLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	if(validate(LearnMore_Modal)){
 		System.out.println("OLE Learn More Modal is Displayed");
 		return new LearnMoreModal(driver);
@@ -539,11 +533,10 @@ public CancelOLEModal OpenCancelOLE() {
 	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 	
 	//CancelEnrollmentLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 	if(validate(CancellationModal)){
 		System.out.println("OLE Cancel Enrollment Modal is Displayed");
 		return new CancelOLEModal(driver);
@@ -556,11 +549,10 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", SiteLogo);
 	//SiteLogo.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 	if(validate(LeavingOLEmodal)){
 		System.out.println("Leaving OLE modal is Displayed");
 		return new LeavingOLEmodal(driver);

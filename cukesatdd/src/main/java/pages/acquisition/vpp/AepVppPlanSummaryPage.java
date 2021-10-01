@@ -736,7 +736,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 
 	public void Enroll_OLE_Plan(String planName, String planType, String planYear ) throws InterruptedException {
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
