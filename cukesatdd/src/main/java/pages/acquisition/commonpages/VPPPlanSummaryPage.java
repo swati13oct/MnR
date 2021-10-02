@@ -197,8 +197,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	// Right Rail Element - TFN
-	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id = "backToPlanSummaryTop")
@@ -742,7 +741,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
-	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide To AARP Medicare Select and Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
 	// @FindBy(xpath =
@@ -2574,9 +2573,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		if(planName.equalsIgnoreCase("AARP MedicareRx Walgreens (PDP)"))
-			planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
-		System.out.println("\n\n======"+planName+"======"+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
