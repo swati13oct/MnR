@@ -20,6 +20,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user should be able to see "Medicare Prescription Drug (Part D) Plans" expanded by default
@@ -56,6 +58,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -96,6 +100,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -125,6 +131,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -213,6 +221,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
@@ -234,8 +244,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
 
     @Scenario7_AARP
     Examples: 
-      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                                          | pscCode | zipcode | isMultutiCounty | county         | PDPplantype | PDPplanname                     | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         | MAplantype | MAplanname                           | SNPPlanType | SNPPlanName                                       | drug1 | drug2   | drug3   | drug4   | zipCode | Medsupplantype | TFNNo1         | defaultPharmacy                                                                            | testPlans                                | zipcode1 | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 8001024 |   36016 | Yes             | Barbour County | PDP         | AARP MedicareRx Walgreens (PDP) | (//a[contains(@class, 'tel')])[3] |         1 |          2 | (//a[contains(@class, 'tel')])[1] | MAPD       | AARP Medicare Advantage Plan 1 (HMO) | SNP         | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | Emsam | Lipitor | Orfadin | Humalog |   27053 | MS             | 1-844-895-7228 | Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.) | AARP Medicare Advantage Plan 2 (HMO-POS) |    90210 |       15 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |
+      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                 | pscCode | zipcode | isMultutiCounty | county            | PDPplantype | PDPplanname                     | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         | MAplantype | MAplanname                           | SNPPlanType | SNPPlanName                                       | drug1 | drug2   | drug3   | drug4   | zipCode | Medsupplantype | TFNNo1         | defaultPharmacy                                                                            | testPlans                                | zipcode1 | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planyear |
+      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | 8001024 |   33111 | No              | Miami-Dade County | PDP         | AARP MedicareRx Walgreens (PDP) | (//a[contains(@class, 'tel')])[3] |         1 |          2 | (//a[contains(@class, 'tel')])[1] | MAPD       | AARP Medicare Advantage Plan 1 (HMO) | SNP         | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | Emsam | Lipitor | Orfadin | Humalog |   27053 | MS             | 1-844-895-7228 | Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.) | AARP Medicare Advantage Plan 2 (HMO-POS) |    90210 |       15 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 | current  |
 
   Scenario Outline: <Scenario>: Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links.
     Given user is on campaign external Links page
@@ -256,6 +266,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And the user views the plans of the below plan type
+      | Plan Type | <PDPplanname> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user should be able to see "Medicare Prescription Drug (Part D) Plans" expanded by default
@@ -292,6 +306,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -332,6 +348,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -361,6 +379,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
@@ -416,6 +436,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code    | <zipcode>  |
       | Distance    | <distance> |
       | County Name | <county>   |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user chooses a plan from dropdown
@@ -449,6 +471,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
@@ -457,6 +481,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
@@ -470,5 +496,5 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
 
     @Scenario7_AARP_Stage @regressionAARP @campaignExternalStage
     Examples: 
-      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                                          | pscCode | zipcode | isMultutiCounty | county         | PDPplantype | PDPplanname                     | TFNxpath3                                                                  | planIndex | planIndex1 | TFNxpath4                         | MAplantype | MAplanname                           | SNPPlanType | SNPPlanName                                       | drug1 | drug2   | drug3   | drug4   | zipCode | Medsupplantype | TFNNo1         | defaultPharmacy       | testPlans                                | zipcode1 | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | 8001024 |   36016 | Yes             | Barbour County | PDP         | AARP MedicareRx Walgreens (PDP) | (//*[contains(@class,'paragraph')]//a[contains(@class,'tel tfn desktop')]) |         1 |          2 | (//a[contains(@class, 'tel')])[3] | MAPD       | AARP Medicare Advantage Plan 1 (HMO) | SNP         | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | Emsam | Lipitor | Orfadin | Humalog |   27053 | MS             | 1-844-895-7228 | Retail Chain Pharmacy | AARP Medicare Advantage Plan 2 (HMO-POS) |    90210 |       15 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 |
+      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                            | pscCode | zipcode | isMultutiCounty | county            | PDPplantype | PDPplanname                     | TFNxpath3                                                                  | planIndex | planIndex1 | TFNxpath4                         | MAplantype | MAplanname                           | SNPPlanType | SNPPlanName                                       | drug1 | drug2   | drug3   | drug4   | zipCode | Medsupplantype | TFNNo1         | defaultPharmacy       | testPlans                                | zipcode1 | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planyear |
+      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | 8001024 |   33111 | No              | Miami-Dade County | PDP         | AARP MedicareRx Walgreens (PDP) | (//*[contains(@class,'paragraph')]//a[contains(@class,'tel tfn desktop')]) |         1 |          2 | (//a[contains(@class, 'tel')])[3] | MAPD       | AARP Medicare Advantage Plan 1 (HMO) | SNP         | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | Emsam | Lipitor | Orfadin | Humalog |   27053 | MS             | 1-844-895-7228 | Retail Chain Pharmacy | AARP Medicare Advantage Plan 2 (HMO-POS) |    90210 |       15 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True             | True                 | current  |
