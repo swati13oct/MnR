@@ -1106,7 +1106,8 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 
-		campaignExternalLinkspage.viewPlanSummary(plantype);
+		VPPPlanSummaryPage plansummaryPage=campaignExternalLinkspage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	}
 

@@ -595,7 +595,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// active']//h2[@id='startoverdetails']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
+	//@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
+	@FindBy(xpath = "//button[contains(@id,'currentyear')]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")

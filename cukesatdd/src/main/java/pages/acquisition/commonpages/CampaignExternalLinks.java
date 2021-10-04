@@ -2069,7 +2069,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement medSuppZipCode;
 
 
-	public void viewPlanSummary(String planType) {
+	public VPPPlanSummaryPage viewPlanSummary(String planType) {
 		
 		if (planType.equalsIgnoreCase("PDP")) {
 			// sleepBySec(2);
@@ -2083,6 +2083,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 
@@ -2091,6 +2092,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			waitForPageLoadSafari();
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
@@ -2101,6 +2103,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
 			 */
+			return new VPPPlanSummaryPage(driver);
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
@@ -2112,8 +2115,9 @@ public class CampaignExternalLinks extends UhcDriver {
 			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
 			 * Auto-generated catch block e.printStackTrace(); }
 			 */
-
+			return new VPPPlanSummaryPage(driver);
 		}
+		return null;
 	}
 		
 	public String getPlanPremium(String PlanName, String planType) {
