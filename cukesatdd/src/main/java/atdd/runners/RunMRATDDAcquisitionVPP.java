@@ -8,7 +8,6 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },
 				features = {"src/main/resources/feature/acquisition/vpp"},
 				monochrome = true,
