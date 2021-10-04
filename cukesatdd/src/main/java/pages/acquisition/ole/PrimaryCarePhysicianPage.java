@@ -249,7 +249,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					 * try { Thread.sleep(2000); } catch (InterruptedException e1) { // TODO
 					 * Auto-generated catch block e1.printStackTrace(); }
 					 */
-						validateNew(filterBtn);
+						waitforElementNew(filterBtn);
+					//	validateNew(filterBtn);
 			
 						if (AssinPCPLinks.size()>0){
 						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
