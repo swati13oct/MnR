@@ -23,7 +23,7 @@ Feature: 1.05.9 UAT-OLE MedSupp Flow
       | MedicareNumber | <medicarenumber> |
 
     #Then the user validate on medsupp plans confirmation page
-    @MedSupp_OLE_Common_AARP @UATRegression @prodRegression_MedSupp_AARP @prodRegression @regressionAARP @sanity
+    @MedSupp_OLE_Common_AARP @UATRegression @prodRegression_MedSupp_AARP @prodRegression @regressionAARP @sanity @test02
     Examples: 
       | scenario           | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username        | password      | AARPUrl-stg                                                                                     | site | medicarenumber |
       | E2E Scenario 3_AMP |   35004 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | St. Clair County | MS       | 11/13/1940 | TEST_PORTALS_John      | TEST_PORTALS_Carry    | ABCD          | Resume          | TiggerOptumID29 | TiggerTigger1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | AARP | 1EG1TE1MK12    |
