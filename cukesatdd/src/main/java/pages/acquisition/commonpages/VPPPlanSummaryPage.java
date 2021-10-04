@@ -7203,7 +7203,6 @@ public String GetMonthlyPremiumValue() {
 		return Plannames;
 		
 	}
-	
 	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
 		findPlansOnShopForPlans.click();
 
