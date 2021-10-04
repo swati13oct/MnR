@@ -84,7 +84,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//span[contains(text(), 'Continue')]//..")
 	private WebElement SelectPCPContinueBtn;
 	
-	@FindBy(xpath = "//*[@id='label_selectedMedicalGroup0']")
+	//@FindBy(xpath = "//*[@id='label_selectedMedicalGroup0']")
+	@FindBy(xpath = "//*[contains(@id,'label_selectedMedicalGroup0')]")
 	private WebElement SelectMedicalGrp;
 
 	@FindBy(xpath = "//*[contains(text(), 'Continue')]")
@@ -93,7 +94,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'assign-pcp-btn')]")
 	private WebElement AddProvider;
 
-	@FindBy(xpath = "//*[@class='provider-name pcp']")
+	@FindBy(xpath = "//*[contains(@class,'provider-name pcp')]")
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
@@ -286,10 +287,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 
 						}
 					//	Thread.sleep(2000);
-						if(validate(ReviewPCPButton)){				
+					/*	if(validate(ReviewPCPButton)){				
 							jsClickNew(ReviewPCPButton);
 
-						}
+						}*/
 						String PCPname = ProviderName.getText();					
 						executor = (JavascriptExecutor)driver;
 						executor.executeScript("arguments[0].click();", AddProvider);
