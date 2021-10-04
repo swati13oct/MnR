@@ -348,6 +348,16 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Details Benefits_Data_2021 | PDPSheet2021_2 | AARP |
+      
+      @planDetailsProd01
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Details Benefits_Data_2021 | ProdSheet2021_1 | AARP |
+
+     @planDetailsProd02
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Details Benefits_Data_2021 | ProdSheet2021_2 | AARP |
 
   # 2021 UHC
   @PlanDetails_ExcelValidation @2021PlanDetialsUHC
@@ -451,3 +461,13 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Details Benefits_Data_2021 | PDPSheet2021_2 | UHC  |
+      
+        @planDetailsProd01
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Details Benefits_Data_2021 | ProdSheet2021_1 | UHC |
+
+     @planDetailsProd02
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Details Benefits_Data_2021 | ProdSheet2021_2 | UHC |

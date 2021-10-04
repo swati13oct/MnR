@@ -360,7 +360,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @importDrugsDocs
+  @importDrugsDocs @nonProd
   Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -374,13 +374,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Member    | <member>    |
 
     #Then the user validates the Drugs and Doctors
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @prodRegression @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @regressionAARP
     Examples: 
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
       | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @prodRegression @regressionUHC
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC
     Examples: 
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
