@@ -90,6 +90,9 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@data-test-id,'provider-name-link')])[1]")
 	public WebElement FirstHospitalRecord;
 
+	@FindBy(css = "[id$='bioTab']")
+	private WebElement providerDetailOverviewTab;
+
 	@FindBy(xpath = "//Img[@alt='Facility icon']")
 	public WebElement Facilityicon;
 	
@@ -146,7 +149,10 @@ public class FindCarePageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
 	private WebElement selectProviderBtn;
-	
+
+	@FindBy(css = "div[class$='mobile-profile-header-buttons'] .saved-provider-button")
+	private WebElement selectProviderButtonOverviewTab;
+
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 	
@@ -364,9 +370,12 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-		validateNew(selectProviderBtn);
-		jsClickNew(selectProviderBtn);
+
+		validate(Providericon);
+		jsClickNew(providerDetailOverviewTab);
+
+		waitforElementNew(selectProviderButtonOverviewTab, 20);
+		jsClickNew(selectProviderButtonOverviewTab);
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if (validate(addressCheckBox)) {
@@ -420,7 +429,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(selectProviderBtn);
+		waitforElementNew(selectProviderBtn, 20);
 		jsClickNew(selectProviderBtn);
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
