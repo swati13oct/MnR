@@ -264,15 +264,22 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 		if(validate(checkedSNPDSNPOption, 20)){
 			validate(snpMedicaid, 30);
 			jsClickNew(snpMedicaid);
-		}else if(validate(checkedSNPCSNPOption, 20)){
+			threadsleep(2000);
+		}
+		if(validate(checkedSNPCSNPOption, 20)){
 			validate(snpConditions, 30);
 			jsClickNew(snpConditions);
-		}else if(validate(checkedSNPISNPOption, 20)) {
+			threadsleep(2000);
+		}
+		if(validate(checkedSNPISNPOption, 20)) {
 			validate(snpNursinghome, 30);
 			jsClickNew(snpNursinghome);
-		}else if(validate(checkedSNPNoneOption, 20)) {
+			threadsleep(2000);
+		}
+		if(validate(checkedSNPNoneOption, 20)) {
 			validate(snpNone, 30);
 			jsClickNew(snpNone);
+			threadsleep(2000);
 		}
 			
 		String snpoptions[] = options.split(",");

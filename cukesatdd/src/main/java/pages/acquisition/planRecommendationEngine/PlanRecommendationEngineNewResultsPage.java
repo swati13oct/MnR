@@ -29,6 +29,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -116,6 +117,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
+	
+	@FindBy(css = "li.view-ms-plans a.buttonLink")
+	private WebElement viewMedigapLink;
 
 	@FindBy(css = ".view-ms-plans a")
 	private WebElement viewMSPlans;
@@ -234,6 +238,17 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "div.content h2")
 	private WebElement planNameDetailsPage;
+	
+	//MS Plan Details page
+	
+	@FindBy(css = "#PlanDetails .back-to-plans")
+	private WebElement MSplanDetailsPage;
+	
+	@FindBy(css = "#PlanDetails h1.heading-1")
+	private WebElement MSplanNameInDetailsPage;
+	
+	@FindBy(css = "#msVppZipCode")
+	private WebElement zipcodeMSForm;
 
 	// Result Loading Page Element Verification Method
 
@@ -441,6 +456,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all drugs covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
+			if(!planName.toUpperCase().contains("PATRIOT"))
+				Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
 		}
@@ -485,7 +503,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
 					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
-					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())
+					|| doctorName.toLowerCase().contains("unitedhealthcare network".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -504,7 +523,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
 					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
 					|| doctorName.toLowerCase().contains("do not include".toLowerCase())
-					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())
+					|| doctorName.toLowerCase().contains("unitedhealthcare network".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -589,9 +609,25 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		if (planAction.toLowerCase().contains("viewbutton")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection>.sub-content button")).click();
+			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+				threadsleep(10000);
+				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
+				if(validate(MSplanDetailsPage,20))
+				{
+					validate(MSplanNameInDetailsPage, 60);
+					Assert.assertTrue(planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+							"Not navigated to Plan details page");
+				}else {
+					validate(zipcodeMSForm, 60);
+					planSelectorResultspage.submitMSform();
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "MS Plan Summary page is not loaded");					
+				}	
+			}
+			else {
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
+			}
 		}
 	}
 
@@ -613,19 +649,35 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertFalse(curURL.contains(newURL), "Invalid Navigation");
 
 	}
+	
+	public void medigaplink() {
+		waitforResultsPage();
+		Assert.assertTrue(validate(viewMedigapLink), "View Medigap link is not showing");
+		if(validate(viewMedigapLink))
+			viewMedigapLink.click();
+		threadsleep(5000);
+		driver.getCurrentUrl().contains("/plan-summary");
+		Assert.assertTrue(validate(zipcodeMSForm, 60), "Microform is not displaying in MS Summary page");
+	}
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		String planType = plantiles.get(planIndex).findElement(By.cssSelector(".planInfo>p:nth-child(1)")).getText()
-				.trim();
+		String planType = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
-		if (planType.contains("Supplement")) {
+		System.out.println("PlanType is: "+planType);
+		
+		if (planType.contains("supplement")) {
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
 			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
 					.trim();
-		} else
-			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button")).click();
+		} else {
+			System.out.println("PlanIndex is: "+planIndex);
+		WebElement viewind = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
+		scrollToView(viewind);
 		threadsleep(2000);
+		jsClickNew(viewind);
+		threadsleep(2000);
+		}
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -720,6 +772,13 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		
 		return new PlanDetailsPage(driver);
 	
+	}
+	
+	public void addDoctorsLink() {
+	threadsleep(5000);
+	System.out.println("Adding doctors from PRE Result page");
+	plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
+	threadsleep(3000);
 	}
 	
 }

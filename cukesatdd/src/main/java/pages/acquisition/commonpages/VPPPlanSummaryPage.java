@@ -197,8 +197,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	// Right Rail Element - TFN
-	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id = "backToPlanSummaryTop")
@@ -2574,9 +2573,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		if(planName.equalsIgnoreCase("AARP MedicareRx Walgreens (PDP)"))
-			planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
-		System.out.println("\n\n======"+planName+"======"+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -7207,7 +7203,6 @@ public String GetMonthlyPremiumValue() {
 		return Plannames;
 		
 	}
-	
 	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
 		findPlansOnShopForPlans.click();
 

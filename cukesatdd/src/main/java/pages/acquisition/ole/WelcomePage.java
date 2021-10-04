@@ -172,7 +172,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'ole-progress-bar')]")
 	private WebElement OLEProgressBar;
 	
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding') or contains(@class,'tel ng-binding')]")
+	@FindBy(xpath = "//*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2]")
 	private WebElement VPPTFNNo;
 	
 	public WelcomePage(WebDriver driver) {
@@ -232,9 +232,9 @@ public class WelcomePage extends UhcDriver{
 				
 				validateNew(VPPTFNNo);
 				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
-				String VPPTFNNoActual = VPPTFNNo.getText();
-				System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
-				CheckiPerseptions();
+				//String VPPTFNNoActual = VPPTFNNo.getText();
+				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
+				//CheckiPerseptions();
 				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
 				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 				enrollInPlan.click();
