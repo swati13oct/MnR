@@ -413,7 +413,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement yearDrpDwnOptionPartA;
 
 	//@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='next_Year']")
-	@FindBy(xpath="//*[contains(@id, 'nextyear')]")
+	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
 	private WebElement nextYearSelection;
 
 	@FindBy(id = "mpbed-month")
@@ -596,7 +596,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement planYearPopup;
 
 	//@FindBy(xpath = "//button[contains(@id,'currentYearPlans')]")
-	@FindBy(xpath="//*[contains(@id, 'currentyear')]")
+	@FindBy(xpath="(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
