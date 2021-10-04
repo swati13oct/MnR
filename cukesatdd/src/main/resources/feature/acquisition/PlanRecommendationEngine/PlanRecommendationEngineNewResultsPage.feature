@@ -18,16 +18,23 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate elements in PRE results page
       | Zip Code       | <Zipcode> |
       | CountyDropDown | <county>  |
+    Then user validates Sort By drop down UI PRE-Result page
+    Then user validates Sort By elements visibility PRE-Result page
+      | Visibility Info | <Visibleinfo> |
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
-      | AARP |   10003 | NO            | New York | PDP           | No             |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
+      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
+      | AARP |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
+      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
-      | UHC  |   10003 | NO            | New York | PDP           | No             |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
+      | UHC  |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
+      | UHC  |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
+      | UHC  |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
 
   @PRE @planrecommandonation @PREVPPPage @F527967 @PREVPPPPaginationPDP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -69,16 +76,17 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Drug Selection | <Drug Selection> |
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo> |
+    Then user validates Sort By dropdown will not display in UI PRE-Result page
 
-    @regressionAARP
+    @regressionAARP @F527970
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
+      | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
+      | UHC  |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
 
   @PRE @planrecommandonation @PREResultsPage @PREPDPNoDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -172,13 +180,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
-    #      | AARP |   15537 | NO            | Bedford | MAPD          | None                 | UHGNetwork      | [blank]     | [blank]       | NO             |     [blank]                                                                                          | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       | UHC  |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
-  #      | UHC  |   15537 | NO            | Bedford | MAPD          | None                 | UHGNetwork      | [blank]     | [blank]       | NO             |     [blank]                                                                                          | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
   @PRE @planrecommendation @MAPDTile @PREResultsMAPDAcceptDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
     Given the user is on UHC medicare acquisition site PRE landing page
@@ -528,3 +534,45 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Examples: 
       | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                            | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                    | DrugInfo1                              | DrugInfo2                               |
       | UHC  |   32115 | NO            | Volusia County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:fentanyl citrate,NO,fentanyl citrate LOZ 200MCG,,,Week,1,NO,NO:Nutrilipid,NO,Nutrilipid EMU 20%,,,Week,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,atorvastatin calcium TAB 10MG,True:Plan G,azathioprine TAB 50MG,True | Plan N,fentanyl citrate LOZ 200MCG,N/A | Plan N,fentanyl citrate LOZ 200MCG,True |
+
+  @PRE @planrecommendation 
+  Scenario Outline: - To validate Filter By PlanType in PRE Result page
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user selects add drug option without drugs in Drug page
+      | Drug Selection | <Drug Selection> |
+    And user selects additional services option in additional services page
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
+    Then user selects cost preferences option in cost preferences page
+      | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
+    Then user validate elements in loading results page
+    Then user validates Sort By drop down UI PRE-Result page
+    Then user validates Sort By using PlanType in PRE-Result page
+      | Sort PlanType | <sortInfo> |
+    Then user removed filtered planType and Check Breadcrumbs in PRE-Result page
+
+    @regressionAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
+      | AARP |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
+
+      @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
+      | UHC  |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
