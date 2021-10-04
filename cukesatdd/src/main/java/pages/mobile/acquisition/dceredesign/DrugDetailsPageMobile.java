@@ -1055,6 +1055,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement uhcLogo;
 
 	public void clickingSiteLogoDrugDetail(String siteName) {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		
 		System.out.println(siteName);
 		if (siteName.equalsIgnoreCase("AARP")) {
 
