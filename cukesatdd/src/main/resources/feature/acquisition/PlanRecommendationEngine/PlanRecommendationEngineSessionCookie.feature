@@ -59,16 +59,18 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | Plan Type | <isCoverageOpt> |
     Then user selects add drug option and comparing DCE and Drug page
       | Drug Selection | <Drug Selection> |
+    #Then user selects edit drug options in Drug Page
+    #  | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
-      | AARP |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 |
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
+      | AARP |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 | Lipitor TAB 80MG,,10,Day,3,YES,NO                         |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
-      | UHC  |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 |
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
+      | UHC  |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 | Lipitor TAB 80MG,,10,Day,3,YES,NO                         |
 
   @PRE @providersessionVPPtoPRE @F358845 @F427538 @F458224
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans

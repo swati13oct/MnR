@@ -76,12 +76,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		boolean validation_Flag = true;
 		validate(ProposedEffectiveDatePageHeader);
 	//	jsClickNew(ProposedEffectiveDatePageHeader);
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		waitforElementNew(ProposedEffectiveDateOptions.get(0));
 		int count = ProposedEffectiveDateOptions.size();
 		if(count>0){
 			validation_Flag = true;
@@ -99,12 +94,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	
 	public String get_proposed_effective_date(){
 		String proposedEfDate = null;
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		waitforElementNew(ProposedEffectiveDateOptions.get(0));
 		int count = ProposedEffectiveDateOptions.size();
 		if(count>0){
 			System.out.println("Proposed Effective Date displayed");
