@@ -52,15 +52,15 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-#    Then the user validates below plan benefit values for the above selected plan
-#      | Monthly Premium            | <monthlyPremium>         |
-#      | Primary Care Physician     | <primaryCarePhysician>   |
-#      | Specialist                 | <specialist>             |
-#      | Referral Required          | <referralRequired>       |
-#      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-#      | Plan Type                  | <plantype>               |
-#      | Annual Deductible          | <annualDeductible>       |
+    Then the user validates below plan benefit values for the above selected plan
+      | Monthly Premium            | <monthlyPremium>         |
+      | Primary Care Physician     | <primaryCarePhysician>   |
+      | Specialist                 | <specialist>             |
+      | Referral Required          | <referralRequired>       |
+      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+      | Plan Type                  | <plantype>               |
+      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -219,7 +219,6 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | County Name     | <county>          |
     #When user accesses global footer of the AARP Medicare Plans home page
     And user clicks on About us link from footer of the Medicare Plans home page
-    And the user clicks on browser back button
     And user clicks on contact us link of aboutus page
     And user clicks on sitemap link of contact us page
     And user clicks on privacy policy link of sitemap page

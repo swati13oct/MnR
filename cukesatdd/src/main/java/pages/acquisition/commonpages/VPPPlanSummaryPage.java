@@ -197,7 +197,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	// Right Rail Element - TFN
-	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
@@ -413,7 +412,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
 	private WebElement yearDrpDwnOptionPartA;
 
-	@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	@FindBy(id = "nextYearPlans")
 	private WebElement nextYearSelection;
 
 	@FindBy(id = "mpbed-month")
@@ -2574,9 +2573,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		if(planName.equalsIgnoreCase("AARP MedicareRx Walgreens (PDP)"))
-			planDeductible = planDeductible.substring(0, 13)+','+ planDeductible.substring(13);
-		System.out.println("\n\n======"+planName+"======"+annualDeductible+"========="+planDeductible+"============\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -3894,13 +3890,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
 			if (validate(currentYearSelection, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
-				jsClickNew(currentYearSelection);
+				currentYearSelection.click();
+			//	jsClickNew(currentYearSelection);
 				
 			}
 		}else {
 			if(validate(nextYearSelection,20)) {
 				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
-				jsClickNew(nextYearSelection);
+				nextYearSelection.click();
+		//		jsClickNew(nextYearSelection);
 			}
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -7207,7 +7205,6 @@ public String GetMonthlyPremiumValue() {
 		return Plannames;
 		
 	}
-	
 	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
 		findPlansOnShopForPlans.click();
 

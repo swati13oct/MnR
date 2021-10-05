@@ -174,7 +174,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
     Then The User validates the Plan details on OLE page
 
-    @vppPlanDetailsCommon_AARP02 @regressionAARP
+    @vppPlanDetailsCommon_AARP02 @regressionAARP @sampleTest
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
       | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)     | current  |

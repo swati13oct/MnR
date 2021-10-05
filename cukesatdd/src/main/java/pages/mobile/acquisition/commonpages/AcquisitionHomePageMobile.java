@@ -519,7 +519,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
 
-	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
+	// @FindBy(xpath = "//span[contains(text(),'Learn more') or
+	// contains(text(),'Learn More About Medicare')]")
 //	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
 	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
 	private WebElement learnAboutMedicareHomeScreen;
@@ -2016,15 +2017,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public LearnAboutMedicareHomePageMobile HoveronaLearnMedicare() throws InterruptedException {
-		waitforElement(learnaboutMedicare);
-		if (learnaboutMedicare.isDisplayed()) {
-			// Actions action = new Actions(driver);
-			// action.moveToElement(ShopForaplan).build().perform();
-			jsMouseOver(learnaboutMedicare);
-			return new LearnAboutMedicareHomePageMobile(driver);
-		} else {
-			return null;
-		}
+		return openLearnAboutMedicareFromMenu();
 	}
 
 	public LearnAboutMedicareHomePageMobile goToLearnMedicare() throws InterruptedException {
@@ -3622,10 +3615,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@class='back-to-top']")
 	private WebElement BackToTop;
-	
+
 	@FindBy(xpath = "//span[text()='Medicare Advantage (Part C) Plans from UnitedHealthcare']")
 	private WebElement MAHeaderonShopPage;
-	
 
 	public void MedicareAdvantagePlans() {
 		threadsleep(5000);
@@ -3829,14 +3821,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
-	@FindBy(xpath = "//div[@data-rel='#plan-list-1']" )
+
+	@FindBy(xpath = "//div[@data-rel='#plan-list-1']")
 	private WebElement maPlansViewLink;
 
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
-		
+
 		sleepBySec(10);
-		if(maPlansViewLink.isDisplayed()) {
+		if (maPlansViewLink.isDisplayed()) {
 			jsClickNew(maPlansViewLink);
 		}
 
@@ -3968,14 +3960,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement requestAgentBtn;
 
 	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
-
-//		Actions actions = new Actions(driver);
-//		PageFactory.initElements(driver, this);
-//		actions.moveToElement(ourPlansHoverLink);
-//		actions.moveToElement(moreHelpInfoLink);
-//		actions.click().build().perform();
-		MobileMenuShopTool();
+		openShopForPlanFromMenu();
 		jsClickNew(moreHelpInfoLink);
+
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
@@ -4388,8 +4375,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(viewShopPlansButton);
+		CommonUtility.checkPageIsReadyNew(driver);
 
-		validate(zipcodeChangeLink, 30);
+		waitforElementNew(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
@@ -4811,8 +4799,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
-
 
 	public void validatestatedropDown(String state, String code) {
 		if (mobileMenuOpenCheck.isDisplayed()) {
@@ -5197,8 +5183,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Email Button is not working fine" + "\nExpected: " + pageTitle + "\nWhole HREF: " + href);
 		}
 	}
-	
-
 
 	public String getTFNNumberFromLink() {
 		CommonUtility.waitForPageLoadNew(driver, telTFNLink, 20);
@@ -5210,7 +5194,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		WebElement stateDropDown = driver.findElement(By.id("state-select"));
 		scrollToView(stateDropDown);
 		Select dropdown = new Select(stateDropDown);
-		String stateSelected=dropdown.getFirstSelectedOption().getText();
+		String stateSelected = dropdown.getFirstSelectedOption().getText();
 		System.out.println("State Selected:" + stateSelected);
 		return stateSelected;
 	}
