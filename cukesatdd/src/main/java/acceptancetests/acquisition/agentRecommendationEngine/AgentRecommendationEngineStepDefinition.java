@@ -65,6 +65,16 @@ public class AgentRecommendationEngineStepDefinition {
 		AREAgentLoginSearch ARESearch = new AREAgentLoginSearch(wd);
 		ARESearch.searchProfile(inputValues.get("Email"));
 	}
+	
+	@And("^agent use flagsmith to validate AEP plancompare page$")
+	public void agent_search_flagsmith(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AREAgentLoginSearch ARESearch = new AREAgentLoginSearch(wd);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "ARE");
+		aquisitionhomepage.openTelesalesAgentPortalAEP();
+		ARESearch.loginflagSmithARE(inputValues.get("User Name"));
+	}
 
 	@Then("^agent validates plan ranking drop down UI plancompare page$")
 	public void agent_verify_planrankingUI() {

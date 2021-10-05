@@ -92,6 +92,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
 	private WebElement headerNavigationBarHomeTab;
 	
+	@FindBy(css = ".twobyone-child1")
+	private List<WebElement> PREWidgetHomepage;
+	
 	@FindBy(css = "a[dtmname*='Shop For a Plan']")
 	private WebElement headerNavigationBarShopForaPlanTab;
 	
@@ -184,8 +187,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(linkText = "Search for a Pharmacy")
     private WebElement headerPharmacysearchLink;
     
-    @FindBy(linkText = "Search Doctors")
+    @FindBy(partialLinkText = "Search Doctors")
     private WebElement headerProvidersearchLink;
+    
     
  //Learn about Medicare inner element
         
@@ -270,7 +274,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
 	private WebElement HeaderShopFromHomeInFindYourPlan;
     
-    @FindBy(xpath = "//a[contains(text(),'Plan Recommendation')]")
+    @FindBy(css = "a[data-asset-name='Get Started']")
 	private WebElement HeaderGetRecommendationInShop;
 	
 //Footer Elements
@@ -498,6 +502,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		
 // Learn about medicare inner elements	
 //		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		backtoshopforaplan();
 		state();
 		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 		headerEligibilityLink.click();
@@ -603,7 +608,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		browserBack();
 
 		footerAboutUsLink.click();
-		validateLinks("/about-us.html");
+		validateLinks("/about-us");
 		browserBack();
 		footerContactUsLink.click();
 		validateLinks("/contact-us.html");
@@ -630,10 +635,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerNavigationBarShopForaPlanTab);
-		jsClickNew(headerShopLink);
-		scrollToView(HeaderShopFromHomeInFindYourPlan);
-		validate(HeaderShopFromHomeInFindYourPlan, 30);
-		jsClickNew(HeaderShopFromHomeInFindYourPlan);
+		jsClickNew(headerShopLink);;
 		scrollToView(HeaderGetRecommendationInShop);
 		validate(HeaderGetRecommendationInShop, 30);
 		jsClickNew(HeaderGetRecommendationInShop);
@@ -723,7 +725,20 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 					else
 						System.out.println("PRE Widget is not Available");
 				}
-			}			
+			}
+			
+// Navigating Plan RecommendationEngine via Homepage PRE Widget
+					public void navigationToPREViaHomePageWidget() {
+						System.out.println("Validating PRE Widget in homepage");
+						state();
+						Assert.assertTrue(validate(PREWidgetHomepage.get(0), 20), "PRE Widget is not present in homepage");
+						Assert.assertTrue(PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE']>h2")).getText().toUpperCase().trim().equalsIgnoreCase("NEED HELP FINDING A PLAN?"), "PRE Widget header is not present in homepage");
+						Assert.assertTrue(PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE'] a[title='Get Started']")).getText().toUpperCase().trim().contains("GET STARTED"), "PRE Widget link is not present in homepage");
+						PREWidgetHomepage.get(0).findElement(By.cssSelector("div[class*='NewCustomRTE'] a[title='Get Started']")).click();
+						threadsleep(2000);
+						driver.getCurrentUrl().contains("plan-recommendation-engine.html#/get-started");
+						validate(landingpageHeader,20);
+					}
 			
 //Reseting State to Select State
 			public void state() {
@@ -731,7 +746,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 				scrollToView(selectState);
 				Select dropdown = new Select(selectState);
 				waitUntilSelectOptionsPopulated(dropdown);
-				dropdown.selectByVisibleText("Select State");
+				dropdown.selectByVisibleText("California");
+				threadsleep(2000);
+				scrollToView(headerNavigationBarHomeTab);
 			}
 	
 //ZipCode Function inside Shop for a Plan

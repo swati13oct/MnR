@@ -197,8 +197,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> maPlansList;
 
 	// Right Rail Element - TFN
-	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id = "backToPlanSummaryTop")
@@ -413,7 +412,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
 	private WebElement yearDrpDwnOptionPartA;
 
-	@FindBy(xpath = "//div[contains(@class,'planOptions')]//label[@for='next_Year']")
+	@FindBy(id = "nextYearPlans")
 	private WebElement nextYearSelection;
 
 	@FindBy(id = "mpbed-month")
@@ -2540,7 +2539,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-                        + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//span[contains(text(),'Prescription Drugs')])"));
+						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -2978,7 +2977,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
-
+		
+		driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div[1]/div[1]/button/span")).click();
+		
 		for (String plan : listOfTestPlans) {
 			System.out.println("Proceed to locate plan=" + plan);
 
@@ -3891,14 +3892,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
 			if (validate(currentYearSelection, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
-				jsClickNew(currentYearSelection);
+				currentYearSelection.click();
+			//	jsClickNew(currentYearSelection);
 				
 			}
-		}else {
+		}else if(planYear.equalsIgnoreCase("future")){
 			if(validate(nextYearSelection,20)) {
 				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
-				jsClickNew(nextYearSelection);
+				nextYearSelection.click();
+		//		jsClickNew(nextYearSelection);
 			}
+		}
+		else {
+			System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
+			currentYearSelection.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
@@ -5233,7 +5240,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "]/div/div[contains(@class,'provider-info')]"));
 				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
 
-				Assertion.assertTrue(providerInfoTxt.contains(provider[i]));
+				Assertion.assertEquals(provider[i], providerInfoTxt);
 				System.out.println("#########" + providerInfoTxt + "#########");
 				/*
 				 * Assertion.assertEquals(provider[i],
@@ -7204,7 +7211,6 @@ public String GetMonthlyPremiumValue() {
 		return Plannames;
 		
 	}
-	
 	public void searchPlansWithCounty(String countyName, String ismultiCounty) {
 		findPlansOnShopForPlans.click();
 
