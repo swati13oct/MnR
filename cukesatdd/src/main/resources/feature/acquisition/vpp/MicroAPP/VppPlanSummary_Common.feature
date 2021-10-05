@@ -200,7 +200,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the popup and content on the site
 
-    @vppPlanSummaryCommonAARP02 @regressionAARP
+    @vppPlanSummaryCommonAARP02 @regressionAARP @callSamTest01
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             |
       | 00006 | AARP |   90210 | NO              | Los Angeles County |
@@ -219,6 +219,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | County Name     | <county>          |
     #When user accesses global footer of the AARP Medicare Plans home page
     And user clicks on About us link from footer of the Medicare Plans home page
+    And the user clicks on browser back button
     And user clicks on contact us link of aboutus page
     And user clicks on sitemap link of contact us page
     And user clicks on privacy policy link of sitemap page
