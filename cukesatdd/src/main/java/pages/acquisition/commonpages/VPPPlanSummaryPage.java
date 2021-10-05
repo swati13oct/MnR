@@ -3890,43 +3890,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(currentYearSelection, 20)) {
-				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
-			//	currentYearSelection.click();
-				jsClickNew(currentYearSelection);
-				
-			}
-		}else if(planYear.equalsIgnoreCase("future")){
-			if(validate(nextYearSelection,20)) {
-				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
-		//		nextYearSelection.click();
-				jsClickNew(nextYearSelection);
-			}
-		}
-		else {
-			System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
+		/*
+		 * CommonUtility.checkPageIsReadyNew(driver); if
+		 * (planYear.equalsIgnoreCase("current")) { // if the scenario is for current
+		 * year if (validate(currentYearSelection, 20)) {
+		 * System.out.println("*****CLICKING ON Current Year button*****: " +
+		 * currentYearSelection.getText()); // currentYearSelection.click();
+		 * jsClickNew(currentYearSelection);
+		 * 
+		 * } }else if(planYear.equalsIgnoreCase("next")){
+		 * if(validate(nextYearSelection,20)) {
+		 * System.out.println("*****CLICKING ON Next Year button*****: " +
+		 * nextYearSelection.getText()); // nextYearSelection.click();
+		 * jsClickNew(nextYearSelection); } } else {
+		 * System.out.println("*****CLICKING ON Current Year button*****: " +
+		 * currentYearSelection.getText()); currentYearSelection.click(); }
+		 * CommonUtility.checkPageIsReadyNew(driver); waitForPageLoadSafari(); }
+		 */
+	
+	CommonUtility.checkPageIsReady(driver);
+
+	if (validate(planYearPopup, 20)) { // if plan year popup is displayed
+		System.out.println("Popup is present for AEP : ");
+		if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 			currentYearSelection.click();
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
+		//validateNew(planYearPopupGoButton);
+		//planYearPopupGoButton.click();
+	} else { // if the plan year popup is not displayed
+		if (validate(CurrentYearPlansBtn, 20) && planYear.equalsIgnoreCase("current")) {
+			System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
+			jsClickNew(CurrentYearPlansBtn);
+			waitForPageLoadSafari();
+			// validateNew(AARPlogo, 10);
+		}
 	}
-
-	// public void handlePlanYearSelectionPopup(String planType) {
-	// if (!(planType.equalsIgnoreCase("MS"))) {
-	// CommonUtility.checkPageIsReadyNew(driver);
-	// CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-	// if (validate(planYearPopup)) {
-	// if (validate(nextYearSelection)) {
-	// nextYearSelection.click();
-	// CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
-	// planYearPopupGoButton.click();
-	// }
-	// }
-	// }
-	// }
-
+}
+	
 	public void handleChatPopup() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
 		// we're not trying to fail the test if it
