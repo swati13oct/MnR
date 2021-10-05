@@ -3892,15 +3892,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
 			if (validate(currentYearSelection, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
-				currentYearSelection.click();
-			//	jsClickNew(currentYearSelection);
+			//	currentYearSelection.click();
+				jsClickNew(currentYearSelection);
 				
 			}
 		}else {
 			if(validate(nextYearSelection,20)) {
 				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
-				nextYearSelection.click();
-		//		jsClickNew(nextYearSelection);
+		//		nextYearSelection.click();
+				jsClickNew(nextYearSelection);
 			}
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
