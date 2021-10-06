@@ -441,13 +441,13 @@ public class BuildYourDrugList extends UhcDriver {
 			jsClickNew(RecommendedDrug);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-            WebElement SelectDrug = driver
+           /* WebElement SelectDrug = driver
 					.findElement(By.xpath("(//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')])[1]"));
 			System.out.println("Drug Search results page is displayed");
 			validateNew(SelectDrug);
 			jsClickNew(SelectDrug);
 			threadsleep(2000);
-			waitForPageLoadSafari();
+			waitForPageLoadSafari(); */
 			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 			if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
