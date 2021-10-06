@@ -661,6 +661,14 @@ public class DCEStepDefinitionAARP {
 		plandetailspage.clickPrescriptionBenifitTab();
 	}
 
+
+	@Then("the user opens and validates Coverage stages modal text on VPP details page")
+	public void the_user_opens_and_validates_coverage_stages_modal_text_on_vpp_details_page() {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		plandetailspage.openValidateCoverageStageText();
+	}
+
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_clicks_Learn_More_button_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
