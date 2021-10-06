@@ -245,7 +245,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 				//if(!planType.contains("SNP")){
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-						jsClickNew(SelectPCPLink);
+						//jsClickNew(SelectPCPLink);
+						executor = (JavascriptExecutor)driver;
+						executor.executeScript("arguments[0].click();", SelectPCPLink);
 					/*
 					 * try { Thread.sleep(2000); } catch (InterruptedException e1) { // TODO
 					 * Auto-generated catch block e1.printStackTrace(); }
