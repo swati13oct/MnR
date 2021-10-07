@@ -357,11 +357,11 @@ public class ReviewSubmitPage extends UhcDriver{
 
 		validateNew(SubmitApplicationBtn);
 		scrollToView(SubmitApplicationBtn);
-		Thread.sleep(4000);
+	//	Thread.sleep(4000);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
 		//threadsleep(3000);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
@@ -693,11 +693,11 @@ public class ReviewSubmitPage extends UhcDriver{
 		claimNumberField.clear();
 		validateNew(claimNumberField);
 		sendkeysNew(claimNumberField, MedicareNumber1);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
 	//	sendkeysNew(medicaidNumberField,"12345876");
-		Thread.sleep(5000);
+	//	Thread.sleep(5000);
 	/*try {
 		if (partAStartDateField.isDisplayed() || partBStartDateField.isDisplayed()) {
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
