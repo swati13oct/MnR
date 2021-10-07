@@ -90,10 +90,10 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	@FindBy(css = "#finishAndReturnButton")
 	private WebElement FinishButton;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(css = "#finishAndReturnButton")
 	private WebElement FinishButtonFinish;
 
 	@FindBy(xpath = "//button[@data-test-id='People']")
@@ -262,7 +262,8 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']"
+				+ "//button[contains(@class,'action-btn')])[1]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		}else

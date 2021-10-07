@@ -75,7 +75,6 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	
 
 	@FindBy(css="span > a[class^='tel tfn'][data-asset-name='TFN']")
-
 	private WebElement needHelpTFN;
 	
 	@FindBy(id = "proceed")

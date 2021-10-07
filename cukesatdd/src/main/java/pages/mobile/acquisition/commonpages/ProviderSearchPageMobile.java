@@ -323,24 +323,15 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		jsClickNew(GetStarted);
 
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
-		scrollToView(MedicalDirectory);
 		jsClickNew(MedicalDirectory);
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
-
-		scrollToView(People);
-
 		jsClickNew(People);
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-
-		scrollToView(Primary);
-
 		jsClickNew(Primary);
 
 		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
-
-		scrollToView(AllPrimaryCare);
 		jsClickNew(AllPrimaryCare);
 
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
@@ -422,11 +413,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		scrollToView(selectProviderBtn);
 
-		WebElement hospitalNameLink = selectProviderBtn.findElement(By.xpath("./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
+		WebElement hospitalNameLink = selectProviderBtn.findElement(By.xpath(
+				"./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
 		String hospitalSaved = hospitalNameLink.getText().trim();
 		System.out.println("Selecting Hospital : " + hospitalSaved);
 		MRConstants.PROV_NAME = hospitalSaved;
-
 
 		jsClickNew(selectProviderBtn);
 
@@ -435,10 +426,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
 		}
-		/*validateNew(providerNameText);
-		String hospitalSaved = providerNameText.getText().trim();
-		System.out.println("Hospital Name is : " + hospitalSaved);
-		MRConstants.PROV_NAME = hospitalSaved;*/
+		/*
+		 * validateNew(providerNameText); String hospitalSaved =
+		 * providerNameText.getText().trim(); System.out.println("Hospital Name is : " +
+		 * hospitalSaved); MRConstants.PROV_NAME = hospitalSaved;
+		 */
 
 		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
@@ -598,16 +590,12 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		jsClickNew(MedicalDirectory);
 
-		// CommonUtility.waitForPageLoadNew(driver, People, 30);
-
 		CommonUtility.waitForPageLoadNew(driver, People, 10);
-		People.click();
+		jsClickNew(People);
 
-		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
-		Primary.click();
+		jsClickNew(Primary);
 
-		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 
