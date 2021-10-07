@@ -1041,6 +1041,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement findPlansOnShopForPlans;
+	
+	@FindBy(xpath = "//div[contains(@class,'swiper-container')]//div[contains(@class,'plan-name')]")
+	private WebElement planListContainerMSPlans;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1163,6 +1166,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			//CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
