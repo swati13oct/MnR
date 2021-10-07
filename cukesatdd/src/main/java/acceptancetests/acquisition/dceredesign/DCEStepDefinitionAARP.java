@@ -3240,5 +3240,17 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
 	}
+	
+	@When("^user selects plan year for OLE$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+		
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+	String planYear = givenAttributesMap.get("Plan Year");
+	ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+			.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+	zipCodePlanYearPage.selectPlanYearOLE(planYear);
+}
 
 }
