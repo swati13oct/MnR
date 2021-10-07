@@ -1,4 +1,3 @@
-
 package pages.acquisition.commonpages;
 
 import static org.testng.Assert.assertTrue;
@@ -3360,13 +3359,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (toolTipText.contains(CallSam1877)) {
+		if (toolTipText.length() == 14 && toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
-
-		} else if (toolTipText.contains(CallSam1855)) {
-			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
 		}
-
 		else
 			Assertion.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 

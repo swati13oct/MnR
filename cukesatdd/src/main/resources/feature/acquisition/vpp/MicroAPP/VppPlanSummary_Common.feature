@@ -52,15 +52,15 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-#    Then the user validates below plan benefit values for the above selected plan
-#      | Monthly Premium            | <monthlyPremium>         |
-#      | Primary Care Physician     | <primaryCarePhysician>   |
-#      | Specialist                 | <specialist>             |
-#      | Referral Required          | <referralRequired>       |
-#      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-#      | Plan Type                  | <plantype>               |
-#      | Annual Deductible          | <annualDeductible>       |
+    Then the user validates below plan benefit values for the above selected plan
+      | Monthly Premium            | <monthlyPremium>         |
+      | Primary Care Physician     | <primaryCarePhysician>   |
+      | Specialist                 | <specialist>             |
+      | Referral Required          | <referralRequired>       |
+      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+      | Plan Type                  | <plantype>               |
+      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -200,7 +200,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then user verify the popup and content on the site
 
-    @vppPlanSummaryCommonAARP02 @regressionAARP
+    @vppPlanSummaryCommonAARP02 @regressionAARP @callSamTest01
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             |
       | 00006 | AARP |   90210 | NO              | Los Angeles County |
