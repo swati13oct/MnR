@@ -114,7 +114,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
-	@FindBy(css = "#highlights > div.align-left.content-secondary > div.ng-scope > div > a")
+	@FindBy(css = "#highlights > div.align-left.content-secondary > a:nth-child(1)")
 	private WebElement EnrollinPlanButtonHeader;
 
 	@FindBy(css = "[class^='module-plan-summary']:nth-of-type(3) a[dtmname='Plans Detail:Tab:Enroll in Plan']")
