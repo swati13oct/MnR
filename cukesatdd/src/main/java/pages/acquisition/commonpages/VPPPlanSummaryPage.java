@@ -2977,7 +2977,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
-
+		
+		driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div[1]/div[1]/button/span")).click();
+		
 		for (String plan : listOfTestPlans) {
 			System.out.println("Proceed to locate plan=" + plan);
 
@@ -3894,12 +3896,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			//	jsClickNew(currentYearSelection);
 				
 			}
-		}else {
+		}else if(planYear.equalsIgnoreCase("future")){
 			if(validate(nextYearSelection,20)) {
 				System.out.println("*****CLICKING ON Next Year button*****: " + nextYearSelection.getText());
 				nextYearSelection.click();
 		//		jsClickNew(nextYearSelection);
 			}
+		}
+		else {
+			System.out.println("*****CLICKING ON Current Year button*****: " + currentYearSelection.getText());
+			currentYearSelection.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
