@@ -224,12 +224,10 @@ public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
 public LearnMoreModal OpenLearnMore() {
 	validate(RightRail_LearnMoreLink);
 	RightRail_LearnMoreLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	if(validate(LearnMore_Modal)){
 		System.out.println("OLE Learn More Modal is Displayed");
 		return new LearnMoreModal(driver);
@@ -245,11 +243,10 @@ public CancelOLEModal OpenCancelOLE() {
 	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 	
 	//CancelEnrollmentLink.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 	if(validate(CancellationModal)){
 		System.out.println("OLE Cancel Enrollment Modal is Displayed");
 		return new CancelOLEModal(driver);
@@ -262,11 +259,10 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", SiteLogo);
 	//SiteLogo.click();
-	try {
-		Thread.sleep(6000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 	if(validate(LeavingOLEmodal)){
 		System.out.println("Leaving OLE modal is Displayed");
 		return new LeavingOLEmodal(driver);
@@ -295,11 +291,10 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 	jsClickNew(ChangingCurrentMedicareRadio);
 	
 	System.out.println("PlanType : "+planType);
-	try {
-		Thread.sleep(3000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		/*
+		 * try { Thread.sleep(3000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 	
 	if(planType.contentEquals("MA")){
 		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 

@@ -159,7 +159,7 @@ public class AuthorizationPage extends UhcDriver{
 				validation_Flag = false;
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
+			//Thread.sleep(6000);
 			jsClickNew(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
@@ -206,7 +206,7 @@ public class AuthorizationPage extends UhcDriver{
 				validation_Flag = false;
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
+		//	Thread.sleep(6000);
 			//jsClickNew(ApplicantRadio);
 			
 			jsClickNew(AuthorizedRepresentativeRadio);
@@ -279,7 +279,7 @@ public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws In
 			}
 			
 			jsClickNew(SoU_AgreeRadio);		
-			Thread.sleep(6000);
+		//	Thread.sleep(6000);
 			}
 		}
 		return validation_Flag;
