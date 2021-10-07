@@ -54,4 +54,8 @@ public class Assertion {
 		Assert.assertEquals(actual, expected);
 	}
 
+	public static void assertStringContains (String message, String actual, String expected){
+		Assert.assertTrue(actual.contains(expected), message);
+	}
+
 }
