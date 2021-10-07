@@ -12,6 +12,8 @@ Feature: 1.05.1. OLE common tool flow E2E through VisitorProfile
     Then user validates plan count for all plan types on plan summary page
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |

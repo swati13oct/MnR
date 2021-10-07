@@ -517,12 +517,10 @@ public class PersonalInformationPage extends UhcDriver{
 	public LearnMoreModal OpenLearnMore() {
 		validate(RightRail_LearnMoreLink);
 		RightRail_LearnMoreLink.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		if(validate(LearnMore_Modal)){
 			System.out.println("OLE Learn More Modal is Displayed");
 			return new LearnMoreModal(driver);
@@ -538,11 +536,10 @@ public class PersonalInformationPage extends UhcDriver{
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 
 		//CancelEnrollmentLink.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(CancellationModal)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
@@ -555,11 +552,10 @@ public class PersonalInformationPage extends UhcDriver{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);
 		//SiteLogo.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(LeavingOLEmodal)){
 			System.out.println("Leaving OLE modal is Displayed");
 			return new LeavingOLEmodal(driver);
@@ -586,7 +582,7 @@ public class PersonalInformationPage extends UhcDriver{
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 		//Updated the get url title SEP Page with Other Health insurance...OLERedesign
 			if(driver.getCurrentUrl().contains("other-health-insurance")){
 			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE Other HealthInsurance or Chronic Page Page is Displayed");
@@ -637,7 +633,7 @@ public class PersonalInformationPage extends UhcDriver{
 		jsClickNew(NextBtn);
 
 		
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
 			//if(driver.getCurrentUrl().contains("special")){
 			if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
 			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE otherhealth insurance Page or Chronic Page is Displayed");
@@ -785,7 +781,7 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		*/
 		
-		Thread.sleep(3000);
+	//	Thread.sleep(3000);
 			if(driver.getCurrentUrl().contains("use")){
 			Assert.assertTrue(driver.getCurrentUrl().contains("use"), "OLE Use and Disclosure Authorization page is Displayed");
 			return new UseAndDisclosureAuthorizationPage(driver);
@@ -839,11 +835,10 @@ public class PersonalInformationPage extends UhcDriver{
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 		
 		//CancelEnrollmentLink.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(CancellationModalOLE)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			validate(CreateProfile);
