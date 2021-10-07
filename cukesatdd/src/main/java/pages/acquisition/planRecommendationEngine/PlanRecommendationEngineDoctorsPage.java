@@ -276,7 +276,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		String browser = MRScenario.browserName;				//E2E: the browser name is stored in browserName variable in getWebDriverNew method of MRScenario 
 
 		String env = MRScenario.environment;
-		threadsleep(2000);
+		threadsleep(6000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {

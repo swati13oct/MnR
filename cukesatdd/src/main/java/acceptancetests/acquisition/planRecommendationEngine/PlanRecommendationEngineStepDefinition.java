@@ -872,6 +872,12 @@ public class PlanRecommendationEngineStepDefinition {
 		preEditpage.returnVPP(button);
    	}
 	
+	@Then("^user return to PRE-Result page using browser back in EditMyResponse page$")
+   	public void browserback_editResponse_page() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.browserBackResult();
+   	}
+	
 	@Then("^user edits values in edit response page$")
    	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -914,6 +920,13 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.addSNPEditResponse(inputValues);
 		preEditpage.addLocationEditResponse(inputValues);
+   	}
+	
+	@Then("^user adds SNP options in edit response page$")
+   	public void snp_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.addSNPEditResponse(inputValues);
    	}
 	
 	@Then("^user selects add drug option in drug page from edit response page$")
@@ -1022,6 +1035,20 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		preEditpage.validateSaveResults();
+	}
+	
+	@Then("^user save recommendation PlanType and PlanName to validate Browser back Functionality in results page$")
+   	public void save_Recom() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.saveFirstRecom();
+	}
+	
+	@Then("^user validate edited recommendation PlanType and PlanName in results page$")
+   	public void edited_save_Recom() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.editedFirstRecom();
 	}
 	
 	@Then("^user save Plans in PRE Result page$")
