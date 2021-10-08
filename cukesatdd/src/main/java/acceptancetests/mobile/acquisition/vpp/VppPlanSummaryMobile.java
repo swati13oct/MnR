@@ -208,11 +208,10 @@ public class VppPlanSummaryMobile {
 		/*
 		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * 
+		 *
 		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
-
 		String plantype = memberAttributesMap.get("Plan Type");
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
@@ -223,7 +222,8 @@ public class VppPlanSummaryMobile {
 		String annualDeductible = memberAttributesMap.get("Annual Deductible");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.viewPlanSummary(plantype);
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
+		plansummaryPage.viewPlanSummary(plantype, planYear);
 
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.clickOnViewMoreForPlan(planName);
@@ -244,18 +244,21 @@ public class VppPlanSummaryMobile {
 	@Then("^the user hover overs the tool tip for Why is my premium 0 and validates the text$")
 	public void toolTip_premium0_validateText() throws Throwable {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("SNP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.viewPlanSummary(planType);
+//			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.viewPlanSummary(planType, planYear);
 			plansummaryPage.toolTipForPremium0(planName);
 		} else if (planType.equals("PDP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.viewPlanSummary(planType, planYear);
+//			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.toolTipForAnnualDeductible(planName);
 		}
 	}
@@ -518,18 +521,21 @@ public class VppPlanSummaryMobile {
 		String site = givenAttributesMap.get("Site");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
 		if (site.equalsIgnoreCase("ulayer")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.viewPlanSummary(plantype);
+			plansummaryPage.viewPlanSummary(plantype, planYear);
+//			plansummaryPage.viewPlanSummary(plantype);
 			EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(plansummaryPage.driver);
 			util.handlePlanYearSelectionPopup(plantype);
 			getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, plansummaryPage.driver);
 		} else {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.viewPlanSummary(plantype);
+			plansummaryPage.viewPlanSummary(plantype, planYear);
+//			plansummaryPage.viewPlanSummary(plantype);
 			EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(plansummaryPage.driver);
 			util.handlePlanYearSelectionPopup(plantype);
 			getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, plansummaryPage.driver);
