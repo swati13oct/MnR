@@ -2672,7 +2672,8 @@ public class VppPlanCompareMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 
