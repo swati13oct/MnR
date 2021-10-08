@@ -1106,39 +1106,58 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
     }
 
-    public void viewPlanSummary(String planType, String planYear) {
+    public void viewPlanSummary(String planType) {
 
         clickonBackToPlanResults(); // navigate back to plan type selection page if not already
 
-        CommonUtility.checkPageIsReadyNew(driver);
         if (planType.equalsIgnoreCase("PDP")) {
             sleepBySec(2);
+
+            // iosScroll(pdpPlansViewLink);
+            scrollToView(pdpPlansViewLink);
             jsClickNew(pdpPlansViewLink);
             System.out.println("PDP Plan Type Clicked");
             CommonUtility.checkPageIsReadyNew(driver);
+            // CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
         } else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+            // CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+            CommonUtility.checkPageIsReadyNew(driver);
             validate(maPlansViewLink, 10);
+            // iosScroll(maPlansViewLink);
+            scrollToView(maPlansViewLink);
             jsClickNew(maPlansViewLink);
             CommonUtility.checkPageIsReadyNew(driver);
+            // CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
         } else if (planType.equalsIgnoreCase("MS")) {
+            // CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+            CommonUtility.checkPageIsReadyNew(driver);
+            // iosScroll(msPlansViewLink);
+            scrollToView(msPlansViewLink);
             jsClickNew(msPlansViewLink);
             CommonUtility.checkPageIsReadyNew(driver);
+            // CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+            /*
+             * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
+             * medSuppPlanList.get(0), 30);
+             */
         } else if (planType.equalsIgnoreCase("SNP")) {
+            CommonUtility.checkPageIsReadyNew(driver);
+            // iosScroll(snpPlansViewLink);
+            scrollToView(snpPlansViewLink);
             jsClickNew(snpPlansViewLink);
             CommonUtility.checkPageIsReadyNew(driver);
-            /*try {
+            // CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+            try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }*/
+            }
 
         }
 
         // For prod checkout only
         clickBackToViewAllPlans();
-        
-        handlePlanYearSelectionPopup(planYear);
     }
 
     /**
@@ -1153,7 +1172,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         }
     }
 
-    public int getPlanCountAndViewPlanSummary(String planType, String planYear) {
+    public int getPlanCountAndViewPlanSummary(String planType) {
         int planCount = 0;
         planType = planType.equalsIgnoreCase("mapd") ? "ma" : planType.toLowerCase();
 
@@ -1191,7 +1210,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
                 break;
         }
 
-        viewPlanSummary(planType, planYear);
+        viewPlanSummary(planType);
         return planCount;
     }
 
@@ -4061,6 +4080,29 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             jsClickNew(planYearToggle);
             CommonUtility.checkPageIsReadyNew(driver);
         }
+
+
+		/*if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
+			if (validate(IsMyDoctorCovereredBanner, 20)) {
+				System.out.println("***** Doctor banner verified ******");
+
+			} else {
+				validate(HowMuchDrugCostBanner, 10);
+				System.out.println("***** Drug cost banner verified ******");
+			}
+		}*/
+
+        // Use this code next year 2022
+
+        // if(planYear.equalsIgnoreCase("current")) { // if the scenario is for current
+        // year
+        // if(validate(CurrentYearPlansBtn, 20)) {
+        // System.out.println("*****CLICKING ON Current Year button*****:
+        // "+CurrentYearPlansBtn.getText());
+        // jsClickNew(CurrentYearPlansBtn);
+        // }
+        // }
+
     }
 
     public void handleChatPopup() {

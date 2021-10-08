@@ -139,9 +139,8 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-		plansummaryPage.viewPlanSummary(plantype, planYear);
 
+		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	List<String> allPlanNames = null;
