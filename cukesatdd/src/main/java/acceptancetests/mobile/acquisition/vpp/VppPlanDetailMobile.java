@@ -2629,7 +2629,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 	}
 
 	@Then("^user verify the popup and content in popup$")
@@ -2662,7 +2663,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 
@@ -3819,7 +3821,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 

@@ -2188,18 +2188,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new VPPTestHarnessPageMobile(driver);
 	}
 
-	public void validateCallSamContent() throws InterruptedException {
+	public void validateCallSamContent(String tfnNumber) throws InterruptedException {
 
 		// Actions action = new Actions(driver);
 		// WebElement element = callsam;
 		// action.moveToElement(element).perform();
 		waitforElementNew(callsamtooltip, 30);
-		String toolTipText = callsamtooltip.getText();
+		String toolTipText = callsamtooltip.getText().trim();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (toolTipText.contains(CallSam1877)) {
+		Assertion.assertEquals("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
+		/*if (toolTipText.contains(CallSam1877)) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
 		} else if (toolTipText.contains(CallSam1855)) {
 			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
@@ -2208,7 +2209,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		else
-			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-844");
+
+			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");*/
+
 
 	}
 
