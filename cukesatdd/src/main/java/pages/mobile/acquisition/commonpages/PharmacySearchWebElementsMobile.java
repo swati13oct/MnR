@@ -241,6 +241,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@id,'createpdf')]")
 	protected WebElement viewsearchpdf;
 
+	@FindBy(xpath="//a[@id='viewImportantInformationpdf_id']")
+	protected WebElement viewFrontMatterPdf;
+
 	@FindBy(xpath = ".//a[@class='display-block collapse-expand collapsed']")
 	protected WebElement moreInfoLink;
 
