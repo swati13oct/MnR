@@ -155,11 +155,11 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public HashMap<String, Integer> collectInfoVppPlanSummaryPg() {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		System.out.println("Proceed to collect the plan counts on vpp summary page");
 
 		clickonBackToPlanResults();
-		
+
 		int allPlans = Integer.valueOf(vppTop.getText().substring(10, 12).trim());
 		scrollToView(maPlansCount);
 		int maPlans = Integer.valueOf(maPlansCount.getText());
@@ -167,17 +167,17 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		try {
 			scrollToView(msPlansCount);
 			msPlans = Integer.valueOf(msPlansCount.getText());
-		} catch (NumberFormatException e) {				
+		} catch (NumberFormatException e) {
 			msPlans = 0;
 		}
-		
+
 		scrollToView(pdpPlansCount);
 		int pdpPlans = Integer.valueOf(pdpPlansCount.getText());
-		
+
 		scrollToView(snpPlansCount);
 		int snpPlans = Integer.valueOf(snpPlansCount.getText());
 
-		HashMap<String, Integer> result=new HashMap<String, Integer>();
+		HashMap<String, Integer> result = new HashMap<String, Integer>();
 		result.put("Total Plan Count", allPlans);
 		result.put("MA Plan Count", maPlans);
 		result.put("MS Plan Count", msPlans);
@@ -186,9 +186,9 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		result.put("Saved Heart Count", planSummary_listOfSavedHearts.size());
 		result.put("Enroll Button Count", planSummary_listOfEnrollInPlanButtons.size());
 		result.put("View Plan Details Button Count", planSummary_listOfViewPlanDetailsButtons.size());
-		
-		System.out.println("collected result="+result);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+
+		System.out.println("collected result=" + result);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return result;
 	}
 
@@ -304,22 +304,20 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void clickOnBackToAllPlansFromCompareBackToSummaryPage() {
-		//scrollToView(backToAllPlansLnk);
-		//Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page", validate(backToAllPlansLnk));
-	
-		//CommonUtility.checkPageIsReadyNew(driver);
-		//jsClickNew(backToAllPlansLnk);
-		scrollToView(backToAllPlansLnk);
-		//CommonUtility.checkPageIsReadyNew(driver);
-		backToAllPlansLnk.click();
-		
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.navigate().back();
+			System.out.println("Email button click not working on iOS hence skipped(Click(),jsclick() both failing)");
+		} else {
+			jsClickNew(backToAllPlansLnk);
+		}
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void clickonBackToPlanResults() {
 		if (backToPlans.isDisplayed()) {
 			scrollToView(backToPlans);

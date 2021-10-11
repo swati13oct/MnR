@@ -93,10 +93,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = ".provider-cards")
 	private WebElement savedProviders;
 
-
 	@FindBy(css = "button[class^='toggle']")
 	private WebElement rallyHamburgerMenu;
-
 
 	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
 	public WebElement addProviderBanner;
@@ -643,23 +641,44 @@ public class ComparePlansPageMobile extends UhcDriver {
 		jsClickNew(planAvailableText);
 	}
 
-	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
-		jsClickNew(BackToAllPlan);
-		System.out.println("Back to all plan is clicked");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	/*
+	 * This method is created as workaround for iOS click issue on backToAllPlan
+	 * link
+	 */
+	public void backToPlanSummary_PlanCompare_iOS() {
+
+		if (driver.getCurrentUrl().contains("plan-compare")) {
+			driver.navigate().back();
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println(driver.getCurrentUrl());
-		Thread.sleep(5000);
-		if (driver.getCurrentUrl().contains("#/plan-summary")) {
+
+	}
+
+	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
+		//CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			backToPlanSummary_PlanCompare_iOS();
 			return new VPPPlanSummaryPageMobile(driver);
+			
+		} else {
+			jsClickNew(BackToAllPlan);
+			System.out.println("Back to all plan is clicked");
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println(driver.getCurrentUrl());
+			Thread.sleep(5000);
+			if (driver.getCurrentUrl().contains("#/plan-summary")) {
+				return new VPPPlanSummaryPageMobile(driver);
+			}
 		}
 		return null;
+
 	}
 
 	public void validateCallSam() throws InterruptedException {
@@ -983,7 +1002,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		 * executor.executeScript("arguments[0].scrollIntoView(true);",
 		 * editDoctorsLink);
 		 */
-
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);

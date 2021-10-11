@@ -138,12 +138,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | current |
+      |   10001 | AARP |        10 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | current |
+      |   10001 | UHC  |        10 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
@@ -167,12 +167,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | current |
+      |   10001 | AARP |        10 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | current |
+      |   10001 | UHC  |        10 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
