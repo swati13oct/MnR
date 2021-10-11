@@ -1,6 +1,7 @@
 #Author: Naveen BK
 #created Date:04/06/2020
-@shopperProfile
+#nonProd tags used to negate running these flows in offline and prod. - Aayush 10/11
+@shopperProfile @nonProd
 Feature: 1.09. ACQ- Shopper Profile
 
   @searchProfileEmail @SanitySP @regressionSP
