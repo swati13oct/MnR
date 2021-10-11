@@ -339,9 +339,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		} else if (driver.findElements(By.xpath(
+		}
+		/*else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {
+				.size() > 0) {*/
+		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
@@ -360,7 +362,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+//	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(css = "#finishAndReturnButton")
 	private WebElement FinishButton;
 
 	public String selectsHospitals() {
@@ -411,9 +414,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		} else if (driver.findElements(By.xpath(
+		}
+		/*else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {
+				.size() > 0) {*/
+		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
@@ -614,9 +619,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		} else if (driver.findElements(By.xpath(
+		}
+		/*else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {
+				.size() > 0) {*/
+		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			// FinishButton.click();
 			validateNew(savedProviderFinishButton);
