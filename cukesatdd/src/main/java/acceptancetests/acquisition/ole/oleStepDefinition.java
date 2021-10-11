@@ -3501,4 +3501,32 @@ public class oleStepDefinition {
 		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		 authorizationPage.validate_Authorized_Applicant();
 	}	
+	@Then("^the user clicks on Submit Enrollment to complete enrollment in Prod$")
+	public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment_Prod() throws Throwable {
+		
+		String ConfirmationNumber="";
+		if ((MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
+					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
+			if (oleConfirmationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+
+				System.out.println("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber);
+				scenario.log("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber); 
+			} else {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+
+				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
+		} else {
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+		}
+		 }
+	
 }
