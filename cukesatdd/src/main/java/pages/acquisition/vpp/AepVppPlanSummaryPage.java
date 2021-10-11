@@ -25,10 +25,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
 	private WebElement welcomePageHeader;
 
-	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+//	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+	@FindBy(xpath="//*[contains(@id,'currentyear')]")
 	private WebElement CurrentYearLink;
 
-	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+//	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+	@FindBy(xpath="//*[contains(@id,'nextyear')]")
 	private WebElement NextYearLink;
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
@@ -328,7 +330,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         for(int i=0;i<5;i++)
         {
             checkForMultiCountyPopup(countyName);
-            selectYearOption(planYear);
+           // selectYearOption(planYear);
             result = collectInfoVppPlanSummaryPg(planName);
             int benefitUICnt = result.size();
             System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
