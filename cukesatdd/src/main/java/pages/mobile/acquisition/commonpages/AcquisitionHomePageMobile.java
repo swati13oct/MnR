@@ -2168,7 +2168,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		Assertion.assertEquals("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
+		Assertion.assertStringContains("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
 		/*if (toolTipText.contains(CallSam1877)) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
 
