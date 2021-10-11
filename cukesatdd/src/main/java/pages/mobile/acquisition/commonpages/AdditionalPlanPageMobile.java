@@ -19,16 +19,16 @@ import pages.acquisition.commonpages.PageTitleConstants;
  */
 public class AdditionalPlanPageMobile extends UhcDriver{
 
-	@FindBy(id = "popupClose")
+	@FindBy(css = "#popupClose")
 	private WebElement noOtherPlanToAddLink;
 
-	@FindBy(id = "popupSubmit")
+	@FindBy(css = "#popupSubmit")
 	private WebElement popupSubmitButton;
 
-	@FindBy(id = "memberId1")
+	@FindBy(css = "#memberId1")
 	private WebElement memberId1;
 
-	@FindBy(id = "memberId2")
+	@FindBy(css = "#memberId2")
 	private WebElement memberId2;
 
 	public AdditionalPlanPageMobile(WebDriver driver) {

@@ -41,17 +41,17 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
 	
-	@FindBy(id = "firstName")
+	@FindBy(css = "#firstName")
 	private WebElement firstNameField; //PDP enrollment guide page
 	
-	@FindBy(id = "ym-first_name")
+	@FindBy(css = "#ym-first_name")
 	private WebElement firstNameAgentAppt; //agent appointment page
 	
 	
 	@FindBy(css = "[id^='zipcodemeded']")
 	private WebElement zipCodeMedEd;
 	
-	@FindBy(id = "lookzip")
+	@FindBy(css = "#lookzip")
 	private WebElement lookUpZipLink;
 	
 	
@@ -76,7 +76,7 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	@FindBy(css="span > a[class^='tel tfn'][data-asset-name='TFN']")
 	private WebElement needHelpTFN;
 	
-	@FindBy(id = "proceed")
+	@FindBy(css = "#proceed")
 	private WebElement proceed;
 	
 	public RequestHelpAndInformationPageMobile(WebDriver driver) {

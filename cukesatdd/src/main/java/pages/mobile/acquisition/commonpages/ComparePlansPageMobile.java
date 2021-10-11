@@ -41,7 +41,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "a#backtoplansummarypage")
 	private WebElement BackToAllPlan;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 
 	@FindBy(css = "#backtoplansummarypage")
@@ -292,7 +292,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
 	private List<WebElement> drugList;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")

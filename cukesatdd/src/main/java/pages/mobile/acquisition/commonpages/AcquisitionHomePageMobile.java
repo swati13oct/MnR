@@ -79,13 +79,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
-	@FindBy(id = "dce")
+	@FindBy(css = "#dce")
 	private WebElement getStartedButton;
 
-	@FindBy(id = "learnfindplanBtn")
+	@FindBy(css = "#learnfindplanBtn")
 	private WebElement learnfindPlansButton;
 
-	@FindBy(id = "Find a pharmacy near you")
+	@FindBy(css = "#Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
 	@FindBy(className = "zip-button")
@@ -94,16 +94,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink1;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(css = "#zipcodebtn")
 	private WebElement findPlansButton;
 
-	@FindBy(id = "learn-zipcode")
+	@FindBy(css = "#learn-zipcode")
 	private WebElement learnzipCodeField;
 
-	@FindBy(id = "lookzip")
+	@FindBy(css = "#lookzip")
 	private WebElement lookzip;
 
-	@FindBy(id = "findazip_box")
+	@FindBy(css = "#findazip_box")
 	private WebElement zipCodeSearchPopup;
 
 	@FindBy(xpath = "//div[@id='findazip_box']/div/div/div/h4")
@@ -112,10 +112,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(id = "homefooter")
+	@FindBy(css = "#homefooter")
 	private WebElement homefooter;
 
-	@FindBys(value = { @FindBy(id = "selectCounty") })
+	@FindBys(value = { @FindBy(css = "#selectCounty") })
 	List<WebElement> countyRows;
 
 	@FindBy(xpath = "/html/body/div[3]/div/table/tbody/tr[3]/td/table/tbody/tr[2]/td/div/div[2]/div/div/div[2]/div/ul/li[2]/a")
@@ -136,22 +136,22 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id=\"planTypesColumn\"]/h3[2]/a")
 	private WebElement enroll;
 
-	@FindBy(id = "ghn_lnk_1")
+	@FindBy(css = "#ghn_lnk_1")
 	public WebElement navigationSectionHomeLink;
 
-	@FindBy(id = "ghn_lnk_2")
+	@FindBy(css = "#ghn_lnk_2")
 	public WebElement ourPlansHoverLink;
 
-	@FindBy(id = "subnav_2")
+	@FindBy(css = "#subnav_2")
 	public WebElement ourPlansDropdownText;
 
 	@FindBy(xpath = "//html[@id='ctl00_MasterHtmlTag']/head/title")
 	public WebElement test;
 
-	@FindBy(id = "provider")
+	@FindBy(css = "#provider")
 	private WebElement po7Link;
 
-	@FindBy(id = "dce")
+	@FindBy(css = "#dce")
 	private WebElement enterYourDrugListButton;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_4']")
@@ -175,10 +175,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a[title='Estimate Drug Costs'], a[title^='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
 
-	@FindBy(id = "redirect_content")
+	@FindBy(css = "#redirect_content")
 	private WebElement leaveAARPMedicarePlansDialog;
 
-	@FindBy(id = "proceed")
+	@FindBy(css = "#proceed")
 	private WebElement proceedLeaveAARPMedicare;
 
 	@FindBy(xpath = "//a[@class='viewLink disclaimer']")
@@ -205,7 +205,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='js-ole-plan-select']//following::button")
 	private WebElement enrollButton;
 
-	@FindBy(id = "js-ole-zip-search")
+	@FindBy(css = "#js-ole-zip-search")
 	private WebElement StandaloneZipcode;
 
 	@FindBy(xpath = "//*[@id='js-ole-zip-search']/following-sibling::button")
@@ -240,16 +240,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement btnGO;
 
 	/*
-	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
+	 * @FindBy(css = "#vpp_selectcounty_box") private WebElement countyModal;
 	 */
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement zipCode;
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(css = "#cta-zipcode")
 	private WebElement zipCode1;
 
 	@FindBy(className = "textalign")
@@ -258,7 +258,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(id = "nav-zipcode")
+	@FindBy(css = "#nav-zipcode")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -267,25 +267,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement GoButton;
 
-	@FindBy(id = "cobrowse-disclaimer")
+	@FindBy(css = "#cobrowse-disclaimer")
 	private WebElement requestAssistanceModal;
 
 	@FindBy(xpath = "//div[@id='cobrowse-disclaimer']//*[contains(@class,'modal-title')]")
 	private WebElement requestAssistanceTitle;
 
-	@FindBy(id = "correlationId")
+	@FindBy(css = "#correlationId")
 	private WebElement requestAssistanceAgentID;
 
 	@FindBy(xpath = "//a[contains(@class,'closer')]")
 	private WebElement requestAssistanceClose;
 
-	@FindBy(id = "gbqfbb")
+	@FindBy(css = "#gbqfbb")
 	private WebElement feelingluckyBtn;
 
 	@FindBy(xpath = "//tr[@id='contentRow']//h1")
 	public WebElement footerLinkHeader;
 
-	@FindBy(id = "medicareTitle")
+	@FindBy(css = "#medicareTitle")
 	public WebElement siteMapHeader;
 
 	@FindBy(xpath = "//*[contains(@class,'heading-1') and contains(text(),'Privacy Policy')]")
@@ -310,7 +310,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a[title='Find a Provider']")
 	private WebElement providerSearchLinkHomeScreen;
 
-	@FindBy(id = "ghn_lnk_2")
+	@FindBy(css = "#ghn_lnk_2")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = "//*[@class='mob-sctn section-3 column column-lg-4']/p")
@@ -344,10 +344,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "a[data-asset-name='Estimate Your Drug Costs']")
 	public WebElement estimateYourDrugCostButton;
 
-	@FindBy(id = "search-field")
+	@FindBy(css = "#search-field")
 	private WebElement searchfield;
 
-	// @FindBy(id = "dupIconFlyOut")
+	// @FindBy(css = "#dupIconFlyOut")
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
@@ -440,16 +440,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = " //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
 
-	@FindBy(id = "pharmacy-zip-search")
+	@FindBy(css = "#pharmacy-zip-search")
 	private WebElement thpharmacyzipsearch;
 
 	@FindBy(xpath = "//input/parent::form//button[text()='Go']")
 	private WebElement thpharmacyGoButton;
 
-	@FindBy(id = "zipcodeTxt")
+	@FindBy(css = "#zipcodeTxt")
 	private WebElement pharmacyZipCodeTextBox;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement zipCodeHealthPlans;
 
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
@@ -506,7 +506,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@aria-label='menu navigation']")
 	private WebElement menu;
 
-	@FindBy(id = "pharmacylocatorheader_id")
+	@FindBy(css = "#pharmacylocatorheader_id")
 	private WebElement locatePharmacy;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")
@@ -3260,10 +3260,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Register')]")
 	public WebElement headerRegisterLinkMobile;
 
-	@FindBy(id = "search-field")
+	@FindBy(css = "#search-field")
 	public WebElement searchTxtbox;
 
-	@FindBy(id = "header-tfn-link")
+	@FindBy(css = "#header-tfn-link")
 	public WebElement headerTfn;
 
 	@FindBy(css = "div[class*='mobile-mysaved'] > div > button")
@@ -3914,7 +3914,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(id = "ghn_lnk_3")
+	@FindBy(css = "#ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
 	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare() throws InterruptedException {

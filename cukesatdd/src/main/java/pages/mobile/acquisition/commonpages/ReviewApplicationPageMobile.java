@@ -21,7 +21,7 @@ import atdd.framework.UhcDriver;
  */
 public class ReviewApplicationPageMobile extends UhcDriver{
 	
-	@FindBy(id = "enrollmentNext")
+	@FindBy(css = "#enrollmentNext")
 	private WebElement enrollmentNext;
 
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")

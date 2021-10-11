@@ -18,10 +18,10 @@ import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
  */
 public class CancelOLEModalMobile extends UhcDriver {
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(css = "#ole-cancel-confirm")
 	private WebElement CancellationModal;
 
-	@FindBy(id = "backBtn")
+	@FindBy(css = "#backBtn")
 	private WebElement BackBtn;
 	
 	@FindBy(css = "[aria-labelledby^='enroll-cancel-popup'] a[class^='leaveApp']")

@@ -18,22 +18,22 @@ import pages.acquisition.commonpages.ComparePlansPage;
 
 public class MemberCreateProfile extends UhcDriver {
 	
-	@FindBy(id = "member-email")
+	@FindBy(css = "#member-email")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "member-firstName")
+	@FindBy(css = "#member-firstName")
 	private WebElement firstName;
 	
-	@FindBy(id = "member-lastName")
+	@FindBy(css = "#member-lastName")
 	private WebElement lastName;
 	
-	@FindBy(id = "member-mbi")
+	@FindBy(css = "#member-mbi")
 	private WebElement mbi;
 	
-	@FindBy(id = "member-zipCode")
+	@FindBy(css = "#member-zipCode")
 	private WebElement zipCode;
 	
-	@FindBy(id = "member-dob")
+	@FindBy(css = "#member-dob")
 	private WebElement dob;
 	
 	@FindBy(xpath = "//input[@id='member-zipCode']/following::button[contains(text(),'Profile')][1]")

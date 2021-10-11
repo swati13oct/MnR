@@ -19,13 +19,13 @@ import atdd.framework.UhcDriver;
  */
 public class RequestAgentAppointmentPageMobile extends UhcDriver{
 	
-	@FindBy(id = "firstNameTxt")
+	@FindBy(css = "#firstNameTxt")
 	private WebElement firstName;
 
-	@FindBy(id = "lastNameTxt")
+	@FindBy(css = "#lastNameTxt")
 	private WebElement lastName;
 
-	@FindBy(id = "postcodeTxt")
+	@FindBy(css = "#postcodeTxt")
 	private WebElement zipCodeInput;
 
 	@FindBy(xpath = "//*[contains(text(),'Get Started')]/parent::button")
@@ -34,7 +34,7 @@ public class RequestAgentAppointmentPageMobile extends UhcDriver{
 	@FindBy(xpath = "//button[contains(@class,'form-control')]//*[contains(text(),'SEARCH')]")
 	private WebElement searchBtn;
 
-	@FindBy(id = "selectedState")
+	@FindBy(css = "#selectedState")
 	private WebElement state;
 	
 	@FindBy(css = "div[class^='description'] > p")

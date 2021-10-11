@@ -26,59 +26,59 @@ import pages.acquisition.commonpages.PageTitleConstants;
  */
 public class BeneficiaryInformationPageMobile extends UhcDriver{
 	
-	@FindBy(id = "emailtext")
+	@FindBy(css = "#emailtext")
 	private WebElement emailAddressField;
 	
-	@FindBy(id = "field-phone-1")
+	@FindBy(css = "#field-phone-1")
 	private WebElement primaryPhoneNumberField;
 	
-	@FindBy(id = "field-phone-2")
+	@FindBy(css = "#field-phone-2")
 	private WebElement alternatePhoneNumberField;
 	
 	@FindBy(id="add-more-link")
 	private WebElement alternatePhoneNumberlink;
 	
-	@FindBy(id = "birthdate")
+	@FindBy(css = "#birthdate")
 	private WebElement dateOfBirthField;
 	
-	@FindBy(id = "language-selectSelectBoxIt")
+	@FindBy(css = "#language-selectSelectBoxIt")
 	private WebElement selectSelectBoxIt;
 	
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='language-selectSelectBoxItOptions']/li") })
 	private List<WebElement> languagePreferenceDropDown;
 		
-	//@FindBy(id = "sex-male")
+	//@FindBy(css = "#sex-male")
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[9]/label")
 	private WebElement maleRadioButton;
 	
-	//@FindBy(id = "sex-female")
+	//@FindBy(css = "#sex-female")
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[10]/label")
 	private WebElement femaleRadioButton;
 	
-	@FindBy(id = "field-address-1")
+	@FindBy(css = "#field-address-1")
 	private WebElement address1Field;
 	
-	@FindBy(id = "field-address-2")
+	@FindBy(css = "#field-address-2")
 	private WebElement address2Field;
 	
-	@FindBy(id = "field-city")
+	@FindBy(css = "#field-city")
 	private WebElement cityField;
 	
-	@FindBy(id = "field-mail-state")
+	@FindBy(css = "#field-mail-state")
 	private WebElement stateField;
 	
-	@FindBy(id = "field-zip")
+	@FindBy(css = "#field-zip")
 	private WebElement zipcodeField;
 	
-	//@FindBy(id = "same-address-yes")
+	//@FindBy(css = "#same-address-yes")
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[17]/label")
 	private WebElement mailingAddressYesButton;
 	
-	//@FindBy(id = "same-address-no")
+	//@FindBy(css = "#same-address-no")
 	@FindBy(xpath = "//*[@id='enrollment-step-1-part-0']/div[1]/div/div[2]/fieldset/span[18]/label")
 	private WebElement mailingAddressNoButton;	
 
-	@FindBy(id = "part1save")
+	@FindBy(css = "#part1save")
 	private WebElement enrollmentNext;
 	
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")
@@ -284,7 +284,7 @@ public class BeneficiaryInformationPageMobile extends UhcDriver{
 		return null;
 	}
 	
-	@FindBy(id = "beneficiarycancel")
+	@FindBy(css = "#beneficiarycancel")
 	private WebElement beneficiaryCancelBtn;
 	
 	public boolean validateBeneficiaryPage(){

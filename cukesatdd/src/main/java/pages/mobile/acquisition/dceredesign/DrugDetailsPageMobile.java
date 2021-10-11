@@ -161,7 +161,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(css = "#selectaPharmacyHeader")
 	public WebElement selectPharmacyHeader;
 
 	@FindBy(css = "#cancelicon")
@@ -182,7 +182,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#mailSelectPharmacyBtn0")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(id = "optumRxTxt")
+	@FindBy(css = "#optumRxTxt")
 	public WebElement optumRxMsg;
 
 	@FindBy(css = "div[class*='changepharmacy'] [class^='uhc-list'][role='tabpanel']")
@@ -269,7 +269,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#previousButton")
 	public WebElement getStartedButton;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement favoriteIcon;
 
 	@FindBy(xpath = "//*[@class='flyout']//div[contains(@class,'success')]")
@@ -1048,10 +1048,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		saveDrugBtn.click();
 	}
 
-	@FindBy(id = "aarpSVGLogo")
+	@FindBy(css = "#aarpSVGLogo")
 	public WebElement aarpLogo;
 
-	@FindBy(id = "uhcSVGLogo")
+	@FindBy(css = "#uhcSVGLogo")
 	public WebElement uhcLogo;
 
 	public void clickingSiteLogoDrugDetail(String siteName) {
@@ -1315,7 +1315,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
 	private WebElement alertTextImg;
 
-	@FindBy(id = "priceLinkBtn_0")
+	@FindBy(css = "#priceLinkBtn_0")
 	private WebElement viewProceBtn;
 
 	public void validateExtraHelpAlert() {

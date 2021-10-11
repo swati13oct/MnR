@@ -39,10 +39,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(className = "providerName")
 	private WebElement providerName;
 
-	@FindBy(id = "ctl00_PopupContentPlaceHolder_CompleteListButton")
+	@FindBy(css = "#ctl00_PopupContentPlaceHolder_CompleteListButton")
 	private WebElement completeMyList;
 
-	@FindBy(id = "pageHeader")
+	@FindBy(css = "#pageHeader")
 	private WebElement pageHeader;
 
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
@@ -110,7 +110,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 
-	@FindBy(id = "location")
+	@FindBy(css = "#location")
 	private WebElement zipCodeTextfield;
 
 	@FindBy(xpath = "//*[@id='mainContent']//button")
@@ -548,6 +548,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	 * }
 	 */
 
+	@FindBy(css = ".main-header + div button")
+	private WebElement savedProviderFinishButton;
+
 	public VPPPlanSummaryPageMobile MultipleselectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 10);
 		jsClickNew(GetStarted);
@@ -616,8 +619,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			// FinishButton.click();
-			validateNew(FinishButton);
-			jsClickNew(FinishButton);
+			validateNew(savedProviderFinishButton);
+			jsClickNew(savedProviderFinishButton);
 		} else
 			System.out.println("Issue with Xpath");
 

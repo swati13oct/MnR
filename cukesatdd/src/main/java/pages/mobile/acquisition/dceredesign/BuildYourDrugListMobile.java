@@ -60,7 +60,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public List<WebElement> AutoCompleteitems;
 
 	// @FindBy(xpath = "//*[@id='drugPopHeading']")
-//	@FindBy(id = "modal-label")
+//	@FindBy(css = "#modal-label")
 	@FindBy(css = "div[class*='tellusyourdrugModal']  #modal-label")
 	public WebElement TellUsAboutHeader;
 

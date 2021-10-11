@@ -26,7 +26,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(id = "updates-email")
+	@FindBy(css = "#updates-email")
 	private WebElement updatesemail;
 
 	@FindBy(xpath = "//*[@id='subnav_2']/div[2]/div/p")

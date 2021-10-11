@@ -34,10 +34,10 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'confirm-button')]")
 	private WebElement SubmitApplicationBtn;
 
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@class = 'cancel-button modal-link' or @id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -55,7 +55,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -317,7 +317,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(),'Save Changes')]")
 	private WebElement ReviewEditSavechanges;
 
-	//@FindBy(id = "medicareClaimNumber")
+	//@FindBy(css = "#medicareClaimNumber")
 	@FindBy(xpath = "//input[contains(@id, 'medicareClaimNumber')]")
 	private WebElement claimNumberField;
 

@@ -42,7 +42,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class PlanDetailsPageMobile extends UhcDriver {
 
-	@FindBy(id = "planDetailsPage")
+	@FindBy(css = "#planDetailsPage")
 	private WebElement plandetails;
 
 	@FindBy(xpath = ".//*[@id='highlights']/div/a")
@@ -79,7 +79,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(linkText = "Back to all plans")
 	private WebElement backToAllPlans;
 
-	@FindBy(id = "medicalbenefits")
+	@FindBy(css = "#medicalbenefits")
 	private List<WebElement> medBenefitsTab;
 
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
@@ -94,13 +94,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab2;
 	
-	@FindBy(id = "prescriptiondrug")
+	@FindBy(css = "#prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
 	@FindBy(xpath = ".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 
-	@FindBy(id = "estimateYourDrugsLink")
+	@FindBy(css = "#estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
@@ -158,7 +158,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
 
-	@FindBy(id = "po7links")
+	@FindBy(css = "#po7links")
 	private WebElement lookUpYourProviderButton;
 
 	@FindBy(xpath = "//p[contains(text(),'See if your Doctor/Provider is covered in your ZIP')]")
@@ -167,7 +167,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
 	private WebElement providerCountUpdated;
 
-	@FindBy(id = "plancosts")
+	@FindBy(css = "#plancosts")
 	private List<WebElement> planCostTab;
 	/* prescription drug tab */
 	@FindBy(xpath = "(//*[contains(text(),'Total Annual ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
@@ -203,48 +203,48 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(id = "distance")
+	@FindBy(css = "#distance")
 	WebElement distanceDropownID;
 
-	@FindBy(id = "englishDocs")
+	@FindBy(css = "#englishDocs")
 	private WebElement englishDocs;
 	
-	@FindBy(id = "otherDocs")
+	@FindBy(css = "#otherDocs")
 	private WebElement otherDocs;
 	
-//	@FindBy(id = "mapd_gi_div_eng")		Not working on mobile
+//	@FindBy(css = "#mapd_gi_div_eng")		Not working on mobile
 	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='General Plan Information']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdGeneralPlanPDfs;
 
-//	@FindBy(id = "mapd_mp_div_eng") 	Not working on mobile
+//	@FindBy(css = "#mapd_mp_div_eng") 	Not working on mobile
 	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Medical Providers']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdMedicalProvidersPDfs;
 
-//	@FindBy(id = "mapd_pdc_div_eng")	Not working on mobile
+//	@FindBy(css = "#mapd_pdc_div_eng")	Not working on mobile
 	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Prescription Drug Coverage']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdDrugCoveragePDfs;
 
-//	@FindBy(id = "mapd_pharmacydirectory_div_eng")		Not working on mobile
+//	@FindBy(css = "#mapd_pharmacydirectory_div_eng")		Not working on mobile
 	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Pharmacy Directory']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdPharmacyDirectoryPDfs;
 
-//	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(css = "#mapd_gi_div_otherlang")
 	@FindBy(xpath = "//div[@id='otherDocs']//h5[text()='General Plan Information']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdGeneralPlanPDfsOtherLang;
 
-//	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(css = "#mapd_gi_div_otherlang")
 	@FindBy(xpath = "//div[@id='otherDocs']//h5[text()='Medical Providers']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdMedicalProvidersPDfsOtherLang;
 
-//	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(css = "#mapd_gi_div_otherlang")
 	@FindBy(xpath = "//div[@id='otherDocs']//strong[text()='Prescription Drug Coverage']/parent::p/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdDrugCoveragePDfsOtherLang;
 
-//	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
+//	@FindBy(css = "#mapd_pharmacydirectory_div_otherlang")
 	@FindBy(xpath = "//div[@id='otherDocs']//strong[text()='Pharmacy Directory']/parent::p/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdPharmacyDirectoryPDfsOtherLang;
 
-	@FindBy(id = "selectmultycounty_box")
+	@FindBy(css = "#selectmultycounty_box")
 	private WebElement countyPopOut;
 
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
@@ -267,7 +267,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return valCostTabEstimatedDrugCost;
 	}
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(css = "#backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
