@@ -1116,11 +1116,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
 			driver.navigate().back();
-			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			accessFooterLinkFromMore("about");
 
-			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			waitForPageLoadSafari();
 			// validateNew(footerLinkHeader, 30);
 			if (getTitle().contains("About us | UnitedHealthcare")) {

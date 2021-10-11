@@ -96,7 +96,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "button[class^='toggle']")
 	private WebElement rallyHamburgerMenu;
 
-	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
+	@FindBy(css = "#routerView > div > div.instructions.visible-phone > h1")
 	public WebElement addProviderBanner;
 
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
@@ -654,13 +654,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
-		//CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			backToPlanSummary_PlanCompare_iOS();
 			return new VPPPlanSummaryPageMobile(driver);
-			
+
 		} else {
 			jsClickNew(BackToAllPlan);
 			System.out.println("Back to all plan is clicked");
@@ -834,11 +834,17 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnBacktoPlans() {
-		scrollToView(backToAllPlansLink);
-		validateNew(backToAllPlansLink);
-		jsClickNew(backToAllPlansLink);
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Clicked on Back to plans");
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			backToPlanSummary_PlanCompare_iOS();
+			System.out.println("BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
+		} else {
+
+			scrollToView(backToAllPlansLink);
+			validateNew(backToAllPlansLink);
+			jsClickNew(backToAllPlansLink);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Clicked on Back to plans");
+		}
 	}
 
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
@@ -1073,10 +1079,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		scrollToView(addDoctorsLink);
-		validate(addDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addDoctorsLink);
@@ -1090,9 +1093,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		// waitforElement(FindUrgentCareLink);
-		scrollToView(addProviderBanner);
-		if (validate(addProviderBanner)) {
+		
+		if (validateNew(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else

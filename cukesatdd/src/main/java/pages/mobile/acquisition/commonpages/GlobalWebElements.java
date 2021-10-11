@@ -74,7 +74,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-3-button")
 	public WebElement learnAboutMedicareFooterButton;
 
-	@FindBy(css = "#accordion-4-button")
+	@FindBy(css = "#accordion-4-button > div")
 	public WebElement more;
 
 	@FindBy(css = "#accordion-1-content [href*='medicare-advantage-plans']")
@@ -487,6 +487,8 @@ public class GlobalWebElements extends UhcDriver {
 	 */
 	public void accessFooterLinkFromMore(String option) {
 		boolean expanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(more, "aria-expanded"));
+		
+		scrollToView(more);
 
 		if (!expanded) {
 			jsClickNew(more);

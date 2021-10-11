@@ -380,7 +380,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		threadsleep(3);
 		// waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		// driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		validateNew(vppFirstPlanCard);
 //		return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
@@ -405,7 +405,13 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
 		jsClickNew(Hospitals);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 
 		scrollToView(selectProviderBtn);
@@ -452,7 +458,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+//		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		validateNew(vppFirstPlanCard);
 //		return new VPPPlanSummaryPageMobile(driver);
