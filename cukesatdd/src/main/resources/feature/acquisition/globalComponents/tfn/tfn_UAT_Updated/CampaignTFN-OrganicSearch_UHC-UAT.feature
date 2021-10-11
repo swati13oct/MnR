@@ -156,7 +156,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     # Precedence 4.3.5 - Visit site via UHC organic search from Google, PSC 880188
     # Campaign supercedes Organic search, so Expected PSC code - 800086
     #Given the user Starts WebDriver
-    Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
+    #Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
+    Given user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence3PSC> |

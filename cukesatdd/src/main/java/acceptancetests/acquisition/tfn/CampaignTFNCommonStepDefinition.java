@@ -1159,21 +1159,8 @@ public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
 
 @Given("^the user is on AARP External Link and Land on MA Plans$")
 public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg1) throws Throwable  {
-	/*Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String Acq_Site = inputAttributesMap.get("Site");
-	String CampaignPath = inputAttributesMap.get("Campaign URL");
-	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
-	//wd.manage().deleteAllCookies();
-	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
-	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-	tfnPage.OpenPath(Acq_Site, CampaignPath);*/
-	
-	//driver = getLoginScenario().getWebDriverNew();
-	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
-	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
@@ -1186,7 +1173,6 @@ public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg
 
 @Given("^the user is on UHC acquisition site from Campaign Traffic$")
 public void the_user_is_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
-	//WebDriver wd = getLoginScenario().getWebDriverNew();
 	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
@@ -1207,9 +1193,19 @@ public void user_opens_tab_to_access_AARP_page() throws Exception  {
 	//wd.manage().deleteAllCookies();
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
-	tfnPage.openURLNewTab(url);
-	//tfnPage.googleSearchAARP();
+	tfnPage.openURLNewTabAARP(url);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
 
+@Given("^user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page$")
+public void user_opens_tab_to_access_UHC_page() throws Exception  {
+
+	String url = "https://www.google.com/";
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.openURLNewTabUHC(url);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 }
 }
