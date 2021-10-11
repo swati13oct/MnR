@@ -2629,35 +2629,46 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validateAgentEBRCPage() {
-		validateNew(RightRail_AgentInYourArea);
-		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
-		String parentWindow = driver.getWindowHandle();
-		checkElementisEnabled(RightRail_AgentInYourArea);
-		jsClickNew(RightRail_AgentInYourArea);
-		sleepBySec(10);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("myuhcagent")) {
-			System.out.println("myuhcagent Page is displayed");
-			Assertion.assertTrue(true);
-			// driver.navigate().back();
-			driver.switchTo().window(parentWindow);
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			jsClickNew(RightRail_AgentInYourArea);
+			if (driver.getCurrentUrl().contains("myuhcagent")) {
+				driver.navigate().back();
+				validateNew(RightRail_AgentInYourArea);
+			}
+			System.out.println("Switch to parent tab is not working on iOS hence workaroud added.....");
+		} else {
+
+			validateNew(RightRail_AgentInYourArea);
+			CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
+			String parentWindow = driver.getWindowHandle();
+			checkElementisEnabled(RightRail_AgentInYourArea);
+			jsClickNew(RightRail_AgentInYourArea);
+			sleepBySec(10);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+
 			CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("plan-summary")) {
-				System.out.println("Back on VPP Plan Summary Page");
+			if (driver.getCurrentUrl().contains("myuhcagent")) {
+				System.out.println("myuhcagent Page is displayed");
 				Assertion.assertTrue(true);
+				// driver.navigate().back();
+				driver.switchTo().window(parentWindow);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("plan-summary")) {
+					System.out.println("Back on VPP Plan Summary Page");
+					Assertion.assertTrue(true);
+				} else
+					Assertion.fail("Unable to load VPP Plan Summary Page");
 			} else
-				Assertion.fail("Unable to load VPP Plan Summary Page");
-		} else
-			Assertion.fail("Unable to load Myuhcagent Page");
+				Assertion.fail("Unable to load Myuhcagent Page");
+		}
 	}
 
 	public void validateMedicareGuideRightRail() {

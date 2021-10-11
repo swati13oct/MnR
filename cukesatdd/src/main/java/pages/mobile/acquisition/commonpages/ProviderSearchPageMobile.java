@@ -56,11 +56,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
-	@FindBy(xpath = "//*[text()='Finish & Return']")
+	@FindBy(xpath = "//*[@id='finishAndReturnButton']")
 	private WebElement FinishReturnButton;
-
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
-	private WebElement FinishButtonFinish;
 
 	@FindBys(value = {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
@@ -392,7 +389,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(xpath = "//*[@id='finishAndReturnButton']")
 	private WebElement FinishButton;
 
 	public String selectsHospitals() {
