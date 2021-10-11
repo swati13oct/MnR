@@ -1,4 +1,4 @@
-@UATRegression @visitorProfile @visitorProfileUpdated
+@UATRegression @visitorProfile @visitorProfileUpdated @nonProd
 Feature: 1.08. UAT- Visitor profile 
 	
 

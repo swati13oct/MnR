@@ -1,6 +1,6 @@
 #Author: Naveen BK
 #created Date:2/12/2019
-@visitorProfileAuthenticated @visitorProfile
+@visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
   @vpMSSavePlanAuthenticated @authenticated

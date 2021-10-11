@@ -1,4 +1,4 @@
-@AuthenticatedNBAValidations
+@AuthenticatedNBAValidations @nonProd
 Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
   @getStartedNBA @decRelease @authenticated
