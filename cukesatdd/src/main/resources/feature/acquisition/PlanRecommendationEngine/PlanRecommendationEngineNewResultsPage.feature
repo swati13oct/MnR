@@ -225,6 +225,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               |
       | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  |
 
+    @regressionAARP @BHDHProviders
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                                               | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                             |
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Virginia S Hogan MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Virginia S Hogan MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
+
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds     | doctors         | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                                  |
@@ -535,7 +540,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                                                                                                                                                                                                            | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                    | DrugInfo1                              | DrugInfo2                               |
       | UHC  |   32115 | NO            | Volusia County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 20MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 40MG,,,Day,3,NO,NO:atorvastatin calcium,YES,atorvastatin calcium TAB 80MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO:fentanyl citrate,NO,fentanyl citrate LOZ 200MCG,,,Week,1,NO,NO:Nutrilipid,NO,Nutrilipid EMU 20%,,,Week,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,atorvastatin calcium TAB 10MG,True:Plan G,azathioprine TAB 50MG,True | Plan N,fentanyl citrate LOZ 200MCG,N/A | Plan N,fentanyl citrate LOZ 200MCG,True |
 
-  @PRE @planrecommendation 
+  @PRE @planrecommendation
   Scenario Outline: - To validate Filter By PlanType in PRE Result page
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -572,7 +577,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | AARP |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
 
-      @regressionUHC
+    @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | UHC  |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
