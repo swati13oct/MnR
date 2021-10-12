@@ -27,10 +27,10 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class ComparePlansPageBlayerMobile extends UhcDriver {
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(css = "#backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 	
 	@FindBy(xpath=".//*[@id='printComparison']")
@@ -63,7 +63,7 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 	@FindBy(xpath = "//p[text()='Your Doctors / Providers']/parent::td/following::td[1]//a[contains(text(),'Look up')]")
 	private WebElement LookUpYourDoctorLink;
 
-	@FindBy(id = "add-drug")
+	@FindBy(css = "#add-drug")
 	public WebElement addDrug;
 
 	@FindBy(xpath = "//span[text()='Find Care']")

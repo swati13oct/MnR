@@ -43,7 +43,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	// @FindBy(id = "dupIconFlyOut")
+	// @FindBy(css = "#dupIconFlyOut")
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
@@ -90,13 +90,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA.signupContainer a")
 	private WebElement signOut;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 
 	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
 	private WebElement enrollInPlan;
 
-	@FindBy(id = "header-number")
+	@FindBy(css = "#header-number")
 	private WebElement shoppingCartNumber;
 
 	@FindBy(xpath = "//a[text()='Compare Plans']")
@@ -338,6 +338,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
            scrollToView(plan);
 			jsClickNew(plan);
            Thread.sleep(20000);
+           CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/details")) {
 				return new PlanDetailsPageMobile(driver);
 			}

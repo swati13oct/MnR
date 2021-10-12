@@ -193,7 +193,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@ng-repeat,'plan in planModel.pdpPlans')]")
 	List<WebElement> pdpPlans;
 
-	@FindBy(id = "allplanssise")
+	@FindBy(css = "#allplanssise")
 	private WebElement allPlansSize;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
@@ -318,13 +318,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(css = "#backToPlanSummaryTop")
 	private WebElement backToPlansLink;
 
 	@FindBy(xpath = "//*[@id='card-updates']/a")
 	private WebElement backToPlanResults;
 
-	@FindBy(id = "drugsTabId")
+	@FindBy(css = "#drugsTabId")
 	public WebElement step1;
 
 	@FindBy(xpath = "//button[@id='enrollment-next-button']")
@@ -332,19 +332,19 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
-	@FindBy(id = "change-location")
+	@FindBy(css = "#change-location")
 	private WebElement ChangeLocationLink;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement ZipCodeTxtBx;
 
-	@FindBy(id = "submit")
+	@FindBy(css = "#submit")
 	private WebElement FIndPlansButton;
 
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(id = "multiCountyCancelBtn")
+	@FindBy(css = "#multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
 	/*
 	 * @FindBy(xpath = "//div[@id='responsiveplan']") private List<WebElement>
@@ -402,7 +402,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h2[contains(text(),'Learn About Plans')]")
 	private WebElement learnAbtPlanText;
 
-	@FindBy(id = "lisBackBtn")
+	@FindBy(css = "#lisBackBtn")
 	private WebElement backButtonInLearnMoreModal;
 
 	@FindBy(xpath = "//input[@id='updates-first-name']")
@@ -555,7 +555,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(className = "loading-dialog")
 	public List<WebElement> loadingBlock;
 
-	@FindBy(id = "msVppDOB")
+	@FindBy(css = "#msVppDOB")
 	private WebElement DOB;
 
 	@FindBy(xpath = "//select[@id='mpaed-month']")
@@ -588,7 +588,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='msVppdpsd']")
 	private WebElement startDrpDwn;
 
-	@FindBy(id = "sign-up-modal-header")
+	@FindBy(css = "#sign-up-modal-header")
 	private WebElement createProfilePopup;
 
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
@@ -606,16 +606,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
 	private WebElement nextButton;
 
-	@FindBy(id = "FirstName")
+	@FindBy(css = "#FirstName")
 	private WebElement firstName;
 
-	@FindBy(id = "LastName")
+	@FindBy(css = "#LastName")
 	private WebElement lastName;
 
-	@FindBy(id = "AddressLine1")
+	@FindBy(css = "#AddressLine1")
 	private WebElement address1;
 
-	@FindBy(id = "City")
+	@FindBy(css = "#City")
 	private WebElement cityName;
 
 	@FindBy(xpath = "//input[@id='alt-address-no']//..//label")
@@ -666,10 +666,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(@class,'single-added-text ng-binding show')]/following::a[contains(text(),'View Plan Details')][1]")
 	private WebElement ViewPlanLink_AddedToCompare;
 
-	@FindBy(id = "mpbed-month")
+	@FindBy(css = "#mpbed-month")
 	private WebElement medSuppMonthDrpdwn;
 
-	@FindBy(id = "mpbed-year")
+	@FindBy(css = "#mpbed-year")
 	private WebElement medSuppYearDrpdwn;
 
 	@FindBy(xpath = "//div[@id='ole-form-content']//div[@id='text']")
@@ -684,7 +684,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'fieldset-label-text')][contains(text(),'date of birth')]")
 	private WebElement medSuppOleDobHeading;
 
-	@FindBy(id = "MPAED")
+	@FindBy(css = "#MPAED")
 	private WebElement medSuppOleHospitalPartA;
 
 	@FindBy(xpath = "//input[@id='Gender_1']/following-sibling::label[text()='Male']")
@@ -747,13 +747,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(text(),'View Prescription')]")
 	private WebElement OleMS_ViewPDPPlanBtn;
 
-	@FindBy(id = "pop-btn-1")
+	@FindBy(css = "#pop-btn-1")
 	private WebElement createProfileBtn;
 
-	@FindBy(id = "pop-btn-2")
+	@FindBy(css = "#pop-btn-2")
 	private WebElement continueAsGuest;
 
-	@FindBy(id = "popupClose")
+	@FindBy(css = "#popupClose")
 	private WebElement btnClose;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -775,16 +775,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
-	@FindBy(id = "msVppZipCode")
+	@FindBy(css = "#msVppZipCode")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[text()='View Plans']")
 	private WebElement viewPlansBtnMedSupp;
 
-	@FindBy(id = "mpaed-month")
+	@FindBy(css = "#mpaed-month")
 	private WebElement part_A_monthDrpDwn;
 
-	@FindBy(id = "mpaed-year")
+	@FindBy(css = "#mpaed-year")
 	private WebElement part_A_yearDrpDwn;
 
 	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
@@ -793,10 +793,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
 	private WebElement Part_A_yearDrpDwnOption;
 
-	@FindBy(id = "mpbed-month")
+	@FindBy(css = "#mpbed-month")
 	private WebElement part_B_monthDrpDwn;
 
-	@FindBy(id = "mpbed-year")
+	@FindBy(css = "#mpbed-year")
 	private WebElement part_B_yearDrpDwn;
 
 	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
@@ -823,7 +823,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 	private List<WebElement> planNames;
 
-	@FindBy(id = "change-location")
+	@FindBy(css = "#change-location")
 	private WebElement changeLocationBtn;
 
 	@FindBy(xpath = "//div[@class='change-zip-link']//a[@class='search-by-address']")
@@ -5526,17 +5526,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
 	private WebElement monthDrpDwn_PartA;
 
-	@FindBy(id = "mpaed-year")
+	@FindBy(css = "#mpaed-year")
 	private WebElement yearDrpDwn_PartA;
 
-	@FindBy(id = "mpbed-month")
+	@FindBy(css = "#mpbed-month")
 	private WebElement monthBDrpDwn;
 
-	@FindBy(id = "mpbed-year")
+	@FindBy(css = "#mpbed-year")
 	private WebElement yearBDrpDwn;
-
-	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
-	private WebElement monthDrpDwnOption;
 
 	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
 	private WebElement yearDrpDwnOption;
@@ -5546,6 +5543,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 	private WebElement yearBDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+	private WebElement monthDrpDwnOption;
 
 	public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
 		checkModelPopup(driver, 25);
@@ -5604,24 +5604,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(id = "pop-btn-2")
+	@FindBy(css = "#pop-btn-2")
 	private WebElement viewSavedPlans;
-
-	/**
-	 * Click on View Saved plans button on Plan saved prompt
-	 *
-	 * @return
-	 */
-	public VisitorProfilePageMobile viewSavedPlans() {
-		viewSavedPlans.click();
-		if (driver.getCurrentUrl().contains("profile")) {
-			CommonUtility.checkPageIsReadyNew(driver);
-			return new VisitorProfilePageMobile(driver);
-		} else {
-			System.out.println("Navigation to visitor profile is failed");
-			return null;
-		}
-	}
 
 	public void checkMAPlansOnly(String counter) {
 		try {
@@ -6143,10 +6127,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsClickNew(addToCompare);
 	}
 
-	@FindBy(id = "findProvidersComponentWrap")
+	@FindBy(css = "#findProvidersComponentWrap")
 	public WebElement findProvidersComponentWrap;
 
-	@FindBy(id = "addDrugComponentWrap")
+	@FindBy(css = "#addDrugComponentWrap")
 	public WebElement addDrugComponentWrap;
 
 	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
@@ -6322,6 +6306,22 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+
+	/**
+	 * Click on View Saved plans button on Plan saved prompt
+	 *
+	 * @return
+	 */
+	public VisitorProfilePageMobile viewSavedPlans() {
+		viewSavedPlans.click();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 
 	public void removeProvidersFromPlanCard() {

@@ -36,7 +36,7 @@ public class WerallyPageMobile extends UhcDriver {
 
 	String page = "Werally";
 
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 // Werally page Elements

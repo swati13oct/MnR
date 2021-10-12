@@ -183,16 +183,16 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 
-	@FindBy(id = "msVppZipCode")
+	@FindBy(css = "#msVppZipCode")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
 
-	@FindBy(id = "mpaed-month")
+	@FindBy(css = "#mpaed-month")
 	private WebElement part_A_monthDrpDwn;
 
-	@FindBy(id = "mpaed-year")
+	@FindBy(css = "#mpaed-year")
 	private WebElement part_A_yearDrpDwn;
 
 	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
@@ -201,10 +201,10 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
 	private WebElement Part_A_yearDrpDwnOption;
 
-	@FindBy(id = "mpbed-month")
+	@FindBy(css = "#mpbed-month")
 	private WebElement part_B_monthDrpDwn;
 
-	@FindBy(id = "mpbed-year")
+	@FindBy(css = "#mpbed-year")
 	private WebElement part_B_yearDrpDwn;
 
 	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
@@ -234,10 +234,10 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
 	private WebElement nextButton;
 
-	@FindBy(id = "FirstName")
+	@FindBy(css = "#FirstName")
 	private WebElement firstName;
 
-	@FindBy(id = "LastName")
+	@FindBy(css = "#LastName")
 	private WebElement lastName;
 
 	public CampaignTFNPageMobile(WebDriver driver) {
@@ -589,8 +589,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink1;
 
-	// @FindBy(id = "zipcodebtn")
-	// @FindBy(id = "//button[contains(@id,'zipcodebtn')]")
+	// @FindBy(css = "#zipcodebtn")
+	// @FindBy(xpath = "//button[contains(@id,'zipcodebtn')]")
 	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
 
@@ -604,7 +604,7 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
 	public WebElement HomePageExternalLinks_EnterZip;
 
-	@FindBy(id = "nav-zipcode")
+	@FindBy(css = "#nav-zipcode")
 	public WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -614,8 +614,8 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	public WebElement HomePageOLE_EnterZip;
 
-	// @FindBy(id = "zipcodebtn")
-	@FindBy(id = "//button[contains(@id,'zipcodebtn')]")
+	// @FindBy(css = "#zipcodebtn")
+	@FindBy(xpath = "//button[contains(@id,'zipcodebtn')]")
 	public WebElement findPlansButtonOLE;
 
 	public void SubNavPlanSearch(String zip) {
@@ -670,13 +670,13 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		findPlansButtonOLE.click();
 	}
 
-	@FindBy(id = "plan-list-1")
+	@FindBy(css = "#plan-list-1")
 	private WebElement maPlanList;
 
-	@FindBy(id = "plan-list-3")
+	@FindBy(css = "#plan-list-3")
 	private WebElement pdpPlanList;
 
-	@FindBy(id = "plan-list-4")
+	@FindBy(css = "#plan-list-4")
 	private WebElement snpPlanList;
 
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
@@ -1041,13 +1041,13 @@ public class CampaignTFNPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(id = "msVppdpsd")
+	@FindBy(css = "#msVppdpsd")
 	private WebElement startDrpDwn;
 
 	@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
 	private WebElement startDrpDwnOption;
 
-	// @FindBy(id = "msVppDOB")
+	// @FindBy(css = "#msVppDOB")
 	@FindBy(xpath = "//input[contains(@id,'msVppDOB')]")
 	private WebElement DOB;
 

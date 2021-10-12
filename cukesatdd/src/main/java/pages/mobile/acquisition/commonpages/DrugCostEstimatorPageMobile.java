@@ -45,19 +45,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement step1;
 
-	@FindBy(id = "pharmacy-form")
+	@FindBy(css = "#pharmacy-form")
 	public WebElement pharmacyform;
 
-	@FindBy(id = "standard-type")
+	@FindBy(css = "#standard-type")
 	public WebElement rbStandardNetwork;
 
-	@FindBy(id = "saver-type")
+	@FindBy(css = "#saver-type")
 	public WebElement rbPharmacySaver;
 
-	@FindBy(id = "mail-service-type")
+	@FindBy(css = "#mail-service-type")
 	public WebElement rbPreferredMailService;
 
-	@FindBy(id = "retail-type")
+	@FindBy(css = "#retail-type")
 	public WebElement rbPreferredRetail;
 
 	@FindBy(className = "edit-drug")
@@ -66,22 +66,22 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id,'drugsearch')]")
 	public WebElement drugsearchinput;
 
-	@FindBy(id = "drugcostestimatorHeading") // [contains(text(),'Cost')][contains(text(),'Estimator')]")
+	@FindBy(css = "#drugcostestimatorHeading") // [contains(text(),'Cost')][contains(text(),'Estimator')]")
 	public WebElement validateIntroductoryText;
 
-	@FindBy(id = "drug-alt-search-button")
+	@FindBy(css = "#drug-alt-search-button")
 	public WebElement continueButton;
 
 	@FindBy(xpath = "/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/div/table/tbody/tr")
 	public WebElement SaveDrugPage;
 
-	@FindBy(id = "dce-pharmacy-radius")
+	@FindBy(css = "#dce-pharmacy-radius")
 	public WebElement milesSelection;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	public WebElement zipcodeInput; // zipcode in step 2 in dce flow
 
-	@FindBy(id = "cta-zipcode")
+	@FindBy(css = "#cta-zipcode")
 	public WebElement zipcodeBtn; // zipcode on acq home page
 
 	@FindBy(xpath = "//div[@class='inputRadioButtons']/div[1]/p")
@@ -123,13 +123,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='drug-container ng-scope'][3]/p[@class='ng-binding ng-scope']")
 	public WebElement drugndosage3;
 
-	@FindBy(id = "zipcode-button")
+	@FindBy(css = "#zipcode-button")
 	public WebElement zipSearchBtn;
 
-	@FindBy(id = "pharmacy-form")
+	@FindBy(css = "#pharmacy-form")
 	public WebElement pharmacy_form;
 
-	@FindBy(id = "pharmacy-results")
+	@FindBy(css = "#pharmacy-results")
 	public WebElement pharmacyResults;
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
@@ -138,61 +138,61 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='select-pharmacy-button' or @id='select-pharmacy-button-0']")
 	public WebElement select_btn_first;
 
-	@FindBy(id = "saverSavingSpan")
+	@FindBy(css = "#saverSavingSpan")
 	public WebElement card_promo_blue_saver;
 
-	@FindBy(id = "mailOrderSavingSpan")
+	@FindBy(css = "#mailOrderSavingSpan")
 	public WebElement card_promo_blue_mail;
 
-	@FindBy(id = "retailSavingSpan")
+	@FindBy(css = "#retailSavingSpan")
 	public WebElement card_promo_blue_retail;
 
-	@FindBy(id = "saver-type")
+	@FindBy(css = "#saver-type")
 	public WebElement pharmacy_saver_type;
 
 	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[1]/div//span[contains (text(), '  total annual drug cost')]")
 	public WebElement text_total_annual_drug_cost;
 
-	@FindBy(id = "retail-type")
+	@FindBy(css = "#retail-type")
 	public WebElement pharmacy_retail_type;
 
-	@FindBy(id = "standard-type")
+	@FindBy(css = "#standard-type")
 	public WebElement pharmacy_standard_type;
 
 	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[1]")
 	public WebElement first_pharmacy_record;
 
-	@FindBy(id = "summary_totalCost")
+	@FindBy(css = "#summary_totalCost")
 	public WebElement summary_tot_cost;
 
-	@FindBy(id = "total_annualcost")
+	@FindBy(css = "#total_annualcost")
 	public WebElement left_rail_tot_cost;
 
 	@FindBy(xpath = "//ul[@class='pharmacy-list']/li[1]//a[@class='btn btn--secondary select-pharmacy']")
 	public WebElement first_pharmacy_select_btn;
 
-	@FindBy(id = "mail-service-select")
+	@FindBy(css = "#mail-service-select")
 	public WebElement mail_service_select_btn;
 
-	@FindBy(id = "summary_savings")
+	@FindBy(css = "#summary_savings")
 	public WebElement summary_saving;
 
-	@FindBy(id = "total_availablesavings")
+	@FindBy(css = "#total_availablesavings")
 	public WebElement left_rail_tot_saving;
 
-	@FindBy(id = "total_drugsavings")
+	@FindBy(css = "#total_drugsavings")
 	public WebElement left_rail_drug_saving;
 
-	@FindBy(id = "total_pharmacysavings")
+	@FindBy(css = "#total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
 	@FindBy(xpath = "//*[contains(@id,'review-drug-costs')]")
 	public WebElement step3;
 
-	@FindBy(id = "drugcosts")
+	@FindBy(css = "#drugcosts")
 	private WebElement step3Info;
 
-	@FindBy(id = "drug-cost-card-acq")
+	@FindBy(css = "#drug-cost-card-acq")
 	private WebElement drugCostCard;
 
 	@FindBy(xpath = "//*[@id='acqsummary']//div[contains(@class,'dce-acq-step-3-costsection')]")
@@ -201,7 +201,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='acqsummary']//div[contains(@class,'dce-acq-step-3-pharmacy')]")
 	private WebElement step3PharmacySummaryInfo;
 
-	@FindBy(id = "total_annauldeductible")
+	@FindBy(css = "#total_annauldeductible")
 	public WebElement left_rail_deductible;
 
 	@FindBy(xpath = "//div[@id='drugdetails']/div[1]/div[1]//a[@class='delete-drug']")
@@ -210,7 +210,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='mail-service-select']")
 	public WebElement btnMailServiceSelect;
 
-	@FindBy(id = "mail-service-type")
+	@FindBy(css = "#mail-service-type")
 	public WebElement lbPreferredMailService;
 
 	@FindBy(xpath = ".//*[@id='total_drugsavings']/div[2]/a")
@@ -231,19 +231,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='learnmoreStagesId']/a")
 	public WebElement learnmoreStages;
 
-	@FindBy(id = "learnmoreStagesId")
+	@FindBy(css = "#learnmoreStagesId")
 	public WebElement stagesTexts;
 
-	@FindBy(id = "learnmoreTiersId")
+	@FindBy(css = "#learnmoreTiersId")
 	public WebElement tierTexts;
 
-	@FindBy(id = "selected-name")
+	@FindBy(css = "#selected-name")
 	public WebElement SelectedName;
 
 	@FindBy(xpath = "//div[@id='idLearnmoreAboutDelivery']/a")
 	public WebElement learnMoreHomeDelivery;
 
-	@FindBy(id = "collapseHomeDel")
+	@FindBy(css = "#collapseHomeDel")
 	public WebElement homeDeliveryContent;
 
 	@FindBy(className = "pharmacy-container")
@@ -252,13 +252,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
 	public WebElement confdelpopup_del_button;
 
-	@FindBy(id = "returnLink")
+	@FindBy(css = "#returnLink")
 	public WebElement returnLink;
 
-	@FindBy(id = "drugcostestimatorDetails")
+	@FindBy(css = "#drugcostestimatorDetails")
 	public WebElement description;
 
-	@FindBy(id = "disclaimersHeading")
+	@FindBy(css = "#disclaimersHeading")
 	public WebElement step1Disclaimers;
 
 	@FindBy(xpath = "//div[@id='collapseDisclaimer']/div/div/div/p")
@@ -267,10 +267,10 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='disclaimerstep2']/div/div/div/a")
 	public WebElement step2Disclaimers;
 
-	@FindBy(id = "collapseDisclaimerStep2")
+	@FindBy(css = "#collapseDisclaimerStep2")
 	public WebElement step2DisclaimerContent;
 
-	@FindBy(id = "show-pharmacy-list")
+	@FindBy(css = "#show-pharmacy-list")
 	public WebElement step3searchButton;
 
 	@FindBy(xpath = ".//*[@id='zip-radios']/div[2]/label")
@@ -294,7 +294,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Find a Plan')]")
 	public WebElement findAPlan;
 
-	@FindBy(id = "step3DisclaimerHome")
+	@FindBy(css = "#step3DisclaimerHome")
 	public WebElement step3DisclaimerHome;
 
 	@FindBy(xpath = ".//*[@id='drugdetails']/div[1]/div/div/div/p")
@@ -306,13 +306,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Return to plans')]")
 	public WebElement returnToPlans;
 
-	@FindBy(id = "step3DisclaimerVPP")
+	@FindBy(css = "#step3DisclaimerVPP")
 	public WebElement step3DisclaimerVPP;
 
 	@FindBy(xpath = ".//*[@id='colhowdoesthiswork_dce']//*[@itemprop='significantLink']/*[@class='cta-button secondary']")
 	public WebElement getStarted;
 
-	@FindBy(id = "zipcode-costs")
+	@FindBy(css = "#zipcode-costs")
 	public WebElement zipCodeTextBox;
 
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
@@ -327,7 +327,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@name,'county')]")
 	List<WebElement> counties;
 
-	@FindBy(id = "zipcodebtn")
+	@FindBy(css = "#zipcodebtn")
 	public WebElement zipcodeFindPlans;
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[1]")
@@ -351,10 +351,10 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//li[1]//div[@id='pharInfo']/img")
 	public WebElement mapIcon;
 
-	@FindBy(id = "ascOrderPharmacySortId")
+	@FindBy(css = "#ascOrderPharmacySortId")
 	public WebElement AtoZtab;
 
-	@FindBy(id = "descOrderPharmacySortId")
+	@FindBy(css = "#descOrderPharmacySortId")
 	public WebElement ZtoAtab;
 
 	@FindBy(xpath = "//div[@id='total_drugsavings']/div[2]")
@@ -369,22 +369,22 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='generic-drug-switch-btn-0']")
 	private WebElement switchNowBtn;
 
-	@FindBy(id = "switchToGenericBtnId")
+	@FindBy(css = "#switchToGenericBtnId")
 	private WebElement updateBtn;
 
-	@FindBy(id = "total_annualcost_acq")
+	@FindBy(css = "#total_annualcost_acq")
 	private WebElement costText;
 
-	@FindBy(id = "ghn_lnk_2")
+	@FindBy(css = "#ghn_lnk_2")
 	public WebElement ourPlansTab;
 
-	@FindBy(id = "nav-zipcode")
+	@FindBy(css = "#nav-zipcode")
 	public WebElement enterZipcode;
 
 	@FindBy(xpath = ".//*[@id='subnav_2']//button[@class='zip-button']")
 	public WebElement findPlans;
 
-	@FindBy(id = "atddEditDrugList")
+	@FindBy(css = "#atddEditDrugList")
 	public WebElement step3EditDrugsList;
 
 	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
@@ -393,19 +393,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'page__header')]//h1[contains(text(),'Drug')]")
 	public WebElement pageHeading;
 
-	@FindBy(id = "drugDosageStrengthId")
+	@FindBy(css = "#drugDosageStrengthId")
 	public List<WebElement> drugNamesList;
 
-	@FindBy(id = "pharInfoId-0")
+	@FindBy(css = "#pharInfoId-0")
 	public WebElement firstPharmacyName;
 
 	@FindBy(xpath = "//div[contains(@class,'pharmacy-list')]//div[contains(@class,'selected')]//address/span")
 	public WebElement selectedPharmacyName;
 
-	@FindBy(id = "map")
+	@FindBy(css = "#map")
 	public WebElement map;
 
-	@FindBy(id = "showhideMapId")
+	@FindBy(css = "#showhideMapId")
 	public WebElement mapToggle;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[1]//span[@class='ng-binding']")
@@ -447,7 +447,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'margin-large generic-name')]")
 	private WebElement lblGenericDrugName;
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(css = "#backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
 
 	@FindBy(xpath = "//*[contains(@src,'loader')]")
@@ -466,7 +466,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 //	@FindBy(xpath = "//img[@alt='Shopping Cart' and @dtmid='acq_visitor_profile']")
 //	private WebElement shoppingCartIcon;
 	
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	public WebElement getImgLoadingIndicator() {

@@ -26,7 +26,7 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	@FindBy(className = "meded-back-link")
 	private WebElement lnkBackMedicareEducationHome;
 
-	@FindBy(id = "state-select")
+	@FindBy(css = "#state-select")
 	private WebElement dropDownState;
 
 	@FindBy(xpath = "//a[@class='med-article-sidebar__link']")
@@ -35,7 +35,7 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='med-article-sidebar__section-title']")
 	private List<WebElement> lstSideBarheadings;
 
-	@FindBy(id = "zipcodemeded")
+	@FindBy(css = "#zipcodemeded")
 	private WebElement txtZipcode;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'lookupZip')]")
@@ -53,7 +53,7 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//span[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 	
-	@FindBy(id = "js-ole-zip-search")
+	@FindBy(css = "#js-ole-zip-search")
 	private WebElement StandaloneZipcode;
 	
 	@FindBy(xpath="//a[contains(@class, 'back-to-top')]")

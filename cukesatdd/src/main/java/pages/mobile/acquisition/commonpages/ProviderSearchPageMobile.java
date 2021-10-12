@@ -41,10 +41,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(className = "providerName")
 	private WebElement providerName;
 
-	@FindBy(id = "ctl00_PopupContentPlaceHolder_CompleteListButton")
+	@FindBy(css = "#ctl00_PopupContentPlaceHolder_CompleteListButton")
 	private WebElement completeMyList;
 
-	@FindBy(id = "pageHeader")
+	@FindBy(css = "#pageHeader")
 	private WebElement pageHeader;
 
 	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
@@ -121,7 +121,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Get Started')]")
 	private WebElement GetStarted;
 
-	@FindBy(id = "location")
+	@FindBy(css = "#location")
 	private WebElement zipCodeTextfield;
 
 	@FindBy(xpath = "//*[@id='mainContent']//button")
@@ -369,9 +369,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		} else if (driver.findElements(By.xpath(
+		}
+		/*else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {
+				.size() > 0) {*/
+		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
@@ -389,7 +391,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 
-	@FindBy(xpath = "//*[@id='finishAndReturnButton']")
+
+//	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(css = "#finishAndReturnButton")
 	private WebElement FinishButton;
 
 	public String selectsHospitals() {
@@ -449,9 +453,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		} else if (driver.findElements(By.xpath(
+		}
+		/*else if (driver.findElements(By.xpath(
 				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {
+				.size() > 0) {*/
+		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
@@ -585,6 +591,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	 * }
 	 */
 
+	@FindBy(css = ".main-header + div button")
+	private WebElement savedProviderFinishButton;
+
 	public VPPPlanSummaryPageMobile MultipleselectsProvider() {
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 10);
@@ -637,6 +646,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		}
 
+
 		/*---------------------Commented the lines as per new changes in rally---------------
 			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders); 	
@@ -658,6 +668,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		---------------------Commented the lines as per new changes in rally---------------*/
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
+
 		threadsleep(3);
 		// waitForCountDecrement(2);
 //	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);

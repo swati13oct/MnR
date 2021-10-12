@@ -26,13 +26,13 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 	
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
 	private WebElement ReviewPCPButton;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -48,7 +48,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -107,11 +107,11 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
 	private WebElement CurrentPCP_Question;
 	
-//	@FindBy(id = "hasCurrentPatientOfPcpYes")
+//	@FindBy(css = "#hasCurrentPatientOfPcpYes")
 	@FindBy(xpath = "//input[contains(@id,'hasCurrentPatientOfPcpYes')]")
 	private WebElement CurrentPCP_Question_Yes;
 
-//	@FindBy(id = "hasCurrentPatientOfPcpNo")
+//	@FindBy(css = "#hasCurrentPatientOfPcpNo")
 	@FindBy(xpath = "//input[contains(@id,'hasCurrentPatientOfPcpNo')]")
 	private WebElement CurrentPCP_Question_No;
 
@@ -121,53 +121,53 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 	//Doctor INfo section 1
 
-	@FindBy(id = "doctorsFullName1")
+	@FindBy(css = "#doctorsFullName1")
 	private WebElement Doctor1_Name;
 	
-	@FindBy(id = "phoneNo1")
+	@FindBy(css = "#phoneNo1")
 	private WebElement Doctor1_Ph;
 	
-	@FindBy(id = "city1")
+	@FindBy(css = "#city1")
 	private WebElement Doctor1_City;
 	
-	@FindBy(id = "state1")
+	@FindBy(css = "#state1")
 	private WebElement Doctor1_State;
 	
-	@FindBy(id = "zip1")
+	@FindBy(css = "#zip1")
 	private WebElement Doctor1_Zip;
 
 	//Doctor INfo section 2
 
-	@FindBy(id = "doctorsFullName2")
+	@FindBy(css = "#doctorsFullName2")
 	private WebElement Doctor2_Name;
 	
-	@FindBy(id = "phoneNo2")
+	@FindBy(css = "#phoneNo2")
 	private WebElement Doctor2_Ph;
 	
-	@FindBy(id = "city2")
+	@FindBy(css = "#city2")
 	private WebElement Doctor2_City;
 	
-	@FindBy(id = "state2")
+	@FindBy(css = "#state2")
 	private WebElement Doctor2_State;
 	
-	@FindBy(id = "zip2")
+	@FindBy(css = "#zip2")
 	private WebElement Doctor2_Zip;
 	
 	//Hospital INfo section 2
 
-	@FindBy(id = "hsptlname")
+	@FindBy(css = "#hsptlname")
 	private WebElement Hospital_Name;
 	
-	@FindBy(id = "hsptlPhno")
+	@FindBy(css = "#hsptlPhno")
 	private WebElement Hospital_Ph;
 		
-	@FindBy(id = "hsptlCity")
+	@FindBy(css = "#hsptlCity")
 	private WebElement Hospital_City;
 	
-	@FindBy(id = "state")
+	@FindBy(css = "#state")
 	private WebElement Hospital_State;
 	
-	@FindBy(id = "hsptlZip")
+	@FindBy(css = "#hsptlZip")
 	private WebElement Hospital_Zip;
 	
 	@FindBy(xpath = "//*[contains(@name,'primary-search')]")
