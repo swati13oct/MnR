@@ -55,15 +55,15 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
-      #| Member Signin URL         | <memberSignIn>        |
-      #| Member Signin URL STG     | <memberSignInstage>   |
-      #| Member Signin URL Offline | <memberSignInOffline> |
-    #Then the user navigates to refresh page
-    #Then the user validates TFN Number
-      #| TFN No    | <memberTFNNo> |
+    Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
+      | Member Signin URL         | <memberSignIn>        |
+      | Member Signin URL STG     | <memberSignInstage>   |
+      | Member Signin URL Offline | <memberSignInOffline> |
+    Then the user navigates to refresh page
+    Then the user validates TFN Number
+      | TFN No    | <memberTFNNo> |
       #| TFN No    | <TFNNo>    |
-      #| TFN Xpath | <TFNxpath>    |
+      | TFN Xpath | <TFNxpath>    |
 #------------------------------------------
     #Then the user validates PSC code
     #| PSC Code | <Precedence2PSC> |
@@ -85,6 +85,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user navigates to refresh page
+    Then user validates TFN in header
     Then the user navigates to plan tab for any plan
       | Plan Type | <MAplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -116,12 +117,14 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | TFN Xpath | <TFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+      Then user validates TFN in header
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then user validates TFN in header
     Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareUrl> |
     Then the user validates TFN Number
@@ -133,19 +136,32 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | Is Multi County | <isMultutiCounty> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MAplantype> |
+      Then user validates TFN in header
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user navigates back to page
+    And the user selects plan year
+      | Plan Year | <planyear> |
+     Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user clicks on Find plans on vpp using following information
+    | County Name2     | <county2>        |
+     | Is Multi County2 | <isMultiCounty2> |  
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
+      Then user validates TFN in header
     Then the user validates TFN Number
       | TFN No    | <MedSupTFN>           |
       | TFN Xpath | <MedsuppTFNxpath> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
+      Then user validates TFN in header
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
     Then the user validates TFN Number
@@ -165,11 +181,12 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then user validates TFN in header
 
 		@campaignTFNProd
     Examples: 
-      | scenario         | site | zipcode | TFNNo          |MedSupTFN| isMultutiCounty | county         | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | EnrollTFNxpath                    | userName        | password      |
-      | Scenario 1 - UMS | UHC  |   90210 | 1-877-596-3258 |1-888-378-0254| NO              | Baldwin County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | (//a[contains(@class, 'tel')])[3] | TiggerOptumID39 | TiggerTigger1 |
+      | scenario         | site | zipcode | TFNNo          |MedSupTFN| isMultutiCounty | county         | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | EnrollTFNxpath                    | userName        | password      |planyear|address|city|state|county2|isMultiCounty2|
+      | Scenario 1 - UMS | UHC  |   90210 | 1-877-596-3258 |1-888-378-0254| NO              | Baldwin County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | (//a[contains(@class, 'tel')])[3] | TiggerOptumID39 | TiggerTigger1 |current|584 MAIN AVE NORWALK |Albany|New York|New York County|no|
 
   #######################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT_PROD @UATRegression
