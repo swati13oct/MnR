@@ -994,6 +994,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(alreadyOnSite);
 	}
+	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite, int zipcode) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        openAndValidate(alreadyOnSite, zipcode);
+    }
+
 
 	public AcquisitionHomePage(WebDriver driver, String siteOrPage, String testharnessurl) {
 		super(driver);
@@ -1091,6 +1097,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
 				checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
+			try {
+				if (proactiveChatExitBtn != null)
+					jsClickNew(proactiveChatExitBtn);
+
+				else
+					Assertion.fail("Please check booleanvalue");
+
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		}
+	}
+	
+	@FindBy(xpath = "//*[@id='zipcode']")
+	private WebElement changeZipcodefield;
+
+	public void openAndValidate(boolean alreadyOnSite, int zipcode) {
+		if (alreadyOnSite) {
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			testSiteUrl = driver.getCurrentUrl();
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
+				checkModelPopup(driver);
+			CommonUtility.waitForPageLoadNew(driver, changeZipcodefield, 15);
 			try {
 				if (proactiveChatExitBtn != null)
 					jsClickNew(proactiveChatExitBtn);
