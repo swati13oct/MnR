@@ -121,10 +121,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
+	@FindBy(css = ".multi-year-select > .select-year:nth-child(2)")
 	private WebElement profileNxtYrPlans;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	@FindBy(xpath = ".multi-year-select > .select-year:nth-child(1)")
 	private WebElement profileCrntYrPlans;
 
 	@FindBy(xpath = "//*[@id='addDrug']")
@@ -495,6 +495,27 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+	}
+
+	/**
+	 * Deletes the saved plans for mentioned plan year
+	 *
+	 * @param planYear
+	 * @param savedPlanNames
+	 */
+	public void deletePlans(String planYear, String savedPlanNames) {
+		if(profileMultiYear.isDisplayed()){
+			WebElement planYearToggle = planYear.equalsIgnoreCase("current") ?  profileCrntYrPlans : profileNxtYrPlans;
+			jsClickNew(planYearToggle);
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
+
+		Arrays.stream(savedPlanNames.split(",")).forEach(plan -> {
+			WebElement removePlanButton = driver.findElement(By.xpath("//h3[contains(text(),'" + plan + "')]/preceding-sibling::button[contains(@class,'remove')]"));
+			jsClickNew(removePlanButton);
+			CommonUtility.checkPageIsReadyNew(driver);
+		});
+
 	}
 
 	/**

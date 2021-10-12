@@ -134,9 +134,11 @@ public class VisitorProfileMobileStepDefinition {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.deletePlans(savedPlanNames);
+//		visitorProfile.deletePlans(savedPlanNames);
+		visitorProfile.deletePlans(planYear, savedPlanNames);
 	}
 	
 	@And("^the user clicks on the shopping cart icon$")
