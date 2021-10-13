@@ -47,7 +47,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(css = "#pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
+	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[3]")
 	private WebElement SaveBtn;
 
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
@@ -268,7 +268,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		if (validate(selectLocationOption)) {
 			jsClickNew(selectLocationOption);
-
 			jsClickNew(saveBtn2);
 
 		}
@@ -370,9 +369,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
 		}
-		/*else if (driver.findElements(By.xpath(
-				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {*/
+		/*
+		 * else if (driver.findElements(By.xpath(
+		 * "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"
+		 * )) .size() > 0) {
+		 */
 		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
@@ -390,7 +391,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
-
 
 //	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
 	@FindBy(css = "#finishAndReturnButton")
@@ -415,10 +415,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 
-		scrollToView(selectProviderBtn);
 
 		WebElement hospitalNameLink = selectProviderBtn.findElement(By.xpath(
 				"./ancestor::div[contains(@data-test-id,'search-result')]//a[contains(@data-test-id,'provider-name')]"));
@@ -454,15 +451,17 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
 		}
-		/*else if (driver.findElements(By.xpath(
-				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
-				.size() > 0) {*/
+		/*
+		 * else if (driver.findElements(By.xpath(
+		 * "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"
+		 * )) .size() > 0) {
+		 */
 		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
 		} else
 			System.out.println("Issue with Xpath");
-		waitForCountDecrement(2);
+//		waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 //		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
@@ -645,7 +644,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			}
 
 		}
-
 
 		/*---------------------Commented the lines as per new changes in rally---------------
 			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);

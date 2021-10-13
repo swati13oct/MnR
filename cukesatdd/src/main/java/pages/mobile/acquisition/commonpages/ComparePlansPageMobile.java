@@ -801,8 +801,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void clickOnNewRemoveLink() {
 
-		CommonUtility.checkPageIsReadyNew(driver);
-
 		validateNew(Newremove3rdplan);
 		String PlanName = Newremove3rdplanName.getText();
 		System.out.println("3rd plan name is : " + PlanName);
