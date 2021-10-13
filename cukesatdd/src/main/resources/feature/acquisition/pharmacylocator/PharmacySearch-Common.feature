@@ -428,7 +428,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county             | plantype | planyear |  planName                        | path                                                                                                      |
-      | AARP | 90210   | NO              | Los Angeles County | PDP      | future   |  AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | AARP | 90210   | NO              | Los Angeles County | PDP      | current  |  AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC
     Examples: 

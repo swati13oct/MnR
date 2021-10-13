@@ -225,9 +225,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(2);
 
 		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(By.cssSelector(".loading-block"), 90);
 		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
-			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(By.cssSelector(".loading-block"), 30);
 		sleepBySec(1); // note: let the page settle down
 //		searchbtn.click();
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -683,7 +683,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				webElement.click();
 				if (!loadingBlock.isEmpty()) {
 					System.out.println("Waiting till loading spinner gets disappear");
-					waitforElementDisapper(By.className("loading-block"), 60);
+					waitforElementDisapper(By.cssSelector(".loading-block"), 60);
 				}
 				if (!driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
 						+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).isEmpty()) {
