@@ -2984,8 +2984,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
 		
-		driver.findElement(By.xpath("/html/body/div[3]/div[2]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div/div[1]/div[1]/button/span")).click();
-		
 		for (String plan : listOfTestPlans) {
 			System.out.println("Proceed to locate plan=" + plan);
 

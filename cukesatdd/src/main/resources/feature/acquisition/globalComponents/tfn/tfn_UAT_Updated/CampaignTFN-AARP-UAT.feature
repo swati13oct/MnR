@@ -135,6 +135,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Plan Year | <planyear> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MAplantype> |
+      And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number
