@@ -255,7 +255,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement loadingImage;
 
 	// protected By loadingSpinner = By.className("loading-block");
-	protected By loadingSpinner = By.className("uhc-spinner");
+	protected By loadingSpinner = By.cssSelector(".uhc-spinner");
 
 	@FindBy(xpath = "//a[@id='filter_toggle_id']")
 	protected WebElement moveAwayFromTooltip;
