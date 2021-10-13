@@ -614,27 +614,33 @@ public abstract class UhcDriver {
 	 */
 	public void iOSClick(WebElement element) {
 		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(
-					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
-					element);
-			//checkElementisEnabled(element);
+			
 			scrollToView(element);
-			//iosScroll(element);
-			element.click();
-			sleepBySec(2);
-			String seleniumClick = element.getAttribute("automationTrack");
-			System.out.println("Selenium Click executed........" + seleniumClick);
-
-			// If automationTrack is null and element is displayed,
-			// then selenium click was not successful
-			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
-
-			if (!seleniumClick.equalsIgnoreCase("true")) {
-				System.out.println("Trying JSClick on IOS ..........");
-				JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js1.executeScript("arguments[0].click();", element);
-			}
+			JavascriptExecutor js1 = (JavascriptExecutor) driver;
+			js1.executeScript("arguments[0].click();", element);
+			
+			
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//			js.executeScript(
+//					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
+//					element);
+//			//checkElementisEnabled(element);
+//			scrollToView(element);
+//			//iosScroll(element);
+//			element.click();
+//			sleepBySec(2);
+//			String seleniumClick = element.getAttribute("automationTrack");
+//			System.out.println("Selenium Click executed........" + seleniumClick);
+//
+//			// If automationTrack is null and element is displayed,
+//			// then selenium click was not successful
+//			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
+//
+//			if (!seleniumClick.equalsIgnoreCase("true")) {
+//				System.out.println("Trying JSClick on IOS ..........");
+//				JavascriptExecutor js1 = (JavascriptExecutor) driver;
+//				js1.executeScript("arguments[0].click();", element);
+//			}
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			System.out.println("Selenium click got executed but, " + e.getMessage());
 		} catch (Exception e) {
