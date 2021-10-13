@@ -78,6 +78,17 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user validates TFN Number
       | TFN No    | <TFNNo2>   |
       | TFN Xpath | <TFNxpath> |
+        And the user selects plan year
+      | Plan Year | <planyear> |
+      Then user validates TFN in header
+     Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user clicks on Find plans on vpp using following information
+    | County Name2     | <county2>        |
+     | Is Multi County2 | <isMultiCounty2> | 
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -94,10 +105,11 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user validates TFN Number
       | TFN No    | <TFNNo2>   |
       | TFN Xpath | <TFNxpath> |
+   
 
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                          | MedsuppTFNxpath                   | TFNxpath2                           |plantype|planyear|
-      | Sc. 3.08 - UMS |  880188 |         880187 |   90210 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')]| //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u |MAPD|current|
+      | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                          | MedsuppTFNxpath                   | TFNxpath2                           |plantype|planyear|address|city|state|county2|isMultiCounty2|
+      | Sc. 3.08 - UMS |  880188 |         880187 |   90210 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')]| //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u |MAPD|current|584 MAIN AVE NORWALK |Albany|New York|New York County|no|
 
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1 for UHC
@@ -156,7 +168,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     # Precedence 4.3.5 - Visit site via UHC organic search from Google, PSC 880188
     # Campaign supercedes Organic search, so Expected PSC code - 800086
     #Given the user Starts WebDriver
-    Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
+    #Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
+    Given user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence3PSC> |

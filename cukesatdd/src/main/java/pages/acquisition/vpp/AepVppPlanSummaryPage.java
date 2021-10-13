@@ -25,12 +25,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
 	private WebElement welcomePageHeader;
 
-//	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
-	@FindBy(xpath="//*[contains(@id,'currentyear')]")
+	//@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+	@FindBy(xpath="//*[contains(@id, 'currentyear')]")
 	private WebElement CurrentYearLink;
 
 //	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
-	@FindBy(xpath="//*[contains(@id,'nextyear')]")
+	@FindBy(xpath="//*[contains(@id, 'nextyear')]")
 	private WebElement NextYearLink;
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
@@ -720,18 +720,35 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		}
 	
 	}*/
+	public void selectYearOptionOLE(String year) {
+		try {
+			if(year.equalsIgnoreCase("current")) {
+				if(validate(CurrentYearLink))
+				jsClickNew(CurrentYearLink);
+				
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		
+	}
 
-	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
-		Thread.sleep(5000);
+	public void Enroll_OLE_Plan(String planName, String planType, String planYear ) throws InterruptedException {
+		//Thread.sleep(5000);
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
 			// driver.navigate().refresh();
+		
 			//Thread.sleep(5000);
+			 selectYearOption(planYear);
 			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
+			 selectYearOption(planYear);
 			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
 			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));

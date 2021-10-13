@@ -212,4 +212,16 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 				}
 
 	}
+		
+		public void selectPlanYearOLE(String planYear) {
+			if (planYear.equalsIgnoreCase("current")) {
+			if(validate(planYearDropdown)) {
+				planYearDropdown.click();
+				Select planYear1 = new Select(planYearDropdown);
+				planYear1.selectByIndex(1);
+			}
+		}
+	
+		}
+	
 }

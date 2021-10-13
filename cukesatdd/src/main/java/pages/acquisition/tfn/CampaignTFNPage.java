@@ -70,7 +70,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
-	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
+	@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
 	//@FindBy(xpath = "//h3//span[contains(text(),'Learn More About Medicare Advantage (Part C)') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 //	@FindBy(xpath = "//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')]")
 //	@FindBy(xpath = "(//h3//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')])[2]")
@@ -82,7 +82,8 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - UHC ..')]")
 	//@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')])/..")
-	@FindBy(xpath = "(//h3[contains(text(),'Medicare Advantage (Part C) Plans from UnitedHealthcare')])/..")
+	//@FindBy(xpath = "(//h3[contains(text(),'Medicare Advantage (Part C) Plans from UnitedHealthcare')])/..")
+	//@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage Plans')]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -626,6 +627,13 @@ public class CampaignTFNPage extends UhcDriver {
 		//action.moveToElement(OurPlansLink1).build().perform();
 		// action.click().build().perform();
 		//validateNew(OurPlansLink1);
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
 		validate(HomePage_EnterZip);
 		HomePage_EnterZip.click();
 		HomePage_EnterZip.sendKeys(zip);
@@ -1386,7 +1394,7 @@ public void decisionGuide() {
 	jsClickNew(decisionGuideClick);
 }
 
-public void openURLNewTab(String url) {
+public void openURLNewTabAARP(String url) {
 	// get original tab handler
 	String winHandleBefore = driver.getWindowHandle();
 
@@ -1410,6 +1418,37 @@ public void openURLNewTab(String url) {
 	
 	start(url);
 	googleSearchAARP();
+	driver.switchTo().window(winHandleBefore);
+	driver.close();
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to use this newly opened tab for remaining validation");
+
+}
+
+public void openURLNewTabUHC(String url) {
+	// get original tab handler
+	String winHandleBefore = driver.getWindowHandle();
+
+	System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+	// open new tab
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("window.open('about:blank','_blank');");
+	for (String winHandle : driver.getWindowHandles()) {
+		if (!winHandle.equals(winHandleBefore)) {
+			driver.switchTo().window(winHandle);
+		}
+	}
+	String winHandleTmp = driver.getWindowHandle();
+	System.out.println(
+			"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+	
+
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to open the acquisition url in new tab");
+	
+	
+	start(url);
+	googleSearchUHC();
 	driver.switchTo().window(winHandleBefore);
 	driver.close();
 	driver.switchTo().window(winHandleTmp);
