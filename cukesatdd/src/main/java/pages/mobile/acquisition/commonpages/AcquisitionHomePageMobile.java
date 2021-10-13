@@ -2042,7 +2042,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		switch (inputValue) {
 		case "Empty":
 			System.out.println("Verify Error message for " + inputValue + "");
-			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
+			String errMessage = driver.findElement(By.cssSelector("#searchErrorMessage")).getText();
 			Assertion.assertTrue(
 					errMessage.contains("Your search box was empty. Please enter some text in the search box"));
 			break;

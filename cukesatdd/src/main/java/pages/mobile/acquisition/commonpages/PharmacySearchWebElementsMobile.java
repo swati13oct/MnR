@@ -95,10 +95,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#services")
 	protected WebElement pharmacyTypeSelectionRadioButton;
 
-	@FindBy(className = "errorHeader")
+	@FindBy(css = ".errorHeader")
 	protected WebElement errorHeader;
 
-	@FindBy(className = "errorPoints")
+	@FindBy(css = ".errorPoints")
 	protected WebElement errorPoints;
 
 	@FindBy(xpath = "//div[@class='pharmacy-search-resultParsys']/div/div/div[1]/div/div[2]")
@@ -123,7 +123,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement pharmacylocatorheader;
 
 	// @FindBy(className = "loading-block")
-	@FindBy(className = "uhc-spinner")
+	@FindBy(css = ".uhc-spinner")
 	protected List<WebElement> loadingBlock;
 
 	@FindBy(xpath = "//img[@alt='Standard Network']")
@@ -251,7 +251,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement moreInfoText_show;
 
 	// @FindBy(className = "loading-block")
-	@FindBy(className = "uhc-spinner")
+	@FindBy(css = ".uhc-spinner")
 	protected WebElement loadingImage;
 
 	// protected By loadingSpinner = By.className("loading-block");
