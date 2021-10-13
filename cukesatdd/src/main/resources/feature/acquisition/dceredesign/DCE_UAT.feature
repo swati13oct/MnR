@@ -278,6 +278,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link
     And I access the DCE Redesign from Plan compare page
+    Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user validates error message for blank search
     Then the user validates No Drug found error message for search
@@ -315,7 +316,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks Return to Compare on DCE Summary Page to return to Compare page
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
-    Then the user validates planName matches plan Name in VPP
+    Then the user clicks on Step Header Step 3 to land on Drug Summary Page
+    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+    Then the user closes the Drug Info Modal on Plan Compare page
+     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planname> |
+    Then the user clicks on Step Header Step 2 to land on Build your drug list Page
+    Then the user clicks on return to compare link on build drug list page to returns to plan compare
+    Then the user closes the Drug Info Modal on Plan Compare page
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planname> |
+    Then the user validates planName matches plan Name in VPP 
     Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal
     Then the user Captures Drug costs on Drug Details Page
     And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
@@ -462,6 +473,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects following Standard pharmacy and returns to DCE Details page
       | SelectStandardPharmacy | <SelectStandardPharmacy> |
     Then the user Captures Drug costs on Drug Details Page
+    Then the user validates enroll option as per following flag
+      | EnrollFlag | <enrollFlag> | 
     And the user validates link to Drug Summary Page
     When user verify the drug summary page
     And the user Captures Drug costs on Drug Summary Page for the given plan
@@ -471,8 +484,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_E2E_Scenario3_UAT_AARP @regressionAARP
     Examples:
-      | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       | enrollFlag |
+      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs | true       |
       #| E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
   @dce_E2E_Scenario3_UAT_UHC @regressionUHC
