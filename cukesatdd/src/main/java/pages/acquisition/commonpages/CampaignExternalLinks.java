@@ -489,7 +489,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
-			return new AcquisitionHomePage(driver);
+			return new AcquisitionHomePage(driver, zipcode);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
