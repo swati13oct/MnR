@@ -1708,7 +1708,7 @@ public abstract class UhcDriver {
 		jsClickNew(pdfLink);
 		
 		WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("android:id/button1")));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")));
 		
 		Set<String> contexts = mobileDriver.getContextHandles();
 
@@ -1716,8 +1716,10 @@ public abstract class UhcDriver {
 			if (context.contains("NATIVE_APP")) {
 				mobileDriver.context(context);
 				try {
-					mobileDriver.findElement(By.id("android:id/button1")).click();
-					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
+					/*mobileDriver.findElement(By.id("android:id/button1")).click();
+					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();*/
+					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")).click();
+					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.packageinstaller:id/permission_allow_button']")).click();
 					break;
 				} catch (NoSuchElementException e) {
 					System.out.println("Permission was already granted.");
