@@ -328,7 +328,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//*[@id='mobile-nav']/div[1]/div/div[1]/div[1]/button[2]")
-	public WebElement mobileMenuOpenCheck;
+	public WebElement menuHamburgerCrossToClose;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
@@ -3500,7 +3500,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
 		proceedToLeaveAARP();
-		if (driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+		if (driver.getCurrentUrl().contains("medicare.gov/my/medicare-complaint")) {
 			System.out.println("Successfully clicked Complaint Form link");
 			Assertion.assertTrue(true);
 
@@ -3565,6 +3565,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		driver.switchTo().window(base);
+		
+		//Added below loop as ios script fails while switching back to parent window
+		if(driver.getCurrentUrl().contains("uhc.com")) {
+			driver.navigate().back();
+		}
 
 	}
 
@@ -3891,6 +3896,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (tabs_windows.size() > 1) {
 			driver.close();
 			driver.switchTo().window(parentWindow);
+		}
+		
+		//This code is added for ios - control does not come back to parent window sometimes hence workaround added 
+		if(driver.getCurrentUrl().contains("myuhcagent")) {
+			driver.navigate().back();
 		}
 
 	}
@@ -4814,8 +4824,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatestatedropDown(String state, String code) {
-		if (mobileMenuOpenCheck.isDisplayed()) {
-			jsClickNew(mobileMenuOpenCheck);
+		if (driver.findElement(By.xpath("//div[@aria-label='menu navigation']")).getAttribute("aria-expanded") != "false") {
+			jsClickNew(menuHamburgerCrossToClose);
 		}
 
 		validateNew(stateDropDown);
