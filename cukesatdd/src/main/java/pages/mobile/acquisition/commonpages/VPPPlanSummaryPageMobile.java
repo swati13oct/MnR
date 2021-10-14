@@ -50,7 +50,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
     @FindBy(xpath = "(//*[text()='View plan details'])[1]")
     WebElement viewPlanDetailsBtn;
 
-    @FindBy(xpath = "//*[@id='card-updates']/a")
+    @FindBy(css = ".back-to-plans")
     public WebElement backToPlans;
 
     @FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
@@ -1244,7 +1244,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
                 + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
-        scrollToView(ProviderSearchLink);
         validateNew(ProviderSearchLink);
         // iosScroll(ProviderSearchLink);
         switchToNewTabNew(ProviderSearchLink);
@@ -2925,74 +2924,56 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
     }
 
     public void savePlans(String savePlanNames, String planType) {
-        String testPlanXpath = "";
-        String initial_savePlanIconXpath = "";
-        String savedPlanIconXpath = "";
-        List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-        System.out
-                .println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+            int ONE = 1;
+            List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+            System.out
+                    .println("Going to mark the following " + listOfTestPlans.size() + " number of " + planType + " plans as favorite");
 
-        for (String plan : listOfTestPlans) {
-            System.out.println("Proceed to locate plan=" + plan);
+            //Get all plan names
+            List<String> planNames = new ArrayList<String>();
+            driver.findElements(By.cssSelector("div[class^='module-plan-overview'] [class^='plan-name-heading'],h3[id*='planSelect']")).
+                    stream().forEach(planCard -> {
+                scrollToView(planCard);
+                planNames.add(planCard.getText());
+            });
 
-            if (planType.equalsIgnoreCase("MS")) {
-                testPlanXpath = "//h2[text()='" + plan + "']";
-            } else {
-                testPlanXpath = "//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]";
+            scrollToView(backToPlans);
+
+            for (String plan : listOfTestPlans) {
+                System.out.println("Proceed to locate plan = " + plan);
+
+                int planCardNumber = planNames.indexOf(plan) + 1;
+                Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
+
+                // Locate the plan card and scroll to view the plan card
+                String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
+                WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
+                List<WebElement> noOfPlanCards = driver.findElements(By.cssSelector(planCardCss));
+                scrollToView(planCard);
+                Assertion.assertEquals("PROBLEM - " + noOfPlanCards.size() + " plan cards found for " + plan, noOfPlanCards.size(), ONE);
+
+                // Locate the save icon for the plan and scroll to view the icon
+                WebElement savePlan = planCard.findElement(By.cssSelector("div[class^='favorite-plan-container'] > a:nth-child(1)"));
+                scrollToView(savePlan);
+                
+                //Validate the save plan icon is displayed for the plan 
+                System.out.println("Validating 'Save Plan' icon appeared before clicking");
+                String savePlanIconLocator = "img[src*='favorite-unfilled']";
+                WebElement savePlanIcon = savePlan.findElement(By.cssSelector(savePlanIconLocator));
+                Assertion.assertTrue("PROBLEM - Save icon not found for " + plan, savePlanIcon.isDisplayed());
+                
+                //Validate the Saved icon is not displayed for the plan before saving the plan
+                System.out.println("Validating 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
+                String savedPlanIconLocator = "img[src*='favorite-filled']";
+                WebElement savedPlanIcon = savePlan.findElement(By.cssSelector(savedPlanIconLocator));
+                Assertion.assertTrue("PROBLEM - 'Saved' icon displayed for " + plan, !savedPlanIcon.isDisplayed());
+
+                //Click on save icon for plan
+                System.out.println("Clicking save plan for " + plan);
+                jsClickNew(savePlan);
             }
-            System.out.println("TEST - textPlanXpath xpath=" + testPlanXpath);
-            List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
-            int expMatch = 1;
-            Assertion.assertTrue(
-                    "PROBLEM - unable to locate plan='" + plan + "'.  Expect number of match='" + expMatch
-                            + "' | Actual number of match='" + listOfPlans.size() + "'",
-                    listOfPlans.size() == expMatch);
 
-            System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
-            if (planType.equalsIgnoreCase("MS")) {
-                // initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
-                initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
-                        + plan + "']";
-            } else {
-                initial_savePlanIconXpath = "//a[contains(text(),'" + plan
-                        + "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
-            }
-            System.out.println("TEST - initial_savePlanLIconXpath xpath=" + initial_savePlanIconXpath);
-
-            List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(initial_savePlanIconXpath));
-            expMatch = 1;
-            Assertion.assertTrue(
-                    "PROBLEM - unable to locate Save Plan icon for ='" + plan + "'.  Expect number of match='"
-                            + expMatch + "' | Actual number of match='" + listOfSavePlanIcons.size() + "'",
-                    listOfSavePlanIcons.size() == expMatch);
-
-            System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
-            if (planType.equalsIgnoreCase("MS")) {
-                savedPlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"
-                        + plan + "']";
-                // "//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan
-                // favorite-plan ng-scope added')]"+savedPlanImgXpath;
-
-            } else {
-                savedPlanIconXpath = "//a[contains(text(),'" + plan
-                        + "')]/following::a[contains(@aria-selected,'false')][1]" + savedPlanImgXpath;
-            }
-            System.out.println("TEST - savedPlanIconXpath xpath=" + savedPlanIconXpath);
-            List<WebElement> listOfSavedPlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
-            expMatch = 0;
-            // ----------------------------------------
-            System.out.println("Proceed to click to save plan");
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);",
-                    listOfSavePlanIcons.get(0));
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
-
-        }
+            scrollToView(backToPlanResults);
     }
 
     /**
@@ -3039,9 +3020,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             System.out.println("Proceed to locate plan = " + plan);
 
             int planCardNumber = planNames.indexOf(plan) + 1;
-//			System.out.println(plan + " index is - " + planCardNumber);
             Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
 
+            //Locate the plan card and scrollToView
             String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
             WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
             List<WebElement> noOfPlanCards = driver.findElements(By.cssSelector(planCardCss));
@@ -3049,48 +3030,28 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             scrollToView(planCard);
             Assertion.assertEquals("PROBLEM - " + noOfPlanCards.size() + " plan cards found for " + plan, noOfPlanCards.size(), ONE);
 
-
+            //Validate Save icon is showed for the plan and scrollToView the save icon for the plan
             System.out.println("Validating 'Save Plan' icon appeared before clicking");
 
-            String savePlanIconLocator = !planType.toUpperCase().equalsIgnoreCase("PDP") ?
-                    "div[class^='favorite-plan-container'] img[src*='favorite-unfilled']" :
-                    "div[class^='favorite-plan-container'] > a:nth-child(1) > img[src*='favorite-unfilled']";
-            List<WebElement> noOfSavePlanIcons = planCard.findElements(By.cssSelector(savePlanIconLocator));
+            WebElement savePlan = planCard.findElement(By.cssSelector("div[class^='favorite-plan-container'] > a:nth-child(1)"));
+            scrollToView(savePlan);
+            
+            String savePlanIconLocator = "img[src*='favorite-unfilled']";
+            WebElement savePlanIcon = savePlan.findElement(By.cssSelector(savePlanIconLocator));
+            Assertion.assertTrue("PROBLEM - Save icon not found for " + plan, savePlanIcon.isDisplayed());
 
-            Assertion.assertEquals("PROBLEM - " + noOfSavePlanIcons.size() + " save icons found for " + plan, noOfSavePlanIcons.size(), ONE);
-
+            //Validate the Saved Plan icon is not shown before saving the plan
             System.out.println("Validating 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
-            String savedPlanIconLocator = !planType.toUpperCase().equalsIgnoreCase("PDP") ?
-                    "div[class^='favorite-plan-container'] img[src*='favorite-filled']" :
-                    "div[class^='favorite-plan-container'] > a:nth-child(1) > img[src*='favorite-filled']";
-            WebElement savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
+            String savedPlanIconLocator = "img[src*='favorite-filled']";
+            WebElement savedPlanIcon = savePlan.findElement(By.cssSelector(savedPlanIconLocator));
 
             Assertion.assertTrue("PROBLEM - 'Saved' icon displayed for " + plan, !savedPlanIcon.isDisplayed());
 
-
+            //Click on Save icon for the plan
             System.out.println("Clicking save plan for " + plan);
-            WebElement savePlan = planCard.findElement(By.cssSelector(savePlanIconLocator));
             jsClickNew(savePlan);
 
-
-			/*String State = CommonConstants.getSelectedState();
-			if (!StringUtils.isNullOrEmpty(State)) {
-				if (State.equalsIgnoreCase("Pennsylvania") || State.equalsIgnoreCase("Puerto Rico")
-						|| State.equalsIgnoreCase("Virginia")) {
-					if (validate(closeProfilePopup))
-						scrollToView(closeProfilePopup);
-					jsClickNew(closeProfilePopup);
-				} else {
-					if (validate(keepShoppingBtn))
-						scrollToView(keepShoppingBtn);
-					jsClickNew(keepShoppingBtn);
-				}
-			} else {
-				if (validate(keepShoppingBtn))
-					scrollToView(keepShoppingBtn);
-				jsClickNew(keepShoppingBtn);
-			}*/
-
+            //Close the saved plan popup
             if (closeProfilePopup.isDisplayed()) {
                 jsClickNew(closeProfilePopup);
             } else {
@@ -3100,21 +3061,20 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             }
             CommonUtility.checkPageIsReady(driver);
 
+            //Validating Saved icon is displayed for the saved plan 
             System.out.println("Validating 'Saved Plan' icon has appeared after 'Save Plan' is clicked");
-            savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
+            scrollToView(savePlan);
+            savedPlanIcon = savePlan.findElement(By.cssSelector(savedPlanIconLocator));
             Assertion.assertTrue("PROBLEM - 'Saved' icon is not displayed for " + plan, savedPlanIcon.isDisplayed());
 
+            // Validating Saved text is displayed for the saved plan
             System.out.println("Validating 'Saved' text has appeared after 'Save Plan' is clicked");
-            String savedPlanTextLocator = !planType.equalsIgnoreCase("PDP") ?
-                    "div[class^='favorite-plan-container'] span.liked" :
-                    "div[class^='favorite-plan-container'] > a:nth-child(1) > span.liked";
-            List<WebElement> noOfSavedText = planCard.findElements(By.cssSelector(savedPlanTextLocator));
-            Assertion.assertEquals("PROBLEM - " + noOfSavedText.size() + " 'Saved' text found for " + plan, noOfSavedText.size(), ONE);
-            Assertion.assertStringContains("PROBLEM - 'Saved' text is not displayed for " + plan, noOfSavedText.get(0).getText(), "Saved");
+            String savedPlanTextLocator = "span.liked";
+            WebElement planSavedText = savePlan.findElement(By.cssSelector(savedPlanTextLocator));
+            Assertion.assertTrue("PROBLEM - 'Saved' text not displayed for " + plan, planSavedText.isDisplayed());
+            Assertion.assertStringContains("PROBLEM - 'Saved' text is not displayed for " + plan, planSavedText.getText(), "Saved");
         }
-
         scrollToView(backToPlanResults);
-
     }
 
     public void validatePlansAreSaved(String savePlanNames, String planType) {
@@ -3133,56 +3093,29 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
         for (String plan : listOfTestPlans) {
             int planCardNumber = planNames.indexOf(plan) + 1;
-//			System.out.println(plan + " index is - " + planCardNumber);
             Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
 
+            //Locate the plan card and scroll into view
             String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
             WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
-
             scrollToView(planCard);
 
-			/*String savedPlanIconLocator = !planType.toUpperCase().equalsIgnoreCase("PDP") ?
-					"div[class^='favorite-plan-container'] img[src*='favorite-filled']" :
-					"div[class^='favorite-plan-container'] > a:nth-child(1) > img[src*='favorite-filled']";*/
-
+            //Scroll to the save icon of the located plan
+            WebElement savePlan = planCard.findElement(By.cssSelector("div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1)"));
+            scrollToView(savePlan);
+            
+            // Validate the number of saved plans for a plan type.
+            // Since all saved icons need to be located hence used driver.find and not planCard.find 
             String savedPlanIconLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1) > img[src*='favorite-filled']";
-
             List<WebElement> savedPlans = driver.findElements(By.cssSelector(savedPlanIconLocator));
             Assertion.assertEquals("Number of saved plans for " + planType + " do not match.",
                     savedPlans.size(), listOfTestPlans.size());
 
-            WebElement savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
+            // Validate saved icon is seen for the particular plan
+            WebElement savedPlanIcon = savePlan.findElement(By.cssSelector("img[src*='favorite-filled']"));
             Assertion.assertTrue("PROBLEM - 'Saved' icon not found for plan " + plan, savedPlanIcon.isDisplayed());
 
         }
-
-		/*sleepBySec(10);
-		String planTypePath = "";
-
-		sleepBySec(3);
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			planTypePath = "//div[@ng-show='showMaPlans']";
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			planTypePath = "//div[@ng-show='showPdpPlans']";
-			// driver.navigate().refresh();
-			CommonUtility.checkPageIsReady(driver);
-			sleepBySec(5);
-		} else if (planType.equalsIgnoreCase("SNP")) {
-			planTypePath = "//div[@ng-show='showSnpPlans']";
-		}
-		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
-		System.out.println("Validate " + listOfTestPlans.size() + " number of test plans are saved as favorite");
-//		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added')]" + savedPlanImgXpath;
-		String appeared_savedPlanLIconXpath = planTypePath + "//*[contains(@class, 'added') and not(contains(@style,'display:none'))]" + savedPlanImgXpath;
-		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
-		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
-		int expMatch = listOfTestPlans.size();
-		pageloadcomplete();
-		Assertion.assertTrue(
-				"PROBLEM - total saved plan icons not as expected.  Expect number of match='" + expMatch
-						+ "' | Actual number of match='" + listOfAppearedSavedPlanIcons.size() + "'",
-				listOfAppearedSavedPlanIcons.size() == expMatch);*/
     }
 
     public String determineSubpath(String planType) {
@@ -3274,8 +3207,16 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         return null;
     }
 
+	/**
+	 * Validate ability to unsave plans.
+	 * 
+	 * This method will unsave the 1st plan from the common separated values of
+	 * savedPlans parameter
+	 *
+	 * @param savedPlans the saved plans
+	 * @param planType the plan type
+	 */
     public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
-        int ZERO = 0;
         CommonUtility.checkPageIsReadyNew(driver);
 
         //Get all plan names
@@ -3287,202 +3228,94 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         });
 
         List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
-//		System.out.println("Validating total number of test plans saved are " + listOfTestPlans.size() + " for plan type " + planType);
 
-//		for (String plan : listOfTestPlans) {
+        //Get the plan name of the 1st plan from the list of plans to unsave
         String plan = listOfTestPlans.get(0);
         int planCardNumber = planNames.indexOf(plan) + 1;
-//		System.out.println(plan + " index is - " + planCardNumber);
         Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
 
+        //Locate the plan card and scrollToView the plan card
         String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
         WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
-
         scrollToView(planCard);
 
+        //Scroll to view the saved icon of the plan card
+        String unSavePlanLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1)";
+        WebElement unsavePlan = planCard.findElement(By.cssSelector(unSavePlanLocator));
+        scrollToView(unsavePlan);
+        
+        //Validate saved icon and text is displayed for the plan
         System.out.println("Validating 'Saved' icon and text is displayed before clicking unsave");
-        String savedPlanIconLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1) > img[src*='favorite-filled']";
-        String savedPlanTextLocator = "div[class^='favorite-plan-container'] > a:nth-child(1) > span.liked";
-        WebElement savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
-        WebElement savedPlanText = planCard.findElement(By.cssSelector(savedPlanTextLocator));
+        String savedPlanIconLocator = "img[src*='favorite-filled']";
+        String savedPlanTextLocator = "span.liked";
+        WebElement savedPlanIcon = unsavePlan.findElement(By.cssSelector(savedPlanIconLocator));
+        WebElement savedPlanText = unsavePlan.findElement(By.cssSelector(savedPlanTextLocator));
         Assertion.assertTrue("PROBLEM - 'Saved' icon not found for plan " + plan, savedPlanIcon.isDisplayed());
         Assertion.assertTrue("PROBLEM - 'Saved' text not found for plan " + plan, savedPlanText.isDisplayed());
 
+        //Click unsave plan button
         System.out.println("Proceeding to unsave " + planType + " plan - " + plan);
-        String unSavePlanLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1)";
-        WebElement unsavePlan = planCard.findElement(By.cssSelector(unSavePlanLocator));
         jsClickNew(unsavePlan);
 
+        //Validate saved icon and text is NOT displayed for the plan after clicking unsave button
         System.out.println("Validating 'Saved' icon is not displayed after clicking unsave");
-        List<WebElement> savedPlanIcons = planCard.findElements(By.cssSelector(savedPlanIconLocator));
+        WebElement savedPlanIcons = planCard.findElement(By.cssSelector(savedPlanIconLocator));
         WebElement savedPlansText = planCard.findElement(By.cssSelector(savedPlanTextLocator));
-        Assertion.assertEquals("PROBLEM - 'Saved' icon found for plan " + plan + " after clicking unsave", savedPlanIcons.size(), ZERO);
+        Assertion.assertTrue("PROBLEM - 'Saved' icon found for plan " + plan + " after clicking unsave", !savedPlanIcons.isDisplayed());
         Assertion.assertTrue("PROBLEM - 'Saved' text found for plan " + plan, !savedPlansText.isDisplayed());
 
+        //Validate save icon is displayed for the plan
         System.out.println("Validating 'Save' icon is displayed after clicking unsave");
-        String savePlanIconLocator = "a:nth-child(1) > img[src*='favorite-unfilled']";
-        WebElement savePlanIcon = planCard.findElement(By.cssSelector(savePlanIconLocator));
+        String savePlanIconLocator = "img[src*='favorite-unfilled']";
+        WebElement savePlanIcon = unsavePlan.findElement(By.cssSelector(savePlanIconLocator));
         Assertion.assertTrue("PROBLEM - 'Save' icon not found for plan " + plan, savePlanIcon.isDisplayed());
+    }
 
+	public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 
-		/*String subPath = determineSubpath(planType);
-		String headerPath = determineHeaderPath(planType);
+		System.out.println("Validate first plan on list is unsaved and second plan on list is saved");
 
-		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
-		String unsavePlan = listOfTestPlans.get(0);
-		System.out.println("Proceed to unsave 1st plan from input '" + unsavePlan + "'");
+		// Get all plan names
+		List<String> planNames = new ArrayList<String>();
+		driver.findElements(
+				By.cssSelector("div[class^='module-plan-overview'] [class^='plan-name-heading'],h3[id*='planSelect']"))
+				.stream().forEach(planCard -> {
+					scrollToView(planCard);
+					planNames.add(planCard.getText());
+				});
 
-		String testPlanXpath = "//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]";
-		WebElement testPlanXpath1 = driver
-				.findElement(By.xpath("//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]"));
-		testPlanXpath1.getText().replaceAll("\u00A00", " ").trim();
-		List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
-		int expMatch = 1;
-		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='"
-				+ expMatch + "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
+		for (int planNumber = 0; planNumber < listOfTestPlans.size(); planNumber++) {
+			String plan = listOfTestPlans.get(planNumber);
+			int planCardNumber = planNames.indexOf(plan) + 1;
+			Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
 
-		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
-		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
-				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
-				+ savedPlanImgXpath;
-		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
-		List<WebElement> listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
-		expMatch = 1;
-		Assertion.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='" + unsavePlan
-				+ "'.  Expect number of match='" + expMatch + "' | Actual number of match='"
-				+ listOfAppearedSavedPlanIcons.size() + "'", listOfAppearedSavedPlanIcons.size() == expMatch);
+			String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
+			WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
+			scrollToView(planCard);
 
-		System.out.println("Proceed to click to unsave plan");
-
-		validate(listOfAppearedSavedPlanIcons.get(0));
-		jsClickNew(listOfAppearedSavedPlanIcons.get(0));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// In the previous steps the plan 0 is unsaved
+			// Validating plan 1 (case 1) is still saved and plan 0 (case 0) is unsaved
+			switch (planNumber) {
+			case 0:
+				System.out.println("Proceed to validate 'Save Plan' icon displayed for unsaved plan " + plan);
+				String savePlanIconLocator = "a:nth-child(1) > img[src*='favorite-unfilled']";
+				WebElement savePlanIcon = planCard.findElement(By.cssSelector(savePlanIconLocator));
+				Assertion.assertTrue("PROBLEM - 'Save' icon not found for plan " + plan, savePlanIcon.isDisplayed());
+				break;
+			case 1:
+				System.out.println("Proceed to validate 'Saved Plan' icon is displayed for " + plan);
+				String savedPlanIconLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1) > img[src*='favorite-filled']";
+				String savedPlanTextLocator = "div[class^='favorite-plan-container'] > a:nth-child(1) > span.liked";
+				WebElement savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
+				WebElement savedPlanText = planCard.findElement(By.cssSelector(savedPlanTextLocator));
+				Assertion.assertTrue("PROBLEM - 'Saved' icon not found for plan " + plan, savedPlanIcon.isDisplayed());
+				Assertion.assertTrue("PROBLEM - 'Saved' text not found for plan " + plan, savedPlanText.isDisplayed());
+				break;
+			}
 		}
-		System.out.println("Proceed to validate 'Saved Plan' icon is not there after clicking to unsave it");
-		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
-		listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
-		expMatch = 0;
-
-		Assertion.assertTrue("PROBLEM - 'Saved Plan' icon should no longer appear for ='" + unsavePlan
-				+ "'.  Expect number of match='" + expMatch + "' | Actual number of match='"
-				+ listOfAppearedSavedPlanIcons.size() + "'", listOfAppearedSavedPlanIcons.size() == expMatch);
-
-		System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
-		String savePlanIconXpath = "//*[contains(text(),'" + unsavePlan
-				+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"
-				+ savePlanImgXpath;
-		System.out.println("TEST - savePlanIconXpath xpath=" + savePlanIconXpath);
-		List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savePlanIconXpath));
-		expMatch = 1;
-		Assertion.assertTrue(
-				"PROBLEM - unable to locate Save Plan icon for ='" + unsavePlan + "'.  Expect number of match='"
-						+ expMatch + "' | Actual number of match='" + listOfSavePlanIcons.size() + "'",
-				listOfSavePlanIcons.size() == expMatch);*/
-    }
-
-    public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
-//		String subPath = determineSubpath(planType);
-//		String headerPath = determineHeaderPath(planType);
-        CommonUtility.checkPageIsReadyNew(driver);
-        List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
-        System.out.println("Validate first plan on list is unsaved and second plan on list is saved");
-
-        //Get all plan names
-        List<String> planNames = new ArrayList<String>();
-        driver.findElements(By.cssSelector("div[class^='module-plan-overview'] [class^='plan-name-heading'],h3[id*='planSelect']")).
-                stream().forEach(planCard -> {
-            scrollToView(planCard);
-            planNames.add(planCard.getText());
-        });
-
-
-        for (int planNumber = 0; planNumber < listOfTestPlans.size(); planNumber++) {
-            String plan = listOfTestPlans.get(planNumber);
-            int planCardNumber = planNames.indexOf(plan) + 1;
-            //	System.out.println(plan + " index is - " + planCardNumber);
-            Assertion.assertTrue("No plan card found for " + plan, planCardNumber > 0);
-
-            String planCardCss = "div[class^='module-plan-overview']:nth-of-type(" + planCardNumber + ")";
-            WebElement planCard = driver.findElement(By.cssSelector(planCardCss));
-            scrollToView(planCard);
-
-            switch (planNumber) {
-                case 0:
-                    System.out.println("Proceed to validate 'Save Plan' icon displayed for unsaved plan " + plan);
-                    String savePlanIconLocator = "a:nth-child(1) > img[src*='favorite-unfilled']";
-                    WebElement savePlanIcon = planCard.findElement(By.cssSelector(savePlanIconLocator));
-                    Assertion.assertTrue("PROBLEM - 'Save' icon not found for plan " + plan, savePlanIcon.isDisplayed());
-                    break;
-                case 1:
-                    System.out.println("Proceed to validate 'Saved Plan' icon is displayed for " + plan);
-                    String savedPlanIconLocator = "div[class^='favorite-plan-container'] > a[class$='added']:nth-child(1) > img[src*='favorite-filled']";
-                    String savedPlanTextLocator = "div[class^='favorite-plan-container'] > a:nth-child(1) > span.liked";
-                    WebElement savedPlanIcon = planCard.findElement(By.cssSelector(savedPlanIconLocator));
-                    WebElement savedPlanText = planCard.findElement(By.cssSelector(savedPlanTextLocator));
-                    Assertion.assertTrue("PROBLEM - 'Saved' icon not found for plan " + plan, savedPlanIcon.isDisplayed());
-                    Assertion.assertTrue("PROBLEM - 'Saved' text not found for plan " + plan, savedPlanText.isDisplayed());
-                    break;
-            }
-
-			/*if (i == 1) { // In the previous steps the plan 0 is unsaved so we will validate plan 1 is
-							// still saved
-				String plan = listOfTestPlans.get(i);
-				System.out.println("Plan '" + plan + "' should be saved");
-				System.out.println("Proceed to locate plan=" + plan);
-
-				String testPlanXpath = "//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]";
-				System.out.println("TEST - testPlanXpath xpath=" + testPlanXpath);
-				List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
-				System.out.println("TEST - size=" + listOfPlans.size());
-				int expMatch = 1;
-				Assertion.assertTrue(
-						"PROBLEM - unable to locate plan='" + plan + "'.  Expect number of match='" + expMatch
-								+ "' | Actual number of match='" + listOfPlans.size() + "'",
-						listOfPlans.size() == expMatch);
-
-				System.out.println("Proceed to validate 'Saved Plan' icon is still there");
-				String savedPlanIconXpath = "//*[contains(text(),'" + plan
-						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added') and not(contains(@style,'display:none'))]"
-						+ savedPlanImgXpath;
-				System.out.println("TEST - initial_savePlanLIconXpath xpath=" + savedPlanIconXpath);
-				List<WebElement> listOfSavePlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
-				expMatch = 1;
-				Assertion.assertTrue(
-						"PROBLEM - unable to locate Save Plan icon for ='" + plan + "'.  Expect number of match='"
-								+ expMatch + "' | Actual number of match='" + listOfSavePlanIcons.size() + "'",
-						listOfSavePlanIcons.size() == expMatch);
-			} else if (i == 0) { // In the previous steps the plan 0 is unsaved so we will validate plan 0 is
-									// still unsaved
-				String plan = listOfTestPlans.get(i);
-				System.out.println("Plan '" + plan + "' should be unsaved");
-
-				String testPlanXpath = "//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]";
-				List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
-				int expMatch = 1;
-				Assertion.assertTrue(
-						"PROBLEM - unable to locate plan='" + plan + "'.  Expect number of match='" + expMatch
-								+ "' | Actual number of match='" + listOfPlans.size() + "'",
-						listOfPlans.size() == expMatch);
-
-				System.out.println("Proceed to validate 'Save Plan' icon appeared again after unsaved plan");
-				String savePlanIconXpath = "//*[contains(text(),'" + plan
-						+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"
-						+ savePlanImgXpath;
-				System.out.println("TEST - savedPlanIconXpath xpath=" + savePlanIconXpath);
-				List<WebElement> listOfSavedPlanIcons = driver.findElements(By.xpath(savePlanIconXpath));
-				expMatch = 1;
-				Assertion.assertTrue(
-						"PROBLEM - unable to locate Save Plan icon for ='" + plan + "'.  Expect number of match='"
-								+ expMatch + "' | Actual number of match='" + listOfSavedPlanIcons.size() + "'",
-						listOfSavedPlanIcons.size() == expMatch);
-			}*/
-        }
-    }
+	}
 
     public void validateEmailOption(String planType) {
         WebElement emailButton = null;
@@ -4192,6 +4025,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
                 planYearPopupGoButton.click();
 
             }
+        }
+    }
+    
+    public void verifySelectedPlanYear(String planYear) {
+        CommonUtility.checkPageIsReady(driver);
+        if (validate(planYearToggle)) {
+        	WebElement planYearToggle = planYear.equalsIgnoreCase("current") ? currentYearToggle : nextYearToggle;
+        	
+        	boolean planYearSelected = Boolean.parseBoolean(CommonUtility.getElementAttribute(planYearToggle, "aria-selected"));
+        	Assertion.assertTrue("Plan year toggle for '" + planYear.toUpperCase() + "' is not selected !", planYearSelected);
+        	
         }
     }
 
