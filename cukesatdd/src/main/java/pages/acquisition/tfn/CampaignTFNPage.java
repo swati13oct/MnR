@@ -1110,8 +1110,8 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				jsClickNew(Start_ApplicationBtn);
 				System.out.println("Start application button is clicked on application page");
 				Thread.sleep(4000);
-				CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-				insuredStatus.click();
+				//CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+				//insuredStatus.click();
 				Thread.sleep(2000);
 				jsClickNew(nextButton);
 				Thread.sleep(2000);
