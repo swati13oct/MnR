@@ -915,7 +915,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType, planCount)) {
+		if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);

@@ -369,7 +369,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
-		if (plansummaryPage.validatePlanNames(planType, planCount)) {
+		if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);

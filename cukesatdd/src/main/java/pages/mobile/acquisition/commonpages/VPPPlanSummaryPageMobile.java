@@ -27,6 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -1677,14 +1678,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         return false;
     }
 
-    public boolean validatePlanNames(String planType, int planCount) {
+    public boolean validatePlanNames(String planType) {
 
         /*
          * if (backToPlanResults.isDisplayed()) { jsClickNew(backToPlanResults); }
          */
         // ElementData elementData = new ElementData("className",
         // "module-plan-overview");
-        ElementData elementData = new ElementData("xpath", "//*[contains(@class,'module-plan-overview')]");
+        /*ElementData elementData = new ElementData("xpath", "//*[contains(@class,'module-plan-overview')]");
 
         if (planType.equalsIgnoreCase("PDP")) {
 
@@ -1703,7 +1704,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             // int snpPlans = Integer.valueOf(snpPlansNumber.getText());
             return planCount == findChildElements(elementData, snpPlanList).size();
         }
-        return false;
+        return false;*/
+    	int planCount = getPlanCountAndViewPlanSummary(planType);
+    	List<WebElement> planCards = driver.findElements(By.xpath("//*[contains(@class,'module-plan-overview')]"));
+    	return planCards.size() == planCount;
 
     }
 
@@ -3913,29 +3917,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             jsClickNew(planYearToggle);
             CommonUtility.checkPageIsReadyNew(driver);
         }
-
-
-		/*if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(IsMyDoctorCovereredBanner, 20)) {
-				System.out.println("***** Doctor banner verified ******");
-
-			} else {
-				validate(HowMuchDrugCostBanner, 10);
-				System.out.println("***** Drug cost banner verified ******");
-			}
-		}*/
-
-        // Use this code next year 2022
-
-        // if(planYear.equalsIgnoreCase("current")) { // if the scenario is for current
-        // year
-        // if(validate(CurrentYearPlansBtn, 20)) {
-        // System.out.println("*****CLICKING ON Current Year button*****:
-        // "+CurrentYearPlansBtn.getText());
-        // jsClickNew(CurrentYearPlansBtn);
-        // }
-        // }
-
+        
     }
 
     public void handleChatPopup() {
