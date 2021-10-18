@@ -82,10 +82,10 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
 	private WebElement SelectPCPAddress;
 	
-	@FindBy(xpath = "//span[contains(text(), 'Continue')]//..")
+	@FindBy(xpath = "//span[contains(text(), 'Continue')]/..")
 	private WebElement SelectPCPContinueBtn;
 	
-	@FindBy(xpath = "//*[@id='label_selectedMedicalGroup0']")
+	@FindBy(xpath = "//*[contains(@id,'label_selectedMedicalGroup0')]")
 	private WebElement SelectMedicalGrp;
 
 	@FindBy(xpath = "//*[contains(text(), 'Continue')]")
