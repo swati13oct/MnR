@@ -227,7 +227,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @BHDHProviders
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                                               | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                             |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                            | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                             |
       | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Virginia S Hogan MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Virginia S Hogan MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
 
     @regressionUHC
@@ -581,3 +581,45 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | UHC  |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
+
+  @PRE @PREMSE2E
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    And user selects additional services option in additional services page
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
+    Then user selects cost preferences option in cost preferences page
+      | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
+    Then user validate elements in loading results page
+    And user views plan details from results page
+      | Plan Info | <planInfo> |
+
+    @regressionAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | planInfo          |
+      | AARP |   82071 | NO            | Albany County          | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | Plan K,ViewButton |
+      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | Plan F,Link       |
+      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | Plan L,ViewButton |
+
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | planInfo          |
+      | UHC  |   82071 | NO            | Albany County          | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | Plan G,Link       |
+      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | Plan F,ViewButton |
+      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | Plan N,Link       |
