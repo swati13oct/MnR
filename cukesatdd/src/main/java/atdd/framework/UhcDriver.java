@@ -616,6 +616,7 @@ public abstract class UhcDriver {
 		try {
 			
 			scrollToView(element);
+			checkElementisEnabled(element);
 			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			js1.executeScript("arguments[0].click();", element);
 			

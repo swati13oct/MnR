@@ -1077,7 +1077,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public DisclaimersAARPPageMobile disclaimersFooterClick() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validateNew(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
@@ -5044,7 +5049,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MenuMobile);
 		validateNew(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
-		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String base = driver.getWindowHandle();
 		Set<String> all = driver.getWindowHandles();
 		if (all.size() > 1) {
