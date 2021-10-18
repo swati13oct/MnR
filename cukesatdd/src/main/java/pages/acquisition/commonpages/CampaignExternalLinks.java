@@ -1472,10 +1472,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	//https://www.uhc.com/legal/accessibility
 
 	public void validatePrivacy() {
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		validateNew(PrivacyPolicy);
 		String parentwindow=driver.getWindowHandle();
-		PrivacyPolicy.click();
-		switchToNewTab();
+		switchToNewTabNew(PrivacyPolicy);
 		CommonUtility.waitForPageLoadNew(driver, Heading, 30);
 		Assert.assertEquals("Privacy Policy", Heading.getText());
 		driver.close();
