@@ -511,7 +511,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
 			if(!planName.toUpperCase().contains("PATRIOT"))
-				Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+				Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
 			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
@@ -656,9 +656,25 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
+			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+				threadsleep(10000);
+				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
+				if(validate(MSplanDetailsPage,20))
+				{
+					validate(MSplanNameInDetailsPage, 60);
+					Assert.assertTrue(planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+							"Not navigated to Plan details page");
+				}else {
+					validate(zipcodeMSForm, 60);
+					planSelectorResultspage.submitMSform();
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "MS Plan Summary page is not loaded");					
+				}	
+			}
+			else {
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
+			}
 		}
 		if (planAction.toLowerCase().contains("viewbutton")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
