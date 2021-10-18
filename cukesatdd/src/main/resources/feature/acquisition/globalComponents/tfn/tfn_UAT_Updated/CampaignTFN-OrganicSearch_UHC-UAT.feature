@@ -80,7 +80,6 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | TFN Xpath | <TFNxpath> |
         And the user selects plan year
       | Plan Year | <planyear> |
-      Then user validates TFN in header
      Then user clicks on Change Zip code link
     Then user clicks on Select by Address and Enter fileds
       | Address | <address> |
