@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import acceptancetests.data.CommonConstants;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -1452,6 +1453,20 @@ public class CampaignExternalLinks extends UhcDriver {
         } else {
             System.out.println("Rally opened successfully");
         }
+
+		if (driver.getWindowHandles().size() > 1) {
+			String currentPage = driver.getWindowHandle();
+			Set<String> newWindow = driver.getWindowHandles();
+			for (String parentWindow : newWindow) {
+				if (!parentWindow.equalsIgnoreCase(currentPage)) {
+					driver.switchTo().window(currentPage).close();
+					break;
+				}
+			}
+		} else {
+			driver.navigate().back();
+			threadsleep(20000);
+		}
     }
 
 	//https://www.uhc.com/legal/accessibility
