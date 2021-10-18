@@ -1460,6 +1460,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			for (String parentWindow : newWindow) {
 				if (!parentWindow.equalsIgnoreCase(currentPage)) {
 					driver.switchTo().window(currentPage).close();
+					driver.switchTo().window(CommonConstants.getMainWindowHandle());
 					break;
 				}
 			}
@@ -1472,7 +1473,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	//https://www.uhc.com/legal/accessibility
 
 	public void validatePrivacy() {
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		//driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(PrivacyPolicy);
 		String parentwindow=driver.getWindowHandle();
 		switchToNewTabNew(PrivacyPolicy);
