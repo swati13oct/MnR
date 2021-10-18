@@ -135,7 +135,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath="//a[text()='Edit Hospitals']")
 	private WebElement editHospitalsLink;
 	
-	@FindBy(xpath = "//*[contains(@class,'modal-btns')]//*[contains(text(),'Save')]")
+	@FindBy(xpath = "//button[@data-test-id='button-update-provider']")
 	public WebElement addressSaveButton; 
 	
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
@@ -312,6 +312,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
+		CommonUtility.waitForPageLoadNew(driver, GreatHeaderText, 15);
 		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
@@ -422,6 +423,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 
 	}
 	
+	@FindBy(css = "[class$='mobile-profile-header-buttons'] button[data-test-id='saved-provider-button']")
+	private WebElement selectThisProviderHospitalButton;
 	public ComparePlansPageMobile placesfromHospital() throws Exception {
 		String ParentWindow = null;
 		CommonUtility.waitForPageLoadNew(driver, GetstartedButton, 45);
@@ -439,8 +442,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
 		CommonUtility.checkPageIsReadyNew(driver);
-		waitforElementNew(selectProviderBtn, 20);
-		jsClickNew(selectProviderBtn);
+		jsClickNew(selectThisProviderHospitalButton);
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
@@ -449,7 +451,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
-		scrollToView(GreatHeaderText);
+		CommonUtility.waitForPageLoadNew(driver, GreatHeaderText, 15);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 

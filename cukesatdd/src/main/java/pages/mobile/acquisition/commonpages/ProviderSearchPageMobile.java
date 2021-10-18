@@ -392,8 +392,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 
-//	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
-	@FindBy(css = "#finishAndReturnButton")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement FinishButton;
 
 	public String selectsHospitals() {
@@ -437,12 +436,14 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		 */
 
 		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
+			jsClickNew(ViewsaveOldbtn);
 		else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
-			Viewsavebtn.click();
+			jsClickNew(Viewsavebtn);
 			if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
-
-				jsClickNew(ViewSavedProvidersLink);
+//				jsClickNew(ViewSavedProvidersLink);
+				jsClickNew(rallyPageHamburgerMenu);
+				CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+				jsClickNew(Savedproviders);
 			} else
 				System.out.println("New Rally page not displayed");
 
@@ -451,19 +452,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
 		}
-		/*
-		 * else if (driver.findElements(By.xpath(
-		 * "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"
-		 * )) .size() > 0) {
-		 */
-		else if (driver.findElements(By.cssSelector("#finishAndReturnButton")).size() > 0) {
+
+		else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+
 			System.out.println("NEW Rally page displayed");
-			jsClickNew(FinishButton);
+			jsClickNew(savedProviderFinishButton);
 		} else
 			System.out.println("Issue with Xpath");
-//		waitForCountDecrement(2);
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-//		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		waitForCountDecrement(2);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
 
 		validateNew(vppFirstPlanCard);
 //		return new VPPPlanSummaryPageMobile(driver);
@@ -645,25 +646,31 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		}
 
+		
 		/*---------------------Commented the lines as per new changes in rally---------------
-			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
-		jsClickNew(Savedproviders); 	
-		waitForPageLoadSafari();
+		jsClickNew(rallyPageHamburgerMenu);
 		
-		
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
-		System.out.println("OLD Rally page displayed");
-		Checkcoverage.click();
-		}	
-		else
-		if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
-		System.out.println("NEW Rally page displayed");
-		//FinishButton.click();
-		validateNew(FinishButton);
-		jsClickNew(FinishButton);
-		}else
-		System.out.println("Issue with Xpath");
-		---------------------Commented the lines as per new changes in rally---------------*/
+		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+		jsClickNew(Savedproviders);
+//		waitForPageLoadSafari();
+
+
+
+
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			jsClickNew(Checkcoverage);
+		}
+		else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			 FinishButton.click();
+			validateNew(savedProviderFinishButton);
+			jsClickNew(savedProviderFinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+			---------------------Commented the lines as per new changes in rally---------------*/
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
 
