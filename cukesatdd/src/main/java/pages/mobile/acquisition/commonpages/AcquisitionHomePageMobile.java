@@ -4277,7 +4277,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(viewShopPlansButton);
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		waitforElementNew(zipcodeChangeLink, 30);
+//		waitforElementNew(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
@@ -4305,8 +4305,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollButton);
-
-		validate(zipcodeChangeLink, 30);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		validate(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
