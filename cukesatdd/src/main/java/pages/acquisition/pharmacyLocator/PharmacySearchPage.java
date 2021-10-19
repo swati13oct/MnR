@@ -168,7 +168,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String expectedURL = "member/pharmacy-locator";
 		Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
 				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
-		driver.close();
+		//driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
