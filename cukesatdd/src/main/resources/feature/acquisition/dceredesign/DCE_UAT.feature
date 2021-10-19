@@ -556,11 +556,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
   
    @dce_E2E_Scenario8_UAT_AARP @regressionAARP 
     Examples:
-      | Scenario               | site | zipcode | isMultutiCounty | county       | planType | drug1   |
-      | E2E_Scenario8_UAT_AARP | AARP | 78006   | YES             | Bexar County | MS       | Lipitor |
+      | Scenario               | site | zipcode | isMultutiCounty | county       | plantype | drug1   |
+      | E2E_Scenario8_UAT_AARP | AARP | 10001   | NO             | New York County | MS       | Lipitor |
     
    @dce_E2E_Scenario8_UAT_UHC @regressionUHC
     Examples:
-      | Scenario              | site | zipcode | isMultutiCounty | county       | planType | drug1   |
-      | E2E_Scenario8_UAT_UHC | UHC  | 78006   | YES             | Bexar County | MS       | Lipitor |
+      | Scenario              | site | zipcode | isMultutiCounty | county       | plantype | drug1   |
+      | E2E_Scenario8_UAT_UHC | UHC  | 10001   | NO             | New York County | MS       | Lipitor |
   
