@@ -205,7 +205,7 @@ public class PlanPremiumPage extends UhcDriver{
 		if(payByMail.isDisplayed())	{
 			System.out.println("Pay By Mail radio button is diplayed or not" +payByMail.isDisplayed());
 			jsClickNew(payByMail);
-			Thread.sleep(1000);
+		//	Thread.sleep(1000);
 			actualText = payByMailText.getText();
 			System.out.println("Actual text for pay by mail  is : " +actualText);			
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
@@ -233,7 +233,7 @@ public class PlanPremiumPage extends UhcDriver{
 		try {
 			if(creditCard.isDisplayed())	{
 				jsClickNew(creditCard);
-				Thread.sleep(10000);
+			//	Thread.sleep(10000);
 				driver.switchTo().frame("ole_credit_payment");
 				actualText = creditCardText.getText();
 				expectedText = CommonConstants.CREDIT_CARD_TEXT;
@@ -278,7 +278,7 @@ public class PlanPremiumPage extends UhcDriver{
 							jsSendkeys(cardExpirationMonth, month);
 							jsSendkeys(cardExpirationYear, year);
 							jsClickNew(btnSubmit);
-							Thread.sleep(5000);
+						//	Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
 							driver.switchTo().defaultContent();
 							actualText = upgResultsMessage.getText();
@@ -308,7 +308,7 @@ public class PlanPremiumPage extends UhcDriver{
 		try {
 			if(socialSecurity.isDisplayed())	{
 				jsClickNew(socialSecurity);
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 				actualText = socialSecurityText.getText().replaceAll("\u00A0"," ").trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
 				flag = actualText.contains(expectedText);

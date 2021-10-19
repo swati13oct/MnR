@@ -225,8 +225,9 @@ public class WelcomePage extends UhcDriver{
 		
 		CheckiPerseptions();
 		if(validateNew(ViewPlanDetails)){
-			ViewPlanDetails.click();
-			Thread.sleep(500);
+			//ViewPlanDetails.click();
+			jsClickNew(ViewPlanDetails);
+		//	Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
 				
@@ -237,8 +238,11 @@ public class WelcomePage extends UhcDriver{
 				//CheckiPerseptions();
 				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
 				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-				enrollInPlan.click();
-				Thread.sleep(500);
+			//	enrollInPlan.click();
+				validateNew(enrollInPlan);
+				jsClickNew(enrollInPlan);
+				
+			//	Thread.sleep(500);
 				flag = driver.getCurrentUrl().contains("welcome");
 				CheckiPerseptions();
 				if (flag){
@@ -337,12 +341,10 @@ public class WelcomePage extends UhcDriver{
 		validate(LearnMoreButton);
 		jsClickNew(LearnMoreButton);
 		//		LearnMoreButton.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		if(validate(LearnMore_Modal)){
 			System.out.println("OLE Learn More Modal is Displayed");
 			return new LearnMoreModal(driver);
@@ -399,11 +401,10 @@ public class WelcomePage extends UhcDriver{
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);
 		//SiteLogo.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(LeavingOLEmodal)){
 			System.out.println("Leaving OLE modal is Displayed");
 			return new LeavingOLEmodal(driver);
@@ -625,11 +626,10 @@ public class WelcomePage extends UhcDriver{
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 		
 		//CancelEnrollmentLink.click();
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(SaveModalOLE)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			validate(CreateProfilesave);
@@ -718,12 +718,10 @@ public class WelcomePage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", LogoImage);
 		
 		
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
 		if(validate(LogoModalOLE)){
 			System.out.println("OLE logo modalis Displayed");
 			validate(LeaveOnlineApplication);

@@ -142,13 +142,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2022 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     #@pharmacylocatorAARP02b
-    @PharmacyLocatorCommonAARP02b @regressionAARP
+    @PharmacyLocatorCommonAARP02b @regressionAARP 
     Examples: 
       | TID   | site | zipcode | distance | countyName      | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15583 | AARP |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2022 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | AARP |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2022 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | AARP |   14867 |       25 | Tompkins County |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2022 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2022 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | AARP |   33321 |       10 | None            |        2021 | MedicareMax (HMO)                        |        2022 | MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
   @PharmacyLocatorCommonAARP02a @NextYear
     Examples:
@@ -292,15 +292,17 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to plan summary" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP summary page
 
-    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @NextYear
+    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @NextYear 
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | AARP |   19019 | Iowa County | No              | MAPD     |
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear |
+      | AARP |   19019 | Iowa County | No              | MAPD     | current  |
 
     @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @NextYear
     Examples: 
@@ -358,12 +360,12 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP detail page
 
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear 
     Examples: 
       | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
       | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)         |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC @NextYear
     Examples: 
@@ -423,10 +425,10 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Then user should be navigated to the previous page
       | PagePath | <path> |
 
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP 
     Examples: 
-      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
-      | AARP | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear |  planName                        | path                                                                                                      |
+      | AARP | 90210   | NO              | Los Angeles County | PDP      | current  |  AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC
     Examples: 
@@ -452,7 +454,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Then user click on breadcrumb "Return to Pharmacy Search" on get started page
     Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
 
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear 
     Examples: 
       | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) |
