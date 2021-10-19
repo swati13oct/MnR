@@ -198,7 +198,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// Right Rail Element - TFN
 	//@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
-	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
+	@FindBy(xpath = "//*[contains(@class,'tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	@FindBy(id = "backToPlanSummaryTop")
@@ -1157,10 +1157,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
+			pageloadcomplete();
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
+			validateNew(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			waitForPageLoadSafari();
+			pageloadcomplete();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,

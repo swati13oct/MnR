@@ -536,3 +536,31 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Examples:
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
       | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      
+  @dce_E2E_Scenario8_UAT
+  Scenario Outline: <Scenario> : To verify on VPP Med Supp plans and then navigate to DCE from Sub-nav, verify the drug summary page
+  Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+  When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+  And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+	Then I click on DCE Redesign link from Shop for a plan hover over
+	Then the user validates Get Started Page
+  Then the user clicks on Build Drug List to navigate to Build Drug List Page
+  Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+  Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+  
+   @dce_E2E_Scenario8_UAT_AARP @regressionAARP 
+    Examples:
+      | Scenario               | site | zipcode | isMultutiCounty | county       | planType | drug1   |
+      | E2E_Scenario8_UAT_AARP | AARP | 78006   | YES             | Bexar County | MS       | Lipitor |
+    
+   @dce_E2E_Scenario8_UAT_UHC @regressionUHC
+    Examples:
+      | Scenario              | site | zipcode | isMultutiCounty | county       | planType | drug1   |
+      | E2E_Scenario8_UAT_UHC | UHC  | 78006   | YES             | Bexar County | MS       | Lipitor |
+  
