@@ -319,14 +319,14 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Step Header Step 3 to land on Drug Summary Page
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then the user closes the Drug Info Modal on Plan Compare page
-     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
     Then the user clicks on Step Header Step 2 to land on Build your drug list Page
     Then the user clicks on return to compare link on build drug list page to returns to plan compare
     Then the user closes the Drug Info Modal on Plan Compare page
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
-    Then the user validates planName matches plan Name in VPP 
+    Then the user validates planName matches plan Name in VPP
     Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal
     Then the user Captures Drug costs on Drug Details Page
     And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
@@ -474,7 +474,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | SelectStandardPharmacy | <SelectStandardPharmacy> |
     Then the user Captures Drug costs on Drug Details Page
     Then the user validates enroll option as per following flag
-      | EnrollFlag | <enrollFlag> | 
+      | EnrollFlag | <enrollFlag> |
     And the user validates link to Drug Summary Page
     When user verify the drug summary page
     And the user Captures Drug costs on Drug Summary Page for the given plan
@@ -536,31 +536,37 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Examples:
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
       | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
-      
+
   @dce_E2E_Scenario8_UAT
   Scenario Outline: <Scenario> : To verify on VPP Med Supp plans and then navigate to DCE from Sub-nav, verify the drug summary page
-  Given the user is on medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
       | Site | <site> |
-  When the user performs plan search using following information
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-  And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-	Then I click on DCE Redesign link from Shop for a plan hover over
-	Then the user validates Get Started Page
-  Then the user clicks on Build Drug List to navigate to Build Drug List Page
-  Then the user searches and adds the following Drug to Drug List
+    And the user views the plans of the below plan type
+      | Plan Type | <VppPlantype> |
+    Then I click on DCE Redesign link from Shop for a plan hover over
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-  Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
-  
-   @dce_E2E_Scenario8_UAT_AARP @regressionAARP 
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then the user validates default Plan type on DCE Summary page as follows
+      | Plan Type | <defaultPlanType> |
+    And user verify the drug summary page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+
+  @dce_E2E_Scenario8_UAT_AARP @regressionAARP
     Examples:
-      | Scenario               | site | zipcode | isMultutiCounty | county       | plantype | drug1   |
-      | E2E_Scenario8_UAT_AARP | AARP | 10001   | NO             | New York County | MS       | Lipitor |
-    
-   @dce_E2E_Scenario8_UAT_UHC @regressionUHC
+      | Scenario               | site | zipcode | isMultutiCounty | county          | VppPlantype | drug1   | defaultPlanType | planType | planName                                         |
+      | E2E_Scenario8_UAT_AARP | AARP | 10001   | NO              | New York County | MS          | Lipitor | MAPD            | SNP      | UnitedHealthcare Nursing Home Plan 2 (HMO I-SNP) |
+
+  @dce_E2E_Scenario8_UAT_UHC @regressionUHC
     Examples:
-      | Scenario              | site | zipcode | isMultutiCounty | county       | plantype | drug1   |
-      | E2E_Scenario8_UAT_UHC | UHC  | 10001   | NO             | New York County | MS       | Lipitor |
+      | Scenario              | site | zipcode | isMultutiCounty | county          | VppPlantype | drug1   | defaultPlanType | planType | planName                        |
+      | E2E_Scenario8_UAT_UHC | UHC  | 96919   | NO              | New York County | MS          | Lipitor | PDP             | PDP      | AARP MedicareRx Preferred (PDP) |
   
