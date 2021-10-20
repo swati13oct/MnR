@@ -615,7 +615,7 @@ public abstract class UhcDriver {
 	public void iOSClick(WebElement element) {
 		try {
 
-			checkElementisEnabled(element);
+			//checkElementisEnabled(element);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
@@ -633,6 +633,7 @@ public abstract class UhcDriver {
 
 			if (!seleniumClick.equalsIgnoreCase("true")) {
 				System.out.println("Trying JSClick on IOS ..........");
+
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
 				js1.executeScript("arguments[0].click();", element);
 			}
@@ -656,7 +657,10 @@ public abstract class UhcDriver {
 
 			// To handle iOS specific click problem By: Harshal Ahire
 
-			iOSClick(element);
+			//iOSClick(element);
+			//blankClick();
+			js.executeScript("arguments[0].click();", element);
+			
 		} else {
 			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -797,6 +801,16 @@ public abstract class UhcDriver {
 				break;
 		}
 
+	}
+	
+	/* 
+	 * Blank click on webPage when focus not changing to next element 
+	 * */
+	
+	public void blankClick() {
+		
+		((JavascriptExecutor) driver).executeScript("window.focus();");
+		driver.findElement(By.xpath("//body")).click();
 	}
 	/*
 	 * Author: Harshal Ahire
@@ -1374,6 +1388,7 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
+				
 				jsClickNew(selectElement);
 			// selectElement.click();
 			threadsleep(2000);

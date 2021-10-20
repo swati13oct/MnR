@@ -301,7 +301,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
-	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	@FindBy(xpath = "(//p[contains(text(),'Monthly Premium')])[1]")
 	private WebElement PremiumDisplay;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")

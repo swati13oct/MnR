@@ -358,6 +358,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 			System.out.println("Provider Look Up button is not displaye");
 			validation_Flag = false;
 		}*/
+		
+		
 		return validation_Flag;
 	
 	}
@@ -417,6 +419,12 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	}	
 		
 		public ArrayList<String> getPCPInfo(){
+			
+			if (driver.getCurrentUrl().contains("werally")) {
+				driver.navigate().back();
+				System.out.println("This if loop added for ios as coming back to Parent window failing..");
+			}
+			
 			ArrayList<String> pcp = new ArrayList<String>();
 			
 			String pcp_name=ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
