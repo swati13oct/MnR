@@ -599,6 +599,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
 	private WebElement currentYearSelection;
 
+	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
+	private WebElement futureYearSelection;
+	
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
@@ -3916,6 +3919,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Popup is present for AEP : ");
 		if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 			currentYearSelection.click();
+		}
+		else {
+			futureYearSelection.click();
 		}
 		waitForPageLoadSafari();
 		//validateNew(planYearPopupGoButton);
