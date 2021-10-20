@@ -2867,7 +2867,7 @@ public class OLEStepDefinitionMobile {
 		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR));
 		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
