@@ -299,15 +299,15 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP summary page
 
-    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @NextYear 
+    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @NextYear
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype | planyear |
-      | AARP |   19019 | Iowa County | No              | MAPD     | current  |
+      | AARP |   19019 | Iowa County | No              | MAPD     | future   |
 
     @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @NextYear
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | UHC  |   19019 | Iowa County | No              | MAPD     |
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear |
+      | UHC  |   19019 | Iowa County | No              | MAPD     | future   |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -413,11 +413,11 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
     And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user validates the Plan details on OLE
     When user clicks on pharmacy link on OLE page
     Then user verify breadcrumb "Return to enroll" displayed on pharmacy search page
@@ -432,8 +432,8 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC
     Examples: 
-      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                                      |
-      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
+      | site | planyear   | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                                      |
+      | UHC  | current    |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Preferred Retail Pharmacy on acquisition <site> site
     Given the user is on medicare acquisition site landing page
