@@ -228,7 +228,7 @@ public class WelcomePage extends UhcDriver{
 			//ViewPlanDetails.click();
 			jsClickNew(ViewPlanDetails);
 		//	Thread.sleep(500);
-			//flag = driver.getCurrentUrl().contains("details");
+			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
 				validateNew(VPPTFNNo);
 				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
@@ -241,7 +241,7 @@ public class WelcomePage extends UhcDriver{
 				validateNew(enrollInPlan);
 				jsClickNew(enrollInPlan);
 				
-				flag = driver.getCurrentUrl().contains("welcome");
+				//flag = driver.getCurrentUrl().contains("welcome");
 				CheckiPerseptions();
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
