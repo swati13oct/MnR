@@ -792,13 +792,22 @@ public class MRScenario {
 	 */
 	public AppiumDriver getMobileDriver() {
 		if (props == null) {
-			TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
+			/*TESTOBJECTAPIKEY = System.getenv("SAUCSLABS_TESTOBJECT_APIKEY");
 			mobileDeviceName = System.getenv("DEVICE_NAME");
 			mobileDeviceOSName = System.getenv("DEVICE_OS_NAME");
 			mobileDeviceOSVersion = System.getenv("DEVICE_OS_VERSION");
 			mobileDeviceType = System.getenv(CommonConstants.MOBILE_DEVICE_TYPE);
 			appiumVersion = System.getenv(CommonConstants.APPIUM_VERSION);
 			if (System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
+				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);*/
+			TESTOBJECTAPIKEY = System.getProperty("SAUCSLABS_TESTOBJECT_APIKEY");
+			mobileDeviceName = System.getProperty("DEVICE_NAME");
+			mobileDeviceOSName = System.getProperty("DEVICE_OS_NAME");
+			mobileDeviceOSVersion = System.getProperty("DEVICE_OS_VERSION");
+			mobileDeviceType = System.getProperty(CommonConstants.MOBILE_DEVICE_TYPE);
+			//Commenting because appium version is already set in static block
+//			appiumVersion = System.getProperty(CommonConstants.APPIUM_VERSION);
+			if (System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
 				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 		}
 		System.out.println("Launching Device : " + mobileDeviceName);
