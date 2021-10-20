@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionOLE.json",
 						"timeline:target" },
-				tags = "@regressionAARP", dryRun=false)
+				tags = "@HPA", dryRun=false)
 
 
 @RetryCountIfFailed(1)
