@@ -583,7 +583,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | UHC  |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
 
   @PRE @PREMSE2E
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
+  Scenario Outline: <site>, <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> ,  <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <priorityOption> ,<priorities>, <planInfo> - To Validate MS Plan Name in PRE-Result vs MS VPP plan details Page.
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
