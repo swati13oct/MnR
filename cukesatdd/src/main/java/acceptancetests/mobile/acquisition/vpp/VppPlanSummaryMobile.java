@@ -24,7 +24,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -1228,7 +1227,8 @@ public class VppPlanSummaryMobile {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario().openApplicationURL(wd, site);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

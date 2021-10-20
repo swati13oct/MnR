@@ -3,24 +3,21 @@
  */
 package pages.mobile.acquisition.ole;
 
+import java.time.Year;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.OLEconfirmationPage;
 
 /**
  * @author sdwaraka
@@ -615,8 +612,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String PartBeffectiveDate = detailsMap.get("PartB Date");
 		String CardType = detailsMap.get("Card Type");
 		String Expected_PlanName = detailsMap.get("Plan Name");
-		//String Expected_PlanYear = detailsMap.get("Plan Year");
-		String Expected_PlanYear = "2021";
+		String Expected_PlanYear = detailsMap.get("Plan Year");
+		int Expected_Current_PlanYear = Year.now(ZoneId.of("America/New_York")).getValue();
+		int Expected_Future_PlanYear = Expected_Current_PlanYear + 1;
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
@@ -682,9 +680,14 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String paymentPlan = detailsMap.get("Payment Plan");
 
 		boolean flag = true;
+		if (Expected_PlanYear.contains("current")) {
+			String Expected_PlanYear_PlanName = Expected_Current_PlanYear + " " + Expected_PlanName;
+			flag = validateTextPlanName(PlanYear_NameDisplay, Expected_PlanYear_PlanName);
+		} else {
+			String Expected_PlanYear_PlanName = Expected_Future_PlanYear + " " + Expected_PlanName;
+			flag = validateTextPlanName(PlanYear_NameDisplay, Expected_PlanYear_PlanName);
 
-		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
-		flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+		}
 		String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
 		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);
