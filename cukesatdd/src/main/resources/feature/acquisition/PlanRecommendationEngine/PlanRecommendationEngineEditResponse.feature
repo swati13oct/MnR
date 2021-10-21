@@ -315,7 +315,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionAARP
+    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionAARP1234
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   32115 | NO            | Volusia | MA            | Medicaid     | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
