@@ -51,8 +51,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                         | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124, +1 833-732-1961; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -99,8 +99,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stage123 @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                         | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124, +1 833-732-1961; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileAndAddPlans @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user

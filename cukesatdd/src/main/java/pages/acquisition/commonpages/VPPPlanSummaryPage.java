@@ -5250,8 +5250,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ planName + "']//following::div[@class='providers-list'][1]/ul/li[" + (i + 1)
 						+ "]/div/div[contains(@class,'provider-info')]"));
 				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
-
-				Assertion.assertEquals(provider[i], providerInfoTxt);
+				providerInfoTxt = providerInfo.getText().trim().replaceAll("\n", " ");
+				Assertion.assertTrue(providerInfoTxt.contains(provider[i]));
 				System.out.println("#########" + providerInfoTxt + "#########");
 				/*
 				 * Assertion.assertEquals(provider[i],
