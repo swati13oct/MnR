@@ -372,7 +372,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
       | UHC  |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       | UHC  |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)   |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site for page - <pageName>
     Given the user is on medicare acquisition site landing page
@@ -453,7 +453,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Then the user validates Get Started Page
     Then user click on breadcrumb "Return to Pharmacy Search" on get started page
     Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
-
+	
     @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear 
     Examples: 
       | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
