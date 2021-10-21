@@ -615,7 +615,7 @@ public abstract class UhcDriver {
 	public void iOSClick(WebElement element) {
 		try {
 
-			//checkElementisEnabled(element);
+			// checkElementisEnabled(element);
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
@@ -657,10 +657,10 @@ public abstract class UhcDriver {
 
 			// To handle iOS specific click problem By: Harshal Ahire
 
-			//iOSClick(element);
-			//blankClick();
+			// iOSClick(element);
+			// blankClick();
 			js.executeScript("arguments[0].click();", element);
-			
+
 		} else {
 			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -802,13 +802,13 @@ public abstract class UhcDriver {
 		}
 
 	}
-	
-	/* 
-	 * Blank click on webPage when focus not changing to next element 
-	 * */
-	
+
+	/*
+	 * Blank click on webPage when focus not changing to next element
+	 */
+
 	public void blankClick() {
-		
+
 		((JavascriptExecutor) driver).executeScript("window.focus();");
 		driver.findElement(By.xpath("//body")).click();
 	}
@@ -1378,8 +1378,6 @@ public abstract class UhcDriver {
 	 *         on visible text mobile Updated By - Harshal Ahire
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
-		
-		Actions ac = new Actions(driver);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
@@ -1390,10 +1388,8 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				
-			ac.moveToElement(selectElement).click().build().perform();
-			
-		//jsClickNew(selectElement);
+
+				jsClickNew(selectElement);
 			// selectElement.click();
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
