@@ -213,6 +213,21 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(id = "LastName")
 	private WebElement lastName;
 	
+	@FindBy(xpath = "//*[@id='header-tfn-link']//span[contains(@class,'invoca_swap')]")
+	private WebElement tfnHeaderLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'tel tfn')]//u)[1]")
+	private WebElement tfnHeaderPopupLink;
+	
+	@FindBy(xpath = "(//*[contains(@id,'sam-call-button')]//*[contains(@class,'invoca_swap')])[1]")
+	private WebElement samTFN;
+	
+	@FindBy(xpath = "(//*[contains(@class,'modal-body')]//*[contains(@class,'invoca_swap')])[1]")
+	private WebElement samTFNPopupLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'modal-close')])[1]")
+	private WebElement tfnHeaderPopupClose;
+	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1111,8 +1126,8 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				jsClickNew(Start_ApplicationBtn);
 				System.out.println("Start application button is clicked on application page");
 				Thread.sleep(4000);
-				CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-				insuredStatus.click();
+				//CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+				//insuredStatus.click();
 				Thread.sleep(2000);
 				jsClickNew(nextButton);
 				Thread.sleep(2000);
@@ -1455,5 +1470,65 @@ public void openURLNewTabUHC(String url) {
 	driver.switchTo().window(winHandleTmp);
 	System.out.println("Proceed to use this newly opened tab for remaining validation");
 
+}
+
+public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
+	System.out.println("Expected PSC code: "+expectedFedTFN);
+	System.out.println("Actual PSC code: "+actualFedTFN);
+	
+	if(expectedFedTFN.contentEquals(actualFedTFN)) {
+		System.out.println("****************Expected Fed TFN matches Actual Fed TFN from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Fed TFN DOES NOT match Actual Fed TFN from TFN cookie ***************");
+	}
+	// TODO Auto-generated method stub
+	
+}
+
+public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN) {
+	System.out.println("Expected PSC code: "+expectedMedsupTFN);
+	System.out.println("Actual PSC code: "+actualMedsupTFN);
+	
+	if(expectedMedsupTFN.contentEquals(actualMedsupTFN)) {
+		System.out.println("****************Expected Medsup TFN matches Actual Medsup TFN from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Medsup TFN DOES NOT match Actual Medsup TFN from TFN cookie ***************");
+	}
+	// TODO Auto-generated method stub
+	
+}
+
+public void validateTFNHeaderAndSAMIcon() {
+	CheckPageLoad();
+	CheckiPerseptions();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	validate(tfnHeaderLink);
+	sleepBySec(5);
+	String tfnHeader=tfnHeaderLink.getText();
+	tfnHeaderLink.click();
+	System.out.println("Clicked on TFN link in header");
+	sleepBySec(5);
+	validate(tfnHeaderPopupLink);
+	String tfnHeaderPopup=tfnHeaderPopupLink.getText();
+	Assertion.assertTrue("TFN in header does not match with TFN in header popup", tfnHeader.equals(tfnHeaderPopup));
+	jsClickNew(tfnHeaderPopupClose);
+	validate(samTFN);
+	sleepBySec(5);
+	Assertion.assertTrue("TFN in header does not match with TFN in SAM icon", tfnHeader.equals(samTFN.getText()));
+	samTFN.click();
+	System.out.println("Clicked on SAM TFN");
+	sleepBySec(5);
+	Assertion.assertTrue("TFN in SAM icon  does not match with TFN in SAM popup", tfnHeader.equals(samTFNPopupLink.getText()));
 }
 }

@@ -1378,6 +1378,8 @@ public abstract class UhcDriver {
 	 *         on visible text mobile Updated By - Harshal Ahire
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
+		
+		Actions ac = new Actions(driver);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
@@ -1389,7 +1391,9 @@ public abstract class UhcDriver {
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
 				
-				jsClickNew(selectElement);
+			ac.moveToElement(selectElement).click().build().perform();
+			
+		//jsClickNew(selectElement);
 			// selectElement.click();
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
