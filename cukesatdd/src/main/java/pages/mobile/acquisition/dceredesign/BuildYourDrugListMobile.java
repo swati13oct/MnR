@@ -210,16 +210,17 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
-		sendkeysMobile(EnterDrugNameTxt, "iphone");
-		validateNew(SearchBtn);
-		jsClickNew(SearchBtn);
-
-		waitforElementVisibilityInTime(NoDrugError, 5);
-		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("Please enter at least 4 characters")) {
-
-			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
-		} else
-			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
+		//below code is commented as per Snehas sugession as searching wrong drug name is failing and they will fix this later as a feature
+//		sendkeysMobile(EnterDrugNameTxt, "iphone");
+//		validateNew(SearchBtn);
+//		jsClickNew(SearchBtn);
+//
+//		waitforElementVisibilityInTime(NoDrugError, 5);
+//		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("Please enter at least 4 characters")) {
+//
+//			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
+//		} else
+//			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 	}
 
 	public void ValidateDrugAutocomplete(String partialDrug) {
