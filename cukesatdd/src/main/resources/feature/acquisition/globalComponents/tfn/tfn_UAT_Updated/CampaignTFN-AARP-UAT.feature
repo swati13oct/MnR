@@ -41,7 +41,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     #Then the user validates TFN Number in header and SAM icon
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
-    Then the user validates TFN Number in header and SAM icon
+    #Then the user validates TFN Number in header and SAM icon
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
     Then the user validates TFN Number
@@ -105,7 +105,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     #| PSC Code | <Precedence2PSC> |
     Examples: 
       | scenario         | site | zipcode | TFNNo          | MedSupTFN      | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | userName        | password      | TFNxpath1                         |planyear|FedTFNNo|MedSupTFNNo|
-      | Scenario 1 - AMP | AARP |   10001 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS         | TiggerOptumID39 | TiggerTigger5 | (//a[contains(@class, 'tel')])[1] |future|1-877-699-5710 | 1-866-408-5545 |
+      | Scenario 1 - AMP | AARP |   10001 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS         | TiggerOptumID39 | TiggerTigger7 | (//a[contains(@class, 'tel')])[1] |future|1-877-699-5710 | 1-866-408-5545 |
 
   #######################Script 2: Campaign traffic########################################
   @Scenario_2_CampaignTraffic_UAT @UATRegression @prodRegression_UAT
@@ -115,8 +115,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Site         | <site>         |
       | Campaign URL | <campaignUrl2> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    #Then the user validates PSC code
-    #| PSC Code | <pscCode> |
+    Then the user validates PSC code
+    | PSC Code | <pscCode> |
     Then the user validates Fed TFN
       | TFN No    | <FedTFNNo>    |
       Then the user validates MedSup TFN
@@ -391,7 +391,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     Examples: 
       | scenario                  | MAplantype | SNPplantype | zipcode | county          | isMultutiCounty | site   | pscCode | campaignUrl                               | medEdURL               | medEdTFN                           | medEdURL1                                  | medEdURL2                                         | TFNNo          | TFNxpath                          | SNPTFNxpath                       | planyear | zipCode |
-      | Scenerio 5-Portfolio- AMP | MA         | SNP         |   10001 | New York County | NO              | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | 1-877-495-2415 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | next     |   10001 |
+      | Scenerio 5-Portfolio- AMP | MA         | SNP         |   24010 | Roanoke City | NO              | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | 1-877-495-2415 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | next     |   10001 |
 
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression
@@ -624,7 +624,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     Examples: 
       | scenario                      | site|zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
-      | Scenerio 9-ExternalLink - AMP |  AARP| 10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger5 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] |
+      | Scenerio 9-ExternalLink - AMP |  AARP| 10001 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger7 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] |
 
   @Scenario_2_CampaignTrafficdummy
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
