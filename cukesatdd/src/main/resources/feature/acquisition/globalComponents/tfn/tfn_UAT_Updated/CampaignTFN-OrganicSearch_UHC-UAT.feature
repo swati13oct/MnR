@@ -255,13 +255,15 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
       | Plan Type | <MAplantype> |
-      # And the user selects plan year
-      #| Plan Year | <planyear> |
+       And the user selects plan year
+      | Plan Year | <planyear> |
     #Then the user navigates to MA Plan Details Page and validates Federal TFN
     Then the user validates TFN Number
       | TFN No    | <TFNNo3>   |
       | TFN Xpath | <TFNxpath> |
     #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+      And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -270,4 +272,4 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
     Examples: 
       | scenario                              | site   | zipcode | MAplantype | MSplantype | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | campaign2Url      | campaign3Url      | campaign4Url                                                                                                   | MedsuppTFNxpath                   | TFNxpath                          | TFNNo          | MedsuppTFNNo   | TFNNo1         | MedsuppTFNNo1  | TFNNo2         | MedsuppTFNNo2  | TFNNo3         |planyear|
-      | Scenario 4b: Campaign Precedence- UMS | blayer |   90210 | MA         | MS         |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class,'tel right')] | //span[contains(@class, 'invoca_swap_sam')]| 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 |current|
+      | Scenario 4b: Campaign Precedence- UMS | blayer |   10001 | MA         | MS         |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class,'tel right')] | //span[contains(@class, 'invoca_swap_sam')]| 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 |current|
