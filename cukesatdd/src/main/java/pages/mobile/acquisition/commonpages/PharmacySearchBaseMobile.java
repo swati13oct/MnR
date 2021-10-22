@@ -101,7 +101,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// selectFromDropDownByText(driver, distanceDropownID, distance);
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
-		driver.findElement(By.cssSelector("#pharmacyfilter > div:nth-child(1) > label")).click();
+		driver.findElement(By.xpath("//span[@class='zipCodeText']")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
@@ -423,7 +423,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		driver.findElement(By.cssSelector("#plan-year-label")).click();
+		driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
 //		jsClickNew(yearDropdown);
 //		Select yearList = new Select(yearDropdown);
 //		yearList.selectByVisibleText(planYear);
@@ -619,6 +619,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "zh" + "']")).getText()
 				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "zh");
 		// mobileSelectOption(languageDropDown, "中文", true);
@@ -635,6 +636,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
 		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
 				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
@@ -665,6 +667,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
 		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
 				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
