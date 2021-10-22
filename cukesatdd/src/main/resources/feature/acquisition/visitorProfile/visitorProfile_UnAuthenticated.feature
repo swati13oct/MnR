@@ -379,9 +379,82 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
       | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | AARP | Aetna     |           |          |            |         |             |                                                                                    |           |
+      | AARP | Humana    |           |          |            |         |             |                                                                                    |           |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC
     Examples: 
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
       | UHC  | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | UHC  | Aetna     |           |          |            |         |             |                                                                                    |           |
+      | UHC  | Humana    |           |          |            |         |             |                                                                                    |           |
+
+  @vppMSSP4.0
+  Scenario Outline: Verify user save Medsupp plans 4.0 with plan details,start application, learn more,add your information on unauthenticated visitor profile-Medsup4.0 - zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the med supp plans
+      | Plan Type | <plantype> |
+    Then user saves two msvpp4 plans as favorite
+      | MS Test Plans | <MS_testPlans> |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+    And user clicks on ms plan details button
+      | MS Plan | <MS_Plan> |
+    And user validates MS plan details
+    And user clicks on Back to Profile link
+    And user clicks on ms start application button
+      | MS Plan | <MS_Plan> |
+    And user validates MS Start application page
+    And user close MS application page
+    And user clicks on ms Learn More link
+      | MS Plan | <MS_Plan> |
+    And user validates MS Learn More page
+    And user clicks on Back to Profile link
+    And user clicks on MS Add your Information link
+      | MS Plan | <MS_Plan> |
+    And user validates MS Add your Information page
+    And user close MS application page
+    And user validates MS SP Profile page with Import, PRE and ComponentCode
+      | Component Code | <component_code> |
+    And user delets the added Ms plans on visitor profile page
+      | MS_testPlans | <MS_testPlans> |
+
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    Examples: 
+      | site | zipcode | isMultiCounty | plantype | county            | MS_testPlans                                      | MS_Plan                  | component_code |
+      | AARP |   07303 | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   20906 | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   30002 | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
+      | AARP |   06011 | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   63113 | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   19706 | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
+      | AARP |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    Examples: 
+      | site | zipcode | isMultiCounty | plantype | county            | MS_testPlans                                      | MS_Plan                  | component_code |
+      | UHC  |   07303 | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   20906 | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   30002 | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
+      | UHC  |   06011 | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   63113 | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   19706 | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
+      | UHC  |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
