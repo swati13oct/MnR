@@ -181,7 +181,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
     Examples: 
       | scenario         | site   | pscCode | zipcode | campaignUrl                                                                                                   | maUrl                     | connectUrl       | TFNNo          | MedsuppTFNNo   | TFNxpath                          | MedsuppTFNxpath                   | EnrollTFNxpath                    | ConnectTFNxpath                     | MAplantype | MSplantype | PDPplantype | SNPplantype |
-      | Scenario 2 - UMS | blayer | 8003728 |   10001 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS         | PDP         | SNP         |
+      | Scenario 2 - UMS | blayer | 8003728 |   24010 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS         | PDP         | SNP         |
 
   #######################Script 5: Email Validation########################################
   @Scenario_5_2_DirectTraffic_Email_UHC_UAT @UATRegression @prodRegression_UAT
