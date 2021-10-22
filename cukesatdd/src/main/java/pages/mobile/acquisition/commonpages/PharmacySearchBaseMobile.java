@@ -99,6 +99,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
 		// selectFromDropDownByText(driver, distanceDropownID, distance);
+		// Clicking on label first as dropdown is not opening in iOS - this will not
+		// affect Android execution
+		driver.findElement(By.cssSelector("#pharmacyfilter > div:nth-child(1) > label")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
@@ -221,6 +224,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		/* To handle iOS dropdown */
 		jsClickNew(planTypeDropDownTitle);
 		// planTypeDropDownTitle.click();
+		//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+		driver.findElement(By.cssSelector("#plan-type-label")).click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
@@ -418,9 +423,12 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		jsClickNew(yearDropdown);
-		Select yearList = new Select(yearDropdown);
-		yearList.selectByVisibleText(planYear);
+		driver.findElement(By.cssSelector("#plan-year-label")).click();
+//		jsClickNew(yearDropdown);
+//		Select yearList = new Select(yearDropdown);
+//		yearList.selectByVisibleText(planYear);
+		
+		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
 	}

@@ -26,6 +26,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -258,11 +259,60 @@ public class PharmacyLocatorStepDefinitionMobile {
 
 	}
 
+//	/** user chooses a plan from dropdown */
+//	@SuppressWarnings("unchecked")
+//	@And("^the user chooses a plan from dropdown list$")
+//	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
+//
+//		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+//		String cy_planName = inputAttributesMap.get("Current Year Plan Name");
+//		String cy_planYear = inputAttributesMap.get("Current Year Plan Year");
+//		String ny_planName = inputAttributesMap.get("Next Year Plan Name");
+//		String ny_planYear = inputAttributesMap.get("Next Year Plan Year");
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_CURRENT_YEAR_PLAN_NAME, cy_planName);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_CURRENT_YEAR_PLAN_YEAR, cy_planYear);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_NEXT_YEAR_PLAN_NAME, ny_planName);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_NEXT_YEAR_PLAN_YEAR, ny_planYear);
+//
+//		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//
+//		// List<String> noteList=(ArrayList<String>)
+//		// getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
+//
+//		// String envTimeYear=(String)
+//		// getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+//		// int envTimeYearValue=Integer.valueOf(envTimeYear);
+//		int actualYearValue = Calendar.getInstance().get(Calendar.YEAR);
+//		// note: if plan year dropdown is showing, select next year
+//		// note: if no plan year dropdown but env has year in next year, select next
+//		// year
+//		// note: all else then assume plans are current year
+//		String testPlanYear = cy_planYear;
+//		String testPlanName = cy_planName;
+//		String testPdfLinkTextDate = String.valueOf(actualYearValue);
+//		/*
+//		 * if (pharmacySearchPage.isPlanYear()) { // note: has plan year dropdown
+//		 * testPlanYear = ny_planYear; testPdfLinkTextDate = ny_planYear; testPlanName =
+//		 * ny_planName; pharmacySearchPage.selectsPlanYear(testPlanYear); //
+//		 * noteList.add("Has plan year dropdown, testing for year="+testPlanYear+" and
+//		 * // plan name="+testPlanName);
+//		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
+//		 * HAS_PLAN_YEAR_DROPDOWN, true);
+//		 * 
+//		 * }
+//		 */
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, testPlanName);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, testPlanYear);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE, testPdfLinkTextDate);
+//
+//		pharmacySearchPage.selectsPlanName(testPlanName);
+//	}
+	
 	/** user chooses a plan from dropdown */
 	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown list$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
-
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String cy_planName = inputAttributesMap.get("Current Year Plan Name");
 		String cy_planYear = inputAttributesMap.get("Current Year Plan Year");
@@ -276,12 +326,11 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 
-		// List<String> noteList=(ArrayList<String>)
-		// getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
+		List<String> noteList = (ArrayList<String>) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
 
-		// String envTimeYear=(String)
-		// getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
-		// int envTimeYearValue=Integer.valueOf(envTimeYear);
+		String envTimeYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+		int envTimeYearValue = Integer.valueOf(envTimeYear);
 		int actualYearValue = Calendar.getInstance().get(Calendar.YEAR);
 		// note: if plan year dropdown is showing, select next year
 		// note: if no plan year dropdown but env has year in next year, select next
@@ -290,23 +339,39 @@ public class PharmacyLocatorStepDefinitionMobile {
 		String testPlanYear = cy_planYear;
 		String testPlanName = cy_planName;
 		String testPdfLinkTextDate = String.valueOf(actualYearValue);
-		/*
-		 * if (pharmacySearchPage.isPlanYear()) { // note: has plan year dropdown
-		 * testPlanYear = ny_planYear; testPdfLinkTextDate = ny_planYear; testPlanName =
-		 * ny_planName; pharmacySearchPage.selectsPlanYear(testPlanYear); //
-		 * noteList.add("Has plan year dropdown, testing for year="+testPlanYear+" and
-		 * // plan name="+testPlanName);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
-		 * HAS_PLAN_YEAR_DROPDOWN, true);
-		 * 
-		 * }
-		 */
+		if (pharmacySearchPage.isPlanYear()) { // note: has plan year dropdown
+			testPlanYear = ny_planYear;
+			testPdfLinkTextDate = ny_planYear;
+			testPlanName = ny_planName;
+			pharmacySearchPage.selectsPlanYear(testPlanYear);
+			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
+
+		} else if (!pharmacySearchPage.isPlanYear() && envTimeYearValue > actualYearValue) {
+			testPlanYear = ny_planYear;
+			testPdfLinkTextDate = cy_planYear;
+			testPlanName = ny_planName;
+			noteList.add("Has NO plan year dropdown and env date is on next year. \nActual Year='" + actualYearValue
+					+ "' | Env Year='" + envTimeYearValue + "'. \nWill test with next year plan name, testing for year="
+					+ testPlanYear + " and plan name=" + testPlanName + "\n");
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, false);
+		} else { // note: no plan year drop down but env year is next year
+			testPdfLinkTextDate = cy_planYear;
+			noteList.add(
+					"Has NO plan year dropdown and env date is on current year, will test with current year plan name, testing for year="
+							+ testPlanYear + " and plan name=" + testPlanName);
+		}
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, testPlanName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, testPlanYear);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE, testPdfLinkTextDate);
-
-		pharmacySearchPage.selectsPlanName(testPlanName);
+		List<String> testNote = pharmacySearchPage.getListOfAvailablePlanNames();
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
+
+
 
 	/*	*//**
 			 * Verify the pharmacies as per the filter criteria
