@@ -159,6 +159,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(css = "#multiCountyCancelBtn")
 	protected WebElement MultiCOunty_CancelBtn;
+	
+	@FindBy(xpath = "//label[contains(text(),'location')]")
+	protected WebElement distanceLabel;
+	
 
 	/*
 	 * @FindBy(id="indian-tribal-label") protected WebElement
