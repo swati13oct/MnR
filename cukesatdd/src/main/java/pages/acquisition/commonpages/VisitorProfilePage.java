@@ -282,6 +282,30 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[text()='UnitedHealthCare']/parent::label")
 	private WebElement chkUHC;
 	
+	@FindBy(xpath = "//div[text()='Aetna']/parent::label")
+	private WebElement chkAetna;
+	
+	@FindBy(xpath = "//div[contains(text(),'Aetna')]/parent::label")
+	private WebElement chkMAwithAetna;
+	
+	@FindBy(xpath = "//div[contains(text(),'Humana')]/parent::label")
+	private WebElement chkMAwithHumana;
+	
+	@FindBy(xpath = "//div[text()='Humana']/parent::label")
+	private WebElement chkHumana;
+	
+	@FindBy(xpath = "//input[@id='acceptReqAccess']/parent::label")
+	private WebElement chkReqAccess;
+	
+	@FindBy(xpath = "//input[@id='acceptTermsOfUse']/parent::label")
+	private WebElement chkTermsOfUse;
+	
+	@FindBy(xpath = "//span[text()='Continue']/parent::button")
+	private WebElement flexContinueBtn;
+	
+	@FindBy(xpath = "//span[contains(text(),'Import')]/parent::button")
+	private WebElement flexImportBtn;
+	
 	@FindBy(xpath = "//div[contains(text(),'don')]/parent::label")
 	private WebElement chkMilliman;
 	
@@ -1469,7 +1493,35 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(btnGetStarted);
         switch (testData.get("Member")) {
 		case "Aetna":
+			jsClickNew(chkAetna);
+	        jsClickNew(btnNext);
+	        jsClickNew(chkMAwithAetna);
+	        jsClickNew(btnNext);
+	        waitforElementNew(chkReqAccess);
+	        jsClickNew(chkReqAccess);
+	        jsClickNew(chkTermsOfUse);
+	        jsClickNew(flexContinueBtn);
+	        waitforElement(flexImportBtn);
+	        jsClickNew(flexImportBtn);
+	        threadsleep(5000);
+	        switchToNewTab();
+	        Assert.assertTrue(driver.getCurrentUrl().contains("aetna.com"));
 			break;
+		case "Humana":
+			jsClickNew(chkHumana);
+	        jsClickNew(btnNext);
+	        jsClickNew(chkMAwithHumana);
+	        jsClickNew(btnNext);
+	        waitforElementNew(chkReqAccess);
+	        jsClickNew(chkReqAccess);
+	        jsClickNew(chkTermsOfUse);
+	        jsClickNew(flexContinueBtn);
+	        waitforElement(flexImportBtn);
+	        jsClickNew(flexImportBtn);
+	        threadsleep(5000);
+	        switchToNewTab();
+	        Assert.assertTrue(driver.getCurrentUrl().contains("humana.com"));
+			break;	
 		case "UHC":
 			jsClickNew(chkUHC);
 	        jsClickNew(btnNext);

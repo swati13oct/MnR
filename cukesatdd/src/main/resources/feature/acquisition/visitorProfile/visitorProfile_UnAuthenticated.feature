@@ -379,12 +379,16 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
       | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | AARP | Aetna     |           |          |            |         |             |                                                                                    |           |
+      | AARP | Humana    |           |          |            |         |             |                                                                                    |           |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC
     Examples: 
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
       | UHC  | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | UHC  | Aetna     |           |          |            |         |             |                                                                                    |           |
+      | UHC  | Humana    |           |          |            |         |             |                                                                                    |           |
 
   @vppMSSP4.0
   Scenario Outline: Verify user save Medsupp plans 4.0 with plan details,start application, learn more,add your information on unauthenticated visitor profile-Medsup4.0 - zipcode - <zipcode>
