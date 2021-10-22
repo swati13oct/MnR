@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 //import com.mysql.jdbc.StringUtils;
 
@@ -317,10 +318,35 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "(//button[@dlassetid='vp_nonmemdetl_next'])[2]")
     private WebElement btnNonMemViewDrugsAndDocs;
 	
+	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
+    private WebElement lnkbackToProfile;
 	
+	@FindBy(xpath  = "//h3[text()='Basic Costs']")
+    private WebElement headingBasicCost;
 	
+	@FindBy(xpath  = "//h3[text()='Doctor Visits']")
+    private WebElement headingDocVisits;
 	
+	@FindBy(id="dateOfBirth")
+	private WebElement msDOB;
 	
+	@FindBy(xpath = "//span[text()='Continue Application']")
+	private WebElement btnContinueApplication;
+	
+	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+	private WebElement closeMSApplication;
+	
+	@FindBy(xpath  = "//h2[text()='Gym Membership']")
+    private WebElement headingGymMembership;
+	
+	@FindBy(xpath  = "//h2[text()='Brain Health']")
+    private WebElement headingBH;
+	
+	@FindBy(xpath  = "//h1[text()='Add your information']")
+    private WebElement headingAddYourInfo;
+	
+	@FindBy(xpath = "//span[contains(text(),'Get')]")
+    private WebElement btnPREGetStarted;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -1156,6 +1182,7 @@ public class VisitorProfilePage extends UhcDriver {
             for (String planName : plan) {
                 jsClickNew(driver.findElement(By.xpath(
                         "//h2[contains(text(),'" + planName + "')]/preceding::button[contains(@class,'remove')][1]")));
+                threadsleep(4000);
             }
             Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
         } catch (Exception e) {
@@ -1475,6 +1502,81 @@ public class VisitorProfilePage extends UhcDriver {
 			break;
 		}
 		
+	}
+	
+	/**
+	 * Validate MS Plan Details Page
+	 */
+	public void validateMSPlanDetailsPage() {
+		Assert.assertTrue(lnkbackToProfile.isDisplayed());
+		Assert.assertTrue(headingBasicCost.isDisplayed());
+		Assert.assertTrue(headingDocVisits.isDisplayed());
+	}
+	
+	public void clickOnMSPlanDetailsPage(String planName) {
+	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details'][1]"));
+		jsClickNew(btnMSPlanDetails);
+		waitforElementNew(lnkbackToProfile);
+	}
+	
+	/**
+	 * Validate MS Start application Page
+	 */
+	public void validateMSStartApplicationPage() {
+		Assert.assertTrue(msDOB.isDisplayed());
+		Assert.assertTrue(btnContinueApplication.isDisplayed());
+		Assert.assertTrue(closeMSApplication.isDisplayed());
+	}
+	
+	public void clickOnMStartApplication(String planName) {
+	    WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Start Application'][1]"));
+		jsClickNew(btnStartApplication);
+		waitforElementNew(msDOB);
+	}
+	
+	public void clickOnBackToProfile() {
+		jsClickNew(lnkbackToProfile);
+		waitforElementNew(addPlans);
+	}
+	
+	public void clickOnCloseMSApplication() {
+		jsClickNew(closeMSApplication);
+		waitforElementNew(addPlans);
+	}
+	
+	public void clickOnMLearnMore(String planName) {
+	    WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::a[text()='Learn More'][1]"));
+		jsClickNew(btnStartApplication);
+		waitforElementNew(lnkbackToProfile);
+	}
+	
+	/**
+	 * Validate MS LearnMore Page
+	 */
+	public void validateMSLearnMorePage() {
+		Assert.assertTrue(lnkbackToProfile.isDisplayed());
+		Assert.assertTrue(headingGymMembership.isDisplayed());
+		Assert.assertTrue(headingBH.isDisplayed());
+	}
+	
+	public void clickOnMSAddYourInformation(String planName) {
+	    WebElement btnAddInfo = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::a[text()='Add your information'][1]"));
+		jsClickNew(btnAddInfo);
+		waitforElementNew(msDOB);
+	}
+	
+	/**
+	 * Validate MS Add Your Information Page
+	 */
+	public void validateMSAddYourInfoPage() {
+		waitforElementNew(msDOB);
+		Assert.assertTrue(headingAddYourInfo.isDisplayed());
+	}
+	
+	public void validateMSSP4ProfilePage(String componentCode) {
+		Assert.assertTrue(btnPREGetStarted.isDisplayed());
+		Assert.assertTrue(lnkImport.isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'"+componentCode+"')]")).isDisplayed());
 	}
  }
 
