@@ -279,7 +279,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "member-medicare-number")
     private WebElement txtMedicareId;
 	
-	@FindBy(xpath = "//div[text()='UnitedHealthCare']/parent::label")
+	@FindBy(xpath = "//div[text()='UnitedHealthcare']/parent::label")
 	private WebElement chkUHC;
 	
 	@FindBy(xpath = "//div[text()='Aetna']/parent::label")
