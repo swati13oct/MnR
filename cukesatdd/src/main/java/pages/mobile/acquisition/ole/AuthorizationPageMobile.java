@@ -241,6 +241,8 @@ public boolean validate_required_field_representative(Map<String, String> Member
 //			scrollToView(Authorized_City);
 			sendkeysMobile(Authorized_City, AuthorizationCity);
 
+			//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+			driver.findElement(By.xpath("//label[@for='state0']")).click(); 
 			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
 
 //			scrollToView(Authorized_ZipCode);

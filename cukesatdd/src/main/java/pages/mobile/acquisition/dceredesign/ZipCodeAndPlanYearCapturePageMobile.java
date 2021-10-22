@@ -1,5 +1,6 @@
 package pages.mobile.acquisition.dceredesign;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -119,6 +120,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		try {
 
 			if (validate(countyDropdown)) {
+				driver.findElement(By.xpath("//label[text()='County']")).click();
 //				countyDropdown.click();
 				//jsClickNew(countyDropdown);
 				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();

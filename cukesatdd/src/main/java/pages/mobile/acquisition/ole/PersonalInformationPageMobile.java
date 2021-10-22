@@ -287,15 +287,20 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (MailingQuestion.equalsIgnoreCase("no")) {
 				jsClickNew(SameMailingAddressNo);
 
+			
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
 				sendkeysMobile(MailingAdd_City, Mailing_City);
+				
 				//Select SelectState = new Select(MailingAdd_State_DropDown);
 				//SelectState.selectByValue(Mailing_State);
-				driver.findElement(By.xpath("//label[@for='state0']")).click();
+
+				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+				driver.findElement(By.xpath("//label[@for='state0']")).click(); 
 				
 				
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+			
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 			}
 		}		
