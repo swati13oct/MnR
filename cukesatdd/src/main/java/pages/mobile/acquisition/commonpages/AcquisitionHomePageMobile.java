@@ -2215,18 +2215,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("====================================================================");
 
 		Assertion.assertStringContains("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
-		/*if (toolTipText.contains(CallSam1877)) {
-			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
-		} else if (toolTipText.contains(CallSam1855)) {
-			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
-		} else if (toolTipText.contains(CallSam1844)) {
-			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
-		}
-
-		else
-
-			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");*/
-
+		/*
+		 * if (toolTipText.contains(CallSam1877)) {
+		 * System.out.println("Call sticky action menu roll out and contain the text: "
+		 * + toolTipText); } else if (toolTipText.contains(CallSam1855)) {
+		 * System.out.println("Call sticky action menu roll out and contain the text" +
+		 * toolTipText); } else if (toolTipText.contains(CallSam1844)) {
+		 * System.out.println("Call sticky action menu roll out and contain the text" +
+		 * toolTipText); }
+		 * 
+		 * else
+		 * 
+		 * Assert.
+		 * fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877"
+		 * );
+		 */
 
 	}
 
@@ -3570,9 +3573,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		driver.switchTo().window(base);
-		
-		//Added below loop as ios script fails while switching back to parent window
-		if(driver.getCurrentUrl().contains("uhc.com")) {
+
+		// Added below loop as ios script fails while switching back to parent window
+		if (driver.getCurrentUrl().contains("uhc.com")) {
 			driver.navigate().back();
 		}
 
@@ -3902,9 +3905,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.close();
 			driver.switchTo().window(parentWindow);
 		}
-		
-		//This code is added for ios - control does not come back to parent window sometimes hence workaround added 
-		if(driver.getCurrentUrl().contains("myuhcagent")) {
+
+		// This code is added for ios - control does not come back to parent window
+		// sometimes hence workaround added
+		if (driver.getCurrentUrl().contains("myuhcagent")) {
 			driver.navigate().back();
 		}
 
@@ -4434,7 +4438,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollButton);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 //		validate(zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -4492,6 +4496,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("State to be Selected: " + geoState);
 		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
 		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
+		// Clicking on label first as dropdown is not opening in iOS - this will not
+		// affect Android execution
+		driver.findElement(By.xpath("//*[@id='stateWidget']/div/label")).click();
 		selectFromDropDownByValue(stateDropDown, geoState);
 		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
 			Assert.fail("Wrong state selected for geotarget");
@@ -4830,7 +4837,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatestatedropDown(String state, String code) {
-		if (driver.findElement(By.xpath("//div[@aria-label='menu navigation']")).getAttribute("aria-expanded") != "false") {
+		if (driver.findElement(By.xpath("//div[@aria-label='menu navigation']"))
+				.getAttribute("aria-expanded") != "false") {
 			jsClickNew(menuHamburgerCrossToClose);
 		}
 
@@ -5039,6 +5047,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#mobile-nav a[dtmname$='Go to the Member Site']")
 	private WebElement goToMemberSiteLink;
+	
+	@FindBy(css = "#mobile-nav > div.scroll-pane > div > div.mob-menu-header > div.icn-sctn > button.icon-mob-btn.nav-close.closeNav3Btn > svg > use")
+	private WebElement menuHamburgerCloseIcon;
+	
 
 	public void clickMemberSiteLink() {
 		// validateNew(headerSignInLink);
@@ -5049,29 +5061,49 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 //		jsMouseOver(navigationSectionHomeLink);
 		jsClickNew(MenuMobile);
 		validateNew(goToMemberSiteLink);
-		jsClickNew(goToMemberSiteLink);
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			//switchToNewTabNew(goToMemberSiteLink);
+			jsClickNew(goToMemberSiteLink);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+			clickBrowserBackButton();
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String base = driver.getWindowHandle();
-		Set<String> all = driver.getWindowHandles();
-		if (all.size() > 1) {
-			Iterator<String> I = all.iterator();
-			while (I.hasNext()) {
-				String childWindow = I.next();
-				if (!base.equals(childWindow)) {
-					driver.switchTo().window(childWindow);
-					Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
-					driver.close();
-				}
-			}
-			driver.switchTo().window(base);
+			jsClickNew(menuHamburgerCloseIcon);
+			System.out.println("Member site link url validation Pass on iOS>>>>>");
 		} else {
-			Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
-			clickBrowserBackButton();
+
+			jsClickNew(goToMemberSiteLink);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String base = driver.getWindowHandle();
+			Set<String> all = driver.getWindowHandles();
+			if (all.size() > 1) {
+				Iterator<String> I = all.iterator();
+				while (I.hasNext()) {
+					String childWindow = I.next();
+					if (!base.equals(childWindow)) {
+						driver.switchTo().window(childWindow);
+						Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+						driver.close();
+					}
+				}
+				driver.switchTo().window(base);
+			}
 		}
 	}
 
