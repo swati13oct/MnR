@@ -41,7 +41,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     #Then the user validates TFN Number in header and SAM icon
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
-    Then the user validates TFN Number in header and SAM icon
+    #Then the user validates TFN Number in header and SAM icon
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
     Then the user validates TFN Number
@@ -115,8 +115,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Site         | <site>         |
       | Campaign URL | <campaignUrl2> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    #Then the user validates PSC code
-    #| PSC Code | <pscCode> |
+    Then the user validates PSC code
+    | PSC Code | <pscCode> |
     Then the user validates Fed TFN
       | TFN No    | <FedTFNNo>    |
       Then the user validates MedSup TFN
@@ -391,7 +391,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     Examples: 
       | scenario                  | MAplantype | SNPplantype | zipcode | county          | isMultutiCounty | site   | pscCode | campaignUrl                               | medEdURL               | medEdTFN                           | medEdURL1                                  | medEdURL2                                         | TFNNo          | TFNxpath                          | SNPTFNxpath                       | planyear | zipCode |
-      | Scenerio 5-Portfolio- AMP | MA         | SNP         |   10001 | New York County | NO              | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | 1-877-495-2415 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | next     |   10001 |
+      | Scenerio 5-Portfolio- AMP | MA         | SNP         |   24010 | Roanoke City | NO              | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | 1-877-495-2415 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | next     |   10001 |
 
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression

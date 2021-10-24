@@ -1762,7 +1762,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(viewPlansButton);
 
 		CommonUtility.checkPageIsReadyNew(driver);
-//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		// validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -3519,7 +3519,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void selectStateForGeotargeting() {
 		// driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
-		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		scrollToView(stateDropDown);
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 
