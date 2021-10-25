@@ -224,6 +224,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[text()='Doctor Visits']")
 	private WebElement doctorVisitsHeader;
 	
+	@FindBy(css = "header[class*='mobile']")
+	private WebElement visitorProfileDashboard;
+	
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -234,6 +237,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(shoppingCartIcon);
+		validate(visitorProfileDashboard);
 
 	}
 
@@ -1037,7 +1041,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		if (medsupPlanHeader != null) {
 			listOfTestPlans.stream().forEach(plan -> {
 				By planNameHeader = By
-						.xpath("//div[contains(@class,'med-supp-profile-card')]//h2[normalize-space()='" + plan + "']");
+						.xpath("//div[contains(@class,'med-supp-profile-card') or contains(@class,'saved-plancard')]//h2[normalize-space()='" + plan + "']");
 				WebElement planName = CommonUtility.waitForPresenceOfElement(driver, planNameHeader, 5);
 				if (planName != null) {
 					scrollToView(planName);
@@ -1197,7 +1201,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(medicareNumberText, testData.get("MBI"));
 				jsClickNew(attestCheckBox);
 				jsClickNew(viewDrugsAndDocsButton);
-				waitforElementNew(savedDrugsAndDoctorsHeader);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
 				break;
 			case "NonMember":
 				jsClickNew(dontHaveInsuranceMedicareRadio);
@@ -1212,7 +1217,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(nonMemberZipcodeText, testData.get("ZipCode"));
 				jsClickNew(attestCheckBox);
 				jsClickNew(nonMemberViewDrugsAndDocsButton);
-				waitforElementNew(savedDrugsAndDoctorsHeader);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
 				break;
 
 			default:
@@ -1239,9 +1245,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		Assertion.assertTrue("Basic Costs header is not displayed !", validateNew(basicCostsHeader));
 		Assertion.assertTrue("Doctor Visits header is not displayed !", validateNew(doctorVisitsHeader));
 	}
-	
-	@FindBy(css = "header[class*='mobile']")
-	private WebElement visitorProfileDashboard;
 	
 	public void clickOnBackToProfile() {
 		jsClickNew(backToPlansLink);
