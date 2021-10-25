@@ -25,11 +25,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
-import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -1183,7 +1180,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         clickBackToViewAllPlans();
 
         // if (driver.getCurrentUrl().contains(expectedUrl)) {
-        if (validate(backToPlanResults)) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement backToPlanResults = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='card-updates']/a")));
+        if (backToPlanResults != null) {
             jsClickNew(backToPlanResults);
         }
         // }
@@ -6114,4 +6113,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             System.out.println("No providers in plan card");
         }
     }
+    
+    /**
+     * Save MSVPP 4 plans.
+     *
+     * @param savePlanNames the save plan names
+     */
+    public void saveMSVPP4Plans(String savePlanNames) {
+
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			listOfTestPlans.stream().forEach(plan -> {
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("Marking MS plan, '" + plan + "' as favorite.");
+				WebElement planCard = driver.findElement(
+						By.xpath("//*[normalize-space()='" + plan + "']/ancestor::div[@class='uhc-card']"));
+				if(validateNew(planCard)) {
+					WebElement savePlanButton = planCard.findElement(By.cssSelector("button[class$='save-plan']"));
+					jsClickNew(savePlanButton);
+				}
+				
+			});
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

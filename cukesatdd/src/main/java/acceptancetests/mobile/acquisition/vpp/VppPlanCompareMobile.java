@@ -3872,7 +3872,7 @@ public class VppPlanCompareMobile {
 
 	}
 
-	@And("^the user views the plans of the below plan type$")
+	@And("^the user views the plans of the below plan type|the user views the med supp plans$")
 	public void user_performs_planSearch_in_aarp_sites(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
