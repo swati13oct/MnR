@@ -832,4 +832,95 @@ public class VisitorProfileStepDefinition {
 		visitorProfilePage.ValidateDrugsProviders("true", "true");
 		
 	}
+	
+	@Then("^user clicks on ms plan details button$")
+	public void user_clicks_on_ms_plan_details_button(DataTable plan) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		visitorProfilePage.clickOnMSPlanDetailsPage(plannameAttributesMap.get("MS Plan"));
+		
+	}
+	
+	@Then("^user validates MS plan details$")
+	public void user_validates_MS_plan_details() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSPlanDetailsPage();
+	}
+	
+	@Then("^user clicks on Back to Profile link$")
+	public void user_Clicks_Back_To_Profile() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickOnBackToProfile();
+	}
+	
+	@Then("^user clicks on ms start application button$")
+	public void user_clicks_on_ms_start_application_button(DataTable plan) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		visitorProfilePage.clickOnMStartApplication(plannameAttributesMap.get("MS Plan"));
+		
+	}
+	
+	@Then("^user validates MS Start application page$")
+	public void user_validates_MS_Start_Application_Page() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSStartApplicationPage();
+	}
+	
+	@Then("^user close MS application page$")
+	public void user_close_MS_Application_Page() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickOnCloseMSApplication();
+	}
+	
+	@Then("^user clicks on ms Learn More link$")
+	public void user_clicks_on_ms_learn_more_link(DataTable plan) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		visitorProfilePage.clickOnMLearnMore(plannameAttributesMap.get("MS Plan"));
+		
+	}
+	
+	@Then("^user validates MS Learn More page$")
+	public void user_validates_MS_learn_more_Page() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSLearnMorePage();
+	}
+	
+	@Then("^user clicks on MS Add your Information link$")
+	public void user_clicks_on_ms_add_your_info_link(DataTable plan) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		visitorProfilePage.clickOnMSAddYourInformation(plannameAttributesMap.get("MS Plan"));
+		
+	}
+	
+	@Then("^user validates MS Add your Information page$")
+	public void user_validates_MS_add_your_info_Page() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSAddYourInfoPage();
+	}
+	
+	@Then("^user validates MS SP Profile page with Import, PRE and ComponentCode$")
+	public void user_validates_MS_SP_Page(DataTable componentCode) {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(componentCode);
+		visitorProfilePage.validateMSSP4ProfilePage(plannameAttributesMap.get("Component Code"));
+	}
 }

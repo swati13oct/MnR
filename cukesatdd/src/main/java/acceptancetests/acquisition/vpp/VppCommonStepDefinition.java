@@ -4586,5 +4586,30 @@ private Scenario scenario;
 		planComparePage.VerifyZipErrorMessageNoPlans();
 	}
 	
+	@And("^the user views the med supp plans$")
+	public void user_performs_ms_planSearch_in_aarp_site(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String plantype = "MS";
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.viewMSPlanSummary(plantype);
+
+	}
+	
+	@Then("^user saves two msvpp4 plans as favorite$")
+	public void user_saves_two_ms__vpp4_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("MS Test Plans");
+		plansummaryPage.saveMSVPP4Plans(savePlanNames);
+	}
+
 	
 }
