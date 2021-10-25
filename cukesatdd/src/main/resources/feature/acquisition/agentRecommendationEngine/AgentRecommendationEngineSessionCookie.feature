@@ -16,8 +16,8 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | ZIP | <PlanCompareZIP> |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
-      | ocpuser | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | 
+      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
+      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
 
   @ARE @SavedSessionDropdown @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
@@ -36,8 +36,8 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Ranking Options1 | <RankingOptions1> |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
-      | ocpuser | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
+      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions | RankingOptions1        |
+      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 | lowpremium     | vision,hearing,fitness |
 
   @ARE @EstimateMedicalCost @F441593
   Scenario Outline: - <Email> To Verify agent login and validating Estimate Medical Cost in ARE
@@ -54,9 +54,9 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Estimate MedicalCost | <EstimateMC> |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC |
-      | ocpuser | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  | YES        |
-      | ocpuser | Password@123 | ATDD4STG@MEMBERDD.COM | None          | current  | NO         |
+      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC |
+      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  | YES        |
+      | mnracq@givmail.com | Password@123 | ATDD4STG@MEMBERDD.COM | None          | current  | NO         |
 
   @ARE @NoDrugDocInDropdown @F457409
   Scenario Outline: - <Email> To Verify agent login and validate No Drugs and Doctors in ARE
@@ -75,8 +75,8 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Current Plan         | <DisplayCurrentPlan> |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
-      | ocpuser | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
+      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
+      | mnracq@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
 
   @ARE @AddEditDeleteDrug @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE
@@ -110,8 +110,8 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User    | Pass         | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
-      | ocpuser | Password@123 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           | [blank]    | drug           | NO             | YES                |
+      | User               | Pass         | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
+      | mnracq@givmail.com | Password@123 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           | [blank]    | drug           | NO             | YES                |
 
   @ARE @AddEditDeleteDoctors @F457409
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Doctors in ARE
@@ -146,5 +146,5 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User    | Pass         | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
-      | ocpuser | Password@123 | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | YES          | YES           | [blank]    | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | YES                |
+      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
+      | mnracq@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | YES          | YES           | [blank]    | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | YES                |
