@@ -51,8 +51,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -99,8 +99,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stage123 @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileAndAddPlans @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -186,7 +186,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
     @stage_AddDrugs @regressionSPStage @sanity @regressionAARP
-    Examples:
+    Examples: 
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | 5240993c-4ca5-41f2-8e16-f05272590b43 | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 

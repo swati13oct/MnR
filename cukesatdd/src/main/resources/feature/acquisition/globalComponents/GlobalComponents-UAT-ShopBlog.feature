@@ -147,7 +147,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PagePath | <path>     |
     Then the user validates proactive chat popup
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                                | pageName                |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            |
@@ -159,7 +159,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            |
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                                | pageName                |
       | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            |
@@ -171,7 +171,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
       | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          |
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                      | pageName                |
       | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              |
@@ -182,7 +182,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                      | pageName                |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              |
@@ -193,7 +193,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       |
       | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                | pageName                     |
       | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
@@ -205,7 +205,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
       | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                | pageName                     |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
@@ -459,33 +459,33 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validates Medicare Education Navigation link
     Then the user validates proactive chat popup
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                              | pageName                                |
       | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  |
       | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
       | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                              | pageName                                |
       | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
       | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                |
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                                                                    | pageName                |
       | E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
       | E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                                                                    | pageName                |
       | E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
       | E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
 
-    @avengersRegressionAARP
+
     Examples:
       | Scenario           | site | path                                                  | pageName      |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page |
@@ -494,7 +494,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page |
 
-    @avengersRegressionUHC
+
     Examples:
       | Scenario           | site | path                                                  | pageName      |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page |
