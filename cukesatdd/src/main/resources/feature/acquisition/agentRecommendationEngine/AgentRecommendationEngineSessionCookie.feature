@@ -111,7 +111,7 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
 
     Examples: 
       | User               | Pass          | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
-      | mnracq@givmail.com | Password@1234 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           | [blank]    | drug           | NO             | YES                |
+      | mnracq@givmail.com | Password@1234 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | NO          | YES           | [blank]    | drug           | NO             | NO                |
 
   @ARE @AddEditDeleteDoctors @F457409
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Doctors in ARE
