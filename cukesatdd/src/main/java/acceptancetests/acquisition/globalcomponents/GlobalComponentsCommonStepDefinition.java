@@ -4,6 +4,9 @@ import java.awt.AWTException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+
 
 public class GlobalComponentsCommonStepDefinition {
 
@@ -1371,6 +1375,23 @@ public class GlobalComponentsCommonStepDefinition {
 //		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		aquisitionhomepage.validateMedsupTFNNo(TFNXpath,ExpecetdTFNNo);
 	}
+	@And("^user validates AARP membership links in medsup header \"([^\"]*)\"$")
+	public void hover_over_AARP_Membership_In_Medsup_Header(String linkTexts) throws Exception {
+		scenario.log("Changes made on 10/19- Step added for new Medsup Header redesign");
+		List<String> navigationLinkOfAARP = Arrays.asList(linkTexts.split(","));
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		// memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			for (String linkText : navigationLinkOfAARP) {
+				aquisitionhomepage.validateAARPMembershipLinks(linkText);
+			}
+		} else {
+			Assertion.fail("Join AARP page is not loaded");
+		}
+	}
+
 
 }
 
