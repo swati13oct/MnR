@@ -15,8 +15,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down UI plancompare page
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear |
+      | mnracq@givmail.com | Password@1234 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
   Scenario Outline: - <Email> To Verify agent login and validate ARE No dropdown UI
@@ -32,9 +32,9 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down not displaying in plancompare page
 
     Examples: 
-      | User               | Pass         | Email                  | IfMultiCounty | PlanYear |
-      | mnracq@givmail.com | Password@123 | ATDD4STG@MEMBERDD.COM  | None          | current  |
-      | mnracq@givmail.com | Password@123 | EMILYN@MACIEJEWSKI.COM | None          | current  |
+      | User               | Pass          | Email                  | IfMultiCounty | PlanYear |
+      | mnracq@givmail.com | Password@1234 | ATDD4STG@MEMBERDD.COM  | None          | current  |
+      | mnracq@givmail.com | Password@1234 | EMILYN@MACIEJEWSKI.COM | None          | current  |
 
   @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
@@ -50,8 +50,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates view plan details in plancompare page
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear |
+      | mnracq@givmail.com | Password@1234 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @SavePlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate Save Plans in ARE
@@ -68,8 +68,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Plan Year | <PlanYear> |
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear |
+      | mnracq@givmail.com | Password@1234 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrollPlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate Enroll Plans in ARE
@@ -85,8 +85,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates enroll plans in plancompare page
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | mnracq@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear |
+      | mnracq@givmail.com | Password@1234 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @PlansReorder @F487396
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE
@@ -107,10 +107,10 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      #| mnracq@givmail.com  | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
-      | mnracq@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]    |
-      | mnracq@givmail.com | Password@123 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | YES                | YES           | [blank]    |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      #| mnracq@givmail.com  | Password@1234 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
+      | mnracq@givmail.com | Password@1234 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]    |
+      | mnracq@givmail.com | Password@1234 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | YES                | YES           | [blank]    |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
@@ -131,8 +131,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | mnracq@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | mnracq@givmail.com | Password@1234 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @MCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
@@ -155,8 +155,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User               | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | mnracq@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | User               | Pass          | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | mnracq@givmail.com | Password@1234 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @NOMCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE
@@ -175,6 +175,6 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Ranking Options | <RankingOptions> |
 
     Examples: 
-      | User               | Pass         | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
-      | mnracq@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
-      | mnracq@givmail.com | Password@123 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
+      | User               | Pass          | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
+      | mnracq@givmail.com | Password@1234 | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
+      | mnracq@givmail.com | Password@1234 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
