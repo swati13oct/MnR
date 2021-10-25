@@ -1180,10 +1180,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         clickBackToViewAllPlans();
 
         // if (driver.getCurrentUrl().contains(expectedUrl)) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement backToPlanResults = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='card-updates']/a")));
-        if (backToPlanResults != null) {
-            jsClickNew(backToPlanResults);
+        By backToPlanResults = By.xpath("//*[@id='card-updates']/a");
+        WebElement backToPlanResultsLink = CommonUtility.waitForPresenceOfElement(driver, backToPlanResults, 10);
+        if (backToPlanResultsLink != null) {
+            jsClickNew(backToPlanResultsLink);
         }
         // }
         CommonUtility.checkPageIsReadyNew(driver);
