@@ -51,7 +51,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import oracle.net.aso.e;
 
 /**
  * @author pjaising
@@ -1699,20 +1698,36 @@ public abstract class UhcDriver {
 		String webContext = mobileDriver.getContext();
 		
 		jsClickNew(pdfLink);
+		CommonUtility.checkPageIsReadyNew(driver);
 		
-		WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")));
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")));
 		
 		Set<String> contexts = mobileDriver.getContextHandles();
 
 		for (String context : contexts) {
+			WebDriverWait wait = new WebDriverWait(mobileDriver, defaultTimeoutInSec);
 			if (context.contains("NATIVE_APP")) {
 				mobileDriver.context(context);
 				try {
+					//For older version of Chrome on Android 9.0
 					/*mobileDriver.findElement(By.id("android:id/button1")).click();
 					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();*/
-					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")).click();
-					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.packageinstaller:id/permission_allow_button']")).click();
+//					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='android:id/button1']")).click();
+//					mobileDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.packageinstaller:id/permission_allow_button']")).click();
+					
+					//These locators are for android version 11.0 chrome 88
+					WebElement allowButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.Button[@resource-id='com.android.chrome:id/positive_button']")));
+					//WebElement denyButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.Button[@resource-id='com.android.chrome:id/negative_button']")));
+					
+					if(allowButton!= null) {
+						allowButton.click();
+						
+						//Locator for new Only this time button
+						WebElement onlyOnce = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_allow_one_time_button']")));
+						if(onlyOnce != null) {
+							onlyOnce.click();
+						}
+					}
 					break;
 				} catch (NoSuchElementException e) {
 					System.out.println("Permission was already granted.");
