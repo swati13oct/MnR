@@ -98,13 +98,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
-		// selectFromDropDownByText(driver, distanceDropownID, distance);
+
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
-		//sendkeysMobile(zipcodeField, zipcode);
+
 		sleepBySec(3);
 		jsClickNew(distanceLabel);
-		driver.findElement(By.xpath("//*[@id='plan-year-label']/span")).click();
+		//driver.findElement(By.xpath("//*[@id='plan-year-label']/span")).click();
+		driver.findElement(By.xpath("(//span[@class='req-asterisk'])[1]")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");

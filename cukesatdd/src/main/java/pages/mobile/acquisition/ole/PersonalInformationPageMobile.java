@@ -423,8 +423,10 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			sendkeysMobile(MailingAdd_Street,Mailing_Street);
 			sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeysMobile(MailingAdd_City,Mailing_City);
-			Select SelectState = new Select(MailingAdd_State_DropDown);
-			SelectState.selectByValue(Mailing_State);
+//			Select SelectState = new Select(MailingAdd_State_DropDown);
+//			SelectState.selectByValue(Mailing_State);
+			driver.findElement(By.xpath("(//span[@class='req-asterisk'])[1]")).click();
+			mobileSelectOption(MailingAdd_State_DropDown, Mailing_State, true);
 			sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
 					}
 		}		

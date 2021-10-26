@@ -1840,7 +1840,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
-
+		iosScroll(EnrollinPlanCompare_PDP);
 		jsClickNew(EnrollinPlanCompare_PDP);
 		waitForPageLoadSafari();
 		// if (driver.getCurrentUrl().contains("enrollment"))

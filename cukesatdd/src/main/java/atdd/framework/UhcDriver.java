@@ -297,6 +297,7 @@ public abstract class UhcDriver {
 			sendKeys_IOS(element, message);
 			element.getText().replaceAll("\u00A00", " ").trim();
 			element.sendKeys(Keys.ENTER);
+			element.sendKeys(Keys.TAB);
 
 			// element.sendKeys(Keys.BACK_SPACE);
 
