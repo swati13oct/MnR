@@ -414,9 +414,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		jsClickNew(yearDropdown);
+		/*jsClickNew(yearDropdown);
 		Select yearList = new Select(yearDropdown);
-		yearList.selectByVisibleText(planYear);
+		yearList.selectByVisibleText(planYear);*/
+		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
 	}
