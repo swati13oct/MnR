@@ -1310,7 +1310,7 @@ public class ComparePlansPage extends UhcDriver {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assertion.assertTrue(provider[i].split(":")[0]
+						Assertion.assertTrue(providers
 								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
 								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
