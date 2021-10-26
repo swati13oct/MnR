@@ -177,13 +177,13 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//img[contains(@alt,'AARP Medicare Plans')]")
 	private WebElement aarpLogo;
 	
-	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
+	@FindBy(xpath = "(//a[contains(@class,'enrollProfileBtn cta-button')])[2]")
 	private WebElement enrollProfileYes;
 	
-	@FindBy(id="dupIconFlyOut")
+	@FindBy(xpath="//span[text()='My Saved Items ']/ancestor::button")
 	private WebElement shoppingCartIcon;
 	
-	@FindBy(css="a#visitor-profile-header")
+	@FindBy(xpath="//button[contains(@id,'saved-items') and  contains(@class,'show')]")
     private WebElement lnkProfile;
 	
 	@FindBy(xpath = "(//*[@class = 'logo']//img)[1]")

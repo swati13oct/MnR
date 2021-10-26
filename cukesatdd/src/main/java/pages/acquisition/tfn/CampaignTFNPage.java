@@ -335,22 +335,27 @@ public class CampaignTFNPage extends UhcDriver {
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN ;
+		String SRC_Code;
 		 
 		for (String a : arrOfStr)
 		        
 		            System.out.println(a); 
 		String PSC_Code_Str= arrOfStr[0];
-		String[] arrStr_1 = PSC_Code_Str.split("="); 
+		String[] arrStr_1 = PSC_Code_Str.split("=");
+		
 		PSC_Code = arrStr_1[1];
+		SRC_Code=arrOfStr[1];
 		FedTFN=arrOfStr[2];
 		MedSuppTFN = arrOfStr[3];
 		
 		System.out.println("Campaign PSC code - "+PSC_Code);
+		System.out.println("Source code - "+SRC_Code);
 		System.out.println("Federal TFN - "+FedTFN);
 		System.out.println("MedSupp TFN - "+MedSuppTFN);
 		
 		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
 		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
 		tfnCookieValues.put("Fed TFN", FedTFN);
 		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
 			System.out.println(tfnCookieValues);
@@ -1484,8 +1489,7 @@ public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
 	else {
 		Assertion.fail("****************Expected Fed TFN DOES NOT match Actual Fed TFN from TFN cookie ***************");
 	}
-	// TODO Auto-generated method stub
-	
+
 }
 
 public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN) {
@@ -1500,7 +1504,6 @@ public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN)
 	else {
 		Assertion.fail("****************Expected Medsup TFN DOES NOT match Actual Medsup TFN from TFN cookie ***************");
 	}
-	// TODO Auto-generated method stub
 	
 }
 
@@ -1530,5 +1533,19 @@ public void validateTFNHeaderAndSAMIcon() {
 	System.out.println("Clicked on SAM TFN");
 	sleepBySec(5);
 	Assertion.assertTrue("TFN in SAM icon  does not match with TFN in SAM popup", tfnHeader.equals(samTFNPopupLink.getText()));
+}
+
+public void validateSourceCode(String expectedSrcCode,String actualSrcCode) {
+	System.out.println("Expected PSC code: "+expectedSrcCode);
+	System.out.println("Actual PSC code: "+actualSrcCode);
+	
+	if(expectedSrcCode.contentEquals(actualSrcCode)) {
+		System.out.println("****************Expected Source code matches Actual Source code from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Source code DOES NOT match Actual Source code from TFN cookie ***************");
+	}
 }
 }
