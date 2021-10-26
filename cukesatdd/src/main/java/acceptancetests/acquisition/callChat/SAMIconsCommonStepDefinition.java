@@ -178,7 +178,7 @@ public class SAMIconsCommonStepDefinition {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
@@ -202,7 +202,7 @@ public class SAMIconsCommonStepDefinition {
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 
 		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
@@ -242,7 +242,7 @@ public class SAMIconsCommonStepDefinition {
 		}*/
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		aquisitionhomepage.validateChatSam();
@@ -283,13 +283,15 @@ public class SAMIconsCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				//.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
-		aquisitionhomepage.validateChatSam();
+		//aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.validateCallpopuponaprivacypage(TFNXpath, ExpecetdTFNNo);
 
 	}
@@ -329,7 +331,7 @@ public class SAMIconsCommonStepDefinition {
 				//(String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		aquisitionhomepage.validateTFNNoonRightRailforMedsupp(TFNXpath, ExpectedTFNNo);
 
@@ -349,7 +351,7 @@ public class SAMIconsCommonStepDefinition {
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 
 		aquisitionhomepage.validateTFNNoonRightRailForOLE(TFNXpath, ExpectedTFNNo);
@@ -370,7 +372,7 @@ public class SAMIconsCommonStepDefinition {
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 
 		aquisitionhomepage.validateTFNNoonRightRailForPlanDetailsPage(TFNXpath, ExpectedTFNNo);
@@ -392,7 +394,7 @@ public class SAMIconsCommonStepDefinition {
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		aquisitionhomepage.validateTFNNoonZipCodeComponent(TFNXpath, ExpectedTFNNo);
 
@@ -411,9 +413,10 @@ public class SAMIconsCommonStepDefinition {
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			//	.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
-
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		aquisitionhomepage.validateTFNNoonSNPRightRailForOLE(TFNXpath, ExpectedTFNNo);
 	

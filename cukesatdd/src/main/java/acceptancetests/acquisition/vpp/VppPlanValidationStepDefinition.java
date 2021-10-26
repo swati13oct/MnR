@@ -583,7 +583,7 @@ public class VppPlanValidationStepDefinition {
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 									  //planSummaryPage.checkForMultiCountyPopup(countyName);
-									  //planSummaryPage.selectYearOption(planYear);
+									 // planSummaryPage.selectYearOption(planYear);
 									  //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);
 
                                       benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
@@ -754,8 +754,9 @@ public class VppPlanValidationStepDefinition {
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
 									if (planType.equalsIgnoreCase("PDP")) {
 										result = true;
-										planSummaryPage.selectCounty(countyName);										
-										planSummaryPage.Enroll_OLE_Plan(planName, planType);
+										planSummaryPage.selectCounty(countyName);	
+										//planSummaryPage.selectYearOptionOLE(planYear);
+										planSummaryPage.Enroll_OLE_Plan(planName, planType, planYear);
 										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										} else {
 					    					result = planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName, planType);

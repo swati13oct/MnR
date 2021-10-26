@@ -82,7 +82,9 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - UHC ..')]")
 	//@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')])/..")
-	@FindBy(xpath = "(//h3[contains(text(),'Medicare Advantage (Part C) Plans from UnitedHealthcare')])/..")
+	//@FindBy(xpath = "(//h3[contains(text(),'Medicare Advantage (Part C) Plans from UnitedHealthcare')])/..")
+	//@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage Plans')]")
+	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -109,8 +111,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html')]")
 	public WebElement YahooSearchResultshop;
 	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
-	//@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
-	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(text(),'Learn More About Medicare Advantage (Part C) Plans')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Learn More About Medicare Advantage Plans')]")
+	//@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(text(),'Learn More About Medicare Advantage (Part C) Plans')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='sb_form_q']")
@@ -210,6 +212,21 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(id = "LastName")
 	private WebElement lastName;
+	
+	@FindBy(xpath = "//*[@id='header-tfn-link']//span[contains(@class,'invoca_swap')]")
+	private WebElement tfnHeaderLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'tel tfn')]//u)[1]")
+	private WebElement tfnHeaderPopupLink;
+	
+	@FindBy(xpath = "(//*[contains(@id,'sam-call-button')]//*[contains(@class,'invoca_swap')])[1]")
+	private WebElement samTFN;
+	
+	@FindBy(xpath = "(//*[contains(@class,'modal-body')]//*[contains(@class,'invoca_swap')])[1]")
+	private WebElement samTFNPopupLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'modal-close')])[1]")
+	private WebElement tfnHeaderPopupClose;
 	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
@@ -318,22 +335,27 @@ public class CampaignTFNPage extends UhcDriver {
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN ;
+		String SRC_Code;
 		 
 		for (String a : arrOfStr)
 		        
 		            System.out.println(a); 
 		String PSC_Code_Str= arrOfStr[0];
-		String[] arrStr_1 = PSC_Code_Str.split("="); 
+		String[] arrStr_1 = PSC_Code_Str.split("=");
+		
 		PSC_Code = arrStr_1[1];
+		SRC_Code=arrOfStr[1];
 		FedTFN=arrOfStr[2];
 		MedSuppTFN = arrOfStr[3];
 		
 		System.out.println("Campaign PSC code - "+PSC_Code);
+		System.out.println("Source code - "+SRC_Code);
 		System.out.println("Federal TFN - "+FedTFN);
 		System.out.println("MedSupp TFN - "+MedSuppTFN);
 		
 		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
 		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
 		tfnCookieValues.put("Fed TFN", FedTFN);
 		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
 			System.out.println(tfnCookieValues);
@@ -626,6 +648,13 @@ public class CampaignTFNPage extends UhcDriver {
 		//action.moveToElement(OurPlansLink1).build().perform();
 		// action.click().build().perform();
 		//validateNew(OurPlansLink1);
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
 		validate(HomePage_EnterZip);
 		HomePage_EnterZip.click();
 		HomePage_EnterZip.sendKeys(zip);
@@ -1102,8 +1131,8 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				jsClickNew(Start_ApplicationBtn);
 				System.out.println("Start application button is clicked on application page");
 				Thread.sleep(4000);
-				CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-				insuredStatus.click();
+				//CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+				//insuredStatus.click();
 				Thread.sleep(2000);
 				jsClickNew(nextButton);
 				Thread.sleep(2000);
@@ -1386,7 +1415,7 @@ public void decisionGuide() {
 	jsClickNew(decisionGuideClick);
 }
 
-public void openURLNewTab(String url) {
+public void openURLNewTabAARP(String url) {
 	// get original tab handler
 	String winHandleBefore = driver.getWindowHandle();
 
@@ -1415,5 +1444,108 @@ public void openURLNewTab(String url) {
 	driver.switchTo().window(winHandleTmp);
 	System.out.println("Proceed to use this newly opened tab for remaining validation");
 
+}
+
+public void openURLNewTabUHC(String url) {
+	// get original tab handler
+	String winHandleBefore = driver.getWindowHandle();
+
+	System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+	// open new tab
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("window.open('about:blank','_blank');");
+	for (String winHandle : driver.getWindowHandles()) {
+		if (!winHandle.equals(winHandleBefore)) {
+			driver.switchTo().window(winHandle);
+		}
+	}
+	String winHandleTmp = driver.getWindowHandle();
+	System.out.println(
+			"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+	
+
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to open the acquisition url in new tab");
+	
+	
+	start(url);
+	googleSearchUHC();
+	driver.switchTo().window(winHandleBefore);
+	driver.close();
+	driver.switchTo().window(winHandleTmp);
+	System.out.println("Proceed to use this newly opened tab for remaining validation");
+
+}
+
+public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
+	System.out.println("Expected PSC code: "+expectedFedTFN);
+	System.out.println("Actual PSC code: "+actualFedTFN);
+	
+	if(expectedFedTFN.contentEquals(actualFedTFN)) {
+		System.out.println("****************Expected Fed TFN matches Actual Fed TFN from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Fed TFN DOES NOT match Actual Fed TFN from TFN cookie ***************");
+	}
+
+}
+
+public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN) {
+	System.out.println("Expected PSC code: "+expectedMedsupTFN);
+	System.out.println("Actual PSC code: "+actualMedsupTFN);
+	
+	if(expectedMedsupTFN.contentEquals(actualMedsupTFN)) {
+		System.out.println("****************Expected Medsup TFN matches Actual Medsup TFN from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Medsup TFN DOES NOT match Actual Medsup TFN from TFN cookie ***************");
+	}
+	
+}
+
+public void validateTFNHeaderAndSAMIcon() {
+	CheckPageLoad();
+	CheckiPerseptions();
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	validate(tfnHeaderLink);
+	sleepBySec(5);
+	String tfnHeader=tfnHeaderLink.getText();
+	tfnHeaderLink.click();
+	System.out.println("Clicked on TFN link in header");
+	sleepBySec(5);
+	validate(tfnHeaderPopupLink);
+	String tfnHeaderPopup=tfnHeaderPopupLink.getText();
+	Assertion.assertTrue("TFN in header does not match with TFN in header popup", tfnHeader.equals(tfnHeaderPopup));
+	jsClickNew(tfnHeaderPopupClose);
+	validate(samTFN);
+	sleepBySec(5);
+	Assertion.assertTrue("TFN in header does not match with TFN in SAM icon", tfnHeader.equals(samTFN.getText()));
+	samTFN.click();
+	System.out.println("Clicked on SAM TFN");
+	sleepBySec(5);
+	Assertion.assertTrue("TFN in SAM icon  does not match with TFN in SAM popup", tfnHeader.equals(samTFNPopupLink.getText()));
+}
+
+public void validateSourceCode(String expectedSrcCode,String actualSrcCode) {
+	System.out.println("Expected PSC code: "+expectedSrcCode);
+	System.out.println("Actual PSC code: "+actualSrcCode);
+	
+	if(expectedSrcCode.contentEquals(actualSrcCode)) {
+		System.out.println("****************Expected Source code matches Actual Source code from TFN cookie ***************");
+
+		Assertion.assertTrue(true);
+	}
+	else {
+		Assertion.fail("****************Expected Source code DOES NOT match Actual Source code from TFN cookie ***************");
+	}
 }
 }

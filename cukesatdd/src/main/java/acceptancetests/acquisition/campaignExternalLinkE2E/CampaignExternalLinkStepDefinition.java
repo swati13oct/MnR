@@ -907,7 +907,6 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.validateFindADoc();
-		campaignExternalLinkspage.naviagteBack();
 	}
 
 	@Then("^user clicks on privacy policy link$")
@@ -953,10 +952,13 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 	}
 
 	@Then("user validates zipcode component and navigates to VPP")
-	public void user_validates_zipcode_component_and_navigates_to_vpp() {
+	public void user_validates_zipcode_component_and_navigates_to_vpp(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String zipcode = memberAttributesMap.get("Zipcode");
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		campaignExternalLinkspage.validatezipcodecomponent();
+		campaignExternalLinkspage.validatezipcodecomponent(zipcode);
 	}
 
 	@Then("user clicks on view plans and pricing and navigates to VPP")
@@ -1106,7 +1108,8 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 
-		campaignExternalLinkspage.viewPlanSummary(plantype);
+		VPPPlanSummaryPage plansummaryPage=campaignExternalLinkspage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	}
 
@@ -1195,4 +1198,17 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 
 	}
 
+	@Then("^the user verify TFN on landing pages$")
+	public void the_user_verify_TFN_on_landing_pages(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String TFNflag = memberAttributesMap.get("TFNflag");
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		if (TFNflag.equalsIgnoreCase("true")) {
+			campaignExternalLinkspage.validateLPPages(TFNXpath);
+			getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, TFNXpath);
+		}
 	}
+}
