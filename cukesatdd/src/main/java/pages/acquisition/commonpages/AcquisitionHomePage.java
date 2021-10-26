@@ -3771,7 +3771,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		Actions action = new Actions(driver);
-		action.moveToElement(planMemberLink).perform();
+		if (driver.toString().contains("Safari")) {
+			planMemberLink.click();
+		}
+		else {
+			action.moveToElement(planMemberLink).perform();
+		}
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
@@ -5333,7 +5338,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(viewAllDisclaimerInformationLink);
 		jsClickNew(viewAllDisclaimerInformationLink);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]/.."));
+		System.out.println("\n\n======="+driver.getCurrentUrl()+"=========\n\n");
+		System.out.println("\n\n1======="+content.isDisplayed()+"======"+content.isEnabled()+"=========\n\n");
 		if (content.isDisplayed() && content.isEnabled()) {
 			System.out.println("View Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);
@@ -5349,6 +5356,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(hideDiscliamerInformation);
 		sleepBySec(2);
 		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]"));
+		if(driver.toString().contains("Safari"))
+			driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]/..")).click();
+		System.out.println("\n\n======="+content.isDisplayed()+"============"+content.isEnabled()+"==============\n\n");
 		if (!content.isDisplayed() && content.isEnabled()) {
 			System.out.println("Hide Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);
@@ -5408,7 +5418,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
 		proceedToLeaveAARP();
-		if (driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+		System.out.println("\n\n======="+driver.getCurrentUrl()+"=========\n\n");
+		if (driver.getCurrentUrl().contains("medicare.gov/my/medicare-complaint")) {
 			System.out.println("Successfully clicked Complaint Form link");
 			Assertion.assertTrue(true);
 
@@ -7224,7 +7235,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
 		Actions action = new Actions(driver);
-		action.moveToElement(planMemberLink).perform();
+		if (driver.toString().contains("Safari")) {
+			planMemberLink.click();
+		}
+		else {
+			action.moveToElement(planMemberLink).perform();
+		}
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
