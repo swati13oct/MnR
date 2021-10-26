@@ -228,6 +228,9 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@class,'modal-close')])[1]")
 	private WebElement tfnHeaderPopupClose;
 	
+	@FindBy(xpath = "//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]")
+	private WebElement msPlansHeading;
+	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -740,7 +743,18 @@ public class CampaignTFNPage extends UhcDriver {
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 			return new VPPPlanSummaryPage(driver);
-		} else if (planType.equalsIgnoreCase("SNP")) {
+		} 
+		else if (planType.equalsIgnoreCase("MS4.0")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			//sleepBySec(2);
+			msPlansViewLink.click();
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, msPlansHeading, 30);
+			/*msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
+			return new VPPPlanSummaryPage(driver);
+		}
+		else if (planType.equalsIgnoreCase("SNP")) {
 //			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
