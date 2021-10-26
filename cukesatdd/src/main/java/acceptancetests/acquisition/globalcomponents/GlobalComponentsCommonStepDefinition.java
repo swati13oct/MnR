@@ -1392,6 +1392,28 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 
-
+	@And("^user clicks on AARP Membership links in the Medsup header for cancel \"([^\"]*)\"$")
+	public void hover_over_AARP_Membership_In_Medsup_Header_Cancel(String linkTexts) throws Exception {
+		scenario.log("Changes made on 10/19- Step added for new Medsup Header redesign");
+		List<String> navigationLinkOfAARP = Arrays.asList(linkTexts.split(","));
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		// memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			for (String linkText : navigationLinkOfAARP) {
+				aquisitionhomepage.validateAARPMembershipcancel(linkText);
+			}
+		} else {
+			Assertion.fail("Join AARP page is not loaded");
+		}
+	}
+	
+	@Then("^Verify AARP Membership links are not present on other pages$")
+	public void verifyAARPMembershipLinksNotPresentOnOtherPage() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.verifyElementNotPresent();
+	}
 }
 

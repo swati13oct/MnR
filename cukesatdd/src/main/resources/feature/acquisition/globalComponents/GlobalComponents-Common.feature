@@ -1059,7 +1059,9 @@ Feature: 1.12 ACQ - Global Components Validation
     When user verifies the logo
     Then user validates TFN in header
     And user validates AARP membership links in medsup header "Join AARP,Renew AARP Membership,AARP Member Benefits"
-    #And user clicks on AARP Membership links in the Medsup header for cancel
+    And user clicks on AARP Membership links in the Medsup header for cancel "Join AARP,Renew AARP Membership,AARP Member Benefits"
+     And the user clicks on browser back button
+    Then Verify AARP Membership links are not present on other pages 
 
     @Header_Medsup_AARP_Membership
     Examples: 

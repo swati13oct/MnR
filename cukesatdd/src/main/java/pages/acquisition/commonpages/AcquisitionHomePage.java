@@ -8044,7 +8044,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),browser);
 		}
 	}
-	@FindBy(xpath = "//*[contains(@class,'aarpMembership_wrap')]//button")
+	@FindBy(xpath = "//li[contains(@class,'aarpMembership_wrap')]//button[normalize-space()='AARP Membership']")
 	private WebElement aarpMembership;
 
 	@FindBy(xpath = "//a[@data-asset-name='Join AARP']")
@@ -8093,11 +8093,59 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String childWindow = I.next();
 			if (!base.equals(childWindow)) {
 				driver.switchTo().window(childWindow);
+				Thread.sleep(2000);
 				proceedToLeaveAARP();
 				Assert.assertTrue(driver.getCurrentUrl().contains(urlToValidate));
 				driver.close();
 			}
 		}
 		driver.switchTo().window(base);
+	}
+	public void validateAARPMembershipcancel(String linkText) throws Exception {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(aarpMembership).perform();
+		// validateNew(headerRegisterLink);
+		WebElement ele;
+		String urlToValidate;
+		switch (linkText) {
+		case "Join AARP":
+			ele = goToJoinAARPLink;
+			urlToValidate = "/leaving.intermediatepage.html?https://appsec.aarp.org/mem/join?campaignId=FEFUUHCW&cmp=ASI_P_MU_JN_UNITEDHEALTHCARE";
+			break;
+		case "Renew AARP Membership":
+			ele = lnkRenewAARPMembership;
+			urlToValidate = "/leaving.intermediatepage.html?https://appsec.aarp.org/mem/renew?campaignId=FEFUUHCW&cmp=ASI_P_MU_RN_UNITEDHEALTHCARE";
+			break;
+		case "AARP Member Benefits":
+			ele = lnkAARPMemberBenefits;
+			urlToValidate = "leaving.intermediatepage.html?http://www.aarp.org/benefits-discounts/?cmp=ASI_P_UMBC_UNITEDHEALTHCARE";
+			break;
+
+		default:
+			throw new Exception("Unable to find the implementation for the case option passed : " + linkText);
+		}
+		String base = driver.getWindowHandle();
+		System.err.println("*** Current window handle : " + base.toString());
+		validateNew(ele);
+		jsClickNew(ele);
+		Thread.sleep(2000);
+		Set<String> all = driver.getWindowHandles();
+		System.err.println("*** All window handles : " + all.toString());
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains(urlToValidate));
+				cancelLeaveAARPRedirect();				
+			}
+		}
+		driver.switchTo().window(base);
+	}
+
+	public void verifyElementNotPresent() {
+		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
 	}
 }
