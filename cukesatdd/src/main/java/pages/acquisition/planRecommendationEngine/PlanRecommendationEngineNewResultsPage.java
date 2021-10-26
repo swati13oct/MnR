@@ -249,6 +249,60 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	
 	@FindBy(css = "#msVppZipCode")
 	private WebElement zipcodeMSForm;
+	
+	//Sort By Elements
+	
+	@FindBy(css = "a#ghn_lnk_1")
+	private WebElement Home;
+	
+	@FindBy(css = "div.sortBySection #plansSorting")
+	private WebElement sortByDropdown;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']>label")
+	private WebElement MAPDCheckLabel;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']")
+	private WebElement MAPDCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD'] span.checkbox-square")
+	private WebElement MAPDCheck;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
+	private WebElement MedigapCheckLabel;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']")
+	private WebElement MedigapCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare'] span.checkbox-square")
+	private WebElement MedigapCheck;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
+	private WebElement PDPCheckLabel;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']")
+	private WebElement PDPCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP'] span.checkbox-square")
+	private WebElement PDPCheck;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
+	private WebElement SNPCheckLabel;
+	
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']")
+	private WebElement SNPCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP'] span.checkbox-square")
+	private WebElement SNPCheck;
+	
+	@FindBy(css = "div.sortBySection div.applySec>button")
+	private WebElement applyBtn;
+	
+	@FindBy(css = ".planRemoveSort span")
+	private WebElement sortBreadCrumbs;
+	
+	@FindBy(css = ".planRemoveSort svg")
+	private WebElement removeBreadCrumbs;
+	
 
 	// Result Loading Page Element Verification Method
 
@@ -457,7 +511,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
 			if(!planName.toUpperCase().contains("PATRIOT"))
-				Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+				Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
 			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
@@ -602,9 +656,25 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
+			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+				threadsleep(10000);
+				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
+				if(validate(MSplanDetailsPage,20))
+				{
+					validate(MSplanNameInDetailsPage, 60);
+					Assert.assertTrue(planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+							"Not navigated to Plan details page");
+				}else {
+					validate(zipcodeMSForm, 60);
+					planSelectorResultspage.submitMSform();
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "MS Plan Summary page is not loaded");					
+				}	
+			}
+			else {
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
+			}
 		}
 		if (planAction.toLowerCase().contains("viewbutton")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
@@ -662,11 +732,11 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		String planType = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
+		String PlanName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
-		System.out.println("PlanType is: "+planType);
+		System.out.println("PlanName is: "+PlanName);
 		
-		if (planType.contains("supplement")) {
+		if (PlanName.contains("supplement")) {
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
 			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
 					.trim();
@@ -779,6 +849,191 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	System.out.println("Adding doctors from PRE Result page");
 	plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
 	threadsleep(3000);
+	}
+	
+	public void validateNoSortByElements() {
+		System.out.println("Validate No Sort By UI ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		Assert.assertFalse(validate(sortByDropdown), "SortBy Dropdown is displaying");
+	}
+	
+	public void validateSortByElements() {
+		System.out.println("Validate Sort By UI Elements : ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		Assert.assertTrue(validate(MAPDCheckLabel), "MAPD Checkbox is missing");
+		Assert.assertTrue(validate(MedigapCheckLabel), "Medigap Checkbox is missing");
+		Assert.assertTrue(validate(PDPCheckLabel), "PDP Checkbox is missing");
+		Assert.assertTrue(validate(SNPCheckLabel), "SNP Checkbox is missing");
+		Assert.assertTrue(validate(applyBtn), "Apply button is missing");
+
+		Assert.assertFalse(MAPDCheck.isSelected(), "MAPD is selected by default");
+		Assert.assertFalse(MedigapCheck.isSelected(), "Medigap is selected by default");
+		Assert.assertFalse(PDPCheck.isSelected(), "PDP is selected by default");
+		Assert.assertFalse(SNPCheck.isSelected(), "SNP is selected by default");
+
+		// Deselect All
+		validate(applyBtn);
+		optionSelection("MAPD,Medigap,PDP,SNP", false);
+		applyBtn.click();
+		threadsleep(3000);
+		boolean dropClose = validate(applyBtn, 10);
+		System.out.println("Drop close : " + dropClose);
+		Assert.assertFalse(dropClose);
+		
+	}
+	
+	public void optionSelection(String option, boolean select) {
+		String options[] = option.split(",");
+		for (int i = 0; i < options.length; i++) {
+			checkUncheck(options[i], select);
+			threadsleep(1000);
+		}
+	}
+
+	public void checkUncheck(String checkOption, boolean select) {
+		System.out.println("Selecting Option " + checkOption + " : " + select);
+		WebElement elemCheck = null, elemClick = null;
+		if (checkOption.equalsIgnoreCase("mapd")) {
+			elemCheck = MAPDCheck;
+			elemClick = MAPDCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("medigap")) {
+			elemCheck = MedigapCheck;
+			elemClick = MedigapCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("pdp")) {
+			elemCheck = PDPCheck;
+			elemClick = PDPCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("snp")) {
+			elemCheck = SNPCheck;
+			elemClick = SNPCheckLabel;
+		}
+
+		if (select && !elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+		if (!select && elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+
+		if (select)
+			Assert.assertTrue(elemCheck.isSelected(), "Unable to Select " + elemCheck);
+		else
+			Assert.assertFalse(elemCheck.isSelected(), "Unable to Deselect " + elemCheck);
+	}
+	
+	public void optionVisibility(String option) {
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		String options[] = option.split(":");
+		for (int i = 0; i < options.length; i++) {
+			String optionInfo = options[i];
+			if (optionInfo.trim().length() > 0) {
+				String[] optionDetails = optionInfo.split(",");
+				String planType = optionDetails[0];
+				String visibility = optionDetails[1];
+				disableCheck(planType, visibility);
+			}
+			threadsleep(2000);
+			sortByDropdown.click();
+		}
+	}
+	
+	public void disableCheck(String planType, String visibility) {
+		System.out.println("Validating " + planType + " Option: " + visibility);
+		if(planType.equalsIgnoreCase("mapd")) 
+			Assert.assertEquals(MAPDCheckOption.getAttribute("ng-reflect-disabled"), visibility, "MAPD is not Disabled");
+		if(planType.equalsIgnoreCase("medigap")) 
+			Assert.assertEquals(MedigapCheckOption.getAttribute("ng-reflect-disabled"), visibility, "Medigap is not Disabled");
+		if(planType.equalsIgnoreCase("pdp")) 
+			Assert.assertEquals(PDPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "PDP is not Disabled");
+		if(planType.equalsIgnoreCase("snp")) 
+			Assert.assertEquals(SNPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "SNP is not Disabled");
+	}
+	
+	public void sortByFunc(String plan) {
+		System.out.println("Sorting  Options: " + plan );
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+			VerifyPlanTile(options[i]);	
+		}
+	}
+	
+	public void sortByBreadcrumb() {
+		System.out.println("Sorting Breadcrumb validation after PlanYear Toggle");
+		threadsleep(5000);
+		Assert.assertFalse(validate(sortBreadCrumbs,20), "BreadCrumbs is displaying after PlanYear Toggle");
+	}
+	
+	public void removeBreadcrumb() {
+		System.out.println("Removing Filtered BreadCrumb");
+		Assert.assertTrue(sortBreadCrumbs.isDisplayed(), "BreadCrumbs is not displaying");
+		removeBreadCrumbs.click();
+		threadsleep(5000);
+		Assert.assertFalse(validate(sortBreadCrumbs,20), "BreadCrumbs is displaying after remove breadcrumb");
+	}
+	
+	public void applySort(String planType) {
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		threadsleep(2000);
+		
+		if(planType.equalsIgnoreCase("mapd")) {
+			validate(MAPDCheck,20);
+			MAPDCheck.click();
+		}
+		if(planType.equalsIgnoreCase("medigap")) {
+			validate(MedigapCheck,20);
+			MedigapCheck.click();
+		}
+		if(planType.equalsIgnoreCase("pdp")) {
+			validate(PDPCheck,20);
+			PDPCheck.click();
+		}
+		if(planType.equalsIgnoreCase("snp")) {
+			validate(SNPCheck,20);
+			SNPCheck.click();
+		}
+		Assert.assertTrue(validate(applyBtn), "apply Button is missing");
+		applyBtn.click();
+		threadsleep(2000);
+	}
+	
+	public void VerifyPlanTile(String plan) {
+		System.out.println("Verify the PlanType after applied Filter");
+		String PlanType = null;
+		String text = null;
+		if(plan.equalsIgnoreCase("mapd"))
+			text = "Part C";
+		if(plan.equalsIgnoreCase("medigap"))
+			text = "Supplement";
+		if(plan.equalsIgnoreCase("pdp"))
+			text = "Part D";
+		if(plan.equalsIgnoreCase("snp"))
+			text = "Special";
+			
+		int plancount = plantiles.size();
+		Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text), "BreadCrumbs not showing for " + plan + " PlanType");
+		for(int i = 0; i < plancount; i++) {
+//			System.out.println("I count is: "+i);
+			if(i==3 || i==6 || i==9 ) {
+				pageNextButton.click();
+				threadsleep(2000);
+			}
+			PlanType = plantiles.get(i).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+			Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
+		}
+		
 	}
 	
 }
