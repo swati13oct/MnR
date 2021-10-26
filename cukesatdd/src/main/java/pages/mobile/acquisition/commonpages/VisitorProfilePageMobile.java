@@ -1,9 +1,10 @@
 package pages.mobile.acquisition.commonpages;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -14,16 +15,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.UhcDriver;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
@@ -213,7 +214,19 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(css = "button[dlassetid='vp_nonmemdetl_next'][dtmname*='View your Drugs & Doctors']")
 	private WebElement nonMemberViewDrugsAndDocsButton;
+	
+	@FindBy(css = "a[class$='back-to-plans']")
+	private WebElement backToPlansLink;
+	
+	@FindBy(xpath = "//h3[text()='Basic Costs']")
+	private WebElement basicCostsHeader;
 
+	@FindBy(xpath = "//h3[text()='Doctor Visits']")
+	private WebElement doctorVisitsHeader;
+	
+	@FindBy(css = "header[class*='mobile']")
+	private WebElement visitorProfileDashboard;
+	
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -224,6 +237,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(shoppingCartIcon);
+		validate(visitorProfileDashboard);
 
 	}
 
@@ -1016,20 +1030,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
             System.out.println("Verified plans are added on visitior profile page");
         }
     }
+
 	public void validateAddedMsPlans(String planNames) {
-		try {
-			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-			CommonUtility.checkPageIsReadyNew(driver);
-			Thread.sleep(20000);
-			for (String plan : listOfTestPlans) {
-				Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
-				Assertion.assertTrue(driver
-						.findElement(By.xpath(
-								"//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
-						.isDisplayed());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		By medsupHeaderLocator = By.xpath("//h3[normalize-space()='Medicare Supplement Insurance Plans']");
+		WebElement medsupPlanHeader = CommonUtility.waitForPresenceOfElement(driver, medsupHeaderLocator, 20);
+
+		if (medsupPlanHeader != null) {
+			listOfTestPlans.stream().forEach(plan -> {
+				By planNameHeader = By
+						.xpath("//div[contains(@class,'med-supp-profile-card') or contains(@class,'saved-plancard')]//h2[normalize-space()='" + plan + "']");
+				WebElement planName = CommonUtility.waitForPresenceOfElement(driver, planNameHeader, 5);
+				if (planName != null) {
+					scrollToView(planName);
+					Assertion.assertTrue("Unable to find MS plan " + plan + " under Saved Plans!", validate(planName));
+				} else {
+					Assertion.fail("Unable to find MS plan " + plan + " under Saved Plans!");
+				}
+			});
+		} else {
+			Assertion.fail("Medsupp saved plans may not be displayed on visitor profile page!");
 		}
 	}
 
@@ -1179,7 +1201,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(medicareNumberText, testData.get("MBI"));
 				jsClickNew(attestCheckBox);
 				jsClickNew(viewDrugsAndDocsButton);
-				waitforElementNew(savedDrugsAndDoctorsHeader);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
 				break;
 			case "NonMember":
 				jsClickNew(dontHaveInsuranceMedicareRadio);
@@ -1194,7 +1217,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(nonMemberZipcodeText, testData.get("ZipCode"));
 				jsClickNew(attestCheckBox);
 				jsClickNew(nonMemberViewDrugsAndDocsButton);
-				waitforElementNew(savedDrugsAndDoctorsHeader);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
 				break;
 
 			default:
@@ -1202,6 +1226,145 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+
+	public void clickOnMSPlanDetailsPage(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		
+		WebElement planDetailsButton = driver.findElement(By.xpath("//h2[normalize-space()='" + planName + "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'plandetails')]"));
+		jsClickNew(planDetailsButton);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementNew(backToPlansLink);
+	}
+	
+	public void validateMSPlanDetailsPage() {
+		Assertion.assertTrue("Back to plans link is not displayed !", validateNew(backToPlansLink));
+		Assertion.assertTrue("Basic Costs header is not displayed !", validateNew(basicCostsHeader));
+		Assertion.assertTrue("Doctor Visits header is not displayed !", validateNew(doctorVisitsHeader));
+	}
+	
+	public void clickOnBackToProfile() {
+		jsClickNew(backToPlansLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementNew(visitorProfileDashboard);
+	}
+	
+	@FindBy(css = "#dateOfBirth")
+	private WebElement msDOB;
+	
+	public void clickOnMStartApplication(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		
+		WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName
+				+ "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'start-application')]"));
+		jsClickNew(btnStartApplication);
+		waitforElementNew(msDOB);
+	}
+	
+	
+	@FindBy(css = "#AddYourInfoForm button[class$='continue-application']")
+	private WebElement continueApplicationButton;
+	
+	@FindBy(css = "#AddYourInfo button[class^='back-to-plans']")
+	private WebElement closeMSApplicationButton;
+	
+	public void validateMSStartApplicationPage() {
+		Assertion.assertTrue("Date of birth field is not displayed on MS application form !", validateNew(msDOB));
+		Assertion.assertTrue("Continue Application button is not displayed on MS application form !", validateNew(continueApplicationButton));
+		Assertion.assertTrue("Close Application button is not displayed on MS application form !", validateNew(closeMSApplicationButton));
+	}
+	
+	public void clickOnCloseMSApplication() {
+		jsClickNew(closeMSApplicationButton);
+		waitforElementNew(visitorProfileDashboard);
+	}
+	
+	@FindBy(css = "#ValueAddService a[class$='back-to-plans']")
+	private WebElement backToProfileLinkLearnMorePage;
+	
+	public void clickOnMLearnMore(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		WebElement learnMoreLinkForPlan = driver.findElement(By.xpath(
+				"//h2[text()='" + planName + "']/ancestor::div[contains(@class,'plan-card')]//a[text()='Learn More']"));
+		jsClickNew(learnMoreLinkForPlan);
+		waitforElementNew(backToProfileLinkLearnMorePage);
+	}
+	
+	@FindBy(xpath  = "//h2[text()='Gym Membership']")
+    private WebElement gymMembershipHeader;
+	
+	@FindBy(xpath  = "//h2[text()='Brain Health']")
+    private WebElement brainHealthHeader;
+	
+	public void validateMSLearnMorePage() {
+		Assertion.assertTrue("Back To Profile link is not displayed on Learn More page !", validateNew(backToProfileLinkLearnMorePage));
+		Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !", validateNew(gymMembershipHeader));
+		Assertion.assertTrue("Brain Health header is not displayed on Learn More page !", validateNew(brainHealthHeader));
+	}
+	
+	
+	public void clickOnMSAddYourInformation(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+	    WebElement addInfoLink = driver.findElement(By.xpath("//h2[text()='"+planName+"']/ancestor::div[contains(@class,'plan-card')]//a[text()='Add your information']"));
+		jsClickNew(addInfoLink);
+		waitforElementNew(msDOB);
+	}
+	
+	
+	@FindBy(xpath = "//h1[text()='Add your information']")
+	private WebElement headingAddYourInfo;
+	
+	public void validateMSAddYourInfoPage() {
+		waitforElementNew(msDOB);
+		Assertion.assertTrue("Date of birth field is not shown on Add Information Page !", validateNew(msDOB));
+		Assertion.assertTrue("Add your information heading is not shown on Add Information Page !", validateNew(headingAddYourInfo));
+	}
+	
+	
+	@FindBy(css = "#saved-plan-recommendations button")
+	private WebElement getStartedButtonPRE;
+	
+	@FindBy(css = "app-drugs-providers a[dtmname$='Import my drugs & doctors']")
+	private WebElement importDrugsAndDoctorsLink;
+	
+	public void validateMSSP4ProfilePage(String componentCode) {
+		Assertion.assertTrue("Get Started button for PRE is not shown on Visitor Profile Page !", validateNew(getStartedButtonPRE));
+		Assertion.assertTrue("Import Drugs and Doctors link is not shown on Visitor Profile Page !", validateNew(importDrugsAndDoctorsLink));
+		
+		WebElement componentCodeText = driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]"));
+		Assertion.assertTrue("Component code is not shown on Visitor Profile Page !", validateNew(componentCodeText));
+	}
+	
+	
+	public void removeMSPlans(String plans) {
+        try {
+            
+			Arrays.stream(plans.split(",")).forEach(plan -> {
+				WebElement removePlanButton = driver.findElement(By.xpath("//h2[contains(text(),'" + plan
+						+ "')]/ancestor::div[contains(@class,'plan-name-container')]/button[contains(@class,'remove')]"));
+				jsClickNew(removePlanButton);
+				CommonUtility.checkPageIsReadyNew(driver);
+			});
+            
+            Assertion.assertTrue("Not all saved MS plans are removed, 'Find Plans' button is not displayed for 'Saved Plan' tab.", validateNew(addPlans));
+        } catch (Exception e) {
+        }
+    }
 
 }
 

@@ -7235,5 +7235,38 @@ public String GetMonthlyPremiumValue() {
 			System.out.println("No County to be selected ");
 		}
 	}
+	
+	public void viewMSPlanSummary(String planType) {
+		CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+		jsClickNew(msPlansViewLink);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
+	}
+	
+	/**
+	 * Save the given Medsupp plans
+	 *
+	 * @param savePlanNames
+	 */
+	public void saveMSVPP4Plans(String savePlanNames) {
+
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			System.out.println(
+					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan : listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
+						+ "']/following::div[contains(@class,'save-box')][1]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				threadsleep(2);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

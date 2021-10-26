@@ -2,6 +2,7 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,14 +23,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
-import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -1183,8 +1182,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         clickBackToViewAllPlans();
 
         // if (driver.getCurrentUrl().contains(expectedUrl)) {
-        if (validate(backToPlanResults)) {
-            jsClickNew(backToPlanResults);
+        By backToPlanResults = By.xpath("//*[@id='card-updates']/a");
+        WebElement backToPlanResultsLink = CommonUtility.waitForPresenceOfElement(driver, backToPlanResults, 10);
+        if (backToPlanResultsLink != null) {
+            jsClickNew(backToPlanResultsLink);
         }
         // }
         CommonUtility.checkPageIsReadyNew(driver);
@@ -2985,24 +2986,21 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
      *
      * @param savePlanNames
      */
-    public void saveMSPlans(String savePlanNames) {
+	public void saveMSPlans(String savePlanNames) {
 
-        try {
-            List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-            System.out.println(
-                    "Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
-            Thread.sleep(5000);
-            for (String plan : listOfTestPlans) {
-                WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-                        + "']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
-                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
-            }
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		listOfTestPlans.stream().forEach(plan -> {
+			System.out
+			.println("Going to mark the MS plan, '" + plan + "' as favorite");
+			String planId = plan.trim().replaceAll(" ", "");
+			WebElement savePlan = driver.findElement(By.xpath("//div[@id='" + planId
+					+ "']/ancestor::div[contains(@class,'med-supp-plan')]//div[@class='save-favorite-plan']"));
+			jsClickNew(savePlan);
+			CommonUtility.checkPageIsReadyNew(driver);
+		});
+
+	}
 
     public void validateAbilityToSavePlans(String savePlanNames, String planType) {
         int ONE = 1;
@@ -3936,54 +3934,44 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
     public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 
-        // medSuppZipCode.sendKeys(zipCode);
         sendkeysMobile(medSuppZipCode, zipCode);
-        Thread.sleep(1000);
-        // sendkeys(DOB, DateOfBirth);
-        DOB.sendKeys(DateOfBirth);
+        
+        CommonUtility.waitForPageLoadNewForClick(driver, DOB, 5);
+        sendkeysMobile(DOB, DateOfBirth);
         System.out.println("Date of birth is entered");
 
-        // monthDrpDwn.click();
-        jsClickNew(monthDrpDwnPartA);
-        monthDrpDwnOptionPartA.click();
-        Thread.sleep(2000);
-        System.out.println("Effective date- month value selected");
-        // medSuppOleMaleCheckbox.click();
+        CommonUtility.waitForPageLoadNewForClick(driver, medSuppOleMaleCheckbox, 5);
         jsClickNew(medSuppOleMaleCheckbox);
-        yearDrpDwnPartA.click();
-        Thread.sleep(2000);
-        yearDrpDwnOptionPartA.click();
 
-        jsClickNew(monthDrpDwnPartB);
-        monthDrpDwnOptionPartB.click();
-        Thread.sleep(2000);
+        CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartA, 5);
+        Select partAMonth = new Select(monthDrpDwnPartA);
+        partAMonth.selectByIndex(1);
+        System.out.println("Effective date- month value selected");
+        
+        CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
+        String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        Select partAYear = new Select(yearDrpDwnPartA);
+        partAYear.selectByVisibleText(year);
+
+        CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
+        Select partBMonth = new Select(monthDrpDwnPartB);
+        partBMonth.selectByIndex(1);
         System.out.println("Effective date- month value selected");
 
-        // yearDrpDwnPartB.click();
-        jsClickNew(yearDrpDwnPartB);
-        Thread.sleep(2000);
-        yearDrpDwnOptionPartB.click();
-
+        CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);
+        Select planBYear = new Select(yearDrpDwnPartB);
+        planBYear.selectByValue(year);
         System.out.println("Effective date- year value selected");
-        Thread.sleep(2000);
 
-        jsClickNew(startDrpDwn);
-        Thread.sleep(2000);
-        scrollToView(startDrpDwnOption);
-        startDrpDwnOption.click();
+        validateNew(startDrpDwn);
+        CommonUtility.waitForPageLoadNewForClick(driver, startDrpDwn, 5);
+        Select selectStartMonth = new Select(startDrpDwn);
+        selectStartMonth.selectByIndex(1);
 
         System.out.println("Plan to start date selected");
 
-        // viewPlansBtnMedSupp.click();
         jsClickNew(viewPlansBtnMedSupp);
         CommonUtility.checkPageIsReadyNew(driver);
-        // CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-
-        /*
-         * if(!driver.findElement(By.xpath(
-         * "//*[@data-rel='#plan-list-2'][contains(@class,'active')]")).isDisplayed()) {
-         * Start_ApplicationBtn.click(); }
-         */
 
     }
 
@@ -6114,4 +6102,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
             System.out.println("No providers in plan card");
         }
     }
+    
+    /**
+     * Save MSVPP 4 plans.
+     *
+     * @param savePlanNames the save plan names
+     */
+    public void saveMSVPP4Plans(String savePlanNames) {
+
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			listOfTestPlans.stream().forEach(plan -> {
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("Marking MS plan, '" + plan + "' as favorite.");
+				WebElement planCard = driver.findElement(
+						By.xpath("//*[normalize-space()='" + plan + "']/ancestor::div[@class='uhc-card']"));
+				if(validateNew(planCard)) {
+					WebElement savePlanButton = planCard.findElement(By.cssSelector("button[class$='save-plan']"));
+					jsClickNew(savePlanButton);
+				}
+				
+			});
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

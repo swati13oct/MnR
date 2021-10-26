@@ -1485,4 +1485,14 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.removeProvidersFromPlanCard();
 	}
+	
+	@Then("^user saves two msvpp4 plans as favorite$")
+	public void user_saves_two_ms__vpp4_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("MS Test Plans");
+		plansummaryPage.saveMSVPP4Plans(savePlanNames);
+	}
 }
