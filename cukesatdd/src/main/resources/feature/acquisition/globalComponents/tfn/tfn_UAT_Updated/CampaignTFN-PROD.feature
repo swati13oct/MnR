@@ -209,7 +209,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
 
-   @Scenario_6_External_Link_UHC_UAT_PROD_Medsup3.0 @campaignTFNProd
+    @Scenario_6_External_Link_UHC_UAT_PROD_Medsup3.0 @campaignTFNProd
     Examples: 
       | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      |
       | Scenerio 6-ExternalLink - UMS | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID39 | TiggerTigger1 | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] |
