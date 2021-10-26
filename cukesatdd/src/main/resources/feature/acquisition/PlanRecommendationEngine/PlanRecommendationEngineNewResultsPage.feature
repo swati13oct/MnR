@@ -22,7 +22,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
 
-    @regressionAARP
+    @regressionAARP @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
       | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
@@ -78,7 +78,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | DrugInfo | <DrugInfo> |
     Then user validates Sort By dropdown will not display in UI PRE-Result page
 
-    @regressionAARP @F527970
+    @regressionAARP @F527970 @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
       | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
@@ -104,7 +104,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo> |
 
-    @regressionAARP
+    @regressionAARP @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                               |
       | AARP |   10003 | NO            | New York | PDP           | No             | Mosaic Choice (PPO),add your drugs,N/A |
@@ -133,15 +133,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                            |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                               |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Complete (HMO D-SNP),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                         |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                            |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Plan 1 (PPO I-SNP),morphine sulfate CAP 10MG ER,False:Plan 2 (HMO I-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Plan 4 (Regional PPO),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                            |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                               |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Complete (HMO D-SNP),morphine sulfate CAP 10MG ER,False:Complete (HMO D-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Complete (HMO D-SNP),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                                                                                                                                                                   | DrugInfo                                                                                                                                                                                                                         |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | atorvastatin calcium,YES,atorvastatin calcium TAB 10MG,,,Day,3,NO,NO:azathioprine,NO,azathioprine TAB 50MG,,,Week,1,NO,NO                                                                                                                                      | Plan 1 (HMO),atorvastatin calcium TAB 10MG,True:Plan 1 (HMO),azathioprine TAB 50MG,True:Walgreens (PDP),atorvastatin calcium TAB 10MG,True:Walgreens (PDP),azathioprine TAB 50MG,True                                            |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,3,NO,NO:Lipotriad,NO,Lipotriad TAB,,,Week,1,NO,NO:fentanyl citrate/bupivacaine hydrochloride/sodium chloride,YES,fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,,,Month,1,NO,NO | Plan 1 (PPO I-SNP),morphine sulfate CAP 10MG ER,False:Plan 2 (HMO I-SNP),Lipotriad TAB,False:Patriot (HMO),does not cover,N/A:Plan 4 (Regional PPO),fentanyl citrate/bupivacaine hydrochloride/sodium chloride INJ 0.2/100,False |
 
   @PRE @planrecommendation @MAPDTile @PREVPPPageElementsMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
@@ -285,7 +285,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @PREMSPlanTile @TestRun
+    @regressionAARP @PREMSPlanTile @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              | doctorsInfo1                           | DoctorsName2       | doctorsInfo2                       |
       | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
@@ -326,17 +326,17 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @PREMSPlanTile
     Examples: 
-      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | snpInfo                                                                                                                                                                |
-      | AARP |   90210 | NO            | Los Angeles  | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                                                              |
-      | AARP |   90210 | NO            | Los Angeles  | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage Assure (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                                                                  |
-      | AARP |   65656 | YES           | Stone County | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO-POS),anyone with Medicare,NoIcon:Complete (HMO D-SNP),Medicare and Medicaid,True:Home Plan (PPO I-SNP),nursing,True:Gold (Regional PPO C-SNP),chronic,True |
+      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | snpInfo                                                                                                                           |
+      | AARP |   90210 | NO            | Los Angeles  | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                         |
+      | AARP |   90210 | NO            | Los Angeles  | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage Assure (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                             |
+      | AARP |   65656 | YES           | Stone County | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO-POS),anyone with Medicare,NoIcon:Choice (PPO D-SNP),Medicare and Medicaid,True:Gold (Regional PPO C-SNP),chronic,True |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | snpInfo                                                                                                                                                                |
-      | UHC  |   90210 | NO            | Los Angeles  | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                                                              |
-      | UHC  |   90210 | NO            | Los Angeles  | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage Assure (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                                                                  |
-      | UHC  |   65656 | YES           | Stone County | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO-POS),anyone with Medicare,NoIcon:Complete (HMO D-SNP),Medicare and Medicaid,True:Home Plan (PPO I-SNP),nursing,True:Gold (Regional PPO C-SNP),chronic,True |
+      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | snpInfo                                                                                                                           |
+      | UHC  |   90210 | NO            | Los Angeles  | MAPD          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SecureHorizons Focus (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                         |
+      | UHC  |   90210 | NO            | Los Angeles  | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage Assure (HMO),anyone with Medicare,NoIcon:Advantage Assure (HMO),anyone with Medicare,NoIcon                             |
+      | UHC  |   65656 | YES           | Stone County | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO-POS),anyone with Medicare,NoIcon:Choice (PPO D-SNP),Medicare and Medicaid,True:Gold (Regional PPO C-SNP),chronic,True |
 
   @PRE @planrecommandonation @viewPlansPREResultsPage
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  - Checks time validate Email Plan List PDP plans in PRE
@@ -572,7 +572,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Sort PlanType | <sortInfo> |
     Then user removed filtered planType and Check Breadcrumbs in PRE-Result page
 
-    @regressionAARP
+    @regressionAARP @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | AARP |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
@@ -583,7 +583,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | UHC  |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |
 
   @PRE @PREMSE2E
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
+  Scenario Outline: <site>, <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> ,  <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <priorityOption> ,<priorities>, <planInfo> - To Validate MS Plan Name in PRE-Result vs MS VPP plan details Page.
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

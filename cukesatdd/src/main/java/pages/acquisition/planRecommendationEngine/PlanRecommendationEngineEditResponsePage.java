@@ -534,6 +534,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String progressText = progressInfo.getText().toLowerCase();
 		Assert.assertTrue(progressText.contains(randomSection) && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
+		threadsleep(2000);
 		cancelButton.click();
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
