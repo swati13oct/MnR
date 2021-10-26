@@ -806,7 +806,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> drug, ArrayList<String> drugListVPP) {
-
+		System.out.println("Drugs in PRE: "  +drug);
+		System.out.println("Drugs in DCE: "  +drugListVPP);
 		if (drug.size() == drugListVPP.size() && count == drug.size()) {
 			String druglist = drug.toString();
 			String vppdruglist = drugListVPP.toString();
