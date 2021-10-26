@@ -98,7 +98,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP1234
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
       | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            |
@@ -125,7 +125,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP1234
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  |
       | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
