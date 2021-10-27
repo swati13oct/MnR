@@ -233,7 +233,6 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to PRE page
     Then user clicks on GetStarted button in PRE page
-//    And verify continue function on "Location" page
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
