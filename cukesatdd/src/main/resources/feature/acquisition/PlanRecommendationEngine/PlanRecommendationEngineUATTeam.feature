@@ -36,12 +36,12 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     @uatE2EAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
-      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
+      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
     @uatE2EUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
-      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
+      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
   @PRE @PRE_UAT_DCE_VPP_Scenario-4 @F550383
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs in VPP page when MA flow complete in PRE and Add drugs in DCE
@@ -233,7 +233,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to PRE page
     Then user clicks on GetStarted button in PRE page
-    And verify continue function on "Location" page
+//    And verify continue function on "Location" page
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page

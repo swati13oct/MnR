@@ -24,17 +24,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @dec
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
-      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
-      | AARP |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
-      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
+      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
+      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
-      | UHC  |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
-      | UHC  |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
-      | UHC  |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
+      | UHC  |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
+      | UHC  |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
 
   @PRE @planrecommandonation @PREVPPPage @F527967 @PREVPPPPaginationPDP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -80,13 +78,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @F527970 @dec
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                         |
+      | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Preferred (PDP),add your drugs,N/A |
+      | AARP |   59933 | NO            | Lincoln                | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Walgreens (PDP),add your drugs,N/A |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | UHC  |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                         |
+      | UHC  |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A    |
+      | UHC  |   59933 | NO            | Lincoln                | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Walgreens (PDP),add your drugs,N/A |
 
   @PRE @planrecommandonation @PREResultsPage @PREPDPNoDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE

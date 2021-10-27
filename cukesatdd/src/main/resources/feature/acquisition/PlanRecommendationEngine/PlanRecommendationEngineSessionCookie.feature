@@ -54,7 +54,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to PRE page
     Then user clicks on GetStarted button in PRE page
-    And verify continue function on "Location" page
+//    And verify continue function on "Location" page
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     Then user selects add drug option and comparing DCE and Drug page

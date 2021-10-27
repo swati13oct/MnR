@@ -511,7 +511,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
 			if(!planName.toUpperCase().contains("PATRIOT"))
-				Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+				Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] a.buttonLink"))), "Add Drug link is not available");
 			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
@@ -737,9 +737,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("PlanName is: "+PlanName);
 		
 		if (PlanName.contains("supplement")) {
+			WebElement MSPlanName= plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
+			 scrollToView(MSPlanName);
+			 planName = MSPlanName.getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
-			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
-					.trim();
+			threadsleep(2000);
+			
 		} else {
 			System.out.println("PlanIndex is: "+planIndex);
 		WebElement viewind = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
@@ -796,11 +799,11 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDoctorShowMore(String planName, String doctorName) {
 		int planIndex = findPlan(planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDoctorsId']")).click();
+		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showAllDoctorsId']")).click();
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
 		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDoctorsId']")).click();
+		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showLessDoctorsId']")).click();
 	}
 
 	String sampleJson = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness membership\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],\"planYear\":2021,\"location\":{\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New York County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
