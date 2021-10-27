@@ -1409,7 +1409,7 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@Then("^Verify AARP Membership links are not present on other pages$")
+	@Then("^Verify AARP Membership links in header not present on page$")
 	public void verifyAARPMembershipLinksNotPresentOnOtherPage() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
