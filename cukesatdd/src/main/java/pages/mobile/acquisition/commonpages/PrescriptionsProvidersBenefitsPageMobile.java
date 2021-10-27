@@ -113,7 +113,7 @@ public void clickMedicareAnnualEnrollment() {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink=driver.findElement(By.cssSelector("a[data-asset-name='Estimate Your Drug Costs'][href$='drug-cost-estimator']"));
+		WebElement DCELink=driver.findElement(By.xpath("(//a[contains(@href,'drug-cost-estimator')])[3]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
 //		switchToNewTabNew(DCELink);

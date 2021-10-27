@@ -52,8 +52,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//span[contains(text(),'Prescription Drug Plans')])[2]")
 	private WebElement lnkPrescriptionDrugPlan;
 
-//	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
-	@FindBy(css = "a[data-asset-name='Find an Agent']")
+	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -406,7 +405,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	public PrescriptionsProvidersBenefitsPageMobile selectBenifitsEducation() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement medBenifits = driver.findElement(By.cssSelector("#globalContentIdForSkipLink a[title='Prescriptions, Providers & Benefits']"));
+		WebElement medBenifits = driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
