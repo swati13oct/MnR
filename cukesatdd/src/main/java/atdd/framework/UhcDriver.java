@@ -78,7 +78,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']/span")
 	public WebElement LearnAboutMedicare;
 
-	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")
+	@FindBy(css = "#accordion-3-content [href*='/medicare-education.html']")
 	public WebElement IntroductionToMedicare;
 
 	@FindBy(xpath = "//div[contains(@class,'dropdown-container sub-level-3')]//a[normalize-space()='Prescriptions, Providers & Benefits']")
@@ -1184,7 +1184,8 @@ public abstract class UhcDriver {
 		
 		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
 			System.out.println("Waiting for accepting the open new window alert on iOS device");
-			threadsleep(5000);
+			threadsleep(10000);
+			System.out.println(driver.getWindowHandles().size() + "<<<<Total windows on iOS");
 			waitForCountIncrement(1);
 		}
 		
@@ -1213,6 +1214,7 @@ public abstract class UhcDriver {
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
+		
 		return timeStr;
 	}
 

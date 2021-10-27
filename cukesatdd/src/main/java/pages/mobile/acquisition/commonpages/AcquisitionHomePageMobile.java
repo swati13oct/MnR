@@ -115,7 +115,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(xpath = "//label[@for='state-select']")
+	@FindBy(css = "#stateWidget > div > label")
 	private WebElement stateWidget;
 
 	@FindBy(css = "#homefooter")
@@ -2477,8 +2477,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@id,'topSection')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.navigate().back();
+		}
 
 	}
 
@@ -3799,6 +3802,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		accessFooterLinkFromShopPlans(PDP);
 		threadsleep(5000);
 		CommonUtility.checkPageIsReadyNew(driver);
+		threadsleep(10);
 		if (driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("PDP Plan Page open: URL-->" + driver.getCurrentUrl());
@@ -4113,12 +4117,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
 
-		validateNew(learnAboutMedicareHomeScreen);
-		jsClickNew(learnAboutMedicareHomeScreen);
+		jsClickNew(learnAboutMedicareFooterButton);
+		jsClickNew(IntroductionToMedicare);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
+			driver.navigate().back();
 			return new LearnAboutMedicareHomePageMobile(driver);
+
 		} else {
 			return null;
 		}
@@ -4861,7 +4867,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		jsClickNew(stateWidget);
-		//validateNew(stateDropDown);
+		// validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*
 		 * String StateSessionStorage = returnDriverStorageJS("sessionStorage",
