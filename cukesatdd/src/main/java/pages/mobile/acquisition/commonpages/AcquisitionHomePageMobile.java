@@ -115,6 +115,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
+	@FindBy(xpath = "//label[@for='state-select']")
+	private WebElement stateWidget;
+
 	@FindBy(css = "#homefooter")
 	private WebElement homefooter;
 
@@ -4513,7 +4516,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
-		driver.findElement(By.xpath("//*[@id='stateWidget']/div/label")).click();
+		jsClickNew(stateWidget);
 		selectFromDropDownByValue(stateDropDown, geoState);
 		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
 			Assert.fail("Wrong state selected for geotarget");
@@ -4857,7 +4860,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(menuHamburgerCrossToClose);
 		}
 
-		validateNew(stateDropDown);
+		jsClickNew(stateWidget);
+		//validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*
 		 * String StateSessionStorage = returnDriverStorageJS("sessionStorage",

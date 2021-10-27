@@ -73,12 +73,12 @@ public class CampaignTFNPageMobile extends UhcDriver {
 	// UnitedHealthcare')]")
 	// @FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part
 	// C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare
-	// Advantage Plans from UnitedHealthcare')])[1]")
+	// Advantage Plans from UnitedHealthcare')])[1]")selectStateForGeotargeting
 	// @FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
 
 //	@FindBy(xpath = "//*[@id=\"rso\"]/div[1]/div/div/div/div[1]/a/div[2]/div")
-	@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//div[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	// @FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
