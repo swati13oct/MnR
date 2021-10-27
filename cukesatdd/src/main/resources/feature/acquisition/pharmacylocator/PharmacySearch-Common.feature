@@ -22,11 +22,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown list
-      | Current Year Plan Name | <cy_planName> |
-      | Current Year Plan Year | <cy_planYear> |
-      | Next Year Plan Name    | <ny_planName> |
-      | Next Year Plan Year    | <ny_planYear> |
+   # And the user chooses a plan from dropdown list
+   #  | Current Year Plan Name | <cy_planName> |
+   #   | Current Year Plan Year | <cy_planYear> |
+   #   | Next Year Plan Name    | <ny_planName> |
+   #  | Next Year Plan Year    | <ny_planYear> |
+   And the user selects plan year toggle
+      | Plan Year | <planyear> |
     #Then the user validates the Pharmacies available
     #  | Language | English |
     And the user validate tooltips on filters
@@ -42,13 +44,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #  @pharmacylocatorAARP01a
     @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
     Examples: 
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | AARP |   10980 |       15 | None       | 2021     | E-Prescribing | True                  | False            | True                 |
 
   @PharmacyLocatorCommonAARP01a @NextYear
     Examples:
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | AARP |   10980 |       15 | None       | 2022     | E-Prescribing | True                  | False            | True                 |
 
      @prodRegression @regressionAARP @vbfGate
     Examples: 
