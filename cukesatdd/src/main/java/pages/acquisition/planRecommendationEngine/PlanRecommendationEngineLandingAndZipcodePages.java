@@ -183,24 +183,16 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	
 //SingleCounty Method
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-
-		// switchToNewIframe(iframePst);
-		// waitTillElementClickableInTime(getStartedBtn, 30);
-		//AcquisitionHomePage.clickIfElementPresentInTime(driver, proactiveChatExitBtn,5);
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
-		jsClickNew(getStartedBtn);
-		System.out.println("After clicking GetStarted");
-		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);
-		waitforElementVisibilityInTime(countyInfo, 45);
 		threadsleep(5000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
+		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);
-//		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
 	
 	}
 
@@ -209,11 +201,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		
 		Thread.sleep(20000);
 		driver.switchTo().defaultContent();
-//		switchToNewIframe(iframePst);
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
-		jsClickNew(getStartedBtn);
-		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
@@ -221,13 +210,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		waitforElementVisibilityInTime(PRECounty, 45);
 		selectFromDropDownByText(driver, PRECounty, County);
 		threadsleep(5000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
-/*		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
-		waitforElementVisibilityInTime(previousBtn, 45);
-		previousBtn.click();
-		validate(planSelectorPageTilte);
-		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));*/
 	}
 	
 	public void zipcodePage() {
