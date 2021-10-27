@@ -196,15 +196,9 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public PrescriptionsProvidersBenefitsPageMobile clickReturnToAcqHomePAge() {
-		if(driver.getWindowHandles().size() > 1) {
-			driver.close();
-			driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		} else {
-			driver.navigate().back();
-		}
-		
+		driver.close();
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			return new PrescriptionsProvidersBenefitsPageMobile(driver);
 		}
