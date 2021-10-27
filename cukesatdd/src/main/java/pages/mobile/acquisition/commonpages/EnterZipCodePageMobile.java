@@ -78,10 +78,10 @@ public class EnterZipCodePageMobile extends UhcDriver{
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
 			while (zipCodeNumber <= zipForm.size()) {
-				Thread.sleep(3000);
-				ZipCodeText.get(zipCodeNumber - 1).clear();
-				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
+				Thread.sleep(5000);
+				sendkeysMobile(ZipCodeText.get(zipCodeNumber - 1), zipCode);
 				waitForPageLoadSafari();
+				Thread.sleep(3000);
 				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
@@ -96,26 +96,68 @@ public class EnterZipCodePageMobile extends UhcDriver{
 					}
 				}
 
-				System.out.println("Actual : " + vppPageTitle.trim());
+				System.out.println("Actual : " + vppPageTitle);
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+							(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+							.contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)
+									.replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out
 								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+							.contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE_MEDIGAP)
+									.replaceAll("[^A-Za-z0-9:.]", "")))
+						System.out.println(
+								"Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE_MEDIGAP);
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+							(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_DPLANS).replaceAll("[^A-Za-z0-9:.]", "")))
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_DPLANS);
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+							(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_SNPPLANS).replaceAll("[^A-Za-z0-9:.]", "")))
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_SNPPLANS);
+					
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+							(PageTitleConstants.ULAYER_SHOP_ALL_PLANS).replaceAll("[^A-Za-z0-9:.]", "")))
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_SHOP_ALL_PLANS);
+					
 					else
 						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+										.contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE)
+												.replaceAll("[^A-Za-z0-9:.]", "")));
 				} else {
-					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
-						System.out
-								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
-					else
-						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+					if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+						if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+								.contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE)
+										.replaceAll("[^A-Za-z0-9:.]", "")))
+							System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+						else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+								.contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)
+										.replaceAll("[^A-Za-z0-9:.]", "")))
+							System.out.println(
+									"Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+						else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+								.contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE_MEDIGAP)
+										.replaceAll("[^A-Za-z0-9:.]", "")))
+							System.out.println("Page Title : "
+									+ PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE_MEDIGAP);
+						else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains(
+								(PageTitleConstants.BLAYER_PRESCRIPTION_DRUG_DPLANS).replaceAll("[^A-Za-z0-9:.]", "")))
+							System.out.println("Page Title : " + PageTitleConstants.BLAYER_PRESCRIPTION_DRUG_DPLANS);
+						else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+								.contains((PageTitleConstants.BLAYER_PRESCRIPTION_DRUG_SNPPLANS)
+										.replaceAll("[^A-Za-z0-9:.]", "")))
+							System.out.println("Page Title : " + PageTitleConstants.BLAYER_PRESCRIPTION_DRUG_SNPPLANS);
+						else
+							assertTrue("Not redirected to VPP page",
+									vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "")
+											.contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE)
+													.replaceAll("[^A-Za-z0-9:.]", "")));
+					}
 				}
+
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
 					Set<String> newWindow = driver.getWindowHandles();
@@ -126,14 +168,17 @@ public class EnterZipCodePageMobile extends UhcDriver{
 							break;
 						}
 					}
-				}
-				else {
+				} else {
 					driver.navigate().back();
+					threadsleep(20000);
 				}
 				zipCodeNumber++;
-				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
-				threadsleep(2000);*/
+				/*
+				 * driver.navigate().refresh(); //Adding refresh since element are not located
+				 * in Safari browser after using navigate back threadsleep(2000);
+				 */
 			}
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -517,7 +517,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	//@FindBy(xpath = "//span[contains(text(),'Learn more') or contains(text(),'Learn More About Medicare')]")
 //	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
-	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
+	@FindBy(css = "div[class$='responsivegrid'] > div > div[class*='GridColumn--phone'] a[data-asset-name*='Learn More About Medicare']")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[5]")
@@ -3968,6 +3968,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(learnAboutMedicareHomeScreen);
 		jsClickNew(learnAboutMedicareHomeScreen);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
 			return new LearnAboutMedicareHomePageMobile(driver);
@@ -4361,19 +4362,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
-		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
+		/*String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
 		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
-		selectFromDropDownByValue(stateDropDown, geoState);
-		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
+		selectFromDropDownByValue(stateDropDown, geoState)*/;
+		mobileSelectOption(stateDropDown, geoState, true);
+		Select geoStateSelect = new Select(stateDropDown);
+		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
+		
+		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
+		
+		/*if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
 			Assert.fail("Wrong state selected for geotarget");
 		}
 		// jsClickNew(stateGeotargeting);
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotargetting: " + stateGeotargeting.getText());
-		waitforElementNew(stateGeotargeting, 5);
+		waitforElementNew(stateGeotargeting, 5);*/
 
 	}
 
@@ -5080,7 +5087,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public String getSelectedState() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		scrollToView(stateDropDown);
 		Select dropdown = new Select(stateDropDown);
 		String stateSelected=dropdown.getFirstSelectedOption().getText();
