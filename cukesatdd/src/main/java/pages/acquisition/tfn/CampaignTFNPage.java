@@ -1478,8 +1478,8 @@ public void openURLNewTabUHC(String url) {
 }
 
 public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
-	System.out.println("Expected PSC code: "+expectedFedTFN);
-	System.out.println("Actual PSC code: "+actualFedTFN);
+	System.out.println("Expected Fed TFN: "+expectedFedTFN);
+	System.out.println("Actual Fed TFN: "+actualFedTFN);
 	
 	if(expectedFedTFN.contentEquals(actualFedTFN)) {
 		System.out.println("****************Expected Fed TFN matches Actual Fed TFN from TFN cookie ***************");
@@ -1493,8 +1493,8 @@ public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
 }
 
 public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN) {
-	System.out.println("Expected PSC code: "+expectedMedsupTFN);
-	System.out.println("Actual PSC code: "+actualMedsupTFN);
+	System.out.println("Expected Medsup TFN: "+expectedMedsupTFN);
+	System.out.println("Actual Medsup TFN: "+actualMedsupTFN);
 	
 	if(expectedMedsupTFN.contentEquals(actualMedsupTFN)) {
 		System.out.println("****************Expected Medsup TFN matches Actual Medsup TFN from TFN cookie ***************");
@@ -1536,8 +1536,8 @@ public void validateTFNHeaderAndSAMIcon() {
 }
 
 public void validateSourceCode(String expectedSrcCode,String actualSrcCode) {
-	System.out.println("Expected PSC code: "+expectedSrcCode);
-	System.out.println("Actual PSC code: "+actualSrcCode);
+	System.out.println("Expected Source code: "+expectedSrcCode);
+	System.out.println("Actual Source code: "+actualSrcCode);
 	
 	if(expectedSrcCode.contentEquals(actualSrcCode)) {
 		System.out.println("****************Expected Source code matches Actual Source code from TFN cookie ***************");
