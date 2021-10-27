@@ -3557,28 +3557,36 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void Accessibility() {
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		String base = driver.getWindowHandle();
-		jsClickNew(Accessibility);
-		threadsleep(5000);
-		// Assertion.assertEquals(driver.getCurrentUrl(),
-		// "https://www.uhc.com/legal/accessibility");
-		Set<String> all = driver.getWindowHandles();
-		Iterator<String> I = all.iterator();
-		while (I.hasNext()) {
-			String childWindow = I.next();
-			if (!base.equals(childWindow)) {
-				driver.switchTo().window(childWindow);
-				Assert.assertTrue(driver.getCurrentUrl().contains("accessibility"));
-				driver.close();
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			String accessibilityURL = Accessibility.getAttribute("href");
+			Assert.assertTrue(accessibilityURL.contains("uhc.com"));
+			System.out.println("Accessibility link validation pass on iOS>>>>>");
+		} else {
+
+			String base = driver.getWindowHandle();
+			jsClickNew(Accessibility);
+			threadsleep(5000);
+			// Assertion.assertEquals(driver.getCurrentUrl(),
+			// "https://www.uhc.com/legal/accessibility");
+			Set<String> all = driver.getWindowHandles();
+			Iterator<String> I = all.iterator();
+			while (I.hasNext()) {
+				String childWindow = I.next();
+				if (!base.equals(childWindow)) {
+					driver.switchTo().window(childWindow);
+					Assert.assertTrue(driver.getCurrentUrl().contains("accessibility"));
+					driver.close();
+				}
 			}
-		}
-		driver.switchTo().window(base);
+			driver.switchTo().window(base);
 
-		// Added below loop as ios script fails while switching back to parent window
-		if (driver.getCurrentUrl().contains("uhc.com")) {
-			driver.navigate().back();
-		}
+			// Added below loop as ios script fails while switching back to parent window
+			if (driver.getCurrentUrl().contains("uhc.com")) {
+				driver.navigate().back();
+			}
 
+		}
 	}
 
 	public void validateAssistancelink(String language) {
