@@ -288,6 +288,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		druglistPRE = CommonConstants.PRE_Drugs.get(curID);
 		threadsleep(5000);
 		getDrugsDCE();
+		DCEDrugsResults = vppDrugsResults;
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}
 	

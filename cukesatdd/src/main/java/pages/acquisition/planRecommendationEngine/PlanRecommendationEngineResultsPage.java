@@ -1514,8 +1514,9 @@ public String getAPIPlansRecommendation(String rankingJSON, String givenPlanType
 	}
 	return recom.trim();
 }
-int value=1;
+
 public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings) {
+	int value=1;
 	List<String> vppPlans = new ArrayList<String>();
 	System.out.println(plansId.size());
 	for (WebElement e : plansId) {
@@ -1541,6 +1542,7 @@ public String getplanId(WebElement plan) {
 	String planId="";
 	planName = plan.getText().trim();
 	threadsleep(3000);
+	System.out.println(planName);
 	if(planName.contains("AARP Medicare Supplement Insurance"))
 		planId = planName.split("Plan ")[1].trim() + "01";
 	else

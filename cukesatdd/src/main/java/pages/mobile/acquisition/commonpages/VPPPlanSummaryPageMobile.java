@@ -3946,22 +3946,21 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartA, 5);
         Select partAMonth = new Select(monthDrpDwnPartA);
         partAMonth.selectByIndex(1);
-        System.out.println("Effective date- month value selected");
+        System.out.println("Effective part a date- month value selected");
         
         CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
         String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-        Select partAYear = new Select(yearDrpDwnPartA);
-        partAYear.selectByVisibleText(year);
+        mobileSelectOption(yearDrpDwnPartA, year, true);
+        System.out.println("Effective part a date- year value selected");
 
         CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
         Select partBMonth = new Select(monthDrpDwnPartB);
         partBMonth.selectByIndex(1);
-        System.out.println("Effective date- month value selected");
+        System.out.println("Effective part b date- month value selected");
 
         CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);
-        Select planBYear = new Select(yearDrpDwnPartB);
-        planBYear.selectByValue(year);
-        System.out.println("Effective date- year value selected");
+        mobileSelectOption(yearDrpDwnPartB, year, true);
+        System.out.println("Effective part b date- year value selected");
 
         validateNew(startDrpDwn);
         CommonUtility.waitForPageLoadNewForClick(driver, startDrpDwn, 5);

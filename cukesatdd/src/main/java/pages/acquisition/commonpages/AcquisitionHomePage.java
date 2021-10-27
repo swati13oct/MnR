@@ -3771,7 +3771,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		Actions action = new Actions(driver);
-		action.moveToElement(planMemberLink).perform();
+		if (driver.toString().contains("Safari")) {
+			planMemberLink.click();
+		}
+		else {
+			action.moveToElement(planMemberLink).perform();
+		}
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
@@ -5333,7 +5338,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(viewAllDisclaimerInformationLink);
 		jsClickNew(viewAllDisclaimerInformationLink);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]/.."));
+		System.out.println("\n\n======="+driver.getCurrentUrl()+"=========\n\n");
+		System.out.println("\n\n1======="+content.isDisplayed()+"======"+content.isEnabled()+"=========\n\n");
 		if (content.isDisplayed() && content.isEnabled()) {
 			System.out.println("View Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);
@@ -5349,6 +5356,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(hideDiscliamerInformation);
 		sleepBySec(2);
 		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]"));
+		if(driver.toString().contains("Safari"))
+			driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]/..")).click();
+		System.out.println("\n\n======="+content.isDisplayed()+"============"+content.isEnabled()+"==============\n\n");
 		if (!content.isDisplayed() && content.isEnabled()) {
 			System.out.println("Hide Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);
@@ -5408,7 +5418,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
 		proceedToLeaveAARP();
-		if (driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+		System.out.println("\n\n======="+driver.getCurrentUrl()+"=========\n\n");
+		if (driver.getCurrentUrl().contains("medicare.gov/my/medicare-complaint")) {
 			System.out.println("Successfully clicked Complaint Form link");
 			Assertion.assertTrue(true);
 
@@ -7224,7 +7235,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
 		Actions action = new Actions(driver);
-		action.moveToElement(planMemberLink).perform();
+		if (driver.toString().contains("Safari")) {
+			planMemberLink.click();
+		}
+		else {
+			action.moveToElement(planMemberLink).perform();
+		}
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
@@ -8028,5 +8044,108 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""),browser);
 		}
 	}
-	
+	@FindBy(xpath = "//li[contains(@class,'aarpMembership_wrap')]//button[normalize-space()='AARP Membership']")
+	private WebElement aarpMembership;
+
+	@FindBy(xpath = "//a[@data-asset-name='Join AARP']")
+	private WebElement goToJoinAARPLink;
+
+	@FindBy(xpath = "//a[@data-asset-name='Renew AARP Membership']")
+	private WebElement lnkRenewAARPMembership;
+
+	@FindBy(xpath = "//a[@data-asset-name='AARP Member Benefits']")
+	private WebElement lnkAARPMemberBenefits;
+
+	public void validateAARPMembershipLinks(String linkText) throws Exception {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(aarpMembership).perform();
+		// validateNew(headerRegisterLink);
+		WebElement ele;
+		String urlToValidate;
+		switch (linkText) {
+		case "Join AARP":
+			ele = goToJoinAARPLink;
+			urlToValidate = "/mem/join?campaignId=FEFUUHCW&cmp=ASI_P_MU_JN_UNITEDHEALTHCARE";
+			break;
+		case "Renew AARP Membership":
+			ele = lnkRenewAARPMembership;
+			urlToValidate = "/mem/renew?campaignId=FEFUUHCW&cmp=ASI_P_MU_RN_UNITEDHEALTHCARE";
+			break;
+		case "AARP Member Benefits":
+			ele = lnkAARPMemberBenefits;
+			urlToValidate = "/benefits-discounts/?cmp=ASI_P_UMBC_UNITEDHEALTHCARE";
+			break;
+
+		default:
+			throw new Exception("Unable to find the implementation for the case option passed : " + linkText);
+		}
+		String base = driver.getWindowHandle();
+		System.err.println("*** Current window handle : " + base.toString());
+		validateNew(ele);
+		jsClickNew(ele);
+		Thread.sleep(2000);
+		Set<String> all = driver.getWindowHandles();
+		System.err.println("*** All window handles : " + all.toString());
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Thread.sleep(2000);
+				proceedToLeaveAARP();
+				Assert.assertTrue(driver.getCurrentUrl().contains(urlToValidate));
+				driver.close();
+			}
+		}
+		driver.switchTo().window(base);
+	}
+	public void validateAARPMembershipcancel(String linkText) throws Exception {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(aarpMembership).perform();
+		// validateNew(headerRegisterLink);
+		WebElement ele;
+		String urlToValidate;
+		switch (linkText) {
+		case "Join AARP":
+			ele = goToJoinAARPLink;
+			urlToValidate = "/leaving.intermediatepage.html?https://appsec.aarp.org/mem/join?campaignId=FEFUUHCW&cmp=ASI_P_MU_JN_UNITEDHEALTHCARE";
+			break;
+		case "Renew AARP Membership":
+			ele = lnkRenewAARPMembership;
+			urlToValidate = "/leaving.intermediatepage.html?https://appsec.aarp.org/mem/renew?campaignId=FEFUUHCW&cmp=ASI_P_MU_RN_UNITEDHEALTHCARE";
+			break;
+		case "AARP Member Benefits":
+			ele = lnkAARPMemberBenefits;
+			urlToValidate = "leaving.intermediatepage.html?http://www.aarp.org/benefits-discounts/?cmp=ASI_P_UMBC_UNITEDHEALTHCARE";
+			break;
+
+		default:
+			throw new Exception("Unable to find the implementation for the case option passed : " + linkText);
+		}
+		String base = driver.getWindowHandle();
+		System.err.println("*** Current window handle : " + base.toString());
+		validateNew(ele);
+		jsClickNew(ele);
+		Thread.sleep(2000);
+		Set<String> all = driver.getWindowHandles();
+		System.err.println("*** All window handles : " + all.toString());
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains(urlToValidate));
+				cancelLeaveAARPRedirect();				
+			}
+		}
+		driver.switchTo().window(base);
+	}
+
+	public void verifyElementNotPresent() {
+		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
+	}
 }

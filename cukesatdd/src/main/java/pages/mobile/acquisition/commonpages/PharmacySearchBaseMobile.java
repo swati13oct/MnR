@@ -104,7 +104,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		sleepBySec(3);
 		jsClickNew(distanceLabel);
-		//driver.findElement(By.xpath("//*[@id='plan-year-label']/span")).click();
+		// driver.findElement(By.xpath("//*[@id='plan-year-label']/span")).click();
 		driver.findElement(By.xpath("(//span[@class='req-asterisk'])[1]")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
@@ -428,10 +428,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
+
 		driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
-//		jsClickNew(yearDropdown);
-//		Select yearList = new Select(yearDropdown);
-//		yearList.selectByVisibleText(planYear);
 
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
@@ -487,11 +485,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				String PDFText = new PDFTextStripper().getText(document);
 
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"
-								+ System.lineSeparator() + "for the AARP MedicareRx Walgreens (PDP) Plan"
+
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
 
-				Assertion.assertTrue("PROBLEM - PDF  is not opening", PDFText.contains(ExpectedPDFText));
+				Assertion.assertTrue("PROBLEM - PDF does not contain " + ExpectedPDFText,
+						PDFText.contains(ExpectedPDFText));
+
 				Assertion.assertTrue("PROBLEM - unable to locate expected year in the PDF. PDF should contain year '"
 						+ yearToVerifyInPdf + "'", PDFText.contains(yearToVerifyInPdf));
 
