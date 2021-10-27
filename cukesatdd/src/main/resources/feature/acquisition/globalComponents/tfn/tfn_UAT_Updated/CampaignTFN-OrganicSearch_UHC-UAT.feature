@@ -71,23 +71,15 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-      And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
     #Then the user navigates to plan tab for any plan
     # | Plan Type | <MAplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo2>   |
       | TFN Xpath | <TFNxpath> |
-        And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
-     Then user clicks on Change Zip code link
-    Then user clicks on Select by Address and Enter fileds
-      | Address | <address> |
-      | City    | <city>    |
-      | State   | <state>   |
-    When the user clicks on Find plans on vpp using following information
-    | County Name2     | <county2>        |
-     | Is Multi County2 | <isMultiCounty2> | 
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -104,11 +96,16 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user validates TFN Number
       | TFN No    | <TFNNo2>   |
       | TFN Xpath | <TFNxpath> |
-   
 
+    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup3.0
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                          | MedsuppTFNxpath                   | TFNxpath2                           |plantype|planyear|address|city|state|county2|isMultiCounty2|
-      | Sc. 3.08 - UMS |  880188 |         880187 |   10001 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')]| //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u |MAPD|current|3333 BROADWAY APT B7G |New York|New York|New York County|no|
+      | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                    | MedsuppTFNxpath                   | TFNxpath2                           | plantype | planyear |
+      | Sc. 3.08 - UMS |  880188 |         880187 |   10001 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')] | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   |
+
+    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup4.0
+    Examples: 
+      | scenario       | pscCode | Precedence1PSC | zipcode | county             | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                                                  | MedsuppTFNxpath                   | TFNxpath2                           | plantype | planyear |
+      | Sc. 3.08 - UMS |  880188 |         880187 |   90210 | Los Angeles County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS4.0      | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   |
 
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1 for UHC
@@ -255,14 +252,14 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
       | Plan Type | <MAplantype> |
-       And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
     #Then the user navigates to MA Plan Details Page and validates Federal TFN
     Then the user validates TFN Number
       | TFN No    | <TFNNo3>   |
       | TFN Xpath | <TFNxpath> |
     #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-      And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
@@ -270,6 +267,12 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | TFN No    | <MedsuppTFNNo2>   |
       | TFN Xpath | <MedsuppTFNxpath> |
 
+    @Scenario_4_1to8_Precedence_1_UHC_UAT_Medsup3.0
     Examples: 
-      | scenario                              | site   | zipcode | MAplantype | MSplantype | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | campaign2Url      | campaign3Url      | campaign4Url                                                                                                   | MedsuppTFNxpath                   | TFNxpath                          | TFNNo          | MedsuppTFNNo   | TFNNo1         | MedsuppTFNNo1  | TFNNo2         | MedsuppTFNNo2  | TFNNo3         |planyear|
-      | Scenario 4b: Campaign Precedence- UMS | blayer |   10001 | MA         | MS         |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class,'tel right')] | //span[contains(@class, 'invoca_swap_sam')]| 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 |current|
+      | scenario                              | site   | zipcode | MAplantype | MSplantype | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | campaign2Url      | campaign3Url      | campaign4Url                                                                                                   | MedsuppTFNxpath                   | TFNxpath                                    | TFNNo          | MedsuppTFNNo   | TFNNo1         | MedsuppTFNNo1  | TFNNo2         | MedsuppTFNNo2  | TFNNo3         | planyear |
+      | Scenario 4b: Campaign Precedence- UMS | blayer |   10001 | MA         | MS         |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class,'tel right')] | //span[contains(@class, 'invoca_swap_sam')] | 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 | future   |
+
+    @Scenario_4_1to8_Precedence_1_UHC_UAT_Medsup4.0
+    Examples: 
+      | scenario                              | site   | zipcode | MAplantype | MSplantype | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | campaign2Url      | campaign3Url      | campaign4Url                                                                                                   | MedsuppTFNxpath                                    | TFNxpath                                    | TFNNo          | MedsuppTFNNo   | TFNNo1         | MedsuppTFNNo1  | TFNNo2         | MedsuppTFNNo2  | TFNNo3         | planyear |
+      | Scenario 4b: Campaign Precedence- UMS | blayer |   90210 | MA         | MS4.0      |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class, 'invoca_swap text-bold tel')] | //span[contains(@class, 'invoca_swap_sam')] | 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 | future   |
