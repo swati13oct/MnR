@@ -1061,7 +1061,7 @@ Feature: 1.12 ACQ - Global Components Validation
     And user validates AARP membership links in medsup header "Join AARP,Renew AARP Membership,AARP Member Benefits"
     And user clicks on AARP Membership links in the Medsup header for cancel "Join AARP,Renew AARP Membership,AARP Member Benefits"
     And the user clicks on browser back button
-    Then Verify AARP Membership links header not present on page
+    Then Verify AARP Membership links in header not present on page
 
     @Header_Medsup_AARP_Membership_AARP
     Examples: 
