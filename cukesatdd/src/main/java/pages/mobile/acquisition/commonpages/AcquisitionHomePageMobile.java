@@ -1146,7 +1146,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(siteMapHeader);
+		CommonUtility.waitForPageLoadNewForClick(driver, siteMapHeader, 20);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
 			return new SiteMapAARPPageMobile(driver);
 		}
@@ -2380,7 +2380,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+//		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
 	}
@@ -3399,7 +3400,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(lnkComplaintForm);
 		jsClickNew(lnkComplaintForm);
 		proceedToLeaveAARP();
-		if (driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+		if (driver.getCurrentUrl().contains("medicare.gov/my/medicare-complaint")) {
 			System.out.println("Successfully clicked Complaint Form link");
 			Assertion.assertTrue(true);
 
@@ -3632,6 +3633,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			CommonUtility.waitForPageLoadNewForClick(driver,MenuMobile,10);
 			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			jsClickNew(MenuMobile);
 			
