@@ -737,9 +737,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("PlanName is: "+PlanName);
 		
 		if (PlanName.contains("supplement")) {
+			WebElement DrugTitle= plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
 			WebElement MSPlanName= plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
-			 scrollToView(MSPlanName);
-			 planName = MSPlanName.getText().trim();
+			scrollToView(DrugTitle);
+			planName = MSPlanName.getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
 			threadsleep(2000);
 			
@@ -850,6 +851,15 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void addDoctorsLink() {
 	threadsleep(5000);
 	System.out.println("Adding doctors from PRE Result page");
+	String pageCount1 = pagenoLabel.getText().trim();
+	int currentPage = Integer
+			.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+	if (currentPage != 1) {
+		for (int c = 1; c < currentPage; c++) {
+			pagePreviousButton.click();
+			threadsleep(2000);
+		}
+	}
 	plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
 	threadsleep(3000);
 	}

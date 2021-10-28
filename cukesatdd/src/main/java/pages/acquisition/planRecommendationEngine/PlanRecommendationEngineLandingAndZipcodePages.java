@@ -255,12 +255,11 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
-		getStartedBtn.click();
-		zipcodePage();
+//		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcodeid);
 		waitforElementVisibilityInTime(continueBtn, 45);
-		continueBtn.click();
+		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 	
@@ -269,13 +268,12 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		waitTillElementClickableInTime(getStartedBtn1, 45);
-		getStartedBtn.click();
-		zipcodePage();
+//		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
-		continueBtn.click();
+		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
