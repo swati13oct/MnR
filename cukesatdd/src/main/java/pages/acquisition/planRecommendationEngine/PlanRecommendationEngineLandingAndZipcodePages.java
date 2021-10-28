@@ -258,7 +258,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 //		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcodeid);
-		waitforElementVisibilityInTime(continueBtn, 45);
+//		waitforElementVisibilityInTime(continueBtn, 45);
 		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
