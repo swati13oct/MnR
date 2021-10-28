@@ -525,7 +525,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//span[contains(text(),'Learn more') or
 	// contains(text(),'Learn More About Medicare')]")
 //	@FindBy(xpath = "//a[contains(text(),'Learn more') or contains(@title,'Learn More About Medicare')]")
-	@FindBy(xpath = "(//a[normalize-space()='Learn more'])[2]")
+	@FindBy(css = "div[class$='responsivegrid'] > div > div[class*='GridColumn--phone'] a[data-asset-name*='Learn More About Medicare']")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "(//a[contains(@href,'medicare-education.html')])[5]")
@@ -1185,7 +1185,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(siteMapHeader);
+		CommonUtility.waitForPageLoadNewForClick(driver, siteMapHeader, 20);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
 			return new SiteMapAARPPageMobile(driver);
 		}
@@ -2477,7 +2477,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@id,'topSection')]")), 30);
+
+//		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header")), 30);
+
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.navigate().back();
@@ -3763,6 +3768,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			CommonUtility.waitForPageLoadNewForClick(driver, MenuMobile, 10);
 			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			jsClickNew(MenuMobile);
 
@@ -4120,6 +4126,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(learnAboutMedicareFooterButton);
 		jsClickNew(IntroductionToMedicare);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
 			driver.navigate().back();
@@ -4515,22 +4522,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
-		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
-		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
-		// Clicking on label first as dropdown is not opening in iOS - this will not
-		// affect Android execution
+		
 		jsClickNew(stateWidget);
-		selectFromDropDownByValue(stateDropDown, geoState);
-		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
-			Assert.fail("Wrong state selected for geotarget");
-		}
-		// jsClickNew(stateGeotargeting);
-		waitforElementNew(stateGeotargeting, 5);
-		System.out.println("State selected for Geotargetting: " + stateGeotargeting.getText());
-		waitforElementNew(stateGeotargeting, 5);
+		mobileSelectOption(stateDropDown, geoState, true);
+		Select geoStateSelect = new Select(stateDropDown);
+		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
+
+		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
+
+		/*
+		 * if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) { >>>>>>> branch
+		 * 'AndroidChrome_TestNG' of https://github.optum.com/gov-prog-digital/mratdd/
+		 * Assert.fail("Wrong state selected for geotarget"); } //
+		 * jsClickNew(stateGeotargeting); waitforElementNew(stateGeotargeting, 5);
+		 * System.out.println("State selected for Geotargetting: " +
+		 * stateGeotargeting.getText()); waitforElementNew(stateGeotargeting, 5);
+		 */
 
 	}
 
@@ -5277,7 +5287,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public String getSelectedState() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		scrollToView(stateDropDown);
 		Select dropdown = new Select(stateDropDown);
 		String stateSelected = dropdown.getFirstSelectedOption().getText();
