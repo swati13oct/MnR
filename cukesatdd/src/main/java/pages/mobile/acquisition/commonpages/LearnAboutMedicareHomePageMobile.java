@@ -435,11 +435,12 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	public MedicareEligibilityPageMobile selectMedicareEligibility() {
-		WebElement lnkMedEligibility = driver.findElement(By.xpath("//span[contains(text(),'Medicare Eligibility')]"));
+		WebElement lnkMedEligibility = driver.findElement(By.xpath("//span[contains(text(),'Medicare Eligibility')]/parent::a"));
 		validateNew(lnkMedEligibility);
 		jsClickNew(lnkMedEligibility);
-
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		String checkUrl = driver.getCurrentUrl();
 		if (checkUrl.contains("medicare-education/medicare-eligibility.html")
 				|| checkUrl.contains("/medicare-education-classic/medicare-eligibility-classic.html")) {
@@ -572,8 +573,8 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		}
 		else if (pageName.contains("Eligibility")) {
 			
-			WebElement lnkEligibility=driver.findElement(By.xpath("//a//span[contains(text(),'Who is eligible for Medicare?')]"));
-			WebElement backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
+			WebElement lnkEligibility=driver.findElement(By.xpath("//span[contains(text(),'Who is eligible for Medicare?')]/parent::a"));
+			WebElement backtotop=driver.findElement(By.xpath("(//span[contains(text(),'Back to Top')])[1]/parent::a"));
 			jsClickNew(lnkEligibility);
 			jsClickNew(backtotop);
 			System.out.println(" Link Clicked: Who is eligible for Medicare? ");
@@ -736,24 +737,17 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	public void hoverToPlanPage(String plantype) {
-		WebElement navBar = driver.findElement(By.xpath("//div[contains(@class,'nav-toggle')]"));
-		jsClickNew(navBar);
-		sleepBySec(2);
-		WebElement lnkMeded = driver.findElement(By.xpath("//a[@id='ghn_lnk_3']"));
-		jsClickNew(lnkMeded);
-		sleepBySec(2);
-		WebElement lnkplanType = driver.findElement(By.xpath("//p[contains(text(),'Types of Plans')]"));
-		jsClickNew(lnkplanType);
-		sleepBySec(2);
-		WebElement lnkPlan = null;
+		String navLink = null;
 		if (plantype.equalsIgnoreCase("MA")) {
-			lnkPlan = driver.findElement(By.xpath("(//a[contains(text(),'Advantage')])[4]"));
+			navLink = "Medicare Advantage Plans";
 		} else if (plantype.equalsIgnoreCase("MS")) {
-			lnkPlan = driver.findElement(By.xpath("(//a[contains(text(),'Supplement')])[2]"));
+			navLink = "Medicare Supplement Insurance";
 		} else if (plantype.equalsIgnoreCase("PDP")) {
-			lnkPlan = driver.findElement(By.xpath("(//a[contains(text(),'Prescription Drug')])[4]"));
+			navLink = "Medicare Prescription Drug Plans";
 		}
-		navigateToMedicareMenuLinks(lnkPlan);
+		
+		LEARNABOUTMEDICARE_TYPESOFPLANS planType = LEARNABOUTMEDICARE_TYPESOFPLANS.getTypesOfPlansEnumFor(navLink);
+		openLearnAboutMedicareFromMenu().selectTypesOfPlansOption(planType);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("PlanType: " + plantype);
 		System.out.println("" + driver.getCurrentUrl());
