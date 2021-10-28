@@ -662,10 +662,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return topicDropDownValues.size();
 	}
 
-	public AcquisitionHomePageMobile returnToAcqHomePage() {
+	public void returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		return new AcquisitionHomePageMobile(driver);
+//		return new AcquisitionHomePageMobile(driver);
 	}
 }

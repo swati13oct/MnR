@@ -115,8 +115,7 @@ public void clickMedicareAnnualEnrollment() {
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink=driver.findElement(By.xpath("(//a[contains(@href,'drug-cost-estimator')])[3]"));
 		validateNew(DCELink);
-		jsClickNew(DCELink);
-//		switchToNewTabNew(DCELink);
+		switchToNewTabNew(DCELink);
 		waitForPageLoadSafari();
 		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
