@@ -2478,9 +2478,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@id,'topSection')]")), 30);
-
-//		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header")), 30);
 
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
