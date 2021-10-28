@@ -228,6 +228,9 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@class,'modal-close')])[1]")
 	private WebElement tfnHeaderPopupClose;
 	
+	@FindBy(xpath = "//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]")
+	private WebElement msPlansHeading;
+	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -740,7 +743,18 @@ public class CampaignTFNPage extends UhcDriver {
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 			return new VPPPlanSummaryPage(driver);
-		} else if (planType.equalsIgnoreCase("SNP")) {
+		} 
+		else if (planType.equalsIgnoreCase("MS4.0")) {
+			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			//sleepBySec(2);
+			msPlansViewLink.click();
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, msPlansHeading, 30);
+			/*msPlansViewLink.click();
+			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
+			return new VPPPlanSummaryPage(driver);
+		}
+		else if (planType.equalsIgnoreCase("SNP")) {
 //			sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
@@ -1478,8 +1492,8 @@ public void openURLNewTabUHC(String url) {
 }
 
 public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
-	System.out.println("Expected PSC code: "+expectedFedTFN);
-	System.out.println("Actual PSC code: "+actualFedTFN);
+	System.out.println("Expected Fed TFN: "+expectedFedTFN);
+	System.out.println("Actual Fed TFN: "+actualFedTFN);
 	
 	if(expectedFedTFN.contentEquals(actualFedTFN)) {
 		System.out.println("****************Expected Fed TFN matches Actual Fed TFN from TFN cookie ***************");
@@ -1493,8 +1507,8 @@ public void validateFedTFNNo(String expectedFedTFN,String actualFedTFN) {
 }
 
 public void validateMedsupTFNNo(String expectedMedsupTFN,String actualMedsupTFN) {
-	System.out.println("Expected PSC code: "+expectedMedsupTFN);
-	System.out.println("Actual PSC code: "+actualMedsupTFN);
+	System.out.println("Expected Medsup TFN: "+expectedMedsupTFN);
+	System.out.println("Actual Medsup TFN: "+actualMedsupTFN);
 	
 	if(expectedMedsupTFN.contentEquals(actualMedsupTFN)) {
 		System.out.println("****************Expected Medsup TFN matches Actual Medsup TFN from TFN cookie ***************");
@@ -1536,8 +1550,8 @@ public void validateTFNHeaderAndSAMIcon() {
 }
 
 public void validateSourceCode(String expectedSrcCode,String actualSrcCode) {
-	System.out.println("Expected PSC code: "+expectedSrcCode);
-	System.out.println("Actual PSC code: "+actualSrcCode);
+	System.out.println("Expected Source code: "+expectedSrcCode);
+	System.out.println("Actual Source code: "+actualSrcCode);
 	
 	if(expectedSrcCode.contentEquals(actualSrcCode)) {
 		System.out.println("****************Expected Source code matches Actual Source code from TFN cookie ***************");
