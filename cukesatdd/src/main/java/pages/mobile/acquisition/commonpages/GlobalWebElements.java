@@ -373,6 +373,15 @@ public class GlobalWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
 	public WebElement learnMedicare;
+	
+	@FindBy(css = "#upgradeVersionBarNew")
+	private WebElement upgradeBrowserVersionBanner;
+	
+	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateLater")
+	private WebElement updateLaterButton;
+	
+	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateNow")
+	private WebElement updateNowButton;
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
@@ -599,6 +608,25 @@ public class GlobalWebElements extends UhcDriver {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		}
 		return null;
+	}
+	
+	/**
+	 * Click update later browser button.
+	 * 
+	 * This method is for lower version of Chrome browser on Android
+	 */
+	public void clickUpdateLaterBrowserButton() {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (validate(upgradeBrowserVersionBanner)) {
+				System.out.println("Update browser banner shown !");
+				jsClickNew(updateLaterButton);
+				System.out.println("Clicked 'Update later' button");
+				sleepBySec(2);
+				if (!upgradeBrowserVersionBanner.isDisplayed()) {
+					System.out.println("Update browser banner disappeared.");
+				}
+			}
+		}
 	}
 	
 }
