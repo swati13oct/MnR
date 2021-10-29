@@ -22,11 +22,11 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-   # And the user chooses a plan from dropdown list
-   #  | Current Year Plan Name | <cy_planName> |
-   #   | Current Year Plan Year | <cy_planYear> |
-   #   | Next Year Plan Name    | <ny_planName> |
-   #  | Next Year Plan Year    | <ny_planYear> |
+    And the user chooses a plan from dropdown list
+     | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+     | Next Year Plan Year    | <ny_planYear> |
    And the user selects plan year toggle
       | Plan Year | <planyear> |
     #Then the user validates the Pharmacies available
