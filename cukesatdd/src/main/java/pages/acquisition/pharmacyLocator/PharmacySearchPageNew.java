@@ -118,4 +118,30 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		return new PharmacySearchPageNew(driver);
 	}
 	
+	public void validateMapSectionContent() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(map_resultSection);
+//		moveMouseToElement(map_resultSection);
+		Assertion.assertTrue("PROBLEM - unable to locate the map", pharmacyValidate(map_mapImg));
+		Assertion.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", pharmacyValidate(map_showHideMapLnk));
+//		map_showHideMapLnk.click();
+		jsClickNew(map_showHideMapLnk);
+		Assertion.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link",
+				!pharmacyValidate(map_mapImg));
+//		map_showHideMapLnk.click();
+		jsClickNew(map_showHideMapLnk);
+		Assertion.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link",
+				pharmacyValidate(map_mapImg));
+		Assertion.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", pharmacyValidate(map_mapBtn));
+		Assertion.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map",
+				pharmacyValidate(map_satelliteBtn));
+		Assertion.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map",
+				pharmacyValidate(map_fullScreenViewBtn));
+		Assertion.assertTrue("PROBLEM - unable to locate the zoom in button on the map", pharmacyValidate(map_zoomIn));
+		Assertion.assertTrue("PROBLEM - unable to locate the zoom out button on the map", pharmacyValidate(map_zoomOut));
+		Assertion.assertTrue("PROBLEM - unable to locate the open street view button on the map",
+				pharmacyValidate(map_openStreetView));
+
+	}
+	
 }

@@ -76,4 +76,12 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//button[@class='uhc-button uhc-button--secondary p-20']")
 	protected WebElement searchbtn;
 	
+*	@FindBy(xpath="//div[@class='pharmacySearchResults section']")
+	protected WebElement map_resultSection;
+
+    @FindBy(xpath = "//button[@title='Show street map' and text()='Map']")
+    protected WebElement map_mapBtn;
+    
+    
+	
 }
