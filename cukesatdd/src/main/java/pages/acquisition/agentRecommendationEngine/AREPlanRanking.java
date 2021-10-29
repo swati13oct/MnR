@@ -451,6 +451,7 @@ public class AREPlanRanking extends UhcDriver {
 		if (plansName.size() != viewplandetails.size()) {
 			for (int i = 0; i < viewplandetails.size(); i++) {
 					 if(i>3) {
+						 validate(viewMorePlansinPlanCompare);
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
@@ -460,6 +461,7 @@ public class AREPlanRanking extends UhcDriver {
 		} else {
 				for (int i = 0; i < viewplandetails.size(); i++) {
 					if(i>3) {
+						validate(viewMorePlansinPlanCompare);
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
