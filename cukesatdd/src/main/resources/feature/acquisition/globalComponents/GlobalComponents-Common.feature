@@ -1048,3 +1048,45 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                                                                                                                                  | Drug Cost Estimator         |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary           |
       | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                                                                                                                                    | Pharmacy Search             |
+
+  @medsupHeaderAARPMembership @F616240
+  Scenario Outline: To verify Medsup AARP membership header links for the page mentioned on site - <site> -  <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    When user verifies the logo
+    Then user validates TFN in header
+    And user validates AARP membership links in medsup header "Join AARP,Renew AARP Membership,AARP Member Benefits"
+    And user clicks on AARP Membership links in the Medsup header for cancel "Join AARP,Renew AARP Membership,AARP Member Benefits"
+    And the user clicks on browser back button
+    Then Verify AARP Membership links in header not present on page
+
+    @Header_Medsup_AARP_Membership_AARP
+    Examples: 
+      | site | path                                                              | pageName                                            |
+      | AARP | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
+      | AARP | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                         |
+      | AARP | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
+      | AARP | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
+      | AARP | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page                     |
+      | AARP | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page                   |
+      | AARP | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page               |
+      | AARP | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page          |
+      | AARP | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page                |
+      | AARP | shop/medicare-supplement-plans/at-your-best.html                  | MedsupShop:Medsup Shop Page                         |
+
+    @Header_Medsup_AARP_Membership_UHC
+    Examples: 
+      | site | path                                                              | pageName                                            |
+      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
+      | UHC  | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                         |
+      | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
+      | UHC  | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
+      | UHC  | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page                     |
+      | UHC  | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page                   |
+      | UHC  | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page               |
+      | UHC  | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page          |
+      | UHC  | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page                |
+      | UHC  | shop/medicare-supplement-plans/at-your-best.html                  | MedsupShop:Medsup Shop Page                         |
