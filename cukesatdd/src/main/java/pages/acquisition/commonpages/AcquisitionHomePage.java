@@ -796,7 +796,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_4')]")
 
 	// @FindBy(xpath = "//button[contains(@id,'LP_EndChatAction_8')]")
-	@FindBy(xpath = "//*[contains(@id,'LP_EndChatAction_2')]")
+	@FindBy(xpath = "//button[contains(@aria-label,'End conversation')][1]")
 	private WebElement proactiveChatPopupEndChatOption;
 
 	@FindBy(xpath = "//*[@id='ip-no']")

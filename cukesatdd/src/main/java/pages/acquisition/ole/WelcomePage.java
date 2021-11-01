@@ -228,6 +228,7 @@ public class WelcomePage extends UhcDriver{
 			//ViewPlanDetails.click();
 			jsClickNew(ViewPlanDetails);
 		//	Thread.sleep(500);
+			waitForPageLoadSafari();
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
 				validateNew(VPPTFNNo);
