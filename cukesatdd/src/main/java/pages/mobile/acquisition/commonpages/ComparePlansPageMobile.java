@@ -298,6 +298,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")
 	private WebElement EnrollinPlanCompare_MAPD;
 
+	@FindBy(xpath = "(//button[@dlassetid='plc-btn-5'])[1]")
+	private WebElement planCompareRightScrollArrow;
+
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
@@ -834,7 +837,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public void clickOnBacktoPlans() {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			backToPlanSummary_PlanCompare_iOS();
-			System.out.println("BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
+			System.out.println(
+					"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
 		} else {
 
 			scrollToView(backToAllPlansLink);
@@ -1091,7 +1095,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		
+
 		if (validateNew(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
@@ -1813,6 +1817,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
 
+		jsClickNew(planCompareRightScrollArrow);
 		jsClickNew(EnrollinPlanCompare_MAPD);
 
 		try {

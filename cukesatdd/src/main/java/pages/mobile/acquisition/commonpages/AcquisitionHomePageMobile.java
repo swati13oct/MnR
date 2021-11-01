@@ -2485,9 +2485,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header")), 30);
 
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			driver.navigate().back();
-		}
+//		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+//			driver.navigate().back();
+//		}
 
 	}
 
