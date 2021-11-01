@@ -1372,4 +1372,32 @@ public class MedicareInformationPage extends UhcDriver {
 		return null;
 	}
 
+
+	public boolean enter_required_Medicare_details_UserFlow(Map<String, String> MedicareDetailsMap) {
+
+		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String MedicaidNumber = MedicareDetailsMap.get("MedicaidNumber");
+
+		//sendkeysMobile(claimNumberField, MedicareNumber);
+		claimNumberField.sendKeys(MedicareNumber);
+
+		if (SSNflag.contains("true")) {
+			String SSNnumber = MedicareDetailsMap.get("SSN Number");
+			// sendkeysNew(SSNField, SSNnumber);
+			sendkeysMobile(SSNField, SSNnumber);
+
+		}
+		System.out.println("Medicare No Details are entered");
+		NextBtn.click();
+
+		medicaiddyes.isDisplayed();
+		//	jsClickNew(medicaiddyes);
+		medicaiddyes.click();
+		medicaidNumberField.sendKeys(MedicaidNumber);
+		System.out.println("Medicaid Details are entered");
+		NextBtn.click();
+		return true;
+	}
 }
