@@ -164,6 +164,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//label[contains(text(),'location')]")
 	protected WebElement distanceLabel;
 	
+	@FindBy(xpath = "//span[text()=' of ZIP Code']")
+	protected WebElement distanceZipTextLabel;
+	
 
 	/*
 	 * @FindBy(id="indian-tribal-label") protected WebElement

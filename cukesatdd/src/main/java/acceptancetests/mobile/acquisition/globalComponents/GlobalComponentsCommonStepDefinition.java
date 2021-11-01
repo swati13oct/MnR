@@ -754,7 +754,8 @@ public class GlobalComponentsCommonStepDefinition {
 		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 
-		AcquisitionHomePageMobile acquisitionHomePage = providerSearchPage.returnToAcqHomePage();
+//		AcquisitionHomePageMobile acquisitionHomePage = providerSearchPage.returnToAcqHomePage();
+		providerSearchPage.returnToAcqHomePage();
 
 	}
 

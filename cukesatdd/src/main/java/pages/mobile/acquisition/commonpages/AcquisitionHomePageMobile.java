@@ -540,6 +540,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
 
+
 	@FindBy(css = "#upgradeVersionBarNew")
 	private WebElement upgradeBrowserVersionBanner;
 
@@ -548,6 +549,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateNow")
 	private WebElement updateNowButton;
+
 
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
@@ -1065,6 +1067,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
+
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		CommonUtility.checkPageIsReadyNew(driver);
