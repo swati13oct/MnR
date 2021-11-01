@@ -1261,6 +1261,14 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.addDoctorsLink();
 	}
 	
+	@Then("^user updating providers to PRE doctorpage$")
+	public void providerUpdate(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
+				inputValues.get("Multi Doctor"));
+	}
+	
 	@Then("^user validates Sort By drop down UI PRE-Result page$")
 	public void sortBy() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));

@@ -52,14 +52,14 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Is Multi County | <isMultutiCounty> |
       | CountyDropDown  | <county>          |
 
-    @FunctionalAARP1234
+    @FunctionalAARP
     Examples: 
       | site | Zipcode | isMultutiCounty | county       |
-     # | AARP |   78006 | YES             | Bexar County |
-    #  | AARP |   22222 | NO              | [blank]      |
-     # | AARP |    1234 | NO              | [blank]      |
-     # | AARP |     123 | NO              | [blank]      |
-     # | AARP |      12 | NO              | [blank]      |
+      | AARP |   78006 | YES             | Bexar County |
+      | AARP |   22222 | NO              | [blank]      |
+      | AARP |    1234 | NO              | [blank]      |
+      | AARP |     123 | NO              | [blank]      |
+      | AARP |      12 | NO              | [blank]      |
       | AARP |       1 | NO              | [blank]      |
       | AARP | [blank] | NO              | [blank]      |
 
