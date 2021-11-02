@@ -25,4 +25,3 @@ public class RunMRATDDAcquisitionOLE extends BaseTestConfig {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
-

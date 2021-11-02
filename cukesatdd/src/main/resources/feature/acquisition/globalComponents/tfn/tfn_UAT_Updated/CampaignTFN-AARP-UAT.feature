@@ -1,4 +1,3 @@
-
 @campaignTFN @regressionAARP @campaignTFNStage
 Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 

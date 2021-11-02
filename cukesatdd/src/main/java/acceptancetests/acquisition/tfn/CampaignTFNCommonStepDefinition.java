@@ -1239,11 +1239,11 @@ public void the_user_validates_TFN_number_in_header_and_SAM_icon() throws Throwa
 @Then("the user validates source code")
 public void the_user_validates_source_code(DataTable inputAttributes) {
 	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
-	String expectedMedsupTFN = inputAttributesMap.get("sourceCode");
+	String expectedSrcCode = inputAttributesMap.get("sourceCode");
 	wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
-	String actualMedsupTFN= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
-	tfnPage.validateMedsupTFNNo(expectedMedsupTFN,actualMedsupTFN);
+	String actualSrcCode= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
+	tfnPage.validateSourceCode(expectedSrcCode,actualSrcCode);
 }
 }
 
