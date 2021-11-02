@@ -68,6 +68,7 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 		HashMap<String,String> tfnCookieValue=tfnPage.retrieveTFNcookie();
 		getLoginScenario().saveBean(CommonConstants.PSC_CODE,tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE,tfnCookieValue.get("Source Code"));
 		getLoginScenario().saveBean(CommonConstants.FED_TFN,tfnCookieValue.get("Fed TFN"));
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN,tfnCookieValue.get("Medsup TFN"));
 	}
@@ -320,7 +321,7 @@ public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TF
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
@@ -1207,6 +1208,42 @@ public void user_opens_tab_to_access_UHC_page() throws Exception  {
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	tfnPage.openURLNewTabUHC(url);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
+
+@Then("the user validates Fed TFN")
+public void the_user_validates_fed_tfn(DataTable inputAttributes) {
+	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+	String expectedFedTFN = inputAttributesMap.get("TFN No");
+	wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
+	String actualFedTFN= (String) getLoginScenario().getBean(CommonConstants.FED_TFN);
+	tfnPage.validateFedTFNNo(expectedFedTFN,actualFedTFN);
+}
+@Then("the user validates MedSup TFN")
+public void the_user_validates_med_sup_tfn(DataTable inputAttributes) {
+	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+	String expectedMedsupTFN = inputAttributesMap.get("TFN No");
+	wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
+	String actualMedsupTFN= (String) getLoginScenario().getBean(CommonConstants.MEDSUP_TFN);
+	tfnPage.validateMedsupTFNNo(expectedMedsupTFN,actualMedsupTFN);
+}
+
+@Then("^the user validates TFN Number in header and SAM icon$")
+public void the_user_validates_TFN_number_in_header_and_SAM_icon() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.validateTFNHeaderAndSAMIcon();
+}
+
+
+@Then("the user validates source code")
+public void the_user_validates_source_code(DataTable inputAttributes) {
+	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+	String expectedSrcCode = inputAttributesMap.get("sourceCode");
+	wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
+	String actualSrcCode= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
+	tfnPage.validateSourceCode(expectedSrcCode,actualSrcCode);
 }
 }
 

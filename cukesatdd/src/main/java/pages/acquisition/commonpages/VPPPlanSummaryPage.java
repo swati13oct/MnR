@@ -599,6 +599,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
 	private WebElement currentYearSelection;
 
+	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
+	private WebElement futureYearSelection;
+	
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
@@ -3917,6 +3920,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 			currentYearSelection.click();
 		}
+		else {
+			futureYearSelection.click();
+		}
 		waitForPageLoadSafari();
 		//validateNew(planYearPopupGoButton);
 		//planYearPopupGoButton.click();
@@ -5244,8 +5250,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ planName + "']//following::div[@class='providers-list'][1]/ul/li[" + (i + 1)
 						+ "]/div/div[contains(@class,'provider-info')]"));
 				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
-
-				Assertion.assertEquals(provider[i], providerInfoTxt);
+				providerInfoTxt = providerInfo.getText().trim().replaceAll("\n", " ");
+				Assertion.assertTrue(providerInfoTxt.contains(provider[i]));
 				System.out.println("#########" + providerInfoTxt + "#########");
 				/*
 				 * Assertion.assertEquals(provider[i],
@@ -7229,5 +7235,38 @@ public String GetMonthlyPremiumValue() {
 			System.out.println("No County to be selected ");
 		}
 	}
+	
+	public void viewMSPlanSummary(String planType) {
+		CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+		jsClickNew(msPlansViewLink);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
+	}
+	
+	/**
+	 * Save the given Medsupp plans
+	 *
+	 * @param savePlanNames
+	 */
+	public void saveMSVPP4Plans(String savePlanNames) {
+
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			System.out.println(
+					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan : listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
+						+ "']/following::div[contains(@class,'save-box')][1]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				threadsleep(2);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

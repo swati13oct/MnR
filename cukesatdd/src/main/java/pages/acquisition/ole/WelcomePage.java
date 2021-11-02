@@ -228,9 +228,9 @@ public class WelcomePage extends UhcDriver{
 			//ViewPlanDetails.click();
 			jsClickNew(ViewPlanDetails);
 		//	Thread.sleep(500);
+			waitForPageLoadSafari();
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
-				
 				validateNew(VPPTFNNo);
 				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
 				//String VPPTFNNoActual = VPPTFNNo.getText();
@@ -242,8 +242,7 @@ public class WelcomePage extends UhcDriver{
 				validateNew(enrollInPlan);
 				jsClickNew(enrollInPlan);
 				
-			//	Thread.sleep(500);
-				flag = driver.getCurrentUrl().contains("welcome");
+				//flag = driver.getCurrentUrl().contains("welcome");
 				CheckiPerseptions();
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
@@ -674,7 +673,7 @@ public class WelcomePage extends UhcDriver{
 	
 	public String GetMonthlyPremiumValue() {
 		
-		if (validateNew(PremiumDisplay, 45)) {
+		if (validateNew(PremiumDisplay, 60)) {
 		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
 			String Monthly_Premium = PremiumDisplay.getText();
 			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );

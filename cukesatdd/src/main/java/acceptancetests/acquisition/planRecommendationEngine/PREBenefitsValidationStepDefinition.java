@@ -209,7 +209,7 @@ public class PREBenefitsValidationStepDefinition {
 
 								zip.navigateToPREResultsPage();
 
-								if (AEP.equalsIgnoreCase("YES") && year.equalsIgnoreCase("2021")) {
+								if (year.equalsIgnoreCase("2021")) {
 									PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
 											wd);
 									planSelectorResultspage.changePlanyear("current");
