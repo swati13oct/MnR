@@ -540,7 +540,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
 
-
 	@FindBy(css = "#upgradeVersionBarNew")
 	private WebElement upgradeBrowserVersionBanner;
 
@@ -549,7 +548,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#upgradeVersionBarNew div[class$='buttons'] > .updateNow")
 	private WebElement updateNowButton;
-
 
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
@@ -1022,13 +1020,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
+
+		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 		long modelPopupTimeout = !MRScenario.environment.equals("stage")
 				? MRScenario.environment.equals("stage-0") ? 20 : 45
 				: 10;
 
-		// CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
-		checkModelPopup(driver, modelPopupTimeout);
+		if (driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+
+			checkModelPopup(driver, modelPopupTimeout);
+		}
 		clickUpdateLaterBrowserButton();
 	}
 
@@ -1067,7 +1068,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
-
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -4526,7 +4526,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
-		
+
 		jsClickNew(stateWidget);
 		mobileSelectOption(stateDropDown, geoState, true);
 		Select geoStateSelect = new Select(stateDropDown);
