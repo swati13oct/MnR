@@ -196,11 +196,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates PSC code
       | PSC Code | <Precedence4PSC> |
     Then the user validates source code
-      | sourceCode | <sourceCode> |
+      | sourceCode | <sourceCode4> |
     Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
+      | TFN No | <FedTFNNo4> |
     Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
+      | TFN No | <MedSupTFNNo4> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo5>   |
       | TFN Xpath | <TFNxpath> |
@@ -217,11 +217,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates PSC code
       | PSC Code | <Precedence5PSC> |
       Then the user validates source code
-      | sourceCode | <sourceCode> |
+      | sourceCode | <sourceCode5> |
     Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
+      | TFN No | <FedTFNNo5> |
     Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
+      | TFN No | <MedSupTFNNo5> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo7>   |
       | TFN Xpath | <TFNxpath> |
@@ -241,11 +241,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates PSC code
       | PSC Code | <Precedence6PSC> |
      Then the user validates source code
-      | sourceCode | <sourceCode> |
+      | sourceCode | <sourceCode6> |
     Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
+      | TFN No | <FedTFNNo6> |
     Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
+      | TFN No | <MedSupTFNNo6> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -267,11 +267,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates PSC code
       | PSC Code | <Precedence7PSC> |
      Then the user validates source code
-      | sourceCode | <sourceCode> |
+      | sourceCode | <sourceCode7> |
     Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
+      | TFN No | <FedTFNNo7> |
     Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
+      | TFN No | <MedSupTFNNo7> |
     #Then the user navigates to MA Plan Details Page and validates Federal TFN
     #| Zip Code        | <zipcode>|
     #Then the user validates TFN Number
@@ -286,8 +286,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
     @campaignTFNProd
     Examples: 
-      | scenario                              | site   | zipcode | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | Precedence7PSC | Precedence8PSC | medSuppUrl                          | medSuppTFN                                                   | campaign2Url                                                      | campaign3Url                                         | campaign4Url                                                                                                   | connect                             | connectTFN                                                   | TFNxpath                          | MedSuppTFNxpath                   | TFNNo          | TFNNo1         | TFNNo2         | TFNNo3         | TFNNo4         | TFNNo5         | TFNNo6         | TFNNo7         | TFNNo8         | TFNxpath2                                                                    |FedTFNNo1       | MedSupTFNNo1    | sourceCode1|FedTFNNo2       | MedSupTFNNo2    | sourceCode2|FedTFNNo3       | MedSupTFNNo3    | sourceCode3|
-      | Scenario 6a: Campaign Precedence- AMP | ulayer |   90210 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'invoca_swap')] |1-800-850-6807|1-866-327-1593|5T9|1-877-610-2672|1-888-708-8922|55Y|1-877-656-8358|1-844-891-4867|9EF|
+      | scenario                              | site   | zipcode | Precedence1PSC | Precedence2PSC | Precedence3PSC | Precedence4PSC | Precedence5PSC | Precedence6PSC | Precedence7PSC | Precedence8PSC | medSuppUrl                          | medSuppTFN                                                   | campaign2Url                                                      | campaign3Url                                         | campaign4Url                                                                                                   | connect                             | connectTFN                                                   | TFNxpath                          | MedSuppTFNxpath                   | TFNNo          | TFNNo1         | TFNNo2         | TFNNo3         | TFNNo4         | TFNNo5         | TFNNo6         | TFNNo7         | TFNNo8         | TFNxpath2                                                                    |FedTFNNo1       | MedSupTFNNo1    | sourceCode1|FedTFNNo2       | MedSupTFNNo2    | sourceCode2|FedTFNNo3       | MedSupTFNNo3    | sourceCode3|FedTFNNo4       | MedSupTFNNo4    | sourceCode4|FedTFNNo5       | MedSupTFNNo5    | sourceCode5|FedTFNNo6       | MedSupTFNNo6    | sourceCode6|FedTFNNo7       | MedSupTFNNo7    | sourceCode7|
+      | Scenario 6a: Campaign Precedence- AMP | ulayer |   90210 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'invoca_swap')] |1-800-850-6807|1-866-327-1593|5T9|1-877-610-2672|1-888-708-8922|55Y|1-877-656-8358|1-844-891-4867|9EF|1-877-656-8358|1-844-891-4867|9EF|1-877-699-5710|1-866-408-5545|AEP|1-800-850-6807|1-866-327-1593|5T9|1-877-656-8358|1-844-891-4867|9EF|
 
   #######################Script 6b: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT
