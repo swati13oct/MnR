@@ -760,19 +760,21 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				Thread.sleep(3000);
 				// signInLegacy.click();
-				scrollToView(signIn);
-				signIn.click();
+				jsClickNew(signIn);
 
 			} else {
 				System.out.println("Clicking on SignIn from Visitor Profile guest page");
-				scrollToView(signIn);
-				signIn.click();
+				jsClickNew(signIn);
 			}
 			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			WebElement userName = driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]"));
+			sendkeysMobile(userName, username);
+			
+			WebElement passwordField = driver.findElement(By.cssSelector("input#passwdId_input"));
+			sendkeysMobile(passwordField, password);
+			
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			Thread.sleep(3000);
@@ -781,15 +783,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			waitforElement(securityAnswer);
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
-				securityAnswer.sendKeys("name1");
+				sendkeysMobile(securityAnswer, "name1");
 			}
 
 			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
 				System.out.println("Question is related to color");
-				securityAnswer.sendKeys("color1");
+				sendkeysMobile(securityAnswer, "color1");
 			} else {
 				System.out.println("Question is related to phone");
-				securityAnswer.sendKeys("number1");
+				sendkeysMobile(securityAnswer, "number1");
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
@@ -926,7 +928,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile addPlanForMember() throws Exception {
-		addPlans.click();
+//		addPlans.click();
+		jsClickNew(addPlans);
 		Thread.sleep(10000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {

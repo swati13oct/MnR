@@ -48,6 +48,8 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -1774,11 +1776,50 @@ public abstract class UhcDriver {
 	 * This is not working as of now.
 	 * Since Appium server needs a flag to be set while starting. this isn't possible on saucelabs as of now
 	 */
-	public void deleteDownloadedFile() {
+	public void deleteDownloadedFile(String fileToDelete) {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
-		List<String> removePDFArgs = Arrays.asList("-rf","/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
+		List<String> removePDFArgs = Arrays.asList("-rf","/sdcard/Download/" + fileToDelete);
 		Map<String, Object> removePDFCmd = ImmutableMap.of("command","rm","args", removePDFArgs);
 		mobileDriver.executeScript("mobile: shell", removePDFCmd);
+	}
+	
+	/**
+	 * Perform submit action from mobile keyboard.
+	 *
+	 * On iOS devices, for some scenarios 'Search' button is displayed otherwise 'go' button is displayed
+	 *
+	 *@author amahale
+	 * @param driver the driver
+	 */
+	public void clickSubmitFromMobileKeyboard(WebDriver driver) {
+		AppiumDriver mobileDriver = (AppiumDriver) driver;
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			((AndroidDriver) mobileDriver).pressKey(new KeyEvent(AndroidKey.ENTER));
+		} else {
+			String webContext = mobileDriver.getContext();
+			Set<String> contexts = mobileDriver.getContextHandles();
+			for (String context : contexts) {
+				if (context.contains("NATIVE_APP")) {
+					mobileDriver.context(context);
+					try {
+						((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Go")).click();
+						break;
+					} catch (NoSuchElementException e) {
+						try {
+							((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeButton[@name='Search']"))
+									.click();
+							break;
+						} catch (NoSuchElementException ne) {
+							Assertion.fail("Couldn't find 'go' or 'search' button on iOS keyboard!");
+							ne.printStackTrace();
+						}
+					}
+				}
+			}
+			
+			mobileDriver.context(webContext);
+			
+		}
 	}
 
 }

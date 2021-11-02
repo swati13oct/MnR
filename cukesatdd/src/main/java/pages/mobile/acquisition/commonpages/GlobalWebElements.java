@@ -353,6 +353,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#ghn_lnk_1")
 	public WebElement home;
 	
+	@FindBy(css = "a[class*='GoToMember']")
+	public WebElement goToMemberSiteLink;
+	
 	@FindBy(css = ".mob-menu-header button[class^='icon-mob-btn'][onclick*='Search']")
 	private WebElement siteSearchButton;
 	
@@ -374,6 +377,13 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-3-button']/div")
 	public WebElement learnMedicare;
 	
+
+	@FindBy(css = "#redirect_content")
+	private WebElement leaveAARPMedicarePlansDialog;
+
+	@FindBy(css = "#proceed")
+	private WebElement proceedLeaveAARPMedicare;
+	
 	@FindBy(css = "#upgradeVersionBarNew")
 	private WebElement upgradeBrowserVersionBanner;
 	
@@ -391,6 +401,14 @@ public class GlobalWebElements extends UhcDriver {
 		actions.click();
 		actions.perform();
 
+	}
+	
+	public void proceedToLeaveAARP() {
+		if (validate(leaveAARPMedicarePlansDialog)) {
+			jsClickNew(proceedLeaveAARPMedicare);
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
 	}
 
 	/**
@@ -544,6 +562,17 @@ public class GlobalWebElements extends UhcDriver {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
+	}
+	
+	public void openMemberSignInFromMenu() {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		jsClickNew(MenuMobile);
+		
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(goToMemberSiteLink);
 	}
 	
 	
