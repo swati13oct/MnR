@@ -94,7 +94,7 @@ public class DGR_ThankYouPage extends UhcDriver{
 			validateNew(FindPlansAreaButton);
 			//FindPlansAreaButton.click();
 			jsClickNew(FindPlansAreaButton);
-			
+			waitForPageLoadSafari();
 			CommonUtility.checkPageIsReadyNew(driver);	
 			String checkUrl=driver.getCurrentUrl();
 			if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
