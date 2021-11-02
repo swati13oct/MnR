@@ -321,7 +321,7 @@ public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TF
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
