@@ -481,7 +481,8 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		CityTxt.clear();
 		ZipTxt.clear();
 		HomeAddressTxt.clear();
-		HomeAddressTxt.sendKeys("12");
+		HomeAddressTxt.sendKeys("121");
+		waitForPageLoadSafari();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e1) {
