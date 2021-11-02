@@ -1577,6 +1577,36 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	}
 	
+	public void openURLNewTabUHC(String url) {
+		// get original tab handler
+		String winHandleBefore = driver.getWindowHandle();
+
+		System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+		// open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('about:blank','_blank');");
+		for (String winHandle : driver.getWindowHandles()) {
+			if (!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+			}
+		}
+		String winHandleTmp = driver.getWindowHandle();
+		System.out.println(
+				"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+
+		driver.switchTo().window(winHandleTmp);
+		System.out.println("Proceed to open the acquisition url in new tab");
+
+//		start(url);
+		driver.navigate().to(url);
+		googleSearchUHC();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleTmp);
+		System.out.println("Proceed to use this newly opened tab for remaining validation");
+
+	}
+	
 	public void validateMedsupTFNNo(String expectedMedsupTFN, String actualMedsupTFN) {
 		System.out.println("Expected Medsup TFN: " + expectedMedsupTFN);
 		System.out.println("Actual Medsup TFN: " + actualMedsupTFN);

@@ -1,26 +1,14 @@
 
 package pages.mobile.acquisition.commonpages;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.MRScenario;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import pages.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
-import pages.mobile.acquisition.ole.WelcomePageMobile;
+import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
+import static acceptancetests.data.CommonConstants.PLANTYPE.DSNP;
+import static acceptancetests.data.CommonConstants.PLANTYPE.MA;
+import static acceptancetests.data.CommonConstants.PLANTYPE.MEDSUPP;
+import static acceptancetests.data.CommonConstants.PLANTYPE.PDP;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
+import static org.testng.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -31,11 +19,32 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
-import static acceptancetests.data.CommonConstants.PLANTYPE.*;
-import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
-import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
-import static org.testng.Assert.assertTrue;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * @author pperugu
@@ -4893,5 +4902,61 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		String stateSelected=dropdown.getFirstSelectedOption().getText();
 		System.out.println("State Selected:" + stateSelected);
 		return stateSelected;
+	}
+	
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	private WebElement zipCodeMedicareField;
+	
+	public VPPPlanSummaryPageMobile searchPlansWithOutCountyLearnMedicareMedsupp(String zipcode) throws InterruptedException {
+
+		CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+		sendkeys(zipCodeMedicareField, zipcode);
+		// jsClickNew(LearnMedicareMedsuppEnrollButton);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(LearnMedicareMedsuppEnrollButton);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(parentWindow);
+				driver.close();
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPageMobile searchPlansLearnMedicareMedsupp(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+		sendkeys(zipCodeMedicareField, zipcode);
+		CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(LearnMedicareMedsuppEnrollButton);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 }

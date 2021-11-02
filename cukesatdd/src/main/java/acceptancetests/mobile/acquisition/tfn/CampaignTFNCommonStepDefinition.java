@@ -1289,6 +1289,46 @@ public class CampaignTFNCommonStepDefinition {
 		/*CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.validateTFNHeaderAndSAMIcon();*/
 	}
+	
+	@Given("^the user is on AARP External Link and Land on MA Plans$")
+	public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg1) throws Throwable  {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String URLpath = inputAttributesMap.get("Campaign URL");
+		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	}
+	
+	@Given("^user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page$")
+	public void user_opens_tab_to_access_UHC_page() throws Exception  {
+
+		String url = "https://www.google.com/";
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//wd.manage().deleteAllCookies();
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+		tfnPage.openURLNewTabUHC(url);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	}
+	
+	@Given("^the user is on UHC acquisition site from Campaign Traffic$")
+	public void the_user_is_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrlsUMS();
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String URLpath = inputAttributesMap.get("Campaign URL");
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	}
 
 
 }
