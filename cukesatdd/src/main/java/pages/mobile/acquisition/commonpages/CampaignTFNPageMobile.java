@@ -578,8 +578,21 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	}
 
 	public void googleSearchUHC() {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement englishLangLink = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='English']")));
+			if (Objects.nonNull(englishLangLink)) {
+				jsClickNew(englishLangLink);
+			}
+		} catch (TimeoutException|NoSuchElementException e) {
+			//The google search page has loaded in English language
+		}
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
-		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
+		GoogleSearchField.click();	//Do not remove this click or change to jsClick, added to invoke keyboard on mobile device.
+		sendkeysMobile(GoogleSearchField, "UHC Medicare Advantage Plans");
+		clickSubmitFromMobileKeyboard(driver);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);
 		// UHCSearchLinkfromGoogle.click();
