@@ -1717,6 +1717,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
         // click Go, so comment it out for now
         // driver.navigate().refresh(); //rectified page load issue on stage
         CommonUtility.waitForPageLoad(driver, vppTop, 30);
+        clickonBackToPlanResults();
         validateNew(maPlansCount);
         validateNew(msPlansCount);
         validateNew(pdpPlansCount);
@@ -4144,6 +4145,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
     }
 
     public void clickOnChangeZipCode() {
+    	clickonBackToPlanResults();
         validateNew(changeLocationBtn);
         // changeLocationBtn.click();
         jsClickNew(changeLocationBtn);

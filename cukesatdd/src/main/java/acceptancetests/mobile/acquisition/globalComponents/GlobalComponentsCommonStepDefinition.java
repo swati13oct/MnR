@@ -73,12 +73,15 @@ public class GlobalComponentsCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
 	}
 
+	
 	@When("user validates TFN in header")
 	public void user_clicks_on_tfn_in_header() throws InterruptedException {
 		scenario.log("Changes made on 7/06- Step added for new Header redesign");
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+		System.out.println(">>>>> Skipping Validation <<<<< There is no TFN in header for mobile");
+		/*AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateTfnInHeader();
+		aquisitionhomepage.validateTfnInHeader();*/
+
 	}
 
 	@Then("^the user hover over Shop for a Plan and validates zipcode component$")

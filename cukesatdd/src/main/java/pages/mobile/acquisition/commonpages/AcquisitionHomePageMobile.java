@@ -1,29 +1,14 @@
 
 package pages.mobile.acquisition.commonpages;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
-import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
-import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
-import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.MRScenario;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import pages.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
-import pages.mobile.acquisition.ole.WelcomePageMobile;
+import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
+import static acceptancetests.data.CommonConstants.PLANTYPE.DSNP;
+import static acceptancetests.data.CommonConstants.PLANTYPE.MA;
+import static acceptancetests.data.CommonConstants.PLANTYPE.MEDSUPP;
+import static acceptancetests.data.CommonConstants.PLANTYPE.PDP;
+import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
+import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
+import static org.testng.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -34,11 +19,32 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
-import static acceptancetests.data.CommonConstants.PLANTYPE.*;
-import static acceptancetests.data.CommonConstants.TOOLS.PHARMACYSEARCH;
-import static acceptancetests.data.CommonConstants.TOOLS.SEARCHDOCTORS;
-import static org.testng.Assert.assertTrue;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * @author pperugu
@@ -180,12 +186,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "a[title='Estimate Drug Costs'], a[title^='Drug Cost Estimator']")
 	private WebElement DCEToolLink;
-
-	@FindBy(css = "#redirect_content")
-	private WebElement leaveAARPMedicarePlansDialog;
-
-	@FindBy(css = "#proceed")
-	private WebElement proceedLeaveAARPMedicare;
 
 	@FindBy(xpath = "//a[@class='viewLink disclaimer']")
 	private WebElement disclaimerLnkMobile;
@@ -1020,8 +1020,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-		long modelPopupTimeout = !MRScenario.environment.equals("stage") ? MRScenario.environment.equals("stage-0") ? 20 : 45 : 10;
-		
+		long modelPopupTimeout = !MRScenario.environment.equals("stage")
+				? MRScenario.environment.equals("stage-0") ? 20 : 45
+				: 10;
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
 		checkModelPopup(driver, modelPopupTimeout);
@@ -3495,14 +3497,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		clickViewDisclaimerInfoLink();
 	}
 
-	public void proceedToLeaveAARP() {
-		if (validate(leaveAARPMedicarePlansDialog)) {
-			jsClickNew(proceedLeaveAARPMedicare);
-			waitForPageLoadSafari();
-			CommonUtility.checkPageIsReadyNew(driver);
-		}
-	}
-
 	public void clickComplaintFormLink() {
 		WebElement disclaimerTab = driver.findElement(By.cssSelector("#accordion-disclaimer-button"));
 
@@ -4554,60 +4548,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 32).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
-		}
-		// ViewMedicareplanlinks.click();
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
-		String prodURL = "https://www.aarpmedicareplans.com/";
-		String offlineprodURL = "https://offline.aarpmedicareplans.com/";
-		String urlCheck = driver.getCurrentUrl();
-		String expectedURL = urlCheck.replace(prodURL, offlineprodURL);
-		System.out.println("**********Actual URL is displayed *************" + expectedURL);
-
-	}
-
 	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		switch (linkName) {
@@ -4954,110 +4894,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return testSiteUrl;
 	}
 
-	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 28).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
-		}
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-	}
-
-	@FindBy(xpath = "(//*[contains(text(),'Sign in')])[1]")
-	private WebElement memberSignInPage;
-
-	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/?WT.mc_id=8009508')]")
-	private WebElement ViewMedicareplanlinks;
-
-	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		// memberSignInPage.click();
-		jsClickNew(memberSignInPage);
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL = CurrentmemberSigninURL.substring(0, 31).trim();
-		System.out.println("memberSignin Page is displayed : " + ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: " + ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: " + ActualmemberSigninURL);
-
-		if (ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("****************member signin Page is not loaded ***************");
-		}
-		// ViewMedicareplanlinks.click();
-		validateNew(ViewMedicareplanlinks);
-		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
-		String parentWindow1 = driver.getWindowHandle();
-		jsClickNew(ViewMedicareplanlinks);
-		sleepBySec(3);
-		Set<String> tabs_windows1 = driver.getWindowHandles();
-		Iterator<String> itr1 = tabs_windows1.iterator();
-		while (itr1.hasNext()) {
-			String window = itr1.next();
-			if (!parentWindow1.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		String stageURL = "https://www.stage-aarpmedicareplans.uhc.com/";
-		String prodURL = "https://www.aarpmedicareplans.com/";
-		String urlCheck = driver.getCurrentUrl();
-		String expectedURL = urlCheck.replace(prodURL, stageURL);
-		System.out.println("**********Actual URL is displayed *************" + expectedURL);
-
-	}
-
 	public void clickOnPlanRecommendationButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement lnkPRE = driver
@@ -5289,5 +5125,62 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		String stateSelected = dropdown.getFirstSelectedOption().getText();
 		System.out.println("State Selected:" + stateSelected);
 		return stateSelected;
+	}
+
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	private WebElement zipCodeMedicareField;
+
+	public VPPPlanSummaryPageMobile searchPlansWithOutCountyLearnMedicareMedsupp(String zipcode)
+			throws InterruptedException {
+
+		CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+		sendkeys(zipCodeMedicareField, zipcode);
+		// jsClickNew(LearnMedicareMedsuppEnrollButton);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(LearnMedicareMedsuppEnrollButton);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(parentWindow);
+				driver.close();
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPageMobile searchPlansLearnMedicareMedsupp(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+		sendkeys(zipCodeMedicareField, zipcode);
+		CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(LearnMedicareMedsuppEnrollButton);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 }

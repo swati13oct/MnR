@@ -65,14 +65,15 @@ public class CampaignTFNCommonStepDefinition {
 
 	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
 	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
-		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookie();
-		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
-		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
-		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
+		HashMap<String,String> tfnCookieValue=tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE,tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE,tfnCookieValue.get("Source Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN,tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN,tfnCookieValue.get("Medsup TFN"));
 	}
 	
 	
@@ -81,9 +82,7 @@ public class CampaignTFNCommonStepDefinition {
 	public void the_user_validates_PSC_code(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String pscCode = inputAttributesMap.get("PSC Code");
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
-				.getBean(PageConstants.CAMPAIGN_TFN_PAGE, (new CampaignTFNPageMobile(wd)));
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String actualPscCode = (String) getLoginScenario().getBean(CommonConstants.PSC_CODE);
 		tfnPage.validatePSCcode(pscCode, actualPscCode);
 	}
@@ -429,16 +428,18 @@ public class CampaignTFNCommonStepDefinition {
 		 * MRScenario.environment.equalsIgnoreCase("prod") ||
 		 * MRScenario.environment.equalsIgnoreCase("stage"))) {
 		 */
+		/*AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// AcquisitionHomePageMobile aquisitionhomepage1 =
 		// (AcquisitionHomePageMobile)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
-			aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
-		} else if (getLoginScenario().environment.equalsIgnoreCase("prod")) {
-			aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
-		} else if (getLoginScenario().environment.equalsIgnoreCase("offline")) {
-			aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);*/
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			tfnPage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
+		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			tfnPage.clickonmemberSignInlink(memberSignINURL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			tfnPage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
 		} else {
 			Assertion.fail("Error in loading the UHC Agent Page");
 		}
@@ -929,11 +930,11 @@ public class CampaignTFNCommonStepDefinition {
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
 
-		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
-				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String Zip = memberAttributesMap.get("Zip Code");
 		tfnPage.HomepagePlanSearch(Zip);
-		tfnPage.ViewPlanSummary(PlanType);
+		VPPPlanSummaryPageMobile plansummaryPage = tfnPage.ViewPlanSummary(PlanType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	}
 
@@ -1135,15 +1136,13 @@ public class CampaignTFNCommonStepDefinition {
 
 	@When("^the user clicks on Agent link for MedsuppPage$")
 	public void User_navigate_through_Medsupp_EBRC(DataTable arg1) throws InterruptedException {
-		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
-		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
-		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
-				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-		if (myUHCAgentURL != null) {
-			tfnPage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
-			Assertion.assertTrue(true);
-		} else
-			Assertion.fail("Error in loading the UHC Agent Page");
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+//		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		//tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+		tfnPage.clickOnAgentLinkMedSup(TFNXpath,ExpecetdTFNNo);
 	}
 
 	@When("^the user performs plan search using Shop Pages for Medsupp Page$")
@@ -1225,16 +1224,116 @@ public class CampaignTFNCommonStepDefinition {
 	public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
 		String memberSignINURL = inputAttributesMap.get("Member Signin URL");
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		/*AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);*/
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 
 		if (memberSignINURL != null) {
-			aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+			tfnPage.clickonmemberSignInlink(memberSignINURL);
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Error in loading the UHC Agent Page");
 		// tfnPage.validateFederalTFN(TFN_Xpath);
 
 	}
+	
+	@Then("^user clicks on back to plans link to navigate plan summary$")
+	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		tfnPage.navigateBackToPlanSummaryPageFromDetailsPage();
+	}
+	
+	@Then("^the user clicks on decision guide for MedsuppPge$")
+	public void User_navigate_through_Medsupp_EBRC() throws Throwable {
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
+			tfnPage.decisionGuide();
+	}
+	
+	@Given("^user opens Google in new tab and search AARP Medicare Advantage Plan to navigate to AARP page$")
+	public void user_opens_tab_to_access_AARP_page() throws Exception  {
+
+		String url = "https://www.google.com/";
+		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//wd.manage().deleteAllCookies();
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		tfnPage.openURLNewTabAARP(url);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	}
+	
+	@Then("the user validates source code")
+	public void the_user_validates_source_code(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String expectedMedsupTFN = inputAttributesMap.get("sourceCode");
+		
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String actualMedsupTFN= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
+		tfnPage.validateMedsupTFNNo(expectedMedsupTFN,actualMedsupTFN);
+	}
+	
+	@Then("the user validates Fed TFN")
+	public void the_user_validates_fed_tfn(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String expectedFedTFN = inputAttributesMap.get("TFN No");
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String actualFedTFN= (String) getLoginScenario().getBean(CommonConstants.FED_TFN);
+		tfnPage.validateFedTFNNo(expectedFedTFN,actualFedTFN);
+	}
+	
+	@Then("the user validates MedSup TFN")
+	public void the_user_validates_med_sup_tfn(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String expectedMedsupTFN = inputAttributesMap.get("TFN No");
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String actualMedsupTFN= (String) getLoginScenario().getBean(CommonConstants.MEDSUP_TFN);
+		tfnPage.validateMedsupTFNNo(expectedMedsupTFN,actualMedsupTFN);
+	}
+	
+	@Then("^the user validates TFN Number in header and SAM icon$")
+	public void the_user_validates_TFN_number_in_header_and_SAM_icon() throws Throwable {
+		System.out.println(">>>>> Skipping Validation <<<<< There is no TFN in header for mobile");
+		/*CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		tfnPage.validateTFNHeaderAndSAMIcon();*/
+	}
+	
+	@Given("^the user is on AARP External Link and Land on MA Plans$")
+	public void the_user_is_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg1) throws Throwable  {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String URLpath = inputAttributesMap.get("Campaign URL");
+		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	}
+	
+	@Given("^user opens Google in new tab and search UHC Medicare Advantage Plan to navigate to UHC page$")
+	public void user_opens_tab_to_access_UHC_page() throws Exception  {
+
+		String url = "https://www.google.com/";
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//wd.manage().deleteAllCookies();
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+		tfnPage.openURLNewTabUHC(url);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	}
+	
+	@Given("^the user is on UHC acquisition site from Campaign Traffic$")
+	public void the_user_is_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrlsUMS();
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String URLpath = inputAttributesMap.get("Campaign URL");
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	}
+
 
 }
