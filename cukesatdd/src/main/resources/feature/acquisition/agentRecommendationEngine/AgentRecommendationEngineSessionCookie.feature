@@ -1,4 +1,5 @@
-@agentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP
+# @nonProd tag added to negate running it in offline and prod regression jobs - Aayush - 10/11
+@agentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP @nonProd
 Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
   @ARE @ClearedSessionNewCloakIn @F457409

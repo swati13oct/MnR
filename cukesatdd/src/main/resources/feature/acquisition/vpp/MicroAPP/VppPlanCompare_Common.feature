@@ -506,6 +506,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     Then validate OON Toggle is displayed on medical and additional benefits
+    Then click on OON Toggle for additional benefits
+    Then validate text under additional benefits
     When remove "<removePlanIndices>" plan from new plan compare page
     Then Validate OON Toggle is not displayed when there are no OON Plans Available
 

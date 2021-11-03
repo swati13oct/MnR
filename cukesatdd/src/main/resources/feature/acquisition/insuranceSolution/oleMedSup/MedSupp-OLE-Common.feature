@@ -1,5 +1,5 @@
 #####Added the @insuranceSolution Tag below for specific scenarios################
-@MedSupp_OLE_Common
+@MedSupp_OLE_Common @nonProd
 Feature: 1.05.9 -OLE MedSupp Flow
 
   @MedSupp_OLE_Common
