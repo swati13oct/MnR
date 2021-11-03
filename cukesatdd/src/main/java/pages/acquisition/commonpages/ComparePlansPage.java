@@ -411,6 +411,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='zipFormError']/..//*[contains(text(), 'Please enter a valid ZIP Code')]")
 	private WebElement InvalidZipError;
+	
+	@FindBy(xpath = "//div[@id='helpTextinAB']")
+	private WebElement OONTextAdditionalBenefit;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1623,6 +1626,22 @@ public class ComparePlansPage extends UhcDriver {
 //		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 	}
+	
+	public void ClickOONToggle() {
+		jsClickNew(additionalBenefitsOONToggle);
+		
+	}
+	 public void validateOONTextAdditionalBenefit() {
+		 
+		 Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
+				 OONTextAdditionalBenefit.isDisplayed());
+		 
+		 System.out.println(OONTextAdditionalBenefit.getText().trim());
+		 
+		 Assertion.assertEquals("Benefits may be accessible via mail order, online, or phone through network "
+		 		+ "providers anywhere in the U.S. View Plan Details under More Options for more information.", OONTextAdditionalBenefit.getText().trim());
+		 
+	 }
 
 	public void validateOONNotDisplayed() {
 		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
