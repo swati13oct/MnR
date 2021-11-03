@@ -1083,36 +1083,33 @@ public abstract class UhcDriver {
 	public WebElement IPerceptionPopuNoBtn;
 
 	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
-		String environment = MRScenario.environment.toLowerCase();
-		switch (environment) {
-			case "offline" :
-				timeoutInSec = timeoutInSec > 20 ? 20 : timeoutInSec;
-				break;
-			case "prod" :
-				timeoutInSec = timeoutInSec > 30 ? 30 : timeoutInSec;
-				break;
-		}
-		//CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
-		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
+		if(!(driver.getClass().toString().toUpperCase().contains("ANDROID") ||
+				driver.getClass().toString().toUpperCase().contains("IOS"))) {
+			// CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
+			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
 
-		try {
-			if (IPerceptionsPopup.isDisplayed()) {
-				// driver.switchTo().frame(IPerceptionsFrame);
-				IPerceptionPopuNoBtn.click();
-				// driver.switchTo().defaultContent();
-			}
-		} catch (Exception e) {
-			System.out.println("IPerceptions Popup not found");
-			/*try {
-				if (IPerceptionsFrame.isDisplayed()) {
-					System.out.println("IPerceptionsFrame found");
-					driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionNoBtn.click();
-					driver.switchTo().defaultContent();
+			try {
+				if (IPerceptionsPopup.isDisplayed()) {
+					// driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionPopuNoBtn.click();
+					// driver.switchTo().defaultContent();
+					System.out.println("IPerceptions Popup  found");
 				}
-			} catch (Exception e1) {
-				System.out.println("Iperceptions not found");
-			}*/
+			} catch (Exception e) {
+				System.out.println("IPerceptions Popup not found");
+				/*try {
+					if (IPerceptionsFrame.isDisplayed()) {
+						System.out.println("IPerceptionsFrame found");
+						driver.switchTo().frame(IPerceptionsFrame);
+						IPerceptionNoBtn.click();
+						driver.switchTo().defaultContent();
+					}
+				} catch (Exception e1) {
+					System.out.println("Iperceptions not found");
+				}*/
+			}
+		} else {
+			System.out.println("Popup check skipped in mobile >>>>");
 		}
 	}
 
