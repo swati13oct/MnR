@@ -885,6 +885,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public void NavigateToHome() {
 		//CheckPageLoad();
 		//CheckiPerseptions();
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 		if(driver.getCurrentUrl().contains("online-application")) {
 			WebElement HomeLogoOle = HomeLogosOle.stream().filter(homeLogo -> homeLogo.isDisplayed()).findFirst().get();
 			CommonUtility.waitForPageLoadNew(driver, HomeLogoOle, 10);
@@ -894,7 +896,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
 		} else {
-			WebElement HomeLogo = HomeLogos.stream().filter(homeLogo -> validateNew(homeLogo)).findFirst().get();
+			WebElement HomeLogo = HomeLogos.stream().filter(homeLogo -> homeLogo.isDisplayed()).findFirst().get();
 			CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
 			jsClickNew(HomeLogo);
 			System.out.println("Home Logo is clicked to navigate to Home Page");
