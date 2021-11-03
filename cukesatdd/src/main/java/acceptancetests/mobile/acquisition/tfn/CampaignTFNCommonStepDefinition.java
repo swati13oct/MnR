@@ -183,7 +183,7 @@ public class CampaignTFNCommonStepDefinition {
 	public void user_is_on_Google_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page() throws Exception {
 
 		String url = "https://www.google.com/";
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// wd.manage().deleteAllCookies();
 		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -313,7 +313,7 @@ public class CampaignTFNCommonStepDefinition {
 		String PlanType = "MA";
 		tfnPage.ViewPlanSummary(PlanType);
 		tfnPage.NavigateToPlanDetails(PlanType);
-		String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+		String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 		// tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 		tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
@@ -324,14 +324,15 @@ public class CampaignTFNCommonStepDefinition {
 		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
 		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String expectedTfnNumber = (String) getLoginScenario().getBean(CommonConstants.FED_TFN);
 		tfnPage.NavigateToHome();
 		String Zip = inputAttributesMap.get("Zip Code");
 		tfnPage.HomepagePlanSearch(Zip);
 		String PlanType = "PDP";
 		tfnPage.ViewPlanSummary(PlanType);
 		tfnPage.NavigateToPlanDetails(PlanType);
-		String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-		tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+		String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
+		tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
 	}
 
@@ -340,14 +341,15 @@ public class CampaignTFNCommonStepDefinition {
 		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
 		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String expectedTfnNumber = (String) getLoginScenario().getBean(CommonConstants.FED_TFN);
 		tfnPage.NavigateToHome();
 		String Zip = inputAttributesMap.get("Zip Code");
 		tfnPage.HomepagePlanSearch(Zip);
 		String PlanType = "SNP";
 		tfnPage.ViewPlanSummary(PlanType);
 		tfnPage.NavigateToPlanDetails(PlanType);
-		String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-		tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+		String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
+		tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
 	}
 

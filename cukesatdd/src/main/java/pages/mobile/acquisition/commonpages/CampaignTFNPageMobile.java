@@ -18,11 +18,14 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -33,7 +36,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded'] + button")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
 	public String testSiteUrl;
@@ -260,7 +263,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	public void CheckiPerseptions() {
+	//iPerseption popup is not shown on mobile, therefore commenting
+	/*public void CheckiPerseptions() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to
 																			// CommonUtility.waitForPageLoadNew as we're
 																			// not trying to fail the test if it isn't
@@ -271,7 +275,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("Proactive chat popup not displayed");
 		}
-	}
+	}*/
 
 	/**
 	 * 
@@ -465,6 +469,16 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	}
 
 	public void googleSearchAARP() {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement englishLangLink = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='English']")));
+			if (Objects.nonNull(englishLangLink)) {
+				jsClickNew(englishLangLink);
+			}
+		} catch (TimeoutException|NoSuchElementException e) {
+			//The google search page has loaded in English language
+		}
 		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
 		GoogleSearchField.click(); // Do not remove this click or change to jsClick, added to invoke keyboard on
@@ -563,8 +577,21 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	}
 
 	public void googleSearchUHC() {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement englishLangLink = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='English']")));
+			if (Objects.nonNull(englishLangLink)) {
+				jsClickNew(englishLangLink);
+			}
+		} catch (TimeoutException|NoSuchElementException e) {
+			//The google search page has loaded in English language
+		}
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
-		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
+		GoogleSearchField.click();	//Do not remove this click or change to jsClick, added to invoke keyboard on mobile device.
+		sendkeysMobile(GoogleSearchField, "UHC Medicare Advantage Plans");
+		clickSubmitFromMobileKeyboard(driver);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);
 		// UHCSearchLinkfromGoogle.click();
@@ -653,7 +680,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void SubNavPlanSearch(String zip) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		validateNew(OurPlansLink1);
 		// Hover over text
 		Actions action = new Actions(driver);
@@ -669,7 +696,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void HomepagePlanSearch(String zip) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 
 		// validateNew(OurPlansLink1);
 		// Hover over text
@@ -688,7 +715,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void HomepagePlanSearchOLE(String zip) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 
 		// validateNew(OurPlansLink1);
 		// Hover over text
@@ -759,7 +786,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile ViewPlanSummary(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 
 		navigateBackToPlanResultPage();
 
@@ -819,7 +846,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToPlanDetails(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
 		jsClickNew(firstPlanDetailsLink);
 		waitForPageLoadSafari();
@@ -839,7 +866,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToOLE(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstEnrollPlanLink, 30);
 		jsClickNew(firstEnrollPlanLink);
 		waitForPageLoadSafari();
@@ -870,7 +897,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToHomeFromPlanDetails() {
 		CheckPageLoad();
-		CheckiPerseptions();
+
+//		CheckiPerseptions();
+		
 
 		WebElement HomeLogo = HomeLogos.stream().filter(homeLogo -> homeLogo.isDisplayed()).findFirst().get();
 
@@ -902,6 +931,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			jsClickNew(HomeLogo);
 			System.out.println("Home Logo is clicked to navigate to Home Page");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if (!validateNew(zipCodeField)) {
 			Assertion.assertTrue("Home Page NOT Displayed", false);
@@ -980,7 +1010,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToOLEEnroll(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, EnrollPlanLink, 30);
 		jsClickNew(EnrollPlanLink);
 		waitForPageLoadSafari();
@@ -995,7 +1025,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void validateFederalTFNNo(String TFNXpath, String ExpectedTFNNo) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1068,7 +1098,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToPlanDetailsdce(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLinkdce, 30);
 		jsClickNew(firstPlanDetailsLinkdce);
 		waitForPageLoadSafari();
@@ -1100,7 +1130,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void NavigateToOLEEnrollDSNP(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, EnrollPlanLinkDSNP, 30);
 		jsClickNew(EnrollPlanLinkDSNP);
 		waitForPageLoadSafari();
@@ -1115,7 +1145,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void HomepagePlanSearchExternalLinks(String zip) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 
 		// validateNew(OurPlansLink1);
 		// Hover over text
@@ -1136,7 +1166,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void EnrollonVPPPage(String planType) {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, VPPEnrollPlanLinkOLE, 30);
 		jsClickNew(VPPEnrollPlanLinkOLE);
 		waitForPageLoadSafari();
@@ -1161,7 +1191,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		// DOB.click();
@@ -1324,7 +1354,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			Assertion.fail("****************  ***************");
 		}
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1449,7 +1479,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			throws InterruptedException {
 		// TODO Auto-generated method stub
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 
 		validateNew(ZipcodePharmacy);
 		CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
@@ -1483,7 +1513,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		 * Assertion.fail("****************  ***************"); }
 		 */
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1540,7 +1570,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			Assertion.fail("****************  ***************");
 		}
 		CheckPageLoad();
-		CheckiPerseptions();
+//		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
