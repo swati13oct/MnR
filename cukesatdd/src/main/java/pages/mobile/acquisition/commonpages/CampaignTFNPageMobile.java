@@ -18,11 +18,14 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -470,9 +473,15 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	}
 
 	public void googleSearchAARP() {
-		WebElement englishLangLink = CommonUtility.waitForPresenceOfElement(driver, By.xpath("//a[text()='English']"), 10);
-		if(Objects.nonNull(englishLangLink)) {
-			jsClickNew(englishLangLink);
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement englishLangLink = wait
+					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='English']")));
+			if (Objects.nonNull(englishLangLink)) {
+				jsClickNew(englishLangLink);
+			}
+		} catch (TimeoutException|NoSuchElementException e) {
+			//The google search page has loaded in English language
 		}
 		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
