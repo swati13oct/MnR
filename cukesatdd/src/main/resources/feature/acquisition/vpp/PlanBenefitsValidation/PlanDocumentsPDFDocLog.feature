@@ -96,8 +96,48 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
     Examples: 
       | excelPath                     | workSheet   | site |
       | PlanDocs_Validation_Data_2022 | Sheet2022_5 | UHC  |
-    
+
     @pdfDocLogUHC06
     Examples: 
       | excelPath                     | workSheet   | site |
       | PlanDocs_Validation_Data_2022 | Sheet2022_6 | UHC  |
+
+    @pdfDocLogUHC07
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_7 | UHC  |
+
+    @pdfDocLogAARP01
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_1 | AARP |
+
+    @pdfDocLogAARP02
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_2 | AARP |
+
+    @pdfDocLogAARP03
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_3 | AARP |
+
+    @pdfDocLogAARP04
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_4 | AARP |
+
+    @pdfDocLogAARP05
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_5 | AARP |
+
+    @pdfDocLogAARP06
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_6 | AARP |
+
+    @pdfDocLogAARP07
+    Examples: 
+      | excelPath                     | workSheet   | site |
+      | PlanDocs_Validation_Data_2022 | Sheet2022_7 | AARP |
