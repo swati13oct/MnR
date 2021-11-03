@@ -36,7 +36,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded'] + button")
+	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
 	private WebElement zipCodeField;
 
 	public String testSiteUrl;
@@ -915,6 +915,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			jsClickNew(HomeLogo);
 			System.out.println("Home Logo is clicked to navigate to Home Page");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
 			Assertion.assertTrue("Home Page NOT Displayed", false);
