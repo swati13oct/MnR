@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +18,7 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -990,14 +993,18 @@ public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws
 	}*/
 
 	String DateOfBirth = memberAttributesMap.get("DOB");
-
+	String zipCode = !StringUtils.isEmpty(memberAttributesMap.get("Zip Code")) ? memberAttributesMap.get("Zip Code") : null;
+	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-	tfnPage.MedSupFormValidationTFN(DateOfBirth);
+	boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+	if(isAddInfoLinkVisible) {
+		tfnPage.addInfoAndMedSupFormTFN();
+	} else {
+		tfnPage.MedSupFormValidationTFN(DateOfBirth);
+	}
 	
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 }
-
-
 
 @Then("^the site user clicks on Start Application Button and proceed few Pages$")
 public void Start_application_button_proceed_next_few_pages(DataTable givenAttributes) throws Throwable {
@@ -1045,12 +1052,19 @@ public void the_user_clicks_on_Agent_Link_MedSup(DataTable arg1) throws Throwabl
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String TFNXpath = inputAttributesMap.get("TFN Xpath");
 	String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+	
+	boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+	if(isAddInfoLinkVisible) {
+		tfnPage.clickAgentLinkMedsup4(TFNXpath,ExpecetdTFNNo);
+	} 
+	else 
+	
 //	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	//tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
 	tfnPage.clickOnAgentLinkMedSup(TFNXpath,ExpecetdTFNNo);
 	
-	
 	}
+
 
 
 @Then("^the user clicks on decision guide for MedsuppPge$")
@@ -1058,6 +1072,12 @@ public void User_navigate_through_Medsupp_EBRC() throws Throwable {
 	//Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	//String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
+	
+	boolean isMedsup4DOBVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//input[@id='dateOfBirth']"), 20);
+	if(isMedsup4DOBVisible) {
+		tfnPage.decisionGuidenotPresent();
+	} else
+
 	//if(myUHCAgentURL!=null){
 		tfnPage.decisionGuide();
 		//Assertion.assertTrue(true);

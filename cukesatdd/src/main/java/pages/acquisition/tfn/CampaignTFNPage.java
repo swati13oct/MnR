@@ -20,12 +20,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class CampaignTFNPage extends UhcDriver {
@@ -1116,6 +1119,11 @@ public class CampaignTFNPage extends UhcDriver {
 	// @FindBy(id = "msVppDOB")
 	@FindBy(xpath = "//input[contains(@id,'msVppDOB')]")
 	private WebElement DOB;
+	
+	
+
+	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
+	private WebElement addYourInformation;
 
 	public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
 		CheckPageLoad();
@@ -1453,9 +1461,10 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement decisionGuideClick;
 
 	public void decisionGuide() {
-		validateNew(decisionGuideClick);
-		jsClickNew(decisionGuideClick);
-	}
+			validateNew(decisionGuideClick);
+			jsClickNew(decisionGuideClick);
+			}
+
 
 	public void openURLNewTabAARP(String url) {
 		// get original tab handler
@@ -1590,4 +1599,63 @@ public class CampaignTFNPage extends UhcDriver {
 					"****************Expected Source code DOES NOT match Actual Source code from TFN cookie ***************");
 		}
 	}
-}
+
+	
+		public void addInfoAndMedSupFormTFN() throws InterruptedException {
+			CheckPageLoad();
+			CheckiPerseptions();
+			validate(addYourInformation, 30);
+			jsClickNew(addYourInformation);
+		}
+		public void decisionGuidenotPresent() {
+		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		driver.navigate().back();
+		
+		}
+
+		@FindBy(xpath = "//a[contains(normalize-space(),'Find an Agent')]")
+		private WebElement findAnAgentMedsupp4;
+		
+		public void clickAgentLinkMedsup4(String TFNXpath, String ExpecetdTFNNo) {
+			validateNew(findAnAgentMedsupp4);
+			CommonUtility.waitForPageLoadNew(driver, findAnAgentMedsupp4, 30);
+			String parentWindow = driver.getWindowHandle();
+			findAnAgentMedsupp4.click();
+			sleepBySec(3);
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentRailURL = driver.getCurrentUrl();
+			System.out.println("Actual  URL: " + CurrentRailURL);
+
+			if (CurrentRailURL.contains("myuhcagent")) {
+				System.out.println("****************  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail("****************  ***************");
+			}
+			CheckPageLoad();
+			CheckiPerseptions();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+			validateNew(ActualTFNelement);
+			// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+				System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
+
+			}
+
+			else {
+				Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
+			}
+
+			driver.navigate().back();
+
+		}
+			}
+	
+	

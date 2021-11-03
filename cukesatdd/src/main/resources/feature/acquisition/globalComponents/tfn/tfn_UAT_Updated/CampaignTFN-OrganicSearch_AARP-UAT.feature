@@ -44,21 +44,6 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
-    #Then the user navigates to plan tab for any plan
-    #  | Plan Type | <MSplantype> |
-    # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
-    #| Plan Type | <MSplantype> |
-    Then user clicks on back to plans link to navigate plan summary
-    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    # | Zip Code | <zipcode> |
-    Then user clicks on Change Zip code link
-    Then user clicks on Select by Address and Enter fileds
-      | Address | <address> |
-      | City    | <city>    |
-      | State   | <state>   |
-    When the user clicks on Find plans on vpp using following information
-      | County Name2     | <county2>        |
-      | Is Multi County2 | <isMultiCounty2> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -71,8 +56,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the site user fills all the details in MedsuppPage for TFN
       | DOB | <dob> |
     Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>    |
-      | TFN Xpath | <MedsuppTFNxpath> |
+      | TFN No    | <MedsuppTFNNo>        |
+      | TFN Xpath | <MedsuppFormTFNxpath> |
     #When the user clicks on Agent link for MedsuppPage
     #| UHC Agent URL | <UHCUrl> |
     Then the user clicks on decision guide for MedsuppPge
@@ -103,10 +88,15 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
 
-    @campaignTFNProd
+    @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup3.0 @campaignTFNProd
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | address               | city     | state    | county2         | isMultiCounty2 |
-      | Sc. 3.08 - AMP |  810106 |         810104 |   10001 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 3333 BROADWAY APT B7G | New York | New York | New York County | no             |
+      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | MedsuppFormTFNxpath               |
+      | Sc. 3.08 - AMP |  810106 |         810104 |   10001 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | //*[contains(@class,'tel right')] |
+
+    @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup4.0 @campaignTFNProd
+    Examples: 
+      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN                            | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                                    | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | MedsuppFormTFNxpath                         |
+      | Sc. 3.08 - AMP |  810106 |         810104 |   90210 | 11/11/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //span[contains(@class, 'invoca_swap_sam')] | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class, 'invoca_swap text-bold tel')] | https://www.myuhcagent.com/ | MA         | PDP         | MS4.0      | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | //span[contains(@class, 'invoca_swap_sam')] |
 
   #######################Script 6a: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT

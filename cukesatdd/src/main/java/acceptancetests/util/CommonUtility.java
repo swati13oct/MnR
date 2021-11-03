@@ -416,6 +416,7 @@ public class CommonUtility {
 
 	}
 	
+		
 	public static void waitForPageLoadNewForClick(WebDriver driver, WebElement element, long timeout) {
 
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -488,5 +489,26 @@ public class CommonUtility {
 		}
 		
 		return attributeValue;
+	}
+	
+	public static boolean waitAndVerifyIfElementVisibleOnPage(WebDriver driver, By xPath, long timeout) {
+
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		try {
+			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOfElementLocated(xPath));
+			if (elementExpected.isDisplayed()) {
+				System.out.println("The element: " + elementExpected + " is visible");
+				return true;
+			} else {
+				System.out.println("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
+				return false;
+			}
+		} catch (Exception e) {
+			Assertion.fail("Not able to locate this element -- " + xPath.toString() + " on page");
+			System.out.println(e.getMessage());
+			return false;
+		}
+
 	}
 }
