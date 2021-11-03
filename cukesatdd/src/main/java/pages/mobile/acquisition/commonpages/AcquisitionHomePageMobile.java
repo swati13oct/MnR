@@ -1020,11 +1020,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openAndValidate() {
-		//long modelPopupTimeout = !MRScenario.environment.equals("stage") ? MRScenario.environment.equals("stage-0") ? 20 : 45 : 10;
+		long modelPopupTimeout = !MRScenario.environment.equals("stage") ? MRScenario.environment.equals("stage-0") ? 20 : 45 : 10;
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, viewPlansButton, 20);
-		//checkModelPopup(driver, modelPopupTimeout);
+		checkModelPopup(driver, modelPopupTimeout);
 		clickUpdateLaterBrowserButton();
 	}
 
