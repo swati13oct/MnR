@@ -1,8 +1,8 @@
-@campaignTFN @regressionAARP @campaignTFNProd
+@campaignTFN @campaignTFNProd 
 Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
   #######################Script 3: Organic Search via Google and Bing##########################################
-  @Scenario3_1_GoogleBingSearch_AARP_UAT @UATRegression
+  @Scenario3_1_GoogleBingSearch_AARP_UAT @UATRegression @prodRegression
   Scenario Outline: - <scenario> 3.1 Google search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
@@ -290,7 +290,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | Scenario 6a: Campaign Precedence- AMP | ulayer |   90210 |         810106 |         860002 |        8001533 |        8001533 |         810027 |         810106 |        8001533 |         810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210 | /shop/medicare-advantage-plans.html?WT.mc_id=8001533 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | /shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 1-866-327-1593 | 1-877-610-2672 | 1-888-708-8922 | 1-877-656-8358 | 1-844-891-4867 | 1-877-699-5710 | 1-800-850-8230 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'invoca_swap')] |1-800-850-6807|1-866-327-1593|5T9|1-877-610-2672|1-888-708-8922|55Y|1-877-656-8358|1-844-891-4867|9EF|1-877-656-8358|1-844-891-4867|9EF|1-877-699-5710|1-866-408-5545|AEP|1-800-850-6807|1-866-327-1593|5T9|1-877-656-8358|1-844-891-4867|9EF|
 
   #######################Script 6b: Campaign Precedence Logic#######################################
-  @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT
+  @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT @prodRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1
     ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
     Given the user Starts WebDriver
