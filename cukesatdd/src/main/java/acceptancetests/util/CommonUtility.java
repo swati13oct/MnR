@@ -416,7 +416,6 @@ public class CommonUtility {
 
 	}
 	
-		
 	public static void waitForPageLoadNewForClick(WebDriver driver, WebElement element, long timeout) {
 
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -505,7 +504,6 @@ public class CommonUtility {
 				return false;
 			}
 		} catch (Exception e) {
-			Assertion.fail("Not able to locate this element -- " + xPath.toString() + " on page");
 			System.out.println(e.getMessage());
 			return false;
 		}

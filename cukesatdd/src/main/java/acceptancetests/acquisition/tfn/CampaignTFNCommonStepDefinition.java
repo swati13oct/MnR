@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -324,7 +325,7 @@ public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TF
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "(//a[contains(@class, 'tel')])[3]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
@@ -993,17 +994,26 @@ public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws
 	}*/
 
 	String DateOfBirth = memberAttributesMap.get("DOB");
-	String zipCode = !StringUtils.isEmpty(memberAttributesMap.get("Zip Code")) ? memberAttributesMap.get("Zip Code") : null;
+	String zipCode = memberAttributesMap.get("zipcode");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+	
+
+
+boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210") || !isAddInfoLinkVisible && zipCode.equals("10001")) ? true : (isAddInfoLinkVisible && zipCode.equals("10001") || !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+	
+	Assert.assertTrue(assertionToFailOrPass, "*** isMedsup4DOB Visible/Invisible : '"+isAddInfoLinkVisible+"' for zipCode : '"+zipCode+"'");
+	
+
+
 	if(isAddInfoLinkVisible) {
-		tfnPage.addInfoAndMedSupFormTFN();
+	tfnPage.addInfoAndMedSupFormTFN();
 	} else {
 		tfnPage.MedSupFormValidationTFN(DateOfBirth);
-	}
 	
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+}
 }
 
 @Then("^the site user clicks on Start Application Button and proceed few Pages$")
@@ -1047,33 +1057,49 @@ public void the_user_close_reopen_broswer() {
 	}
 
 @When("^the user clicks on Agent link for MedsuppPage$")
-public void the_user_clicks_on_Agent_Link_MedSup(DataTable arg1) throws Throwable {
-	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-	String TFNXpath = inputAttributesMap.get("TFN Xpath");
-	String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
-	
-	boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
-	if(isAddInfoLinkVisible) {
-		tfnPage.clickAgentLinkMedsup4(TFNXpath,ExpecetdTFNNo);
-	} 
-	else 
-	
-//	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
-	//tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
-	tfnPage.clickOnAgentLinkMedSup(TFNXpath,ExpecetdTFNNo);
-	
+	public void the_user_clicks_on_Agent_Link_MedSup(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("zipcode");
+
+		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+
+		boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
+				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("10001")
+								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+				"*** isAddInfoLinkVisible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
+
+		if (isAddInfoLinkVisible) {
+			tfnPage.clickAgentLinkMedsup4(TFNXpath, ExpecetdTFNNo);
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.clickOnAgentLinkMedSup(TFNXpath, ExpecetdTFNNo);
+
 	}
 
 
 
 @Then("^the user clicks on decision guide for MedsuppPge$")
-public void User_navigate_through_Medsupp_EBRC() throws Throwable {
-	//Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	//String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+public void User_navigate_through_Medsupp_EBRC(DataTable dataTable) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(dataTable);
+	String zipCode = inputAttributesMap.get("zipcode");
+	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
 	
 	boolean isMedsup4DOBVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//input[@id='dateOfBirth']"), 20);
+	
+	boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210") || !isMedsup4DOBVisible && zipCode.equals("10001")) ? true : (isMedsup4DOBVisible && zipCode.equals("10001") || !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
+	
+	Assert.assertTrue(assertionToFailOrPass, "*** isMedsup4DOB Visible/Invisible : '"+isMedsup4DOBVisible+"' for zipCode : '"+zipCode+"'");
+	
 	if(isMedsup4DOBVisible) {
 		tfnPage.decisionGuidenotPresent();
 	} else
@@ -1259,11 +1285,11 @@ public void the_user_validates_TFN_number_in_header_and_SAM_icon() throws Throwa
 @Then("the user validates source code")
 public void the_user_validates_source_code(DataTable inputAttributes) {
 	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
-	String expectedMedsupTFN = inputAttributesMap.get("sourceCode");
+	String expectedSrcCode = inputAttributesMap.get("sourceCode");
 	wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
-	String actualMedsupTFN= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
-	tfnPage.validateMedsupTFNNo(expectedMedsupTFN,actualMedsupTFN);
+	String actualSrcCode= (String) getLoginScenario().getBean(CommonConstants.SRC_CODE);
+	tfnPage.validateSourceCode(expectedSrcCode,actualSrcCode);
 }
 }
 
