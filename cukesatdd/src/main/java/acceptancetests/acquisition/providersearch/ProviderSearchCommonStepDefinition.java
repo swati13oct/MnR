@@ -70,6 +70,57 @@ public class ProviderSearchCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
 		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
+	
+	
+	@When("^user selects a Behaviour and returns to VPP page$")
+	public void user_selects_a_Behaviour_and_returns_to_VPP_page() {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsBehaviour();
+		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
+	
+	@When("^user selects a Dental and retuns to VPP page$")
+	public void user_selects_a_Dental_and_retuns_to_VPP_page() {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsDental();
+		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
+	
+	
+	@When("^the user Click on Provider covered link$")
+	public void UserclickonProvidercoveredlink(DataTable Planname ){
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname
+				.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
+					.get(0), plannameAttributesRow.get(i).getCells().get(1));
+		}*/
+		String planName = plannameAttributesMap.get("PlanName");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		//ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+		ProviderSearchPage providerSearchPage = plansummaryPage.ProviderCovered(planName);
+		
+		if(providerSearchPage!=null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+	
+	@When("^user selects a Dental Behaviour Medical provider and retuns to VPP page$")
+	public void user_selects_Dental_Behaviour_Medical_provider_and_retuns_to_VPP_page() {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+		plansummaryPage = providerSearchPage.selectsBehaviour();
+		plansummaryPage = providerSearchPage.selectsDental();
+		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
 			
 			
 	/**

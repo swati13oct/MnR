@@ -414,6 +414,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='helpTextinAB']")
 	private WebElement OONTextAdditionalBenefit;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png']")
+	private WebElement DentalIcon;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png']")
+	private WebElement DoctorIcon;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png']")
+	private WebElement BehaviourIcon;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -912,6 +921,10 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(FirstProviderName);
 		validateNew(viewlocationsLink);
 		System.out.println("Verified Edit Doctors Section");
+	}
+	
+	public void validateIcons() {
+		
 	}
 	
 	public void validateAllDoctors() {

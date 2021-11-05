@@ -1230,6 +1230,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	public ProviderSearchPage ProviderCovered(String planName) {
+
+		sleepBySec(5);
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		validateNew(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
+		ProviderSearchLink.click();
+		WebElement SearchDoctors = driver.findElement(By.xpath("//*[@class='edit-providers']/a"));
+		switchToNewTabNew(SearchDoctors);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+	}
 	public void validateclicksOnIsProviderCovered(String planName) {
 
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
