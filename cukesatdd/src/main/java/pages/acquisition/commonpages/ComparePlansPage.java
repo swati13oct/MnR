@@ -924,6 +924,9 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void validateIcons() {
+		validateNew(DentalIcon);
+		validateNew(DoctorIcon);
+		validateNew(BehaviourIcon);
 		
 	}
 	
