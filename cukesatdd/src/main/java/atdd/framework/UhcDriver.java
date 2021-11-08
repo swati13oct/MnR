@@ -1201,6 +1201,7 @@ public abstract class UhcDriver {
 				Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
 			}
 			driver.navigate().back();
+			driver.switchTo().window(winHandleBefore);
 			return timeStr;
 		} else {
 
