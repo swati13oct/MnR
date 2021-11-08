@@ -3,7 +3,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic__UHC_UAT @UATRegression
-  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario> <zipcode> Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -114,7 +114,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
   #######################Script 2: Campaign traffic########################################
   @Scenario_2_CampaignTraffic_UHC_UAT @UATRegression
-  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
+  Scenario Outline: <scenario> <zipcode> Verify TFN for different plan types through Campaign Traffic
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
@@ -122,6 +122,12 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+      Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -198,22 +204,28 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
     @Scenario_2_CampaignTraffic_UHC_UAT_medsup3.0
     Examples: 
-      | scenario         | site   | pscCode | zipcode | campaignUrl                                                                                                   | maUrl                     | connectUrl       | TFNNo          | MedsuppTFNNo   | TFNxpath                          | MedsuppTFNxpath                                                           | EnrollTFNxpath                    | ConnectTFNxpath                   | MAplantype | MSplantype | PDPplantype | SNPplantype |
-      | Scenario 2 - UMS | blayer | 8003728 |   10001 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS         | PDP         | SNP         |
+      | scenario         | site   | pscCode | zipcode | campaignUrl                                                                                                   | maUrl                     | connectUrl       | TFNNo          | MedsuppTFNNo   | TFNxpath                          | MedsuppTFNxpath                                                           | EnrollTFNxpath                    | ConnectTFNxpath                   | MAplantype | MSplantype | PDPplantype | SNPplantype |FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenario 2 - UMS | blayer | 8003728 |   10001 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS         | PDP         | SNP         |1-855-448-4586|1-866-271-0607|G3Y|
 
     @Scenario_2_CampaignTraffic_UHC_UAT_medsup4.0
     Examples: 
-      | scenario         | site   | pscCode | zipcode | campaignUrl                                                                                                   | maUrl                     | connectUrl       | TFNNo          | MedsuppTFNNo   | TFNxpath                          | MedsuppTFNxpath                                    | EnrollTFNxpath                    | ConnectTFNxpath                   | MAplantype | MSplantype | PDPplantype | SNPplantype |
-      | Scenario 2 - UMS | blayer | 8003728 |   90210 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS4.0         | PDP         | SNP         |
+      | scenario         | site   | pscCode | zipcode | campaignUrl                                                                                                   | maUrl                     | connectUrl       | TFNNo          | MedsuppTFNNo   | TFNxpath                          | MedsuppTFNxpath                                    | EnrollTFNxpath                    | ConnectTFNxpath                   | MAplantype | MSplantype | PDPplantype | SNPplantype |FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenario 2 - UMS | blayer | 8003728 |   90210 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS4.0         | PDP         | SNP         |1-855-448-4586|1-866-271-0607|G3Y|
 
   #######################Script 5: Email Validation########################################
   @Scenario_5_2_DirectTraffic_Email_UHC_UAT @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario>  Verify TFN through Email validation
+  Scenario Outline: <scenario> <zipcode> Verify TFN through Email validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+      Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -222,6 +234,12 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode1> |
+     Then the user validates source code
+      | sourceCode | <sourceCode1> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo1> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo1> |
     Then the user validates TFN Number
       | TFN No    | <EmailTFNNo>    |
       | TFN Xpath | <EmailTFNxpath> |
@@ -244,8 +262,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN Xpath | <MedicareSupplementTFNxpath> |
 
     Examples: 
-      | scenario               | site | pscCode | pscCode1 | emailLinkUrl                                                       | medicareUrl            | shoppagesUrl                        | TFNNo          | TFNxpath                          | EmailTFNNo     | MedicareSupplementTFNNo | MedicareSupplementTFNxpath        | EmailTFNxpath                                                                  |
-      | Scenario 5-Email - UMS | UHC  |  880180 |  8014300 | ?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 | medicare-articles.html | shop/medicare-supplement-plans.html | 1-877-596-3258 | (//a[contains(@class, 'tel')])[3] | 1-855-569-9796 | 1-866-253-1495          | (//a[contains(@class, 'tel')])[4] | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] |
+      | scenario               | site | pscCode | pscCode1 | emailLinkUrl                                                       | medicareUrl            | shoppagesUrl                        | TFNNo          | TFNxpath                          | EmailTFNNo     | MedicareSupplementTFNNo | MedicareSupplementTFNxpath        | EmailTFNxpath                                                                  |FedTFNNo1       | MedSupTFNNo1    | sourceCode1 |FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenario 5-Email - UMS | UHC  |  880180 |  8014300 | ?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 | medicare-articles.html | shop/medicare-supplement-plans.html | 1-877-596-3258 | (//a[contains(@class, 'tel')])[3] | 1-855-569-9796 | 1-866-253-1495          | (//a[contains(@class, 'tel')])[4] | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] |1-855-569-9796|1-866-253-1495|94L|1-877-596-3258 | 1-888-378-0254 | AEP        |
 
   #######################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT @UATRegression
@@ -258,6 +276,12 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+      Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -315,10 +339,10 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
     @Scenario_6_External_Link_UHC_UAT_Medsup3.0
     Examples: 
-      | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | MAplantype |
-      | Scenerio 6-ExternalLink - UMS | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID39 | TiggerTigger7 | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | MA         |
+      | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | MAplantype |FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenerio 6-ExternalLink - UMS1 | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID39 | TiggerTigger7 | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | MA         |1-877-755-5345|1-877-755-5345|MOR|
 
     @Scenario_6_External_Link_UHC_UAT_Medsup4.0
     Examples: 
-      | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | MAplantype |
-      | Scenerio 6-ExternalLink - UMS | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=90210&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID39 | TiggerTigger7 | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | MA         |
+      | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | MAplantype |FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenerio 6-ExternalLink - UMS2 | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=90210&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID39 | TiggerTigger7 | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | MA         |1-877-755-5345|1-877-755-5345|MOR|
