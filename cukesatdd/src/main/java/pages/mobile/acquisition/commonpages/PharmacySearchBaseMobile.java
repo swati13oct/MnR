@@ -101,10 +101,12 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
-
+	
 		sleepBySec(3);
 
-		if (driver.findElement(By.xpath("//*[@id='lang-select']")).getText().contains("中文 ")) {
+		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona un idioma")) {
+			jsClickNew(distanceZipTextLabel);
+		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
 			jsClickNew(distanceZipTextLabel);
 		} else {
 			jsClickNew(distanceLabel);
