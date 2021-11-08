@@ -1991,6 +1991,15 @@ private Scenario scenario;
 		planComparePage.validateDoctors();
 	}
 	
+	@Then("^verify_icons_loaded_with_doctor_summary_on_Plan_Compare_page$")
+	public void verify_icons_covered() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateIcons();
+	}
+	
+	
+	
 	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
 	public void verify_all_doctors_covered() {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
