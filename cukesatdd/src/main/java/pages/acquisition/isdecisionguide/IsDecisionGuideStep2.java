@@ -376,7 +376,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		
 		if(validateNew(SubmitBtn)&& SubmitBtn.isDisplayed())
 		jsClickNew(SubmitBtn);
-		
+		waitForPageLoadSafari();
 		System.out.println("Submit Button Clicked on decision guide page");
 		
 		
