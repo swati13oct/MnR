@@ -230,8 +230,8 @@ public class WelcomePage extends UhcDriver{
 		//	Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
-				validateNew(VPPTFNNo);
-				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
+//				validateNew(VPPTFNNo);
+//				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
 				//String VPPTFNNoActual = VPPTFNNo.getText();
 				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
 				//CheckiPerseptions();
