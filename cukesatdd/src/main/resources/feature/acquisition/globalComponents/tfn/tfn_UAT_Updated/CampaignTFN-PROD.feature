@@ -2,7 +2,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic_UAT_PROD @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario> <zipcode> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -86,7 +86,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT_PROD @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario> 1.0 Verify TFN through External Links
+  Scenario Outline: <scenario> <zipcode> 1.0 Verify TFN through External Links
     #Given the user Starts WebDriver
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -131,7 +131,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic__UHC_UAT_PROD @UATRegression
-  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario> <zipcode> Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -216,7 +216,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   ###################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT_PROD @UATRegression
-  Scenario Outline: <scenario>  Verify TFN through External Links
+  Scenario Outline: <scenario> <zipcode>  Verify TFN through External Links
     #Given the user Starts WebDriver
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
