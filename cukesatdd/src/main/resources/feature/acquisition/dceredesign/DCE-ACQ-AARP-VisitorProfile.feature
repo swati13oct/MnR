@@ -119,7 +119,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) | 10001   | NO            | New York County |
 
-  @dceShopperProfileAddDrugsGloballyAuthenticatedUser @decRelease
+  @dceShopperProfileAddDrugsGloballyAuthenticatedUser @decRelease @nonProd
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally for authenticated user
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

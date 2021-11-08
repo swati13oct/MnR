@@ -3183,6 +3183,22 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONDDisplayed();
 	}
+	
+	@Then("^click on OON Toggle for additional benefits$")
+	public void click_on_OON_Toggle_for_additional_benefits() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.ClickOONToggle();
+	}
+	
+
+	@Then("^validate text under additional benefits$")
+	public void validate_text_under_additional_benefits() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONTextAdditionalBenefit();
+	}
+	
 
 	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
 	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
