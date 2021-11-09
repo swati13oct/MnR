@@ -12,7 +12,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP @HPA
+    @avengersRegressionAARP 
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ |

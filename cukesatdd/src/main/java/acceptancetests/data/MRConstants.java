@@ -670,6 +670,8 @@ public class MRConstants {
 	public static final String STAGE_DEEPLINK_URL_payments_overview_new = "https://stage-medicare.uhc.com/member/payments/overview-new.html";
 
 	public static String PROV_NAME = "";
+	public static String BEHAV_NAME = "";
+	public static String DENT_NAME = "";
 	public static final String AARP_HAWL = "http://stage-myaarpmedicare.uhc.com/extras";
 	// public static final String
 	// AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";

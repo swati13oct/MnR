@@ -3,7 +3,9 @@
  */
 package pages.acquisition.commonpages;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,11 +15,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.DataTableParser;
 import atdd.framework.UhcDriver;
+import io.cucumber.datatable.DataTable;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 
 /**
@@ -104,8 +110,17 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "//button[@data-test-id='People']")
 	private WebElement People;
 
+	@FindBy(xpath = "//button[@data-test-id='GeneralDentists']")
+	private WebElement GeneralDentist;
+
 	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]")
 	private WebElement MedicalDirectory;
+
+	@FindBy(xpath = "//*[contains(@data-test-id,'BehavioralHealthDirectory')]")
+	private WebElement BehaviourDirectory;
+
+	@FindBy(xpath = "//*[contains(@data-test-id,'DentalHealthDirectory')]")
+	private WebElement DentalDirectory;
 
 	@FindBy(xpath = "//button[@data-test-id='Places']")
 	private WebElement Places;
@@ -115,6 +130,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-test-id='PrimaryCare']")
 	private WebElement Primary;
+
+	@FindBy(xpath = "//button[@data-test-id='MedicalVirtualCare']")
+	private WebElement VirtualCare;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
@@ -169,6 +187,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[text()='Finish & Return']")
 	private WebElement FinishReturnButton;
+
+	@FindBy(xpath = "//*[@track='Find Care']")
+	private WebElement FindCare;
 
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -276,6 +297,136 @@ public class ProviderSearchPage extends UhcDriver {
 		threadsleep(3);
 		waitForCountDecrement(2);
 		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		return new VPPPlanSummaryPage(driver);
+	}
+
+	public VPPPlanSummaryPage selectsBehaviour() {
+
+		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
+		FindCare.click();
+
+		CommonUtility.waitForPageLoadNew(driver, BehaviourDirectory, 30);
+		BehaviourDirectory.click();
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		// CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		// Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, VirtualCare, 30);
+
+		VirtualCare.click();
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
+
+		if (validate(selectLocationOption, 10)) {
+			jsClickNew(selectLocationOption);
+			validateNew(saveBtn2);
+			jsClickNew(saveBtn2);
+		}
+		threadsleep(10);
+		validateNew(providerNameText);
+		String BehaviourSaved = providerNameText.getText().trim();
+		System.out.println("Provider Name is : " + BehaviourSaved);
+		MRConstants.BEHAV_NAME = BehaviourSaved;
+
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ Viewsavebtn.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			jsClickNew(Checkcoverage);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+
+		threadsleep(3);
+		waitForCountDecrement(2);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		return new VPPPlanSummaryPage(driver);
+	}
+
+	public VPPPlanSummaryPage selectsDental() {
+
+		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
+		FindCare.click();
+
+		CommonUtility.waitForPageLoadNew(driver, DentalDirectory, 30);
+		DentalDirectory.click();
+
+		CommonUtility.waitForPageLoadNew(driver, GeneralDentist, 30);
+		GeneralDentist.click();
+
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
+
+		if (validate(selectLocationOption, 10)) {
+			jsClickNew(selectLocationOption);
+			validateNew(saveBtn2);
+			jsClickNew(saveBtn2);
+		}
+		threadsleep(10);
+		validateNew(providerNameText);
+		String DentalSaved = providerNameText.getText().trim();
+		System.out.println("Provider Name is : " + DentalSaved);
+		MRConstants.DENT_NAME = DentalSaved;
+
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ Viewsavebtn.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			jsClickNew(Checkcoverage);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+
+		threadsleep(3);
+		waitForCountDecrement(2);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		// note: setting the implicit wait back to default value - 10

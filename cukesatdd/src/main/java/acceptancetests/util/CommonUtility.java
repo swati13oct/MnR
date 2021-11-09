@@ -490,6 +490,27 @@ public class CommonUtility {
 		return attributeValue;
 	}
 	
+	public static boolean waitAndVerifyIfElementVisibleOnPage(WebDriver driver, By xPath, long timeout) {
+
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		try {
+			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOfElementLocated(xPath));
+			if (elementExpected.isDisplayed()) {
+				System.out.println("The element: " + elementExpected + " is visible");
+				return true;
+			} else {
+				System.out.println("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	
+
 	/**
 	 * Wait until presence of element in DOM.
 	 *

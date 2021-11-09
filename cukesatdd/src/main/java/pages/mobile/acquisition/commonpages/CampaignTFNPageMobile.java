@@ -108,7 +108,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage
 	// (Part C) Plans - UHC ..')]")
-	@FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans')])/..")
+	@FindBy(xpath = "//div[text()='Learn More About Medicare Advantage Plans']")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")

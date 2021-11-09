@@ -26,6 +26,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
@@ -142,6 +143,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
 	private WebElement validateEmailButtonOnPlanDetails;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
+	public WebElement comparePlansLink1;
+	public ComparePlansPageMobile navigateToPlanCompare() {
+		jsClickNew(comparePlansLink1);
+		return new ComparePlansPageMobile(driver);
+		
+	}
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
 	private WebElement emailPopup;
@@ -1752,7 +1761,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
 		jsClickNew(addToCompareLabel);
-		jsClickNew(comparePlansLink);
+		jsClickNew(comparePlansLink1);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
