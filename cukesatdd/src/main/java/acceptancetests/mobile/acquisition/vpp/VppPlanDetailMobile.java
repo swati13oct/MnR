@@ -2629,7 +2629,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 	}
 
 	@Then("^user verify the popup and content in popup$")
@@ -2662,7 +2663,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 
@@ -3787,7 +3789,7 @@ public class VppPlanDetailMobile {
 		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
-		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailPage();
 		if (plansummaryPage != null) {
 			Assertion.assertTrue(true);
 		} else
@@ -3798,6 +3800,7 @@ public class VppPlanDetailMobile {
 	public void user_click_on_compare_checkbox_AARP() {
 		VPPPlanSummaryPageMobile vppplansummarypage = (VPPPlanSummaryPageMobile) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
 		vppplansummarypage.clickCompareChkBox();
 		PlanDetailsPageMobile planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
 		if (planDetailsPage != null) {
@@ -3818,7 +3821,8 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 

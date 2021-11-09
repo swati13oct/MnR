@@ -28,19 +28,19 @@ public class PrescriptionDrugCoveragePageMobile extends UhcDriver{
 	@FindBy(xpath = "//label[@for='drug-coverage-yes']")
 	private WebElement pdcyes;
 	
-	@FindBy(id = "insurance-name")
+	@FindBy(css = "#insurance-name")
 	private WebElement pdcnameofinsur;
 	
-	@FindBy(id = "group-id")
+	@FindBy(css = "#group-id")
 	private WebElement pdcgroupid;
 	
-	@FindBy(id = "member-id")
+	@FindBy(css = "#member-id")
 	private WebElement pdcmemberid;
 	
-	@FindBy(id = "pdcsaveandcont")
+	@FindBy(css = "#pdcsaveandcont")
 	private WebElement pdcsaveandcont;
 	
-	@FindBy(id = "pdccancel")
+	@FindBy(css = "#pdccancel")
 	private WebElement pdccancel;
 	
 	private PageData prescriptiondrugcoverageInformation;

@@ -108,7 +108,7 @@ public class UlayerTFNPageMobile extends UhcDriver {
 	@FindBy(xpath="//*[@id='globalContentIdForSkipLink']/div/div/div[6]/div/section/div/div/div[1]/div[1]/div/div/div/div/div/p[1]/span/a")
 	public WebElement LearnAboutMedicareTFNumber;
 	
-	@FindBy(id = "gfn_lnk_row3_1")
+	@FindBy(css = "#gfn_lnk_row3_1")
 	 public WebElement learnAboutMedicareLink;
 
 	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
@@ -141,10 +141,10 @@ public class UlayerTFNPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'clientLogo')]")
 	public WebElement popUpLogo;
 
-	@FindBy(id = "IPerceptionsEmbed")
+	@FindBy(css = "#IPerceptionsEmbed")
 	private WebElement iPerceptionBody;
 
-	@FindBy(id = "closeButton")
+	@FindBy(css = "#closeButton")
 	private WebElement iPerceptionCloseButton;
 
 	@FindBy(xpath = "//label[contains(@for,'next_Year')]")

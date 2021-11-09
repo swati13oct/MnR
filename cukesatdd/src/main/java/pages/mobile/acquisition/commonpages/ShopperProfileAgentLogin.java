@@ -33,16 +33,16 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 		return loginScenario;
 	}
 
-	@FindBy(id = "loginusername")
+	@FindBy(css = "#loginusername")
 	private WebElement username;
 
-	@FindBy(id = "loginpassword")
+	@FindBy(css = "#loginpassword")
 	private WebElement password;
 
 	@FindBy(xpath = "//button")
 	private WebElement btnLogin;
 
-	@FindBy(id = "visitorsEmail")
+	@FindBy(css = "#visitorsEmail")
 	private WebElement visitorEmail;
 
 	public ShopperProfileAgentLogin(WebDriver driver) {

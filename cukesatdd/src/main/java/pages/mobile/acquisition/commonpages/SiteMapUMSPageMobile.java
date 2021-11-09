@@ -29,7 +29,7 @@ public class SiteMapUMSPageMobile extends UhcDriver{
 	@FindBy(className = "med_cont")
 	private WebElement siteMapTable;
 	
-	@FindBy(id = "medicareTitle")
+	@FindBy(css = "#medicareTitle")
 	private WebElement medicareTitle;
 
 	@FindBy(id="PO7link")

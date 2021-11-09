@@ -118,7 +118,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     #And user clicks on Request Assistance and validates modal window ulayer
     #And user verifies home link of agents & brokers page
    
-    @vppPlanCompareCommon_AARP01 @regressionAARP
+    @vppPlanCompareCommon_AARP01 @regressionAARP 
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | AARP |   90210 | No            | Los Angeles County | MAPD     | current   |
@@ -155,7 +155,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And I select "<plantype>" plans to compare and click on compare plan link
     Then the user clicks on back on all plan link in Plan Compare page
 
-    @vppPlanCompareCommon_AARP01 @regressionAARP
+    @vppPlanCompareCommon_AARP01 @regressionAARP 
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | AARP |   90210 | No            | Los Angeles County | MAPD     | current   |

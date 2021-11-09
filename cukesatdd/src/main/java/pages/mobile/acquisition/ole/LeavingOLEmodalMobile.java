@@ -16,13 +16,13 @@ import atdd.framework.UhcDriver;
  */
 public class LeavingOLEmodalMobile extends UhcDriver{
 	
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 	
-	@FindBy(id = "proceed")
+	@FindBy(css = "#proceed")
 	private WebElement YesLeaveOLE;
 
-	@FindBy(id = "leaveOleAlertBack")
+	@FindBy(css = "#leaveOleAlertBack")
 	private WebElement NoBacktoOLE;
 	
 
