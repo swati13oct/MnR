@@ -3,7 +3,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
   ################################Script 3: Organic Search via Google and Bing######################################
   @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prodRegression_UAT @prodRegression
-  Scenario Outline: - <scenario> 3.1 Google search UHC Medicare Advantage Plan
+  Scenario Outline: - <scenario> <zipcode> 3.1 Google search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -278,7 +278,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | Scenario 4a: Campaign Precedence- UMS | blayer |   10001 | MA         | MS         |         800085 |         800086 |         800086 |         880180 |         880188 |         880189 | /?WT.mc_id=800085 | /?WT.mc_id=800086 | /health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[3] | 1-888-262-3289 | 1-866-260-5005 | 1-888-581-8578 | 1-877-596-3258 | 1-800-607-2877 | 1-888-378-0849 | 1-800-850-8659 |1-888-262-3289|1-866-260-5005|22A|1-888-581-8578|1-866-260-5005|22A|1-888-581-8578|1-866-260-5005|22A|1-877-596-3258|1-888-378-0254|AEP|1-800-607-2877|1-888-378-0849|8EC|
 
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression @prodRegression
-  Scenario Outline: <scenario>  Campaign Precedence Logic No 4b for UHC
+  Scenario Outline: <scenario> <zipcode> Campaign Precedence Logic No 4b for UHC
     #----------****  Campaign supercedes Campaign  ***** --------------
     # Precedence 4.3.11 - Visit site via UHC organic search from Yahoo, PSC 880189
     # Campaign supercedes Organic search, so Expected PSC code - 880189
