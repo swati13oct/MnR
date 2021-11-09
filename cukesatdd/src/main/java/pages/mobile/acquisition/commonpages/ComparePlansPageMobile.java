@@ -31,6 +31,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -1413,7 +1414,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#addDrug")
 	public WebElement addMyDrugsButton;
-
+	
+	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
+	public WebElement comparePlansLink;
+	public ComparePlansPageMobile navigateToPlanCompare() {
+		jsClickNew(comparePlansLink);
+		return new ComparePlansPageMobile(driver);
+		
+	}
+	
+	
 	public GetStartedPageMobile navigateToDCERedesign() {
 
 		validateNew(addDrugsLink, 30);

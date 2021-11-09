@@ -32,6 +32,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -724,6 +727,28 @@ public class VppPlanCompareMobile {
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 
+	}
+	
+	@And("^I select \"([^\"]*)\" plans to compare$")
+	public void i_select_plans_to_compare(String planType) throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPageMobile = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPageMobile.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPageMobile.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+
+	}
+	
+	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
+	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
+		VPPPlanSummaryPageMobile vppplansummarypageMobile = (VPPPlanSummaryPageMobile) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypageMobile.validateNBAButton("Get Started");
+		vppplansummarypageMobile.clickOnButtonInPlanSummaryPage("Get Started");
 	}
 
 	@And("^the user selects plan year for AARP site$")
@@ -2887,6 +2912,15 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
 		Assertion.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
+
+	}
+	
+	@Then("^the user clicks on compare plans button on plan details page and navigate to compare page$")
+	public void clicks__compare_plans_button_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
+		PlanDetailsPageMobile planDetailsPageMobile = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		ComparePlansPageMobile planComparePageMobile = planDetailsPageMobile.navigateToPlanCompare();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePageMobile);
 
 	}
 
