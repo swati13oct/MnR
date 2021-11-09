@@ -236,7 +236,8 @@ public class GetStartedPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
 		validateNew(ImportModal_GetStartedBtn);
 		if(Authenticated_Flag.equalsIgnoreCase("false")){
-			validateNew(SignIn_Link);
+			//Sign-in link hidden for Unauthenticated Drug Import flow
+			//validateNew(SignIn_Link);
 		}
 		jsClickNew(ImportModal_GetStartedBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);

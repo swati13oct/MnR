@@ -21,16 +21,16 @@ import atdd.framework.UhcDriver;
  */
 public class SubmitApplicationPageMobile extends UhcDriver{
 	
-	@FindBy(id = "medicareTitle")
+	@FindBy(css = "#medicareTitle")
 	private WebElement pageHeading;
 	
-	@FindBy(id = "enrollmentNext")
+	@FindBy(css = "#enrollmentNext")
 	private WebElement submitApplicationButton;
 	
-	@FindBy(id = "enrollment.relationshipToEnrolleeInfo.self1")
+	@FindBy(css = "#enrollment.relationshipToEnrolleeInfo.self1")
 	private WebElement applicantOption;
 	
-	@FindBy(id = "enrollment.souAccepted1")
+	@FindBy(css = "#enrollment.souAccepted1")
 	private WebElement agreeRadioButton;
 	
 	private PageData submitApplication;

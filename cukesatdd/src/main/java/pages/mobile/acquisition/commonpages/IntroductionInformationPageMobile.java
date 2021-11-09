@@ -27,10 +27,10 @@ public class IntroductionInformationPageMobile extends UhcDriver{
 	@FindBy(id="firstnametextbox")
 	private WebElement firstNameField;
 	
-	@FindBy(id = "middlenametextbox")
+	@FindBy(css = "#middlenametextbox")
 	private WebElement middleInitialField;
 	
-	@FindBy(id = "lastnametextbox")
+	@FindBy(css = "#lastnametextbox")
 	private WebElement lastNameField;
 	
 	/*@FindBy(xpath = ".//*[@id='medicalclaimnum']/input[2]")
@@ -39,13 +39,13 @@ public class IntroductionInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='medicalclaimnumtext'][2]")
 	private WebElement claimNumberField;
 	
-	@FindBy(id = "part-a")
+	@FindBy(css = "#part-a")
 	private WebElement partAStartDateField;
 	
-	@FindBy(id = "part-b")
+	@FindBy(css = "#part-b")
 	private WebElement partBStartDateField;
 	
-	@FindBy(id = "enrollmentdisclaimerstep1btn")
+	@FindBy(css = "#enrollmentdisclaimerstep1btn")
 	private WebElement viewEnrollDisclaimer;
 	
 	@FindBy(id="disclaimerAgreeBtndisclaimer")
@@ -57,10 +57,10 @@ public class IntroductionInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//div[@id='beginOnlineEnrollment']/span")
 	private WebElement alreadyEnrolledErrorMsg;
 	
-	@FindBy(id = "medicalclaimnumerr")
+	@FindBy(css = "#medicalclaimnumerr")
 	private WebElement MedicareIDErrorMsg;
 	
-	@FindBy(id = "step2Heading")
+	@FindBy(css = "#step2Heading")
 	private WebElement NextStepPage;
 	
 	

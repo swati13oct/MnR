@@ -19,16 +19,16 @@ import pages.acquisition.commonpages.PageTitleConstants;
  */
 public class ZipcodeLookupPageMobile extends UhcDriver {
 
-	@FindBy(id = "address")
+	@FindBy(css = "#address")
 	private WebElement addressField;
 
-	@FindBy(id = "city")
+	@FindBy(css = "#city")
 	private WebElement cityField;
 
-	@FindBy(id = "state_select")
+	@FindBy(css = "#state_select")
 	private WebElement stateDropDown;
 
-	@FindBy(id = "selectzip_box")
+	@FindBy(css = "#selectzip_box")
 	private WebElement zipCodeListPopup;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='state_select']/option") })
@@ -40,7 +40,7 @@ public class ZipcodeLookupPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='selectzip_box']/div/div/div/h4")
 	private WebElement zipCodePopupHeading;
 
-	@FindBy(id = "findZip")
+	@FindBy(css = "#findZip")
 	private WebElement zipcodeButton;
 
 	public ZipcodeLookupPageMobile(WebDriver driver) {

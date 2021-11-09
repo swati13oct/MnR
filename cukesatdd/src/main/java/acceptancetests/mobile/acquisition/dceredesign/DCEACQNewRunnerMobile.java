@@ -378,7 +378,6 @@ public class DCEACQNewRunnerMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		drugDetailsPage.ValidatesDrugsList(druglist);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, drugDetailsPage);
 	}
 
 	@Then("^verify drug is switched to generic on detail page$")
