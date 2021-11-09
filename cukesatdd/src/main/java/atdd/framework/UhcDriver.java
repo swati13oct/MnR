@@ -86,7 +86,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']/span")
 	public WebElement LearnAboutMedicare;
 
-	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")
+	@FindBy(xpath = "(//a[contains(text(),'Introduction to Medicare')])[2]")
 	public WebElement IntroductionToMedicare;
 
 	@FindBy(xpath = "//div[contains(@class,'dropdown-container sub-level-3')]//a[normalize-space()='Prescriptions, Providers & Benefits']")

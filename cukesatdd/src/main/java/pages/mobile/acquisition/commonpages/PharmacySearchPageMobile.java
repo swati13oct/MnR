@@ -1222,6 +1222,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+				driver.navigate().back();
+			}
+
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
 			if (driver.getTitle().toLowerCase().contains("locate a pharmacy"))
