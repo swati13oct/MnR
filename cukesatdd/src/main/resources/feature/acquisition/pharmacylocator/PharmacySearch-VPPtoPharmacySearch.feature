@@ -55,7 +55,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
-    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP @HPA
+    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP 
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | English - Pharmacy | AARP | English  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2021&planId=H0543168000&planYear=2021&systemYear=2021&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
