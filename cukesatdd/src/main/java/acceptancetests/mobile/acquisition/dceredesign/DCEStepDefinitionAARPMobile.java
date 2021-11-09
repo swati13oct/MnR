@@ -18,6 +18,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
@@ -25,6 +26,7 @@ import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
@@ -184,6 +186,25 @@ public class DCEStepDefinitionAARPMobile {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.validateDetailsForDrug(drugName, drugQuantity, drugFrequency, drugSupplyLen);
 
+	}
+	
+	@When("^clicks on Review drug cost button to land on drug summary page$")
+	public void clicks_on_Review_drug_cost_for_drug_summary_Page() {
+		BuildYourDrugListMobile buildYourDrugListMobile = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPageMobile drugSummaryPageMobile = buildYourDrugListMobile.navigateToDrugSummaryPage();
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPageMobile);
+	}
+	
+	@Then("^the user clicks view plan details button for first plan from Drug Summary Page$")
+	public void the_user_clicks_plan_details_button_on_Drug_Details_Page() throws Throwable {
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		
+		PlanDetailsPageMobile planDetailsPage = drugSummaryPage.clickViewPlanDetails();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
+		
 	}
 
 	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
