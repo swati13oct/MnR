@@ -19,14 +19,14 @@ import pages.acquisition.commonpages.PageTitleConstants;
 public class PrimaryCareProviderPageMobile extends UhcDriver {
 
 
-	@FindBy(id = "pcpprevious")
+	@FindBy(css = "#pcpprevious")
 	private WebElement pcpprevious;
 
-	@FindBy(id = "pcpsaveandcont")
+	@FindBy(css = "#pcpsaveandcont")
 	private WebElement pcpsaveandcont;
 	
 	
-	@FindBy(id = "pcpcancel")
+	@FindBy(css = "#pcpcancel")
 	private WebElement pcpcancel;
 
 	@FindBy(xpath = "//*[@id='pcpsaveandcont']")

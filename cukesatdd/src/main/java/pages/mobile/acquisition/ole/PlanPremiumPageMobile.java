@@ -30,10 +30,10 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -41,7 +41,8 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	//Page Header
 //	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
-	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
+//	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 	
 	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
@@ -52,7 +53,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -67,7 +68,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath=".//*[@id='ole-form-content']//*[contains(@for,'premiumAgree')]")
 	private WebElement agreeBtn;
 	
-	//@FindBy(id = "premiumPaymentQstnPBM")
+	//@FindBy(css = "#premiumPaymentQstnPBM")
 	
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnPBM')])[1]")
 	private WebElement payByMail;
@@ -76,11 +77,11 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	private WebElement premium;
 	
 	
-	//@FindBy(id = "premiumPaymentQstnCC")
+	//@FindBy(css = "#premiumPaymentQstnCC")
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnCC')])[1]")
 	private WebElement creditCard;
 	
-	//@FindBy(id = "premiumPaymentQstnSSRRB")
+	//@FindBy(css = "#premiumPaymentQstnSSRRB")
 	
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnSSRRB')])[1]")
 	private WebElement socialSecurity;
@@ -88,7 +89,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")
 	private WebElement payByMailText;
 	
-	@FindBy(id = "div_cardInfo")
+	@FindBy(css = "#div_cardInfo")
 	private WebElement creditCardText;
 	
 	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")

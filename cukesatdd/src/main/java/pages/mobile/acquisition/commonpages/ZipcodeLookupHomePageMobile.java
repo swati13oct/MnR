@@ -18,19 +18,19 @@ import atdd.framework.UhcDriver;
  */
 public class ZipcodeLookupHomePageMobile extends UhcDriver {
 
-	@FindBy(id = "address")
+	@FindBy(css = "#address")
 	private WebElement addressField;
 
-	@FindBy(id = "city")
+	@FindBy(css = "#city")
 	private WebElement cityField;
 
-	@FindBy(id = "state_select")
+	@FindBy(css = "#state_select")
 	private WebElement stateDropDown;
 
-	@FindBy(id = "searchzip")
+	@FindBy(css = "#searchzip")
 	private WebElement lookupZipcodeButton;
 
-	@FindBy(id = "selectzip_box")
+	@FindBy(css = "#selectzip_box")
 	private WebElement zipCodeListPopup;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='state_select']/option") })

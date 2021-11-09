@@ -27,7 +27,7 @@ public class LoginAssitanceMessagePageMobile extends UhcDriver{
 
 	public JSONObject loginAssistanceMessageJson;
 	
-	@FindBy(id = "passwordChangeInfoDiv")
+	@FindBy(css = "#passwordChangeInfoDiv")
 	private WebElement messageDiv;
 	
 	@FindBy(xpath = ".//*[@id='personalIndentificationPageDiv']/div[2]/small/div[@id='memberidErrorMsg']")

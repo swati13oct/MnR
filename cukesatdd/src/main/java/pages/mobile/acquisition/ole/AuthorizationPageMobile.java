@@ -28,7 +28,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 	@FindBy(xpath= "//*[contains(@id,'ole-form-next-button')]")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -45,7 +45,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -68,31 +68,31 @@ public class AuthorizationPageMobile extends UhcDriver{
 
 	//Authorized Representative Details
 	
-	@FindBy(id = "firstName0")
+	@FindBy(css = "#firstName0")
 	private WebElement Authorized_FirstName;
 
-	@FindBy(id = "lastName0")
+	@FindBy(css = "#lastName0")
 	private WebElement Authorized_LastName;
 	
-	@FindBy(id = "authorizedPersonRelationship0")
+	@FindBy(css = "#authorizedPersonRelationship0")
 	private WebElement Authorized_Relation;
 	
-	@FindBy(id = "address10")
+	@FindBy(css = "#address10")
 	private WebElement Authorized_Address;
 	
-	@FindBy(id = "city0")
+	@FindBy(css = "#city0")
 	private WebElement Authorized_City;
 	
-	@FindBy(id = "address20")
+	@FindBy(css = "#address20")
 	private WebElement Authorized_Apartment;
 	
-	@FindBy(id = "state0")
+	@FindBy(css = "#state0")
 	private WebElement Authorized_State;
 	
 	@FindBy(xpath = "//*[@id = 'Zip0' or @id = 'zipCode0']")
 	private WebElement Authorized_ZipCode;
 	
-	@FindBy(id = "authorizedPersonPhone0")
+	@FindBy(css = "#authorizedPersonPhone0")
 	private WebElement Authorized_PhNo;
 
 	//Read and Agree to the Statement of Understanding
@@ -241,6 +241,8 @@ public boolean validate_required_field_representative(Map<String, String> Member
 //			scrollToView(Authorized_City);
 			sendkeysMobile(Authorized_City, AuthorizationCity);
 
+			//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+			driver.findElement(By.xpath("//label[@for='state0']")).click(); 
 			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
 
 //			scrollToView(Authorized_ZipCode);

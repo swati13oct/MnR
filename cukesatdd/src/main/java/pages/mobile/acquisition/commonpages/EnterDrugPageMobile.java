@@ -17,7 +17,7 @@ import atdd.framework.UhcDriver;
 
 public class EnterDrugPageMobile extends UhcDriver {
 
-	@FindBy(id = "drugNameFilter")
+	@FindBy(css = "#drugNameFilter")
 	private WebElement drugInputField;
 
 	@FindBy(xpath="/html/body/div[1]/div/div[1]/div/div[3]/div/div[8]/div/div/div/div[2]/div/div/div")
@@ -26,7 +26,7 @@ public class EnterDrugPageMobile extends UhcDriver {
 	@FindBy(name = "drugInitials")
 	CharSequence[] drugInitials;
 	
-	@FindBy(id = "detailsPage")
+	@FindBy(css = "#detailsPage")
 	private WebElement detailsPage;
 	
 	private PageData formularyList;

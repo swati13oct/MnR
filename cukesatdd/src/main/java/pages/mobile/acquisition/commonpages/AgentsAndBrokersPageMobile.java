@@ -22,7 +22,7 @@ public class AgentsAndBrokersPageMobile extends GlobalWebElements{
 	@FindBy(className = "med_cont")
 	private WebElement agentsAndBrokersTable;
 
-	@FindBy(id = "medicareTitle")
+	@FindBy(css = "#medicareTitle")
 	private WebElement agentsAndBrokersTitle;
 
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")

@@ -23,38 +23,38 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
 	
-	//@FindBy(id = "providerName")
+	//@FindBy(css = "#providerName")
 	@FindBy(xpath = "//input[@id='providerName']")
 	private WebElement ProviderName;
 	
-	//@FindBy(id = "providerStreetAddress")
+	//@FindBy(css = "#providerStreetAddress")
 	@FindBy(xpath= "//input[@id='providerStreetAddress']")
 	private WebElement ProviderStreetAddress;
 	
-//	@FindBy(id = "providerCity")
+//	@FindBy(css = "#providerCity")
 	@FindBy(xpath = "//input[@id='providerCity']")
 	private WebElement ProviderCity;	
 
-	//@FindBy(id = "state")
+	//@FindBy(css = "#state")
 	@FindBy(xpath = "//select[@id='state']")
 	private WebElement StateDropDown;
 	
 	
-//	@FindBy(id = "providerZip")
+//	@FindBy(css = "#providerZip")
 	@FindBy(xpath = "//input[@id='providerZip']")
 	private WebElement ZipCode;
 	
-	//@FindBy(id = "providePhoneNumber")
+	//@FindBy(css = "#providePhoneNumber")
 	@FindBy(xpath = "//input[@id='providePhoneNumber']")
 	private WebElement ProvidePhoneNumber;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackButton;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextButton;
 	
-	@FindBy(id = "ole-form-cancel-button")
+	@FindBy(css = "#ole-form-cancel-button")
 	private WebElement CancelEnrolButton;
 	
 

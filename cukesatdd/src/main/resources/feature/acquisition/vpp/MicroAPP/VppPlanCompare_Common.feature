@@ -118,7 +118,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     #And user clicks on Request Assistance and validates modal window ulayer
     #And user verifies home link of agents & brokers page
    
-    @vppPlanCompareCommon_AARP01 @regressionAARP
+    @vppPlanCompareCommon_AARP01 @regressionAARP 
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | AARP |   90210 | No            | Los Angeles County | MAPD     | current   |
@@ -155,7 +155,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And I select "<plantype>" plans to compare and click on compare plan link
     Then the user clicks on back on all plan link in Plan Compare page
 
-    @vppPlanCompareCommon_AARP01 @regressionAARP
+    @vppPlanCompareCommon_AARP01 @regressionAARP 
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | AARP |   90210 | No            | Los Angeles County | MAPD     | current   |
@@ -915,4 +915,33 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00035 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current   |
+      
+      
+    Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of routine dental benefit link on plan compare on click of view all plans on <site>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>        |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then click on Show All button on plan compare page
+    Then Verify Dental Link text for third plan on plan Compare page
+
+    #Then validate all available plans are shown on click of view all plans
+    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @test12
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county            | plantype  | planyear | planIndices |
+      | 00036 | AARP |   78006 | NO            | Kendall County    | MAPD      | current   |          2 |
+      
+    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @test12
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county            | plantype  | planyear | planIndices |
+      | 00037 | AARP |   78006 | NO            | Kendall County    | MAPD      | next     |           2 |
+      
       

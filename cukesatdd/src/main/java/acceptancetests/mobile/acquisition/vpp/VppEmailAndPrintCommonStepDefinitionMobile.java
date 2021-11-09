@@ -267,17 +267,23 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validatingFunctionalityOfEmailOnPlanDetails();
 
-		// note: collect page data for email deeplink validation
-		// util = new EmailAndPrintUtilMobile(wDriver);
-		HashMap<String, String> infoMap = util.collectInfoVppPlanDetailPg(planType, "original", wDriver);
-		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
+		if (wDriver.getClass().toString().toUpperCase().contains("IOS")) {
 
-		// note: if email is successfully sent, deepLink info should be available, save
-		// it for later use
-		String deepLink = util.getEmailDeepLink(wDriver);
-		System.out.println("TEST - email deepLink=" + deepLink);
-		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK, deepLink);
-		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+			System.out.println("DeepLink validation failing as Performance log issue in Safari");
+		} else {
+
+			// note: collect page data for email deeplink validation
+			// util = new EmailAndPrintUtilMobile(wDriver);
+			HashMap<String, String> infoMap = util.collectInfoVppPlanDetailPg(planType, "original", wDriver);
+			getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
+
+			// note: if email is successfully sent, deepLink info should be available, save
+			// it for later use
+			String deepLink = util.getEmailDeepLink(wDriver);
+			System.out.println("TEST - email deepLink=" + deepLink);
+			getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_DEEPLINK, deepLink);
+			getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -286,7 +292,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 
 		if (wDriver.getClass().toString().toUpperCase().contains("IOS")) {
 
-			System.out.println("Deeplink validation skipped on iOS ");
+			System.out.println("Deeplink validation skipped on iOS because performance log safari issue...");
 		} else {
 
 			wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -368,7 +374,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void the_user_hovers_screen_over_the_learnmedicare_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = acqusitionHomePage.goToLearnMedicare();
 		if (learnAboutMedicareHomePage != null) {
 			System.out.println("learn about medicare drop down is opened");
 			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
@@ -409,15 +415,21 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailFunctionOnSummaryPage(planType);
 
-		// note: collect page data for email deeplink validation
-		HashMap<String, Integer> vppSummaryPgInfo = util.collectInfoVppPlanSummaryPg();
+		if (wDriver.getClass().toString().toUpperCase().contains("IOS")) {
 
-		// note: if email is successfully sent, deepLink info should be available, save
-		// it for later use
-		String deepLinkStr = util.getEmailDeepLink(wDriver);
-		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
-		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
-		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+			System.out.println("Deeplink validation skipped on iOS");
+		} else {
+
+			// note: collect page data for email deeplink validation
+			HashMap<String, Integer> vppSummaryPgInfo = util.collectInfoVppPlanSummaryPg();
+
+			// note: if email is successfully sent, deepLink info should be available, save
+			// it for later use
+			String deepLinkStr = util.getEmailDeepLink(wDriver);
+			getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
+			getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
+			getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

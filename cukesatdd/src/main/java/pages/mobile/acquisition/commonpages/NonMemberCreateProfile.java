@@ -16,16 +16,16 @@ import pages.acquisition.commonpages.ComparePlansPage;
 
 public class NonMemberCreateProfile extends UhcDriver {
 	
-	@FindBy(id = "non-member-email")
+	@FindBy(css = "#non-member-email")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "non-member-firstName")
+	@FindBy(css = "#non-member-firstName")
 	private WebElement firstName;
 	
 	@FindBy(id="non-member-lastName")
 	private WebElement lastName;
 	
-	@FindBy(id = "non-member-dob")
+	@FindBy(css = "#non-member-dob")
 	private WebElement dob;
 	
 	@FindBy(xpath = "//label[@for='male']")
@@ -34,7 +34,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	@FindBy(xpath = "//label[@for='female']")
 	private WebElement female;
 	
-	@FindBy(id = "zipCode")
+	@FindBy(css = "#zipCode")
 	private WebElement zipCode;
 	
 	@FindBy(xpath = "//input[@id='zipCode']/following::button[contains(text(),'Profile')][1]")

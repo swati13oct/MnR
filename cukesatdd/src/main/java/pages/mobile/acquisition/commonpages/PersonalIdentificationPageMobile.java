@@ -20,28 +20,28 @@ import pages.acquisition.commonpages.PageTitleConstants;
 public class PersonalIdentificationPageMobile extends UhcDriver{
 	
 	
-	@FindBy(id = "memberid1")
+	@FindBy(css = "#memberid1")
 	private WebElement memberId1;
 	
-	@FindBy(id = "memberid2")
+	@FindBy(css = "#memberid2")
 	private WebElement memberId2;
 	
-	@FindBy(id = "month")
+	@FindBy(css = "#month")
 	private WebElement monthField;
 	
-	@FindBy(id = "day")
+	@FindBy(css = "#day")
 	private WebElement dayField;
 	
-	@FindBy(id = "year")
+	@FindBy(css = "#year")
 	private WebElement yearField;
 	
-	@FindBy(id = "lastName")
+	@FindBy(css = "#lastName")
 	private WebElement lastNameField;
 	
-	@FindBy(id = "zipCode")
+	@FindBy(css = "#zipCode")
 	private WebElement zipCodeField;
 	
-	@FindBy(id = "continueToConfirmPersonalId")
+	@FindBy(css = "#continueToConfirmPersonalId")
 	private WebElement continueField;
 	
 	

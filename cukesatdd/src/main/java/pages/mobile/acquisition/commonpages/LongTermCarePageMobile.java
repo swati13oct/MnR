@@ -25,28 +25,28 @@ public class LongTermCarePageMobile extends UhcDriver{
 	@FindBy(xpath = "//label[@for='ltc-yes']")
 	private WebElement longtermcaredyes;
 	
-	@FindBy(id = "ltc-name")
+	@FindBy(css = "#ltc-name")
 	private WebElement longtermcarename;
 	
-	@FindBy(id = "ltc-address-1")
+	@FindBy(css = "#ltc-address-1")
 	private WebElement longtermcarestreet;
 	
-	@FindBy(id = "ltc-address-2")
+	@FindBy(css = "#ltc-address-2")
 	private WebElement longtermcareapt;
 	
-	@FindBy(id = "ltc-city")
+	@FindBy(css = "#ltc-city")
 	private WebElement longtermcarecity;
 	
-	@FindBy(id = "ltc-phone")
+	@FindBy(css = "#ltc-phone")
 	private WebElement longtermcarephone;
 	
-	@FindBy(id = "ltc-date")
+	@FindBy(css = "#ltc-date")
 	private WebElement longtermcaredate;
 	
-	@FindBy(id = "longtermcaresaveandcont")
+	@FindBy(css = "#longtermcaresaveandcont")
 	private WebElement longtermcaredsaveandcontinue;
 	
-	@FindBy(id = "longtermcarecancel")
+	@FindBy(css = "#longtermcarecancel")
 	private WebElement longtermcaredcancelregistration;	
 	
 	private PageData longtermcareInformation;

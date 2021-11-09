@@ -3,7 +3,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 1: Direct traffic########################################
   @Scenario_1_2_DirectTraffic_UAT @UATRegression
-  Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -117,7 +117,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 2: Campaign traffic########################################
   @Scenario_2_CampaignTraffic_UAT @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
+  Scenario Outline: <scenario> <zipcode>Verify TFN for different plan types through Campaign Traffic
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
@@ -226,7 +226,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
   @Scenario4_1_ExternalLink_AARP_UAT @UATRegression
-  Scenario Outline: <scenario> 4.7.1 Verify Externals referral plan functionalities
+  Scenario Outline: <scenario> <zipcode>4.7.1 Verify Externals referral plan functionalities
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>       |
@@ -334,7 +334,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 5: Portfolio Campaign Traffic to Med Ed########################################
   @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario>1.0 Verify TFN in MedEd Pages and VPP
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN in MedEd Pages and VPP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
@@ -419,7 +419,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression
-  Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
+  Scenario Outline: <scenario> <zipcode> 1.0 Verify TFN through Email Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -482,7 +482,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 8: External Link PDP########################################
   @Scenario_8_External_Link_PDP_UAT @UATRegression
-  Scenario Outline: <scenario>  Verify TFN through External Links PDP
+  Scenario Outline: <scenario> <zipcode> Verify TFN through External Links PDP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
@@ -603,7 +603,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT @UATRegression
-  Scenario Outline: <scenario> 1.0 Verify TFN through External Links
+  Scenario Outline: <scenario> <zipcode> 1.0 Verify TFN through External Links
     #Given the user Starts WebDriver
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -724,3 +724,4 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Examples: 
       | scenario                      | site   | zipcode | pscCode | campaignUrl                                                                                                  | campaignUrl1                                                                           | drug1   | zipCode | planType | planName                            | campaignUrl2                                                                                  | medEdURL1                                         | shoppagesUrl                        | estimateUrl                                        | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath                   | EnrollTFNxpath                    | DCETFNxpath                                                           | shopTFNxpath                      | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | PDPplantype | MAplantype | MSplantype | SNPplantype | planyear |
       | Scenerio 8-ExternalLink - AMP | ulayer |   10001 | 8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary | health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted | Lipitor |   10001 | MAPD     | AARP Medicare Advantage Prime (HMO) | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English | medicare-articles/eligibility-and-enrollment.html | shop/medicare-supplement-plans.html | /health-plans/estimate-drug-costs.html#/getstarted | 1-866-308-8818 | (//a[contains(@class, 'tel')])[1] | 1-844-895-7228 | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[3] | //button[@id='sam-call-button']//span[contains(@class,'invoca_swap')] | (//a[contains(@class, 'tel')])[2] |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | PDP         | MA         | MS         | SNP         | future   |
+
