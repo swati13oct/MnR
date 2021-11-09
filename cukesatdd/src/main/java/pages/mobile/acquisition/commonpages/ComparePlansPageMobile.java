@@ -42,7 +42,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "a#backtoplansummarypage")
 	private WebElement BackToAllPlan;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 
 	@FindBy(css = "#backtoplansummarypage")
@@ -81,16 +81,23 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "#adddrug")
 	public WebElement addDrug;
 
-	@FindBy(xpath = "//span[text()='Find Care']")
+//	@FindBy(xpath = "//span[text()='Find Care']")
+	@FindBy(css = "a[data-ui-element-name='Find Care']")
 	public WebElement FindCareLink;
+
+	@FindBy(xpath = "//*[@class='location']")
+	public WebElement LocationLink;
 
 	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
-	
-	@FindBy(css = ".provider-cards")
-	private WebElement savedProviders;	
 
-	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
+	@FindBy(css = ".provider-cards")
+	private WebElement savedProviders;
+
+	@FindBy(css = "button[class^='toggle']")
+	private WebElement rallyHamburgerMenu;
+
+	@FindBy(css = "#routerView > div > div.instructions.visible-phone > h1")
 	public WebElement addProviderBanner;
 
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
@@ -286,16 +293,19 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
 	private List<WebElement> drugList;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']/button/span")
 	private WebElement EnrollinPlanCompare_MAPD;
 
+	@FindBy(xpath = "//button//img[@class='d-block mx-auto md-right-scroll-image']")
+	private WebElement planCompareRightScrollArrow;
+
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']/button/span")
 	private WebElement EnrollinPlanCompare_PDP;
 
-	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	@FindBy(xpath = "(//strong[contains(text(),'Monthly Premium')])[1]")
 	private WebElement PremiumDisplay;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
@@ -598,10 +608,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public WelcomePageMobile Enroll_OLE_Plancompare() throws InterruptedException {
 		WebElement enrollForPlan = null;
-		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
+		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']/button/span"));
 		if (enrollForPlan != null) {
-			// validateNew(enrollForPlan);
-			// enrollForPlan.click();
+
 			jsClickNew(enrollForPlan);
 			waitForPageLoadSafari();
 		}
@@ -636,23 +645,44 @@ public class ComparePlansPageMobile extends UhcDriver {
 		jsClickNew(planAvailableText);
 	}
 
-	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
-		jsClickNew(BackToAllPlan);
-		System.out.println("Back to all plan is clicked");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	/*
+	 * This method is created as workaround for iOS click issue on backToAllPlan
+	 * link
+	 */
+	public void backToPlanSummary_PlanCompare_iOS() {
+
+		if (driver.getCurrentUrl().contains("plan-compare")) {
+			driver.navigate().back();
 		}
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println(driver.getCurrentUrl());
-		Thread.sleep(5000);
-		if (driver.getCurrentUrl().contains("#/plan-summary")) {
+
+	}
+
+	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
+		// CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, BackToAllPlan, 30);
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			backToPlanSummary_PlanCompare_iOS();
 			return new VPPPlanSummaryPageMobile(driver);
+
+		} else {
+			jsClickNew(BackToAllPlan);
+			System.out.println("Back to all plan is clicked");
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println(driver.getCurrentUrl());
+			Thread.sleep(5000);
+			if (driver.getCurrentUrl().contains("#/plan-summary")) {
+				return new VPPPlanSummaryPageMobile(driver);
+			}
 		}
 		return null;
+
 	}
 
 	public void validateCallSam() throws InterruptedException {
@@ -757,7 +787,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validatePlanComparePage() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(backToAllPlansLink);
 		validateNew(backToAllPlansLink);
 
@@ -774,7 +804,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnNewRemoveLink() {
-		scrollToView(Newremove3rdplan);
+
 		validateNew(Newremove3rdplan);
 		String PlanName = Newremove3rdplanName.getText();
 		System.out.println("3rd plan name is : " + PlanName);
@@ -806,11 +836,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnBacktoPlans() {
-		scrollToView(backToAllPlansLink);
-		validateNew(backToAllPlansLink);
-		jsClickNew(backToAllPlansLink);
-		pageloadcomplete();
-		System.out.println("Clicked on Back to plans");
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			backToPlanSummary_PlanCompare_iOS();
+			System.out.println(
+					"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
+		} else {
+
+			scrollToView(backToAllPlansLink);
+			validateNew(backToAllPlansLink);
+			jsClickNew(backToAllPlansLink);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Clicked on Back to plans");
+		}
 	}
 
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
@@ -969,11 +1006,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);*/
+		/*
+		 * JavascriptExecutor executor = (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].scrollIntoView(true);",
+		 * editDoctorsLink);
+		 */
 
-		jsClickNew(editDoctorsLink);
-		
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
@@ -986,8 +1024,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(savedProviders);
-		if (validate(savedProviders)) {
+		jsClickNew(rallyHamburgerMenu);
+		waitforElement(FindCareLink);
+
+		jsClickNew(FindCareLink);
+
+		if (validate(LocationLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1011,7 +1053,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		switchToNewTabNew(editHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
-			System.out.println("We are on Find Care winodow opened");
+			System.out.println("We are on Find Care window opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(savedProviders);
@@ -1019,9 +1061,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
+		jsClickNew(rallyHamburgerMenu);
+		waitforElement(FindCareLink);
 
-		waitforElement(savedProviders);
-		if (validate(savedProviders)) {
+		jsClickNew(FindCareLink);
+
+		if (validate(LocationLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1037,10 +1082,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		scrollToView(addDoctorsLink);
-		validate(addDoctorsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addDoctorsLink);
@@ -1049,15 +1091,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			scrollToView(addProviderBanner);
-			waitforElement(addProviderBanner);
+			CommonUtility.waitForPageLoadNew(driver, addProviderBanner, 30);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		// waitforElement(FindUrgentCareLink);
-		scrollToView(addProviderBanner);
-		if (validate(addProviderBanner)) {
+
+		if (validateNew(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1084,6 +1124,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
+			CommonUtility.checkPageIsReadyNew(driver);
 			scrollToView(addProviderBanner);
 			waitforElement(addProviderBanner);
 		} else {
@@ -1411,8 +1452,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	
 	public GetStartedPageMobile navigateToDCERedesign() {
-
-		validateNew(addDrugsLink, 30);
+		CommonUtility.checkPageIsReadyNew(driver);
+		// validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
 		if (validateNew(addMyDrugsButton)) {
 			System.out.println("User is on DCE Get started Page");
@@ -1501,8 +1542,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
-			ele = driver.findElement(
-					By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
+			ele = driver.findElement(By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
 			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
@@ -1714,7 +1754,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
 			}
-			
+
 //			drugYouPaylist = drugYouPaylist + "&" + drugYouPay;
 			drugYouPaylist = StringUtils.isNullOrEmpty(drugYouPaylist) ? drugYouPay : drugYouPaylist + "&" + drugYouPay;
 //			System.out.println("Current Added Drug Name : " + currentAddedDrug);
@@ -1787,6 +1827,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
 
+		jsClickNew(planCompareRightScrollArrow);
 		jsClickNew(EnrollinPlanCompare_MAPD);
 
 		try {
@@ -1814,7 +1855,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
-
+		iosScroll(EnrollinPlanCompare_PDP);
 		jsClickNew(EnrollinPlanCompare_PDP);
 		waitForPageLoadSafari();
 		// if (driver.getCurrentUrl().contains("enrollment"))
@@ -1846,7 +1887,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(ChangeZipCodeLink);
 		jsClickNew(ChangeZipCodeLink);
 		sendkeysMobile(ChangeZipCodeField, zipcode);
@@ -1858,7 +1899,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement ComparePage = driver.findElement(
 				By.xpath("//div[@class = 'plan-compare-heading-holder']/h1[contains(text(), ' " + zipcode + "')]"));
 		validateNew(ComparePage, 30);
@@ -1887,7 +1928,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
@@ -1908,34 +1949,34 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public void searchZipCode(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(ChangeZipCodeLink);
 		jsClickNew(ChangeZipCodeLink);
 		sendkeysNew(ChangeZipCodeField, zipcode);
 		jsClickNew(FindPlans);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void VerifyInvalidZipCodeErrorMessage() throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(InvalidZipError);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void VerifyZipErrorMessageNoPlans() throws InterruptedException {
 
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zeroPlanPopup);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(zeroPlanErrorPopup);
 		validateNew(ViewAllPlansButton);
 		jsClickNew(ViewAllPlansButton);
 		waitForPageLoadSafari();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 

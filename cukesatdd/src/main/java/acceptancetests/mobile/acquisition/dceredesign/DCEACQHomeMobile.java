@@ -99,7 +99,9 @@ public class DCEACQHomeMobile {
 
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		String tfnNumber = aquisitionhomepage.getTFNNumberFromLink();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(CommonConstants.TFN, tfnNumber);
 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);

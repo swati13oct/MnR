@@ -21,7 +21,7 @@ import atdd.framework.UhcDriver;
 
 public class GroupHomePage extends UhcDriver { 
 	
-	//@FindBy(id = "cq-imagebutton-jsp-/content/gr/en/asrs/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton")
+	//@FindBy(css = "#cq-imagebutton-jsp-/content/gr/en/asrs/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton")
 	//private WebElement signInOrRegisterbtn;
 	
 	private String groupName;

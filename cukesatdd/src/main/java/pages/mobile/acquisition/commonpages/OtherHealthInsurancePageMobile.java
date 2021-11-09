@@ -29,22 +29,22 @@ public class OtherHealthInsurancePageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[@for='other-insurance-yes']")
 	private WebElement otherhealthinsuranceyes;
 
-	@FindBy(id = "other-insurance-name")
+	@FindBy(css = "#other-insurance-name")
 	private WebElement otherhealthinsurancename;
 
-	@FindBy(id = "other-insurance-group")
+	@FindBy(css = "#other-insurance-group")
 	private WebElement otherhealthinsurancegroup;
 
-	@FindBy(id = "other-insurance-member")
+	@FindBy(css = "#other-insurance-member")
 	private WebElement otherhealthinsurancememberid;
 
-	@FindBy(id = "othprevious")
+	@FindBy(css = "#othprevious")
 	private WebElement otherhealthinsuranceprevious;
 
-	@FindBy(id = "othsaveandcont")
+	@FindBy(css = "#othsaveandcont")
 	private WebElement otherhelathinsurancesaveandcontinue;
 
-	@FindBy(id = "othcancel")
+	@FindBy(css = "#othcancel")
 	private WebElement otherhelathinsurancecancelregristration;
 
 	

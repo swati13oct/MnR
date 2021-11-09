@@ -34,10 +34,10 @@ public class ProviderSearchPageUhcRetiree extends UhcDriver{
 	@FindBy(className = "providerName")
 	private WebElement providerName;
 
-	@FindBy(id = "ctl00_PopupContentPlaceHolder_CompleteListButton")
+	@FindBy(css = "#ctl00_PopupContentPlaceHolder_CompleteListButton")
 	private WebElement completeMyList;
 
-	@FindBy(id = "pageHeader")
+	@FindBy(css = "#pageHeader")
 	private WebElement pageHeader;
 
 	@FindBy(xpath="(//div[contains(@class,'searchData')]//button[contains(@class,'saved-provider-button')]/span)[1]")

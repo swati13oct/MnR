@@ -22,20 +22,20 @@ public class OurPlansPageMobile extends UhcDriver {
 	@FindBy(className = "zipcode_text")
 	private WebElement zipCodeField;
 
-	@FindBy(id = "goBtn")
+	@FindBy(css = "#goBtn")
 	private WebElement goButton;
 
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
 
-	@FindBy(id = "ghn_lnk_2")
+	@FindBy(css = "#ghn_lnk_2")
 	private WebElement OurPlansLink;
 
-	@FindBy(id = "subnav_2")
+	@FindBy(css = "#subnav_2")
 	public WebElement ourPlansDropdown;
 
-	@FindBy(id = "nav-zipcode")
+	@FindBy(css = "#nav-zipcode")
 	private WebElement zipfield;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
