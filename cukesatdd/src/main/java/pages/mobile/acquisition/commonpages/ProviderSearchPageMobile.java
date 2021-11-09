@@ -372,7 +372,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage'])[2]")
 	private WebElement FinishButton;
 
 	public VPPPlanSummaryPageMobile selectsHospitals() {

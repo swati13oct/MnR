@@ -21,6 +21,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -1207,6 +1208,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "(//button/span[contains(text(), 'Plan Details')])[1]/..")
+	public WebElement firstViewPlanDetailsBtn;
+	
 	@FindBy(xpath = "//button[contains(@dtmname, 'drug pricing:edit drug list')]")
 	public WebElement DrugPricingModal_EditDrugs;
 
@@ -1236,6 +1240,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(returnToPlanSummaryLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
+	}
+	
+	public PlanDetailsPageMobile clickViewPlanDetails() {
+		validateNew(firstViewPlanDetailsBtn);
+		jsClickNew(firstViewPlanDetailsBtn);
+		waitForPageLoadSafari();
+		return new PlanDetailsPageMobile(driver);
 	}
 
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
