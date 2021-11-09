@@ -4597,7 +4597,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile checkZipCompSubNavVpp(String zipCode) {
-		sendkeys(OurPlans_zipfield, zipCode);
+		sendkeysMobile(OurPlans_zipfield, zipCode);
 		jsClickNew(FindPlansButton1);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
