@@ -244,6 +244,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		noteList.add("===== TEST NOTE ================================================");
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		
 		noteList.add("test run at stage time =" + currentEnvTime);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
 		String[] tmpDateAndTime = currentEnvTime.split(" ");

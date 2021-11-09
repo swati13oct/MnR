@@ -152,7 +152,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	protected WebElement pharmacyBodyContentSpanish;
 
-	@FindBy(xpath = "//select[@id='distance']")
+	@FindBy(css = "#distance")
 	protected WebElement distanceDropownID;
 
 	@FindBy(xpath = "//div[@class='modal-title']")
@@ -161,7 +161,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#multiCountyCancelBtn")
 	protected WebElement MultiCOunty_CancelBtn;
 	
-	@FindBy(xpath = "//label[contains(text(),'location')]")
+	@FindBy(css = "label[for='distance']")
 	protected WebElement distanceLabel;
 	
 	@FindBy(xpath = "//span[text()=' of ZIP Code']")

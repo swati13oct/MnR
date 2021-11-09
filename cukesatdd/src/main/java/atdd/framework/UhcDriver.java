@@ -1,5 +1,6 @@
 package atdd.framework;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -13,6 +14,12 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -1166,44 +1173,72 @@ public abstract class UhcDriver {
 		return timeStr;
 	}
 
+	/*
+	 * Method created for Pharmacy testURL to get systemDate
+	 * 
+	 * @params testURL
+	 */
+
+	public String getSystemDateFromEndpointURL(String endPointURLtoGetSysDate) {
+
+		String systemDate = "";
+
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(endPointURLtoGetSysDate);
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpGet);
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode == 200) {
+				String responseString = EntityUtils.toString(response.getEntity(), "UTF-8");
+				JSONObject responseJson = new JSONObject(responseString);
+
+				JSONObject dataObj = responseJson.getJSONObject("data");
+				systemDate = dataObj.get("systemDate").toString().split(" ")[0];
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return systemDate;
+
+	}
+
 	public String getAcqTestEnvSysTime(String testSiteUrl) {
 
 		String timeStr = "";
+
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		// tbd String urlGetSysTime=testSiteUrl+
 		// "/DCERestWAR/dcerest/profiledetail/bConnected";
 		String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
 		System.out.println("test env URL for getting time: " + urlGetSysTime);
-		// open new tab
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			try {
+				String systemDate = getSystemDateFromEndpointURL(urlGetSysTime);
+				return systemDate;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Unable to get system date from API-TestURL>>>>");
+			}
+		} else {
+			// open new tab
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
+
+//		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 //			System.out.println("Waiting for accepting the open new window alert on iOS device");
 //			threadsleep(5000);
+//
 //			waitForCountIncrement(1);
-			waitForPageLoadSafari();
-			threadsleep(2000);
-			WebElement currentSysTimeElement = timeJson;
-			String currentSysTimeStr = currentSysTimeElement.getText();
-			System.out.println("currentSysTimeStr=" + currentSysTimeStr);
-			JSONParser parser = new JSONParser();
-			org.json.simple.JSONObject jsonObj;
-			try {
-				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
-
-				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
-				timeStr = (String) dataObj.get("systemDate");
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
-			}
-			driver.navigate().back();
-			driver.switchTo().window(winHandleBefore);
-			return timeStr;
-		} else {
+//			// driver.navigate().back();
+//
+//		}
 
 			for (String winHandle : driver.getWindowHandles()) {
 				if (!winHandle.equals(winHandleBefore)) {
@@ -1230,8 +1265,10 @@ public abstract class UhcDriver {
 			}
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
-			return timeStr;
+			
 		}
+		return timeStr;
+
 	}
 
 	/**
