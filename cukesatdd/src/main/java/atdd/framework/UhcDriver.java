@@ -1176,7 +1176,7 @@ public abstract class UhcDriver {
 	/*
 	 * Method created for Pharmacy testURL to get systemDate
 	 * 
-	 * @params testURL
+	 * @params testURL/EndPointURL
 	 */
 
 	public String getSystemDateFromEndpointURL(String endPointURLtoGetSysDate) {

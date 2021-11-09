@@ -104,12 +104,13 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	
 		sleepBySec(3);
 
-		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona un idioma")) {
+		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
 			jsClickNew(distanceZipTextLabel);
 		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
 			jsClickNew(distanceZipTextLabel);
 		} else {
 			jsClickNew(distanceLabel);
+			jsClickNew(distanceZipTextLabel);
 		}
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);

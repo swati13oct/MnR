@@ -3866,15 +3866,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//div[@data-rel='#plan-list-1']")
+	@FindBy(xpath = "//div/a[@href='/shop/medicare-advantage-plans.html']")
 	private WebElement maPlansViewLink;
 
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
 
 		sleepBySec(10);
-		if (maPlansViewLink.isDisplayed()) {
-			jsClickNew(maPlansViewLink);
-		}
+//		scrollToView(maPlansViewLink);
+//		if (maPlansViewLink.isDisplayed()) {
+//			jsClickNew(maPlansViewLink);
+//			threadsleep(5);
+//		}
 
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
