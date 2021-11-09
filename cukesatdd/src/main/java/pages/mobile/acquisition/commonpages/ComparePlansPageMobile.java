@@ -1403,9 +1403,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink;
-	public ComparePlansPage navigateToPlanCompare() {
+	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink);
-		return new ComparePlansPage(driver);
+		return new ComparePlansPageMobile(driver);
 		
 	}
 	
