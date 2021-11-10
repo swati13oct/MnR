@@ -40,10 +40,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
-	
-	@FindBy(css = "div[class*='get-started-main-inner'] button")
-	private WebElement getStartedBtn1;
-	
+
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 	
@@ -171,7 +168,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		validate(landingpageImage, 30);
 		String landingpageLabelText = landingpageLabel.getText();
 		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));
-		waitTillElementClickableInTime(getStartedBtn1, 45);
+		waitTillElementClickableInTime(getStartedBtn, 45);
 	}
 	
 	public void navigatezipcodepage() {
@@ -184,7 +181,6 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 //SingleCounty Method
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);
@@ -202,7 +198,6 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		Thread.sleep(20000);
 		driver.switchTo().defaultContent();
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
@@ -254,7 +249,6 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	public void getStartedAndRunInvalidzipcode(String zipcodeid) throws InterruptedException {
 
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
 //		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcodeid);
@@ -267,7 +261,6 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) throws Exception {
 		
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
 //		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
@@ -329,7 +322,6 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
   public void getStartedContinueZipcode()  {
       System.out.println("Click on GetStarted and Click on Continue Button in Zipcode:");
       waitTillElementClickableInTime(getStartedBtn, 45);
-      waitTillElementClickableInTime(getStartedBtn1, 45);
       getStartedBtn.click();
       threadsleep(3000);
       zipcodePage();
