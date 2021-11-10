@@ -3583,7 +3583,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.switchTo().window(base);
 
 			// Added below loop as ios script fails while switching back to parent window
-			if (driver.getCurrentUrl().contains("uhc.com")) {
+			if (driver.getCurrentUrl().contains("uhc.com") && driver.getClass().toString().toUpperCase().contains("IOS")) {
 				driver.navigate().back();
 			}
 
