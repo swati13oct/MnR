@@ -102,17 +102,17 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
 	
-		sleepBySec(3);
-
-		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
-			jsClickNew(distanceZipTextLabel);
-		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
-			jsClickNew(distanceZipTextLabel);
-		} else {
-			jsClickNew(distanceLabel);
-			jsClickNew(distanceZipTextLabel);
-		}
-		mobileSelectOption(distanceDropownID, distance, true);
+//		sleepBySec(3);
+//
+//		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
+//			jsClickNew(distanceZipTextLabel);
+//		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
+//			jsClickNew(distanceZipTextLabel);
+//		} else {
+//			jsClickNew(distanceLabel);
+//			jsClickNew(distanceZipTextLabel);
+//		}
+//		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
@@ -850,7 +850,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec = 20;
+		long timeoutInSec = 40;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

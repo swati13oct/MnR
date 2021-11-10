@@ -1168,7 +1168,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		// Hence only validating that the view search pdf link is present for an android
 		// device.
 		// For iOS device, the validation is same as for desktop
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				| driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (pharmacyValidate(viewFrontMatterPdf))
 				return new PharmacySearchPageMobile(driver);
 		} else {
@@ -1222,9 +1223,9 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
-			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-				driver.navigate().back();
-			}
+//			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+//				driver.navigate().back();
+//			}
 
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("TEST - driver.getTitle()=" + driver.getTitle());

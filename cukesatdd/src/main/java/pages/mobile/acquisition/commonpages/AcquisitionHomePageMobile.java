@@ -4514,7 +4514,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("select[name=state-select]"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
 
