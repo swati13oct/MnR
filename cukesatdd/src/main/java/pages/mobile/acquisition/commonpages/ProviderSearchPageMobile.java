@@ -383,7 +383,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		threadsleep(3);
 		// waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		// driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		validateNew(vppFirstPlanCard);
 //		return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
