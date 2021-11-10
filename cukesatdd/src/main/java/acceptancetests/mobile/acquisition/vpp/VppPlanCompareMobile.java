@@ -146,8 +146,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -723,7 +725,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-//		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 
 	}
 	
@@ -938,7 +940,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType, planCount)) {
+		if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);
@@ -2695,7 +2697,8 @@ public class VppPlanCompareMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamContent();
+		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		aquisitionhomepage.validateCallSamContent(tfnNumber);
 
 	}
 
@@ -3903,7 +3906,7 @@ public class VppPlanCompareMobile {
 
 	}
 
-	@And("^the user views the plans of the below plan type$")
+	@And("^the user views the plans of the below plan type|the user views the med supp plans$")
 	public void user_performs_planSearch_in_aarp_sites(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -4382,8 +4385,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -4678,8 +4683,10 @@ public class VppPlanCompareMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
-			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+//			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			String selectedHospital = providerSearchPage.selectsHospitals();
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, selectedHospital);
+//			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}

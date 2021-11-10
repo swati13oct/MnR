@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	
 	
-	@FindBy(xpath =".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	@FindBy(css ="a[data-asset-name='Find an Agent']")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
 	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
@@ -41,17 +41,17 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	@FindBy(xpath =".//*[@id='ghn_lnk_1']")
 	private WebElement homeTab;
 	
-	@FindBy(id = "firstName")
+	@FindBy(css = "#firstName")
 	private WebElement firstNameField; //PDP enrollment guide page
 	
-	@FindBy(id = "ym-first_name")
+	@FindBy(css = "#ym-first_name")
 	private WebElement firstNameAgentAppt; //agent appointment page
 	
 	
-	@FindBy(id = "zipcodemeded")
+	@FindBy(css = "[id^='zipcodemeded']")
 	private WebElement zipCodeMedEd;
 	
-	@FindBy(id = "lookzip")
+	@FindBy(css = "#lookzip")
 	private WebElement lookUpZipLink;
 	
 	
@@ -73,10 +73,11 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'uhc-container')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need')]")
 	private WebElement needHelpHeader;
 	
-	@FindBy(xpath="//a[contains(@class,'tel')][contains(@class, 'tfn')]")
+
+	@FindBy(css="span > a[class^='tel tfn'][data-asset-name='TFN']")
 	private WebElement needHelpTFN;
 	
-	@FindBy(id = "proceed")
+	@FindBy(css = "#proceed")
 	private WebElement proceed;
 	
 	public RequestHelpAndInformationPageMobile(WebDriver driver) {
@@ -87,10 +88,14 @@ public class RequestHelpAndInformationPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(needHelpHeader);
+
+//		validateNew(needHelpHeader);
+
 		validateNew(needHelpTFN);
 		validateNew(zipCodeMedEd);
-		validateNew(lookUpZipLink);
+
+//		validateNew(lookUpZipLink);
+
 		
 
 	}

@@ -23,7 +23,7 @@ public class MedicareAdvantagePartCPlansPageMobile extends GlobalWebElements {
 	@FindBy(className = "meded-back-link")
 	private WebElement lnkBackMedicareEducationHome;
 
-	@FindBy(id = "state-select")
+	@FindBy(css = "#state-select")
 	private WebElement dropDownState;
 
 	@FindBy(xpath = "//a[@class='med-article-sidebar__link']")
@@ -32,7 +32,7 @@ public class MedicareAdvantagePartCPlansPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='med-article-sidebar__section-title']")
 	private List<WebElement> lstSideBarheadings;
 
-	@FindBy(id = "zipcodemeded")
+	@FindBy(css = "#zipcodemeded")
 	private WebElement txtZipcode;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'lookupZip')]")

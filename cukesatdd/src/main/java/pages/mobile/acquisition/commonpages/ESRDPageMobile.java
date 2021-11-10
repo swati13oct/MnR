@@ -26,13 +26,13 @@ public class ESRDPageMobile extends UhcDriver{
 	@FindBy(xpath = ".//*[@id='esrd-yes_label']")
 	private WebElement esrdyes;
 	
-	@FindBy(id = "esrdprevious")
+	@FindBy(css = "#esrdprevious")
 	private WebElement esrdprevious;
 	
-	@FindBy(id = "esrdsaveandcont")
+	@FindBy(css = "#esrdsaveandcont")
 	private WebElement esrdsaveandcontinue;
 	
-	@FindBy(id = "esrdcancel")
+	@FindBy(css = "#esrdcancel")
 	private WebElement esrdcancelregistration;
 	
 	private PageData esrdInformation;

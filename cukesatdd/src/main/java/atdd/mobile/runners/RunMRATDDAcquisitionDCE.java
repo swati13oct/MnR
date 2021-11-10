@@ -8,12 +8,17 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
-		"src/main/resources/feature/acquisition/dceredesign" }, monochrome = true, plugin = { "pretty",
-				"html:reports/test-report.html", "json:target/cucumber-RunMRATDDAcquisitionDCE.json",
-				"timeline:target" }, tags = "@regressionAARP", dryRun = false)
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
+				features = {"src/main/resources/feature/acquisition/dceredesign" },
+				monochrome = true,
+				plugin = { "pretty",
+				"html:reports/test-report.html",
+				"json:target/cucumber-RunMRATDDAcquisitionDCE.json",
+				"timeline:target" },
+				tags = "@regressionAARP",
+				dryRun = false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)

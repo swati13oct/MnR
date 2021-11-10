@@ -507,6 +507,21 @@ public class CommonUtility {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
 
+	
+
+	/**
+	 * Wait until presence of element in DOM.
+	 *
+	 * @param driver the driver
+	 * @param locator the locator of 'By' class
+	 * @param timeOutInSeconds the time out in seconds
+	 * @return the web element
+	 */
+	
+	public static WebElement waitForPresenceOfElement(WebDriver driver, By locator, long timeOutInSeconds) {
+		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
 }

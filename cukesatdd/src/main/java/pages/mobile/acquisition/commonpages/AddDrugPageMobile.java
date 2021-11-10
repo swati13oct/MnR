@@ -20,7 +20,7 @@ public class AddDrugPageMobile extends UhcDriver {
 	@FindBy(className = "drugDropDownList")
 	private WebElement drugDropDown;
 
-	@FindBy(id = "dcemodal")
+	@FindBy(css = "#dcemodal")
 	WebElement drugsAdded;
 
 	@FindBy(className = "drugSearchBox")

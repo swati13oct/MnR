@@ -23,10 +23,10 @@ public class RegistrationSuccessPageMobile extends UhcDriver {
 	@FindBy(linkText = "go to My Account home")
 	private WebElement homePageLink;
 
-	@FindBy(id = "disclosure_link")
+	@FindBy(css = "#disclosure_link")
 	private WebElement logOut;
 
-	@FindBy(id = "contentRow")
+	@FindBy(css = "#contentRow")
 	private WebElement registrationSuccessContent;
 
 	private PageData registrationSuccess;

@@ -42,7 +42,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		return loginScenario;
 	}
 
-	//AppiumDriver wd;
+	// AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -63,11 +63,12 @@ public class DCEACQVPPPlanSummaryMobile {
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -92,10 +93,12 @@ public class DCEACQVPPPlanSummaryMobile {
 	@Then("^the enduser navigates to the plan details for the given plan type in AARP site-$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
-		//wd.manage().window().maximize();
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);*/
+		// wd.manage().window().maximize();
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * planType = memberAttributesRow.get(0).getCells().get(1); String planName =
+		 * memberAttributesRow.get(1).getCells().get(1);
+		 */
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String planType = data.cell(0, 1);
 		String planName = data.cell(1, 1);
@@ -146,11 +149,12 @@ public class DCEACQVPPPlanSummaryMobile {
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -257,11 +261,11 @@ public class DCEACQVPPPlanSummaryMobile {
 		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		if (cost.trim().contains(EstimatedDrugCosts))
-			Assertion.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : " + cost
-					+ "; Actual : " + EstimatedDrugCosts, true);
+			Assertion.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : "
+					+ cost + "; Actual : " + EstimatedDrugCosts, true);
 		else
-			Assertion.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : " + cost
-					+ "; Actual : " + EstimatedDrugCosts, false);
+			Assertion.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : "
+					+ cost + "; Actual : " + EstimatedDrugCosts, false);
 
 	}
 	///
@@ -270,12 +274,13 @@ public class DCEACQVPPPlanSummaryMobile {
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
@@ -292,20 +297,22 @@ public class DCEACQVPPPlanSummaryMobile {
 	public void accessDCERign_PlanSummaryforPlan(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = attributes.getGherkinRows(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		//plansummaryPage.viewPlanSummary(plantype);
+		// plansummaryPage.viewPlanSummary(plantype);
 
 		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		if (null != getStartedPage) {
@@ -313,8 +320,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
-	
-	
+
 	@And("^user clicks on get started button on NBA$")
 	public void user_click_Get_started_button_on_NBA() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
