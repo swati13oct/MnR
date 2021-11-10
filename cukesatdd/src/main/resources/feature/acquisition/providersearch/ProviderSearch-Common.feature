@@ -40,12 +40,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP
     Examples: 
       | zipcode | site | planname                             | year   |
       |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | current |
 
-    @ProviderSearchCommon_UHC @regressionUHC
+    @ProviderSearchCommon_UHC
     Examples: 
       | zipcode | site | planname                             | year   |
       |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | current |
@@ -116,12 +116,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP
     Examples: 
       | zipcode | site | planname                             | year     |
       |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    @ProviderSearchCommon_UHC @regressionUHC
+    @ProviderSearchCommon_UHC
     Examples: 
       | zipcode | site | planname                             | year     |
       |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
@@ -138,12 +138,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | current |
+      |   10001 | AARP |        10 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | current |
+      |   10001 | UHC  |        10 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |
@@ -167,12 +167,12 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        12 | current |
+      |   10001 | AARP |        10 | current |
 
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        12 | current |
+      |   10001 | UHC  |        10 | current |
 
     Examples: 
       | zipcode | site | plancount | year   |

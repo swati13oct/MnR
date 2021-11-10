@@ -21,19 +21,19 @@ import pages.acquisition.commonpages.PageTitleConstants;
  */
 public class RegistrationHomePageMobile extends UhcDriver{
 
-	@FindBy(id = "memberid1")
+	@FindBy(css = "#memberid1")
 	private WebElement memberid1;
 
 	@FindBy(name = "memberIdNumber2")
 	private WebElement memberIdNumber2;
 
-	@FindBy(id = "month")
+	@FindBy(css = "#month")
 	private WebElement monthToEnter;
 
-	@FindBy(id = "day")
+	@FindBy(css = "#day")
 	private WebElement dayToEnter;
 
-	@FindBy(id = "year")
+	@FindBy(css = "#year")
 	private WebElement yearToEnter;
 
 	@FindBy(name = "continue")

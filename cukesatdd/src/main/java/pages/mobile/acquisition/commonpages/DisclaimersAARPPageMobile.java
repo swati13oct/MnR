@@ -40,7 +40,7 @@ public class DisclaimersAARPPageMobile extends GlobalWebElements {
 		validateNew(mededAccordianList.get(0));
 	}
 
-	@FindBy(id = "logo")
+	@FindBy(css = "#logo")
 	public WebElement logoLink;
 
 	public AcquisitionHomePageMobile logoClick() {

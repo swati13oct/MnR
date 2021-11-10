@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -35,7 +36,7 @@ public class WerallyPageMobile extends UhcDriver {
 
 	String page = "Werally";
 
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 // Werally page Elements
@@ -259,7 +260,7 @@ public class WerallyPageMobile extends UhcDriver {
 				+ docInfo + "')]/../../../../div[contains(@class,'provider-header')]/p[2]/span/button[@class='link']"));
 		jsClickNew(deleteLink);
 		threadsleep(2000);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 	
 	public void werallyDeleteAll() {

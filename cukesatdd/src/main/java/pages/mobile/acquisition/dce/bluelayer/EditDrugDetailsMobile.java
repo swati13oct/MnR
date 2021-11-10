@@ -31,13 +31,13 @@ public class EditDrugDetailsMobile extends UhcDriver {
 	@FindBy(xpath = "//input[@value='Lipitor TAB 10MG']")
 	public WebElement Dosageone;
 
-	@FindBy(id = "quantity")
+	@FindBy(css = "#quantity")
 	public WebElement quantityField;
 	
-	@FindBy(id = "drug-alt-back-button")
+	@FindBy(css = "#drug-alt-back-button")
 	public WebElement backToSearchBtn;
 	
-	@FindBy(id = "frequency")
+	@FindBy(css = "#frequency")
 	public WebElement selectYourFrequencyDropdown;
 	public EditDrugDetailsMobile(WebDriver driver) {
 		super(driver);

@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class DCEPageMobile extends UhcDriver {
@@ -196,7 +196,7 @@ public class DCEPageMobile extends UhcDriver {
 	public void returnToCompare() {
 		validate(drugpageButtons.get(0));
 		drugpageButtons.get(0).click();
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		threadsleep(2000);
 	}
 
@@ -222,7 +222,7 @@ public class DCEPageMobile extends UhcDriver {
 		jsClickNew(deleteLink);
 
 		threadsleep(2000);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void deleteAllDrugs() {

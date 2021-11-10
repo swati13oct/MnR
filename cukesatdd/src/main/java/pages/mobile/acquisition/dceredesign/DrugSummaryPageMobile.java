@@ -45,7 +45,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "button[dtmid$='nba'][dtmname$='Create Account']")
 	public WebElement dceNBAModalBtn;
 
-	@FindBy(id = "SignIn")
+	@FindBy(css = "#SignIn")
 	public WebElement signInBtn;
 
 	// @FindBy(xpath =
@@ -115,7 +115,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
-	// @FindBy(id = "changePharmacyLink")
+	// @FindBy(css = "#changePharmacyLink")
 	@FindBy(css = "div[class*='d-block'] [id*='changePharmacyLink']")
 	public WebElement changePharmacy;
 
@@ -140,7 +140,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#mailSelectPharmacyBtn0")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(id = "optumRxTxt")
+	@FindBy(css = "#optumRxTxt")
 	public WebElement optumRxMsg;
 
 	@FindBy(css = "[role='tabpanel'][class^='uhc-list']")
@@ -158,7 +158,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#paginationNextBtn")
 	public WebElement nextBtn;
 
-	@FindBy(id = "changePharmacyLink")
+	@FindBy(css = "#changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
 
 	@FindBy(xpath = "//*[text()='Return to plan summary']")
@@ -215,7 +215,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugSummaryPageMobile verifyDefaultPlanType(String planType) {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(planTypeHeading);
+		CommonUtility.waitForPageLoadNew(driver, planTypeHeading, 20);
 		if (planTypeHeading.getText().contains(planType)) {
 			return new DrugSummaryPageMobile(driver);
 		}
@@ -691,7 +691,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(id = "sign-up-modal-header")
+	@FindBy(css = "#sign-up-modal-header")
 	private WebElement createProfilePopup;
 
 	public void savePlan(String planName) {
@@ -791,7 +791,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			scrollToView(mapdPlanToggle);
 			// validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
@@ -841,6 +841,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		// changePharmacy.click(); exception thrown for click on saucelabs -
 		// org.openqa.selenium.WebDriverException
 		jsClickNew(changePharmacy);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public DrugSummaryPageMobile selectPharmacyModalDisplayed() throws InterruptedException {
@@ -929,6 +930,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void sortPharmacies(String sortOption) {
+		driver.findElement(By.xpath("//label[text()='Sort:']")).click();
 		mobileSelectOption(sortDrpdown, sortOption, true);
 	}
 
@@ -1223,7 +1225,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement SearchBtn;
 
 	public BuildYourDrugListMobile clickEditDrugs_DrugPricingModal() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(DrugPricingModal_EditDrugs);
 		jsClickNew(DrugPricingModal_EditDrugs);
 		waitForPageLoadSafari();

@@ -17,70 +17,70 @@ import atdd.framework.UhcDriver;
  */
 public class OLETestHarnessPageMobile extends UhcDriver {
 
-	@FindBy(id = "siteid")
+	@FindBy(css = "#siteid")
 	private WebElement SiteidTH;
-	@FindBy(id = "clientcode")
+	@FindBy(css = "#clientcode")
 	private WebElement ClientcodeTH;
-	@FindBy(id = "plantype")
+	@FindBy(css = "#plantype")
 	private WebElement PlantypeTH;
-	@FindBy(id = "planname")
+	@FindBy(css = "#planname")
 	private WebElement PlannameTH;
-	@FindBy(id = "year")
+	@FindBy(css = "#year")
 	private WebElement YearTH;
-	@FindBy(id = "zip")
+	@FindBy(css = "#zip")
 	private WebElement ZipTH;
-	@FindBy(id = "countyname")
+	@FindBy(css = "#countyname")
 	private WebElement countyTH;
-	@FindBy(id = "premium")
+	@FindBy(css = "#premium")
 	private WebElement premiumTH;
-	@FindBy(id = "statecode")
+	@FindBy(css = "#statecode")
 	private WebElement StatecodeTH;
-	@FindBy(id = "hnumber")
+	@FindBy(css = "#hnumber")
 	private WebElement HnumberTH;
-	@FindBy(id = "pbpnumber")
+	@FindBy(css = "#pbpnumber")
 	private WebElement pbpnumTH;
-	@FindBy(id = "segmentid")
+	@FindBy(css = "#segmentid")
 	private WebElement SegmentidTH;
-	@FindBy(id = "tfn")
+	@FindBy(css = "#tfn")
 	private WebElement TfnTH;
-	@FindBy(id = "psc")
+	@FindBy(css = "#psc")
 	private WebElement PscTH;
-	@FindBy(id = "env")
+	@FindBy(css = "#env")
 	private WebElement EnvTH;
-	@FindBy(id = "business")
+	@FindBy(css = "#business")
 	private WebElement BusinessTH;
-	@FindBy(id = "clientprodcode")
+	@FindBy(css = "#clientprodcode")
 	private WebElement ClientprodcodeTH;
-	@FindBy(id = "fipscode")
+	@FindBy(css = "#fipscode")
 	private WebElement FipscodeTH;
-	@FindBy(id = "cmscode")
+	@FindBy(css = "#cmscode")
 	private WebElement CmscodeTH;
 	
-	@FindBy(id = "riderflag")
+	@FindBy(css = "#riderflag")
 	private WebElement riderflagTH;
-	@FindBy(id = "prefferedplanid")
+	@FindBy(css = "#prefferedplanid")
 	private WebElement prefferedplanidTH;
-	@FindBy(id = "plancode")
+	@FindBy(css = "#plancode")
 	private WebElement plancodeTH;
-	@FindBy(id = "mapsplantype")
+	@FindBy(css = "#mapsplantype")
 	private WebElement mapsplantypeTH;
-	@FindBy(id = "oleiscns")
+	@FindBy(css = "#oleiscns")
 	private WebElement oleiscnsTH;
-	@FindBy(id = "clientprodcode")
+	@FindBy(css = "#clientprodcode")
 	private WebElement clientprodcodeTH;
-	@FindBy(id = "lineofbusiness")
+	@FindBy(css = "#lineofbusiness")
 	private WebElement lineofbusinessTH;
-	@FindBy(id = "oleiscsnp")
+	@FindBy(css = "#oleiscsnp")
 	private WebElement oleiscsnpTH;
-	@FindBy(id = "fitness")
+	@FindBy(css = "#fitness")
 	private WebElement fitnessTH;
-	@FindBy(id = "vision")
+	@FindBy(css = "#vision")
 	private WebElement visionTH;
-	@FindBy(id = "hearing")
+	@FindBy(css = "#hearing")
 	private WebElement hearingTH;
-	@FindBy(id = "dental")
+	@FindBy(css = "#dental")
 	private WebElement dentalTH;
-	@FindBy(id = "salesagentid")
+	@FindBy(css = "#salesagentid")
 	private WebElement salesagentidTH;
 	
 
@@ -88,7 +88,7 @@ public class OLETestHarnessPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table//button[text()='Launch OLE']")
 	private WebElement LaunchOLEButton;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 
 	public OLETestHarnessPageMobile(WebDriver driver) {
