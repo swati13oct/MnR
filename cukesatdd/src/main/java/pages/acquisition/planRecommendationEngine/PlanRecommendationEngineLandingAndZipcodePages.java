@@ -335,7 +335,6 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
  public void navigateToCoveragePage(String zip_code, String County) {
 	  	pageloadcomplete();
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		jsClickNew(getStartedBtn);
 		threadsleep(1000);
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
@@ -345,7 +344,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		if(validate(PRECounty,5))
 			selectFromDropDownByText(driver, PRECounty, County);
 		threadsleep(3000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
 	}
  
