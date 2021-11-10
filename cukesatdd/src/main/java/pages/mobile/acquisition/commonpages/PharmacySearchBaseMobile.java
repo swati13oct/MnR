@@ -493,9 +493,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				String PDFText = new PDFTextStripper().getText(document);
 
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
-
+//						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
 
 				Assertion.assertTrue("PROBLEM - PDF does not contain " + ExpectedPDFText,
