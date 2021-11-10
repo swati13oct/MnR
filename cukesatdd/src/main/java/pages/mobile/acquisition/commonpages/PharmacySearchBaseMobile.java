@@ -168,6 +168,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sendkeysMobile(zipcodeField, zipcode);
 		if (zipcode.length() != 5) {
 //			jsClickNew(zipCodeFieldLabel);
+			scrollToView(zipCodeFieldLabel);
 			zipCodeFieldLabel.click();
 			sleepBySec(2);
 			/*
