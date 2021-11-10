@@ -435,7 +435,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
 
-		driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		}
 
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
