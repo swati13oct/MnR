@@ -4121,7 +4121,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
-			driver.navigate().back();
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+				driver.navigate().back();
+			}
+
 			return new LearnAboutMedicareHomePageMobile(driver);
 
 		} else {

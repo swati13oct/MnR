@@ -405,7 +405,9 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	public PrescriptionsProvidersBenefitsPageMobile selectBenifitsEducation() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement medBenifits = driver.findElement(By.xpath("(//p)[191]"));
+		
+//		MobileLearnAboutMedicarePrescProvBenefit();
+		WebElement medBenifits = driver.findElement(By.cssSelector("#accordion-3-content > nav > p:nth-child(1)"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
