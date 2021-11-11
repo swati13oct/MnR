@@ -930,7 +930,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void sortPharmacies(String sortOption) {
-		driver.findElement(By.xpath("//label[text()='Sort:']")).click();
+		if (driver.getClass().toString().contains("IOS")) {
+			driver.findElement(By.xpath("//label[text()='Sort:']")).click();
+		}
 		mobileSelectOption(sortDrpdown, sortOption, true);
 	}
 

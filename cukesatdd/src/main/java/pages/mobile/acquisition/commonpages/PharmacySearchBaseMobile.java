@@ -443,6 +443,13 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
+		
+		if (!loadingBlock.isEmpty())
+			// waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
+		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+			// waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
 	}
 
 	public void selectAYear(String year) { // note: keep for now, may need when AEP comes around
@@ -494,8 +501,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				String PDFText = new PDFTextStripper().getText(document);
 
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-//						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
+						? "Additional Indian/Tribal/Urban (I/T/U) Home Infusion & Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+//						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
 
 				Assertion.assertTrue("PROBLEM - PDF does not contain " + ExpectedPDFText,

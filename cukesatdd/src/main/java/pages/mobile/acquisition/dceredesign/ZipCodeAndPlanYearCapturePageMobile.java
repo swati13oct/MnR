@@ -121,7 +121,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 			if (validate(countyDropdown)) {
 				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
-				driver.findElement(By.xpath("//label[text()='County']")).click();
+				if (driver.getClass().toString().contains("IOS")) {
+					driver.findElement(By.xpath("//label[text()='County']")).click();
+				}
 //				countyDropdown.click();
 				//jsClickNew(countyDropdown);
 				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();
