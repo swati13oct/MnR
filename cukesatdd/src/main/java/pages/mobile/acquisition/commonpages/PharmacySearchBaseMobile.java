@@ -168,6 +168,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sendkeysMobile(zipcodeField, zipcode);
 		if (zipcode.length() != 5) {
 //			jsClickNew(zipCodeFieldLabel);
+			scrollToView(zipCodeFieldLabel);
 			zipCodeFieldLabel.click();
 			sleepBySec(2);
 			/*
@@ -435,7 +436,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
 
-		driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		}
 
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
@@ -491,9 +494,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				String PDFText = new PDFTextStripper().getText(document);
 
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
-
+//						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
 
 				Assertion.assertTrue("PROBLEM - PDF does not contain " + ExpectedPDFText,

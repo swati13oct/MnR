@@ -849,7 +849,9 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		 * seletPlandropdown.click(); jsClickNew(seletPlandropdown); sleepBySec(1);
 		 * selectFromDropDownByText(driver, seletPlandropdown, planName);
 		 */
-		driver.findElement(By.cssSelector("#plan-type-label")).click();
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.findElement(By.cssSelector("#plan-type-label")).click();
+		}
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
