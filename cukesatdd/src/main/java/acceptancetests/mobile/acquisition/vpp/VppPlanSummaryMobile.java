@@ -1528,4 +1528,20 @@ public class VppPlanSummaryMobile {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@When("^the user Click on Provider covered link$")
+	public void UserclickonProvidercoveredlink(DataTable Planname ){
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("PlanName");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		//ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+		ProviderSearchPageMobile providerSearchPage = plansummaryPage.ProviderCovered(planName);
+		
+		if(providerSearchPage!=null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
 }

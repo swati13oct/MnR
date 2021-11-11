@@ -3583,7 +3583,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.switchTo().window(base);
 
 			// Added below loop as ios script fails while switching back to parent window
-			if (driver.getCurrentUrl().contains("uhc.com")) {
+			if (driver.getCurrentUrl().contains("uhc.com") && driver.getClass().toString().toUpperCase().contains("IOS")) {
 				driver.navigate().back();
 			}
 
@@ -4121,7 +4121,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
-			driver.navigate().back();
+			if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+				driver.navigate().back();
+			}
 			return new LearnAboutMedicareHomePageMobile(driver);
 
 		} else {
@@ -4967,6 +4969,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					}
 				}
 				driver.switchTo().window(base);
+			} else {
+				//Step to click browser back is commented in feature file, not sure of its impact on desktop script if un commented.
+				// hence adding navigate back if the member site loads in same window. Remove this else block if the browser back step is added.
+				driver.navigate().back();
 			}
 		}
 	}
