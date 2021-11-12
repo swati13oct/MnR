@@ -218,6 +218,7 @@ public class GetStartedPageMobile extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -236,7 +237,8 @@ public class GetStartedPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
 		validateNew(ImportModal_GetStartedBtn);
 		if(Authenticated_Flag.equalsIgnoreCase("false")){
-			validateNew(SignIn_Link);
+			//Sign-in link hidden for Unauthenticated Drug Import flow
+			//validateNew(SignIn_Link);
 		}
 		jsClickNew(ImportModal_GetStartedBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);

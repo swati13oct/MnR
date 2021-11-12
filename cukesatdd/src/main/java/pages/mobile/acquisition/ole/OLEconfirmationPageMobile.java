@@ -48,7 +48,7 @@ public class OLEconfirmationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='pdptextbtn']")
 	private WebElement NextSteps_PDPBtn;
 	
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	@FindBy(css = "a#visitor-profile-header")

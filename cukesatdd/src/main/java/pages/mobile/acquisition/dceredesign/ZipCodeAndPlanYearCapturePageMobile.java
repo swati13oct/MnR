@@ -1,5 +1,6 @@
 package pages.mobile.acquisition.dceredesign;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -97,7 +98,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(AddMyDrugsBtn);
 		System.out.println("clicked add drugs");
 		// CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			if (BuildDrugPage_verificationTxt.isDisplayed()) {
 				System.out.println("Navigated to Build Drug List Page");
@@ -112,15 +113,19 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	}
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		validateNew(zipCodeTxtbox);
+		//validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
 
 			if (validate(countyDropdown)) {
+				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+				if (driver.getClass().toString().contains("IOS")) {
+					driver.findElement(By.xpath("//label[text()='County']")).click();
+				}
 //				countyDropdown.click();
-				jsClickNew(countyDropdown);
+				//jsClickNew(countyDropdown);
 				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();
 				Select sl = new Select(countyDropdown);
 				String countyValue= sl.getOptions().get(1).getText().toString();
@@ -137,7 +142,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public DrugSummaryPageMobile clickContinueBtn() {
 		jsClickNew(reviewDrugCostsButton);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
@@ -150,7 +155,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public void validateZipCodePlanYearCapturePageNonAEP() {
 
 		//CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(reviewDrugCostsButton)) {
 			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		} else {
@@ -223,6 +228,17 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			Assertion.assertTrue("Review drug cost page not displayed", true);
 		} else {
 			Assertion.assertTrue("Review drug cost page not displayed", false);
+		}
+
+	}
+	
+	public void selectPlanYearOLE(String planYear) {
+		if (planYear.equalsIgnoreCase("current")) {
+			if (validate(planYearDropdown)) {
+				jsClickNew(planYearDropdown);
+				Select planYear1 = new Select(planYearDropdown);
+				planYear1.selectByIndex(1);
+			}
 		}
 
 	}

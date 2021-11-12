@@ -19,19 +19,19 @@ import atdd.framework.UhcDriver;
  */
 public class CreateAccountPageMobile extends UhcDriver{
 
-	@FindBy(id = "user_name")
+	@FindBy(css = "#user_name")
 	private WebElement userNameField;
 
-	@FindBy(id = "pass_word")
+	@FindBy(css = "#pass_word")
 	private WebElement passwordField;
 
-	@FindBy(id = "confirm_password")
+	@FindBy(css = "#confirm_password")
 	private WebElement confirmPasswordField;
 
-	@FindBy(id = "email_address")
+	@FindBy(css = "#email_address")
 	private WebElement emailAdrField;
 
-	@FindBy(id = "confirm_email")
+	@FindBy(css = "#confirm_email")
 	private WebElement confirmEmailAdrField;
 
 	@FindBy(name = "continue")

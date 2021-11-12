@@ -31,10 +31,10 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 	
 	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg req')]")
@@ -46,16 +46,16 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 
-	@FindBy(id = "ole-force-cancel-button")
+	@FindBy(css = "#ole-force-cancel-button")
 	private WebElement CancelButton;
 	
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(css = "#ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	//Right Rail Elements
@@ -63,7 +63,7 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -85,19 +85,19 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Are you enrolled in your state Medicaid program?')]")
 	private WebElement MedicaidQuestion;
 	
-	@FindBy(id = "hasMedicaidEnrolleeNo")
+	@FindBy(css = "#hasMedicaidEnrolleeNo")
 	private WebElement medicaiddno;
 	
-	@FindBy(id = "hasMedicaidEnrolleeYes")
+	@FindBy(css = "#hasMedicaidEnrolleeYes")
 	private WebElement medicaiddyes;
 	
-	@FindBy(id = "medicaidNumber0")
+	@FindBy(css = "#medicaidNumber0")
 	private WebElement medicaidnumTxtBx;
 	
 	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who are NOT enrolled in Medicaid.')]")
 	private WebElement MedicaidErrorText;
 
-	@FindBy(id = "hasMedicaidEnrollee")
+	@FindBy(css = "#hasMedicaidEnrollee")
 	private WebElement MedicaidError;
 
 	//ESRD Question
@@ -105,28 +105,28 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you have End-Stage Renal Disease (ESRD)?')]")
 	private WebElement ESRDQuestion;
 
-	@FindBy(id = "hasEndStateRenalDiseaseYes")
+	@FindBy(css = "#hasEndStateRenalDiseaseYes")
 	private WebElement esrdYes;
 
-	@FindBy(id = "hasEndStateRenalDiseaseNo")
+	@FindBy(css = "#hasEndStateRenalDiseaseNo")
 	private WebElement esrdNo;
 	
 	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who have End-Stage Renal Disease.')]")
 	private WebElement esrdErrorText;
 
-	@FindBy(id = "hasEndStateRenalDisease")
+	@FindBy(css = "#hasEndStateRenalDisease")
 	private WebElement esrdError;
 	
 	@FindBy(xpath = "//*[@class='formset']//span/label[@for='disclosureHealth']")
 	private WebElement DisclosureCheckBox;
 	
-	@FindBy(id = "providerName")
+	@FindBy(css = "#providerName")
 	private WebElement FirstName;
 	
-	@FindBy(id = "providerCity")
+	@FindBy(css = "#providerCity")
 	private WebElement City;
 	
-	@FindBy(id = "providerZip")
+	@FindBy(css = "#providerZip")
 	private WebElement Zip;
 	
 	
@@ -134,7 +134,7 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	
 	// Diabetes questions
 	
-	@FindBy(id = "diabetes")
+	@FindBy(css = "#diabetes")
 	private WebElement diabetesQuestion1;
 	
 	@FindBy(id="diabetesQuestionYes")
@@ -149,7 +149,7 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 
 	// chronicHeartFailure Questions
 	
-	@FindBy(id = "chronicHeartFailure")
+	@FindBy(css = "#chronicHeartFailure")
 	private WebElement chronicHeartFailureQuestion1;
 	
 	@FindBy(id="chronicHeartFailureQuestionNo")
@@ -167,7 +167,7 @@ public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	
 	
 	
-	@FindBy(id = "thromboembolicdisorder")
+	@FindBy(css = "#thromboembolicdisorder")
 	private WebElement CardiovascularDisordersQuestion1;
 	
 	@FindBy(id="thromboembolicdisorderQuestionNo")

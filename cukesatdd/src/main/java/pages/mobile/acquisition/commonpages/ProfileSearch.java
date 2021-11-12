@@ -21,13 +21,13 @@ import pages.acquisition.commonpages.ComparePlansPage;
 
 public class ProfileSearch extends UhcDriver {
 	
-	@FindBy(id = "visitorsEmail")
+	@FindBy(css = "#visitorsEmail")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "authFirstName")
+	@FindBy(css = "#authFirstName")
 	private WebElement firstName;
 	
-	@FindBy(id = "authLastName")
+	@FindBy(css = "#authLastName")
 	private WebElement lastName;
 	
 	@FindBy(xpath = "//button[text()='Search Shopper']")
@@ -42,7 +42,7 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(xpath="//table//button")
 	private WebElement btnCloakIn;
 	
-	@FindBy(id = "aarpSVGLogo")
+	@FindBy(css = "#aarpSVGLogo")
 	public WebElement AARPlogo;
 	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")

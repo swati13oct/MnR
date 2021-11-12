@@ -14,13 +14,13 @@ import atdd.framework.UhcDriver;
 
 public class DeleteProfileMobile extends UhcDriver {
 	
-	@FindBy(id = "visitorsEmail")
+	@FindBy(css = "#visitorsEmail")
 	private WebElement visitorEmail;
 	
-	@FindBy(id = "mbi")
+	@FindBy(css = "#mbi")
 	private WebElement mbi;
 	
-	@FindBy(id = "dob")
+	@FindBy(css = "#dob")
 	private WebElement dob;
 	
 	@FindBy(xpath="//button[text()='Delete']")

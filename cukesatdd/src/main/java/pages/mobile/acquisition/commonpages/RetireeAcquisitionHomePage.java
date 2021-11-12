@@ -53,13 +53,13 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	@FindBy(linkText = "Look up prescription drugs")
 	private WebElement druglookuplink;
 
-	@FindBy(id = "new_form_GroupSelector")
+	@FindBy(css = "#new_form_GroupSelector")
 	private WebElement dropDownMenu;
 
 	@FindBy(xpath = ".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[2]/div/div/div/p[2]/a")
 	private WebElement lookupproviderLink;
 
-	@FindBy(id = "new_form_GroupSelector")
+	@FindBy(css = "#new_form_GroupSelector")
 	private WebElement alcatelLucentSelect;
 
 	@FindBy(xpath = "//*[@id='main']/div/div[1]/div/div[8]/div/div/div/div[1]/ul/li[6]/a")

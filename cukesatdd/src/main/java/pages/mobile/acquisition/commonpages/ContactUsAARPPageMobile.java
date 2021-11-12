@@ -15,7 +15,7 @@ public class ContactUsAARPPageMobile extends GlobalWebElements{
 	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
 	public WebElement rightRailSection_ProvidersOnly;
 	
-	@FindBy(id = "collapse2heading_article_mededaccordion0")
+	@FindBy(css = "#collapse2heading_article_mededaccordion0")
 	public WebElement ma_AccordialCollapsed;
 	
 	@FindBy(xpath = "//div[contains(@class,'disclaimer-box')]/p")

@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.util.CommonUtility;
 
@@ -25,7 +27,7 @@ public class PrescriptionsProvidersBenefitsPageMobile extends GlobalWebElements 
 	@FindBy(className = "meded-back-link")
 	private WebElement lnkBackMedicareEducationHome;
 
-	@FindBy(id = "state-select")
+	@FindBy(css = "#state-select")
 	private WebElement dropDownState;
 
 	@FindBy(xpath = "//a[@class='med-article-sidebar__link']")
@@ -34,7 +36,7 @@ public class PrescriptionsProvidersBenefitsPageMobile extends GlobalWebElements 
 	@FindBy(xpath = "//*[@class='med-article-sidebar__section-title']")
 	private List<WebElement> lstSideBarheadings;
 
-	@FindBy(id = "zipcodemeded")
+	@FindBy(css = "#zipcodemeded")
 	private WebElement txtZipcode;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'lookupZip')]")
@@ -86,23 +88,21 @@ public void clickMedicareAnnualEnrollment() {
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
-		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
+		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans")||driver.getCurrentUrl().contains("/medicare-education-classic/enrollment-and-changing-plans-classic"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
-			waitforElementNew(pageHeader);
+			/*WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			waitforElementNew(pageHeader);*/
 			System.out.println("Annual Enrollment Period Page open correctly");
 			
 		}else {
-			System.out.println("Annual Enrollment Period Page did not open correctly");
+			Assert.fail("Annual Enrollment Period Page did not open correctly");
 		}
-		
 		driver.navigate().back();
 		
 	}
 	public ProviderSearchPageMobile clicksOnRallyToolFromMedEdPage() {
 		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
-		scrollToView(providerSearchFromMedEd);
 		switchToNewTabNew(providerSearchFromMedEd);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {

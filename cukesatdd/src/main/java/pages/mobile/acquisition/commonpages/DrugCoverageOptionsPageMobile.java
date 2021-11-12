@@ -11,7 +11,7 @@ import pages.mobile.acquisition.commonpages.EnterDrugPageMobile;
 
 public class DrugCoverageOptionsPageMobile extends UhcDriver {
 
-	@FindBy(id = "drugNameFilter")
+	@FindBy(css = "#drugNameFilter")
 	private WebElement inputFilter;
 	
 	@FindBy(xpath = "/html/body/div[1]/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[1]/a")

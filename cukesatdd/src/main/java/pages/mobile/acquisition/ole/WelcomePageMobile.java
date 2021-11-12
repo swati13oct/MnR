@@ -49,13 +49,13 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
 
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
 	@FindBy(css = "#enroll-cancel-profile")
 	private WebElement CancellationModal;
 
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	@FindBy(xpath = "//*[contains(@class,'h3-welcome-class')]")
@@ -82,7 +82,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 	//Right Rail Elements
 
-	//	@FindBy(id = "//*[contains(text(),'Need Help? Call')]/u")
+	//	@FindBy(xpath = "//*[contains(text(),'Need Help? Call')]/u")
 	@FindBy(xpath = "//*[contains(@class,'tel tfn')]")
 	private WebElement TFNNoWidget;
 	
@@ -194,7 +194,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		// Commenting modal check for stage environment
 		/*
 		 * else checkModelPopup(driver,10);
@@ -659,8 +659,11 @@ public class WelcomePageMobile extends UhcDriver {
 		//TFN no  above the continue button
 		
 		boolean flag = false;
-		
+
+		scrollToView(TFNNoWidget);
 		String TFNWidget_OLE = TFNNoWidget.getText();
+
+		scrollToView(TFNNoNeedHelp);
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
 			
 		

@@ -160,6 +160,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then user validates plan count for all plan types on plan summary page
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planYear> |
     Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |

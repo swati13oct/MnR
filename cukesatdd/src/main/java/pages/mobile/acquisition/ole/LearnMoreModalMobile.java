@@ -22,7 +22,7 @@ import pages.acquisition.ole.WelcomePage;
  */
 public class LearnMoreModalMobile extends UhcDriver {
 
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
 	@FindBy(css = "#returnbtn")
