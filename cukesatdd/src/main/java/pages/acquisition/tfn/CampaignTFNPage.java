@@ -269,7 +269,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]")
 	private WebElement msPlansHeading;
-	
+
 	@FindBy(xpath = "//a[contains(@class,'samModalClose')]")
 	private WebElement samTfnPopupClose;
 
@@ -463,11 +463,12 @@ public class CampaignTFNPage extends UhcDriver {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + tFN_Xpath);
 		}
 		String TFNonPage = TFNelement.getText();
-		/*if (TFNonPage.contains(FEDERAL_TFN)) {
-			System.out.println("Correct Federal TFN is Displayed on Page : " + TFNelement.getText());
-		} else {
-			Assertion.fail("TFN displayed is INCORRECT for Federal : " + tFN_Xpath);
-		}*/
+		/*
+		 * if (TFNonPage.contains(FEDERAL_TFN)) {
+		 * System.out.println("Correct Federal TFN is Displayed on Page : " +
+		 * TFNelement.getText()); } else {
+		 * Assertion.fail("TFN displayed is INCORRECT for Federal : " + tFN_Xpath); }
+		 */
 
 	}
 
@@ -1122,8 +1123,6 @@ public class CampaignTFNPage extends UhcDriver {
 	// @FindBy(id = "msVppDOB")
 	@FindBy(xpath = "//input[contains(@id,'msVppDOB')]")
 	private WebElement DOB;
-	
-	
 
 	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
 	private WebElement addYourInformation;
@@ -1463,11 +1462,16 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'decisionGuide')]//a")
 	private WebElement decisionGuideClick;
 
-	public void decisionGuide() {
-			validateNew(decisionGuideClick);
-			jsClickNew(decisionGuideClick);
-			}
+	@FindBy(xpath = "//a[normalize-space()='Back to previous page']")
+	private WebElement backToPreviousPage;
 
+	public void decisionGuide() {
+		validateNew(decisionGuideClick);
+		decisionGuideClick.click();
+		// jsClickNew(decisionGuideClick);
+		// backToPreviousPage.click();
+		// driver.navigate().back();
+	}
 
 	public void openURLNewTabAARP(String url) {
 		// get original tab handler
@@ -1586,7 +1590,7 @@ public class CampaignTFNPage extends UhcDriver {
 		sleepBySec(5);
 		Assertion.assertTrue("TFN in SAM icon  does not match with TFN in SAM popup",
 				tfnHeader.equals(samTFNPopupLink.getText()));
-		//samTfnPopupClose.click();
+		// samTfnPopupClose.click();
 		jsClickNew(samTfnPopupClose);
 	}
 
@@ -1605,62 +1609,78 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 	}
 
-	
-		public void addInfoAndMedSupFormTFN() throws InterruptedException {
-			CheckPageLoad();
-			CheckiPerseptions();
-			validate(addYourInformation, 30);
-			jsClickNew(addYourInformation);
-		}
-		public void decisionGuidenotPresent() {
+	public void addInfoAndMedSupFormTFN() throws InterruptedException {
+		CheckPageLoad();
+		CheckiPerseptions();
+		validate(addYourInformation, 30);
+		jsClickNew(addYourInformation);
+
+	}
+
+	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp']//span[@class='uhc-button__text'][normalize-space()='Cancel']")
+	private WebElement cancelMS4FormModal;
+
+	public void decisionGuidenotPresent() {
 		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		jsClickNew(cancelMS4FormModal);
+		// driver.navigate().back();
+
+	}
+
+	@FindBy(xpath = "//a[contains(normalize-space(),'Find an Agent')]")
+	private WebElement findAnAgentMedsupp4;
+
+	public void clickAgentLinkMedsup4(String TFNXpath, String ExpecetdTFNNo) {
+		validateNew(findAnAgentMedsupp4);
+		// CommonUtility.waitForPageLoadNew(driver, findAnAgentMedsupp4, 30);
+		// String parentWindow = driver.getWindowHandle();
+		findAnAgentMedsupp4.click();
+		sleepBySec(3);
+		// CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("myuhcagent")) {
+			System.out.println("****************  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************  ***************");
+		}
+		CheckPageLoad();
+		CheckiPerseptions();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
+
+		}
+
+		else {
+			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
+		}
+
 		driver.navigate().back();
-		
-		}
 
-		@FindBy(xpath = "//a[contains(normalize-space(),'Find an Agent')]")
-		private WebElement findAnAgentMedsupp4;
-		
-		public void clickAgentLinkMedsup4(String TFNXpath, String ExpecetdTFNNo) {
-			validateNew(findAnAgentMedsupp4);
-			CommonUtility.waitForPageLoadNew(driver, findAnAgentMedsupp4, 30);
-			String parentWindow = driver.getWindowHandle();
-			findAnAgentMedsupp4.click();
-			sleepBySec(3);
-			CommonUtility.checkPageIsReadyNew(driver);
-			String CurrentRailURL = driver.getCurrentUrl();
-			System.out.println("Actual  URL: " + CurrentRailURL);
+	}
 
-			if (CurrentRailURL.contains("myuhcagent")) {
-				System.out.println("****************  ***************");
+	@FindBy(xpath = "//a[@class='backToPrevPage']")
+	private WebElement backToPreviousDG;
 
-				Assertion.assertTrue(true);
-			} else {
-				Assertion.fail("****************  ***************");
-			}
-			CheckPageLoad();
-			CheckiPerseptions();
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-			validateNew(ActualTFNelement);
-			// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-			if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-				System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
+	public void backtoPreviousDGMedsup4() {
+		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		// driver.navigate().back();
+	}
 
-			}
-
-			else {
-				Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-			}
-
-			driver.navigate().back();
-
-		}
-			}
-	
-	
+	public void backtoPreviousDGMedsup3() {
+		validate(backToPreviousDG);
+		jsClickNew(backToPreviousDG);
+	}
+}

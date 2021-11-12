@@ -185,19 +185,30 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>     |
       | TFN Xpath | <MedsuppTFNxpath1> |
-    Then the site user fills all the details in MedsuppPage for TFN
-      | DOB | <dob> |
+    #Then the site user fills all the details in MedsuppPage for TFN
+    # | DOB | <dob> |
+    Then the user fills all the details in MedsuppPage for TFN
+      | DOB      | <dob>     |
+      | Zip Code | <zipcode> |
     Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>     |
-      | TFN Xpath | <MedsuppTFNxpath1> |
-    When the user clicks on Agent link for MedsuppPage
-      | TFN No    | <agentTFN>   |
-      | TFN Xpath | <agentXpath> |
+      | TFN No    | <MedsuppTFNNo>        |
+      | TFN Xpath | <MedsuppFormTFNxpath> |
+    #When the user clicks on Agent link for MedsuppPage
+    # | TFN No    | <agentTFN>   |
+    #| TFN Xpath | <agentXpath> |
     Then the user clicks on decision guide for MedsuppPge
+      | Zip Code | <zipcode> |
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>     |
       | TFN Xpath | <decisionGuideTFN> |
-    Then the user navigates back to page
+   # Then the user navigates back to page
+   Then the user click on back to previous page on Request a Free Decision Guide
+    | Zip Code | <zipcode> |
+    When the user clicks on Agent link for MedsuppPage
+      | TFN No    | <agentTFN>   |
+      | TFN Xpath | <agentXpath> |
+      | Zip Code  | <zipcode>    |
+    #Then the user clicks on decision guide for MedsuppPge
     #Then the user clicks on Request a Free Decision Guide
     # | TFN No    | <MedsuppTFNNo> |
     #| TFN Xpath | <TFNxpath>     |
@@ -220,9 +231,15 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
 
+    @Scenario_2_CampaignTraffic_UAT_Medsup3.0 @campaignTFNProd
     Examples: 
-      | scenario         | planyear | zipcode | MSplantype | dob        | UHCUrl                      | planName                            | MAplantype | PDPplantype | isMultutiCounty | county         | pscCode | site   | campaignUrl                                                   | maUrl                     | maTFN                                                   | pdpUrl                     | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | medSuppUrl                          | shoppages        | campaignUrl2       | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath1                  | MedsuppTFNxpath                   | EnrollTFNxpath                    | MedsuppShopTFNxpath               | ShopTFNxpath                                                              | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenario 2 - AMP | current  |   10001 | MS         | 01/01/1950 | https://www.myuhcagent.com/ | AARP Medicare Advantage Prime (HMO) | MA         | PDP         | NO              | Baldwin County | 8001038 | ulayer | /shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038 | enroll/ma-enrollment.html | //*[contains(@class,'call')]//a[contains(@class,'tel')] | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | shop/medicare-supplement-plans.html | /contact-us.html | /?wt.mc_id=8001038 | 1-877-541-7755 | (//a[contains(@class, 'tel')])[3] | 1-844-887-2813 | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-877-541-7755 | 1-844-887-2813 | 9C9        |
+      | scenario         | planyear | zipcode | MSplantype | dob        | UHCUrl                      | planName                            | MAplantype | PDPplantype | isMultutiCounty | county         | pscCode | site   | campaignUrl                                                   | maUrl                     | maTFN                                                   | pdpUrl                     | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | medSuppUrl                          | shoppages        | campaignUrl2       | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath1                  | MedsuppTFNxpath                   | EnrollTFNxpath                    | MedsuppShopTFNxpath               | ShopTFNxpath                                                              | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | MedsuppFormTFNxpath               |
+      | Scenario 2 - AMP | current  |   10001 | MS         | 01/01/1950 | https://www.myuhcagent.com/ | AARP Medicare Advantage Prime (HMO) | MA         | PDP         | NO              | Baldwin County | 8001038 | ulayer | /shop/medicare-advantage-plans?zipcode=10001&WT.mc_id=8001038 | enroll/ma-enrollment.html | //*[contains(@class,'call')]//a[contains(@class,'tel')] | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | shop/medicare-supplement-plans.html | /contact-us.html | /?wt.mc_id=8001038 | 1-877-541-7755 | (//a[contains(@class, 'tel')])[3] | 1-844-887-2813 | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-877-541-7755 | 1-844-887-2813 | 9C9        | //*[contains(@class,'tel right')] |
+
+    @Scenario_2_CampaignTraffic_UAT_Medsup4.0 @campaignTFNProd
+    Examples: 
+      | scenario         | planyear | zipcode | MSplantype | dob        | UHCUrl                      | planName                            | MAplantype | PDPplantype | isMultutiCounty | county         | pscCode | site   | campaignUrl                                                   | maUrl                     | maTFN                                                   | pdpUrl                     | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | medSuppUrl                          | shoppages        | campaignUrl2       | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath1                                   | MedsuppTFNxpath                   | EnrollTFNxpath                    | MedsuppShopTFNxpath               | ShopTFNxpath                                                              | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | MedsuppFormTFNxpath                         |
+      | Scenario 2 - AMP | current  |   90210 | MS4.0      | 01/01/1950 | https://www.myuhcagent.com/ | AARP Medicare Advantage Prime (HMO) | MA         | PDP         | NO              | Baldwin County | 8001038 | ulayer | /shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038 | enroll/ma-enrollment.html | //*[contains(@class,'call')]//a[contains(@class,'tel')] | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //span[contains(@class, 'invoca_swap_sam')] | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | shop/medicare-supplement-plans.html | /contact-us.html | /?wt.mc_id=8001038 | 1-877-541-7755 | (//a[contains(@class, 'tel')])[3] | 1-844-887-2813 | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-877-541-7755 | 1-844-887-2813 | 9C9        | //span[contains(@class, 'invoca_swap_sam')] |
 
   ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
   @Scenario4_1_ExternalLink_AARP_UAT @UATRegression

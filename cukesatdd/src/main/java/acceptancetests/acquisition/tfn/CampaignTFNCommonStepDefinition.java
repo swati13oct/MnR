@@ -1083,18 +1083,17 @@ public class CampaignTFNCommonStepDefinition {
 		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
 		String zipCode = inputAttributesMap.get("Zip Code");
 
-		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+		boolean msPlan4Heading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+	boolean assertionToFailOrPass = (msPlan4Heading && zipCode.equals("90210")
+				|| !msPlan4Heading && zipCode.equals("10001")) ? true
+						: (msPlan4Heading && zipCode.equals("10001")
+								|| !msPlan4Heading && zipCode.equals("90210")) ? false : true;
 
-		boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
-								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+		//Assert.assertTrue(assertionToFailOrPass,
+			//	"*** imsPlan4HeadingVisible/Invisible : '" + msPlan4Heading + "' for zipCode : '" + zipCode + "'");
 
-		Assert.assertTrue(assertionToFailOrPass,
-				"*** isAddInfoLinkVisible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
-
-		if (isAddInfoLinkVisible) {
+		if (msPlan4Heading) {
 			tfnPage.clickAgentLinkMedsup4(TFNXpath, ExpecetdTFNNo);
 		} else
 
@@ -1111,28 +1110,28 @@ public class CampaignTFNCommonStepDefinition {
 
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 
-		boolean isMedsup4DOBVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver,
+		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver,
 				By.xpath("//input[@id='dateOfBirth']"), 20);
 
-		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
-				|| !isMedsup4DOBVisible && zipCode.equals("10001")) ? true
-						: (isMedsup4DOBVisible && zipCode.equals("10001")
-								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
+		boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
+				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("10001")
+								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
-				//"*** isMedsup4DOB Visible/Invisible : '" + isMedsup4DOBVisible + "' for zipCode : '" + zipCode + "'");
+		//		"*** isAddInfoLinkVisible Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
 
-		if (isMedsup4DOBVisible) {
+		if (isAddInfoLinkVisible) {
 			tfnPage.decisionGuidenotPresent();
 		} else
-
+		{
 			// if(myUHCAgentURL!=null){
 			tfnPage.decisionGuide();
 		// Assertion.assertTrue(true);
 		// }else
 		// Assertion.fail("Error in loading the UHC Agent Page");
 	}
-
+	}
 	@When("^the user performs plan search using Shop Pages for Medsupp Page$")
 	public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1343,8 +1342,8 @@ public class CampaignTFNCommonStepDefinition {
 						: (isAddInfoLinkVisible && zipCode.equals("10001")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
-		//Assert.assertTrue(assertionToFailOrPass,
-				//"*** isMedsup4DOB Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
+		Assert.assertTrue(assertionToFailOrPass,
+				"*** isMedsup4DOB Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
 
 		if (isAddInfoLinkVisible) {
 			tfnPage.addInfoAndMedSupFormTFN();
@@ -1354,5 +1353,41 @@ public class CampaignTFNCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 		}
 	}
+	
+	@Then("^the user click on back to previous page on Request a Free Decision Guide$")
+	public void user_click_on_previous_Page_On_Decision_Guide(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String zipCode = memberAttributesMap.get("Zip Code");
+
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+		boolean assertionToFailOrPass = false;
+
+		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
+				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("10001")
+								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+				"*** isMedsup4DOB Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
+
+		if (isAddInfoLinkVisible) {
+			tfnPage.backtoPreviousDGMedsup4();
+		} else {
+			tfnPage.backtoPreviousDGMedsup3();
+
+			getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		}
+	}
+
 
 }
