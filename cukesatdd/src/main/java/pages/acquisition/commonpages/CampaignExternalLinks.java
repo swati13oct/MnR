@@ -2468,7 +2468,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		// Now')]"));
 		// }
 		// });
-		validateNew(samChatIcon, 30);
+		validateNew(samChatIcon, 35);
 		// present = true;
 		// } catch (Exception e) {
 		// present = false;
