@@ -226,7 +226,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']")
 	private WebElement closeIconPlanSavePopup;
 
-	@FindBy(xpath = "(//button/span[contains(text(), 'View Plan Details')])[1]")
+	@FindBy(xpath = "(//button/span[contains(text(), 'View Plan Details')])[2]")
 	public WebElement firstViewPlanDetailsBtn;
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")

@@ -27,16 +27,16 @@ public class OptionalRidersPageMobile extends UhcDriver{
 	@FindBy(xpath = "//label[@for='dental-no']")
 	private WebElement optno;
 	
-	@FindBy(id = "dental-rider-yes-label1")
+	@FindBy(css = "#dental-rider-yes-label1")
 	private WebElement optyes;
 	
-	@FindBy(id = "optRiderprevious")
+	@FindBy(css = "#optRiderprevious")
 	private WebElement optionalridersprevious;
 	
-	@FindBy(id = "optRidersaveandcont")
+	@FindBy(css = "#optRidersaveandcont")
 	private WebElement optionalriderssaveandcontinue;
 	
-	@FindBy(id = "optRidercancel")
+	@FindBy(css = "#optRidercancel")
 	private WebElement optionalriderscancelregristration;
 	
 	private PageData optionalridersInformation;

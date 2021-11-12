@@ -39,7 +39,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 	@FindBy(css = "div.progress-bar-info")

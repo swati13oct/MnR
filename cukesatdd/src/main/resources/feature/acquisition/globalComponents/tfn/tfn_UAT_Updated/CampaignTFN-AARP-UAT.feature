@@ -105,6 +105,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     #Then the user validates PSC code
     #| PSC Code | <Precedence2PSC> |
+    
     @Scenario_1_2_DirectTraffic_UAT_Medsup3.0
     Examples: 
       | scenario         | site | zipcode | TFNNo          | MedSupTFN      | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                               | MSplantype | userName        | password      | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode |
