@@ -105,7 +105,6 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     #Then the user validates PSC code
     #| PSC Code | <Precedence2PSC> |
-    
     @Scenario_1_2_DirectTraffic_UAT_Medsup3.0
     Examples: 
       | scenario         | site | zipcode | TFNNo          | MedSupTFN      | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                               | MSplantype | userName        | password      | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode |
@@ -181,6 +180,9 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Plan Type | <MAplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN
+      | Plan Type | <MAplantype> |
+    Then user clicks on back to plans link to navigate plan summary
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -202,9 +204,9 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>     |
       | TFN Xpath | <decisionGuideTFN> |
-   # Then the user navigates back to page
-   Then the user click on back to previous page on Request a Free Decision Guide
-    | Zip Code | <zipcode> |
+    # Then the user navigates back to page
+    Then the user click on back to previous page on Request a Free Decision Guide
+      | Zip Code | <zipcode> |
     When the user clicks on Agent link for MedsuppPage
       | TFN No    | <agentTFN>   |
       | TFN Xpath | <agentXpath> |
@@ -239,7 +241,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     @Scenario_2_CampaignTraffic_UAT_Medsup4.0 @campaignTFNProd
     Examples: 
-      | scenario         | planyear | zipcode | MSplantype | dob        | UHCUrl                      | planName                            | MAplantype | PDPplantype | isMultutiCounty | county         | pscCode | site   | campaignUrl                                                   | maUrl                     | maTFN                                                   | pdpUrl                     | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | medSuppUrl                          | shoppages        | campaignUrl2       | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath1                                   | MedsuppTFNxpath                   | EnrollTFNxpath                    | MedsuppShopTFNxpath               | ShopTFNxpath                                                              | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | MedsuppFormTFNxpath                         |
+      | scenario         | planyear | zipcode | MSplantype | dob        | UHCUrl                      | planName                            | MAplantype | PDPplantype | isMultutiCounty | county         | pscCode | site   | campaignUrl                                                   | maUrl                     | maTFN                                                   | pdpUrl                     | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN                            | agentApptUrl                                                  | agentApptTFN   | medSuppUrl                          | shoppages        | campaignUrl2       | TFNNo          | TFNxpath                          | MedsuppTFNNo   | MedsuppTFNxpath1                                   | MedsuppTFNxpath                   | EnrollTFNxpath                    | MedsuppShopTFNxpath               | ShopTFNxpath                                                              | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | MedsuppFormTFNxpath                         |
       | Scenario 2 - AMP | current  |   90210 | MS4.0      | 01/01/1950 | https://www.myuhcagent.com/ | AARP Medicare Advantage Prime (HMO) | MA         | PDP         | NO              | Baldwin County | 8001038 | ulayer | /shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038 | enroll/ma-enrollment.html | //*[contains(@class,'call')]//a[contains(@class,'tel')] | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //span[contains(@class, 'invoca_swap_sam')] | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | shop/medicare-supplement-plans.html | /contact-us.html | /?wt.mc_id=8001038 | 1-877-541-7755 | (//a[contains(@class, 'tel')])[3] | 1-844-887-2813 | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-877-541-7755 | 1-844-887-2813 | 9C9        | //span[contains(@class, 'invoca_swap_sam')] |
 
   ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################

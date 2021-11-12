@@ -1083,17 +1083,17 @@ public class CampaignTFNCommonStepDefinition {
 		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
 		String zipCode = inputAttributesMap.get("Zip Code");
 
-		boolean msPlan4Heading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
-	boolean assertionToFailOrPass = (msPlan4Heading && zipCode.equals("90210")
-				|| !msPlan4Heading && zipCode.equals("10001")) ? true
-						: (msPlan4Heading && zipCode.equals("10001")
-								|| !msPlan4Heading && zipCode.equals("90210")) ? false : true;
+	boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
+				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("10001")
+								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
 			//	"*** imsPlan4HeadingVisible/Invisible : '" + msPlan4Heading + "' for zipCode : '" + zipCode + "'");
 
-		if (msPlan4Heading) {
+		if (isAddInfoLinkVisible) {
 			tfnPage.clickAgentLinkMedsup4(TFNXpath, ExpecetdTFNNo);
 		} else
 
@@ -1110,18 +1110,18 @@ public class CampaignTFNCommonStepDefinition {
 
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 
-		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver,
+		boolean isMedsup4DOBVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver,
 				By.xpath("//input[@id='dateOfBirth']"), 20);
 
-		boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
-								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
+				|| !isMedsup4DOBVisible && zipCode.equals("10001")) ? true
+						: (isMedsup4DOBVisible && zipCode.equals("10001")
+								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
 		//		"*** isAddInfoLinkVisible Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
 
-		if (isAddInfoLinkVisible) {
+		if (isMedsup4DOBVisible) {
 			tfnPage.decisionGuidenotPresent();
 		} else
 		{
@@ -1369,19 +1369,19 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = memberAttributesMap.get("Zip Code");
 
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//*[@id='dateOfBirth']"), 20);
 		boolean assertionToFailOrPass = false;
 
-		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
-								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+		assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
+				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
+						: (isMedsup4DOB && zipCode.equals("10001")
+								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
-				"*** isMedsup4DOB Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
+				"*** isMedsup4DOB Visible/Invisible : '" + isMedsup4DOB + "' for zipCode : '" + zipCode + "'");
 
-		if (isAddInfoLinkVisible) {
+		if (isMedsup4DOB) {
 			tfnPage.backtoPreviousDGMedsup4();
 		} else {
 			tfnPage.backtoPreviousDGMedsup3();

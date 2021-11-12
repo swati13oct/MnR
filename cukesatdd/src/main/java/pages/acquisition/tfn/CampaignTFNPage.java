@@ -371,11 +371,12 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - " + str);
-		/*String sep = str.contains(",") ? "," : "%2C";
-		// String[] arrOfStr = str.split("%2C");
-		String[] arrOfStr = str.split(sep);*/
-		
-		String[] arrStr=str.split(";");
+		/*
+		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
+		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 */
+
+		String[] arrStr = str.split(";");
 		String[] arrOfStr = arrStr[0].split("%2C");
 		/*
 		 * if (str.contains(",")) { arrOfStr = str.split(","); }
@@ -1626,7 +1627,6 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void decisionGuidenotPresent() {
 		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
-		jsClickNew(cancelMS4FormModal);
 		// driver.navigate().back();
 
 	}
@@ -1680,6 +1680,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void backtoPreviousDGMedsup4() {
 		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		jsClickNew(cancelMS4FormModal);
 		// driver.navigate().back();
 	}
 
