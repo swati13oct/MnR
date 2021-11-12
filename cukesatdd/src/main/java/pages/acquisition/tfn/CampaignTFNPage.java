@@ -371,9 +371,12 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - " + str);
-		String sep = str.contains(",") ? "," : "%2C";
+		/*String sep = str.contains(",") ? "," : "%2C";
 		// String[] arrOfStr = str.split("%2C");
-		String[] arrOfStr = str.split(sep);
+		String[] arrOfStr = str.split(sep);*/
+		
+		String[] arrStr=str.split(";");
+		String[] arrOfStr = arrStr[0].split("%2C");
 		/*
 		 * if (str.contains(",")) { arrOfStr = str.split(","); }
 		 */
@@ -1476,7 +1479,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public void openURLNewTabAARP(String url) {
 		// get original tab handler
 		String winHandleBefore = driver.getWindowHandle();
-
+		Cookie cookie1 = driver.manage().getCookieNamed("TFNSessionCookie");
 		System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
 		// open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1492,9 +1495,9 @@ public class CampaignTFNPage extends UhcDriver {
 
 		driver.switchTo().window(winHandleTmp);
 		System.out.println("Proceed to open the acquisition url in new tab");
-
 		start(url);
 		googleSearchAARP();
+		driver.manage().addCookie(cookie1);
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleTmp);
@@ -1505,7 +1508,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public void openURLNewTabUHC(String url) {
 		// get original tab handler
 		String winHandleBefore = driver.getWindowHandle();
-
+		Cookie cookie1 = driver.manage().getCookieNamed("TFNSessionCookie");
 		System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
 		// open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1524,6 +1527,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 		start(url);
 		googleSearchUHC();
+		driver.manage().addCookie(cookie1);
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleTmp);
