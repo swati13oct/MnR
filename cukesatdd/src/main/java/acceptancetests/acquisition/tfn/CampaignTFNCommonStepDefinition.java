@@ -1262,6 +1262,7 @@ public class CampaignTFNCommonStepDefinition {
 		String url = "https://www.google.com/";
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// wd.manage().deleteAllCookies();
+		
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openURLNewTabAARP(url);
