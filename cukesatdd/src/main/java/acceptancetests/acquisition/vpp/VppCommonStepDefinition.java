@@ -288,6 +288,15 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
+	
+	@Then("^Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
+	
+	
 
 	@And("^the user views the plans of the below plan type and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
@@ -1997,6 +2006,15 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateIcons();
 	}
+	
+	@Then("^click on Show All button on plan compare page$")
+	public void click_on_Show_All_button() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.showAllButton();
+	}
+	
+	
 	
 	
 	

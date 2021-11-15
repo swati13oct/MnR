@@ -24,10 +24,10 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver{
 	@FindBy(xpath ="//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -45,7 +45,7 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -57,13 +57,13 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 	
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(css = "#ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	//SEP common options for all plan Types

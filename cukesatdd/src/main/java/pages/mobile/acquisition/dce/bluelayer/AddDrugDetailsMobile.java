@@ -28,22 +28,22 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Add Drug Details')]")
 	public WebElement addDrugDetailsPage;
 
-	@FindBy(id = "drug-dosage-button")
+	@FindBy(css = "#drug-dosage-button")
 	public WebElement continueButton;
 
 	@FindBy(xpath = "//input[@value='Lipitor TAB 10MG']")
 	public WebElement Dosageone;
 
-	@FindBy(id = "quantity")
+	@FindBy(css = "#quantity")
 	public WebElement quantityField;
 
-	@FindBy(id = "drug-alt-back-button")
+	@FindBy(css = "#drug-alt-back-button")
 	public WebElement backToSearchBtn;
 
 	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
 	public WebElement btndrugName;
 
-	@FindBy(id = "frequency")
+	@FindBy(css = "#frequency")
 	public WebElement selectYourFrequencyDropdown;
 
 	public AddDrugDetailsMobile(WebDriver driver) {

@@ -17,7 +17,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 
 	public JSONObject addnewdrugJson;
 
-	@FindBy(id = "drug-search-button")
+	@FindBy(css = "#drug-search-button")
 	public WebElement searchButton;
 
 
@@ -27,7 +27,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Cancel']")
 	public WebElement cancelButton;
 	
-	@FindBy(id = "drug-search-input")
+	@FindBy(css = "#drug-search-input")
 	public WebElement drugsearchinput;
 	
 	@FindBy(id="radio-0")
@@ -36,7 +36,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Please enter at least 4 characters to continue search')]")
 	public WebElement errorMessage;
 
-	@FindBy(id = "drug-alt-search-button")
+	@FindBy(css = "#drug-alt-search-button")
 	public WebElement continueButton;
 	
 	@FindBy(xpath = "//span[contains(text(),'Your Drug List can contain a maximum of 25 drugs.')]")
@@ -45,7 +45,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
 	
-	@FindBy(id = "dialogHeading1")
+	@FindBy(css = "#dialogHeading1")
 	public WebElement modalHeading;
 	
 	@FindBy(xpath = "//div[contains(@class,'autocomplete-suggestions')]/div[@class='autocomplete-suggestion']")
@@ -57,7 +57,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	@FindBy(xpath = "//input[starts-with(@id,'drugs-')]/parent::div[contains(@class,'radio-block')]/label")
 	public WebElement drugList;
 
-	@FindBy(id = "closeDrugPopup")
+	@FindBy(css = "#closeDrugPopup")
 	public WebElement cancel;
 	
 	

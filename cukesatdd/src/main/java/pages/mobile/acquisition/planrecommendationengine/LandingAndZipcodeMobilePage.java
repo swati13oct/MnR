@@ -24,7 +24,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	String page = CommonutilitiesMobile.locationPageName;
 	// Landing Page Elements
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
@@ -111,7 +111,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "label[for='MultipleCounty']>sup")
 	private WebElement zipcodePageCountyQuestionMark;
 
-	@FindBy(id = "errorMessage")
+	@FindBy(css = "#errorMessage")
 	private WebElement errorMessage;
 
 	@Override

@@ -16,13 +16,13 @@ import acceptancetests.data.LoginCommonConstants;
  */
 public class LoginAssistancePageMobile extends GlobalWebElements{
 	
-	@FindBy(id = "usercheckbox")
+	@FindBy(css = "#usercheckbox")
 	private WebElement userNameCheckBox;
 	
-	@FindBy(id = "pwdcheckbox")
+	@FindBy(css = "#pwdcheckbox")
 	private WebElement passwordCheckBox;
 	
-	@FindBy(id = "continueToPersonalId")
+	@FindBy(css = "#continueToPersonalId")
 	private WebElement continueButton;
 	
 	@FindBy(xpath = "//div[@id='personalIndentificationPageDiv']/div/h3")
