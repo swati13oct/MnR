@@ -426,7 +426,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				// Select SelectState = new Select(MailingAdd_State_DropDown);
 				// SelectState.selectByValue(Mailing_State);
 				if (driver.getClass().toString().contains("IOS")) {
-					driver.findElement(By.xpath("(//span[@class='req-asterisk'])[1]")).click();
+					WebElement label = driver.findElement(By.cssSelector("label[for='state0']"));
+					jsClickNew(label);
 				}
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);

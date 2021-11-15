@@ -4189,6 +4189,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
+		
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			// iOS dropdown does not open without clicking label hence added below code
+			WebElement stateLabel1 = driver.findElement(By.cssSelector("label[for='statedrpdwn'] sup"));
+			WebElement stateLabel2 = driver.findElement(By.xpath("//span//label[@for='statedrpdwn']"));
+			
+			jsClickNew(stateLabel1);
+			jsClickNew(stateLabel2);
+		}
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");

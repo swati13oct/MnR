@@ -172,13 +172,15 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	private WebElement ShopEnrollButton;
 
 	// @FindBy(xpath = "//span[contains(text(),'Shop Plans')]")
-	@FindBy(xpath = "//*[contains(@class,'zipCompForm-0')]//button[contains(@class,'uhc-zip-button')]")
+	@FindBy(xpath = "(//*[@zipcompindex='1'])[6]")
 	private WebElement ShopEnrollMedsuppButton;
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
+	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
+	
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
@@ -224,10 +226,11 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
 	private WebElement MaleGender;
 
-	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
+	@FindBy(xpath = "//button[contains(text(),'View Plans')]")
 	private WebElement Start_ApplicationBtn;
 
 	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
@@ -263,19 +266,15 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
-	//iPerseption popup is not shown on mobile, therefore commenting
-	/*public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to
-																			// CommonUtility.waitForPageLoadNew as we're
-																			// not trying to fail the test if it isn't
-																			// found
-		try {
-			if (proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
-		}
-	}*/
+	// iPerseption popup is not shown on mobile, therefore commenting
+	/*
+	 * public void CheckiPerseptions() { CommonUtility.waitForPageLoad(driver,
+	 * proactiveChatExitBtn, 10); // do not change this to //
+	 * CommonUtility.waitForPageLoadNew as we're // not trying to fail the test if
+	 * it isn't // found try { if (proactiveChatExitBtn.isDisplayed())
+	 * jsClickNew(proactiveChatExitBtn); } catch (Exception e) {
+	 * System.out.println("Proactive chat popup not displayed"); } }
+	 */
 
 	/**
 	 * 
@@ -476,8 +475,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			if (Objects.nonNull(englishLangLink)) {
 				jsClickNew(englishLangLink);
 			}
-		} catch (TimeoutException|NoSuchElementException e) {
-			//The google search page has loaded in English language
+		} catch (TimeoutException | NoSuchElementException e) {
+			// The google search page has loaded in English language
 		}
 		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
@@ -584,12 +583,13 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			if (Objects.nonNull(englishLangLink)) {
 				jsClickNew(englishLangLink);
 			}
-		} catch (TimeoutException|NoSuchElementException e) {
-			//The google search page has loaded in English language
+		} catch (TimeoutException | NoSuchElementException e) {
+			// The google search page has loaded in English language
 		}
 		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 60);
 		validateNew(GoogleSearchField);
-		GoogleSearchField.click();	//Do not remove this click or change to jsClick, added to invoke keyboard on mobile device.
+		GoogleSearchField.click(); // Do not remove this click or change to jsClick, added to invoke keyboard on
+									// mobile device.
 		sendkeysMobile(GoogleSearchField, "UHC Medicare Advantage Plans");
 		clickSubmitFromMobileKeyboard(driver);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
@@ -899,7 +899,6 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		CheckPageLoad();
 
 //		CheckiPerseptions();
-		
 
 		WebElement HomeLogo = HomeLogos.stream().filter(homeLogo -> homeLogo.isDisplayed()).findFirst().get();
 
@@ -1430,7 +1429,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		sendkeys(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollMedsuppButton);
 		waitForPageLoadSafari();
-		// }
+
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -1442,6 +1441,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	private WebElement tFNHomePage;
 
 	public String getTFNFromHomePage() {
+		CommonUtility.waitForPageLoadNew(driver, tFNHomePage, 30);
 		scrollToView(tFNHomePage);
 		// validateNew(tFNHomePage);
 		String tfnNo = tFNHomePage.getText().trim();
