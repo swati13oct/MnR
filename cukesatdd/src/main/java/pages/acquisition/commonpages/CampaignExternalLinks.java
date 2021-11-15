@@ -322,6 +322,31 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(text(), 'View Plans & Pricing')])[2]")
 	private WebElement viewPricingBtn2;
 
+	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
+	private WebElement rightRailSectionTFNHeaderMedsupp;
+
+	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
+	private WebElement rightRailSectionTFNHeaderMedsupp1;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
+	private WebElement CallSamTFN;
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
+	private WebElement CallSamTFNClose;
+	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
+	private WebElement CallSamTFNMember_Medsup;
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
+	private WebElement CallSamTFNtimezone;
+	@FindBy(xpath = "//div[@id='sam-call-modal']//p[contains(text(),'Already a member')]")
+	private WebElement CallSamTFNMember;
+
+	@FindBy(xpath = "//*[@id='sam-call-modal']//*[contains(@class,'modal-title')]")
+	private WebElement CallSamModalHeader;
+
+	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
+	private WebElement CallSamModalMember;
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
+	private WebElement CallSamTFNMedsupptimezone;
+
 	public String parentWindow;
 
 	public CampaignExternalLinks(WebDriver driver) {
@@ -2485,17 +2510,6 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
-	private WebElement CallSamTFN;
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
-	private WebElement CallSamTFNClose;
-	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
-	private WebElement CallSamTFNMember_Medsup;
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
-	private WebElement CallSamTFNtimezone;
-	@FindBy(xpath = "//div[@id='sam-call-modal']//p[contains(text(),'Already a member')]")
-	private WebElement CallSamTFNMember;
-
 	public void validateCallpopuponapageFromExternal(String TFNXpath, String ExpecetdTFNNo)
 			throws InterruptedException {
 		// driver.navigate().refresh();
@@ -2653,14 +2667,6 @@ public class CampaignExternalLinks extends UhcDriver {
 					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
 
-	@FindBy(xpath = "//*[@id='sam-call-modal']//*[contains(@class,'modal-title')]")
-	private WebElement CallSamModalHeader;
-
-	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
-	private WebElement CallSamModalMember;
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
-	private WebElement CallSamTFNMedsupptimezone;
-
 	public void validateCallpopuponMSExternalpage(String TFNXpath, String ExpecetdTFNNo) {
 		threadsleep(10);
 		System.out.println("########Validating TFN on Call SAM icon and Call popup for Medsupp#######");
@@ -2730,12 +2736,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		validate(CallSamTFNClose);
 		jsClickNew(CallSamTFNClose);
 	}
-
-	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
-	private WebElement rightRailSectionTFNHeaderMedsupp;
-
-	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
-	private WebElement rightRailSectionTFNHeaderMedsupp1;
 
 	public void validateTFNNoonRightRailforMSExternal(String TFNXpath, String ExpecetdTFNNo) {
 
