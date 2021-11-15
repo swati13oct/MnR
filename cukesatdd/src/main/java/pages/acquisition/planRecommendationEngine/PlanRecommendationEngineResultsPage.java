@@ -1937,7 +1937,7 @@ public void viewplanLink(List<WebElement> plansName) {
 }
  ArrayList<String> vppPlans = new ArrayList<String>();
 public ArrayList<String> saveplans(String plan) {
-	int planIndex = planSelectorNewResultspage.findPlan(plan);
+	int planIndex = planSelectorNewResultspage.findPlan(plan,false);
 	System.out.println("Plans Index is :" +planIndex);
 	vppPlans.add(plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim());
 	threadsleep(3000);
