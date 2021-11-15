@@ -329,27 +329,24 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
+      | Middle Name              | <middlename>             |
       | Last Name                | <lastname>               |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
       | Perm_city                | <permcity>               |
+      | Perm_AptNo               | <permaptno>              |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
+      | Mailing_AptNo            | <mailingaptno>           |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    # | Perm_Aptno               | <permaptno>              |
-    # | Mailing_Aptno            | <mailingaptno>           |
-    Then the user enters following information in Personal Information Page
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      | Home Number        | <phoneno>           |
-      | Mobile Number      | <mobileno>          |
-      | Middle Name        | <middlename>        |
+      | Email Confirmation | <emailConfirmation>            |
+      | Go Green           | <goGreen>                      |
+      | Home Number        | <phoneno>                      |
+      | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
     And the user quits the session
@@ -387,31 +384,28 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
+      | Middle Name              | <middlename>             |
       | Last Name                | <lastname>               |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
       | Perm_city                | <permcity>               |
+      | Perm_AptNo               | <permaptno>              |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
+      | Mailing_AptNo            | <mailingaptno>           |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    # | Perm_Aptno               | <permaptno>              |
-    # | Mailing_Aptno            | <mailingaptno>           |
-    Then the user enters following information in Personal Information Page
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      | Home Number        | <phoneno>           |
-      | Mobile Number      | <mobileno>          |
-      | Middle Name        | <middlename>        |
+      | Email Confirmation | <emailConfirmation>            |
+      | Go Green           | <goGreen>                      |
+      | Home Number        | <phoneno>                      |
+      | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @vppPlanCompareCommon_AARP01New @regressionAARP
+    @vppPlanCompareCommon_AARP01New @regressionAARP @test001
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_AMP | AARP |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
