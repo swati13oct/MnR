@@ -1,7 +1,7 @@
 @campaignExternalLinks
 Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morganstanley
 
-  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
+  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in Learn About Medicare from External link: <externallink>
     Given user is on campaign external Links page
       | External Link | <externallink> |
     And the user validate links and other options on morganstanley external link page
@@ -129,7 +129,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                 | TFNxpath3                           | TFNxpath4                             | pscCode | Zipcode | isMultiCounty | county          | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                                                         | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            |
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //a[contains(@class,'invoca_swap')] | (//div[@class= 'twineTfn'])[2]/div[2] | 8002977 |   10001 | NO            | New York County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] |
 
-  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
+  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in Learn About Medicare from External link: <externallink>
     Given user is on campaign external Links page
       | External Link | <externallink> |
     And the user validate links and other options on morganstanley external link page
