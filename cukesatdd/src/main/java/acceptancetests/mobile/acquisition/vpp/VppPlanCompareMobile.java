@@ -3037,6 +3037,12 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
 	}
+	
+	@Then("^the user quits the session$")
+	public void user_ends_current_session() throws Throwable {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.quit();
+	}
 
 	@Then("^user clicks on Change Zip code link$")
 	public void user_clicks_at_Change_Zip_code_link() throws Throwable {
