@@ -1437,7 +1437,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			return null;
 	}
 
-	@FindBy(xpath = "(//a[contains(@class, 'tel')])[3]")
+	@FindBy(xpath = "(//a[contains(@class, 'tel')])[3] | (//span[contains(@class, 'tel')])[1]")
 	private WebElement tFNHomePage;
 
 	public String getTFNFromHomePage() {

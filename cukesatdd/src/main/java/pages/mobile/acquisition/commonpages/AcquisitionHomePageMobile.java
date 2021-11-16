@@ -124,6 +124,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#stateWidget > div > label")
 	private WebElement stateWidget;
 
+	@FindBy(xpath = "//*[@id='stateWidget']")
+	private WebElement stateWidgetLable;
+
 	@FindBy(css = "#homefooter")
 	private WebElement homefooter;
 
@@ -3583,7 +3586,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.switchTo().window(base);
 
 			// Added below loop as ios script fails while switching back to parent window
-			if (driver.getCurrentUrl().contains("uhc.com") && driver.getClass().toString().toUpperCase().contains("IOS")) {
+			if (driver.getCurrentUrl().contains("uhc.com")
+					&& driver.getClass().toString().toUpperCase().contains("IOS")) {
 				driver.navigate().back();
 			}
 
@@ -3872,11 +3876,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
 
 		sleepBySec(10);
-//		scrollToView(maPlansViewLink);
-//		if (maPlansViewLink.isDisplayed()) {
-//			jsClickNew(maPlansViewLink);
-//			threadsleep(5);
-//		}
+		if (driver.getCurrentUrl().contains("/plan-summary") & !FindAnAgent.isDisplayed()) {
+			scrollToView(maPlansViewLink);
+			jsClickNew(maPlansViewLink);
+			threadsleep(5);
+		}
 
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
@@ -4523,6 +4527,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("State to be Selected: " + geoState);
 
 		jsClickNew(stateWidget);
+		jsClickNew(stateWidgetLable);
 		mobileSelectOption(stateDropDown, geoState, true);
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
@@ -4972,8 +4977,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				}
 				driver.switchTo().window(base);
 			} else {
-				//Step to click browser back is commented in feature file, not sure of its impact on desktop script if un commented.
-				// hence adding navigate back if the member site loads in same window. Remove this else block if the browser back step is added.
+				// Step to click browser back is commented in feature file, not sure of its
+				// impact on desktop script if un commented.
+				// hence adding navigate back if the member site loads in same window. Remove
+				// this else block if the browser back step is added.
 				driver.navigate().back();
 			}
 		}

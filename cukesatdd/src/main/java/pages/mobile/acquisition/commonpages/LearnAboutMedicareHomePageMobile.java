@@ -405,15 +405,18 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	public PrescriptionsProvidersBenefitsPageMobile selectBenifitsEducation() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-//		MobileLearnAboutMedicarePrescProvBenefit();
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			accessFooterLinkFromLearnAboutMedicare("introduction to medicare");
+		}
 		WebElement medBenifits = driver.findElement(By.cssSelector("#accordion-3-content > nav > p:nth-child(1)"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		String checkUrl = driver.getCurrentUrl();
-		if (checkUrl.contains("medicare-education/medicare-benefits.html")||checkUrl.contains("/medicare-education-classic/medicare-benefits-classic.html")) {
+		if (checkUrl.contains("medicare-education/medicare-benefits.html")
+				|| checkUrl.contains("/medicare-education-classic/medicare-benefits-classic.html")) {
 			return new PrescriptionsProvidersBenefitsPageMobile(driver);
 		} else {
 			return null;
@@ -437,7 +440,8 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	public MedicareEligibilityPageMobile selectMedicareEligibility() {
-		WebElement lnkMedEligibility = driver.findElement(By.xpath("//span[contains(text(),'Medicare Eligibility')]/parent::a"));
+		WebElement lnkMedEligibility = driver
+				.findElement(By.xpath("//span[contains(text(),'Medicare Eligibility')]/parent::a"));
 		validateNew(lnkMedEligibility);
 		jsClickNew(lnkMedEligibility);
 		waitForPageLoadSafari();
@@ -487,6 +491,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 			}
 		}
 
+		threadsleep(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
 		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
@@ -517,12 +522,14 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	public void clickOnReadNextLink() {
 		// TODO Auto-generated method stub
 
-		//WebElement lnkNext=driver.findElement(By.xpath("//span[contains(text(),'Read Next')]/following-sibling::span//a"));
+		// WebElement lnkNext=driver.findElement(By.xpath("//span[contains(text(),'Read
+		// Next')]/following-sibling::span//a"));
 		WebElement lnkNext;
-		if(driver.getCurrentUrl().contains("classic")){
-			lnkNext=driver.findElement(By.xpath("//span[contains(text(),'Read Next')]/following-sibling::span//a"));
-		}else{
-			lnkNext=driver.findElement(By.xpath("//span[contains(text(),'Next')]/ancestor::*/following-sibling::p//a"));
+		if (driver.getCurrentUrl().contains("classic")) {
+			lnkNext = driver.findElement(By.xpath("//span[contains(text(),'Read Next')]/following-sibling::span//a"));
+		} else {
+			lnkNext = driver
+					.findElement(By.xpath("//span[contains(text(),'Next')]/ancestor::*/following-sibling::p//a"));
 
 		}
 
@@ -531,7 +538,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
-		
+
 	}
 
 	public void selectStateForGeotargeting() {
@@ -551,104 +558,123 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	public void checkInnerPageLinks(String pageName) {
-		
-		if (pageName.contains("Prescription"))
-		{
-			WebElement drugcvrg = driver.findElement(By.xpath("//a//span[contains(text(),'prescription drug coverage?')]"));
-			WebElement backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
+
+		if (pageName.contains("Prescription")) {
+			WebElement drugcvrg = driver
+					.findElement(By.xpath("//a//span[contains(text(),'prescription drug coverage?')]"));
+			WebElement backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
 			System.out.println(" Link Clicked: Will I have prescription drug coverage? ");
 			jsClickNew(drugcvrg);
-			jsClickNew(backtotop);		
-			
+			jsClickNew(backtotop);
+
 			WebElement currentProvider = driver.findElement(By.xpath("//a//span[contains(text(),'current provider')]"));
-			backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
+			backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
 			System.out.println(" Link Clicked: Will I still be able to see my current provider(s)? ");
 			jsClickNew(currentProvider);
 			jsClickNew(backtotop);
-			
-			WebElement additionBenefits= driver.findElement(By.xpath("//a//span[contains(text(),'additional benefits')]"));
-			//backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
-			System.out.println(" Link Clicked: Will I have coverage for additional benefits like vision, dental, or hearing aids? ");
+
+			WebElement additionBenefits = driver
+					.findElement(By.xpath("//a//span[contains(text(),'additional benefits')]"));
+			// backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to
+			// Top')])[3]"));
+			System.out.println(
+					" Link Clicked: Will I have coverage for additional benefits like vision, dental, or hearing aids? ");
 			jsClickNew(additionBenefits);
-			jsClickNew(backtotop);				
-			
-		}
-		else if (pageName.contains("Eligibility")) {
-			
-			WebElement lnkEligibility=driver.findElement(By.xpath("//span[contains(text(),'Who is eligible for Medicare?')]/parent::a"));
-			WebElement backtotop=driver.findElement(By.xpath("(//span[contains(text(),'Back to Top')])[1]/parent::a"));
+			jsClickNew(backtotop);
+
+		} else if (pageName.contains("Eligibility")) {
+
+			WebElement lnkEligibility = driver
+					.findElement(By.xpath("//span[contains(text(),'Who is eligible for Medicare?')]/parent::a"));
+			WebElement backtotop = driver
+					.findElement(By.xpath("(//span[contains(text(),'Back to Top')])[1]/parent::a"));
 			jsClickNew(lnkEligibility);
 			jsClickNew(backtotop);
 			System.out.println(" Link Clicked: Who is eligible for Medicare? ");
-			
-			WebElement lnkPast65=driver.findElement(By.xpath("//a//span[contains(text(),'What if I continue to work past age 65?')]"));
-			backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
+
+			WebElement lnkPast65 = driver
+					.findElement(By.xpath("//a//span[contains(text(),'What if I continue to work past age 65?')]"));
+			backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
 			jsClickNew(lnkPast65);
 			jsClickNew(backtotop);
 			System.out.println(" Link Clicked: What if I continue to work past age 65? ");
 
-			WebElement lnkNeedToEligible=driver.findElement(By.xpath("//a//span[contains(text(),\"What do I need to do when I'm eligible for Medicar\")]"));
-			backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
+			WebElement lnkNeedToEligible = driver.findElement(
+					By.xpath("//a//span[contains(text(),\"What do I need to do when I'm eligible for Medicar\")]"));
+			backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
 			jsClickNew(lnkNeedToEligible);
 			jsClickNew(backtotop);
 			System.out.println(" Link Clicked: What do I need to do when I'm eligible for Medicare? ");
 
-			WebElement lnkCvgChoice=driver.findElement(By.xpath("//a//span[contains(text(),'my coverage choices after')]"));
-			backtotop=driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[4]"));
+			WebElement lnkCvgChoice = driver
+					.findElement(By.xpath("//a//span[contains(text(),'my coverage choices after')]"));
+			backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[4]"));
 			jsClickNew(lnkCvgChoice);
 			jsClickNew(backtotop);
-			System.out.println(" Link Clicked: What are my coverage choices after I have Medicare? ");				
-		}
-		else if (pageName.contains("Coverage Choices")) {
-			
-			WebElement lnkcvrgChoice=driver.findElement(By.xpath("//a//span[contains(text(),'Get to know your coverage choices')]"));
+			System.out.println(" Link Clicked: What are my coverage choices after I have Medicare? ");
+		} else if (pageName.contains("Coverage Choices")) {
+
+			WebElement lnkcvrgChoice = driver
+					.findElement(By.xpath("//a//span[contains(text(),'Get to know your coverage choices')]"));
 			jsClickNew(lnkcvrgChoice);
 			System.out.println(" Link Clicked: Get to know your coverage choices ");
 
-			WebElement lnkogMedCvrg=driver.findElement(By.xpath("//a//span[contains(text(),'Original Medicare coverage from the U.S. governmen')]"));
-			//WebElement lnkogMedCvrg=driver.findElement(By.xpath("//a//span[contains(text(),'Medicare coverage combinations')]"));
+			WebElement lnkogMedCvrg = driver.findElement(
+					By.xpath("//a//span[contains(text(),'Original Medicare coverage from the U.S. governmen')]"));
+			// WebElement
+			// lnkogMedCvrg=driver.findElement(By.xpath("//a//span[contains(text(),'Medicare
+			// coverage combinations')]"));
 			scrollToView(lnkogMedCvrg);
 			jsClickNew(lnkogMedCvrg);
-			
+
 			System.out.println(" Link Clicked: Medicare coverage combinations ");
 
-			WebElement lnkPIC=driver.findElement(By.xpath("//a//span[contains(text(),'Coverage choices from private insurance companies')]"));
+			WebElement lnkPIC = driver.findElement(
+					By.xpath("//a//span[contains(text(),'Coverage choices from private insurance companies')]"));
 			scrollToView(lnkPIC);
 			jsClickNew(lnkPIC);
 			System.out.println(" Link Clicked: Coverage choices from private insurance companies ");
 
-			WebElement lnkplanCombo=driver.findElement(By.xpath("//a//span[contains(text(),'Seven plan combo options')]"));
-			//WebElement lnkplanCombo=driver.findElement(By.xpath("//a//span[contains(text(),'Key things to remember when choosing coverage')]"));
+			WebElement lnkplanCombo = driver
+					.findElement(By.xpath("//a//span[contains(text(),'Seven plan combo options')]"));
+			// WebElement
+			// lnkplanCombo=driver.findElement(By.xpath("//a//span[contains(text(),'Key
+			// things to remember when choosing coverage')]"));
 			scrollToView(lnkplanCombo);
 			jsClickNew(lnkplanCombo);
-			System.out.println(" Link Clicked: Seven plan combo options ");				
-		}
-		else if (pageName.contains("Cost Basics")) {
-			
-			/*WebElement lnkPremium=driver.findElement(By.xpath("(//a[contains(text(),'What is a premium?')])[2]"));
-			jsClickNew(lnkPremium);
-			System.out.println(" Link Clicked: What is a premium? ");
-			
-			WebElement lnkcostShare=driver.findElement(By.xpath("//a[contains(text(),'Which costs might I share with Original Medicare')]"));
-			scrollToView(lnkcostShare);
-			jsClickNew(lnkcostShare);
-			
-			System.out.println(" Link Clicked: Which costs might I share with Original Medicare or my plan? ");
+			System.out.println(" Link Clicked: Seven plan combo options ");
+		} else if (pageName.contains("Cost Basics")) {
 
-			WebElement lnkSpending=driver.findElement(By.xpath("//a[contains(text(),'out-of-pocket spending?')]"));
-			scrollToView(lnkSpending);
-			jsClickNew(lnkSpending);
-			System.out.println(" Link Clicked: Are there ways to limit my out-of-pocket spending? ");
-
-			WebElement lnkPartAB=driver.findElement(By.xpath("//a[contains(text(),'(Parts A and B) costs?')]"));
-			scrollToView(lnkPartAB);
-			jsClickNew(lnkPartAB);
-			System.out.println(" Link Clicked: What are Original Medicare (Parts A and B) costs? ");
-			
-			WebElement lnkMedCost=driver.findElement(By.xpath("(//a[contains(text(),'paying Medicare costs?')])[2]"));
-			scrollToView(lnkMedCost);
-			jsClickNew(lnkMedCost);
-			System.out.println(" What if I need help paying Medicare costs? ");*/
+			/*
+			 * WebElement lnkPremium=driver.findElement(By.
+			 * xpath("(//a[contains(text(),'What is a premium?')])[2]"));
+			 * jsClickNew(lnkPremium);
+			 * System.out.println(" Link Clicked: What is a premium? ");
+			 * 
+			 * WebElement lnkcostShare=driver.findElement(By.
+			 * xpath("//a[contains(text(),'Which costs might I share with Original Medicare')]"
+			 * )); scrollToView(lnkcostShare); jsClickNew(lnkcostShare);
+			 * 
+			 * System.out.
+			 * println(" Link Clicked: Which costs might I share with Original Medicare or my plan? "
+			 * );
+			 * 
+			 * WebElement lnkSpending=driver.findElement(By.
+			 * xpath("//a[contains(text(),'out-of-pocket spending?')]"));
+			 * scrollToView(lnkSpending); jsClickNew(lnkSpending); System.out.
+			 * println(" Link Clicked: Are there ways to limit my out-of-pocket spending? "
+			 * );
+			 * 
+			 * WebElement lnkPartAB=driver.findElement(By.
+			 * xpath("//a[contains(text(),'(Parts A and B) costs?')]"));
+			 * scrollToView(lnkPartAB); jsClickNew(lnkPartAB); System.out.
+			 * println(" Link Clicked: What are Original Medicare (Parts A and B) costs? ");
+			 * 
+			 * WebElement lnkMedCost=driver.findElement(By.
+			 * xpath("(//a[contains(text(),'paying Medicare costs?')])[2]"));
+			 * scrollToView(lnkMedCost); jsClickNew(lnkMedCost);
+			 * System.out.println(" What if I need help paying Medicare costs? ");
+			 */
 		}
 	}
 
@@ -747,7 +773,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			navLink = "Medicare Prescription Drug Plans";
 		}
-		
+
 		LEARNABOUTMEDICARE_TYPESOFPLANS planType = LEARNABOUTMEDICARE_TYPESOFPLANS.getTypesOfPlansEnumFor(navLink);
 		openLearnAboutMedicareFromMenu().selectTypesOfPlansOption(planType);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -776,7 +802,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		return new MedicareSupplementInsurancePlansPageMobile(driver);
 
 	}
-	
+
 	/**
 	 * Click learn about medicare nav link.
 	 * 
@@ -785,11 +811,14 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	 * @param navLink the nav link
 	 */
 	public void clickLearnAboutMedicareNavLink(String navLink) {
-		LEARNABOUTMEDICARE_INTRODUCTION introductionEnum = LEARNABOUTMEDICARE_INTRODUCTION.getIntroductionEnumFor(navLink);
-		LEARNABOUTMEDICARE_TYPESOFPLANS typesOfPlansEnum = LEARNABOUTMEDICARE_TYPESOFPLANS.getTypesOfPlansEnumFor(navLink);
-		LEARNABOUTMEDICARE_MEDICAREENROLLMENT medicareEnrollmentEnum = LEARNABOUTMEDICARE_MEDICAREENROLLMENT.getMedicareEnrollmentEnumFor(navLink);
-		
-		if(introductionEnum != null) {
+		LEARNABOUTMEDICARE_INTRODUCTION introductionEnum = LEARNABOUTMEDICARE_INTRODUCTION
+				.getIntroductionEnumFor(navLink);
+		LEARNABOUTMEDICARE_TYPESOFPLANS typesOfPlansEnum = LEARNABOUTMEDICARE_TYPESOFPLANS
+				.getTypesOfPlansEnumFor(navLink);
+		LEARNABOUTMEDICARE_MEDICAREENROLLMENT medicareEnrollmentEnum = LEARNABOUTMEDICARE_MEDICAREENROLLMENT
+				.getMedicareEnrollmentEnumFor(navLink);
+
+		if (introductionEnum != null) {
 			selectIntroductionToMedicareOption(introductionEnum);
 		} else if (typesOfPlansEnum != null) {
 			selectTypesOfPlansOption(typesOfPlansEnum);
@@ -1028,7 +1057,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		validateNew(requestplaninformationLearnMedicaresubmit);
 		jsClickNew(requestplaninformationLearnMedicaresubmit);
 
-		if(validateNew(requestplaninformationLearnMedicaresubmitpopup)) {
+		if (validateNew(requestplaninformationLearnMedicaresubmitpopup)) {
 			Assertion.assertTrue("****************Request  information is not displayed  ***************",
 					requestplaninformationLearnMedicaresubmitpopup.getText()
 							.contains("Your guide will arrive in your inbox shortly"));
