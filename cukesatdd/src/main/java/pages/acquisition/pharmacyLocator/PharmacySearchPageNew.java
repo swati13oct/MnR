@@ -154,7 +154,6 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		else
 			Assertion.fail("Plan Name is NOT Displayed in Pharmacy Results Section");
 	}
-	
 
 	/** Validate show on map link appearance for search results */
 	public PharmacySearchPage validateShowOnMapLinks() {
