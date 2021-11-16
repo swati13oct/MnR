@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -143,5 +145,31 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 //				pharmacyValidate(map_openStreetView));
 //
 //	}
+	
+	public void validatePlanNameInResultsSection(String testPlanName) {
+		WebElement PlanNameText = driver.findElement(By.xpath("//h3[contains(@id, 'selectedplanname') and contains(text(), '"+testPlanName+"')]"));
+		if(validateNew(PlanNameText)) {
+			System.out.println("Ecpected Plan Name displayed in Pharmacy Results section : "+PlanNameText.getText());
+		}
+		else
+			Assertion.fail("Plan Name is NOT Displayed in Pharmacy Results Section");
+	}
+	
+
+	/** Validate show on map link appearance for search results */
+	public PharmacySearchPage validateShowOnMapLinks() {
+		CommonUtility.checkPageIsReady(driver);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,-100)", "");
+		int showonmapCount = showonmap.size();
+		int PharmacyCount = PharmacyResultList.size();
+		System.out.println(" No of SHOW ON MAP Links displayed : " + showonmapCount);
+		System.out.println(" No of Pharmacy Results displayed : " + PharmacyCount);
+		if (showonmapCount == PharmacyCount) {
+			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+	}
 	
 }

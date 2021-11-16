@@ -84,6 +84,10 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 
 	@FindBy(id = "//h4[text()='3 Matching Pharmacies Found in Your Area']")
 	protected WebElement pharmacyCount;
-    
 	
+	@FindBy(xpath="//span[contains(@class,'uhc-button_text') and contains(text(),'Show on Map')]")
+	protected List<WebElement> showonmap;
+	
+	@FindBy(xpath = "//*[@class='mb-10 mb-lg-0 flex']")
+	protected List<WebElement> PharmacyResultList;
 }
