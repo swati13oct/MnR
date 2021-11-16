@@ -41,6 +41,7 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * @author pperugu
@@ -1627,7 +1628,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
+	public PharmacySearchPageNew navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		scrollToView(navigationSectionHomeLink);
@@ -1638,7 +1639,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 

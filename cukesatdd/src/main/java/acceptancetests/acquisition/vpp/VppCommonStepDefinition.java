@@ -60,6 +60,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
@@ -2773,7 +2774,7 @@ private Scenario scenario;
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		PharmacySearchPage pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
+		PharmacySearchPageNew pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
 		// PharmacySearchPage pharmacySearchPage=new
 		// PharmacySearchPage(aquisitionhomepage.driver);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);

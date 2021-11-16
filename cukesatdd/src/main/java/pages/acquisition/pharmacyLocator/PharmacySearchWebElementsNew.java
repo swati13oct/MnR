@@ -28,28 +28,28 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]/span")
 	protected WebElement inputInstruction;
 	
-	@FindBy(xpath="//select[@id='miles']//option")
+	@FindBy(xpath="(//select[@id='miles'])[2]//option")
 	protected List<WebElement> distanceOptions;
 	
-	@FindBy(id = "miles")
+	@FindBy(xpath = "(//select[@id='miles'])[2]")
 	protected WebElement distanceDropDownField;
 	
-	@FindBy(xpath="//*[@id='miles']/option[1]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[1]")
 	protected WebElement distanceOption_1mile;
 	
-	@FindBy(xpath="//*[@id='miles']/option[2]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[2]")
 	protected WebElement distanceOption_2miles;
 
-	@FindBy(xpath="//*[@id='miles']/option[3]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[3]")
 	protected WebElement distanceOption_5miles;
 
-	@FindBy(xpath="//*[@id='miles']/option[4]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[4]")
 	protected WebElement distanceOption_10miles;
 
-	@FindBy(xpath="//*[@id='miles']/option[5]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[5]")
 	protected WebElement distanceOption_15miles;
 
-	@FindBy(xpath="//*[@id='miles']/option[6]")
+	@FindBy(xpath="(//select[@id='miles'])[2]/option[6]")
 	protected WebElement distanceOption_25miles;
 	
 	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[1]")
@@ -76,12 +76,14 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//button[@class='uhc-button uhc-button--secondary p-20']")
 	protected WebElement searchbtn;
 	
-*	@FindBy(xpath="//div[@class='pharmacySearchResults section']")
+	@FindBy(xpath="//div[@class='pharmacySearchResults section']")
 	protected WebElement map_resultSection;
 
     @FindBy(xpath = "//button[@title='Show street map' and text()='Map']")
     protected WebElement map_mapBtn;
-    
+
+	@FindBy(id = "//h4[text()='3 Matching Pharmacies Found in Your Area']")
+	protected WebElement pharmacyCount;
     
 	
 }

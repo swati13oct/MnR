@@ -25,6 +25,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  *Functionality:PharmacyLocator
@@ -80,7 +81,7 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-		PharmacySearchPage pharmacySearchPage= aquisitionhomepage.navigateToPharmacyLocator();
+		PharmacySearchPageNew pharmacySearchPage= aquisitionhomepage.navigateToPharmacyLocator();
 		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);

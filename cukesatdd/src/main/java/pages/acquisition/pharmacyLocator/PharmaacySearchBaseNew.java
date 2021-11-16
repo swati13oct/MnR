@@ -72,18 +72,18 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		sleepBySec(1);
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
-		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(loadingSpinner, 90);
-		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
-			waitforElementDisapper(loadingSpinner, 90);
+//		if (!loadingBlock.isEmpty())
+//			waitforElementDisapper(loadingSpinner, 90);
+//		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
+//			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); //note: let the page settle down
 		jsClickNew(searchbtn);
 
 		// let the plans load, wait for the loading symbol to disappear
-		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(loadingSpinner, 90);
-		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
-			waitforElementDisapper(loadingSpinner, 90);
+//		if (!loadingBlock.isEmpty())
+//			waitforElementDisapper(loadingSpinner, 90);
+//		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+//			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); // note: let the page settle down
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {

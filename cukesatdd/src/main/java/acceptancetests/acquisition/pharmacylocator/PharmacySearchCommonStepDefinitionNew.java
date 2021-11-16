@@ -48,7 +48,7 @@ public class PharmacySearchCommonStepDefinitionNew {
         System.out.println("Unselected state on home page for more predictable result");
         String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
         getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-        PharmacySearchPage pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
+		PharmacySearchPageNew pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
         getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
         getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
     }
