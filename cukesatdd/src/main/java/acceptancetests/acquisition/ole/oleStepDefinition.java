@@ -126,8 +126,12 @@ public class oleStepDefinition {
 			 * ,(new VPPPlanSummaryPage((WebDriver)getLoginScenario()
 			 * .getBean(CommonConstants.WEBDRIVER))));
 			 */
-			TFN = planSummaryPage.GetTFNforPlanType();
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 
+			TFN = planSummaryPage.GetTFNforPlanType();
+			getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+			System.out.println("TFN for Plan Type is : " + TFN);
+		}
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
 			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
@@ -140,13 +144,13 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
+
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
