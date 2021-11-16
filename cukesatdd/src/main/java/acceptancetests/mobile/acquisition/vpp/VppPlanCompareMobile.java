@@ -4697,6 +4697,14 @@ public class VppPlanCompareMobile {
 		}
 	}
 
+	@Then("^verify icons loaded with doctor summary on Plan Compare page$")
+	public void verify_icons_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		planComparePage.validateDoctors();
+	}
+
 	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page$")
 	public void verify_doctors_covered() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4704,7 +4712,7 @@ public class VppPlanCompareMobile {
 
 		planComparePage.validateDoctors();
 	}
-
+	
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
 	public void clickONEdityourdocits() throws Exception {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
