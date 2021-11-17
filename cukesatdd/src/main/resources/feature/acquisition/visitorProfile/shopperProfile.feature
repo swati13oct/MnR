@@ -292,41 +292,6 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-  #@searchProfileEmptyFields
-  #Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate empty email firstname and lastname
-  #
-  #Examples:
-  #| username  | password  |
-  #| qavgogine | qavgogine |
-  #
-  #@searchProfileInvalidEmail
-  #Scenario Outline: Telesales agent searching for the profile using invalid Email
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate invalid email
-  #| Email | <email> |
-  #
-  #Examples:
-  #| username  | password  | email     |
-  #| qavgogine | qavgogine | yy!ue.com |
-  #
-  #@searchProfileInvalidFnameLname
-  #Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate invalid first name and last name
-  #| First Name | <fname> |
-  #| Last Name  | <lname> |
-  #
-  #Examples:
-  #| username  | password  | fname    | lname     |
-  #| qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
   @createProfileMemberSP @regressionSPStage @regressionAARP
   Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
