@@ -4654,5 +4654,19 @@ private Scenario scenario;
 		plansummaryPage.saveMSVPP4Plans(savePlanNames);
 	}
 
+	@Then("^validate all available plans are shown on click of browser back$")
+	public void validate_all_plans_are_shown_on_click_of_browser_back() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.browserBackAndValidateAllPlansShown();
+	}
 	
+	@And("^validate base line benefit popup$")
+	public void validate_base_line_benefit_popup(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateBaseLineBenefitsPopup(memberAttributesMap);
+	}
 }
