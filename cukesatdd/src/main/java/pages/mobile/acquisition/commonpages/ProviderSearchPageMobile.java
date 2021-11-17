@@ -221,7 +221,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		switchToNewIframe(cboxIframeElement);
 		completeMyList.click();
 
-		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (getTitle().equalsIgnoreCase("Our Medicare Plan Types | AARPÂ® Medicare Plans from UnitedHealthcareÂ®")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
@@ -662,10 +662,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders);
 //		waitForPageLoadSafari();
-
-
-
-
 		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);

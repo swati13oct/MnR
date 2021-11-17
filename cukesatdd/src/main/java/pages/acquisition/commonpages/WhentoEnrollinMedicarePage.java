@@ -83,11 +83,11 @@ public class WhentoEnrollinMedicarePage extends GlobalWebElements {
     }
 
     public void checkInnerLinks() {
-        WebElement lnkfirstTime = driver.findElement(By.xpath("//a[contains(@title,'should I enroll')]"));
-        WebElement lnkNeedMedicare = driver.findElement(By.xpath("//a[contains(@title,'plan to work')]"));
-        WebElement lnkcoverSpouse = driver.findElement(By.xpath("//a[contains(@title,'spouse')]"));
-        WebElement lnkMissIEP = driver.findElement(By.xpath("//a[contains(@title,'miss my Initial')]"));
-        WebElement lnkEnrollMedicare = driver.findElement(By.xpath("//a[contains(@title,'my next steps')]"));
+        WebElement lnkfirstTime = driver.findElement(By.xpath("//a//span[contains(text(),'should I enroll')]"));
+        WebElement lnkNeedMedicare = driver.findElement(By.xpath("//a//span[contains(text(),'plan to work')]"));
+        WebElement lnkcoverSpouse = driver.findElement(By.xpath("//a//span[contains(text(),'spouse')]"));
+        WebElement lnkMissIEP = driver.findElement(By.xpath("//a//span[contains(text(),'miss my Initial')]"));
+        WebElement lnkEnrollMedicare = driver.findElement(By.xpath("//a//span[contains(text(),'my next steps')]"));
         WebElement backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
 
 
