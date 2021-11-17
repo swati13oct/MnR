@@ -18,6 +18,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -198,6 +200,17 @@ public class DCEStepDefinitionAARPMobile {
 		PlanDetailsPageMobile planDetailsPage = drugSummaryPage.clickViewPlanDetails();
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
 		
+	}
+	
+	@And("^the user clicks on DCE link to land on DCE Redesign from PDP Shop page$")
+	public void the_user_clicks_on_DCE_link_to_land_on_DCE_Redesign_from_PDP_Shop_page() throws Throwable {
+		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		GetStartedPageMobile getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
