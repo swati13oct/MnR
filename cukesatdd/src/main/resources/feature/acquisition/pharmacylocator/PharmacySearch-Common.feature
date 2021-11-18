@@ -44,13 +44,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #  @pharmacylocatorAARP01a
     @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
     Examples: 
-      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       | 2021     | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2021     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
   @PharmacyLocatorCommonAARP01a @NextYear
     Examples:
-      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       | 2022     | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2022     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
      @prodRegression @regressionAARP @vbfGate
     Examples: 

@@ -144,7 +144,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			if (county.equalsIgnoreCase("None")) {
 				Assertion.assertTrue(
 						"PROBLEM - expects zicode '" + zipcode + "' to have multi-county but selection is showing",
-						!pharmacyValidate(countyModal));
+						pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println(
