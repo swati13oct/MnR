@@ -73,7 +73,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath = "//select[@id='plans']")
 	protected WebElement seletPlandropdown;
 
-	@FindBy(xpath="//button[@class='uhc-button uhc-button--secondary p-20']")
+	@FindBy(xpath="//span[text()='Search ']")
 	protected WebElement searchbtn;
 	
 	@FindBy(xpath="//div[@class='pharmacySearchResults section']")

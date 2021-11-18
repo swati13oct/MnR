@@ -270,14 +270,14 @@ public class PharmacySearchCommonStepDefinition {
 	 * Verifying show on map link clickable for pharmacies appearing in the search
 	 * results
 	 */
-	@Then("^the user validate show on map link$")
-	public void viewsShowOnMapResult() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-	}
+//	@Then("^the user validate show on map link$")
+//	public void viewsShowOnMapResult() {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
+//		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
+//		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+//	}
 
 	@Then("^the user validate get direction link$")
 	public void getDirectionResult() {
@@ -287,15 +287,15 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
 
-	/** Verify search results based on plan type */
-	@And("^the user validate more information content based on plan type$")
-	public void validateMoreInformationContent() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validateMoreInfoContent();
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-		System.out.println("More Info Disclaimer is Displayed");
-	}
+//	/** Verify search results based on plan type */
+//	@And("^the user validate more information content based on plan type$")
+//	public void validateMoreInformationContent() {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage.validateMoreInfoContent();
+//		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+//		System.out.println("More Info Disclaimer is Displayed");
+//	}
 
 	/**
 	 * Verify Create a PDF in pharmacy search page
@@ -581,14 +581,14 @@ public class PharmacySearchCommonStepDefinition {
 	}
 
 
-	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")
-	public void the_user_validates_Selected_Plan_Name_in_Results_Section_on_Pharmacy_page() throws Throwable {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
-		pharmacySearchPage.validatePlanNameInResultsSection(testPlanName);
-		
-	}
+//	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")
+//	public void the_user_validates_Selected_Plan_Name_in_Results_Section_on_Pharmacy_page() throws Throwable {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+//		pharmacySearchPage.validatePlanNameInResultsSection(testPlanName);
+//
+//	}
 
 	@Then("^the user clicks on the following language Pharmacy Directory Link$")
 	public void the_user_clicks_on_the_following_language_Pharmacy_Directory_Link(DataTable inputAttributes) throws Throwable {

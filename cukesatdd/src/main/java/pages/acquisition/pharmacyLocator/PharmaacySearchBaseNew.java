@@ -184,7 +184,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 
 		zipcodeField.sendKeys(zipcode);
 		if(zipcode.length()!=5){
-			zipcodeField.sendKeys(Keys.TAB);
+			searchbtn.click();
 			sleepBySec(2);
 			/*jsMouseOver(distanceDropDownField);
 			distanceDropDownField.click();
