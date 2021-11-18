@@ -130,13 +130,18 @@ public class VppPlanSummaryMobile {
 
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 
 		String planName = givenAttributesMap.get("Plan Name").trim();
+		//String plantype = givenAttributesMap.get("Plan Type").trim();
 
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		//planSummaryPage.viewPlanSummary(plantype);
 
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
