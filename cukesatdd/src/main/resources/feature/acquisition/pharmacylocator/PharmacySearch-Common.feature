@@ -37,7 +37,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     And the user validates map section contents
     Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
-    And the user validate get direction link
+    #And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 

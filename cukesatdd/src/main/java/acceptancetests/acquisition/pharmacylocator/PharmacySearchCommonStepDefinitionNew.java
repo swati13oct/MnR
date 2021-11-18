@@ -76,7 +76,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE, distance);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY, county);
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 
 		List<String> noteList = new ArrayList<String>();
@@ -182,16 +182,16 @@ public class PharmacySearchCommonStepDefinitionNew {
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
 	
-	@And("^the user validates map section contents$")
+/* 	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateMapSectionContent();
-	}
+	} */
     
 	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")
 	public void the_user_validates_Selected_Plan_Name_in_Results_Section_on_Pharmacy_page() throws Throwable {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		pharmacySearchPage.validatePlanNameInResultsSection(testPlanName);
@@ -200,11 +200,20 @@ public class PharmacySearchCommonStepDefinitionNew {
 	
 	@Then("^the user validate show on map link$")
 	public void viewsShowOnMapResult() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
 		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
-
+	
+	/** Verify search results based on plan type */
+	@And("^the user validate more information content based on plan type$")
+	public void validateMoreInformationContent() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateMoreInfoContent();
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+		System.out.println("More Info Disclaimer is Displayed");
+	}
 }

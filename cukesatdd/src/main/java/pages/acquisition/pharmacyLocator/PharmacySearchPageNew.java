@@ -85,7 +85,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip == null || inputZip.equals("")) { // note: no zip value
-			String exp_noZipTxt = "Please enter a ZIP Code";
+			String exp_noZipTxt = "Please enter a valid ZIP Code";
 			Assertion.assertTrue("PROBLEM - not seeing no zip error element", pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt = noZipcode.getText();
@@ -94,7 +94,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { // note: zip invalid format
-				String exp_zipFormatErrTxt = "Please enter your ZIP Code as 5 numbers like this";
+				String exp_zipFormatErrTxt = "Please enter a valid ZIP Code";
 				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt = invalidZip.getText();
@@ -156,7 +156,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 
 	/** Validate show on map link appearance for search results */
-	public PharmacySearchPage validateShowOnMapLinks() {
+	public PharmacySearchPageNew validateShowOnMapLinks() {
 		CommonUtility.checkPageIsReady(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-100)", "");
@@ -166,9 +166,22 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		System.out.println(" No of Pharmacy Results displayed : " + PharmacyCount);
 		if (showonmapCount == PharmacyCount) {
 			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 	}
 	
+	/** Validate More info section */
+	public void validateMoreInfoContent() {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
+		Assertion.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link",
+				pharmacyValidate(moreInfoText_show));
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
+		Assertion.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again",
+				!pharmacyValidate(moreInfoText_show));
+	}
 }

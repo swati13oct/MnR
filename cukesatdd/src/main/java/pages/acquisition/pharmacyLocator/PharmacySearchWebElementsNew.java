@@ -28,28 +28,28 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]/span")
 	protected WebElement inputInstruction;
 	
-	@FindBy(xpath="(//select[@id='miles'])[2]//option")
+	@FindBy(xpath="//select[@id='miles']//option")
 	protected List<WebElement> distanceOptions;
 	
-	@FindBy(xpath = "(//select[@id='miles'])[2]")
+	@FindBy(id="miles")
 	protected WebElement distanceDropDownField;
 	
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[1]")
+	@FindBy(xpath="//select[@id='miles']/option[1]")
 	protected WebElement distanceOption_1mile;
 	
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[2]")
+	@FindBy(xpath="//select[@id='miles']/option[2]")
 	protected WebElement distanceOption_2miles;
 
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[3]")
+	@FindBy(xpath="//select[@id='miles']/option[3]")
 	protected WebElement distanceOption_5miles;
 
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[4]")
+	@FindBy(xpath="//select[@id='miles']/option[4]")
 	protected WebElement distanceOption_10miles;
 
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[5]")
+	@FindBy(xpath="//select[@id='miles']/option[5]")
 	protected WebElement distanceOption_15miles;
 
-	@FindBy(xpath="(//select[@id='miles'])[2]/option[6]")
+	@FindBy(xpath="//select[@id='miles']/option[6]")
 	protected WebElement distanceOption_25miles;
 	
 	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[1]")
@@ -58,10 +58,10 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[2]")
 	protected WebElement NextYearLink;
 	
-	@FindBy(xpath="//div[@id='zipError']//p[contains(text(),'Error: ZIP Code')]")
+	@FindBy(xpath="//div[@id='zipError']//p[contains(text(),'Error: Please enter a valid ZIP Code')]")
 	protected WebElement noZipcode;
 	
-	@FindBy(xpath = "//div[@id='zipError']//p[contains(text(),'Error: Please enter your ZIP')]")
+	@FindBy(xpath = "//div[@id='zipError']//p[contains(text(),'Error: Please enter a valid ZIP Code')]")
 	protected WebElement invalidZip;
 	
 	@FindBy(xpath="//div[contains(@id,'modifyYourSearchId')]//li")
@@ -90,4 +90,19 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='mb-10 mb-lg-0 flex']")
 	protected List<WebElement> PharmacyResultList;
+
+	@FindBy(xpath = "//span[@class='accordion__header text-bold text-sans-serif text-gray-800 text-normal']")
+	protected WebElement moreInfoLink;
+
+	@FindBy(xpath="//div[@id='accordion-1-content' and @aria-labelledby='accordion-button']")
+	protected WebElement moreInfoText_show;
+	
+	@FindBy(xpath="//select[@id='miles']")
+	protected WebElement distanceDropownID;
+	
+	@FindBy(xpath = "//div[@id='countycontainer']")
+	protected WebElement countyModal;
+	
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement pharmacylocatorheader;
 }
