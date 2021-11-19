@@ -171,6 +171,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@track='Find Care']")
 	private WebElement FindCare;
 	
+	@FindBy(xpath = "//div[@id=\"connectHeader\"]//button[contains(@class,'toggle ngAnimateEnabled')]")
+	private WebElement MobileOptions;
+	
 	@FindBy(xpath = "//button[@data-test-id='GeneralDentists']")
 	private WebElement GeneralDentist;
 	
@@ -717,6 +720,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	
 	public String selectsBehaviour() {
 
+		CommonUtility.waitForPageLoadNew(driver, MobileOptions, 45);
+		jsClickNew(MobileOptions);
 		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
 		jsClickNew(FindCare);
 
@@ -786,7 +791,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 	
 	public String selectsDental() {
-
+		
+		CommonUtility.waitForPageLoadNew(driver, MobileOptions, 45);
+		jsClickNew(MobileOptions);
 		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
 		jsClickNew(FindCare);
 
