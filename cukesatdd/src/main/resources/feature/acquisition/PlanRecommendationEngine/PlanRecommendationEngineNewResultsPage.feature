@@ -273,6 +273,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
+    Then user return to vpp page using "update" from edit response page
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo1> |
     Then user navigates to PRE doctorpage to edit providers
