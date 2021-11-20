@@ -85,6 +85,10 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>        |
       | TFN Xpath | <MedsuppFormTFNxpath> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
     #When the user clicks on Agent link for MedsuppPage
     #| UHC Agent URL | <UHCUrl> |
     Then the user clicks on decision guide for MedsuppPge
@@ -98,6 +102,22 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN No    | <agentTFN>   |
       | TFN Xpath | <agentXpath> |
       | Zip Code  | <zipcode>    |
+    And user click on Start Application in MS plan
+      | Zip Code | <zipcode> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
+    Then user click on Cancel Application in MS plan
+      | Zip Code | <zipcode> |
+    And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
+    And user click on Back to Plan in MS Plan Details
+      | Zip Code | <zipcode> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
