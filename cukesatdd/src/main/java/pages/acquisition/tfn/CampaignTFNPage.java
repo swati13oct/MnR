@@ -1742,6 +1742,13 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void ms3ViewPlanDetails() {
 
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
 		validate(ms3ViewPlanDetails);
 		jsClickNew(ms3ViewPlanDetails);
 
