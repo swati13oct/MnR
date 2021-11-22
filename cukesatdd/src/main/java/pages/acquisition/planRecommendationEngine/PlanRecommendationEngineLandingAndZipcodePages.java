@@ -187,6 +187,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		sendkeys(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);
 	
@@ -201,11 +202,12 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
-		zipcodePagemultiCounty();
+//		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);
 		selectFromDropDownByText(driver, PRECounty, County);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+		Thread.sleep(2000);
 		waitforElementVisibilityInTime(coverageTitle, 30);
 	}
 	
@@ -265,7 +267,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
-		zipcodePagemultiCounty();
+//		zipcodePagemultiCounty();
 		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}

@@ -758,7 +758,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
 			scrollToView(DrugTitle);
 			planName = MSPlanName.getText().trim();
-			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
+			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)"));
+			jsClickNew(viewModel);
 			threadsleep(2000);
 
 		} else {
