@@ -2017,7 +2017,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else
 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
 
 		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		pageloadcomplete();
