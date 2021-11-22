@@ -2495,7 +2495,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li//*[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
