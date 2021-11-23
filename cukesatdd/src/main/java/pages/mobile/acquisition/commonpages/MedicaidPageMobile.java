@@ -29,16 +29,16 @@ public class MedicaidPageMobile extends UhcDriver{
 	@FindBy(xpath = "//label[@for='medicaid-yes']")
 	private WebElement medicaiddyes;
 		
-	@FindBy(id = "medicaid-number")
+	@FindBy(css = "#medicaid-number")
 	private WebElement medicaidnum;
 	
-	@FindBy(id = "medicaidprevious")
+	@FindBy(css = "#medicaidprevious")
 	private WebElement medicaidprevious;
 	
-	@FindBy(id = "medicaidsaveandcont")
+	@FindBy(css = "#medicaidsaveandcont")
 	private WebElement medicaidsaveandcontinue;
 	
-	@FindBy(id = "medicaidcancel")
+	@FindBy(css = "#medicaidcancel")
 	private WebElement medicaidcancleregistration;
 			
 	

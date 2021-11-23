@@ -228,10 +228,11 @@ public class WelcomePage extends UhcDriver{
 			//ViewPlanDetails.click();
 			jsClickNew(ViewPlanDetails);
 		//	Thread.sleep(500);
+			waitForPageLoadSafari();
 			flag = driver.getCurrentUrl().contains("details");
 			if(flag){
-				validateNew(VPPTFNNo);
-				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
+//				validateNew(VPPTFNNo);
+//				System.out.println("TFN in VPP Right Rail : "+VPPTFNNo);
 				//String VPPTFNNoActual = VPPTFNNo.getText();
 				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
 				//CheckiPerseptions();

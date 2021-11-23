@@ -131,7 +131,7 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-String PlanName = givenAttributesMap.get("Plan Name");
+		String PlanName = givenAttributesMap.get("Plan Name");
 		
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
@@ -143,49 +143,42 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
 		WelcomePageMobile welcomePage;
-		if (SiteName.contains("UHC_ACQ")) {
-			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/*
+		 * ,(new VPPPlanSummaryPageMobile((WebDriver)getLoginScenario()
+		 * .getBean(CommonConstants.WEBDRIVER))));
+		 */
+		TFN = planSummaryPage.GetTFNforPlanType();
 
-			
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
-			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
+		// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
+		welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
+		PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
 
-		} else {
-			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
 
-			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
-			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+	getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+	getLoginScenario().saveBean(CommonConstants.TFN, TFN);
+	System.out.println("Plan Name is : " + PlanName);
+	System.out.println("Plan Type is : " + PlanType);
+	System.out.println("Plan Zip Code is : " + ZipCode);
+	System.out.println("Plan County Name is : " + County);
+	System.out.println("Plan Plan Premium is : " + PlanPremium);
+	System.out.println("TFN for Plan Type is : " + TFN);
+	System.out.println("Plan Year is : " + PlanYear);
+	System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
-		} // --------------------------------------------------------------------------------------------------------------------
-
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
-		System.out.println("Plan Name is : " + PlanName);
-		System.out.println("Plan Type is : " + PlanType);
-		System.out.println("Plan Zip Code is : " + ZipCode);
-		System.out.println("Plan County Name is : " + County);
-		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
-		System.out.println("Plan Year is : " + PlanYear);
-		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
-
-		if (welcomePage != null) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			System.out.println("OLE Welcome Page is Displayed");
-			Assertion.assertTrue(true);
-		} else
-			Assertion.fail("Error in validating the OLE Welcome Page");
+	if (welcomePage != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assertion.assertTrue(true);
+	} else
+		Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
 	@Then("^the user navigates to clicks on Enroll Now for AARP site to start the OLE flow$")
@@ -369,7 +362,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
-		if (plansummaryPage.validatePlanNames(planType, planCount)) {
+		if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);
@@ -379,22 +372,23 @@ String PlanName = givenAttributesMap.get("Plan Name");
 	}
 
 	@Then("^the user validates TFN on Welcome OLE Page$")
-	public void the_user_validates_TFN_in_Right_Rail(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
-		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
-		if (Validation_Status) {
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assertion.assertTrue(true);
-		} else {
-			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
-			Assertion.fail();
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+			String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
+			boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
+			if (Validation_Status) {
+				System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
 		}
 	}
 
@@ -2873,7 +2867,7 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR));
 		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		DetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
@@ -3313,23 +3307,29 @@ String PlanName = givenAttributesMap.get("Plan Name");
 		}
 	}
 	@Then("^the user validate widgets on Welcome OLE Page$")
-	public void the_user_validates_widgtes_welcome_OLE(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_welcome_OLE() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-		welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
-		System.out.println("Widgets are displayed on welcome Pages");
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+			welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
+			System.out.println("Widgets are displayed on welcome Pages");
 		}
+	}
 	
 	@Then("^the user validate widgets on OLE Pages$")
-	public void the_user_validates_widgtes_OLE_Pages(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_OLE_Pages() throws Throwable {
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
-	System.out.println("Widgets are displayed on welcome Pages");
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);*/
+//		String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.TFN);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+			medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
+			System.out.println("Widgets are displayed on welcome Pages");
+		}
 	}
 	
 	@Then("^the user validates Medicaid Number in OLE Page$")

@@ -288,6 +288,15 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
+	
+	@Then("^Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
+	
+	
 
 	@And("^the user views the plans of the below plan type and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
@@ -1991,6 +2000,24 @@ private Scenario scenario;
 		planComparePage.validateDoctors();
 	}
 	
+	@Then("^verify_icons_loaded_with_doctor_summary_on_Plan_Compare_page$")
+	public void verify_icons_covered() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateIcons();
+	}
+	
+	@Then("^click on Show All button on plan compare page$")
+	public void click_on_Show_All_button() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.showAllButton();
+	}
+	
+	
+	
+	
+	
 	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
 	public void verify_all_doctors_covered() {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
@@ -3183,6 +3210,22 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONDDisplayed();
 	}
+	
+	@Then("^click on OON Toggle for additional benefits$")
+	public void click_on_OON_Toggle_for_additional_benefits() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.ClickOONToggle();
+	}
+	
+
+	@Then("^validate text under additional benefits$")
+	public void validate_text_under_additional_benefits() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONTextAdditionalBenefit();
+	}
+	
 
 	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
 	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
@@ -4611,5 +4654,19 @@ private Scenario scenario;
 		plansummaryPage.saveMSVPP4Plans(savePlanNames);
 	}
 
+	@Then("^validate all available plans are shown on click of browser back$")
+	public void validate_all_plans_are_shown_on_click_of_browser_back() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.browserBackAndValidateAllPlansShown();
+	}
 	
+	@And("^validate base line benefit popup$")
+	public void validate_base_line_benefit_popup(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateBaseLineBenefitsPopup(memberAttributesMap);
+	}
 }

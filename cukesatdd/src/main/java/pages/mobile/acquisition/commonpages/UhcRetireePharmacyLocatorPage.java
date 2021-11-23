@@ -20,28 +20,28 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(id="zipCode")
 	private WebElement txtZipcode;
 	
-	@FindBy(id = "zipcodeTxt")
+	@FindBy(css = "#zipcodeTxt")
 	private WebElement zipcodeField;
 	
-	@FindBy(id = "plan-year-label")
+	@FindBy(css = "#plan-year-label")
 	private WebElement planYeartext;
 	
-	@FindBy(id = "zipcode-button")
+	@FindBy(css = "#zipcode-button")
 	private WebElement searchbtn;;
 
-	@FindBy(id = "selectmultycounty_box")
+	@FindBy(css = "#selectmultycounty_box")
 	private WebElement countyPopOut;
 
-	@FindBy(id = "showpharmacycount_id")
+	@FindBy(css = "#showpharmacycount_id")
 	private WebElement pharmacyCount;
 
-	@FindBy(id = "zipcodeTxt")
+	@FindBy(css = "#zipcodeTxt")
     private WebElement txtZipCode;
 
-    @FindBy(id = "address")
+    @FindBy(css = "#address")
     private WebElement txtAddress;
 
-    @FindBy(id = "city")
+    @FindBy(css = "#city")
     private WebElement txtCity;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
@@ -53,13 +53,13 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
-	@FindBy(id = "pharmacies")
+	@FindBy(css = "#pharmacies")
 	private WebElement allPharmacies;
 
-	@FindBy(id = "services")
+	@FindBy(css = "#services")
 	private WebElement particularServices;
 
-	@FindBy(id = "find_searchbtn")
+	@FindBy(css = "#find_searchbtn")
 	private WebElement searchPharmaciesButton;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
@@ -72,10 +72,10 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='plan-type']/option")
 	private List<WebElement> selectPlandropdown;
 
-	@FindBy(id = "pharmacy-preffered")
+	@FindBy(css = "#pharmacy-preffered")
 	private WebElement preferredPharmacy;
 
-	@FindBy(id = "pharmacy-standard")
+	@FindBy(css = "#pharmacy-standard")
 	private WebElement standardPharmacy;
 
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
@@ -89,28 +89,28 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyResultHeader;
 
-	@FindBy(id = "state_select")
+	@FindBy(css = "#state_select")
     private WebElement drpState;
 
-    @FindBy(id = "plan-type")
+    @FindBy(css = "#plan-type")
     private WebElement drpPlan;
     
-    @FindBy(id = "plan-year")
+    @FindBy(css = "#plan-year")
     private WebElement drpYear;
 
     @FindBy(css = "#zipcode-button>span")
     private WebElement btnContinue;
 	
-	@FindBy(id = "services")
+	@FindBy(css = "#services")
 	private WebElement pharmacyTypeSelectionRadioButton;
 	
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
 	private WebElement language;
 	
-	@FindBy(id = "plan-type")
+	@FindBy(css = "#plan-type")
 	private WebElement planType;
 	
-	@FindBy(id = "plan-year")
+	@FindBy(css = "#plan-year")
 	private WebElement planYearsel;
 	
 	@FindBy(xpath = "//*[@id='site-wrapper']/div[4]/div/div/div/div/main/div/div/div/div[1]/div/div[2]/div/ul[2]/li[2]/div/div[3]/div/div/a[1]")
@@ -150,13 +150,13 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	List<WebElement> pharmacyListItems;
 
-	@FindBy(id = "createpdf_id")
+	@FindBy(css = "#createpdf_id")
 	WebElement resultAsPDF;
 	
 	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
 	WebElement standardNetworkPharmacy;
 	
-	@FindBy(id = "pharmacylocatorheader_id")
+	@FindBy(css = "#pharmacylocatorheader_id")
 	WebElement pharmacylocatorheader;
 	
 	@FindBy(className = "loading-block")
@@ -180,7 +180,7 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'callus')]")
 	WebElement questionsRightRailWidget;
 	
-	@FindBy(id = "lang-select")
+	@FindBy(css = "#lang-select")
 	WebElement langDropdown;
 	
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
@@ -189,7 +189,7 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'Ã¤Â½Â¿Ã§â€�Â¨Ã§Â¶Â²Ã¤Â¸Å Ã¥ï¿½ï¿½Ã¥â€ Å Ã¦ï¿½Å“Ã¥Â°â€¹Ã¨â€”Â¥Ã¦Ë†Â¿Ã¥â€™Å’Ã¨â€”Â¥Ã¦Ë†Â¿Ã¤Â½ï¿½Ã§Â½Â®Ã£â‚¬â€š')]")
 	WebElement pharmacyBodyContentChinese;
 
-	@FindBy(id = "distance")
+	@FindBy(css = "#distance")
 	WebElement distanceDropownID;
 	
 	public UhcRetireePharmacyLocatorPage(WebDriver driver) {
