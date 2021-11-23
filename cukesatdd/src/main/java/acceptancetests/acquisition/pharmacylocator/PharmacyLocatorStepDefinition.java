@@ -360,7 +360,7 @@ public class PharmacyLocatorStepDefinition {
 	}
 
 	/** Choosing the different set of combination in Pharmacy filter */
-	@When("^the user selects Pharmacy Types to Filter$")
+/*	@When("^the user selects Pharmacy Types to Filter$")
 	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
@@ -370,7 +370,7 @@ public class PharmacyLocatorStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
-	}
+	}*/
 	
 	@Then("^the user validates error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message(){

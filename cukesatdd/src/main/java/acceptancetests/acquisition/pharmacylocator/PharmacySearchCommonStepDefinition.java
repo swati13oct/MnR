@@ -534,8 +534,9 @@ public class PharmacySearchCommonStepDefinition {
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
-	
+
 	/** user is on the Medicare Site landing page */
+	/*
 	@And("^the user navigate to pharmacy search page from plan type pdp navigation bar$")
 	public void userNavigatesFromplantypeToPharmacySearchPage() {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -549,6 +550,7 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}
+	*/
 	
 	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
 	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {

@@ -184,4 +184,101 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		Assertion.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again",
 				!pharmacyValidate(moreInfoText_show));
 	}
+
+	/** Changing of pharmacyType filter */
+	public void validatePlanTypeFilter(String pharmacyType, String language) {
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		int totalBefore = Integer.parseInt(PharmacyFoundCount.getText().trim());
+		String labelId = "";
+		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
+			labelId = "ePrescribing-label";
+		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
+			labelId = "home-specialty-label";
+		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
+			labelId = "indian-tribal-label";
+		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
+			labelId = "long-term-label";
+		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
+			labelId = "mail-order-label";
+		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
+			labelId = "24-hours-label";
+		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
+			labelId = "StandardNightyDays-label";
+		} else {
+			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
+		}
+		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
+		jsClickNew(label);
+
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, pagination, 10);
+		int PharmacyCount = 0;
+		if (!pharmacyValidate(noResultMsg))
+			PharmacyCount = PharmacyResultList.size();
+		if (PharmacyCount > 0) {
+			int totalAfter = Integer.parseInt(PharmacyFoundCount.getText().trim());
+			Assertion.assertTrue("PROBLEM - expect total after filter to be equal or less than before filter. "
+					+ "Expect='" + totalBefore + "' | Actual='" + totalAfter + "'", totalBefore >= totalAfter);
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
+					pharmacyValidate(pharmaciesAvailable));
+			if (totalAfter > 10) {
+				WebElement contactUsLink = contactUnitedHealthCare;
+				if (!pharmacyValidate(contactUnitedHealthCare))
+					contactUsLink = contactUnitedHealthCare_ol;
+				scrollToView(contactUsLink);
+
+//				moveMouseToElement(contactUsLink);
+				jsMouseOver(contactUsLink);
+
+				sleepBySec(3);
+				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
+				sleepBySec(3);
+				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", pharmacyValidate(leftArrow));
+				sleepBySec(3);
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", pharmacyValidate(rightArrow));
+				try {
+					sleepBySec(2);
+					CommonUtility.waitForPageLoadNewForClick(driver, rightArrow, 60);
+//					rightArrow.click();
+					jsClickNew(rightArrow);
+					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.waitForPageLoadNewForClick(driver, leftArrow, 60);
+//					leftArrow.click();
+					jsClickNew(leftArrow);
+					sleepBySec(5);
+					CommonUtility.checkPageIsReady(driver);
+				} catch (Exception e) {
+					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
+				}
+				sleepBySec(8);
+				if (language.equalsIgnoreCase("English")) {
+					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
+					String expTxt2 = "Change the pharmacy type you selected.";
+					String actualTxtXpath1 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
+					String actualTxt1 = driver.findElement(By.xpath(actualTxtXpath1)).getText();
+					String actualTxtXpath2 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
+					String actualTxt2 = driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
+					Assertion.assertTrue(
+							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+									+ "Expected='" + expTxt1 + "' | " + "Actual-'" + actualTxt1 + "'",
+							expTxt1.equals(actualTxt1));
+					Assertion.assertTrue(
+							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
+							expTxt2.equals(actualTxt2));
+				}
+//				scrollToView(moveAwayFromTooltip);
+//				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
+
+			} else {
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!pharmacyValidate(rightArrow));
+			}
+		}
+	}
 }

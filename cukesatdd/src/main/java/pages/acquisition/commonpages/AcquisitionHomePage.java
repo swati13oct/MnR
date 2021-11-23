@@ -5311,7 +5311,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocatorFromPlanType() {
+	public PharmacySearchPageNew navigateToPharmacyLocatorFromPlanType() {
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
 		jsClickNew(planTypePDPLink);
@@ -5322,7 +5322,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 

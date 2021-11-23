@@ -105,4 +105,49 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
 	protected WebElement pharmacylocatorheader;
+
+
+	//xpaths need to be updated/Added
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement PharmacyFoundCount;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement loadingImage;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement FilterOpen;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement FilterClose;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement FilterApplyBtn;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement FilterReset;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement pagination;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement noResultMsg;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement pharmaciesAvailable;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement contactUnitedHealthCare;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement contactUnitedHealthCare_ol;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement leftArrow;
+
+	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
+	protected WebElement rightArrow;
+
+
+
 }

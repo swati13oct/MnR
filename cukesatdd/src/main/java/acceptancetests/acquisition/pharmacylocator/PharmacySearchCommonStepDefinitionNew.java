@@ -55,8 +55,21 @@ public class PharmacySearchCommonStepDefinitionNew {
         getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
         getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
     }
-    
-	
+
+	/** user is on the Medicare Site landing page */
+	@And("^the user navigate to pharmacy search page from plan type pdp navigation bar$")
+	public void userNavigatesFromplantypeToPharmacySearchPage() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PharmacySearchPageNew pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocatorFromPlanType();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+
+	}
 	@And("^the user validates header section content on site$")
 	public void verifyHeaderSection() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
@@ -215,5 +228,17 @@ public class PharmacySearchCommonStepDefinitionNew {
 		pharmacySearchPage.validateMoreInfoContent();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
+	}
+
+	@When("^the user selects Pharmacy Types to Filter$")
+	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
+		String language = inputAttributesMap.get("Language");
+		System.out.println("Filter Type to Select : "+pharmacyType);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
 	}
 }
