@@ -90,8 +90,8 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 //		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 //			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); // note: let the page settle down
-		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
-		if (!pharmacyValidate(pharmacyCount)) {
+		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", validateNew(pharmacyCount));
+		if (!validate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
 				String currentSysTime=getAcqTestEnvSysTime(testSiteUrl);

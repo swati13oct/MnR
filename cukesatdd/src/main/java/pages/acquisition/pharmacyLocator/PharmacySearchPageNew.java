@@ -187,9 +187,16 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-		int totalBefore = Integer.parseInt(PharmacyFoundCount.getText().trim());
+		//CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+
+        String PharmacyCountText = PharmacyFoundCount.getText();
+        String[] Text = PharmacyCountText.split("Matching");
+		int totalBefore = Integer.parseInt(Text[0].trim());
+		System.out.println("Pharmacy Count Displayed : "+totalBefore);
 		String labelId = "";
+		validateNew(Filter);
+		jsClickNew(Filter);
+		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
 			labelId = "ePrescribing-label";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
@@ -207,10 +214,16 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
-		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
+//		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
+        WebElement label = driver.findElement(By.xpath("//*[contains(text(), '"+ labelId +"')]//parent::label"));
+
+		validateNew(label);
 		jsClickNew(label);
 
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+        validateNew(FilterApplyBtn);
+        jsClickNew(FilterApplyBtn);
+
+//		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount = 0;
