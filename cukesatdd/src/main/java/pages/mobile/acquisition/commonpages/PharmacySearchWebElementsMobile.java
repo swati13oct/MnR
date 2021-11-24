@@ -190,7 +190,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#noResultsFoundErrorMessage")
 	protected WebElement noPharmaciesErrorMessage;
 
-	@FindBy(xpath = "//*[@id='modifyYourSearchId']//li")
+	@FindBy(xpath = "//*[@id='emptyzipcodeerror_id']/p")
 	protected WebElement zipcodeErrorMessage;
 
 	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")

@@ -167,9 +167,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		sendkeysMobile(zipcodeField, zipcode);
 		if (zipcode.length() != 5) {
-//			jsClickNew(zipCodeFieldLabel);
-			scrollToView(zipCodeFieldLabel);
-			zipCodeFieldLabel.click();
+			jsClickNew(zipCodeFieldLabel);
 			sleepBySec(2);
 			/*
 			 * jsMouseOver(distanceDropDownField); distanceDropDownField.click();
@@ -177,9 +175,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			 */
 		}
 		// searchbtn.click();
-		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
-		// pharmacyValidate(zipcodeErrorMessage));
+//		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+//		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
+//		pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**

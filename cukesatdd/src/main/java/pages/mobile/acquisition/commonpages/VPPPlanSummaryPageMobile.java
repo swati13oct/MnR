@@ -2945,7 +2945,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void savePlans(String savePlanNames, String planType) {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		int ONE = 1;
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
