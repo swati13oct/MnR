@@ -2945,6 +2945,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void savePlans(String savePlanNames, String planType) {
+		pageloadcomplete();
+
 		int ONE = 1;
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out.println("Going to mark the following " + listOfTestPlans.size() + " number of " + planType
