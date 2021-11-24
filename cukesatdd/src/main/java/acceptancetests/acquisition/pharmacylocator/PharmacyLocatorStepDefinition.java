@@ -66,7 +66,7 @@ public class PharmacyLocatorStepDefinition {
 	}
 	
 	/** user is on the AARP Medicare Site landing page */
-	@Given("^the user is on the Acquisition Site landing page and navigate to pharmacy search page$")
+/*	@Given("^the user is on the Acquisition Site landing page and navigate to pharmacy search page$")
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
@@ -86,7 +86,7 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
 
-	}
+	} */
 	
 	/** user is on the AARP Medicare Site landing page and select state */
 	@Given("^the user is on the Acquisition Site landing page with selected state and navigate to pharmacy search page$")
