@@ -214,6 +214,15 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2022_17 |
+    @planCompareBenefitsUHC18
+    Examples: 
+      | workSheet    |
+      | Sheet2022_18 |
+
+    @planCompareBenefitsUHC19
+    Examples: 
+      | workSheet    |
+      | Sheet2022_19 |
 
     @planCompareBenefitsPDPUHC01
     Examples: 
