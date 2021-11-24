@@ -19,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
@@ -195,12 +196,12 @@ public class PharmacySearchCommonStepDefinitionNew {
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
 	
-/* 	@And("^the user validates map section contents$")
+ 	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateMapSectionContent();
-	} */
+	}
     
 	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")
 	public void the_user_validates_Selected_Plan_Name_in_Results_Section_on_Pharmacy_page() throws Throwable {
@@ -240,5 +241,54 @@ public class PharmacySearchCommonStepDefinitionNew {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
+	}
+
+	/**
+	 * Verify Create a PDF in pharmacy search page
+	 *
+	 * @throws InterruptedException
+	 */
+	@Then("^the user validate view search PDF link$")
+	public void viewsSearchResultPdf() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
+
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+		System.out.println("PDF Result Page is Displayed");
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
+	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
+
+	@When("^user clicks on breadcrumb on pharmacy search page$")
+	public void user_clicks_on_breadcrumb_on_pharmacy_search_page()  {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickBreadCrumb();
+	}
+
+	@Then("^user should be navigated to home page$")
+	public void user_should_be_navigated_to_home_page() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateHomePage();
+	}
+
+	@Then("^click on DCE Link on Pharmacy Page$")
+	public void clickonDCELink() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		GetStartedPage getStartedPage = pharmacySearchPage.navigateToDCE();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 }

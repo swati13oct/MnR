@@ -1,5 +1,6 @@
 package pages.acquisition.pharmacyLocator;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	
@@ -147,7 +149,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 //	}
 	
 	public void validatePlanNameInResultsSection(String testPlanName) {
-		WebElement PlanNameText = driver.findElement(By.xpath("//h3[contains(@id, 'selectedplanname') and contains(text(), '"+testPlanName+"')]"));
+		WebElement PlanNameText = driver.findElement(By.xpath("//h3[contains(text(), '"+testPlanName+"')]"));
 		if(validateNew(PlanNameText)) {
 			System.out.println("Ecpected Plan Name displayed in Pharmacy Results section : "+PlanNameText.getText());
 		}
@@ -170,7 +172,86 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		}
 		return null;
 	}
-	
+
+	public void validateMapSectionContent() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(mapCollapse);
+//		moveMouseToElement(map_resultSection);
+//		Assertion.assertTrue("PROBLEM - unable to locate the map", pharmacyValidate(map_mapImg));
+//		Assertion.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", pharmacyValidate(map_showHideMapLnk));
+////		map_showHideMapLnk.click();
+//		jsClickNew(map_showHideMapLnk);
+//		Assertion.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link",
+//				!pharmacyValidate(map_mapImg));
+////		map_showHideMapLnk.click();
+//		jsClickNew(map_showHideMapLnk);
+//		Assertion.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link",
+//				pharmacyValidate(map_mapImg));
+//		Assertion.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", pharmacyValidate(map_mapBtn));
+//		Assertion.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map",
+//				pharmacyValidate(map_satelliteBtn));
+//		Assertion.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map",
+//				pharmacyValidate(map_fullScreenViewBtn));
+//		Assertion.assertTrue("PROBLEM - unable to locate the zoom in button on the map", pharmacyValidate(map_zoomIn));
+//		Assertion.assertTrue("PROBLEM - unable to locate the zoom out button on the map", pharmacyValidate(map_zoomOut));
+//		Assertion.assertTrue("PROBLEM - unable to locate the open street view button on the map",
+//				pharmacyValidate(map_openStreetView));
+
+	}
+
+	public PharmacySearchPageNew ValidateSearchPdfResults(String testPlanName) throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
+		Assertion.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
+		String winHandleBefore = driver.getWindowHandle();
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+//		//viewsearchpdf.click();
+		jsClickNew(viewsearchpdf);
+		Thread.sleep(5000); // note: keep this for the page to load
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int i = 0;
+		while (i < 3) {
+			if (beforeClicked_tabs.size() == afterClicked_tabs.size()) {
+				System.out.println(i + " give it extra 3 seconds for pdf to load");
+				Thread.sleep(3000); // note: keep this for the page to load
+				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				i = i++;
+				i = i++;
+			} else
+				break;
+		}
+		afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		i = i++;
+		int afterClicked_numTabs = afterClicked_tabs.size();
+		System.out.println("TEST - afterClicked_numTabs=" + afterClicked_numTabs);
+		// note: no point to continue if tab for pdf didn't show
+		Assertion.assertTrue("PROBLEM - expect more browser tabs after clicking pdf. " + "Before="
+						+ beforeClicked_tabs.size() + " | After=" + afterClicked_numTabs,
+				beforeClicked_tabs.size() < afterClicked_numTabs);
+		String tab = null;
+		for (int j = 0; j < afterClicked_numTabs; j++) {
+			if (j == afterClicked_numTabs - 1) {
+				tab = afterClicked_tabs.get(j);
+				driver.switchTo().window(tab);
+				break;
+			}
+		}
+		System.out.println("New window = " + driver.getTitle());
+		String currentURL = driver.getCurrentUrl();
+		System.out.println("Current URL is : " + currentURL);
+
+
+		String expectedURL = "member/pharmacy-locator";
+		Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
+				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
+		driver.switchTo().window(winHandleBefore);
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
+		if (driver.getTitle().toLowerCase().contains("locate a pharmacy"))
+			return new PharmacySearchPageNew(driver);
+		return null;
+	}
+
 	/** Validate More info section */
 	public void validateMoreInfoContent() {
 		CommonUtility.checkPageIsReady(driver);
@@ -183,6 +264,34 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		jsClickNew(moreInfoLink);
 		Assertion.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again",
 				!pharmacyValidate(moreInfoText_show));
+	}
+
+	public void validateBreadCrumb(String breadcrumb) {
+		validateNew(breadCrumbLink);
+		Assertion.assertTrue("Expected breadcrumb" + breadcrumb + "not displayed",
+				breadcrumb.equals(breadCrumbLink.getText()));
+	}
+
+	public void clickBreadCrumb() {
+		breadCrumbLink.click();
+		waitForPageLoadSafari();
+	}
+	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")
+	private WebElement DCELink;
+
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	public WebElement AddMyDrugsBtn;
+
+	public GetStartedPage navigateToDCE() {
+		scrollToView(DCELink);
+		validateNew(DCELink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
 	}
 
 	/** Changing of pharmacyType filter */

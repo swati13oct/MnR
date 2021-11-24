@@ -27,13 +27,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
      | Next Year Plan Year    | <ny_planYear> |
-   And the user selects plan year toggle
-      | Plan Year | <planyear> |
+#   And the user selects plan year toggle
+#      | Plan Year | <planyear> |
     #Then the user validates the Pharmacies available
     #  | Language | English |
-    And the user validate tooltips on filters
-      | Language                                   | English                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+#    And the user validate tooltips on filters
+#      | Language                                   | English                 |
+#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
     Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
@@ -446,7 +446,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |

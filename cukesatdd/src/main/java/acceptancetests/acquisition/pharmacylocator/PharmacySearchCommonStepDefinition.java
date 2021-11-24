@@ -302,17 +302,17 @@ public class PharmacySearchCommonStepDefinition {
 	 * 
 	 * @throws InterruptedException
 	 */
-	@Then("^the user validate view search PDF link$")
-	public void viewsSearchResultPdf() throws InterruptedException {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
-		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
-		
-		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
-		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
-		System.out.println("PDF Result Page is Displayed");
-	}
+//	@Then("^the user validate view search PDF link$")
+//	public void viewsSearchResultPdf() throws InterruptedException {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+//		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
+//
+//		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
+//		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+//		System.out.println("PDF Result Page is Displayed");
+//	}
 
 	@Then("^the user validates pharmacy widgets on page$")
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
@@ -524,16 +524,16 @@ public class PharmacySearchCommonStepDefinition {
 
 	}*/
 	
-	@Then("^click on DCE Link on Pharmacy Page$")
-	public void clickonDCELink() throws InterruptedException {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		GetStartedPage getStartedPage = pharmacySearchPage.navigateToDCE();
-		if (null != getStartedPage) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
-		} else
-			Assertion.fail("DCE Redesign page object not loaded");
-	}
+//	@Then("^click on DCE Link on Pharmacy Page$")
+//	public void clickonDCELink() throws InterruptedException {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		GetStartedPage getStartedPage = pharmacySearchPage.navigateToDCE();
+//		if (null != getStartedPage) {
+//			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+//		} else
+//			Assertion.fail("DCE Redesign page object not loaded");
+//	}
 
 	/** user is on the Medicare Site landing page */
 	/*
@@ -552,13 +552,13 @@ public class PharmacySearchCommonStepDefinition {
 	}
 	*/
 	
-	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
-	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validateBreadCrumb(breadCrumb);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-	}
+//	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
+//	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage.validateBreadCrumb(breadCrumb);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+//	}
 	
 	@When("^user clicks on home tab$")
 	public void user_clicks_on_home_tab() {
@@ -569,18 +569,18 @@ public class PharmacySearchCommonStepDefinition {
 	}
 	
 
-	@When("^user clicks on breadcrumb on pharmacy search page$")
-	public void user_clicks_on_breadcrumb_on_pharmacy_search_page()  {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.clickBreadCrumb();
-	}
+//	@When("^user clicks on breadcrumb on pharmacy search page$")
+//	public void user_clicks_on_breadcrumb_on_pharmacy_search_page()  {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage.clickBreadCrumb();
+//	}
 	
-	@Then("^user should be navigated to home page$")
-	public void user_should_be_navigated_to_home_page() {
-		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateHomePage();
-	}
+//	@Then("^user should be navigated to home page$")
+//	public void user_should_be_navigated_to_home_page() {
+//		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateHomePage();
+//	}
 
 
 //	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")

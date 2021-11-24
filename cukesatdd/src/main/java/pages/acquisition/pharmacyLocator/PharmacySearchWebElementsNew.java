@@ -145,6 +145,13 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(), 'Pharmacy Search')]")
 	protected WebElement loadingImage;
 
+	@FindBy(xpath="//*[@id='map']/div/div/iframe")
+	protected WebElement mapCollapse;
 
+	@FindBy(xpath="//span[text()='View Results as PDF ']")
+	protected WebElement viewsearchpdf;
+
+	@FindBy(xpath = "//app-returnlink//div/a")
+	public WebElement breadCrumbLink;
 
 }
