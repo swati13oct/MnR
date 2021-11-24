@@ -24,17 +24,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @dec
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
-      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
-      | AARP |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
-      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
+      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
+      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo                     |
-      | UHC  |   10003 | NO            | New York         | PDP           | No             | Medigap,true                    |
-      | UHC  |   59933 | NO            | Lincoln          | PDP           | No             | MAPD,true:Medigap,true:SNP,true |
-      | UHC  |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true          |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
+      | UHC  |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
+      | UHC  |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
 
   @PRE @planrecommandonation @PREVPPPage @F527967 @PREVPPPPaginationPDP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -80,13 +78,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @F527970 @dec
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                         |
+      | AARP |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Preferred (PDP),add your drugs,N/A |
+      | AARP |   59933 | NO            | Lincoln                | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Walgreens (PDP),add your drugs,N/A |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                      |
-      | UHC  |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | Drug Selection | DrugInfo                                                         |
+      | UHC  |   99502 | NO            | Anchorage Municipality | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Plan 1 (HMO),add your drugs,N/A    |
+      | UHC  |   59933 | NO            | Lincoln                | PDP           | Yes            | Plus (PDP),add your drugs,N/A:Walgreens (PDP),add your drugs,N/A |
 
   @PRE @planrecommandonation @PREResultsPage @PREPDPNoDrug
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -269,10 +269,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | DoctorsInfo | <doctorsInfo> |
     Then user navigates to PRE doctorpage to add providers
     #Then user navigate Doctors lookup session in Doctors page
-    And user selects doctors in doctors page
+    And user updating providers to PRE doctorpage
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
+    Then user return to vpp page using "update" from edit response page
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo1> |
     Then user navigates to PRE doctorpage to edit providers
@@ -288,12 +289,12 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     @regressionAARP @PREMSPlanTile @dec
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              | doctorsInfo1                           | DoctorsName2       | doctorsInfo2                       |
-      | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
+      | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Harold E Simon MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
 
     @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              | doctorsInfo1                           | DoctorsName2       | doctorsInfo2                       |
-      | UHC  |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Simon Harold E MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
+      | UHC  |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Harold E Simon MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
 
   @PRE @planrecommendation @MAPDTile @PREResultsMAPDSNP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page

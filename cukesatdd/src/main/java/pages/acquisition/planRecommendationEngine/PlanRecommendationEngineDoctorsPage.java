@@ -584,7 +584,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		jsClickNew(continueBtn);
 		providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[class*='secondary']")));
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
 		threadsleep(2000);
 		jsClickNew(modalContinuedoctors);
 		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
