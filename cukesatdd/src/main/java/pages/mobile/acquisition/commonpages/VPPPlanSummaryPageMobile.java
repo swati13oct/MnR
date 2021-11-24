@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -2013,16 +2014,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planType.equalsIgnoreCase("PDP")) {
 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]"
-					+ "//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]"
-					+ "//*[contains(@class,'ng-scope')]"));
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		} else
 
-			premiumForPlan = driver.findElement(By.xpath(
-					"//*[contains(text(), '" + PlanName + "')]//following::td[@class='medical-benefits'][1]//span"
-							+ "//strong[contains(text(),'$') and (contains(@class,'ng-binding'))]"));
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
 
-		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		pageloadcomplete();
 		String PlanPremium = premiumForPlan.getText();
 
@@ -2411,15 +2409,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planName.contains("SNP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
 		} else
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2498,13 +2496,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li//*[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -2558,7 +2556,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -4193,15 +4190,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
-
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			// iOS dropdown does not open without clicking label hence added below code
-			WebElement stateLabel1 = driver.findElement(By.cssSelector("label[for='statedrpdwn'] sup"));
-			WebElement stateLabel2 = driver.findElement(By.xpath("//span//label[@for='statedrpdwn']"));
-
-			jsClickNew(stateLabel1);
-			jsClickNew(stateLabel2);
-		}
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");

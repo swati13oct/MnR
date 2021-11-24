@@ -273,6 +273,19 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class,'samModalClose')]")
 	private WebElement samTfnPopupClose;
 
+	@FindBy(xpath = "//button[@aria-describedby='View plan details Plan F']")
+	private WebElement ms3ViewPlanDetails;
+
+	@FindBy(xpath = "//a[@class='back-to-plans resTopPadding10 back-arrow-left leftPadding20' and normalize-space()='Back to all plans']")
+	private WebElement ms3BackToAllPlans;
+	
+	@FindBy(xpath = "//a[@class='uhc-link-button plandetails view-more-link' and @plancode='F01']")
+	private WebElement ms4ViewPlanDetails;
+
+	@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	private WebElement ms4BackToPlanList;
+
+
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1687,5 +1700,67 @@ public class CampaignTFNPage extends UhcDriver {
 	public void backtoPreviousDGMedsup3() {
 		validate(backToPreviousDG);
 		jsClickNew(backToPreviousDG);
+	}
+
+	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp' and @plancode='F01']//span[@class='uhc-button__text'][normalize-space()='Start Application']")
+	private WebElement startMS4OLE;
+
+	public void clickStartMS4Ole() {
+		jsClickNew(startMS4OLE);
+	}
+
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLE;
+
+	public void clickStartMS3Ole() {
+		jsClickNew(startMS3OLE);
+	}
+
+	public void clickCancelMS4Ole() {
+		validate(cancelMS4FormModal);
+		jsClickNew(cancelMS4FormModal);
+	}
+
+	@FindBy(xpath = "//a[@class='cancel-button modal-link' and normalize-space()= 'Cancel Application']")
+	private WebElement cancelMS3OLE;
+
+	@FindBy(xpath = "//a[@class='cta-button action_end_session' and normalize-space()= 'Cancel Application']")
+	private WebElement cancelMS3OLEModal;
+
+	public void clickCancelMS3Ole() {
+		validate(cancelMS3OLE);
+		jsClickNew(cancelMS3OLE);
+		validate(cancelMS3OLEModal);
+		jsClickNew(cancelMS3OLEModal);
+	}
+
+	public void ms4ViewPlanDetails() {
+
+		validate(ms4ViewPlanDetails);
+		jsClickNew(ms4ViewPlanDetails);
+	}
+
+	public void ms3ViewPlanDetails() {
+
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		validate(ms3ViewPlanDetails);
+		jsClickNew(ms3ViewPlanDetails);
+
+	}
+
+	public void ms4BackToPlanList() {
+
+		jsClickNew(ms4BackToPlanList);
+	}
+
+	public void ms3BackToAllPlans() {
+
+		jsClickNew(ms3BackToAllPlans);
 	}
 }

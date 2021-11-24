@@ -781,6 +781,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
             validate(headerNavigationBarHomeTab,20);
             jsClickNew(headerNavigationBarHomeTab);
             String zipcode =inputdata.get("Zip Code");
+            pageloadcomplete();
+            waitForPageLoadSafari();
             validate(homePageZiptxt,60);
             homePageZiptxt.sendKeys(zipcode);
             jsClickNew(homePageFindPlans);
@@ -944,7 +946,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		public void vppToDCE() {
 			System.out.println("Validating VPP to DCE Page");
 			scrollToView(headerDrugcostLink);
-			headerDrugcostLink.click();
+//			headerDrugcostLink.click();
+			jsClickNew(headerDrugcostLink);
 			pageloadcomplete();
 			Assert.assertTrue(driver.getCurrentUrl().contains("drug-cost-estimator"), "Page is not navigated to DCE");		
 		}
@@ -952,7 +955,8 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		public void DCEtoPRE() {
 			System.out.println("Navigating to PRE Page");
 			scrollToView(headerGetaPlanRecommendationLink);
-			headerGetaPlanRecommendationLink.click();
+//			headerGetaPlanRecommendationLink.click();
+			jsClickNew(headerGetaPlanRecommendationLink);
 			pageloadcomplete();
 			Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html#/get-started"), "Page is not navigated to PRE");		
 		}
@@ -1937,7 +1941,7 @@ public void viewplanLink(List<WebElement> plansName) {
 }
  ArrayList<String> vppPlans = new ArrayList<String>();
 public ArrayList<String> saveplans(String plan) {
-	int planIndex = planSelectorNewResultspage.findPlan(plan);
+	int planIndex = planSelectorNewResultspage.findPlan(plan,false);
 	System.out.println("Plans Index is :" +planIndex);
 	vppPlans.add(plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim());
 	threadsleep(3000);

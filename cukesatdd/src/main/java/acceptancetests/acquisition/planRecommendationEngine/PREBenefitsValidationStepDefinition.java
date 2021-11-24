@@ -219,7 +219,7 @@ public class PREBenefitsValidationStepDefinition {
 								break; // If any exception in flow then no record in excel
 							}*/
 
-							int planIndex = resultsPage.findPlan(planName);
+							int planIndex = resultsPage.findPlan(planName,true);
 							int planYear = 2021; // Not using now
 
 							if (planIndex < 0)

@@ -1390,5 +1390,117 @@ public class CampaignTFNCommonStepDefinition {
 		}
 	}
 
+	@And("^user click on Start Application in MS plan$")
+	public void the_user_clicks_on_Start_MS_OLE(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
 
+		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
+				|| !msPlansHeading && zipCode.equals("10001")) ? true
+						: (msPlansHeading && zipCode.equals("10001")
+								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlansHeading) {
+			tfnPage.clickStartMS4Ole();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.clickStartMS3Ole();
+
+	}
+
+	@And("^user click on Cancel Application in MS plan$")
+	public void the_user_clicks_on_Cancel_MS_OLE(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//*[@id='dateOfBirth']"), 20);
+	boolean assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
+				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
+						: (isMedsup4DOB && zipCode.equals("10001")
+								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** isMedsupDOBVisible/invisible : '" + isMedsup4DOB + "' for zipCode : '" + zipCode + "'");
+
+		if (isMedsup4DOB) {
+			tfnPage.clickCancelMS4Ole();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.clickCancelMS3Ole();
+
+	}
+	
+	@And("^user click on View Plan Details in MS plan$")
+	public void the_user_clicks_on_View_Plan_Detials_in_MS_Plan(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
+				|| !msPlansHeading && zipCode.equals("10001")) ? true
+						: (msPlansHeading && zipCode.equals("10001")
+								|| !msPlansHeading&& zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlansHeading) {
+			tfnPage.ms4ViewPlanDetails();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.ms3ViewPlanDetails();
+
+}
+	
+	@And("^user click on Back to Plan in MS Plan Details$")
+	public void the_user_clicks_on_Back_to_All_Plan_From_MS_Detail_Page(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']"), 20);
+	boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
+				|| !msPlansDetailsBackToAllPlans && zipCode.equals("10001")) ? true
+						: (msPlansDetailsBackToAllPlans && zipCode.equals("10001")
+								|| !msPlansDetailsBackToAllPlans&& zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** msBacktoPlanListvisible/invisible : '" + msPlansDetailsBackToAllPlans + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlansDetailsBackToAllPlans) {
+			tfnPage.ms4BackToPlanList();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.ms3BackToAllPlans();
+
+}
+	
+	
 }

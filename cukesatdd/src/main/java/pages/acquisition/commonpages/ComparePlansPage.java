@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
@@ -285,7 +287,7 @@ public class ComparePlansPage extends UhcDriver {
   @FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
-	@FindBy(xpath = "//*[@id='printPlans']/th[2]/div[1]/span")
+	@FindBy(xpath = "//h2[contains(@class,'heading2')]")
 	public WebElement planComparePlansAvailableLabel;
 
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
@@ -432,6 +434,12 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
 	private WebElement DentalLinkText;
+	
+	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")
+	private WebElement baseLineBenefitslink;
+	
+	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
+	private WebElement planNameOnBaseLinePopup;
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -2127,4 +2135,28 @@ public void saveaPlan(String plans) {
 
 	}
 
+	public void browserBackAndValidateAllPlansShown() {
+		driver.navigate().back();
+		sleepBySec(5);
+		System.out.println(planComparePlansAvailableLabel.getText());
+		int planCount = Integer.parseInt(planComparePlansAvailableLabel.getText()
+				.substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
+		System.out.println("Count of plans Available=" + planCount);
+		System.out.println("Count of plans on compare Before button is clicked"
+				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
+	}
+	
+	public void validateBaseLineBenefitsPopup(Map<String, String> memberAttributesMap) {
+		String planName = memberAttributesMap.get("Plan Name");
+		String medicalDeductible = memberAttributesMap.get("Medical Deductible");
+		String pcp = memberAttributesMap.get("Primary Care Physician");
+		String Specialist = memberAttributesMap.get("Specialist");
+		WebElement moreOps = driver.findElement(By.xpath("(//span[text()='"+planName+"'])[1]/following::span[contains(text(),'More Options')][1]"));
+		moreOps.click();
+		baseLineBenefitslink.click();
+		Assert.assertEquals(planNameOnBaseLinePopup.getText().trim(), planName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Medical Deductible')]/following-sibling::td/span")).getText().trim(), medicalDeductible);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
+	}
 }
