@@ -651,10 +651,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user selects priority in priorities page
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
-    Then user validates Sort By using PlanType in PRE-Result page
-      | Sort PlanType | <sortInfo> |
-    Then user validate CSNP Plans Ranking in PRE results page
-      | SNP Options | <specialNeeds> |
+    Then user Filter SNP Plantype and validate CSNP Plans Ranking in PRE results page
+      | Sort PlanType | <sortInfo>     |
+      | SNP Options   | <specialNeeds> |
 
     @regressionAARP
     Examples: 

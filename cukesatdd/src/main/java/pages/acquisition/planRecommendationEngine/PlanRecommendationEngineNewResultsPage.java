@@ -1026,6 +1026,14 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			VerifyPlanTile(options[i]);
 		}
 	}
+	
+	public void sortByFuncWithoutVerify(String plan) {
+		System.out.println("Sorting  Options: " + plan);
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+		}
+	}
 
 	public void sortByBreadcrumb() {
 		System.out.println("Sorting Breadcrumb validation after PlanYear Toggle");
@@ -1101,8 +1109,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
 		if(snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
-			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
-			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");			
+			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");			
 		}else {
 			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
 			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
