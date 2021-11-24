@@ -157,6 +157,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal")
 	private WebElement drugModel;
+	
+	@FindBy(css = "#modal a[class*='buttonLink']")
+	private WebElement editDurglink;
+	
+	@FindBy(css = "#modal td.plan-drug-deductible")
+	private WebElement deductible;
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
@@ -774,6 +780,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
+		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"), "Edit Drug List not found in drug model - " + planName);
+		Assert.assertTrue(deductible.getText().contains("Deductible"), "Deductible not found in drug model - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
 		covered = drugModel.findElements(By.cssSelector("span[class^='covered']")).size();
@@ -880,6 +888,22 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			}
 		}
 		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
+		threadsleep(3000);
+	}
+	
+	public void editDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Editing doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				pagePreviousButton.click();
+				threadsleep(2000);
+			}
+		}
+		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] button[dlassetid*='editDoc']")).click();
 		threadsleep(3000);
 	}
 
@@ -1069,6 +1093,20 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
 		}
 
+	}
+	
+	public void csnRanking(String snpOption) {
+		String FirstplanName;
+		String SecondplanName;
+		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
+		if(snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
+			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");			
+		}else {
+			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
+			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
+		}
 	}
 
 }

@@ -1311,6 +1311,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.sortByBreadcrumb();
 	}
 	
+	@Then("^user validate CSNP Plans Ranking in PRE results page$")
+	public void csnp_ranking(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
+	}
+	
 	@Then("^the user do poc$")
    	public void poc_new_results_page() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
