@@ -193,7 +193,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
 	public WebElement changePharmacyCoverPrescription;
 
-	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div[contains(text(), 'OptumRx Home')]")
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div//span[contains(text(), 'Mail service')]")
 	private WebElement mailOrderPharmacyMsg;
 
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
