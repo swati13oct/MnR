@@ -110,7 +110,7 @@ public class PharmacyLocatorStepDefinition {
 	}
 	
 	/** user enters following details for pharmacy search */
-	@And("^the user enters following details for pharmacy search$")
+/*	@And("^the user enters following details for pharmacy search$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String zipcode = inputAttributesMap.get("Zip Code");
@@ -141,7 +141,7 @@ public class PharmacyLocatorStepDefinition {
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 
-	}
+	} */
 
 	/** Verifying the error message in pharmacy search tool */	
 	@And("^the user verify error messages in pharmacy locator page$")
