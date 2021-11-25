@@ -661,3 +661,10 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | AARP |   30004 | YES           | Forsyth County | MAPD          | Chronic                  | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
       | AARP |   30004 | YES           | Forsyth County | MAPD          | Medicaid,Chronic         | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
       | AARP |   30004 | YES           | Forsyth County | MAPD          | Medicaid,chronic,nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
+
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo |
+      | UHC  |   30004 | YES           | Forsyth County | MAPD          | Chronic                  | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
+      | UHC  |   30004 | YES           | Forsyth County | MAPD          | Medicaid,Chronic         | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
+      | UHC  |   30004 | YES           | Forsyth County | MAPD          | Medicaid,chronic,nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
