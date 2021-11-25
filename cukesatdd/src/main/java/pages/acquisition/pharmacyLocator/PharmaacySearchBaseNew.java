@@ -153,13 +153,13 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+ county + "')]")).click();
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'\"+ county + \"')]")).click();
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
@@ -193,5 +193,72 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
+	}
+	
+	public boolean searchesPharmacyResults(String language, String planName) throws InterruptedException {
+		int total=0;
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		int PharmacyCount = 0;
+		if (!pharmacyValidate(noResultMsg)) {
+			PharmacyCount = PharmacyResultList.size();
+		}		
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
+					pharmacyValidate(pharmaciesAvailable));
+			if (total >10) {
+				WebElement contacUstLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contacUstLink)) 
+					contacUstLink=contactUnitedHealthCare_ol;
+				Assertion.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
+						pharmacyValidate(contacUstLink));
+			} else {
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!pharmacyValidate(rightArrow));
+			}
+		} else {
+			WebElement contacUstLink=contactUnitedHealthCare;
+			if (!pharmacyValidate(contacUstLink)) 
+				contacUstLink=contactUnitedHealthCare_ol;
+			Assertion.assertTrue("PROBLEM - should not be able to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!pharmacyValidate(contacUstLink));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
+					!pharmacyValidate(pdf_otherPlans));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
+					!pharmacyValidate(pdf_WalgreenPlans));
+			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
+		}
+		if (!mapToggleElement.isDisplayed())
+			return false;
+		if (!pharmacyList.isDisplayed())
+			return false;
+		if (mapView.getAttribute("class").contains("ng-hide"))
+			return false;
+		if (!(pharmacyListItems.size() > 1))
+			return false;
+		if (!resultAsPDF.isDisplayed())
+			return false;
+		if (!(standardNetworkMarker.size() == 1 || PreferredNetworkMarker.size() == 1))
+			return false;
+		if (!showOnMapLink.isDisplayed())
+			return false;
+		if (!getDirectionLink.isDisplayed())
+			return false;
+		if (!pharmacyNameLink.isDisplayed())
+			return false;
+		if (!questionsRightRailWidget.isDisplayed())
+			return false;
+		return true;
 	}
 }

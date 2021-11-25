@@ -156,7 +156,7 @@ public class PharmacyLocatorStepDefinition {
 	}
 
 	/** user chooses a plan from dropdown */
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
@@ -209,7 +209,7 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
-	}
+	} */
 	
 	/** Verify the pharmacies as per the filter criteria 
 	 * @throws InterruptedException */
@@ -233,8 +233,7 @@ public class PharmacyLocatorStepDefinition {
 //		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 //		String language = inputAttributesMap.get("Language");
 //		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-//		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+//			.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 //		if(pharmacySearchPage.searchesPharmacyResults(language, planName)){
 //			Assertion.assertTrue(true);
 //		} else {
@@ -460,7 +459,7 @@ public class PharmacyLocatorStepDefinition {
 		boolean isPharmacySelected;
 		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(filterType);
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
-	}
+	} 
 	
 	/** user is on the AARP Medicare Site landing page */
 	@Given("^the user is on the Acquisition Site landing page$")

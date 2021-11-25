@@ -153,5 +153,28 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 
 	@FindBy(xpath = "//app-returnlink//div/a")
 	public WebElement breadCrumbLink;
+	
+	@FindBy(xpath="//div[@id='ITC_LC_HIS_2']//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
+	protected WebElement pdf_otherPlans;
+	
+	@FindBy(xpath="//div[@id='ITC_LC_HIS_2']//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
+	protected WebElement pdf_WalgreenPlans;
+	
+	@FindBy(xpath = "//*[@id='mapview']")
+	protected WebElement mapToggleElement;
+	
+	@FindBy(xpath = "//div[@class='mt-10']//*[@class='row']")
+	protected WebElement pharmacyList;
+	
+	@FindBy(id="collapseMap")
+	protected WebElement mapView;
+
+	@FindBy(xpath = "//div[@class='mt-10']//*[@class='row']//*[@class='list-item']")
+	protected List<WebElement> pharmacyListItems;
+	
+	@FindBy(id = "createpdf_id")
+	protected WebElement resultAsPDF;
+
+
 
 }
