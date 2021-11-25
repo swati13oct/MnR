@@ -10,11 +10,16 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
+#    And the user chooses a plan from dropdown
+#      | Current Year Plan Name | <cy_planName> |
+#      | Current Year Plan Year | <cy_planYear> |
+#      | Next Year Plan Name    | <ny_planName> |
+#      | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies results
       | Language | English |
 

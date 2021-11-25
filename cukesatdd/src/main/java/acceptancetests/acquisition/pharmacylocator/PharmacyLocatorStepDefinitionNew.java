@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import atdd.framework.Assertion;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -112,5 +114,19 @@ public class PharmacyLocatorStepDefinitionNew {
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 
+	}
+
+	@Then("^the user validates the pharmacies results$")
+	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String language = inputAttributesMap.get("Language");
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		if(pharmacySearchPage.searchesPharmacyResults(language, planName)){
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Error in validating Pharmacy Results ");
+		}
 	}
 }

@@ -228,19 +228,19 @@ public class PharmacyLocatorStepDefinition {
 	
 	/** Verify the pharmacies as per the filter criteria 
 	 * @throws InterruptedException */
-	@Then("^the user validates the pharmacies results$")
-	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
-		String language = inputAttributesMap.get("Language");
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
-		if(pharmacySearchPage.searchesPharmacyResults(language, planName)){
-			Assertion.assertTrue(true);
-		} else {
-			Assertion.fail("Error in validating Pharmacy Results ");
-		}
-	}
+//	@Then("^the user validates the pharmacies results$")
+//	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {
+//		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+//		String language = inputAttributesMap.get("Language");
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+//		if(pharmacySearchPage.searchesPharmacyResults(language, planName)){
+//			Assertion.assertTrue(true);
+//		} else {
+//			Assertion.fail("Error in validating Pharmacy Results ");
+//		}
+//	}
 	
 	/** Verify tooltips on the filters */
 	@And("^the user validates tooltips on filters$")
