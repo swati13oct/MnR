@@ -57,6 +57,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates TFN Number
       | TFN No    | <MedSupTFN>        |
       | TFN Xpath | <MedsuppFormTFNxpath> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates source code
@@ -75,6 +76,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | Zip Code  | <zipcode>    |
    And user click on Start Application in MS plan
       | Zip Code | <zipcode> |
+   And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates source code
@@ -83,6 +85,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | Zip Code | <zipcode> |
     And user click on View Plan Details in MS plan
       | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates source code
