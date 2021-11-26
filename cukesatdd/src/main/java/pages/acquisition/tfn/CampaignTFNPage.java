@@ -1323,14 +1323,14 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		/*if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
 			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
 
 		}
 
 		else {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-		}
+		}*/
 
 		driver.switchTo().window(parentWindow);
 
@@ -1675,14 +1675,14 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		/*if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
 			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
 
 		}
 
 		else {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-		}
+		}*/
 
 		driver.navigate().back();
 
