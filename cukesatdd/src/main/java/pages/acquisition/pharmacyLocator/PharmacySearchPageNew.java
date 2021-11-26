@@ -2,6 +2,7 @@ package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -293,6 +294,121 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 			return new GetStartedPage(driver);
 		return null;
 	}
+
+	/**
+	 * Validate Widgets From copy deck: Preferred Retail Pharmacy Network Only
+	 * display the Preferred Retail Pharmacy Network tile for plans that have a
+	 * Preferred Retail Pharmacy benefit. Do not display for the AARP MedicareRx
+	 * Walgreens plan Walgreens ? Preferred Retail Pharmacy Only display the
+	 * Walgreens tile for AARP MedicareRx Walgreens plan members Preferred Mail
+	 * Service Pharmacy Only display the Preferred Mail Service Pharmacy tile for
+	 * plans that have a Preferred Mail Service Pharmacy benefit. Do not display for
+	 * AL PEEHIP BYPASS KNOWN ISSUE -ticket INC12081940 - Walgreens widget on
+	 * doesn't show up for Chinese and Spanish page
+	 *
+	 * @param //planType
+	 * @throws InterruptedException
+	 */
+	public void validatePharmacyWidgets(boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan,
+										boolean expectPrefMailServPlan, HashMap<String, String> inputMap, String testSiteUrl)
+			throws InterruptedException {
+		String testPlanName = inputMap.get("planName");
+		String language = inputMap.get("language");
+		String testWidget = "";
+		String expUrl = "";
+		boolean hasWalgreensPlan = false;
+		if (testPlanName.contains("AARP MedicareRx Walgreens"))
+			hasWalgreensPlan = true;
+		Assertion.assertTrue("PROBLEM - test input expects no walgreens plan but user has walgreens plan",
+				expectWalgreensPlan == hasWalgreensPlan);
+
+		testWidget = "Preferred Mail Service Pharmacy";
+		if (expectPrefMailServPlan) {
+			Assertion.assertTrue("PROBLEM - user should see '" + testWidget + "' widget",
+					pharmacyValidate(widget_preferredMailServicePharmacy));
+			expUrl = "resources/mail-order-pharmacy.html";
+			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
+		} else {
+			Assertion.assertTrue("PROBLEM - user should see '" + testWidget + "' widget",
+					pharmacyValidate(widget_preferredMailServicePharmacy));
+		}
+
+		testWidget = "Preferred Retail Pharmacy Network";
+		if (expectPrefRetailPharmacyPlan) { // note: with this plan should see widget BUT if plan is walgreen then won't
+			if (hasWalgreensPlan) {
+				Assertion.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '" + testWidget + "' widget",
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+			} else {
+				Assertion.assertTrue("PROBLEM - PDP user should see '" + testWidget + "' widget",
+						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+				Assertion.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
+						!pharmacyValidate(widget_walgreens));
+				expUrl = "health-plans/estimate-drug-costs.html";
+//				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
+			}
+		} else {
+			Assertion.assertTrue("PROBLEM - user input does not expect to see '" + testWidget + "' widget",
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+		}
+		testWidget = "Walgreens - Preferred Retail Pharmacy";
+		if (expectWalgreensPlan) {
+			if (hasWalgreensPlan) {
+				if (language.equalsIgnoreCase("English")) {
+					Assertion.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
+							pharmacyValidate(widget_walgreens));
+//					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+					expUrl = "health-plans/estimate-drug-costs.html";
+					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
+				} else {
+					System.out.println(
+							"INC12081940 - bypassed the Walgreens widget issue for Spanish and Chinese for the time being");
+				}
+			}
+		} else {
+			Assertion.assertTrue("PROBLEM - test input not expect to see '" + testWidget + "' widget",
+					!pharmacyValidate(widget_walgreens));
+		}
+	}
+
+	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl,
+							   HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException {
+		String planName = inputMap.get("planName");
+		String planYear = inputMap.get("planYear");
+		String zipcode = inputMap.get("zipcode");
+		String distance = inputMap.get("distance");
+		String county = inputMap.get("county");
+		Assertion.assertTrue("PROBLEM - '" + linkType + "' link should show for '" + widgetName + "' widget",
+				pharmacyValidate(learnMoreElement));
+		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
+//		learnMoreElement.click();
+		jsClickNew(learnMoreElement);
+		sleepBySec(8);
+		CommonUtility.checkPageIsReady(driver);
+		String actUrl = driver.getCurrentUrl();
+		Assertion.assertTrue(
+				"PROBLEM - '" + linkType + "' link on '" + widgetName + "' widget is not opening expected page.  "
+						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
+				actUrl.contains(expUrl));
+		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
+		//tbd Thread.sleep(2000); //note: keep for timing issue
+		//driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
+		sleepBySec(2);
+		CommonUtility.checkPageIsReady(driver);
+		expUrl = "/Pharmacy-Search-";
+		actUrl = driver.getCurrentUrl();
+		Assertion.assertTrue(
+				"PROBLEM - Unable to get back to pharmacy locator page for further validation. "
+						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
+				actUrl.contains(expUrl));
+		enterZipDistanceDetails(zipcode, distance, county);
+//		if (isPlanYear()) {
+//			selectsPlanYear(planYear);
+//		}
+		selectsPlanName(planName, testSiteUrl);
+		CommonUtility.checkPageIsReady(driver);
+	}
+
 
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {

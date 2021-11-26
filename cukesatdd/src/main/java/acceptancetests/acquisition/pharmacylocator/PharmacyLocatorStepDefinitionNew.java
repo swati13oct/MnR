@@ -1,11 +1,8 @@
 package acceptancetests.acquisition.pharmacylocator;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.Assertion;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
@@ -186,5 +183,44 @@ public class PharmacyLocatorStepDefinitionNew {
 			Assertion.fail("Error in validating Pharmacy Results ");
 		}
 	}
-	
+
+	@Then("^the user validates pharmacy widgets$")
+	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
+		Map<String, String> inputDataMap=parseInputArguments(inputData);
+		String tmp=inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. \nActual='"+tmp+"'",
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
+
+		tmp=inputDataMap.get("Has Walgreens plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='"+tmp+"'",
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasWalgreens = Boolean.parseBoolean(tmp);
+
+		tmp=inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='"+tmp+"'",
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
+
+		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		String planYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
+		String zipcode=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
+		String distance=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.DISTANCE);
+		String county=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.COUNTY);
+		String language=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.LANGUAGE);
+		if (language==null)
+			language="English";
+		HashMap<String, String> inputMap=new HashMap<String, String>();
+		inputMap.put("planName", planName);
+		inputMap.put("planYear", planYear);
+		inputMap.put("zipcode", zipcode);
+		inputMap.put("distance", distance);
+		inputMap.put("county", county);
+		inputMap.put("language", language);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap, testSiteUrl);
+	}
+
 }

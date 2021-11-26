@@ -194,11 +194,21 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
+
+//	public void selectsPlanYear(String planYear) {
+//		CommonUtility.checkPageIsReadyNew(driver);
+//		scrollToView(yearDropdown);
+//		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
+//		//		yearDropdown.click();
+//		Select yearList=new Select(yearDropdown);
+//		yearList.selectByVisibleText(planYear);
+//		System.out.println("Selected year='"+planYear+"' from year dropdown");
+//		CommonUtility.checkPageIsReadyNew(driver);
+//	}
 	
 	public boolean searchesPharmacyResults(String language, String planName) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
 		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
@@ -207,7 +217,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
 			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
 
-			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim().split(" ")[0]);
 
 			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
 					pharmacyValidate(pharmaciesAvailable));
@@ -243,8 +253,8 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			return false;
 		if (!pharmacyList.isDisplayed())
 			return false;
-		if (mapView.getAttribute("class").contains("ng-hide"))
-			return false;
+//		if (mapView.getAttribute("class").contains("ng-hide"))
+//			return false;
 		if (!(pharmacyListItems.size() > 1))
 			return false;
 		if (!resultAsPDF.isDisplayed())
@@ -253,8 +263,6 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			return false;
 		if (!showOnMapLink.isDisplayed())
 			return false;
-	/*	if (!getDirectionLink.isDisplayed())
-			return false; */
 		if (!pharmacyNameLink.isDisplayed())
 			return false;
 		if (!questionsRightRailWidget.isDisplayed())
