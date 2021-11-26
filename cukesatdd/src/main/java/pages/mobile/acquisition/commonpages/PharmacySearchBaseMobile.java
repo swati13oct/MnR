@@ -101,7 +101,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		// Clicking on label first as dropdown is not opening in iOS - this will not
 		// affect Android execution
-	
+
 //		sleepBySec(3);
 //
 //		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
@@ -174,10 +174,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			 * distanceOption_15miles.click();
 			 */
 		}
-		// searchbtn.click();
-//		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-//		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
-//		pharmacyValidate(zipcodeErrorMessage));
+
+		jsClickNew(searchbtn);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**
@@ -434,14 +434,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
 
-		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
 		}
 
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
-		
+
 		if (!loadingBlock.isEmpty())
 			// waitforElementDisapper(By.className("loading-block"), 90);
 			waitforElementDisapper(loadingSpinner, 90);
