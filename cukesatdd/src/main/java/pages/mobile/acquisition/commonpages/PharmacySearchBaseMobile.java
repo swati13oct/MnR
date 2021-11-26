@@ -176,8 +176,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		}
 
 		jsClickNew(searchbtn);
-		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
+		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
+		// pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**
@@ -435,7 +436,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// yearDropdown.click();
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+			WebElement planYearLabel = driver.findElement(By.xpath("//label[@id='plan-year-label']"));
+			jsClickNew(planYearLabel);
+			WebElement planYearAsterisk = driver.findElement(By.xpath("//*[@id='plan-type-label']/span"));
+			jsClickNew(planYearAsterisk);
+
 		}
 
 		mobileSelectOption(yearDropdown, planYear, true);
