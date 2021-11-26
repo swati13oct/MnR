@@ -175,6 +175,21 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(id = "createpdf_id")
 	protected WebElement resultAsPDF;
 
+	@FindBy(xpath = "(//img[@class='pharmacypin'])[1]")
+	protected List<WebElement> standardNetworkMarker;
+	
+	@FindBy(xpath = "(//img[@class='pharmacypin'])[2]")
+	protected List<WebElement> PreferredNetworkMarker;
+	
+	@FindBy(xpath = "(//span[contains(@class,'uhc-button_text') and contains(text(),'Show on Map')])[1]")
+	protected WebElement showOnMapLink;
+	
+	@FindBy(xpath = "//div[@class='mb-10 mb-lg-0 flex']//h4[@class='text-bold text-small m-0 mt-5 mb-10 text-blue-dark text-left']")
+	protected WebElement pharmacyNameLink;
+	
+	@FindBy(xpath = "//div[@class='row mt-20']")
+	protected WebElement questionsRightRailWidget;
+
 
 
 }

@@ -253,8 +253,8 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			return false;
 		if (!showOnMapLink.isDisplayed())
 			return false;
-		if (!getDirectionLink.isDisplayed())
-			return false;
+	/*	if (!getDirectionLink.isDisplayed())
+			return false; */
 		if (!pharmacyNameLink.isDisplayed())
 			return false;
 		if (!questionsRightRailWidget.isDisplayed())
