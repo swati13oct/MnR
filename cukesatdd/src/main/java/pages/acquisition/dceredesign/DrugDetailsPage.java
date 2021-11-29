@@ -238,7 +238,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(xpath = "//*[@role='tabpanel' or @role='list']")
+	@FindBy(xpath = "//*[(@role='tabpanel' or @role='list') and contains(@class, 'uhc-list')]")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
