@@ -2412,11 +2412,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
 		} else
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2495,13 +2495,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
