@@ -3,7 +3,9 @@
  */
 package pages.acquisition.commonpages;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,11 +15,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.DataTableParser;
 import atdd.framework.UhcDriver;
+import io.cucumber.datatable.DataTable;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 
 /**
@@ -49,48 +55,53 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
 	private WebElement selectProviderBtn;
 
-	//@FindBys(value = {
-	//		@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
-	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
+	// @FindBys(value = {
+	// @FindBy(xpath = "//div[@class='acquisitionButtons
+	// hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']")
+	// })
+	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 
-	
-	@FindBys(value = { @FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
+	@FindBys(value = {
+			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
 	private List<WebElement> SaveBtns;
 
 	@FindBys(value = {
-			//	@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
-				@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })	
-		private List<WebElement> MulitpleSaveBtns;
+			// @FindBy(xpath = "//div[@class='acquisitionButtons
+			// hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+			@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })
+	private List<WebElement> MulitpleSaveBtns;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
-	
+
 	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
 	private WebElement ViewsaveOldbtn;
-	
-	//@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
-//	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+
+	// @FindBy(xpath = "//*[contains(@class,'action-btn') and
+	// contains(text(),'Finish')]")
+	// @FindBy(xpath = "//*[contains(@class,'action-btn') and
+	// contains(text(),'Finish')]")
 	@FindBy(xpath = "(//*[contains(@class,'action-btn') and contains(text(),'Finish')])[2]")
 	private WebElement finishReturnBtn;
-	
+
 	@FindBy(xpath = "//*[text()='View Saved']")
 	private WebElement ViewsaveProviderbtn;
-	
-	@FindBy(xpath="//*[contains(@text(),'View Saved')]")
+
+	@FindBy(xpath = "//*[contains(@text(),'View Saved')]")
 	private WebElement EditSavedButton;
-	
-	@FindBy(xpath="//span[contains(text(),'Saved')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Saved')]")
 	private WebElement ViewSavedProvidersLink;
 
-	//@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	// @FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
 	@FindBy(xpath = "//label[contains(@id,'unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
-	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+
+	@FindBy(css = "#finishAndReturnButton")
 	private WebElement FinishButton;
 
 	@FindBy(id = "finishAndReturnButton")
@@ -98,9 +109,18 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-test-id='People']")
 	private WebElement People;
-	
-	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]") 
+
+	@FindBy(xpath = "//button[@data-test-id='GeneralDentists']")
+	private WebElement GeneralDentist;
+
+	@FindBy(xpath = "//*[contains(@data-test-id,'MedicalDirectory')]")
 	private WebElement MedicalDirectory;
+
+	@FindBy(xpath = "//*[contains(@data-test-id,'BehavioralHealthDirectory')]")
+	private WebElement BehaviourDirectory;
+
+	@FindBy(xpath = "//*[contains(@data-test-id,'DentalHealthDirectory')]")
+	private WebElement DentalDirectory;
 
 	@FindBy(xpath = "//button[@data-test-id='Places']")
 	private WebElement Places;
@@ -110,6 +130,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-test-id='PrimaryCare']")
 	private WebElement Primary;
+
+	@FindBy(xpath = "//button[@data-test-id='MedicalVirtualCare']")
+	private WebElement VirtualCare;
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
@@ -146,8 +169,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
-	
-	
+
 	@FindBy(xpath = "//li[@class='provider-card']")
 	private WebElement providerCard;
 
@@ -156,15 +178,18 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
 	private WebElement currentYrTile;
-	
-	@FindBy(xpath="//button[text()='Continue Searching']")
+
+	@FindBy(xpath = "//button[text()='Continue Searching']")
 	private WebElement continueSearching;
-	
-	@FindBy(xpath="(//button[contains(text(),'Finish')])[2]")
+
+	@FindBy(xpath = "(//button[contains(text(),'Finish')])[2]")
 	private WebElement Finish;
-	
-	@FindBy(xpath="//*[text()='Finish & Return']")
+
+	@FindBy(xpath = "//*[text()='Finish & Return']")
 	private WebElement FinishReturnButton;
+
+	@FindBy(xpath = "//*[@track='Find Care']")
+	private WebElement FindCare;
 
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -217,7 +242,7 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
 		MedicalDirectory.click();
 
@@ -226,14 +251,14 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption,10)) {
+		if (validate(selectLocationOption, 10)) {
 			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
@@ -242,8 +267,8 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
+		MRConstants.PROV_NAME = providerSaved;
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -256,25 +281,156 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
-		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement>
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		} else if (driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']"
+				+ "//button[contains(@class,'action-btn')])[1]")).size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
-		}else
+		} else
 			System.out.println("Issue with Xpath");
-	
+
+		threadsleep(3);
+		waitForCountDecrement(2);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		return new VPPPlanSummaryPage(driver);
+	}
+
+	public VPPPlanSummaryPage selectsBehaviour() {
+
+		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
+		FindCare.click();
+
+		CommonUtility.waitForPageLoadNew(driver, BehaviourDirectory, 30);
+		BehaviourDirectory.click();
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		People.click();
+
+		// CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		// Primary.click();
+
+		CommonUtility.waitForPageLoadNew(driver, VirtualCare, 30);
+
+		VirtualCare.click();
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
+
+		if (validate(selectLocationOption, 10)) {
+			jsClickNew(selectLocationOption);
+			validateNew(saveBtn2);
+			jsClickNew(saveBtn2);
+		}
+		threadsleep(10);
+		validateNew(providerNameText);
+		String BehaviourSaved = providerNameText.getText().trim();
+		System.out.println("Provider Name is : " + BehaviourSaved);
+		MRConstants.BEHAV_NAME = BehaviourSaved;
+
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ Viewsavebtn.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			jsClickNew(Checkcoverage);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+
 		threadsleep(3);
 		waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		
-		//note: setting the implicit wait back to default value - 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		return new VPPPlanSummaryPage(driver);
+	}
+
+	public VPPPlanSummaryPage selectsDental() {
+
+		CommonUtility.waitForPageLoadNew(driver, FindCare, 45);
+		FindCare.click();
+
+		CommonUtility.waitForPageLoadNew(driver, DentalDirectory, 30);
+		DentalDirectory.click();
+
+		CommonUtility.waitForPageLoadNew(driver, GeneralDentist, 30);
+		GeneralDentist.click();
+
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
+
+		if (validate(selectLocationOption, 10)) {
+			jsClickNew(selectLocationOption);
+			validateNew(saveBtn2);
+			jsClickNew(saveBtn2);
+		}
+		threadsleep(10);
+		validateNew(providerNameText);
+		String DentalSaved = providerNameText.getText().trim();
+		System.out.println("Provider Name is : " + DentalSaved);
+		MRConstants.DENT_NAME = DentalSaved;
+
+		/*
+		 * if(driver.findElements(By.xpath(
+		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		 * ViewsaveOldbtn.click(); else
+		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
+		 * size() > 0){ Viewsavebtn.click();
+		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
+		 * size() > 0){ ViewSavedProvidersLink.click(); } else
+		 * System.out.println("New Rally page not displayed");
+		 * 
+		 * }
+		 */
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			jsClickNew(Checkcoverage);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+
+		threadsleep(3);
+		waitForCountDecrement(2);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		return new VPPPlanSummaryPage(driver);
 	}
@@ -282,10 +438,10 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage selectsHospitals() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
-		
+
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		MedicalDirectory.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, Places, 30);
 		jsClickNew(Places);
 
@@ -303,30 +459,30 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		MRConstants.PROV_NAME = providerSaved;
+
+		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			jsClickNew(ViewsaveOldbtn);
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+		else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
 			jsClickNew(Viewsavebtn);
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			jsClickNew(ViewSavedProvidersLink);
+			if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
+				jsClickNew(ViewSavedProvidersLink);
+			} else
+				System.out.println("New Rally page not displayed");
+
 		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
-		}else
+		} else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPPlanSummaryPage(driver);
@@ -340,15 +496,15 @@ public class ProviderSearchPage extends UhcDriver {
 		continueButton.click();
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				//currentYrTile.click();
+				// currentYrTile.click();
 				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
 		} else if (year.contains("next")) {
 			if (validate(nextYrTile))
-				//nextYrTile.click();
-			jsClickNew(nextYrTile);
+				// nextYrTile.click();
+				jsClickNew(nextYrTile);
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
 		validateNew(planNameToBeSelected);
@@ -365,7 +521,8 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(continueButton);
 		selectYear(year);
 
-		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//div[@data-ui-section='plan-listing']//ul//li"));
+		List<WebElement> topicDropDownValues = driver
+				.findElements(By.xpath("//div[@data-ui-section='plan-listing']//ul//li"));
 
 		return topicDropDownValues.size();
 	}
@@ -392,20 +549,19 @@ public class ProviderSearchPage extends UhcDriver {
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-	
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+
+		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+		else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
 			Viewsavebtn.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
+			if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
+				ViewSavedProvidersLink.click();
+			} else
+				System.out.println("New Rally page not displayed");
+
 		}
 		CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
-		//validateNew(providerCard);
+		// validateNew(providerCard);
 		validateNew(PrintEmailBtn);
 
 	}
@@ -415,10 +571,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		MedicalDirectory.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		People.click();
 
@@ -440,8 +596,8 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
+		MRConstants.PROV_NAME = providerSaved;
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -454,23 +610,25 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
-		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement>
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
-		}	
-		else if(driver.findElements(By.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]")).size() > 0){
+		} else if (driver.findElements(By.xpath(
+				"//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
-//		FinishButton.click();
+			// FinishButton.click();
 			jsClickNew(FinishButtonFinish);
-		}else
+		} else
 			System.out.println("Issue with Xpath");
-		
-		//note: setting the implicit wait back to default value - 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
-		
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPage(driver);
@@ -479,7 +637,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	public VPPTestHarnessPage selectsProviderNavigateBacktoTestharness() {
 		GetStarted.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		MedicalDirectory.click();
 
@@ -504,252 +662,228 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Hospital Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+		MRConstants.PROV_NAME = providerSaved;
+
+		if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
 			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+		else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
 			Viewsavebtn.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
+			if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
+				ViewSavedProvidersLink.click();
+			} else
+				System.out.println("New Rally page not displayed");
+
 		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			FinishButton.click();
-		}else
+		} else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPTestHarnessPage(driver);
 	}
-/*
+
 	/*
+	 * /* public VPPPlanSummaryPage MultipleselectsProvider() { GetStarted.click();
+	 * 
+	 * //CommonUtility.waitForPageLoadNew(driver, People, 30);
+	 * CommonUtility.waitForPageLoadNew(driver, People, 10); People.click();
+	 * 
+	 * //CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+	 * CommonUtility.waitForPageLoadNew(driver, Primary, 10); Primary.click();
+	 * 
+	 * //CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+	 * CommonUtility.waitForPageLoadNew(driver, Physician, 10);
+	 * jsClickNew(Physician);
+	 * 
+	 * CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+	 * jsClickNew(selectProviderBtn);
+	 * 
+	 * int counter =0; for (WebElement element : MulitpleSaveBtns) {
+	 * //CommonUtility.waitForPageLoadNew(driver, element, 45);
+	 * CommonUtility.waitForPageLoadNew(driver, element, 10); jsClickNew(element);
+	 * 
+	 * if (validate(selectLocationOption,10)) { // selectLocationOption.click();
+	 * jsClickNew(selectLocationOption); validateNew(saveBtn2);
+	 * jsClickNew(saveBtn2); //saveBtn2.click(); } //New Changes
+	 * 
+	 * //CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+	 * CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
+	 * //continueSearching.click(); jsClickNew(continueSearching);
+	 * 
+	 * 
+	 * //CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
+	 * //jsClickNew(BtnClose);
+	 * 
+	 * 
+	 * counter++; if(counter==9) { break; }
+	 * 
+	 * } CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+	 * jsClickNew(Savedproviders); waitForPageLoadSafari();
+	 * 
+	 * if(driver.findElements(By.
+	 * xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() >
+	 * 0){ System.out.println("OLD Rally page displayed"); // Checkcoverage.click();
+	 * jsClickNew(Checkcoverage); } else if(driver.findElements(By.xpath(
+	 * "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"
+	 * )).size() > 0){ System.out.println("NEW Rally page displayed");
+	 * //FinishButton.click(); validateNew(FinishButton); jsClickNew(FinishButton);
+	 * }else System.out.println("Issue with Xpath");
+	 * 
+	 * threadsleep(3); waitForCountDecrement(2);
+	 * driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	 * 
+	 * return new VPPPlanSummaryPage(driver); }
+	 */
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, People, 30);
-		CommonUtility.waitForPageLoadNew(driver, People, 10);
-		People.click();
-
-		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
-		Primary.click();
-
-		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
-		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
-		jsClickNew(Physician);
-		
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-		jsClickNew(selectProviderBtn);
-		
-		int counter =0;
-		for (WebElement element : MulitpleSaveBtns) {
-			//CommonUtility.waitForPageLoadNew(driver, element, 45);
-			CommonUtility.waitForPageLoadNew(driver, element, 10);
-			jsClickNew(element);
-
-			if (validate(selectLocationOption,10)) {
-			//	selectLocationOption.click();
-				jsClickNew(selectLocationOption);
-				validateNew(saveBtn2);
-				jsClickNew(saveBtn2);
-				//saveBtn2.click();
-			}
-			//New Changes
-			
-			//CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
-			//continueSearching.click();
-			jsClickNew(continueSearching);
-			
-			
-			//CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			//jsClickNew(BtnClose);
-
-		
-		counter++;
-		if(counter==9)
-			{
-			break;			
-			}
-
-		}
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
-		jsClickNew(Savedproviders); 	
-		waitForPageLoadSafari();
-		
-	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
-		System.out.println("OLD Rally page displayed");
-	//	Checkcoverage.click();
-		jsClickNew(Checkcoverage);
-	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
-		System.out.println("NEW Rally page displayed");
-		//FinishButton.click();
-		validateNew(FinishButton);
-		jsClickNew(FinishButton);
-	}else
-		System.out.println("Issue with Xpath");
-
-	threadsleep(3);
-	waitForCountDecrement(2);
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-
-	return new VPPPlanSummaryPage(driver);
-}
-*/
-	public VPPPlanSummaryPage MultipleselectsProvider() {
-		GetStarted.click();
-		
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		MedicalDirectory.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, People, 30);
+		// CommonUtility.waitForPageLoadNew(driver, People, 30);
 		CommonUtility.waitForPageLoadNew(driver, People, 10);
 		People.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		// CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
 		Primary.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		// CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
-		
-	//	CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-	//	jsClickNew(selectProviderBtn);
-		
-		int counter =0;
+
+		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		// jsClickNew(selectProviderBtn);
+
+		int counter = 0;
 		for (WebElement element : MulitpleSaveBtns) {
-			//CommonUtility.waitForPageLoadNew(driver, element, 45);
+			// CommonUtility.waitForPageLoadNew(driver, element, 45);
 			CommonUtility.waitForPageLoadNew(driver, element, 10);
 			jsClickNew(element);
 
-			if (validate(selectLocationOption,10)) {
-				//selectLocationOption.click();
+			if (validate(selectLocationOption, 10)) {
+				// selectLocationOption.click();
 				jsClickNew(selectLocationOption);
 				validateNew(saveBtn2);
-				//saveBtn2.click();
+				// saveBtn2.click();
 				jsClickNew(saveBtn2);
 			}
-			/*New Changes
-			 */
-			//CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
-			//continueSearching.click();
-			jsClickNew(continueSearching);
-			
 			/*
-			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			jsClickNew(BtnClose);*/
+			 * New Changes
+			 */
+			// CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
+			// continueSearching.click();
+			jsClickNew(continueSearching);
 
-		
-		counter++;
-		if(counter==9)
-			{
-			break;			
+			/*
+			 * CommonUtility.waitForPageLoadNew(driver, BtnClose, 45); jsClickNew(BtnClose);
+			 */
+
+			counter++;
+			if (counter == 9) {
+				break;
 			}
 
 		}
-		
+
 		/*---------------------Commented the lines as per new changes in rally---------------
 			CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders); 	
 		waitForPageLoadSafari();
 		
 		
-	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
 		Checkcoverage.click();
-	}	
-	else
+		}	
+		else
 		if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		//FinishButton.click();
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
-	}else
+		}else
 		System.out.println("Issue with Xpath");
-	---------------------Commented the lines as per new changes in rally---------------*/
+		---------------------Commented the lines as per new changes in rally---------------*/
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
-	threadsleep(3);
-	//waitForCountDecrement(2);
-//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-	driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		threadsleep(3);
+		// waitForCountDecrement(2);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
-	return new VPPPlanSummaryPage(driver);
-}
+		return new VPPPlanSummaryPage(driver);
+	}
 
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
 
-	 public void selectYear(String year) {
-	        if (year.contains("current")) {
-	            if (validate(currentYrTile)) {
-	                // currentYrTile.click();
-	                jsClickNew(currentYrTile);
-	            } else {
-	                System.out.println("Current year tile is not present");
-	            }
-	        } else {
-	            if (validate(nextYrTile)) {
-	                // nextYrTile.click();
-	                jsClickNew(nextYrTile);
-	            } else {
-	                System.out.println("Next year tile is not present");
-	            }
-	        }
-	    }
+	public void selectYear(String year) {
+		if (year.contains("current")) {
+			if (validate(currentYrTile)) {
+				// currentYrTile.click();
+				jsClickNew(currentYrTile);
+			} else {
+				System.out.println("Current year tile is not present");
+			}
+		} else {
+			if (validate(nextYrTile)) {
+				// nextYrTile.click();
+				jsClickNew(nextYrTile);
+			} else {
+				System.out.println("Next year tile is not present");
+			}
+		}
+	}
 
 	public AcquisitionHomePage returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		return new AcquisitionHomePage(driver);
 	}
-	@FindBy(xpath="(//*[@class='remove-provider'])[1]")
+
+	@FindBy(xpath = "(//*[@class='remove-provider'])[1]")
 	public WebElement removeExistingProvider;
-	
-	public void removeExistingProviderIfAny()
-	{
+
+	public void removeExistingProviderIfAny() {
 		removeExistingProvider.click();
 	}
-	
+
 	public PlanDetailsPage navigatebacktoPlanDetails() {
 		// TODO Auto-generated method stub
 
 		CommonUtility.waitForPageLoadNew(driver, FinishReturnButton, 45);
 		validateNew(FinishReturnButton);
-		jsClickNew(FinishReturnButton);		
-		
-		//note: setting the implicit wait back to default value - 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
-		
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		jsClickNew(FinishReturnButton);
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPage(driver);
 
 	}
-	
+
 	public VisitorProfilePage selectsProviderAndBackToVP() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		GetStarted.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 10);
 		MedicalDirectory.click();
 
@@ -758,14 +892,14 @@ public class ProviderSearchPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption,10)) {
+		if (validate(selectLocationOption, 10)) {
 			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
@@ -774,8 +908,8 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
+		MRConstants.PROV_NAME = providerSaved;
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -788,32 +922,34 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
-		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement>
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			jsClickNew(FinishButton);
-		}else
+		} else
 			System.out.println("Issue with Xpath");
-	
+
 		threadsleep(3);
 		waitForCountDecrement(2);
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		
-		//note: setting the implicit wait back to default value - 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		return new VisitorProfilePage(driver);
 	}
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
-    private WebElement addDoctor;
-	
+	private WebElement addDoctor;
+
 	public ProviderSearchPage addDoctor() {
 		switchToNewTabNew(addDoctor);
 		sleepBySec(15);
@@ -821,5 +957,5 @@ public class ProviderSearchPage extends UhcDriver {
 			return new ProviderSearchPage(driver);
 		}
 		return null;
-    }
+	}
 }

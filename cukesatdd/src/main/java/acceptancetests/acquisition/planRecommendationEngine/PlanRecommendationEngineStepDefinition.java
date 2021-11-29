@@ -88,7 +88,7 @@ public class PlanRecommendationEngineStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		if_offline_prod = aquisitionhomepage.openAEPPRE(inputValues.get("Site"), inputValues.get("User Name"));
-		if (MRScenario.environment.contains("digital-uatv2")) 
+		if (MRScenario.environment.contains("digital-uatv2") || MRScenario.environment.contains("digital-devv2")) 
 			aquisitionhomepage.fixPrivateConnection();
 		
 		aquisitionhomepage.loginflagSmithPRE(inputValues.get("Site"), inputValues.get("User Name"));
@@ -872,6 +872,12 @@ public class PlanRecommendationEngineStepDefinition {
 		preEditpage.returnVPP(button);
    	}
 	
+	@Then("^user return to PRE-Result page using browser back in EditMyResponse page$")
+   	public void browserback_editResponse_page() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.browserBackResult();
+   	}
+	
 	@Then("^user edits values in edit response page$")
    	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
@@ -914,6 +920,13 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.addSNPEditResponse(inputValues);
 		preEditpage.addLocationEditResponse(inputValues);
+   	}
+	
+	@Then("^user adds SNP options in edit response page$")
+   	public void snp_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		preEditpage.addSNPEditResponse(inputValues);
    	}
 	
 	@Then("^user selects add drug option in drug page from edit response page$")
@@ -1022,6 +1035,20 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		preEditpage.validateSaveResults();
+	}
+	
+	@Then("^user save recommendation PlanType and PlanName to validate Browser back Functionality in results page$")
+   	public void save_Recom() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.saveFirstRecom();
+	}
+	
+	@Then("^user validate edited recommendation PlanType and PlanName in results page$")
+   	public void edited_save_Recom() {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		preEditpage.editedFirstRecom();
 	}
 	
 	@Then("^user save Plans in PRE Result page$")
@@ -1232,6 +1259,64 @@ public class PlanRecommendationEngineStepDefinition {
 	public void addDoctorLink() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.addDoctorsLink();
+	}
+	
+	@Then("^user updating providers to PRE doctorpage$")
+	public void providerUpdate(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
+				inputValues.get("Multi Doctor"));
+	}
+	
+	@Then("^user validates Sort By drop down UI PRE-Result page$")
+	public void sortBy() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateSortByElements();
+	}
+	
+	@Then("^user validates Sort By dropdown will not display in UI PRE-Result page$")
+	public void sortBy_No() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateNoSortByElements();
+	}
+	
+	@Then("^user validates Sort By using PlanType in PRE-Result page$")
+	public void sortBy_planType(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.sortByFunc(inputValues.get("Sort PlanType"));
+	}
+	
+	@Then("^user validates Sort By elements visibility PRE-Result page$")
+	public void sortBy_Visibility(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.optionVisibility(inputValues.get("Visibility Info"));
+	}
+	
+	@Then("^user validates Sort By breadcrumb after Plan Year Toggle in PRE-Result page$")
+	public void sortBy_planYear(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.changePlanyear(inputValues.get("Sort PlanYear"));
+		planSelectorNewResultspage.sortByBreadcrumb();
+	}
+	
+	@Then("^user removed filtered planType and Check Breadcrumbs in PRE-Result page$")
+	public void sortBy_Remove() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.removeBreadcrumb();
+		planSelectorNewResultspage.sortByBreadcrumb();
+	}
+	
+	@Then("^user Filter SNP Plantype and validate CSNP Plans Ranking in PRE results page$")
+	public void csnp_ranking(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.sortByFuncWithoutVerify(inputValues.get("Sort PlanType"));
+		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
 	}
 	
 	@Then("^the user do poc$")

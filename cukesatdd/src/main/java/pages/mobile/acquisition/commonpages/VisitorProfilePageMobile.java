@@ -17,24 +17,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.vpp.VPPTestHarnessPage;
 
 public class VisitorProfilePageMobile extends UhcDriver {
 
@@ -54,7 +44,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	// @FindBy(id = "dupIconFlyOut")
+	// @FindBy(css = "#dupIconFlyOut")
 	@FindBy(css = "div[class^='shoppingcartwidget'] button[aria-describedby='savedItemsFlyout']")
 	private WebElement shoppingCartIcon;
 
@@ -101,13 +91,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA.signupContainer a")
 	private WebElement signOut;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 
 	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
 	private WebElement enrollInPlan;
 
-	@FindBy(id = "header-number")
+	@FindBy(css = "#header-number")
 	private WebElement shoppingCartNumber;
 
 	@FindBy(xpath = "//a[text()='Compare Plans']")
@@ -132,10 +122,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
+	@FindBy(css = ".multi-year-select > .select-year:nth-child(2)")
 	private WebElement profileNxtYrPlans;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	@FindBy(xpath = ".multi-year-select > .select-year:nth-child(1)")
 	private WebElement profileCrntYrPlans;
 
 	@FindBy(xpath = "//*[@id='addDrug']")
@@ -150,6 +140,93 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div[class*='plan-drug-doctor-popup'] > div > button")
 	private WebElement addedProvidersModalCloseButton;
 
+	@FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
+	private WebElement importLnk;
+
+	@FindBy(css = "#data-import-popup button[dtmname$='Get Started']")
+	private WebElement btnGetStarted;
+
+	@FindBy(css = "#member")
+	private WebElement uhcRadio;
+
+	@FindBy(css = "#aetna")
+	private WebElement aetnaRadio;
+
+	@FindBy(css = "#humana")
+	private WebElement humanaRadio;
+
+	@FindBy(css = "#other-mem")
+	private WebElement anotherInsuranceMedicareRadio;
+
+	@FindBy(css = "#non-member")
+	private WebElement dontHaveInsuranceMedicareRadio;
+
+	@FindBy(css = "button[dlassetid$='next']")
+	private WebElement importDrugNextButton;
+
+	@FindBy(css = "button[dtmname$='Previous']")
+	private WebElement importDrugPreviousButton;
+
+	@FindBy(css = "#member-firstName")
+	private WebElement firstNameText;
+
+	@FindBy(css = "#member-lastName")
+	private WebElement lastNameText;
+
+	@FindBy(css = "#member-date-of-birth")
+	private WebElement dateOfBirthText;
+
+	@FindBy(css = "#member-zip-code")
+	private WebElement zipcodeText;
+
+	@FindBy(css = "#member-medicare-number")
+	private WebElement medicareNumberText;
+
+	@FindBy(css = "input[name='isAttested']")
+	private WebElement attestCheckBox;
+
+	@FindBy(css = "button[dlassetid='vp_imp_mem_det_next']")
+	private WebElement viewDrugsAndDocsButton;
+
+	@FindBy(css = "button[dlassetid='vp_confimp_next']")
+	private WebElement nonMemberNextButton;
+
+	@FindBy(css = "#agreementName")
+	private WebElement agreementNameText;
+
+	@FindBy(css = "button[dtmname$='consent:Next']")
+	private WebElement nonMemberConsentNextButton;
+
+	@FindBy(css = "#non-member-firstName")
+	private WebElement nonMemberFirstNameText;
+
+	@FindBy(css = "#non-member-lastName")
+	private WebElement nonMemberLastNameText;
+
+	@FindBy(css = "#male")
+	private WebElement genderMale;
+
+	@FindBy(css = "#non-member-date-of-birth")
+	private WebElement nonMemberDateOfBirthText;
+
+	@FindBy(css = "#non-member-zip-code")
+	private WebElement nonMemberZipcodeText;
+
+	@FindBy(css = "button[dlassetid='vp_nonmemdetl_next'][dtmname*='View your Drugs & Doctors']")
+	private WebElement nonMemberViewDrugsAndDocsButton;
+	
+	@FindBy(css = "a[class$='back-to-plans']")
+	private WebElement backToPlansLink;
+	
+	@FindBy(xpath = "//h3[text()='Basic Costs']")
+	private WebElement basicCostsHeader;
+
+	@FindBy(xpath = "//h3[text()='Doctor Visits']")
+	private WebElement doctorVisitsHeader;
+	
+	@FindBy(css = "header[class*='mobile']")
+	private WebElement visitorProfileDashboard;
+	
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -160,6 +237,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validate(shoppingCartIcon);
+		validate(visitorProfileDashboard);
 
 	}
 
@@ -214,7 +292,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
 		 */
 		// CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		
+		CommonUtility.checkPageIsReadyNew(driver);
 		Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs & Pharmacy (1)")));
 		// Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §",
 		// drugHeader.getText().trim());
@@ -242,7 +320,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			for (String plan : listOfTestPlans) {
 				Assertion.assertEquals(plan,
-						driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText().trim());
+						driver.findElement(By.xpath("//h3[contains(text(),'" + plan + "')]")).getText().trim());
 				Assertion.assertTrue(driver.findElement(By.xpath(
 						"//h4[contains(text(),'" + plan + "')]/following::a[contains(@class,'add-provider')][1]"))
 						.isDisplayed());
@@ -274,6 +352,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
            scrollToView(plan);
 			jsClickNew(plan);
            Thread.sleep(20000);
+           CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/details")) {
 				return new PlanDetailsPageMobile(driver);
 			}
@@ -330,7 +409,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	private WebElement remove;
 
 	public void removeAddedDrugsFromVP() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		try {
 
@@ -412,7 +491,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
-					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
+					jsClickNew(driver.findElement(By.xpath("//h3[text()='" + plan + "']/preceding::button[1]")));
 					Thread.sleep(5000);
 				}
 
@@ -430,6 +509,27 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+	}
+
+	/**
+	 * Deletes the saved plans for mentioned plan year
+	 *
+	 * @param planYear
+	 * @param savedPlanNames
+	 */
+	public void deletePlans(String planYear, String savedPlanNames) {
+		if(profileMultiYear.isDisplayed()){
+			WebElement planYearToggle = planYear.equalsIgnoreCase("current") ?  profileCrntYrPlans : profileNxtYrPlans;
+			jsClickNew(planYearToggle);
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
+
+		Arrays.stream(savedPlanNames.split(",")).forEach(plan -> {
+			WebElement removePlanButton = driver.findElement(By.xpath("//h3[contains(text(),'" + plan + "')]/preceding-sibling::button[contains(@class,'remove')]"));
+			jsClickNew(removePlanButton);
+			CommonUtility.checkPageIsReadyNew(driver);
+		});
+
 	}
 
 	/**
@@ -660,19 +760,21 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				Thread.sleep(3000);
 				// signInLegacy.click();
-				scrollToView(signIn);
-				signIn.click();
+				jsClickNew(signIn);
 
 			} else {
 				System.out.println("Clicking on SignIn from Visitor Profile guest page");
-				scrollToView(signIn);
-				signIn.click();
+				jsClickNew(signIn);
 			}
 			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			WebElement userName = driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]"));
+			sendkeysMobile(userName, username);
+			
+			WebElement passwordField = driver.findElement(By.cssSelector("input#passwdId_input"));
+			sendkeysMobile(passwordField, password);
+			
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			Thread.sleep(3000);
@@ -681,15 +783,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			waitforElement(securityAnswer);
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
-				securityAnswer.sendKeys("name1");
+				sendkeysMobile(securityAnswer, "name1");
 			}
 
 			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
 				System.out.println("Question is related to color");
-				securityAnswer.sendKeys("color1");
+				sendkeysMobile(securityAnswer, "color1");
 			} else {
 				System.out.println("Question is related to phone");
-				securityAnswer.sendKeys("number1");
+				sendkeysMobile(securityAnswer, "number1");
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
@@ -826,7 +928,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile addPlanForMember() throws Exception {
-		addPlans.click();
+//		addPlans.click();
+		jsClickNew(addPlans);
 		Thread.sleep(10000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -858,7 +961,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public WebElement addDrugsGlobal;
 
 	public void clickAddDrugsGlobal() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(addDrugsGlobal);
 		// addDrugsGlobal.click();
 		jsClickNew(addDrugsGlobal);
@@ -930,20 +1033,28 @@ public class VisitorProfilePageMobile extends UhcDriver {
             System.out.println("Verified plans are added on visitior profile page");
         }
     }
+
 	public void validateAddedMsPlans(String planNames) {
-		try {
-			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-			CommonUtility.checkPageIsReadyNew(driver);
-			Thread.sleep(20000);
-			for (String plan : listOfTestPlans) {
-				Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
-				Assertion.assertTrue(driver
-						.findElement(By.xpath(
-								"//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
-						.isDisplayed());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		By medsupHeaderLocator = By.xpath("//h3[normalize-space()='Medicare Supplement Insurance Plans']");
+		WebElement medsupPlanHeader = CommonUtility.waitForPresenceOfElement(driver, medsupHeaderLocator, 20);
+
+		if (medsupPlanHeader != null) {
+			listOfTestPlans.stream().forEach(plan -> {
+				By planNameHeader = By
+						.xpath("//div[contains(@class,'med-supp-profile-card') or contains(@class,'saved-plancard')]//h2[normalize-space()='" + plan + "']");
+				WebElement planName = CommonUtility.waitForPresenceOfElement(driver, planNameHeader, 5);
+				if (planName != null) {
+					scrollToView(planName);
+					Assertion.assertTrue("Unable to find MS plan " + plan + " under Saved Plans!", validate(planName));
+				} else {
+					Assertion.fail("Unable to find MS plan " + plan + " under Saved Plans!");
+				}
+			});
+		} else {
+			Assertion.fail("Medsupp saved plans may not be displayed on visitor profile page!");
 		}
 	}
 
@@ -1006,7 +1117,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+	@FindBy(xpath = "//*[@dlassetid='vp_mlnk_signin']")
 	public WebElement loginLink;
 
 	@FindBy(xpath = "//input[contains(@id, 'agreeButton')]")
@@ -1076,6 +1187,187 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+
+	public void importDrugsAndDoctors(Map<String, String> testData) {
+		jsClickNew(importLnk);
+		jsClickNew(btnGetStarted);
+		switch (testData.get("Member")) {
+			case "Aetna":
+				break;
+			case "UHC":
+				jsClickNew(uhcRadio);
+				jsClickNew(importDrugNextButton);
+				sendkeysMobile(firstNameText, testData.get("FirstName"));
+				sendkeysMobile(lastNameText, testData.get("LastName"));
+				sendkeysMobile(dateOfBirthText, testData.get("DOB"));
+				sendkeysMobile(zipcodeText, testData.get("ZipCode"));
+				sendkeysMobile(medicareNumberText, testData.get("MBI"));
+				jsClickNew(attestCheckBox);
+				jsClickNew(viewDrugsAndDocsButton);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
+				break;
+			case "NonMember":
+				jsClickNew(dontHaveInsuranceMedicareRadio);
+				jsClickNew(importDrugNextButton);
+				jsClickNew(nonMemberNextButton);
+				sendkeysMobile(agreementNameText,testData.get("FirstName")+" "+testData.get("LastName"));
+				jsClickNew(nonMemberConsentNextButton);
+				sendkeysMobile(nonMemberFirstNameText, testData.get("FirstName"));
+				sendkeysMobile(nonMemberLastNameText, testData.get("LastName"));
+				sendkeysMobile(nonMemberDateOfBirthText, testData.get("DOB"));
+				jsClickNew(genderMale);
+				sendkeysMobile(nonMemberZipcodeText, testData.get("ZipCode"));
+				jsClickNew(attestCheckBox);
+				jsClickNew(nonMemberViewDrugsAndDocsButton);
+				CommonUtility.waitForPageLoadNew(driver, savedDrugsAndDoctorsHeader, 60);
+//				waitforElementNew(savedDrugsAndDoctorsHeader);
+				break;
+
+			default:
+				break;
+		}
+
+	}
+
+	public void clickOnMSPlanDetailsPage(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		
+		WebElement planDetailsButton = driver.findElement(By.xpath("//h2[normalize-space()='" + planName + "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'plandetails')]"));
+		jsClickNew(planDetailsButton);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementNew(backToPlansLink);
+	}
+	
+	public void validateMSPlanDetailsPage() {
+		Assertion.assertTrue("Back to plans link is not displayed !", validateNew(backToPlansLink));
+		Assertion.assertTrue("Basic Costs header is not displayed !", validateNew(basicCostsHeader));
+		Assertion.assertTrue("Doctor Visits header is not displayed !", validateNew(doctorVisitsHeader));
+	}
+	
+	public void clickOnBackToProfile() {
+		jsClickNew(backToPlansLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementNew(visitorProfileDashboard);
+	}
+	
+	@FindBy(css = "#dateOfBirth")
+	private WebElement msDOB;
+	
+	public void clickOnMStartApplication(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		
+		WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName
+				+ "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'start-application')]"));
+		jsClickNew(btnStartApplication);
+		waitforElementNew(msDOB);
+	}
+	
+	
+	@FindBy(css = "#AddYourInfoForm button[class$='continue-application']")
+	private WebElement continueApplicationButton;
+	
+	@FindBy(css = "#AddYourInfo button[class^='back-to-plans']")
+	private WebElement closeMSApplicationButton;
+	
+	public void validateMSStartApplicationPage() {
+		Assertion.assertTrue("Date of birth field is not displayed on MS application form !", validateNew(msDOB));
+		Assertion.assertTrue("Continue Application button is not displayed on MS application form !", validateNew(continueApplicationButton));
+		Assertion.assertTrue("Close Application button is not displayed on MS application form !", validateNew(closeMSApplicationButton));
+	}
+	
+	public void clickOnCloseMSApplication() {
+		jsClickNew(closeMSApplicationButton);
+		waitforElementNew(visitorProfileDashboard);
+	}
+	
+	@FindBy(css = "#ValueAddService a[class$='back-to-plans']")
+	private WebElement backToProfileLinkLearnMorePage;
+	
+	public void clickOnMLearnMore(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+		WebElement learnMoreLinkForPlan = driver.findElement(By.xpath(
+				"//h2[text()='" + planName + "']/ancestor::div[contains(@class,'plan-card')]//a[text()='Learn More']"));
+		jsClickNew(learnMoreLinkForPlan);
+		waitforElementNew(backToProfileLinkLearnMorePage);
+	}
+	
+	@FindBy(xpath  = "//h2[text()='Gym Membership']")
+    private WebElement gymMembershipHeader;
+	
+	@FindBy(xpath  = "//h2[text()='Brain Health']")
+    private WebElement brainHealthHeader;
+	
+	public void validateMSLearnMorePage() {
+		Assertion.assertTrue("Back To Profile link is not displayed on Learn More page !", validateNew(backToProfileLinkLearnMorePage));
+		Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !", validateNew(gymMembershipHeader));
+		Assertion.assertTrue("Brain Health header is not displayed on Learn More page !", validateNew(brainHealthHeader));
+	}
+	
+	
+	public void clickOnMSAddYourInformation(String planName) {
+		WebElement msPlanHeader = driver.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
+		if(!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
+			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
+			jsClickNew(expandAccordionButton);
+		}
+	    WebElement addInfoLink = driver.findElement(By.xpath("//h2[text()='"+planName+"']/ancestor::div[contains(@class,'plan-card')]//a[text()='Add your information']"));
+		jsClickNew(addInfoLink);
+		waitforElementNew(msDOB);
+	}
+	
+	
+	@FindBy(xpath = "//h1[text()='Add your information']")
+	private WebElement headingAddYourInfo;
+	
+	public void validateMSAddYourInfoPage() {
+		waitforElementNew(msDOB);
+		Assertion.assertTrue("Date of birth field is not shown on Add Information Page !", validateNew(msDOB));
+		Assertion.assertTrue("Add your information heading is not shown on Add Information Page !", validateNew(headingAddYourInfo));
+	}
+	
+	
+	@FindBy(css = "#saved-plan-recommendations button")
+	private WebElement getStartedButtonPRE;
+	
+	@FindBy(css = "app-drugs-providers a[dtmname$='Import my drugs & doctors']")
+	private WebElement importDrugsAndDoctorsLink;
+	
+	public void validateMSSP4ProfilePage(String componentCode) {
+		Assertion.assertTrue("Get Started button for PRE is not shown on Visitor Profile Page !", validateNew(getStartedButtonPRE));
+		Assertion.assertTrue("Import Drugs and Doctors link is not shown on Visitor Profile Page !", validateNew(importDrugsAndDoctorsLink));
+		
+		WebElement componentCodeText = driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]"));
+		Assertion.assertTrue("Component code is not shown on Visitor Profile Page !", validateNew(componentCodeText));
+	}
+	
+	
+	public void removeMSPlans(String plans) {
+        try {
+            
+			Arrays.stream(plans.split(",")).forEach(plan -> {
+				WebElement removePlanButton = driver.findElement(By.xpath("//h2[contains(text(),'" + plan
+						+ "')]/ancestor::div[contains(@class,'plan-name-container')]/button[contains(@class,'remove')]"));
+				jsClickNew(removePlanButton);
+				CommonUtility.checkPageIsReadyNew(driver);
+			});
+            
+            Assertion.assertTrue("Not all saved MS plans are removed, 'Find Plans' button is not displayed for 'Saved Plan' tab.", validateNew(addPlans));
+        } catch (Exception e) {
+        }
+    }
 
 }
 

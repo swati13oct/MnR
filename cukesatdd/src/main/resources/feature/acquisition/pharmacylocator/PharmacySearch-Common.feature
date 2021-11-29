@@ -362,12 +362,12 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP detail page
 
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear 
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear
     Examples: 
       | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
       | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)         |
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP)         |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC @NextYear
     Examples: 
@@ -416,10 +416,10 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user validates the available plans for selected plan types
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planName> |
     And the user selects plan year
       | Plan Year | <planyear> |
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     When user clicks on pharmacy link on OLE page
     Then user verify breadcrumb "Return to enroll" displayed on pharmacy search page
@@ -427,7 +427,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Then user should be navigated to the previous page
       | PagePath | <path> |
 
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP 
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county             | plantype | planyear |  planName                        | path                                                                                                      |
       | AARP | 90210   | NO              | Los Angeles County | PDP      | current  |  AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |

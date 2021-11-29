@@ -12,22 +12,22 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(id = "header-number")
+	@FindBy(css = "#header-number")
 	private WebElement shoppingCartNumber;
 
 	@FindBy(xpath = "//*[text()='Save plans in Guest profile']")
 	private WebElement SaveplansinGuestprofileLink;
 
-	@FindBy(id = "helperModeCheckboxSavePlans")
+	@FindBy(css = "#helperModeCheckboxSavePlans")
 	private WebElement HelperModeCheckboxSavePlans;
 
-	@FindBy(id = "uuid")
+	@FindBy(css = "#uuid")
 	private WebElement Uuid;
 
-	@FindBy(id = "isguest")
+	@FindBy(css = "#isguest")
 	private WebElement Isguest;
 
 	@FindBy(xpath = "//*[text()='Create Cookie']")
@@ -36,7 +36,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Save plans in authenticated profile']")
 	private WebElement Saveplansinauthenticatedprofile;
 
-	@FindBy(id = "vpp-planid")
+	@FindBy(css = "#vpp-planid")
 	private WebElement Vppplanid;
 
 	@FindBy(xpath = "//button[text()='Delete Plan']")
@@ -44,7 +44,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 
 	// Launch DCE from Visitor Profile
 
-	@FindBy(id = "js-ole-zip-search")
+	@FindBy(css = "#js-ole-zip-search")
 	private WebElement oleZipsearch;
 
 	@FindBy(xpath = "//button[text()='Search']")
@@ -52,7 +52,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 
 	// Launch Visitor Profile with Drugs and Pharmacy
 
-	@FindBy(id = "helperModeCheckboxAddDrugs")
+	@FindBy(css = "#helperModeCheckboxAddDrugs")
 	private WebElement HelperModeCheckboxAddDrugs;
 
 	@FindBy(xpath = "//*[text()='Launch VP with Drug and Pharmacy Info']")
@@ -60,7 +60,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 
 	// Navigate to Rally Connect with no providers from Visitor Profile
 
-	@FindBy(id = "helperModeCheckbox")
+	@FindBy(css = "#helperModeCheckbox")
 	private WebElement HelperModeCheckboxRallyProv;
 
 	@FindBy(xpath = "//*[text()='Launch Rally Connect with no Providers']")
@@ -71,14 +71,14 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Launch Rally Connect with Providers']")
 	private WebElement LaunchRallyConnectwithProviders;
 
-	@FindBy(id = "helperModeCheckboxwithProviders")
+	@FindBy(css = "#helperModeCheckboxwithProviders")
 	private WebElement HelperModeCheckboxwithProviders;
 
 	// Launch Visitor Profile with Providers data
 	@FindBy(xpath = "//*[text()='Launch VP with Providers data']")
 	private WebElement LaunchVPwithProvidersdata;
 
-	@FindBy(id = "helperModeCheckboxLaunchVp")
+	@FindBy(css = "#helperModeCheckboxLaunchVp")
 	private WebElement HelperModeCheckboxLaunchVp;
 
 	// Delete a provider in Visitor Profile page
@@ -86,48 +86,48 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 	private WebElement DeleteproviderinVPpage;
 
 	// Naviagte to Plan Compare page from Visitor Profile
-	@FindBy(id = "helperModeCheckboxDeleteProviderinVP")
+	@FindBy(css = "#helperModeCheckboxDeleteProviderinVP")
 	private WebElement HelperModeCheckboxDeleteProviderinVP;
 
-	@FindBy(id = "planId")
+	@FindBy(css = "#planId")
 	private WebElement PlanIdInput;
 
 	@FindBy(xpath = "//*[text()='Compare Plans']")
 	private WebElement ComparePlansLink;
 
 	// Navigate to Plan Details from Visitor Profile
-	@FindBy(id = "contract_number")
+	@FindBy(css = "#contract_number")
 	private WebElement ContractNum;
-	@FindBy(id = "pbp_number")
+	@FindBy(css = "#pbp_number")
 	private WebElement PbPNum;
-	@FindBy(id = "segment_ID")
+	@FindBy(css = "#segment_ID")
 	private WebElement SegmentID;
-	@FindBy(id = "county_code")
+	@FindBy(css = "#county_code")
 	private WebElement CountyCode;
-	@FindBy(id = "product")
+	@FindBy(css = "#product")
 	private WebElement Product;
-	@FindBy(id = "plan_Year")
+	@FindBy(css = "#plan_Year")
 	private WebElement PlanYear;
 	@FindBy(xpath = "//*[text()='Plan Details']")
 	private WebElement PlanDetailsLink;
 
 	// Launch OLE from Visitor Profile
-	@FindBy(id = "jsonHelperChk")
+	@FindBy(css = "#jsonHelperChk")
 	private WebElement jsonHelperChkOLE;
 	@FindBy(xpath = " //*[text()='Launch OLE']")
 	private WebElement LaunchOLEButton;
 
 	// OLE steps Information
-	@FindBy(id = "helperModeCheckboxolestepsdata")
+	@FindBy(css = "#helperModeCheckboxolestepsdata")
 	private WebElement helperModeCheckboxolestepsdataOLESteps;
 
 	@FindBy(xpath = "//*[text()='OLE Data']")
 	private WebElement OLEDataLink;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "helperModeCheckboxDeleteDrugsandPharmacy")
+	@FindBy(css = "#helperModeCheckboxDeleteDrugsandPharmacy")
 	private WebElement HelperModeCheckboxDeleteDrugsandPharmacy;
 	
 	@FindBy(xpath = " //*[text()='Delete drugs and Pharmacy Info']")

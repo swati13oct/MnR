@@ -13,25 +13,25 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 	public JSONObject adddrugdetailsJson;
 
-	@FindBy(id = "addheadDetails_id")
+	@FindBy(css = "#addheadDetails_id")
 	public WebElement addDrugDetailsPageHeading;
 
-	@FindBy(id = "drug-dosage-button")
+	@FindBy(css = "#drug-dosage-button")
 	public WebElement continueButton;
 	
 	@FindBy(xpath = "//*[contains(@id,'dosage')]//select")  
 	public WebElement dosageDropdown;
 
-	@FindBy(id = "quantity")
+	@FindBy(css = "#quantity")
 	public WebElement quantityField;
 	
-	@FindBy(id = "drug-alt-back-button")
+	@FindBy(css = "#drug-alt-back-button")
 	public WebElement backToSearchBtn;
 
 	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
 	public WebElement loadingDialog;
 	
-	@FindBy(id = "frequency")
+	@FindBy(css = "#frequency")
 	public WebElement selectYourFrequencyDropdown;
 	
 	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")

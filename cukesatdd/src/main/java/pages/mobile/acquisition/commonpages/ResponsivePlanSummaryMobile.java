@@ -49,7 +49,7 @@ public class ResponsivePlanSummaryMobile extends UhcDriver{
 		@FindBy(xpath=".//*[@id='add-drug']/section")
            WebElement addaDrug;
 		
-		//@FindBy(id = "zipcode")
+		//@FindBy(css = "#zipcode")
 		@FindBy(xpath = "//*[@id='zipcode']")
 		private WebElement zipCodeField;
 		

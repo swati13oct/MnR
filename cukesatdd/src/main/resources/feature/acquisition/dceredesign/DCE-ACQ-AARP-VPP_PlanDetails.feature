@@ -331,32 +331,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        | planyear |
-      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) | future   |
+      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) | current   |
 
     @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP @NextYear
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | future   |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | current   |
 
   @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
     Examples:
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | current   |
 
   @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       | planyear |
-      | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | future   |
+      | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | current   |
 
     @dceRedesign_PlanSave_PDP_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
-      | UHC  |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
+      | UHC  |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | current   |
 
     @dceRedesign_PlanSave_SNP_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   | planyear |
-      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) | current   |
 
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP @decRelease
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy
