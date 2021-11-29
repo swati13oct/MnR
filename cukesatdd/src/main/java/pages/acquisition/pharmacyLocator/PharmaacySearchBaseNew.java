@@ -89,7 +89,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 //			waitforElementDisapper(loadingSpinner, 90);
 //		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 //			waitforElementDisapper(loadingSpinner, 90);
-		sleepBySec(1); // note: let the page settle down
+		sleepBySec(4); // note: let the page settle down
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", validateNew(pharmacyCount));
 		if (!validate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
@@ -159,7 +159,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 																							// afterward
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
-					driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'\"+ county + \"')]")).click();
+					driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+ county + "')]")).click();
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward

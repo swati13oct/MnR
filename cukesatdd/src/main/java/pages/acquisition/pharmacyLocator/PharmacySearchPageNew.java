@@ -371,6 +371,32 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		}
 	}
 
+	public boolean validateNoPharmaciesErrorMessage() {
+		jsClickNew(Filter);
+		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+		jsClickNew(indian_tribal_label_filter);
+		jsClickNew(FilterApplyBtn);
+		sleepBySec(5);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		if (!noPharmaciesErrorMessage.isDisplayed()) {
+			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+			jsClickNew(indian_tribal_label_filter);
+		}
+		sleepBySec(5);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		Assertion.assertTrue("PROBLEM - unable to locate No Pharmacy Error message",
+				pharmacyValidate(noPharmaciesErrorMessage));
+		return true;
+	}
+
+	public void validateQuestionsWidget() {
+		CommonUtility.waitForPageLoad(driver, callUnitedHealthCareText, 5);
+		Assertion.assertTrue("PROBLEM -Question Widget is not displayed", pharmacyValidate(questionsRightRailWidget));
+		Assertion.assertTrue("PROBLEM -Call us icon is not displayed", pharmacyValidate(callUsIcon));
+		Assertion.assertTrue("PROBLEM -Call United Health care is not displayed",
+				pharmacyValidate(callUnitedHealthCareText));
+	}
+
 	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl,
 							   HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException {
 		String planName = inputMap.get("planName");
@@ -395,7 +421,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		//driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
 		sleepBySec(2);
 		CommonUtility.checkPageIsReady(driver);
-		expUrl = "/Pharmacy-Search-";
+		expUrl = "health-plans/aarp-pharmacy.html";
 		actUrl = driver.getCurrentUrl();
 		Assertion.assertTrue(
 				"PROBLEM - Unable to get back to pharmacy locator page for further validation. "
@@ -407,6 +433,32 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 //		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
+	}
+
+	/** Verify page load in chinese language */
+	public PharmacySearchPageNew clickChinese() {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
+		chineseLanguage.click();
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Chinese language selected");
+		return new PharmacySearchPageNew(driver);
+	}
+
+	public void validateLanguageChanges(String language) {
+		CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 15);
+		if (("English").equalsIgnoreCase(language)) {
+			Assertion.assertTrue("PROBLEM - page should be in English after selecting English",
+					pharmacyValidate(pgInEnglish));
+		} else if (("Chinese").equalsIgnoreCase(language)) {
+			Assertion.assertTrue("PROBLEM - page should be in Chinese after selecting Chinese",
+					pharmacyValidate(pgInEnglish));
+		} else if (("Spanish").equalsIgnoreCase(language)) {
+			Assertion.assertTrue("PROBLEM - page should be in Spanish after selecting Spanish",
+					pharmacyValidate(pgInEnglish));
+		} else {
+			Assertion.assertTrue("PROBLEM - language '" + language + "' is not supported, check test input", false);
+		}
 	}
 
 

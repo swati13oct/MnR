@@ -184,6 +184,41 @@ public class PharmacyLocatorStepDefinitionNew {
 		}
 	}
 
+	@Then("^the user validates error message displayed when filter results in no match$")
+	public void the_user_validates_the_no_pharmacies_error_message(){
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		boolean isPharmacySelected= pharmacySearchPage.validateNoPharmaciesErrorMessage();
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!",isPharmacySelected);
+	}
+
+	@Then("^the user validates the question widget$")
+	public void validateQuestionWidget() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateQuestionsWidget();
+	}
+
+	/** Verifying the pharmacy search tool in Chinese languages */
+	@Then("^the user selects Chinese Language$")
+	public void selectChinese() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		//note: if english has plan year dropdown, other language should have it too
+//		boolean expectedPlanYearDropdown=false;
+//		if (pharmacySearchPage.isPlanYear()) {
+//			expectedPlanYearDropdown=true;
+//		}
+		pharmacySearchPage = pharmacySearchPage.clickChinese();
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",pharmacySearchPage != null);
+		pharmacySearchPage.validateLanguageChanges("Chinese");
+//		boolean actualPlanYearDropdown=pharmacySearchPage.isPlanYear();
+//		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+//				expectedPlanYearDropdown==actualPlanYearDropdown);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Chinese");
+	}
+
 	@Then("^the user validates pharmacy widgets$")
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
 		Map<String, String> inputDataMap=parseInputArguments(inputData);

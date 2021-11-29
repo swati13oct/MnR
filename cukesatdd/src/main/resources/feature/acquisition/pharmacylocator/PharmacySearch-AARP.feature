@@ -223,7 +223,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
-    When the user selects Chinese Language
+    #When the user selects Chinese Language
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
@@ -237,11 +237,11 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-    And the user selects Pharmacy Types to Filter
-      | Pharmacy Type | <pharmacyType> |
-      | Language      | Chinese        |
-    Then the user validates the pharmacies available
-      | Language | Chinese |
+#    And the user selects Pharmacy Types to Filter
+#      | Pharmacy Type | <pharmacyType> |
+#      | Language      | Chinese        |
+#    Then the user validates the pharmacies available
+#      | Language | Chinese |
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
@@ -256,18 +256,18 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
-    When the user selects Spanish Language
+    #When the user selects Spanish Language
     And the user validates header section content on site
     When the user enters following details for pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
+#    Then the user verify error messages in pharmacy locator page
+#      | Language | Spanish |
     When the user enters following details for pharmacy search
       | Zip Code |       9999 |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
+#    Then the user verify error messages in pharmacy locator page
+#      | Language | Spanish |
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
@@ -277,12 +277,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the pharmacies available
-      | Language | Spanish |
-    And the user validates map section content
-    And the user validates show on map link
-    And the user validates more information content based on plan type
-    And the user validates view search PDF link
+#    Then the user validates the pharmacies available
+#      | Language | Spanish |
+    And the user validates map section contents
+    And the user validate show on map link
+    And the user validate more information content based on plan type
+    And the user validate view search PDF link
 
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
