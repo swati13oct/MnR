@@ -66,13 +66,15 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
       | Supply Length | <supplyLength> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Captures Drug costs on Drug Details Page
+    Then the user validates enroll option as per following flag
+      | EnrollFlag | <enrollFlag> | 
     And the user clicks on Return to details link on Drug Details page
     And the user verifies the drug information on plan costs tab
 
     @dce_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP
     Examples: 
-      | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
-      | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |
+      | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   | enrollFlag | 
+      | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months | true       |
 
     @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression @sanity
     Examples: 
