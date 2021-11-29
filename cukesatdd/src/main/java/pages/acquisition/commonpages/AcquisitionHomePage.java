@@ -3780,11 +3780,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
-		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		/*if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
-		}
+		}*/
 		validateLogo();
 		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
