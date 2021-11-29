@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
@@ -285,7 +287,7 @@ public class ComparePlansPage extends UhcDriver {
   @FindBy(xpath  = "//button[contains(@id,'saved-items') and  contains(@class,'show')]")
 	private WebElement lnkProfile;
 
-	@FindBy(xpath = "//*[@id='printPlans']/th[2]/div[1]/span")
+	@FindBy(xpath = "//h2[contains(@class,'heading2')]")
 	public WebElement planComparePlansAvailableLabel;
 
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
@@ -411,7 +413,34 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='zipFormError']/..//*[contains(text(), 'Please enter a valid ZIP Code')]")
 	private WebElement InvalidZipError;
-
+	
+	@FindBy(xpath = "//div[@id='helpTextinAB']")
+	private WebElement OONTextAdditionalBenefit;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png']")
+	private WebElement DentalIcon;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png']")
+	private WebElement DoctorIcon;
+	
+	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png']")
+	private WebElement BehaviourIcon;
+	
+	@FindBy(xpath = "//h2[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans']")
+	private WebElement ShowAllButton;
+	
+	@FindBy(xpath = "//h2[contains(text(), 'Plans Available (No Hidden)')]")
+	private WebElement AllPlansVisible;
+	
+	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
+	private WebElement DentalLinkText;
+	
+	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")
+	private WebElement baseLineBenefitslink;
+	
+	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
+	private WebElement planNameOnBaseLinePopup;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -493,6 +522,35 @@ public class ComparePlansPage extends UhcDriver {
 		validate(validateprintbutton);
 		validate(validateemailbutton);
 		System.out.println("successfully validated the Print and email in plan compare page ");
+
+	}
+	
+	public void showAllButton() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(ShowAllButton);
+		ShowAllButton.click();
+		validate(AllPlansVisible);
+		System.out.println("successfully validated all plans on compare page ");
+
+	}
+	
+	public void DentalLinkText() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(DentalLinkText);
+		String DentalText = DentalLinkText.getText();
+		System.out.println("Routine Dental text is" + DentalText );
 
 	}
 
@@ -911,6 +969,13 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Verified Edit Doctors Section");
 	}
 	
+	public void validateIcons() {
+		validateNew(DentalIcon);
+		validateNew(DoctorIcon);
+		validateNew(BehaviourIcon);
+		
+	}
+	
 	public void validateAllDoctors() {
 		validateNew(backToAllPlansLink);
 		validateNew(yourDoctorsBanner);
@@ -1310,7 +1375,7 @@ public class ComparePlansPage extends UhcDriver {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < provider.length - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assertion.assertTrue(provider[i].split(":")[0]
+						Assertion.assertTrue(providers
 								.contains(providersList.get(i).findElement(By.xpath("th/span")).getText().trim()));
 						System.out.println("#########"
 								+ providersList.get(i).findElement(By.xpath("th/span")).getText().trim() + "#########");
@@ -1623,6 +1688,22 @@ public class ComparePlansPage extends UhcDriver {
 //		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 	}
+	
+	public void ClickOONToggle() {
+		jsClickNew(additionalBenefitsOONToggle);
+		
+	}
+	 public void validateOONTextAdditionalBenefit() {
+		 
+		 Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
+				 OONTextAdditionalBenefit.isDisplayed());
+		 
+		 System.out.println(OONTextAdditionalBenefit.getText().trim());
+		 
+		 Assertion.assertEquals("Benefits may be accessible via mail order, online, or phone through network "
+		 		+ "providers anywhere in the U.S. View Plan Details under More Options for more information.", OONTextAdditionalBenefit.getText().trim());
+		 
+	 }
 
 	public void validateOONNotDisplayed() {
 		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
@@ -2054,4 +2135,28 @@ public void saveaPlan(String plans) {
 
 	}
 
+	public void browserBackAndValidateAllPlansShown() {
+		driver.navigate().back();
+		sleepBySec(5);
+		System.out.println(planComparePlansAvailableLabel.getText());
+		int planCount = Integer.parseInt(planComparePlansAvailableLabel.getText()
+				.substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
+		System.out.println("Count of plans Available=" + planCount);
+		System.out.println("Count of plans on compare Before button is clicked"
+				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
+	}
+	
+	public void validateBaseLineBenefitsPopup(Map<String, String> memberAttributesMap) {
+		String planName = memberAttributesMap.get("Plan Name");
+		String medicalDeductible = memberAttributesMap.get("Medical Deductible");
+		String pcp = memberAttributesMap.get("Primary Care Physician");
+		String Specialist = memberAttributesMap.get("Specialist");
+		WebElement moreOps = driver.findElement(By.xpath("(//span[text()='"+planName+"'])[1]/following::span[contains(text(),'More Options')][1]"));
+		moreOps.click();
+		baseLineBenefitslink.click();
+		Assert.assertEquals(planNameOnBaseLinePopup.getText().trim(), planName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Medical Deductible')]/following-sibling::td/span")).getText().trim(), medicalDeductible);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
+	}
 }

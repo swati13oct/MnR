@@ -171,6 +171,11 @@ public class WerallyPage extends UhcDriver {
 			for (int j = 0; j < doclist.length; j++) {
 				String docInfo = doclist[j];
 				if (docInfo.trim().length() > 0) {
+					if(!validate(searchBox, 30)) {
+						validate(findCarebutton, 20);
+						jsClickNew(findCarebutton);
+						threadsleep(2000);
+					}
 					validate(searchBox, 30);
 					searchBox.sendKeys(docInfo);
 					threadsleep(2000);
@@ -181,7 +186,7 @@ public class WerallyPage extends UhcDriver {
 						for (int i = count - 1; i >= 0; i--) {
 							threadsleep(5000);
 							WebElement saveButton = searchResults.get(i)
-									.findElement(By.cssSelector("div[class*='hidden-phone'] button"));
+									.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 							saveButton.click();
 							threadsleep(3000);
 							chooseFirstLocation();

@@ -209,7 +209,7 @@ public class PREBenefitsValidationStepDefinition {
 
 								zip.navigateToPREResultsPage();
 
-								if (AEP.equalsIgnoreCase("YES") && year.equalsIgnoreCase("2021")) {
+								if (year.equalsIgnoreCase("2021")) {
 									PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
 											wd);
 									planSelectorResultspage.changePlanyear("current");
@@ -219,7 +219,7 @@ public class PREBenefitsValidationStepDefinition {
 								break; // If any exception in flow then no record in excel
 							}*/
 
-							int planIndex = resultsPage.findPlan(planName);
+							int planIndex = resultsPage.findPlan(planName,true);
 							int planYear = 2021; // Not using now
 
 							if (planIndex < 0)

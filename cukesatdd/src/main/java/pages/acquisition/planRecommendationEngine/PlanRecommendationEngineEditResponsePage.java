@@ -157,7 +157,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "a#changeMyProviders")
 	private WebElement changeDocLink;
 	
-	@FindBy(css = "#doctors-warning")
+	@FindBy(css = "uhc-alert[class*='alert-error-message']")
 	private WebElement WarningDocMsg;
 
 	@FindBy(css = "#modal button[class*='primary']")
@@ -439,6 +439,12 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		else
 			returnToPlanLink.click();
 	}
+	
+	public void browserBackResult() {
+		String pageURL = driver.getCurrentUrl().replace("#/editmypreferences", "#/result");
+		driver.navigate().to(pageURL);
+		threadsleep(2000);
+	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
 		String UIInfo = getUISectionValue(section);
@@ -528,6 +534,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String progressText = progressInfo.getText().toLowerCase();
 		Assert.assertTrue(progressText.contains(randomSection) && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
+		threadsleep(2000);
 		cancelButton.click();
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
@@ -657,7 +664,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	}
 	
 	public void addLocationEditResponse(HashMap<String, String> userInput) {
-		System.out.println("Change SpecialNeeds Options:");
+		System.out.println("Change Location Options:");
 		inputValues = userInput;
 		pageloadcomplete();
 //		navigateEditResponsePage(inputValues.get("Plan Type"));
@@ -688,6 +695,42 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");
+	}
+	
+	public String RecomPlanName = "";
+	public String RecomplanType = "";
+	public void saveFirstRecom() {
+		System.out.println("Save #1 Recom PlanType and PlanName");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		scrollToView(headerNavigationBarHomeTab);
+		RecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		RecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
+		CommonConstants.firstRecommentionplanType.put(curID, planType);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+RecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+RecomplanType);
+		threadsleep(5000);
+	}
+	
+	public void editedFirstRecom() {
+		String editedRecomPlanName = "";
+		String editedRecomplanType = "";
+		System.out.println("Edited #1 Recom PlanType and PlanName");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(curID);
+		String R1PlanType = CommonConstants.firstRecommentionplanType.get(curID);
+		scrollToView(headerNavigationBarHomeTab);
+		editedRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+editedRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+editedRecomplanType);
+		Assert.assertNotEquals(R1PlanType, editedRecomplanType, "Original and Edited Recommendation PlanType are same");
+		Assert.assertNotEquals(R1PlanName, editedRecomPlanName, "Original and Edited Recommendation PlanName are same");
+		threadsleep(5000);
 	}
 	
 	public void signIn(String username, String password) {

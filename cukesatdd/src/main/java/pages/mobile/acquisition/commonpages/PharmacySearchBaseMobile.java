@@ -98,7 +98,20 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
-		// selectFromDropDownByText(driver, distanceDropownID, distance);
+
+		// Clicking on label first as dropdown is not opening in iOS - this will not
+		// affect Android execution
+	
+		sleepBySec(3);
+
+		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
+			jsClickNew(distanceZipTextLabel);
+		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
+			jsClickNew(distanceZipTextLabel);
+		} else {
+			jsClickNew(distanceLabel);
+			jsClickNew(distanceZipTextLabel);
+		}
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
@@ -121,14 +134,16 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
-					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					WebElement countyOption = driver
+							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
-					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					WebElement countyOption = driver
+							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -151,17 +166,20 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(8);
 
 		sendkeysMobile(zipcodeField, zipcode);
-		if(zipcode.length()!=5){
+		if (zipcode.length() != 5) {
 //			jsClickNew(zipCodeFieldLabel);
+			scrollToView(zipCodeFieldLabel);
 			zipCodeFieldLabel.click();
 			sleepBySec(2);
-			/*jsMouseOver(distanceDropDownField);
-			distanceDropDownField.click();
-			distanceOption_15miles.click();*/
+			/*
+			 * jsMouseOver(distanceDropDownField); distanceDropDownField.click();
+			 * distanceOption_15miles.click();
+			 */
 		}
-		//searchbtn.click();
-		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
+		// searchbtn.click();
+		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
+		// pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**
@@ -217,16 +235,19 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		/* To handle iOS dropdown */
 		jsClickNew(planTypeDropDownTitle);
 		// planTypeDropDownTitle.click();
+		// Clicking on label first as dropdown is not opening in iOS - this will not
+		// affect Android execution
+		driver.findElement(By.cssSelector("#plan-type-label")).click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
 		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(By.cssSelector(".loading-block"), 90);
 		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
-			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(By.cssSelector(".loading-block"), 30);
 		sleepBySec(1); // note: let the page settle down
 //		searchbtn.click();
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			grantPermissionOnAndroidChrome(searchbtn);
 		} else {
 			jsClickNew(searchbtn);
@@ -414,11 +435,21 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		jsClickNew(yearDropdown);
-		Select yearList = new Select(yearDropdown);
-		yearList.selectByVisibleText(planYear);
+
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		}
+
+		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
+		
+		if (!loadingBlock.isEmpty())
+			// waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
+		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+			// waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
 	}
 
 	public void selectAYear(String year) { // note: keep for now, may need when AEP comes around
@@ -457,25 +488,28 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"
 						+ testPlanYear + "' | Actual link text='" + pdfLink.getText() + "'",
 				pdfLink.getText().contains(testPdfLinkTextDate));
-		
+
 		CommonUtility.checkPageIsReady(driver);
-		
+
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			String yearToVerifyInPdf = ", " +testPlanYear; 
+			String yearToVerifyInPdf = ", " + testPlanYear;
 			grantPermissionOnAndroidChrome(pdfLink);
 			String pdfName = pdfType.split("\\.")[0];
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(pdfName);
 			try {
 				PDDocument document = PDDocument.load(pdfContent);
 				String PDFText = new PDFTextStripper().getText(document);
-				
+
 				String ExpectedPDFText = pdfLink.getText().contains("Walgreens")
-						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
+						? "Additional Indian/Tribal/Urban (I/T/U) Home Infusion & Long-Term Care Pharmacies for the AARP MedicareRx Walgreens (PDP) Plan"
+//						? "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies"+System.lineSeparator()+"for the AARP MedicareRx Walgreens (PDP) Plan"
 						: "Additional Indian/Tribal/Urban (I/T/U), Home Infusion and Long-Term Care Pharmacies for All Other UnitedHealthcare Plans";
-				
-				Assertion.assertTrue("PROBLEM - PDF  is not opening", PDFText.contains(ExpectedPDFText));
+
+				Assertion.assertTrue("PROBLEM - PDF does not contain " + ExpectedPDFText,
+						PDFText.contains(ExpectedPDFText));
+
 				Assertion.assertTrue("PROBLEM - unable to locate expected year in the PDF. PDF should contain year '"
-						+ yearToVerifyInPdf + "'",PDFText.contains(yearToVerifyInPdf));
+						+ yearToVerifyInPdf + "'", PDFText.contains(yearToVerifyInPdf));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -491,10 +525,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			String expectedURL = pdfType;
 			Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
 					+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
-			Assertion.assertTrue(
-					"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
-							+ testPlanYear + "' | Actual URL='" + currentURL + "'",
-					currentURL.contains(testPlanYear));
+			Assertion.assertTrue("PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
+					+ testPlanYear + "' | Actual URL='" + currentURL + "'", currentURL.contains(testPlanYear));
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
 			currentURL = driver.getCurrentUrl();
@@ -604,7 +636,15 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		chineseLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+
+		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "zh" + "']")).getText()
+				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		mobileSelectOption(languageDropDown, dropDownOptionText, true);
+		// selectFromDropDownByValue(languageDropDown, "zh");
+		// mobileSelectOption(languageDropDown, "中文", true);
+		// chineseLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -614,7 +654,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectspanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		SpanishLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
+				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		mobileSelectOption(languageDropDown, dropDownOptionText, true);
+		// selectFromDropDownByValue(languageDropDown, "es");
+		// mobileSelectOption(languageDropDown, "español", true);
+		// SpanishLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Spanish language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -638,7 +685,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectPlanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		SpanishLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
+				.trim();
+		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		mobileSelectOption(languageDropDown, dropDownOptionText, true);
+		// selectFromDropDownByValue(languageDropDown, "es");
+		// mobileSelectOption(languageDropDown, "español", true);
+		// SpanishLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Spanish language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -661,7 +715,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				webElement.click();
 				if (!loadingBlock.isEmpty()) {
 					System.out.println("Waiting till loading spinner gets disappear");
-					waitforElementDisapper(By.className("loading-block"), 60);
+					waitforElementDisapper(By.cssSelector(".loading-block"), 60);
 				}
 				if (!driver.findElements(By.xpath("//label[contains(text(),'" + pharmacytype
 						+ "')]/preceding-sibling::input[contains(@class,'ng-dirty')]")).isEmpty()) {
@@ -822,10 +876,13 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// validate(element, timeoutInSec)
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
-			//steps for scrolling element in mobile view
-			/*JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);*/
-			
+			// steps for scrolling element in mobile view
+			/*
+			 * JavascriptExecutor js = (JavascriptExecutor) driver; js.
+			 * executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});"
+			 * , element);
+			 */
+
 			if (element.isDisplayed()) {
 				System.out.println("Element '" + element.toString() + "' found!!!!");
 				return true;

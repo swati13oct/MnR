@@ -1,6 +1,6 @@
 #Author: Naveen BK
 #created Date:2/12/2019
-@visitorProfileAuthenticated @visitorProfile
+@visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
   @vpMSSavePlanAuthenticated @authenticated
@@ -31,12 +31,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples: 
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName  | password   |
-      | AARP |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdatdd_01 | Password@1 |
+      | AARP |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
 
     @visitorProfile_UHC @regressionUHC @authenticatedUHC
     Examples: 
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName      | password   |
-      | UHC  |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdatdd_01_uhc | Password@1 |
+      | UHC  |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
 
   @addDrugAuthenticated @authenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
@@ -150,17 +150,24 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
       | Last Name                | <lastname>               |
+      | Middle Name              | <middlename>             |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
       | Perm_city                | <permcity>               |
+      | Perm_AptNo               | <mailingaptno>           |
+      | Mailing_AptNo            | <mailingaptno>           |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
+      | Email Confirmation       | <emailConfirmation>      |
+      | Go Green                 | <goGreen>                |
       | MedicaidNumber           | <medicaidnumber>         |
+      | Home Number              | <homeNumber>             |
+      | Mobile Number            | <homeNumber>             |
     Then the user clicks on save and return later to profile page
     And validate OLE details
       | Plan Name       | <planName>       |
@@ -172,8 +179,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
     Examples: 
-      | site | state    | userName  | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | AARP | New York | vdatdd_15 | Password@1 |   10010 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | site | state    | userName  | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
+      | AARP | New York | vdatdd_15 | Password@1 |   10010 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             | 1111111111 | No                | No      |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page

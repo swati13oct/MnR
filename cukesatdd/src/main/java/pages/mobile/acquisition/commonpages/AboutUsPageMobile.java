@@ -24,7 +24,7 @@ public class AboutUsPageMobile extends GlobalWebElements{
 	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
 	public WebElement abountUsBodyParaSection;
 	
-	@FindBy(id = "medicareTitle")
+	@FindBy(css = "#medicareTitle")
 	private WebElement aboutUsTitle;
 	
 	@FindBy(className = "med_cont")

@@ -77,7 +77,7 @@ public class PharmacySearchCommonStepDefinition {
 //
 //	}
 
-	/** user is on the AARP Medicare Site landing page and select state */
+/*	*//** user is on the AARP Medicare Site landing page and select state *//*
 	@Given("^the user navigate to pharmacy search page with selected state$")
 	public void userNavigatesPharmacySearchWithSelectedState(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
@@ -94,7 +94,7 @@ public class PharmacySearchCommonStepDefinition {
 		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(wd);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
-	}
+	}*/
 
 //	/** user enters following details for pharmacy search */
 //	@And("^the user enters following details for the pharmacy search$")

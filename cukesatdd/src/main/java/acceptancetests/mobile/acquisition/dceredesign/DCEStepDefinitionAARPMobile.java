@@ -18,18 +18,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 
@@ -185,6 +182,36 @@ public class DCEStepDefinitionAARPMobile {
 		buildDrugList.validateDetailsForDrug(drugName, drugQuantity, drugFrequency, drugSupplyLen);
 
 	}
+	
+	@When("^clicks on Review drug cost button to land on drug summary page$")
+	public void clicks_on_Review_drug_cost_for_drug_summary_Page() {
+		BuildYourDrugListMobile buildYourDrugListMobile = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPageMobile drugSummaryPageMobile = buildYourDrugListMobile.navigateToDrugSummaryPage();
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPageMobile);
+	}
+	
+	@Then("^the user clicks view plan details button for first plan from Drug Summary Page$")
+	public void the_user_clicks_plan_details_button_on_Drug_Details_Page() throws Throwable {
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		
+		PlanDetailsPageMobile planDetailsPage = drugSummaryPage.clickViewPlanDetails();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
+		
+	}
+	
+	@And("^the user clicks on DCE link to land on DCE Redesign from PDP Shop page$")
+	public void the_user_clicks_on_DCE_link_to_land_on_DCE_Redesign_from_PDP_Shop_page() throws Throwable {
+		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		GetStartedPageMobile getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
+	}
 
 	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
 	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Summary_Pharmacy_Page() throws Throwable {
@@ -227,5 +254,17 @@ public class DCEStepDefinitionAARPMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDetailsForDrugInYourDrugs(drugName,drugQuantity,drugFrequency,drugSupplyLen);}
+	
+	@When("^user selects plan year for OLE$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.selectPlanYearOLE(planYear);
+	}
 
 }

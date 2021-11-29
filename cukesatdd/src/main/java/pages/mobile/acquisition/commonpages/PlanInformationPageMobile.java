@@ -21,13 +21,13 @@ import atdd.framework.UhcDriver;
  */
 public class PlanInformationPageMobile extends UhcDriver {
 		
-	@FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease1")
+	@FindBy(xpath = "//*[contains(@id,'enrollment.medicareBeneficiary.hasEndStateRenalDisease1')]")
 	private WebElement noRadioButton;
 	
-	@FindBy(id = "enrollment.medicareBeneficiary.hasEndStateRenalDisease2")
+	@FindBy(xpath = "//*[contains(@id,'enrollment.medicareBeneficiary.hasEndStateRenalDisease2')]")
 	private WebElement yesRadioButton;
 	
-	@FindBy(id = "enrollmentNext")
+	@FindBy(css = "#enrollmentNext")
 	private WebElement enrollmentNext;
 	
 	@FindBy(xpath = "//div[@class='enrollment_content']/div[2]/form/h2")

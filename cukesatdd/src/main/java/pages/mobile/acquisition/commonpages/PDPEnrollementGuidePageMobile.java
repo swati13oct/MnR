@@ -22,25 +22,25 @@ import atdd.framework.UhcDriver;
  */
 public class PDPEnrollementGuidePageMobile extends UhcDriver{
 
-	@FindBy(id = "inquryKitSubmitLink")
+	@FindBy(css = "#inquryKitSubmitLink")
 	private WebElement inquryKitSubmitLink;
 	
-	@FindBy(id = "firstName")
+	@FindBy(css = "#firstName")
 	private WebElement firstNameField;
 	
-	@FindBy(id = "lastName")
+	@FindBy(css = "#lastName")
 	private WebElement lastNameField;
 	
-	@FindBy(id = "birthDate")
+	@FindBy(css = "#birthDate")
 	private WebElement birthDateField;
 	
 	@FindBys(value = { @FindBy(xpath = "//select[@id='relationship']") })
 	private WebElement relationshipDropDown;
 	
-	@FindBy(id = "emailAddress")
+	@FindBy(css = "#emailAddress")
 	private WebElement emailAddressField;
 	
-	@FindBy(id = "emailAddressConfirm")
+	@FindBy(css = "#emailAddressConfirm")
 	private WebElement emailAddressConfirmField;
 	
 	@FindBy(xpath = ".//label[@for='promotions_yes']")
@@ -55,16 +55,16 @@ public class PDPEnrollementGuidePageMobile extends UhcDriver{
 	@FindBy(xpath = ".//label[@for='gender_female']")
 	private WebElement genderFemale;
 	
-	@FindBy(id = "medicareNumber")
+	@FindBy(css = "#medicareNumber")
 	private WebElement medicareNumberField;
 	
-	@FindBy(id = "oneTimeAddress.addressLine1")
+	@FindBy(css = "#oneTimeAddress.addressLine1")
 	private WebElement addressLine1Field;
 	
-	@FindBy(id = "oneTimeAddress.addressLine2")
+	@FindBy(css = "#oneTimeAddress.addressLine2")
 	private WebElement addressLine2Field;
 	
-	@FindBy(id = "oneTimeAddress.city")
+	@FindBy(css = "#oneTimeAddress.city")
 	private WebElement cityField;
 	
 	@FindBy(xpath=".//*[@id='planGuide1']")
@@ -103,13 +103,13 @@ public class PDPEnrollementGuidePageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@class='error'][@for='dayPhone'][string-length(text())>1]")
 	private WebElement phoneErrorMsg;
 	
-	@FindBy(id = "oneTimeAddress.zipCode")
+	@FindBy(css = "#oneTimeAddress.zipCode")
 	private WebElement zipCodeField;
 	
-	@FindBy(id = "dayPhone")
+	@FindBy(css = "#dayPhone")
 	private WebElement dayPhoneField;
 	
-	@FindBy(id = "nameInfo")
+	@FindBy(css = "#nameInfo")
 	private WebElement nameInfoConfPage;
 	
 	@FindBy(xpath = "//*[@id='currentYearTitle'][@style='display: block;'][string-length(text())>1]")

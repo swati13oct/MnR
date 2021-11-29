@@ -25,7 +25,7 @@ import pages.acquisition.ole.OLEconfirmationPage;
 public class ReviewAndSubmitPageMobile extends UhcDriver{
 	
 
-	@FindBy(id = "editIntro")
+	@FindBy(css = "#editIntro")
 	private WebElement 	editIntroBtn;
 	
 	@FindBy(xpath = "//label[@for='authorized-0']")
@@ -40,13 +40,13 @@ public class ReviewAndSubmitPageMobile extends UhcDriver{
 	@FindBy(xpath = "//label[@for='sou-no']")
 	private WebElement stmtofUnderstandingDisagreeBtn;
 	
-	@FindBy(id = "stmtunderstandingviewdisclaimerbutton")
+	@FindBy(css = "#stmtunderstandingviewdisclaimerbutton")
 	private WebElement stmtofUnderstandingDisclaimerBtn;
 	
 	@FindBy(id="disclaimerAgreeBtnstmtunderstanding")
 	private WebElement stmtofUnderstandingDisclaimerBackBtn;
 	
-	@FindBy(id = "step3save")
+	@FindBy(css = "#step3save")
 	private WebElement reviewandsubmitapplication;
 	
 	@FindBy(xpath =".//*[@id='enrollment-step-2-part-0']/span")

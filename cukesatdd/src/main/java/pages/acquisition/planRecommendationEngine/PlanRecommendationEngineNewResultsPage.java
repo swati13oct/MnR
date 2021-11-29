@@ -117,7 +117,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
-	
+
 	@FindBy(css = "li.view-ms-plans a.buttonLink")
 	private WebElement viewMedigapLink;
 
@@ -157,6 +157,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal")
 	private WebElement drugModel;
+	
+	@FindBy(css = "#modal a[class*='buttonLink']")
+	private WebElement editDurglink;
+	
+	@FindBy(css = "#modal td.plan-drug-deductible")
+	private WebElement deductible;
 
 	@FindBy(css = "#modal button")
 	private WebElement drugModelClose;
@@ -238,17 +244,70 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "div.content h2")
 	private WebElement planNameDetailsPage;
-	
-	//MS Plan Details page
-	
+
+	// MS Plan Details page
+
 	@FindBy(css = "#PlanDetails .back-to-plans")
 	private WebElement MSplanDetailsPage;
-	
+
 	@FindBy(css = "#PlanDetails h1.heading-1")
 	private WebElement MSplanNameInDetailsPage;
-	
+
 	@FindBy(css = "#msVppZipCode")
 	private WebElement zipcodeMSForm;
+
+	// Sort By Elements
+
+	@FindBy(css = "a#ghn_lnk_1")
+	private WebElement Home;
+
+	@FindBy(css = "div.sortBySection #plansSorting")
+	private WebElement sortByDropdown;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']>label")
+	private WebElement MAPDCheckLabel;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']")
+	private WebElement MAPDCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD'] span.checkbox-square")
+	private WebElement MAPDCheck;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
+	private WebElement MedigapCheckLabel;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']")
+	private WebElement MedigapCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare'] span.checkbox-square")
+	private WebElement MedigapCheck;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
+	private WebElement PDPCheckLabel;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']")
+	private WebElement PDPCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP'] span.checkbox-square")
+	private WebElement PDPCheck;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
+	private WebElement SNPCheckLabel;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']")
+	private WebElement SNPCheckOption;
+
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP'] span.checkbox-square")
+	private WebElement SNPCheck;
+
+	@FindBy(css = "div.sortBySection div.applySec>button")
+	private WebElement applyBtn;
+
+	@FindBy(css = ".planRemoveSort span")
+	private WebElement sortBreadCrumbs;
+
+	@FindBy(css = ".planRemoveSort svg")
+	private WebElement removeBreadCrumbs;
 
 	// Result Loading Page Element Verification Method
 
@@ -364,7 +423,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		}
 	}
 
-	public int findPlan(String uniqueName) {
+	public int findPlan(String uniqueName, boolean exactName) {
 		System.out.println("Finding a Plan... " + uniqueName);
 		waitforResultsPage();
 		threadsleep(3000);
@@ -389,9 +448,17 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				// 3 plans per page
 				for (int k = 0; k < 3; k++) {
 					String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
-					if (planName.contains(uniqueName.trim())) {
-						planAvailable = true;
-						break;
+					if (exactName) {
+						if (planName.equalsIgnoreCase(uniqueName.trim())) { // Changing to equals as we have Plan G and
+																			// Plan G+
+							planAvailable = true;
+							break;
+						}
+					} else {
+						if (planName.contains(uniqueName.trim())) {
+							planAvailable = true;
+							break;
+						}
 					}
 					planIndex++;
 				}
@@ -436,7 +503,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdata(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
 		// String drugText =
@@ -456,8 +523,11 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all drugs covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
-			if(!planName.toUpperCase().contains("PATRIOT"))
-				Assert.assertTrue(validate(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink"))), "Add Drug link is not available");
+			if (!planName.toUpperCase().contains("PATRIOT"))
+				Assert.assertTrue(
+						validate(plantiles.get(planIndex)
+								.findElement(By.cssSelector("div[class*='displayDrugsUI'] a.buttonLink"))),
+						"Add Drug link is not available");
 			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
@@ -485,7 +555,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctordata(String planName, String doctorName, String doctorStatus) {
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
 		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()),
@@ -567,7 +637,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifySNPdata(String planName, String snpName, String snpStatus) {
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 		String snpText = plantiles.get(planIndex).findElement(By.cssSelector("*[class*='special-needs-ul']")).getText()
 				.trim();
 		Assert.assertTrue(snpText.contains(snpName), "SNP details not found in plan - " + planName);
@@ -594,39 +664,61 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);
 		System.out.println("Navigating Plans Info...");
 		String planName = "", planAction = "";
-		String[] planDetails = planInfo.split(",");		   
+		String[] planDetails = planInfo.split(",");
 		planName = planDetails[0];
 		planAction = planDetails[1];
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
-			validate(planNameDetailsPage, 60);
-			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
-					"Not navigated to Plan details page");
+			if (planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
+					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
+					|| planName.contains("Plan N")) {
+				threadsleep(10000);
+				PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
+						driver);
+				if (validate(MSplanDetailsPage, 20)) {
+					validate(MSplanNameInDetailsPage, 60);
+					Assert.assertTrue(
+							planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+							"Not navigated to Plan details page");
+				} else {
+					validate(zipcodeMSForm, 60);
+					planSelectorResultspage.submitMSform();
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"),
+							"MS Plan Summary page is not loaded");
+				}
+			} else {
+				validate(planNameDetailsPage, 60);
+				Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
+						"Not navigated to Plan details page");
+			}
 		}
 		if (planAction.toLowerCase().contains("viewbutton")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection>.sub-content button")).click();
-			if(planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F") || planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L") || planName.contains("Plan N")) {
+			if (planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
+					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
+					|| planName.contains("Plan N")) {
 				threadsleep(10000);
-				PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(driver);
-				if(validate(MSplanDetailsPage,20))
-				{
+				PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
+						driver);
+				if (validate(MSplanDetailsPage, 20)) {
 					validate(MSplanNameInDetailsPage, 60);
-					Assert.assertTrue(planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
+					Assert.assertTrue(
+							planFullName.toLowerCase().contains(MSplanNameInDetailsPage.getText().toLowerCase()),
 							"Not navigated to Plan details page");
-				}else {
+				} else {
 					validate(zipcodeMSForm, 60);
 					planSelectorResultspage.submitMSform();
-					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "MS Plan Summary page is not loaded");					
-				}	
-			}
-			else {
-			validate(planNameDetailsPage, 60);
-			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
-					"Not navigated to Plan details page");
+					Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"),
+							"MS Plan Summary page is not loaded");
+				}
+			} else {
+				validate(planNameDetailsPage, 60);
+				Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
+						"Not navigated to Plan details page");
 			}
 		}
 	}
@@ -649,11 +741,11 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertFalse(curURL.contains(newURL), "Invalid Navigation");
 
 	}
-	
+
 	public void medigaplink() {
 		waitforResultsPage();
 		Assert.assertTrue(validate(viewMedigapLink), "View Medigap link is not showing");
-		if(validate(viewMedigapLink))
+		if (validate(viewMedigapLink))
 			viewMedigapLink.click();
 		threadsleep(5000);
 		driver.getCurrentUrl().contains("/plan-summary");
@@ -661,26 +753,35 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName);
-		String planType = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
+		int planIndex = findPlan(planName,false);
+		String PlanName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
-		System.out.println("PlanType is: "+planType);
-		
-		if (planType.contains("supplement")) {
-			plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)")).click();
-			planName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a")).getText()
-					.trim();
+		System.out.println("PlanName is: " + PlanName);
+
+		if (PlanName.contains("supplement")) {
+			WebElement DrugTitle = plantiles.get(planIndex)
+					.findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
+			scrollToView(DrugTitle);
+			planName = MSPlanName.getText().trim();
+			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)"));
+			jsClickNew(viewModel);
+			threadsleep(2000);
+
 		} else {
-			System.out.println("PlanIndex is: "+planIndex);
-		WebElement viewind = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
-		scrollToView(viewind);
-		threadsleep(2000);
-		jsClickNew(viewind);
-		threadsleep(2000);
+			System.out.println("PlanIndex is: " + planIndex);
+			WebElement viewind = plantiles.get(planIndex)
+					.findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
+			scrollToView(viewind);
+			threadsleep(2000);
+			jsClickNew(viewind);
+			threadsleep(2000);
 		}
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
+		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"), "Edit Drug List not found in drug model - " + planName);
+		Assert.assertTrue(deductible.getText().contains("Deductible"), "Deductible not found in drug model - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
 		covered = drugModel.findElements(By.cssSelector("span[class^='covered']")).size();
@@ -701,7 +802,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugShowMore(String planName, String drugName) {
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
@@ -710,7 +811,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugWhySeparateMdel(String planName) {
-		int planIndex = findPlan(planName);
+		int planIndex = findPlan(planName,false);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
 		threadsleep(2000);
 		Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
@@ -725,12 +826,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctorShowMore(String planName, String doctorName) {
-		int planIndex = findPlan(planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDoctorsId']")).click();
+		int planIndex = findPlan(planName,false);
+		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showAllDoctorsId']")).click();
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
 		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDoctorsId']")).click();
+		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showLessDoctorsId']")).click();
 	}
 
 	String sampleJson = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness membership\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],\"planYear\":2021,\"location\":{\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New York County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
@@ -764,21 +865,256 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public PlanDetailsPage validatePlanNamesPRE(String planName) {
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		WebElement PREPlandetails = driver.findElement(By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName
-				+ "')]"));
+		WebElement PREPlandetails = driver.findElement(
+				By.xpath("//*[contains(@class,'button button-tertiary')]//*[contains(text(), '" + planName + "')]"));
 		CommonUtility.waitForPageLoadNew(driver, PREPlandetails, 30);
 		jsClickNew(PREPlandetails);
 		System.out.println("View Plan Details Link is clicked for MA plan" + planName);
-		
+
 		return new PlanDetailsPage(driver);
-	
+
 	}
-	
+
 	public void addDoctorsLink() {
-	threadsleep(5000);
-	System.out.println("Adding doctors from PRE Result page");
-	plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
-	threadsleep(3000);
+		threadsleep(5000);
+		System.out.println("Adding doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				pagePreviousButton.click();
+				threadsleep(2000);
+			}
+		}
+		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
+		threadsleep(3000);
 	}
 	
+	public void editDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Editing doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				pagePreviousButton.click();
+				threadsleep(2000);
+			}
+		}
+		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] button[dlassetid*='editDoc']")).click();
+		threadsleep(3000);
+	}
+
+	public void validateNoSortByElements() {
+		System.out.println("Validate No Sort By UI ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		Assert.assertFalse(validate(sortByDropdown), "SortBy Dropdown is displaying");
+	}
+
+	public void validateSortByElements() {
+		System.out.println("Validate Sort By UI Elements : ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		Assert.assertTrue(validate(MAPDCheckLabel), "MAPD Checkbox is missing");
+		Assert.assertTrue(validate(MedigapCheckLabel), "Medigap Checkbox is missing");
+		Assert.assertTrue(validate(PDPCheckLabel), "PDP Checkbox is missing");
+		Assert.assertTrue(validate(SNPCheckLabel), "SNP Checkbox is missing");
+		Assert.assertTrue(validate(applyBtn), "Apply button is missing");
+
+		Assert.assertFalse(MAPDCheck.isSelected(), "MAPD is selected by default");
+		Assert.assertFalse(MedigapCheck.isSelected(), "Medigap is selected by default");
+		Assert.assertFalse(PDPCheck.isSelected(), "PDP is selected by default");
+		Assert.assertFalse(SNPCheck.isSelected(), "SNP is selected by default");
+
+		// Deselect All
+		validate(applyBtn);
+		optionSelection("MAPD,Medigap,PDP,SNP", false);
+		applyBtn.click();
+		threadsleep(3000);
+		boolean dropClose = validate(applyBtn, 10);
+		System.out.println("Drop close : " + dropClose);
+		Assert.assertFalse(dropClose);
+
+	}
+
+	public void optionSelection(String option, boolean select) {
+		String options[] = option.split(",");
+		for (int i = 0; i < options.length; i++) {
+			checkUncheck(options[i], select);
+			threadsleep(1000);
+		}
+	}
+
+	public void checkUncheck(String checkOption, boolean select) {
+		System.out.println("Selecting Option " + checkOption + " : " + select);
+		WebElement elemCheck = null, elemClick = null;
+		if (checkOption.equalsIgnoreCase("mapd")) {
+			elemCheck = MAPDCheck;
+			elemClick = MAPDCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("medigap")) {
+			elemCheck = MedigapCheck;
+			elemClick = MedigapCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("pdp")) {
+			elemCheck = PDPCheck;
+			elemClick = PDPCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("snp")) {
+			elemCheck = SNPCheck;
+			elemClick = SNPCheckLabel;
+		}
+
+		if (select && !elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+		if (!select && elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+
+		if (select)
+			Assert.assertTrue(elemCheck.isSelected(), "Unable to Select " + elemCheck);
+		else
+			Assert.assertFalse(elemCheck.isSelected(), "Unable to Deselect " + elemCheck);
+	}
+
+	public void optionVisibility(String option) {
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		String options[] = option.split(":");
+		for (int i = 0; i < options.length; i++) {
+			String optionInfo = options[i];
+			if (optionInfo.trim().length() > 0) {
+				String[] optionDetails = optionInfo.split(",");
+				String planType = optionDetails[0];
+				String visibility = optionDetails[1];
+				disableCheck(planType, visibility);
+			}
+			threadsleep(2000);
+			sortByDropdown.click();
+		}
+	}
+
+	public void disableCheck(String planType, String visibility) {
+		System.out.println("Validating " + planType + " Option: " + visibility);
+		if (planType.equalsIgnoreCase("mapd"))
+			Assert.assertEquals(MAPDCheckOption.getAttribute("ng-reflect-disabled"), visibility,
+					"MAPD is not Disabled");
+		if (planType.equalsIgnoreCase("medigap"))
+			Assert.assertEquals(MedigapCheckOption.getAttribute("ng-reflect-disabled"), visibility,
+					"Medigap is not Disabled");
+		if (planType.equalsIgnoreCase("pdp"))
+			Assert.assertEquals(PDPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "PDP is not Disabled");
+		if (planType.equalsIgnoreCase("snp"))
+			Assert.assertEquals(SNPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "SNP is not Disabled");
+	}
+
+	public void sortByFunc(String plan) {
+		System.out.println("Sorting  Options: " + plan);
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+			VerifyPlanTile(options[i]);
+		}
+	}
+	
+	public void sortByFuncWithoutVerify(String plan) {
+		System.out.println("Sorting  Options: " + plan);
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+		}
+	}
+
+	public void sortByBreadcrumb() {
+		System.out.println("Sorting Breadcrumb validation after PlanYear Toggle");
+		threadsleep(5000);
+		Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after PlanYear Toggle");
+	}
+
+	public void removeBreadcrumb() {
+		System.out.println("Removing Filtered BreadCrumb");
+		Assert.assertTrue(sortBreadCrumbs.isDisplayed(), "BreadCrumbs is not displaying");
+		removeBreadCrumbs.click();
+		threadsleep(5000);
+		Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after remove breadcrumb");
+	}
+
+	public void applySort(String planType) {
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		threadsleep(2000);
+
+		if (planType.equalsIgnoreCase("mapd")) {
+			validate(MAPDCheck, 20);
+			MAPDCheck.click();
+		}
+		if (planType.equalsIgnoreCase("medigap")) {
+			validate(MedigapCheck, 20);
+			MedigapCheck.click();
+		}
+		if (planType.equalsIgnoreCase("pdp")) {
+			validate(PDPCheck, 20);
+			PDPCheck.click();
+		}
+		if (planType.equalsIgnoreCase("snp")) {
+			validate(SNPCheck, 20);
+			SNPCheck.click();
+		}
+		Assert.assertTrue(validate(applyBtn), "apply Button is missing");
+		applyBtn.click();
+		threadsleep(2000);
+	}
+
+	public void VerifyPlanTile(String plan) {
+		System.out.println("Verify the PlanType after applied Filter");
+		String PlanType = null;
+		String text = null;
+		if (plan.equalsIgnoreCase("mapd"))
+			text = "Part C";
+		if (plan.equalsIgnoreCase("medigap"))
+			text = "Supplement";
+		if (plan.equalsIgnoreCase("pdp"))
+			text = "Part D";
+		if (plan.equalsIgnoreCase("snp"))
+			text = "Special";
+
+		int plancount = plantiles.size();
+		Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
+				"BreadCrumbs not showing for " + plan + " PlanType");
+		for (int i = 0; i < plancount; i++) {
+			// System.out.println("I count is: "+i);
+			if (i == 3 || i == 6 || i == 9) {
+				pageNextButton.click();
+				threadsleep(2000);
+			}
+			PlanType = plantiles.get(i).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+			Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
+		}
+
+	}
+	
+	public void csnRanking(String snpOption) {
+		String FirstplanName;
+		String SecondplanName;
+		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
+		if(snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");			
+		}else {
+			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
+			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
+		}
+	}
+
 }

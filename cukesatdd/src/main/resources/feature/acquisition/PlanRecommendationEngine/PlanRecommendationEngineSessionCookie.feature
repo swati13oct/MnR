@@ -54,14 +54,13 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to PRE page
     Then user clicks on GetStarted button in PRE page
-    And verify continue function on "Location" page
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     Then user selects add drug option and comparing DCE and Drug page
       | Drug Selection | <Drug Selection> |
+
     #Then user selects edit drug options in Drug Page
     #  | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
-
     @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
@@ -99,13 +98,13 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
 
     @regressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
-      | AARP |   10003 | NO            | New York | MAPD          | None         | sue         | NO            |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName      | isMultiDoctor |
+      | AARP |   10003 | NO            | New York | MAPD          | None         | Ricky K. Hsu, MD | NO            |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
-      | UHC  |   10003 | NO            | New York | MAPD          | None         | sue         | NO            |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName      | isMultiDoctor |
+      | UHC  |   10003 | NO            | New York | MAPD          | None         | Ricky K. Hsu, MD | NO            |
 
   @PRE @DruglistSessionStoragePREtoDCE @F537262
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> - To validate Drug list are same PRE vs DCE

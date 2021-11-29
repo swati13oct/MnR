@@ -10,6 +10,7 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -290,5 +291,25 @@ public class PharmacySearchCommonStepDefinitionNew {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
+	}
+
+
+	/** user is on the AARP Medicare Site landing page and select state */
+	@Given("^the user navigate to pharmacy search page with selected state$")
+	public void userNavigatesPharmacySearchWithSelectedState(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		String state = inputAttributesMap.get("State");
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+//		aquisitionhomepage.selectState(state);
+		System.out.println("Selected state '" + state + "' on home page");
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		aquisitionhomepage.navigateToPharmacyLocator();
+//		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPageNew pharmacySearchPage = new PharmacySearchPageNew(wd);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+
 	}
 }

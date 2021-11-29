@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -20,12 +19,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
-
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProfileSearch;
@@ -133,9 +128,11 @@ public class VisitorProfileMobileStepDefinition {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.deletePlans(savedPlanNames);
+//		visitorProfile.deletePlans(savedPlanNames);
+		visitorProfile.deletePlans(planYear, savedPlanNames);
 	}
 	
 	@And("^the user clicks on the shopping cart icon$")
@@ -292,13 +289,6 @@ public class VisitorProfileMobileStepDefinition {
 	public void user_validates_the_added_Ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
-		 * i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -308,10 +298,6 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user should be able to see all the added Drugs information in the guest profile page$")
 	public void the_user_should_be_able_to_see_all_the_added_Drugs_information_in_the_guest_profile_page(
 			DataTable data) {
-		/*
-		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
-		 * drugList = memberAttributesRow.get(0).getCells().get(1);
-		 */
 		String drugList = data.cell(0, 1);
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -322,13 +308,6 @@ public class VisitorProfileMobileStepDefinition {
 	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
-		 * i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -347,13 +326,6 @@ public class VisitorProfileMobileStepDefinition {
 	public void user_clicks_on_plan_name_in_AARP(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
-		 * i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String planName = givenAttributesMap.get("Test Plans");
 		VisitorProfilePageMobile VisitorProfilePageMobile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -369,17 +341,8 @@ public class VisitorProfileMobileStepDefinition {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells() .get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-
-		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
 
-		// ----- MS plan type ----------------------------
 		plansummaryPage.saveMSPlans(ms_savePlanNames);
 
 	}
@@ -388,7 +351,6 @@ public class VisitorProfileMobileStepDefinition {
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(
 			DataTable givenAttributes) throws Throwable {
 
-		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -418,12 +380,6 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells() .get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String savePlanNames = memberAttributesMap.get("Test Plans");
 		String planType = memberAttributesMap.get("Plan Type");
 
@@ -491,7 +447,7 @@ public class VisitorProfileMobileStepDefinition {
 		/*
 		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
 		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
-		 * 
+		 *
 		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 		 * plannameAttributesRow.get(i).getCells().get(1)); }
 		 */
@@ -661,5 +617,118 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.clickAddDrugsBtn();
 	}
-}
 
+	@When("^the user Import Drugs and Doctors$")
+	public void the_user_clicks_on_Import_Drugs_and_Doctors(DataTable data) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(data);
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.importDrugsAndDoctors(givenAttributesMap);
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@Then("^user clicks on ms plan details button$")
+	public void user_clicks_on_ms_plan_details_button(DataTable plan) {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		String planName = plannameAttributesMap.get("MS Plan");
+		visitorProfilePage.clickOnMSPlanDetailsPage(planName);
+	}
+
+	@Then("^user validates MS plan details$")
+	public void user_validates_MS_plan_details() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSPlanDetailsPage();
+	}
+
+	@Then("^user clicks on Back to Profile link$")
+	public void user_Clicks_Back_To_Profile() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickOnBackToProfile();
+	}
+
+	@Then("^user clicks on ms start application button$")
+	public void user_clicks_on_ms_start_application_button(DataTable plan) {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		String planName = plannameAttributesMap.get("MS Plan");
+		visitorProfilePage.clickOnMStartApplication(planName);
+	}
+
+	@Then("^user validates MS Start application page$")
+	public void user_validates_MS_Start_Application_Page() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSStartApplicationPage();
+	}
+
+	@Then("^user close MS application page$")
+	public void user_close_MS_Application_Page() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickOnCloseMSApplication();
+	}
+
+	@Then("^user clicks on ms Learn More link$")
+	public void user_clicks_on_ms_learn_more_link(DataTable plan) {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		String planName = plannameAttributesMap.get("MS Plan");
+		visitorProfilePage.clickOnMLearnMore(planName);
+	}
+
+	@Then("^user validates MS Learn More page$")
+	public void user_validates_MS_learn_more_Page() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSLearnMorePage();
+	}
+
+	@Then("^user clicks on MS Add your Information link$")
+	public void user_clicks_on_ms_add_your_info_link(DataTable plan) {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(plan);
+		String planName = plannameAttributesMap.get("MS Plan");
+		visitorProfilePage.clickOnMSAddYourInformation(planName);
+
+	}
+
+	@Then("^user validates MS Add your Information page$")
+	public void user_validates_MS_add_your_info_Page() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.validateMSAddYourInfoPage();
+	}
+
+	@Then("^user validates MS SP Profile page with Import, PRE and ComponentCode$")
+	public void user_validates_MS_SP_Page(DataTable componentCode) {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(componentCode);
+		String ComponentCode = plannameAttributesMap.get("Component Code");
+		visitorProfilePage.validateMSSP4ProfilePage(ComponentCode);
+	}
+
+	@And("^user delets the added Ms plans on visitor profile page$")
+	public void user_delets_the_added_ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
+		String savedPlanNames = givenAttributesMap.get("MS_testPlans");
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.removeMSPlans(savedPlanNames);
+	}
+}

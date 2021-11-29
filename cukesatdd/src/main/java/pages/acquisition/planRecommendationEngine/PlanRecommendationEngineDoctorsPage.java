@@ -276,7 +276,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		String browser = MRScenario.browserName;				//E2E: the browser name is stored in browserName variable in getWebDriverNew method of MRScenario 
 
 		String env = MRScenario.environment;
-		threadsleep(2000);
+		threadsleep(6000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {
@@ -584,7 +584,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		jsClickNew(continueBtn);
 		providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[class*='secondary']")));
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
 		threadsleep(2000);
 		jsClickNew(modalContinuedoctors);
 		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
