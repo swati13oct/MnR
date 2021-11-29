@@ -269,4 +269,182 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			return false;
 		return true;
 	}
+	
+	public void selectYearOption(String year) {
+		try {
+			if(year.equalsIgnoreCase("current")) {
+				if(validate(CurrentYearLink))
+					CurrentYearLink.click();
+			}else {
+				if(validate(NextYearLink))
+					NextYearLink.click();
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on Pharmacy Page : ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void validateLtcPdfDoc(String pdfType, String testPlanYear, WebElement pdfLink, String testPdfLinkTextDate) throws InterruptedException {
+		CommonUtility.waitForPageLoad(driver, pdfLink, 15);
+		Assertion.assertTrue("PROBLEM - unable to locate the link for pdf for "+pdfType, 
+				pharmacyValidate(pdfLink));
+		//note: "current year" set of doc will be associated with current real year (e.g. right now is 2019, so "current year" docs are 2019 docs)
+		//note: "next year" set of doc will be associated with next real year (e.g. "next year" docs are 2020 docs)
+		//note: code will determine what is the "current year" and display the right set of doc
+		//note: so if system is on year 2020 (but real time is 2019), 2020 is the current year, therefore, it display the "current year" docs which would still contain 2019 text
+		//note: if planYear dropdown option exists, then 2019 is "current year", 2020 is "next year"
+		//note: then the code would know to display 2020 link text when you select 2020 because that's the "next year" docs
+		Assertion.assertTrue("PROBLEM - unable to locate expected year on the link text for pdf for "+pdfType+". "
+				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
+				pdfLink.getText().contains(testPdfLinkTextDate));
+		String winHandleBefore = driver.getWindowHandle();
+//		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickNew(pdfLink);
+//		pdfLink.click();
+		Thread.sleep(2000); //note: keep this for the page to load
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int noOfWindows = afterClicked_tabs.size();
+		for (int i = 0; i < noOfWindows; i++) {
+			String tab = afterClicked_tabs.get(i);
+			driver.switchTo().window(tab);
+			if(!tab.equalsIgnoreCase(winHandleBefore)) {
+				break;
+			}
+			
+			/*if (i == noOfWindows - 1) {
+				tab = afterClicked_tabs.get(i);
+				driver.switchTo().window(tab);
+				break;
+			}*/
+			
+		}
+		
+
+//		int afterClicked_numTabs=afterClicked_tabs.size();					
+//		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		String currentURL=driver.getCurrentUrl();
+		String expectedURL=pdfType;
+		Assertion.assertTrue("PROBLEM - PDF Page  is not opening, "
+				+ "URL should contain '"+expectedURL+"' | Actual URL='"+currentURL+"'", 
+				currentURL.contains(expectedURL));
+		Assertion.assertTrue("PROBLEM - unable to locate expected year on the URL. "
+				+ "URL should contain year '"+testPdfLinkTextDate+"' | Actual URL='"+currentURL+"'", 
+				currentURL.contains(testPdfLinkTextDate));
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		currentURL=driver.getCurrentUrl();
+		expectedURL="Pharmacy-Search";
+		Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+				currentURL.contains(expectedURL));
+	}
+	
+	
+	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
+		int total=0;
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		//waitforElementDisapper(loadingSpinner, 90);
+		int PharmacyCount = 0;
+		if (!pharmacyValidate(noResultMsg)) {
+			PharmacyCount = PharmacyResultList.size();
+		}		
+		if(PharmacyCount>0){
+			System.out.println("No of Pharmacies Displayed in Pharmacy Result Page 1 : "+PharmacyCount);
+			System.out.println("Total Pharmacy Count : "+PharmacyFoundCount.getText());
+
+			total=Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
+					pharmacyValidate(pharmaciesAvailable));
+			if (total >10) {
+				WebElement contactUsLink=contactUnitedHealthCare;
+				if (!pharmacyValidate(contactUsLink)) {
+					contactUsLink=contactUnitedHealthCare_ol;
+				}
+				Assertion.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
+						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
+						pharmacyValidate(contactUsLink));
+				jsClickNew(contactUsLink);
+				Thread.sleep(2000); //note: keep this for the page to load
+				CommonUtility.checkPageIsReadyNew(driver);
+				String currentURL=driver.getCurrentUrl();
+				String expectedURL="contact-us.html";
+				Assertion.assertTrue("PROBLEM - unable to go to contact us page. "
+						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
+						currentURL.contains(expectedURL));
+				driver.navigate().back();
+				driver.navigate().refresh();	//Added since select plan dropdown element was not located after navigating back from contact us page
+				CommonUtility.checkPageIsReadyNew(driver);
+				//waitforElementDisapper(loadingSpinner, 90);
+				currentURL=driver.getCurrentUrl();
+				//System.out.println(currentURL);
+				expectedURL="Pharmacy-Search";
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+						currentURL.contains(expectedURL));
+				//note: if year dropdown is available, handle it with current year
+				if (isPlanYear()) {
+					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
+					selectYearOption(testPlanYear);
+					sleepBySec(2);
+					CommonUtility.checkPageIsReady(driver);
+				}
+				selectsPlanName(planName, testSiteUrl);
+				String pdfType="LTC_HI_ITU_Pharmacies_Other.pdf";
+				WebElement pdfElement=pdf_otherPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
+				pdfElement=pdf_WalgreenPlans;
+				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
+				scrollToView(contactUsLink);
+				jsMouseOver(contactUsLink);
+				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", 
+						pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", 
+						pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", 
+						pharmacyValidate(rightArrow));
+				try {
+					jsClickNew(rightArrow);
+					CommonUtility.checkPageIsReady(driver);
+					jsClickNew(leftArrow);
+					CommonUtility.checkPageIsReady(driver);
+				} catch (Exception e) {
+					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
+				}
+
+			} else {
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+						!pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+						!pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+						!pharmacyValidate(rightArrow));
+			}
+		} else {
+			WebElement contactUsLink=contactUnitedHealthCare;
+			if (!pharmacyValidate(contactUnitedHealthCare)) 
+				contactUsLink=contactUnitedHealthCare_ol;
+			Assertion.assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section", 
+					!pharmacyValidate(contactUsLink));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans", 
+					!pharmacyValidate(pdf_otherPlans));
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans", 
+					!pharmacyValidate(pdf_WalgreenPlans));
+			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "+PharmacyCount);
+			System.out.println("Consider looking for user data / filter that would produce pharamcy count > 0 for testing to be meaningful");
+		}
+	}
+	
+	/** Verify page load in spanish language */
+	public PharmacySearchPageNew selectPlanLanguage() {
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
+		SpanishLanguage.click();
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Spanish language selected"); 
+		return new PharmacySearchPageNew(driver);
+	}
+
 }

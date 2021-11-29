@@ -213,7 +213,7 @@ public class PharmacyLocatorStepDefinition {
 	
 	/** Verify the pharmacies as per the filter criteria 
 	 * @throws InterruptedException */
-	@Then("^the user validates the pharmacies available$")
+/*	@Then("^the user validates the pharmacies available$")
 	public void validatesPharmaciesAvailable(DataTable inputAttributes) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
@@ -224,7 +224,7 @@ public class PharmacyLocatorStepDefinition {
 		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		String testPdfLinkTextDate=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE);
 		pharmacySearchPage.searchesPharmacy(language,planName,testPlanYear, testSiteUrl, testPdfLinkTextDate);
-	}
+	} */
 	
 	/** Verify the pharmacies as per the filter criteria 
 	 * @throws InterruptedException */
@@ -387,7 +387,7 @@ public class PharmacyLocatorStepDefinition {
 //	}
 
 	/** Verifying the pharmacy search tool in Spanish language */	
-	@Then("^the user selects Spanish Language$")
+/*	@Then("^the user selects Spanish Language$")
 	public void selectSpanish() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
@@ -405,7 +405,7 @@ public class PharmacyLocatorStepDefinition {
 				expectedPlanYearDropdown==actualPlanYearDropdown);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
-	}
+	} */
 
 	/** Verifying the pharmacy search tool in different languages */	
 	@And("^the user searches multi lang for pharmacy search results available$")
