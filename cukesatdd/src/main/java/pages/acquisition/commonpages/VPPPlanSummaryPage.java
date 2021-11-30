@@ -601,7 +601,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
 	private WebElement futureYearSelection;
-	
+
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
@@ -1044,7 +1044,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement findPlansOnShopForPlans;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'swiper-container')]//div[contains(@class,'plan-name')]")
 	private WebElement planListContainerMSPlans;
 
@@ -1164,12 +1164,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
+			pageloadcomplete();
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
+			validateNew(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			waitForPageLoadSafari();
+			pageloadcomplete();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
-			//CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
@@ -3005,7 +3013,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
-		
+
 		for (String plan : listOfTestPlans) {
 			System.out.println("Proceed to locate plan=" + plan);
 
@@ -3921,7 +3929,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * System.out.println("*****CLICKING ON Current Year button*****: " +
 		 * currentYearSelection.getText()); // currentYearSelection.click();
 		 * jsClickNew(currentYearSelection);
-		 * 
+		 *
 		 * } }else if(planYear.equalsIgnoreCase("next")){
 		 * if(validate(nextYearSelection,20)) {
 		 * System.out.println("*****CLICKING ON Next Year button*****: " +
@@ -3931,7 +3939,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * currentYearSelection.getText()); currentYearSelection.click(); }
 		 * CommonUtility.checkPageIsReadyNew(driver); waitForPageLoadSafari(); }
 		 */
-	
+
 	CommonUtility.checkPageIsReady(driver);
 
 	if (validate(planYearPopup, 20)) { // if plan year popup is displayed
@@ -3954,7 +3962,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 }
-	
+
 	public void handleChatPopup() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
 		// we're not trying to fail the test if it
@@ -7254,14 +7262,14 @@ public String GetMonthlyPremiumValue() {
 			System.out.println("No County to be selected ");
 		}
 	}
-	
+
 	public void viewMSPlanSummary(String planType) {
 		CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 		jsClickNew(msPlansViewLink);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, planListContainerMSPlans, 30);
 	}
-	
+
 	/**
 	 * Save the given Medsupp plans
 	 *
