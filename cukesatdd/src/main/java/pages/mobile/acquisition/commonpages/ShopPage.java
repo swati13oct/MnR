@@ -22,7 +22,8 @@ public class ShopPage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
 
-	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
+	//@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
+	@FindBy(xpath = "(.//*[contains(@id,'mobile')]/div/div)[2]/button")
 	private WebElement submit;
 
 	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
@@ -319,9 +320,10 @@ public class ShopPage extends GlobalWebElements {
 //				System.out.println("Validating VPP page for Zip code " + zipCode);
 			scrollToView(zipcodeFieldShopPage);
 			sendkeysMobile(zipcodeFieldShopPage, zipCode);
+			System.out.println("\n\n1========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 			jsClickNew(GetStartedShopPage);
-
 			Thread.sleep(20000);
+			System.out.println("\n\n2========"+driver.getCurrentUrl()+"==========="+driver.getTitle()+"=========\n\n");
 			String vppPageTitle = driver.getTitle();
 			if (driver.getWindowHandles().size() > 1) {
 				String currentPage = driver.getWindowHandle();
@@ -336,42 +338,45 @@ public class ShopPage extends GlobalWebElements {
 			System.out.println("Curent URL *****" + driver.getCurrentUrl());
 			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 				if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-					System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					System.out.println("Page Title 1: " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 				else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
-					System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					System.out.println("Page Title 2: " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 				else
 					assertTrue("Not redirected to VPP page",
 							vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 			} else {
 				if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-					System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					System.out.println("Page Title 3: " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 				else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
-					System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					System.out.println("Page Title 4: " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 				else
 					assertTrue("Not redirected to VPP page",
 							vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 			}
-//				if (driver.getWindowHandles().size() > 1) {
-//					String currentPage = driver.getWindowHandle();
-//					Set<String> newWindow = driver.getWindowHandles();
-//					for (String parentWindow : newWindow) {
-//						if (!parentWindow.equalsIgnoreCase(currentPage)) {
-//							driver.switchTo().window(currentPage).close();
-//							vppPageTitle = driver.switchTo().window(parentWindow).getTitle();
-//							break;
-//						}
-//					}
-//				} else {
-//					driver.navigate().back();
-//				}
+/*			if (driver.getWindowHandles().size() > 1) {
+					String currentPage = driver.getWindowHandle();
+					Set<String> newWindow = driver.getWindowHandles();
+					for (String parentWindow : newWindow) {
+						if (!parentWindow.equalsIgnoreCase(currentPage)) {
+							driver.switchTo().window(currentPage).close();
+							vppPageTitle = driver.switchTo().window(parentWindow).getTitle();
+							break;
+						}			}
+				} else {
+					driver.navigate().back();
+				}*/
 //				zipCodeNumber++;
 //				/*
 //				 * driver.navigate().refresh(); //Adding refresh since element are not located
 //				 * in Safari browser after using navigate back threadsleep(2000);
 //				 */
 //			}
+			System.out.println("\n\nLast========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 		} catch (Exception e) {
 			System.out.println(e);
+		}
+		if(driver.getCurrentUrl().contains("plan-summary")) {
+			driver.navigate().back();
 		}
 	}
 
@@ -379,7 +384,7 @@ public class ShopPage extends GlobalWebElements {
 		validateNew(findYourPlanHeader);
 		List<WebElement> list = driver
 				.findElements(By.xpath("//div[contains(@class,'NewCustomRTE')]//span[contains(@class,'heading-3')]"));
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < list.size(); i++)
 			System.out.println(list.get(i).getText());
 	}
 

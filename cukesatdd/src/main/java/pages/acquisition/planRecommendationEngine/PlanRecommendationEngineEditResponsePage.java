@@ -157,7 +157,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "a#changeMyProviders")
 	private WebElement changeDocLink;
 	
-	@FindBy(css = "#doctors-warning")
+	@FindBy(css = "uhc-alert[class*='alert-error-message']")
 	private WebElement WarningDocMsg;
 
 	@FindBy(css = "#modal button[class*='primary']")
