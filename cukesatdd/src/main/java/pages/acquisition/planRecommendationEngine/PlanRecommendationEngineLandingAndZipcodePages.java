@@ -38,7 +38,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 
 //Landing page Elements
 
-	@FindBy(css = "div[class*='get-started-banner'] button")
+	@FindBy(css = "#selector")
 	private WebElement getStartedBtn;
 
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")

@@ -77,18 +77,19 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user selects add drug option in drug page from edit response page
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user return to vpp page using "update" from edit response page
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo> |
     When user navigate to Drug page using edit drugs from PREResult page
     Then user selects add drug option in drug page from edit response page
       | Drug Selection | <Drug Selection>                                                                 |
       | Drug Details   | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user return to vpp page using "update" from edit response page
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo1> |
-    Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @uatE2EAARP
+    @uatE2EAARP12345
     Examples: 
       | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | Drug Selection | DrugInfo                               | DrugInfo1                              |
       | AARP |   53202 | NO            | Milwaukee | MAPD          | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | Lipitor,YES,Lipitor TAB 40MG,,,Day,3,YES,NO                                    | PDP            | LP (HMO D-SNP),Link | Yes            | Preferred (PDP),Lipitor TAB 10MG,False | Preferred (PDP),Lipitor TAB 40MG,False |

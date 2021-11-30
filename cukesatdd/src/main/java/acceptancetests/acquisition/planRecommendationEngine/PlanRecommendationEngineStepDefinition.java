@@ -830,7 +830,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigate to Drug page using edit drugs from PREResult page$")
    	public void edit_drugs_preResult_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.useraddDrugsPREResult();
+		planSelectorResultspage.usereditDrugsPREResult();
    	}
 	
 	@Then("^user navigate from VPP to DCE tool$")
@@ -1255,10 +1255,15 @@ public class PlanRecommendationEngineStepDefinition {
     }
 	
 	@Then("^user navigates to PRE doctorpage to add providers$")
-	@Then("^user navigates to PRE doctorpage to edit providers$")
 	public void addDoctorLink() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.addDoctorsLink();
+	}
+	
+	@Then("^user navigates to PRE doctorpage to edit providers$")
+	public void editDoctorLink() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.editDoctorsLink();
 	}
 	
 	@Then("^user updating providers to PRE doctorpage$")

@@ -672,6 +672,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
+			threadsleep(5000);
 			if (planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
 					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
 					|| planName.contains("Plan N")) {
@@ -759,10 +760,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("PlanName is: " + PlanName);
 
 		if (PlanName.contains("supplement")) {
-			WebElement DrugTitle = plantiles.get(planIndex)
-					.findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+			WebElement DocTitle = plantiles.get(planIndex)
+					.findElement(By.cssSelector("div[class*='providerSection'] h3"));
 			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
-			scrollToView(DrugTitle);
+			scrollToView(DocTitle);
 			planName = MSPlanName.getText().trim();
 			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)"));
 			jsClickNew(viewModel);
