@@ -1580,15 +1580,13 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
 		// !validate(LIS_CopayHeader) &&
-				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_Alert)) {
+				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
 			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
 			System.out.println("***** $0 Deductible for LIS Buydown *****");
 			System.out.println(LIS_Deductible.getText());
-			System.out.println("***** Page level Alert Displayed for LIS Buydown *****");
-			System.out.println(LIS_Alert.getText());
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
