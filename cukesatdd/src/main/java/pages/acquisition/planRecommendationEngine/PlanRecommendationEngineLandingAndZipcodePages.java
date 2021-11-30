@@ -38,7 +38,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 
 //Landing page Elements
 
-	@FindBy(css = "#selector")
+	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
 
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
@@ -173,8 +173,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	
 	public void navigatezipcodepage() {
 		pageloadcomplete();
-		getStartedBtn.click();
 		validate(zipCode,30);
+		getStartedBtn.click();
 	}
 	
 	
