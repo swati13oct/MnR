@@ -115,15 +115,15 @@ Feature: 1.11 UAT - Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP02 @regressionAARP
+    @UATAARP02 @regressionAARP 
     Examples: 
-      | TID                 | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 2_AARP | AARP | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+       | TID                 | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+       | E2E Scenario 2_AARP | AARP | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=current&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     @UATUHC02 @regressionUHC
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 2_UHC | UHC  | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | E2E Scenario 2_UHC | UHC  | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=current&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
   @UATAARP02 @NextYear
     Examples:

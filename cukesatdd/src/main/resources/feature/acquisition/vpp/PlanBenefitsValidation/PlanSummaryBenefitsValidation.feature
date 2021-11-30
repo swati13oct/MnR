@@ -117,6 +117,16 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                       | workSheet      | site |
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_3 | AARP |
+      
+     @2022planSummaryBenefitsProd_1
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | ProdSheet2022_1 | AARP |
+
+   @2022planSummaryBenefitsProd_2
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | ProdSheet2022_2 | AARP |
 
   # Below are examples for UHC plan Summary benefits
   @planSummary_ExcelValidation @2022planSummaryBenefitsUHC @2022planSummaryBenefits
@@ -236,6 +246,15 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet      | site |
       | Plan Summary Benefits_Data_2022 | PDPSheet2022_3 | UHC  |
 
+ 	@2022planSummaryBenefitsProd01
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | ProdSheet2022_1 | UHC |
+
+   @2022planSummaryBenefitsProd02
+    Examples: 
+      | excelPath                       | workSheet    | site |
+      | Plan Summary Benefits_Data_2022 | ProdSheet2022_2 | UHC |
   #2021 Plans
   @planSummary_ExcelValidation @2021planSummaryAARP
   Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>

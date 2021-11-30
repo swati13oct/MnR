@@ -21,7 +21,7 @@ public class KeywordSearchAARPMobile extends GlobalWebElements {
 		checkModelPopup(driver);
 	}
 	
-	@FindBy(id = "search-field")
+	@FindBy(css = "#search-field")
 	private WebElement search;
 	
 	@FindBy(xpath="//input[@type='button']")

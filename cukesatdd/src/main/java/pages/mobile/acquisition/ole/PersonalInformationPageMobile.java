@@ -37,22 +37,22 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath ="//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button1' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(css = "#ole-cancel-confirm")
 	private WebElement CancellationModal;
 
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	//Right Rail Elements
@@ -60,7 +60,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -80,7 +80,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Last Name')]//..")
 	private WebElement LastNameDisplay;
 
-	@FindBy(id = "dob")
+	@FindBy(css = "#dob")
 	private WebElement DOBtxtFld;
 	
 	@FindBy(xpath = "//input[contains(@id,'homephnnum')]")
@@ -95,31 +95,31 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id,'goGreenYes')]")
 	private WebElement goGreenYesBtn;
 	
-	//@FindBy(id = "goGreenNo")
+	//@FindBy(css = "#goGreenNo")
 	@FindBy(xpath = "//input[contains(@id,'goGreenNo')]")
 	private WebElement goGreenNoBtn;
 	
-	//@FindBy(id = "emailConfirmationNo")
+	//@FindBy(css = "#emailConfirmationNo")
 	@FindBy(xpath = "//input[contains(@id,'emailConfirmationNo')]")
 	private WebElement emailConfirmationNoBtn;
 	
-	//@FindBy(id = "emailConfirmationYes")
+	//@FindBy(css = "#emailConfirmationYes")
 	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
 	private WebElement emailConfirmationYesBtn;
 
-	@FindBy(id = "genderMale")
+	@FindBy(css = "#genderMale")
 	private WebElement GenderSelectMale;
 
-	@FindBy(id = "genderFemale")
+	@FindBy(css = "#genderFemale")
 	private WebElement GenderSelectFemale;
 
-	@FindBy(id = "address1")
+	@FindBy(css = "#address1")
 	private WebElement PermanentAdd_Street;
 
 	@FindBy(xpath = "//input[@id='address2']")
 	private WebElement PermanentAdd_Aptno;
 
-	@FindBy(id = "city")
+	@FindBy(css = "#city")
 	private WebElement PermanentAdd_City;
 
 	@FindBy(xpath = "//*[contains(text(), 'State:')]//..")
@@ -128,20 +128,20 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Zip Code:')]//..")
 	private WebElement ZipDisplay;
 
-	@FindBy(id = "sameMailingAddressYes")
+	@FindBy(css = "#sameMailingAddressYes")
 	private WebElement SameMailingAddressYes;
 
-	@FindBy(id = "sameMailingAddressNo")
+	@FindBy(css = "#sameMailingAddressNo")
 	private WebElement SameMailingAddressNo;
 
-	@FindBy(id = "address10")
+	@FindBy(css = "#address10")
 	private WebElement MailingAdd_Street;
 	
-	@FindBy(id = "address20")
+	@FindBy(css = "#address20")
 	private WebElement MailingAdd_Aptno;
 
 
-	@FindBy(id = "city0")
+	@FindBy(css = "#city0")
 	private WebElement MailingAdd_City;
 
 	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state0']")
@@ -150,7 +150,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='zipCode0' or @id = 'Zip0']")
 	private WebElement MailingAdd_Zip;
 
-	@FindBy(id = "emailAddressQuestion.emailAddress")
+	@FindBy(xpath = "//*[contains(@id,'emailAddressQuestion.emailAddress')]")
 	private WebElement Email;
 	
 	@FindBy(xpath="//*[@id='firstName' or @id = 'FirstName']")
@@ -287,12 +287,20 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (MailingQuestion.equalsIgnoreCase("no")) {
 				jsClickNew(SameMailingAddressNo);
 
+			
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
 				sendkeysMobile(MailingAdd_City, Mailing_City);
-				// Select SelectState = new Select(MailingAdd_State_DropDown);
-				// SelectState.selectByValue(Mailing_State);
+				
+				//Select SelectState = new Select(MailingAdd_State_DropDown);
+				//SelectState.selectByValue(Mailing_State);
+
+				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+				driver.findElement(By.xpath("//label[@for='state0']")).click(); 
+				
+				
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+			
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 			}
 		}		
@@ -409,16 +417,20 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		sendkeysMobile(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeysMobile(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
-		if(MailingQuestion.equalsIgnoreCase("no")){
-			jsClickNew(SameMailingAddressNo);
-			
-			sendkeysMobile(MailingAdd_Street,Mailing_Street);
-			sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
-			sendkeysMobile(MailingAdd_City,Mailing_City);
-			Select SelectState = new Select(MailingAdd_State_DropDown);
-			SelectState.selectByValue(Mailing_State);
-			sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
-					}
+			if (MailingQuestion.equalsIgnoreCase("no")) {
+				jsClickNew(SameMailingAddressNo);
+
+				sendkeysMobile(MailingAdd_Street, Mailing_Street);
+				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
+				sendkeysMobile(MailingAdd_City, Mailing_City);
+				// Select SelectState = new Select(MailingAdd_State_DropDown);
+				// SelectState.selectByValue(Mailing_State);
+				if (driver.getClass().toString().contains("IOS")) {
+					driver.findElement(By.xpath("(//span[@class='req-asterisk'])[1]")).click();
+				}
+				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+			}
 		}		
 		result= Clickoncontinuebutton("phone-number");
 		if(result) {

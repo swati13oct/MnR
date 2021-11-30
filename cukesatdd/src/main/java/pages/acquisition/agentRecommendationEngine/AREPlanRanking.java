@@ -114,7 +114,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "a[dtmname*=' Drugs']")
 	private WebElement AddDrugsLink;
 
-	@FindBy(css = "a[dtmname*=' Doctors']")
+	@FindBy(xpath = "//a//span[contains(text(),'Doctors')]")
 	private WebElement AddDoctorsLink;
 
 	@FindBy(css = "a[dtmname*=' Hospitals']")
@@ -132,7 +132,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
 	private List<WebElement> viewplandetailslink;
 
-	@FindBy(css = "#enroll-row th")
+	@FindBy(css = "button[class*='moreOptionsbtn']")
 	private List<WebElement> enrollBtn;
 	
 	@FindBy(css = "#highlights a[dtmid*='cta_acq_plans_detail']")
@@ -451,6 +451,7 @@ public class AREPlanRanking extends UhcDriver {
 		if (plansName.size() != viewplandetails.size()) {
 			for (int i = 0; i < viewplandetails.size(); i++) {
 					 if(i>3) {
+						 validate(viewMorePlansinPlanCompare);
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
@@ -460,6 +461,7 @@ public class AREPlanRanking extends UhcDriver {
 		} else {
 				for (int i = 0; i < viewplandetails.size(); i++) {
 					if(i>3) {
+						validate(viewMorePlansinPlanCompare);
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
@@ -472,7 +474,7 @@ public class AREPlanRanking extends UhcDriver {
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
 		String actualplanName = "";
 		String exceptedplanName = plan.getText().toUpperCase().trim();
-		planInPDP = planInPDP.findElement(By.cssSelector(" button[class*='moreOptionsbtn']"));
+//		planInPDP = planInPDP.findElement(By.cssSelector("button[class*='moreOptionsbtn']"));
 		System.out.println("MoreOption in Plan Compare Page: " + planInPDP.getText());
 		threadsleep(2000);
 		jsClickNew(planInPDP);
@@ -643,7 +645,7 @@ public class AREPlanRanking extends UhcDriver {
 		saveplan.click();
 		String save = saveplanOption.getText().trim();
 		if (save.equalsIgnoreCase("Save Plan")) {
-			saveplan.click();
+			saveplanOption.click();
 		} else {
 			saveplanOption.click();
 			threadsleep(2000);
@@ -704,7 +706,7 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		// Checking and Changing Future Year
-		if (year.equalsIgnoreCase("future")) {
+		else if (year.equalsIgnoreCase("future")) {
 			if (validate(planYear, 10)) 
 				futurePlanYear.click();
 			} 		
@@ -729,7 +731,7 @@ public class AREPlanRanking extends UhcDriver {
 			if (validate(planYear, 10)) {
 				int nxtYear = Integer.parseInt(curYear) + 1;
 				if(futurePlanYear.getAttribute("aria-selected").equalsIgnoreCase("true") )
-					Assert.assertTrue(futurePlanYear.findElement(By.cssSelector(">div")).getText().trim().contains(String.valueOf(nxtYear)),
+					Assert.assertTrue(futurePlanYear.findElement(By.cssSelector("div")).getText().trim().contains(String.valueOf(nxtYear)),
 						"Future Year is not set by default");
 			}
 		}
@@ -1198,7 +1200,7 @@ public class AREPlanRanking extends UhcDriver {
 		threadsleep(5000);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for(int i=1;i<=totalnumberofplans;i++) {
-			WebElement estimate = estimateMedicalCostvalue.get(i);
+			WebElement estimate = estimateMedicalCostvalue.get(i-1);
 			String estimateCost = (String) (js.executeScript("return arguments[0].textContent;", estimate).toString());
 			estimateMCE.add(estimateCost.trim());
 		}

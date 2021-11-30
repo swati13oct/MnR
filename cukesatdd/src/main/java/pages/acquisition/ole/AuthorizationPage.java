@@ -127,39 +127,58 @@ public class AuthorizationPage extends UhcDriver{
 	}
 
 	public boolean validate_required_field() throws InterruptedException {
+//		boolean validation_Flag = true;
+//		if(NextBtn.isEnabled()){
+//			System.out.println("Next Button is Enabled : Required fields present");
+//			//validateNew(SoU_DisagreeRadio);
+//			jsClickNew(SoU_DisagreeRadio);
+//			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
+//				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
+//				validation_Flag = true;
+//			}
+//			else{
+//				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
+//				validation_Flag = false;
+//			}
+///*			if(validate(SoU_AgreeRadio)){
+//				SoU_AgreeRadio.click();
+//			}
+//			if(validate(AuthorizedRepresentativeRadio)){
+//				AuthorizedRepresentativeRadio.click();
+//			}*/
+//			jsClickNew(SoU_AgreeRadio);
+//			AuthorizedRepresentativeRadio.click();
+//			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName)
+//					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
+//					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
+//				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is enabled");
+//				validation_Flag = (!validation_Flag)?false:true;
+//			}
+//			else{
+//				System.out.println("Next Button is enabled : Required Field Validation Failed");
+//				validation_Flag = false;
+//			}
+//			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
+//			//Thread.sleep(6000);
+//			jsClickNew(ApplicantRadio);
+//			if(NextBtn.isEnabled()){
+//				validation_Flag = (!validation_Flag)?false:true;
+//				System.out.println("Validation Passed : All required fields are entered");
+//			}
+//			else{
+//				System.out.println("All required Fields are entered : Next Button is disabled");
+//				validation_Flag = false;
+//			}
+//		}
+//		else{
+//			System.out.println("Next Button is enabled : Required Field Validation Failed");
+//			validation_Flag = false;
+//		}
+//		return validation_Flag;
+
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
-			//validateNew(SoU_DisagreeRadio);
-			jsClickNew(SoU_DisagreeRadio);
-			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
-				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
-				validation_Flag = true;
-			}
-			else{
-				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
-				validation_Flag = false;
-			}
-/*			if(validate(SoU_AgreeRadio)){
-				SoU_AgreeRadio.click();
-			}
-			if(validate(AuthorizedRepresentativeRadio)){
-				AuthorizedRepresentativeRadio.click();
-			}*/
-			jsClickNew(SoU_AgreeRadio);
-			AuthorizedRepresentativeRadio.click();
-			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
-					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
-					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
-				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is enabled");
-				validation_Flag = (!validation_Flag)?false:true;
-			}
-			else{
-				System.out.println("Next Button is enabled : Required Field Validation Failed");
-				validation_Flag = false;
-			}
-			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
 			jsClickNew(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
@@ -206,7 +225,7 @@ public class AuthorizationPage extends UhcDriver{
 				validation_Flag = false;
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
+		//	Thread.sleep(6000);
 			//jsClickNew(ApplicantRadio);
 			
 			jsClickNew(AuthorizedRepresentativeRadio);
@@ -279,7 +298,7 @@ public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws In
 			}
 			
 			jsClickNew(SoU_AgreeRadio);		
-			Thread.sleep(6000);
+		//	Thread.sleep(6000);
 			}
 		}
 		return validation_Flag;

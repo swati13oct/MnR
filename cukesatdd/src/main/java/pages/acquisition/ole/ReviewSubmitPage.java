@@ -207,7 +207,7 @@ public class ReviewSubmitPage extends UhcDriver{
 //	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
 	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
-	
+
 	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number') or contains(text(), 'Home Phone Number')]//following-sibling::*")
 	private WebElement PrimaryPhoneNo;
 	
@@ -217,7 +217,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
 	private WebElement EmailConfirmationNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?') or contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
 	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -357,11 +357,11 @@ public class ReviewSubmitPage extends UhcDriver{
 
 		validateNew(SubmitApplicationBtn);
 		scrollToView(SubmitApplicationBtn);
-		Thread.sleep(4000);
+	//	Thread.sleep(4000);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
 		//threadsleep(3000);
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
@@ -529,6 +529,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
 				}
 				flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
+
 				flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
@@ -595,6 +596,7 @@ public class ReviewSubmitPage extends UhcDriver{
 					}
 					else flag = false;
 				}else flag = false;
+
 				if(validate(SubmitApplicationBtn)){
 					if(SubmitApplicationBtn.isEnabled()){
 						//flag = (!flag)?false:true;
@@ -691,11 +693,11 @@ public class ReviewSubmitPage extends UhcDriver{
 		claimNumberField.clear();
 		validateNew(claimNumberField);
 		sendkeysNew(claimNumberField, MedicareNumber1);
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
 	//	sendkeysNew(medicaidNumberField,"12345876");
-		Thread.sleep(5000);
+	//	Thread.sleep(5000);
 	/*try {
 		if (partAStartDateField.isDisplayed() || partBStartDateField.isDisplayed()) {
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
@@ -709,6 +711,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	}
 	catch (Exception e){
 				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
+
 			}
 		*/	
 		

@@ -124,7 +124,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void validatePlanCompareEmailThankYouMessage() {
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			scrollToView(validateemailbutton);
@@ -133,7 +133,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 			scrollToView(validateemailbutton);
 			jsClickNew(validateemailbutton);
-			// pageloadcomplete();
+			// CommonUtility.checkPageIsReadyNew(driver);
 			// Validating email popup
 			validate(leavingcomapreplansitepopup);
 			System.out.println("!!!Leaving site popup is displayed ===>");

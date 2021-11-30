@@ -1,6 +1,7 @@
 #Author: Naveen BK
 #created Date:04/06/2020
-@shopperProfile
+#nonProd tags used to negate running these flows in offline and prod. - Aayush 10/11
+@shopperProfile @nonProd
 Feature: 1.09. ACQ- Shopper Profile
 
   @searchProfileEmail @SanitySP @regressionSP
@@ -51,8 +52,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileName
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -99,8 +100,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @stage123 @regressionSPStage @sanity @regressionAARP
     Examples: 
-      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                             |
-      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD:825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
   @searchProfileAndAddPlans @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -186,7 +187,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
     @stage_AddDrugs @regressionSPStage @sanity @regressionAARP
-    Examples:
+    Examples: 
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | 5240993c-4ca5-41f2-8e16-f05272590b43 | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
@@ -291,41 +292,6 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-  #@searchProfileEmptyFields
-  #Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate empty email firstname and lastname
-  #
-  #Examples:
-  #| username  | password  |
-  #| qavgogine | qavgogine |
-  #
-  #@searchProfileInvalidEmail
-  #Scenario Outline: Telesales agent searching for the profile using invalid Email
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate invalid email
-  #| Email | <email> |
-  #
-  #Examples:
-  #| username  | password  | email     |
-  #| qavgogine | qavgogine | yy!ue.com |
-  #
-  #@searchProfileInvalidFnameLname
-  #Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
-  #Given I am an agent logged into the cloak in tool
-  #| User Name | <username> |
-  #| Password  | <password> |
-  #Then validate invalid first name and last name
-  #| First Name | <fname> |
-  #| Last Name  | <lname> |
-  #
-  #Examples:
-  #| username  | password  | fname    | lname     |
-  #| qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
   @createProfileMemberSP @regressionSPStage @regressionAARP
   Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
@@ -402,3 +368,88 @@ Feature: 1.09. ACQ- Shopper Profile
     Examples: 
       | username | password     | email                  | dob        | mbi | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                                                                          | providers                                                                                                                                                                                     |
       | ocpuser2 | Password@123 | DFONNMUF@NONMEMBER.COM | 08/20/1946 |     | female | DFONNMUF | DFONNMUL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG,trazodone hcl TAB 50MG,simvastatin TAB 20MG,nifedipine TAB 60MG ER Osmotic,levothyroxine sodium (tablets) TAB 75MCG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
+
+  @PlanDetailPlanCompare @PRB0993334
+  Scenario Outline: Telesales agent validate navigation from plan details to plan compare
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
+    And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
+    Then the user clicks on Plan details link in new Plan Compare page
+    Then validate all available plans are shown on click of browser back
+
+    @team-e_searchProfileAndVPPPlanDetail @regressionSPTeamE
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers |
+      | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        |
+
+    @stage_searchProfileAndVPPPlanDetail @PRB0993334
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers |
+      | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        |
+
+  @SPBaseLinePopup @F700755
+  Scenario Outline: Telesales agent validate navigation from plan details to plan compare
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
+    And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
+    Then validate base line benefit popup
+      | Plan Name              | <planName>             |
+      | Medical Deductible     | <medicalDeductible>    |
+      | Primary Care Physician | <primaryCarePhysician> |
+      | Specialist             | <specialist>           |
+
+    @team-e_searchProfileAndVPPPlanDetail @regressionSPTeamE
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician          | specialist                     |
+      | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay | In: $45 copay / Out: $65 copay |
+
+    @stage_searchProfileAndVPPPlanDetail @SPBaseLinePopupStage
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician          | specialist                     |
+      | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay | In: $45 copay / Out: $65 copay |

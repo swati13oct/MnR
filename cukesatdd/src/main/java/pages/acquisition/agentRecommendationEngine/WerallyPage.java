@@ -171,6 +171,11 @@ public class WerallyPage extends UhcDriver {
 			for (int j = 0; j < doclist.length; j++) {
 				String docInfo = doclist[j];
 				if (docInfo.trim().length() > 0) {
+					if(!validate(searchBox, 30)) {
+						validate(findCarebutton, 20);
+						jsClickNew(findCarebutton);
+						threadsleep(2000);
+					}
 					validate(searchBox, 30);
 					searchBox.sendKeys(docInfo);
 					threadsleep(2000);

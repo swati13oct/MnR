@@ -15,9 +15,9 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionCampaignExternalLinksNewLPM.json",
 						"timeline:target" },
-				tags = "@StageLPP", dryRun=false)												
+				tags = "@regressionAARP", dryRun=false)												
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionCampaignExternalLinksNewLPM extends BaseTestConfig{
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

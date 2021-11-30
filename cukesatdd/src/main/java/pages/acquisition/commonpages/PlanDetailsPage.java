@@ -127,7 +127,8 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement planCostsTab;
 
 	// Right Rail Element - TFN
-	@FindBy(xpath = "//*[@class='tel ng-binding']")
+//	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
 	private WebElement RightRail_TFN;
 
 	// @FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
@@ -762,12 +763,10 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public String getPlanPremium(String PlanName) {
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		System.out.println("Plan Name is : " + PlanName);
 
 		String PlanPremium = PremiumForPlan.getText();
@@ -785,12 +784,12 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
 
-		try {
+		/*try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		try {
@@ -805,12 +804,12 @@ public class PlanDetailsPage extends UhcDriver {
 
 		jsClickNew(EnrollinPlan);
 
-		try {
+	/*	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		// if (driver.getCurrentUrl().contains("enrollment"))
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -2090,5 +2089,62 @@ public String GetMonthlyPremiumValue() {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+
+
+	@FindBy(xpath = "//a[contains(@dtmname, 'drug payment stages')]")
+	public WebElement CoverageStagesLnk;
+
+	@FindBy(xpath = "//*[contains(@class, 'paymentStages')]")
+	public WebElement CoverageStages_Modal;
+
+	@FindBy(xpath = "//a[contains(@class, 'modal-close')][contains(text(), 'Close')]")
+	public WebElement CoverageStages_ModalClose;
+
+	@FindBy(xpath = "//*[contains(@class, 'paymentStages')]//p[contains(text(), 'Initial Coverage')]")
+	public WebElement CoverageStages_Modal_Initial;
+
+	@FindBy(xpath = "//*[contains(@class, 'paymentStages')]//p[contains(text(), 'During the Coverage Gap')]")
+	public WebElement CoverageStages_Modal_CoverageGap;
+
+	@FindBy(xpath = "//*[contains(@class, 'paymentStages')]//p[contains(text(), 'Catastrophic')]")
+	public WebElement CoverageStages_Modal_Catastrophic;
+
+	private static String INITIAL_COVERAGE_TEXT_NextYear = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs paid by you (or others on your behalf) and the plan reach $4,430, you then move to the Coverage Gap Stage.";
+	private static String COVERAGE_GAP_TEXT_NextYear = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% on brand name drugs and generics for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $7,050 in year-to-date out-of-pocket costs.";
+	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay the greater of 5% drug cost or $3.95 for generic/preferred multi-source drugs and $9.85 for all others.";
+
+
+	public void openValidateCoverageStageText() {
+		validateNew(CoverageStagesLnk);
+		jsClickNew(CoverageStagesLnk);
+		validateNew(CoverageStages_Modal);
+		validateNew(CoverageStages_ModalClose);
+
+		validateNew(CoverageStages_Modal_Initial);
+		String ActualText = CoverageStages_Modal_Initial.getText().trim();
+		System.out.println("Initial Coverage Stage Modal PopUp Text - "+ActualText);
+		if (ActualText.contains(INITIAL_COVERAGE_TEXT_NextYear)) {
+			System.out.println("Correct Modal Text displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else {
+			Assertion.fail(
+					">>>>> Expected Initial Coverage Stage Text - "+INITIAL_COVERAGE_TEXT_NextYear+"; Actual - "+ActualText+" <<<<<");
+		}
+		ActualText = CoverageStages_Modal_CoverageGap.getText().trim();
+
+		if (ActualText.contains(COVERAGE_GAP_TEXT_NextYear)) {
+			System.out.println(
+					"Correct Modal Text displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Coverage Gap Stage text - "+COVERAGE_GAP_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_CoverageGap.getText()+" <<<<<");
+		ActualText = CoverageStages_Modal_Catastrophic.getText().trim();
+
+		if (ActualText.contains(CATASTROPHIC_TEXT_NextYear)) {
+			System.out.println(
+					"Correct Modal Text displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_Catastrophic.getText()+" <<<<<");
 	}
 }

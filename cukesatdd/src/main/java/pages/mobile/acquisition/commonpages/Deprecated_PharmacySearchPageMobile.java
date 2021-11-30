@@ -30,28 +30,28 @@ import pages.acquisition.commonpages.PageTitleConstants;
  */
 public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 
-	@FindBy(id = "zipcodeTxt")
+	@FindBy(css = "#zipcodeTxt")
 	private WebElement zipcodeField;
 
-	//tbd-remove @FindBy(id = "plan-year-label")
+	//tbd-remove @FindBy(css = "#plan-year-label")
 	//tbd-remove private WebElement planYeartext;
 
-	@FindBy(id = "zipcode-button")
+	@FindBy(css = "#zipcode-button")
 	private WebElement searchbtn;;
 
-	@FindBy(id = "selectmultycounty_box")
+	@FindBy(css = "#selectmultycounty_box")
 	private WebElement countyPopOut;
 
-	@FindBy(id = "showpharmacycount_id")
+	@FindBy(css = "#showpharmacycount_id")
 	private WebElement pharmacyCount;
 
-	@FindBy(id = "zipcodeTxt")
+	@FindBy(css = "#zipcodeTxt")
 	private WebElement txtZipCode;
 
-	@FindBy(id = "address")
+	@FindBy(css = "#address")
 	private WebElement txtAddress;
 
-	@FindBy(id = "city")
+	@FindBy(css = "#city")
 	private WebElement txtCity;
 
 	//tbd-remove @FindBys(value = { @FindBy(xpath = "//select[@id='plan-type']/option") })
@@ -63,13 +63,13 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
 
-	@FindBy(id = "pharmacies")
+	@FindBy(css = "#pharmacies")
 	private WebElement allPharmacies;
 
-	@FindBy(id = "services")
+	@FindBy(css = "#services")
 	private WebElement particularServices;
 
-	@FindBy(id = "find_searchbtn")
+	@FindBy(css = "#find_searchbtn")
 	private WebElement searchPharmaciesButton;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
@@ -81,10 +81,10 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[@id='plan-type']/option")
 	private List<WebElement> selectPlandropdown;
 
-	@FindBy(id = "pharmacy-preffered")
+	@FindBy(css = "#pharmacy-preffered")
 	private WebElement preferredPharmacy;
 
-	//tbd-remove @FindBy(id = "pharmacy-standard")
+	//tbd-remove @FindBy(css = "#pharmacy-standard")
 	//tbd-remove private WebElement standardPharmacy;
 
 	@FindBys(value = { @FindBy(xpath = "//ul[@id='pharm_services']/li") })
@@ -96,28 +96,28 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='medicareTitle']/h1")
 	private WebElement pharmacyResultHeader;
 
-	@FindBy(id = "state_select")
+	@FindBy(css = "#state_select")
 	private WebElement drpState;
 
-	@FindBy(id = "plan-type")
+	@FindBy(css = "#plan-type")
 	private WebElement drpPlan;
 
-	@FindBy(id = "plan-year")
+	@FindBy(css = "#plan-year")
 	private WebElement drpYear;
 
 	@FindBy(css = "#zipcode-button>span")
 	private WebElement btnContinue;
 
-	@FindBy(id = "services")
+	@FindBy(css = "#services")
 	private WebElement pharmacyTypeSelectionRadioButton;
 
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
 	private WebElement language;
 
-	//tbd-remove @FindBy(id = "plan-type")
+	//tbd-remove @FindBy(css = "#plan-type")
 	//tbd-remove private WebElement planType;
 
-	//tbd-remove @FindBy(id = "plan-year")
+	//tbd-remove @FindBy(css = "#plan-year")
 	//tbd-remove private WebElement planYearsel;
 
 	//tbd-remove @FindBy(xpath = "//div[contains(@class,'callus')]")
@@ -151,13 +151,13 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	private List<WebElement> pharmacyListItems;
 
-	@FindBy(id = "createpdf_id")
+	@FindBy(css = "#createpdf_id")
 	private WebElement resultAsPDF;
 
 	@FindBy(xpath = "//*[@id='15ec5a30-0a71-4aaa-b7df-074986ec97a9_toolTip']/parent::p")
 	private WebElement standardNetworkPharmacy;
 
-	@FindBy(id = "pharmacylocatorheader_id")
+	@FindBy(css = "#pharmacylocatorheader_id")
 	private WebElement pharmacylocatorheader;
 
 	@FindBy(className = "loading-block")
@@ -181,7 +181,7 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'callus')]")
 	private WebElement questionsRightRailWidget;
 
-	@FindBy(id = "lang-select")
+	@FindBy(css = "#lang-select")
 	private WebElement langDropdown;
 
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
@@ -190,13 +190,13 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'ÃƒÂ¤Ã‚Â½Ã‚Â¿ÃƒÂ§Ã¢Â€Â�Ã‚Â¨ÃƒÂ§Ã‚Â¶Ã‚Â²ÃƒÂ¤Ã‚Â¸Ã…Â ÃƒÂ¥Ã¯Â¿Â½Ã¯Â¿Â½ÃƒÂ¥Ã¢Â€Â Ã…Â ÃƒÂ¦Ã¯Â¿Â½Ã…Â“ÃƒÂ¥Ã‚Â°Ã¢Â€Â¹ÃƒÂ¨Ã¢Â€Â�?Ã‚Â¥ÃƒÂ¦Ã‹Â†Ã‚Â¿ÃƒÂ¥Ã¢Â€Â™Ã…Â’ÃƒÂ¨Ã¢Â€Â�?Ã‚Â¥ÃƒÂ¦Ã‹Â†Ã‚Â¿ÃƒÂ¤Ã‚Â½Ã¯Â¿Â½ÃƒÂ§Ã‚Â½Ã‚Â®ÃƒÂ£Ã¢Â‚Â¬Ã¢Â€Âš')]")
 	private WebElement pharmacyBodyContentChinese;
 
-	@FindBy(id = "distance")
+	@FindBy(css = "#distance")
 	private WebElement distanceDropownID;
 	
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(id = "multiCountyCancelBtn")
+	@FindBy(css = "#multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
 
 	@FindBy(id="indian-tribal-label")
@@ -214,7 +214,7 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(@id, 'pharmacylocatorheader')]")
 	protected WebElement PharmacyLocatorPageHeader;
 
-	@FindBy(id = "distance")
+	@FindBy(css = "#distance")
 	protected WebElement distanceDropDownField;
 
 	@FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and not(contains(@class,'ng-hide'))]")
@@ -236,10 +236,10 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	private WebElement pdf_WalgreenPlans;
 
-	@FindBy(id = "zipcode-button")
+	@FindBy(css = "#zipcode-button")
 	protected WebElement continueField;
 
-	@FindBy(id = "plan-type")
+	@FindBy(css = "#plan-type")
 	protected WebElement PlanNameDropDown;
 
 	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
@@ -278,10 +278,10 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div/div/div/div/main/div/div[4]/div/div[4]/div[1]/div[1]")
 	protected WebElement TFNwidget;
 
-	@FindBy(id = "goto-header-first")
+	@FindBy(css = "#goto-header-first")
 	protected WebElement iPerceptionBody;  	// iperception pop up objects
 
-	@FindBy(id = "closeButton")
+	@FindBy(css = "#closeButton")
 	protected WebElement iPerceptionCloseButton;
 
 	@FindBy(className = "loading-block")

@@ -16,23 +16,23 @@ import atdd.framework.UhcDriver;
 
 public class VPPRequestSendEmailPageMobile extends UhcDriver {
 	
-	@FindBy(id = "updates-first-name")
+	@FindBy(css = "#updates-first-name")
 	private WebElement firstNameField;
 	
-	@FindBy(id = "updates-last-name")
+	@FindBy(css = "#updates-last-name")
 	private WebElement lastNameField;
 	
-	@FindBy(id = "updates-email")
+	@FindBy(css = "#updates-email")
 	private WebElement emailAddressField;	
 
 	
 	@FindBy(xpath = "//div[@class='rightraillink']/img")
 	private WebElement plusSign;
 	
-	@FindBy(id = "signUp")
+	@FindBy(css = "#signUp")
 	WebElement submitEmailButton;
 	
-	@FindBy(id = "po7modalmessage")
+	@FindBy(css = "#po7modalmessage")
 	private WebElement messagePopup;
 	
 	@FindBy(xpath = "//div[@id='po7modalmessage']/div/div/h3")

@@ -23,32 +23,34 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown list
-      | Current Year Plan Name | <cy_planName> |
+     | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
-      | Next Year Plan Year    | <ny_planYear> |
+     | Next Year Plan Year    | <ny_planYear> |
+#   And the user selects plan year toggle
+#      | Plan Year | <planyear> |
     #Then the user validates the Pharmacies available
     #  | Language | English |
-    And the user validate tooltips on filters
-      | Language                                   | English                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+#    And the user validate tooltips on filters
+#      | Language                                   | English                 |
+#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
     Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
-    And the user validate get direction link
+    #And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
     #  @pharmacylocatorAARP01a
     @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
     Examples: 
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2021     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
   @PharmacyLocatorCommonAARP01a @NextYear
     Examples:
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2022     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
      @prodRegression @regressionAARP @vbfGate
     Examples: 
@@ -142,13 +144,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2022 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     #@pharmacylocatorAARP02b
-    @PharmacyLocatorCommonAARP02b @regressionAARP
+    @PharmacyLocatorCommonAARP02b @regressionAARP 
     Examples: 
       | TID   | site | zipcode | distance | countyName      | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15583 | AARP |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2022 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | AARP |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2022 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | AARP |   14867 |       25 | Tompkins County |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2022 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2022 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | AARP |   33321 |       10 | None            |        2021 | MedicareMax (HMO)                        |        2022 | MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
   @PharmacyLocatorCommonAARP02a @NextYear
     Examples:
@@ -292,6 +294,8 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to plan summary" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
@@ -299,13 +303,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @NextYear
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | AARP |   19019 | Iowa County | No              | MAPD     |
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear |
+      | AARP |   19019 | Iowa County | No              | MAPD     | future   |
 
     @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @NextYear
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | UHC  |   19019 | Iowa County | No              | MAPD     |
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear |
+      | UHC  |   19019 | Iowa County | No              | MAPD     | future   |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -363,14 +367,14 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
       | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP)         |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC @NextYear
     Examples: 
       | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
       | UHC  |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       | UHC  |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)   |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site for page - <pageName>
     Given the user is on medicare acquisition site landing page
@@ -411,9 +415,9 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user validates the available plans for selected plan types
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -425,13 +429,13 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP
     Examples: 
-      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
-      | AARP | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear |  planName                        | path                                                                                                      |
+      | AARP | 90210   | NO              | Los Angeles County | PDP      | current  |  AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC
     Examples: 
-      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                                      |
-      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
+      | site | planyear   | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                                      |
+      | UHC  | current    |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Preferred Retail Pharmacy on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -442,7 +446,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -451,8 +455,8 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Then the user validates Get Started Page
     Then user click on breadcrumb "Return to Pharmacy Search" on get started page
     Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
-
-    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear
+	
+    @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear 
     Examples: 
       | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) |

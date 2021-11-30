@@ -583,7 +583,7 @@ public class VppPlanValidationStepDefinition {
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 									  //planSummaryPage.checkForMultiCountyPopup(countyName);
-									  //planSummaryPage.selectYearOption(planYear);
+									 // planSummaryPage.selectYearOption(planYear);
 									  //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);
 
                                       benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
@@ -640,6 +640,7 @@ public class VppPlanValidationStepDefinition {
 	//@Then("^the user navigates to OLE plan summary page and compares benefits value from excel to UI and reports into excel$")
 	@Then("^the user navigates to Welcome OLE page and compares premium value from excel to UI and reports into excel$")
 	public void exceldataValidation_OLE_planSummary(DataTable givenAttributes) throws Throwable {
+		//HashMap<String, Boolean> btnMap = new HashMap<String, Boolean>();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
@@ -753,14 +754,19 @@ public class VppPlanValidationStepDefinition {
 									planSummaryPage = new AepVppPlanSummaryPage(wd);
 									if (planType.equalsIgnoreCase("PDP")) {
 										result = true;
-										planSummaryPage.selectCounty(countyName);
-										planSummaryPage.Enroll_OLE_Plan(planName, planType);
+										planSummaryPage.selectCounty(countyName);	
+										//planSummaryPage.selectYearOptionOLE(planYear);
+										planSummaryPage.Enroll_OLE_Plan(planName, planType, planYear);
 										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										} else {
 					    					result = planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName, planType);
+					    					//btnMap = planSummaryPage.updatedEnroll_OLE_Plan_PlanDetails(planName, planType);
 										if (result) {
 											premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
 										}
+										/*if (btnMap.get("EnrollBtnDisplayed")){
+											premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex , highOptionDental, dentalPlatinum);
+										}*/
 									}
 								 }
 								if (result) {
@@ -792,6 +798,36 @@ public class VppPlanValidationStepDefinition {
 
 									}
 								}
+								
+								/*if (btnMap.get("EnrollBtnDisplayed")) {
+									if (!(currentColName.equalsIgnoreCase("plan year") ||
+											currentColName.equalsIgnoreCase("plan id qa script") ||
+											currentColName.equalsIgnoreCase("Contract PBP Segment ID") ||
+											currentColName.equalsIgnoreCase("Segment ID") ||
+											currentColName.equalsIgnoreCase("product focus") ||
+											currentColName.equalsIgnoreCase("dsnp sub type") ||
+											currentColName.equalsIgnoreCase("Error Count") ||
+											currentColName.equalsIgnoreCase("portal labels") ||
+											currentColName.equalsIgnoreCase("plan type") ||
+											currentColName.equalsIgnoreCase("county") ||
+											currentColName.equalsIgnoreCase("Link parameters") ||
+											currentColName.equalsIgnoreCase("product")  ||
+											currentColName.equalsIgnoreCase("Fips")
+									)) {
+                                        resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
+
+										if (resultMap.containsKey(false))
+											valueMatches = false;
+										System.out.println(currentColName + " : " + valueMatches);
+										if (valueMatches)
+											newCell.setCellStyle(stylePassed);
+										else {
+											newCell.setCellStyle(styleFailed);
+											failureCounter++;
+										}
+
+									}
+								}*/
 								//
 								/*if(currentColName.equalsIgnoreCase("Monthly Premium") && rowIndex != 0 && !result){
 										newCell.setCellValue("N/A");
@@ -840,10 +876,17 @@ public class VppPlanValidationStepDefinition {
 									 }
 								 }
 									 //	if(result){
-								if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0)
+								if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0) {
 									newCell.setCellValue(failureCounter);
-								else {
-									if (valueMatches) {            //if boolean value is true then it will write only the excel value from the input sheet and mark it green
+								}
+								/*else if (currentColName.equalsIgnoreCase("Save Plan Displayed") && rowIndex != 0)
+								{
+									newCell.setCellValue(btnMap.get("SaveBtnDisplayed"));
+								}
+								*/
+								
+								else{
+									if (valueMatches) {//if boolean value is true then it will write only the excel value from the input sheet and mark it green
 										//newCell.setCellValue(cell.getStringCellValue());
 										//if(!currentColName.equalsIgnoreCase("Monthly Premium")){
 											//if boolean value is true then it will write only the excel value from the input sheet and mark it green

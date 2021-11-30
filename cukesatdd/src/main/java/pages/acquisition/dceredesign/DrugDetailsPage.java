@@ -42,7 +42,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	@FindBy(xpath = "//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -90,7 +90,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_DrugsTxt;
 
-	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'You Pay')]")
+	@FindBy(xpath = "//div[@id='editdrugcontainer']//th//span[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
 	// @FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial
@@ -238,7 +238,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(xpath = "//*[@role='tabpanel' or @role='list']")
+	@FindBy(xpath = "//*[(@role='tabpanel' or @role='list') and contains(@class, 'uhc-list')]")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
@@ -1085,6 +1085,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public SwitchToGeneric clickSwitchGeneric(String brandDrug) {
 		WebElement SwitchLink = driver.findElement(By
 				.xpath("//*[contains(@id, 'drugtable')]//*[contains(@aria-label, 'Switch') and contains(@aria-label, '" +brandDrug+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, SwitchLink, 20);
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
@@ -2487,6 +2488,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//p[contains(@class, 'normal')]")
 	private WebElement CoverageStage_Modal_Text;
+
     private static String INITIAL_COVERAGE_TEXT = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,130 you then move to the Coverage Gap Stage.";
 	private static String COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $6,550 in year-to-date out-of-pocket costs.";
 	private static String CATASTROPHIC_TEXT = "You enter the Catastrophic Coverage Stage after $6,550 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.70 copay for generic drugs, $9.20 copay for brand name drugs or a 5% coinsurance, whichever is greater.";
@@ -2533,6 +2535,55 @@ public class DrugDetailsPage extends UhcDriver {
 					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
+
+
+	private static String INITIAL_COVERAGE_TEXT_NextYear = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,430 you then move to the Coverage Gap Stage.";
+	private static String COVERAGE_GAP_TEXT_NextYear = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $7,050 in year-to-date out-of-pocket costs.";
+	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 15% coinsurance, whichever is greater.";
+
+	public void validateCoveragestagePopUpTextNextYear() {
+		validateNew(MonthlyDrugStage_InitialCoverageLink);
+		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		validateNew(CoverageStage_Modal_Text);
+		String[] ExpectedTexts = INITIAL_COVERAGE_TEXT_NextYear.split("--");
+		String ActualText = CoverageStage_Modal_Text.getText().trim();
+		System.out.println("Initial Coverage Stage Modal PopUp Text - "+ActualText);
+		if (ActualText.contains(ExpectedTexts[0]) && ActualText.contains(ExpectedTexts[1]) && ActualText.contains(ExpectedTexts[2])
+				&& validateNew(InitialCoverage_Modal_Header)) {
+			System.out.println("Correct Modal Text displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else {
+			Assertion.fail(
+					">>>>> Expected Initial Coverage Stage Text - "+INITIAL_COVERAGE_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		}
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CoverageGapLink);
+		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		validateNew(CoverageStage_Modal_Text);
+		System.out.println("Coverage Gap Stage Modal PopUp Text - "+CoverageStage_Modal_Text.getText().trim());
+		if (CoverageStage_Modal_Text.getText().trim().equalsIgnoreCase(COVERAGE_GAP_TEXT_NextYear)
+				&& validateNew(CoverageGap_Modal_Header)) {
+			System.out.println(
+					"Correct Modal Text displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Coverage Gap Stage text - "+COVERAGE_GAP_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CatastropheLink);
+		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		validateNew(CoverageStage_Modal_Text);
+		System.out.println("Catastrophic Stage Modal PopUp Text - "+CoverageStage_Modal_Text.getText().trim());
+		if (CoverageStage_Modal_Text.getText().trim().equalsIgnoreCase(CATASTROPHIC_TEXT_NextYear)
+				&& validateNew(Catastrophe_Modal_Header)) {
+			System.out.println(
+					"Correct Modal Text displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		jsClickNew(StageInfo_Modal_DoneBtn);
+	}
+
 
 	@FindBy(xpath = "//*[contains(@id,'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]//following-sibling::div//p")
 	private List<WebElement> DefStPlan_LISCopayTexts;
@@ -2616,5 +2667,29 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(saveDrugs);
 		jsClickNew(saveDrugs);
 			}
-		
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement Enrollbtn;
+	public void ClickEnrollbtn(String Enroll_flag){
+		if(Enroll_flag.equalsIgnoreCase("true")){
+			if(validateNew(Enrollbtn)){
+				jsClickNew(Enrollbtn);
+				waitForPageLoadSafari();
+				if (driver.getCurrentUrl().contains("welcome")) {
+					System.out.println("OLE Welcome Page displayed ");
+					driver.navigate().back();
+					System.out.println("Validation Passed - Enroll option is displayed and OLE Welclme page is displayed on Enroll Btn click");
+				}
+			}
+			else
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is NOT displayed <<<<<");
+		}
+		else{
+			if(!validate(Enrollbtn))
+				System.out.println("Validation Passed for Enroll option not displayed");
+			else if(validateNew(Enrollbtn))
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
+		}
+	}
+
 }

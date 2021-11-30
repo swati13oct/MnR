@@ -84,7 +84,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//span[contains(text(), 'Continue')]//..")
 	private WebElement SelectPCPContinueBtn;
 	
-	@FindBy(xpath = "//*[@id='label_selectedMedicalGroup0']")
+	//@FindBy(xpath = "//*[@id='label_selectedMedicalGroup0']")
+	@FindBy(xpath = "//*[contains(@id,'label_selectedMedicalGroup0')]")
 	private WebElement SelectMedicalGrp;
 
 	@FindBy(xpath = "//*[contains(text(), 'Continue')]")
@@ -93,7 +94,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'assign-pcp-btn')]")
 	private WebElement AddProvider;
 
-	@FindBy(xpath = "//*[@class='provider-name pcp']")
+	@FindBy(xpath = "//*[contains(@class,'provider-name pcp')]")
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
@@ -201,7 +202,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		boolean validation_Flag = true;
 		if(validate(LookUpProviderBtn)){
 			String PCPWindow = driver.getWindowHandle();
-			
+
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
 			executor.executeScript("arguments[0].click();", LookUpProviderBtn);
 			//LookUpProviderBtn.click();
@@ -217,8 +218,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					driver.switchTo().window(winHandle);
 				}
 			}
-			CommonUtility.checkPageIsReadyNew(driver);
-			String CurrentURL = driver.getCurrentUrl();
+			CommonUtility.checkPageIsReadyNew(driver);			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Currnt URL - "+CurrentURL);
 			if(CurrentURL.contains("post-error")){
 				System.out.println("Provider look Up Button CLicked - Rally Provider Look up Error Page is displayed for Plan Type : "+planType);
@@ -244,34 +244,34 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 				}
 			}
 			else if(CurrentURL.contains("find-pcp")){
-				
+
 				//if(!planType.contains("SNP")){
-					if(validate(SelectPCPLink)){
-						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-						jsClickNew(SelectPCPLink);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						validateNew(filterBtn);
-			
-						if (AssinPCPLinks.size()>0){
+				if(validate(SelectPCPLink)){
+					System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
+					jsClickNew(SelectPCPLink);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					validateNew(filterBtn);
+
+					if (AssinPCPLinks.size()>0){
 						System.out.println("No of PCPs are Displayed : "+AssinPCPLinks.size());
-						}
-						WebElement firstPCP = AssinPCPLinks.get(0);
-						scrollToView(firstPCP);
-						jsClickNew(firstPCP);
-						CommonUtility.waitForPageLoadNew(driver,SelectPCPAddress, 30);
-						//firstPCP.click();
+					}
+					WebElement firstPCP = AssinPCPLinks.get(0);
+					scrollToView(firstPCP);
+					jsClickNew(firstPCP);
+					CommonUtility.waitForPageLoadNew(driver,SelectPCPAddress, 30);
+					//firstPCP.click();
 //						SelectPCPAddress.click();
-						jsClickNew(SelectPCPAddress);
-						executor = (JavascriptExecutor)driver;
-						executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
+					jsClickNew(SelectPCPAddress);
+					executor = (JavascriptExecutor)driver;
+					executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
 						/*try {
 							Thread.sleep(2000);
-							if(validate(ReviewPCPButton)){				
+							if(validate(ReviewPCPButton)){
 								jsClickNew(ReviewPCPButton);
 
 							}
@@ -280,84 +280,84 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}*/
-						//button[contains(text(),'Submit')]
+					//button[contains(text(),'Submit')]
 
-						//SelectPCPContinueBtn.click();
-						try {
-							Thread.sleep(2000);
-							if(validate(SelectMedicalGrp)){
+					//SelectPCPContinueBtn.click();
+					try {
+						Thread.sleep(2000);
+						if(validate(SelectMedicalGrp)){
 //								SelectMedicalGrp.click();
-								jsClickNew(SelectMedicalGrp);
-								executor = (JavascriptExecutor)driver;
-								executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
+							jsClickNew(SelectMedicalGrp);
+							executor = (JavascriptExecutor)driver;
+							executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
 
-							}
+						}
 
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						try {
-							Thread.sleep(3000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						
-						try {
-							Thread.sleep(2000);
-							if(validate(ReviewPCPButton)){				
-								jsClickNew(ReviewPCPButton);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-							}
 
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+					try {
+						Thread.sleep(2000);
+						if(validate(ReviewPCPButton)){
+							jsClickNew(ReviewPCPButton);
+
 						}
-						String PCPname = ProviderName.getText();					
-						executor = (JavascriptExecutor)driver;
-						executor.executeScript("arguments[0].click();", AddProvider);
-							
-						//AddProvider.click();
-						System.out.println("PCP selected : "+PCPname);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						driver.switchTo().window(PCPWindow);
-						if(driver.getCurrentUrl().contains("provider-search")){
-							System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
-							waitforElement(ProviderNameDisplay_PCPpage);
-							String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
-							if(PCPname.contains(ProviderNameDisplay)
-									&& validate(CurrentPCP_Question_Yes) && validate(CurrentPCP_Question_No)){
-								System.out.println("PCP Name is Displayed"+ProviderNameDisplay);
-								System.out.println("PCP Question and OPtions are Displayed");
-								validation_Flag = true;
-							}
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					String PCPname = ProviderName.getText();
+					executor = (JavascriptExecutor)driver;
+					executor.executeScript("arguments[0].click();", AddProvider);
+
+					//AddProvider.click();
+					System.out.println("PCP selected : "+PCPname);
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					driver.switchTo().window(PCPWindow);
+					if(driver.getCurrentUrl().contains("provider-search")){
+						System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
+						waitforElement(ProviderNameDisplay_PCPpage);
+						String ProviderNameDisplay = ProviderNameDisplay_PCPpage.getText();
+						if(PCPname.contains(ProviderNameDisplay)
+								&& validate(CurrentPCP_Question_Yes) && validate(CurrentPCP_Question_No)){
+							System.out.println("PCP Name is Displayed"+ProviderNameDisplay);
+							System.out.println("PCP Question and OPtions are Displayed");
+							validation_Flag = true;
 						}
 					}
-					else{
-						System.out.println("Rally Provider Lookup page is not displayed");
-						validation_Flag = false; 
-					}
+				}
+				else{
+					System.out.println("Rally Provider Lookup page is not displayed");
+					validation_Flag = false;
+				}
 			}
-			}
-			else{
-				System.out.println("Rally Provider Lookup page is not displayed");
-				validation_Flag = false; 
-			}
+		}
+		else{
+			System.out.println("Rally Provider Lookup page is not displayed");
+			validation_Flag = false;
+		}
 	/*
 		else{
 			System.out.println("Provider Look Up button is not displaye");
 			validation_Flag = false;
 		}*/
 		return validation_Flag;
-	
+
 	}
 
 
@@ -385,12 +385,10 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		boolean flag;
 		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
 		PCPSearchLink.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 		//WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
 			WebElement radioBtn = driver.findElement(By.xpath("	//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[contains(@class,'ng-star-inserted active')]"));
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("ng-star-inserted active");

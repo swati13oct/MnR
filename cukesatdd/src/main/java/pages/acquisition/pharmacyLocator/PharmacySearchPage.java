@@ -108,7 +108,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String expectedURL = "member/pharmacy-locator";
 		Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
 				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
-		driver.close();
+		//driver.navigate().back();
+		//driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
@@ -167,7 +168,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		String expectedURL = "member/pharmacy-locator";
 		Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
 				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
-		driver.close();
+		//driver.close();
 		driver.switchTo().window(winHandleBefore);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
@@ -524,7 +525,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	 * AL PEEHIP BYPASS KNOWN ISSUE -ticket INC12081940 - Walgreens widget on
 	 * doesn't show up for Chinese and Spanish page
 	 * 
-	 * @param planType
+	 * @param
 	 * @throws InterruptedException
 	 */
 	public void validatePharmacyWidgets(boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan,

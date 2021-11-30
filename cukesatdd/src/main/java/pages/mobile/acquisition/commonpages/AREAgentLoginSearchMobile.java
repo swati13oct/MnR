@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.agentRecommendationEngine.ARECommonutility;
 
@@ -58,7 +59,7 @@ public class AREAgentLoginSearchMobile extends UhcDriver {
 			username.sendKeys(user);
 			password.sendKeys(pass);
 			loginBtn.click();
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		Assert.assertTrue(validate(searchbox), "Login not success");
 	}

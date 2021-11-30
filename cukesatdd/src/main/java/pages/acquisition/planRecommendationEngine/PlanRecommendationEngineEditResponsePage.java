@@ -102,6 +102,9 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "button#viewPlanBtn")
 	private WebElement ViewProfileButton;
 	
+	@FindBy(css = ".modal-inner button[dtmname*='View Saved Plans']")
+	private WebElement ViewSavedPlansButton;
+	
 	@FindBy(css = "li.planTileGrid")
 	private List<WebElement> plantiles;
 	
@@ -113,10 +116,10 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "button[class*='saved-items-button']")
 	private WebElement mySavedItems ;
 	
-	@FindBy(css = "img[alt*='Shopping Cart']")
+	@FindBy(css = ".saved_items_container button[class*='mySavedItem']")
 	private WebElement ShoppingCartImg;
 		
-	@FindBy(css = "h3#guest-profile")
+	@FindBy(css = "#guest-saved-items-button >span")
 	private WebElement guestProfileLink;
 		
 	@FindBy(css = "h3#auth-profile")
@@ -154,7 +157,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "a#changeMyProviders")
 	private WebElement changeDocLink;
 	
-	@FindBy(css = "#doctors-warning")
+	@FindBy(css = "uhc-alert[class*='alert-error-message']")
 	private WebElement WarningDocMsg;
 
 	@FindBy(css = "#modal button[class*='primary']")
@@ -165,9 +168,18 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
 	private WebElement FirstRecommendationSectionPlanName;
+	
+	@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card button>span")
+	private WebElement FirstRecommendationSectionButton;
 
-@FindBy(css = "div[class*='log-in'] a")
-private WebElement signInLink;	
+	@FindBy(css = "div[class*='log-in'] a")
+	private WebElement signInLink;	
+	
+	@FindBy(css = "input#agreeButton")
+	private WebElement agreeButton;	
+	
+	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
+	private WebElement headerNavigationBarHomeTab;
 
 	// Variables
 
@@ -222,15 +234,17 @@ private WebElement signInLink;
 	
 	public String firstRecomPlanName = "";
 	public String planType = "";
+	ArrayList<String> savedplanName = new ArrayList<String>();
 	public String navigateSaveResultsPage() {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		scrollToView(headerNavigationBarHomeTab);
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
-		String curID = String.valueOf(Thread.currentThread().getId());
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
-		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
-		validate(saveYourResults, 10);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" for the flow "+planType);
+//		scrollToView(saveYourResults);
 		saveYourResults.click();
 		validate(saveResultsTitle);
 		validate(saveResultsPopupClose, 30);
@@ -245,8 +259,11 @@ private WebElement signInLink;
 			if(validate(SignInButton)) {
 				SignInButton.click();
 				signIn(username, password);
-			}else
+			}else {
+				validate(ViewSavedPlansButton);
+				ViewSavedPlansButton.click();
 				System.out.println("Authenciated profile already Signed In");
+			}
 		}
 		
 		
@@ -261,10 +278,11 @@ private WebElement signInLink;
 			guestProfileLink.click();
 			threadsleep(3000);
 		}else {
-			navigatePlanTypeFromMS(plantype);
+			browserBack();
+			threadsleep(3000);
 			navigateSaveResultsPage();
-			validateSaveResultModel(userType);
 			SignInButton.click();
+			threadsleep(2000);
 			signIn(username, password);
 			threadsleep(3000);
 		}
@@ -309,17 +327,18 @@ private WebElement signInLink;
 	
 	public void PRESaveResultModelBtn() {
 		SignInButton.click();
-		threadsleep(2000);
+		threadsleep(6000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
-		threadsleep(3000);
+		driver.navigate().back();
 		browserBack();
+		threadsleep(3000);
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 		CreateProfileButton.click();
-		threadsleep(2000);
+		threadsleep(6000);
 		Assert.assertTrue(driver.getCurrentUrl().contains("/registration"),"***Create One Healthcare ID Page Not Opened***");
+		driver.navigate().back();
 		threadsleep(3000);
-		browserBack();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
 	}
@@ -420,6 +439,12 @@ private WebElement signInLink;
 		else
 			returnToPlanLink.click();
 	}
+	
+	public void browserBackResult() {
+		String pageURL = driver.getCurrentUrl().replace("#/editmypreferences", "#/result");
+		driver.navigate().to(pageURL);
+		threadsleep(2000);
+	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
 		String UIInfo = getUISectionValue(section);
@@ -509,6 +534,7 @@ private WebElement signInLink;
 		String progressText = progressInfo.getText().toLowerCase();
 		Assert.assertTrue(progressText.contains(randomSection) && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
+		threadsleep(2000);
 		cancelButton.click();
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
@@ -638,7 +664,7 @@ private WebElement signInLink;
 	}
 	
 	public void addLocationEditResponse(HashMap<String, String> userInput) {
-		System.out.println("Change SpecialNeeds Options:");
+		System.out.println("Change Location Options:");
 		inputValues = userInput;
 		pageloadcomplete();
 //		navigateEditResponsePage(inputValues.get("Plan Type"));
@@ -648,9 +674,17 @@ private WebElement signInLink;
 		Assert.assertTrue(progressText.contains("location") && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
 		editValue("location");
-		validate(WarningDocMsg, 10);
-		Assert.assertTrue(WarningDocMsg.getText().contains("Warning:"), "Doctors Warning message is not displayed");
+		validate(WarningDocMsg, 10); 
+		Assert.assertTrue(WarningDocMsg.getText().trim().contains("Warning:"), "Doctors Warning message is not displayed");
 		System.out.println("******  Add Location Completed ******");
+	}
+	
+	public void validateSaveResults() {
+		System.out.println("Validating Save Results : ");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+		threadsleep(5000);
 	}
 
 	public void checkCoveragevalue(HashMap<String, String> userInput) {
@@ -663,11 +697,39 @@ private WebElement signInLink;
 		editValue("drugs");
 	}
 	
-	public void validateSaveResults() {
-		System.out.println("Validating Save Results : ");
+	public String RecomPlanName = "";
+	public String RecomplanType = "";
+	public void saveFirstRecom() {
+		System.out.println("Save #1 Recom PlanType and PlanName");
 		pageloadcomplete();
 		waitForPageLoadSafari();
-		navigateSaveResultsPage();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		scrollToView(headerNavigationBarHomeTab);
+		RecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		RecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
+		CommonConstants.firstRecommentionplanType.put(curID, planType);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+RecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+RecomplanType);
+		threadsleep(5000);
+	}
+	
+	public void editedFirstRecom() {
+		String editedRecomPlanName = "";
+		String editedRecomplanType = "";
+		System.out.println("Edited #1 Recom PlanType and PlanName");
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		String curID = String.valueOf(Thread.currentThread().getId());
+		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(curID);
+		String R1PlanType = CommonConstants.firstRecommentionplanType.get(curID);
+		scrollToView(headerNavigationBarHomeTab);
+		editedRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+editedRecomPlanName);
+		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+editedRecomplanType);
+		Assert.assertNotEquals(R1PlanType, editedRecomplanType, "Original and Edited Recommendation PlanType are same");
+		Assert.assertNotEquals(R1PlanName, editedRecomPlanName, "Original and Edited Recommendation PlanName are same");
 		threadsleep(5000);
 	}
 	
@@ -698,8 +760,13 @@ private WebElement signInLink;
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
 //			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			if((validate(agreeButton)))
+					agreeButton.click();
+			threadsleep(2000);
+				
 
 		} catch (Exception e) {
+// Required access code to login in offline and online prod, so not possible....			
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 
@@ -711,8 +778,8 @@ private WebElement signInLink;
 		String curID = String.valueOf(Thread.currentThread().getId());
 		String R1PlanName = CommonConstants.firstRecommentionPlanName.get(String.valueOf(Thread.currentThread().getId()));
 		String R1PlanType = CommonConstants.firstRecommentionplanType.get(String.valueOf(Thread.currentThread().getId()));
-		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanName+" ****");
-		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+R1PlanType+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" Recommendation in VP "+R1PlanName+" ****");
+		System.out.println("**** Current Thread ID is - "+curID+" PlanType in VP "+R1PlanType+" ****");
 		String R1 = "";
 //		String R1PlanType = planType;
 //		String R1PlanName = firstRecomPlanName;
@@ -739,24 +806,31 @@ private WebElement signInLink;
 					"MA Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"PDP Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"SNP Invalid Recommendations");
 			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
 					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Enroll In Plan"), "MS Plan does not have Enroll In Plan Button");
 		}
 		if (R1.equalsIgnoreCase("MS")) {
 			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
 					"SNP Invalid Recommendations");
-			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
-					.equalsIgnoreCase(R1PlanName), "MS PlanName Invalid");
+			Assert.assertTrue(R1PlanName.toUpperCase().contains(FirstRecommendationSectionPlanName.getText().trim().toUpperCase()), "MS PlanName Invalid");
+			Assert.assertTrue(FirstRecommendationSectionButton.getText().trim()
+					.equalsIgnoreCase("Start Application"), "MS Plan does not have Start Application Button");
 		}
 	}
 

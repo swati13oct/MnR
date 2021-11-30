@@ -90,7 +90,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
 	public WebElement EditproviderlistLink;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(id = "finishAndReturnButton")
 	private WebElement FinishButton;
 	
 	@FindBy(xpath = "//h1[text()='Who are you looking for?']")
@@ -105,7 +105,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//Img[@alt='Medical group icon']")
 	public WebElement Medicalgroupicon;
 	
-	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	@FindBy(xpath = "(//button[@data-test-id='saved-provider-button'])")
 	private WebElement selectProviderBtn;
 	
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
@@ -248,7 +248,7 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 			//ParentWindow = driver.getTitle();
 			jsClickNew(CheckProviderCoverageButton);
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
+		else if(driver.findElements(By.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 			//ParentWindow = driver.getTitle();
 			jsClickNew(FinishButton);
@@ -310,7 +310,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 		ParentWindow = driver.getTitle();
 		jsClickNew(CheckProviderCoverageButton);
 	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
+	else if(driver.findElements(By.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		ParentWindow = driver.getTitle();
 		jsClickNew(FinishButton);
@@ -329,6 +329,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 
 public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	String ParentWindow = null;
+	jsClickNew(FindCareLink);
 	System.out.println("In find care page");
 	validate(LocationLink);
 	validate(ChangeLocationButton);
@@ -368,7 +369,7 @@ public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 		ParentWindow = driver.getTitle();
 		jsClickNew(CheckProviderCoverageButton);
 	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+	else if(driver.findElements(By.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		ParentWindow = driver.getTitle();
 		jsClickNew(FinishButton);
@@ -427,7 +428,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 		ParentWindow = driver.getTitle();
 		jsClickNew(CheckProviderCoverageButton);
 	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+	else if(driver.findElements(By.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		ParentWindow = driver.getTitle();
 		jsClickNew(FinishButton);
@@ -474,7 +475,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 			jsClickNew(CheckProviderCoverageButton);
 		} else if (driver
 				.findElements(By
-						.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+						.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]"))
 				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			ParentWindow = driver.getTitle();

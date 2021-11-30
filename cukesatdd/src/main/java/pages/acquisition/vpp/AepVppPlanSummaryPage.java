@@ -25,10 +25,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
 	private WebElement welcomePageHeader;
 
-	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+	//@FindBy(xpath="//label[contains(@for, 'currentYear')]")
+	@FindBy(xpath="//*[contains(@id, 'currentyear')]")
 	private WebElement CurrentYearLink;
 
-	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+//	@FindBy(xpath="//label[contains(@for, 'futureYear')]")
+	@FindBy(xpath="//*[contains(@id, 'nextyear')]")
 	private WebElement NextYearLink;
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
@@ -48,6 +50,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'popup-modal active')]")
 	private WebElement countyModal;
+	
 
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
@@ -70,6 +73,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan_PlanDetails;
 	
+	@FindBy(xpath = "(//*[contains(@class,'favorite-plan')]//*[contains(@class,'unliked')])[1]")
+	private WebElement Saveaplan;
 	
 	String sheetName = "";
 	int rowIndex;
@@ -325,7 +330,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         for(int i=0;i<5;i++)
         {
             checkForMultiCountyPopup(countyName);
-            selectYearOption(planYear);
+           // selectYearOption(planYear);
             result = collectInfoVppPlanSummaryPg(planName);
             int benefitUICnt = result.size();
             System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
@@ -704,18 +709,46 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 
 	}
+	
+/*	public void SaveaPlan() throws InterruptedException{
+		//CommonUtility.waitForPageLoad(driver, countyModal, 10);
+		//Thread.sleep(5000);
+		
+			validateNew(Saveaplan);
+			scrollToView(Saveaplan);
+			Saveaplan.isEnabled();
+		}
+	
+	}*/
+	public void selectYearOptionOLE(String year) {
+		try {
+			if(year.equalsIgnoreCase("current")) {
+				if(validate(CurrentYearLink))
+				jsClickNew(CurrentYearLink);
+				
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (Exception e) {
+			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on VPP Page : ");
+			e.printStackTrace();
+		}
+		
+	}
 
-	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
-		Thread.sleep(5000);
+	public void Enroll_OLE_Plan(String planName, String planType, String planYear ) throws InterruptedException {
+		//Thread.sleep(5000);
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
 			// driver.navigate().refresh();
+		
 			//Thread.sleep(5000);
+			 selectYearOption(planYear);
 			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
+			 selectYearOption(planYear);
 			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
 			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
@@ -723,6 +756,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
+		//	validateNew(Saveaplan);
+		//	System.out.println("Save a Plan is enabled on Plan summary page : " +Saveaplan.isDisplayed());
 			jsClickNew(enrollForPlan);
 			validateNew(welcomePageHeader,60);
 
@@ -933,12 +968,68 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					}
 
 				if (enrollInPlan != null) {
+				//	validateNew(Saveaplan);
+				//	System.out.println("Save a Plan is enabled on Plan details page : " +Saveaplan.isDisplayed());
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 					validateNew(welcomePageHeader,60);
 				}
 		return flag;
 		}
+    
+    
+	public HashMap<String,Boolean> updatedEnroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
+    	HashMap<String,Boolean> resultMap = new HashMap<String,Boolean>();
+    	boolean enrollBtnflag = true;
+    	boolean saveBtnflag = true;
+
+    		System.out.println("Enroll in Plan for Plan : " + planName);
+
+				WebElement enrollInPlan = null;
+					try {
+						
+				if(planType.equalsIgnoreCase("MA")) {
+
+					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					scrollToView(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
+				}
+				if(planType.equalsIgnoreCase("SNP")){
+					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					scrollToView(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
+				}
+				}catch(Exception e){
+				System.out.println("This plan does not have enroll button");
+				enrollBtnflag = false;
+					}
+
+				if (enrollInPlan != null) {
+					saveBtnflag=validateSavePlanButton();
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+					validateNew(welcomePageHeader,60);
+				}
+				resultMap.put("EnrollBtnDisplayed", enrollBtnflag);
+				resultMap.put("SaveBtnDisplayed", saveBtnflag);
+		return resultMap;
+		}
+
+    public boolean validateSavePlanButton() throws InterruptedException {
+    	boolean savePlanFlag = true;
+
+    		System.out.println("Validating save plan button");
+    		if(Saveaplan.isDisplayed()) {
+    			System.out.println("Save plan button is displayed");
+    		}
+    		else {
+    			savePlanFlag = false;
+    			System.out.println("Save plan button is NOT displayed");
+    		}
+		
+    	return savePlanFlag;
+		}
+
 	}
 
 	

@@ -31,10 +31,10 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[contains(@class, 'enrollmentAllowed-error-msg')]/p")
@@ -51,7 +51,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
 
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -77,7 +77,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='card-typeB']/label")
 	private WebElement SelectCardB;
 
-	@FindBy(id = "card-type-before")
+	@FindBy(css = "#card-type-before")
 	private WebElement RadioCardA;
 
 	// Medicare Information fields
@@ -87,29 +87,29 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
 
-	@FindBy(id = "emailAddress")
+	@FindBy(css = "#emailAddress")
 	private WebElement emailAddressField;
 
-	// @FindBy(id = "medicareClaimNumber")
+	// @FindBy(css = "#medicareClaimNumber")
 	@FindBy(xpath = "//input[contains(@id, 'medicareClaimNumber')]")
 	private WebElement claimNumberField;
 
-	@FindBy(id = "SSN")
+	@FindBy(css = "#SSN")
 	private WebElement SSNField;
 
-	@FindBy(id = "SSN2")
+	@FindBy(css = "#SSN2")
 	private WebElement SSNNumberField;
 
-	@FindBy(id = "goGreenYes")
+	@FindBy(css = "#goGreenYes")
 	private WebElement goGreenYesBtn;
 
-	@FindBy(id = "goGreenNo")
+	@FindBy(css = "#goGreenNo")
 	private WebElement goGreenNoBtn;
 
-	@FindBy(id = "emailConfirmationNo")
+	@FindBy(css = "#emailConfirmationNo")
 	private WebElement emailConfirmationNoBtn;
 
-	@FindBy(id = "emailConfirmationYes")
+	@FindBy(css = "#emailConfirmationYes")
 	private WebElement emailConfirmationYesBtn;
 
 	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
@@ -118,13 +118,13 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
 	private WebElement partBStartDateField;
 
-	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(css = "#ole-cancel-confirm")
 	private WebElement CancellationModal;
 
-	@FindBy(id = "leavingSite-linkrouter")
+	@FindBy(css = "#leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
 	@FindBy(xpath = "//*[contains(@class, 'field-error-msg')]")
@@ -136,7 +136,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='ole-form-container']//div[@id='ole-form-content']//div[@class='form-row'][2]/h3")
 	private WebElement DiabetesSection;
 
-	@FindBy(id = "hasEndStateRenalDiseaseNo")
+	@FindBy(css = "#hasEndStateRenalDiseaseNo")
 	private WebElement ESRD;
 
 	@FindBy(xpath = "//*[contains(text(),'Are you enrolled in your state Medicaid program?')]")
@@ -145,19 +145,19 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Are you enrolled in your state Medicaid program?')]")
 	private WebElement MedicaidQuestion;
 
-	@FindBy(id = "hasMedicaidEnrolleeNo")
+	@FindBy(css = "#hasMedicaidEnrolleeNo")
 	private WebElement medicaiddno;
 
 	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who are NOT enrolled in Medicaid.')]")
 	private WebElement MedicaidErrorText;
 
-	@FindBy(id = "hasMedicaidEnrollee")
+	@FindBy(css = "#hasMedicaidEnrollee")
 	private WebElement MedicaidError;
 
 	@FindBy(xpath = "//*[contains(text(), 'sorry. We cannot process online applications for people who have End-Stage Renal Disease.')]")
 	private WebElement esrdErrorText;
 
-	@FindBy(id = "hasEndStateRenalDisease")
+	@FindBy(css = "#hasEndStateRenalDisease")
 	private WebElement esrdError;
 
 	// ESRD Question
@@ -165,25 +165,25 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Do you have End-Stage Renal Disease (ESRD)?')]")
 	private WebElement ESRDQuestion;
 
-	@FindBy(id = "hasEndStateRenalDiseaseYes")
+	@FindBy(css = "#hasEndStateRenalDiseaseYes")
 	private WebElement esrdYes;
 
-	@FindBy(id = "hasEndStateRenalDiseaseNo")
+	@FindBy(css = "#hasEndStateRenalDiseaseNo")
 	private WebElement esrdNo;
 
-	@FindBy(id = "hasMedicaidEnrolleeYes")
+	@FindBy(css = "#hasMedicaidEnrolleeYes")
 	private WebElement medicaiddyes;
 
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
 
-	@FindBy(id = "medicaidNumber0")
+	@FindBy(css = "#medicaidNumber0")
 	private WebElement medicaidnumTxtBx;
 
 	@FindBy(xpath = "//*[contains(@class, 'subques-err-msg req')]")
 	private WebElement MedicaidRequired_ErrorMessage;
 
-	@FindBy(id = "ole-force-cancel-button")
+	@FindBy(css = "#ole-force-cancel-button")
 	private WebElement CancelButton;
 
 	@FindBy(xpath = "//*[contains(text(), 'Do you have other insurance that will cover your prescription drugs in addition')]")
@@ -192,8 +192,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
 	private WebElement OtherIns_Question;
 
-	// @FindBy(id = "hasLongTermCareFacilityYes")
-	@FindBy(id = "hasHealthInsuranceYes")
+	// @FindBy(css = "#hasLongTermCareFacilityYes")
+	@FindBy(css = "#hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
@@ -211,7 +211,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'memberidNumber0')]")
 	private WebElement memberNumberField;
 
-	@FindBy(id = "hasPrescriptionDrugCoverageYes")
+	@FindBy(css = "#hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 
 	@FindBy(xpath = "//*[contains(@id,'hasPrescriptionDrugCoverageYes')]")
@@ -239,7 +239,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	// Diabetes questions
 
-	@FindBy(id = "diabetes")
+	@FindBy(css = "#diabetes")
 	private WebElement diabetesQuestion1;
 
 	@FindBy(xpath = "//*[contains(@for,'diabetesQuestionYes')]")
@@ -254,7 +254,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	// chronicHeartFailure Questions
 
-	@FindBy(id = "chronicHeartFailure")
+	@FindBy(css = "#chronicHeartFailure")
 	private WebElement chronicHeartFailureQuestion1;
 
 	@FindBy(xpath = "//*[contains(@for,'chronicHeartFailureQuestionNo')]")
@@ -270,7 +270,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	// Cardiovascular Disorders
 
-	@FindBy(id = "thromboembolicdisorder")
+	@FindBy(css = "#thromboembolicdisorder")
 	private WebElement CardiovascularDisordersQuestion1;
 
 	@FindBy(xpath = "//*[contains(@for,'thromboembolicdisorderQuestionNo')]")

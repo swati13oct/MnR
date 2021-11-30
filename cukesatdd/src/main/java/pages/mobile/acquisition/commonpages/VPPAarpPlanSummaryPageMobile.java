@@ -48,7 +48,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 
 	
 	
-	@FindBy(id = "pageHeader")
+	@FindBy(css = "#pageHeader")
 	private WebElement pageHeader;
 
 	
@@ -631,13 +631,13 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 	
-	@FindBy(id = "change-location")
+	@FindBy(css = "#change-location")
 	private WebElement ChangeLocationLink;
 	
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement ZipCodeTxtBx;
 
-	@FindBy(id = "submit")
+	@FindBy(css = "#submit")
 	private WebElement FIndPlansButton;
 
 	@FindBy(xpath = "//div[@class='modal-title']")

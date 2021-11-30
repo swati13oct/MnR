@@ -12,12 +12,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user validates the Step Header as follows
       | Flags | <DrugListPage_NoDrugs> |
+#    Then the user validates Drug Recommendation section
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drugForRecommendation> |
-    Then the user selects the following drug recommendation and validates Drug Search page is displayed and add drug
-      | SelectDrugRecommendation | <selectDrugRecommendation> |
+    #Then the user searches and adds the following Drug to Drug List
+    # | DrugName | <drugForRecommendation> |
+#    Then the user selects the following drug recommendation and validates Drug Search page is displayed and add drug
+#      | SelectDrugRecommendation | <selectDrugRecommendation> |
     Then the user validates Drug Recommendation section
     Then the user validates the Step Header as follows
       | Flags | <DrugListPage_DrugsAdded> |
@@ -56,11 +57,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
-    Then the user validates default view for Plan Effective Date
-    Then the user validates Change effective date Dropdown
-    Then the user validates Change effective date modal and display after changing effective date
-    Then the user validates Reset effective date
-    Then the user validate no bar is displayed for November and December
+#    Then the user validates default view for Plan Effective Date
+#    Then the user validates Change effective date Dropdown
+#    Then the user validates Change effective date modal and display after changing effective date
+#    Then the user validates Reset effective date
+#    Then the user validate no bar is displayed for November and December
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user verifies the drug information on prescription drug tab
       | DrugName | <drug2> |
@@ -277,6 +278,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link
     And I access the DCE Redesign from Plan compare page
+    Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user validates error message for blank search
     Then the user validates No Drug found error message for search
@@ -314,6 +316,16 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks Return to Compare on DCE Summary Page to return to Compare page
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
+    Then the user clicks on Step Header Step 3 to land on Drug Summary Page
+    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+    Then the user closes the Drug Info Modal on Plan Compare page
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planname> |
+    Then the user clicks on Step Header Step 2 to land on Build your drug list Page
+    Then the user clicks on return to compare link on build drug list page to returns to plan compare
+    Then the user closes the Drug Info Modal on Plan Compare page
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planname> |
     Then the user validates planName matches plan Name in VPP
     Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal
     Then the user Captures Drug costs on Drug Details Page
@@ -334,11 +346,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
     Then the user validates Important information section
-    Then the user validates default view for Plan Effective Date
-    Then the user validates Change effective date Dropdown
-    Then the user validates Change effective date modal and display after changing effective date
-    Then the user validates Reset effective date
-    Then the user validate no bar is displayed for November and December
+#    Then the user validates default view for Plan Effective Date
+#    Then the user validates Change effective date Dropdown
+#    Then the user validates Change effective date modal and display after changing effective date
+#    Then the user validates Reset effective date
+#    Then the user validate no bar is displayed for November and December
     Then the user Captures Drug costs on Drug Details Page
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then the user closes the Drug Info Modal on Plan Compare page
@@ -461,6 +473,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects following Standard pharmacy and returns to DCE Details page
       | SelectStandardPharmacy | <SelectStandardPharmacy> |
     Then the user Captures Drug costs on Drug Details Page
+    Then the user validates enroll option as per following flag
+      | EnrollFlag | <enrollFlag> |
     And the user validates link to Drug Summary Page
     When user verify the drug summary page
     And the user Captures Drug costs on Drug Summary Page for the given plan
@@ -470,8 +484,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_E2E_Scenario3_UAT_AARP @regressionAARP
     Examples:
-      | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       | enrollFlag |
+      | E2E Scenario 3_AMP | AARP | 78006   | Bexar County | 00000           | YES             | 99619           | 55344            | ROCK PHARMACY  | HEB PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) | 78456    | 12345    | 96799    | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs | true       |
       #| E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
   @dce_E2E_Scenario3_UAT_UHC @regressionUHC
@@ -522,3 +536,37 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Examples:
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
       | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+
+  @dce_E2E_Scenario8_UAT
+  Scenario Outline: <Scenario> : To verify on VPP Med Supp plans and then navigate to DCE from Sub-nav, verify the drug summary page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <VppPlantype> |
+    Then I click on DCE Redesign link from Shop for a plan hover over
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then the user validates default Plan type on DCE Summary page as follows
+      | Plan Type | <defaultPlanType> |
+    And user verify the drug summary page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+
+  @dce_E2E_Scenario8_UAT_AARP @regressionAARP
+    Examples:
+      | Scenario               | site | zipcode | isMultutiCounty | county          | VppPlantype | drug1   | defaultPlanType | planType | planName                                         |
+      | E2E_Scenario8_UAT_AARP | AARP | 10001   | NO              | New York County | MS          | Lipitor | MAPD            | SNP      | UnitedHealthcare Nursing Home Plan 2 (HMO I-SNP) |
+
+  @dce_E2E_Scenario8_UAT_UHC @regressionUHC
+    Examples:
+      | Scenario              | site | zipcode | isMultutiCounty | county          | VppPlantype | drug1   | defaultPlanType | planType | planName                        |
+      | E2E_Scenario8_UAT_UHC | UHC  | 96919   | NO              | New York County | MS          | Lipitor | PDP             | PDP      | AARP MedicareRx Preferred (PDP) |
+  

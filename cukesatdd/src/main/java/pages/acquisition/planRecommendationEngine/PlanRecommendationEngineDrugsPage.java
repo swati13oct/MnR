@@ -276,6 +276,17 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		jsClickNew(continueBtn);
 		validate(drugsearchBox);
 	}
+	
+// Edit Drug option selects in Drug page
+
+		public void editDrugs() {
+			System.out.println("Editing drugs in Druglist Page");
+			threadsleep(3000);
+			WebElement edit = drugsList.get(0).findElement(By.cssSelector("button#editDrugId"));
+			jsClickNew(edit);
+			threadsleep(3000);
+			Assert.assertTrue(validate(modalDosageSelect),"Edit Model is not opened");
+		}	
 
 //Drug Adding details in Drug Page                                
 
@@ -318,6 +329,42 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		validateResultsCount();
 
 	}
+	
+// Edit drug details in Drug Page  
+	
+	public void editdrugsHandlerWithdetails(String drugsDetails) {
+		String drugName = "";
+		boolean searchButtonClick = false;
+		String dosage = "";
+		String packageName = "";
+		String count = "";
+		String frequency = "";
+		boolean threeeMonthSLength = false;
+		boolean GenericDrug = false;
+		boolean switchGeneric = false;
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String drugInfo = drugslist[i];
+			if (drugInfo.trim().length() > 0) {
+				String[] drugDetails = drugInfo.split(",");
+				dosage = drugDetails[0];
+				packageName = drugDetails[1];
+				count = drugDetails[2];
+				frequency = drugDetails[3];
+				if (drugDetails[4].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
+				if (drugDetails[5].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[6].toUpperCase().equals("YES"))
+					switchGeneric = true;
+
+				editDrug(dosage, packageName, count, frequency, threeeMonthSLength,	GenericDrug, switchGeneric);
+			}
+		}
+		validateResultsCount();
+
+	}	
 
 // Continue Function
 
@@ -422,6 +469,20 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
 		return drugNames;
+	}
+	
+//Quantity Number with Zero
+	
+	public void qtyNumberPrefixZero(String qty) {
+		System.out.println("Validating drugs quantity number in Drug Page");
+		int count = drugNameList.size();
+		for (int i = count - 1; i >= 0; i--) {
+			threadsleep(1000);
+			int Edqty = Integer.parseInt(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().split(" per")[0]);
+			String Editedqty = String.format("%03d", Edqty);
+			Assert.assertTrue(qty.equals(Editedqty), "Quantity is not matched");
+		}
+		
 	}
 
 //Canceling the Model in Drug Page                                
@@ -556,6 +617,55 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 			System.out.println("Unable to add drug");
 		}
 	}
+	
+//Editing Drug Functionality
+
+		public void editDrug(String dosage, String packageName,
+				String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+			try {
+				String drugName = "";
+				validate(modalDosageSelect, 30);
+				threadsleep(2000);
+				Select dos = new Select(modalDosageSelect);
+				Select freq = new Select(modalFrequencySelect);
+				Select slen = new Select(modalSLengthSelect);
+				
+				if (!dosage.isEmpty())
+					dos.selectByVisibleText(dosage);
+				if (!packageName.isEmpty()) {
+					Select pack = new Select(modalPackageSelect);
+					pack.selectByVisibleText(packageName);
+				}
+				if (!count.isEmpty()) {
+					modalQuantity.clear();
+					modalQuantity.sendKeys(count);
+				}
+				
+				freq.selectByVisibleText(frequency);
+				
+				if (threeeMonthSLength)
+					slen.selectByVisibleText("Every 3 Months");
+
+				threadsleep(4000);
+				jsClickNew(modalcontinue);
+
+				if (GenericDrug) {
+					validate(modalGenericDrug, 30);
+					threadsleep(2000);
+					// Generic modal
+					if (switchGeneric) {
+						clickSwitchdrug();
+						drugName = modalGenericDrug.getText();
+					}
+					threadsleep(2000);
+					jsClickNew(modalcontinue);
+				}
+
+				validateAddedDrugname(drugName);
+			} catch (Exception e) {
+				System.out.println("Unable to add drug");
+			}
+		}	
 
 // Clicking Switch Drug Model
 
@@ -696,7 +806,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> drug, ArrayList<String> drugListVPP) {
-
+		System.out.println("Drugs in PRE: "  +drug);
+		System.out.println("Drugs in DCE: "  +drugListVPP);
 		if (drug.size() == drugListVPP.size() && count == drug.size()) {
 			String druglist = drug.toString();
 			String vppdruglist = drugListVPP.toString();

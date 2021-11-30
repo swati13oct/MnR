@@ -28,13 +28,13 @@ public class PlanPaymentOptionsMobile extends UhcDriver{
 	private WebElement planpaymentyes;
 	
 	
-	@FindBy(id = "planpaymentLink")
+	@FindBy(css = "#planpaymentLink")
 	private WebElement planpaymentLink;
 	
 	@FindBy(id="disclaimerAgreeBtnplanpayment")
 	private WebElement ppodisclaimerAgreeBtn;
 	
-	@FindBy(id = "planPaymentOptionSaveBtnId")
+	@FindBy(css = "#planPaymentOptionSaveBtnId")
 	private WebElement pposaveandcont;
 	
 	@FindBy(xpath = ".//*[@id='disclaimerAgreeBtnplanpayment']")

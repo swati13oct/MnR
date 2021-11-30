@@ -661,6 +661,14 @@ public class DCEStepDefinitionAARP {
 		plandetailspage.clickPrescriptionBenifitTab();
 	}
 
+
+	@Then("the user opens and validates Coverage stages modal text on VPP details page")
+	public void the_user_opens_and_validates_coverage_stages_modal_text_on_vpp_details_page() {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		plandetailspage.openValidateCoverageStageText();
+	}
+
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_clicks_Learn_More_button_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
@@ -819,6 +827,17 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	
+	@Then("^the user validates enroll option as per following flag$")
+	public void the_user_validates_enroll_option_as_per_following_flag(DataTable attributes) throws Throwable{
+	      DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+					.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		    Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+			String Enroll_Flag = memberAttributesMap.get("EnrollFlag");
+		  drugDetailsPage.ClickEnrollbtn(Enroll_Flag);
+	}
+	
 	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
 	public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable{
 	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -3042,6 +3061,13 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateCoveragestagePopUpText();
 	}
 
+	@Then("the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year")
+	public void the_user_validates_the_text_for_coverage_stages_modal_popups_for_NonLIS_NextYear() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateCoveragestagePopUpTextNextYear();
+	}
+
 
 	@Then("the user validates Copay Section for LIS for defined standard plan for following")
 	public void the_user_validates_copay_section_for_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {
@@ -3225,5 +3251,17 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
 	}
+	
+	@When("^user selects plan year for OLE$")
+	public void user_selects_plan_year(DataTable givenAttributes) {
+		
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+	String planYear = givenAttributesMap.get("Plan Year");
+	ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+			.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+	zipCodePlanYearPage.selectPlanYearOLE(planYear);
+}
 
 }

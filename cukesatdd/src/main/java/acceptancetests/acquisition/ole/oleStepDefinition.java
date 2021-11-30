@@ -119,16 +119,7 @@ public class oleStepDefinition {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
-		if (SiteName.contains("UHC_ACQ")) {
-			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
-
-			
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
-			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
-
-		} else {
+		
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			/*
@@ -141,7 +132,6 @@ public class oleStepDefinition {
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
 			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
 
-		} // --------------------------------------------------------------------------------------------------------------------
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -429,17 +419,17 @@ public class oleStepDefinition {
 	}
 
 	@Then("^the user validates TFN on Welcome OLE Page$")
-	public void the_user_validates_TFN_on_Welcome_OLE_Page(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_TFN_on_Welcome_OLE_Page() throws Throwable {
 		scenario.log("Sai - Change made 06/15 - Validate TFN on Welcome OLE Page");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 	//	Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 	//	PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
-	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
-		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(ExpectedTFNNo);
+		//givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+	//	String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		boolean Validation_Status = welcomePage.ValidateTFNonWelcomeOLE(TFN);
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
@@ -3457,22 +3447,24 @@ public class oleStepDefinition {
 	}
 	
 	@Then("^the user validate widgets on Welcome OLE Page$")
-	public void the_user_validates_widgtes_welcome_OLE(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_welcome_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+	//	givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+	//	String ExpectedTFNNo = givenAttributesMap.get("TFN No");
+		String ExpectedTFNNo=(String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		welcomePage.ValidateWidgetsonWelcomeOLE(ExpectedTFNNo);
 		System.out.println("Widgets are displayed on welcome Pages");
 		}
 	}
 	@Then("^the user validate widgets on OLE Pages$")
-	public void the_user_validates_widgtes_OLE_Pages(DataTable planAttributes) throws Throwable {
+	public void the_user_validates_widgtes_OLE_Pages() throws Throwable {
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+	//	givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+	//	String ExpectedTFNNo = givenAttributesMap.get("TFN No");	
+		String ExpectedTFNNo=(String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		medicareInfoPage.ValidateWidgetsonOLEPages(ExpectedTFNNo);
 	System.out.println("Widgets are displayed on welcome Pages");
@@ -3509,4 +3501,98 @@ public class oleStepDefinition {
 		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		 authorizationPage.validate_Authorized_Applicant();
 	}	
+	@Then("^the user clicks on Submit Enrollment to complete enrollment in Prod$")
+	public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment_Prod() throws Throwable {
+		
+		String ConfirmationNumber="";
+		if ((MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
+					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
+			if (oleConfirmationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+
+				System.out.println("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber);
+				scenario.log("OLE Confirmation Page is Displayed with Confirmation No" +ConfirmationNumber); 
+			} else {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+
+				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
+		} else {
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+		}
+		 }
+	@Then("^the user enters following required Medicare Information pages for User flow$")
+	public void the_user_enters_details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		if (CardType.contains("HICN")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n) + "C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		} else if (CardType.contains("RRID")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID" + Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		}
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		if (SSNflag.contains("true")) {
+			MedicareDetailsMap.put("SSN Number", "123456789");
+		}
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details_UserFlow(MedicareDetailsMap);
+		if (isInformationFilled) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+			getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
+	@Then("^the user validates the long term and Prescription Drug questions in Medicare Information Page$")
+	public void the_user_validates_the_long_term_Prescription_Drug_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
+
+		scenario.log("Sai - Change made 07/27- Validate ong term questions page--Aug Release");
+
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm(MemberDetailsMap);
+		if (medicareInfoPageLongTerm) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Other Insurance Questions in Medicare Information Page - All required Member Details are entered");
+
+			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE, MemberDetailsMap.get("LongTerm Question"));
+			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE_NAME, MemberDetailsMap.get("Health Insurance Name"));
+			getLoginScenario().saveBean(oleCommonConstants.GROUP_NUMBER, MemberDetailsMap.get("Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.MEMBER_NUMBER, MemberDetailsMap.get("Member Number"));
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+
 }

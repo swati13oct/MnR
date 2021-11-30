@@ -35,7 +35,7 @@ public class PlanRecommendationEngineCommonutilityMobile extends GlobalWebElemen
 	}
 	String flow;
 	
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 // Coverage Option page Elements
