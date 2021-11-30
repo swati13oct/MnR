@@ -20,7 +20,9 @@ import atdd.framework.MRScenario;
 import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
-	
+
+	public int PharmacyCount;
+
 	public PharmacySearchPageNew(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -409,7 +411,8 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
 //		learnMoreElement.click();
 		jsClickNew(learnMoreElement);
-		sleepBySec(8);
+		sleepBySec(12);
+		pageloadcomplete();
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl = driver.getCurrentUrl();
 		Assertion.assertTrue(
@@ -461,33 +464,37 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		}
 	}
 
+	public int getPharmacyCnt(){
+		String PharmacyCountText = PharmacyFoundCount.getText();
+		String[] Text = PharmacyCountText.split("Matching");
+		PharmacyCount = Integer.parseInt(Text[0].trim());
+		System.out.println("Displayed Pharmacy Count - "+PharmacyCount);
+		return PharmacyCount;
+	}
 
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {
 		//CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-
-        String PharmacyCountText = PharmacyFoundCount.getText();
-        String[] Text = PharmacyCountText.split("Matching");
-		int totalBefore = Integer.parseInt(Text[0].trim());
+ 		int totalBefore = getPharmacyCnt();
 		System.out.println("Pharmacy Count Displayed : "+totalBefore);
 		String labelId = "";
 		validateNew(Filter);
 		jsClickNew(Filter);
 		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			labelId = "ePrescribing-label";
+			labelId = "E-Prescribing";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			labelId = "home-specialty-label";
+			labelId = "Home Infusion";
 		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			labelId = "indian-tribal-label";
+			labelId = "Indian/Tribal/Urban";
 		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			labelId = "long-term-label";
+			labelId = "Long-Term";
 		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			labelId = "mail-order-label";
+			labelId = "Mail Service";
 		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			labelId = "24-hours-label";
+			labelId = "Open 24 hours";
 		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			labelId = "StandardNightyDays-label";
+			labelId = "Retail Pharmacy";
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
@@ -507,7 +514,8 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if (PharmacyCount > 0) {
-			int totalAfter = Integer.parseInt(PharmacyFoundCount.getText().trim());
+
+			int totalAfter = getPharmacyCnt();
 			Assertion.assertTrue("PROBLEM - expect total after filter to be equal or less than before filter. "
 					+ "Expect='" + totalBefore + "' | Actual='" + totalAfter + "'", totalBefore >= totalAfter);
 			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
@@ -571,4 +579,17 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 			}
 		}
 	}
+
+
+	@FindBy(xpath = "//*[contains(@ng-show, 'pharmacyServiceFailure')]/*[contains(@class, 'homefusion')]//a[contains(text(), 'pharmacy list PDFs') and contains(@onclick, 'scrollTo')]")
+	public WebElement ITU_LTC_HS_Message_PDFlink;
+
+	public void validateITU_HS_LTC_Messaging() {
+
+		if(!validateNew(ITU_LTC_HS_Message_PDFlink)) {
+			Assertion.fail("Anchor link and Messaging NOT Displayed for No Pharmacy Results for ITU/HS/LTC filter selection - >>>>Validation FAILED <<<<");
+		}
+		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
+	}
+
 }

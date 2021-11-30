@@ -25,6 +25,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 public class PharmacySearchCommonStepDefinition {
 
@@ -314,6 +315,7 @@ public class PharmacySearchCommonStepDefinition {
 //		System.out.println("PDF Result Page is Displayed");
 //	}
 
+/*
 	@Then("^the user validates pharmacy widgets on page$")
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
 		Map<String, String> inputDataMap = parseInputArguments(inputData);
@@ -349,12 +351,13 @@ public class PharmacySearchCommonStepDefinition {
 		inputMap.put("distance", distance);
 		inputMap.put("county", county);
 		inputMap.put("language", language);
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap,
 				testSiteUrl);
 	}
+*/
 
 	/** Choosing the different set of combination in Pharmacy filter */
 	@When("^the user selects Pharmacy Types to Filter pharmacies$")
@@ -369,13 +372,13 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
-	@Then("^the user validate error message displayed when filter results in no match$")
+/*	@Then("^the user validate error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		boolean isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
-	}
+	}*/
 
 	@Then("^the user validate the question widget$")
 	public void validateQuestionWidget() {
@@ -606,12 +609,13 @@ public class PharmacySearchCommonStepDefinition {
 		else
 			Assertion.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
 	}
-	
+/*
 	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
 	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateITU_HS_LTC_Messaging();
 
-	}
+	}*/
+
 }

@@ -312,4 +312,63 @@ public class PharmacySearchCommonStepDefinitionNew {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}
+
+	@Then("^the user validates pharmacy widgets on page$")
+	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
+		Map<String, String> inputDataMap = parseInputArguments(inputData);
+		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
+		Assertion.assertTrue(
+				"PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. \nActual='" + tmp
+						+ "'",
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
+
+		tmp = inputDataMap.get("Has Walgreens plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
+				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasWalgreens = Boolean.parseBoolean(tmp);
+
+		tmp = inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
+		Assertion.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='"
+				+ tmp + "'", tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
+		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
+
+		String planName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		String planYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
+		String zipcode = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
+		String distance = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.DISTANCE);
+		String county = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.COUNTY);
+		String language = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.LANGUAGE);
+		if (language == null)
+			language = "English";
+		HashMap<String, String> inputMap = new HashMap<String, String>();
+		inputMap.put("planName", planName);
+		inputMap.put("planYear", planYear);
+		inputMap.put("zipcode", zipcode);
+		inputMap.put("distance", distance);
+		inputMap.put("county", county);
+		inputMap.put("language", language);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap,
+				testSiteUrl);
+	}
+
+	@Then("^the user validate error message displayed when filter results in no match$")
+	public void the_user_validates_the_no_pharmacies_error_message() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		boolean isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
+	}
+
+
+	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
+	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateITU_HS_LTC_Messaging();
+
+	}
 }
