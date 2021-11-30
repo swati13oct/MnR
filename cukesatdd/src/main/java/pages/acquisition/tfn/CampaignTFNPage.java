@@ -1410,13 +1410,13 @@ public class CampaignTFNPage extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//input[@id='zipcodeTxt']")
+	@FindBy(xpath = "//input[@id='zip-code']")
 	private WebElement ZipcodePharmacy;
 
-	@FindBy(xpath = "//select[@id='plan-type']")
+	@FindBy(xpath = "//select[@id='plans']")
 	private WebElement seletPlandropdown;
 
-	@FindBy(xpath = "//button[contains(@dtmid,'cta_pharmacylocator')]//span[contains(text(),'Continue')]")
+	@FindBy(xpath = "//button[contains(@dtmid,'pharmacy')]//span[contains(text(),'Search')]")
 	private WebElement ContinuePharmacy;
 
 	@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
