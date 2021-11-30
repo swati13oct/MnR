@@ -2413,11 +2413,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
 		} else
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2496,13 +2496,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -2522,7 +2522,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(text(),'Prescription Drugs')])"));
+						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li)[3]"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -2945,8 +2945,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void savePlans(String savePlanNames, String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
-
 		int ONE = 1;
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out.println("Going to mark the following " + listOfTestPlans.size() + " number of " + planType
@@ -6160,7 +6158,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6180,3 +6178,4 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 }
+

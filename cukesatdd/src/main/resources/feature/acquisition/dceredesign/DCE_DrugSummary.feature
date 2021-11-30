@@ -99,7 +99,7 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
     When user selects Preferred mail order pharmacy
-    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+    Then the message "Mail service pharmacies only provide a 3-month supply length for eligible drugs. All eligible drugs will need to be filled for a 3-month supply." should be displayed on change pharmacy modal
     And user verify the default distance on change pharmacy modal
     When user sort the pharmacy list by "A to Z"
     Then pharmacy list should be displayed in ascending order
