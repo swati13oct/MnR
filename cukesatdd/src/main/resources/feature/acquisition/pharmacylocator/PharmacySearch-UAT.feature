@@ -154,7 +154,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
-    Then the user validates ITU, Home Infusion, LTC filter Message and anchor link
 
     @UATAARP03 @regressionAARP
     Examples: 

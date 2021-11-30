@@ -363,12 +363,4 @@ public class PharmacySearchCommonStepDefinitionNew {
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 
-
-	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
-	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
-		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validateITU_HS_LTC_Messaging();
-
-	}
 }

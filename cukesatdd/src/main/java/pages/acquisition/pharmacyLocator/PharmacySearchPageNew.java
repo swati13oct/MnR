@@ -580,16 +580,4 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		}
 	}
 
-
-	@FindBy(xpath = "//*[contains(@ng-show, 'pharmacyServiceFailure')]/*[contains(@class, 'homefusion')]//a[contains(text(), 'pharmacy list PDFs') and contains(@onclick, 'scrollTo')]")
-	public WebElement ITU_LTC_HS_Message_PDFlink;
-
-	public void validateITU_HS_LTC_Messaging() {
-
-		if(!validateNew(ITU_LTC_HS_Message_PDFlink)) {
-			Assertion.fail("Anchor link and Messaging NOT Displayed for No Pharmacy Results for ITU/HS/LTC filter selection - >>>>Validation FAILED <<<<");
-		}
-		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
-	}
-
 }
