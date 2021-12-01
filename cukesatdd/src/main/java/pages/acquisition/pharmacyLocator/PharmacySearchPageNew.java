@@ -610,20 +610,20 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 				}
 				sleepBySec(8);
 				if (language.equalsIgnoreCase("English")) {
-					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
-					String expTxt2 = "Change the pharmacy type you selected.";
-					String actualTxtXpath1 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
-					String actualTxt1 = driver.findElement(By.xpath(actualTxtXpath1)).getText();
-					String actualTxtXpath2 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
-					String actualTxt2 = driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
-					Assertion.assertTrue(
-							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-									+ "Expected='" + expTxt1 + "' | " + "Actual-'" + actualTxt1 + "'",
-							expTxt1.equals(actualTxt1));
-					Assertion.assertTrue(
-							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
-							expTxt2.equals(actualTxt2));
+//					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
+//					String expTxt2 = "Change the pharmacy type you selected.";
+//					String actualTxtXpath1 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
+//					String actualTxt1 = driver.findElement(By.xpath(actualTxtXpath1)).getText();
+//					String actualTxtXpath2 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
+//					String actualTxt2 = driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
+//					Assertion.assertTrue(
+//							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+//									+ "Expected='" + expTxt1 + "' | " + "Actual-'" + actualTxt1 + "'",
+//							expTxt1.equals(actualTxt1));
+//					Assertion.assertTrue(
+//							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+//									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
+//							expTxt2.equals(actualTxt2));
 				}
 //				scrollToView(moveAwayFromTooltip);
 //				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
