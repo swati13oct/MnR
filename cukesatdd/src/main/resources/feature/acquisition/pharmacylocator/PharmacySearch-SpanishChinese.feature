@@ -84,7 +84,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-    And the user selects Pharmacy Types to Filter pharmacies
+    And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
     Then the user validates the Pharmacies available
@@ -178,7 +178,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-    And the user selects Pharmacy Types to Filter pharmacies
+    And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Spanish        |
     Then the user validates the Pharmacies available

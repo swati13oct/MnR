@@ -127,7 +127,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-    And the user selects Pharmacy Types to Filter pharmacies
+    And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     #Then the user validates the Pharmacies available
