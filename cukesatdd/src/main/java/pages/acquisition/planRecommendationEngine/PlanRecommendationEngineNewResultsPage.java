@@ -804,6 +804,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDrugShowMore(String planName, String drugName) {
 		int planIndex = findPlan(planName,false);
+		WebElement DocTitle = plantiles.get(planIndex)
+				.findElement(By.cssSelector("div[class*='providerSection'] h3"));
+		scrollToView(DocTitle);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();

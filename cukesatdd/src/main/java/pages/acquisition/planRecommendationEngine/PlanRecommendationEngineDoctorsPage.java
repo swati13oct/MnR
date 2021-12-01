@@ -431,7 +431,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
 //		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
-		jsClickNew(modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")));
+		jsClickNew(modalDoctorsList.get(1).findElement(By.cssSelector("div[class*='editButton'] button")));
 		int afterRemove = modalDoctorsList.size();
 		if (beforeRemove != afterRemove) {
 			System.out.println("Remove Results Count mismatch");
