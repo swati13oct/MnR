@@ -772,8 +772,10 @@ public class DrugDetailsPage extends UhcDriver {
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Quantity Limit')]"));
 		WebElement SevenDayInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Seven Day')]"));
+/*
 		WebElement LAInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Limited Access')]"));
+*/
 		WebElement DLInfo = driver.findElement(By
 				.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Dispensing Limit')]"));
 		WebElement ST_PDF_Link = driver.findElement(
@@ -843,10 +845,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Limit Info NOT Displayed in Important Information Section !!!");
 
+/*
 		if (validateNew(LAInfo)) {
 			System.out.println("Limited Access Info Displayed in Important Information Section : " + LAInfo.getText());
 		} else
 			Assertion.fail("Limited Access Info NOT Displayed in Important Information Section  !!!");
+*/
 
 		if (validateNew(DLInfo)) {
 			System.out
