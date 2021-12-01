@@ -49,7 +49,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
     #    Then the user validates the Pharmacies available
     #      | Language | <language> |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
     @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP 
     Examples: 
