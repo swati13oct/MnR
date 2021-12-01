@@ -336,12 +336,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP @NextYear
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | current   |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
 
   @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
     Examples:
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | current   |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
 
   @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
