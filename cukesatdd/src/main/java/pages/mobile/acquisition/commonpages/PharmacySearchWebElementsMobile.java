@@ -202,7 +202,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#miles")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(css = ".mobileErrorMsg #emptyzipcodeerror_id>p")
+	@FindBy(css = "#zipError > p")
 	protected WebElement noZipcode;
 
 	@FindBy(css = ".mobileErrorMsg #zipcodeformaterror_id>p")

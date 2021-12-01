@@ -192,7 +192,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				+ "Expected='6' | Actual='" + distanceOptions.size() + "'", distanceOptions.size() == 6);
 		Select select = new Select(distanceDropDownField);
 		String actualSelectedDistance = select.getFirstSelectedOption().getText();
-		String expectedSelectedDistance = "15 miles";
+		String expectedSelectedDistance = "15 Miles";
 		Assertion.assertTrue(
 				"PROBLEM - default selected distance option is not as expected. " + "Expected='"
 						+ expectedSelectedDistance + "' | Actual='" + actualSelectedDistance + "'",
@@ -237,7 +237,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip == null || inputZip.equals("")) { // note: no zip value
-			String exp_noZipTxt = "Please enter a ZIP Code";
+			String exp_noZipTxt = "Error: Please enter a valid ZIP Code.";
 			Assertion.assertTrue("PROBLEM - not seeing no zip error element", pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt = noZipcode.getText();
