@@ -409,7 +409,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			accessFooterLinkFromLearnAboutMedicare("introduction to medicare");
 		}
-		WebElement medBenifits = driver.findElement(By.cssSelector("#accordion-3-content > nav > p:nth-child(1)"));
+		WebElement medBenifits = driver.findElement(By.xpath("//span[text()='Prescriptions, Providers & Benefits']"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();

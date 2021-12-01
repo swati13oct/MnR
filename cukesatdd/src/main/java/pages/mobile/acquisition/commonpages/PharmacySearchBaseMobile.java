@@ -99,20 +99,6 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
 
-		// Clicking on label first as dropdown is not opening in iOS - this will not
-		// affect Android execution
-
-//		sleepBySec(3);
-//
-//		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
-//			jsClickNew(distanceZipTextLabel);
-//		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
-//			jsClickNew(distanceZipTextLabel);
-//		} else {
-//			jsClickNew(distanceLabel);
-//			jsClickNew(distanceZipTextLabel);
-//		}
-//		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
@@ -135,7 +121,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
 					WebElement countyOption = driver
-							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+							.findElement(By.xpath("//select[@id='county']//option[text()='" +  county  + "']"));
+					
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -143,7 +130,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
 					WebElement countyOption = driver
-							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+							.findElement(By.xpath("//select[@id='county']//option[text()='" +  county  + "']"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -167,7 +154,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		sendkeysMobile(zipcodeField, zipcode);
 		if (zipcode.length() != 5) {
-			jsClickNew(zipCodeFieldLabel);
+			// jsClickNew(zipCodeFieldLabel);
 			sleepBySec(2);
 			/*
 			 * jsMouseOver(distanceDropDownField); distanceDropDownField.click();

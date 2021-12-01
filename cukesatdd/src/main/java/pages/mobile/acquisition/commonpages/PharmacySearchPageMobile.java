@@ -212,23 +212,23 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		Assertion.assertTrue("PROBLEM - unable to locate the zipcode input field element",
 				pharmacyValidate(zipcodeField));
 		Assertion.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
-		if (pharmacyValidate(drpYear)) {
-			select = new Select(drpYear);
-			List<WebElement> yearList = select.getOptions();
-			Assertion.assertTrue("PROBLEM - list of years should be >0.  Actual='" + yearList.size() + "'",
-					yearList.size() > 0);
-			String expectedYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-			boolean containCurrentYr = false;
-			for (int i = 0; i < yearList.size(); i++) {
-				String planName = yearList.get(i).getText();
-				if (planName.contains(expectedYear)) {
-					containCurrentYr = true;
-					break;
-				}
-			}
-			Assertion.assertTrue("PROBLEM - list of year options should contain current year as option.",
-					containCurrentYr);
-		}
+//		if (pharmacyValidate(drpYear)) {
+//			select = new Select(drpYear);
+//			List<WebElement> yearList = select.getOptions();
+//			Assertion.assertTrue("PROBLEM - list of years should be >0.  Actual='" + yearList.size() + "'",
+//					yearList.size() > 0);
+//			String expectedYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+//			boolean containCurrentYr = false;
+//			for (int i = 0; i < yearList.size(); i++) {
+//				String planName = yearList.get(i).getText();
+//				if (planName.contains(expectedYear)) {
+//					containCurrentYr = true;
+//					break;
+//				}
+//			}
+//			Assertion.assertTrue("PROBLEM - list of year options should contain current year as option.",
+//					containCurrentYr);
+//		}
 	}
 
 	/** Verify error messages in pharmacy page */
