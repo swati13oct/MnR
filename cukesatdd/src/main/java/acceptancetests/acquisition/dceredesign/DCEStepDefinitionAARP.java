@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * Functionality:DCE Acquisition
@@ -2619,12 +2620,11 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")
 	public void user_click_breadcrumb_on_get_started_page(String breadCrumb) {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.clickReturnToPharamcySearch();
 
 	}
-
 
 	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
 	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Summary_Pharmacy_Page() throws Throwable {

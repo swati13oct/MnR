@@ -638,5 +638,14 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 			}
 		}
 	}
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
+	public WebElement returntoPharmacySearch;
+
+
+	public void clickReturnToPharamcySearch() {
+		validateNew(returntoPharmacySearch);
+		returntoPharmacySearch.click();
+		waitForPageLoadSafari();
+	}
 
 }
