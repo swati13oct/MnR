@@ -89,7 +89,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 //			waitforElementDisapper(loadingSpinner, 90);
 //		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 //			waitforElementDisapper(loadingSpinner, 90);
-		sleepBySec(4); // note: let the page settle down
+		sleepBySec(10); // note: let the page settle down
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", validateNew(pharmacyCount));
 		if (!validate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
@@ -184,6 +184,9 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 
 		zipcodeField.sendKeys(zipcode);
 		if(zipcode.length()!=5){
+			zipcodeField.sendKeys("1");
+			sleepBySec(2);
+			zipcodeField.sendKeys(Keys.BACK_SPACE);
 			searchbtn.click();
 			sleepBySec(2);
 			/*jsMouseOver(distanceDropDownField);

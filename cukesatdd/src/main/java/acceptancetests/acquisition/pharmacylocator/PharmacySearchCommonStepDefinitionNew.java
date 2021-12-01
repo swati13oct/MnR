@@ -19,6 +19,7 @@ import java.util.*;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -363,4 +364,18 @@ public class PharmacySearchCommonStepDefinitionNew {
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 
+	@Then("^the user clicks on the following language Pharmacy Directory Link$")
+	public void the_user_clicks_on_the_following_language_Pharmacy_Directory_Link(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Language = inputAttributesMap.get("Language");
+		String County = inputAttributesMap.get("County");
+		WebDriver testDriver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PlanDetailsPage vppPlanDetailsPage = new PlanDetailsPage(testDriver);
+		PharmacySearchPageNew pharmacySearchPage = vppPlanDetailsPage.planDetails_ClickPharmacyDirectoryforLanguage(Language, County);
+		if(null!=pharmacySearchPage) {
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		}
+		else
+			Assertion.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
+	}
 }

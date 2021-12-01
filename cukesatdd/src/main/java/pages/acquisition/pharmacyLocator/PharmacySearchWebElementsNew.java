@@ -236,6 +236,9 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'language')]//option[contains(text(),'español')]")
 	protected WebElement SpanishLanguage;
 
+	@FindBy(xpath="(//div[@id='viewpdf']//a)[2]")
+	protected WebElement viewFrontMatterPdf;
+
 	
 	
 }
