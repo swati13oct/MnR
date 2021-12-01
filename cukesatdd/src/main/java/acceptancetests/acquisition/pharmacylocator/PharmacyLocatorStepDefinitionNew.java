@@ -308,17 +308,17 @@ public class PharmacyLocatorStepDefinitionNew {
 		System.out.println("Front Matter Result Page is Displayed");
 	}
 	
-	@When("^the user selects Pharmacy Types to Filter$")
-	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
-		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
-		String language = inputAttributesMap.get("Language");
-		System.out.println("Filter Type to Select : "+pharmacyType);
-		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
-	}
+//	@When("^the user selects Pharmacy Types to Filter$")
+//	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
+//		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+//		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
+//		String language = inputAttributesMap.get("Language");
+//		System.out.println("Filter Type to Select : "+pharmacyType);
+//		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
+//	}
 
 
 	
