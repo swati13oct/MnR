@@ -100,7 +100,6 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
-    Then the user validates ITU, Home Infusion, LTC filter Message and anchor link
 
     @Pharmacy_Locator_ITU_HI_LTC_Messaging_AARP @regressionAARP
     Examples: 
