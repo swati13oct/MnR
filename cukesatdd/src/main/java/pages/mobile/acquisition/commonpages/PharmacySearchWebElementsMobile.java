@@ -120,7 +120,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#createpdf_id")
 	protected WebElement resultAsPDF;
 
-	@FindBy(xpath = "//h1[@id='pharmacylocatorheader_id']")
+	@FindBy(xpath = "//h1[contains(text(),'Pharmacy Search')]")
 	protected WebElement pharmacylocatorheader;
 
 	// @FindBy(className = "loading-block")
@@ -228,13 +228,13 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//ol[contains(@class,'pharmacy-list')]//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	protected WebElement pdf_WalgreenPlans;
 
-	@FindBy(xpath = "//*[contains(@id,'lang-select')]//option[contains(@id,'spanish')]")
+	@FindBy(xpath = "(//*[@id='language']//option)[3]")
 	protected WebElement SpanishLanguage;
 
 	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
 	protected WebElement filterLink;
 
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[2]")
+	@FindBy(xpath = "(//*[@id='language']//option)[2]")
 	protected WebElement chineseLanguage;
 
 	@FindBy(xpath = "//*[@class='pharmacy-info']")
