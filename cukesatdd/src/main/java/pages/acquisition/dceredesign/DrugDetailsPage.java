@@ -680,8 +680,11 @@ public class DrugDetailsPage extends UhcDriver {
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Quantity Limit')]"));
 		List<WebElement> SevenDayDrugs = driver.findElements(By
 				.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Seven Day')]"));
-		List<WebElement> LADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
+		// Limited Access is no more availabel for any drug for 2022 plans.
+		//		List<WebElement> LADrugs = driver.findElements(By.xpath(
+//				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
 		List<WebElement> DLDrugs = driver.findElements(By.xpath(
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Dispensing Limits')]"));
 		if (Tier1Drugs.size() > 0) {
@@ -734,10 +737,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Drug text NOT Displayed in Your Drug Section!!!");
 
+/*
 		if (LADrugs.size() > 0) {
 			System.out.println("Total No. of Limited Access Drugs Added: " + LADrugs.size());
 		} else
 			Assertion.fail("Limited Access Drug text NOT Displayed in Your Drug Section!!!");
+*/
 
 		if (DLDrugs.size() > 0) {
 			System.out.println("Total No. of Dispensing Limits Drugs Added: " + DLDrugs.size());
