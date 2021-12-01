@@ -2548,11 +2548,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement outOfPocketForPlan = null;
 
 		if (planName.contains("SNP")) {
-			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
+			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(text(),'Out Of Pocket')])"));
+			
 		} else if (planName.contains("PDP")) {
-			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
