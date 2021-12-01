@@ -196,7 +196,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
 	protected WebElement ProactiveChat_Exit;
 
-	@FindBy(xpath = "//h1[contains(@id, 'pharmacylocatorheader')]")
+	@FindBy(xpath = "//h1[(text()=' Pharmacy Search  ')] ")
 	protected WebElement PharmacyLocatorPageHeader;
 
 	@FindBy(css = "#distance")
