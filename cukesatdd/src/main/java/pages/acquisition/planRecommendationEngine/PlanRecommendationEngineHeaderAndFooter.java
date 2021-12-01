@@ -220,7 +220,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(3) div>p:nth-child(8)>a")
     private WebElement headerFAQLink;
     
-    @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(1)  div>p:nth-child(8)>a")
+    @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(1) div[class*='sctn-artcl']:nth-child(1) p>a")
     private WebElement headerMedicareArticles;
     
     @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(1)")

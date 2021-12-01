@@ -1760,6 +1760,13 @@ public void useraddDrugsPREResult() {
 	threadsleep(3000);
 }
 
+public void usereditDrugsPREResult() {
+	threadsleep(10000);
+	System.out.println("Adding drugs from PRE Result page");
+	plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")).click();
+	threadsleep(3000);
+}
+
 
 public void userPreDCE() {
 	if(validate(MAViewPlansLink,15) ) {
