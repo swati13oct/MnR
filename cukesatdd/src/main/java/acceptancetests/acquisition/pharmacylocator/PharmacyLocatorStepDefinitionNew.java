@@ -5,6 +5,8 @@ import java.util.*;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.Assertion;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -305,6 +307,19 @@ public class PharmacyLocatorStepDefinitionNew {
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("Front Matter Result Page is Displayed");
 	}
+	
+	@When("^the user selects Pharmacy Types to Filter$")
+	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
+		String language = inputAttributesMap.get("Language");
+		System.out.println("Filter Type to Select : "+pharmacyType);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
+	}
+
 
 	
 
