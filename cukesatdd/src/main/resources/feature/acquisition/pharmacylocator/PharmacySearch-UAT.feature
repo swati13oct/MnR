@@ -34,7 +34,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user validates map section contents
     And the user validate show on map link
-    And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
     And click on DCE Link on Pharmacy Page
@@ -111,7 +110,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user validates map section contents
     And the user validate show on map link
-    And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
