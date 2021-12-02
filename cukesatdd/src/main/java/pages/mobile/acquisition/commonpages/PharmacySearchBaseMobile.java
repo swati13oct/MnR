@@ -99,20 +99,6 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
 
-		// Clicking on label first as dropdown is not opening in iOS - this will not
-		// affect Android execution
-	
-		sleepBySec(3);
-
-		if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("Selecciona")) {
-			jsClickNew(distanceZipTextLabel);
-		} else if (driver.findElement(By.xpath("//*[@id='lang-select-label']")).getText().contains("选择语言")) {
-			jsClickNew(distanceZipTextLabel);
-		} else {
-			jsClickNew(distanceLabel);
-			jsClickNew(distanceZipTextLabel);
-		}
-		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
@@ -135,7 +121,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
 					WebElement countyOption = driver
-							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
+
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -143,7 +130,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
 					WebElement countyOption = driver
-							.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -167,16 +154,15 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		sendkeysMobile(zipcodeField, zipcode);
 		if (zipcode.length() != 5) {
-//			jsClickNew(zipCodeFieldLabel);
-			scrollToView(zipCodeFieldLabel);
-			zipCodeFieldLabel.click();
+			// jsClickNew(zipCodeFieldLabel);
 			sleepBySec(2);
 			/*
 			 * jsMouseOver(distanceDropDownField); distanceDropDownField.click();
 			 * distanceOption_15miles.click();
 			 */
 		}
-		// searchbtn.click();
+
+		jsClickNew(searchbtn);
 		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
 		// pharmacyValidate(zipcodeErrorMessage));
@@ -436,14 +422,18 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
 
-		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
-			driver.findElement(By.xpath("//label[@id='plan-year-label']")).click();
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			WebElement planYearLabel = driver.findElement(By.xpath("//label[@id='plan-year-label']"));
+			jsClickNew(planYearLabel);
+			WebElement planYearAsterisk = driver.findElement(By.xpath("//*[@id='plan-type-label']/span"));
+			jsClickNew(planYearAsterisk);
+
 		}
 
 		mobileSelectOption(yearDropdown, planYear, true);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
 		CommonUtility.checkPageIsReady(driver);
-		
+
 		if (!loadingBlock.isEmpty())
 			// waitforElementDisapper(By.className("loading-block"), 90);
 			waitforElementDisapper(loadingSpinner, 90);
@@ -636,15 +626,16 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
 
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "zh" + "']")).getText()
+		String dropDownOptionText = languageDropDown
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()
 				.trim();
-		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "zh");
 		// mobileSelectOption(languageDropDown, "中文", true);
-		// chineseLanguage.click();
+		// chineseLanguage.click()
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -654,10 +645,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectspanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
+		String dropDownOptionText = languageDropDown
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText()
 				.trim();
-		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
@@ -685,10 +677,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectPlanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='lang-select']"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "es" + "']")).getText()
-				.trim();
-		driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
+		String dropDownOptionText = languageDropDown.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText().trim();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
@@ -859,7 +850,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec = 20;
+		long timeoutInSec = 40;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

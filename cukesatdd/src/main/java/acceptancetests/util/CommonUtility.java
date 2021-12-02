@@ -453,7 +453,7 @@ public class CommonUtility {
 				}
 				try {
 					System.out.println(counter + " of 23 tries - wait 5 sec for document.readyState=complete... ");
-					Thread.sleep(5000);
+					Thread.sleep(8000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
