@@ -40,7 +40,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     And the user validate view search PDF link
 
     #  @pharmacylocatorAARP01a
-    @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
+    @PharmacyLocatorCommonAARP01a @regressionAARP @sanity @HPA
     Examples: 
       | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |

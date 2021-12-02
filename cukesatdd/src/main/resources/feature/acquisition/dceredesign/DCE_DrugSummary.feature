@@ -117,7 +117,7 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | ZipCode | <zipCode2> |
     Then error message "Please enter a valid ZIP code" should be displayed on change pharmacy modal
 
-    @dceRedesign_ChangePharmacyModal_AARP @regressionAARP
+    @dceRedesign_ChangePharmacyModal_AARP @regressionAARP @HPA1
     Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | AARP | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |
