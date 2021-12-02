@@ -109,16 +109,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		sleepBySec(3);
 
-		if (driver.findElement(By.xpath("//*[@for='language']")).getText().contains("Selecciona")) {
-			jsClickNew(distanceZipTextLabel);
-		} else if (driver.findElement(By.xpath("//*[@for='language']")).getText().contains("选择语言")) {
-			jsClickNew(distanceZipTextLabel);
-		} else {
-			jsClickNew(distanceLabel);
-			jsClickNew(distanceZipTextLabel);
-		}
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
+		
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -130,7 +123,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			if (county.equalsIgnoreCase("None")) {
 				Assertion.assertTrue(
 						"PROBLEM - expects zicode '" + zipcode + "' to have multi-county but selection is showing",
-						!pharmacyValidate(countyModal));
+						pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println(
@@ -227,13 +220,6 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			testNote.add("plan " + i + " is " + plans.get(i).getText());
 		}
 		return testNote;	
-	/*	List<String> testNote = new ArrayList<String>();
-		Select dropdown = new Select(yearToggle);
-		testNote.add("available plans from plan dropdown on current test env:");
-		for (int i = 1; i <= 2; i++) { // note: first item is 'Select a plan' so skip it
-			testNote.add("plan " + i + " is " + dropdown);
-		}
-		return testNote; */
 	}
 
 	public void selectsPlanName(String planName) {

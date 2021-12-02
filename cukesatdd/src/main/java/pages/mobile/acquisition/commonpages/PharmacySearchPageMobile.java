@@ -237,28 +237,26 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip == null || inputZip.equals("")) { // note: no zip value
-			
-	/*--------- commented the below assertions due to the defect found in error message on stage --------------------*/
-			String exp_noZipTxt = "Please enter a ZIP Code";
-//			Assertion.assertTrue("PROBLEM - not seeing no zip error element", pharmacyValidate(noZipcode));
+			String exp_noZipTxt = "Please enter a valid ZIP Code";
+			Assertion.assertTrue("PROBLEM - not seeing no zip error element", pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
-//				String act_noZipTxt = noZipcode.getText();
-//				Assertion.assertTrue("PROBLEM - no Zip error text is not as expected. " + "Expected='" + exp_noZipTxt
-//						+ "' | Actual='" + act_noZipTxt + "'", act_noZipTxt.contains(exp_noZipTxt));
+				String act_noZipTxt = noZipcode.getText();
+				Assertion.assertTrue("PROBLEM - no Zip error text is not as expected. " + "Expected='" + exp_noZipTxt
+						+ "' | Actual='" + act_noZipTxt + "'", act_noZipTxt.contains(exp_noZipTxt));
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { // note: zip invalid format
-				String exp_zipFormatErrTxt = "Please enter your ZIP Code as 5 numbers like this";
-//				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(invalidZip));
+				String exp_zipFormatErrTxt = "Please enter a valid ZIP Code";
+				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
-//					String act_zipFormatErrTxt = invalidZip.getText();
-//					Assertion.assertTrue(
-//							"PROBLEM - Zip format error text is not as expected. " + "Expected='" + exp_zipFormatErrTxt
-//									+ "' | Actual='" + act_zipFormatErrTxt + "'",
-//							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
+					String act_zipFormatErrTxt = invalidZip.getText();
+					Assertion.assertTrue(
+							"PROBLEM - Zip format error text is not as expected. " + "Expected='" + exp_zipFormatErrTxt
+									+ "' | Actual='" + act_zipFormatErrTxt + "'",
+							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
 				}
 			} else { // note: if format is right then going to assume u r getting this error
-				String exp_noPlanForZipErrTxt = "There were no results found for the requested search. Broadening your search criteria";
+		/*		String exp_noPlanForZipErrTxt = "There were no results found for the requested search. Broadening your search criteria";
 				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt = modifyZipErr.getText();
@@ -266,11 +264,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 							"PROBLEM - Zip format error text is not as expected. " + "Expected='"
 									+ exp_noPlanForZipErrTxt + "' | Actual='" + act_noPlanForZipErrTxt + "'",
 							act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt));
-				}
+				}*/
 			} // note: may need to code for a case when zip result in no result but don't know
 				// of a zip that has that behavior yet
 		}
-		/*--------- commented the above assertions due to the defect found in error message on stage --------------------*/
 		return new PharmacySearchPageMobile(driver);
 	}
 
@@ -851,18 +848,21 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		 * seletPlandropdown.click(); jsClickNew(seletPlandropdown); sleepBySec(1);
 		 * selectFromDropDownByText(driver, seletPlandropdown, planName);
 		 */
+		scrollToView(seletPlandropdown);
+		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+		
 		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.findElement(By.cssSelector("#plan-type-label")).click();
 		}
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
-		if (!loadingBlock.isEmpty())
+//		if (!loadingBlock.isEmpty())
 			// waitforElementDisapper(By.className("loading-block"), 90);
-			waitforElementDisapper(loadingSpinner, 90);
-		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+//			waitforElementDisapper(loadingSpinner, 90);
+//		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 			// waitforElementDisapper(By.className("loading-block"), 30);
-			waitforElementDisapper(loadingSpinner, 90);
-		sleepBySec(1); // note: let the page settle down
+//			waitforElementDisapper(loadingSpinner, 90);
+//		sleepBySec(1); // note: let the page settle down
 		// searchbtn.click();
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			grantPermissionOnAndroidChrome(searchbtn);
