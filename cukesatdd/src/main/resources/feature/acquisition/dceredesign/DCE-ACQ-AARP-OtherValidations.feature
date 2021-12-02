@@ -37,7 +37,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Acq Home to NEW DCE Flows other validatio
     #Examples:
     # | path                                  | pageName                   | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            |
     # | health-plans/estimate-drug-costs.html | DCE Redesign - Get Started | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
-    @dce_ErrorMessages_AEP_AARP @regressionAARP @vbfGate @HPA
+    @dce_ErrorMessages_AEP_AARP @regressionAARP @vbfGate
     Examples: 
       | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            | site |
       | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP |
