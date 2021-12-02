@@ -76,6 +76,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user clicks on Enroll Now and validates the Welcome to OLE Page
 
 
+    @vppPlanSummaryCommonAARP01
     @vppPlanSummaryCommonAARP01  @test00001
 
     Examples: 

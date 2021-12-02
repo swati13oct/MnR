@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,11 +21,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.When;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
@@ -92,14 +100,18 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option",
 				pharmacyValidate(distanceDropownID));
 		if (distance.equals("1"))
-			distance = distance + " mile";
+			distance = distance + " Mile";
 		else
-			distance = distance + " miles";
+			distance = distance + " Miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
 
 		sleepBySec(3);
+
+		mobileSelectOption(distanceDropownID, distance, true);
+		sleepBySec(3);
+		
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -111,7 +123,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			if (county.equalsIgnoreCase("None")) {
 				Assertion.assertTrue(
 						"PROBLEM - expects zicode '" + zipcode + "' to have multi-county but selection is showing",
-						!pharmacyValidate(countyModal));
+						pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println(
@@ -198,7 +210,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * } driver.close(); driver.switchTo().window(winHandleBefore); return timeStr;
 	 * }
 	 */
-
+    
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote = new ArrayList<String>();
 		Select dropdown = new Select(seletPlandropdown);
@@ -207,7 +219,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		for (int i = 1; i < plans.size(); i++) { // note: first item is 'Select a plan' so skip it
 			testNote.add("plan " + i + " is " + plans.get(i).getText());
 		}
-		return testNote;
+		return testNote;	
 	}
 
 	public void selectsPlanName(String planName) {
