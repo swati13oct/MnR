@@ -246,7 +246,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { // note: zip invalid format
-				String exp_zipFormatErrTxt = "Please enter your ZIP Code as 5 numbers like this";
+				String exp_zipFormatErrTxt = "Error: Please enter a valid ZIP Code.";
 				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt = invalidZip.getText();
@@ -256,7 +256,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
 				}
 			} else { // note: if format is right then going to assume u r getting this error
-				String exp_noPlanForZipErrTxt = "There were no results found for the requested search. Broadening your search criteria";
+				String exp_noPlanForZipErrTxt = "Error: Please enter a valid ZIP Code.";
 				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(modifyZipErr));
 				if (language.equalsIgnoreCase("English")) {
 					String act_noPlanForZipErrTxt = modifyZipErr.getText();
