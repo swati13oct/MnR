@@ -384,6 +384,19 @@ public class PharmacySearchCommonStepDefinitionNew {
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 
+	/** Verifying the pharmacy search tool in Spanish language */
+	@Then("^the user selects Spanish Language to translate$")
+	public void selectSpanish() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage = pharmacySearchPage.selectPlanLanguage();
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
+				pharmacySearchPage != null);
+		pharmacySearchPage.validateLanguageChanges("Spanish");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
+	}
+
 	@Then("^the user clicks on the following language Pharmacy Directory Link$")
 	public void the_user_clicks_on_the_following_language_Pharmacy_Directory_Link(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);

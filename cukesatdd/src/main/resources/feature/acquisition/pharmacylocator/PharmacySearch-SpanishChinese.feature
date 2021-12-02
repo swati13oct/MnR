@@ -166,17 +166,17 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    And the user validates pharmacy widgets on page
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-      | Has Walgreens plan                         | <hasWalgreensPlan>      |
-      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+#    And the user validates pharmacy widgets on page
+#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+#      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+#      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Spanish        |
     Then the user validates the Pharmacies available
       | Language | Spanish |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
   @PharmacyLocatorSpanish2_AARP @regressionAARP
     Examples:

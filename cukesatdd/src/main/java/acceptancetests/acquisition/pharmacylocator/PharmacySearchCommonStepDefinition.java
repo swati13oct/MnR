@@ -387,26 +387,26 @@ public class PharmacySearchCommonStepDefinition {
 		pharmacySearchPage.validateQuestionsWidget();
 	}
 
-	/** Verifying the pharmacy search tool in Spanish language */
-	@Then("^the user selects Spanish Language to translate$")
-	public void selectSpanish() {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage = pharmacySearchPage.selectPlanLanguage();
-		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
-				pharmacySearchPage != null);
-		// note: if english has plan year dropdown, other language should have it too
-		boolean expectedPlanYearDropdown = false;
-		if (pharmacySearchPage.isPlanYear()) {
-			expectedPlanYearDropdown = true;
-		}
-		pharmacySearchPage.validateLanguageChanges("Spanish");
-		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
-		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
-				expectedPlanYearDropdown == actualPlanYearDropdown);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
-	}
+//	/** Verifying the pharmacy search tool in Spanish language */
+//	@Then("^the user selects Spanish Language to translate$")
+//	public void selectSpanish() {
+//		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage = pharmacySearchPage.selectPlanLanguage();
+//		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
+//				pharmacySearchPage != null);
+//		// note: if english has plan year dropdown, other language should have it too
+//		boolean expectedPlanYearDropdown = false;
+//		if (pharmacySearchPage.isPlanYear()) {
+//			expectedPlanYearDropdown = true;
+//		}
+//		pharmacySearchPage.validateLanguageChanges("Spanish");
+//		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
+//		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+//				expectedPlanYearDropdown == actualPlanYearDropdown);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
+//	}
 
 	/** Verifying the pharmacy search tool in different languages */
 /*	@And("^the user searches multi lang for pharmacy search results available$")
