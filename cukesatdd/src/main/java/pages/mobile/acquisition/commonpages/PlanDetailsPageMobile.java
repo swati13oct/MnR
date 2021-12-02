@@ -1100,6 +1100,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		Thread.sleep(5000);
 		checkElementisEnabled(lookUpYourProviderButton);
 		switchToNewTabNew(lookUpYourProviderButton);
+		threadsleep(10000);
+		if (driver.getCurrentUrl().contains("about:blank")) {
+			threadsleep(10000);
+		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
