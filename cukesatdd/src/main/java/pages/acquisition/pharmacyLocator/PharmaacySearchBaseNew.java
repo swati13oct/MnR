@@ -301,7 +301,7 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		//note: then the code would know to display 2020 link text when you select 2020 because that's the "next year" docs
 		Assertion.assertTrue("PROBLEM - unable to locate expected year on the link text for pdf for "+pdfType+". "
 				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
-				pdfLink.getText().contains(testPdfLinkTextDate));
+				!pdfLink.getText().contains(testPdfLinkTextDate));
 		String winHandleBefore = driver.getWindowHandle();
 //		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(pdfLink);

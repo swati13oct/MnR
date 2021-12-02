@@ -541,27 +541,27 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		jsClickNew(Filter);
 		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			labelId = "E-Prescribing";
+			labelId = "(//div[@id='filtercontainer']//label)[7]";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			labelId = "Home Infusion";
+			labelId = "(//div[@id='filtercontainer']//label)[3]";
 		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			labelId = "Indian/Tribal/Urban";
+			labelId = "(//div[@id='filtercontainer']//label)[4]";
 		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			labelId = "Long-Term";
+			labelId = "(//div[@id='filtercontainer']//label)[5]";
 		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			labelId = "Mail Service";
+			labelId = "(//div[@id='filtercontainer']//label)[9]";
 		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			labelId = "Open 24 hours";
+			labelId = "(//div[@id='filtercontainer']//label)[8]";
 		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			labelId = "Retail Pharmacy";
+			labelId = "(//div[@id='filtercontainer']//label)[6]";
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
 //		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
-        WebElement label = driver.findElement(By.xpath("//*[contains(text(), '"+ labelId +"')]//parent::label"));
+			WebElement label = driver.findElement(By.xpath(labelId));
 
-		validateNew(label);
-		jsClickNew(label);
+			validateNew(label);
+			jsClickNew(label);
 
         validateNew(FilterApplyBtn);
         jsClickNew(FilterApplyBtn);
