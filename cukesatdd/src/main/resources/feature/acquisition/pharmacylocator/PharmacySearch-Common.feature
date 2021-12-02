@@ -23,32 +23,34 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Distance    | <distance>   |
       | County Name | <countyName> |
     And the user chooses a plan from dropdown list
-      | Current Year Plan Name | <cy_planName> |
+     | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
-      | Next Year Plan Year    | <ny_planYear> |
+     | Next Year Plan Year    | <ny_planYear> |
+#   And the user selects plan year toggle
+#      | Plan Year | <planyear> |
     #Then the user validates the Pharmacies available
     #  | Language | English |
-    And the user validate tooltips on filters
-      | Language                                   | English                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+#    And the user validate tooltips on filters
+#      | Language                                   | English                 |
+#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
     Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
-    And the user validate get direction link
+    #And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
     #  @pharmacylocatorAARP01a
-    @PharmacyLocatorCommonAARP01a @regressionAARP @sanity @HPA
+    @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
     Examples: 
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2021     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
   @PharmacyLocatorCommonAARP01a @NextYear
     Examples:
-      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | 15582 | AARP |   10980 |       15 | None       | 2022     | E-Prescribing | True                  | False            | True                 |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) |
 
      @prodRegression @regressionAARP @vbfGate
     Examples: 
@@ -444,7 +446,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -463,3 +465,4 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) |
+

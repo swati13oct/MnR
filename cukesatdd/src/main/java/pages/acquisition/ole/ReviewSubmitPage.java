@@ -220,7 +220,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?') or contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
-	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
 	private WebElement EmailAddress;
 	
 	//Submit Application Disclaimer

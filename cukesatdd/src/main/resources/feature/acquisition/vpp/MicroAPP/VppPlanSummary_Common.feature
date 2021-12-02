@@ -263,22 +263,22 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     @vppPlanSummaryCommonAARP02 @prodRegression @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
-      | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
+      | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
 
     @vppPlanSummaryCommonUHC02 @regressionUHC @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
-      | 00008 | UHC  |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
+      | 00008 | UHC  |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
 
     @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
-      | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
+      | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
 
     @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
-      | 00008 | UHC  |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
+      | 00008 | UHC  |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from <site> site from plan summary page
     Given the user is on medicare acquisition site landing page
