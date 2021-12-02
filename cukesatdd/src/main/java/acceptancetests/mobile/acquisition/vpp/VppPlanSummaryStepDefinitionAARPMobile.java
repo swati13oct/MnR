@@ -133,14 +133,18 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}*/
+		
+		
 
 		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		System.out.println("Select PlanType to view Plans for entered Zip " + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
+	
 	}
 
 	List<String> allPlanNames = null;
@@ -1165,14 +1169,17 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		
 		String county2 = memberAttributesMap.get("County Name2");
 		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+		
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
-
+        
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -1181,6 +1188,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 				Assertion.fail("Error in validating the Plan Summary Page");
 
 		}
+
 	}
 	
 	
