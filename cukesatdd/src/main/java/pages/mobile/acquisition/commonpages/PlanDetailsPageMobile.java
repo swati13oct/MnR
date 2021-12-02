@@ -215,7 +215,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(css = "#distance")
+	@FindBy(css = "#miles")
 	WebElement distanceDropownID;
 
 	@FindBy(css = "#englishDocs")
