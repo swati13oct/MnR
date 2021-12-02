@@ -27,6 +27,7 @@ import org.testng.Assert;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -417,13 +418,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='helpTextinAB']")
 	private WebElement OONTextAdditionalBenefit;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png'][2]")
 	private WebElement DentalIcon;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png'][2]")
 	private WebElement DoctorIcon;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png'][2]")
 	private WebElement BehaviourIcon;
 	
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans']")
@@ -440,6 +441,8 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
 	private WebElement planNameOnBaseLinePopup;
+	
+	
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -970,9 +973,9 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void validateIcons() {
-		validateNew(DentalIcon);
-		validateNew(DoctorIcon);
-		validateNew(BehaviourIcon);
+		validate(DentalIcon);
+		validate(DoctorIcon);
+		validate(BehaviourIcon);
 		
 	}
 	
@@ -2159,4 +2162,36 @@ public void saveaPlan(String plans) {
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
 	}
+	
+	public void validateProvidersCovered() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(MRConstants.PROV_NAME);
+		System.out.println(MRConstants.BEHAV_NAME);
+		System.out.println(MRConstants.DENT_NAME);
+		WebElement DoctorCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.PROV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div")) ;
+		System.out.println(DoctorCoveredText.getText());
+		WebElement BehaviourCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.BEHAV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div"));
+		System.out.println(BehaviourCoveredText.getText());
+		WebElement DentalCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.DENT_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div"));;
+		System.out.println(DentalCoveredText.getText());
+		validate(DoctorCoveredText);
+		validate(BehaviourCoveredText);
+		validate(DentalCoveredText);
+		
+		Assert.assertEquals("Not Covered\n" + 
+				"View Locations", DentalCoveredText.getText().trim());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", BehaviourCoveredText.getText().trim());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", DoctorCoveredText.getText().trim());
+
+	}
+
 }
