@@ -121,8 +121,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
 					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" +  county  + "']"));
-					
+							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
+
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -130,7 +130,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
 					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" +  county  + "']"));
+							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -628,13 +628,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
 		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
 
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "1" + "']")).getText()
+		String dropDownOptionText = languageDropDown
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()
 				.trim();
-		//driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "zh");
 		// mobileSelectOption(languageDropDown, "中文", true);
-		// chineseLanguage.click();
+		// chineseLanguage.click()
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -645,9 +646,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
 		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "2" + "']")).getText()
+		String dropDownOptionText = languageDropDown
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText()
 				.trim();
-		//driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
@@ -676,9 +678,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
 		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//option[@value='" + "2" + "']")).getText()
-				.trim();
-		//driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		String dropDownOptionText = languageDropDown.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText().trim();
+		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
