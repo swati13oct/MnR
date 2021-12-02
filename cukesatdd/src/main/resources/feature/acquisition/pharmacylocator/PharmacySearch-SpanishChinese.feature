@@ -173,7 +173,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Spanish        |
-    Then the user validates the Pharmacies available
+    Then the user validates the pharmacies available
       | Language | Spanish |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
