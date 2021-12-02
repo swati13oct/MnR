@@ -79,6 +79,26 @@ public class PharmacySearchCommonStepDefinitionNew {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateHeaderSection();
 	}
+
+	@Then("^the user selects Chinese Language to translate$")
+	public void selectChinese() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		// note: if english has plan year dropdown, other language should have it too
+		boolean expectedPlanYearDropdown = false;
+//		if (pharmacySearchPage.isPlanYear()) {
+//			expectedPlanYearDropdown = true;
+//		}
+		pharmacySearchPage = pharmacySearchPage.clickChinese();
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",
+				pharmacySearchPage != null);
+		pharmacySearchPage.validateLanguageChanges("Chinese");
+//		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
+//		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+//				expectedPlanYearDropdown == actualPlanYearDropdown);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Chinese");
+	}
 	
 	/** user enters following details for pharmacy search */
 	@And("^the user enters following details for the pharmacy search$")

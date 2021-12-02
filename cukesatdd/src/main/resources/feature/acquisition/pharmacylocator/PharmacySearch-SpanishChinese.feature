@@ -30,25 +30,21 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | Chinese |
-    And the user validate tooltips on filters
-      | Language                                   | Chinese                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-    And the user validates map section content
-    And the user validates show on map link
-    And the user validates get direction link
-    And the user validates more information content based on plan type
-    And the user validates view search PDF link
-    And the user validates pharmacy widgets
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-      | Has Walgreens plan                         | <hasWalgreensPlan>      |
-      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+    And the user validates map section contents
+    And the user validate show on map link
+    And the user validate more information content based on plan type
+    And the user validate view search PDF link
+#    And the user validates pharmacy widgets
+#      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+#      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+#      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-    Then the user validates the Pharmacies available
+    Then the user validates the pharmacies available
       | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
   @PharmacyLocatorChinese1_AARP @regressionAARP
     Examples:
@@ -87,10 +83,10 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-    Then the user validates the Pharmacies available
+    Then the user validates the pharmacies available
       | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
   @PharmacyLocatorChinese2_AARP @regressionAARP
     Examples:
@@ -117,7 +113,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     When the user enters following details for the pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
+    Then the user validates the pharmacies available
       | Language | Spanish |
     When the user enters following details for pharmacy search
       | Zip Code |       9999 |
@@ -133,14 +129,10 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the Pharmacies available
+    Then the user validates the pharmacies available
       | Language | Spanish |
-    And the user validate tooltips on filters
-      | Language                                   | Spanish                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
     And the user validate show on map link
-    And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
