@@ -420,6 +420,18 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
 	}
+	
+	@And("the user selects plan year toggle$")
+	public void user_selects_plan_year_toggle(DataTable givenAttributes) {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String PlanYear = givenAttributesMap.get("Plan Year");
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.selectYearOption(PlanYear);
+		
+	}
 
 	/**
 	 * Verify Create a PDF in pharmacy search page
