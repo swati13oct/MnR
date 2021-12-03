@@ -308,7 +308,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | path                              | pagename                                             |
       | E2E Scenario_2 AMP | AARP | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
       #| E2E Scenario_2 AMP | AARP | shop/connect.html                 | Connect with UnitedHealthcare                        |
-      | E2E Scenario_2 AMP | AARP | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
+      #| E2E Scenario_2 AMP | AARP | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
       #| E2E Scenario_2 AMP | AARP | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
       #| E2E Scenario_2 AMP | AARP | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 AMP | AARP | shop/compare.html                 | Shop: Compare Plans                                  |
@@ -353,7 +353,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | resources/healthcare-fraud.html                               | Preventing Medicare Fraud                                         |
       | E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans.html                   | Medicare Supplement Insurance Plans                               |
       #| E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
-      | E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
+      #| E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 AMP | AARP | medicare-education.html                                       | Understanding Medicare                                            |
 
     @globalheader_AARP_6 @regressionAARP
@@ -402,7 +402,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | path                              | pagename                                             |
       | E2E Scenario_2 UMS | UHC  | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
       # | E2E Scenario_2 UMS | UHC  | shop/connect.html                 | Connect with UnitedHealthcare                        |
-      | E2E Scenario_2 UMS | UHC  | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
+      #| E2E Scenario_2 UMS | UHC  | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
       # | E2E Scenario_2 UMS | UHC  | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
       #| E2E Scenario_2 UMS | UHC  | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 UMS | UHC  | shop/compare.html                 | Shop: Compare Plans                                  |
@@ -447,7 +447,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | resources/healthcare-fraud.html                               | Preventing Medicare Fraud                                         |
       | E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans.html                   | Medicare Supplement Insurance Plans                               |
       #| E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/selectdirectory.html   | Medicare Select Hospital Directory                                |
-      | E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
+      #| E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 UMS | UHC  | medicare-education.html                                       | Understanding Medicare                                            |
 
     @globalheader_UHC_6 @regressionUHC
