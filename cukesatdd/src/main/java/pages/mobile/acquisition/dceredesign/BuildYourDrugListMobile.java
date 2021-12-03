@@ -5,6 +5,7 @@ import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -229,6 +230,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
 //		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, partialDrug);
+		EnterDrugNameTxt.sendKeys(Keys.ENTER);
 		validateNew(AutoCompleteList);
 		System.out.println("Drug Auto complete list count : " + AutoCompleteitems.size());
 		if (validateNew(AutoCompleteList) && AutoCompleteitems.size() <= 5) {

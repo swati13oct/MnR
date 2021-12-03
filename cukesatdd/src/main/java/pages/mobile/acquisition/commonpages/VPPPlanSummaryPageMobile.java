@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -4846,8 +4847,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validate(ZipCodeTxtBx);
 		// ZipCodeTxtBx.click();
 		jsClickNew(ZipCodeTxtBx);
-		ZipCodeTxtBx.clear();
-		ZipCodeTxtBx.sendKeys(zipcode);
+//		ZipCodeTxtBx.clear();
+//		ZipCodeTxtBx.sendKeys(zipcode);
+		sendkeysMobile(ZipCodeTxtBx, zipcode);
 		scrollToView(FIndPlansButton);
 		validate(FIndPlansButton, 30);
 		// FIndPlansButton.click();
@@ -6177,3 +6179,4 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 }
+

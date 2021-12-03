@@ -97,7 +97,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15583 | UHC  |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | UHC  |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | UHC  |   14867 |       25 | Tompkins County |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | UHC  |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | UHC  |   33321 |       10 | None            |        2021 | MedicareMax (HMO)                       						 |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
   @PharmacyLocatorCommonUHC01b @NextYear
     Examples:
@@ -364,10 +364,10 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP @NextYear
     Examples: 
-      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
-      | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
-      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP)         |
+      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           						|
+      | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) 						|
+      | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    						|
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP)       			|
 
     @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC @NextYear
     Examples: 
@@ -465,3 +465,4 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) |
+
