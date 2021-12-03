@@ -191,7 +191,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors & Dentists')]/following::a[contains(@dtmname,'provider covered')]")
+	@FindBy(xpath = "//*[@id='additionalBenefits']/div[3]/div/a")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -1114,16 +1114,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public boolean providerinfo() {
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String editProviderButtonText = editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit my Doctor")) {
+		if (editProviderButtonText.contains("Edit my doctor & dentist")) {
 			return true;
 		}
 		return false;

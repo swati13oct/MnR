@@ -16,7 +16,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionProviderSearch.json",
 						"timeline:target" },
-				tags = "", dryRun=false)
+				tags = "@HPA", dryRun=false)
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionProviderSearch extends BaseTestConfig {
