@@ -205,10 +205,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#zipError > p")
 	protected WebElement noZipcode;
 
-	@FindBy(css = ".mobileErrorMsg #zipcodeformaterror_id>p")
+	@FindBy(css = "#zipError > p")
 	protected WebElement invalidZip;
 
-	@FindBy(xpath = "//div[contains(@id,'modifyYourSearchId')]//li")
+	@FindBy(xpath = "#zipError > p")
 	protected WebElement modifyZipErr;
 
 	@FindBy(xpath = "//p[contains(text(),'see the pharmacy')]")

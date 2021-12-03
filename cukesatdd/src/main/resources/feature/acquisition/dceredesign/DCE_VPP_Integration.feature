@@ -74,12 +74,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     @dce_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   | enrollFlag | 
-      | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months | true       |
+      | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage Prime (HMO) | Every 3 Months | true       |
 
     @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression @sanity
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
-      | UHC  |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |
+      | UHC  |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage Prime (HMO) | Every 3 Months |
 
   Scenario Outline: To test the NBA - to -DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
     Given the user is on medicare acquisition site landing page

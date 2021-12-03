@@ -1041,7 +1041,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
-		jsClickNew(distanceLable);
+		//jsClickNew(distanceLable);
 		mobileSelectOption(distanceDrpDown, distanceValue, true);
 //		jsClickNew(pharmacySearchBtn);
 	}

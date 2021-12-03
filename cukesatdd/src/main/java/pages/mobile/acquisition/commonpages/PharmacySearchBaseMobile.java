@@ -103,7 +103,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		validateNoresultsZipcodeError(zipcode);
+		//validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 
 		if (matcher.matches()) {
@@ -678,7 +678,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
 		WebElement languageDropDown = driver.findElement(By.cssSelector("#language"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText().trim();
+		String dropDownOptionText = languageDropDown
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText()
+				.trim();
 		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");

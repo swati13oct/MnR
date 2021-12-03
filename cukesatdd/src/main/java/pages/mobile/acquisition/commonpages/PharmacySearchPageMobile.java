@@ -268,6 +268,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			} // note: may need to code for a case when zip result in no result but don't know
 				// of a zip that has that behavior yet
 		}
+	
 		return new PharmacySearchPageMobile(driver);
 	}
 
