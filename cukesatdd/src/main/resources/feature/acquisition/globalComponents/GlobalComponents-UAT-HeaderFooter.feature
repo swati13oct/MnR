@@ -39,7 +39,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     And the user clicks on browser back button
     And the user clicks on Accessibility Link
     #And the user clicks on browser back button
@@ -113,7 +113,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And user hover over for plan member to click to go to member site
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
@@ -171,7 +171,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
@@ -229,7 +229,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
@@ -289,7 +289,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
@@ -527,7 +527,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
