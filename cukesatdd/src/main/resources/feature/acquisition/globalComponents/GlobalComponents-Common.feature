@@ -47,7 +47,7 @@ Feature: 1.12 ACQ - Global Components Validation
     #And user clicks on visit aarp.org link in the header
     #And user clicks on visit aarp.org link in the header for cancel
 
-    @globalheader123
+    @globalheader
     Examples: 
       | site |
       | AARP |
