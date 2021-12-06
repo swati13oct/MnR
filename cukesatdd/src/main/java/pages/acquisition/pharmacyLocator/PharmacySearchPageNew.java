@@ -276,7 +276,8 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 
 	public void clickBreadCrumb() {
-		breadCrumbLink.click();
+		//breadCrumbLink.click();
+		jsClickNew(breadCrumbLink);
 		waitForPageLoadSafari();
 	}
 	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")

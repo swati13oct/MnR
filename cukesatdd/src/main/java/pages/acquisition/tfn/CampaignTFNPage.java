@@ -1416,7 +1416,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='plans']")
 	private WebElement seletPlandropdown;
 
-	@FindBy(xpath = "//button[contains(@dtmid,'cta_pharmacylocator')]//span[contains(text(),'Continue')]")
+	@FindBy(xpath = "//button[contains(@dtmid,'pharmacy')]//span[contains(text(),'Search')]")
 	private WebElement ContinuePharmacy;
 	
 	

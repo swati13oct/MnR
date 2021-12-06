@@ -172,6 +172,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#milesDropdown")
 	public WebElement distanceDrpDown;
+	
+	@FindBy(xpath = "//*[@id='pharmacyfilter']/div[1]/label")
+	public WebElement distanceLable;
 
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
@@ -1038,6 +1041,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
+		jsClickNew(distanceLable);
 		mobileSelectOption(distanceDrpDown, distanceValue, true);
 //		jsClickNew(pharmacySearchBtn);
 	}
@@ -1988,10 +1992,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void vppdetails_clickEditPharmacy() throws InterruptedException {
 		Thread.sleep(6000);
-		validateNew(prescriptiondrugTab);
+//		validateNew(prescriptiondrugTab);
 		jsClickNew(prescriptiondrugTab);
-		scrollToView(editLink);
-		validateNew(editLink);
+//		scrollToView(editLink);
+//		validateNew(editLink);
 		jsClickNew(editLink);
 
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
