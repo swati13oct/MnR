@@ -1936,7 +1936,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				"***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
 	}
 
-	@FindBy(css = "#buttoncontainer button[dtmname$='save']")
+	@FindBy(css = "#buttoncontainer > div > button")
 	public WebElement saveUnsaveBtn;
 	
 	@FindBy(css = "button[dtmname$='save'] > img:nth-child(1)[alt='Save']")

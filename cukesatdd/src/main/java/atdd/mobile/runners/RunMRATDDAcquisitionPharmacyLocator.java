@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPharmacyLocator.json",
 						"timeline:target" },
-				tags = "@HPA", dryRun=false)
+				tags = "@lang", dryRun=false)
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionPharmacyLocator extends BaseTestConfig {
