@@ -196,7 +196,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
-	
+		
  	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
