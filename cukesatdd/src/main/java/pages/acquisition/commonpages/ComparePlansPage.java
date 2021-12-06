@@ -433,7 +433,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available (No Hidden)')]")
 	private WebElement AllPlansVisible;
 	
-	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
+	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[3]")
 	private WebElement DentalLinkText;
 	
 	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")

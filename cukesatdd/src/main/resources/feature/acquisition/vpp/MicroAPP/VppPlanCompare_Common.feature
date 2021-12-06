@@ -887,7 +887,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then verify plan compare page is loaded
     Then verify icons loaded with doctor summary on Plan Compare page
     Then validate all providers are covered
-    Then validate view locations popup on compare page
 
     @regressionAARP
     Examples: 
