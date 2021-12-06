@@ -34,7 +34,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     @regressionAARP @nextYear
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
-      | 00001 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
+      | 00001 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2022  | future   |
 
     @regressionUHC @nextYear
     Examples: 
