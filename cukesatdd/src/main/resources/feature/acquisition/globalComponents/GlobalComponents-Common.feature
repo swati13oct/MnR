@@ -44,8 +44,8 @@ Feature: 1.12 ACQ - Global Components Validation
     #Then the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
-    And user clicks on visit aarp.org link in the header for cancel
+    #And user clicks on visit aarp.org link in the header
+    #And user clicks on visit aarp.org link in the header for cancel
 
     @globalheader
     Examples: 
