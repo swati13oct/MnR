@@ -484,6 +484,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | PDP      |               2,1 | next     |           3 |
       | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
 
+  @UATSpartans
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -864,6 +865,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
       | 00034 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |         96799 |
 
+  @UATSpartans
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Dental behaviour Medical provider from VPP and view locations on plan compare page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -910,6 +912,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00035 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |
 
+  @UATSpartans
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of routine dental benefit link on plan compare on click of view all plans on <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

@@ -191,7 +191,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser2 | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | 5240993c-4ca5-41f2-8e16-f05272590b43 | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
-  @searchProfileAndProviderFlow
+  @searchProfileAndProviderFlow @UATSpartans
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -369,7 +369,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email                  | dob        | mbi | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                                                                          | providers                                                                                                                                                                                     |
       | ocpuser2 | Password@123 | DFONNMUF@NONMEMBER.COM | 08/20/1946 |     | female | DFONNMUF | DFONNMUL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG,trazodone hcl TAB 50MG,simvastatin TAB 20MG,nifedipine TAB 60MG ER Osmotic,levothyroxine sodium (tablets) TAB 75MCG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
 
-  @PlanDetailPlanCompare @PRB0993334
+  @PlanDetailPlanCompare @PRB0993334 @UATSpartans
   Scenario Outline: Telesales agent validate navigation from plan details to plan compare
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -410,7 +410,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers |
       | ocpuser2 | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        |
 
-  @SPBaseLinePopup @F700755
+  @SPBaseLinePopup @F700755 @UATSpartans
   Scenario Outline: Telesales agent validate navigation from plan details to plan compare
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
