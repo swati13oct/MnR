@@ -16,11 +16,11 @@ import atdd.framework.UhcDriver;
  */
 public class SaveandReturnOLEModalMobile extends UhcDriver{
 
-	@FindBy(id = "enroll-save-popup")
+	@FindBy(css = "#enroll-save-popup")
 	private WebElement SaveandReturnModal;
 	
 	
-	@FindBy(id = "backBtn")
+	@FindBy(css = "#backBtn")
 	private WebElement BackBtn;
 
 	public SaveandReturnOLEModalMobile(WebDriver driver) {

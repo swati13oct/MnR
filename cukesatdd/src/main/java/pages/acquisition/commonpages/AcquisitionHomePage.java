@@ -41,6 +41,7 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * @author pperugu
@@ -1627,7 +1628,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
+	public PharmacySearchPageNew navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		scrollToView(navigationSectionHomeLink);
@@ -1638,7 +1639,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 
@@ -3780,11 +3781,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
-		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		/*if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
-		}
+		}*/
 		validateLogo();
 		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
@@ -5315,7 +5316,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocatorFromPlanType() {
+	public PharmacySearchPageNew navigateToPharmacyLocatorFromPlanType() {
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
 		jsClickNew(planTypePDPLink);
@@ -5326,7 +5327,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 
@@ -8059,7 +8060,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateAARPMembershipLinks(String linkText) throws Exception {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
-		
+
 		// validateNew(headerRegisterLink);
 		if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 			Assert.assertEquals(driver.findElements(By.xpath("//li[contains(@class,'aarpMembership_wrap')]//button[normalize-space()='AARP Membership']")).size(), 0, "*** AARP Membership links header should NOT present on current page. ***");
@@ -8105,7 +8106,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			driver.switchTo().window(base);
 		}
-		
+
 	}
 	public void validateAARPMembershipcancel(String linkText) throws Exception {
 		// validateNew(headerSignInLink);

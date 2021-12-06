@@ -68,7 +68,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 	
 	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
@@ -342,10 +342,10 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	@FindBy(css = "#selectCounty p a")
 	private List<WebElement> multiCounty;
 
-	@FindBy(id = "zipInfo")
+	@FindBy(css = "#zipInfo")
 	private WebElement countyInfo;
 
-	@FindBy(id = "MultipleCounty")
+	@FindBy(css = "#MultipleCounty")
 	private WebElement multiCountyInfo;
 
 	// VPP Details page
@@ -353,7 +353,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	@FindBy(css = ".uhc-container div.content h2")
 	private WebElement planNameVPPDetailsPage;
 
-	@FindBy(id = "backToPlanSummaryTop")
+	@FindBy(css = "#backToPlanSummaryTop")
 	private WebElement backtoPlanSummary;
 
 	@FindBy(css = ".segment h2")

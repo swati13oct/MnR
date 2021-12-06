@@ -108,10 +108,10 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@data-asset-name,'Start Now')]")
 	private WebElement preExternalLink;
 	
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement ZipCodeTxtBx;
 
-	@FindBy(id = "submit")
+	@FindBy(css = "#submit")
 	private WebElement FindPlansButton;
 
 //	--- locators for scenario 5
@@ -143,7 +143,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "(//div[@class='modal-body'])[1]")
 	private WebElement countyModalVpp;
 
-	@FindBy(id = "multiCountyCancelBtn")
+	@FindBy(css = "#multiCountyCancelBtn")
 	private WebElement cancelCountyModal;
 
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")

@@ -1261,6 +1261,14 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.addDoctorsLink();
 	}
 	
+	@Then("^user updating providers to PRE doctorpage$")
+	public void providerUpdate(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
+				inputValues.get("Multi Doctor"));
+	}
+	
 	@Then("^user validates Sort By drop down UI PRE-Result page$")
 	public void sortBy() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -1301,6 +1309,14 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.removeBreadcrumb();
 		planSelectorNewResultspage.sortByBreadcrumb();
+	}
+	
+	@Then("^user Filter SNP Plantype and validate CSNP Plans Ranking in PRE results page$")
+	public void csnp_ranking(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.sortByFuncWithoutVerify(inputValues.get("Sort PlanType"));
+		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
 	}
 	
 	@Then("^the user do poc$")

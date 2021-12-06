@@ -138,14 +138,14 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 		@FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName | isMultiDoctor |
-      | AARP |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | John        | YES           |
-      | AARP |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | julie       | YES           |
+      | AARP |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Arash Lalezary MD        | YES           |
+      | AARP |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Robert W Fields MD       | YES           |
       
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName | isMultiDoctor |
-      | UHC  |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | John        | YES           |
-      | UHC  |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | julie       | YES           |
+      | UHC  |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Arash Lalezary MD        | YES           |
+      | UHC  |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Robert W Fields MD       | YES           |
 
   @PRE @planrecommandonation @doctorspage @doctorspagepagecancel @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page modal cancel functions in Plan Recommendation Engine
@@ -198,9 +198,9 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 		@FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1 | isMultiDoctor1 | DoctorsName2 | isMultiDoctor2 |
-      | AARP |   10001 | NO            | New York | MAPD          | None         | sue          | NO             | robert       | NO             |
+      | AARP |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD          | NO             | Robert W Fields MD       | NO             |
       
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1 | isMultiDoctor1 | DoctorsName2 | isMultiDoctor2 |
-      | UHC  |   10001 | NO            | New York | MAPD          | None         | sue          | NO             | robert       | NO             |
+      | UHC  |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD          | NO             | Robert W Fields MD       | NO             |

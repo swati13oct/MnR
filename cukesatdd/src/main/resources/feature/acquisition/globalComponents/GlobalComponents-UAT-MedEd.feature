@@ -28,7 +28,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP 
     Examples:
       | Scenario           | site | geoState    | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | Puerto Rico | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |

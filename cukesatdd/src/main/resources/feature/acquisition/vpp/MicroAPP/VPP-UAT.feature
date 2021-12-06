@@ -25,6 +25,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Is Multi County2 | <isMultiCounty3> |
     And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
+      | Plan Type | <plantype> |
     Then I validate "<plantype>" plans with names "<planNamesList>" are listed correctly on summary page
     Then the user validates marketing bullets of the plan
     And I validate view more and view less links on plan summary
@@ -108,7 +109,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user clicks on browser back button
     Then verify plan compare page is loaded
 
-    @vppPlanCompareCommon_AARP01New @prodRegression_UAT @regressionAARP
+    @vppPlanCompareCommon_AARP01New @prodRegression_UAT @regressionAARP @MHJ
     Examples: 
       | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount | planIndices | drug1  | drug2                | drug3   | removePlanIndices | planNamesList                                                                                                           |
       | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              | [blank]          | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            | [blank]                 | [blank]       | [blank]             | [blank]               | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -329,27 +330,24 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
+      | Middle Name              | <middlename>             |
       | Last Name                | <lastname>               |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
       | Perm_city                | <permcity>               |
+      | Perm_AptNo               | <permaptno>              |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
+      | Mailing_AptNo            | <mailingaptno>           |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    # | Perm_Aptno               | <permaptno>              |
-    # | Mailing_Aptno            | <mailingaptno>           |
-    Then the user enters following information in Personal Information Page
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      | Home Number        | <phoneno>           |
-      | Mobile Number      | <mobileno>          |
-      | Middle Name        | <middlename>        |
+      | Email Confirmation | <emailConfirmation>            |
+      | Go Green           | <goGreen>                      |
+      | Home Number        | <phoneno>                      |
+      | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
     And the user quits the session
@@ -387,31 +385,28 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
+      | Middle Name              | <middlename>             |
       | Last Name                | <lastname>               |
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
       | Perm_city                | <permcity>               |
+      | Perm_AptNo               | <permaptno>              |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
+      | Mailing_AptNo            | <mailingaptno>           |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    # | Perm_Aptno               | <permaptno>              |
-    # | Mailing_Aptno            | <mailingaptno>           |
-    Then the user enters following information in Personal Information Page
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      | Home Number        | <phoneno>           |
-      | Mobile Number      | <mobileno>          |
-      | Middle Name        | <middlename>        |
+      | Email Confirmation | <emailConfirmation>            |
+      | Go Green           | <goGreen>                      |
+      | Home Number        | <phoneno>                      |
+      | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @vppPlanCompareCommon_AARP01New @regressionAARP
+    @vppPlanCompareCommon_AARP01New @regressionAARP @test001
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_AMP | AARP |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
@@ -451,4 +446,5 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Examples: 
       | site       | zipcode | isMultiCounty | county     | planNamesList                                                                                                                                                                                                                                                                                                                                                                                                                                              | plantype | planyear | zipcode2 | county2  | planNamesList2                                                                                                                                | SavePlansCount |
       | Myuhcplans |   33111 | NO            | Miami-Dade | Preferred Medicare Assist Plan 2 (HMO D-SNP),Preferred Medicare Assist Plan 1 (HMO D-SNP),Medica HealthCare Plans MedicareMax Plus (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP),UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP),Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP),UnitedHealthcare Assisted Living Plan (PPO I-SNP),UnitedHealthcare Nursing Home Plan (HMO I-SNP) | SNP      | current  |    37714 | Campbell | UnitedHealthcare Dual Complete (HMO D-SNP),UnitedHealthcare Dual Complete ONE (HMO D-SNP),UnitedHealthcare Dual Complete ONE Plus (HMO D-SNP) |              1 |
+
       

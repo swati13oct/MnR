@@ -42,7 +42,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	@FindBy(xpath = "//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -90,7 +90,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_DrugsTxt;
 
-	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'You Pay')]")
+	@FindBy(xpath = "//div[@id='editdrugcontainer']//th//span[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
 	// @FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial
@@ -238,7 +238,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(xpath = "//*[@role='tabpanel' or @role='list']")
+	@FindBy(xpath = "//*[(@role='tabpanel' or @role='list') and contains(@class, 'uhc-list')]")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
@@ -1085,6 +1085,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public SwitchToGeneric clickSwitchGeneric(String brandDrug) {
 		WebElement SwitchLink = driver.findElement(By
 				.xpath("//*[contains(@id, 'drugtable')]//*[contains(@aria-label, 'Switch') and contains(@aria-label, '" +brandDrug+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, SwitchLink, 20);
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
@@ -2666,5 +2667,29 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(saveDrugs);
 		jsClickNew(saveDrugs);
 			}
-		
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement Enrollbtn;
+	public void ClickEnrollbtn(String Enroll_flag){
+		if(Enroll_flag.equalsIgnoreCase("true")){
+			if(validateNew(Enrollbtn)){
+				jsClickNew(Enrollbtn);
+				waitForPageLoadSafari();
+				if (driver.getCurrentUrl().contains("welcome")) {
+					System.out.println("OLE Welcome Page displayed ");
+					driver.navigate().back();
+					System.out.println("Validation Passed - Enroll option is displayed and OLE Welclme page is displayed on Enroll Btn click");
+				}
+			}
+			else
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is NOT displayed <<<<<");
+		}
+		else{
+			if(!validate(Enrollbtn))
+				System.out.println("Validation Passed for Enroll option not displayed");
+			else if(validateNew(Enrollbtn))
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
+		}
+	}
+
 }

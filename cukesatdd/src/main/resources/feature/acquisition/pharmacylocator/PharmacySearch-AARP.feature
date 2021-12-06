@@ -10,7 +10,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -22,7 +22,6 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                         | ny_planYear | ny_planName                                         | plantype |
       | Ulayer   |   80002 |       25 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
 
-  #| Ulayer   | 80002   | 15       | Adams County | 2020        | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |
   Scenario Outline: To verify available pharmacies page
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -73,36 +72,32 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
-    And the user validates header section content
+    And the user validates header section content on site
     When the user enters following details for pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
+    Then the user verify error messages in Pharmacy locator page
       | Language | English |
     When the user enters following details for pharmacy search
       | Zip Code |       9999 |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
+    Then the user verify error messages in Pharmacy locator page
       | Language | English |
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the pharmacies available
-      | Language | English |
-    And the user validates tooltips on filters
-      | Language                                   | English                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-    And the user validates map section content
-    And the user validates show on map link
-    And the user validates get direction link
-    And the user validates more information content based on plan type
-    And the user validates view search PDF link
+#    Then the user validates the pharmacies available
+#      | Language | English |
+    And the user validates map section contents
+    And the user validate show on map link
+    And the user validate more information content based on plan type
+    And the user validate view search PDF link
 
     @pharmacylocatorulayer01a
     Examples: 
@@ -131,12 +126,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ English -----------------------------------
-    And the user validates header section content
+    And the user validates header section content on site
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -148,10 +143,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
-    Then the user validates the pharmacies available
-      | Language | English |
-    Then the user validates error message displayed when filter results in no match
-    Then the user validates the question widget
+#    Then the user validates the pharmacies available
+#      | Language | English |
+#    Then the user validates error message displayed when filter results in no match
+#    Then the user validates the question widget
 
     @pharmacylocatorulayer02a
     Examples: 
@@ -179,7 +174,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
-    And the user validates header section content
+    And the user validates header section content on site
     When the user enters following details for pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
@@ -194,19 +189,15 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | Chinese |
-    And the user validates tooltips on filters
-      | Language                                   | Chinese                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section content
     And the user validates show on map link
-    And the user validates get direction link
     And the user validates more information content based on plan type
     And the user validates view search PDF link
     And the user validates pharmacy widgets
@@ -232,12 +223,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Chinese -----------------------------------
-    When the user selects Chinese Language
+    #When the user selects Chinese Language
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -246,11 +237,11 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
-    And the user selects Pharmacy Types to Filter
-      | Pharmacy Type | <pharmacyType> |
-      | Language      | Chinese        |
-    Then the user validates the pharmacies available
-      | Language | Chinese |
+#    And the user selects Pharmacy Types to Filter
+#      | Pharmacy Type | <pharmacyType> |
+#      | Language      | Chinese        |
+#    Then the user validates the pharmacies available
+#      | Language | Chinese |
     Then the user validates error message displayed when filter results in no match
     Then the user validates the question widget
 
@@ -265,37 +256,33 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
     #------ Spanish -----------------------------------
-    When the user selects Spanish Language
-    And the user validates header section content
+    #When the user selects Spanish Language
+    And the user validates header section content on site
     When the user enters following details for pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
+#    Then the user verify error messages in pharmacy locator page
+#      | Language | Spanish |
     When the user enters following details for pharmacy search
       | Zip Code |       9999 |
       | Distance | <distance> |
-    Then the user verify error messages in pharmacy locator page
-      | Language | Spanish |
+#    Then the user verify error messages in pharmacy locator page
+#      | Language | Spanish |
     And the user enters following details for pharmacy search
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
     Then the user validates the pharmacies available
       | Language | Spanish |
-    And the user validates tooltips on filters
-      | Language                                   | Spanish                 |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-    And the user validates map section content
-    And the user validates show on map link
-    And the user validates get direction link
-    And the user validates more information content based on plan type
-    And the user validates view search PDF link
+    And the user validates map section contents
+    And the user validate show on map link
+    And the user validate more information content based on plan type
+    And the user validate view search PDF link
 
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
@@ -313,7 +300,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
-    And the user chooses a plan from dropdown
+    And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
@@ -332,9 +319,9 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
 
     Examples: 
       | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | Ulayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | Ulayer   |   10980 |       15 | None           |        2022 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | Ulayer   |   78006 |       15 | Kendall County |        2022 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | Ulayer   |   78006 |       10 | Comal County   |        2022 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   @pharmacylocatorulayer07 @onlinePharmacyDir @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
@@ -364,7 +351,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Site Name | <siteName> |
       | State     | <state>    |
     #------ English -----------------------------------
-    And the user validates header section content
+    And the user validates header section content on site
 
     Examples: 
       | TID   | state     | siteName |

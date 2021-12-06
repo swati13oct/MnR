@@ -39,7 +39,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	public GetStartedPageMobile(WebDriver driver) {

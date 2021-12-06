@@ -152,7 +152,7 @@ public class VPPTestHarnessPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@ng-click,'plandetails')]")
 	private WebElement planDetailsCreateButton;
 
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(css = "#backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 
 	@FindBy(xpath = "//h4[contains(text(),'Plan Selector')]//parent::div//input[@name='contractnumber']")

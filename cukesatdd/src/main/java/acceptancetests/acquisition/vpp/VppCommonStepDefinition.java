@@ -60,6 +60,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
@@ -288,6 +289,15 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
+	
+	@Then("^Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
+	
+	
 
 	@And("^the user views the plans of the below plan type and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
@@ -1991,13 +2001,20 @@ private Scenario scenario;
 		planComparePage.validateDoctors();
 	}
 	
-	@Then("^verify_icons_loaded_with_doctor_summary_on_Plan_Compare_page$")
+	@Then("^verify icons loaded with doctor summary on Plan Compare page$")
 	public void verify_icons_covered() {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateIcons();
 	}
 	
+	
+	@Then("^click on Show All button on plan compare page$")
+	public void click_on_Show_All_button() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.showAllButton();
+	}
 	
 	
 	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
@@ -2782,7 +2799,7 @@ private Scenario scenario;
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		PharmacySearchPage pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
+		PharmacySearchPageNew pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
 		// PharmacySearchPage pharmacySearchPage=new
 		// PharmacySearchPage(aquisitionhomepage.driver);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
@@ -4636,5 +4653,27 @@ private Scenario scenario;
 		plansummaryPage.saveMSVPP4Plans(savePlanNames);
 	}
 
+	@Then("^validate all available plans are shown on click of browser back$")
+	public void validate_all_plans_are_shown_on_click_of_browser_back() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.browserBackAndValidateAllPlansShown();
+	}
 	
+	@And("^validate base line benefit popup$")
+	public void validate_base_line_benefit_popup(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateBaseLineBenefitsPopup(memberAttributesMap);
+	}
+	
+	@Then("^validate all providers are covered$")
+	public void validate_all_providers_are_covered() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateProvidersCovered();
+	}
+
 }

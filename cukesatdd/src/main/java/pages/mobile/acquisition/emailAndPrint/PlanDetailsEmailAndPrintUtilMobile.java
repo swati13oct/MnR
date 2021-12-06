@@ -312,8 +312,10 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		sendkeysMobile(driver.findElement(By.xpath(".//*[@id='email']")), "alisha_kapoor@optum.com");
 		System.out.println("!!!Entered valid Email ");
 //		hidekeypad();
-		emailModalTitle.click();
-		sendButtonEmailPlanDetailsPopUp.click();
+		//emailModalTitle.click();
+		jsClickNew(emailModalTitle);
+		//sendButtonEmailPlanDetailsPopUp.click();
+		jsClickNew(sendButtonEmailPlanDetailsPopUp);
 		System.out.println("Email has success fully send to user");
 		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send",
 				validate(validatesuccesspopup));

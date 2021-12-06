@@ -66,7 +66,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
 	public WebElement Tier5_MailPharmacy_Text;
 
-	@FindBy(css = "button[id='changePharmacyLink'][class$='block']")
+	@FindBy(css = ".uhc-link-button.ml-0.mt-lg-0.mt-10.opensansfont.d-block")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(css = "a[dtmname$='plans in your area']")
@@ -103,7 +103,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "div[class='uhc-card__content'] > div[class*='d-block'] > div > p:nth-child(4) > span")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(css = "#viewplan")
+	@FindBy(xpath = "//*[@id='viewplan']/span[text()='View Plan Details']")
 	public WebElement DrugCosts_PlanDetailsBtn;
 	
 	@FindBy(css = "#printdetails")
@@ -161,7 +161,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(css = "#selectaPharmacyHeader")
 	public WebElement selectPharmacyHeader;
 
 	@FindBy(css = "#cancelicon")
@@ -172,6 +172,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#milesDropdown")
 	public WebElement distanceDrpDown;
+	
+	@FindBy(xpath = "//*[@id='pharmacyfilter']/div[1]/label")
+	public WebElement distanceLable;
 
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
@@ -182,7 +185,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#mailSelectPharmacyBtn0")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(id = "optumRxTxt")
+	@FindBy(css = "#optumRxTxt")
 	public WebElement optumRxMsg;
 
 	@FindBy(css = "div[class*='changepharmacy'] [class^='uhc-list'][role='tabpanel']")
@@ -269,7 +272,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#previousButton")
 	public WebElement getStartedButton;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(css = "#dupIconFlyOut")
 	private WebElement favoriteIcon;
 
 	@FindBy(xpath = "//*[@class='flyout']//div[contains(@class,'success')]")
@@ -384,17 +387,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsCard);
-		validateNew(LinktoExitScenario);
-		if(!LinktoExitScenario.getText().toLowerCase().contains("compare")) {
-            validateNew(LinkToDrugSummary);
-        }
-        /*
-         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
-         */
-
-		validateNew(LinktoEditDrugList);
+//		validateNew(DrugDetails_ChangePharmacyLnk);
+//		validateNew(DrugDetails_DrugCostsCard);
+//		validateNew(LinktoExitScenario);
+//		if(!LinktoExitScenario.getText().toLowerCase().contains("compare")) {
+//            validateNew(LinkToDrugSummary);
+//        }
+//        /*
+//         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+//         */
+//
+//		validateNew(LinktoEditDrugList);
 	}
 
 	public void validatePlanName(String planName) {
@@ -518,8 +521,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPageMobile ClickLinktoNavigatetoDrugSummary() {
-		validateNew(LinkToDrugSummary);
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(LinkToDrugSummary);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
@@ -570,30 +574,36 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
-		List<WebElement> Tier1Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 1')]"));
-		List<WebElement> Tier2Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 2')]"));
-		List<WebElement> Tier3Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 3')]"));
-		List<WebElement> Tier4Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 4')]"));
-		List<WebElement> Tier5Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 5')]"));
-		List<WebElement> NotCoveredDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Not Covered')]"));
-		List<WebElement> PADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Prior Authorization')]"));
-		List<WebElement> STDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Step Therapy')]"));
-		List<WebElement> QLDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Quantity Limit')]"));
-		List<WebElement> SevenDayDrugs = driver.findElements(By
-				.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Seven Day')]"));
-		List<WebElement> LADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Limited Access')]"));
-		List<WebElement> DLDrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Dispensing Limits')]"));
+		WebElement yourDrugsAccordion = driver.findElement(By.xpath("//app-accordion[@buttonid='edityourdrug']/div[@id='accordion']"));
+
+		if(!CommonUtility.getElementAttribute(yourDrugsAccordion, "class").contains("expanded")){
+			jsClickNew(yourDrugsAccordion);
+		}
+
+		List<WebElement> Tier1Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 1')]"));
+		List<WebElement> Tier2Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 2')]"));
+		List<WebElement> Tier3Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 3')]"));
+		List<WebElement> Tier4Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 4')]"));
+		List<WebElement> Tier5Drugs = yourDrugsAccordion.findElements(
+				By.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Tier 5')]"));
+		List<WebElement> NotCoveredDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Not Covered')]"));
+		List<WebElement> PADrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Prior Authorization')]"));
+		List<WebElement> STDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Step Therapy')]"));
+		List<WebElement> QLDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Quantity Limit')]"));
+		List<WebElement> SevenDayDrugs = yourDrugsAccordion.findElements(By
+				.xpath(".//div[contains(@class,'d-block')]//li[contains(text(), 'Seven Day')]"));
+		List<WebElement> LADrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Limited Access')]"));
+		List<WebElement> DLDrugs = yourDrugsAccordion.findElements(By.xpath(
+				".//div[contains(@class,'d-block')]//li[contains(text(), 'Dispensing Limits')]"));
 		if (Tier1Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 1 Drugs Added: " + Tier1Drugs.size());
 		} else
@@ -1025,12 +1035,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void clickChangePharmacyLinkDetailsPage() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		jsClickNew(DrugDetails_ChangePharmacyLnk);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(pharmacyZipcodeSearch);
 		validateSelectPharmacyPage();
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
+		jsClickNew(distanceLable);
 		mobileSelectOption(distanceDrpDown, distanceValue, true);
 //		jsClickNew(pharmacySearchBtn);
 	}
@@ -1042,13 +1053,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		saveDrugBtn.click();
 	}
 
-	@FindBy(id = "aarpSVGLogo")
+	@FindBy(css = "#aarpSVGLogo")
 	public WebElement aarpLogo;
 
-	@FindBy(id = "uhcSVGLogo")
+	@FindBy(css = "#uhcSVGLogo")
 	public WebElement uhcLogo;
 
 	public void clickingSiteLogoDrugDetail(String siteName) {
+		//Scroll to the top of page for header to be visible
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		
 		System.out.println(siteName);
 		if (siteName.equalsIgnoreCase("AARP")) {
 
@@ -1305,7 +1320,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
 	private WebElement alertTextImg;
 
-	@FindBy(id = "priceLinkBtn_0")
+	@FindBy(css = "#priceLinkBtn_0")
 	private WebElement viewProceBtn;
 
 	public void validateExtraHelpAlert() {
@@ -1931,7 +1946,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement savedIcon;
 
 	public void savePlan() {
-		validateNew(saveIcon);
+		//validateNew(saveIcon);//Scrolling in validatenew and then scrolling again in jsclick creating issue in iOS - SauceLab issue
 		jsClickNew(saveUnsaveBtn);
 		validateNew(savedIcon);
 	}
@@ -1977,9 +1992,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void vppdetails_clickEditPharmacy() throws InterruptedException {
 		Thread.sleep(6000);
-		validateNew(prescriptiondrugTab);
+//		validateNew(prescriptiondrugTab);
 		jsClickNew(prescriptiondrugTab);
-		validateNew(editLink);
+//		scrollToView(editLink);
+//		validateNew(editLink);
 		jsClickNew(editLink);
 
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
@@ -2196,8 +2212,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	
 	
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
-		validateNew(DrugCosts_PlanDetailsBtn);
-		jsClickNew(DrugCosts_PlanDetailsBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		//jsClickNew(DrugCosts_PlanDetailsBtn);
+		scrollToView(DrugCosts_PlanDetailsBtn);
+		DrugCosts_PlanDetailsBtn.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("details")) {
 			System.out.println("Plan Details Page displayed ");
