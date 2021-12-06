@@ -506,22 +506,22 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               5,3 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               4,3 |
 
     @regressionAARP @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               5,3 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               4,3 |
 
     @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               5,3 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               4,3 |
 
     @regressionUHC @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               5,3 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               4,3 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
@@ -929,19 +929,19 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00036 | AARP |   78006 | NO            | Bexar County   | MAPD     | current  |           2 |
+      | 00036 | AARP |   78006 | Yes            | Bexar County   | MAPD     | current  |           2 |
 
     @regressionAARP @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00036 | AARP |   78006 | NO            | Bexar County   | MAPD     | next     |           2 |
+      | 00036 | AARP |   78006 | Yes            | Bexar County   | MAPD     | next     |           2 |
 
     @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00037 | UHC  |   78006 | NO            | Kendall County | MAPD     | current  |           2 |
+      | 00037 | UHC  |   78006 | Yes            | Kendall County | MAPD     | current  |           2 |
 
     @regressionUHC @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00037 | UHC  |   78006 | NO            | Kendall County | MAPD     | next     |           2 |
+      | 00037 | UHC  |   78006 | Yes            | Kendall County | MAPD     | next     |           2 |
