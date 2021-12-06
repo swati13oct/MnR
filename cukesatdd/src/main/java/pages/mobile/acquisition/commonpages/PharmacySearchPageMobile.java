@@ -377,7 +377,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			Assertion.fail("Plan Name is NOT Displayed in Pharmacy Results Section");
 	}
 
-	@FindBy(xpath = "//div[@ng-if='returnLinkText']//a")
+	@FindBy(xpath = "//span[contains(@class,'back-to-view-all-pla')]")
 	public WebElement breadCrumbLink;
 
 	public void clickBreadCrumb() {
