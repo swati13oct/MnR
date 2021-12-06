@@ -3311,12 +3311,22 @@ public class oleStepDefinition {
 	}
 
 	@Then("^the user validates Footer links on Welcome OLE Page$")
-	public void the_user_validates_footer_links_welcome_OLE_Page() throws Throwable {
+	public void the_user_validates_footer_links_welcome_OLE_Page(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String plantype = memberAttributesMap.get("Plan Type");
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 			//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		if(plantype.contentEquals("MA") && plantype.contentEquals("SNP")){
 			welcomePage.ValidateFooterEnrollmentChecklistLink();
 			welcomePage.ValidateFooterListaVerificationLink();
+			welcomePage.ValidateFooterFitBitLink();
+		}
+		else if(plantype.contentEquals("PDP")){
+			welcomePage.ValidateFooterExtrahelpLink();
+			welcomePage.ValidateFooterAARPPharmacyLink();
+			}
 		}
 	}
 	
