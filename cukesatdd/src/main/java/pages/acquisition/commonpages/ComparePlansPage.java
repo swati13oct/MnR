@@ -1723,7 +1723,7 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println(FirstProviderName.getText());
 		String firstDoctorName = FirstProviderName.getText();
 		Thread.sleep(2000);
-		validateNew(viewlocationsLink);
+		validate(viewlocationsLink);
 		viewlocationsLink.click();
 		Thread.sleep(2000);
 		Assertion.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
