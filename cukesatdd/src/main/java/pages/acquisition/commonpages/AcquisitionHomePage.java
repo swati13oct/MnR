@@ -7416,7 +7416,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			jsClickNew(samChatIcon);
 			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
+			threadsleep(5);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(
