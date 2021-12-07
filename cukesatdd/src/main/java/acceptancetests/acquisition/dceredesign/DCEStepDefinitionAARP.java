@@ -827,6 +827,17 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	
+	@Then("^the user validates enroll option as per following flag$")
+	public void the_user_validates_enroll_option_as_per_following_flag(DataTable attributes) throws Throwable{
+	      DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+					.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		    Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+			String Enroll_Flag = memberAttributesMap.get("EnrollFlag");
+		  drugDetailsPage.ClickEnrollbtn(Enroll_Flag);
+	}
+	
 	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
 	public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable{
 	    DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);

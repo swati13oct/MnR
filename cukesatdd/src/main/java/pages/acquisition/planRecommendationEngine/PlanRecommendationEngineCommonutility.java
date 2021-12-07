@@ -258,7 +258,8 @@ public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 		Assert.assertTrue(errorMessage.getText().toUpperCase().contains("PLEASE")
 				|| (errorMessage.getText().toUpperCase().contains("NO"))
 				|| (errorMessage.getText().toUpperCase().contains("ZIP")));
-		Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pagename.toUpperCase()));
+		if(!pagename.equalsIgnoreCase("Location"))
+			Assert.assertTrue(pageStepsNumberName.getText().toUpperCase().contains(pagename.toUpperCase()));
 	}
 
 	public void browserBack() {

@@ -3010,9 +3010,11 @@ public class VppPlanCompareMobile {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -3036,6 +3038,12 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
+	}
+	
+	@Then("^the user quits the session$")
+	public void user_ends_current_session() throws Throwable {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.quit();
 	}
 
 	@Then("^user clicks on Change Zip code link$")
@@ -4691,6 +4699,14 @@ public class VppPlanCompareMobile {
 		}
 	}
 
+	@Then("^verify icons loaded with doctor summary on Plan Compare page$")
+	public void verify_icons_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		planComparePage.validateDoctors();
+	}
+
 	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page$")
 	public void verify_doctors_covered() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4698,7 +4714,7 @@ public class VppPlanCompareMobile {
 
 		planComparePage.validateDoctors();
 	}
-
+	
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
 	public void clickONEdityourdocits() throws Exception {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
