@@ -28,8 +28,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the pharmacies available
-      | Language | Chinese |
+#    Then the user validates the pharmacies available
+#      | Language | Chinese |
     And the user validates map section contents
     And the user validate show on map link
     And the user validate more information content based on plan type
@@ -83,8 +83,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-    Then the user validates the pharmacies available
-      | Language | Chinese |
+#    Then the user validates the pharmacies available
+#      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
 
@@ -129,8 +129,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the pharmacies available
-      | Language | Spanish |
+#    Then the user validates the pharmacies available
+#      | Language | Spanish |
     And the user validates map section contents
     And the user validate show on map link
     And the user validate more information content based on plan type
@@ -173,8 +173,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Spanish        |
-    Then the user validates the pharmacies available
-      | Language | Spanish |
+#    Then the user validates the pharmacies available
+#      | Language | Spanish |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
 
