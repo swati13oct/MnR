@@ -41,8 +41,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-    Then the user validates the pharmacies available
-      | Language | Chinese |
+#    Then the user validates the pharmacies available
+#      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
 
@@ -113,8 +113,8 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     When the user enters following details for the pharmacy search
       | Zip Code | [blank]    |
       | Distance | <distance> |
-    Then the user validates the pharmacies available
-      | Language | Spanish |
+#    Then the user validates the pharmacies available
+#      | Language | Spanish |
     When the user enters following details for pharmacy search
       | Zip Code |       9999 |
       | Distance | <distance> |

@@ -222,7 +222,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//html[@lang='es']")
 	protected WebElement pgInSpanish;
 
-	@FindBy(xpath="//input[@id='checkbox-11-input']/..")
+	@FindBy(xpath="//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/..")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy (xpath= "//div[@id='searcherrorcontainer']//p")

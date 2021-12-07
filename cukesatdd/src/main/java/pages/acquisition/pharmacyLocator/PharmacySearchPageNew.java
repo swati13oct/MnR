@@ -437,7 +437,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
 		jsClickNew(FilterApplyBtn);
-		sleepBySec(5);
+		sleepBySec(10);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		if (!noPharmaciesErrorMessage.isDisplayed()) {
 			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
