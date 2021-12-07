@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.HashMap;
-
+import java.util.ArrayList;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -79,7 +79,7 @@ public class VppPlanValidationStepDefinition {
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
-		
+		HashMap <String, Integer> benefitsColorMap = new HashMap<String, Integer>();
 		 WebDriver wd = getLoginScenario().getWebDriverNew();
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
@@ -118,8 +118,9 @@ public class VppPlanValidationStepDefinition {
 				 String currentColName = "";
 				  
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				 ArrayList <Integer> benefitsArray = new ArrayList<Integer>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
-				 int counter =0;
+				 int counter =0, colorCounter = 0, cellCounter = 0;
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
@@ -129,7 +130,7 @@ public class VppPlanValidationStepDefinition {
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 		                Iterator<Cell> cellIterator = row.cellIterator();
 		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
-   
+		                HSSFRow resultsRowNew = null;
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
@@ -148,6 +149,7 @@ public class VppPlanValidationStepDefinition {
 		                		 System.out.println(e);
 		                	 }
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
+			                 
 							 if(rowIndex==0) {
 								 newCell.setCellValue(cell.getStringCellValue()); 
 							 }
@@ -156,8 +158,9 @@ public class VppPlanValidationStepDefinition {
 									 
 									 if(counter==0) {
 										  aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, siteType);
-										  counter++;
+										  
 									  }
+									 counter++;
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
 									  planDetailsPage = new AepPlanDetailsPage(wd);
@@ -173,20 +176,37 @@ public class VppPlanValidationStepDefinition {
 										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);              //  stores all the table info into hashmap
 
 								 }
-
-								 if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
-
+								 if(rowIndex==1) {//this will initialize the arraylist of colors to value of 0's for each benefit
+									  benefitsArray.add(cellCounter, 0);
+								  }
+								 if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("Product Focus <Next Year>"))) {	
+									  
 								      resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 								      if(resultMap.containsKey(false))
 											 valueMatches = false;
 									  System.out.println(currentColName + " : "+ valueMatches);
 									 	if(valueMatches) {					                    
 									 		newCell.setCellStyle(stylePassed);
+									 		int value = benefitsArray.get(cellCounter); // get value at the index of cellCounter from the array
+									 		value = value + 1; // increment value for this indes if the cell is green
+									 		benefitsArray.set(cellCounter, value); // replace old value with the incremented value
+									 		benefitsColorMap.put(currentColName,value); //updating the value into the hashmap for the specific benefit
 								 		}else {		
 								 			newCell.setCellStyle(styleFailed);
 									 		failureCounter++;										 
 								 		}
+									 	
+									 	 if(rowIndex==lastRow) {
+									 		 if(cellCounter==0) {
+									 			resultsRowNew = (HSSFRow) ResultsSheet.createRow(lastRow+1);
+									 			 }
+							                 HSSFCell colorRowCell = (HSSFCell) resultsRowNew.createCell(cellIndex);
+											 colorRowCell.setCellValue(benefitsArray.get(cellCounter));
+										 }
+									 	cellCounter++;
 								 }
+								 
+								 
 								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
 				                	 newCell.setCellValue(failureCounter);
 								 else {
@@ -195,8 +215,10 @@ public class VppPlanValidationStepDefinition {
 				                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
 				                		 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));	 
 				                	 }
-				              }
-							 } 
+								 }
+								
+								 
+							 } //end skip the header if logic
 							  cellIndex++;						  
 		                 }
 		            }
@@ -215,6 +237,12 @@ public class VppPlanValidationStepDefinition {
 					outputStream.close();
 					e.printStackTrace();
 			}
+			
+			for(String keyValue : benefitsColorMap.keySet()) {
+				  System.out.println("Benefit Name: "+keyValue+" Total Passed: "+benefitsColorMap.get(keyValue));
+				  System.out.println(
+				  "_________________________________________________________________________________________________"
+				  ); }
 	}
 	
 	@Then("^the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel$")
