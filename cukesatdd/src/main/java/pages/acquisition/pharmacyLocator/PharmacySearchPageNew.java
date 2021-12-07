@@ -431,9 +431,15 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 					!pharmacyValidate(widget_walgreens));
 		}
 	}
-
+	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
+	protected WebElement indian_tribal_label_filter_text;
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
+		String indian_tribal_text = indian_tribal_label_filter_text.getText();
+		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
+		}
+
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
 		jsClickNew(FilterApplyBtn);

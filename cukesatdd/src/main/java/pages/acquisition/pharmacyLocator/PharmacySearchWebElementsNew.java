@@ -197,11 +197,11 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//a[contains(@href,'mail-order')]")
 	protected WebElement widget_prefMailServPhar_learnMore;
 
-	@FindBy(xpath="(//h3[@class='m-0 text-bold']/../../..)[2]")
+	@FindBy(xpath="//h3[@class='m-0 text-bold']/../../..//p[contains(text(),'MedicareRx Preferred (PDP)')]/../../..")
 	//@FindBy(xpath="//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
-	@FindBy(xpath="(//h3[@class='m-0 text-bold']/../../..)[2]")
+	@FindBy(xpath="(//h3[contains(text(),'Walgreens')]/../../..)[2]")
 	protected WebElement widget_walgreens;
 
 	@FindBy(xpath="//div[@class='uhc-card__content text-left']//p//a[@href='/health-plans/estimate-drug-costs.html#/drug-cost-estimator']")
@@ -222,7 +222,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//html[@lang='es']")
 	protected WebElement pgInSpanish;
 
-	@FindBy(xpath="//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/..")
+	@FindBy(xpath="//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/../..")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy (xpath= "//div[@id='searcherrorcontainer']//p")
