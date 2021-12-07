@@ -435,7 +435,12 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	protected WebElement indian_tribal_label_filter_text;
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
-		String indian_tribal_text = indian_tribal_label_filter_text.getText();
+		String indian_tribal_text = "";
+		try {
+			 indian_tribal_text = indian_tribal_label_filter_text.getText();
+		}
+		catch (Exception ex){
+		}
 		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
 			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
 		}
