@@ -25,10 +25,10 @@ public class CoverageInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']")
 	private WebElement SiteLogo;
 	
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "ole-form-back-button")
+	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackBtn;
 
 	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
@@ -46,7 +46,7 @@ public class CoverageInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
 	private WebElement pedHeader;
 	
-	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 	
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
@@ -63,19 +63,19 @@ public class CoverageInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you have other insurance that will cover your prescription drugs in addition')]")
 	private WebElement PDP_Question;
 
-	@FindBy(id = "hasPrescriptionDrugCoverageYes")
+	@FindBy(css = "#hasPrescriptionDrugCoverageYes")
 	private WebElement PDPQuestion_Yes;
 	
-	@FindBy(id = "hasPrescriptionDrugCoverageNo")
+	@FindBy(css = "#hasPrescriptionDrugCoverageNo")
 	private WebElement PDPQuestion_No;
 
 	@FindBy(xpath = "//*[contains(text(), 'Do you live in a nursing home or a long-term care facility?')]")
 	private WebElement LongTerm_Question;
 
-	@FindBy(id = "hasLongTermCareFacilityYes")
+	@FindBy(css = "#hasLongTermCareFacilityYes")
 	private WebElement LongTerm_Question_Yes;
 	
-	@FindBy(id = "hasLongTermCareFacilityNo")
+	@FindBy(css = "#hasLongTermCareFacilityNo")
 	private WebElement LongTerm_Question_No;
 
 	//Non-PDP Plans, MA, MAPD and DSNP
@@ -83,10 +83,10 @@ public class CoverageInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
 	private WebElement OtherIns_Question;
 
-	@FindBy(id = "hasHealthInsuranceYes")
+	@FindBy(css = "#hasHealthInsuranceYes")
 	private WebElement OtherIns_Question_Yes;
 	
-	@FindBy(id = "hasHealthInsuranceYes")
+	@FindBy(css = "#hasHealthInsuranceYes")
 	private WebElement OtherIns_Question_No;
 
 	public CoverageInformationPageMobile(WebDriver driver) {

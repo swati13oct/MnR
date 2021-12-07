@@ -21,7 +21,7 @@ import pages.acquisition.commonpages.PageTitleConstants;
 
 public class PlanSelectorNewPageMobile extends GlobalWebElements {
 
-	@FindBy(id = "planSelectorTool")
+	@FindBy(css = "#planSelectorTool")
 	private WebElement iframePst;
 
 	/*
@@ -35,10 +35,10 @@ public class PlanSelectorNewPageMobile extends GlobalWebElements {
 	// @FindBy(css = "#widget_0tdroCAgSEGuqWNwLbf7xA > div > a")
 	// private WebElement getStartedBtn;
 
-	@FindBy(id = "DemographicsDataModel_ZipCode")
+	@FindBy(css = "#DemographicsDataModel_ZipCode")
 	private WebElement zipCode;
 
-	@FindBy(id = "Counties")
+	@FindBy(css = "#Counties")
 	private WebElement PSTCounty;
 
 	@FindBy(xpath = "//*[@id='CoverageType_Idontknow_Option_7_Lable']/following-sibling ::label")
@@ -56,7 +56,7 @@ public class PlanSelectorNewPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[@class='preferencenavigation pageNavigation']/a[2])[1]")
 	private WebElement NextQuestionButton;
 
-	@FindBy(id = "planPreferenceLegend_1")
+	@FindBy(css = "#planPreferenceLegend_1")
 	private WebElement NextQuestion;
 
 	@FindBy(xpath = "//*[@class='planPreferenceQuestion']//div[@class='preferencenavigation pageNavigation']/a[2]")
@@ -68,10 +68,10 @@ public class PlanSelectorNewPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='skipToResultsLink']")
 	private WebElement ResultsPageLink;
 
-	@FindBy(id = "planPreferenceLegend_1")
+	@FindBy(css = "#planPreferenceLegend_1")
 	private WebElement PrescriptionBox;
 
-	@FindBy(id = "DrugSearchBox_SearchtextBox")
+	@FindBy(css = "#DrugSearchBox_SearchtextBox")
 	private WebElement PrescriptionBox_1;
 
 	/*
@@ -111,7 +111,7 @@ public class PlanSelectorNewPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[@id='selectCounty']/p/a)[1]")
 	private WebElement BackToPlanCounty;
 
-	@FindBy(id = "backToPlanSelectorBottom")
+	@FindBy(css = "#backToPlanSelectorBottom")
 	private WebElement backToPlanSelectorBottom;
 	
 	@FindBy(xpath = "//div[@class='modal-title']")
@@ -135,7 +135,7 @@ public class PlanSelectorNewPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='MyDrugsList']//div[@id='MyDrugsSection']//div[starts-with(@id,'drugItem_')]")
 	private WebElement addedDrug;
 
-	@FindBy(id = "providerLinkTest")
+	@FindBy(css = "#providerLinkTest")
 	private WebElement addDocAndProviders;
 
 	@FindBy(xpath = "(//div[contains(@class,'planList'[contains(@id,'List_')])]//div[contains(@class,'plan-name')])[1]")

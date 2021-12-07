@@ -453,7 +453,7 @@ public class CommonUtility {
 				}
 				try {
 					System.out.println(counter + " of 23 tries - wait 5 sec for document.readyState=complete... ");
-					Thread.sleep(5000);
+					Thread.sleep(8000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -507,6 +507,21 @@ public class CommonUtility {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
 
+	
+
+	/**
+	 * Wait until presence of element in DOM.
+	 *
+	 * @param driver the driver
+	 * @param locator the locator of 'By' class
+	 * @param timeOutInSeconds the time out in seconds
+	 * @return the web element
+	 */
+	
+	public static WebElement waitForPresenceOfElement(WebDriver driver, By locator, long timeOutInSeconds) {
+		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
 }

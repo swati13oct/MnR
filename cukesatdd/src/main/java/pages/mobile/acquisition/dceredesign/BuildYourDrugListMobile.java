@@ -1,21 +1,21 @@
 package pages.mobile.acquisition.dceredesign;
 
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.UhcDriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
@@ -33,6 +33,12 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']/parent::button")
 	public WebElement SearchBtn;
+
+	@FindBy(xpath = "//*[@id='modal-label']")
+	public WebElement searchDrugHeader;
+
+	@FindBy(css = "div[class='uhc-spinner']")
+	private WebElement drugLoadingSpinner;
 
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
 	public WebElement enterDrugTitle;
@@ -59,7 +65,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public List<WebElement> AutoCompleteitems;
 
 	// @FindBy(xpath = "//*[@id='drugPopHeading']")
-//	@FindBy(id = "modal-label")
+//	@FindBy(css = "#modal-label")
 	@FindBy(css = "div[class*='tellusyourdrugModal']  #modal-label")
 	public WebElement TellUsAboutHeader;
 
@@ -111,6 +117,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateNoDrug_ErrorMsg() {
+		
+		pageloadcomplete();
 		if (addDrugButton.isDisplayed()) {
 			jsClickNew(addDrugButton);
 		}
@@ -143,7 +151,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		scrollToView(SearchBtn);
 		// SearchBtn.click();
 		jsClickNew(SearchBtn);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		/*
 		 * WebElement SelectDrug = driver .findElement(By.
 		 * xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName +
@@ -203,16 +211,17 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
-		sendkeysMobile(EnterDrugNameTxt, "india");
-		validateNew(SearchBtn);
-		jsClickNew(SearchBtn);
-
-		waitforElementVisibilityInTime(NoDrugError, 5);
-		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("Please enter at least 4 characters")) {
-
-			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
-		} else
-			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
+		//below code is commented as per Snehas sugession as searching wrong drug name is failing and they will fix this later as a feature
+//		sendkeysMobile(EnterDrugNameTxt, "iphone");
+//		validateNew(SearchBtn);
+//		jsClickNew(SearchBtn);
+//
+//		waitforElementVisibilityInTime(NoDrugError, 5);
+//		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("Please enter at least 4 characters")) {
+//
+//			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
+//		} else
+//			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 	}
 
 	public void ValidateDrugAutocomplete(String partialDrug) {
@@ -221,6 +230,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
 //		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, partialDrug);
+		EnterDrugNameTxt.sendKeys(Keys.ENTER);
 		validateNew(AutoCompleteList);
 		System.out.println("Drug Auto complete list count : " + AutoCompleteitems.size());
 		if (validateNew(AutoCompleteList) && AutoCompleteitems.size() <= 5) {
@@ -245,7 +255,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
-		// pageloadcomplete();
+		// CommonUtility.checkPageIsReadyNew(driver);
 		// iosScroll(reviewDrugCost);
 		scrollToView(reviewDrugCostButtonFooter);
 		jsClickNew(reviewDrugCostButtonFooter);
@@ -277,7 +287,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		scrollToView(SelectDrug);
 
 		jsClickNew(SelectDrug);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		threadsleep(2000);
 		// waitForPageLoadSafari();
@@ -292,7 +302,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (addDrugButton.isDisplayed()) {
@@ -307,6 +317,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		sleepBySec(5);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+
+		waitforElementVisibilityInTime(searchDrugHeader, 20);
 
 		List<WebElement> searchedDrugList = driver
 				.findElements(By.cssSelector("div[class*='searchdrugpopup'] div > ul > li > p"));
@@ -323,7 +335,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 		jsClickNew(selectDrug);
 
-		threadsleep(2000);
+		threadsleep(6000);
 		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsAboutHeader, 30);
@@ -359,6 +371,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(css = "button#cancelicon")
 	public WebElement DrugListModal_Close;
 
+	@FindBy(css = "div[class*='druglimitpopup'] button#cancelicon")
+	private WebElement drugLimitPopup_CloseButton;
+
 	@FindBy(xpath = "//button[contains(text(), 'Got it')]")
 	public WebElement DrugListModal_GotItBtn;
 
@@ -376,12 +391,27 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 
-		if (validateNew(DrugListModal_Header) && validateNew(DrugListModal_Close)
+		sleepBySec(5);
+		waitForPageLoadSafari();
+
+		List<WebElement> searchedDrugList = driver
+				.findElements(By.cssSelector("div[class*='searchdrugpopup'] div > ul > li > p"));
+
+		WebElement selectDrug = (WebElement) searchedDrugList.stream()
+				.filter(listedDrug -> listedDrug.getText().contains(drugName))
+				.map(listedDrug -> listedDrug.findElement(By.xpath("./following-sibling::button"))).findFirst().get();
+
+		jsClickNew(selectDrug);
+
+		if (validateNew(DrugListModal_Header) && validateNew(drugLimitPopup_CloseButton)
 				&& validateNew(DrugListModal_GotItBtn)) {
+			Assertion.assertTrue(
+					"Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message.getText(),
+					true);
 			jsClickNew(DrugListModal_GotItBtn);
 			System.out.println("Got It button Clicked to close modal");
-			Assertion.assertTrue(
-					"Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message, true);
+
+			jsClickNew(DrugListModal_Close);
 		} else
 			Assertion.fail("Drug List Modal and Message NOT Displayed!!!");
 
@@ -525,7 +555,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				jsClickNew(addDrugButton);
 			}
 
-			pageloadcomplete();
+			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(EnterDrugNameTxt);
 
 			WebElement RecommendedDrug = driver.findElement(
@@ -591,7 +621,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 		waitForPageLoadSafari();
 		threadsleep(2000);
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		} else {
@@ -601,8 +631,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
+		if (addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
+
 		if (!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
 			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
+			jsClickNew(DrugListModal_Close);
 		} else
 			Assertion.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
 	}

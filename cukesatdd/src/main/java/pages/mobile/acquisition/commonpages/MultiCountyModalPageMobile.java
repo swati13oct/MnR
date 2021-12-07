@@ -14,13 +14,13 @@ import atdd.framework.UhcDriver;
  */
 public class MultiCountyModalPageMobile extends UhcDriver {
 
-	@FindBy(id = "zipLookup")
+	@FindBy(css = "#zipLookup")
 	private WebElement lookupZipcodeLink;
 
 	@FindBy(className = "zipcode_text")
 	private WebElement zipCodeField;
 
-	@FindBy(id = "goBtn")
+	@FindBy(css = "#goBtn")
 	private WebElement goButton;
 
 	private static String PAGE_URL = MRConstants.UHC_OUR_PLANS_URL;
@@ -42,10 +42,10 @@ public class MultiCountyModalPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(id = "multiCountyCancelBtn")
+	@FindBy(css = "#multiCountyCancelBtn")
 	private WebElement MultiCOunty_CancelBtn;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement ZipCodeTxtBx;
 
 	public boolean validateMultiCounty_CancelButton() {

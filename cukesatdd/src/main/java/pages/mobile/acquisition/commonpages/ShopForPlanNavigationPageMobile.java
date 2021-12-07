@@ -26,7 +26,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(id = "updates-email")
+	@FindBy(css = "#updates-email")
 	private WebElement updatesemail;
 
 	@FindBy(xpath = "//*[@id='subnav_2']/div[2]/div/p")
@@ -132,11 +132,9 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	private WebElement getPlanRecommendation;
 
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Estimate Drug Costs']")
-
 	private WebElement drugCostEstimator;
 
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search for a Pharmacy']")
-
 	private WebElement pharmacySearch;
 
 	/*
@@ -145,10 +143,10 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 	 * WebElement providerSearch;
 	 */
 
-	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
+	@FindBy(css = "a[dtmname*='NavLinks:Shop for a Plan:Plan Types:Search Doctors']")
 	private WebElement searchDoctors;
 
-	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Search Dentists']")
+	@FindBy(css = "a[dtmname*='NavLinks:Shop for a Plan:Plan Types:Search Dentists']")
 	private WebElement searchDentists;
 
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
@@ -205,7 +203,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		 * scrollToView(shopLink); waitforElement(shopLink); jsClickNew(shopLink);
 		 */
 
-		Thread.sleep(4000);
+		Thread.sleep(10000);
 		return new ShopPage(driver);
 
 	}
@@ -426,10 +424,10 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 			jsClickNew(pharmacySearch);
 			break;
 		case SEARCHDOCTORS:
-			jsClickNew(searchDoctors);
+			switchToNewTabNew(searchDoctors);
 			break;
 		case SEARCHDENTISTS:
-			jsClickNew(searchDentists);
+			switchToNewTabNew(searchDentists);
 			break;
 		default:
 			throw new IllegalArgumentException(

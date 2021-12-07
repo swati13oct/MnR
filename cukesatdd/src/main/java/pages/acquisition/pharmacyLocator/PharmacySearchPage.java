@@ -525,7 +525,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	 * AL PEEHIP BYPASS KNOWN ISSUE -ticket INC12081940 - Walgreens widget on
 	 * doesn't show up for Chinese and Spanish page
 	 * 
-	 * @param planType
+	 * @param
 	 * @throws InterruptedException
 	 */
 	public void validatePharmacyWidgets(boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan,

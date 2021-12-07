@@ -25,19 +25,19 @@ import atdd.framework.UhcDriver;
 @SuppressWarnings("deprecation")
 public class DrugLookUpPageMobile extends UhcDriver {
 
-	@FindBy(id = "drugNameFilter_scr")
+	@FindBy(css = "#drugNameFilter_scr")
 	public WebElement findAdrugTextBox;
 
-	@FindBy(id = "findDrugsButton_srch")
+	@FindBy(css = "#findDrugsButton_srch")
 	public WebElement findDrugButton;
 
-	@FindBy(id = "formularyListTable")
+	@FindBy(css = "#formularyListTable")
 	public WebElement formularyDrugListTable;
 
 	@FindBy(xpath = ".//*[@id='formularyListTable']//tr[2]//a")
 	public WebElement drugLink;
 
-	@FindBy(id = "brandsection")
+	@FindBy(css = "#brandsection")
 	public WebElement formularyDrugTable;
 
 	@FindBy(xpath = ".//*[@id='brandtable']//tbody//tr")

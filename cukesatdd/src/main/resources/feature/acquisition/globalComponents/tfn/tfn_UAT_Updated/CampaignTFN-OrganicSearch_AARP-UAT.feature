@@ -3,7 +3,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
   #######################Script 3: Organic Search via Google and Bing##########################################
   @Scenario3_1_GoogleBingSearch_AARP_UAT @UATRegression @prodRegression
-  Scenario Outline: - <scenario> 3.1 Google search AARP Medicare Advantage Plan
+  Scenario Outline: - <scenario> <zipcode> 3.1 Google search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -54,15 +54,22 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     # Then the user navigates to MA Plan Details Page and validates Federal TFN
     #	| Zip Code        | <zipcode>|
     Then the user validates TFN Number
-      | TFN No    | <TFNNo1>   |
+      | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #Then the user navigates to plan tab for any plan
-    #  | Plan Type | <MSplantype> |
-    # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
-    #| Plan Type | <MSplantype> |
+    Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+      | Plan Type | <MAplantype> |
+    Then the user validates TFN Number
+      | TFN No    | <TFNNo>          |
+      | TFN Xpath | <EnrollTFNxpath> |
+    Then the user navigates to homepage validates Federal TFN
+    Then the user enter zipcode in homepage
+      | Zip Code  | <zipcode>    |
+      | Plan Type | <MAplantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN
+      | Plan Type | <MAplantype> |
     Then user clicks on back to plans link to navigate plan summary
-    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    # | Zip Code | <zipcode> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
@@ -78,6 +85,10 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>        |
       | TFN Xpath | <MedsuppFormTFNxpath> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
     #When the user clicks on Agent link for MedsuppPage
     #| UHC Agent URL | <UHCUrl> |
     Then the user clicks on decision guide for MedsuppPge
@@ -85,11 +96,28 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>     |
       | TFN Xpath | <decisionGuideTFN> |
-    Then the user navigates back to page
+    Then the user click on back to previous page on Request a Free Decision Guide
+      | Zip Code | <zipcode> |
     When the user clicks on Agent link for MedsuppPage
       | TFN No    | <agentTFN>   |
       | TFN Xpath | <agentXpath> |
       | Zip Code  | <zipcode>    |
+    And user click on Start Application in MS plan
+      | Zip Code | <zipcode> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
+    Then user click on Cancel Application in MS plan
+      | Zip Code | <zipcode> |
+    And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+    Then the user validates source code
+      | sourceCode | <sourceCode1> |
+    And user click on Back to Plan in MS Plan Details
+      | Zip Code | <zipcode> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -110,19 +138,19 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
 
-   @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup3.0 @campaignTFNProd
+    @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup3.0 @campaignTFNProd
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 | MedsuppFormTFNxpath               |
-      | Sc. 3.08 - AMP |  810106 |         810104 |   10001 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-800-850-6807 | 1-866-327-1593 | 5T9        | 1-877-608-5598 | 1-866-327-1593 | 5T9         | //*[contains(@class,'tel right')] |
+      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                   | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 | MedsuppFormTFNxpath               | EnrollTFNxpath                    |
+      | Sc. 3.08 - AMP |  810106 |         810104 |   10001 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']   | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class,'tel right')] | https://www.myuhcagent.com/ | MA         | PDP         | MS         | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | future  | 1-800-850-6807 | 1-866-327-1593 | 5T9        | 1-877-608-5598 | 1-866-327-1593 | 5T9         | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[3] |
 
-   @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup4.0 @campaignTFNProd
+    @Scenario3_1_GoogleBingSearch_AARP_UAT_Medsup4.0 @campaignTFNProd
     Examples: 
-      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN                            | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                                    | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 | MedsuppFormTFNxpath                         |
-      | Sc. 3.08 - AMP |  810106 |         810104 |   90210 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //span[contains(@class, 'invoca_swap_sam')] | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class, 'invoca_swap text-bold tel')] | https://www.myuhcagent.com/ | MA         | PDP         | MS4.0      | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | current  | 1-800-850-6807 | 1-866-327-1593 | 5T9        | 1-877-608-5598 | 1-866-327-1593 | 5T9         | //span[contains(@class, 'invoca_swap_sam')] |
+      | scenario       | pscCode | Precedence1PSC | zipcode | dob        | maUrl                              | maTFN                                                        | medicareeduUrl                                    | medicareeduTFN                    | decisionGuideUrl                                                          | decisionGuideTFN                            | agentApptUrl                                                  | agentApptTFN   | shoppages       | shoppagesTFN                                                 | TFNNo          | TFNxpath                                    | TFNNo1         | MedsuppTFNNo   | MedsuppTFNxpath                                    | UHCUrl                      | MAplantype | PDPplantype | MSplantype | url                     | ampTFN         | agentTFN       | agentXpath                          | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 | MedsuppFormTFNxpath                         | EnrollTFNxpath                    |
+      | Sc. 3.08 - AMP |  810106 |         810104 |   90210 | 11/01/1951 | shop/medicare-advantage-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[4] | /medicare-education/medicare-advantage-plans.html | (//a[contains(@class, 'tel')])[3] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //span[contains(@class, 'invoca_swap_sam')] | health-plans/medicare-supplement-plans/agent-appointment.html | //*[@id='tfn'] | contact-us.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[3] | 1-800-850-6807 | //span[contains(@class, 'invoca_swap_sam')] | 1-877-608-5598 | 1-866-327-1593 | //*[contains(@class, 'invoca_swap text-bold tel')] | https://www.myuhcagent.com/ | MA         | PDP         | MS4.0      | https://www.google.com/ | 1-800-850-6807 | 1-877-596-3258 | //*[contains(@class,'headline')]//a | future  | 1-800-850-6807 | 1-866-327-1593 | 5T9        | 1-877-608-5598 | 1-866-327-1593 | 5T9         | //span[contains(@class, 'invoca_swap_sam')] | (//a[contains(@class, 'tel')])[3] |
 
   #######################Script 6a: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT
-  Scenario Outline: <scenario> Campaign Precedence Logic No 1
+  Scenario Outline: <scenario> <zipcode>Campaign Precedence Logic No 1
     #------------------------**********---------------------------------
     # Precedence 6.1 - Visit AMP using google URL , PSC code 810106
     Given the user Starts WebDriver
@@ -291,7 +319,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
   #######################Script 6b: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression @prodRegression_UAT @prodRegression
-  Scenario Outline: <scenario> Campaign Precedence Logic No 1
+  Scenario Outline: <scenario> <zipcode>Campaign Precedence Logic No 1
     ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
     Given the user Starts WebDriver
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page

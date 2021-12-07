@@ -2,9 +2,11 @@ package acceptancetests.mobile.acquisition.providersearch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 
 public class ProviderSearchCommonStepDefinitionMobile {
@@ -23,6 +25,26 @@ public class ProviderSearchCommonStepDefinitionMobile {
 		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
+	}
+	
+	@When("^user selects a Behaviour and returns to VPP page$")
+	public void user_selects_a_Behaviour_and_returns_to_VPP_page() {
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+//		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsBehaviour();
+//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		String savedProvider = providerSearchPage.selectsBehaviour();
+		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+	}
+	
+	@When("^user selects a Dental and retuns to VPP page$")
+	public void user_selects_a_Dental_and_retuns_to_VPP_page() {
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+//		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsDental();
+//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		String savedProvider = providerSearchPage.selectsDental();
+		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
 	}
 
 }

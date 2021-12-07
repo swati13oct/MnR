@@ -12,7 +12,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP 
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ |
@@ -983,7 +983,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama  | medicare-articles/retiring-what-to-know-about-medicare.html                                                                | Article Page  153 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/medicare-and-cobra.html                                                                                  | Article Page  154 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/special-enrollment-for-medicare-when-working-past-65.html                                                | Article Page  155 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | AARP | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
@@ -1147,6 +1147,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/retiring-what-to-know-about-medicare.html                                                                | Article Page  153 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/medicare-and-cobra.html                                                                                  | Article Page  154 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/special-enrollment-for-medicare-when-working-past-65.html                                                | Article Page  155 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | UHC  | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
