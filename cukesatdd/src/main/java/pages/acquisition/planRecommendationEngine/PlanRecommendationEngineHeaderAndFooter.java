@@ -452,6 +452,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 //	Header Element Click Verification Method 
 	
 		public void headerLinkvalidation(){
+		driver.navigate().refresh();
 		String curURL = driver.getCurrentUrl();			
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
