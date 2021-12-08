@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.awt.AWTException;
@@ -143,13 +144,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
 	private WebElement validateEmailButtonOnPlanDetails;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink1;
+
 	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink1);
 		return new ComparePlansPageMobile(driver);
-		
+
 	}
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
@@ -191,7 +193,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedDrugCost;
 
-	@FindBy(xpath = "//*[@id='additionalBenefits']/div[3]/div/a")
+	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors & Dentists')]/following::a[contains(@dtmname,'provider covered')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -215,7 +217,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(css = "#miles")
+	@FindBy(css = "#distance")
 	WebElement distanceDropownID;
 
 	@FindBy(css = "#englishDocs")
@@ -1114,16 +1116,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public boolean providerinfo() {
 
 		CommonUtility.checkPageIsReadyNew(driver);
-		//driver.navigate().refresh();
+		driver.navigate().refresh();
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String editProviderButtonText = editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit my doctor & dentist")) {
+		if (editProviderButtonText.contains("Edit my Doctor")) {
 			return true;
 		}
 		return false;
@@ -1491,7 +1493,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 
 		WebElement PDFCode = driver.findElement(
-				By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
+				By.xpath("//a[@ng-href='/online_documents/ovation/pdf/mapd/en/2022/Step_Therapy_MCORE_2022.pdf']"));
 
 		// On mobile chrome when user clicks on pdf link it asks for phone memory access
 		// on SauceLabs hence verifying code via @href

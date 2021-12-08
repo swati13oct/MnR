@@ -243,11 +243,11 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*")
 	private WebElement HealthInsuranceName;
 	
-	@FindBy(xpath = "//span[text()= 'Group Number' or text()= 'Group ID' ]//following-sibling::*")
+	@FindBy(xpath = "//*[text()= 'Group Number' or text()= 'Group ID' ]//following-sibling::*")
 	private WebElement HealthInsuranceGroupNo;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'Member Number')]//following-sibling::*")
-	@FindBy(xpath = "//span[text()= 'Member Number' or text()= 'Member ID' ]//following-sibling::*")
+	@FindBy(xpath = "//*[text()= 'Member Number' or text()= 'Member ID' ]//following-sibling::*")
 	private WebElement HealthInsuranceMemberNo;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Name of Insurance')]//following-sibling::*")
