@@ -143,6 +143,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	@FindBy(css = "#city0")
 	private WebElement MailingAdd_City;
+	
+	@FindBy(xpath="//label[@for='state0']")
+	private WebElement MailingAdd_State_DropDown_Label;
 
 	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state0']")
 	private WebElement MailingAdd_State_DropDown;
@@ -296,6 +299,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				//SelectState.selectByValue(Mailing_State);
 
 				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
+				//jsClickNew(MailingAdd_State_DropDown_Label);
 				driver.findElement(By.xpath("//label[@for='state0']")).click(); 
 				
 				
