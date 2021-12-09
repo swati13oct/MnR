@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -298,11 +299,16 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				//Select SelectState = new Select(MailingAdd_State_DropDown);
 				//SelectState.selectByValue(Mailing_State);
 
-				//Clicking on label first as dropdown is not opening in iOS - this will not affect Android execution
-				//jsClickNew(MailingAdd_State_DropDown_Label);
-				driver.findElement(By.xpath("//label[@for='state0']")).click(); 
+//				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+//					WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
+//					WebElement stateLabel1 = driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
+//			
+//					Actions ac = new Actions(driver);
+//					ac.doubleClick(stateLable);
+//					//stateLabel1.click();
+//				}
 				
-				
+				MailingAdd_State_DropDown.sendKeys("");
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 			
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);

@@ -20,6 +20,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -292,6 +294,11 @@ public class SiteSearchMobile {
 		getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String savedProvider = providerSearchPage.selectsProvider();
 		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, savedProvider);
+//		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		
+//		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+//				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+//		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
 //		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
 

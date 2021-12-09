@@ -1023,6 +1023,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		threadsleep(10);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -6159,7 +6160,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6179,4 +6180,3 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 }
-

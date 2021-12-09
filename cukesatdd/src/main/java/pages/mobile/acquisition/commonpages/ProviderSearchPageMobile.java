@@ -392,12 +392,13 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		} else
 			System.out.println("Issue with Xpath");
 
-		threadsleep(3);
+		threadsleep(5);
 		// waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")){
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());}
 		validateNew(vppFirstPlanCard);
-//		return new VPPPlanSummaryPageMobile(driver);
+		//return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
 	}
 
