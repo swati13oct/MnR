@@ -767,7 +767,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
 	private WebElement samChatPopup;
 
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header') and contains(text(),'Message')]")
 	private WebElement samChatPopupHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
@@ -3422,6 +3422,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		threadsleep(3);
 		driver.switchTo().activeElement();
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
