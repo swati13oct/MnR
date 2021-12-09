@@ -4006,7 +4006,6 @@ public class VppPlanCompareMobile {
 		}
 	}
 	
-	
 	@Then("^user saves all plans as favorite$")
 	public void user_saves_all_plans_as_favorite(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -4697,6 +4696,13 @@ public class VppPlanCompareMobile {
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
+	}
+	
+	@Then("^validate all providers are covered$")
+	public void validate_all_providers_are_covered() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateProvidersCovered();
 	}
 
 	@Then("^verify icons loaded with doctor summary on Plan Compare page$")
