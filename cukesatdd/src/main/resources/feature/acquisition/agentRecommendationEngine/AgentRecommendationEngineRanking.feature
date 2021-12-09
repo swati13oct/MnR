@@ -16,7 +16,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | future  |
 
   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
   Scenario Outline: - <Email> To Verify agent login and validate ARE No dropdown UI
@@ -33,8 +33,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                  | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123 | ATDD4STG@MEMBERDD.COM  | None          | current  |
-      | areddstage@givmail.com | Password@123 | EMILYN@MACIEJEWSKI.COM | None          | current  |
+      | areddstage@givmail.com | Password@123 | ATDD4STG@MEMBERDD.COM  | None          | future  |
+      | areddstage@givmail.com | Password@123 | EMILYN@MACIEJEWSKI.COM | None          | future  |
 
   @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
@@ -51,7 +51,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | future  |
 
   @ARE @SavePlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate Save Plans in ARE
@@ -69,7 +69,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | future  |
 
   @ARE @EnrollPlansARE @F439411
   Scenario Outline: - <Email> To Verify agent login and validate Enroll Plans in ARE
@@ -86,7 +86,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | current  |
+      | areddstage@givmail.com | Password@123 | ATDD1STG@MEMBERDD.COM | None          | future  |
 
   @ARE @PlansReorder @F487396
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE
@@ -109,8 +109,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       #| areddstage@givmail.com  | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
-      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]    |
-      | areddstage@givmail.com | Password@123 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | future  |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | APISTG@MEMBERDD.COM   | None          | future  |          10001 | hearing,vision,lowpremium,drug,doctor | YES                | YES           | [blank]    |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
@@ -132,7 +132,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | future  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @MCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
@@ -156,7 +156,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | future  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @NOMCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE
@@ -176,5 +176,5 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
-      | areddstage@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
-      | areddstage@givmail.com | Password@123 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
+      | areddstage@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM    | None          | future  | NO         | mce            |
+      | areddstage@givmail.com | Password@123 | ATDD2STG@NONMEMBERDD.COM | None          | future  | NO         | mce            |
