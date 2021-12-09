@@ -1491,7 +1491,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 
 		WebElement PDFCode = driver.findElement(
-				By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
+				By.xpath("//a[@ng-href='/online_documents/ovation/pdf/mapd/en/2022/Step_Therapy_MCORE_2022.pdf']"));
 
 		// On mobile chrome when user clicks on pdf link it asks for phone memory access
 		// on SauceLabs hence verifying code via @href

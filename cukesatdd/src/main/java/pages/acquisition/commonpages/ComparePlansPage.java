@@ -1929,7 +1929,8 @@ public class ComparePlansPage extends UhcDriver {
 		jsClickNew(drugCostDetailsBtn);
 		Assertion.assertEquals(drugName,
 				driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
-		jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		//jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		jsClickNew(driver.findElement(By.xpath("(//*[contains(text(),'Return to plan compare')])[1]")));
 		// driver.findElement(By.xpath("//span[text()='Return to
 		// Compare']/parent::button")).click();
 		waitforElement(drugCostDetailsBtn);
