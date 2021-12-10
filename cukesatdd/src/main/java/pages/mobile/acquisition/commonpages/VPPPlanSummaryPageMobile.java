@@ -1,4 +1,3 @@
-
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;

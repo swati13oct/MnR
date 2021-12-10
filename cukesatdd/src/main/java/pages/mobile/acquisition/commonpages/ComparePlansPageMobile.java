@@ -22,11 +22,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -720,6 +722,37 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// System.out.println(
 		// "No Call sticky action menu didn't roll out and doesn't contain the text Call
 		// a Licensed Insurance Agent");
+	}
+	
+	public void validateProvidersCovered() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(MRConstants.PROV_NAME);
+		System.out.println(MRConstants.BEHAV_NAME);
+		System.out.println(MRConstants.DENT_NAME);
+		WebElement DoctorCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.PROV_NAME.substring(0, 4)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div")) ;
+		System.out.println(DoctorCoveredText.getText());
+		WebElement BehaviourCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.BEHAV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
+		System.out.println(BehaviourCoveredText.getText());
+		WebElement DentalCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.DENT_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));;
+		System.out.println(DentalCoveredText.getText());
+		validate(DoctorCoveredText);
+		validate(BehaviourCoveredText);
+		validate(DentalCoveredText);
+		
+		Assert.assertEquals("Not Covered\n" + 
+				"View Locations", DentalCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", BehaviourCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", DoctorCoveredText.getText());
+
 	}
 
 	public void validateCallpopup() throws InterruptedException {
@@ -1610,10 +1643,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		WebElement DentalFlyerLink;
 		if (counter.equals("1023")) {
-			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
-			System.out.println("Dental Flyer link is 1023 Displayed");
+			DentalFlyerLink = driver.findElement(By.partialLinkText("Click here for details"));
+			System.out.println("Dental Flyer link is 1023 Displayed=========="+DentalFlyerLink.getText());
 			scrollToView(DentalFlyerLink);
-
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 				grantPermissionOnAndroidChrome(DentalFlyerLink);
 				byte[] pdfContent = getDownloadedPdfFileContentAndroid(Documentcode);
