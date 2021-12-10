@@ -22,7 +22,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
     @Override
     public void openAndValidate() {
-        validateNew(pageHeader);
+        validateNew(breadCrumb);
         if (driver.getCurrentUrl().contains("medicare-education.html")) {
             Assert.assertEquals(breadCrumb.getText(), "Introduction to Medicare");
             Assert.assertTrue(true);
