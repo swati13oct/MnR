@@ -24,7 +24,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     public void openAndValidate() {
         validateNew(pageHeader);
         if (driver.getCurrentUrl().contains("medicare-education.html")) {
-            Assert.assertEquals(pageHeader.getText(), "Medicare Made Clear");
+            Assert.assertEquals(breadCrumb.getText(), "Introduction to Medicare");
             Assert.assertTrue(true);
             System.out.println("New Learn about Medicare Homepage opened Successfully");
         } else {
@@ -35,7 +35,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     @FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')]")
     private WebElement pageHeader;
 
-    @FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')]")
+    @FindBy(xpath = "(//div[contains(@class,'breadcrumb')]//a[contains(@href,'medicare-education')])[1]")
     private WebElement breadCrumb;
 
     @FindBy(xpath = "//span[contains(text(),'Medicare Eligibility')]")
