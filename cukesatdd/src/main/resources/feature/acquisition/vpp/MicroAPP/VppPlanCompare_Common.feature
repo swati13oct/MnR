@@ -462,27 +462,27 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | current  |           5 |
-      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current  |           4 |
+#      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current  |           4 |
 
     @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | next     |           5 |
-      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
+#      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
 
     @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | MAPD     |               2,1 | current  |           5 |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | PDP      |               2,1 | current  |           3 |
-      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current  |           4 |
+#      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current  |           4 |
 
     @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | MAPD     |               2,1 | next     |           5 |
       | 00016 | UHC  |   55343 | NO            | Hennepin County   | PDP      |               2,1 | next     |           3 |
-      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
+#      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | next     |           4 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
@@ -924,18 +924,18 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     Then click on Show All button on plan compare page
-    Then Verify Dental Link text for third plan on plan Compare page
+    Then Verify Dental Link text for third plan on plan Compare page 
 
     #Then validate all available plans are shown on click of view all plans
     @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00036 | AARP |   78006 | NO            | Kendall County | MAPD     | current  |           2 |
+      | 00036 | AARP |   78006 | YES            | Kendall County | MAPD     | current  |           2 |
 
     @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
-      | 00036 | AARP |   78006 | NO            | Kendall County | MAPD     | next     |           2 |
+      | 00036 | AARP |   78006 | YES            | Kendall County | MAPD     | next     |           2 |
 
     @regressionUHC
     Examples: 
