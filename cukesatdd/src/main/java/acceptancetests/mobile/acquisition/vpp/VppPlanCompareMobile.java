@@ -4635,6 +4635,13 @@ public class VppPlanCompareMobile {
 		planComparePage.validateOONDDisplayed();
 	}
 	
+	@Then("^Verify Dental Link text for third plan on plan Compare page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
+	
 	@Then("^validate text under additional benefits$")
 	public void validate_text_under_additional_benefits() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()

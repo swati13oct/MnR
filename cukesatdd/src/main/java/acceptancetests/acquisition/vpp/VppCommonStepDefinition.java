@@ -290,7 +290,7 @@ private Scenario scenario;
 		planComparePage.validatePlanComparePage();
 	}
 	
-	@Then("^Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page$")
+	@Then("^Verify Dental Link text for third plan on plan Compare page$")
 	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
