@@ -164,6 +164,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
+	
+	@FindBy(xpath = "//div[@id='helpTextinAB']")
+	private WebElement OONTextAdditionalBenefit;
 
 	@FindBy(css = "th:nth-child(5) > div:nth-child(1) > a")
 	private WebElement Newremove4thplan;
@@ -273,7 +276,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
+	
+	@FindBy(xpath = "(//span[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans'])[1]")
+	private WebElement ShowAllButton;
 
+	@FindBy(xpath = "(//span[contains(text(), 'Plans Available (No Hidden)')])[1]")
+	private WebElement AllPlansVisible;
+	
 	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
 
@@ -1444,6 +1453,21 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public void showAllButton() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(ShowAllButton);
+		ShowAllButton.click();
+		validate(AllPlansVisible);
+		System.out.println("successfully validated all plans on compare page ");
+
+	}
 
 	public void validateDrugInfo(String drug) {
 		validateNew(backToAllPlansLink);
@@ -1519,15 +1543,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 				medicalBenefitsOONToggle.isDisplayed());
 
 		scrollToView(medicalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		jsClickNew(medicalBenefitsOONToggle);
 
 		scrollToView(medicalBenefitsOONLabel);
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1538,13 +1562,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 				additionalBenefitsOONToggle.isDisplayed());
 
 		scrollToView(additionalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		scrollToView(additionalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1636,6 +1660,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		scrollToView(viewLocationPopupProviderName);
 		Assertion.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
 				viewLocationPopupProviderName.getText().trim());
+	}
+	
+	public void ClickOONToggle() {
+		jsClickNew(additionalBenefitsOONToggle);
+		
 	}
 
 	public void CounterDentalFlyerLink(String counter, String Documentcode) throws Exception {
@@ -1915,6 +1944,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Validated Change zipcode link on compare");
 
 	}
+	
+	public void validateOONTextAdditionalBenefit() {
+		 
+		 Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
+				 OONTextAdditionalBenefit.isDisplayed());
+		 
+		 System.out.println(OONTextAdditionalBenefit.getText().trim());
+		 
+		 Assertion.assertEquals("Benefits may be accessible via mail order, online, or phone through network "
+		 		+ "providers anywhere in the U.S. View Plan Details under More Options for more information.", OONTextAdditionalBenefit.getText().trim());
+		 
+	 }
 
 	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
 
