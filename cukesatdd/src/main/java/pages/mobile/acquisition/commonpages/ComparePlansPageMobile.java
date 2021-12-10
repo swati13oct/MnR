@@ -22,11 +22,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -162,6 +164,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
+	
+	@FindBy(xpath = "//div[@id='helpTextinAB']")
+	private WebElement OONTextAdditionalBenefit;
 
 	@FindBy(css = "th:nth-child(5) > div:nth-child(1) > a")
 	private WebElement Newremove4thplan;
@@ -271,7 +276,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
+	
+	@FindBy(xpath = "(//span[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans'])[1]")
+	private WebElement ShowAllButton;
 
+	@FindBy(xpath = "(//span[contains(text(), 'Plans Available (No Hidden)')])[1]")
+	private WebElement AllPlansVisible;
+	
 	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
 
@@ -720,6 +731,37 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// System.out.println(
 		// "No Call sticky action menu didn't roll out and doesn't contain the text Call
 		// a Licensed Insurance Agent");
+	}
+	
+	public void validateProvidersCovered() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(MRConstants.PROV_NAME);
+		System.out.println(MRConstants.BEHAV_NAME);
+		System.out.println(MRConstants.DENT_NAME);
+		WebElement DoctorCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.PROV_NAME.substring(0, 4)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div")) ;
+		System.out.println(DoctorCoveredText.getText());
+		WebElement BehaviourCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.BEHAV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
+		System.out.println(BehaviourCoveredText.getText());
+		WebElement DentalCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.DENT_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));;
+		System.out.println(DentalCoveredText.getText());
+		validate(DoctorCoveredText);
+		validate(BehaviourCoveredText);
+		validate(DentalCoveredText);
+		
+		Assert.assertEquals("Not Covered\n" + 
+				"View Locations", DentalCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", BehaviourCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", DoctorCoveredText.getText());
+
 	}
 
 	public void validateCallpopup() throws InterruptedException {
@@ -1411,6 +1453,21 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public void showAllButton() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(ShowAllButton);
+		ShowAllButton.click();
+		validate(AllPlansVisible);
+		System.out.println("successfully validated all plans on compare page ");
+
+	}
 
 	public void validateDrugInfo(String drug) {
 		validateNew(backToAllPlansLink);
@@ -1486,15 +1543,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 				medicalBenefitsOONToggle.isDisplayed());
 
 		scrollToView(medicalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		jsClickNew(medicalBenefitsOONToggle);
 
 		scrollToView(medicalBenefitsOONLabel);
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"Viewing In-Network Benefits", medicalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1505,13 +1562,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 				additionalBenefitsOONToggle.isDisplayed());
 
 		scrollToView(additionalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
-				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle default Text should be displayed as Viewing In-Network Benefits",
+				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		scrollToView(additionalBenefitsOONLabel);
-		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
-				"Viewing In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assertion.assertEquals("OON Toggle Text should be changed to Viewing Out-of-Network Benefits",
+				"Viewing Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 
 		scrollToView(outOfNetworkStyle);
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
@@ -1604,16 +1661,20 @@ public class ComparePlansPageMobile extends UhcDriver {
 		Assertion.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
 				viewLocationPopupProviderName.getText().trim());
 	}
+	
+	public void ClickOONToggle() {
+		jsClickNew(additionalBenefitsOONToggle);
+		
+	}
 
 	public void CounterDentalFlyerLink(String counter, String Documentcode) throws Exception {
 		PDDocument document;
 		String ParentWindow = driver.getTitle();
 		WebElement DentalFlyerLink;
 		if (counter.equals("1023")) {
-			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
-			System.out.println("Dental Flyer link is 1023 Displayed");
+			DentalFlyerLink = driver.findElement(By.partialLinkText("Click here for details"));
+			System.out.println("Dental Flyer link is 1023 Displayed=========="+DentalFlyerLink.getText());
 			scrollToView(DentalFlyerLink);
-
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 				grantPermissionOnAndroidChrome(DentalFlyerLink);
 				byte[] pdfContent = getDownloadedPdfFileContentAndroid(Documentcode);
@@ -1883,6 +1944,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Validated Change zipcode link on compare");
 
 	}
+	
+	public void validateOONTextAdditionalBenefit() {
+		 
+		 Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
+				 OONTextAdditionalBenefit.isDisplayed());
+		 
+		 System.out.println(OONTextAdditionalBenefit.getText().trim());
+		 
+		 Assertion.assertEquals("Benefits may be accessible via mail order, online, or phone through network "
+		 		+ "providers anywhere in the U.S. View Plan Details under More Options for more information.", OONTextAdditionalBenefit.getText().trim());
+		 
+	 }
 
 	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
 
