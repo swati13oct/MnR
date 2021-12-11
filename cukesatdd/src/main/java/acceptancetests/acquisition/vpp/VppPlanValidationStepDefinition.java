@@ -125,7 +125,7 @@ public class VppPlanValidationStepDefinition {
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
-					 	int failureCounter = 0;
+					 	int failureCounter = 0, mcareFailureCounter = 0;
 					 	int cellIndex = 0;
 					 	
 					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
@@ -180,7 +180,7 @@ public class VppPlanValidationStepDefinition {
 				                 }//end if cellIndex = 0
 								 
 						
-								 if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("Product Focus <Next Year>"))) {	
+								 if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("Product Focus <Next Year>")||currentColName.equalsIgnoreCase("MCARE Error count"))) {	
 									  
 								      resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 								      if(resultMap.containsKey(false))
@@ -194,7 +194,10 @@ public class VppPlanValidationStepDefinition {
 									 		benefitsColorMap.put(currentColName,value); //updating the value into the hashmap for the specific benefit
 								 		}else {		
 								 			newCell.setCellStyle(styleFailed);
-									 		failureCounter++;										 
+									 		failureCounter++;
+									 		if(!(currentColName.equalsIgnoreCase("Out-of-Network Benefits")||currentColName.equalsIgnoreCase("High Option DentalPS")||currentColName.equalsIgnoreCase("Platinum DentalPS")||currentColName.equalsIgnoreCase("Estimated Annual Total Platinum Dental")||currentColName.equalsIgnoreCase("Estimated Annual Total High Option Dental")||currentColName.equalsIgnoreCase("Estimated Annual Total No riders")||currentColName.equalsIgnoreCase("Footnotes")||currentColName.equalsIgnoreCase("Drug Costs from Formulary")||currentColName.equalsIgnoreCase("Estimated Annual Total"))) {
+									 			mcareFailureCounter++;
+									 		}
 								 		}
 									 	
 									 	 if(rowIndex==lastRow) {
@@ -211,7 +214,9 @@ public class VppPlanValidationStepDefinition {
 								 
 								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
 				                	 newCell.setCellValue(failureCounter);
-								 else {
+								 else if(currentColName.equalsIgnoreCase("MCARE Error Count")&&rowIndex!=0) {
+									 newCell.setCellValue(mcareFailureCounter);
+								 }else {
 				                	 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
 				                		 newCell.setCellValue(cell.getStringCellValue()); 
 				                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
