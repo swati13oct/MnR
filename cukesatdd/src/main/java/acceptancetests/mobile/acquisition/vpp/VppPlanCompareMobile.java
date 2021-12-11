@@ -4900,6 +4900,13 @@ public class VppPlanCompareMobile {
 		Assertion.assertTrue(true);
 		System.out.println("TFN Widget is Displayed");
 	}
+	
+	@Then("^Verify Dental Link text for third plan on plan Compare page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
 
 	@Then("^verify plan compare checkbox is not visible on plan summary$")
 	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary() throws Throwable {

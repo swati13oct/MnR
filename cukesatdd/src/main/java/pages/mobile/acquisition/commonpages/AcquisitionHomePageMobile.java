@@ -3393,6 +3393,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validateHeaderLinks() {
 		driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
+		threadsleep(5);
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
 
