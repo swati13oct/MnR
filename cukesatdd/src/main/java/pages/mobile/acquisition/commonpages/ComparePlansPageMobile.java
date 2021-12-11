@@ -1944,22 +1944,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		return null;
 	}
 	
-	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
-	private WebElement DentalLinkText;
-	
-	public void DentalLinkText() {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		validate(DentalLinkText);
-		String DentalText = DentalLinkText.getText();
-		System.out.println("Routine Dental text is" + DentalText );
-
-	}
 
 	public void validateAllDoctors() {
 		validateNew(backToAllPlansLink);
