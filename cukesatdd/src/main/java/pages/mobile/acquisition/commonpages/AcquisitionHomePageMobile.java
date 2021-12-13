@@ -3392,7 +3392,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement siteSearchIcon;
 
 	public void validateHeaderLinks() {
-		driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
+		//driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3543,7 +3543,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	// method to click View Disclaimer Information link present in Footer
 	public void clickViewDisclaimerInfoLink() {
-		// CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(viewAllDisclaimerInformationLink);
 		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
