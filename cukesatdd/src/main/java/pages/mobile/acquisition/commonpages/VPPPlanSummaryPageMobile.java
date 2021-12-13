@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -2017,7 +2018,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else
 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
 
 		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		pageloadcomplete();
@@ -2495,7 +2496,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li//*[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
@@ -2521,7 +2522,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(text(),'Prescription Drugs')])"));
+						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li)[3]"));
 			} else if (planType.equalsIgnoreCase("MAPD")) {
 				drugsForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Prescription Drugs')]"));
@@ -4846,8 +4847,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validate(ZipCodeTxtBx);
 		// ZipCodeTxtBx.click();
 		jsClickNew(ZipCodeTxtBx);
-		ZipCodeTxtBx.clear();
-		ZipCodeTxtBx.sendKeys(zipcode);
+//		ZipCodeTxtBx.clear();
+//		ZipCodeTxtBx.sendKeys(zipcode);
+		sendkeysMobile(ZipCodeTxtBx, zipcode);
 		scrollToView(FIndPlansButton);
 		validate(FIndPlansButton, 30);
 		// FIndPlansButton.click();
@@ -6157,4 +6159,24 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 	}
+	
+	public ProviderSearchPageMobile ProviderCovered(String planName) {
+
+		sleepBySec(5);
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		validateNew(ProviderSearchLink);
+		jsClickNew(ProviderSearchLink);
+		WebElement SearchDoctors = driver.findElement(By.xpath("//*[@class='edit-providers']/a"));
+		switchToNewTabNew(SearchDoctors);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPageMobile(driver);
+		}
+		return null;
+	}
 }
+

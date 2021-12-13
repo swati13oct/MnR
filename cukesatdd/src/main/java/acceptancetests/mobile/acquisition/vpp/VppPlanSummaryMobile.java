@@ -127,11 +127,22 @@ public class VppPlanSummaryMobile {
 		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
+
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
 		String planName = givenAttributesMap.get("Plan Name").trim();
+		//String plantype = givenAttributesMap.get("Plan Type").trim();
+
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		//planSummaryPage.viewPlanSummary(plantype);
+
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 
@@ -643,7 +654,7 @@ public class VppPlanSummaryMobile {
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			String savedProvider = providerSearchPage.selectsProvider();
-			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, savedProvider);
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
@@ -1228,7 +1239,8 @@ public class VppPlanSummaryMobile {
 		 */
 		String site = memberAttributesMap.get("Site");
 //		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario().openApplicationURL(wd, site);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.openApplicationURL(wd, site);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -1478,14 +1490,14 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNBAModalNotDisplayed();
 	}
-	
+
 	@When("^user removes provider from plan card$")
 	public void user_removes_provider_from_plan_card() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.removeProvidersFromPlanCard();
 	}
-	
+
 	@Then("^user saves two msvpp4 plans as favorite$")
 	public void user_saves_two_ms__vpp4_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -1495,7 +1507,7 @@ public class VppPlanSummaryMobile {
 		String savePlanNames = memberAttributesMap.get("MS Test Plans");
 		plansummaryPage.saveMSVPP4Plans(savePlanNames);
 	}
-	
+
 	@When("^the user performs plan search using learn about medicare Pages$")
 	public void learn_about_medicare_zipcode_details(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1526,6 +1538,24 @@ public class VppPlanSummaryMobile {
 
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
+		}
+	}
+
+	@When("^the user Click on Provider covered link$")
+	public void UserclickonProvidercoveredlink(DataTable Planname) {
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("PlanName");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		// ProviderSearchPage providerSearchPage =
+		// plansummaryPage.clicksOnIsProviderCovered(planName);
+		ProviderSearchPageMobile providerSearchPage = plansummaryPage.ProviderCovered(planName);
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
 	}
 }

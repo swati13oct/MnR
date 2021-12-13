@@ -124,6 +124,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#stateWidget > div > label")
 	private WebElement stateWidget;
 
+	@FindBy(xpath = "//*[@id='stateWidget']")
+	private WebElement stateWidgetLable;
+
 	@FindBy(css = "#homefooter")
 	private WebElement homefooter;
 
@@ -1759,7 +1762,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(zipCodeField);
 		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
@@ -3583,7 +3586,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.switchTo().window(base);
 
 			// Added below loop as ios script fails while switching back to parent window
-			if (driver.getCurrentUrl().contains("uhc.com")) {
+			if (driver.getCurrentUrl().contains("uhc.com")
+					&& driver.getClass().toString().toUpperCase().contains("IOS")) {
 				driver.navigate().back();
 			}
 
@@ -3872,11 +3876,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
 
 		sleepBySec(10);
-//		scrollToView(maPlansViewLink);
-//		if (maPlansViewLink.isDisplayed()) {
-//			jsClickNew(maPlansViewLink);
-//			threadsleep(5);
-//		}
+		if (driver.getCurrentUrl().contains("/plan-summary") & !FindAnAgent.isDisplayed()) {
+			scrollToView(maPlansViewLink);
+			jsClickNew(maPlansViewLink);
+			threadsleep(5);
+		}
 
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
@@ -4121,7 +4125,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
-			driver.navigate().back();
+
+//			if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+//				driver.navigate().back();
+//			}
+
 			return new LearnAboutMedicareHomePageMobile(driver);
 
 		} else {
@@ -4514,11 +4522,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("select[name=state-select]"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
 
 		jsClickNew(stateWidget);
+		jsClickNew(stateWidgetLable);
 		mobileSelectOption(stateDropDown, geoState, true);
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
@@ -4967,6 +4976,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					}
 				}
 				driver.switchTo().window(base);
+			} else {
+				// Step to click browser back is commented in feature file, not sure of its
+				// impact on desktop script if un commented.
+				// hence adding navigate back if the member site loads in same window. Remove
+				// this else block if the browser back step is added.
+				driver.navigate().back();
 			}
 		}
 	}

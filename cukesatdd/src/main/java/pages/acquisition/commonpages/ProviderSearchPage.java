@@ -33,6 +33,7 @@ import pages.acquisition.vpp.VPPTestHarnessPage;
 public class ProviderSearchPage extends UhcDriver {
 
 	private static final String planToBeSelected = null;
+	
 
 	@FindBy(className = "firstTierFilterItem")
 	private WebElement physcianSearchTypes;
@@ -101,7 +102,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(css = "#finishAndReturnButton")
+	@FindBy(xpath = "(//button[contains(text(),'Finish & Return')])[1]")
 	private WebElement FinishButton;
 
 	@FindBy(id = "finishAndReturnButton")
@@ -333,7 +334,7 @@ public class ProviderSearchPage extends UhcDriver {
 		threadsleep(10);
 		validateNew(providerNameText);
 		String BehaviourSaved = providerNameText.getText().trim();
-		System.out.println("Provider Name is : " + BehaviourSaved);
+		System.out.println("Behaviour Provider Name is : " + BehaviourSaved);
 		MRConstants.BEHAV_NAME = BehaviourSaved;
 
 		/*
@@ -395,7 +396,7 @@ public class ProviderSearchPage extends UhcDriver {
 		threadsleep(10);
 		validateNew(providerNameText);
 		String DentalSaved = providerNameText.getText().trim();
-		System.out.println("Provider Name is : " + DentalSaved);
+		System.out.println("Dental Provider Name is : " + DentalSaved);
 		MRConstants.DENT_NAME = DentalSaved;
 
 		/*
@@ -790,7 +791,7 @@ public class ProviderSearchPage extends UhcDriver {
 			 */
 
 			counter++;
-			if (counter == 9) {
+			if (counter == 8) {
 				break;
 			}
 

@@ -40,10 +40,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
-	
-	@FindBy(css = "div[class*='get-started-main-inner'] button")
-	private WebElement getStartedBtn1;
-	
+
 	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 	
@@ -171,7 +168,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		validate(landingpageImage, 30);
 		String landingpageLabelText = landingpageLabel.getText();
 		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));
-		waitTillElementClickableInTime(getStartedBtn1, 45);
+		waitTillElementClickableInTime(getStartedBtn, 45);
 	}
 	
 	public void navigatezipcodepage() {
@@ -183,24 +180,16 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	
 //SingleCounty Method
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-
-		// switchToNewIframe(iframePst);
-		// waitTillElementClickableInTime(getStartedBtn, 30);
-		//AcquisitionHomePage.clickIfElementPresentInTime(driver, proactiveChatExitBtn,5);
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
-		jsClickNew(getStartedBtn);
-		System.out.println("After clicking GetStarted");
-		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);
-		waitforElementVisibilityInTime(countyInfo, 45);
 		threadsleep(5000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
+		threadsleep(2000);
+		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);
-//		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
 	
 	}
 
@@ -209,25 +198,17 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 		
 		Thread.sleep(20000);
 		driver.switchTo().defaultContent();
-//		switchToNewIframe(iframePst);
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
-		jsClickNew(getStartedBtn);
-		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
-		zipcodePagemultiCounty();
+//		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);
 		selectFromDropDownByText(driver, PRECounty, County);
 		threadsleep(5000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
+		Thread.sleep(2000);
 		waitforElementVisibilityInTime(coverageTitle, 30);
-/*		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
-		waitforElementVisibilityInTime(previousBtn, 45);
-		previousBtn.click();
-		validate(planSelectorPageTilte);
-		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));*/
 	}
 	
 	public void zipcodePage() {
@@ -270,13 +251,11 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	public void getStartedAndRunInvalidzipcode(String zipcodeid) throws InterruptedException {
 
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
-		getStartedBtn.click();
-		zipcodePage();
+//		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcodeid);
-		waitforElementVisibilityInTime(continueBtn, 45);
-		continueBtn.click();
+//		waitforElementVisibilityInTime(continueBtn, 45);
+		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 	
@@ -284,14 +263,12 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) throws Exception {
 		
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
-		getStartedBtn.click();
-		zipcodePage();
+//		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
-		zipcodePagemultiCounty();
-		continueBtn.click();
+//		zipcodePagemultiCounty();
+		getStartedBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
@@ -347,7 +324,6 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
   public void getStartedContinueZipcode()  {
       System.out.println("Click on GetStarted and Click on Continue Button in Zipcode:");
       waitTillElementClickableInTime(getStartedBtn, 45);
-      waitTillElementClickableInTime(getStartedBtn1, 45);
       getStartedBtn.click();
       threadsleep(3000);
       zipcodePage();
@@ -361,7 +337,6 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
  public void navigateToCoveragePage(String zip_code, String County) {
 	  	pageloadcomplete();
 		waitTillElementClickableInTime(getStartedBtn, 45);
-		jsClickNew(getStartedBtn);
 		threadsleep(1000);
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
@@ -371,7 +346,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		if(validate(PRECounty,5))
 			selectFromDropDownByText(driver, PRECounty, County);
 		threadsleep(3000);
-		jsClickNew(continueBtn);
+		jsClickNew(getStartedBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
 	}
  
