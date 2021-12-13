@@ -687,7 +687,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				+ "Expected='6' | Actual='" + distanceOptions.size() + "'", distanceOptions.size() == 6);
 		Select select = new Select(distanceDropDownField);
 		String actualSelectedDistance = select.getFirstSelectedOption().getText();
-		String expectedSelectedDistance = "15 miles";
+		String expectedSelectedDistance = "15 Miles";
 		Assertion.assertTrue(
 				"PROBLEM - default selected distance option is not as expected. " + "Expected='"
 						+ expectedSelectedDistance + "' | Actual='" + actualSelectedDistance + "'",
