@@ -390,7 +390,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @uatE2EAARP
+    @uatE2EAARP @null
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   32115 | NO            | Volusia | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Higher               | both           | Health Care Premium, Doctors | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
