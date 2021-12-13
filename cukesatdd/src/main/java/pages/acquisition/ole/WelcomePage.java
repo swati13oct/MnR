@@ -111,11 +111,22 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
 	private WebElement EnrollmentChecklistLink;
 
-	@FindBy(xpath = "//a[contains(text(),'Lista de Verificaci贸n de Inscripci贸n (PDF)')]")
+	@FindBy(xpath = "//a[contains(text(),'Lista de Verificaci髇 de Inscripci髇 (PDF)')]")
 	private WebElement ListaVerificationLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'www.fitbit.com/legal/trademark-list')]")
+	private WebElement FitbitLink;
+	@FindBy(xpath = "//a[contains(text(),'Lista de Verificaci贸n de Inscripci贸n (PDF)')]")
+	private WebElement MedicaidLink;
 	
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
 	private WebElement PrivacyPolicy;
+	
+	@FindBy(xpath = "//a[contains(text(),'Extra Help')]")
+	private WebElement Extrahelp;
+	
+	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html')]")
+	private WebElement AARPPharmacy;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
@@ -616,7 +627,149 @@ public class WelcomePage extends UhcDriver{
 		driver.switchTo().window(parentWindow);
 
 	}
+	
+	public void ValidateFooterFitBitLink()  throws InterruptedException, IOException{
+		try {
+		validateNew(FitbitLink);
+		CommonUtility.waitForPageLoadNew(driver, FitbitLink, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(FitbitLink);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
 		
+		if (CurrentPageURL.contains("legal/trademark-list")) {
+			System.out.println("****************legal/trademark-list is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************legal/trademark-list is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		}
+		catch(Exception e) {
+			System.out.println("****************legal/trademark-list Link is not displayed  ***************");
+		}
+	}
+	
+	public void ValidateFooterMedicaidLink()  throws InterruptedException, IOException{
+		try {
+		validateNew(MedicaidLink);
+		CommonUtility.waitForPageLoadNew(driver, MedicaidLink, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(MedicaidLink);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
+		
+		if (CurrentPageURL.contains("legal/trademark-list")) {
+			System.out.println("****************legal/trademark-list is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************legal/trademark-list is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		}
+		catch(Exception e) {
+			System.out.println("****************legal/trademark-list Link is not displayed  ***************");
+		}
+	}
+	
+	
+	
+	public void ValidateFooterExtrahelpLink()  throws InterruptedException, IOException{
+		
+		validateNew(Extrahelp);
+		CommonUtility.waitForPageLoadNew(driver, Extrahelp, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(Extrahelp);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
+		
+		if (CurrentPageURL.contains("prescription-drug-costs-help.html")) {
+			System.out.println("****************prescription-drug-costs-help is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************prescription-drug-costs-help is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		
+	}
+	
+	
+	
+public void ValidateFooterAARPPharmacyLink()  throws InterruptedException, IOException{
+		
+		validateNew(AARPPharmacy);
+		CommonUtility.waitForPageLoadNew(driver, AARPPharmacy, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(AARPPharmacy);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
+		
+		if (CurrentPageURL.contains("Pharmacy-Search-English")) {
+			System.out.println("****************Pharmacy-Search-English is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Pharmacy-Search-English is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		
+	}
+	
 	public SaveandReturnOLEModal OpensavereturnOLEPages() {
 		validate(SaveEnrollmentLinkOLE);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;

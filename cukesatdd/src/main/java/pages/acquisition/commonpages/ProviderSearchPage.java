@@ -102,7 +102,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 
-	@FindBy(css = "#finishAndReturnButton")
+	@FindBy(xpath = "(//button[contains(text(),'Finish & Return')])[1]")
 	private WebElement FinishButton;
 
 	@FindBy(id = "finishAndReturnButton")
@@ -791,7 +791,7 @@ public class ProviderSearchPage extends UhcDriver {
 			 */
 
 			counter++;
-			if (counter == 9) {
+			if (counter == 8) {
 				break;
 			}
 

@@ -277,8 +277,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @regressionAARP @nextYear
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
-      | 00011 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
+      | 00011 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
 
     @regressionUHC
     Examples: 
@@ -287,8 +287,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @regressionUHC @nextYear
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
-      | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
+      | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for <site> site
     Given the user is on medicare acquisition site landing page
@@ -511,7 +511,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionAARP @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               4,3 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               3,5 |
 
     @regressionUHC
     Examples: 
@@ -521,7 +521,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionUHC @nextYear @UATSpartans
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           4 |               4,3 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               3,5 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
@@ -730,8 +730,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @regressionAARP @nextYear
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
-      | 00026 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | next     |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
+      | 00026 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
 
     @regressionUHC
     Examples: 
@@ -895,8 +895,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @regressionAARP @nextYear  @UATSpartans
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
-      | 00035 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | next     |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
+      | 00035 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
 
     @regressionUHC
     Examples: 
@@ -905,8 +905,8 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @regressionUHC @nextYear  @UATSpartans
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
-      | 00035 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | next     |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
+      | 00035 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of routine dental benefit link on plan compare on click of view all plans on <site>
     Given the user is on medicare acquisition site landing page
