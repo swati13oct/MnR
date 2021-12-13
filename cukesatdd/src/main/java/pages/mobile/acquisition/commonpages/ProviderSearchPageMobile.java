@@ -350,6 +350,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public String selectsProvider() {
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
