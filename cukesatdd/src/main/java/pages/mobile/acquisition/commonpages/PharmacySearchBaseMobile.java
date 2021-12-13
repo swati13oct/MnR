@@ -133,7 +133,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
 					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
+ 							.findElement(By.xpath("//select[@id='county']//option[contains(text(),' " + county + " ')]"));
 
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
