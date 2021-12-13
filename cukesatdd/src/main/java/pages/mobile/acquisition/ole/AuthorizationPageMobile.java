@@ -244,9 +244,11 @@ public class AuthorizationPageMobile extends UhcDriver {
 			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 				WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
 				//WebElement stateLabel1 = driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
-				stateLable.click();
+				//stateLable.click();
+				jsClickNew(stateLable);
 				//stateLabel1.click();
 			}
+			checkElementisEnabled(Authorized_State);
 			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
 
 //			scrollToView(Authorized_ZipCode);

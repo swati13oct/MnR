@@ -164,7 +164,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
-	
+
 	@FindBy(xpath = "//div[@id='helpTextinAB']")
 	private WebElement OONTextAdditionalBenefit;
 
@@ -276,13 +276,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
-	
+
 	@FindBy(xpath = "(//span[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans'])[1]")
 	private WebElement ShowAllButton;
 
 	@FindBy(xpath = "(//span[contains(text(), 'Plans Available (No Hidden)')])[1]")
 	private WebElement AllPlansVisible;
-	
+
 	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
 
@@ -297,7 +297,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
-	
+
 	@FindBy(xpath = "(//span[@class='dentalTextFont ng-binding']/p/b[not(contains(text(), 'No coverage'))])[3]")
 	private WebElement DentalLinkText;
 
@@ -735,7 +735,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// "No Call sticky action menu didn't roll out and doesn't contain the text Call
 		// a Licensed Insurance Agent");
 	}
-	
+
 	public void validateProvidersCovered() {
 		// TODO Auto-generated method stub
 		try {
@@ -744,26 +744,30 @@ public class ComparePlansPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println(MRConstants.PROV_NAME);
 		System.out.println(MRConstants.BEHAV_NAME);
 		System.out.println(MRConstants.DENT_NAME);
-		WebElement DoctorCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.PROV_NAME.substring(0, 4)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div")) ;
+		WebElement DoctorCoveredText = driver.findElement(By
+				.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'" + MRConstants.PROV_NAME.substring(0, 4)
+						+ "')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
 		System.out.println(DoctorCoveredText.getText());
-		WebElement BehaviourCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.BEHAV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
+		WebElement BehaviourCoveredText = driver.findElement(By.xpath(
+				"(//*[@id='your-doctors-table']/..//text()[contains(. ,'" + MRConstants.BEHAV_NAME.substring(0, 6)
+						+ "')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
 		System.out.println(BehaviourCoveredText.getText());
-		WebElement DentalCoveredText = driver.findElement(By.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.DENT_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));;
+		WebElement DentalCoveredText = driver.findElement(By
+				.xpath("(//*[@id='your-doctors-table']/..//text()[contains(. ,'" + MRConstants.DENT_NAME.substring(0, 6)
+						+ "')]/ancestor::span/ancestor::th)[1]//following-sibling::td/div"));
+		;
 		System.out.println(DentalCoveredText.getText());
 		validate(DoctorCoveredText);
 		validate(BehaviourCoveredText);
 		validate(DentalCoveredText);
-		
-		Assert.assertEquals("Not Covered\n" + 
-				"View Locations", DentalCoveredText.getText());
-		Assert.assertEquals("Covered\n" + 
-				"View Locations", BehaviourCoveredText.getText());
-		Assert.assertEquals("Covered\n" + 
-				"View Locations", DoctorCoveredText.getText());
+
+		Assert.assertEquals("Not Covered\n" + "View Locations", DentalCoveredText.getText());
+		Assert.assertEquals("Covered\n" + "View Locations", BehaviourCoveredText.getText());
+		Assert.assertEquals("Covered\n" + "View Locations", DoctorCoveredText.getText());
 
 	}
 
@@ -1091,10 +1095,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(editHospitalsLink);
 		String ParentWindow = driver.getTitle();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
+//		JavascriptExecutor executor = (JavascriptExecutor) driver;
+//		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
 
-		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1456,7 +1460,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showAllButton() {
 		// TODO Auto-generated method stub
 		try {
@@ -1501,16 +1505,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#addDrug")
 	public WebElement addMyDrugsButton;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink;
+
 	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink);
 		return new ComparePlansPageMobile(driver);
-		
+
 	}
-	
-	
+
 	public GetStartedPageMobile navigateToDCERedesign() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// validateNew(addDrugsLink, 30);
@@ -1664,10 +1668,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 		Assertion.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
 				viewLocationPopupProviderName.getText().trim());
 	}
-	
+
 	public void ClickOONToggle() {
 		jsClickNew(additionalBenefitsOONToggle);
-		
+
 	}
 
 	public void CounterDentalFlyerLink(String counter, String Documentcode) throws Exception {
@@ -1676,7 +1680,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		WebElement DentalFlyerLink;
 		if (counter.equals("1023")) {
 			DentalFlyerLink = driver.findElement(By.partialLinkText("Click here for details"));
-			System.out.println("Dental Flyer link is 1023 Displayed=========="+DentalFlyerLink.getText());
+			System.out.println("Dental Flyer link is 1023 Displayed==========" + DentalFlyerLink.getText());
 			scrollToView(DentalFlyerLink);
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 				grantPermissionOnAndroidChrome(DentalFlyerLink);
@@ -1805,10 +1809,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		validate(DentalLinkText);
 		String DentalText = DentalLinkText.getText();
-		System.out.println("Routine Dental text is" + DentalText );
+		System.out.println("Routine Dental text is" + DentalText);
 
 	}
-	
+
 	public String validateDrugListCaptureDrugYouPay(String druglistObject) {
 		String[] Drugs = druglistObject.split("&");
 		int DrugCount_Total = Drugs.length - 1;
@@ -1820,11 +1824,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 		for (i = 0; i <= DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(
-					By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver
-					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
-							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
+			WebElement DrugName = driver.findElement(By.xpath(
+					"//*[contains(@class, 'accordion__content')]//*[contains(text(), '" + currentAddedDrug + "')]"));
+//			WebElement DrugYouPay = driver
+//					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
+//							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath(
+					"(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
+					+ "//*[contains(text(), '" + currentAddedDrug + "')]//following::li[contains(text(),'$')]"));
 			// DrugYouPay.getText will get child element text as well in Safari browser
 			// which fails the scripts ahead
 			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
@@ -1943,7 +1950,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		return null;
 	}
-	
 
 	public void validateAllDoctors() {
 		validateNew(backToAllPlansLink);
@@ -1962,18 +1968,20 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Validated Change zipcode link on compare");
 
 	}
-	
+
 	public void validateOONTextAdditionalBenefit() {
-		 
-		 Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
-				 OONTextAdditionalBenefit.isDisplayed());
-		 
-		 System.out.println(OONTextAdditionalBenefit.getText().trim());
-		 
-		 Assertion.assertEquals("Benefits may be accessible via mail order, online, or phone through network "
-		 		+ "providers anywhere in the U.S. View Plan Details under More Options for more information.", OONTextAdditionalBenefit.getText().trim());
-		 
-	 }
+
+		Assertion.assertTrue("Help text below the 'Additional Benefits' is displayed",
+				OONTextAdditionalBenefit.isDisplayed());
+
+		System.out.println(OONTextAdditionalBenefit.getText().trim());
+
+		Assertion.assertEquals(
+				"Benefits may be accessible via mail order, online, or phone through network "
+						+ "providers anywhere in the U.S. View Plan Details under More Options for more information.",
+				OONTextAdditionalBenefit.getText().trim());
+
+	}
 
 	public void searchPlansWithOutCounty(String zipcode, String ClickEnter) throws InterruptedException {
 

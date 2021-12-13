@@ -297,7 +297,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 				}
 				
-		
+		checkElementisEnabled(MailingAdd_State_DropDown);
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);

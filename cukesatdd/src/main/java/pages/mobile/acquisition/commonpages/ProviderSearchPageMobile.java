@@ -113,6 +113,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement AllPrimaryCare;
+	
+	@FindBy(xpath="(//a[@data-test-id='provider-name-link'])[1]")
+	private WebElement providerNameVerify;
 
 	@FindBy(xpath = "//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
@@ -324,6 +327,27 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new PlanDetailsPageMobile(driver);
 
 	}
+	
+	public void providerCheckHomePage() {
+		
+		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+		jsClickNew(GetStarted);
+
+		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+		jsClickNew(MedicalDirectory);
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		jsClickNew(People);
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		jsClickNew(Primary);
+
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
+		jsClickNew(AllPrimaryCare);
+		
+		validateNew(providerNameVerify);
+		
+	}
 
 	public String selectsProvider() {
 
@@ -397,7 +421,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")){
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());}
-		validateNew(vppFirstPlanCard);
+		validate(vppFirstPlanCard);
 		//return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
 	}

@@ -3979,15 +3979,18 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
 		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		driver.findElement(By.xpath("//label[@for='mpaed-month']")).click();
 		mobileSelectOption(yearDrpDwnPartA, year, true);
 		System.out.println("Effective part a date- year value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
+		driver.findElement(By.xpath("//label[@for='mpbed-month']")).click();
 		Select partBMonth = new Select(monthDrpDwnPartB);
 		partBMonth.selectByIndex(1);
 		System.out.println("Effective part b date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);
+		driver.findElement(By.xpath("//label[@for='mpbed-month']")).click();
 		mobileSelectOption(yearDrpDwnPartB, year, true);
 		System.out.println("Effective part b date- year value selected");
 
