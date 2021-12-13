@@ -822,6 +822,14 @@ public class VppPlanCompareMobile {
 	/**
 	 * @toDo:the user validating email and print option in plan compare
 	 */
+	
+	@Then("^click on Show All button on plan compare page$")
+	public void click_on_Show_All_button() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.showAllButton();
+	}
+	
 	@Then("^the user validating email and print option in plan compare$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
@@ -3010,9 +3018,11 @@ public class VppPlanCompareMobile {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -4004,7 +4014,6 @@ public class VppPlanCompareMobile {
 		}
 	}
 	
-	
 	@Then("^user saves all plans as favorite$")
 	public void user_saves_all_plans_as_favorite(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -4625,6 +4634,20 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONDDisplayed();
 	}
+	
+	@Then("^validate text under additional benefits$")
+	public void validate_text_under_additional_benefits() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONTextAdditionalBenefit();
+	}
+	
+	@Then("^click on OON Toggle for additional benefits$")
+	public void click_on_OON_Toggle_for_additional_benefits() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.ClickOONToggle();
+	}
 
 	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
 	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
@@ -4695,6 +4718,13 @@ public class VppPlanCompareMobile {
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
+	}
+	
+	@Then("^validate all providers are covered$")
+	public void validate_all_providers_are_covered() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateProvidersCovered();
 	}
 
 	@Then("^verify icons loaded with doctor summary on Plan Compare page$")

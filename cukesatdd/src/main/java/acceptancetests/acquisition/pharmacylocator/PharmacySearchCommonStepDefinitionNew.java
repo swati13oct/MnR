@@ -99,7 +99,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Chinese");
 	}
-	
+
 	/** user enters following details for pharmacy search */
 	@And("^the user enters following details for the pharmacy search$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable inputAttributes) {
@@ -217,7 +217,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
-	
+
  	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()

@@ -356,7 +356,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @dceRedesign_PlanSave_SNP_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   | planyear |
-      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) | current   |
+      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
 
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP @decRelease
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy

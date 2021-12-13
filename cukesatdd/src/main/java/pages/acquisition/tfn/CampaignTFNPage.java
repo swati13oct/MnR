@@ -34,7 +34,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 public class CampaignTFNPage extends UhcDriver {
 
 	// @FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
 	public String testSiteUrl;
@@ -657,7 +657,7 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement findPlansButtonExternalLinks;
 
 	// @FindBy(id="cta-zipcode")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0') or contains(@id,'cta-zipcode')]")
 
 	private WebElement HomePage_EnterZip;
 
@@ -1410,14 +1410,19 @@ public class CampaignTFNPage extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//input[@id='zipcodeTxt']")
+	@FindBy(xpath = "//input[@id='zip-code']")
 	private WebElement ZipcodePharmacy;
 
-	@FindBy(xpath = "//select[@id='plan-type']")
+	@FindBy(xpath = "//select[@id='plans']")
 	private WebElement seletPlandropdown;
 
-	@FindBy(xpath = "//button[contains(@dtmid,'cta_pharmacylocator')]//span[contains(text(),'Continue')]")
+	@FindBy(xpath = "//button[contains(@dtmid,'pharmacy')]//span[contains(text(),'Search')]")
 	private WebElement ContinuePharmacy;
+	
+	
+	@FindBy(xpath = "//button[contains(@dtmid, 'pharmacy')] //span[normalize-space()='Search']")
+	private WebElement searchPharmacy;
+	
 
 	@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	private WebElement PreferredRetailedPharmacy;
@@ -1438,7 +1443,7 @@ public class CampaignTFNPage extends UhcDriver {
 		sleepBySec(1);
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
-		jsClickNew(ContinuePharmacy);
+		jsClickNew(searchPharmacy);
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e1) {
