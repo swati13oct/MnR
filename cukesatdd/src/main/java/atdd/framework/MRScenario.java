@@ -671,9 +671,18 @@ public class MRScenario {
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
-				// capabilities.setCapability("parent-tunnel", "sauce_admin");
-				capabilities.setCapability("parent-tunnel", "optumtest");
-				capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+				//capabilities.setCapability("parent-tunnel", "sauce_admin");
+				if (environment.equals("stage") || environment.equals("offline") || environment.equals("prod")) {
+					capabilities.setCapability("parent-tunnel", "");
+					capabilities.setCapability("tunnelIdentifier", "");
+				}
+				
+				else
+				{
+					capabilities.setCapability("parent-tunnel", "optumtest");
+					capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+				}
+				
 				// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
