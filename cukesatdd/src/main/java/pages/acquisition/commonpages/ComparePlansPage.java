@@ -1633,6 +1633,7 @@ public class ComparePlansPage extends UhcDriver {
 		for (String index : (TreeSet<String>) mySet.descendingSet()) {
 			if (Integer.parseInt(index) > 3) {
 				jsClickNew(forwardArrow);
+				jsClickNew(forwardArrow);
 			} else {
 				jsClickNew(backArrow);
 			}
