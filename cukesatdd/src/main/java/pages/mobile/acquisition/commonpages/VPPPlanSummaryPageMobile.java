@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -1022,7 +1023,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		threadsleep(10);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -2409,7 +2409,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planName.contains("SNP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -2496,7 +2496,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Out Of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
@@ -2556,6 +2556,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
+		System.out.println("\n\n================="+annualDeductible+"============="+planDeductible+"=================\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -3979,18 +3980,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartA, 5);
 		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		driver.findElement(By.xpath("//label[@for='mpaed-month']")).click();
 		mobileSelectOption(yearDrpDwnPartA, year, true);
 		System.out.println("Effective part a date- year value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, monthDrpDwnPartB, 5);
-		driver.findElement(By.xpath("//label[@for='mpbed-month']")).click();
 		Select partBMonth = new Select(monthDrpDwnPartB);
 		partBMonth.selectByIndex(1);
 		System.out.println("Effective part b date- month value selected");
 
 		CommonUtility.waitForPageLoadNewForClick(driver, yearDrpDwnPartB, 5);
-		driver.findElement(By.xpath("//label[@for='mpbed-month']")).click();
 		mobileSelectOption(yearDrpDwnPartB, year, true);
 		System.out.println("Effective part b date- year value selected");
 

@@ -28,7 +28,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-
+	
 	/*
 	 * @Override public void openAndValidate() {
 	 * CommonUtility.checkPageIsReadyNew(driver); if
@@ -257,16 +257,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));
 				}
 			} else { // note: if format is right then going to assume u r getting this error
-				/*
-				 * String exp_noPlanForZipErrTxt =
-				 * "There were no results found for the requested search. Broadening your search criteria"
-				 * ; Assertion.assertTrue("PROBLEM - not seeing zip format error element",
-				 * pharmacyValidate(modifyZipErr)); if (language.equalsIgnoreCase("English")) {
-				 * String act_noPlanForZipErrTxt = modifyZipErr.getText(); Assertion.assertTrue(
-				 * "PROBLEM - Zip format error text is not as expected. " + "Expected='" +
-				 * exp_noPlanForZipErrTxt + "' | Actual='" + act_noPlanForZipErrTxt + "'",
-				 * act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt)); }
-				 */
+		/*		String exp_noPlanForZipErrTxt = "There were no results found for the requested search. Broadening your search criteria";
+				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(modifyZipErr));
+				if (language.equalsIgnoreCase("English")) {
+					String act_noPlanForZipErrTxt = modifyZipErr.getText();
+					Assertion.assertTrue(
+							"PROBLEM - Zip format error text is not as expected. " + "Expected='"
+									+ exp_noPlanForZipErrTxt + "' | Actual='" + act_noPlanForZipErrTxt + "'",
+							act_noPlanForZipErrTxt.contains(exp_noPlanForZipErrTxt));
+				}*/
 			} // note: may need to code for a case when zip result in no result but don't know
 				// of a zip that has that behavior yet
 		}
@@ -372,7 +371,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	}
 
 	public void validatePlanNameInResultsSection(String testPlanName) {
-		WebElement PlanNameText = driver.findElement(By.xpath("//h3[contains(text(), '" + testPlanName + "')]"));
+		WebElement PlanNameText = driver.findElement(By.xpath("//h3[contains(text(), '"+testPlanName+"')]"));
 		if (validateNew(PlanNameText)) {
 			System.out.println("Ecpected Plan Name displayed in Pharmacy Results section : " + PlanNameText.getText());
 		} else
@@ -459,7 +458,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	public PharmacySearchPageMobile validateSearchPdfResult() throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 10);
-		// scrollToView(map_showHideMapLnk); // note: scroll so pdf link will be in view
+	//	scrollToView(map_showHideMapLnk); // note: scroll so pdf link will be in view
 		Assertion.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
 
 		// A new browser tab is only opened for ios device, in case of android a pdf is
@@ -682,7 +681,6 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				pharmacyValidate(PharmacyLocatorPageHeader));
 		Assertion.assertTrue("PROBLEM - unable to locate the input section", pharmacyValidate(inputSection));
 		Assertion.assertTrue("PROBLEM - unable to locate the input instruction", pharmacyValidate(inputInstruction));
-
 		Assertion.assertTrue("PROBLEM - unable to locate the distance dropdown element",
 				pharmacyValidate(distanceDropDownField));
 		Assertion.assertTrue("PROBLEM - number of options for distance dropdown is not as expected.  "
@@ -693,7 +691,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		Assertion.assertTrue(
 				"PROBLEM - default selected distance option is not as expected. " + "Expected='"
 						+ expectedSelectedDistance + "' | Actual='" + actualSelectedDistance + "'",
-				expectedSelectedDistance.equalsIgnoreCase(actualSelectedDistance));
+				expectedSelectedDistance.equals(actualSelectedDistance));
 		Assertion.assertTrue("PROBLEM - unable to locate distance option '1 mile'",
 				pharmacyValidate(distanceOption_1mile));
 		Assertion.assertTrue("PROBLEM - unable to locate distance option '2 miles'",
@@ -709,7 +707,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		Assertion.assertTrue("PROBLEM - unable to locate the zipcode input field element",
 				pharmacyValidate(zipcodeField));
 //		Assertion.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
-		if (pharmacyValidate(drpYear)) {
+	/*	if (pharmacyValidate(drpYear)) {
 			select = new Select(drpYear);
 			List<WebElement> yearList = select.getOptions();
 			Assertion.assertTrue("PROBLEM - list of years should be >0.  Actual='" + yearList.size() + "'",
@@ -722,10 +720,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					containCurrentYr = true;
 					break;
 				}
-			}
+			} 
 			Assertion.assertTrue("PROBLEM - list of year options should contain current year as option.",
 					containCurrentYr);
-		}
+		} */
 	}
 
 	/**
@@ -818,15 +816,19 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		jsClickNew(learnMoreElement);
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
+		ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(newTb.get(1));
 		String actUrl = driver.getCurrentUrl();
 		Assertion.assertTrue(
 				"PROBLEM - '" + linkType + "' link on '" + widgetName + "' widget is not opening expected page.  "
 						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
 				actUrl.contains(expUrl));
-		driver.navigate().back(); // note: use driver back to go back to pharmacy locator page
+		driver.close(); // note: use driver back to go back to pharmacy locator page
+		driver.switchTo().window(newTb.get(0));
 		// tbd Thread.sleep(2000); //note: keep for timing issue
 		// driver.navigate().refresh(); //note: added refresh since Safari has issues
 		// locating elements after navigate back
+		
 		sleepBySec(2);
 		CommonUtility.checkPageIsReady(driver);
 		expUrl = "/Pharmacy-Search-";
@@ -852,17 +854,20 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		 */
 		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
-
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+		sleepBySec(1);
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		sleepBySec(2);
+		
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.findElement(By.cssSelector("#plan-type-label")).click();
 		}
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 //		if (!loadingBlock.isEmpty())
-		// waitforElementDisapper(By.className("loading-block"), 90);
+			// waitforElementDisapper(By.className("loading-block"), 90);
 //			waitforElementDisapper(loadingSpinner, 90);
 //		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
-		// waitforElementDisapper(By.className("loading-block"), 30);
+			// waitforElementDisapper(By.className("loading-block"), 30);
 //			waitforElementDisapper(loadingSpinner, 90);
 //		sleepBySec(1); // note: let the page settle down
 		// searchbtn.click();
@@ -871,6 +876,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		} else {
 			jsClickNew(searchbtn);
 		}
+		sleepBySec(4);
 
 		// let the plans load, wait for the loading symbol to disappear
 		if (!loadingBlock.isEmpty())
@@ -908,36 +914,49 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {
 		// CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-		int totalBefore = Integer.parseInt(PharmacyFoundCount.getText().trim());
+		String totalLine = PharmacyFoundCount.getText().trim();
+		String totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
+		int totalBefore = Integer.parseInt(totalString);
+		System.out.println("Pharmacy Count Displayed : "+totalBefore);
 		String labelId = "";
+		validateNew(Filter);
+		jsClickNew(Filter);
+		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			labelId = "ePrescribing-label";
+			labelId = "E-Prescribing";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			labelId = "home-specialty-label";
+			labelId = "Home Infusion";
 		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			labelId = "indian-tribal-label";
+			labelId = "Indian/Tribal/Urban";
 		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			labelId = "long-term-label";
+			labelId = "Long-Term";
 		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			labelId = "mail-order-label";
+			labelId = "Mail Service";
 		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			labelId = "24-hours-label";
+			labelId = "Open 24 hours";
 		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			labelId = "StandardNightyDays-label";
+			labelId = "Retail Pharmacy";
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
-		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
+//		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
+        WebElement label = driver.findElement(By.xpath("//*[contains(text(), '"+ labelId +"')]//parent::label"));
+        validateNew(label);
 		jsClickNew(label);
+		
+		validateNew(FilterApplyBtn);
+        jsClickNew(FilterApplyBtn);
 
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+//		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
 		int PharmacyCount = 0;
 		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if (PharmacyCount > 0) {
-			int totalAfter = Integer.parseInt(PharmacyFoundCount.getText().trim());
+			totalLine = PharmacyFoundCount.getText().trim();
+			totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
+			int totalAfter = Integer.parseInt(totalString);
 			Assertion.assertTrue("PROBLEM - expect total after filter to be equal or less than before filter. "
 					+ "Expect='" + totalBefore + "' | Actual='" + totalAfter + "'", totalBefore >= totalAfter);
 			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
@@ -973,18 +992,6 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
 				sleepBySec(8);
-				CommonUtility.waitForPageLoadNew(driver, resultNavTooltip, 60);
-				Assertion.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element",
-						pharmacyValidate(resultNavTooltip));
-				scrollToView(resultNavTooltip);
-
-				// moveMouseToElement(resultNavTooltip); //note: then move mouse over to target
-				// element
-				jsMouseOver(resultNavTooltip);
-
-				Assertion.assertTrue("PROBLEM - unable to locate tooltip display after mouse over",
-
-						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
 					String expTxt2 = "Change the pharmacy type you selected.";
@@ -1020,30 +1027,24 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	}
 
 	public boolean validateNoPharmaciesErrorMessage() {
-		// CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter,
-		// 60);
-
-		boolean isFilterExpanded = Boolean
-				.parseBoolean(CommonUtility.getElementAttribute(filterToggle, "aria-expanded"));
-
-		if (!isFilterExpanded) {
-			jsClickNew(filterToggle);
-			CommonUtility.waitForPageLoad(driver, filterOptions, 10);
-		}
-
+		jsClickNew(Filter);
+		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-
-		// CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
-		if (!noPharmaciesErrorMessage.isDisplayed()) {
-			// CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter,
-			// 60);
-
+		jsClickNew(FilterApplyBtn);
+		sleepBySec(5);
+		try {
+			CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+			if (!noPharmaciesErrorMessage.isDisplayed()) {
+				CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+				jsClickNew(indian_tribal_label_filter);
+			}
+		}
+		catch(Exception NoSuchElementException) {
+			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 			jsClickNew(indian_tribal_label_filter);
-//			jsClickNew(indian_tribal_filter);
 		}
 		sleepBySec(5);
-		// CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		Assertion.assertTrue("PROBLEM - unable to locate No Pharmacy Error message",
 				pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
@@ -1243,11 +1244,11 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
 	public void selectYearOption(String year) {
 		try {
-			if (year.equalsIgnoreCase("current")) {
-				if (validate(CurrentYearLink))
+			if(year.equalsIgnoreCase("current")) {
+				if(validate(CurrentYearLink))
 					CurrentYearLink.click();
-			} else {
-				if (validate(NextYearLink))
+			}else {
+				if(validate(NextYearLink))
 					NextYearLink.click();
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -1256,5 +1257,6 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			e.printStackTrace();
 		}
 	}
+
 
 }

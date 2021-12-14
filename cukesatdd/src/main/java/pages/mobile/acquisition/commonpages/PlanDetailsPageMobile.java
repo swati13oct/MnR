@@ -144,14 +144,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
 	private WebElement validateEmailButtonOnPlanDetails;
-
+	
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink1;
-
 	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink1);
 		return new ComparePlansPageMobile(driver);
-
+		
 	}
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
@@ -217,7 +216,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(css = "#distance")
+	@FindBy(css = "#miles")
 	WebElement distanceDropownID;
 
 	@FindBy(css = "#englishDocs")
@@ -1847,5 +1846,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		return null;
 	}
+
 
 }
