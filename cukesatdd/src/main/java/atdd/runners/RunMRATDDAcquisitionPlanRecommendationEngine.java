@@ -18,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@CSNPGoldSilverRanking")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

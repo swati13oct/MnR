@@ -46,7 +46,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
 
-  @PharmacyLocatorChinese1_AARP @regressionAARP
+  @PharmacyLocatorChinese1_AARP @regressionAARP @lang
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |

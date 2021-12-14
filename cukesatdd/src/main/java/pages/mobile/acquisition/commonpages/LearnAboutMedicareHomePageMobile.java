@@ -120,7 +120,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Special Needs Plans']")
 	private WebElement specialNeedsPlansLink;
 
-	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Medicare FAQ']")
+	@FindBy(css = "#learnmore-scroll > div:nth-child(3) > div:nth-child(4) > p")
 	private WebElement medicareFAQLink;
 
 	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Glossary']")
@@ -966,6 +966,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	 */
 	public boolean validatePlanTypeMenu() {
 		if (!typesOfPlansBackButton.isDisplayed()) {
+			validateNew(medicareFAQLink);
 			jsClickNew(typesOfPlansButton);
 			CommonUtility.waitForPageLoadNew(driver, typesOfPlansBackButton, 10);
 		}
@@ -978,7 +979,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 			validateMenuOptions = validateMenuOptions && validateNew(medicarePrescriptionDrugPlansLink);
 
-			validateMenuOptions = validateMenuOptions && validateNew(medicareFAQLink);
+			//validateMenuOptions = validateMenuOptions && validateNew(medicareFAQLink);
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
