@@ -433,7 +433,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available (No Hidden)')]")
 	private WebElement AllPlansVisible;
 	
-	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
+	@FindBy(xpath = "(//span[@class='dentalTextFont ng-binding']/p/b[not(contains(text(), 'No coverage'))])[3]")
 	private WebElement DentalLinkText;
 	
 	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")
@@ -2187,11 +2187,11 @@ public void saveaPlan(String plans) {
 		validate(DentalCoveredText);
 		
 		Assert.assertEquals("Not Covered\n" + 
-				"View Locations", DentalCoveredText.getText().trim());
+				"View Locations", DentalCoveredText.getText());
 		Assert.assertEquals("Covered\n" + 
-				"View Locations", BehaviourCoveredText.getText().trim());
+				"View Locations", BehaviourCoveredText.getText());
 		Assert.assertEquals("Covered\n" + 
-				"View Locations", DoctorCoveredText.getText().trim());
+				"View Locations", DoctorCoveredText.getText());
 
 	}
 
