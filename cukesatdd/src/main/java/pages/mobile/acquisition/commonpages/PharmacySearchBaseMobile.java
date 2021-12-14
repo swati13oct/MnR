@@ -126,23 +126,22 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
-					System.out.println(
+					scrollToView(countyModal);
+			/*		System.out.println(
 							"This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assertion.assertTrue(
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
-							pharmacyValidate(countyModal));
-					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
-
-					jsClickNew(countyOption);
+							pharmacyValidate(countyModal)); 
+					WebElement countyOption = driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+ county + "')]")); */
+					mobileSelectOption(countyModal, county, true);
+				//	jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
-					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
+					WebElement countyOption = driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+ county + "')]"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
