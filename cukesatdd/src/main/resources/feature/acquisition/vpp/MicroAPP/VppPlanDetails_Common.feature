@@ -69,7 +69,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
      # | 00002 | UHC  |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @prodRegression
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 00002 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
@@ -185,7 +185,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     @prodRegression 
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
-      | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
+      | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future  |
 
     @vppPlanDetailsCommon_UHC02 @regressionUHC
     Examples: 
@@ -198,7 +198,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     @prodRegression 
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                                   | planyear |
-      | 00008 | UHC  |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | 00008 | UHC  |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future  |
 
     @regressionAARP @nextYear
     Examples: 
@@ -243,7 +243,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                             | planyear |
    #   | 00009 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Choice (PPO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @prodRegression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                             | planyear |
       | 00009 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Choice (PPO) | future   |
@@ -324,7 +324,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       #| 000013 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @prodRegression
     Examples: 
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 000013 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
