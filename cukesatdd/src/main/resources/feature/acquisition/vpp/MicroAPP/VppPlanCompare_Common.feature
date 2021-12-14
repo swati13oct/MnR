@@ -1,3 +1,4 @@
+
 @vppPlanCompareAARPNew @vpp @planCompare
 Feature: 1.01.3-Vpp to plan Compare Scenarios
 
@@ -359,7 +360,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future  |
 
-    @regressionUHC @prodRegression @HPA
+    @regressionUHC @prodRegression
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | UHC  |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future  |
@@ -512,7 +513,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionAARP @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               3,5 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               5,3 |
 
     @regressionUHC
     Examples: 
@@ -522,7 +523,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @regressionUHC @nextYear
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               3,5 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               5,3 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
@@ -682,25 +683,27 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then Click on Dental Flyer Link
       | PDF LINK     | <pdfLink> |
       | DocumentCode | <docCode> |
+      
+  # Obul recommended to remove regression tag as it is covered in plan benefit validation
 
-    @regressionAARP
+    
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
     #  | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | current  |    1023 | 4805658 |
 
-    @regressionAARP @nextYear
+     
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
       | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |    1023 | 4805658 |
       | 0023 | AARP |   78006 | YES           | Bexar County | MAPD     | next     |    1025 | 4875364 |
 
-    @regressionUHC
+  
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
     #  | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |    1023 | 4805658 |
     #  | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |    1025 | 4875364 |
 
-    @regressionUHC @nextYear
+   
     Examples: 
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
       | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |    1023 | 4805658 |
@@ -947,3 +950,4 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
       | 00037 | UHC  |   78006 | NO            | Kendall County | MAPD     | next     |           2 |
+

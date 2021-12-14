@@ -34,14 +34,10 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
       | Next Year Plan Year    | <ny_planYear> |
     #Then the user validates the pharmacies available
     #  | Language | <language> |
-    And the user validate tooltips on filters
-      | Language                                   | <language>              |
-      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
-    And the user validates map section content
-    And the user validates show on map link
-    And the user validates get direction link
-    And the user validates more information content based on plan type
-    And the user validates view search PDF link
+    And the user validates map section contents
+    And the user validate show on map link
+    And the user validate more information content based on plan type
+    And the user validate view search PDF link
     And the user validates Front Matter PDF link
     And the user validates pharmacy widgets
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -53,7 +49,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
     #    Then the user validates the Pharmacies available
     #      | Language | <language> |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
     @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP @HPA
     Examples: 
@@ -104,7 +100,6 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
-    Then the user validates ITU, Home Infusion, LTC filter Message and anchor link
 
     @Pharmacy_Locator_ITU_HI_LTC_Messaging_AARP @regressionAARP
     Examples: 
