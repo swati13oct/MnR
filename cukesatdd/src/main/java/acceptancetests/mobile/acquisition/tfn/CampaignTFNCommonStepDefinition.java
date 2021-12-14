@@ -8,14 +8,17 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -25,6 +28,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.tfn.CampaignTFNPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.CampaignTFNPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -1321,6 +1325,44 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openURLNewTabUHC(url);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	}
+	
+	@Then("^the user fills all the details in MedsuppPage for TFN$")
+	public void user_fills_all_details_medsupp_Form_TFN(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipCode = memberAttributesMap.get("Zip Code");
+
+		CampaignTFNPageMobile tfnPage = (CampaignTFNPageMobile) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
+		boolean assertionToFailOrPass = false;
+
+		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
+				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("10001")
+								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+				"*** isMedsup4DOB Visible/Invisible : '" + isAddInfoLinkVisible + "' for zipCode : '" + zipCode + "'");
+
+		if (isAddInfoLinkVisible) {
+			tfnPage.addInfoAndMedSupFormTFN();
+		} else {
+			tfnPage.MedSupFormValidationTFN(DateOfBirth);
+
+			getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		}
 	}
 	
 	@Given("^the user is on UHC acquisition site from Campaign Traffic$")

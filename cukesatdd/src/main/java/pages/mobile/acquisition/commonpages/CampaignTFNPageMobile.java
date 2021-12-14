@@ -81,7 +81,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
 
-	@FindBy(xpath = "//div[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//a/h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	// @FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
@@ -177,10 +177,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
-	
+
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
-	
+
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
@@ -226,7 +226,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
 	private WebElement MaleGender;
 
-	//@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	// @FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
@@ -1876,6 +1876,17 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		String urlCheck = driver.getCurrentUrl();
 		String expectedURL = urlCheck.replace(prodURL, offlineprodURL);
 		System.out.println("**********Actual URL is displayed *************" + expectedURL);
+
+	}
+
+	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
+	private WebElement addYourInformation;
+
+	public void addInfoAndMedSupFormTFN() throws InterruptedException {
+		CheckPageLoad();
+		// CheckiPerseptions();
+		validate(addYourInformation, 30);
+		jsClickNew(addYourInformation);
 
 	}
 }

@@ -689,11 +689,11 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				+ "Expected='6' | Actual='" + distanceOptions.size() + "'", distanceOptions.size() == 6);
 		Select select = new Select(distanceDropDownField);
 		String actualSelectedDistance = select.getFirstSelectedOption().getText();
-		String expectedSelectedDistance = "15 miles";
+		String expectedSelectedDistance = "15 Miles";
 		Assertion.assertTrue(
 				"PROBLEM - default selected distance option is not as expected. " + "Expected='"
 						+ expectedSelectedDistance + "' | Actual='" + actualSelectedDistance + "'",
-				expectedSelectedDistance.equals(actualSelectedDistance));
+				expectedSelectedDistance.equalsIgnoreCase(actualSelectedDistance));
 		Assertion.assertTrue("PROBLEM - unable to locate distance option '1 mile'",
 				pharmacyValidate(distanceOption_1mile));
 		Assertion.assertTrue("PROBLEM - unable to locate distance option '2 miles'",

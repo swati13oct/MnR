@@ -1859,7 +1859,7 @@ public abstract class UhcDriver {
 						break;
 					} catch (NoSuchElementException e) {
 						try {
-							((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeButton[@name='Search']"))
+							((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeButton[@name='search']"))
 									.click();
 							break;
 						} catch (NoSuchElementException ne) {

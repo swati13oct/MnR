@@ -1574,6 +1574,32 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		} else
 			Assertion.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
 	}
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement Enrollbtn;
+	
+	
+	public void ClickEnrollbtn(String Enroll_flag){
+		if(Enroll_flag.equalsIgnoreCase("true")){
+			if(validateNew(Enrollbtn)){
+				jsClickNew(Enrollbtn);
+				waitForPageLoadSafari();
+				if (driver.getCurrentUrl().contains("welcome")) {
+					System.out.println("OLE Welcome Page displayed ");
+					driver.navigate().back();
+					System.out.println("Validation Passed - Enroll option is displayed and OLE Welclme page is displayed on Enroll Btn click");
+				}
+			}
+			else
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is NOT displayed <<<<<");
+		}
+		else{
+			if(!validate(Enrollbtn))
+				System.out.println("Validation Passed for Enroll option not displayed");
+			else if(validateNew(Enrollbtn))
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
+		}
+	}
 
 	public void validateStandardMailCopaySection() {
 		validateNew(CopaySection);

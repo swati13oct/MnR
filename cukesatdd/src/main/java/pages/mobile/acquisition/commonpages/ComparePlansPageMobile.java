@@ -1503,7 +1503,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
 	public WebElement viewAllplansButton;
 
-	@FindBy(css = "#addDrug")
+	@FindBy(id = "addDrug")
 	public WebElement addMyDrugsButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
@@ -1748,7 +1748,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	// START >>>>> F&F - Added Code for DCE flow - View Drug COsts from View Drug
 	// Info Modal
 
-	@FindBy(css = "button[dtmname$='View Drug Information Modal:Drug Cost Details']")
+	@FindBy(css = "a[dtmname$='Plan Compare:View Drug Information']")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
 	public void clickViewDrugInfoLinkForPlan(String planName) {
@@ -1825,13 +1825,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath(
-					"//*[contains(@class, 'accordion__content')]//*[contains(text(), '" + currentAddedDrug + "')]"));
+					"//*[(@id='editdruglist')]//*[contains(text(), '" + currentAddedDrug + "')]"));
+			
 //			WebElement DrugYouPay = driver
 //					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
 //							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
-					+ "//*[contains(text(), '" + currentAddedDrug + "')]//following::li[contains(text(),'$')]"));
+			WebElement DrugYouPay = driver.findElement(
+					By.xpath("(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
+							+ "//*[contains(text(), '" + currentAddedDrug
+							+ "')]//following::li[contains(text(),'$')]"));
 			// DrugYouPay.getText will get child element text as well in Safari browser
 			// which fails the scripts ahead
 			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {

@@ -103,19 +103,17 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " Mile";
 		else
 			distance = distance + " Miles";
-		sleepBySec(3);
+		//sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
 
-		sleepBySec(3);
-
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
-		
+
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		//validateNoresultsZipcodeError(zipcode);
+		// validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 
 		if (matcher.matches()) {
@@ -210,7 +208,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * } driver.close(); driver.switchTo().window(winHandleBefore); return timeStr;
 	 * }
 	 */
-    
+
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote = new ArrayList<String>();
 		Select dropdown = new Select(seletPlandropdown);
@@ -219,7 +217,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		for (int i = 1; i < plans.size(); i++) { // note: first item is 'Select a plan' so skip it
 			testNote.add("plan " + i + " is " + plans.get(i).getText());
 		}
-		return testNote;	
+		return testNote;
 	}
 
 	public void selectsPlanName(String planName) {
