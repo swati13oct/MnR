@@ -159,7 +159,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
     Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
-      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com| Password@1 |
+      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com| Password@2 |
 
   @dceImportDrugs_AuthMember
   Scenario Outline: To verify DCE  - Drug Import flow for Authenticated Member Profile
@@ -212,7 +212,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   @dceImportDrugs_AuthMember_AARP
     Examples:
       | site | zipCode | drug2  | planType | planName                                            | userName | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |authenticatedflag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true  |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@2 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true  |
 
 
   @dceImportDrugs_AuthMember_UHC
@@ -272,7 +272,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   @dceImportDrugs_AuthNonMember_AARP
     Examples:
       | site | zipCode | drug2  | planType | planName                                            | userName | password    | dob        | importZipCode | gender | drugFlag | providersFlag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 06/30/1948 | 06096         | F      | true     | true          |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@2 | 06/30/1948 | 06096         | F      | true     | true          |
 
 
   @dceImportDrugs_AuthNonMember_UHC
