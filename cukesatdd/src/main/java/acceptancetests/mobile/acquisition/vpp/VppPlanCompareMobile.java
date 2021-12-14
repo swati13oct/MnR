@@ -822,6 +822,14 @@ public class VppPlanCompareMobile {
 	/**
 	 * @toDo:the user validating email and print option in plan compare
 	 */
+	
+	@Then("^click on Show All button on plan compare page$")
+	public void click_on_Show_All_button() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.showAllButton();
+	}
+	
 	@Then("^the user validating email and print option in plan compare$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
@@ -4625,6 +4633,27 @@ public class VppPlanCompareMobile {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONDDisplayed();
+	}
+	
+	@Then("^Verify Dental Link text for third plan on plan Compare page$")
+	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.DentalLinkText();
+	}
+	
+	@Then("^validate text under additional benefits$")
+	public void validate_text_under_additional_benefits() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONTextAdditionalBenefit();
+	}
+	
+	@Then("^click on OON Toggle for additional benefits$")
+	public void click_on_OON_Toggle_for_additional_benefits() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.ClickOONToggle();
 	}
 
 	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
