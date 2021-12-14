@@ -2189,6 +2189,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("@@@Inside search text value Method@@@");
 		threadsleep(5);
 //		MobileMenuSiteSearch();
+		waitforElementNew(MenuMobile, 10);
 		openSiteSearchFromMenu();
 		CommonUtility.checkPageIsReadyNew(driver);
 		// sendkeysMobile(EnterSearch, sv);
@@ -3399,7 +3400,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(goToMemberSiteLink);
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(visitAARPLink);
+		//	validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
