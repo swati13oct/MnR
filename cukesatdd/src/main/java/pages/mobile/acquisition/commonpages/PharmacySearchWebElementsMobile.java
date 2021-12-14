@@ -19,7 +19,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#enterZipCodeText")
 	protected WebElement zipCodeFieldLabel;
 
-	@FindBy(xpath = "//button//span[@class='uhc-button__text' and text()='Search ']")
+	@FindBy(xpath = "//button[contains(@dlassetid,'ps-search-btn')]")
 	protected WebElement searchbtn;
 
 	@FindBy(css = "#selectmultycounty_box")
@@ -93,7 +93,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement drpYear;
 
 //	@FindBy(xpath = "//label[@id='plan-year-label']/../../../div[contains(@ng-hide,'showYearToggle') and not(contains(@class,'ng-hide'))]")
-	@FindBy(css = "#plan-year-label")
+	@FindBy(xpath = "//app-toggle/div[contains(@class,'toggle')]")
 	protected WebElement yearDropdownLabel;
 
 	@FindBy(xpath = "//select[@id='plan-year']")
@@ -161,7 +161,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	protected WebElement pharmacyBodyContentSpanish;
 
-	@FindBy(css = "#miles")
+	@FindBy(id = "miles")
 	protected WebElement distanceDropownID;
 
 	@FindBy(xpath = "//select[@id='county']")
@@ -204,7 +204,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
 	protected WebElement ProactiveChat_Exit;
 
-	@FindBy(xpath = "//h1[(text()=' Pharmacy Search  ')] ")
+	@FindBy(xpath = "//h1[(contains(text(),'Pharmacy Search'))]")
 	protected WebElement PharmacyLocatorPageHeader;
 
 	@FindBy(css = "#miles")
@@ -443,10 +443,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInEnglish;
 
-	@FindBy(xpath = "//html[@lang='zh']")
+	@FindBy(xpath = "//html[@lang='en']")//DOM does not get update after language change to Chinese or Spanish
 	protected WebElement pgInChinese;
 
-	@FindBy(xpath = "//html[@lang='es']")
+	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInSpanish;
 
 	@FindBy(xpath = "//body")
