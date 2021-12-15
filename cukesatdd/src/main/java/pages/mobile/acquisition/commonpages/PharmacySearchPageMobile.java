@@ -817,14 +817,20 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
 		ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(newTb.get(1));
+		if(newTb.size()>1)
+			driver.switchTo().window(newTb.get(1));
 		String actUrl = driver.getCurrentUrl();
 		Assertion.assertTrue(
 				"PROBLEM - '" + linkType + "' link on '" + widgetName + "' widget is not opening expected page.  "
 						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
 				actUrl.contains(expUrl));
-		driver.close(); // note: use driver back to go back to pharmacy locator page
-		driver.switchTo().window(newTb.get(0));
+		if(newTb.size()>1) {
+			driver.close();
+			driver.switchTo().window(newTb.get(0));
+		}
+		else {
+			driver.navigate().back();; // note: use driver back to go back to pharmacy locator page
+		}
 		// tbd Thread.sleep(2000); //note: keep for timing issue
 		// driver.navigate().refresh(); //note: added refresh since Safari has issues
 		// locating elements after navigate back
@@ -920,7 +926,9 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		System.out.println("Pharmacy Count Displayed : "+totalBefore);
 		String labelId = "";
 		validateNew(Filter);
+		scrollToView(Filter);
 		jsClickNew(Filter);
+		scrollToView(FilterApplyBtn);
 		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
 			labelId = "E-Prescribing";

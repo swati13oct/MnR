@@ -257,7 +257,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(), 'Apply')]")
 	protected WebElement FilterApplyBtn;
 
-	@FindBy(xpath = "//a[contains(@dtmname,'pharmacy locator:show on map')]")
+	@FindBy(xpath = "//span[contains(@class,'uhc-button_text') and contains(text(),'Show on Map')]")
 	protected List<WebElement> showonmap;
 
 	@FindBy(xpath = "//span[text()='View Results as PDF ']")
@@ -362,10 +362,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath = "//div[@class='']//div[@class='pharmacywidgets section']//*[contains(@class,'card-header')]//h2[contains(text(), 'Walgreens')]")
+	@FindBy(xpath = "//h3[contains(text(),'Walgreens ? Preferred Retail Pharmacy')]/../../..")
 	protected WebElement widget_walgreens;
 
-	@FindBy(xpath = "//div[@class='pharmacywidgets section']//*[contains(@dtmname,'pharmacy locator:preferred')]")
+	@FindBy(xpath = "//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
 	@FindBy(xpath = "//*[contains(@id, 'errorcontainer')]//*[contains(text(), 'no results')]")
@@ -383,10 +383,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'mail-order')]")
 	protected WebElement widget_prefMailServPhar_learnMore;
 
-	@FindBy(xpath = "//p[contains(@dtmname, 'preferred')]//following-sibling::p//a")
+	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	protected WebElement widget_prefRetPhaNet_estYurDrugCosts;
 
-	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segment') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]/../../../div[2]//a")
+	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a Walgreens preferred retail pharmacy')]")
 	protected WebElement widget_walgreens_estYurDrugCosts;
 
 	@FindBy(xpath = "//a[@dtmname='pharmacy locator:get directions']")
