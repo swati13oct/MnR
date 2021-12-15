@@ -40,6 +40,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 
 /**
@@ -224,7 +225,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(id = "distance")
+	@FindBy(id = "miles")
 	WebElement distanceDropownID;
 
 	@FindBy(id = "mapd_gi_div_eng")
@@ -1171,7 +1172,7 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 
-	public PharmacySearchPage planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+	public PharmacySearchPageNew planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
 		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
 		if(language.equalsIgnoreCase("English")){
 			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
@@ -1205,7 +1206,7 @@ public class PlanDetailsPage extends UhcDriver {
 		if (validateNew(distanceDropownID) && driver.getCurrentUrl().contains(language)) {
 			System.out.println("Pharmacy locator page for Language : "+language+" is loaded");
 			System.out.println("Current URL : "+driver.getCurrentUrl());
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		} else 
 			System.out.println("Pharmacy locator page not loaded");
 

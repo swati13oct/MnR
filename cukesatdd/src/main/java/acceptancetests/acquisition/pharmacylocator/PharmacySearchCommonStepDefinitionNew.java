@@ -19,6 +19,7 @@ import java.util.*;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -78,7 +79,27 @@ public class PharmacySearchCommonStepDefinitionNew {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateHeaderSection();
 	}
-	
+
+	@Then("^the user selects Chinese Language to translate$")
+	public void selectChinese() {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		// note: if english has plan year dropdown, other language should have it too
+		boolean expectedPlanYearDropdown = false;
+//		if (pharmacySearchPage.isPlanYear()) {
+//			expectedPlanYearDropdown = true;
+//		}
+		pharmacySearchPage = pharmacySearchPage.clickChinese();
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",
+				pharmacySearchPage != null);
+		pharmacySearchPage.validateLanguageChanges("Chinese");
+//		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
+//		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+//				expectedPlanYearDropdown == actualPlanYearDropdown);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Chinese");
+	}
+
 	/** user enters following details for pharmacy search */
 	@And("^the user enters following details for the pharmacy search$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable inputAttributes) {
@@ -196,7 +217,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
-		
+
  	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
@@ -363,12 +384,31 @@ public class PharmacySearchCommonStepDefinitionNew {
 		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 
-
-	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
-	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
+	/** Verifying the pharmacy search tool in Spanish language */
+	@Then("^the user selects Spanish Language to translate$")
+	public void selectSpanish() {
 		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage.validateITU_HS_LTC_Messaging();
+		pharmacySearchPage = pharmacySearchPage.selectPlanLanguage();
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
+				pharmacySearchPage != null);
+		pharmacySearchPage.validateLanguageChanges("Spanish");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
+	}
 
+	@Then("^the user clicks on the following language Pharmacy Directory Link$")
+	public void the_user_clicks_on_the_following_language_Pharmacy_Directory_Link(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Language = inputAttributesMap.get("Language");
+		String County = inputAttributesMap.get("County");
+		WebDriver testDriver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PlanDetailsPage vppPlanDetailsPage = new PlanDetailsPage(testDriver);
+		PharmacySearchPageNew pharmacySearchPage = vppPlanDetailsPage.planDetails_ClickPharmacyDirectoryforLanguage(Language, County);
+		if(null!=pharmacySearchPage) {
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		}
+		else
+			Assertion.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
 	}
 }

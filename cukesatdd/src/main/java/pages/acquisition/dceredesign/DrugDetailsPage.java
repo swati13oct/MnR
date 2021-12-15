@@ -680,8 +680,11 @@ public class DrugDetailsPage extends UhcDriver {
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Quantity Limit')]"));
 		List<WebElement> SevenDayDrugs = driver.findElements(By
 				.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Seven Day')]"));
-		List<WebElement> LADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
+		// Limited Access is no more availabel for any drug for 2022 plans.
+		//		List<WebElement> LADrugs = driver.findElements(By.xpath(
+//				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
 		List<WebElement> DLDrugs = driver.findElements(By.xpath(
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Dispensing Limits')]"));
 		if (Tier1Drugs.size() > 0) {
@@ -734,10 +737,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Drug text NOT Displayed in Your Drug Section!!!");
 
+/*
 		if (LADrugs.size() > 0) {
 			System.out.println("Total No. of Limited Access Drugs Added: " + LADrugs.size());
 		} else
 			Assertion.fail("Limited Access Drug text NOT Displayed in Your Drug Section!!!");
+*/
 
 		if (DLDrugs.size() > 0) {
 			System.out.println("Total No. of Dispensing Limits Drugs Added: " + DLDrugs.size());
@@ -767,8 +772,10 @@ public class DrugDetailsPage extends UhcDriver {
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Quantity Limit')]"));
 		WebElement SevenDayInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Seven Day')]"));
+/*
 		WebElement LAInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Limited Access')]"));
+*/
 		WebElement DLInfo = driver.findElement(By
 				.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Dispensing Limit')]"));
 		WebElement ST_PDF_Link = driver.findElement(
@@ -838,10 +845,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Limit Info NOT Displayed in Important Information Section !!!");
 
+/*
 		if (validateNew(LAInfo)) {
 			System.out.println("Limited Access Info Displayed in Important Information Section : " + LAInfo.getText());
 		} else
 			Assertion.fail("Limited Access Info NOT Displayed in Important Information Section  !!!");
+*/
 
 		if (validateNew(DLInfo)) {
 			System.out
@@ -1580,15 +1589,13 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
 		// !validate(LIS_CopayHeader) &&
-				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_Alert)) {
+				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
 			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
 			System.out.println("***** $0 Deductible for LIS Buydown *****");
 			System.out.println(LIS_Deductible.getText());
-			System.out.println("***** Page level Alert Displayed for LIS Buydown *****");
-			System.out.println(LIS_Alert.getText());
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");

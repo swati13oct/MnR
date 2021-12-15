@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * Functionality:DCE Acquisition
@@ -1813,7 +1814,9 @@ public class DCEStepDefinitionAARP {
 		planComparePage.validateEstimatedDrugCostForPlan(planName, Expected_Estimated_Drug_Cost);
 
 	}
+//Commenting out the following step as View Compare button is not displayed for Compare flow as of Dec 2021 release.
 
+/*
 	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_View_Plan_Compare_button_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
@@ -1827,6 +1830,7 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assertion.fail("VPP Plan Compare not loaded");
 	}
+*/
 
 	@Then("^the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_Back_to_Compare_link_and_validates_Plan_Compare_page() throws Throwable {
@@ -2619,12 +2623,11 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")
 	public void user_click_breadcrumb_on_get_started_page(String breadCrumb) {
-		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.clickReturnToPharamcySearch();
 
 	}
-
 
 	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
 	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Summary_Pharmacy_Page() throws Throwable {

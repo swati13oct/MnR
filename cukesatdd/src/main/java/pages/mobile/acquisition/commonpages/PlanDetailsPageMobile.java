@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.awt.AWTException;
@@ -1845,5 +1846,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		return null;
 	}
+
 
 }
