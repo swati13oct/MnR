@@ -6160,7 +6160,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6180,4 +6180,3 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 }
-

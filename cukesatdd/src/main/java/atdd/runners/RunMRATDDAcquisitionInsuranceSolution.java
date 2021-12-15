@@ -17,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regressionAARP")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionInsuranceSolution extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

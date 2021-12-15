@@ -34,7 +34,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user validates map section contents
     And the user validate show on map link
-    And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
     And click on DCE Link on Pharmacy Page
@@ -111,7 +110,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
     And the user validates map section contents
     And the user validate show on map link
-    And the user validate get direction link
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
@@ -154,7 +152,6 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
-    Then the user validates ITU, Home Infusion, LTC filter Message and anchor link
 
     @UATAARP03 @regressionAARP
     Examples: 
