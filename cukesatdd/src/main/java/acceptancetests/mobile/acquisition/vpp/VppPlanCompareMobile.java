@@ -75,7 +75,7 @@ public class VppPlanCompareMobile {
 		return loginScenario;
 	}
 
-	//AppiumDriver wd;
+	// AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -111,7 +111,7 @@ public class VppPlanCompareMobile {
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			String savedProvider = providerSearchPage.selectsProvider();
-			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+			getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY, savedProvider);
 //			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
@@ -728,7 +728,7 @@ public class VppPlanCompareMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 
 	}
-	
+
 	@And("^I select \"([^\"]*)\" plans to compare$")
 	public void i_select_plans_to_compare(String planType) throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPageMobile = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -742,7 +742,7 @@ public class VppPlanCompareMobile {
 		}
 
 	}
-	
+
 	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
 	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
 		VPPPlanSummaryPageMobile vppplansummarypageMobile = (VPPPlanSummaryPageMobile) loginScenario
@@ -822,14 +822,14 @@ public class VppPlanCompareMobile {
 	/**
 	 * @toDo:the user validating email and print option in plan compare
 	 */
-	
+
 	@Then("^click on Show All button on plan compare page$")
 	public void click_on_Show_All_button() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.showAllButton();
 	}
-	
+
 	@Then("^the user validating email and print option in plan compare$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
@@ -946,7 +946,7 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
+		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
@@ -2922,7 +2922,7 @@ public class VppPlanCompareMobile {
 		Assertion.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
 
 	}
-	
+
 	@Then("^the user clicks on compare plans button on plan details page and navigate to compare page$")
 	public void clicks__compare_plans_button_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
 		PlanDetailsPageMobile planDetailsPageMobile = (PlanDetailsPageMobile) getLoginScenario()
@@ -3023,7 +3023,6 @@ public class VppPlanCompareMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
-
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = null;
@@ -3047,7 +3046,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
 	}
-	
+
 	@Then("^the user quits the session$")
 	public void user_ends_current_session() throws Throwable {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -3926,12 +3925,13 @@ public class VppPlanCompareMobile {
 	public void user_performs_planSearch_in_aarp_sites(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -4013,7 +4013,7 @@ public class VppPlanCompareMobile {
 			break;
 		}
 	}
-	
+
 	@Then("^user saves all plans as favorite$")
 	public void user_saves_all_plans_as_favorite(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -4021,11 +4021,12 @@ public class VppPlanCompareMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String savePlanNames = memberAttributesMap.get("Test Plans");
@@ -4634,21 +4635,21 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONDDisplayed();
 	}
-	
+
 	@Then("^Verify Dental Link text for third plan on plan Compare page$")
 	public void Verify_Dental_Link_text_for_third_plan_on_plan_Compare_page() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.DentalLinkText();
 	}
-	
+
 	@Then("^validate text under additional benefits$")
 	public void validate_text_under_additional_benefits() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONTextAdditionalBenefit();
 	}
-	
+
 	@Then("^click on OON Toggle for additional benefits$")
 	public void click_on_OON_Toggle_for_additional_benefits() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4726,7 +4727,7 @@ public class VppPlanCompareMobile {
 
 		}
 	}
-	
+
 	@Then("^validate all providers are covered$")
 	public void validate_all_providers_are_covered() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4749,7 +4750,7 @@ public class VppPlanCompareMobile {
 
 		planComparePage.validateDoctors();
 	}
-	
+
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
 	public void clickONEdityourdocits() throws Exception {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4882,8 +4883,8 @@ public class VppPlanCompareMobile {
 //			System.out.println("Selected All MAPD plans for Plan Compare");
 //		}
 //		else
-		plansummaryPage.checkPlansForCompare(Counter,planType);
-		
+		plansummaryPage.checkPlansForCompare(Counter, planType);
+
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -5009,7 +5010,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateViewLocation();
 	}
-	
+
 	@When("^the user performs plan search using Standalone information in EnrollPage$")
 	public void Standalone_Shop_details_in_aarp_site_Enroll(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -5041,7 +5042,7 @@ public class VppPlanCompareMobile {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@When("^the user performs plan search using Shop Pages$")
 	public void Standalone_zipcode_details(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -5073,16 +5074,17 @@ public class VppPlanCompareMobile {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@When("^the user performs plan search using Shop Pages for DSNP Plans$")
 	public void Standalone_zipcode_details_dsnp_plans(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -5109,22 +5111,21 @@ public class VppPlanCompareMobile {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
 	public void verify_all_doctors_covered() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateAllDoctors();
 	}
-	
+
 	@Then("Verify Change Zip Code Link is displayed on compare Page")
 	public void verify_Change_Zip_Code() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChangeZipCode();
 	}
-	
-	
+
 	@When("^the user performs zip search using following information on Plan Compare Page$")
 	public void zipcode_Search_Plan_compare(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

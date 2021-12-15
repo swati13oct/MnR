@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -1364,6 +1365,18 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		WebElement componentCodeText = driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]"));
 		Assertion.assertTrue("Component code is not shown on Visitor Profile Page !", validateNew(componentCodeText));
 	}
+	
+//	@FindBy(xpath = "//span[contains(text(),'Get')]")
+//    private WebElement btnPREGetStarted;
+//	
+//	@FindBy(xpath = "//a[contains(text(),'Import')]")
+//    private WebElement lnkImport;
+//	
+//	public void validateMSSP4ProfilePage(String componentCode) {
+//		Assert.assertTrue(btnPREGetStarted.isDisplayed());
+//		Assert.assertTrue(lnkImport.isDisplayed());
+//		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'"+componentCode+"')]")).isDisplayed());
+//	}
 
 	public void removeMSPlans(String plans) {
 		try {
