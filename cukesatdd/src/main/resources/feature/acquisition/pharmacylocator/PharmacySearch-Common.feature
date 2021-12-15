@@ -133,7 +133,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #Then the user validates the Pharmacies available
     #  | Language | English |
     Then the user validate error message displayed when filter results in no match
-    Then the user validate the question widget
+    Then the user validates the question widget
 
     #@pharmacylocatorAARP02a\
   @PharmacyLocatorCommonAARP02a @regressionAARP
