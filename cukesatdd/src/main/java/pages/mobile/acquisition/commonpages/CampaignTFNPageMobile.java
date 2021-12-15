@@ -81,7 +81,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
 
-	@FindBy(xpath = "//a/h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//div[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	// @FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
