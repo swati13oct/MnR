@@ -478,5 +478,5 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | UHC  |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | UHC  |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
       | UHC  |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
