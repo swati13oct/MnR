@@ -79,14 +79,14 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     # | Zip Code    | <zipcode>    |
     #Then the user validates PSC code
     #| PSC Code | <Precedence1PSC> |
-    # When the user performs plan search using Shop Pages for campaign Links
-    #  | Zip Code        | <zipcode>         |
-    # | County Name     | <county>          |
-    #| Is Multi County | <isMultutiCounty> |
-    #And the user selects plan year
-    # | Plan Year | <planyear> |
+    When the user performs plan search using Shop Pages for campaign Links
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     #Then the user navigates to plan tab for any plan
-    # | Plan Type | <MAplantype> |
+    #| Plan Type | <MAplantype> |
     Then the user validates TFN Number
       | TFN No    | <TFNNo2>   |
       | TFN Xpath | <TFNxpath> |
