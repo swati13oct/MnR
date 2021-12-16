@@ -19,10 +19,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -226,6 +230,18 @@ public class DCEStepDefinitionAARPMobile {
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateNBAModal();
+	}
+	
+	@Then("the user clicks edit drugs on Compare page to land on Build Drug List Page")
+	public void the_user_clicks_edit_drugs_on_compare_page_to_land_on_build_drug_list_page() {
+		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		DrugCostEstimatorPageMobile buildYourDrugList = planComparepage.clickonEdityourDrugs();
+		if (null != buildYourDrugList) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugList);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
+
 	}
 
 	@Then("^the user validates OptumRx consistently displays on DCE Details - Pharmacy Page$")
