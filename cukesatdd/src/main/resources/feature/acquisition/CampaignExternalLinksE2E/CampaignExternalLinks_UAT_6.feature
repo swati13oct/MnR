@@ -74,6 +74,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | current  | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'invoca_swap tel ng-binding')]) |         1 |          2 | (//a[contains(@class, 'invoca_swap tel')]) | 8000158 | 584 MAIN AVE NORWALK | Albany | New York | New York County | no             |
 
   #----------Repeat the steps for PDP Plan-----------------#
+  @CampaignExternalLink_E2E_Scenario_Six_PDP
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links for PDP Plan Type.
     Given user is on campaign external Links page
       | External Link | <externallink> |
@@ -142,6 +143,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | current  | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'invoca_swap tel ng-binding')]) |         1 |          2 | (//a[contains(@class, 'invoca_swap tel')]) | 8000158 | 584 MAIN AVE NORWALK | Albany | New York | New York County | no             |
 
   #----------Repeat the steps for SNP Plan-----------------#
+  @CampaignExternalLink_E2E_Scenario_Six_SNP
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links for SNP Plan Type.
     Given user is on campaign external Links page
       | External Link | <externallink> |
@@ -193,6 +195,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | Preferred Medicare Assist Plan 1 (HMO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'invoca_swap tel ng-binding')]) |         1 |          2 | (//a[contains(@class, 'invoca_swap tel')]) | 8000158 | 584 MAIN AVE NORWALK | Albany | New York | New York County | no             |
 
   #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
+  @CampaignExternalLink_E2E_Scenario_Six_MS
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links For MS Plan and Privacy Link.
     Given user is on campaign external Links page
       | External Link | <externallink> |
