@@ -877,7 +877,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
-	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "None";
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.21.0";

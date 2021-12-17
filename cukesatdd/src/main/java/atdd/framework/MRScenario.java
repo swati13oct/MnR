@@ -307,13 +307,13 @@ public class MRScenario {
 
 		sauceLabsMobileTunnelIdentifier = (null == System
 				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER)
-				? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
-				: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
+						? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
+						: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
 
 		appiumVersion = mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: (null == props ? System.getProperty(CommonConstants.APPIUM_VERSION)
-				: props.get(CommonConstants.APPIUM_VERSION));
+						: props.get(CommonConstants.APPIUM_VERSION));
 
 		flagSmith = null != System.getProperty(CommonConstants.FLAGSMITH)
 				? Boolean.parseBoolean(System.getProperty(CommonConstants.FLAGSMITH))
@@ -325,7 +325,7 @@ public class MRScenario {
 				: null != props ? props.get(CommonConstants.FLAGSMITH_USER) : "";
 		System.out.println("Flagsmith user is " + flagSmithUser);
 
-		//If planYear is empty or null, it will be set in openApplicationURL
+		// If planYear is empty or null, it will be set in openApplicationURL
 		planYear = null != System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				? System.getProperty(VPPCommonConstants.PLAN_YEAR)
 				: null != props ? props.get(VPPCommonConstants.PLAN_YEAR) : "";
@@ -671,18 +671,17 @@ public class MRScenario {
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
-				//capabilities.setCapability("parent-tunnel", "sauce_admin");
+				// capabilities.setCapability("parent-tunnel", "sauce_admin");
 				if (environment.equals("stage") || environment.equals("offline") || environment.equals("prod")) {
 					capabilities.setCapability("parent-tunnel", "");
 					capabilities.setCapability("tunnelIdentifier", "");
 				}
-				
-				else
-				{
+
+				else {
 					capabilities.setCapability("parent-tunnel", "optumtest");
 					capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
 				}
-				
+
 				// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
 				capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 
@@ -797,7 +796,7 @@ public class MRScenario {
 
 	/**
 	 * @author Murali - mmurugas This method will invoke the Appium driver for
-	 * Mobile automation
+	 *         Mobile automation
 	 */
 	public AppiumDriver getMobileDriver() {
 		if (props == null) {
@@ -810,6 +809,8 @@ public class MRScenario {
 			if (System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) != null)
 				sauceLabsMobileTunnelIdentifier = System.getenv(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER);
 		}
+		
+		
 		System.out.println("Launching Device : " + mobileDeviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -822,8 +823,8 @@ public class MRScenario {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Either Optum-Prd or Optum-Stage tunnels to be used
 		System.out.println("sauceLabsMobileTunnelIdentifier : " + sauceLabsMobileTunnelIdentifier);
-		capabilities.setCapability("parentTunnel", "optumtest");
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		//capabilities.setCapability("parentTunnel", "optumtest");
+		//capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -842,6 +843,15 @@ public class MRScenario {
 		capabilities.setCapability("appiumVersion", appiumVersion);
 		capabilities.setCapability("forceMjsonwp", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
+		if (environment.equals("stage") || environment.equals("offline") || environment.equals("prod")) {
+			capabilities.setCapability("parentTunnel", "optumtest");
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
+
+		else {
+			capabilities.setCapability("parentTunnel", "optumtest");
+			capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+		}
 
 		try {
 
@@ -930,14 +940,17 @@ public class MRScenario {
 
 	private String getFlagsmithApplicationUrl(String site) {
 		switch (MRScenario.environment.toLowerCase()) {
-			case "stage-0":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_STAGE0_AARP_URL : MRConstants.FLAGSMITH_STAGE0_UHC_URL;
-			case "offline":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_OFFLINE_PROD_AARP_URL : MRConstants.FLAGSMITH_OFFLINE_PROD_UHC_URL;
-			case "prod":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_PROD_AARP_URL : MRConstants.FLAGSMITH_PROD_UHC_URL;
-			default:
-				return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+		case "stage-0":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_STAGE0_AARP_URL
+					: MRConstants.FLAGSMITH_STAGE0_UHC_URL;
+		case "offline":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_OFFLINE_PROD_AARP_URL
+					: MRConstants.FLAGSMITH_OFFLINE_PROD_UHC_URL;
+		case "prod":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_PROD_AARP_URL
+					: MRConstants.FLAGSMITH_PROD_UHC_URL;
+		default:
+			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
 		}
 	}
 
@@ -946,7 +959,6 @@ public class MRScenario {
 		driver.get(flagSmithURL);
 		return new FlagsmithLoginPage(driver);
 	}
-
 
 	public String getSystemDateForAEP(String systemDateUrl) {
 		String systemDate = null;
@@ -961,8 +973,10 @@ public class MRScenario {
 
 				JSONObject dataObj = responseJson.getJSONObject("data");
 				systemDate = dataObj.get("systemDate").toString().split(" ")[0];
-				/*int lastIndex = systemDate.lastIndexOf("/");
-				systemDate = systemDate.substring(0, lastIndex);*/
+				/*
+				 * int lastIndex = systemDate.lastIndexOf("/"); systemDate =
+				 * systemDate.substring(0, lastIndex);
+				 */
 			}
 
 		} catch (IOException e) {
@@ -976,17 +990,19 @@ public class MRScenario {
 
 	private String getSystemAPIUrl(String site) {
 		switch (MRScenario.environment.toLowerCase()) {
-			case "stage-0":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.STAGE0_AARP_SYSTEM_DATE_URL : MRConstants.STAGE0_UHC_SYSTEM_DATE_URL;
-			case "offline":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.OFFLINE_PROD_AARP_SYSTEM_DATE_URL : MRConstants.OFFLINE_PROD_UHC_SYSTEM_DATE_URL;
-			case "prod":
-				return site.equalsIgnoreCase("AARP") ? MRConstants.PROD_AARP_SYSTEM_DATE_URL : MRConstants.PROD_UHC_SYSTEM_DATE_URL;
-			default:
-				return site.equalsIgnoreCase("AARP") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.UHC_SYSTEM_DATE_URL;
+		case "stage-0":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.STAGE0_AARP_SYSTEM_DATE_URL
+					: MRConstants.STAGE0_UHC_SYSTEM_DATE_URL;
+		case "offline":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.OFFLINE_PROD_AARP_SYSTEM_DATE_URL
+					: MRConstants.OFFLINE_PROD_UHC_SYSTEM_DATE_URL;
+		case "prod":
+			return site.equalsIgnoreCase("AARP") ? MRConstants.PROD_AARP_SYSTEM_DATE_URL
+					: MRConstants.PROD_UHC_SYSTEM_DATE_URL;
+		default:
+			return site.equalsIgnoreCase("AARP") ? MRConstants.AARP_SYSTEM_DATE_URL : MRConstants.UHC_SYSTEM_DATE_URL;
 		}
 	}
-
 
 	private String getPlanYear(String site) {
 		String planYear;
@@ -1010,18 +1026,20 @@ public class MRScenario {
 
 	public Object openApplicationURL(WebDriver driver, String site) {
 
-		//Commenting for now
-		/*if (StringUtils.isEmpty(planYear)) {
-			planYear = getPlanYear(site);
-		}
-		System.out.println("Plan Year selected " + planYear);*/
+		// Commenting for now
+		/*
+		 * if (StringUtils.isEmpty(planYear)) { planYear = getPlanYear(site); }
+		 * System.out.println("Plan Year selected " + planYear);
+		 */
 
 		if (flagSmith) {
 			FlagsmithLoginPage flagsmithLoginPage = openFlagSmithLoginPage(driver, site);
 			return flagsmithLoginPage.startFlagSmithUserTest(flagSmithUser);
 		} else {
 			String driverType = driver.getClass().toString().toUpperCase();
-			return driverType.contains("IOS") || driverType.contains("ANDROID") ? new AcquisitionHomePageMobile(driver, site) : new AcquisitionHomePage(driver, site);
+			return driverType.contains("IOS") || driverType.contains("ANDROID")
+					? new AcquisitionHomePageMobile(driver, site)
+					: new AcquisitionHomePage(driver, site);
 		}
 	}
 
