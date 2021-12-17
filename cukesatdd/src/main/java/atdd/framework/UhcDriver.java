@@ -788,7 +788,7 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
-		scrollToView(Element);
+		//scrollToView(Element);
 		jsClickNew(Element);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1859,7 +1859,7 @@ public abstract class UhcDriver {
 						break;
 					} catch (NoSuchElementException e) {
 						try {
-							((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeButton[@name='Search']"))
+							((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypeButton[contains(@name,'search')]"))
 									.click();
 							break;
 						} catch (NoSuchElementException ne) {

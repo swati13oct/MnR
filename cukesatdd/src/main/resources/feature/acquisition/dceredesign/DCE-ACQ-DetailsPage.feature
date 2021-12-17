@@ -300,9 +300,9 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     @dce_DrugDetailsNonBuyDownLIS_AARP @regressionAARP
     Examples: 
       | drug1  | drug2   | zipCode | planType | planName                                                   | site |
-      | Fanapt | Lipitor |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP |
+      | Fanapt | Lipitor |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | AARP |
 
     @dce_DrugDetailsNonBuyDownLIS_UHC @regressionUHC
     Examples: 
       | drug1  | drug2   | zipCode | planType | planName                                                   | site |
-      | Fanapt | Lipitor |   78006 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  |
+      | Fanapt | Lipitor |   78006 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  |
