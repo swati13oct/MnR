@@ -18,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 				tags = "@regressionAARP",
 				dryRun = false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)

@@ -17,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@HPATFN", dryRun=false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
