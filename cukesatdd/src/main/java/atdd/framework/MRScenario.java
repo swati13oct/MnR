@@ -850,7 +850,7 @@ public class MRScenario {
 
 		else {
 			capabilities.setCapability("parentTunnel", "optumtest");
-			capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		}
 
 		try {
