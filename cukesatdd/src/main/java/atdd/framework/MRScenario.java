@@ -844,8 +844,8 @@ public class MRScenario {
 		capabilities.setCapability("forceMjsonwp", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		if (environment.equals("stage") || environment.equals("offline") || environment.equals("prod")) {
-			capabilities.setCapability("parentTunnel", "optumtest");
-			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+			capabilities.setCapability("parentTunnel", "");
+			capabilities.setCapability("tunnelIdentifier", "");
 		}
 
 		else {
