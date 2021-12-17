@@ -425,7 +425,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     When user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
-    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+    Then the message "Mail service pharmacies only provide a 3-month supply length for eligible drugs. All eligible drugs will need to be filled for a 3-month supply." should be displayed on change pharmacy modal
     And user verify the default distance on change pharmacy modal
     When user sort the pharmacy list by "A to Z"
     Then pharmacy list should be displayed in ascending order
@@ -446,7 +446,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     When user clicks on Keep Using This Pharmacy link on change pharmacy modal
     When user clicks on change pharmacy link from summary page
     When user selects Preferred mail order pharmacy
-    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+    Then the message "Mail service pharmacies only provide a 3-month supply length" should be displayed on change pharmacy modal
     And user verify the default distance on change pharmacy modal
     Then the user selects Mail Pharmacy and returns to DCE Summary page
     When user clicks on change pharmacy link from summary page
