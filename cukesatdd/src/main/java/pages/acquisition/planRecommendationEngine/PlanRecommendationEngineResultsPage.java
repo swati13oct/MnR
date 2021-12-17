@@ -2056,7 +2056,8 @@ public void validateDrugProvider() {
 	ArrayList<String> vpdrugs = new ArrayList<String>();
 	ArrayList<String> vpProviders = new ArrayList<String>();
 	String curID = String.valueOf(Thread.currentThread().getId());
-	DrugsInPRE = CommonConstants.PRE_Drugs.get(String.valueOf(Thread.currentThread().getId()));
+	threadsleep(2000);
+	DrugsInPRE = CommonConstants.PRE_Drugs.get(curID);
 	System.out.println("**** Current Thread ID is - "+curID+" Drugs in PRE "+DrugsInPRE+" ****");
 //	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));

@@ -589,9 +589,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		System.out.println("Validating " + page + " page Continue button functionality");
 		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
 		threadsleep(2000);
-		String Msg1 = docWarningMsg.get(0).getText().trim();
+		String Msg1 = docWarningMsg.get(0).getText().trim(); //Added for Feb. feature
 		String Msg2 = docWarningMsg.get(1).getText().trim();
-		Assert.assertTrue(Msg1.contains("Edit your list"),"Edit your list is not displaying in Doctor popup");
+		Assert.assertTrue(Msg1.contains("Edit your list"),"Edit your list is not displaying in Doctor popup"); 
 		Assert.assertTrue(Msg2.contains("Continue"),"Continue is not displaying in Doctor popup");
 		threadsleep(2000);
 		jsClickNew(modalContinuedoctors);

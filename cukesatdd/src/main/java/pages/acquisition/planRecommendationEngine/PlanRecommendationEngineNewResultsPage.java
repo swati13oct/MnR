@@ -765,7 +765,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
 			scrollToView(DocTitle);
 			planName = MSPlanName.getText().trim();
-			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)"));
+			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
 			jsClickNew(viewModel);
 			threadsleep(2000);
 
@@ -804,9 +804,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	public void verifyDrugShowMore(String planName, String drugName) {
 		int planIndex = findPlan(planName,false);
-		WebElement DocTitle = plantiles.get(planIndex)
-				.findElement(By.cssSelector("div[class*='providerSection'] h3"));
-		scrollToView(DocTitle);
+		WebElement DrugTitle = plantiles.get(planIndex)
+				.findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+		scrollToView(DrugTitle);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
