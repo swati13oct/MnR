@@ -26,6 +26,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -388,7 +389,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 
-	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
@@ -398,7 +399,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public List<WebElement> loadingBlock;
 
 	@FindBy(id = "msVppDOB")
+	//@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
 	private WebElement DOB;
+
+	@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
+	private WebElement DOB1;
 
 	@FindBy(id = "mpaed-month")
 	private WebElement monthDrpDwnPartA;
@@ -642,10 +647,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	WebElement ViewPlanMedSupPage;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
+	//@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
 	private WebElement femaleGender;
 
+	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
+
+	private WebElement femaleGender1;
+
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
+//@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[2]")
 	private WebElement MaleGender;
+
+	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[2]")
+	private WebElement MaleGender1;
 
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 	private WebElement medicareGuidePopup;
@@ -691,6 +705,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
 	private WebElement CoverageMedicaid;
 
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[4]")
+	private WebElement LostCoverage;
+
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
 	private WebElement CoveragePartc;
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
@@ -706,7 +723,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//label[text()='No'])[1]")
 	private WebElement CoverageVerification2;
-	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	//@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	@FindBy(xpath = "(//label[text()='No'])[2]")
 	private WebElement CoverageVerificationAcknowledge;
 
 	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
@@ -1047,6 +1065,93 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'swiper-container')]//div[contains(@class,'plan-name')]")
 	private WebElement planListContainerMSPlans;
+
+
+	@FindBy(xpath = "//*[@for='KidneyProblem_2']")
+	private WebElement kidneyProblem;
+
+	@FindBy(xpath = "//*[@for='EligibilityAdmitToHospPast90Days_2']")
+	private WebElement Eligibility;
+
+	@FindBy(xpath = "//*[@for='NursingFacility_2']")
+	private WebElement NursingFacility;
+
+	@FindBy(xpath = "//*[@for='ESRD_2']")
+	private WebElement ESRD;
+
+	@FindBy(xpath = "//*[@for='EligibilitySurgery_2']")
+	private WebElement EligibilitySurgery;
+
+	@FindBy(xpath = "//*[@for='atrial_2']")
+	private WebElement atrial;
+
+	@FindBy(xpath = "//*[@for='ArteryorVeinBlockage_2']")
+	private WebElement artery;
+
+	@FindBy(xpath = "//*[@for='PeripheralVascularDisease_2']")
+	private WebElement peripheral;
+
+
+	@FindBy(xpath = "//*[@for='Cardiomyopathy_2']")
+	private WebElement cardio;
+
+	@FindBy(xpath = "//*[@for='CongestiveHeartFailure_2']")
+	private WebElement CongestiveHeartFailure;
+
+	@FindBy(xpath = "//*[@for='CoronaryArteryDisease_2']")
+	private WebElement CoronaryArtery;
+
+
+	@FindBy(xpath = "//*[@for='ChronicLungDisease_2']")
+	private WebElement ChronicLungDisease;
+
+	@FindBy(xpath = "//*[@for='ChronicKidneyDisease_2']")
+	private WebElement ChronicKidneyDisease;
+
+	@FindBy(xpath = "//*[@for='Diabetes_2']")
+	private WebElement Diabetes;
+
+
+	@FindBy(xpath = "//*[@for='Cancer_2']")
+	private WebElement Cancer;
+
+	@FindBy(xpath = "//*[@for='CirrhosisDisease_2']")
+	private WebElement CirrhosisDisease;
+
+	@FindBy(xpath = "//*[@for='macular_2']")
+	private WebElement macular;
+
+
+	@FindBy(xpath = "//*[@for='multiple_sclerosis_2']")
+	private WebElement multiple_sclerosis;
+
+	@FindBy(xpath = "//*[@for='rheumatoid_2']")
+	private WebElement rheumatoid;
+
+	@FindBy(xpath = "//*[@for='nervous_condition_2']")
+	private WebElement nervouscondition;
+	@FindBy(xpath = "//*[@for='EligibilityHeartAttackTIAStroke_2']")
+	private WebElement EligibilityHeartAttack;
+	@FindBy(xpath = "//*[@for='TobaccoUse_2']")
+	private WebElement Tobacco;
+
+	@FindBy(xpath = "//*[@for='MedicaidCovered_2']")
+	private WebElement MedicaidCovered;
+
+
+	@FindBy(xpath = "//*[@for='ExistingMedicare_2']")
+	private WebElement ExistingMedicare;
+
+	@FindBy(xpath = "//*[@for='ExistMedSupp_2']")
+	private WebElement ExistMedSupp;
+
+	@FindBy(xpath = "//*[@for='OtherInsCoverage_2']")
+	private WebElement OtherInsCoverage;
+
+	@FindBy(xpath = "//*[@for='CpaSignatureInd']")
+	private WebElement CpaSignatureInd;
+
+
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -4684,15 +4789,48 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
+	@FindBy(xpath = "//*[@id='part-b-month']")
+	private WebElement PartBMonth;
 
+	@FindBy(xpath = "//*[@id='part-b-year']")
+	private WebElement PartByear;
+
+	@FindBy(xpath = "//*[@id='part-b-month']//option[2]")
+	private WebElement PartBMonthDropDown;
+
+	@FindBy(xpath = "//*[@id='part-b-year']//option[2]")
+	private WebElement PartByearDropDown;
+
+	@FindBy(xpath = "//*[@id='plan-start-date']")
+	private WebElement PlanstartDate;
+	@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
+	private WebElement ContinueApplication;
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-		insuredStatus.click();
+
+
+
+		DOB1.sendKeys("10111952");
+		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
+		jsClickNew(MaleGender1);
+		Thread.sleep(2000);
+	//	jsClickNew(PartBMonth);
+		String PartBMonth_Displayed = PartBMonth.getAttribute("value");
+		String PartByear_Displayed = PartByear.getAttribute("value");
+		System.out.println("part_A_Month_Displaye Displayed : "+PartBMonth_Displayed);
+		System.out.println("part_A_Year_Displaye Displayed : "+PartByear_Displayed);
+//		jsClickNew(PartBMonthDropDown);
+//		jsClickNew(PartByear);
+//		jsClickNew(PartByearDropDown);
+jsClickNew(ContinueApplication);
+
+	//	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+//		insuredStatus.click();
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -4746,8 +4884,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		//Added line for Birthday
-		jsClickNew(nextButton);
-		jsClickNew(BirthdayEnrollment);
+		//jsClickNew(nextButton);
+		jsClickNew(LostCoverage);
+		//jsClickNew(BirthdayEnrollment);
 		//jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
@@ -4785,6 +4924,66 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(CoverageVerificationAcknowledge);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		//jsClickNew(paymentOption);
+
+
+
+		jsClickNew(kidneyProblem);
+		jsClickNew(nextButton);
+		jsClickNew(Eligibility);
+		jsClickNew(NursingFacility);
+		jsClickNew(ESRD);
+		jsClickNew(EligibilitySurgery);
+
+		jsClickNew(nextButton);
+
+		jsClickNew(atrial);
+		jsClickNew(artery);
+		jsClickNew(peripheral);
+		jsClickNew(cardio);
+		jsClickNew(CongestiveHeartFailure);
+		jsClickNew(CoronaryArtery);
+
+		jsClickNew(ChronicLungDisease);
+		jsClickNew(ChronicKidneyDisease);
+		jsClickNew(Diabetes);
+
+
+		jsClickNew(Cancer);
+		jsClickNew(CirrhosisDisease);
+		jsClickNew(macular);
+
+
+		jsClickNew(multiple_sclerosis);
+		jsClickNew(rheumatoid);
+		jsClickNew(nervouscondition);
+		jsClickNew(EligibilityHeartAttack);
+
+
+		jsClickNew(nextButton);
+		jsClickNew(nextButton);
+
+
+
+		jsClickNew(Tobacco);
+		jsClickNew(nextButton);
+		Thread.sleep(5);
+		jsClickNew(nextButton);
+		jsClickNew(Tobacco);
+		jsClickNew(nextButton);
+		jsClickNew(nextButton);
+		jsClickNew(MedicaidCovered);
+		jsClickNew(nextButton);
+		jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+		jsClickNew(ExistMedSupp);
+		jsClickNew(nextButton);
+
+		jsClickNew(OtherInsCoverage);
+		jsClickNew(nextButton);
+
+		jsClickNew(CpaSignatureInd);
+		jsClickNew(nextButton);
 		jsClickNew(paymentOption);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
