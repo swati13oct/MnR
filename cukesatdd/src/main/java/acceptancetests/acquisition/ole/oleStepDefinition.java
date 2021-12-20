@@ -284,7 +284,6 @@ public class oleStepDefinition {
 	/**
 	 * @author sdwaraka To start Enroll Now and land on Welcome Page from Plan
 	 *         Details Page of VPP
-	 * @param planAttributes
 	 * @throws Throwable
 	 */
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
@@ -390,7 +389,7 @@ public class oleStepDefinition {
 	/**
 	 * @author sdwaraka To Validate the Plan Details carried forward from VPP on
 	 *         Welcome Page of VPP
-	 * @param planAttributes
+
 	 * @throws Throwable
 	 */
 	@Then("^the user validates the Plan details on OLE$")
@@ -2171,7 +2170,7 @@ public class oleStepDefinition {
 	}
 
 	/**
-	 * @param planName
+
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in
 	 *                UHC VPP page are same
 	 */
@@ -2229,7 +2228,7 @@ public class oleStepDefinition {
 	 */
 
 	/**
-	 * @param planName
+
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in AARP VPP page are same
 	 */
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed$")
@@ -2292,7 +2291,7 @@ public class oleStepDefinition {
 	 * 
 	 * To Validate the OLE WELCOME Page Marketing bullets
 	 * 
-	 * @param planAttributes
+
 	 * @throws Throwable
 	 */
 	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
@@ -3322,6 +3321,7 @@ public class oleStepDefinition {
 			welcomePage.ValidateFooterEnrollmentChecklistLink();
 			welcomePage.ValidateFooterListaVerificationLink();
 			welcomePage.ValidateFooterFitBitLink();
+			welcomePage.ValidateFooterMedicaidLink();
 		}
 		else if(plantype.contentEquals("PDP")){
 			welcomePage.ValidateFooterExtrahelpLink();
