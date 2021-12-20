@@ -639,7 +639,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//select[@id='language']"));
+		WebElement languageDropDown = driver.findElement(By.id("language"));
 //
 //		String dropDownOptionText = languageDropDown
 //				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()

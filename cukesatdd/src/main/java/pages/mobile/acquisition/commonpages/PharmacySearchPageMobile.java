@@ -931,54 +931,19 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		scrollToView(FilterApplyBtn);
 		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "E-Prescribing";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "电子处方";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "E-prescripción";
+			labelId = "E-Prescribing";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Home Infusion and Specialty";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "家庭输液与专业";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Infusión a domicilio y medicamentos de especialidad";
+			labelId = "Home Infusion";
 		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Indian/Tribal/Urban";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "印第安人 / 部落 / 都市";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Servicio de salud indígena, tribal o indígena urbano";
+			labelId = "Indian/Tribal/Urban";
 		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Long-term care";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "長期照護";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Cuidado a largo plazo";
+			labelId = "Long-Term";
 		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Mail Order Pharmacy";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "OptumRx 優先郵購遞送到府";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Entrega a domicilio de pedidos por correo en farmacia preferida a través de OptumRx";
+			labelId = "Mail Service";
 		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Open 24 hours";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "24 小時營業";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Abierta las 24 horas";
+			labelId = "Open 24 hours";
 		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			if(driver.getCurrentUrl().contains("English"))
-				labelId = "Retail Pharmacy";
-			else if(driver.getCurrentUrl().contains("Chinese"))
-				labelId = "零售藥房 (100 天)";
-			else if(driver.getCurrentUrl().contains("Spanish"))
-				labelId = "Farmacia de venta al por menor (100 días)";
+			labelId = "Retail Pharmacy";
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
