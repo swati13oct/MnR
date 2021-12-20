@@ -1768,4 +1768,59 @@ public class CampaignTFNPage extends UhcDriver {
 
 		jsClickNew(ms3BackToAllPlans);
 	}
+	
+	public HashMap<String, String> retrieveTFNcookieLP() {
+		System.out.println("Current URL - " + driver.getCurrentUrl());
+		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
+		System.err.println(cookietfn);
+		String str = cookietfn.toString();
+		System.out.println("TFN Cookie Value - " + str);
+		/*
+		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
+		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 */
+
+		String[] arrStr = str.split(",");
+		/*String[] arrOfStr = arrStr[0].split(";");
+		/*
+		 * if (str.contains(",")) { arrOfStr = str.split(","); }
+		 */
+		String PSC_Code;
+		String FedTFN;
+		String MedSuppTFN;	
+		String SRC_Code;
+
+		/*for (String a : arrOfStr)
+
+		*	System.out.println(a);
+		* String PSC_Code_Str = arrOfStr[0];
+		* String[] arrStr_1 = PSC_Code_Str.split("=");*/
+
+		PSC_Code = arrStr[0];
+		FedTFN = arrStr[2];
+		MedSuppTFN = arrStr[3];
+		SRC_Code = arrStr[4];
+
+		System.out.println("Campaign PSC code - " + PSC_Code);
+		System.out.println("Source code - " + SRC_Code);
+		System.out.println("Federal TFN - " + FedTFN);
+		System.out.println("MedSupp TFN - " + MedSuppTFN);
+
+		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
+		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
+		tfnCookieValues.put("Fed TFN", FedTFN);
+		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
+		System.out.println(tfnCookieValues);
+		return tfnCookieValues;
+
+		/*
+		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
+		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
+		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
+		 */
+
+	}
+
 }
+
