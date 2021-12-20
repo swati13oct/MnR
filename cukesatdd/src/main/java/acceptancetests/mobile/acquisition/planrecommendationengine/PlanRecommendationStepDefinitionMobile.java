@@ -75,25 +75,16 @@ public class PlanRecommendationStepDefinitionMobile {
 			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
-	public void checkpopup() {
-		if(if_offline_prod && !popup_clicked) {
-			PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-			popup_clicked = planSelectorhomepage.close_Popup();
-		}
-	}
-	boolean if_offline_prod = false, popup_clicked = false;
+	
 	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		wd = getLoginScenario().getMobileDriver();
 		readfeaturedataMobile(inputdata);
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE");
-		if_offline_prod = aquisitionhomepage.openPRE(inputValues.get("Site"));
-		if (MRScenario.environment.contains("digital-devv2"))
-			aquisitionhomepage.fixPrivateConnectionMobile();
-		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openPRE(inputValues.get("Site"));
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		checkpopup();
 	}
 	
 	@When("^user navigates to PRE landing page mobile$")

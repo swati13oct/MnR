@@ -312,6 +312,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 //	}
 	
 	/** user chooses a plan from dropdown */
+	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown list$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
@@ -344,7 +345,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectYearOption(testPlanYear);
+			pharmacySearchPage.selectsPlanYear(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 
@@ -595,7 +596,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectYearOption(testPlanYear);
+			pharmacySearchPage.selectsPlanYear(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 

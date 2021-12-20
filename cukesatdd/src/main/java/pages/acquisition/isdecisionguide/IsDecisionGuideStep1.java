@@ -555,7 +555,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	public IsDecisionGuideStep2 NavigateNext_DGRStep2() {
 		if(!validate(topErrorMsg) && validate(NextBtn)){
 			jsClickNew(NextBtn);
-
+			
 		}
 		try {
 			Thread.sleep(2000);

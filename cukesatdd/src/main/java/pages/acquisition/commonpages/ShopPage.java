@@ -298,12 +298,10 @@ public class ShopPage extends UhcDriver {
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
 				waitForPageLoadSafari();
-				System.out.println("\n\n1========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
 				Thread.sleep(20000);
-				System.out.println("\n\n2========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
@@ -317,19 +315,19 @@ public class ShopPage extends UhcDriver {
 				System.out.println("Actual : " + vppPageTitle);
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-						System.out.println("Page Title 1: " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
 						System.out
-								.println("Page Title 2: " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				} else {
 					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
-						System.out.println("Page Title 3: " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
 						System.out
-								.println("Page Title 4: " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
@@ -351,7 +349,6 @@ public class ShopPage extends UhcDriver {
 				zipCodeNumber++;
 				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
 				threadsleep(2000);*/
-				System.out.println("\n\nLast========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
