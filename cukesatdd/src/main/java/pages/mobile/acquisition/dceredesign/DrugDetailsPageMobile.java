@@ -1977,12 +1977,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "button[dtmname$='save'] > img:nth-child(1)[alt='Saved']")
 	public WebElement savedIcon;
+	
+	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Save']/parent::button")
+	public WebElement saveBtn;
+
+	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Saved']")
+	public WebElement savedBtn;
 
 	public void savePlan() {
-		// validateNew(saveIcon);//Scrolling in validatenew and then scrolling again in
-		// jsclick creating issue in iOS - SauceLab issue
-		jsClickNew(saveUnsaveBtn);
-		validateNew(savedIcon);
+		validate(saveBtn);
+		jsClickNew(saveBtn);
+		validate(savedBtn);
 	}
 
 	@FindBy(css = "p[class$='nopharmacyheader'] + p > span")
