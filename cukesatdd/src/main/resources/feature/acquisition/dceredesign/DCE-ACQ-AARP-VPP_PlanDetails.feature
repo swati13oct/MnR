@@ -323,7 +323,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <planname> |
 
-    @dceRedesign_PlanSave_MAPD_AARP @dceDrugDetailSaveAARP @regressionAARP
+    @dceRedesign_PlanSave_MAPD_AARP @dceDrugDetailSaveAARP @regressionAARP 
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       | planyear |
       | AARP |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | future   |

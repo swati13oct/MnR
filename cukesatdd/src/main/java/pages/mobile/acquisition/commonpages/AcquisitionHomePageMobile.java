@@ -672,7 +672,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+			} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
 				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);

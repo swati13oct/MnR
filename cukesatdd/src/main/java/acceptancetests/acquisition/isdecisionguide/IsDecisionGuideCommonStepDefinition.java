@@ -189,7 +189,6 @@ public class IsDecisionGuideCommonStepDefinition {
 		}
 
 	}
-	
 	/*@Then("^the user validates all the required fields for blank validation on Second Step on AARP site$")
 	public void the_user_validates_all_the_required_fields_for_blank_validation_on_Second_Step_on_AARP_site() throws Throwable {
 		IsDecisionGuideStep2 DecisionGuideStep2Page  =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);

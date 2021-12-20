@@ -33,12 +33,12 @@ Feature: 1.06-To test request an appointment with an agent flow
     @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                            | pageName                    | UHCUrl                      |
-      | AARP | shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/ |
-      | AARP | shop/connect                    | ShopPlan: Request more Info | https://www.myuhcagent.com/ |
+ #     | AARP | shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/ |
+ #     | AARP | shop/connect                    | ShopPlan: Request more Info | https://www.myuhcagent.com/ |
       | AARP | shop/compare/compare-ms.html    | ShopPlan: Compare-MS        | https://www.myuhcagent.com/ |
-      | AARP | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
-      | AARP | shop/compare/compare-ma-ms.html | ShopPlan: Compare-MA-MS     | https://www.myuhcagent.com/ |
-      | AARP | safe-shopping.html              | ShopPlan: Safe-Shopping     | https://www.myuhcagent.com/ |
+ #     | AARP | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
+ #    | AARP | shop/compare/compare-ma-ms.html | ShopPlan: Compare-MA-MS     | https://www.myuhcagent.com/ |
+ #     | AARP | safe-shopping.html              | ShopPlan: Safe-Shopping     | https://www.myuhcagent.com/ |
       #| AARP | shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/ |
       #| AARP | shop/compare.html               | ShopPlan: Compare           | https://www.myuhcagent.com/ |
       #| AARP | shop/estimate.html              | ShopPlan: Estimate          | https://www.myuhcagent.com/ |

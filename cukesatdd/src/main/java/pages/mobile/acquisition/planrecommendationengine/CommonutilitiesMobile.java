@@ -86,10 +86,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 
 	public boolean mobileFindElementBeforeCallBanner(WebElement element, String percentage, int swipeCount, boolean swipeUp) {
 		boolean swipeScusses = true;
-		try {
-			validate(footerCallbannerSection, 30);
-			validate(element, 30);
-			int locationDifference = 100;
+//		try {
+//			validate(footerCallbannerSection, 30);
+//			validate(element, 30);
+//			int locationDifference = 100;
 			/*
 			System.out.println("Footer Size :"+footerCallbannerSection.getSize());
 			System.out.println("Footer Location :"+footerCallbannerSection.getLocation());
@@ -100,7 +100,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 			System.out.println("Element X : "+element.getLocation().getX());
 			System.out.println("Element Y : "+element.getLocation().getY());
 			*/		
-			if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
+			/*if (footerCallbannerSection.getLocation().getY() - element.getLocation().getY() < locationDifference
 					&& swipeCount > 0) {
 				swipeScusses = mobileswipe(percentage, swipeUp);
 				if (swipeScusses) {
@@ -114,7 +114,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Element not visible footer banner");
-		}
+		}*/
 		return swipeScusses;
 	}
 

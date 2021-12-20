@@ -175,7 +175,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP 
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |

@@ -1,16 +1,20 @@
 package pages.mobile.acquisition.emailAndPrint;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -160,7 +164,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	public void validatePrintOptionOnPage(String pageType, String planType) {
-
+		String mainURL;
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			System.out.println("Print Funxtionality check skipped on mobile device.....");
 		} else if ((driver.getClass().toString().toUpperCase().contains("ANDROID"))) {
@@ -173,6 +177,9 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			String winHandleBefore = driver.getWindowHandle();
 			String originalPageTitle = driver.getTitle();
 			System.out.println("Current title: " + driver.getTitle());
+			System.out.println("Current title: " + driver.getCurrentUrl());
+			mainURL = driver.getCurrentUrl();
+			System.out.println("\n\n===========clicking on print button============\n\n");
 			if (pageType.equalsIgnoreCase("summary")) {
 				WebElement summary_printButton = null;
 				if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -205,6 +212,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			boolean flag = false;// flag will be used to determine a new window was opened after the click of
 									// print button
 			// note: switch to handle the new print window
+		//	driver.switchTo().window(winHandleBefore);
 			for (String winHandle : driver.getWindowHandles()) {
 				if (!winHandle.equals(winHandleBefore)) {
 					driver.switchTo().window(winHandle);
@@ -212,6 +220,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 					driver.switchTo().window(winHandleBefore);
 				}
 			}
+			
 			// note: keep for the print page to load
 			// CommonUtility.checkPageIsReady(driver);
 			// Perform the actions on new window
@@ -228,6 +237,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 					originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 		}
 	}
+
 
 	/**
 	 * Need to keep the original sesson on sauce lab alive by refreshing the page

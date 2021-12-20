@@ -42,7 +42,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     And the user validate view search PDF link
 
     #  @pharmacylocatorAARP01a
-  @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
+  @PharmacyLocatorCommonAARP01a @regressionAARP @sanity @kiriti
     Examples:
       | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | 15582 | AARP | 10980   | 15       | None       | 2021     | E-Prescribing | True                  | False            | True                 | 2021        | AARP MedicareRx Walgreens (PDP) | 2021        | AARP MedicareRx Walgreens (PDP) |
@@ -430,12 +430,12 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
   @breadcrumbPharmacySearch_AARP_Part2 @regressionAARP
     Examples:
       | site | zipcode | isMultutiCounty | county             | plantype | planyear | planName                        | path                                                                                                      |
-      | AARP | 90210   | NO              | Los Angeles County | PDP      | current  | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | AARP | 90210   | NO              | Los Angeles County | PDP      | future   | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
 
   @breadcrumbPharmacySearch_UHC_Part2 @regressionUHC
     Examples:
       | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                                      |
-      | UHC  | current  | 90210   | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
+      | UHC  | future   | 90210   | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Preferred Retail Pharmacy on acquisition <site> site
     Given the user is on medicare acquisition site landing page
