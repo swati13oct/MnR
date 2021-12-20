@@ -103,9 +103,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " Mile";
 		else
 			distance = distance + " Miles";
-		// sleepBySec(3);
+	   // sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
-	//	scrollToView(distanceDropownID);
+		scrollToView(distanceDropownID);
 		sleepBySec(3);
 		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
@@ -114,7 +114,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		// validateNoresultsZipcodeError(zipcode);
+		validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 
 		if (matcher.matches()) {

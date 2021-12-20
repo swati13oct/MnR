@@ -845,7 +845,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
 		if (isPlanYear()) {
-			selectsPlanYear(planYear);
+			selectYearOption(planYear);
 		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
@@ -1120,7 +1120,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				// note: if year dropdown is available, handle it with current year
 				if (isPlanYear()) {
 					System.out.println("Year dropdown is displayed, proceed to select '" + testPlanYear + "' year");
-					selectsPlanYear(testPlanYear);
+					selectYearOption(testPlanYear);
 					sleepBySec(2);
 					CommonUtility.checkPageIsReady(driver);
 				}
@@ -1254,10 +1254,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		try {
 			if(year.equalsIgnoreCase("current")) {
 				if(validate(CurrentYearLink))
-					CurrentYearLink.click();
+					jsClickNew(CurrentYearLink);
 			}else {
 				if(validate(NextYearLink))
-					NextYearLink.click();
+					jsClickNew(NextYearLink);
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 		} catch (Exception e) {
