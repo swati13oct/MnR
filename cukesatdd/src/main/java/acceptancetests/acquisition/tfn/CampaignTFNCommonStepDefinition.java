@@ -67,7 +67,7 @@ public class CampaignTFNCommonStepDefinition {
 
 	}
 
-	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
+	/*@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
 	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
@@ -77,7 +77,7 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
 		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
-	}
+	}*/
 
 	WebDriver wd;
 
