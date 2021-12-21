@@ -1013,11 +1013,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		for (String plans : planNames) {
 			String[] listOfTestPlans = plans.split(",");
 			for (String plan : listOfTestPlans) {
-				System.out.println("Checking Saved Plan on VP for : " + plan);
-				WebElement addedPlan = driver.findElement(By.cssSelector("[dtmname$='Card:" + plan + "']"));
-				validateNew(addedPlan);
-				Assertion.assertEquals(plan, addedPlan.getText().trim());
-				System.out.println("Verified plans are added on visitior profile page");
+				if(!plan.contains("I-SNP"))	{
+					System.out.println("Checking Saved Plan on VP for : " + plan);
+					WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+					validateNew(addedPlan);
+					Assertion.assertEquals(plan, addedPlan.getText().trim());
+					System.out.println("Verified plans are added on visitior profile page");
+				}
 			}
 		}
 	}

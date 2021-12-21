@@ -1983,11 +1983,16 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Saved']")
 	public WebElement savedBtn;
+	
+	@FindBy(xpath = "//h2[contains(@class,'noborder text-blue-primary')]")
+	public WebElement planName;
 
 	public void savePlan() {
-		validate(saveBtn);
-		jsClickNew(saveBtn);
-		validate(savedBtn);
+		if(!planName.getText().contains("I-SNP")) {
+			validate(saveBtn);
+			jsClickNew(saveBtn);
+			validate(savedBtn);
+		}
 	}
 
 	@FindBy(css = "p[class$='nopharmacyheader'] + p > span")
