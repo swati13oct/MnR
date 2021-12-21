@@ -306,10 +306,10 @@ public class MRScenario {
 				: System.getProperty(CommonConstants.SAUCELABS_TUNNEL_IDENTIFIER));
 
 		sauceLabsMobileTunnelIdentifier = (null == System
-				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER) && 
-				environment.equalsIgnoreCase("stage")|environment.equalsIgnoreCase("offline")|environment.equalsIgnoreCase("prod")
-						? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
-						: CommonConstants.SAUCELABS_NOTUNNEL_MOBILE_TUNNEL);
+				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER)
+				&& environment.equalsIgnoreCase("stage") | environment.equalsIgnoreCase("offline")
+						| environment.equalsIgnoreCase("prod") ? CommonConstants.SAUCELABS_NOTUNNEL_MOBILE_TUNNEL
+								: CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL);
 
 		appiumVersion = mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
@@ -823,8 +823,7 @@ public class MRScenario {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Either Optum-Prd or Optum-Stage tunnels to be used
 		System.out.println("sauceLabsMobileTunnelIdentifier : " + sauceLabsMobileTunnelIdentifier);
-		//capabilities.setCapability("parentTunnel", "optumtest");
-		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -843,15 +842,10 @@ public class MRScenario {
 		capabilities.setCapability("appiumVersion", appiumVersion);
 		capabilities.setCapability("forceMjsonwp", true);
 		capabilities.setCapability("autoAcceptAlerts", true);
-//		if (environment.equals("stage") || environment.equals("offline") || environment.equals("prod")) {
-//			capabilities.setCapability("parentTunnel", "");
-//			capabilities.setCapability("tunnelIdentifier", "");
-//		}
-//
-//		else {
-//			capabilities.setCapability("parentTunnel", "optumtest");
-//			capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
-//		}
+		if (!sauceLabsMobileTunnelIdentifier.isEmpty()) {
+			capabilities.setCapability("parentTunnel", "optumtest");
+			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
 
 		try {
 
