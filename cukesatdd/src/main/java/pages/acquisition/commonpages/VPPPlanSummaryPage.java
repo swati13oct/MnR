@@ -5865,10 +5865,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			// action.moveToElement(DOB).build().perform(); //Does not work on Safari
 			// browser
-			jsMouseOver(DOB);
+			/*jsMouseOver(DOB);
 			if (DOB.isDisplayed()) {
 				flag = true;
-			}
+			}*/
 
 		} else {
 			Thread.sleep(2000);
