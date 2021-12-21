@@ -1985,11 +1985,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement savedBtn;
 
 	public void savePlan() {
-		if(!planName.getText().contains("I-SNP")) {
-			validate(saveBtn);
-			jsClickNew(saveBtn);
-			validate(savedBtn);
-		}
+		validate(saveBtn);
+		jsClickNew(saveBtn);
+		validate(savedBtn);
 	}
 
 	@FindBy(css = "p[class$='nopharmacyheader'] + p > span")
