@@ -3436,12 +3436,12 @@ private Scenario scenario;
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-			plansummaryPage.medsuppOLEPlanOverview();
-			plansummaryPage.medsuppOLEBenefitsTable();
-			plansummaryPage.medsuppOLERulesandDisclosures();
+		//	plansummaryPage.medsuppOLEPlanOvervieworOutlineCoverage();
+		//	plansummaryPage.medsuppOLEBenefitsTable();
+		//	plansummaryPage.medsuppOLERulesandDisclosures();
 			plansummaryPage.medsuppOLEHealthInsurance();
 			plansummaryPage.medsuppOLEAARPSupplementPlans();
-			// plansummaryPage.medsuppOLEPrintandSaveApplication();
+		//	 plansummaryPage.medsuppOLEPrintandSaveApplication();
 			plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
 
 		}
@@ -4674,6 +4674,20 @@ private Scenario scenario;
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateProvidersCovered();
+	}
+
+	@Then("^the site user clicks on Start Application Button and proceed Next for VPP 3.0$")
+	public void Start_application_button_proceed_next_for_VPP_3(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.StartApplicationforvpp3(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+		}
 	}
 
 }
