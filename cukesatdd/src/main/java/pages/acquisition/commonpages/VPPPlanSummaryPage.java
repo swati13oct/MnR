@@ -4840,10 +4840,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 //		jsClickNew(PartBMonthDropDown);
 //		jsClickNew(PartByear);
 //		jsClickNew(PartByearDropDown);
-jsClickNew(ContinueApplication);
+		jsClickNew(ContinueApplication);
+		try {
+			CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+			insuredStatus.click();
+		}catch(Exception e) {
 
-	//	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-//		insuredStatus.click();
+		}
+
+	//
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -6336,7 +6341,7 @@ jsClickNew(ContinueApplication);
 	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
 	private WebElement viewSavedPlansBtn;
 
-	@FindBy(xpath = "//h2[contains(text(),'Your Guest Profile')]")
+	@FindBy(xpath = "(//*[contains(text(),'Your Guest Profile')])[1]")
 	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])")
@@ -7576,6 +7581,168 @@ public String GetMonthlyPremiumValue() {
 		System.out.println("Start application button is clicked on application page for VPP 3.0");
 		Thread.sleep(4000);
 
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		jsClickNew(nextButton);
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@optum.com");
+		phoneNumber.sendKeys("1234567890");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(cancelButton);
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		jsClickNew(ReturntoApplicationButton);
+		Thread.sleep(2000);
+		// jsClickNew(nextButton);
+		return LastName;
+
+	}
+
+	public String continueApplicationuntilSubmitOtherpages(String Medicarenumber) throws InterruptedException {
+
+		// CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
+		MedicareNumber.sendKeys(Medicarenumber);
+		clickGender();
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Birthday Enrollment-Your Information ? Guaranteed Acceptance");
+		jsClickNew(BirthdayEnrollment);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage Page is Displayed");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page1 is Displayed");
+//		jsClickNew(nextButton);
+//		Thread.sleep(2000);
+//		System.out.println("Past and Current Coverage ? Eligibility Page2 is Displayed");
+//		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Medicaid ");
+		jsClickNew(MedicaidCovered);
+
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medicare");
+		jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medsupp");
+		jsClickNew(ExistMedSupp);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Other Health Insurance Coverage");
+		jsClickNew(OtherInsCoverage);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Verification");
+		jsClickNew(CpaSignatureInd);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Payment ? Verification");
+		jsClickNew(paymentOption);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Document Delivery ? Verification");
+		Thread.sleep(2000);
+		jsClickNew(DocumentDelivery);
+		jsClickNew(nextButton);
+
+		///////////////////////// New to add another Method
+		Thread.sleep(2000);
+		validateNew(EmailAddressNo);
+		jsClickNew(EmailAddressNo);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		validateNew(ReadAgreement);
+		jsClickNew(ReadAgreement);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		validateNew(ProceedAuthorization);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ProceedAuthorization);
+		jsClickNew(ProceedAuthorization);
+		Thread.sleep(2000);
+		System.out.println("Authorization ? Verification of Application Information and Authorization for the Release of Medical Information is displayed");
+		validateNew(VerificationAgree);
+		jsClickNew(VerificationAgree);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		try {
+			System.out.println("Authorization ? Verification of Information is displayed");
+			validateNew(VerificationAgree3);
+			jsClickNew(VerificationAgree3);
+			jsClickNew(nextButton);
+		}catch(Exception e) {
+			System.out.println("Authorization ? Verification of Information is displayed or not");
+		}
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) {
+		 * validateNew(VerificationAgree2); Thread.sleep(3000);
+		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
+		 */
+		/*validateNew(VerificationAgree3);
+		Thread.sleep(3000);
+		jsClickNew(VerificationAgree3);
+		jsClickNew(nextButton);*/
+		// }
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			validateNew(SubmitApplication);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", SubmitApplication);
+			jsClickNew(SubmitApplication);
+			validateNew(submitconfirmation);
+			String SubmitConfirmation = submitconfirmation.getText();
+			System.out.println("The return to the application code is- " + SubmitConfirmation);
+			Thread.sleep(2000);
+
+			// jsClickNew(ViewPrescriptionDrugPlans);
+			// Thread.sleep(2000);
+			return SubmitConfirmation;
+		}
+		return Medicarenumber;
+	}
+
+	public String StartApplicationthroughShopPages(String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		jsClickNew(Start_ApplicationBtn);
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(4000);
+		DOB1.sendKeys("10111952");
+		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
+		jsClickNew(MaleGender1);
+		Thread.sleep(2000);
+		//	jsClickNew(PartBMonth);
+		String PartBMonth_Displayed = PartBMonth.getAttribute("value");
+		String PartByear_Displayed = PartByear.getAttribute("value");
+		System.out.println("part_A_Month_Displaye Displayed : "+PartBMonth_Displayed);
+		System.out.println("part_A_Year_Displaye Displayed : "+PartByear_Displayed);
+//		jsClickNew(PartBMonthDropDown);
+//		jsClickNew(PartByear);
+//		jsClickNew(PartByearDropDown);
+		jsClickNew(ContinueApplication);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
