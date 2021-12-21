@@ -1506,7 +1506,7 @@ public class CampaignTFNCommonStepDefinition {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookie();
+		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookieLP();
 		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
 		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
 		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
