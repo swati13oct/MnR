@@ -254,7 +254,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//button[contains(@id, 'showfilter')]/span")
 	protected WebElement Filter;
 	
-	@FindBy(xpath="//button[contains(@dlassetid, 'ps-filter-lnk')]")
+	@FindBy(xpath="//button[contains(@dlassetid, 'apply-filter-btn')]")
 	protected WebElement FilterApplyBtn;
 
 	@FindBy(xpath = "//button[@dlassetid='ps-show-on-map']//span[contains(@class,'uhc-button_text')]")
