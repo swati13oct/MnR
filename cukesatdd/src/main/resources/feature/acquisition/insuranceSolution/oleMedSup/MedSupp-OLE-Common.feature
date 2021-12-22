@@ -112,7 +112,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
       | No Of Plans To Save | <NoOfPlans> |
     And user clicks on view saved plans land on shopper profile page
     And user clicks on Edit Your Information link and navigate back to micro form
-    Then user validate all fields are editable and view plan and cancel buttons are visible
+   # Then user validate all fields are editable and view plan and cancel buttons are visible
 
     @MedSupp_OLE_Regression_AARP @insuranceSolution @regressionAARP
     Examples: 
