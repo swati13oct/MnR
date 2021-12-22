@@ -1040,6 +1040,9 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		}
 	}
+	
+	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
+	protected WebElement indian_tribal_label_filter_text;
 
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
@@ -1055,8 +1058,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		}
 		catch(Exception NoSuchElementException) {
+			jsClickNew(Filter);
 			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 			jsClickNew(indian_tribal_label_filter);
+			jsClickNew(FilterApplyBtn);
 		}
 		sleepBySec(5);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);

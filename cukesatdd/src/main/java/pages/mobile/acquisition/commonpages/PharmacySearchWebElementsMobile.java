@@ -188,7 +188,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement filterOptions;
 
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
-	@FindBy(xpath="(//span[contains(@class,'label-content')])[2]")
+	@FindBy(xpath="(//span[contains(@class,'label-content')])[4]")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy(css = "#indian-tribal")
