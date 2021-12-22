@@ -1791,11 +1791,11 @@ public class CampaignTFNPage extends UhcDriver {
 
 		/*for (String a : arrOfStr)
 
-		*	System.out.println(a);
-		* String PSC_Code_Str = arrOfStr[0];
-		* String[] arrStr_1 = PSC_Code_Str.split("=");*/
+		*	System.out.println(a);*/
+		String PSC_Code_Str = arrStr[0];
+		String[] arrStr_1 = PSC_Code_Str.split("=");
 
-		PSC_Code = arrStr[0];
+		PSC_Code = arrStr_1[1];
 		FedTFN = arrStr[2];
 		MedSuppTFN = arrStr[3];
 		SRC_Code = arrStr[4];
