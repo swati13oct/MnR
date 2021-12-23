@@ -642,6 +642,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// code')]")
 	@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 	private WebElement resumeApplication;
+	
+	@FindBy(xpath = "//*[contains(text(),'plans available')]")
+	private WebElement planSummaryPage;
 
 	@FindBy(xpath = "(//input[@id='DOB'])[1]")
 	private WebElement ResumeDOB;
@@ -3234,7 +3237,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// enter zipcode
 		planOverviewZipCodeFieldBox.sendKeys(zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-		jsClickNew(backToPlans);
+		if(!planSummaryPage.isDisplayed())
+			jsClickNew(backToPlans);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
