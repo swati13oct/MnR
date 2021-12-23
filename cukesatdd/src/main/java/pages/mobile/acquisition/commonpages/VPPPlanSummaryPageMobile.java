@@ -34,6 +34,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -449,7 +450,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
 	private WebElement shopForAPlanOptionFindPlanButton;
 
-	@FindBy(css = "#change-location")
+	@FindBy(xpath = "//a[contains(text(),'Change ZIP')]")
 	private WebElement planOverviewChangeZipCodeLink;
 
 	@FindBy(xpath = "//*[@id='zipcode']")
@@ -3209,21 +3210,31 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		scrollToView(planOverviewChangeZipCodeLink);
+		jsClickNew(backToPlans);
+		sleepBySec(3);
 		try {
-			clickonBackToPlanResults();
+			// if change zip code link is there then click it, once you used it then it will
+			// only display field box going forward.
 			jsClickNew(planOverviewChangeZipCodeLink);
-			validateNew(planOverviewZipCodeFieldBox, 10);
 		} catch (Exception e) {
 			System.out.println(
 					"Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
-		scrollToView(planOverviewZipCodeFieldBox);
+		// if field box already there then clear it if left over text from prior run
+		// Commenting since there is no Control key on a Mac machine
+		/*
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		 */
+		CommonUtility.waitForPageLoad(driver, planOverviewZipCodeFieldBox, 45);
+		jsClickNew(planOverviewZipCodeFieldBox);
+		planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
+		planOverviewZipCodeFieldBox.sendKeys(zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-
-		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickNew(backToPlans);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
@@ -3231,6 +3242,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
