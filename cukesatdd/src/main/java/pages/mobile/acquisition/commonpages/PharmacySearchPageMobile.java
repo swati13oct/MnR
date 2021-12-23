@@ -845,7 +845,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
 		if (isPlanYear()) {
-			selectsPlanYear(planYear);
+			selectYearOption(planYear);
 		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
@@ -931,24 +931,31 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		scrollToView(FilterApplyBtn);
 		validateNew(FilterApplyBtn);
 		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			labelId = "E-Prescribing";
+			//labelId = "E-Prescribing";
+			labelId = "5";
 		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			labelId = "Home Infusion";
+			//labelId = "Home Infusion";
+			labelId = "1";
 		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			labelId = "Indian/Tribal/Urban";
+			//labelId = "Indian/Tribal/Urban";
+			labelId = "2";
 		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			labelId = "Long-Term";
+			//labelId = "Long-Term";
+			labelId = "3";
 		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			labelId = "Mail Service";
+			//labelId = "Mail Service";
+			labelId = "7";
 		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			labelId = "Open 24 hours";
+			//labelId = "Open 24 hours";
+			labelId = "6";
 		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			labelId = "Retail Pharmacy";
+			//labelId = "Retail Pharmacy";
+			labelId = "4";
 		} else {
 			Assertion.assertTrue("PROBLEM - haven't code to handle filter '" + pharmacyType + "' yet", false);
 		}
 //		WebElement label = driver.findElement(By.xpath("//label[@id='" + labelId + "']"));
-        WebElement label = driver.findElement(By.xpath("//*[contains(text(), '"+ labelId +"')]//parent::label"));
+        WebElement label = driver.findElement(By.xpath("(//label[contains(@class,'checkbox-label')])["+labelId+"]"));
         validateNew(label);
 		jsClickNew(label);
 		
@@ -1001,23 +1008,23 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				}
 				sleepBySec(8);
 				if (language.equalsIgnoreCase("English")) {
-					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
-					String expTxt2 = "Change the pharmacy type you selected.";
-					String actualTxtXpath1 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
-					String actualTxt1 = driver.findElement(By.xpath(actualTxtXpath1)).getText();
-					String actualTxtXpath2 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
-					String actualTxt2 = driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
-					Assertion.assertTrue(
-							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-									+ "Expected='" + expTxt1 + "' | " + "Actual-'" + actualTxt1 + "'",
-							expTxt1.equals(actualTxt1));
-					Assertion.assertTrue(
-							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
-							expTxt2.equals(actualTxt2));
+//					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
+//					String expTxt2 = "Change the pharmacy type you selected.";
+//					String actualTxtXpath1 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
+//					String actualTxt1 = driver.findElement(By.xpath(actualTxtXpath1)).getText();
+//					String actualTxtXpath2 = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
+//					String actualTxt2 = driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
+//					Assertion.assertTrue(
+//							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+//									+ "Expected='" + expTxt1 + "' | " + "Actual-'" + actualTxt1 + "'",
+//							expTxt1.equals(actualTxt1));
+//					Assertion.assertTrue(
+//							"PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
+//									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
+//							expTxt2.equals(actualTxt2));
 				}
 
-				jsMouseOut(resultNavTooltip); // note: mouse out from tooltip for it to disappear
+//				jsMouseOut(resultNavTooltip); // note: mouse out from tooltip for it to disappear
 
 				// scrollToView(moveAwayFromTooltip);
 				// moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for
@@ -1033,6 +1040,9 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		}
 	}
+	
+	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
+	protected WebElement indian_tribal_label_filter_text;
 
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
@@ -1048,8 +1058,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		}
 		catch(Exception NoSuchElementException) {
+			jsClickNew(Filter);
 			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 			jsClickNew(indian_tribal_label_filter);
+			jsClickNew(FilterApplyBtn);
 		}
 		sleepBySec(5);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
@@ -1120,7 +1132,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				// note: if year dropdown is available, handle it with current year
 				if (isPlanYear()) {
 					System.out.println("Year dropdown is displayed, proceed to select '" + testPlanYear + "' year");
-					selectsPlanYear(testPlanYear);
+					selectYearOption(testPlanYear);
 					sleepBySec(2);
 					CommonUtility.checkPageIsReady(driver);
 				}
@@ -1254,10 +1266,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		try {
 			if(year.equalsIgnoreCase("current")) {
 				if(validate(CurrentYearLink))
-					CurrentYearLink.click();
+					jsClickNew(CurrentYearLink);
 			}else {
 				if(validate(NextYearLink))
-					NextYearLink.click();
+					jsClickNew(NextYearLink);
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 		} catch (Exception e) {
