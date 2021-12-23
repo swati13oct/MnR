@@ -3994,8 +3994,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		validateNew(startDrpDwn);
 		CommonUtility.waitForPageLoadNewForClick(driver, startDrpDwn, 5);
-		Select selectStartMonth = new Select(startDrpDwn);
-		selectStartMonth.selectByIndex(1);
+		jsClickNew(startDrpDwn);
+		Thread.sleep(5000);
+		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
 
