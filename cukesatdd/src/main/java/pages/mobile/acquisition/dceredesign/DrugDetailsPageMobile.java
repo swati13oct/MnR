@@ -1457,7 +1457,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
 		// !validate(LIS_CopayHeader) &&
-				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_Alert)) {
+				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_ZeroDeductible)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
 			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
@@ -1465,7 +1465,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			System.out.println("***** Deductible for LIS Buydown and LIS link Displayed *****");
 			System.out.println(LIS_Deductible.getText());
 			System.out.println("***** Alert Displayed for LIS Buydown *****");
-			System.out.println(LIS_Alert.getText());
+			System.out.println(LIS_Deductible.getText());
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
@@ -1977,12 +1977,22 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "button[dtmname$='save'] > img:nth-child(1)[alt='Saved']")
 	public WebElement savedIcon;
+	
+	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Save']/parent::button")
+	public WebElement saveBtn;
+
+	@FindBy(xpath = "//*[contains(@class,'uhc-button__text')][text()='Saved']")
+	public WebElement savedBtn;
+	
+	@FindBy(xpath = "//h2[contains(@class,'noborder text-blue-primary')]")
+	public WebElement planName;
 
 	public void savePlan() {
-		// validateNew(saveIcon);//Scrolling in validatenew and then scrolling again in
-		// jsclick creating issue in iOS - SauceLab issue
-		jsClickNew(saveUnsaveBtn);
-		validateNew(savedIcon);
+		if(!planName.getText().contains("I-SNP")) {
+			validate(saveBtn);
+			jsClickNew(saveBtn);
+			validate(savedBtn);
+		}
 	}
 
 	@FindBy(css = "p[class$='nopharmacyheader'] + p > span")
