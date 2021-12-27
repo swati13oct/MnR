@@ -277,3 +277,53 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | name | userName              | password   | plantype | planname                            | drugList           | providerList          |
       | UHC  | Alabama |   10010 | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
+
+  @validateVPFlyoutName @authenticated
+  Scenario Outline: Verify name is appearing for the signed in user
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    Then the user validate the name on visitor profile flyout
+      | Name | <name> |
+
+    @visitorProfile_AARP
+    Examples:
+      | site | name | userName              | password   |
+      | AARP | VD   | vdatdd_17@getnada.com | Password@1 |
+
+    @visitorProfile_UHC @check
+    Examples:
+      | site | name | userName              | password   |
+      | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
+
+   @authenticated @DCEImportSignIn
+   Scenario Outline: Verify DCE Redirect
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add drugs button in the profile
+    Then the user validates Get Started Page
+    Then the user clicks on import drugs link
+    Then the user starts the import of the drugs
+      | FirstName | <firstName> |
+      | LastName  | <lastName>  |
+      | DOB       | <dob>       |
+      | ZipCode   | <zipcode>   |
+      | MBI       | <mbi>       |
+      | Member    | <member>    |
+     Then the user signs in with optum Id credentials on DCE import
+       | User Name | <userName> |
+       | Password  | <password> |
+
+    @visitorProfile_AARP
+    Examples:
+      | site | member| firstName | lastName | dob        | zipcode | mbi         |userName              |password    |
+      | AARP | UHC   | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 |jonette@getairmail.com|Password@123|
+
+    @visitorProfile_UHC
+    Examples:
+     | site | member| firstName | lastName | dob        | zipcode | mbi         |userName              |password    |
+     | UHC  | UHC   | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 |jonette@getairmail.com|Password@123|
