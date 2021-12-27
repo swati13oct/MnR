@@ -1053,7 +1053,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 		catch (Exception ex){
 		}
-		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
+		if(indian_tribal_text.contains("Servicio de salud ind")){
 			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
