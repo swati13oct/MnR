@@ -198,6 +198,8 @@ public class CampaignExternalLinkStepDefinition {
 	public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String env = MRScenario.environment;
+		campaignExternalLinkspage.updateHrefUrlVPP_Script1(env);
 		campaignExternalLinkspage.clickFindPlansPricing();
 	}
 
