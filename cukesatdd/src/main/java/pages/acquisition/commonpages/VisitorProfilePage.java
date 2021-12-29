@@ -1305,9 +1305,9 @@ public class VisitorProfilePage extends UhcDriver {
     public void validateNewHeader(DataTable data) {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
         Assertion.assertEquals("welcome," + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
-        Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
-        Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("Your Saved\n" + "Insurance Plans (1)", savedInsuredPlans.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
