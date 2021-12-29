@@ -312,8 +312,11 @@ public void yahooSearch(String searchParameter) {
 		sendkeys(Member_DOBtxtbx, member_dob);
 		sendkeys(Member_Ziptxtbx, member_zip);
 		sendkeys(Member_MBItxtbx, member_mbi);
+		validateNew(Member_VieDrugsDrBtn);
 		jsClickNew(Member_VieDrugsDrBtn);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
+		validateNew(DataImportStatusPopup);
 		if(!validateNew(DataImportStatusPopup)){
 			Assertion.fail(">>>>>>>> Import FAILED <<<<<<<< - Import Status Modal not displayed");
 		}

@@ -314,7 +314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement providerSearchFromGlobalHeader;
 
 	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]/a")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//*[@class='toolsLinks-forAnalytics links-forAnalytics']//p[4]/a")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -767,7 +767,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
 	private WebElement samChatPopup;
 
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header') and contains(text(),'Message')]")
 	private WebElement samChatPopupHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
@@ -3422,6 +3422,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		threadsleep(3);
 		driver.switchTo().activeElement();
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
@@ -7416,7 +7417,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			jsClickNew(samChatIcon);
 			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
+			threadsleep(5);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(

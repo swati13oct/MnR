@@ -15,11 +15,11 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='zip-code']")
 	protected WebElement zipcodeField;
-	
+
 	@FindBy(css = "#enterZipCodeText")
 	protected WebElement zipCodeFieldLabel;
 
-	@FindBy(xpath = "//button//span[@class='uhc-button__text' and text()='Search ']")
+	@FindBy(xpath = "//button[contains(@dlassetid,'ps-search-btn')]")
 	protected WebElement searchbtn;
 
 	@FindBy(css = "#selectmultycounty_box")
@@ -36,14 +36,14 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(css = "#city")
 	protected WebElement txtCity;
-	
-	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[1]")
+
+	@FindBy(xpath = "//div[contains(@class, 'uhc-toggle__inner')]//button[1]")
 	protected WebElement CurrentYearLink;
-	
-	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[2]")
+
+	@FindBy(xpath = "//div[contains(@class, 'uhc-toggle__inner')]//button[2]")
 	protected WebElement NextYearLink;
-	
-	@FindBy(xpath="//*[@id='map']/div/div/iframe")
+
+	@FindBy(xpath = "//*[@id='map']/div/div/iframe")
 	protected WebElement mapCollapse;
 
 	@FindBys(value = { @FindBy(xpath = "//select[@id='plan-year']/option") })
@@ -93,7 +93,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement drpYear;
 
 //	@FindBy(xpath = "//label[@id='plan-year-label']/../../../div[contains(@ng-hide,'showYearToggle') and not(contains(@class,'ng-hide'))]")
-	@FindBy(css = "#plan-year-label")
+	@FindBy(xpath = "//app-toggle/div[contains(@class,'toggle')]")
 	protected WebElement yearDropdownLabel;
 
 	@FindBy(xpath = "//select[@id='plan-year']")
@@ -129,7 +129,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#createpdf_id")
 	protected WebElement resultAsPDF;
 
-	@FindBy(xpath = "//h1[contains(text(),'Pharmacy Search')]")
+	@FindBy(xpath = "//h1[contains(@class,'drug-cost-estimator text-bold')]")
 	protected WebElement pharmacylocatorheader;
 
 	// @FindBy(className = "loading-block")
@@ -152,7 +152,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement pharmacyNameLink;
 
 //	@FindBy(xpath = "//div[contains(@class,'callus')]")
-	@FindBy(css = "div[class^='rightrailwidgets'] div[class^='callus']")
+	@FindBy(xpath = "//div[@class='row mt-20']")
 	protected WebElement questionsRightRailWidget;
 
 	@FindBy(css = "#lang-select")
@@ -169,13 +169,12 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(css = "#multiCountyCancelBtn")
 	protected WebElement MultiCOunty_CancelBtn;
-	
+
 	@FindBy(css = "label[for='distance']")
 	protected WebElement distanceLabel;
-	
+
 	@FindBy(xpath = "//span[text()=' of ZIP Code']")
 	protected WebElement distanceZipTextLabel;
-	
 
 	/*
 	 * @FindBy(id="indian-tribal-label") protected WebElement
@@ -184,19 +183,19 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(css = "#filter_toggle_id")
 	protected WebElement filterToggle;
-	
+
 	@FindBy(css = "div[class$='accordion'] > div[id^='collapsible']")
 	protected WebElement filterOptions;
-	
+
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
-	@FindBy(css = "[id*='indian-tribal-label']")
+	@FindBy(xpath="(//span[contains(@class,'label-content')])[4]")
 	protected WebElement indian_tribal_label_filter;
-	
+
 	@FindBy(css = "#indian-tribal")
 	protected WebElement indian_tribal_filter;
 
 //	@FindBy(css = "#noResultsFoundErrorMessage")
-	@FindBy(css = "#noResultsFoundErrorMessage")
+	@FindBy (xpath= "//div[@id='searcherrorcontainer']//p")
 	protected WebElement noPharmaciesErrorMessage;
 
 	@FindBy(xpath = "//*[@id='emptyzipcodeerror_id']/p")
@@ -205,28 +204,28 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@class='proactive-offer__button-wrapper']/button[contains(text(), 'Exit')]")
 	protected WebElement ProactiveChat_Exit;
 
-	@FindBy(xpath = "//h1[(text()=' Pharmacy Search  ')] ")
+	@FindBy(xpath = "//h1[(contains(text(),'Pharmacy Search'))]")
 	protected WebElement PharmacyLocatorPageHeader;
 
 	@FindBy(css = "#miles")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[contains(text(),'Error: Please enter a valid ZIP Code')]")
+	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[contains(text(),'Error: Please enter a valid ZIP Code')]")
+	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
 	protected WebElement invalidZip;
 
-	@FindBy(xpath = "//div[contains(@id,'modifyYourSearchId')]//li")
+	@FindBy(xpath = "#zipError > p")
 	protected WebElement modifyZipErr;
 
 	@FindBy(xpath = "//p[contains(text(),'see the pharmacy')]")
 	protected WebElement areaUnderArrow;
 
-	@FindBy(xpath = "//div[contains(@ng-show,'pharmacyModel') and not(contains(@class,'ng-hide'))]//a[contains(@href,'contact-us.html')]")
+	@FindBy(xpath = "//*[@id='ITC_LC_HIS_2']//a[contains(@href,'/contact-us.html')]")
 	protected WebElement contactUnitedHealthCare;
 
-	@FindBy(xpath = "//ol[@class='pharmacy-list']//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//*[@id='ITC_LC_HIS_2']//a[contains(@href,'/contact-us.html')]")
 	protected WebElement contactUnitedHealthCare_ol;
 
 	// @FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
@@ -246,19 +245,25 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[@id='language']//option)[2]")
 	protected WebElement chineseLanguage;
 
-	@FindBy(xpath = "//*[@class='pharmacy-info']")
+	@FindBy(xpath = "//*[@class='mb-10 mb-lg-0 flex']")
 	protected List<WebElement> PharmacyResultList;
 
-	@FindBy(xpath = "//span[@ng-show = 'showPharmacyCount']")
+	@FindBy(xpath = "//h4[@id = 'selectedplanname']")
 	protected WebElement PharmacyFoundCount;
+	
+	@FindBy(xpath="//button[contains(@id, 'showfilter')]/span")
+	protected WebElement Filter;
+	
+	@FindBy(xpath="//button[contains(@dlassetid, 'apply-filter-btn')]")
+	protected WebElement FilterApplyBtn;
 
-	@FindBy(xpath = "//a[contains(@dtmname,'pharmacy locator:show on map')]")
+	@FindBy(xpath = "//button[@dlassetid='ps-show-on-map']//span[contains(@class,'uhc-button_text')]")
 	protected List<WebElement> showonmap;
 
-	@FindBy(xpath = "//span[text()='View Results as PDF ']")
+	@FindBy(xpath = "//a[@dlassetid='ps-view-pdf-lnk']/span[contains(@class,'uhc-button_text')]")
 	protected WebElement viewsearchpdf;
 
-	@FindBy(xpath="//a[@id='viewImportantInformationpdf_id']")
+	@FindBy(xpath = "//a[@id='viewImportantInformationpdf_id']")
 	protected WebElement viewFrontMatterPdf;
 
 	@FindBy(xpath = "//span[@class='accordion__header text-bold text-sans-serif text-gray-800 text-normal']")
@@ -280,16 +285,16 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='tooltip']")
 	protected WebElement tooltip;
 
-	@FindBy(xpath = "//h2[contains(@class,'pharmacy-count')]")
+	@FindBy(xpath = "//h1[contains(@class, 'text-left text-extra-large')]")
 	protected WebElement pharmaciesAvailable;
 
-	@FindBy(xpath = "//ul[contains(@class,'pagination')]")
+	@FindBy(xpath = "//*[contains(@id, 'pagainator')]//span[contains(@class, 'mr-10 f-16')]")
 	protected WebElement pagination;
 
-	@FindBy(xpath = "//a[contains(@aria-label,'Previous')]")
+	@FindBy(xpath = "//button[contains(@dtmname, 'previous')]")
 	protected WebElement leftArrow;
 
-	@FindBy(xpath = "//a[contains(@aria-label,'Next')]")
+	@FindBy(xpath = "//button[contains(@dtmname, 'next')]")
 	protected WebElement rightArrow;
 
 	@FindBy(xpath = "//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//*[name()='svg']")
@@ -357,31 +362,31 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath = "//div[@class='']//div[@class='pharmacywidgets section']//*[contains(@class,'card-header')]//h2[contains(text(), 'Walgreens')]")
+	@FindBy(xpath = "//h3[contains(text(),'Walgreens ? Preferred Retail Pharmacy')]/../../..")
 	protected WebElement widget_walgreens;
 
-	@FindBy(xpath = "//div[@class='pharmacywidgets section']//*[contains(@dtmname,'pharmacy locator:preferred')]")
+	@FindBy(xpath = "//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
-	@FindBy(xpath = "//div[@id='noResultsFoundErrorMessage']")
+	@FindBy(xpath = "//*[contains(@id, 'errorcontainer')]//*[contains(@class, 'errtext')]")
 	protected WebElement noResultMsg;
 
-	@FindBy(xpath = "//img[@alt='callus']")
+	@FindBy(xpath = "//img[contains(@src,'icon-call.png')]")
 	protected WebElement callUsIcon;
 
-	@FindBy(xpath = "//*[contains(@ng-controller, 'contactTFNcontroller')]")
+	@FindBy(xpath = "//div[@dlassetid='ps_tfncard_tfn_2']//h3/../../.")
 	protected WebElement callUnitedHealthCareText;
 
-	@FindBy(xpath = "//div[contains(@ng-show,'preferredmailservice')]")
+	@FindBy(xpath = "//h3[contains(text(),'Preferred Mail')]/../../..")
 	protected WebElement widget_preferredMailServicePharmacy;
 
 	@FindBy(xpath = "//a[contains(@href,'mail-order')]")
 	protected WebElement widget_prefMailServPhar_learnMore;
 
-	@FindBy(xpath = "//p[contains(@dtmname, 'preferred')]//following-sibling::p//a")
+	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	protected WebElement widget_prefRetPhaNet_estYurDrugCosts;
 
-	@FindBy(xpath = "//div[contains(@ng-show,'evaluateAEM_Segment') and not(contains(@class,'ng-hide'))]//h2[contains(text(),'Walgreens') and contains(text(),'Preferred Retail Pharmacy')]/../../../div[2]//a")
+	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a Walgreens preferred retail pharmacy')]")
 	protected WebElement widget_walgreens_estYurDrugCosts;
 
 	@FindBy(xpath = "//a[@dtmname='pharmacy locator:get directions']")
@@ -417,8 +422,6 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(),'Help & Contact Us')]|//h1/span[contains(text(),'Contact UnitedHealthcare')]")
 	protected WebElement contactUsHeader;
 
-	
-
 	@FindBy(xpath = "//a[@id='find_searchagainbtn']")
 	protected WebElement searchAgainButton;
 
@@ -440,10 +443,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInEnglish;
 
-	@FindBy(xpath = "//html[@lang='zh']")
+	@FindBy(xpath = "//html[@lang='en']")//DOM does not get update after language change to Chinese or Spanish
 	protected WebElement pgInChinese;
 
-	@FindBy(xpath = "//html[@lang='es']")
+	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInSpanish;
 
 	@FindBy(xpath = "//body")

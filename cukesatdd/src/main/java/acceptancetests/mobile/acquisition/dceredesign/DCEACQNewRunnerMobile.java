@@ -23,6 +23,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -56,6 +57,16 @@ public class DCEACQNewRunnerMobile {
 		this.scenario = scenario;
 	}
 	
+	
+	@Then("^the user validates enroll option as per following flag$")
+	public void the_user_validates_enroll_option_as_per_following_flag(DataTable attributes) throws Throwable{
+	      DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+					.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		    Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+			String Enroll_Flag = memberAttributesMap.get("EnrollFlag");
+		  drugDetailsPage.ClickEnrollbtn(Enroll_Flag);
+	}
 
 	@Then("^the user edits supply length to three months for following drug$")
 	public void the_user_edits_supply_length_to_three_months_for_following_drug(DataTable givenAttributes)

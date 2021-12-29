@@ -10,7 +10,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
       | Year      | <year>     |
-    When user select a provider and save it
+    When user select a provider from home page and save it
 
     @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
     Examples: 
@@ -69,7 +69,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
       | Year      | <year>     |
-    When user select a provider and save it
+    When user select a provider from home page and save it
 
     @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @sanity
     Examples: 

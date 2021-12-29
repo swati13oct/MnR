@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import java.awt.AWTException;
@@ -143,13 +144,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
 	private WebElement validateEmailButtonOnPlanDetails;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink1;
+
 	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink1);
 		return new ComparePlansPageMobile(driver);
-		
+
 	}
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
@@ -215,7 +217,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(css = "#distance")
+	@FindBy(css = "#miles")
 	WebElement distanceDropownID;
 
 	@FindBy(css = "#englishDocs")
@@ -1694,7 +1696,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
 			jsClickNew(dentalCoverPopupContinue);
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			System.out.println("Moved to dental directoy rally page");
 
 			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
@@ -1760,11 +1762,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
+	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone'].isSelected();")
+	public WebElement addToCompareCheckBox;
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink;
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
-		jsClickNew(addToCompareLabel);
+		if (addToCompareCheckBox.isDisplayed()) {
+			jsClickNew(addToCompareLabel);
+		}
 		jsClickNew(comparePlansLink1);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);

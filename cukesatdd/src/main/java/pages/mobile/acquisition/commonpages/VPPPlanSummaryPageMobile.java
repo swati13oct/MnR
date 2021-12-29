@@ -2496,7 +2496,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Out Of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
@@ -2556,6 +2556,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
+		System.out.println("\n\n================="+annualDeductible+"============="+planDeductible+"=================\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -4190,6 +4191,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
+		driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")).click();
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
@@ -5268,7 +5270,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
-		sleepBySec(5);
+		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -6159,7 +6161,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6179,4 +6181,3 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 }
-

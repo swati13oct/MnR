@@ -108,7 +108,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage
 	// (Part C) Plans - UHC ..')]")
-	@FindBy(xpath = "//div[text()='Learn More About Medicare Advantage Plans']")
+	@FindBy(xpath = "//div[contains(text(),'Learn More About Medicare Advantage Plans')]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -177,10 +177,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
-	
+
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
-	
+
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
@@ -226,7 +226,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
 	private WebElement MaleGender;
 
-	//@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	// @FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
@@ -590,7 +590,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validateNew(GoogleSearchField);
 		GoogleSearchField.click(); // Do not remove this click or change to jsClick, added to invoke keyboard on
 									// mobile device.
+		//GoogleSearchField.sendKeys("UHC Medicare Advantage Plans");
 		sendkeysMobile(GoogleSearchField, "UHC Medicare Advantage Plans");
+		//GoogleSearchField.sendKeys(Keys.ENTER);
+		//getkeypad();
 		clickSubmitFromMobileKeyboard(driver);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);
@@ -1876,6 +1879,17 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		String urlCheck = driver.getCurrentUrl();
 		String expectedURL = urlCheck.replace(prodURL, offlineprodURL);
 		System.out.println("**********Actual URL is displayed *************" + expectedURL);
+
+	}
+
+	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
+	private WebElement addYourInformation;
+
+	public void addInfoAndMedSupFormTFN() throws InterruptedException {
+		CheckPageLoad();
+		// CheckiPerseptions();
+		validate(addYourInformation, 30);
+		jsClickNew(addYourInformation);
 
 	}
 }
