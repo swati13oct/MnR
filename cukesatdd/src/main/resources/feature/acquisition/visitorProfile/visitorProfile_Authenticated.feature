@@ -258,7 +258,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @validateHeaderWidget @authenticated
-  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
+  Scenario Outline: Verify Visitor Profile page Header
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -294,7 +294,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | name | userName              | password   |
       | AARP | VD   | vdatdd_17@getnada.com | Password@1 |
 
-    @visitorProfile_UHC @check
+    @visitorProfile_UHC
     Examples:
       | site | name | userName              | password   |
       | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
