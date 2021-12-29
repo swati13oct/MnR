@@ -646,17 +646,17 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
     When user clicks on Start Now to get start the PRE flow external page for lower env
-    When user clicks on Start Now to start the PRE flow external page for lower env
-    And user clicks on get started to start questionnaire
+    #And user clicks on get started to start questionnaire
+    And clicks on get started button and runs questionnaire
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
     #And the user validates SAM icons on the page
     And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
-    And user select plantype in the coverage options page
+    And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
     Then user select add drug option in the Drug page
       | Drug Selection | <Drug Selection>                                                       |
@@ -666,36 +666,37 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
     And the user click on view plan in results page
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
+    #And the user click on view plan in results page
     And User clicks on Back to Plans on detail page
-    And the user validates SAM icons on the page
-      | TFN Xpath | <TFNxpath2> |
-    And the user clicks the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user validates SAM icons on the page
+    And the user views the plans for below plan type
+      | Plan Type | <MAplantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    #Then the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
+      | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
     And the user views plan details for selected plan and validates
       | Plan Name | <planname> |
-    And the user validates SAM icons on the page
-      | TFN Xpath | <TFNxpath2> |
-    Then the user clicks on Enroll Now in Details Page to start the OLE flow on the site
-    #Then The User validates the Plan details on OLE page
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail OLE page
+    #Then the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath4> |
-    #And user closes current tab and navigate to previous tab
-    And the user closes the new browser tab
+      | TFN Xpath | <TFNxpath2> |
+    # Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
+    Then the user clicks on Enroll Now in Details Page to start the OLE flow on the site
+    #Then the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
 
     @CampaignExternal_Scenario1_AARP_Stage @regressionAARP @campaignExternalStage
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county          | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                            | TFNxpath                                    | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4                                   | TFNxpath5                            | defaultPharmacy       |
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   10001 | NO            | New York County | MAPD       | 1-866-979-3947 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Prime (HMO) | //span[contains(@class, 'invoca_swap_sam')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | current  | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap_sam')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012869 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[contains(@class,'invoca_swap tel tfn')] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy |
+      | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                    | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4                                   | TFNxpath5                            | defaultPharmacy       |
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | NO            | Miami-Dade County | MAPD       | 1-866-979-3947 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //span[contains(@class, 'invoca_swap_sam')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap_sam')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012869 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[contains(@class,'invoca_swap tel tfn')] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy |
 
     @CampaignExternal_Scenario1_UHC_Stage @regressionUHC @campaignExternalStage
     Examples: 
-      | Scenario                                             | externallink                                                | zipcode | isMultiCounty | county          | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                            | TFNxpath                                    | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4                                   | TFNxpath5                            | defaultPharmacy       |
-      | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   10001 | NO            | New York County | MAPD       | 1-877-589-2553 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Prime (HMO) | //span[contains(@class, 'invoca_swap_sam')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | current  | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap_sam')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-888-378-0254 | 8012870 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[contains(@class,'invoca_swap tel tfn')] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy |
+      | Scenario                                             | externallink                                                | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                    | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4                                   | TFNxpath5                            | defaultPharmacy       |
+      | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | NO            | Miami-Dade County | MAPD       | 1-877-589-2553 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //span[contains(@class, 'invoca_swap_sam')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap_sam')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-888-378-0254 | 8012870 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[contains(@class,'invoca_swap tel tfn')] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy |
