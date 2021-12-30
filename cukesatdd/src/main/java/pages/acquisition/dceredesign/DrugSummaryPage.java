@@ -1300,7 +1300,11 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
+		/*
+		Removed After Page Re-design
 		validateNew(PharmacyFilterApplyBtn);
+		*/
+		validateNew(pharmacySearchBtn);
 		PharmacyFilterTxtBx.sendKeys("a");
 		System.out.println("FIlter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
@@ -1311,8 +1315,8 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
 		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
@@ -1324,9 +1328,9 @@ public class DrugSummaryPage extends UhcDriver {
 		PharmacyFilterTxtBx.clear();
 		PharmacyFilterTxtBx.sendKeys(filterText);
 		System.out.println("FIlter text entered : "+filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
-		System.out.println("Apply button clicked for filter text"+filterText);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
+		System.out.println("Search button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
 			System.out.println("Pharmacy Name : "+PharmacyName.getText());
 			if(!PharmacyName.getText().contains(filterText)) {
