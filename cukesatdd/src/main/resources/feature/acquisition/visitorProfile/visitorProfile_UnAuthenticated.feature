@@ -300,11 +300,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
       | AARP | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | AARP | Virginia |  23666 | NO            | MS       | future   | 11/11/1949 | Hampton City | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
       | UHC  | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | UHC  | Virginia|  23666  | NO            | MS       | future   | 11/11/1949 | Hampton City    | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
