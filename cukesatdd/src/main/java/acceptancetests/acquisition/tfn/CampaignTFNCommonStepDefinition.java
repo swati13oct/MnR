@@ -16,6 +16,7 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -34,6 +35,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.tfn.CampaignTFNPage;
 
@@ -1184,10 +1186,12 @@ public class CampaignTFNCommonStepDefinition {
 
 		if (county == null)
 			county = "None";
-
-		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		CampaignTFNPage tfnPage=new CampaignTFNPage(wd);
 		tfnPage.enterZipDistanceDetails(zipcode, distance, county, planName);
-
+		PharmacySearchPageNew pharmacySearchPage = new PharmacySearchPageNew(wd);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
 	@Given("^the user is on UHC medicare solutions acquisition site from Campaign Traffic$")
