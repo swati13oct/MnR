@@ -11,9 +11,9 @@ import io.cucumber.testng.PickleWrapper;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
 		"src/main/resources/feature/acquisition/vpp" }, monochrome = true, plugin = { "pretty",
 				"html:reports/test-report.html", "json:target/cucumber-RunMRATDDAcquisitionVPP.json",
-				"timeline:target" }, tags = "@kiriti", dryRun = false)
+				"timeline:target" }, tags = "@HPA", dryRun = false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionVPP extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

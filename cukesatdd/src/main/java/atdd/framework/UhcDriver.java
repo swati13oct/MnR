@@ -1063,7 +1063,7 @@ public abstract class UhcDriver {
 		 */
 		jsMouseOver(hdrMenuElement);
 		jsMouseOver(menuDropListItem);
-		jsClickNew(menuDropListItem);
+		menuDropListItem.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
