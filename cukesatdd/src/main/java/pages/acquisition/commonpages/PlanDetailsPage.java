@@ -2148,4 +2148,6 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail(
 					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_Catastrophic.getText()+" <<<<<");
 	}
+	
+
 }
