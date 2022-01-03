@@ -1503,7 +1503,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
 	public WebElement viewAllplansButton;
 
-	@FindBy(id = "addDrug")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement addMyDrugsButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
@@ -1785,9 +1785,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = ".uhc-card__content")
 	public WebElement DrugDetails_DrugCostsCard;
 
+	@FindBy(xpath = "(//div[contains(@class,'uhc-button__text btn_styles')])[1]")
+	public WebElement DrugCostDetailsButton;
+	
 	public DrugDetailsPageMobile clickDrugCostDetails_DrugInfoModal() {
-		validateNew(DrugInfoModal_DrugCostDetailsBtn);
-		jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugCostDetailsButton);
+		jsClickNew(DrugCostDetailsButton);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsCard, 30);
@@ -1825,15 +1828,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath(
-					"//*[(@id='editdruglist')]//*[contains(text(), '" + currentAddedDrug + "')]"));
+					"//*[(@id='viewDrugInformationPopup')]//*[contains(text(), '" + currentAddedDrug + "')]"));
 			
-//			WebElement DrugYouPay = driver
-//					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
-//							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
-			WebElement DrugYouPay = driver.findElement(
-					By.xpath("(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
-							+ "//*[contains(text(), '" + currentAddedDrug
-							+ "')]//following::li[contains(text(),'$')]"));
+			WebElement DrugYouPay = driver
+					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
+							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
+			
+//			WebElement DrugYouPay = driver.findElement(
+//					By.xpath("(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
+//							+ "//*[contains(text(), '" + currentAddedDrug
+//							+ "')]//following::li[contains(text(),'$')][3]"));
 			// DrugYouPay.getText will get child element text as well in Safari browser
 			// which fails the scripts ahead
 			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {

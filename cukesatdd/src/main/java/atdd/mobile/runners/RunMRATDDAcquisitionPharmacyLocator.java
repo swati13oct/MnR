@@ -15,9 +15,9 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPharmacyLocator.json",
 						"timeline:target" },
-				tags = "@lang", dryRun=false)
+				tags = "@HPA", dryRun=false)
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionPharmacyLocator extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

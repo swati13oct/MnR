@@ -219,7 +219,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath ="//*[contains(text(), 'paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 
-	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
 	private WebElement EmailAddress;
 
 	//Submit Application Disclaimer
@@ -242,11 +242,11 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*")
 	private WebElement HealthInsuranceName;
 
-	@FindBy(xpath = "//span[text()= 'Group Number' or text()= 'Group ID' ]//following-sibling::*")
+	@FindBy(xpath="//*[text()= 'Group Number' or text()= 'Group ID' ]//following-sibling::*")
 	private WebElement HealthInsuranceGroupNo;
 
 	//@FindBy(xpath = "//*[contains(text(), 'Member Number')]//following-sibling::*")
-	@FindBy(xpath = "//span[text()= 'Member Number' or text()= 'Member ID' ]//following-sibling::*")
+	@FindBy(xpath="//*[text()= 'Member Number' or text()= 'Member ID' ]//following-sibling::*")
 	private WebElement HealthInsuranceMemberNo;
 
 	@FindBy(xpath = "//*[contains(text(), 'Name of Insurance')]//following-sibling::*")
@@ -321,7 +321,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 
-	@FindBy(xpath = "//span[contains(text(),'How would you like to pay for your plan?')]//following-sibling::span")
+	@FindBy(xpath="//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
 	private WebElement paymentPlanDisplay;
 
 	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")

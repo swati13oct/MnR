@@ -26,6 +26,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -388,17 +389,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 
-	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
+	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	// @FindBy(xpath =
+	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
+	// application')])[1]")
+	private WebElement Start_Application;
+
 	@FindBy(className = "loading-dialog")
 	public List<WebElement> loadingBlock;
 
 	@FindBy(id = "msVppDOB")
+	//@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
 	private WebElement DOB;
+
+	@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
+	private WebElement DOB1;
 
 	@FindBy(id = "mpaed-month")
 	private WebElement monthDrpDwnPartA;
@@ -642,10 +653,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	WebElement ViewPlanMedSupPage;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
+	//@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
 	private WebElement femaleGender;
 
+	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
+
+	private WebElement femaleGender1;
+
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
+//@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[2]")
 	private WebElement MaleGender;
+
+	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[2]")
+	private WebElement MaleGender1;
 
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 	private WebElement medicareGuidePopup;
@@ -691,6 +711,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
 	private WebElement CoverageMedicaid;
 
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[4]")
+	private WebElement LostCoverage;
+
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
 	private WebElement CoveragePartc;
 	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
@@ -706,7 +729,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//label[text()='No'])[1]")
 	private WebElement CoverageVerification2;
-	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	//@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	@FindBy(xpath = "(//label[text()='No'])[2]")
 	private WebElement CoverageVerificationAcknowledge;
 
 	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
@@ -779,13 +803,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(), 'Guide to Health Insurance for People')]")
 	private WebElement RightRail_HealthInsurance;
-	@FindBy(xpath = "//a[contains(text(), 'Your Guide to AARP Medicare Supplement Insurance')]")
+	@FindBy(xpath = "//*[contains(text(), 'Your Guide to AARP Medicare Supplement')]")
 	private WebElement RightRail_AARPSupplementPlans;
 
 	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application') or contains(text(),'Print information on this page')]")
 	private WebElement PrintandSave_Application;
 
-	@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")
+	//@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")
+	@FindBy(xpath = "//*[contains(text(), 'Outline of Coverage')]")
 	private WebElement medsuppOLE_PlanOverview;
 
 	@FindBy(xpath = "//a[contains(text(), 'Rules and Disclosures')]")
@@ -1047,6 +1072,99 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'swiper-container')]//div[contains(@class,'plan-name')]")
 	private WebElement planListContainerMSPlans;
+
+
+	@FindBy(xpath = "//*[@for='KidneyProblem_2']")
+	private WebElement kidneyProblem;
+
+	@FindBy(xpath = "//*[@for='EligibilityAdmitToHospPast90Days_2']")
+	private WebElement Eligibility;
+
+	@FindBy(xpath = "//*[@for='NursingFacility_2']")
+	private WebElement NursingFacility;
+
+
+
+	@FindBy(xpath = "//*[@for='EligibilitySurgery_2']")
+	private WebElement EligibilitySurgery;
+
+	@FindBy(xpath = "//*[@for='EligibilityHeartAttackTIAStroke_2']")
+	private WebElement EligibilityHeartAttack;
+
+	@FindBy(xpath = "//*[@for='atrial_2']")
+	private WebElement atrial;
+
+	@FindBy(xpath = "//*[@for='ArteryorVeinBlockage_2']")
+	private WebElement artery;
+
+	@FindBy(xpath = "//*[@for='PeripheralVascularDisease_2']")
+	private WebElement peripheral;
+
+
+	@FindBy(xpath = "//*[@for='Cardiomyopathy_2']")
+	private WebElement cardio;
+
+	@FindBy(xpath = "//*[@for='CongestiveHeartFailure_2']")
+	private WebElement CongestiveHeartFailure;
+
+	@FindBy(xpath = "//*[@for='CoronaryArteryDisease_2']")
+	private WebElement CoronaryArtery;
+
+
+	@FindBy(xpath = "//*[@for='ChronicLungDisease_2']")
+	private WebElement ChronicLungDisease;
+
+	@FindBy(xpath = "//*[@for='ESRD_2']")
+	private WebElement ESRD;
+
+	@FindBy(xpath = "//*[@for='ChronicKidneyDisease_2']")
+	private WebElement ChronicKidneyDisease;
+
+	@FindBy(xpath = "//*[@for='Diabetes_2']")
+	private WebElement Diabetes;
+
+
+	@FindBy(xpath = "//*[@for='Cancer_2']")
+	private WebElement Cancer;
+
+	@FindBy(xpath = "//*[@for='CirrhosisDisease_2']")
+	private WebElement CirrhosisDisease;
+
+	@FindBy(xpath = "//*[@for='macular_2']")
+	private WebElement macular;
+
+	@FindBy(xpath = "//*[@for='multiple_sclerosis_2']")
+	private WebElement multiple_sclerosis;
+
+	@FindBy(xpath = "//*[@for='rheumatoid_2']")
+	private WebElement rheumatoid;
+
+	@FindBy(xpath = "//*[@for='nervous_condition_2']")
+	private WebElement nervouscondition;
+
+	@FindBy(xpath = "//*[@for='TobaccoUse_2']")
+	private WebElement Tobacco;
+
+
+
+	@FindBy(xpath = "//*[@for='MedicaidCovered_2']")
+	private WebElement MedicaidCovered;
+
+
+
+	@FindBy(xpath = "//*[@for='ExistingMedicare_2']")
+	private WebElement ExistingMedicare;
+
+	@FindBy(xpath = "//*[@for='ExistMedSupp_2']")
+	private WebElement ExistMedSupp;
+
+	@FindBy(xpath = "//*[@for='OtherInsCoverage_2']")
+	private WebElement OtherInsCoverage;
+
+	@FindBy(xpath = "//*[@for='CpaSignatureInd']")
+	private WebElement CpaSignatureInd;
+
+
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -2464,13 +2582,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
 		} else
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2549,14 +2667,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
-					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(text(),'Out Of Pocket')])"));
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(text(),'Out of Pocket')])"));
 			
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
-					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -4684,15 +4802,53 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
+	@FindBy(xpath = "//*[@id='part-b-month']")
+	private WebElement PartBMonth;
 
+	@FindBy(xpath = "//*[@id='part-b-year']")
+	private WebElement PartByear;
+
+	@FindBy(xpath = "//*[@id='part-b-month']//option[2]")
+	private WebElement PartBMonthDropDown;
+
+	@FindBy(xpath = "//*[@id='part-b-year']//option[2]")
+	private WebElement PartByearDropDown;
+
+	@FindBy(xpath = "//*[@id='plan-start-date']")
+	private WebElement PlanstartDate;
+	@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
+	private WebElement ContinueApplication;
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-		insuredStatus.click();
+
+
+
+		DOB1.sendKeys("10111952");
+		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
+		jsClickNew(MaleGender1);
+		Thread.sleep(2000);
+	//	jsClickNew(PartBMonth);
+		String PartBMonth_Displayed = PartBMonth.getAttribute("value");
+		String PartByear_Displayed = PartByear.getAttribute("value");
+		System.out.println("part_A_Month_Displaye Displayed : "+PartBMonth_Displayed);
+		System.out.println("part_A_Year_Displaye Displayed : "+PartByear_Displayed);
+//		jsClickNew(PartBMonthDropDown);
+//		jsClickNew(PartByear);
+//		jsClickNew(PartByearDropDown);
+		jsClickNew(ContinueApplication);
+		try {
+			CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+			insuredStatus.click();
+		}catch(Exception e) {
+
+		}
+
+	//
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -4746,8 +4902,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		//Added line for Birthday
-		jsClickNew(nextButton);
-		jsClickNew(BirthdayEnrollment);
+		//jsClickNew(nextButton);
+		jsClickNew(LostCoverage);
+		//jsClickNew(BirthdayEnrollment);
 		//jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
@@ -4785,40 +4942,147 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(CoverageVerificationAcknowledge);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		//jsClickNew(paymentOption);
+
+
+		System.out.println("Health Questions are displayed");
+
+		jsClickNew(kidneyProblem);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+
+		System.out.println("Eligibility Health Questions are displayed");
+		jsClickNew(Eligibility);
+		jsClickNew(NursingFacility);
+		jsClickNew(ESRD);
+		jsClickNew(EligibilitySurgery);
+
+		jsClickNew(nextButton);
+
+		jsClickNew(atrial);
+		jsClickNew(artery);
+		jsClickNew(peripheral);
+		jsClickNew(cardio);
+		jsClickNew(CongestiveHeartFailure);
+		jsClickNew(CoronaryArtery);
+
+		jsClickNew(ChronicLungDisease);
+		jsClickNew(ChronicKidneyDisease);
+		jsClickNew(Diabetes);
+
+
+		jsClickNew(Cancer);
+		jsClickNew(CirrhosisDisease);
+		jsClickNew(macular);
+
+
+		jsClickNew(multiple_sclerosis);
+		jsClickNew(rheumatoid);
+		jsClickNew(nervouscondition);
+		jsClickNew(EligibilityHeartAttack);
+
+
+		jsClickNew(nextButton);
+		//jsClickNew(nextButton);
+
+
+		System.out.println("Your Information ? Medical Providers");
+		//jsClickNew(Tobacco);
+		//jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Tobacco Page is Displayed");
+		jsClickNew(Tobacco);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		//System.out.println("Tobacco Page is Displayed");
+		Thread.sleep(5);
+	//	jsClickNew(nextButton);
+	//	jsClickNew(nextButton);
+	//	jsClickNew(MedicaidCovered);
+	//	jsClickNew(nextButton);
+		System.out.println("Past and Current Coverage Page is Displayed");
+	//	jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page1 is Displayed");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page2 is Displayed");
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Medicaid ");
+		jsClickNew(MedicaidCovered);
+
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medicare");
+		jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medsupp");
+		jsClickNew(ExistMedSupp);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Other Health Insurance Coverage");
+		jsClickNew(OtherInsCoverage);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Verification");
+		jsClickNew(CpaSignatureInd);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Payment ? Verification");
 		jsClickNew(paymentOption);
 		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Document Delivery ? Verification");
 		Thread.sleep(2000);
 		jsClickNew(DocumentDelivery);
 		jsClickNew(nextButton);
 
 		///////////////////////// New to add another Method
+		Thread.sleep(2000);
 		validateNew(EmailAddressNo);
 		jsClickNew(EmailAddressNo);
 		jsClickNew(nextButton);
+		Thread.sleep(2000);
 		validateNew(ReadAgreement);
 		jsClickNew(ReadAgreement);
 		jsClickNew(nextButton);
 
+		Thread.sleep(2000);
 		validateNew(ProceedAuthorization);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ProceedAuthorization);
 		jsClickNew(ProceedAuthorization);
+		Thread.sleep(2000);
+		System.out.println("Authorization ? Verification of Application Information and Authorization for the Release of Medical Information is displayed");
 		validateNew(VerificationAgree);
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
-
-		// validateNew(VerificationAgree2);
-		// jsClickNew(VerificationAgree2);
-		// jsClickNew(nextButton);
+		Thread.sleep(2000);
+		/*try {
+			System.out.println("Authorization ? Verification of Information is displayed");
+			validateNew(VerificationAgree2);
+			jsClickNew(VerificationAgree2);
+			jsClickNew(nextButton);
+		}catch(Exception e) {
+			System.out.println("Authorization ? Verification of Information is displayed or not");
+		}*/
 		/*
 		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
 		 * MRScenario.environment.equalsIgnoreCase("prod")) {
 		 * validateNew(VerificationAgree2); Thread.sleep(3000);
 		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
 		 */
-		validateNew(VerificationAgree3);
+		/*validateNew(VerificationAgree3);
 		Thread.sleep(3000);
 		jsClickNew(VerificationAgree3);
-		jsClickNew(nextButton);
+		jsClickNew(nextButton);*/
 		// }
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
@@ -5475,55 +5739,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot, String navigateComparePage)
 			throws InterruptedException {
-		/*
-		 * boolean flag = false; Actions action = new Actions(driver); if
-		 * (btn.equalsIgnoreCase("Compare")) { if (plans == 1) { Thread.sleep(2000);
-		 * jsClickNew(compareLink); Thread.sleep(10000); } else { while (plans > 0) {
-		 * Thread.sleep(2000); WebElement comparePlanLink = driver
-		 * .findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
-		 * jsClickNew(compareLink); Thread.sleep(10000); plans = plans - 1; } }
-		 * if(navigateComparePage.equalsIgnoreCase("Yes")) {
-		 * action.moveToElement(compareButton).build().perform(); compareButton.click();
-		 * Thread.sleep(2000); //
-		 * action.moveToElement(comparePageHeader).build().perform(); //Failing on
-		 * Safari browser scrollToView(comparePageHeader); if
-		 * (comparePageHeader.isDisplayed()) { flag = true; } }
-		 * if(navigateComparePage.equalsIgnoreCase("No")) { flag = true; }
-		 * 
-		 * 
-		 * } else if (btn.equalsIgnoreCase("Save")) { if (plans == 1) {
-		 * Thread.sleep(2000); action.moveToElement(savePlanButton).build().perform();
-		 * savePlanButton.click(); Thread.sleep(2000);
-		 * flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked"); } else if
-		 * (shot.equalsIgnoreCase("first")) { while (plans > 0) { Thread.sleep(2000);
-		 * WebElement savePlanLink = driver
-		 * .findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans +
-		 * "]"));
-		 * 
-		 * action.moveToElement(savePlanLink).build().perform(); savePlanLink.click();
-		 * Thread.sleep(10000); plans = plans - 1; if(close.isDisplayed()) {
-		 * close.click(); }
-		 * flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked"); } } else if
-		 * (shot.equalsIgnoreCase("second")) { Thread.sleep(2000);
-		 * jsClickNew(savePlanK); Thread.sleep(10000); jsClickNew(savePlanL);
-		 * Thread.sleep(10000);
-		 * flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
-		 * backToPlans.click(); Thread.sleep(10000); } } else if
-		 * (btn.equalsIgnoreCase("Information")) { Thread.sleep(2000);
-		 * action.moveToElement(editYourInformationLink).build().perform();
-		 * editYourInformationLink.click(); Thread.sleep(2000);
-		 * action.moveToElement(DOB).build().perform(); if (DOB.isDisplayed()) { flag =
-		 * true; }
-		 * 
-		 * } else { Thread.sleep(2000); //
-		 * action.moveToElement(ViewPlanMedSupPage).build().perform();
-		 * scrollToView(ViewPlanMedSupPage); ViewPlanMedSupPage.click();
-		 * Thread.sleep(2000); waitForPageLoadSafari(); //
-		 * action.moveToElement(compareButton).build().perform();
-		 * scrollToView(compareButton); if (compareLink.isDisplayed()) { flag = true; }
-		 * 
-		 * } return flag;
-		 */
 		boolean flag = false;
 		Actions action = new Actions(driver);
 		if (btn.equalsIgnoreCase("Compare")) {
@@ -5598,7 +5813,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// work on Safari browser
 			jsMouseOver(editYourInformationLink);
 			editYourInformationLink.click();
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			// action.moveToElement(DOB).build().perform(); //Does not work on Safari
 			// browser
 			jsMouseOver(DOB);
@@ -5612,7 +5827,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// on Safari browser
 			jsMouseOver(ViewPlanMedSupPage);
 			ViewPlanMedSupPage.click();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			// action.moveToElement(compareButton).build().perform(); //Does not work on
 			// Safari browser
 			jsMouseOver(compareButton);
@@ -5726,6 +5941,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		String zip = "90210";
 		String dob = "11/01/1951";
+		jsMouseOver(editYourInformationLink);
+		editYourInformationLink.click();
 
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
@@ -5904,7 +6121,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("---------plan name on plan details is incorrect----------");
 			}
 		}
-
+		/*------------	Benefit Table is removed-------
 		if (flag) {
 			System.out.println("Validating benefit table link on plan details----------");
 
@@ -5931,7 +6148,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("---------benefit table link on plan details is not working----------");
 			}
 		}
-
+					------------	Benefit Table is removed-------*/
 		if (flag) {
 			System.out.println("Validating start application button on plan details----------");
 
@@ -5980,6 +6197,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 
+		/*-------Benefit Table is not present
 		if (flag) {
 			System.out.println("Validating benefit table link on plan compare----------");
 
@@ -6006,7 +6224,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("---------benefit table link on plan compare is not working----------");
 			}
 		}
-
+						-------Benefit Table is not present*/
 		if (flag) {
 			System.out.println("Validating saved plan count on plan compare----------");
 			int noOfSavedPlans = Integer.parseInt(savedPlanHeaderCount.getText());
@@ -6077,7 +6295,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
 	private WebElement viewSavedPlansBtn;
 
-	@FindBy(xpath = "//h2[contains(text(),'Your Guest Profile')]")
+	@FindBy(xpath = "(//*[contains(text(),'Your Guest Profile')])[1]")
 	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])")
@@ -6779,7 +6997,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	public void medsuppOLEPlanOverview() throws InterruptedException {
+	public void medsuppOLEPlanOvervieworOutlineCoverage() throws InterruptedException {
 		validateNew(medsuppOLE_PlanOverview);
 		CommonUtility.waitForPageLoadNew(driver, medsuppOLE_PlanOverview, 30);
 		String parentWindow = driver.getWindowHandle();
@@ -6802,11 +7020,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
 				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
 						&& CurrentRailURL.contains(".pdf")) {
-			System.out.println("****************  PlanOverview is displayed  ***************");
-
+			//System.out.println("****************  PlanOverview is displayed  ***************");
+			System.out.println("Outline Coverage is displayed");
 			Assertion.assertTrue(true);
 		} else {
-			Assertion.fail("**************** PlanOverview is not loaded ***************");
+		//	Assertion.fail("**************** PlanOverview is not loaded ***************");
+			Assertion.fail("Outline Coverage is not displayed");
 		}
 		driver.close();
 		driver.switchTo().window(parentWindow);
@@ -6902,77 +7121,91 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
 		MedicareNumber.sendKeys(Medicarenumber);
 		clickGender();
-		// Gender.click();
-		// jsClickNew(Gender);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		jsClickNew(BirthdayEnrollment);
+		System.out.println("Past and Current Coverage Page is Displayed");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page1 is Displayed");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page2 is Displayed");
 		jsClickNew(nextButton);
-		jsClickNew(CoverageMedicaid);
+
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Medicaid ");
+		jsClickNew(MedicaidCovered);
+
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medicare");
+		jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medsupp");
+		jsClickNew(ExistMedSupp);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		jsClickNew(CoveragePartc);
+		System.out.println("Other Health Insurance Coverage");
+		jsClickNew(OtherInsCoverage);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		jsClickNew(CoverageSupplementPlans);
+		System.out.println("Past and Current Coverage ? Verification");
+		jsClickNew(CpaSignatureInd);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		jsClickNew(CoverageotherInsurance);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerification);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerification1);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerification2);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerification2);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerification);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
-		jsClickNew(CoverageVerificationAcknowledge);
-		jsClickNew(nextButton);
-		Thread.sleep(2000);
+		System.out.println("Payment ? Verification");
 		jsClickNew(paymentOption);
 		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Document Delivery ? Verification");
 		Thread.sleep(2000);
 		jsClickNew(DocumentDelivery);
 		jsClickNew(nextButton);
 
 		///////////////////////// New to add another Method
+		Thread.sleep(2000);
 		validateNew(EmailAddressNo);
 		jsClickNew(EmailAddressNo);
 		jsClickNew(nextButton);
+		Thread.sleep(2000);
 		validateNew(ReadAgreement);
 		jsClickNew(ReadAgreement);
 		jsClickNew(nextButton);
 
+		Thread.sleep(2000);
 		validateNew(ProceedAuthorization);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ProceedAuthorization);
 		jsClickNew(ProceedAuthorization);
+		Thread.sleep(2000);
+		System.out.println("Authorization ? Verification of Application Information and Authorization for the Release of Medical Information is displayed");
 		validateNew(VerificationAgree);
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
-		// ----------Added Lines for vpp pages-------------------
-		// validateNew(VerificationAgree2);
-		// jsClickNew(VerificationAgree2);
-		//////////// ---------------
-		// jsClickNew(nextButton);
-		validateNew(VerificationAgree3);
+		Thread.sleep(2000);
+		try {
+			System.out.println("Authorization ? Verification of Information is displayed");
+			validateNew(VerificationAgree2);
+			jsClickNew(VerificationAgree2);
+			jsClickNew(nextButton);
+		}catch(Exception e) {
+			System.out.println("Authorization ? Verification of Information is displayed or not");
+		}
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) {
+		 * validateNew(VerificationAgree2); Thread.sleep(3000);
+		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
+		 */
+		/*validateNew(VerificationAgree3);
 		Thread.sleep(3000);
 		jsClickNew(VerificationAgree3);
-		jsClickNew(nextButton);
+		jsClickNew(nextButton);*/
+		// }
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			validateNew(SubmitApplication);
@@ -6988,7 +7221,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return SubmitConfirmation;
 		}
 		return Medicarenumber;
-
 	}
 
 	public MedSuppOLEPage clickOnStartApplication() {
@@ -7296,5 +7528,201 @@ public String GetMonthlyPremiumValue() {
 		}
 	}
 
+	public String StartApplicationforvpp3(String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_Application, 20);
+		jsClickNew(Start_Application);
+		System.out.println("Start application button is clicked on application page for VPP 3.0");
+		Thread.sleep(4000);
 
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		jsClickNew(nextButton);
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@optum.com");
+		phoneNumber.sendKeys("1234567890");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(cancelButton);
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		jsClickNew(ReturntoApplicationButton);
+		Thread.sleep(2000);
+		// jsClickNew(nextButton);
+		return LastName;
+
+	}
+
+	public String continueApplicationuntilSubmitOtherpages(String Medicarenumber) throws InterruptedException {
+
+		// CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
+		MedicareNumber.sendKeys(Medicarenumber);
+		clickGender();
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Birthday Enrollment-Your Information ? Guaranteed Acceptance");
+		jsClickNew(BirthdayEnrollment);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage Page is Displayed");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Eligibility Page1 is Displayed");
+//		jsClickNew(nextButton);
+//		Thread.sleep(2000);
+//		System.out.println("Past and Current Coverage ? Eligibility Page2 is Displayed");
+//		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Medicaid ");
+		jsClickNew(MedicaidCovered);
+
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medicare");
+		jsClickNew(ExistingMedicare);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		System.out.println("Existing Medsupp");
+		jsClickNew(ExistMedSupp);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Other Health Insurance Coverage");
+		jsClickNew(OtherInsCoverage);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Past and Current Coverage ? Verification");
+		jsClickNew(CpaSignatureInd);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Payment ? Verification");
+		jsClickNew(paymentOption);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		System.out.println("Document Delivery ? Verification");
+		Thread.sleep(2000);
+		jsClickNew(DocumentDelivery);
+		jsClickNew(nextButton);
+
+		///////////////////////// New to add another Method
+		Thread.sleep(2000);
+		validateNew(EmailAddressNo);
+		jsClickNew(EmailAddressNo);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		validateNew(ReadAgreement);
+		jsClickNew(ReadAgreement);
+		jsClickNew(nextButton);
+
+		Thread.sleep(2000);
+		validateNew(ProceedAuthorization);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ProceedAuthorization);
+		jsClickNew(ProceedAuthorization);
+		Thread.sleep(2000);
+		System.out.println("Authorization ? Verification of Application Information and Authorization for the Release of Medical Information is displayed");
+		validateNew(VerificationAgree);
+		jsClickNew(VerificationAgree);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		try {
+			System.out.println("Authorization ? Verification of Information is displayed");
+			validateNew(VerificationAgree3);
+			jsClickNew(VerificationAgree3);
+			jsClickNew(nextButton);
+		}catch(Exception e) {
+			System.out.println("Authorization ? Verification of Information is displayed or not");
+		}
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) {
+		 * validateNew(VerificationAgree2); Thread.sleep(3000);
+		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
+		 */
+		/*validateNew(VerificationAgree3);
+		Thread.sleep(3000);
+		jsClickNew(VerificationAgree3);
+		jsClickNew(nextButton);*/
+		// }
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			validateNew(SubmitApplication);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", SubmitApplication);
+			jsClickNew(SubmitApplication);
+			validateNew(submitconfirmation);
+			String SubmitConfirmation = submitconfirmation.getText();
+			System.out.println("The return to the application code is- " + SubmitConfirmation);
+			Thread.sleep(2000);
+
+			// jsClickNew(ViewPrescriptionDrugPlans);
+			// Thread.sleep(2000);
+			return SubmitConfirmation;
+		}
+		return Medicarenumber;
+	}
+
+	public String StartApplicationthroughShopPages(String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		jsClickNew(Start_ApplicationBtn);
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(4000);
+		DOB1.sendKeys("10111952");
+		System.out.println("Date of birth is entered");
+		Thread.sleep(2000);
+		jsClickNew(MaleGender1);
+		Thread.sleep(2000);
+		//	jsClickNew(PartBMonth);
+		String PartBMonth_Displayed = PartBMonth.getAttribute("value");
+		String PartByear_Displayed = PartByear.getAttribute("value");
+		System.out.println("part_A_Month_Displaye Displayed : "+PartBMonth_Displayed);
+		System.out.println("part_A_Year_Displaye Displayed : "+PartByear_Displayed);
+//		jsClickNew(PartBMonthDropDown);
+//		jsClickNew(PartByear);
+//		jsClickNew(PartByearDropDown);
+		jsClickNew(ContinueApplication);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		jsClickNew(nextButton);
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@optum.com");
+		phoneNumber.sendKeys("1234567890");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(cancelButton);
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		jsClickNew(ReturntoApplicationButton);
+		Thread.sleep(2000);
+		// jsClickNew(nextButton);
+		return LastName;
+
+	}
 }

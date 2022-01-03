@@ -170,7 +170,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	@FindBy(id = "hsptlZip")
 	private WebElement Hospital_Zip;
 	
-	@FindBy(xpath = "//*[contains(@name,'primary-search')]")
+	//@FindBy(xpath = "//*[contains(@name,'primary-search')]")
+	@FindBy(xpath = "//*[contains(text(),'All Primary Care Providers')]")
 	private WebElement filterBtn;
 
 	public PrimaryCarePhysicianPage(WebDriver driver) {

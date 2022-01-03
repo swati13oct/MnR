@@ -81,7 +81,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from
 	// UnitedHealthcare')]")
 
-	@FindBy(xpath = "//a/h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	@FindBy(xpath = "//div[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	// @FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
@@ -108,7 +108,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage
 	// (Part C) Plans - UHC ..')]")
-	@FindBy(xpath = "//div[text()='Learn More About Medicare Advantage Plans']")
+	@FindBy(xpath = "//div[contains(text(),'Learn More About Medicare Advantage Plans')]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -590,7 +590,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validateNew(GoogleSearchField);
 		GoogleSearchField.click(); // Do not remove this click or change to jsClick, added to invoke keyboard on
 									// mobile device.
+		//GoogleSearchField.sendKeys("UHC Medicare Advantage Plans");
 		sendkeysMobile(GoogleSearchField, "UHC Medicare Advantage Plans");
+		//GoogleSearchField.sendKeys(Keys.ENTER);
+		//getkeypad();
 		clickSubmitFromMobileKeyboard(driver);
 		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
 		validateNew(UHCSearchLinkfromGoogle);

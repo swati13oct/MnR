@@ -300,11 +300,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
       | AARP | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | AARP | Virginia |  23666 | NO            | MS       | future   | 11/11/1949 | Hampton City | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
       | UHC  | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | UHC  | Virginia|  23666  | NO            | MS       | future   | 11/11/1949 | Hampton City    | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -455,14 +457,14 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | AARP |   07303 | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   20906 | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   30002 | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
       | AARP |   06011 | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   63113 | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   19706 | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | AARP |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
       | AARP |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC

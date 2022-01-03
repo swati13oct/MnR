@@ -18,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@planDetailsBenefits")
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDPlanBenefits extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
