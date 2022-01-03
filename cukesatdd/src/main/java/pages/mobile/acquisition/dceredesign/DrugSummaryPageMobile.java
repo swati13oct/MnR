@@ -936,7 +936,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		mobileSelectOption(sortDrpdown, sortOption, true);
 	}
 
-	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div[contains(text(), 'OptumRx Home')]")
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div//span[contains(text(), 'Mail service')]")
 	private WebElement mailOrderPharmacyMsg;
 
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
