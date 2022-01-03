@@ -845,7 +845,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * private List<WebElement> stateDropDownValues;
 	 */
 
-	@FindBy(css = "#statedrpdwn")
+	@FindBy(xpath = "//select[@id='statedrpdwn']")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
@@ -4202,13 +4202,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void enterAddressDetails(String address, String city, String state) {
 		validateNew(searchByAddressButton);
-		// searchByAddressButton.click();
 		jsClickNew(searchByAddressButton);
 		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
-		driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")).click();
+		jsClickNew(driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")));
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
