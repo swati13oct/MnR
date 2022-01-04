@@ -333,4 +333,16 @@ public class PharmacyLocatorStepDefinitionNew {
 		pharmacySearchPage.enterPharmacyName(pharmacyNameFilter);
 	}
 
+	@Then("^the user validates the searched pharmacy$")
+	public void the_user_validates_the_searched_pharmacy() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String pharmacyName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL);
+		if(pharmacySearchPage.validateSearchedPharmacy(pharmacyName)){
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Searched Pharmacy is not Available in the Results");
+		}
+	}
+
 }

@@ -474,4 +474,17 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(pharmacyNameOptionalErrorMessage));
 	}
 
+	public boolean validateSearchedPharmacy(String pharmacyName) {
+		sleepBySec(2);
+		if(PharmacyResultList.size() > 0)
+		{
+			List<WebElement> searchedPharmacyList = PharmacyResultList;
+			sleepBySec(2);
+			if(searchedPharmacyList.get(0).findElement(By.tagName("h4")).getText().contains(pharmacyName)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

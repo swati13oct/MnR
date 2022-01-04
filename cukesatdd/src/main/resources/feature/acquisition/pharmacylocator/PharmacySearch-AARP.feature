@@ -17,6 +17,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates the searched pharmacy
     Then the user validates the pharmacies results
       | Language | English |
 
