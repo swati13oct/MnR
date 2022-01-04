@@ -135,14 +135,19 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 
 		String planName = givenAttributesMap.get("Plan Name").trim();
-		String plantype = givenAttributesMap.get("Plan Type").trim();
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	
-		planSummaryPage.viewPlanSummary(plantype);
+		
+		try {
+			String plantype = givenAttributesMap.get("Plan Type").trim();
+			planSummaryPage.viewPlanSummary(plantype);
+		}
+		catch(Exception e) {
+			
+		}
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 
