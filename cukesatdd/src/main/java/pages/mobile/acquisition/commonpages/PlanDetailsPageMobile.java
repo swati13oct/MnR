@@ -1762,7 +1762,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
-	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone'].isSelected();")
+	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone']")
 	public WebElement addToCompareCheckBox;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
