@@ -144,13 +144,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
 	private WebElement validateEmailButtonOnPlanDetails;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink1;
+
 	public ComparePlansPageMobile navigateToPlanCompare() {
 		jsClickNew(comparePlansLink1);
 		return new ComparePlansPageMobile(driver);
-		
+
 	}
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetailPopUp']")
@@ -1180,12 +1181,12 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				}
 			} else {
 				WebElement AdditionalBenefitType1 = driver.findElement(By.xpath("//p[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+						+ additionalBenefits.get(i).get(1) + "')]/.."));
 				scrollToView(AdditionalBenefitType1);
 				// System.out.println("The additional Benefit to Valuidate : ");
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
-								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+								+ "')]/.."));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
@@ -1351,9 +1352,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		// rider.click();
 		jsClickNew(rider);
 		WebElement optionalRiderValue = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong"));
+				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//p"));
 		scrollToView(optionalRiderValue);
-		String optionalRiderPremium = optionalRiderValue.getText().trim();
+		String optionalRiderPremium = (optionalRiderValue.getText().trim()).split(" ")[1];
 		return optionalRiderPremium;
 	}
 
@@ -1695,7 +1696,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
 			jsClickNew(dentalCoverPopupContinue);
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			System.out.println("Moved to dental directoy rally page");
 
 			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
@@ -1761,11 +1762,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
+	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone'].isSelected();")
+	public WebElement addToCompareCheckBox;
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink;
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
-		jsClickNew(addToCompareLabel);
+		if (addToCompareCheckBox.isDisplayed()) {
+			jsClickNew(addToCompareLabel);
+		}
 		jsClickNew(comparePlansLink1);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
@@ -1846,6 +1852,5 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		return null;
 	}
-
 
 }

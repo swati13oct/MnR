@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
@@ -17,7 +18,7 @@ import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	@FindBy(css = "#addDrug")
+	@FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[2]")
 	public WebElement AddMyDrugsBtn;
 	
 	@FindBy(css = "div[class^='d-block'] #importDrug")
@@ -129,9 +130,11 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-//		validateNew(getStartedTab);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver, 45);
+		validateNew(getStartedTab);
 		validateNew(AddMyDrugsBtn);
-		validateNew(importDrugsLink);
+
 	}
 
 	public BuildYourDrugListMobile clickAddsDrugs() {

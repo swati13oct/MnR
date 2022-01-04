@@ -210,7 +210,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
 	private WebElement viewDrugPricingLink;
 
-	@FindBy(xpath = "//button[text()='Yes, Remove']")
+	//@FindBy(xpath = "//button[text()='Yes, Remove']")
+	@FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
 	private WebElement removeDrugBtn;
 
 	@FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
@@ -371,6 +372,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//span[contains(text(),'Get')]")
     private WebElement btnPREGetStarted;
+
+	@FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
+	WebElement btnReviewDrugs;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -1300,10 +1304,10 @@ public class VisitorProfilePage extends UhcDriver {
      */
     public void validateNewHeader(DataTable data) {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
-        Assertion.assertEquals("welcome, " + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
-        Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
-        Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("welcome," + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
+        Assertion.assertEquals("Your Saved\n" + "Insurance Plans (1)", savedInsuredPlans.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
@@ -1566,7 +1570,8 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void clickOnMSPlanDetailsPage(String planName) {
-	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details'][1]"));
+	    //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
+	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
 		jsClickNew(btnMSPlanDetails);
 		waitforElementNew(lnkbackToProfile);
 	}
@@ -1630,5 +1635,119 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertTrue(lnkImport.isDisplayed());
 		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'"+componentCode+"')]")).isDisplayed());
 	}
- }
+
+	public void validateNameOnFlyout(String name) {
+		sleepBySec(3);
+		driver.findElement(By.xpath("//*[contains(@class,'saved_items')]")).click();
+		WebElement authName=driver.findElement(By.xpath("//h2[@id='auth-profile']"));
+		if(authName.getText().trim().equalsIgnoreCase("Welcome, "+name)){
+			System.out.println(" Correct Text present on Flyout: "+ authName.getText().trim());
+		}else{
+			Assert.fail("Wrong Text present on Flyout: "+authName.getText().trim());
+		}
+
+
+	}
+
+	public void clickOnImportLinkOnDCE() {
+		sleepBySec(2);
+		WebElement lnkImportDCE=driver.findElement(By.xpath("(//button[@id='importDrug'])[1]"));
+		if (validateNew(lnkImportDCE)){
+			System.out.println("Import Link on DCE present");
+			jsClickNew(lnkImportDCE);
+			System.out.println("Import Link on DCE clicked");
+			sleepBySec(4);
+			WebElement ImportHeader =driver.findElement(By.xpath("(//div[@id='modal'])//div//div[contains(@class,'header')]//h2"));
+			if (ImportHeader.getText().trim().equalsIgnoreCase("import drugs and doctors")){
+				System.out.println("Import Pop-Up opened");
+			}else{
+				System.out.println("\n"+ImportHeader.getText().trim());
+				Assert.fail("Import Pop-Up not opened");
+			}
+		}else{
+			Assert.fail("Import link on DCE not present");
+		}
+
+	}
+
+	public void importOnDCE(DataTable data) {
+		Map<String, String> testData = data.asMap(String.class, String.class);
+		WebElement btnGetStarted =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
+		validateNew(btnGetStarted);
+		jsClickNew(btnGetStarted);
+		sleepBySec(1);
+		WebElement rdbYes=driver.findElement(By.xpath("//span[contains(@class,'radio-button__label') and contains(text(),'Yes')]"));
+		jsClickNew(rdbYes);
+		WebElement btnNext =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Next')]"));
+		jsClickNew(btnNext);
+		sleepBySec(3);
+
+		WebElement txtFirstName=driver.findElement(By.xpath("//input[@id='member-first-name']"));
+		WebElement txtLastName =driver.findElement(By.xpath("//input[@id='member-last-name']"));
+		WebElement txtYourDOB =driver.findElement(By.xpath("//input[@id='member-date-of-birth']"));
+		WebElement txtYourZIP =driver.findElement(By.xpath("//input[@id='member-zip-code']"));
+		WebElement txtYourMBI =driver.findElement(By.xpath("//input[@id='member-medicare-number']"));
+		WebElement chkAttest =driver.findElement(By.xpath("//input[@id='member-attestation-field']"));
+		WebElement btnViewDrugsDoc =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'View Your ')]"));
+
+		txtFirstName.sendKeys(testData.get("FirstName"));
+		txtLastName.sendKeys(testData.get("LastName"));
+		txtYourDOB.sendKeys(testData.get("DOB"));
+		txtYourZIP.sendKeys(testData.get("ZipCode"));
+		txtYourMBI.sendKeys(testData.get("MBI"));
+		//jsClickNew(driver.findElement(By.xpath("//div[@id='modal']//div//div[contains(@class,'header')]//h2")));
+		//jsClickNew(txtYourMBI);
+		sleepBySec(2);
+		jsClickNew(chkAttest);
+		sleepBySec(2);
+		//jsClickNew(btnViewDrugsDoc);
+		btnViewDrugsDoc.click();
+		sleepBySec(10);
+		waitforElementNew(btnReviewDrugs,60);
+		if (validateNew(btnReviewDrugs)){
+			System.out.println("Drug import is successfull");
+		}else{
+			Assert.fail("Drug import unsuccessfull");
+		}
+	}
+
+	public void signInOnDCEImport(String username, String password) {
+		try {
+			jsClickNew(signIn);
+			Thread.sleep(3000);
+			waitForPageLoadSafari();
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+			sleepBySec(3);
+			if(driver.getCurrentUrl().contains("health-plans/estimate-drug-costs")){
+				System.out.println("Redirect to DCE page is successful");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Redirect to DCE page is not successful");
+			}
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+	}
+}
 

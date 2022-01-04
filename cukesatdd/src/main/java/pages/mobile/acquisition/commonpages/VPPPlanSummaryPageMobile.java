@@ -34,6 +34,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -449,7 +450,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
 	private WebElement shopForAPlanOptionFindPlanButton;
 
-	@FindBy(css = "#change-location")
+	@FindBy(xpath = "//a[contains(text(),'Change ZIP')]")
 	private WebElement planOverviewChangeZipCodeLink;
 
 	@FindBy(xpath = "//*[@id='zipcode']")
@@ -641,6 +642,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// code')]")
 	@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 	private WebElement resumeApplication;
+	
+	@FindBy(xpath = "//*[contains(text(),'plans available')]")
+	private WebElement planSummaryPage;
 
 	@FindBy(xpath = "(//input[@id='DOB'])[1]")
 	private WebElement ResumeDOB;
@@ -841,7 +845,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * private List<WebElement> stateDropDownValues;
 	 */
 
-	@FindBy(css = "#statedrpdwn")
+	@FindBy(xpath = "//select[@id='statedrpdwn']")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
@@ -2409,15 +2413,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planName.contains("SNP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
 		} else
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2496,13 +2500,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -3209,21 +3213,32 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		scrollToView(planOverviewChangeZipCodeLink);
+		jsClickNew(backToPlans);
+		sleepBySec(3);
 		try {
-			clickonBackToPlanResults();
+			// if change zip code link is there then click it, once you used it then it will
+			// only display field box going forward.
 			jsClickNew(planOverviewChangeZipCodeLink);
-			validateNew(planOverviewZipCodeFieldBox, 10);
 		} catch (Exception e) {
 			System.out.println(
 					"Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
-		scrollToView(planOverviewZipCodeFieldBox);
+		// if field box already there then clear it if left over text from prior run
+		// Commenting since there is no Control key on a Mac machine
+		/*
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		 */
+		CommonUtility.waitForPageLoad(driver, planOverviewZipCodeFieldBox, 45);
+		jsClickNew(planOverviewZipCodeFieldBox);
+		planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
+		planOverviewZipCodeFieldBox.sendKeys(zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-
-		CommonUtility.checkPageIsReadyNew(driver);
+		if(!planSummaryPage.isDisplayed())
+			jsClickNew(backToPlans);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
@@ -3231,6 +3246,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -3994,8 +4010,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		validateNew(startDrpDwn);
 		CommonUtility.waitForPageLoadNewForClick(driver, startDrpDwn, 5);
-		Select selectStartMonth = new Select(startDrpDwn);
-		selectStartMonth.selectByIndex(1);
+		jsClickNew(startDrpDwn);
+		Thread.sleep(5000);
+		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
 
@@ -4185,12 +4202,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void enterAddressDetails(String address, String city, String state) {
 		validateNew(searchByAddressButton);
-		// searchByAddressButton.click();
 		jsClickNew(searchByAddressButton);
 		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
+		jsClickNew(driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")));
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
@@ -5269,7 +5286,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
-		sleepBySec(5);
+		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
