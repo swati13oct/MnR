@@ -953,9 +953,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
 		
 		swipeToPlanCard(planName);
-		WebElement planCard = driver
-				.findElement(By.xpath("(.//div[contains(@class,'segment-title')]//*[contains(text(),'" + planName
-						+ "')]//ancestor::div[contains(@class,'module-plan-overview')]//a)[1]"));
+		WebElement planCard = element
+				.findElement(By.xpath(".//div[contains(@class,'segment-title')]//*[contains(text(),'" + planName
+						+ "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
 		System.out.println("\n\n============"+element.getText()+"====================\n\n");
 		if (planCard.getText().trim().contains(planName)) {
 			return true;
@@ -1670,10 +1670,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		else
 			for (int i = 0; i < count; i++)
 				selectPlanIndexes.add(i);
+		scrollToView(driver
+				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
 		List<WebElement> allPlans = driver
 				.findElements(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])"));
+		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"========\n\n");
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
+				scrollToView(allPlans.get(i));
 				jsClickNew(allPlans.get(i));
 				System.out.println(i);
 				if (i == 1) {
