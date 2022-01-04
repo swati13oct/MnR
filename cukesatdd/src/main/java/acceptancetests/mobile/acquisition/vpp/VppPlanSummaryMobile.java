@@ -24,6 +24,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -133,19 +135,58 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 
 		String planName = givenAttributesMap.get("Plan Name").trim();
-		//String plantype = givenAttributesMap.get("Plan Type").trim();
-
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	
-		//planSummaryPage.viewPlanSummary(plantype);
-
+		
+		try {
+			String plantype = givenAttributesMap.get("Plan Type").trim();
+			planSummaryPage.viewPlanSummary(plantype);
+		}
+		catch(Exception e) {
+			
+		}
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 
+	}
+	
+	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
+	public void I_validate_planNames_on_planSummary(String planType, String planNames) throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validatePlanNames(planType, planNames);
+	}
+	
+	@Then("^I validate view more and view less links on plan summary$")
+	public void i_validate_viewMore_and_viewLess() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateViewMoreAndLessLinks();
+	}
+	
+	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
+	public void i_save_plans_and_verify_plan_count(String planType, String Counter) throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		switch (planType.toUpperCase()) {
+		case "MAPD":
+		case "MA":
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, "MA");
+			break;
+		default:
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, planType.toUpperCase());
+			break;
+		}
+	}
+	
+	@Then("^user click on close button on Drug info Modal popup")
+	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.dceModelClosepopup();
 	}
 
 	@Then("^the user validates marketing bullets of the plan$")

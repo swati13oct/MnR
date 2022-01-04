@@ -187,7 +187,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
@@ -982,7 +982,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyArticlePage(String zipcode) throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ArticlesEnrollButton);
 		waitForPageLoadSafari();
 		// }
@@ -1466,7 +1466,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//input[@id='zipcodeTxt']")
+	@FindBy(xpath = "//input[@id='zip-code']")
 	private WebElement ZipcodePharmacy;
 
 	@FindBy(xpath = "//select[@id='plan-type']")
