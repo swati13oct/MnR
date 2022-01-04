@@ -28,7 +28,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | next     |
       | 00002 | AARP |   10001 | NO            | New York         | SNP      | next     |
-      | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | next     |
+    # | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | next     |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | next     |
 
     @sanity @vbfGate
