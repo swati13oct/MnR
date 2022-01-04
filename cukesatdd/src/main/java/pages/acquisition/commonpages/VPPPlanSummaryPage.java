@@ -2039,10 +2039,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement premiumForPlan = null;
 		if (planType.equalsIgnoreCase("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-binding')]"));
 		} else
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-scope')]"));
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
 		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		String PlanPremium = premiumForPlan.getText();
 
@@ -2716,7 +2716,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]//following::span[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
