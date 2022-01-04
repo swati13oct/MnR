@@ -619,8 +619,7 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("SNP Plan Toggle Clicked");
 			pageloadcomplete();
 			waitForPageLoadSafari();
-			WebElement DrugCostsLinkforPlan = driver.findElement(
-					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
+			WebElement DrugCostsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
 			validateNew(DrugCostsLinkforPlan);
 			jsClickNew(DrugCostsLinkforPlan);

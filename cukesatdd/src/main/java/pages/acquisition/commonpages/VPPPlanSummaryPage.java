@@ -2066,8 +2066,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-			enrollForPlan = driver.findElement(By.xpath(
-					"//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+		//	enrollForPlan = driver.findElement(By.xpath(
+		//			"//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(@class,'plan-name-heading') and contains(text(), '" + planName + "')]/following::*[contains(text(),'Enroll in Plan')][2]"));
 		}
 		if (enrollForPlan != null) {
 			validateNew(enrollForPlan);

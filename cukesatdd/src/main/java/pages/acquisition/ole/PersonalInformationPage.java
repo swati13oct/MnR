@@ -829,6 +829,8 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	public CancelOLEModal OpenLogoOLEPages() {
 		validate(logoimageOLE);
+		CheckPageLoad();
+		CheckiPerseptions();
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", logoimageOLE);
 		
@@ -839,6 +841,7 @@ public class PersonalInformationPage extends UhcDriver{
 		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
 		 * e.printStackTrace(); }
 		 */
+
 		if(validate(CancellationModalOLE)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			validate(CreateProfile);
