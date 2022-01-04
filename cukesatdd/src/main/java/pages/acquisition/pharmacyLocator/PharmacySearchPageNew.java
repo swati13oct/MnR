@@ -83,6 +83,8 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 				pharmacyValidate(distanceOption_25miles));
 		Assertion.assertTrue("PROBLEM - unable to locate the zipcode input field element", 
 				pharmacyValidate(zipcodeField));
+		Assertion.assertTrue("PROBLEM - unable to locate the Pharmacy Name - Optional input field element",
+				pharmacyValidate(pharmacyNameOptionalTxt));
 	}
 	
 	public PharmacySearchPageNew validatePharmacyErrormessages(String language, String inputZip) {

@@ -450,4 +450,28 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 		return new PharmacySearchPageNew(driver);
 	}
 
+	public void enterPharmacyName(String pharmacyName) {
+		CommonUtility.waitForPageLoad(driver, pharmacyNameOptionalTxt, 5);
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, pharmacyNameOptionalTxt, 60);
+		scrollToView(pharmacyNameOptionalTxt);
+		validateOneCharPharmacyError(pharmacyName.split("")[0]);
+		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
+		if (pharmacyName != null) {
+			pharmacyNameOptionalTxt.clear();
+			sleepBySec(3);
+			pharmacyNameOptionalTxt.sendKeys(pharmacyName);
+		}
+	}
+
+	public void validateOneCharPharmacyError(String pharmacyName) {
+		pharmacyNameOptionalTxt.clear();
+		sleepBySec(3);
+		pharmacyNameOptionalTxt.sendKeys(pharmacyName);
+		searchbtn.click();
+		sleepBySec(2);
+		CommonUtility.waitForPageLoadNew(driver, pharmacyNameOptionalErrorMessage, 10);
+		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(pharmacyNameOptionalErrorMessage));
+	}
+
 }

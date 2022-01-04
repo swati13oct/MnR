@@ -240,6 +240,10 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="(//div[@id='viewpdf']//a)[2]")
 	protected WebElement viewFrontMatterPdf;
 
-	
+	@FindBy(id="filtertext")
+	protected WebElement pharmacyNameOptionalTxt;
+
+	@FindBy(xpath="//div[@id='filterError']//p")
+	protected WebElement pharmacyNameOptionalErrorMessage;
 	
 }

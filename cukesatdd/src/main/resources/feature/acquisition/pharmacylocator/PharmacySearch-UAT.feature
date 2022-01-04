@@ -21,6 +21,8 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
+    And the user enters pharmacy name for pharmacy search
+      | Pharmacy Name | CVS |
     And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |

@@ -320,7 +320,17 @@ public class PharmacyLocatorStepDefinitionNew {
 //		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
 //	}
 
-
-	
+	/** user enters following details for pharmacy search */
+	@And("^the user enters pharmacy name for pharmacy search$")
+	public void user_enters_pharmacy_name_for_pharmacy_search(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyNameFilter = inputAttributesMap.get("Pharmacy Name");
+		if(pharmacyNameFilter==null)
+			pharmacyNameFilter="";
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL,pharmacyNameFilter);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.enterPharmacyName(pharmacyNameFilter);
+	}
 
 }
