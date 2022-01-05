@@ -35,13 +35,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
-      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName      | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
+      | AARP |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
-      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName      | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear | PlanInfo                 |
+      | UHC  |   10001 | NO            | New York | None          | None         | None   | Lookup  | Ricky K. Hsu, MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  | Prime (HMO):Choice (PPO) |
 
   @PRE @PRE_UAT_DCE_VPP_Scenario-4 @F550383
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs in VPP page when MA flow complete in PRE and Add drugs in DCE
@@ -150,13 +150,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | PlanYear | PlanInfo                                                                      |
-      | AARP |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | current  | Walgreens (PDP):Preferred (PDP):Prime (HMO):Plan 1 (HMO):Complete (HMO D-SNP) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | PlanYear | PlanInfo                                                                    |
+      | AARP |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | current  | Walgreens (PDP):Preferred (PDP):Prime (HMO):Plan 1 (HMO):Plan 2 (HMO D-SNP) |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | PlanYear | PlanInfo                                                                      |
-      | UHC  |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | current  | Walgreens (PDP):Preferred (PDP):Prime (HMO):Plan 1 (HMO):Complete (HMO D-SNP) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | PlanYear | PlanInfo                                                                    |
+      | UHC  |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | current  | Walgreens (PDP):Preferred (PDP):Prime (HMO):Plan 1 (HMO):Plan 2 (HMO D-SNP) |
 
   @PRE @PRE_UAT_PlanDetails_Email_EditMyResponses_Scenario-1
   Scenario Outline: <Zipcode> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <PlanYear>  - To validate drug and doctors in Visitor profile
@@ -403,7 +403,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | UHC  |   32115 | NO            | Volusia | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Higher               | both           | Health Care Premium, Doctors | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
 
   @PRE @PRE_EditResponse_BrowserBack @F556308
-  Scenario Outline:  - To validate PlanName and PlanType in Result page when user edit preference and do browser back to Result page without using Updated View planRecom Button
+  Scenario Outline: - To validate PlanName and PlanType in Result page when user edit preference and do browser back to Result page without using Updated View planRecom Button
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -429,8 +429,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate elements in loading results page
     Then user save recommendation PlanType and PlanName to validate Browser back Functionality in results page
     Then user adds SNP options in edit response page
-      | Plan Type       | <isCoverageOpt>  |
-      | SNP Options     | <E_specialNeeds> |
+      | Plan Type   | <isCoverageOpt>  |
+      | SNP Options | <E_specialNeeds> |
     Then user return to PRE-Result page using browser back in EditMyResponse page
     Then user validate edited recommendation PlanType and PlanName in results page
     Then user validate UI and API recommendation rankings in results page
@@ -439,7 +439,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | E_specialNeeds           |
       | AARP |   10001 | NO            | New York | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Dental , Doctors | Medicaid,chronic,nursing |
-      
+
     @uatE2EUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | E_specialNeeds           |
