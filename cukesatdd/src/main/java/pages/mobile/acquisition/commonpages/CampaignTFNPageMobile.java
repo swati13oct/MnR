@@ -735,7 +735,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".back-to-plans")
 	private WebElement backToPlanResultsLink;
-
+	
+	@FindBy(xpath = "//a[contains(@class,'back-to-portfolio')]")
+	private WebElement backToPlanResultsLink2;
+	
 	/**
 	 * For mobile view plans link for a plan type are not seen on the same page
 	 * while viewing plans, hence navigating back. For medsupp 3.0, back to plan
@@ -744,7 +747,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	 * homepage.
 	 */
 	public void navigateBackToPlanResultPage() {
-		if (validate(backToPlanResultsLink)) {
+		if (validate(backToPlanResultsLink) || validate(backToPlanResultsLink2)) {
 			jsClickNew(backToPlanResultsLink);
 		} else if (validate(msPlansHeading)) {
 //			driver.navigate().back();
@@ -789,7 +792,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile ViewPlanSummary(String planType) {
 		CheckPageLoad();
-//		CheckiPerseptions();
+		CheckiPerseptions();
 
 		navigateBackToPlanResultPage();
 
@@ -1108,7 +1111,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		//
 	}
 
-	@FindBy(xpath = "(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
+	@FindBy(xpath = "(//button//span[contains(text(),'View plan') or contains(text(),'Plan Detail')])[2]")
 	private WebElement firstPlanDetailsLinkdce;
 
 	public void NavigateToPlanDetailsdce(String planType) {
