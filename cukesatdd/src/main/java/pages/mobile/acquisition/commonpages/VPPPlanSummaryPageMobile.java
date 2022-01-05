@@ -238,6 +238,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//label[@for='EmailChange_2']")
 	private WebElement EmailAddressNo;
+	
+	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
+	List<WebElement> mapdOrSnpPlansNameOnSummary;
+	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
+	List<WebElement> pdpPlansNameOnSummary;
 
 	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
 	private WebElement ReadAgreement;
@@ -277,6 +282,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "(//span[@class='view--more'])[1]")
+	private WebElement viewMoreLink;
+	
+	@FindBy(xpath = "(//span[@class='view--less'])[1]")
+	private WebElement viewLessLink;
 
 	// @FindBy(xpath =
 	// "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
@@ -464,6 +475,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private List<WebElement> nextBestActionModalMsg;
+	
+	@FindBy(xpath = "//button[@id='pop-btn-1']")
+	private WebElement savedPlansContinueShoppingButton;
+	
+	@FindBy(xpath = "//span[@id='header-number']")
+	private WebElement shoppingCartSaveCount;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Get Started')]")
 	private WebElement nextBestActionModalGetStartedBtn;
@@ -934,10 +951,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
+		
 		swipeToPlanCard(planName);
 		WebElement planCard = element
 				.findElement(By.xpath(".//div[contains(@class,'segment-title')]//*[contains(text(),'" + planName
 						+ "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
+		System.out.println("\n\n============"+element.getText()+"====================\n\n");
 		if (planCard.getText().trim().contains(planName)) {
 			return true;
 		} else {
@@ -1607,6 +1626,67 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		jsClickNew(Checkbox);
 
+	}
+	
+	public void validatePlanNames(String planType, String planList) {
+		List<String> expectedPlanNames = new ArrayList<String>();
+		List<String> actualPlanNames = new ArrayList<String>();
+		List<WebElement> actualPlanElments;
+		for (String planName : planList.split(",")) {
+			expectedPlanNames.add(planName);
+		}
+		actualPlanElments = planType.equalsIgnoreCase("PDP") ? pdpPlansNameOnSummary : mapdOrSnpPlansNameOnSummary;
+		for (WebElement ele : actualPlanElments) {
+			scrollToView(ele);
+			actualPlanNames.add(ele.getText());
+		}
+		Assertion.assertTrue(
+				"Plan listed are not shown correctly expected:" + expectedPlanNames + " Actual: " + actualPlanNames,
+				actualPlanNames.containsAll(expectedPlanNames));
+	}
+	
+	public void validateViewMoreAndLessLinks() {
+		jsClickNew(viewLessLink);
+		System.out.println("view less link clicked");
+		Assertion.assertEquals("On click of view less link plan card is not collapsed", 1, driver
+				.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		// Assertion.assertFalse("view Less link not working properly",
+		// viewPlanDetailsLink.isDisplayed());
+		jsClickNew(viewMoreLink);
+		System.out.println("view More link clicked");
+		Assertion.assertEquals("On click of view More link plan card is not collapsed", 0, driver
+				.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+
+	}
+	
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
+		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
+		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
+		if (count == 0)
+			for (String index : counter.split(",")) {
+				selectPlanIndexes.add(Integer.parseInt(index));
+				count++;
+			}
+		else
+			for (int i = 0; i < count; i++)
+				selectPlanIndexes.add(i);
+		scrollToView(driver
+				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
+		List<WebElement> allPlans = driver
+				.findElements(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])"));
+		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"========\n\n");
+		if (allPlans != null) {
+			for (int i : selectPlanIndexes) {
+				scrollToView(allPlans.get(i));
+				jsClickNew(allPlans.get(i));
+				System.out.println(i);
+				if (i == 1) {
+					jsClickNew(savedPlansContinueShoppingButton);
+				}
+			}
+		}
+		Assertion.assertEquals("Shopping cart count not updated with save plan count", count,
+				Integer.parseInt(shoppingCartSaveCount.getText()));
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
