@@ -889,9 +889,9 @@ public class CampaignTFNCommonStepDefinition {
 				.getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		
 		String TFNXpath = inputAttributesMap.get("TFN Xpath");
-		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
 		
-		String ExpecetdTFNNo = tfnPage.getTFNFromHomePage();
+		//String ExpecetdTFNNo = tfnPage.getTFNFromHomePage();
 //	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		tfnPage.validateFederalTFNNo(TFNXpath, ExpecetdTFNNo);
 	}

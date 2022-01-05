@@ -1024,10 +1024,23 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : " + planType, false);
 		}
 	}
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to
+																			// CommonUtility.waitForPageLoadNew as we're
+																			// not trying to fail the test if it isn't
+																			// found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
 
 	public void validateFederalTFNNo(String TFNXpath, String ExpectedTFNNo) {
 		CheckPageLoad();
-//		CheckiPerseptions();
+		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1469,7 +1482,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='zip-code']")
 	private WebElement ZipcodePharmacy;
 
-	@FindBy(xpath = "//select[@id='plan-type']")
+	@FindBy(xpath = "//select[@id='plans']")
 	private WebElement seletPlandropdown;
 
 	@FindBy(xpath = "(//button/span)[1]")
@@ -1477,6 +1490,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	private WebElement PreferredRetailedPharmacy;
+	
+	@FindBy(xpath = "//button[contains(@dtmid, 'pharmacy')] //span[normalize-space()='Search']")
+	private WebElement searchPharmacy;
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county, String planName)
 			throws InterruptedException {
@@ -1496,7 +1512,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
-		jsClickNew(ContinuePharmacy);
+		jsClickNew(searchPharmacy);
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e1) {
