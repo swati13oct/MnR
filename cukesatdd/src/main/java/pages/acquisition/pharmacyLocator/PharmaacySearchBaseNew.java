@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 
@@ -72,23 +73,12 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
-//		seletPlandropdown.click();
 		jsClickNew(seletPlandropdown);
 		sleepBySec(1);
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
-//		if (!loadingBlock.isEmpty())
-//			waitforElementDisapper(loadingSpinner, 90);
-//		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
-//			waitforElementDisapper(loadingSpinner, 90);
-		sleepBySec(1); //note: let the page settle down
 		jsClickNew(searchbtn);
 
-		// let the plans load, wait for the loading symbol to disappear
-//		if (!loadingBlock.isEmpty())
-//			waitforElementDisapper(loadingSpinner, 90);
-//		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
-//			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(10); // note: let the page settle down
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", validateNew(pharmacyCount));
 		if (!validate(pharmacyCount)) {
@@ -485,6 +475,27 @@ public class PharmaacySearchBaseNew extends PharmacySearchWebElementsNew {
 			}
 		}
 		return false;
+	}
+
+	public boolean validateNoPharmacyResultError() {
+		sleepBySec(2);
+		if(noPharmacyResultErrorMessage.isDisplayed())
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public void selectsPlanNameForNoPharmacy(String planName) {
+		scrollToView(seletPlandropdown);
+		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+		jsClickNew(seletPlandropdown);
+		sleepBySec(1);
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		sleepBySec(2);
+		jsClickNew(searchbtn);
+		sleepBySec(2);
+		CommonUtility.checkPageIsReady(driver);
 	}
 
 }
