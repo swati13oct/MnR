@@ -58,19 +58,9 @@ Feature: 1.11 UAT - Pharmacy Locator
   @UATAARP01 @regressionAARP
     Examples:
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
-      | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
-
-  @UATUHC01 @regressionUHC
-    Examples:
-      | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
-      | E2E Scenario 1_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
-
-  @UATAARP01 @NextYear
-    Examples:
-      | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
       | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
 
-  @UATUHC01 @NextYear
+  @UATUHC01 @regressionUHC
     Examples:
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
       | E2E Scenario 1_UHC | UHC  |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
@@ -115,22 +105,12 @@ Feature: 1.11 UAT - Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP02 @regressionAARP 
-    Examples: 
-       | TID                 | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-       | E2E Scenario 2_AARP | AARP | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=current&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-
-    @UATUHC02 @regressionUHC
-    Examples: 
-      | TID                | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 2_UHC | UHC  | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=current&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-
-  @UATAARP02 @NextYear
+  @UATAARP02 @regressionAARP
     Examples:
       | TID                 | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_AARP | AARP | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=2022&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-  @UATUHC02 @NextYear
+  @UATUHC02 @regressionUHC
     Examples:
       | TID                | site | language | countyForPlanDetails | path                                                                                                                       | pageName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_UHC | UHC  | English  | None                 | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&planyear=2022&WT.mc_id=8001024&county=053&state=27#/plan-summary | PDP-52   |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -155,23 +135,12 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
 
-    @UATAARP03 @regressionAARP
-    Examples: 
-      | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
-
-    @UATUHC03 @regressionUHC
-    Examples: 
-      | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
-
-
-  @UATAARP03 @regressionAARP @NextYear
+  @UATAARP03 @regressionAARP
     Examples:
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
 
-  @UATUHC03 @regressionUHC @NextYear
+  @UATUHC03 @regressionUHC
     Examples:
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |

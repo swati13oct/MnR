@@ -211,8 +211,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @dceImportDrugs_AuthMember_AARP
     Examples:
-      | site | zipCode | drug2  | planType | planName                                            | userName           | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@3 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true              |
+      | site | zipCode | drug2  | planType | planName                                            | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | LEONELNew | Password@3 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true              |
 
 
   @dceImportDrugs_AuthMember_UHC
