@@ -1,4 +1,4 @@
-@pharmacyLocator
+@pharmacyLocator @pharmacyLocatorUAT
 Feature: 1.11 UAT - Pharmacy Locator
 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site

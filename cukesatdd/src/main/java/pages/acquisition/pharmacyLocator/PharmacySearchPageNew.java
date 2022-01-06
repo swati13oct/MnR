@@ -579,7 +579,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 
         validateNew(FilterApplyBtn);
         jsClickNew(FilterApplyBtn);
-
+		pageloadcomplete();
 //		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
