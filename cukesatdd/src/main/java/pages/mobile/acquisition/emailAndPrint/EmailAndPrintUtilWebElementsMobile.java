@@ -65,7 +65,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@ng-click,'closeEmailSuccessMsgSummaryPopUp')]")
 	protected WebElement emailPlanSummarySuccessCloseButton;
 
-	@FindBy(xpath = "//input[@id='email' and @class='error']")
+	@FindBy(xpath="//input[@id='email' and contains(@class,'error')]")
 	protected WebElement emailPlanSummaryErrorFieldBox;
 
 	@FindBy(xpath = "//p//span[@id='emailError']")

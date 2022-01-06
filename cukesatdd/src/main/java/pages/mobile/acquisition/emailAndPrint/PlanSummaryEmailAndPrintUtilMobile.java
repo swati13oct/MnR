@@ -54,7 +54,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 					false);
 		}
 		System.out.println("Proceed to validate email popup screen for cancel option");
-		emailButton.click();
+		jsClickNew(emailButton);
 		Assertion.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",
 				validate(emailPlanSummaryPopupScreen));
 		String expectedEmailBoxHeader = emailPlanSummaryPopupScreenText.getText();
@@ -79,12 +79,12 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 		// ----- failure cases ------------------
 		System.out.println("Proceed to validate email popup screen for send option for failure case 1");
-		emailButton.click();
+		jsClickNew(emailButton);
 		validateNew(emailPopupPlanSummary);
 		String testEmailAddresss = "bademailformat";
 		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
-		emailModalTitle.click();
-		emailPlanSummarySendButton.click();
+		jsClickNew(emailModalTitle);
+		jsClickNew(emailPlanSummarySendButton);
 		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
