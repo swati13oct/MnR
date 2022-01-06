@@ -649,7 +649,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 	private WebElement Part_B_yearDrpDwnOption;
 
-	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
+	@FindBy(xpath = "//*[contains(@class,'viewPlans') or contains(text(),'Save and Update Premiums')]")
 	WebElement ViewPlanMedSupPage;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
@@ -878,7 +878,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css = "div#currPlansBanner>div>a")
 	private WebElement enrolledPlansBanner;
-	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
+	@FindBy(xpath = "(//label[text()='Add to Compare'])[1]")
 	private WebElement compareLink;
 
 	@FindBy(xpath = "(//a[@class='collapsed add-button'])[2]")
@@ -893,8 +893,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[11]")
 	private WebElement savePlanL;
 
-	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
+	@FindBy(xpath = "(//*[contains(text(),'Back to plan list')])[1]")
 	private WebElement backToPlans;
+
+	@FindBy(xpath = "(//*[contains(text(),'Add your information')])[1]")
+	private WebElement AddYourInformationLink;
 
 	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
 	private WebElement planK;
@@ -917,21 +920,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	@FindBy(xpath = "(//button[contains(text(),'Compare')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare Plan')])[1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "//span[contains(@class,'semiBoldText colorPrimaryBlue')]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare AARP® Medicare Supplement ')])[1]")
 	private WebElement comparePageHeader;
 
-	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
+//	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[1]")
 	private WebElement savePlanButton;
 
 	// @FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
 	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[1]")
 	private WebElement close;
 
-	@FindBy(xpath = "(//*[@class='liked buttonIntoText'])[1]/img")
+	//@FindBy(xpath = "(//*[@class='liked buttonIntoText'])[1]/img")
+	@FindBy(xpath = "(//*[@class='liked'])")
 	private WebElement savePlanImg;
 
 	@FindBy(xpath = "(//a[@class='edit-your-info-link back-arrow-right show returnEntryPage'])[1]")
@@ -1295,7 +1300,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 			waitForPageLoadSafari();
 			pageloadcomplete();
-			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+		//	CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
@@ -5751,7 +5756,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement comparePlanLink = driver
-							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
+							.findElement(By.xpath("(//label[text()='Add to Compare'])[" + plans + "]"));
 					jsClickNew(compareLink);
 					Thread.sleep(10000);
 					plans = plans - 1;
@@ -5785,7 +5790,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement savePlanLink = driver
-							.findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans + "]"));
+							.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + plans + "]"));
 
 					// action.moveToElement(savePlanLink).build().perform(); //Does not work on
 					// Safari browser
@@ -5812,13 +5817,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			// action.moveToElement(editYourInformationLink).build().perform(); //Does not
 			// work on Safari browser
-			jsMouseOver(editYourInformationLink);
-			editYourInformationLink.click();
+		//	jsMouseOver(editYourInformationLink);
+		//	editYourInformationLink.click();
+			jsMouseOver(AddYourInformationLink);
+				AddYourInformationLink.click();
+
 			Thread.sleep(6000);
 			// action.moveToElement(DOB).build().perform(); //Does not work on Safari
 			// browser
-			jsMouseOver(DOB);
-			if (DOB.isDisplayed()) {
+			jsMouseOver(DOB1);
+			if (DOB1.isDisplayed()) {
 				flag = true;
 			}
 
@@ -5826,6 +5834,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			// action.moveToElement(ViewPlanMedSupPage).build().perform(); //Does not work
 			// on Safari browser
+			DOB1.sendKeys("10/11/1951");
 			jsMouseOver(ViewPlanMedSupPage);
 			ViewPlanMedSupPage.click();
 			Thread.sleep(5000);
