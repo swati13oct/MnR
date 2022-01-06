@@ -1111,7 +1111,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
-				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+				mailOrderPharmacyMsg.getText().trim().contains(expectedMsg));
 	}
 
 	public void validateDefaultDistance() {
