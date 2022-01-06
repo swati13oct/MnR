@@ -1780,6 +1780,14 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidateNCPharmacyCoveredDrugs();
 	}
 
+	@Then("^the user validates Speciality pharmacy message DCE Summary Page plan card$")
+	public void the_user_validates_drug_pricing_message_for_specialty_Pharmacy_selection_dce_summary_page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.ValidateSpecialtyPharmMessage();
+	}
+
+
 	@Then("^the user clicks on View Drug Information link for the following Plan and lands on DCE details$")
 	public void the_user_clicks_on_View_Drug_Information_link_for_the_following_Plan_and_lands_on_DCE_details(
 			DataTable arg1) throws Throwable {
