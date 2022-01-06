@@ -360,3 +360,24 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | TID   | state     | siteName |
       | xxxxx | Ohio      | Ulayer   |
       | xxxxx | Minnesota | Ulayer   |
+
+  @pharmacylocatorulayer09
+  Scenario Outline: To verify available pharmacies
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user enters pharmacy name for pharmacy search
+      | Pharmacy Name | Test@123 |
+    And the user chooses a plan from dropdown list
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates no result error message
+
+    Examples:
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                         | ny_planYear | ny_planName                                         | plantype |
+      | Ulayer   |   80002 |       25 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |

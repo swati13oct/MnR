@@ -245,5 +245,8 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 
 	@FindBy(xpath="//div[@id='filterError']//p")
 	protected WebElement pharmacyNameOptionalErrorMessage;
+
+	@FindBy(xpath="//p[@class='text-bold mb-10 text-left text-large']")
+	protected WebElement noPharmacyResultErrorMessage;
 	
 }

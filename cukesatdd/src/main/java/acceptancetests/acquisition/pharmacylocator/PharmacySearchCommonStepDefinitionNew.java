@@ -215,7 +215,11 @@ public class PharmacySearchCommonStepDefinitionNew {
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String pharmacyName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL);
+		if(!pharmacyName.equalsIgnoreCase("Test@123"))
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
+		else
+		pharmacySearchPage.selectsPlanNameForNoPharmacy(testPlanName);
 	}
 
  	@And("^the user validates map section contents$")

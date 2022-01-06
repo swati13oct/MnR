@@ -345,4 +345,15 @@ public class PharmacyLocatorStepDefinitionNew {
 		}
 	}
 
+	@Then("^the user validates no result error message$")
+	public void the_user_validates_no_result_error_message() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		if(pharmacySearchPage.validateNoPharmacyResultError()){
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("User experience error message not displayed for no pharmacy result");
+		}
+	}
+
 }
