@@ -364,12 +364,12 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     @regressionAARP @nextYear
     Examples: 
       | TID    | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | planyear |
-      | 000014 | AARP |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
+#      | 000014 | AARP |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
 
     @regressionUHC @nextYear
     Examples: 
       | TID    | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | planyear |
-      | 000014 | UHC  |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
+#      | 000014 | UHC  |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
 
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary on <site> site
     Given the user is on medicare acquisition site landing page

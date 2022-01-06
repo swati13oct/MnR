@@ -2044,7 +2044,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement premiumForPlan = null;
 		if (planType.equalsIgnoreCase("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-binding')]"));
 		} else
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
@@ -2588,13 +2588,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
 		} else
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2673,14 +2673,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
-					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(text(),'Out Of Pocket')])"));
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(text(),'Out of Pocket')])"));
 			
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
-					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -2722,7 +2722,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]//following::span[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {

@@ -46,6 +46,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
+	
+	@FindBy(xpath = "//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
+	private WebElement DceClosebutton;
 
 	@FindBy(css = "#backtoplansummarypage")
 	private WebElement backToAllPlansLink;
@@ -942,6 +945,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
 		} else
 			Assertion.assertTrue(false);
+	}
+	
+	public void dceModelClosepopup() {
+		validateNew(DceClosebutton);
+		jsClickNew(DceClosebutton);
+		System.out.println("Clicked on Close button on DCE model popup");
+
 	}
 
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {

@@ -5739,6 +5739,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
+		threadsleep(3);
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {

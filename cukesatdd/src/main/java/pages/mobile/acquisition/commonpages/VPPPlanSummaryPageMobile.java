@@ -34,6 +34,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -237,6 +238,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//label[@for='EmailChange_2']")
 	private WebElement EmailAddressNo;
+	
+	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
+	List<WebElement> mapdOrSnpPlansNameOnSummary;
+	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
+	List<WebElement> pdpPlansNameOnSummary;
 
 	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
 	private WebElement ReadAgreement;
@@ -276,6 +282,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
+	
+	@FindBy(xpath = "(//span[@class='view--more'])[1]")
+	private WebElement viewMoreLink;
+	
+	@FindBy(xpath = "(//span[@class='view--less'])[1]")
+	private WebElement viewLessLink;
 
 	// @FindBy(xpath =
 	// "//div[@id='maplans_container']/div[3]/div/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div[2]/table/tbody/tr/td[3]/div/div[2]/div[3]/div[1]/p/a")
@@ -449,7 +461,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
 	private WebElement shopForAPlanOptionFindPlanButton;
 
-	@FindBy(css = "#change-location")
+	@FindBy(xpath = "//a[contains(text(),'Change ZIP')]")
 	private WebElement planOverviewChangeZipCodeLink;
 
 	@FindBy(xpath = "//*[@id='zipcode']")
@@ -463,6 +475,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private List<WebElement> nextBestActionModalMsg;
+	
+	@FindBy(xpath = "//button[@id='pop-btn-1']")
+	private WebElement savedPlansContinueShoppingButton;
+	
+	@FindBy(xpath = "//span[@id='header-number']")
+	private WebElement shoppingCartSaveCount;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Get Started')]")
 	private WebElement nextBestActionModalGetStartedBtn;
@@ -641,6 +659,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// code')]")
 	@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 	private WebElement resumeApplication;
+	
+	@FindBy(xpath = "//*[contains(text(),'plans available')]")
+	private WebElement planSummaryPage;
 
 	@FindBy(xpath = "(//input[@id='DOB'])[1]")
 	private WebElement ResumeDOB;
@@ -841,7 +862,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * private List<WebElement> stateDropDownValues;
 	 */
 
-	@FindBy(css = "#statedrpdwn")
+	@FindBy(xpath = "//select[@id='statedrpdwn']")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
@@ -930,10 +951,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
+		
 		swipeToPlanCard(planName);
 		WebElement planCard = element
 				.findElement(By.xpath(".//div[contains(@class,'segment-title')]//*[contains(text(),'" + planName
 						+ "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
+		System.out.println("\n\n============"+element.getText()+"====================\n\n");
 		if (planCard.getText().trim().contains(planName)) {
 			return true;
 		} else {
@@ -1603,6 +1626,67 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		jsClickNew(Checkbox);
 
+	}
+	
+	public void validatePlanNames(String planType, String planList) {
+		List<String> expectedPlanNames = new ArrayList<String>();
+		List<String> actualPlanNames = new ArrayList<String>();
+		List<WebElement> actualPlanElments;
+		for (String planName : planList.split(",")) {
+			expectedPlanNames.add(planName);
+		}
+		actualPlanElments = planType.equalsIgnoreCase("PDP") ? pdpPlansNameOnSummary : mapdOrSnpPlansNameOnSummary;
+		for (WebElement ele : actualPlanElments) {
+			scrollToView(ele);
+			actualPlanNames.add(ele.getText());
+		}
+		Assertion.assertTrue(
+				"Plan listed are not shown correctly expected:" + expectedPlanNames + " Actual: " + actualPlanNames,
+				actualPlanNames.containsAll(expectedPlanNames));
+	}
+	
+	public void validateViewMoreAndLessLinks() {
+		jsClickNew(viewLessLink);
+		System.out.println("view less link clicked");
+		Assertion.assertEquals("On click of view less link plan card is not collapsed", 1, driver
+				.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		// Assertion.assertFalse("view Less link not working properly",
+		// viewPlanDetailsLink.isDisplayed());
+		jsClickNew(viewMoreLink);
+		System.out.println("view More link clicked");
+		Assertion.assertEquals("On click of view More link plan card is not collapsed", 0, driver
+				.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+
+	}
+	
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
+		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
+		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
+		if (count == 0)
+			for (String index : counter.split(",")) {
+				selectPlanIndexes.add(Integer.parseInt(index));
+				count++;
+			}
+		else
+			for (int i = 0; i < count; i++)
+				selectPlanIndexes.add(i);
+		scrollToView(driver
+				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
+		List<WebElement> allPlans = driver
+				.findElements(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])"));
+		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"========\n\n");
+		if (allPlans != null) {
+			for (int i : selectPlanIndexes) {
+				scrollToView(allPlans.get(i));
+				jsClickNew(allPlans.get(i));
+				System.out.println(i);
+				if (i == 1) {
+					jsClickNew(savedPlansContinueShoppingButton);
+				}
+			}
+		}
+		Assertion.assertEquals("Shopping cart count not updated with save plan count", count,
+				Integer.parseInt(shoppingCartSaveCount.getText()));
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
@@ -2409,15 +2493,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planName.contains("SNP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
 		} else
 
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Provider')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2496,13 +2580,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out Of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out Of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -3209,21 +3293,32 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		scrollToView(planOverviewChangeZipCodeLink);
+		jsClickNew(backToPlans);
+		sleepBySec(3);
 		try {
-			clickonBackToPlanResults();
+			// if change zip code link is there then click it, once you used it then it will
+			// only display field box going forward.
 			jsClickNew(planOverviewChangeZipCodeLink);
-			validateNew(planOverviewZipCodeFieldBox, 10);
 		} catch (Exception e) {
 			System.out.println(
 					"Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
-		scrollToView(planOverviewZipCodeFieldBox);
+		// if field box already there then clear it if left over text from prior run
+		// Commenting since there is no Control key on a Mac machine
+		/*
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		 */
+		CommonUtility.waitForPageLoad(driver, planOverviewZipCodeFieldBox, 45);
+		jsClickNew(planOverviewZipCodeFieldBox);
+		planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
+		planOverviewZipCodeFieldBox.sendKeys(zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-
-		CommonUtility.checkPageIsReadyNew(driver);
+		if(!planSummaryPage.isDisplayed())
+			jsClickNew(backToPlans);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
@@ -3231,6 +3326,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -3994,8 +4090,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		validateNew(startDrpDwn);
 		CommonUtility.waitForPageLoadNewForClick(driver, startDrpDwn, 5);
-		Select selectStartMonth = new Select(startDrpDwn);
-		selectStartMonth.selectByIndex(1);
+		jsClickNew(startDrpDwn);
+		Thread.sleep(5000);
+		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
 
@@ -4185,13 +4282,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void enterAddressDetails(String address, String city, String state) {
 		validateNew(searchByAddressButton);
-		// searchByAddressButton.click();
 		jsClickNew(searchByAddressButton);
 		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
-		driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")).click();
+		jsClickNew(driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")));
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");

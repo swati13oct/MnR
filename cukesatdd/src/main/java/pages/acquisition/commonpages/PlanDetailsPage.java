@@ -1105,9 +1105,10 @@ public class PlanDetailsPage extends UhcDriver {
 		WebElement rider = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/following::label[1]"));
 		// rider.click();
 		jsClickNew(rider);
-		String optionalRiderPremium = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong")).getText()
-				.trim();
+		String optionalRiderPremium = (driver
+				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//p")).getText()
+				.trim()).split(" ")[1];
+		
 		return optionalRiderPremium;
 	}
 

@@ -328,13 +328,18 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	}
 	
+	@FindBy(xpath = "//h2[contains(@class,'whatCanWeHelpYouFindNear')]")
+	private WebElement peoplesPage;
+	
 	public void providerCheckHomePage() {
 		
-		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		jsClickNew(GetStarted);
-
-		CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
-		jsClickNew(MedicalDirectory);
+		if(!peoplesPage.isDisplayed()) {	
+			CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+			jsClickNew(GetStarted);
+	
+			CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+			jsClickNew(MedicalDirectory);
+		}
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
 		jsClickNew(People);
