@@ -1301,9 +1301,11 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
+/*
 	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
 	public WebElement PharmacyFilterApplyBtn;
-	
+*/
+
 	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
 	public WebElement PharmacyFilterClearTextX;
 

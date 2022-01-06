@@ -941,7 +941,8 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
 				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
+				// && validateNew(matchingPharmacyCount)
+				&& validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
 			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
@@ -2089,9 +2090,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
+/*
+FIlter Apply button is removed
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement PharmacyFilterApplyBtn;
-	
+*/
+
 	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
 	public WebElement PharmacyFilterClearTextX;
 
@@ -2101,7 +2105,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
-		validateNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
 		PharmacyFilterTxtBx.sendKeys("a");
 		System.out.println("FIlter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
@@ -2111,22 +2115,25 @@ public class DrugDetailsPage extends UhcDriver {
 		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
 	}
 
+/*
+Blank error message is removed
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
 		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
 		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
+*/
 
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
 		PharmacyFilterTxtBx.clear();
 		PharmacyFilterTxtBx.sendKeys(filterText);
 		System.out.println("FIlter text entered : "+filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
 			System.out.println("Pharmacy Name : "+PharmacyName.getText());

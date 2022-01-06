@@ -2715,7 +2715,11 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Pharmacy_Filter_Error_message_and_x_cancel_function_is_working_on_Summary_page_Change_Pharmacy_Page() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validatePharmacyFilterErrormessage();
-		drugSummaryPage.validateXcleartextPharmacyFilter();
+/**
+ * No error message for Blank filter
+ * drugSummaryPage.validateXcleartextPharmacyFilter();
+  */
+
 	}
 
 	@Then("^the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page$")
@@ -2732,7 +2736,12 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePharmacyFilterErrormessage();
-		drugDetailsPage.validateXcleartextPharmacyFilter();
+
+		/**
+		 * Optional filter. Error message is removed for blank pharmacy filter
+		 * drugDetailsPage.validateXcleartextPharmacyFilter();
+		 */
+
 	}
 
 	@Then("^the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page$")
