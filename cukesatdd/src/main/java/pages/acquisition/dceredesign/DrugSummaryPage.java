@@ -903,6 +903,9 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_Distance_Select1Mile.click();
 		// validateNew(Pharmacy_Distance_Select1Mile);
 		jsClickNew(Pharmacy_Distance_Select1Mile);
+		validateNew(Pharmacy_SearchBtn);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -911,6 +914,9 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_Distance_Select2Mile.click();
 		// validateNew(Pharmacy_Distance_Select2Mile);
 		jsClickNew(Pharmacy_Distance_Select2Mile);
+
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -919,6 +925,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select5Mile);
 		Pharmacy_Distance_Select5Mile.click();
 		jsClickNew(Pharmacy_Distance_Select5Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -927,6 +935,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select10Mile);
 		Pharmacy_Distance_Select10Mile.click();
 		jsClickNew(Pharmacy_Distance_Select10Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -935,6 +945,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select15Mile);
 		Pharmacy_Distance_Select15Mile.click();
 		jsClickNew(Pharmacy_Distance_Select15Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -943,6 +955,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select25Mile);
 		Pharmacy_Distance_Select25Mile.click();
 		jsClickNew(Pharmacy_Distance_Select25Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -950,11 +964,12 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_ZipCodeTxt.clear();
 		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
 		validateNew(Pharmacy_SearchBtn);
-		Pharmacy_SearchBtn.click();
-		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Search for Zip Expected - " + pharmacyZipCode + "  : Entered : "
 				+ Pharmacy_ZipCodeTxt.getText());
 		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
-
 	}
 
 	public void clickReturnToPlanSummary() {
