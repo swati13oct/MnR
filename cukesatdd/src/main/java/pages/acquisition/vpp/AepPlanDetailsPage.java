@@ -568,7 +568,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
 							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
-						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")) {
+						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")||columnName.equalsIgnoreCase("Special Eligibility Requirement")) {
 							if(benefitValueUI.contains(benefitValue)) {
 								flag=true; break;
 							}else {
