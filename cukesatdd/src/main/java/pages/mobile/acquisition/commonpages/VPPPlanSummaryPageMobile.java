@@ -785,10 +785,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
 	 * private WebElement planYearPopup;
 	 */
-	@FindBy(xpath = "//div[@class='popup-modal active']//h2[@id='startoverdetails']")
+	@FindBy(xpath="//div[@class='uhc-modal__content']//h3[@id='modalTitle']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/fieldset[1]/div[1]/label[1]")
+	@FindBy(xpath="(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//h3[@id='doctorsAlertTitle']")
@@ -2628,7 +2628,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
@@ -4011,7 +4011,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 	private WebElement SelectYearGoBtn;
 
-	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+	@FindBy(xpath = "//div[contains(@dtmname,'Plan Year Toggle:2021')]")
 	private WebElement CurrentYearPlansBtn;
 
 	@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
@@ -4031,15 +4031,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(css = "button#nextyear")
 	private WebElement nextYearToggle;
+	
+	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
+	private WebElement futureYearSelection;
 
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		CommonUtility.checkPageIsReadyNew(driver);
-
-		if (planYearToggle.isDisplayed()) {
-			WebElement planYearToggle = planYear.equalsIgnoreCase("current") ? currentYearToggle : nextYearToggle;
-			jsClickNew(planYearToggle);
-			CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(planYearPopup, 20)) { // if plan year popup is displayed
+			System.out.println("Popup is present for AEP : ");
+			if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
+				jsClickNew(currentYearSelection);
+			}
+			else {
+				jsClickNew(futureYearSelection);
+			}
+			waitForPageLoadSafari();
+			//validateNew(planYearPopupGoButton);
+			//planYearPopupGoButton.click();
+		} else { // if the plan year popup is not displayed
+			if (validate(CurrentYearPlansBtn, 20) && planYear.equalsIgnoreCase("current")) {
+				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);
+				waitForPageLoadSafari();
+				// validateNew(AARPlogo, 10);
+			}
 		}
 
 	}

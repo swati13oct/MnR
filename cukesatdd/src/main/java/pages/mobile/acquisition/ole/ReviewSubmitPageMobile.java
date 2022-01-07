@@ -185,6 +185,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	//Mailing Address Display
 	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::*")
 	private WebElement MailingQiuestionDisplay;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number') or contains(text(), 'Home Phone Number')]//following-sibling::*")
+	private WebElement PrimaryPhoneNo;
 
 	@FindBy(xpath = "(//*[contains(text(), 'Street Address')])[2]//following-sibling::*")
 	private WebElement MailStreetDisplays;
@@ -216,7 +219,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	private WebElement EmailConfirmationNo;
 
 //	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
-	@FindBy(xpath ="//*[contains(text(), 'paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?') or contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 
 	@FindBy(xpath ="//*[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -321,7 +324,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 
-	@FindBy(xpath="//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
+	@FindBy(xpath = "//span[contains(text(),'How would you like to pay for your plan?')]//following-sibling::span")
 	private WebElement paymentPlanDisplay;
 
 	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
@@ -613,8 +616,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String CardType = detailsMap.get("Card Type");
 		String Expected_PlanName = detailsMap.get("Plan Name");
 		String Expected_PlanYear = detailsMap.get("Plan Year");
-		int Expected_Current_PlanYear = Year.now(ZoneId.of("America/New_York")).getValue();
-		int Expected_Future_PlanYear = Expected_Current_PlanYear + 1;
+		String Expected_Current_PlanYear = "2021";
+		String Expected_Future_PlanYear = "2022";
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
@@ -624,7 +627,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
 		//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
 		String Paperless_Delivery = detailsMap.get("Paperless Delivery");
-
+		
 		String prescriptionDrugName= detailsMap.get("Prescription Name");
 		String prescriptionGroupNumber = detailsMap.get("PD Group Number");
 		String prescriptionMemberNumber = detailsMap.get("PD Member Number");
@@ -634,13 +637,13 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String healthInsuranceMemberNo = detailsMap.get("Member Number");
 		String healthInsurance = detailsMap.get("Health Insurance");
 		String prescriptionDrug= detailsMap.get("Prescription Drug");
-
-
+		
+	
 		String PCP_Name = detailsMap.get("PCP Name");
 		String PCP_Number = detailsMap.get("PCP Number");
 		String PCP_recently_visited= detailsMap.get("PCP Recently Visited");
 		String Proposed_Effective_date= detailsMap.get("Proposed Effective date");
-
+		
 		String AuthFirstNameDisplay= detailsMap.get("Authorization First Name");
 		String AuthLastNameDisplay = detailsMap.get("Authorization last Name");
 		String AuthAddressDisplay = detailsMap.get("Authorization Address");
@@ -651,7 +654,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String AuthPhoneNumberDisplay= detailsMap.get("Authorization Phone No");
 		String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
 		String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
-
+		
 		String DiabetesQuestion1Display= detailsMap.get("Diabetes Question 1");
 		String DiabetesQuestion2Display= detailsMap.get("Diabetes Question 2");
 		String ChronicHeartFailureQuestion1Display= detailsMap.get("Chronic Heart Failure Question 1");
@@ -663,7 +666,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String CardioVascularDisorderQuestion4Display= detailsMap.get("Cardio Vascular Disorder Question 4");
 		String CardioVascularDisorderQuestion5Display= detailsMap.get("Cardio Vascular Disorder Question 5");
 		String CardioVascularDisorderQuestion6Display= detailsMap.get("Cardio Vascular Disorder Question 6");
-
+		
 		String DisclosureCheckboxDisplay= detailsMap.get("Disclosure Checkbox");
 		String DisclosureProviderNameDisplay= detailsMap.get("Disclosure Provider Name");
 		String DisclosureProviderStreetAddressDisplay= detailsMap.get("Disclosure Provider Street Address");
@@ -676,9 +679,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		String expectedOptionalRidersText = "Dental Platinum";
 		String expectedOptionalHighRidersText = "High Option Dental";
 		String expectedText = "0.00";
-
+		
 		String paymentPlan = detailsMap.get("Payment Plan");
-
+		System.out.println("Expected Plan Year Displayed  : "+Expected_PlanYear);
 		boolean flag = true;
 		if (Expected_PlanYear.contains("current")) {
 			String Expected_PlanYear_PlanName = Expected_Current_PlanYear + " " + Expected_PlanName;
@@ -701,7 +704,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			flag&=validateText(MedicaidNo,Medicaid_No);
 		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
-		flag&=validateText(HomePhoneNo,PrimaryPhoneNumber);
+		//flag&=validateText(HomePhoneNo,PrimaryPhoneNumber);
+		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
 		flag&=validateText(PaperlessDelivery,Paperless_Delivery);
 		flag&=validateText(EmailAddress,Email_Address);
