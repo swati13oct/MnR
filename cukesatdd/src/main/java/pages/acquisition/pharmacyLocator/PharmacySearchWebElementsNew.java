@@ -191,7 +191,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath = "//div[@class='row mt-20']")
 	protected WebElement questionsRightRailWidget;
 
-	@FindBy(xpath="(//h3[@class='m-0 text-bold']/../../..)[2]")
+	@FindBy(xpath="//app-pharmacy-widgets//h3[contains(text(),'OptumRx')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
 	@FindBy(xpath="//a[contains(@href,'mail-order')]")

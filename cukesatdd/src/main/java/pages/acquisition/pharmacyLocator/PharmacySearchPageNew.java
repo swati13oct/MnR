@@ -436,6 +436,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
 	protected WebElement indian_tribal_label_filter_text;
+
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
 		String indian_tribal_text = "";
