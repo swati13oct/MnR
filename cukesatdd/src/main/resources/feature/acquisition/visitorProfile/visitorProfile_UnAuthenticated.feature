@@ -88,6 +88,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Test Plans | <testPlans> |
 
     #@visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP
+    @vbfGate
     Examples:
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | future   | 90210   | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -129,7 +130,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
       | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @vbfGate @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
     Examples:
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) |  Eyewear           | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
