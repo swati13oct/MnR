@@ -65,8 +65,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @sanity @authenticatedAARP
     Examples:
-      | site | state   | userName  | password   | drug1   | zipCode |
-      | AARP | Alabama | vdatdd_02 | Password#1 | Lipitor | 90210   |
+      | site | state   | userName  | password     | drug1   | zipCode |
+      | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
 
     @visitorProfile_UHC @regressionUHC
     Examples:
@@ -97,13 +97,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
-      | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @regressionUHC
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |
-      | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName      | password     | plantype | planname                             |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @oleAuthenticatedValidations @authenticatedd
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
@@ -121,13 +121,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @visitorProfile_UHC @regressionUHC
     Examples:
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vppartialOLEAndRemove @authenticated
   Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
