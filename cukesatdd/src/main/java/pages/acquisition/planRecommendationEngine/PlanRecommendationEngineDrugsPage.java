@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
+import oracle.net.aso.s;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.GlobalWebElements;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
@@ -155,6 +156,9 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalError;
 
+	@FindBy(css = "#modal uhc-radio:nth-of-type(1) label")
+	private WebElement modalBrandSwitchLabel;
+	
 	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
 	private WebElement modalGenericSwitchLabel;
 
@@ -166,13 +170,13 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalGenericDescription;
 
-	@FindBy(css = "#modal legend")
+	@FindBy(css = "fieldset label[for*='generic-question']")
 	private WebElement modalGenericDrug;
 
-	@FindBy(css = "#modal uhc-radio:nth-of-type(1) label .radio-label-content")
+	@FindBy(css = "#modal uhc-radio:nth-of-type(1) label .radio-label-content span:nth-child(2)")
 	private WebElement modalGenericKeep;
 
-	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content span:nth-child(2)")
 	private WebElement modalGenericSwitch;
 
 	@FindBy(css = "uhc-temp-display p[role='alert']")
@@ -279,12 +283,18 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	
 // Edit Drug option selects in Drug page
 
-		public void editDrugs() {
+		public void editDrugs(String dosage) {
 			System.out.println("Editing drugs in Druglist Page");
 			threadsleep(3000);
-			WebElement edit = drugsList.get(0).findElement(By.cssSelector("button#editDrugId"));
-			jsClickNew(edit);
-			threadsleep(3000);
+			for(int i=0;i<drugsList.size();i++) {
+				String durgName = drugsList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toLowerCase();
+				if (durgName.contains(dosage.trim().toLowerCase())) {
+					WebElement edit = drugsList.get(i).findElement(By.cssSelector("button#editDrugId"));
+					jsClickNew(edit);
+					threadsleep(3000);
+					break;
+				}
+			}
 			Assert.assertTrue(validate(modalDosageSelect),"Edit Model is not opened");
 		}	
 
@@ -376,6 +386,54 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
+	
+//Drug Adding same dosage in Drug Page                                
+
+		public void drugsHandlerWithSamedetails(String drugsDetails) {
+			String drugName = "";
+			boolean searchButtonClick = false;
+			String dosage = "";
+			String packageName = "";
+			String count = "";
+			String frequency = "";
+			boolean threeeMonthSLength = false;
+			boolean GenericDrug = false;
+			boolean switchGeneric = false;
+
+			String[] drugslist = drugsDetails.split(":");
+			for (int i = 0; i < drugslist.length; i++) {
+				String drugInfo = drugslist[i];
+				if (drugInfo.trim().length() > 0) {
+					String[] drugDetails = drugInfo.split(",");
+					drugName = drugDetails[0];
+					if (drugDetails[1].toUpperCase().equals("NO"))
+						searchButtonClick = true;
+					dosage = drugDetails[2];
+					packageName = drugDetails[3];
+					count = drugDetails[4];
+					frequency = drugDetails[5];
+					if (drugDetails[6].toUpperCase().equals("3"))
+						threeeMonthSLength = true;
+					if (drugDetails[7].toUpperCase().equals("YES"))
+						GenericDrug = true;
+					if (drugDetails[8].toUpperCase().equals("YES"))
+						switchGeneric = true;
+
+					addDrugsbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
+							GenericDrug, switchGeneric);
+				}
+			}
+			errorValidation();
+		}
+	
+// Error Validation Function
+
+		public void errorValidation() {
+			validate(modalError, 30);
+			threadsleep(2000);
+			Assert.assertTrue(modalError.getText().toUpperCase().contains("ALREADY"),
+					"Expected Error Message is not displayed");
+		}
 
 // Continue with ZeroDrug Function
 
@@ -574,15 +632,39 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 			} else {
 				jsClickNew(drugsAutoList.get(0));
 			}
-
+			
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
+			
+			if (GenericDrug) {
+				validate(modalGenericSwitchLabel, 30);
+				threadsleep(2000);
+				// Generic modal
+				if (switchGeneric) 
+					jsClickNew(modalGenericSwitchLabel);
+				else
+					jsClickNew(modalBrandSwitchLabel);
+				threadsleep(2000);
+			}
+			
+			
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
 			Select slen = new Select(modalSLengthSelect);
 			
-			if (!dosage.isEmpty())
-				dos.selectByVisibleText(dosage);
+			if (!dosage.isEmpty()) {
+				if(switchGeneric) {
+					String branName = modalGenericKeep.getText().trim().replace(" (Brand)", "");
+					String genName = modalGenericSwitch.getText().trim().replace(" (Generic)", "").toLowerCase();
+					drugName = dosage.replace(branName, genName);
+					dos.selectByVisibleText(drugName);
+					threadsleep(2000);}
+				else {
+					dos.selectByVisibleText(dosage);
+					threadsleep(2000);
+				}
+			}
+				
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
 				pack.selectByVisibleText(packageName);
@@ -596,24 +678,16 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 			
 			if (threeeMonthSLength)
 				slen.selectByVisibleText("Every 3 Months");
+			
+			
 
 			threadsleep(4000);
 			jsClickNew(modalcontinue);
 
-			if (GenericDrug) {
-				validate(modalGenericDrug, 30);
-				threadsleep(2000);
-				// Generic modal
-				if (switchGeneric) {
-					clickSwitchdrug();
-					drugName = modalGenericDrug.getText();
-				}
-				threadsleep(2000);
-				jsClickNew(modalcontinue);
-			}
 
 			validateAddedDrugname(drugName);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
 	}
@@ -626,12 +700,25 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 				String drugName = "";
 				validate(modalDosageSelect, 30);
 				threadsleep(2000);
+				
+				if (GenericDrug) {
+					validate(modalGenericSwitchLabel, 30);
+					threadsleep(2000);
+					// Generic modal
+					if (switchGeneric) 
+						jsClickNew(modalGenericSwitchLabel);
+					else
+						jsClickNew(modalBrandSwitchLabel);
+					threadsleep(2000);
+				}
+				
 				Select dos = new Select(modalDosageSelect);
 				Select freq = new Select(modalFrequencySelect);
 				Select slen = new Select(modalSLengthSelect);
 				
 				if (!dosage.isEmpty())
 					dos.selectByVisibleText(dosage);
+				
 				if (!packageName.isEmpty()) {
 					Select pack = new Select(modalPackageSelect);
 					pack.selectByVisibleText(packageName);
@@ -649,23 +736,89 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 				threadsleep(4000);
 				jsClickNew(modalcontinue);
 
-				if (GenericDrug) {
-					validate(modalGenericDrug, 30);
-					threadsleep(2000);
-					// Generic modal
-					if (switchGeneric) {
-						clickSwitchdrug();
-						drugName = modalGenericDrug.getText();
-					}
-					threadsleep(2000);
-					jsClickNew(modalcontinue);
-				}
-
 				validateAddedDrugname(drugName);
 			} catch (Exception e) {
 				System.out.println("Unable to add drug");
 			}
-		}	
+		}
+		
+		//Adding Drug Functionality
+
+		public void addDrugsbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
+				String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+			try {
+				validate(drugsearchBox, 30);
+				threadsleep(2000);
+				drugsearchBox.clear();
+				drugsearchBox.sendKeys(drugName);
+				if (searchButtonClick) {
+					jsClickNew(drugsearchButton);
+					threadsleep(6000);
+					validate(modalSelcetedDrug, 30);
+					threadsleep(2000);
+					Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+							"Drug name is not Matched :" + drugName);
+					// Select modal
+					threadsleep(2000);
+					jsClickNew(modalcontinue);
+					threadsleep(2000);
+				} else {
+					jsClickNew(drugsAutoList.get(0));
+				}
+				
+				validate(modalDosageSelect, 30);
+				threadsleep(2000);
+				
+				if (GenericDrug) {
+					validate(modalGenericSwitchLabel, 30);
+					threadsleep(2000);
+					// Generic modal
+					if (switchGeneric) {
+						jsClickNew(modalGenericSwitchLabel);
+					}
+					threadsleep(2000);
+				}
+				
+				
+				Select dos = new Select(modalDosageSelect);
+				Select freq = new Select(modalFrequencySelect);
+				Select slen = new Select(modalSLengthSelect);
+				
+				if (!dosage.isEmpty()) {
+					if(switchGeneric) {
+						String branName = modalGenericKeep.getText().trim().replace(" (Brand)", "");
+						String genName = modalGenericSwitch.getText().trim().replace(" (Generic)", "").toLowerCase();
+						drugName = dosage.replace(branName, genName);
+						dos.selectByVisibleText(drugName);
+						threadsleep(2000);}
+					else {
+						dos.selectByVisibleText(dosage);
+						threadsleep(2000);
+					}
+				}
+					
+				if (!packageName.isEmpty()) {
+					Select pack = new Select(modalPackageSelect);
+					pack.selectByVisibleText(packageName);
+				}
+				if (!count.isEmpty()) {
+					modalQuantity.clear();
+					modalQuantity.sendKeys(count);
+				}
+				
+				freq.selectByVisibleText(frequency);
+				
+				if (threeeMonthSLength)
+					slen.selectByVisibleText("Every 3 Months");
+			
+				threadsleep(4000);
+				jsClickNew(modalcontinue);
+
+			} 
+			catch (Exception e) {
+				System.out.println("Unable to add drug");
+			}
+		}
 
 // Clicking Switch Drug Model
 
@@ -673,7 +826,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		jsClickNew(modalGenericSwitchLabel);
 		threadsleep(2000);
 //		jsClickMobile(modalGenericSwitch);
-		jsClickNew(modalGenericSwitch);
+//		jsClickNew(modalGenericSwitch);
 	}
 
 //Validate Added Drug Name

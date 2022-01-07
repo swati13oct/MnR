@@ -408,16 +408,71 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user selects edit drug options in Drug Page
+      | Edit Dosage  | <Original>                                                  |
       | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
     Then user added drug Quantity number prefix with zeros in Drug page
       | Edit Quantity | <EditQty> |
 
     @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Original                     | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 10MG ER | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |
 
     @FunctionalUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Original                     | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 | EditQty |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO               | morphine sulfate CAP 10MG ER | morphine sulfate CAP 30MG ER,,007,Week,3,NO,NO            |     007 |
+
+  @PRE @drugpage @samedosageerror
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <Drug Selection> - To validate switch drug function in PRE
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    Then user selects add brand and generic drugs with same dosage in Drug page
+      | Drug Selection | <Drug Selection>                                                               |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+
+    @FunctionalAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch            |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:Lipitor,YES,Lipitor TAB 20MG,,,Day,1,YES,YES |
+
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch            |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:Lipitor,YES,Lipitor TAB 20MG,,,Day,1,YES,YES |
+
+  @PRE @drugpage @editsamedosageerror
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <Drug Selection> - To validate switch drug function in PRE
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects add drug option in Drug page without continue next page
+      | Drug Selection | <Drug Selection>                                                               |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user selects edit drug options in Drug Page
+      | Edit Dosage  | <Original>                                                  |
+      | Edit Details | <Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1> |
+    Then user validate error message in Drug Model Page
+
+    @FunctionalAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch              | Original         | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:Lipitor,YES,Lipitor TAB 10MG,,,Day,1,YES,YES | Lipitor TAB 20MG | Lipitor TAB 10MG,,010,Month,3,YES,NO                      |
+
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch              | Original         | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:Lipitor,YES,Lipitor TAB 10MG,,,Day,1,YES,YES | Lipitor TAB 20MG | Lipitor TAB 10MG,,010,Month,3,YES,NO                      |

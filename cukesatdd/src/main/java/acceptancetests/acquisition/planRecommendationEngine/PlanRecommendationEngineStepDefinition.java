@@ -377,7 +377,7 @@ public class PlanRecommendationEngineStepDefinition {
      	public void edit_drugs_page_WithoutContinue(DataTable givenAttributes) {
      		readfeaturedata(givenAttributes);
      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-     		planSelectorDrugspage.editDrugs();
+     		planSelectorDrugspage.editDrugs(inputValues.get("Edit Dosage"));
      		planSelectorDrugspage.editdrugsHandlerWithdetails(inputValues.get("Edit Details"));
      		planSelectorDrugspage.drugnamesList();
      	}
@@ -420,6 +420,22 @@ public class PlanRecommendationEngineStepDefinition {
    		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
    		planSelectorDrugspage.continueNextpageZeroDrug();
    	}
+       
+       @Then("^user selects add brand and generic drugs with same dosage in Drug page$")
+      	public void add_same_dosage(DataTable givenAttributes) {
+      		readfeaturedata(givenAttributes);
+      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+      		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+      		planSelectorDrugspage.drugsHandlerWithSamedetails(inputValues.get("Drug Details"));
+      	}
+       
+       @Then("^user validate error message in Drug Model Page$")
+     	public void error_msg() {
+     		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+     		planSelectorDrugspage.errorValidation();
+     	}
+       
+       
        
        @Then("^user selects add drug option and comparing DCE and Drug page$")
       	public void verify_drugs_dce_drug_page(DataTable givenAttributes) {
