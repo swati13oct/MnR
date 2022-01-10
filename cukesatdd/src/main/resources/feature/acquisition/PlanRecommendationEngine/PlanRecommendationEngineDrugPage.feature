@@ -476,3 +476,30 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch              | Original         | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
       | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:Lipitor,YES,Lipitor TAB 10MG,,,Day,1,YES,YES | Lipitor TAB 20MG | Lipitor TAB 10MG,,010,Month,3,YES,NO                      |
+
+  @PRE @drugpage @brandGenericOption
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <Drug Selection> - To validate switch drug function in PRE
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects add drug option in Drug page without continue next page
+      | Drug Selection | <Drug Selection>                                                               |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    Then user selects edit on drug and check Brand and Generic options in Drug Model Page
+      | Drug Names | <DrugNames> |
+
+    @FunctionalAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch              | DrugNames                                      |
+      | AARP |   90001 | NO            | Los Angeles County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:Lipitor,YES,Lipitor TAB 10MG,,,Day,1,YES,YES | Lipitor TAB 20MG:atorvastatin calcium TAB 10MG |
+
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch              | DrugNames                                      |
+      | UHC  |   90001 | NO            | Los Angeles County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:Lipitor,YES,Lipitor TAB 10MG,,,Day,1,YES,YES | Lipitor TAB 20MG:atorvastatin calcium TAB 10MG |

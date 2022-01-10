@@ -48,6 +48,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	PlanRecommendationEngineDrugsPage drug = new PlanRecommendationEngineDrugsPage(driver);
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
+	PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(driver);
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -180,6 +181,18 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
 	private WebElement headerNavigationBarHomeTab;
+	
+	@FindBy(css = "#modal .modal-inner h2")
+	private WebElement modelStateTitle;
+	
+	@FindBy(css = "#modal .modal-inner p")
+	private WebElement modelStatePara;	
+	
+	@FindBy(css = "#modal .modal-inner span>button")
+	private WebElement modelStateCancelButton;	
+	
+	@FindBy(css = "#modal .modal-inner div[class*='buttonPanel']>button")
+	private WebElement modelStateConfirmButton;	
 
 	// Variables
 
@@ -565,6 +578,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		// cancelButton.click();
 		// Assertion.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
 	}
+	
 
 	public void editValue(String section) {
 
@@ -576,6 +590,15 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 					driver);
 			loc.edit_location(zipcode, multi, county);
 			jsClickNew(saveBtn);
+			if(county.toLowerCase().contains("baltimore")) {
+				Assert.assertTrue(modelStateTitle.getText().toLowerCase().contains("zip") && modelStatePara.getText().toLowerCase().contains("reselect"),
+						"Model popup not having warning Messages");
+				validate(modelStateCancelButton);
+				validate(modelStateConfirmButton);
+				jsClickNew(modelStateConfirmButton);
+				threadsleep(3000);
+				planSelectorSpecialneedspage.nospecialneedspage("MD");
+			}
 			checkContent("location");
 		} else if (section.equalsIgnoreCase("drugs")) {
 			String drugSelect = inputValues.get("Drug Selection");

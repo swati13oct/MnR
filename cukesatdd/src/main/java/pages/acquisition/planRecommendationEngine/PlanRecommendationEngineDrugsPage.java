@@ -155,6 +155,9 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalError;
+	
+	@FindBy(css = "#modal label[for*='generic-question']")
+	private WebElement modalBrandGenericOptions;
 
 	@FindBy(css = "#modal uhc-radio:nth-of-type(1) label")
 	private WebElement modalBrandSwitchLabel;
@@ -279,6 +282,26 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		drugpageOptions(drugSelection);
 		jsClickNew(continueBtn);
 		validate(drugsearchBox);
+	}
+	
+	public void drugsOptions(String drugsDetails) {
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String dosage = drugslist[i];
+			editDrugs(dosage);
+			checkOptions();
+		}
+		
+	}
+	
+	public void checkOptions() {
+		if(validate(modalBrandGenericOptions)) {
+			modalGenericKeep.getText().trim().contains("Brand");
+			modalGenericSwitch.getText().trim().contains("Generic");
+		}else
+			Assert.assertFalse(validate(modalBrandGenericOptions), "Brand and Generic Options are Showing in Drug Model");
+		
+		jsClickNew(modalBackCancel);
 	}
 	
 // Edit Drug option selects in Drug page

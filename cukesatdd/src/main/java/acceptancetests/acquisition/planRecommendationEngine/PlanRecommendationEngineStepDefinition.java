@@ -278,6 +278,15 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
 	}
 	
+	@And("^user validating No CSNP and DSNP in Special Needs Page")
+	public void no_special_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorSpecialneedspage.nospecialneedspage(inputValues.get("state Type"));	
+		String status = "Positive";
+		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
+	}
+	
 	@And("^user validate elements in doctors page$")
     public void elements_doctor_page() {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -379,8 +388,14 @@ public class PlanRecommendationEngineStepDefinition {
      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
      		planSelectorDrugspage.editDrugs(inputValues.get("Edit Dosage"));
      		planSelectorDrugspage.editdrugsHandlerWithdetails(inputValues.get("Edit Details"));
-     		planSelectorDrugspage.drugnamesList();
      	}
+       
+       @Then("^user selects edit on drug and check Brand and Generic options in Drug Model Page$")
+    	public void edit_drugs_options(DataTable givenAttributes) {
+    		readfeaturedata(givenAttributes);
+    		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+    		planSelectorDrugspage.drugsOptions(inputValues.get("Drug Names"));
+    	}
        
        @Then("^user added drug Quantity number prefix with zeros in Drug page$")
        public void qty_withzero(DataTable givenAttributes) {
@@ -934,8 +949,8 @@ public class PlanRecommendationEngineStepDefinition {
    	public void add_snp_editResponse_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		preEditpage.addSNPEditResponse(inputValues);
 		preEditpage.addLocationEditResponse(inputValues);
+		preEditpage.addSNPEditResponse(inputValues);
    	}
 	
 	@Then("^user adds SNP options in edit response page$")
