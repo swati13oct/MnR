@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@PlanRecommendationEngine @febRelease
 Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendation Engine
 
   @PRE @drugpage @drugelementValidation @F374225
