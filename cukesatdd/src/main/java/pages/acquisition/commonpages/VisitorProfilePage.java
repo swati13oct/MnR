@@ -346,10 +346,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
     private WebElement lnkbackToProfile;
 	
-	@FindBy(xpath  = "//h3[text()='Basic Costs']")
+	@FindBy(xpath  = "//h2[text()='Basic Costs']")
     private WebElement headingBasicCost;
 	
-	@FindBy(xpath  = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath  = "//h2[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
 	@FindBy(id="dateOfBirth")
