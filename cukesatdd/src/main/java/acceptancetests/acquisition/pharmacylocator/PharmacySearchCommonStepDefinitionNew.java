@@ -161,6 +161,23 @@ public class PharmacySearchCommonStepDefinitionNew {
 	@And("^the user chooses a plan from dropdown list$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String planName = inputAttributesMap.get("Current Year Plan Name");
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, planName);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String pharmacyName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL);
+		if(null!= pharmacyName && !pharmacyName.equalsIgnoreCase("Test@123"))
+			pharmacySearchPage.selectsPlanName(planName, testSiteUrl);
+		else
+			pharmacySearchPage.selectsPlanNameForNoPharmacy(planName);
+
+	}
+/*
+
+	@And("^the user chooses a plan from dropdown list$")
+	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String cy_planName = inputAttributesMap.get("Current Year Plan Name");
 		String cy_planYear = inputAttributesMap.get("Current Year Plan Year");
 		String ny_planName = inputAttributesMap.get("Next Year Plan Name");
@@ -221,6 +238,7 @@ public class PharmacySearchCommonStepDefinitionNew {
 		else
 		pharmacySearchPage.selectsPlanNameForNoPharmacy(testPlanName);
 	}
+*/
 
  	@And("^the user validates map section contents$")
 	public void verifyMapSectionContent() {

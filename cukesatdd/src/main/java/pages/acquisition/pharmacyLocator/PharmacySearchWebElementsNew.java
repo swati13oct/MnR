@@ -164,13 +164,13 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath = "//*[@id='mapview']")
 	protected WebElement mapToggleElement;
 	
-	@FindBy(xpath = "//div[@class='mt-10']//*[@class='row']")
+	@FindBy(xpath = "//div[contains(@class,'mt-10')]//*[contains(@class,'row')]")
 	protected WebElement pharmacyList;
 	
 	@FindBy(id="collapseMap")
 	protected WebElement mapView;
 
-	@FindBy(xpath = "//div[@class='mt-10']//*[@class='row']//*[@class='list-item']")
+	@FindBy(xpath = "//div[@class='mt-10']//*[contains(@class,'row')]//*[contains(@class,'list-item')]")
 	protected List<WebElement> pharmacyListItems;
 	
 	@FindBy(xpath = "//div[@id='viewpdf']//span[contains(text(), 'View Results')]")

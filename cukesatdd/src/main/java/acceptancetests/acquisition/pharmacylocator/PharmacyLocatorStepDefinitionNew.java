@@ -115,7 +115,10 @@ public class PharmacyLocatorStepDefinitionNew {
 
 	}
 	
-	/** user chooses a plan from dropdown */
+/*
+	*/
+/** user chooses a plan from dropdown *//*
+
 	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
@@ -171,6 +174,7 @@ public class PharmacyLocatorStepDefinitionNew {
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
 	
+*/
 
 	@Then("^the user validates the pharmacies results$")
 	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {

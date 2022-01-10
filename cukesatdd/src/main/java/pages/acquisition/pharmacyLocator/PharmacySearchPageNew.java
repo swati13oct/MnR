@@ -539,6 +539,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 
 	public int getPharmacyCnt(){
+	    pageloadcomplete();
 		String PharmacyCountText = PharmacyFoundCount.getText();
 		String[] Text = PharmacyCountText.split("Matching");
 		PharmacyCount = Integer.parseInt(Text[0].trim());
