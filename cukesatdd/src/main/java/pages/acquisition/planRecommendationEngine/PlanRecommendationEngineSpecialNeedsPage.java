@@ -66,6 +66,9 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 //	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(2) uhc-checkbox label>span.checkbox-container>span.checkbox-square")
 	private WebElement snpConditions;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(2) uhc-checkbox label>span.checkbox-container>span.checkbox-square")
+	private WebElement snpNoneMD;
 
 //	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(3) uhc-checkbox label>span.checkbox-container>span.checkbox-square")
@@ -198,7 +201,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 		public void nospecialneedspage(String options) {
 			if (options.equalsIgnoreCase("MD")) {
 				Assert.assertTrue(validate(snpMedicaid), "D-SNP option not Available");
-				Assert.assertTrue(validate(snpNone), "None option not Available");
+				Assert.assertTrue(validate(snpNoneMD), "None option not Available");
 				Assert.assertFalse(validate(snpConditions), "D-SNP option Available");
 				Assert.assertTrue(validate(snpNursinghome), "D-SNP option Available");
 				}

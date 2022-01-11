@@ -241,7 +241,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 
 //Drugs Search Generic Element Verification Method
 	public void genericElements() {
-		validate(modalGenericDescription, 30);
+//		validate(modalGenericDescription, 30);
 //                            		Assertion.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
 		validate(modalGenericDrug, 30);
 //                            		Assertion.assertTrue(modalGenericDrug.getText().contains("TAB"));
@@ -618,8 +618,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 			threadsleep(2000);
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
-			modalcontinue.click();
-			threadsleep(2000);
+//			modalcontinue.click();
+//			threadsleep(2000);
 			genericElements();
 			validate(modalGenericDrug, 30);
 			threadsleep(2000);
@@ -909,9 +909,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		 * "Expected Error Message is not displayed");
 		 */
 		modalQuantity.sendKeys(count);
-		jsClickNew(modalcontinue);
 		if (GenericDrug) {
-			validate(modalGenericDrug, 30);
+			validate(modalGenericSwitchLabel, 30);
 			threadsleep(2000);
 			jsClickNew(modalcontinue);
 		}
@@ -945,10 +944,10 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 		threadsleep(2000);
 		validate(modalDosageSelect, 30);
 		threadsleep(2000);
-		jsClickNew(modalcontinue);
+//		jsClickNew(modalcontinue);
 		threadsleep(2000);
 		if (generic) {
-			validate(modalGenericDrug, 30);
+			validate(modalGenericSwitchLabel, 30);
 			threadsleep(2000);
 			jsClickNew(modalcontinue);
 		}

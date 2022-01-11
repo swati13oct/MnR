@@ -49,7 +49,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | AARP |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
       | AARP |   12345 | NO            | [blank]          | MAPD          | None                     | AcceptsMedicare | [blank]     | [blank]       |
       | AARP |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | UHGNetwork      | [blank]     | [blank]       |
-      | AARP |   21212 | YES           | Baltimore County | None          | nursing                  | AcceptsMedicare | [blank]     | [blank]       |
+      | AARP |   21212 | YES           | Baltimore County | None          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       |
 
     @FunctionalUHC
     Examples: 
@@ -57,7 +57,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | UHC  |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
       | UHC  |   12345 | NO            | [blank]          | MAPD          | None                     | AcceptsMedicare | [blank]     | [blank]       |
       | UHC  |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | UHGNetwork      | [blank]     | [blank]       |
-      | UHC  |   21212 | YES           | Baltimore County | None          | nursing                  | AcceptsMedicare | [blank]     | [blank]       |
+      | UHC  |   21212 | YES           | Baltimore County | None          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       |
 
   @PRE @planrecommendation @doctorspage @doctorspageerrorScenario @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page error scenarios in Plan Recommendation Engine
