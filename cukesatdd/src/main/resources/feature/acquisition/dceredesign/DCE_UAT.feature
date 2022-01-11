@@ -107,6 +107,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And user click on View Drug Pricing Modal
     And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
     And user clicks on change pharmacy link from summary page
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy4> |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | None |
+    And user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
     Then the user validates Pharmacy Filter - Error message and x cancel function is working on Summary page - Change Pharmacy Page
@@ -122,6 +127,25 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user Captures Drug costs on Drug Details Page
     And the user compares drug costs for drug details and drug summary pages
     Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy4> |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | Preferred |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy4> |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | Standard |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | "WALGREENS" |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | NoStandardWithPreferred |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | "CVS PHARMACY" |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | NoPreferredWithStandard |
     Then the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
     Then the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page
@@ -132,13 +156,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples:
-      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  | Test@123        |
 
   @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
     Examples:
-      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam | 80002   | 10001           | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  | Test@123        |
 
   @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link, LIS Buydown validation, Covered and not covered drugs You pay, Details Switch to generic, NBA

@@ -1475,4 +1475,51 @@ public class DrugSummaryPage extends UhcDriver {
 					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
 	}
 
+	@FindBy(xpath = "//p[contains(text(),'able to find any results for')]")
+	public WebElement dynamicErrorMessage;
+
+	@FindBy(xpath = "//p[contains(text(),'able to find any Preferred Pharmacy results')]")
+	public WebElement dynamicPreferredErrorMessage;
+
+	@FindBy(xpath = "//p[contains(text(),'able to find any Standard Pharmacy')]")
+	public WebElement dynamicStandardErrorMessage;
+
+	@FindBy(xpath = "(//div[contains(@class,'uhc-list__item')]//p)[2]")
+	public WebElement dynamicStandardPreferredErrorMessage;
+
+
+	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
+		if(pharmacyErrorType.equalsIgnoreCase("None")){
+			validateNew(dynamicErrorMessage);
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("Preferred")){
+			validateNew(dynamicPreferredErrorMessage);
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoStandardWithPreferred")){
+			validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Preferred")){
+
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoPreferredWithStandard")){
+			validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Standard")){
+
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else{
+			validateNew(dynamicStandardErrorMessage);
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+	}
+
 }
