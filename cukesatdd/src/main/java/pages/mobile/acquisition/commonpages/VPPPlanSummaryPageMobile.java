@@ -830,7 +830,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 	WebElement ViewPlanMedSupPage;
 
-	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
+	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[1]")
 	private WebElement MaleGender;
 
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
@@ -2098,11 +2098,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		if (planType.equalsIgnoreCase("PDP")) {
 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-binding')]"));
 		} else
 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(@class,'ng-binding')]"));
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/div[contains(@class,'ng-bind')]"));
 
 		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		pageloadcomplete();
@@ -2580,13 +2580,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		if (planName.contains("SNP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Out of Pocket')])"));
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//span[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -3665,33 +3665,33 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
 		Thread.sleep(2000);
-		part_A_monthDrpDwn.click();
+		jsClickNew(part_A_monthDrpDwn);
 		Thread.sleep(2000);
-		Part_A_monthDrpDwnOption.click();
+		jsClickNew(Part_A_monthDrpDwnOption);
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
-		part_A_yearDrpDwn.click();
+		jsClickNew(part_A_yearDrpDwn);
 		Thread.sleep(2000);
-		Part_A_yearDrpDwnOption.click();
+		jsClickNew(Part_A_yearDrpDwnOption);
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
 		// part_B_monthDrpDwn.click();
 		jsClickNew(part_B_monthDrpDwn);
 		Thread.sleep(2000);
-		Part_B_monthDrpDwnOption.click();
+		Part_B_monthDrpDwnOption.click();;
 		Thread.sleep(2000);
 		// part_B_yearDrpDwn.click();
-		jsClickNew(part_B_yearDrpDwn);
+		part_B_yearDrpDwn.click();;
 		Thread.sleep(2000);
-		Part_B_yearDrpDwnOption.click();
+		Part_B_yearDrpDwnOption.click();;
 		Thread.sleep(2000);
 		// startDrpDwn.click();
-		jsClickNew(startDrpDwn);
+		startDrpDwn.click();
 		Thread.sleep(2000);
-		startDrpDwnOption.click();
+		startDrpDwnOption.click();;
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 	}
 
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth) {
@@ -5940,7 +5940,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	private WebElement RightRail_FindAnAgentMedsupp;
 
 	public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
-
+		sleepBySec(5);
 		validateNew(RightRail_FindAnAgentMedsupp);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
 		String parentWindow = driver.getWindowHandle();
