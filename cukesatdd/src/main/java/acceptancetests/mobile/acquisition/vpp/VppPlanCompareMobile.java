@@ -74,8 +74,6 @@ public class VppPlanCompareMobile {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 	// AppiumDriver wd;
 
@@ -84,7 +82,7 @@ public class VppPlanCompareMobile {
 	 */
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-//		AppiumDriver wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -648,6 +646,7 @@ public class VppPlanCompareMobile {
 
 	@When("^user successfully adds drug in the ums site$")
 	public void user_successfully_adds_drugs(DataTable data) throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetailsMobile DrugDetails = (AddDrugDetailsMobile) getLoginScenario()
 				.getBean(PageConstants.ADD_DRUG_DETAILS);
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
@@ -719,13 +718,11 @@ public class VppPlanCompareMobile {
 		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
-//		// WebDriver wd = getLoginScenario().getWebDriverNew();
+
 		String planYear = givenAttributesMap.get("Plan Year");
 
-		VPPPlanSummaryPageMobile plansummaryPage =new VPPPlanSummaryPageMobile(wd);
-		
-//		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
@@ -1447,7 +1444,7 @@ public class VppPlanCompareMobile {
 
 		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
 
-//		// WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = new VPPPlanSummaryPageMobile(wd, OLE_Campaign_URL, true);
@@ -1474,7 +1471,7 @@ public class VppPlanCompareMobile {
 
 		String OLE_Campaign_URL = "https://www.team-acme-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
 
-//		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = new VPPPlanSummaryPageMobile(wd, OLE_Campaign_URL, true);
@@ -3052,7 +3049,7 @@ public class VppPlanCompareMobile {
 
 	@Then("^the user quits the session$")
 	public void user_ends_current_session() throws Throwable {
-//		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 	}
 
@@ -3118,7 +3115,7 @@ public class VppPlanCompareMobile {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
-		// WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, siteName, TestharnessPage);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
@@ -3487,7 +3484,7 @@ public class VppPlanCompareMobile {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
-		// WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, siteName, TestharnessPage);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
@@ -3855,7 +3852,7 @@ public class VppPlanCompareMobile {
 				resultsRow.createCell(2).setCellValue((String) pdfType);
 				resultsRow.createCell(3).setCellValue((String) docCode);
 
-				// WebDriver wd = getLoginScenario().getWebDriverNew();
+				WebDriver wd = getLoginScenario().getWebDriverNew();
 				AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 
 				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -3937,14 +3934,14 @@ public class VppPlanCompareMobile {
 		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
-		// WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
-//		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	//	getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	//	plansummaryPage.viewPlanSummary(plantype);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+//		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
@@ -4877,11 +4874,8 @@ public class VppPlanCompareMobile {
 	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link$")
 	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link(String planType, String Counter)
 			throws Throwable {
-	//	VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-	//			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		AppiumDriver wd = getLoginScenario().getMobileDriver();
-		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
-		
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
 //		if (planType.equals("MAPD")) {
 //			// plansummaryPage.clickonViewPlans();
