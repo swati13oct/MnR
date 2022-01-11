@@ -82,7 +82,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @regressionAARP @kiriti
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @regressionAARP
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   23666 | NO              | New York           | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
