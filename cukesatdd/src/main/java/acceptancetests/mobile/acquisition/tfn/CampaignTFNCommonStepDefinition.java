@@ -1408,7 +1408,7 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = inputAttributesMap.get("Zip Code");
 		
 		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(wd, By.xpath(
-				"(//a[contains(@class,'back-to-plans')])[1]"), 20);
+				"//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']"), 20);
 		boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
 				|| !msPlansDetailsBackToAllPlans && zipCode.equals("10001")) ? true
 						: (msPlansDetailsBackToAllPlans && zipCode.equals("10001")

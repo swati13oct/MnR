@@ -1668,7 +1668,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(decisionGuideClick);
 	}
 
-	@FindBy(xpath = "//a[contains(normalize-space(),'Make an appointment with a licensed insurance agent.')]")
+	@FindBy(xpath = "//a[contains(@class,'uhc-button uhc-button--outlined')]")
 	private WebElement FindAnAgentMedsupp;
 
 	public void clickOnAgentLinkMedSup(String TFNXpath, String ExpecetdTFNNo) {
