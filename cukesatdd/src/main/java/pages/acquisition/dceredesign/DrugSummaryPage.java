@@ -1489,34 +1489,42 @@ public class DrugSummaryPage extends UhcDriver {
 
 
 	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
+		boolean flag = false;
 		if(pharmacyErrorType.equalsIgnoreCase("None")){
-			validateNew(dynamicErrorMessage);
+			flag = validateNew(dynamicErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed for Change Pharmacy Modal on Summary and Detail Page for Non PDP Plan");
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
 		}
 		else if(pharmacyErrorType.equalsIgnoreCase("Preferred")){
-			validateNew(dynamicPreferredErrorMessage);
+			flag = validateNew(dynamicPreferredErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
 		}
 		else if(pharmacyErrorType.equalsIgnoreCase("NoStandardWithPreferred")){
-			validateNew(dynamicStandardPreferredErrorMessage);
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
 			if(dynamicStandardPreferredErrorMessage.getText().contains("Preferred")){
-
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+						"no Pharmacies available for Standard Tab but on Preferred Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
 			}
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
 		}
 		else if(pharmacyErrorType.equalsIgnoreCase("NoPreferredWithStandard")){
-			validateNew(dynamicStandardPreferredErrorMessage);
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
 			if(dynamicStandardPreferredErrorMessage.getText().contains("Standard")){
-
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+						"no Pharmacies available for Preferred Tab but on Standard Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
 			}
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
 		}
 		else{
-			validateNew(dynamicStandardErrorMessage);
+			flag = validateNew(dynamicStandardErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
 		}
