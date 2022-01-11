@@ -32,6 +32,10 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.android.nativekey.PressesKey;
+import io.appium.java_client.windows.PressesKeyCode;
 
 public class CampaignTFNPageMobile extends GlobalWebElements {
 
@@ -163,7 +167,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "(//input[contains(@id,'zipcodemeded')])[2]")
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeShopField;
 	// @FindBy(xpath =
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
@@ -188,7 +192,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 
-	@FindBy(id = "msVppZipCode")
+	@FindBy(xpath = "//input[@id='msVppZipCode']")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
@@ -231,7 +235,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
-	@FindBy(xpath = "//button[contains(text(),'View Plans')]")
+	@FindBy(xpath="(//button[contains(text(),'Start application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
 	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
@@ -853,9 +857,11 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		} else if (validate(msPlansHeading)) {
 //			driver.navigate().back();
 			String currentURL = driver.getCurrentUrl();
-			if (currentURL.contains("health-plans.html#/plan-summary")) {
-				String newURL = currentURL.replace("health-plans.html#/plan-summary", "health-plans.html");
-				driver.navigate().to(newURL);
+			if (currentURL.contains("plan-summary")) {
+				if(currentURL.contains("aarp"))
+					driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/health-plans.html");
+				else
+					driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.htm");
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
