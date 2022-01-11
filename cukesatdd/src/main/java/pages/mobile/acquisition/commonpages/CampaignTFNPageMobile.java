@@ -167,7 +167,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	@FindBy(xpath = "(//input[contains(@id,'zipcodemeded')])[2]")
 	private WebElement zipCodeShopField;
 	// @FindBy(xpath =
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
@@ -607,7 +607,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@aria-describedby='View plan details Plan F']")
 	private WebElement ms3ViewPlanDetails;
 	
-	@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	@FindBy(xpath = "(//a[contains(@class,'back-to-plans')])[1]")
 	private WebElement ms4BackToPlanList;
 	
 	@FindBy(xpath = "//a[@class='back-to-plans resTopPadding10 back-arrow-left leftPadding20' and normalize-space()='Back to all plans']")
@@ -1668,7 +1668,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(decisionGuideClick);
 	}
 
-	@FindBy(xpath = "//span[text()='Find an Agent']")
+	@FindBy(xpath = "//a[contains(normalize-space(),'Make an appointment with a licensed insurance agent.')]")
 	private WebElement FindAnAgentMedsupp;
 
 	public void clickOnAgentLinkMedSup(String TFNXpath, String ExpecetdTFNNo) {
