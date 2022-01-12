@@ -128,6 +128,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | PharmacyFilterText | "CVS PHARMACY" |
     Then the user validates the dynamic error message displayed for filter that has no result
       | PharmacyErrorType | NoPreferredWithStandard |
+    Then user clicks on change pharmacy link from details page
     Then the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
     Then the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page
