@@ -89,7 +89,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "(//*[@class='text-small header-link-mobile'])[3]")
+	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
 
 	@FindBy(css = "#enrollment-next-button")

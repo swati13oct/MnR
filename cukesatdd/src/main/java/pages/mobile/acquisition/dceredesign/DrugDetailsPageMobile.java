@@ -72,7 +72,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link'][dtmname*='return']")
+	@FindBy(xpath="//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 //	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -103,7 +103,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "div[class='uhc-card__content'] > div[class*='d-block'] > div > p:nth-child(4) > span")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//*[@id='viewplan']/span[text()='View Plan Details']")
+	@FindBy(xpath="//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(css = "#printdetails")

@@ -976,6 +976,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					+ "Expect='" + totalBefore + "' | Actual='" + totalAfter + "'", totalBefore >= totalAfter);
 			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
 					pharmacyValidate(pharmaciesAvailable));
+			System.out.println("\n\nTotal pharmacy count : "+totalAfter+"\n\n");
 			if (totalAfter > 10) {
 				WebElement contactUsLink = contactUnitedHealthCare;
 				if (!pharmacyValidate(contactUnitedHealthCare))
@@ -1046,6 +1047,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
+		String indian_tribal_text = "";
+		try {
+			 indian_tribal_text = indian_tribal_label_filter_text.getText();
+		}
+		catch (Exception ex){
+		}
+		if(indian_tribal_text.contains("Servicio de salud ind")){
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
+		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
 		jsClickNew(FilterApplyBtn);

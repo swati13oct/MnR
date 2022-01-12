@@ -240,7 +240,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(css = "div[class$='newstyle_feature_toggle']
 	// input[id^='zipcodemeded'] + button")
 
-	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
+	@FindBy(xpath="(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")

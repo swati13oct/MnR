@@ -1181,12 +1181,12 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				}
 			} else {
 				WebElement AdditionalBenefitType1 = driver.findElement(By.xpath("//p[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+						+ additionalBenefits.get(i).get(1) + "')]/.."));
 				scrollToView(AdditionalBenefitType1);
 				// System.out.println("The additional Benefit to Valuidate : ");
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
-								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+								+ "')]/.."));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
@@ -1352,9 +1352,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		// rider.click();
 		jsClickNew(rider);
 		WebElement optionalRiderValue = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong"));
+				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//p"));
 		scrollToView(optionalRiderValue);
-		String optionalRiderPremium = optionalRiderValue.getText().trim();
+		String optionalRiderPremium = (optionalRiderValue.getText().trim()).split(" ")[1];
 		return optionalRiderPremium;
 	}
 
@@ -1762,7 +1762,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
-	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone'].isSelected();")
+	@FindBy(xpath = "//label[@class='compare_c' and @for='compareone']/preceding::input[@id='compareone']")
 	public WebElement addToCompareCheckBox;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
