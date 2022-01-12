@@ -6138,7 +6138,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 
-		jsClickNew(viewPlanDetailsBtn);
+		//jsClickNew(viewPlanDetailsBtn);
+		jsClickNew(VisitorProfilePlanDetailsBtn);
 		waitForPageLoadSafari();
 		Thread.sleep(2000);
 
@@ -6161,39 +6162,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("---------plan name on plan details is incorrect----------");
 			}
 		}
-		/*------------	Benefit Table is removed-------
-		if (flag) {
-			System.out.println("Validating benefit table link on plan details----------");
 
-			String parentHandle = driver.getWindowHandle();
-
-			jsClickNew(benefitTableLink);
-			Thread.sleep(2000);
-
-			Set<String> windowhandles = driver.getWindowHandles();
-
-			for (String windowHandle : windowhandles) {
-				if (!windowHandle.equalsIgnoreCase(parentHandle)) {
-					driver.switchTo().window(windowHandle);
-					String url1 = driver.getCurrentUrl();
-					flag = url1.contains("MedSuppDocs/BenefitsTable");
-				}
-			}
-
-			driver.switchTo().window(parentHandle);
-
-			if (flag) {
-				System.out.println("---------benefit table link on plan details is working----------");
-			} else {
-				System.out.println("---------benefit table link on plan details is not working----------");
-			}
-		}
-					------------	Benefit Table is removed-------*/
-		if (flag) {
+		//if (flag) {
 			System.out.println("Validating start application button on plan details----------");
 
-			jsClickNew(startApplicationBtn);
+			jsClickNew(startApplicationBtnonPlanDetails);
 			Thread.sleep(2000);
+			if (DOB1.isDisplayed()) {
+
+				Thread.sleep(2000);
+				DOB1.sendKeys("01111951");
+
+				Thread.sleep(7000);
+				jsMouseOver(femaleGender1);
+				jsClickNew(femaleGender1);
+				Thread.sleep(7000);
+				jsMouseOver(ContinueApplication);
+				jsClickNew(ContinueApplication);
+				Thread.sleep(5000);
+
+			}
+			else {
+				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
+			}
 			flag = insuredStatusHeader.isDisplayed();
 
 			if (flag) {
@@ -6201,7 +6192,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			} else {
 				System.out.println("---------start application button on plan details is not working----------");
 			}
-		}
+
 
 		return flag;
 	}
@@ -6311,14 +6302,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "planDetailStartApp")
 	WebElement startApplicationBtn;
 
+	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
+	WebElement startApplicationBtnonPlanDetails;
+
+
 	@FindBy(xpath = "//a[text()='Benefit Table']")
 	WebElement benefitTableLink;
 
-	@FindBy(xpath = "//h2[@class='plan-title noMargin']")
+	//@FindBy(xpath = "//h2[@class='plan-title noMargin']")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-tempo-header_')])[1]")
 	WebElement planNameOnPlanDetails;
 
 	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
 	WebElement viewPlanDetailsBtn;
+
+	@FindBy(xpath = "(//*[contains(@class,'swiper-slide plan-card-component shopper-profile-card my-10 med-supp-profile-card')]//*[text()='Plan Details'])[1]")
+	WebElement VisitorProfilePlanDetailsBtn;
 
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
 	WebElement CancelBtn;

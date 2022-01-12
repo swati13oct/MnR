@@ -141,7 +141,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
     And user clicks on view saved plans land on shopper profile page
     Then user clicks on compare plans link and validates plan name start application button and benefit link
 
-    @MedSupp_OLE_Regression_AARP @regressionAARP @insuranceSolution @Meduspp_OLE
+    @MedSupp_OLE_Regression_AARP @regressionAARP @insuranceSolution
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | Yes               |                           3 |         2 |   10001 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | New York County | MS       | 11/13/1940 | TEST_PORTALS_John      | TEST_PORTALS_Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | AARP |
@@ -168,7 +168,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
     And user clicks on view saved plans land on shopper profile page
     Then user clicks on view plan details button and validates plan name start application button and benefit link
 
-    @MedSupp_OLE_Regression_AARP @regressionAARP @insuranceSolution
+    @MedSupp_OLE_Regression_AARP @regressionAARP @insuranceSolution @Meduspp_OLE
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | Yes               |                           3 |         2 |   10001 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | New York County | MS       | 11/13/1940 | John      | Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | AARP |
