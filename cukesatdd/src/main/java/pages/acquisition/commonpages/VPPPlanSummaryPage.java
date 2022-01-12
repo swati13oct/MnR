@@ -652,6 +652,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'viewPlans') or contains(text(),'Save and Update Premiums')]")
 	WebElement ViewPlanMedSupPage;
 
+	//@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
+	//WebElement ContinueApplication;
+
 	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
 	//@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
 	private WebElement femaleGender;
@@ -881,16 +884,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//label[text()='Add to Compare'])[1]")
 	private WebElement compareLink;
 
-	@FindBy(xpath = "(//a[@class='collapsed add-button'])[2]")
+	//@FindBy(xpath = "(//a[@class='collapsed add-button'])[2]")
+	@FindBy(xpath = "(//*[contains(@class,'add-plan-button')])")
 	private WebElement addBtn2;
 
-	@FindBy(xpath = "(//a[@class='add-button collapsed'])[3]")
+	//@FindBy(xpath = "(//a[@class='add-button collapsed'])[3]")
+	@FindBy(xpath = "(//*[contains(@class,'add-plan-button')])")
 	private WebElement addBtn3;
 
-	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[10]")
+	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[3]")
 	private WebElement savePlanK;
 
-	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[11]")
+	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[4]")
 	private WebElement savePlanL;
 
 	@FindBy(xpath = "(//*[contains(text(),'Back to plan list')])[1]")
@@ -899,13 +904,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Add your information')])[1]")
 	private WebElement AddYourInformationLink;
 
-	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	//@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	@FindBy(xpath = "//*[contains(@dtmname,'MS:Plan Compare:Add Another Plan:K01')]")
 	private WebElement planK;
 
-	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[3]")
+	//@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[3]")
+	@FindBy(xpath = "//*[contains(@dtmname,'MS:Plan Compare:Add Another Plan:L01')]")
 	private WebElement planL;
 
-	@FindBy(xpath = "(//h3[contains(text(),'Plan L')])[1]")
+
+	@FindBy(xpath = "(//*[contains(@dtmname,'Scroll Plans Right')])[1]")
+	private WebElement scrollright;
+
+	@FindBy(xpath = "(//*[contains(text(),'Plan L')])[1]")
 	private WebElement displayplanL;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
@@ -924,7 +935,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
-	@FindBy(xpath = "(//*[contains(text(),'Compare AARP® Medicare Supplement ')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare AARP® Medicare Supplement')])[1]")
 	private WebElement comparePageHeader;
 
 //	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -1170,6 +1181,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement CpaSignatureInd;
 
 
+	@FindBy(xpath = "//*[@id='part-b-month']")
+	private WebElement PartBMonth;
+
+	@FindBy(xpath = "//*[@id='part-b-year']")
+	private WebElement PartByear;
+
+	@FindBy(xpath = "//*[@id='part-b-month']//option[2]")
+	private WebElement PartBMonthDropDown;
+
+	@FindBy(xpath = "//*[@id='part-b-year']//option[2]")
+	private WebElement PartByearDropDown;
+
+	@FindBy(xpath = "//*[@id='plan-start-date']")
+	private WebElement PlanstartDate;
+	@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
+	private WebElement ContinueApplication;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Are my doctors & dentist covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -4808,22 +4835,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
-	@FindBy(xpath = "//*[@id='part-b-month']")
-	private WebElement PartBMonth;
 
-	@FindBy(xpath = "//*[@id='part-b-year']")
-	private WebElement PartByear;
-
-	@FindBy(xpath = "//*[@id='part-b-month']//option[2]")
-	private WebElement PartBMonthDropDown;
-
-	@FindBy(xpath = "//*[@id='part-b-year']//option[2]")
-	private WebElement PartByearDropDown;
-
-	@FindBy(xpath = "//*[@id='plan-start-date']")
-	private WebElement PlanstartDate;
-	@FindBy(xpath = "//*[contains(text(),'Continue Application')]")
-	private WebElement ContinueApplication;
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
@@ -5733,12 +5745,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			close.click();
 			Thread.sleep(2000);
 		}
+		jsMouseOver(scrollright);
+		jsClickNew(scrollright);
 		action.moveToElement(addBtn3).build().perform();
 		addBtn3.click();
 		Thread.sleep(10000);
 		jsClickNew(planL);
 		Thread.sleep(10000);
-		flag = displayplanL.getAttribute("class").equalsIgnoreCase("inline");
+		//flag = displayplanL.getAttribute("text").equalsIgnoreCase("Plan L");
 
 		return flag;
 	}
@@ -5807,7 +5821,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Thread.sleep(2000);
 				jsClickNew(savePlanK);
 				Thread.sleep(10000);
-				jsClickNew(savePlanL);
+			//	jsClickNew(savePlanL);
 				Thread.sleep(10000);
 				flag = savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 				backToPlans.click();
@@ -5820,7 +5834,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//	jsMouseOver(editYourInformationLink);
 		//	editYourInformationLink.click();
 			jsMouseOver(AddYourInformationLink);
-				AddYourInformationLink.click();
+			//	AddYourInformationLink.click();
+				jsClickNew(AddYourInformationLink);
 
 			Thread.sleep(6000);
 			// action.moveToElement(DOB).build().perform(); //Does not work on Safari
@@ -5834,14 +5849,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Thread.sleep(2000);
 			// action.moveToElement(ViewPlanMedSupPage).build().perform(); //Does not work
 			// on Safari browser
-			DOB1.sendKeys("10/11/1951");
+			DOB1.sendKeys("01111951");
+
+			Thread.sleep(7000);
+			jsMouseOver(femaleGender1);
+			jsClickNew(femaleGender1);
+			Thread.sleep(7000);
 			jsMouseOver(ViewPlanMedSupPage);
-			ViewPlanMedSupPage.click();
+			jsClickNew(ViewPlanMedSupPage);
 			Thread.sleep(5000);
 			// action.moveToElement(compareButton).build().perform(); //Does not work on
 			// Safari browser
-			jsMouseOver(compareButton);
-			if (compareLink.isDisplayed()) {
+
+			//jsMouseOver(compareButton);
+
+		//	if (compareLink.isDisplayed()) {
+				jsMouseOver(comparePageHeader);
+
+				if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
 
@@ -5853,7 +5878,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 
-		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+	//	List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//*[contains(@class,'unliked button')]"));
 
 		int planToSaveCount = unsavedPlanButton.size();
 		int totalNoOfPlans = planToSaveCount;
@@ -5861,8 +5887,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		while (planToSaveCount > 0) {
 			Thread.sleep(2000);
+		/*	WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));*/
 			WebElement planToSave = driver
-					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+					.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + planToSaveCount + "]"));
 			jsClickNew(planToSave);
 			Thread.sleep(10000);
 			planToSaveCount = planToSaveCount - 1;
@@ -5882,7 +5910,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 
-		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//*[contains(@class,'unliked button')]"));
 
 		int planToSaveCount = unsavedPlanButton.size();
 		int totalNoOfPlans = planToSaveCount;
@@ -5890,7 +5918,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		while (planToSaveCount > 0) {
 			Thread.sleep(2000);
 			WebElement planToSave = driver
-					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+					.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + planToSaveCount + "]"));
 			jsClickNew(planToSave);
 			Thread.sleep(10000);
 			if (close.isDisplayed()) {
@@ -5920,12 +5948,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		while (i <= noOfPlansToSave) {
 			Thread.sleep(2000);
 			WebElement planToSave = driver
-					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + i + "]"));
+					.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + i + "]"));
 			jsClickNew(planToSave);
 			Thread.sleep(2000);
 			WebElement heartIcon = driver
-					.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
-			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
+				//	.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
+			.findElement(By.xpath("(//div[contains(@class,'save-box')])[" + i + "]"));
+			//flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
+			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-box");
 
 			i = i + 1;
 		}
@@ -6181,7 +6211,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String planName2 = "Plan G";
 		int noOfPlans = 2;
 		boolean flag = false;
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 
 		jsClickNew(comparePlansLink);
 		waitForPageLoadSafari();
@@ -6207,34 +6237,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		}
 
-		/*-------Benefit Table is not present
-		if (flag) {
-			System.out.println("Validating benefit table link on plan compare----------");
-
-			String parentHandle = driver.getWindowHandle();
-
-			jsClickNew(comparePageBenefitTableLink);
-			Thread.sleep(2000);
-
-			Set<String> windowhandles = driver.getWindowHandles();
-
-			for (String windowHandle : windowhandles) {
-				if (!windowHandle.equalsIgnoreCase(parentHandle)) {
-					driver.switchTo().window(windowHandle);
-					String url1 = driver.getCurrentUrl();
-					flag = url1.contains("MedSuppDocs/BenefitsTable");
-				}
-			}
-
-			driver.switchTo().window(parentHandle);
-
-			if (flag) {
-				System.out.println("---------benefit table link on plan compare is working----------");
-			} else {
-				System.out.println("---------benefit table link on plan compare is not working----------");
-			}
-		}
-						-------Benefit Table is not present*/
 		if (flag) {
 			System.out.println("Validating saved plan count on plan compare----------");
 			int noOfSavedPlans = Integer.parseInt(savedPlanHeaderCount.getText());
@@ -6251,11 +6253,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 
-		if (flag) {
+	/*	if (flag) {
 			System.out.println("Validating start application button on plan compare----------");
-
+*/
 			jsClickNew(comparePageStartApplicationBtn);
-			Thread.sleep(2000);
+			if (DOB1.isDisplayed()) {
+
+				Thread.sleep(2000);
+				DOB1.sendKeys("01111951");
+
+				Thread.sleep(7000);
+				jsMouseOver(femaleGender1);
+				jsClickNew(femaleGender1);
+				Thread.sleep(7000);
+				jsMouseOver(ContinueApplication);
+				jsClickNew(ContinueApplication);
+				Thread.sleep(5000);
+				validateNew(comparePageStartApplicationBtn);
+				jsClickNew(comparePageStartApplicationBtn);
+			}
+			else {
+				System.out.println("DOB is not displayed and User clicked on Start Application to land on IS OLE Page");
+			}
+			validateNew(insuredStatusHeader);
+
 			flag = insuredStatusHeader.isDisplayed();
 
 			if (flag) {
@@ -6263,7 +6284,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			} else {
 				System.out.println("---------start application button on plan compare is not working----------");
 			}
-		}
+		//}
 
 		return flag;
 	}
@@ -6271,17 +6292,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//a[text()='Benefit Table'])[1]")
 	WebElement comparePageBenefitTableLink;
 
-	// @FindBy(xpath = "(//span[text()='Start application'])[1]//parent::a")
-	@FindBy(xpath = "(//button[contains(@class,'cta-button')]//span[contains(text(),'Start application')])[1]")
+	 @FindBy(xpath = "(//*[contains(@aria-label,'Start Application')])[1]")
+	//@FindBy(xpath = "(//button[contains(@class,'cta-button')]//span[contains(text(),'Start application')])[1]")
 	WebElement comparePageStartApplicationBtn;
 
-	@FindBy(xpath = "(//h3[@class='inline'])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'text-light')])[1]")
 	WebElement comparePagePlan1;
 
-	@FindBy(xpath = "(//h3[@class='inline'])[2]")
+	@FindBy(xpath = "(//*[contains(@class,'text-light')])[2]")
 	WebElement comparePagePlan2;
 
-	@FindBy(xpath = "//a[text()='Compare Plans']")
+	@FindBy(xpath = "(//*[contains(text(),'Compare Plans')])[1]")
 	WebElement comparePlansLink;
 
 	@FindBy(xpath = "//span[@class='globalTitle']")
