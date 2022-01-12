@@ -2578,7 +2578,8 @@ public class DCEStepDefinitionAARP {
 
     @When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal$")
     public void user_clicks_on_keep_using_pharmacy_link_on_change_pharmacy_modal() throws InterruptedException {
-        DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+        DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugSummary);
         drugSummaryPage.clickKeepUsingPharmacyLink();
     }
 
