@@ -134,13 +134,14 @@ Feature: 1.11 UAT - Pharmacy Locator
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
     Then the user validate error message displayed when filter results in no match
+    Then the user clicks on Reset filter on pharmacy search page
 
   @UATAARP03 @regressionAARP
     Examples:
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
+      | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing  | True                  | False            | True                 |
 
   @UATUHC03 @regressionUHC
     Examples:
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
+      | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing  | True                  | False            | True                 |

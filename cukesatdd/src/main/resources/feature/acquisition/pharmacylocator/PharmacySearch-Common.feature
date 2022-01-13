@@ -104,6 +104,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #  | Language | English |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
+    Then the user clicks on Reset filter on pharmacy search page
 
 
   @PharmacyLocatorCommonAARP02a @regressionAARP

@@ -669,5 +669,12 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		returntoPharmacySearch.click();
 		waitForPageLoadSafari();
 	}
+	
+	public void clickResetFilter() {
+		//breadCrumbLink.click();
+		jsClickNew(resetfilterlink);
+		waitForPageLoadSafari();
+		validateNew(pharmacyList);
+	}
 
 }

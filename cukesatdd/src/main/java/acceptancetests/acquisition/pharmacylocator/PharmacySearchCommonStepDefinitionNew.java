@@ -287,6 +287,13 @@ public class PharmacySearchCommonStepDefinitionNew {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
 	}
 
+	@Then("^the user clicks on Reset filter on pharmacy search page$")
+	public void user_clicks_on_Reset_Filter_on_pharmacy_search_page()  {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickResetFilter();
+	}
+	
 	/**
 	 * Verify Create a PDF in pharmacy search page
 	 *

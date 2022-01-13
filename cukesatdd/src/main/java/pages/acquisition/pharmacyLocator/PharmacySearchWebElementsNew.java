@@ -249,4 +249,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//p[@class='text-bold mb-10 text-left text-large']")
 	protected WebElement noPharmacyResultErrorMessage;
 	
+	@FindBy(xpath="(//button[contains(@class, 'uhc-link-button')])[2]")
+	protected WebElement resetfilterlink;
+	
 }

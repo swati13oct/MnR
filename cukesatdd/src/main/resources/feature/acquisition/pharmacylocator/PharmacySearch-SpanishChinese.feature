@@ -45,6 +45,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
 #      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
+    Then the user clicks on Reset filter on pharmacy search page
 
   @PharmacyLocatorChinese1_AARP @regressionAARP @lang
     Examples:
@@ -87,6 +88,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
 #      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
+    Then the user clicks on Reset filter on pharmacy search page
 
   @PharmacyLocatorChinese2_AARP @regressionAARP
     Examples:
@@ -177,6 +179,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts for Spanish and Chinese Langua
 #      | Language | Spanish |
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
+    Then the user clicks on Reset filter on pharmacy search page
 
   @PharmacyLocatorSpanish2_AARP @regressionAARP
     Examples:
