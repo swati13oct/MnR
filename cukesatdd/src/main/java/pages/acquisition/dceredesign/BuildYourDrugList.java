@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -187,17 +188,26 @@ public class BuildYourDrugList extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
         WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
-		validateNew(SelectDrug);
-		jsClickNew(SelectDrug);
-		threadsleep(2000);
-		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
-		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
-			return new TellUsAboutDrug(driver);
-		} else {
-			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
-			return null;
+        WebElement TopDrug = driver.findElement(By.xpath("//uhc-list-item//span[1]"));
+        if(drugName.equalsIgnoreCase(TopDrug.getText()))
+		{
+			 validateNew(SelectDrug);
+			 jsClickNew(SelectDrug);
+			 threadsleep(2000);
+			 waitForPageLoadSafari();
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+			 if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+					return new TellUsAboutDrug(driver);
+			} else {
+			  Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+					return null;
+			}
+		}
+		else
+		{
+			Assertion.fail("Drug name not displayed on TOP");
+		    return null;
 		}
 	}
 

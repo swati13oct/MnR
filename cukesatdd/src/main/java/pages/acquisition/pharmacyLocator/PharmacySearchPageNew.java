@@ -88,6 +88,8 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 				pharmacyValidate(distanceOption_25miles));
 		Assertion.assertTrue("PROBLEM - unable to locate the zipcode input field element", 
 				pharmacyValidate(zipcodeField));
+		Assertion.assertTrue("PROBLEM - unable to locate the Pharmacy Name - Optional input field element",
+				pharmacyValidate(pharmacyNameOptionalTxt));
 	}
 	
 	public PharmacySearchPageNew validatePharmacyErrormessages(String language, String inputZip) {
@@ -242,6 +244,12 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 
 	public void validateMapSectionContent() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		pageloadcomplete();
+		try {
+			wait(3);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		scrollToView(mapCollapse);
 //		moveMouseToElement(map_resultSection);
 //		Assertion.assertTrue("PROBLEM - unable to locate the map", pharmacyValidate(map_mapImg));
@@ -439,6 +447,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
 	protected WebElement indian_tribal_label_filter_text;
+
 	public boolean validateNoPharmaciesErrorMessage() {
 		jsClickNew(Filter);
 		String indian_tribal_text = "";
@@ -541,6 +550,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	}
 
 	public int getPharmacyCnt(){
+	    pageloadcomplete();
 		String PharmacyCountText = PharmacyFoundCount.getText();
 		String[] Text = PharmacyCountText.split("Matching");
 		PharmacyCount = Integer.parseInt(Text[0].trim());
@@ -582,7 +592,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 
         validateNew(FilterApplyBtn);
         jsClickNew(FilterApplyBtn);
-
+		pageloadcomplete();
 //		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, pagination, 10);
@@ -663,6 +673,13 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 		validateNew(returntoPharmacySearch);
 		returntoPharmacySearch.click();
 		waitForPageLoadSafari();
+	}
+	
+	public void clickResetFilter() {
+		//breadCrumbLink.click();
+		jsClickNew(resetfilterlink);
+		waitForPageLoadSafari();
+		validateNew(pharmacyList);
 	}
 
 	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
