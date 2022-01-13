@@ -862,6 +862,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		sleepBySec(1);
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		//mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 		
 		if(driver.getClass().toString().toUpperCase().contains("IOS")) {

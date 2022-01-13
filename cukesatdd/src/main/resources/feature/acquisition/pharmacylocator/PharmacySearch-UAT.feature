@@ -53,7 +53,7 @@ Feature: 1.11 UAT - Pharmacy Locator
     Then user verify breadcrumb "Return to Pharmacy Search" on drug summary page
     And user click on return to home on drug summary in AARP site
 
-  @UATAARP01 @regressionAARP
+  @UATAARP01 @regressionAARP @HPA
     Examples:
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
       | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |

@@ -106,9 +106,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	   // sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
-		sleepBySec(3);
-		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
-		mobileSelectOption(distanceDropownID, distance, true);
+	
+//		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
+//		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 
 		String initialZipVal = zipcodeField.getAttribute("value");
