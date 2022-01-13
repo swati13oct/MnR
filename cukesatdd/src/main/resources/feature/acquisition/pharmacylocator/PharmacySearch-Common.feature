@@ -46,7 +46,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | TID   | site | zipcode | distance | countyName | planyear | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
       | 15582 | AARP | 10980   | 15       | None       | 2022     | E-Prescribing | True                  | False            | True                 | 2022        | AARP MedicareRx Walgreens (PDP) | 2022        | AARP MedicareRx Walgreens (PDP) |
 
-  @prodRegression @regressionAARP @vbfGate
+  @prodRegression @regressionAARP #@vbfGate
     Examples:
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP | 78006   | 15       | Kendall County | 2022        | AARP MedicareRx Walgreens (PDP) | 2022        | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
@@ -153,7 +153,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #------ English -----------------------------------
     And the user validates header section content on site
 
-  @PharmacyLocatorCommonAARP07 @regressionAARP @vbfGate
+  @PharmacyLocatorCommonAARP07 @regressionAARP #@vbfGate
     Examples:
       | TID   | site | state     |
       | xxxxx | AARP | Ohio      |
