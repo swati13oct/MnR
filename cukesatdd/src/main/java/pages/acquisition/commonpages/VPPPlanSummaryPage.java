@@ -445,7 +445,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
 	private WebElement startDrpDwnOption;
 
-	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
+	//FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
+	@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
 	private WebElement insuredStatus;
 
 	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
@@ -4859,6 +4860,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 //		jsClickNew(PartByear);
 //		jsClickNew(PartByearDropDown);
 		jsClickNew(ContinueApplication);
+		Thread.sleep(6000);
 		try {
 			CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
 			insuredStatus.click();
@@ -6877,7 +6879,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
 						&& CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Benefits Table is displayed  ***************");
 
@@ -6911,8 +6913,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
-						&& CurrentRailURL.contains(".pdf")) {
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
+				&& CurrentRailURL.contains(".pdf")) {
 			System.out.println(
 					"****************Guide to Health Insurance for People with Medicare is displayed  ***************");
 
@@ -6947,7 +6949,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
 						&& CurrentRailURL.contains(".pdf")) {
 			System.out.println(
 					"****************Your Guide to AARP Medicare Supplement Insurance Plans is displayed  ***************");
@@ -6982,7 +6984,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
 						&& CurrentRailURL.contains(".pdf")) {
 			System.out.println("**************** Print/save a copy of your application is displayed  ***************");
 
@@ -7083,7 +7085,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
 						&& CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************  Rules and Disclosures is displayed  ***************");
 
