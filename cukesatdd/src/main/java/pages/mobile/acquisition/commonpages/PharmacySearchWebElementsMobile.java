@@ -188,7 +188,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement filterOptions;
 
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
-	@FindBy(xpath="(//span[contains(@class,'label-content')])[4]")
+	@FindBy(xpath="//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/../..")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy(css = "#indian-tribal")
@@ -236,7 +236,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//ol[contains(@class,'pharmacy-list')]//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	protected WebElement pdf_WalgreenPlans;
 
-	@FindBy(xpath = "(//*[@id='language']//option)[3]")
+	@FindBy(xpath = "//*[contains(@id,'language')]//option[3]")
 	protected WebElement SpanishLanguage;
 
 	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
@@ -362,7 +362,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath = "//h3[contains(text(),'Walgreens ? Preferred Retail Pharmacy')]/../../..")
+	@FindBy(xpath = "//h3[contains(text(),'Walgreens – Preferred Retail Pharmacy ')]/../../..")
 	protected WebElement widget_walgreens;
 
 	@FindBy(xpath = "//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
