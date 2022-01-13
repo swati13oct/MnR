@@ -140,7 +140,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Status']/following-sibling::span")
 	public WebElement enrolledStatus;
 
-	@FindBy(xpath = "//span[text()='ZIP Code']/following-sibling::span")
+	@FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
 	public WebElement enrolledPlanZipcode;
 
 	@FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
@@ -346,10 +346,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
     private WebElement lnkbackToProfile;
 	
-	@FindBy(xpath  = "//h3[text()='Basic Costs']")
+	@FindBy(xpath  = "//*[text()='Basic Costs']")
     private WebElement headingBasicCost;
 	
-	@FindBy(xpath  = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
 	@FindBy(id="dateOfBirth")
@@ -1305,9 +1305,9 @@ public class VisitorProfilePage extends UhcDriver {
     public void validateNewHeader(DataTable data) {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
         Assertion.assertEquals("welcome," + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
-        Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
-        Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("Your Saved\n" + "Insurance Plans (1)", savedInsuredPlans.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
+        Assertion.assertEquals("Your Saved\n"+"Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
