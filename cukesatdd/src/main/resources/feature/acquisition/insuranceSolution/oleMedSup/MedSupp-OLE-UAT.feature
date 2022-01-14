@@ -43,11 +43,12 @@ Feature: 1.05.9 UAT-OLE MedSupp Flow
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    Then the site user fills all the details in MedsuppPage
-      | DOB | <DOB> |
+    #Then the site user fills all the details in MedsuppPage
+     # | DOB | <DOB> |
 #    Then the site user validates the RightRails Links on Medsupp Page
 #    Then user validate the plandetails on medsupp plans
-    Then the site user clicks on Start Application Button and proceed Next for VPP 3.0
+    #Then the site user clicks on Start Application Button and proceed Next for VPP 3.0
+   Then the site user clicks on Start Application Button and proceed Next
       | DOB       | <DOB>       |
       | Firstname | <Firstname> |
       | Lastname  | <Lastname>  |
