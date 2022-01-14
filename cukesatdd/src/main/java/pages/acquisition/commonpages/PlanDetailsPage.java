@@ -127,6 +127,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 
+	@FindBy(id = "planDocuments")
+	private WebElement planDocumentSection;
+
 	// Right Rail Element - TFN
 //	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
@@ -424,7 +427,11 @@ public class PlanDetailsPage extends UhcDriver {
 			checkModelPopup(driver, 45);
 		/*else
 			checkModelPopup(driver, 10);*/
-		validateNew(planCostsTab);
+		validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 
 	}
 
@@ -452,7 +459,11 @@ public class PlanDetailsPage extends UhcDriver {
 			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
 					"Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
-		validateNew(planCostsTab);
+				validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 		// note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

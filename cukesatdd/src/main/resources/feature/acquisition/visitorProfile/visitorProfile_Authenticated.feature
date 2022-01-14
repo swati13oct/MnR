@@ -29,14 +29,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | MS Test Plans | <MS_testPlans> |
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples: 
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName  | password   |
-      | AARP |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName    | password   |
+      | AARP | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
 
     @visitorProfile_UHC @regressionUHC @authenticatedUHC
-    Examples: 
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName      | password   |
-      | UHC  |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName        | password   |
+      | UHC  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
 
   @addDrugAuthenticated @authenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
@@ -64,14 +64,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | DrugName | <drug1> |
 
     @visitorProfile_AARP @regressionAARP @sanity @authenticatedAARP
-    Examples: 
-      | site | state   | userName  | password   | drug1   | zipCode |
-      | AARP | Alabama | vdatdd_02 | Password#1 | Lipitor |   90210 |
+    Examples:
+      | site | state   | userName  | password     | drug1   | zipCode |
+      | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
 
     @visitorProfile_UHC @regressionUHC
-    Examples: 
-      | site | state   | userName      | password   | drug1   | zipCode |
-      | UHC  | Alabama | vdatdd_02_uhc | Password@1 | Lipitor |   90210 |
+    Examples:
+      | site | state   | userName      | password     | drug1   | zipCode |
+      | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
 
   @providerFlowAuthenticated @authenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -96,14 +96,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | PlanName | <planname> |
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
-      | AARP | New York |   10010 | NO              | New York County | vdatdd_13 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+    Examples:
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @regressionUHC
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |
-      | UHC  | New York |   10010 | NO              | New York County | vdatdd_13_uhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+    Examples:
+      | site | state    | zipcode | isMultutiCounty | county          | userName      | password     | plantype | planname                             |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @oleAuthenticatedValidations @authenticatedd
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
@@ -120,14 +120,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | Monthly Premium | <monthlyPremium> |
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10010 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+    Examples:
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @visitorProfile_UHC @regressionUHC
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10010 | NO              | New York County | vdatdd_14 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+    Examples:
+      | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vppartialOLEAndRemove @authenticated
   Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
@@ -178,9 +178,9 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | Plan Name | <planName> |
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
-    Examples: 
-      | site | state    | userName  | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
-      | AARP | New York | vdatdd_15 | Password@1 |   10010 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             | 1111111111 | No                | No      |
+    Examples:
+      | site | state    | userName  | password     | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
+      | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
@@ -198,14 +198,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | User Name | <userName> |
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | AARP | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @visitorProfile_UHC @regressionUHC @vbfGate1
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | UHC  | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanDetailAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page
@@ -222,14 +222,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | User Name | <userName> |
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | AARP | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @visitorProfile_UHC @regressionUHC
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | UHC  | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanCompareAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
@@ -248,14 +248,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | User Name | <userName> |
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | AARP | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @visitorProfile_UHC @regressionUHC
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | userName              | password   | plantype | planname                            |
-      | UHC  | Alabama |   10010 | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
+      | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @validateHeaderWidget @authenticated
   Scenario Outline: Verify Visitor Profile page Header
@@ -269,14 +269,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | Name | <name> |
 
     @visitorProfile_AARP
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | name | userName              | password   | plantype | planname                            | drugList           | providerList          |
-      | AARP | Alabama |   10010 | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | name | userName              | password     | plantype | planname                            | drugList           | providerList          |
+      | AARP | Alabama | 10010   | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
 
     @visitorProfile_UHC
-    Examples: 
-      | site | state   | zipcode | isMultutiCounty | county          | name | userName              | password   | plantype | planname                            | drugList           | providerList          |
-      | UHC  | Alabama |   10010 | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
+    Examples:
+      | site | state   | zipcode | isMultutiCounty | county          | name | userName              | password     | plantype | planname                            | drugList           | providerList          |
+      | UHC  | Alabama | 10010   | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
 
   @validateVPFlyoutName @authenticated
   Scenario Outline: Verify name is appearing for the signed in user
@@ -299,8 +299,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | name | userName              | password   |
       | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
 
-   @authenticated @DCEImportSignIn
-   Scenario Outline: Verify DCE Redirect
+  @authenticated @DCEImportSignIn
+  Scenario Outline: Verify DCE Redirect
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -314,16 +314,16 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | ZipCode   | <zipcode>   |
       | MBI       | <mbi>       |
       | Member    | <member>    |
-     Then the user signs in with optum Id credentials on DCE import
-       | User Name | <userName> |
-       | Password  | <password> |
+    Then the user signs in with optum Id credentials on DCE import
+      | User Name | <userName> |
+      | Password  | <password> |
 
     @visitorProfile_AARP
     Examples:
-      | site | member| firstName | lastName | dob        | zipcode | mbi         |userName              |password    |
-      | AARP | UHC   | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 |jonette@getairmail.com|Password@123|
+      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
+      | AARP | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
 
     @visitorProfile_UHC
     Examples:
-     | site | member| firstName | lastName | dob        | zipcode | mbi         |userName              |password    |
-     | UHC  | UHC   | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 |jonette@getairmail.com|Password@123|
+      | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
+      | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |

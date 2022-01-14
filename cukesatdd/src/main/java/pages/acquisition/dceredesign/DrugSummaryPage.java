@@ -850,6 +850,19 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
 	}
 
+	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'provides prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthCare')])[1]")
+	public WebElement DrugPricingSpecialtyPharmacyText;
+
+	public void ValidateSpecialtyPharmMessage() {
+		pageloadcomplete();
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, DrugPricingSpecialtyPharmacyText, 30);
+		if (validateNew(DrugPricingSpecialtyPharmacyText)) {
+			System.out.println("Drug Summary Page, Message for Speciality Pharmacy Not able to provide Drug Pricing is Displayed");
+		} else
+			Assertion.fail("Drug Summary Page, Message for Speciality Pharmacy Not able to provide Drug Pricing is NOT Displayed");
+	}
+
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
@@ -889,6 +902,9 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_Distance_Select1Mile.click();
 		// validateNew(Pharmacy_Distance_Select1Mile);
 		jsClickNew(Pharmacy_Distance_Select1Mile);
+		validateNew(Pharmacy_SearchBtn);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -897,6 +913,9 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_Distance_Select2Mile.click();
 		// validateNew(Pharmacy_Distance_Select2Mile);
 		jsClickNew(Pharmacy_Distance_Select2Mile);
+
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -905,6 +924,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select5Mile);
 		Pharmacy_Distance_Select5Mile.click();
 		jsClickNew(Pharmacy_Distance_Select5Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -913,6 +934,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select10Mile);
 		Pharmacy_Distance_Select10Mile.click();
 		jsClickNew(Pharmacy_Distance_Select10Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -921,6 +944,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select15Mile);
 		Pharmacy_Distance_Select15Mile.click();
 		jsClickNew(Pharmacy_Distance_Select15Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -929,6 +954,8 @@ public class DrugSummaryPage extends UhcDriver {
 		// validateNew(Pharmacy_Distance_Select25Mile);
 		Pharmacy_Distance_Select25Mile.click();
 		jsClickNew(Pharmacy_Distance_Select25Mile);
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
 		validateNew(PharmacyCountTxt);
 		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
@@ -936,11 +963,12 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_ZipCodeTxt.clear();
 		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
 		validateNew(Pharmacy_SearchBtn);
-		Pharmacy_SearchBtn.click();
-		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Search for Zip Expected - " + pharmacyZipCode + "  : Entered : "
 				+ Pharmacy_ZipCodeTxt.getText());
 		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
-
 	}
 
 	public void clickReturnToPlanSummary() {
@@ -1097,7 +1125,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
-				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+				mailOrderPharmacyMsg.getText().trim().contains(expectedMsg));
 	}
 
 	public void validateDefaultDistance() {
@@ -1287,9 +1315,11 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
+/*
 	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
 	public WebElement PharmacyFilterApplyBtn;
-	
+*/
+
 	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
 	public WebElement PharmacyFilterClearTextX;
 
@@ -1299,7 +1329,11 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
+		/*
+		Removed After Page Re-design
 		validateNew(PharmacyFilterApplyBtn);
+		*/
+		validateNew(pharmacySearchBtn);
 		PharmacyFilterTxtBx.sendKeys("a");
 		System.out.println("FIlter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
@@ -1310,8 +1344,8 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
 		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
@@ -1323,9 +1357,9 @@ public class DrugSummaryPage extends UhcDriver {
 		PharmacyFilterTxtBx.clear();
 		PharmacyFilterTxtBx.sendKeys(filterText);
 		System.out.println("FIlter text entered : "+filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
-		System.out.println("Apply button clicked for filter text"+filterText);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
+		System.out.println("Search button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
 			System.out.println("Pharmacy Name : "+PharmacyName.getText());
 			if(!PharmacyName.getText().contains(filterText)) {
@@ -1438,6 +1472,61 @@ public class DrugSummaryPage extends UhcDriver {
 		} else
 			Assertion.fail(
 					"DCE Summary Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
+	}
+
+	@FindBy(xpath = "//p[contains(text(),'able to find any results for')]")
+	public WebElement dynamicErrorMessage;
+
+	@FindBy(xpath = "//p[contains(text(),'able to find any Preferred Pharmacy results')]")
+	public WebElement dynamicPreferredErrorMessage;
+
+	@FindBy(xpath = "//p[contains(text(),'able to find any Standard Pharmacy')]")
+	public WebElement dynamicStandardErrorMessage;
+
+	@FindBy(xpath = "(//div[contains(@class,'uhc-list__item')]//p)[2]")
+	public WebElement dynamicStandardPreferredErrorMessage;
+
+
+	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
+		boolean flag = false;
+		if(pharmacyErrorType.equalsIgnoreCase("None")){
+			flag = validateNew(dynamicErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed for Change Pharmacy Modal on Summary and Detail Page for Non PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("Preferred")){
+			flag = validateNew(dynamicPreferredErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoStandardWithPreferred")){
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Preferred")){
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+						"no Pharmacies available for Standard Tab but on Preferred Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoPreferredWithStandard")){
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Standard")){
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+						"no Pharmacies available for Preferred Tab but on Standard Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else{
+			flag = validateNew(dynamicStandardErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
 	}
 
 }

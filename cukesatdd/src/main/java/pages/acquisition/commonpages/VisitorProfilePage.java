@@ -143,7 +143,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Status']/following-sibling::span")
 	public WebElement enrolledStatus;
 
-	@FindBy(xpath = "//span[text()='ZIP Code']/following-sibling::span")
+	@FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
 	public WebElement enrolledPlanZipcode;
 
 	@FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
@@ -349,10 +349,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
     private WebElement lnkbackToProfile;
 	
-	@FindBy(xpath  = "//h3[text()='Basic Costs']")
+	@FindBy(xpath  = "//*[text()='Basic Costs']")
     private WebElement headingBasicCost;
 	
-	@FindBy(xpath  = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
 	@FindBy(id="dateOfBirth")
