@@ -3438,8 +3438,8 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 			//	plansummaryPage.medsuppOLEPlanOvervieworOutlineCoverage();
-			//	plansummaryPage.medsuppOLEBenefitsTable();
-			//	plansummaryPage.medsuppOLERulesandDisclosures();
+				plansummaryPage.medsuppOLEBenefitsTable();
+				plansummaryPage.medsuppOLERulesandDisclosures();
 			plansummaryPage.medsuppOLEHealthInsurance();
 			plansummaryPage.medsuppOLEAARPSupplementPlans();
 			//	 plansummaryPage.medsuppOLEPrintandSaveApplication();

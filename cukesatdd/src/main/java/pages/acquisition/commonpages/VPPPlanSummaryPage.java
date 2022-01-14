@@ -446,8 +446,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement startDrpDwnOption;
 
 	//FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
-	@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
+	@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment') or contains(text(),'Insured Status')]")
 	private WebElement insuredStatus;
+
+	@FindBy(xpath = "//*[contains(@for,'CurrentlyInsured_2')]")
+	private WebElement CurrentinsuredStatus;
 
 	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
 	private WebElement nextButton;
@@ -807,7 +810,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(), 'Guide to Health Insurance for People')]")
 	private WebElement RightRail_HealthInsurance;
-	@FindBy(xpath = "//*[contains(text(), 'Your Guide to AARP Medicare Supplement')]")
+	@FindBy(xpath = "//*[contains(text(), 'Your Guide to AARP Medicare Supplement') or contains(text(), 'Your Guide To AARP Medicare Supplement')]")
 	private WebElement RightRail_AARPSupplementPlans;
 
 	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application') or contains(text(),'Print information on this page')]")
@@ -4867,8 +4870,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}catch(Exception e) {
 
 		}
+		try {
+			jsClickNew(CurrentinsuredStatus);
+		}catch(Exception e) {
 
-	//
+		}
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -7050,8 +7056,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
-				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
-						&& CurrentRailURL.contains(".pdf")) {
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") ||CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/") ||CurrentRailURL.contains("https://www.stage-uhcmedicaresolutions.uhc.com/")
+				&& CurrentRailURL.contains(".pdf")) {
 			//System.out.println("****************  PlanOverview is displayed  ***************");
 			System.out.println("Outline Coverage is displayed");
 			Assertion.assertTrue(true);
