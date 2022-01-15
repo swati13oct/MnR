@@ -128,14 +128,14 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "sameMailingAddressNo")
 	private WebElement SameMailingAddressNo;
 
-	@FindBy(id = "address10")
+	@FindBy(xpath = "//*[@id='address10']")
 	private WebElement MailingAdd_Street;
 	
-	@FindBy(id = "address20")
+	@FindBy(xpath = "//*[@id='address20']")
 	private WebElement MailingAdd_Aptno;
 
 
-	@FindBy(id = "city0")
+	@FindBy(xpath = "//*[@id='city0']")
 	private WebElement MailingAdd_City;
 
 	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state0']")
@@ -301,7 +301,7 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			jsClickNew(SameMailingAddressNo);
-			
+			scrollToView(MailingAdd_Street);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
 			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
@@ -407,7 +407,7 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			jsClickNew(SameMailingAddressNo);
-			
+			scrollToView(MailingAdd_Street);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
 			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
@@ -829,6 +829,8 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	public CancelOLEModal OpenLogoOLEPages() {
 		validate(logoimageOLE);
+		CheckPageLoad();
+		CheckiPerseptions();
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", logoimageOLE);
 		
@@ -839,6 +841,7 @@ public class PersonalInformationPage extends UhcDriver{
 		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
 		 * e.printStackTrace(); }
 		 */
+
 		if(validate(CancellationModalOLE)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			validate(CreateProfile);
@@ -849,7 +852,8 @@ public class PersonalInformationPage extends UhcDriver{
 			LeaveOnlineApplicationforLogo.isDisplayed();
 			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
-			closepopup.click();
+			//closepopup.click();
+			jsClickNew(closepopup);
 			return new CancelOLEModal(driver);
 		}
 		return null;

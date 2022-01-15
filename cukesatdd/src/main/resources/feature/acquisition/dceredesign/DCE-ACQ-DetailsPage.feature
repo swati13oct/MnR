@@ -109,6 +109,35 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user validates Dynamic Copay Section for following Pharmacy selection
       | Pharmacy Selection | <DefaultSelected> |
     And user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy4> |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | Preferred |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy4> |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | Standard |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | "WALGREENS" |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | NoStandardWithPreferred |
+    Then user clicks on change pharmacy link from details page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | "CVS PHARMACY" |
+    Then the user validates the dynamic error message displayed for filter that has no result
+      | PharmacyErrorType | NoPreferredWithStandard |
+    Then user clicks on change pharmacy link from details page
+    Then the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page
+      | PharmacyZipCode | <pharmacyZipCode> |
+    Then the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <PharmacyFilterPreferred> |
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy2> |
+    When user clicks on Keep Using This Pharmacy link on change pharmacy modal
+    Then user clicks on change pharmacy link from details page
     Then the user selects Mail Pharmacy and returns to DCE Details page
     Then the user validates Dynamic Copay Section for following Pharmacy selection
       | Pharmacy Selection | <MailPharSelected> |
@@ -121,13 +150,14 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
 
     @dce_DrugDetailsCopay_Preferred_AARP @regressionAARP
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
-      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
+      | drug1      | drug2  | zipCode | pharmacyZipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
+      | vigabatrin | Fanapt |   80001 | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
 
     @dce_DrugDetailsCopay_Preferred_UHC @regressionUHC
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
-      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
+      | drug1      | drug2  | zipCode | pharmacyZipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
+      | vigabatrin | Fanapt |   80001 | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
+ 
 
   @dce_DrugDetailsDynamicCopay_Standard
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Standard Pharmacy Copay and Not covered Pharmacy View - <planType>
