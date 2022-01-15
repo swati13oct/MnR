@@ -4039,12 +4039,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement RightRail_FindAnAgentMedsupp;
 
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
-		threadsleep(3);
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(RightRail_FindAnAgent);
-		sleepBySec(3);
+		pageloadcomplete();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {

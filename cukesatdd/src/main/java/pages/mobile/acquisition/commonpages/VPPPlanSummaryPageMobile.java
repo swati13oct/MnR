@@ -479,7 +479,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='pop-btn-1']")
 	private WebElement savedPlansContinueShoppingButton;
 	
-	@FindBy(xpath = "//span[@id='header-number']")
+	@FindBy(xpath = "(//span[contains(@class,'plans-count')])[1]")
 	private WebElement shoppingCartSaveCount;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Get Started')]")
@@ -1660,6 +1660,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 	
 	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
+		if(planType.contains("MA"))
+			planType = "MAPD";
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)
@@ -1674,7 +1676,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
 		List<WebElement> allPlans = driver
 				.findElements(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])"));
-		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"========\n\n");
+		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"===="+count+"====\n\n");
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
 				scrollToView(allPlans.get(i));
@@ -1685,8 +1687,13 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				}
 			}
 		}
+		scrollToView(driver
+				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
+		scrollToView(driver.findElement(By.xpath("(//a[contains(@class,'emailsummary')])[1]")));
+		validate(shoppingCartSaveCount);
 		Assertion.assertEquals("Shopping cart count not updated with save plan count", count,
 				Integer.parseInt(shoppingCartSaveCount.getText()));
+		System.out.println("\n\n========"+shoppingCartSaveCount.getText()+"===========\n\n");
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
@@ -2471,7 +2478,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
 		} else if (planName.contains("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//*[contains(text(),'Monthly Premium')])"));
 		} else
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
@@ -2627,8 +2634,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
+		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]//following::span[3]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
@@ -2703,9 +2710,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)"));
 		// Actions action = new Actions(driver);
 		// action.moveToElement(toolTip).build().perform();
 		scrollToView(toolTip);

@@ -87,7 +87,6 @@ public class DCEACQHomeMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);*/
 		
 		
-		
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -99,9 +98,9 @@ public class DCEACQHomeMobile {
 
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
-		String tfnNumber = aquisitionhomepage.getTFNNumberFromLink();
+//		String tfnNumber = aquisitionhomepage.getTFNNumberFromLink();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
-		getLoginScenario().saveBean(CommonConstants.TFN, tfnNumber);
+//		getLoginScenario().saveBean(CommonConstants.TFN, tfnNumber);
 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
@@ -1247,6 +1246,8 @@ public class DCEACQHomeMobile {
 		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
+//		GetStartedPageMobile getStarted = (GetStartedPageMobile) getLoginScenario()
+//				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		TellUsAboutDrugMobile tellUsAboutDrug = buildDrugList.SearchaddDrug(drugName);

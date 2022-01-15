@@ -619,7 +619,7 @@ public class GlobalWebElements extends UhcDriver {
 
 		jsClickNew(MenuMobile);
 
-		sleepBySec(5);
+		waitforElement(shopForAPlan);
 		// validateNew(mobileNav, 5);
 
 		jsClickNew(shopForAPlan);
