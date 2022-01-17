@@ -599,10 +599,10 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     Then the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP @regressionAARP123
     Examples: 
       | site | zipcode | plantype | planName                                            |
-      | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP |   90210 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS)|
 
     @samIconsUHC @regressionUHC
     Examples: 
@@ -1245,3 +1245,75 @@ Feature: ACQ M&R- To test SAM Icons
       | medicare-education/getting-started.html                                                                                                                                                                                                                                                                                       | UHC  |
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | UHC  |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | UHC  |
+
+  Scenario Outline: To test the SAM icons on Acq site from External Email Campaign <site> <pagename>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user opens the page to validate M&R Sites
+      | pagename | <pagename> |
+    Then the user validates whether call icon is visible
+    And the user validates the chat icon
+
+    @samIconsAARP @regressionAARP
+    Examples: 
+      | pagename | site |
+      | [blank]  | AARP |
+
+    @samIconsAARP @regressionAARP @samIconsEmailExternal_01
+    Examples: 
+      | pagename                                                           | site |
+      | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650 | AARP |
+      | ?WT.mc_id=8027651&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027651 | AARP |
+      | ?WT.mc_id=8027652&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027652 | AARP |
+      | ?WT.mc_id=8027677&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027677    | AARP |
+      | ?WT.mc_id=8027678&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027678    | AARP |
+      | ?WT.mc_id=8027679&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027679    | AARP |
+      | ?WT.mc_id=8027682&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027682    | AARP |
+
+    @samIconsAARP @regressionAARP @samIconsEmailExternal_02
+    Examples: 
+      | pagename                                                                                                                                           | site |
+      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015755&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015755 | AARP |
+      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015756&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015756 | AARP |
+      | /medicare-articles/aep-change-or-renew.html?WT.mc_id=8015751&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015751                                          | AARP |
+      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015752&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015752 | AARP |
+      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015753&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015753 | AARP |
+      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8017352&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8017352 | AARP |
+      | ?WT.mc_id=8027587&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027587                                                                                    | AARP |
+
+    @samIconsAARP @regressionAARP @samIconsEmailExternal_03
+    Examples: 
+      | pagename                                                             | site |
+      | ?WT.mc_id=8027588&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027588      | AARP |
+      | ?WT.mc_id=8027590&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027590      | AARP |
+      | ?WT.mc_id=8027591&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027591      | AARP |
+      | ?WT.mc_id=8027592&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027592      | AARP |
+      | ?WT.mc_id=8027589&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027589      | AARP |
+      | ?WT.mc_id=8027593&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027593      | AARP |
+      | /?WT.mc_id=8027581&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027581 | AARP |
+      | /?WT.mc_id=8027582&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027582 | AARP |
+      | /?WT.mc_id=8027583&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027583 | AARP |
+      | /?WT.mc_id=8027586&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027586 | AARP |
+      | /?WT.mc_id=8027492&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027492 | AARP |
+      | /?WT.mc_id=8027494&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027494 | AARP |
+      | /?WT.mc_id=8027495&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027495 | AARP |
+      | /?WT.mc_id=8027496&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027496 | AARP |
+      | /?WT.mc_id=8027571&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027571 | AARP |
+      | /?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 | AARP |
+      | /?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 | AARP |
+
+    @samIconsUHC @regressionUHC @samIconsEmailExternal
+    Examples: 
+      | pagename                                                             | site |
+      | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650   | UHC  |
+      | ?WT.mc_id=8027651&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027651   | UHC  |
+      | ?WT.mc_id=8027652&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027652   | UHC  |
+      | /?WT.mc_id=8027680&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027680     | UHC  |
+      | /?WT.mc_id=8027681&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027681     | UHC  |
+      | /?WT.mc_id=8027584&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027584 | UHC  |
+      | /?WT.mc_id=8027585&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027585 | UHC  |
+      | /?WT.mc_id=8027497&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027497 | UHC  |
+      | /?WT.mc_id=8027499&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027499 | UHC  |
+      | /?WT.mc_id=8027574&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027574 | UHC  |
+      | /?WT.mc_id=8027575&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027575 | UHC  |
+      | /?WT.mc_id=8027576&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027576 | UHC  |

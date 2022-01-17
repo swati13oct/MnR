@@ -38,6 +38,9 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
     private WebElement signIn;
 
+	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+	private WebElement signInButton;
+
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
 
@@ -140,7 +143,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Status']/following-sibling::span")
 	public WebElement enrolledStatus;
 
-	@FindBy(xpath = "//span[text()='ZIP Code']/following-sibling::span")
+	@FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
 	public WebElement enrolledPlanZipcode;
 
 	@FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
@@ -346,10 +349,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
     private WebElement lnkbackToProfile;
 	
-	@FindBy(xpath  = "//h3[text()='Basic Costs']")
+	@FindBy(xpath  = "//*[text()='Basic Costs']")
     private WebElement headingBasicCost;
 	
-	@FindBy(xpath  = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
 	@FindBy(id="dateOfBirth")
@@ -1748,6 +1751,45 @@ public class VisitorProfilePage extends UhcDriver {
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
+	}
+
+	public WelcomePage Enroll_OLE_Plan_SignInUser(String planName) throws InterruptedException {
+
+
+
+		System.out.println("Enroll in Plan for Plan through Vistor Profile: " + planName);
+		WebElement EnrollinPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::*[contains(text(), 'Enroll in Plan')]"));
+		jsClickNew(EnrollinPlan);
+
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
+
+	public void signInOptumId(String username, String password) {
+
+		validateNew(signIn);
+		jsClickNew(signIn);
+		waitForPageLoadSafari();
+		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+		jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+		waitForPageLoadSafari();
+		String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+		WebElement securityAnswer = driver.findElement(By.xpath("//input[@id='UnrecognizedSecAns_input']"));
+		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+			System.out.println("Question is related to friendname");
+			securityAnswer.sendKeys("name1");
+		} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+			System.out.println("Question is related to color");
+			securityAnswer.sendKeys("color1");
+		} else {
+			System.out.println("Question is related to phone");
+			securityAnswer.sendKeys("number1");
+		}
+
 	}
 }
 

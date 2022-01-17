@@ -1116,8 +1116,8 @@ public class CampaignTFNCommonStepDefinition {
 				By.xpath("//input[@id='dateOfBirth']"), 20);
 
 		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
-				|| !isMedsup4DOBVisible && zipCode.equals("10001")) ? true
-						: (isMedsup4DOBVisible && zipCode.equals("10001")
+				|| !isMedsup4DOBVisible && zipCode.equals("24010")) ? true
+						: (isMedsup4DOBVisible && zipCode.equals("24010")
 								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1343,8 +1343,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
+				|| !isAddInfoLinkVisible && zipCode.equals("24010")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("24010")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1378,8 +1378,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
-						: (isMedsup4DOB && zipCode.equals("10001")
+				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
+						: (isMedsup4DOB && zipCode.equals("24010")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1405,8 +1405,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("10001")) ? true
-						: (msPlansHeading && zipCode.equals("10001")
+				|| !msPlansHeading && zipCode.equals("24010")) ? true
+						: (msPlansHeading && zipCode.equals("24010")
 								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1433,8 +1433,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//*[@id='dateOfBirth']"), 20);
 	boolean assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
-						: (isMedsup4DOB && zipCode.equals("10001")
+				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
+						: (isMedsup4DOB && zipCode.equals("24010")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1461,8 +1461,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("10001")) ? true
-						: (msPlansHeading && zipCode.equals("10001")
+				|| !msPlansHeading && zipCode.equals("24010")) ? true
+						: (msPlansHeading && zipCode.equals("24010")
 								|| !msPlansHeading&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1489,8 +1489,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']"), 20);
 	boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
-				|| !msPlansDetailsBackToAllPlans && zipCode.equals("10001")) ? true
-						: (msPlansDetailsBackToAllPlans && zipCode.equals("10001")
+				|| !msPlansDetailsBackToAllPlans && zipCode.equals("24010")) ? true
+						: (msPlansDetailsBackToAllPlans && zipCode.equals("24010")
 								|| !msPlansDetailsBackToAllPlans&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
