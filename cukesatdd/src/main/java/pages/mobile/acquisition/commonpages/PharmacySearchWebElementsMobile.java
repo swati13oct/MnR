@@ -64,7 +64,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBys(value = { @FindBy(xpath = "//select[@id='distance']/option") })
 	protected List<WebElement> distanceDropDown;
 
-	@FindBy(css = "#plans")
+	@FindBy(xpath = "//*[@id='plans']")
 	protected WebElement seletPlandropdown;
 
 	@FindBy(xpath = "//select[@id='plan-type']/option")
