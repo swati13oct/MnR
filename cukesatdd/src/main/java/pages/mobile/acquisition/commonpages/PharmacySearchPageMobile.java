@@ -1272,6 +1272,12 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 		return null;
 	}
+	
+	public void validateBreadCrumb(String breadcrumb) {
+		validateNew(breadCrumbLink);
+		Assertion.assertTrue("Expected breadcrumb" + breadcrumb + "not displayed",
+				breadcrumb.equals(breadCrumbLink.getText()));
+	}
 
 	public void selectYearOption(String year) {
 		try {

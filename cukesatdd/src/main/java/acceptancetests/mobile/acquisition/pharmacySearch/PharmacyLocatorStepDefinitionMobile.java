@@ -537,11 +537,11 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*
-		 * pharmacySearchPage.validateBreadCrumb(breadCrumb);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
-		 * PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-		 */
+	
+		 pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		 getLoginScenario().saveBean(PharmacySearchCommonConstants.
+		 PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	
 		System.out.println("skipping the step for verify breadcrumb for mobile execution");
 	}
 
