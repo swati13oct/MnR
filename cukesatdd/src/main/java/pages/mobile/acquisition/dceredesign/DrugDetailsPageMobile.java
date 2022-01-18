@@ -1196,7 +1196,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
 	}
 
-	@FindBy(css = "button[id='plancompare']")
+	@FindBy(xpath = "//a[contains(@dtmname, 'compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
 
 	public ComparePlansPageMobile clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
@@ -2045,10 +2045,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
 
-	@FindBy(css = "[dtmname$='Modal:Drug Cost Details']")
+	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
-	@FindBy(css = "#closeIconId")
+	@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
