@@ -13,7 +13,7 @@ import io.cucumber.messages.internal.com.google.protobuf.EnumValue;
  *
  */
 public class CommonConstants {
-	
+
 //	public static String SELECTED_STATE = null;
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
@@ -27,17 +27,17 @@ public class CommonConstants {
 	public static final String PROPERTY_FILE_NAME = "config.properties";
 
 	public static final String DEFAULT_ENVIRONMENT_CI = "ci";
-	
+
 	public static final String USER_PASSWORD = "userPassword";
-	
+
 	public static final String BUSINESS_CATEGORY = "businessCategory";
-	
+
 	public static final String ATTRIB_FIRST_NAME = "givenName";
 
 	public static final String ATTRIB_LAST_NAME = "sn";
-	
+
 	public static final String ATTRIB_COMMON_NAME = "cn";
-	
+
 	public static final String ATTRIB_OBJECT_CLASS = "objectClass";
 
 	public static final String UID = "uid";
@@ -47,7 +47,6 @@ public class CommonConstants {
 	public static final String DB_USERNAME = "DBUsername";
 
 	public static final String DB_PASSWORD = "DBPassword";
-	
 
 	public static final String DB_SCHEMA = "DBSchema";
 
@@ -115,15 +114,15 @@ public class CommonConstants {
 	public static final String PAYMENT_HISTORY_MOBILE = "payment_history_mobile";
 
 	public static final String PAYMENT_HISTORY_MOBILE_DATA = "paymenthistory_mobile.json";
-	
-	public static final String  PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/bluelayer/payment-history/";
-	
-	public static final String  DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE ="/jsonresponse/mobile/member/ulayer/payment-history/";
+
+	public static final String PAYMENT_HISTORY_BLUELAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/bluelayer/payment-history/";
+
+	public static final String DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE = "/jsonresponse/mobile/member/ulayer/payment-history/";
 
 	private static final String DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY = "/jsonresponse/member/dashboard/drugcostestimator/";
 
 	public static final String ADD_DRUG_DETAILS = "adddrugdetails";
-	
+
 	public static final Page[] PAGES = { new Page(CommonConstants.GLOBAL, CommonConstants.GLOBAL_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME, CommonConstants.MY_ACCOUNT_HOME_DIRECTORY),
 			new Page(CommonConstants.MY_ACCOUNT_HOME_COMBO, CommonConstants.MY_ACCOUNT_HOME_COMBO_DIRECTORY),
@@ -170,10 +169,8 @@ public class CommonConstants {
 			new Page(CommonConstants.ADD_PLAN_CONFIRMATION, CommonConstants.ADD_PLAN_CONFIRMATION_ULAYER_DIRECTORY),
 			new Page(CommonConstants.PAYMENT_HISTORY_MOBILE,
 					CommonConstants.DASHBOARD_PAYMENT_HISTORY_ULAYER_DIRECTORY_MOBILE),
-			new Page(CommonConstants.ADD_DRUG_DETAILS,
-					CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
-					new Page(CommonConstants.ADD_NEW_DRUG_MODAL,
-                            CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_DRUG_DETAILS, CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
+			new Page(CommonConstants.ADD_NEW_DRUG_MODAL, CommonConstants.DASHBOARD_DRUGCOSTESTIMATOR_DIRECTORY),
 
 	};
 
@@ -581,7 +578,7 @@ public class CommonConstants {
 	public static final String LOW_COST_OPTIONS_INDIVIDUAL_BLUE_LAYER_PAGE_DATA = "lowcostoptionsindividual.json";
 
 	public static final String SELECT_PHARMACY = "selectpharmacy";
-	
+
 	public static final String LOCATE_PHARMACIES_PAGE_DATA = "locatepharmacy.json";
 
 	public static final String SELECT_PHARMACY_BLUE_LAYER_DIRECTORY = "/jsonresponse/member/bluelayer/estimatedrugcosts/selectpharmacy/";
@@ -791,7 +788,7 @@ public class CommonConstants {
 	public static final String LOGIN_ASSISTANCE_PERSONAL_IDENTIFICATION_ERROR_SCENARIO = "personalIdentificationErrorScenario.json";
 
 	public static final String NEXT_YEAR = "nextyear";
-	
+
 	public static final String YEAR_BUTTON_VPPPAGE = "yearBtnVppPageExists";
 
 	public static final String BENEFITS_AND_COVERAGE_MAPD_LIS_NONUS_PAGE_DATA = "planbenefitsandcoveragelisnotusother.json";
@@ -802,66 +799,67 @@ public class CommonConstants {
 	public static final String NEW_PAYMENT_HISTORY_EXPECTED_JSON = "newPaymentHistoryexpectedJSON";
 
 	public static final String PROFILE_AND_PREFERENCES_REDESIGN_PAGE_DATA = "profilenpreferencesredesign.json";
-	
-	 public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
-	 
-	 public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
-	 
-	 public static final String SAVE_DRUG_PAGE_DATA="savedrugpagedata.json";
-	 
-	 public static final String DCEstimator = "DCEstimator.json";
-	 
-	 public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
-	 
-	 public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
-	 
-	 public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
-	 
-	 public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
-	 
-	 public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
-	 
-	 public static final String SWITCH_GENERIC="switchgeneric.json";
-	 
-	 public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
-	 
-	 public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
+
+	public static final String REVIEW_AUTOMATIC_PAGE_DATA = "reviewautomaticactual.json";
+
+	public static final String REVIEW_ONE_TIME_PAGE_DATA = "reviewonetimeactual.json";
+
+	public static final String SAVE_DRUG_PAGE_DATA = "savedrugpagedata.json";
+
+	public static final String DCEstimator = "DCEstimator.json";
+
+	public static final String ADD_DRUG_DETAILS_PAGE_DATA = "adddrugdetailspagedata.json";
+
+	public static final String PAGE_OBJECT_DIRECTORY_DCE_MEMBER = "/page-objects/member/dashboard/drugcostestimator/";
+
+	public static final String ADD_NEW_DRUG_PAGE_DATA = "addnewdrugpagedata.json";
+
+	public static final String SWITCH_GENERIC_PAGE_DATA = "switchgenericpagedata.json";
+
+	public static final String NEW_CLAIM_DETAILS_PAGE_DATA = "newClaimDetailsPage.json";
+
+	public static final String SWITCH_GENERIC = "switchgeneric.json";
+
+	public static final String ADD_NEW_DRUG_MODAL = "addnewdrugmodal";
+
+	public static final String PROFILE_AND_PREFERNCES_PAGE_DIRECTORY = "/jsonresponse/member/ulayer/profilesandprefereneces/";
 
 	public static final String FORMS_AND_RESOURCES_ACTUAL = null;
 
-	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage" ;
-	
+	public static final String BENEFITS_AND_COVERAGE = "benefitsandcoverage";
+
 	public static final String DRUGCOSTESTIMATORDATAPAGE = "DrugCostEstimatorPage.json";
-	
-	public static final String PLAN_NAME_ON_PROFILE_PAGE= "planName";
-    //Browsers supported in MRScenario
+
+	public static final String PLAN_NAME_ON_PROFILE_PAGE = "planName";
+	// Browsers supported in MRScenario
 	public static final String BROWSER_NAME = "browsername";
 	public static final String BROWSER_VERSION = "browserversion";
-    public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
-    public static final String DESKTOP_WEBDRIVER = "WebDriver";
+	public static final String JENKINS_BROWSER_PHANTOMJS = "headless";
+	public static final String DESKTOP_WEBDRIVER = "WebDriver";
 	public static final String JENKINS_BROWSER = "webdriverhost";
-    public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
-    public static final String FIREFOX_BROWSER = "FIREFOX";
-    public static final String CHROME_BROWSER = "CHROME";
-    public static final String IE_BROWSER = "IE";
-    public static final String MOBILE_BROWSER = "MOBILE";   
-    public static final String SAUCE_BROWSER_WEB = "saucelabs";
-    public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
+	public static final String HTMLUNIT_BROWSER = "HTMLUNIT";
+	public static final String FIREFOX_BROWSER = "FIREFOX";
+	public static final String CHROME_BROWSER = "CHROME";
+	public static final String IE_BROWSER = "IE";
+	public static final String MOBILE_BROWSER = "MOBILE";
+	public static final String SAUCE_BROWSER_WEB = "saucelabs";
+	public static final String SAUCE_BROWSER_MOBILE = "SAUCE_BROWSER_MOBILE";
 
-    public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
-    public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
+	public static final String DESKTOP_BROWSER_AGENT_STRING = "BrowserAgentString";
+	public static final String JENKINS_BROWSER_AGENT_STRING = "JENKINS_BROWSER_AGENT_STRING";
 	public static final String ACCOUNT_USER_NAME = null;
 
 	public static final String IS_TESTHARNESS = "IS_TESTHARNESS";
 
 	public static final String COMMONSTEPDEFINITIONMEMVBF = "commonStepDefinition";
-	public static final String IS_HSID_COMPATIBLE	 = "isHSIDCompatible";
-	public static final String CATEGORY_TERMIATED	 = "TerminatedFed";
+	public static final String IS_HSID_COMPATIBLE = "isHSIDCompatible";
+	public static final String CATEGORY_TERMIATED = "TerminatedFed";
 	public static final long TIMEOUT_60 = 60;
 	public static final long TIMEOUT_90 = 90;
 	public static final String SAUCELABS_TUNNEL_IDENTIFIER = "saucelabstunnel";
-	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
-	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd"; //Optum-Prd
+	// public static final String SAUCELABS_DEFAULT_TUNNEL =
+	// "OptumSharedTunnel-Stg";
+	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd"; // Optum-Prd
 	private static ThreadLocal<String> MAIN_WINDOW_HANDLE_ACQUISITION = new ThreadLocal<>();
 
 	public synchronized static String getMainWindowHandle() {
@@ -871,129 +869,83 @@ public class CommonConstants {
 	public static void setMainWindowHandle(String parentWindow) {
 		MAIN_WINDOW_HANDLE_ACQUISITION.set(parentWindow);
 	}
+
 	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
 	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
-	
-	
+
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";
 	public static final String SAUCELABS_NOTUNNEL_MOBILE_TUNNEL = "";
-	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
-	
+	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter
+																											// name from
+																											// Jenkins
+																											// run
+
 	public static final String APPIUM_DEFAULT_VERSION = "1.21.0";
-	//1.17.0
+	// 1.17.0
 	public static final String APPIUM_VERSION = "APPIUM_VERSION";
 	public static final String MOBILE_DEVICE_TYPE = "MOBILE_DEVICE_TYPE";
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
 	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
-	
+
 	public static final String FLAGSMITH = "flagSmith";
-	
+
 	public static final String FLAGSMITH_USER = "flagsmithUser";
-	
+
 	public static final String SCREEN_RESOLUTION = "screenResolution";
-	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +
-			  "database=GPSST04SVC_TRN;" + "user=qaread;" + "password=testreadonly;" +
-			  "encrypt=true;" + "trustServerCertificate=false;" + "loginTimeout=30;";
-	*/
-	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@localhost:1521:GPSST04SVC_TRN";
-	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
-	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
-	
+	/*
+	 * public static final String CONNECTION_URL =
+	 * "jdbc:sqlserver://120.130.10.2:1433;" + "database=GPSST04SVC_TRN;" +
+	 * "user=qaread;" + "password=testreadonly;" + "encrypt=true;" +
+	 * "trustServerCertificate=false;" + "loginTimeout=30;";
+	 */
+	// public static final String CONNECTION_URL =
+	// "jdbc:oracle:thin:qaread/testreadonly@localhost:1521:GPSST04SVC_TRN";
+	// public static final String CONNECTION_URL =
+	// "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
+	// public static final String CONNECTION_URL =
+	// "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
+
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
-	
-	//GPS Query cannot be final variable, since a stage id is to be appended at runtime
-	public static String GPS_QUERY = "Select MEDICAID_IND,\n" + 
-			"MEDICAID_NUMBER,\n" + 
-			"MAILING_ZIP_CD,\n" + 
-			"MAILING_STATE_CD,\n" + 
-			"MAILING_CITY,\n" + 
-			"MAILING_ADDRESS_LINE_2,\n" + 
-			"MAILING_ADDRESS_LINE_1,\n" + 
-			"FIRST_NAME,\n" + 
-			"MIDDLE_INITIAL,\n" + 
-			"LAST_NAME,\n" + 
-			"DATE_OF_BIRTH,\n" + 
-			"GENDER,\n" + 
-			"ADDRESS_LINE_1,\n" + 
-			"ADDRESS_LINE_2,\n" + 
-			"CITY,\n" + 
-			"STATE_CD,\n" + 
-			"ZIP_CD,\n" + 
-			"DAYTIME_PHONE_NUM,\n" + 
-			"EVENING_PHONE_NUM,\n" + 
-			"PAPERLESS_PREFERENCE_IND,\n" + 
-			"EMAIL,\n" + 			
-			"LANGUAGE_PREFERENCE,\n" + 
-			"MEDICARE_NUMBER,\n" + 
-			"SSN,\n" + 
-			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
-			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
-			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
-			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
-			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
-			"OTHER_HEALTH_INSURANCE_ID,\n" +
-			"DO_YOU_HAVE_OTHER_RX_COVERAGE,\n" +
-			"OTHER_RX_COVERAGE_NAME,\n" +
-			"SECONDARY_RX_COVERAGE_NAME,\n" + 
-			"OTHER_RX_COVERAGE_NAME,\n" + 
-			"SECONDARY_RX_GROUP,\n" + 
-			"SECONDARY_RX_ID,\n" + 
-			"SECONDARY_RX_BIN,\n" +
-			"NOTE,\n" + 
-			"REQUESTED_EFFECTIVE_DATE,\n" + 
-			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
-			"PRIMARY_CARE_PHYSICIAN,\n" + 
-			"DENTAL_PLATINUM,\n" +
-			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
-			"CURRENTLY_A_PATIENT_OF_THE_PCP,\n" + 
-			"PAYMENT_METHOD,\n" + 
-			"DENTAL_PLATINUM,\n" + 
-			"AUTHORIZED_REPRESENTATIVE_IND,\n" + 
-			"AUTHORIZED_REP_FIRST_NAME,\n" + 
-			"AUTHORIZED_REP_LAST_NAME,\n" + 
-			"AUTHORIZED_REP_RELATIONSHIP,\n" + 
-			"AUTHORIZED_REP_MAILING_ADDR_1,\n" + 
-			"AUTHORIZED_REP_MAILING_ADDR_2,\n" + 
-			"AUTHORIZED_REP_MAILING_CITY,\n" + 
-			"AUTHORIZED_REP_MAILING_STATE,\n" + 
-			"AUTHORIZED_REP_MAILING_ZIP_CD,\n" + 
-			"AUTHORIZED_REP_DAYTIME_PHONE,\n" + 
-			"SIGNATURE_PRESENCE,\n" + 
-			"CREDIT_CARD_NUMBER,\n" +
-			"CREDIT_CARD_NAME_ON_CARD,\n" +
-			"CREDIT_CARD_EXPIRATION_DATE,\n" +
-			"ASMENT_DIAB1_DOC_INFORMED_DIAB,\n" +
-			"ASMENT_DIAB2_PRESCRIBED_INSULN,\n" + 
-			"CHRONIC_AUTH_HEART_FAILURE,\n" + 
-			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA,\n" + 
-			"ASMENT_HEART2_CARDC_BYPASS,\n" + 
-			"CHRONIC_AUTH_VASCULAR_DISEASE,\n" + 
-			"ASMENT_HEART1_HEART_ATTACK,\n" +
-			"ASMENT_HEART10_ANGINA,\n" +
-			"ASMENT_HBP2_MEDICATION_FOR_HBP,\n"+
-			"ASMENT_HEART7_PACEMKR_R_DEFIB,\n" + 
-			"ASMENT_HEART3_ANGIOPLASTY,\n" + 
-			"ASMENT_SIGN_PRESENCE_ENROLLEE,\n" + 
-			"CHRONIC_PHYSICIAN_NAME,\n" + 
-			"CHRONIC_PHYSICIAN_PHONE_NUM,\n" + 
-			"ASMENT_FULL_ADDR_FOR_PHYSICIAN,\n" +
-			"APPLICATION_RECEIPT_DATE,\n"+
-			"SIGNATURE_DATE,\n" +
-            "XEROX_STAGE_ID\n" +
-            "from Xerox_stage where xerox_stage_id = ";
-	
-	public static final String GPS_QUERY_1 ="Select\n" + 
-			"FIRST_NAME,\n" + 
-			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
+
+	// GPS Query cannot be final variable, since a stage id is to be appended at
+	// runtime
+	public static String GPS_QUERY = "Select MEDICAID_IND,\n" + "MEDICAID_NUMBER,\n" + "MAILING_ZIP_CD,\n"
+			+ "MAILING_STATE_CD,\n" + "MAILING_CITY,\n" + "MAILING_ADDRESS_LINE_2,\n" + "MAILING_ADDRESS_LINE_1,\n"
+			+ "FIRST_NAME,\n" + "MIDDLE_INITIAL,\n" + "LAST_NAME,\n" + "DATE_OF_BIRTH,\n" + "GENDER,\n"
+			+ "ADDRESS_LINE_1,\n" + "ADDRESS_LINE_2,\n" + "CITY,\n" + "STATE_CD,\n" + "ZIP_CD,\n"
+			+ "DAYTIME_PHONE_NUM,\n" + "EVENING_PHONE_NUM,\n" + "PAPERLESS_PREFERENCE_IND,\n" + "EMAIL,\n"
+			+ "LANGUAGE_PREFERENCE,\n" + "MEDICARE_NUMBER,\n" + "SSN,\n" + "MEDICARE_PART_A_EFFECTIVE_DATE,\n"
+			+ "MEDICARE_PART_B_EFFECTIVE_DATE,\n" + "DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + "OTHER_HEALTH_INSURANCE_NAME,\n"
+			+ "OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + "OTHER_HEALTH_INSURANCE_ID,\n" + "DO_YOU_HAVE_OTHER_RX_COVERAGE,\n"
+			+ "OTHER_RX_COVERAGE_NAME,\n" + "SECONDARY_RX_COVERAGE_NAME,\n" + "OTHER_RX_COVERAGE_NAME,\n"
+			+ "SECONDARY_RX_GROUP,\n" + "SECONDARY_RX_ID,\n" + "SECONDARY_RX_BIN,\n" + "NOTE,\n"
+			+ "REQUESTED_EFFECTIVE_DATE,\n" + "PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + "PRIMARY_CARE_PHYSICIAN,\n"
+			+ "DENTAL_PLATINUM,\n" + "PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + "CURRENTLY_A_PATIENT_OF_THE_PCP,\n"
+			+ "PAYMENT_METHOD,\n" + "DENTAL_PLATINUM,\n" + "AUTHORIZED_REPRESENTATIVE_IND,\n"
+			+ "AUTHORIZED_REP_FIRST_NAME,\n" + "AUTHORIZED_REP_LAST_NAME,\n" + "AUTHORIZED_REP_RELATIONSHIP,\n"
+			+ "AUTHORIZED_REP_MAILING_ADDR_1,\n" + "AUTHORIZED_REP_MAILING_ADDR_2,\n" + "AUTHORIZED_REP_MAILING_CITY,\n"
+			+ "AUTHORIZED_REP_MAILING_STATE,\n" + "AUTHORIZED_REP_MAILING_ZIP_CD,\n" + "AUTHORIZED_REP_DAYTIME_PHONE,\n"
+			+ "SIGNATURE_PRESENCE,\n" + "CREDIT_CARD_NUMBER,\n" + "CREDIT_CARD_NAME_ON_CARD,\n"
+			+ "CREDIT_CARD_EXPIRATION_DATE,\n" + "ASMENT_DIAB1_DOC_INFORMED_DIAB,\n"
+			+ "ASMENT_DIAB2_PRESCRIBED_INSULN,\n" + "CHRONIC_AUTH_HEART_FAILURE,\n"
+			+ "ASMENT_LUNG1_BRONC_EMPH_ASTHMA,\n" + "ASMENT_HEART2_CARDC_BYPASS,\n" + "CHRONIC_AUTH_VASCULAR_DISEASE,\n"
+			+ "ASMENT_HEART1_HEART_ATTACK,\n" + "ASMENT_HEART10_ANGINA,\n" + "ASMENT_HBP2_MEDICATION_FOR_HBP,\n"
+			+ "ASMENT_HEART7_PACEMKR_R_DEFIB,\n" + "ASMENT_HEART3_ANGIOPLASTY,\n" + "ASMENT_SIGN_PRESENCE_ENROLLEE,\n"
+			+ "CHRONIC_PHYSICIAN_NAME,\n" + "CHRONIC_PHYSICIAN_PHONE_NUM,\n" + "ASMENT_FULL_ADDR_FOR_PHYSICIAN,\n"
+			+ "APPLICATION_RECEIPT_DATE,\n" + "SIGNATURE_DATE,\n" + "XEROX_STAGE_ID\n"
+			+ "from Xerox_stage where xerox_stage_id = ";
+
+	public static final String GPS_QUERY_1 = "Select\n" + "FIRST_NAME,\n"
+			+ "LAST_NAME from Xerox_stage where xerox_stage_id = ";
 
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
-	
+
 	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 
 //	public static String SELECTED_STATE = null;
-	
+
 	private static ThreadLocal<String> SELECTED_STATE = new ThreadLocal<>();
 
 	public synchronized static String getSelectedState() {
@@ -1004,69 +956,70 @@ public class CommonConstants {
 		SELECTED_STATE.set(State);
 	}
 
-	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217)) + "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we" + String.valueOf(Character.toChars(8217))
+			+ "ll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 //	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
-	
+
 	public static String SOCIAL_SECURITY_TEXT = "We will bill you directly until the Social Security Administration or Railroad Retirement Board approves the deduction. It could take up to 90 days after the approval for the first deduction to occur, so please continue to make payments. If the Social Security Administration or Railroad Retirement Board does not approve your request for automatic deduction, we will notify you and continue to send a paper bill for your monthly premiums.";
-	
+
 	public static String ACCEPTED_CARDS_TEXT = "Accepted Cards are Mastercard, VISA, and Discover";
 
 	public static String SESSION_TIMEOUT_TEXT = "Please submit the below details within 15 minutes to avoid session timeout period";
-	
+
 	public static String CARD_STORED_SUCCESSFULLY_TEXT = "Thank You!. Your Card details has been stored successfully.";
-	
+
 	public static String NO_MONTHLY_PREMIUM_TEXT = "The plan you have chosen does not have a monthly premium.";
-	
+
 	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality (LEP) you will receive a bill in the email.";
-	
+
 	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
-	
-	public static String SS_TEXT  = "You can pay it from your SS check";
-	
-	public static String MEDICARE_TEXT  = "Medicare can bill you";
-	
-	public static String RAILROAD_TEXT   = "The Railroad Retirement Board(RRB) can bill you";
+
+	public static String SS_TEXT = "You can pay it from your SS check";
+
+	public static String MEDICARE_TEXT = "Medicare can bill you";
+
+	public static String RAILROAD_TEXT = "The Railroad Retirement Board(RRB) can bill you";
 	//
-	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
-	
+	public static String PARTDIRMAA_TEXT = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
+
 	public static final String STATE_SELECTED = "state";
-	
+
 	public static final String LEARNABOUTMEDICARE_LINK = "linkName";
-	
-	public static final String PSC_CODE="pscCode";
 
-	public static final String FED_TFN="fedTfn";
+	public static final String PSC_CODE = "pscCode";
 
-	public static final String MEDSUP_TFN="medsupTfn";
+	public static final String FED_TFN = "fedTfn";
 
-	public static final String TFN="tfn";
-	
+	public static final String MEDSUP_TFN = "medsupTfn";
+
+	public static final String TFN = "tfn";
+
 	public static final String FOOTER_LINK = "linkName";
-	
-	public static final String SRC_CODE="sourceCode";
-	
-	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
-	
-	public static LinkedHashMap<String,ArrayList<String>> PRE_Rally_Providers = new LinkedHashMap<String,ArrayList<String>>();
-	
-	public static LinkedHashMap<String,ArrayList<String>> PRE_Providers = new LinkedHashMap<String,ArrayList<String>>();
-	
-	public static LinkedHashMap<String,ArrayList<String>> PRE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
-	
-	public static LinkedHashMap<String,ArrayList<String>> DCE_Drugs = new LinkedHashMap<String,ArrayList<String>>();
-	
-	public static LinkedHashMap<String,ArrayList<String>> VP_Drugs = new LinkedHashMap<String,ArrayList<String>>();
-	
-	public static LinkedHashMap<String,String> firstRecommentionPlanName = new LinkedHashMap<String,String>();
-	
-	public static LinkedHashMap<String,String> firstRecommentionplanType = new LinkedHashMap<String,String>();
-	
-	public static LinkedHashMap<String,String> savedplanNames = new LinkedHashMap<String,String>();
-	
-	public static LinkedHashMap<String,String> Agent_URL    = new LinkedHashMap<String,String>();
-	
+
+	public static final String SRC_CODE = "sourceCode";
+
+	public static LinkedHashMap<String, String> PRE_FLOW = new LinkedHashMap<String, String>();
+
+	public static LinkedHashMap<String, ArrayList<String>> PRE_Rally_Providers = new LinkedHashMap<String, ArrayList<String>>();
+
+	public static LinkedHashMap<String, ArrayList<String>> PRE_Providers = new LinkedHashMap<String, ArrayList<String>>();
+
+	public static LinkedHashMap<String, ArrayList<String>> PRE_Drugs = new LinkedHashMap<String, ArrayList<String>>();
+
+	public static LinkedHashMap<String, ArrayList<String>> DCE_Drugs = new LinkedHashMap<String, ArrayList<String>>();
+
+	public static LinkedHashMap<String, ArrayList<String>> VP_Drugs = new LinkedHashMap<String, ArrayList<String>>();
+
+	public static LinkedHashMap<String, String> firstRecommentionPlanName = new LinkedHashMap<String, String>();
+
+	public static LinkedHashMap<String, String> firstRecommentionplanType = new LinkedHashMap<String, String>();
+
+	public static LinkedHashMap<String, String> savedplanNames = new LinkedHashMap<String, String>();
+
+	public static LinkedHashMap<String, String> Agent_URL = new LinkedHashMap<String, String>();
+
 	public static enum PLANTYPE {
 		MA, MAPD, PDP, DSNP, SNP, MEDSUPP
 	}
@@ -1078,78 +1031,91 @@ public class CommonConstants {
 	public static enum SHOPFORPLAN {
 		SHOP, ENROLL, MEMBERRESOURCES
 	}
-	
+
 	public static enum LEARNABOUTMEDICARE_INTRODUCTION {
-		INTRODUCTION("Introduction"), 
-		ELIGIBILITY("Eligibility"), 
-		COVERAGEOPTIONS("Coverage Options"), 
-		BENEFITS("Prescriptions, Providers & Benefits"), 
-		COSTBASICS("Medicare Cost Basics"),
+		INTRODUCTION("Introduction"), ELIGIBILITY("Eligibility"), COVERAGEOPTIONS("Coverage Options"),
+		BENEFITS("Prescriptions, Providers & Benefits"), COSTBASICS("Medicare Cost Basics"),
 		ARTICLES("Articles and Special Topics");
-		
+
 		private String option;
-		
-		LEARNABOUTMEDICARE_INTRODUCTION(String option){
+
+		LEARNABOUTMEDICARE_INTRODUCTION(String option) {
 			this.option = option;
 		}
-		
+
 		public static LEARNABOUTMEDICARE_INTRODUCTION getIntroductionEnumFor(String option) {
 			for (LEARNABOUTMEDICARE_INTRODUCTION learnAboutMedicareOption : LEARNABOUTMEDICARE_INTRODUCTION.values()) {
-				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
 					return learnAboutMedicareOption;
 				}
 			}
 			return null;
 		}
-		
+
 	}
-	
-	public static enum LEARNABOUTMEDICARE_TYPESOFPLANS {
-		OVERVIEW ("Overview of Plans"),
-		MA ("Medicare Advantage Plans"), 
-		PDP ("Medicare Prescription Drug Plans"),
-		SNP ("Special Needs Plans"),
-		MEDSUPP ("Medicare Supplement Insurance"),
-		MEDICAREFAQ ("Medicare FAQ"),
-		GLOSSARY ("Glossary");
-		
+
+	public static enum LEARNABOUTMEDICARE_FAQ {
+
+		MEDICAREFAQ("Medicare FAQ"), GLOSSARY("Glossary");
+
 		private String option;
-		
-		LEARNABOUTMEDICARE_TYPESOFPLANS(String option){
+
+		LEARNABOUTMEDICARE_FAQ(String option) {
 			this.option = option;
 		}
-		
+
+		public static LEARNABOUTMEDICARE_FAQ getMedicareFaqEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_FAQ learnAboutMedicareOption : LEARNABOUTMEDICARE_FAQ.values()) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+
+	}
+
+	public static enum LEARNABOUTMEDICARE_TYPESOFPLANS {
+		OVERVIEW("Overview of Plans"), MA("Medicare Advantage Plans"), PDP("Medicare Prescription Drug Plans"),
+		SNP("Special Needs Plans"), MEDSUPP("Medicare Supplement Insurance"), MEDICAREFAQ("Medicare FAQ"),
+		GLOSSARY("Glossary");
+
+		private String option;
+
+		LEARNABOUTMEDICARE_TYPESOFPLANS(String option) {
+			this.option = option;
+		}
+
 		public static LEARNABOUTMEDICARE_TYPESOFPLANS getTypesOfPlansEnumFor(String option) {
 			for (LEARNABOUTMEDICARE_TYPESOFPLANS learnAboutMedicareOption : LEARNABOUTMEDICARE_TYPESOFPLANS.values()) {
-				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
 					return learnAboutMedicareOption;
 				}
 			}
 			return null;
 		}
 	}
-	
+
 	public static enum LEARNABOUTMEDICARE_MEDICAREENROLLMENT {
-		WHENTOENROLL ("When to Enroll"),
-		HOWTOENROLL ("How to Enroll"),
-		CHANGINGPLANS ("Changing Plans"),
-		WORKINGPAST65 ("Working Past 65");
-		
+		WHENTOENROLL("When to Enroll"), HOWTOENROLL("How to Enroll"), CHANGINGPLANS("Changing Plans"),
+		WORKINGPAST65("Working Past 65");
+
 		private String option;
-		
-		LEARNABOUTMEDICARE_MEDICAREENROLLMENT(String option){
+
+		LEARNABOUTMEDICARE_MEDICAREENROLLMENT(String option) {
 			this.option = option;
 		}
-		
+
 		public static LEARNABOUTMEDICARE_MEDICAREENROLLMENT getMedicareEnrollmentEnumFor(String option) {
-			for (LEARNABOUTMEDICARE_MEDICAREENROLLMENT learnAboutMedicareOption : LEARNABOUTMEDICARE_MEDICAREENROLLMENT.values()) {
-				if(learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+			for (LEARNABOUTMEDICARE_MEDICAREENROLLMENT learnAboutMedicareOption : LEARNABOUTMEDICARE_MEDICAREENROLLMENT
+					.values()) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
 					return learnAboutMedicareOption;
 				}
 			}
 			return null;
 		}
-		
+
 	}
-	
+
 }

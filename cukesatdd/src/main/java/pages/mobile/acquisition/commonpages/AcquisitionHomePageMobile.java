@@ -120,7 +120,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(css = "#stateWidget > div > label")
+	@FindBy(id = "stateWidget")
 	private WebElement stateWidget;
 
 	@FindBy(xpath = "//*[@id='stateWidget']")

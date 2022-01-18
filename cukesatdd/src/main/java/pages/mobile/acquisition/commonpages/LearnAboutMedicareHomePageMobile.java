@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_FAQ;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
@@ -141,6 +142,21 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Working Past 65']")
 	private WebElement workingPast65Link;
+
+	// Medicare FAQ hamburger flyout locators
+	@FindBy(xpath = "//*[@id='learnmore-scroll']/div[2]/div[4]/p")
+	private WebElement FAQ;
+	
+	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'])[2]")
+	private WebElement medicareFaq;
+	
+	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Glossary'])[2]")
+	private WebElement glossary;
+	
+	@FindBy(xpath = "//*[@id=\"learnmore-scroll\"]/div[2]/div[4]/div/div/div[1]/span")
+	private WebElement medicareFaqBackButton;
+	
+	
 
 	public WebElement getLnkMedicareAdvantage() {
 		return lnkMedicareAdvantage;
@@ -817,13 +833,16 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 				.getTypesOfPlansEnumFor(navLink);
 		LEARNABOUTMEDICARE_MEDICAREENROLLMENT medicareEnrollmentEnum = LEARNABOUTMEDICARE_MEDICAREENROLLMENT
 				.getMedicareEnrollmentEnumFor(navLink);
+		LEARNABOUTMEDICARE_FAQ MedicareFaqEnum = LEARNABOUTMEDICARE_FAQ.getMedicareFaqEnumFor(navLink);
 
 		if (introductionEnum != null) {
 			selectIntroductionToMedicareOption(introductionEnum);
 		} else if (typesOfPlansEnum != null) {
 			selectTypesOfPlansOption(typesOfPlansEnum);
-		} else {
+		} else if (medicareEnrollmentEnum != null){
 			selectMedicareEnrollmentOption(medicareEnrollmentEnum);
+		} else {
+			selectMedicareFAQ(MedicareFaqEnum);
 		}
 	}
 
@@ -932,6 +951,29 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 
 	/**
+	 * Select option from Learn About Medicare, Medicare FAQ menu.
+	 *
+	 * @param option the option
+	 */
+	public void selectMedicareFAQ(LEARNABOUTMEDICARE_FAQ option) {
+		if (!FAQ.isDisplayed()) {
+			jsClickNew(FAQ);
+			CommonUtility.waitForPageLoadNew(driver, medicareFaqBackButton, 10);
+		}
+
+		switch (option) {
+		case MEDICAREFAQ:
+			jsClickNew(medicareFaq);
+			break;
+		case GLOSSARY:
+			jsClickNew(glossary);
+			break;
+		default:
+			throw new IllegalArgumentException(option.name() + " is not available under 'Medicare FAQ' menu.");
+		}
+	}
+
+	/**
 	 * Validate options from Learn About Medicare, Introduction to Medicare menu.
 	 *
 	 * @return true, if successful
@@ -979,7 +1021,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 			validateMenuOptions = validateMenuOptions && validateNew(medicarePrescriptionDrugPlansLink);
 
-			//validateMenuOptions = validateMenuOptions && validateNew(medicareFAQLink);
+			// validateMenuOptions = validateMenuOptions && validateNew(medicareFAQLink);
 
 		} catch (Exception e) {
 			Assertion.fail("Failed to validate the menu option for Shop for a plan menu");
