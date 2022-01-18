@@ -1615,7 +1615,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void validateMSLearnMorePage() {
 		Assert.assertTrue(lnkbackToProfile.isDisplayed());
-		Assert.assertTrue(headingGymMembership.isDisplayed());
+		//Assert.assertTrue(headingGymMembership.isDisplayed());
 		Assert.assertTrue(headingBH.isDisplayed());
 	}
 	
