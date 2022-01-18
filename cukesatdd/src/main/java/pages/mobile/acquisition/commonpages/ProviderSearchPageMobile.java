@@ -19,6 +19,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
 
 /**
  * @author pperugu
@@ -55,7 +56,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
-	@FindBy(xpath = "//*[@id='finishAndReturnButton']")
+	@FindBy(xpath = "//*[text()='Finish & Return']")
 	private WebElement FinishReturnButton;
 
 	@FindBys(value = {
@@ -819,6 +820,23 @@ public class ProviderSearchPageMobile extends UhcDriver {
 //		return new VPPPlanSummaryPageMobile(driver);
 		validateNew(vppFirstPlanCard);
 		return BehaviourSaved;
+	}
+	
+	public PlanDetailsPageMobile navigatebacktoPlanDetails() {
+		// TODO Auto-generated method stub
+
+		CommonUtility.waitForPageLoadNew(driver, FinishReturnButton, 45);
+		validateNew(FinishReturnButton);
+		jsClickNew(FinishReturnButton);
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		return new PlanDetailsPageMobile(driver);
+
 	}
 	
 	public String selectsDental() {
