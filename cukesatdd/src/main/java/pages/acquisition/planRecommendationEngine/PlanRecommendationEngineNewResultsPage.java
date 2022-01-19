@@ -157,10 +157,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal")
 	private WebElement drugModel;
-	
+
 	@FindBy(css = "#modal a[class*='buttonLink']")
 	private WebElement editDurglink;
-	
+
 	@FindBy(css = "#modal td.plan-drug-deductible")
 	private WebElement deductible;
 
@@ -428,26 +428,34 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		waitforResultsPage();
 		threadsleep(3000);
 		try {
-			String pageCount1 = pagenoLabel.getText().trim();
-			System.out.println("Total Page Count : " + pageCount1);
-			int currentPage = Integer
-					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
-			if (currentPage != 1) {
-				for (int c = 1; c < currentPage; c++) {
-					pagePreviousButton.click();
-					threadsleep(2000);
+			String pageCount1 = "";
+			if (validate(pagenoLabel, 10)) {
+				pageCount1 = pagenoLabel.getText().trim();
+				int currentPage = Integer
+						.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+				if (currentPage != 1) {
+					for (int c = 1; c < currentPage; c++) {
+						pagePreviousButton.click();
+						threadsleep(2000);
+					}
 				}
 			}
 			boolean planAvailable = false;
 			// String uniqueName = "Plan 1 (Regional PPO)";
 			// int totalPlans = plantiles.size();
 			// String pageCount1 = pagenoLabel.getText().trim();
-			int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+			int totalPage = 1;
+			if (pageCount1 == "") {
+				totalPage = 1;
+			} else {
+				totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+			}
 			int i = 1, planIndex = 0;
 			do {
 				// 3 plans per page
 				for (int k = 0; k < 3; k++) {
 					String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
+					System.out.println("planName "+planName);
 					if (exactName) {
 						if (planName.equalsIgnoreCase(uniqueName.trim())) { // Changing to equals as we have Plan G and
 																			// Plan G+
@@ -503,7 +511,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdata(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
 		// String drugText =
@@ -555,7 +563,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctordata(String planName, String doctorName, String doctorStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
 		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()),
@@ -637,7 +645,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifySNPdata(String planName, String snpName, String snpStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String snpText = plantiles.get(planIndex).findElement(By.cssSelector("*[class*='special-needs-ul']")).getText()
 				.trim();
 		Assert.assertTrue(snpText.contains(snpName), "SNP details not found in plan - " + planName);
@@ -667,7 +675,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String[] planDetails = planInfo.split(",");
 		planName = planDetails[0];
 		planAction = planDetails[1];
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
@@ -754,7 +762,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String PlanName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
 		System.out.println("PlanName is: " + PlanName);
@@ -765,7 +773,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
 			scrollToView(DocTitle);
 			planName = MSPlanName.getText().trim();
-			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
+			WebElement viewModel = plantiles.get(planIndex)
+					.findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
 			jsClickNew(viewModel);
 			threadsleep(2000);
 
@@ -781,8 +790,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
-		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"), "Edit Drug List not found in drug model - " + planName);
-		Assert.assertTrue(deductible.getText().contains("Deductible"), "Deductible not found in drug model - " + planName);
+		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"),
+				"Edit Drug List not found in drug model - " + planName);
+		Assert.assertTrue(deductible.getText().contains("Deductible"),
+				"Deductible not found in drug model - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
 		covered = drugModel.findElements(By.cssSelector("span[class^='covered']")).size();
@@ -803,9 +814,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugShowMore(String planName, String drugName) {
-		int planIndex = findPlan(planName,false);
-		WebElement DrugTitle = plantiles.get(planIndex)
-				.findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+		int planIndex = findPlan(planName, false);
+		WebElement DrugTitle = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
 		scrollToView(DrugTitle);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
@@ -815,7 +825,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugWhySeparateMdel(String planName) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
 		threadsleep(2000);
 		Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
@@ -830,7 +840,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctorShowMore(String planName, String doctorName) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showAllDoctorsId']")).click();
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
@@ -894,7 +904,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
 		threadsleep(3000);
 	}
-	
+
 	public void editDoctorsLink() {
 		threadsleep(5000);
 		System.out.println("Editing doctors from PRE Result page");
@@ -1030,7 +1040,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			VerifyPlanTile(options[i]);
 		}
 	}
-	
+
 	public void sortByFuncWithoutVerify(String plan) {
 		System.out.println("Sorting  Options: " + plan);
 		String options[] = plan.split(",");
@@ -1106,16 +1116,16 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		}
 
 	}
-	
+
 	public void csnRanking(String snpOption) {
 		String FirstplanName;
 		String SecondplanName;
 		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
-		if(snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+		if (snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
 			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
-			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");			
-		}else {
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");
+		} else {
 			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
 			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
 		}
