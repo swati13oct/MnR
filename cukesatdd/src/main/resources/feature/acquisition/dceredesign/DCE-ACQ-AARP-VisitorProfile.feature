@@ -156,10 +156,10 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
+  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @regressionAARP
     Examples:
-      | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
-      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com| Password@1 |
+      | site | drug1   | zipCode | drug2  | planType | planName                                            | userName           | password   |
+      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@3 |
 
   @dceImportDrugs_AuthMember
   Scenario Outline: To verify DCE  - Drug Import flow for Authenticated Member Profile
@@ -178,9 +178,9 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | AuthenticatedFlag | <authenticatedflag> |
     Then the user selects Member and provides Member Details and proceeds to import
       | AuthenticatedFlag | <authenticatedflag> |
-      | DOB     | <dob>           |
-      | ZipCode | <importZipCode> |
-      | MBI     | <mbi>           |
+      | DOB               | <dob>               |
+      | ZipCode           | <importZipCode>     |
+      | MBI               | <mbi>               |
     Then the user validates Import Success/Failure modal as follows
       | DrugsFlag     | <drugFlag>      |
       | ProvidersFlag | <providersFlag> |
@@ -211,15 +211,14 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @dceImportDrugs_AuthMember_AARP
     Examples:
-      | site | zipCode | drug2  | planType | planName                                            | userName | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |authenticatedflag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true  |
+      | site | zipCode | drug2  | planType | planName                                            | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | LEONELNew | Password@3 | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | true              |
 
 
   @dceImportDrugs_AuthMember_UHC
     Examples:
       | site | zipCode | drug2  | planType | planName                        | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag |
-      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD1 | Password@1 | 06/11/1943 | 06383         | 3AA6TD4UY48 | true     | false         | true              |
- #     | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD2 | Password@1 | 05/11/1953 | 06052         | 3WD2PU1GE94 | false    | true          | true |
+      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD1 | Password@2 | 06/11/1943 | 06383         | 3AA6TD4UY48 | true     | false         | true              |
 
 
   @dceImportDrugs_AuthNonMember
@@ -271,14 +270,14 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @dceImportDrugs_AuthNonMember_AARP
     Examples:
-      | site | zipCode | drug2  | planType | planName                                            | userName | password    | dob        | importZipCode | gender | drugFlag | providersFlag |
-      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@1 | 06/30/1948 | 06096         | F      | true     | true          |
+      | site | zipCode | drug2  | planType | planName                                            | userName | password    | dob        | importZipCode | gender | drugFlag | providersFlag | authenticatedflag |
+      | AARP | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | DFONNNEF | 2DCEProfile | 10/06/1942 | 06383         | F      | true     | false         | true              |
 
 
   @dceImportDrugs_AuthNonMember_UHC
     Examples:
-      | site | zipCode | drug2  | planType | planName                        | userName | password    | dob        | importZipCode | gender | drugFlag | providersFlag |
-      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DFONNNEF | 1DCEProfile | 10/06/1942 | 06383         | F      | true     | false         |
+      | site | zipCode | drug2  | planType | planName                        | userName | password    | dob        | importZipCode | gender | drugFlag | providersFlag | authenticatedflag |
+      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DFONNNEF | 2DCEProfile | 10/06/1942 | 06383         | F      | true     | false         | true              |
 
 
   @drugSummary_DefaultPlanType

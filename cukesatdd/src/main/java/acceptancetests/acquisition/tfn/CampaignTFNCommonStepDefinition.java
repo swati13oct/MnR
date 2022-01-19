@@ -16,6 +16,7 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -34,6 +35,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.tfn.CampaignTFNPage;
 
@@ -1114,8 +1116,8 @@ public class CampaignTFNCommonStepDefinition {
 				By.xpath("//input[@id='dateOfBirth']"), 20);
 
 		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
-				|| !isMedsup4DOBVisible && zipCode.equals("10001")) ? true
-						: (isMedsup4DOBVisible && zipCode.equals("10001")
+				|| !isMedsup4DOBVisible && zipCode.equals("24010")) ? true
+						: (isMedsup4DOBVisible && zipCode.equals("24010")
 								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1184,10 +1186,12 @@ public class CampaignTFNCommonStepDefinition {
 
 		if (county == null)
 			county = "None";
-
-		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		CampaignTFNPage tfnPage=new CampaignTFNPage(wd);
 		tfnPage.enterZipDistanceDetails(zipcode, distance, county, planName);
-
+		PharmacySearchPageNew pharmacySearchPage = new PharmacySearchPageNew(wd);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
 	@Given("^the user is on UHC medicare solutions acquisition site from Campaign Traffic$")
@@ -1339,8 +1343,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
+				|| !isAddInfoLinkVisible && zipCode.equals("24010")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("24010")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1374,8 +1378,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
-						: (isMedsup4DOB && zipCode.equals("10001")
+				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
+						: (isMedsup4DOB && zipCode.equals("24010")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1401,8 +1405,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("10001")) ? true
-						: (msPlansHeading && zipCode.equals("10001")
+				|| !msPlansHeading && zipCode.equals("24010")) ? true
+						: (msPlansHeading && zipCode.equals("24010")
 								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1429,8 +1433,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//*[@id='dateOfBirth']"), 20);
 	boolean assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("10001")) ? true
-						: (isMedsup4DOB && zipCode.equals("10001")
+				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
+						: (isMedsup4DOB && zipCode.equals("24010")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1457,8 +1461,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("10001")) ? true
-						: (msPlansHeading && zipCode.equals("10001")
+				|| !msPlansHeading && zipCode.equals("24010")) ? true
+						: (msPlansHeading && zipCode.equals("24010")
 								|| !msPlansHeading&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1485,8 +1489,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']"), 20);
 	boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
-				|| !msPlansDetailsBackToAllPlans && zipCode.equals("10001")) ? true
-						: (msPlansDetailsBackToAllPlans && zipCode.equals("10001")
+				|| !msPlansDetailsBackToAllPlans && zipCode.equals("24010")) ? true
+						: (msPlansDetailsBackToAllPlans && zipCode.equals("24010")
 								|| !msPlansDetailsBackToAllPlans&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,

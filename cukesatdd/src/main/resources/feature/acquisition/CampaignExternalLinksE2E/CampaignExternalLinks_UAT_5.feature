@@ -126,8 +126,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
     #And the user closes the new browser tab
     @Scenario5_AARP @Scenario5_AARP_VPP_Summary
     Examples: 
-      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                 | TFNxpath3                           | TFNxpath4                             | pscCode | Zipcode | isMultiCounty | county          | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                                                         | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            |
-      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //a[contains(@class,'invoca_swap')] | (//div[@class= 'twineTfn'])[2]/div[2] | 8002977 |   10001 | NO            | New York County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] |
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                 | TFNxpath3                           | TFNxpath4                             | pscCode | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                                                         | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            |
+      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //a[contains(@class,'invoca_swap')] | (//div[@class= 'twineTfn'])[2]/div[2] | 8002977 |   24010 | NO            | Roanoke City | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] |
 
   Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in Learn About Medicare from External link: <externallink>
     Given user is on campaign external Links page
@@ -167,11 +167,12 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | PSC Code | <pscCode> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And user clicks on get started to start questionnaire
+    #And user clicks on get started to start questionnaire
+    And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
     And user select plantype in the coverage options page
       | Plan Type | <isCoverageOpt> |
@@ -181,20 +182,21 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     #Then user validate elements in loading results page
-    And the user validates SAM icons on the page
+    # And the user validates SAM icons on the page
+    And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
     And the user click on view plan in results page
     And User clicks on Back to Plans on detail page
     And the user views the plans for below plan type
-      | Plan Type | <plantype> |
+      | Plan Type | <MAplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    #And the user validates SAM icons on the page
-    And the user validates SAM icons on the page from external link
-      | TFN Xpath | <TFNxpath2> |
-    #And the user views plan details of the above selected plan and validates
+    And the user views the plans for below plan type
+      | Plan Type | <plantypePDP> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And the user views plan details for selected plan and validates
-      | Plan Name | <planName> |
+      | Plan Name | <PDPplanName> |
     #And the user validates SAM icons on the page
     And the user validates SAM icons on the page from external link
       | TFN Xpath | <TFNxpath2> |
@@ -207,8 +209,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
 
     @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage @Scenario5_AARP_Stage_PRE
     Examples: 
-      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                              | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           |
-      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | (//a[@data-asset-name= 'TFN'])[1]/u[1] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   65656 | YES           | Christian County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | AARP Medicare Advantage Choice (PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] | future   | //a[contains(@class,'invoca_swap')] |
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                              | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | MAplantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           | PDPplanName                     |
+      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | (//a[@data-asset-name= 'TFN'])[1]/u[1] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   65656 | YES           | Christian County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MAPD       | AARP Medicare Advantage Choice (PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] | future   | //a[contains(@class,'invoca_swap')] | AARP MedicareRx Walgreens (PDP) |
 
   #---------------------VPP from Morgan Stanley page-------------------
   Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, VPP Summary from External link: <externallink>
@@ -250,5 +252,5 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
     #And the user closes the new browser tab
     @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage @Scenario5_AARP_Stage_VPP_Summary
     Examples: 
-      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                           | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county          | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           |
-      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | //a[contains(@class,'invoca_swap')] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   10001 | NO            | New York County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | AARP Medicare Advantage Choice (PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] | current  | //a[contains(@class,'invoca_swap')] |
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                           | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           |
+      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | //a[contains(@class,'invoca_swap')] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   24010 | NO            | Roanoke City | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | AARP Medicare Advantage Choice (PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] | current  | //a[contains(@class,'invoca_swap')] |

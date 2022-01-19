@@ -21,6 +21,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,10 +32,12 @@ import org.testng.Assert;
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -308,6 +311,21 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = ".planRemoveSort svg")
 	private WebElement removeBreadCrumbs;
+
+	@FindBy(xpath = "//*[contains(@dlassetid,'pre_plan_pn_2')]")
+	private WebElement NextButtonPRE;
+	
+	@FindBy(xpath = "//*[contains(text(),'My Saved Items ')]")
+	private WebElement MySavedPlan;
+	
+	@FindBy(xpath = "(//*[contains(text(),'View Saved Items')])[1]")
+	private WebElement ViewSavedPlan;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Or, Sign In to your Profile ')])[1]")
+	private WebElement SignInUser;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	private WebElement signOut;
 
 	// Result Loading Page Element Verification Method
 
@@ -1117,4 +1135,75 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		}
 	}
 
+
+	public VisitorProfilePage validatePlanNamesPREforOLEFlow(String planName ) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(NextButtonPRE);
+		NextButtonPRE.click();
+		WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+		CommonUtility.waitForPageLoadNew(driver, PRESaveaPlan, 30);
+		System.out.println("Plan Name on PRE Page" + PRESaveaPlan);
+		jsClickNew(PRESaveaPlan);
+		System.out.println("Save a plan Link is clicked for MA plan" + planName);
+		Actions builder = new Actions(driver);
+		WebElement mySavedItem = driver.findElement(By.xpath("(//*[contains(text(),'My Saved Items')])[1]"));
+		// builder.moveToElement(mySavedItem).build().perform();
+		WebElement viewSavedItem = driver.findElement(By.xpath("(//*[contains(text(),'View Saved Items')])[1]"));
+
+		builder.moveToElement(mySavedItem).perform();
+		builder.moveToElement(viewSavedItem).click().perform();
+		String[] listOfTestPlans = planName.split(",");
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan : listOfTestPlans) {
+			System.out.println("Checking Saved Plan on VP for : " + plan);
+			WebElement addedPlan = driver
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			validateNew(addedPlan);
+
+			System.out.println(addedPlan.getText());
+
+			Assertion.assertEquals(plan, addedPlan.getText().trim());
+
+			System.out.println("Verified plans are added on visitior profile page");
+		}
+
+		return new VisitorProfilePage(driver);
+
+
+	}
+
+	public void validateSignInUser(String username, String password){
+
+		try {
+			validate(SignInUser);
+			jsClickNew(SignInUser);
+
+			waitForPageLoadSafari();
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+	}
 }

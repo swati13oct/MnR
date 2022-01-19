@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 
 public class FindCarePageMobile extends UhcDriver {
 
@@ -93,7 +95,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(css = "[id$='bioTab']")
 	private WebElement providerDetailOverviewTab;
 
-	@FindBy(xpath = "//Img[@alt='Facility icon']")
+	@FindBy(xpath = "(//Img[@alt='Facility icon'])[2]")
 	public WebElement Facilityicon;
 	
 	@FindBy(xpath = "//Img[@alt='Medical group icon']")
@@ -123,7 +125,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[@class='provider-name']//a")
 	public WebElement SavedProviderName;
 
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
+	@FindBy(xpath="(//*[contains(text(),'Check Provider Coverage')])[1]")
 	public WebElement CheckProviderCoverageButton;
 
 	@FindBy(xpath = "(//*[contains(text(),'Edit my Doctor')])[1]")
@@ -135,7 +137,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath="//a[text()='Edit Hospitals']")
 	private WebElement editHospitalsLink;
 	
-	@FindBy(xpath = "//button[@data-test-id='button-update-provider']")
+	@FindBy(xpath="//*[contains(@class,'modal-btns')]//*[contains(text(),'Save')]")
 	public WebElement addressSaveButton; 
 	
 	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
@@ -147,7 +149,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath="//span[text()='View Saved Providers']")
 	private WebElement ViewSavedProvidersLink;
 	
-	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[2]")
 	private WebElement selectProviderBtn;
 
 	@FindBy(css = "div[class$='mobile-profile-header-buttons'] .saved-provider-button")
@@ -157,8 +159,11 @@ public class FindCarePageMobile extends UhcDriver {
 	private WebElement ViewsaveOldbtn;
 	
 //	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
-	@FindBy(css = "#finishAndReturnButton")
+	@FindBy(xpath = "//button[@id='finishAndReturnButton']")
 	private WebElement FinishButton;
+	
+	@FindBy(xpath = "//button[contains(@class,'action-btn ally-focus')]")
+	private WebElement saveBtn;
 
 	public ComparePlansPageMobile getstarted() throws Exception {
 		validate(GetstartedButton);
@@ -499,6 +504,55 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 
 		CommonUtility.waitForPageLoadNew(driver, LocationLink, 30);
 		validateNew(LocationLink);
+
+	}
+	
+	public ComparePlansPageMobile HospitalPlaces() throws Exception {
+		String ParentWindow = null;
+		CommonUtility.waitForPageLoadNew(driver, LocationLink, 45);
+		System.out.println("in find care page");
+		validate(LocationLink);
+		validate(ChangeLocationButton);
+		jsClickNew(MedicalDirectory);
+		jsClickNew(PlacesButton);
+		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
+		jsClickNew(HospitalsButton);
+		waitforElementNew(ResultsHeader, 20);
+		String HospName = FirstHospitalRecord.getText();
+		System.out.println("Text is :: " + HospName);
+		jsClickNew(FirstHospitalRecord);
+		validate(Facilityicon);
+		jsClickNew(selectProviderBtn);
+		if (validate(addressCheckBox)) {
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
+		}
+		String GreatText = GreatHeaderText.getText();
+		System.out.println("Text is :: " + GreatText);
+
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			ParentWindow = driver.getTitle();
+			jsClickNew(CheckProviderCoverageButton);
+		} else if (driver
+				.findElements(By
+						.xpath("//form[@data-ui-element-name='check-provider-coverage']//button[contains(@id,'finishAndReturnButton')]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			ParentWindow = driver.getTitle();
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPageMobile(driver);
+		return null;
 
 	}
 

@@ -103,15 +103,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " Mile";
 		else
 			distance = distance + " Miles";
-		sleepBySec(3);
+	   // sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
-
 		sleepBySec(3);
-
+		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
-		
+
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -126,23 +125,25 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
-					System.out.println(
-							"This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
-					Assertion.assertTrue(
-							"PROBLEM - expects zipcode '" + zipcode
-									+ "' with multi-county but county selection popup is NOT showing",
-							pharmacyValidate(countyModal));
-					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
-
-					jsClickNew(countyOption);
+					scrollToView(countyModal);
+					/*
+					 * System.out.println(
+					 * "This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup"
+					 * ); Assertion.assertTrue( "PROBLEM - expects zipcode '" + zipcode +
+					 * "' with multi-county but county selection popup is NOT showing",
+					 * pharmacyValidate(countyModal)); WebElement countyOption =
+					 * driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+
+					 * county + "')]"));
+					 */
+					mobileSelectOption(countyModal, county, true);
+					// jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				} else if (validate(countyModal)) {
 					pharmacyValidate(countyModal);
 					WebElement countyOption = driver
-							.findElement(By.xpath("//select[@id='county']//option[text()='" + county + "']"));
+							.findElement(By.xpath("//*[@id='county']//option[contains(text(),'" + county + "')]"));
 					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
@@ -210,7 +211,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * } driver.close(); driver.switchTo().window(winHandleBefore); return timeStr;
 	 * }
 	 */
-    
+
 	public List<String> getListOfAvailablePlanNames() {
 		List<String> testNote = new ArrayList<String>();
 		Select dropdown = new Select(seletPlandropdown);
@@ -219,7 +220,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		for (int i = 1; i < plans.size(); i++) { // note: first item is 'Select a plan' so skip it
 			testNote.add("plan " + i + " is " + plans.get(i).getText());
 		}
-		return testNote;	
+		return testNote;
 	}
 
 	public void selectsPlanName(String planName) {
@@ -638,16 +639,18 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile clickChinese() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
-
-		String dropDownOptionText = languageDropDown
+		WebElement languageDropDown = driver.findElement(By.xpath("//select[@id='language']"));
+//
+//		String dropDownOptionText = languageDropDown
+//				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()
+//				.trim();
+		String dropDownOptionText = driver
 				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()
 				.trim();
-		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+
+		driver.findElement(By.xpath("//div//label[@for='language']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
-		// selectFromDropDownByValue(languageDropDown, "zh");
-		// mobileSelectOption(languageDropDown, "中文", true);
-		// chineseLanguage.click()
+
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Chinese language selected");
 		return new PharmacySearchPageMobile(driver);
@@ -657,11 +660,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectspanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
-		String dropDownOptionText = languageDropDown
+		WebElement languageDropDown = driver.findElement(By.id("language"));
+		String dropDownOptionText = driver
 				.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText()
 				.trim();
-		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
+		driver.findElement(By.xpath("//div//label[@for='language']")).click();
 		mobileSelectOption(languageDropDown, dropDownOptionText, true);
 		// selectFromDropDownByValue(languageDropDown, "es");
 		// mobileSelectOption(languageDropDown, "español", true);
@@ -689,15 +692,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectPlanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		WebElement languageDropDown = driver.findElement(By.xpath("//*[@id='language']"));
-		String dropDownOptionText = languageDropDown.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText().trim();
-		// driver.findElement(By.xpath("//label[@id='lang-select-label']")).click();
-		mobileSelectOption(languageDropDown, dropDownOptionText, true);
-		// selectFromDropDownByValue(languageDropDown, "es");
-		// mobileSelectOption(languageDropDown, "español", true);
-		// SpanishLanguage.click();
+		SpanishLanguage.click();
 		CommonUtility.checkPageIsReady(driver);
-		System.out.println("Spanish language selected");
+		System.out.println("Spanish language selected"); 
 		return new PharmacySearchPageMobile(driver);
 	}
 

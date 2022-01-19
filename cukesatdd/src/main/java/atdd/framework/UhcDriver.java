@@ -95,7 +95,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//*[@id='shop-scroll']/div[2]/div[5]/div/div[3]/h3[2]/a")
+	@FindBy(xpath = "//*[@id=\"shop-scroll\"]//h3[@role='listitem']//a[contains(@href,'estimate-drug-costs')]")
 	public WebElement DCERedesignLink;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
@@ -788,7 +788,7 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
-		scrollToView(Element);
+		//scrollToView(Element);
 		jsClickNew(Element);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1063,7 +1063,7 @@ public abstract class UhcDriver {
 		 */
 		jsMouseOver(hdrMenuElement);
 		jsMouseOver(menuDropListItem);
-		menuDropListItem.click();
+		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
@@ -1859,7 +1859,7 @@ public abstract class UhcDriver {
 						break;
 					} catch (NoSuchElementException e) {
 						try {
-							((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeButton[@name='Search']"))
+							((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypeButton[contains(@name,'search')]"))
 									.click();
 							break;
 						} catch (NoSuchElementException ne) {

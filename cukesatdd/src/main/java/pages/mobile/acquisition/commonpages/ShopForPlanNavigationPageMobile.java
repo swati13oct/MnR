@@ -203,7 +203,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		 * scrollToView(shopLink); waitforElement(shopLink); jsClickNew(shopLink);
 		 */
 
-		Thread.sleep(10000);
+		pageloadcomplete();
 		return new ShopPage(driver);
 
 	}

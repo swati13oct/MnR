@@ -44,7 +44,7 @@ public class RequestAgentApptCommonStepDefinition {
 	 * @toDo: user navigates to request more help and information in 
 	 */
 	@When("^the user clicks on Agent link and validates the correct URL is loaded$")
-	public void User_navigate_EBRC_Links(DataTable arg1) throws InterruptedException {
+	public void User_navigate_EBRC_Links1(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -83,7 +83,7 @@ public class RequestAgentApptCommonStepDefinition {
 	}
 	
 	@When("^the user navigates to request more help and information$")
-	public void navigates_request_more_help_information()
+	public void navigates_request_more_help_information1()
 	{
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		RequestHelpAndInformationPageMobile requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
@@ -150,7 +150,7 @@ public class RequestAgentApptCommonStepDefinition {
 //	}
 //	
 	@When("^the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page$")
-	public void User_navigate_EBRC_Links_from_MedEd(DataTable arg1) throws InterruptedException {
+	public void User_navigate_EBRC_Links_from_MedEd2(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		

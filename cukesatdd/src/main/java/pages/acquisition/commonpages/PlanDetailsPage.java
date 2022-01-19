@@ -40,6 +40,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 
 /**
@@ -125,6 +126,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
+
+	@FindBy(id = "planDocuments")
+	private WebElement planDocumentSection;
 
 	// Right Rail Element - TFN
 //	@FindBy(xpath = "//*[@class='tel ng-binding']")
@@ -224,7 +228,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Online pharmacy directory')]")
 	private WebElement vppPlanDetailsPlLink;
 
-	@FindBy(id = "distance")
+	@FindBy(id = "miles")
 	WebElement distanceDropownID;
 
 	@FindBy(id = "mapd_gi_div_eng")
@@ -423,7 +427,11 @@ public class PlanDetailsPage extends UhcDriver {
 			checkModelPopup(driver, 45);
 		/*else
 			checkModelPopup(driver, 10);*/
-		validateNew(planCostsTab);
+		validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 
 	}
 
@@ -451,7 +459,11 @@ public class PlanDetailsPage extends UhcDriver {
 			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
 					"Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
-		validateNew(planCostsTab);
+				validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 		// note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -1104,9 +1116,10 @@ public class PlanDetailsPage extends UhcDriver {
 		WebElement rider = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/following::label[1]"));
 		// rider.click();
 		jsClickNew(rider);
-		String optionalRiderPremium = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong")).getText()
-				.trim();
+		String optionalRiderPremium = (driver
+				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//p")).getText()
+				.trim()).split(" ")[1];
+		
 		return optionalRiderPremium;
 	}
 
@@ -1171,7 +1184,7 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 
-	public PharmacySearchPage planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+	public PharmacySearchPageNew planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
 		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
 		if(language.equalsIgnoreCase("English")){
 			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
@@ -1205,7 +1218,7 @@ public class PlanDetailsPage extends UhcDriver {
 		if (validateNew(distanceDropownID) && driver.getCurrentUrl().contains(language)) {
 			System.out.println("Pharmacy locator page for Language : "+language+" is loaded");
 			System.out.println("Current URL : "+driver.getCurrentUrl());
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		} else 
 			System.out.println("Pharmacy locator page not loaded");
 
@@ -2147,4 +2160,6 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail(
 					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_Catastrophic.getText()+" <<<<<");
 	}
+	
+
 }

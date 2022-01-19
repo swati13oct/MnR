@@ -24,8 +24,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DC
 
     @dce_redesign_ShopPDP @regressionAARP
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode | site |
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
+      | drug1   | drug2  | drug3   | drug4               | zipCode | site |
+      | Orkambi | Fanapt | Humalog | diclofenac potassium|   80002 | AARP |
 
     @dce_redesign_ShopPDP @regressionUHC
     Examples: 
