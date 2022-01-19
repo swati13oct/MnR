@@ -256,7 +256,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     }
 
     public boolean checkAllLinks() {
-        if (validateNew(breadCrumb) || validateNew(lnkBenefits) || validateNew(lnkCostBasics) || validateNew(lnkCoverageChoices) || validateNew(lnkEnrollment) ||
+        if (validateNew(pageHeader) || validateNew(lnkBenefits) || validateNew(lnkCostBasics) || validateNew(lnkCoverageChoices) || validateNew(lnkEnrollment) ||
                 validateNew(lnkLearnMoreMedicareIEP) || validateNew(lnkLearnMoreMedicareWP65) || validateNew(lnkMAPlans) || validateNew(lnkMedicareEligibility) ||
                 validateNew(lnkMedSuppPlans) || validateNew(lnkOriginalMedicare) || validateNew(lnkOverviewOfPlans) || validateNew(lnkPDPPlans) || validateNew(lnkSNPPlans)) {
             return true;
