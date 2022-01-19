@@ -4825,7 +4825,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(menuHamburgerCrossToClose);
 		}
 
-		jsClickNew(stateWidget);
+		//jsClickNew(stateWidget);
 		// validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*

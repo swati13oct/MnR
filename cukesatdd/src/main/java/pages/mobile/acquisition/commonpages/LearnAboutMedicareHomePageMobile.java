@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_FAQ;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MEDICAREENROLLMENT;
+import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_MOREABOUTMEDICARE;
 import acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_TYPESOFPLANS;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -121,10 +122,10 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Special Needs Plans']")
 	private WebElement specialNeedsPlansLink;
 
-	@FindBy(css = "#learnmore-scroll > div:nth-child(3) > div:nth-child(4) > p")
+	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'])[2]")
 	private WebElement medicareFAQLink;
 
-	@FindBy(css = "div[class^='mob-sctn'] a[dtmname$='Glossary']")
+	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Glossary'])[2]")
 	private WebElement glossaryLink;
 
 	// Medicare Enrollment hamburger flyout locators
@@ -146,16 +147,18 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	// Medicare FAQ hamburger flyout locators
 	@FindBy(xpath = "//*[@id='learnmore-scroll']/div[2]/div[4]/p")
 	private WebElement FAQ;
-	
+
 	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'])[2]")
 	private WebElement medicareFaq;
-	
+
 	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Glossary'])[2]")
 	private WebElement glossary;
-	
-	@FindBy(xpath = "//*[@id=\"learnmore-scroll\"]/div[2]/div[4]/div/div/div[1]/span")
+
+	@FindBy(xpath = "//*[@id='learnmore-scroll']/div[2]/div[4]/div/div/div[1]/span")
 	private WebElement medicareFaqBackButton;
 	
+	@FindBy(xpath = "//*[@id='learnmore-scroll']/div[2]/div[2]/p")
+	private WebElement moreAboutMedicare;
 	
 
 	public WebElement getLnkMedicareAdvantage() {
@@ -834,16 +837,18 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		LEARNABOUTMEDICARE_MEDICAREENROLLMENT medicareEnrollmentEnum = LEARNABOUTMEDICARE_MEDICAREENROLLMENT
 				.getMedicareEnrollmentEnumFor(navLink);
 		LEARNABOUTMEDICARE_FAQ MedicareFaqEnum = LEARNABOUTMEDICARE_FAQ.getMedicareFaqEnumFor(navLink);
+		LEARNABOUTMEDICARE_MOREABOUTMEDICARE moreAboutMedicare = LEARNABOUTMEDICARE_MOREABOUTMEDICARE
+				.getMoreAbtMedicareEnum(navLink);
 
 		if (introductionEnum != null) {
 			selectIntroductionToMedicareOption(introductionEnum);
 		} else if (typesOfPlansEnum != null) {
 			selectTypesOfPlansOption(typesOfPlansEnum);
-		} else if (medicareEnrollmentEnum != null){
+		} else if (medicareEnrollmentEnum != null) {
 			selectMedicareEnrollmentOption(medicareEnrollmentEnum);
-		} else {
+		} else if(MedicareFaqEnum != null) {
 			selectMedicareFAQ(MedicareFaqEnum);
-		}
+		} else {selectMoreAbtMedicare(moreAboutMedicare);}
 	}
 
 	/**
@@ -968,6 +973,27 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		case GLOSSARY:
 			jsClickNew(glossary);
 			break;
+		default:
+			throw new IllegalArgumentException(option.name() + " is not available under 'Medicare FAQ' menu.");
+		}
+	}
+
+	/**
+	 * Select option from Learn About Medicare, Medicare FAQ menu.
+	 *
+	 * @param moreAboutMedicare the option
+	 */
+	public void selectMoreAbtMedicare(LEARNABOUTMEDICARE_MOREABOUTMEDICARE option) {
+		if (!moreAboutMedicare.isDisplayed()) {
+			jsClickNew(moreAboutMedicare);
+			CommonUtility.waitForPageLoadNew(driver, medicareFaqBackButton, 10);
+		}
+
+		switch (option) {
+		case ARTICLSANDSPECIALTOPICS:
+			jsClickNew(articlesAndSpecialTopicsLink);
+			break;
+	
 		default:
 			throw new IllegalArgumentException(option.name() + " is not available under 'Medicare FAQ' menu.");
 		}
