@@ -5390,7 +5390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
