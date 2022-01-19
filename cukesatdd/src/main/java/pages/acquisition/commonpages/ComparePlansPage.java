@@ -291,7 +291,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(@class,'heading2')]")
 	public WebElement planComparePlansAvailableLabel;
 
-	@FindBy(xpath = "//a[contains(text(),'Show All')]")
+	@FindBy(xpath = "(//a[contains(text(),'Show All')])[3]")
 	public WebElement viewAllplansButton;
 
 	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
@@ -1663,7 +1663,13 @@ public class ComparePlansPage extends UhcDriver {
 		viewAllplansButton.click();
 		System.out.println("Count of plans on compare after button is clicked"
 				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
-		Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		try {
+			if(viewAllplansButton.isDisplayed())
+				Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		}
+		catch(NoSuchElementException e) {
+			
+		}
 		Assertion.assertEquals("Plan Counts mismatch", planCount,
 				driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	}

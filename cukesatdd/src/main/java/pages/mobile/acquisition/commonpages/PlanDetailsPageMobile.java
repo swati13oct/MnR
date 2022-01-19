@@ -85,7 +85,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#medicalbenefits")
 	private List<WebElement> medBenefitsTab;
 	
-	@FindBy(id = "planDocuments")
+	@FindBy(xpath = "//div[contains(@id,'planDocuments')]")
 	private WebElement planDocumentSection;
 
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
