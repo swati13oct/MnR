@@ -22,7 +22,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
       | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
@@ -104,7 +104,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo> |
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                               |
       | AARP |   10003 | NO            | New York | PDP           | No             | Mosaic Choice (PPO),add your drugs,N/A |
@@ -286,7 +286,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @PREMSPlanTile @dec
+    @regressionAARP @PREMSPlanTile
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              | doctorsInfo1                           | DoctorsName2       | doctorsInfo2                       |
       | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Harold E Simon MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
@@ -573,7 +573,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Sort PlanType | <sortInfo> |
     Then user removed filtered planType and Check Breadcrumbs in PRE-Result page
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | AARP |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |

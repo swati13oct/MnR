@@ -229,6 +229,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 //		modalFinddoctors.click();
+		threadsleep(3000);
 		if(validate(modalEditDoctor))
 			jsClickNew(modalEditDoctor);
 		jsClickNew(modalFinddoctors);

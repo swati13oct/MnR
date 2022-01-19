@@ -203,7 +203,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 				Assert.assertTrue(validate(snpMedicaid), "D-SNP option not Available");
 				Assert.assertTrue(validate(snpNoneMD), "None option not Available");
 				Assert.assertFalse(validate(snpNone), "C-SNP option Available");
-				Assert.assertTrue(validate(snpNursinghome), "I-SNP option Available");
+				Assert.assertFalse(validate(snpNursinghome), "I-SNP option Available");
 				}
 		}
 				

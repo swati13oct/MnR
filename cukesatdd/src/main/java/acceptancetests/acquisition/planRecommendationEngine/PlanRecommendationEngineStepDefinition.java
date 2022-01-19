@@ -949,8 +949,8 @@ public class PlanRecommendationEngineStepDefinition {
    	public void add_snp_editResponse_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		preEditpage.addLocationEditResponse(inputValues);
 		preEditpage.addSNPEditResponse(inputValues);
+		preEditpage.addLocationEditResponse(inputValues);
    	}
 	
 	@Then("^user adds SNP options in edit response page$")

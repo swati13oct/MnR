@@ -690,7 +690,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		System.out.println("Change Location Options:");
 		inputValues = userInput;
 		pageloadcomplete();
-		navigateEditResponsePage(inputValues.get("Plan Type"));
+//		navigateEditResponsePage(inputValues.get("Plan Type"));
 		verifyClickEditButton("location", true);
 		validate(progressInfo, 10);
 		String progressText = progressInfo.getText().toLowerCase();
@@ -729,7 +729,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String curID = String.valueOf(Thread.currentThread().getId());
 		scrollToView(headerNavigationBarHomeTab);
 		RecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		RecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		RecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+RecomPlanName);
