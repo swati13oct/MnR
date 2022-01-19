@@ -690,7 +690,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		System.out.println("Change Location Options:");
 		inputValues = userInput;
 		pageloadcomplete();
-//		navigateEditResponsePage(inputValues.get("Plan Type"));
+		navigateEditResponsePage(inputValues.get("Plan Type"));
 		verifyClickEditButton("location", true);
 		validate(progressInfo, 10);
 		String progressText = progressInfo.getText().toLowerCase();

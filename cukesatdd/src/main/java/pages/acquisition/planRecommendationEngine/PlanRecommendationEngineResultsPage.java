@@ -1763,7 +1763,7 @@ public void useraddDrugsPREResult() {
 public void usereditDrugsPREResult() {
 	threadsleep(10000);
 	System.out.println("Adding drugs from PRE Result page");
-	plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")).click();
+	jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")));
 	threadsleep(3000);
 }
 

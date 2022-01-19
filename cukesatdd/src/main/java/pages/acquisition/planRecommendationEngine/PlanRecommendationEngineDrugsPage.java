@@ -625,7 +625,7 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 			threadsleep(2000);
 			modalBackCancel.click();
 			threadsleep(2000);
-			if (modalQuantity.isDisplayed() == false) {
+			if (drugsearchBox.isDisplayed() == false) {
 				System.out.println("Generic drug modal is not closed");
 				Assert.assertTrue(false);
 			}
@@ -665,8 +665,6 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 				// Generic modal
 				if (switchGeneric) 
 					jsClickNew(modalGenericSwitchLabel);
-				else
-					jsClickNew(modalBrandSwitchLabel);
 				threadsleep(2000);
 			}
 			
@@ -730,8 +728,6 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 					// Generic modal
 					if (switchGeneric) 
 						jsClickNew(modalGenericSwitchLabel);
-					else
-						jsClickNew(modalBrandSwitchLabel);
 					threadsleep(2000);
 				}
 				
