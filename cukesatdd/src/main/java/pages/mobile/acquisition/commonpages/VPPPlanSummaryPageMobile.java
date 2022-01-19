@@ -2475,7 +2475,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		WebElement premiumForPlan = null;
 		if (planName.contains("SNP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Monthly Premium')])"));
 		} else if (planName.contains("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//*[contains(text(),'Monthly Premium')])"));
