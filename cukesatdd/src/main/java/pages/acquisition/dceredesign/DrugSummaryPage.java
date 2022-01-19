@@ -854,6 +854,9 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'provides prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthCare')])[1]")
 	public WebElement DrugPricingSpecialtyPharmacyText;
 
+	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'the pharmacy you selected does not provide Prescription Drug Coverage under this plan. We are unable to provide the drug pricing.')])[1]")
+	public WebElement DrugPricingNotCoveredPharmacyText;
+
 	public void ValidateSpecialtyPharmMessage() {
 		pageloadcomplete();
 		sleepBySec(3);
@@ -862,6 +865,16 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("Drug Summary Page, Message for Speciality Pharmacy Not able to provide Drug Pricing is Displayed");
 		} else
 			Assertion.fail("Drug Summary Page, Message for Speciality Pharmacy Not able to provide Drug Pricing is NOT Displayed");
+	}
+
+	public void ValidateNotCoveredPharMessage() {
+		pageloadcomplete();
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, DrugPricingSpecialtyPharmacyText, 30);
+		if (validateNew(DrugPricingNotCoveredPharmacyText)) {
+			System.out.println("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is Displayed");
+		} else
+			Assertion.fail("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is NOT Displayed");
 	}
 
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")

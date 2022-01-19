@@ -420,7 +420,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SpecialtyPharmacy> |
     Then the user validates Covered Drug display for NC Pharmacy selection
-    Then the user validates Speciality pharmacy message DCE Summary Page plan card
+#    Then the user validates Speciality pharmacy message DCE Summary Page plan card
+    Then the user validates Not Covered Pharmacy message DCE Summary Page plan card
     And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
