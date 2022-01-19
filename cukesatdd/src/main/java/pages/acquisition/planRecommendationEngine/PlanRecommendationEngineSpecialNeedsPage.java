@@ -129,16 +129,16 @@ public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements 
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
 	private WebElement checkedSNP;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(1) uhc-checkbox label>span:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(1) uhc-checkbox[class*='checkbox-checked'] label>span:nth-child(1)")
 	private WebElement checkedSNPDSNPOption;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(2) uhc-checkbox label>span:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(2) uhc-checkbox[class*='checkbox-checked'] label>span:nth-child(1)")
 	private WebElement checkedSNPCSNPOption;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(3) uhc-checkbox label>span:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(3) uhc-checkbox[class*='checkbox-checked'] label>span:nth-child(1)")
 	private WebElement checkedSNPISNPOption;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(4) uhc-checkbox label>span:nth-child(1)")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>div:nth-child(4) uhc-checkbox[class*='checkbox-checked'] label>span:nth-child(1)")
 	private WebElement checkedSNPNoneOption;
 
 //Special Needs Page Element Verification Method 
