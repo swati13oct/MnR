@@ -29,6 +29,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
@@ -96,7 +97,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab2;
 
-	@FindBy(css = "#prescriptiondrug")
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
 	private List<WebElement> presDrugTab;
 
 	@FindBy(xpath = ".//*[@id='drugBenefits']")
@@ -108,6 +109,15 @@ public class PlanDetailsPageMobile extends UhcDriver {
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	@FindBy(css = "#plancosts")
 	private WebElement planCostsTab;
+	
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+	private WebElement palncompareCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+	private WebElement palncompareLink;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
 	private WebElement prescriptiondrugTab;
@@ -193,7 +203,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(text(),'Edit drug ')]//following::td//*[@class='ng-binding' and contains(text(),'$')])[1]")
 	private WebElement valCostTabEstimatedDrugCost;
 
-	@FindBy(xpath = "//*[contains(@class,'ng-binding') and contains(text(),'Doctors & Dentists')]/following::a[contains(@dtmname,'provider covered')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'provider covered') and contains(text(),' Edit')]")
 	private WebElement editProviderButtonOnPlanDetails;
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
@@ -525,7 +535,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(css = "#DrugListDetails")
+	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
 	private WebElement editDrugLink;
 
 	@FindBy(xpath = "//h2[normalize-space()='Build Your Drug List']")
@@ -709,6 +719,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		else
 			Assertion.assertTrue(false);
 
+	}
+	
+	public void validatealllinksonPlanDetails() {
+		validateNew(medBenefitsTab.get(0));
+		validateNew(presDrugTab1.get(0));
+		validateNew(optionalServicesTab);
+		validateNew(planCostsTab);
+		validateNew(EnrollinPlan);
+		validateNew(palncompareCheckbox);
+		validateNew(palncompareLink);
 	}
 
 	public void validateVPPDetailsPage() {
@@ -1608,6 +1628,18 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		scrollToView(compareBox);
 		validateNew(compareBox);
 		jsClickNew(compareBox);
+	}
+	
+	public ProviderSearchPageMobile validateEditDocotrsProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(editProviderButtonOnPlanDetails);
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+		switchToNewTabNew(editProviderButtonOnPlanDetails);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPageMobile(driver);
+		}
+		return null;
 	}
 
 	public boolean ClickValidatePDFText_URL_ForDocCode(String pDFtype, String documentCode) {
