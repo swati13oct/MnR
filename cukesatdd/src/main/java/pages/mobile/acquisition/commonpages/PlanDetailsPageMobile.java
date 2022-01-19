@@ -107,7 +107,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	private WebElement estimateDrugBtn;
 
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
-	@FindBy(css = "#plancosts")
+	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	private WebElement planCostsTab;
 	
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")

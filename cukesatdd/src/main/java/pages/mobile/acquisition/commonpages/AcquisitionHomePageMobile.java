@@ -887,7 +887,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			scrollToView(TFNelement);
 			jsClickNew(TFNelement);
 			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
-			threadsleep(3000);
+			waitforElement(TFNelement);
 			verifyTFNPopUp(TFNelement);
 		} else {
 			org.testng.Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
@@ -1904,7 +1904,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		try {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
-				Thread.sleep(3000);
 				// StandalonSearchCounty.click();
 			}
 
@@ -1913,6 +1912,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		// ViewPlansPricingButton.click();
+		validate(ViewPlansPricingButton);
 		jsClickNew(ViewPlansPricingButton);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -2194,7 +2194,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendKeysByCharacter(siteSearchInputTextField, sv);
 
 		jsClickNew(enterSearchLable);
-		sleepBySec(4);
+		validate(siteSearch_SearchButton);
 		jsClickNew(siteSearch_SearchButton);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
@@ -3154,7 +3154,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailAddress.sendKeys("a@gmail.com");
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		} else {
-			threadsleep(8);
+			waitforElement(SubmitEmail);
 			// SubmitEmail.click();
 			scrollToView(SubmitEmail);
 			jsClickNew(SubmitEmail);
@@ -3311,7 +3311,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (chatsam.isDisplayed()) {
 			System.out.println("@@@@ Chat Icon window opened successfully@@@");
 			jsClickNew(chatsam);
-			Thread.sleep(5000);
+			waitforElement(ChatCancelBtn);
 			// driver.switchTo().frame("sp-chat-iframe");
 			validate(ChatCancelBtn, 10);
 			present = true;
@@ -3495,7 +3495,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
 		jsClickNew(headLogo);
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
@@ -3545,7 +3545,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void clickViewDisclaimerInfoLink() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(viewAllDisclaimerInformationLink);
-		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
 		if (content.isDisplayed() && content.isEnabled()) {
@@ -3608,7 +3607,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		scrollToView(lnkAssistance);
 		validateNew(lnkAssistance);
-		sleepBySec(2);
 		switchToNewTabNew(lnkAssistance);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("https://www.uhc.com/legal/medicare-plans")) {
@@ -3664,7 +3662,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// MedicareAdvantagePlans.click();
 //		jsClickNew(MedicareAdvantagePlans);
 		accessFooterLinkFromShopPlans(MA);
-		threadsleep(5000);
 		waitforElementVisibilityInTime(MAHeaderonShopPage, 20);
 		if (driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assertion.assertTrue(true);
@@ -3801,7 +3798,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(6);
 		// MedicarePrescriptionDrugPlans.click();
 		accessFooterLinkFromShopPlans(PDP);
-		threadsleep(5000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		threadsleep(10);
 		if (driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
@@ -3823,7 +3819,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// MedicareEducation.click();
 //		jsClickNew(MedicareEducation);
 		accessFooterLinkFromLearnAboutMedicare("Introduction to Medicare");
-		threadsleep(5);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			Assert.assertTrue(true);
@@ -3860,7 +3855,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void backtotop() {
-		threadsleep(6);
+		waitforElement(BackToTop);
 		// BackToTop.click();
 		jsClickNew(BackToTop);
 		threadsleep(5);
@@ -3876,7 +3871,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
 
-		sleepBySec(10);
+		sleepBySec(6);
 		if (driver.getCurrentUrl().contains("/plan-summary") & !FindAnAgent.isDisplayed()) {
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
@@ -4148,7 +4143,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public boolean checkZipCompErrorInSubNav() {
 		hoverOverShopForPlan();
-		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(OurPlans_zipfield);
 		validateNew(FindPlansButton1);
@@ -4948,23 +4942,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.assertTrue(goToMemberSiteLink.getAttribute("href").contains("medicare.uhc.com"));
 			// Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
 			// clickBrowserBackButton();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			waitforElement(menuHamburgerCloseIcon);
 			jsClickNew(menuHamburgerCloseIcon);
 			System.out.println("Member site link url validation Pass on iOS>>>>>");
 		} else {
 
 			jsClickNew(goToMemberSiteLink);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			pageloadcomplete();
 			String base = driver.getWindowHandle();
 			Set<String> all = driver.getWindowHandles();
 			if (all.size() > 1) {
@@ -5003,7 +4987,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateSamChatIcon() throws InterruptedException {
 		boolean present;
 		try {
-			threadsleep(5);
 			validateNew(samChatIcon);
 			present = true;
 		} catch (NoSuchElementException e) {
@@ -5034,9 +5017,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateSamChatPopup() throws InterruptedException {
 		try {
 			jsClickNew(samChatIcon);
-			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(
