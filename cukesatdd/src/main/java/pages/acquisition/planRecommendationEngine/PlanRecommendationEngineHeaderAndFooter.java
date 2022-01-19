@@ -651,11 +651,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 			jsClickNew(headerNavigationBarLearnAboutMedicareTab);
 			jsClickNew(headerMedicareArticles);
 			validate(HeaderBreadcrumb, 30);
-			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles"), "Medicare Articles page not opened");
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Articles"), "Medicare Articles page not opened");
 			validate(HeaderEnrollMedicareArticles, 30);
 			jsClickNew(HeaderEnrollMedicareArticles);
 			validate(HeaderBreadcrumb, 30);
-			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles / Eligibility & Enrollment"),"Medicare and COBRA page not opened");
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Eligibility & Enrollment"),"Medicare and COBRA page not opened");
 			scrollToView(HeaderGetStartedMedicareArticles);
 			validate(HeaderGetStartedMedicareArticles, 30);
 			jsClickNew(HeaderGetStartedMedicareArticles);
@@ -689,22 +689,22 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 //				jsClickNew(headerNavigationBarLearnAboutMedicareTab);
 				headerEligibilityLink.click();
 				validate(HeaderBreadcrumb, 30);
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Eligibility"), "Medicare Eligibility page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Eligibility"), "Medicare Eligibility page not opened");
 				PRE();
 				scrollToView(CoverageOptionsLink);
 				validate(CoverageOptionsLink);
 				CoverageOptionsLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Coverage Options"), "Coverage Choices page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Coverage Options"), "Coverage Choices page not opened");
 				PRE();
 				scrollToView(MedicareCostBasicsLink);
 				validate(MedicareCostBasicsLink);
 				MedicareCostBasicsLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Cost Basics"), "Medicare Cost Basics page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Cost Basics"), "Medicare Cost Basics page not opened");
 				PRE();
 				scrollToView(OriginalMedicareLink);
 				validate(OriginalMedicareLink);
 				OriginalMedicareLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Original Medicare"), "Original Medicare page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Original Medicare"), "Original Medicare page not opened");
 				PRE();
 			}	
 			

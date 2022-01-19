@@ -98,7 +98,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @null
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
       | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            |

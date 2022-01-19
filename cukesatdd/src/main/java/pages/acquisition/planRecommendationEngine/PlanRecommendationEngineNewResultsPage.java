@@ -1111,7 +1111,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				pageNextButton.click();
 				threadsleep(2000);
 			}
-			PlanType = plantiles.get(i).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+			PlanType = plantiles.get(i).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 			Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
 		}
 
