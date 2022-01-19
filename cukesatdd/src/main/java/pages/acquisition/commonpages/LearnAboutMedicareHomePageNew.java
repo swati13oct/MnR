@@ -22,9 +22,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
     @Override
     public void openAndValidate() {
-        validateNew(breadCrumb);
+        validateNew(pageHeader);
         if (driver.getCurrentUrl().contains("medicare-education.html")) {
-            Assert.assertEquals(breadCrumb.getText(), "Introduction to Medicare");
+            Assert.assertEquals(pageHeader.getText(), "Medicare Made Clear");
             Assert.assertTrue(true);
             System.out.println("New Learn about Medicare Homepage opened Successfully");
         } else {
@@ -32,7 +32,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         }
     }
 
-    @FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')]")
+    @FindBy(xpath = "//h2[contains(text(),'Medicare Made Clear')]")
     private WebElement pageHeader;
 
     @FindBy(xpath = "(//div[contains(@class,'breadcrumb')]//a[contains(@href,'medicare-education')])[1]")
