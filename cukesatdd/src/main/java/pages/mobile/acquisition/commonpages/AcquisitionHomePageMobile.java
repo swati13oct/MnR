@@ -240,7 +240,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(css = "div[class$='newstyle_feature_toggle']
 	// input[id^='zipcodemeded'] + button")
 
-	@FindBy(xpath="(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -3392,7 +3392,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement siteSearchIcon;
 
 	public void validateHeaderLinks() {
-		//driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
+		if (!driver.findElement(By.cssSelector("#Lock-ups")).isDisplayed()) {
+			driver.navigate().refresh();
+		} // Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3494,8 +3496,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo')][1]"));
 		jsClickNew(headLogo);
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
@@ -4825,7 +4826,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(menuHamburgerCrossToClose);
 		}
 
-		//jsClickNew(stateWidget);
+		// jsClickNew(stateWidget);
 		// validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*
