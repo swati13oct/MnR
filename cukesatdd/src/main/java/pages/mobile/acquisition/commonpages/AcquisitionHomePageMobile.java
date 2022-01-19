@@ -4528,8 +4528,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
 
-		jsClickNew(stateWidget);
-		jsClickNew(stateWidgetLable);
+//		jsClickNew(stateWidget);
+//		jsClickNew(stateWidgetLable);
 		mobileSelectOption(stateDropDown, geoState, true);
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
