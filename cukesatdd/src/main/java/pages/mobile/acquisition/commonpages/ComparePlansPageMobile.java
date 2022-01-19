@@ -1053,7 +1053,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public FindCarePageMobile clickonEditYourDoctors() throws InterruptedException {
-		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		validate(editDoctorsLink);
 		String ParentWindow = driver.getTitle();
 		/*
@@ -1117,7 +1122,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public FindCarePageMobile clickonAddYourDoctors() throws InterruptedException {
-
 		waitforElement(addDoctorsLink);
 		scrollToView(addDoctorsLink);
 		String ParentWindow = driver.getTitle();
@@ -1727,9 +1731,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
-		if (!planName.contains("PDP")) {
-			i++;
-		}
 		System.out.println("\n"+i+"\n");
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-" + i + "')]"));
 		validateNew(DrugInfoLink);
