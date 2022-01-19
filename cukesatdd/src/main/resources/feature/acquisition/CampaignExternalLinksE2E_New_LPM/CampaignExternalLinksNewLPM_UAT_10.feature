@@ -220,7 +220,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
     Then user saves plan as favorite on vpp summary page
       | Test Plans | <testPlans> |
     And Navigate to Visitor Profile page
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
     Then the user validates PSC code
       | PSC Code | <pscCode> |
 #    When verify Call SAM icon is visible
