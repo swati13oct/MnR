@@ -533,6 +533,19 @@ public class PharmacyLocatorStepDefinitionMobile {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
+	/** user enters following details for pharmacy search */
+	@And("^the user enters pharmacy name for pharmacy search$")
+	public void user_enters_pharmacy_name_for_pharmacy_search(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyNameFilter = inputAttributesMap.get("Pharmacy Name");
+		if(pharmacyNameFilter==null)
+			pharmacyNameFilter="";
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL,pharmacyNameFilter);
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.enterPharmacyName(pharmacyNameFilter);
+	}
+	
 	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
 	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
