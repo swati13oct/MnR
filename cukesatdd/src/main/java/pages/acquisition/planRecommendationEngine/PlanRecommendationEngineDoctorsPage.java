@@ -252,6 +252,41 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 //		modalContinuedoctors.click();
 		jsClickNew(modalContinuedoctors);
 	}
+	
+//Doctors Page Function Verification                      
+
+		public void editdoctorspageFunctional(String doctor, String doctorsName, String multiDoctor, String status) {
+			System.out.println("Doctor Page Functional Operations");
+			if (status.toUpperCase().contains("POSITIVE")) {
+				doctorspageOptions(doctor);
+				jsClickNew(continueBtn);
+				if (doctor.equalsIgnoreCase("Lookup")) {
+					if (multiDoctor.equalsIgnoreCase("YES"))
+						editdoctorModellookup(doctorsName, 3);
+					else
+						editdoctorModellookup(doctorsName, 1);
+				}
+			} else {
+				if (doctor.isEmpty()) {
+					jsClickNew(continueBtn);
+					desktopCommonUtils.desktopErrorValidation(page);
+				}
+			}
+		}
+	
+//Editing doctor
+
+		public void editdoctorModellookup(String search, int count) {
+			String curWindow = driver.getWindowHandle();
+			System.out.println(curWindow);
+			threadsleep(3000);
+			if(validate(modalEditDoctor))
+				jsClickNew(modalEditDoctor);
+			jsClickNew(modalFinddoctors);
+			validateLinksanotherWindow(curWindow, "Doctors", search, count, locationCount);
+			threadsleep(5000);
+			jsClickNew(modalContinuedoctors);
+		}
 
 	public void doctorModellookupElements() {
 		validate(modalDescription);

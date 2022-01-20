@@ -114,7 +114,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "a[dtmname*=' Drugs']")
 	private WebElement AddDrugsLink;
 
-	@FindBy(xpath = "//a//span[contains(text(),'Doctors')]")
+	@FindBy(xpath = "#your-doctors-table >thead th:nth-child(2)>a")
 	private WebElement AddDoctorsLink;
 
 	@FindBy(css = "a[dtmname*=' Hospitals']")
@@ -198,7 +198,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']")
 	private List<WebElement> planNameSection;
 
-	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
+	@FindBy(css = "table.uhc-slide-table #printPlans th span[class*='headerPlanName']")
 	private List<WebElement> planNamesOnly;
 
 	@FindBy(css = "#printPlans th[class*='text-blue-primary'] a[class*='uhc-link-button']")

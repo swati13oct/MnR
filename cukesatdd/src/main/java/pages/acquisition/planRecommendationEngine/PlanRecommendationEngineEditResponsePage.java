@@ -591,13 +591,15 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 			loc.edit_location(zipcode, multi, county);
 			jsClickNew(saveBtn);
 			if(county.toLowerCase().contains("baltimore")) {
-				Assert.assertTrue(modelStateTitle.getText().toLowerCase().contains("zip") && modelStatePara.getText().toLowerCase().contains("reselect"),
-						"Model popup not having warning Messages");
-				validate(modelStateCancelButton);
-				validate(modelStateConfirmButton);
-				jsClickNew(modelStateConfirmButton);
-				threadsleep(3000);
-				planSelectorSpecialneedspage.nospecialneedspage("MD");
+				if(validate(modelStateTitle)) {
+					Assert.assertTrue(modelStateTitle.getText().toLowerCase().contains("zip") && modelStatePara.getText().toLowerCase().contains("reselect"),
+							"Model popup not having warning Messages");
+					validate(modelStateCancelButton);
+					validate(modelStateConfirmButton);
+					jsClickNew(modelStateConfirmButton);
+					threadsleep(3000);
+					planSelectorSpecialneedspage.nospecialneedspage("MD");
+				}
 			}
 			checkContent("location");
 		} else if (section.equalsIgnoreCase("drugs")) {

@@ -346,6 +346,17 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorDoctorspage.doctorspageCancel(inputValues.get("Doctors Search Text"), inputValues.get("Multi Doctor"));
 	}
     
+    @And("^user edit doctors in doctors page$")
+    public void edit_doctor_page(DataTable givenAttributes) throws Throwable {
+                    readfeaturedata(givenAttributes);
+                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+                    String doctor = inputValues.get("Doctors");
+                    String status = "Positive_NextPageName";
+                    if (!(doctor.isEmpty())) {
+                                    planSelectorDoctorspage.editdoctorspageFunctional(inputValues.get("Doctors"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
+                    }
+    }
+    
     @And("^user validate elements in drugs page$")
     public void elements_drugs_page() {
     				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));

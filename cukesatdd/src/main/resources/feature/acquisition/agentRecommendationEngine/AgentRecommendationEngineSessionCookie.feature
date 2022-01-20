@@ -77,7 +77,7 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
-      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
+      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Choice(PPO),Patriot(HMO),Patriot(RegionalPPO) | NO                 |
 
   @ARE @AddEditDeleteDrug @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE
@@ -111,8 +111,8 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User                   | Pass         | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
-      | areddstage@givmail.com | Password@123 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | NO           | YES           | [blank]    | drug           | NO             | NO                 |
+      | User                   | Pass         | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                                         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
+      | areddstage@givmail.com | Password@123 | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | ATORVASTATIN CALCIUM,NO,atorvastatin calcium TAB 10MG,,,Month,1,NO,NO         | azithromycin POW 1GM PAK:atorvastatin calcium TAB 10MG | NO           | YES           | [blank]    | drug           | NO             | NO                 |
 
   @ARE @AddEditDeleteDoctors @F457409
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Doctors in ARE
@@ -147,5 +147,5 @@ Feature: 1.17.2 Agent Recommendation Engine - Verify ARE functionality with Sess
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
-      | areddstage@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | YES          | YES           | [blank]    | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | YES                |
+      | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DoctorsNames                         | DelDoctorsNames                      | DisplayCurrentPlan |
+      | areddstage@givmail.com | Password@123 | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | NO           | YES           | [blank]    | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | Adams, Susan E, AUD:Palmer, John, MD | NO                 |

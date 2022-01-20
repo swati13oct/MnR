@@ -109,8 +109,8 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       #| areddstage@givmail.com  | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
-      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | YES                | YES           | [blank]    |
-      | areddstage@givmail.com | Password@123 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | NO                 | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | [blank]    |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
@@ -132,7 +132,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | NO                 | YES           | [blank]    |
 
   @ARE @PlansReorder @MCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
@@ -156,7 +156,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User                   | Pass         | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
 
   @ARE @PlansReorder @NOMCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE

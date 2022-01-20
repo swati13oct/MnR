@@ -1,5 +1,5 @@
-@agentRecommendationEngine @AREAEPRegression @regressionAARP @nextYear @nonProd
-Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
+@agentRecommendationEngine @AREAEPRegression @nextYear @nonProd
+Feature: 1.17.1 Agent Recommendation Engine -AEP - Verify ARE elements
 
   @ARE @PlanYearAutoRanking @F472941
   Scenario Outline: - <Email> To Verify agent login and validate plan year Auto Ranking in ARE
