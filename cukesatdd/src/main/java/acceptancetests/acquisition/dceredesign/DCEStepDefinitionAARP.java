@@ -38,6 +38,8 @@ import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * Functionality:DCE Acquisition
@@ -841,7 +843,7 @@ public class DCEStepDefinitionAARP {
     @Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
     public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable {
         DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-        WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+        WelcomePageMobile welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
         if (null != welcomepage) {
             getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
         } else
@@ -1307,6 +1309,8 @@ public class DCEStepDefinitionAARP {
          * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
          */
         GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+        BuildYourDrugList bd = getStartedPage.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, bd);
         if (null != getStartedPage) {
             getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
         } else

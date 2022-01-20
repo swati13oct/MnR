@@ -321,7 +321,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		boolean flag = false;
 		//String actualText = null;
 		
-	//	try {
+		try {
 			String Actual_Premium = paymentInformationMap.get("PlanPremium");
 			System.out.println("=====Premium value from Welcome OLE Page: "+Actual_Premium);
 			String expectedText = "$0.00";
@@ -330,9 +330,9 @@ public class PlanPremiumPageMobile extends UhcDriver{
 			if(!flag) {
 			System.out.println("=====Premium is greater than 0=====");
 		}
-			//	} catch (Exception e) {
+				} catch (Exception e) {
 			
-	//	}		
+		}		
     return flag;
 	
 	}

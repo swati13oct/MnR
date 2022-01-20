@@ -26,6 +26,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 
 public class DrugDetailsPage extends UhcDriver {
@@ -1426,13 +1427,13 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
-    public WelcomePage clickEnrollinPlanbtn() {
+    public WelcomePageMobile clickEnrollinPlanbtn() {
 		validateNew(DrugCosts_EnrollInPlanBtn);
 		jsClickNew(DrugCosts_EnrollInPlanBtn);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page displayed ");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		} else {
 			return null;
 		}
