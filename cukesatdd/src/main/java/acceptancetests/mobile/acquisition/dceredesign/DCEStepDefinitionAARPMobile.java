@@ -36,6 +36,7 @@ import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DCEStepDefinitionAARPMobile {
 
@@ -127,7 +128,7 @@ public class DCEStepDefinitionAARPMobile {
 	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
     public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable {
         DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-        WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+        WelcomePageMobile welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
         if (null != welcomepage) {
             getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
         } else

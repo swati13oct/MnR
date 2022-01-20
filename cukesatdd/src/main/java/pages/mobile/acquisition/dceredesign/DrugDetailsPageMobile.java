@@ -37,6 +37,7 @@ import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DrugDetailsPageMobile extends UhcDriver {
 
@@ -1185,13 +1186,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
 	
-	public WelcomePage clickEnrollinPlanbtn() {
+	public WelcomePageMobile clickEnrollinPlanbtn() {
 		validateNew(DrugCosts_EnrollInPlanBtn);
 		jsClickNew(DrugCosts_EnrollInPlanBtn);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page displayed ");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		} else {
 			return null;
 		}

@@ -204,7 +204,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
 	private WebElement providerSumamryHeaderCount;
 
-	@FindBy(xpath="//*[@id='your-doctors-table']//tr[4]/th/span")
+	@FindBy(xpath="(//*[@id='your-doctors-table']//span[contains(@class,'boldinPrint')])[2]")
 	private WebElement FirstProviderName;
 	
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/th[1]/span")
