@@ -1427,13 +1427,13 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
-    public WelcomePageMobile clickEnrollinPlanbtn() {
+    public WelcomePage clickEnrollinPlanbtn() {
 		validateNew(DrugCosts_EnrollInPlanBtn);
 		jsClickNew(DrugCosts_EnrollInPlanBtn);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page displayed ");
-			return new WelcomePageMobile(driver);
+			return new WelcomePage(driver);
 		} else {
 			return null;
 		}

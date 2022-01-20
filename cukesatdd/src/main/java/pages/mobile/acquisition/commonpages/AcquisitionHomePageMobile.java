@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
@@ -379,7 +380,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(css = "#sam-call-button-mobile")
+	@FindBy(xpath = "//p[contains(@class,'swap_sam sam__button__text')]")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
