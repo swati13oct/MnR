@@ -2752,16 +2752,15 @@ public class VppPlanCompareMobile {
 		 */
 	}
 
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
+/*	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
 			throws InterruptedException {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		aquisitionhomepage.validateCallSamContent(tfnNumber);
+		aquisitionhomepage.validateCallSamContent(); 
 
-	}
+	} */
 
 	@Then("^user verify the popup and content$")
 	public void user_verify_the_popup_and_content() throws InterruptedException {
