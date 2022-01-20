@@ -38,6 +38,7 @@ import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
@@ -1308,6 +1309,8 @@ public class DCEStepDefinitionAARP {
          * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
          */
         GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+        BuildYourDrugList bd = getStartedPage.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, bd);
         if (null != getStartedPage) {
             getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
         } else
