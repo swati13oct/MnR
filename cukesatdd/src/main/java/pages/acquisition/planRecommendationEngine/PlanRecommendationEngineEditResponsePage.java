@@ -252,7 +252,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String curID = String.valueOf(Thread.currentThread().getId());
 		scrollToView(headerNavigationBarHomeTab);
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		planType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
 		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
@@ -748,7 +748,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String R1PlanType = CommonConstants.firstRecommentionplanType.get(curID);
 		scrollToView(headerNavigationBarHomeTab);
 		editedRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+editedRecomPlanName);
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+editedRecomplanType);
 		Assert.assertNotEquals(R1PlanType, editedRecomplanType, "Original and Edited Recommendation PlanType are same");

@@ -87,7 +87,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 
 // Doctors Page Modal popup
 	
-	@FindBy(css = "div[class*='edit-list-button']>div")
+	@FindBy(css = "div[class*='edit-list-button'] button")
 	private WebElement modalEditDoctor;
 
 	@FindBy(css = "#modal div>button[class*='primary button']")
@@ -228,7 +228,6 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-//		modalFinddoctors.click();
 		threadsleep(3000);
 		if(validate(modalEditDoctor))
 			jsClickNew(modalEditDoctor);

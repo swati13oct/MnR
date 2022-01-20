@@ -210,13 +210,13 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     #Then user save recommendation results and validate in VP
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                             | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo         | learnMore  |
-      | AARP |   22901 | YES           | Albemarle County | MAPD          | None         | withinUS,outsideUS | Lookup  | Christina Tieu MD:Heather R Quillian MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Prime (HMO),Link | Supplement |
+      | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo          | learnMore  |
+      | AARP |   02115 | NO            | Suffolk County | MAPD          | None         | withinUS,outsideUS | Lookup  | Erika Ann Pabo MD:Lori A Panther MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Plan 1 (HMO),Link | Supplement |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                             | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo         | learnMore  |
-      | UHC  |   22901 | YES           | Albemarle County | MAPD          | None         | withinUS,outsideUS | Lookup  | Christina Tieu MD:Heather R Quillian MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Prime (HMO),Link | Supplement |
+      | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | PlanYear | PlanInfo          | learnMore  |
+      | UHC  |   02115 | NO            | Suffolk County | MAPD          | None         | withinUS,outsideUS | Lookup  | Erika Ann Pabo MD:Lori A Panther MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | lower                | 1st            | Health Care Premium, Doctors | current  | Plan 1 (HMO),Link | Supplement |
 
   @PRE @PRE_UAT_Provider_Drugs_StartNow_MAPD_PlanCompare_Scenario-5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Providers session from VPP to PRE for MA plans
@@ -295,25 +295,25 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user adds SNP options and Location in edit response page
-      | Plan Type       | <isCoverageOpt>  |
-      | Zip Code        | <E_Zipcode>      |
-      | Is Multi County | <isMultiCounty>  |
-      | CountyDropDown  | <E_county>       |
-      | SNP Options     | <E_specialNeeds> |
+      | Plan Type       | <isCoverageOpt>   |
+      | Zip Code        | <E_Zipcode>       |
+      | Is Multi County | <E_isMultiCounty> |
+      | CountyDropDown  | <E_county>        |
+      | SNP Options     | <E_specialNeeds>  |
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
     @uatE2EAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors | DoctorsName            | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds | E_Zipcode | E_county       |
-      | AARP |   53202 | NO            | Milwaukee        | MA            | Medicaid,chronic,nursing | Lookup  | Zimmer, Veronica L, NP | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |     10001 | New York       |
-      | AARP |   65656 | YES           | Christian County | MA            | Medicaid,chronic,nursing | Lookup  | Higgins, Mina K, FNP   | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | Medicaid       |     21213 | Baltimore City |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors | DoctorsName            | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds | E_Zipcode | E_county       | E_isMultiCounty |
+      | AARP |   53202 | NO            | Milwaukee        | MA            | Medicaid,chronic,nursing | Lookup  | Zimmer, Veronica L, NP | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |     10001 | New York       | NO              |
+      | AARP |   65656 | YES           | Christian County | MA            | Medicaid,chronic,nursing | Lookup  | Higgins, Mina K, FNP   | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | Medicaid       |     21213 | Baltimore City | NO              |
 
     @uatE2EUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors | DoctorsName            | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds | E_Zipcode | E_county       |
-      | UHC  |   53202 | NO            | Milwaukee        | MA            | Medicaid,chronic,nursing | Lookup  | Zimmer, Veronica L, NP | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |     10001 | New York       |
-      | UHC  |   65656 | YES           | Christian County | MA            | Medicaid,chronic,nursing | Lookup  | Higgins, Mina K, FNP   | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | Medicaid       |     21213 | Baltimore City |
+      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors | DoctorsName            | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities       | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 | PlanInfo            | E_specialNeeds | E_Zipcode | E_county       | E_isMultiCounty |
+      | UHC  |   53202 | NO            | Milwaukee        | MA            | Medicaid,chronic,nursing | Lookup  | Zimmer, Veronica L, NP | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | chronic        |     10001 | New York       | NO              |
+      | UHC  |   65656 | YES           | Christian County | MA            | Medicaid,chronic,nursing | Lookup  | Higgins, Mina K, FNP   | NO            | Yes,No,Yes,No                 | Lower                | both           | Dental , Doctors | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            | LP (HMO D-SNP),Link | Medicaid       |     21213 | Baltimore City | NO              |
 
   @PRE @PRE_UAT_E2E_Scenario-6
   Scenario Outline: - To validate user MS 1st Recommendation and View Plan will take to MicroForm for Non Approved states
