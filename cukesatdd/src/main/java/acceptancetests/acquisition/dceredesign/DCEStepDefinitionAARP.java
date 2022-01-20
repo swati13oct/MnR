@@ -843,7 +843,7 @@ public class DCEStepDefinitionAARP {
     @Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
     public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable {
         DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-        WelcomePageMobile welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+        WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
         if (null != welcomepage) {
             getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
         } else
