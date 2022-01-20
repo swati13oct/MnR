@@ -129,7 +129,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
-	@FindBy(xpath = "//*[contains(@class,'delete-plan ng-scope')]")
+	@FindBy(xpath="//*[contains(@aria-label,'Remove Plan')]")
 	private WebElement removeLink;
 
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
@@ -291,7 +291,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(@class,'heading2')]")
 	public WebElement planComparePlansAvailableLabel;
 
-	@FindBy(xpath = "//a[contains(text(),'Show All')]")
+	@FindBy(xpath = "(//a[contains(text(),'Show All')])[3]")
 	public WebElement viewAllplansButton;
 
 	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
@@ -324,7 +324,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
 	private WebElement allSetDrugsProvidersInfo;
 
-	@FindBy(xpath = "//*[text()='View Plan Details']")
+	@FindBy(xpath="(//*[text()='View Plan Details'])[2]")
 	private WebElement viewPlanDetailslink;
 
 	@FindBy(xpath = "//button[contains(@id,'headerSavePlan')]//img[contains(@class,'liked savePlanIcon')][1]")
@@ -333,7 +333,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'headerSavePlan')]//img[contains(@class,'unliked savePlanIcon')][1]")
 	private WebElement viewUnSaveIcon;
 
-	@FindBy(xpath = "//*[@id='viewallplansBtnId']")
+	@FindBy(xpath = "(//*[@id='viewallplansBtnId'])[3]")
 	private WebElement ViewAllPlans;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
@@ -1504,9 +1504,6 @@ public class ComparePlansPage extends UhcDriver {
 
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
-		if (!planName.contains("PDP")) {
-			i++;
-		}
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-" + i + "')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
@@ -1663,7 +1660,13 @@ public class ComparePlansPage extends UhcDriver {
 		viewAllplansButton.click();
 		System.out.println("Count of plans on compare after button is clicked"
 				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
-		Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		try {
+			if(viewAllplansButton.isDisplayed())
+				Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		}
+		catch(NoSuchElementException e) {
+			
+		}
 		Assertion.assertEquals("Plan Counts mismatch", planCount,
 				driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	}
@@ -1807,8 +1810,8 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 	public void validateViewALLplanButtonNotDisplayed() {
-		Assertion.assertFalse("view all plans button must not be visible", !(driver
-				.findElements(By.xpath("//*[@id='viewallplansBtnId' and contains(@class,'ng-hide')]")).size() > 0));
+		Assertion.assertFalse("view all plans button must not be visible", (driver
+				.findElement(By.xpath("//div[contains(@class,'text-bold ng-scope')]")).getText()).contains("Show All"));
 		System.out.println("Validated view all plans link not displayed on plan compare");
 	}
 
