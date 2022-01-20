@@ -2208,7 +2208,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new VPPTestHarnessPageMobile(driver);
 	}
 
-	public void validateCallSamContent(String tfnNumber) throws InterruptedException {
+	public void validateCallSamContent() throws InterruptedException {
 
 		// Actions action = new Actions(driver);
 		// WebElement element = callsam;
@@ -2219,7 +2219,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		Assertion.assertStringContains("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
+		if (toolTipText.length() == 14 && toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
+			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
+		}
+		else
+			Assertion.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 		/*
 		 * if (toolTipText.contains(CallSam1877)) {
 		 * System.out.println("Call sticky action menu roll out and contain the text: "
