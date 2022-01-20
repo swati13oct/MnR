@@ -2623,15 +2623,14 @@ public class VppPlanDetailMobile {
 		 */
 	}
 
-	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+/*	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
 	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
 			throws InterruptedException {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		aquisitionhomepage.validateCallSamContent(tfnNumber);
-	}
+		aquisitionhomepage.validateCallSamContent();
+	} */
 
 	@Then("^user verify the popup and content in popup$")
 	public void user_verify_the_popup_and_content_in_popup() throws InterruptedException {
@@ -2657,16 +2656,15 @@ public class VppPlanDetailMobile {
 		 */
 	}
 
-	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
+/*	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
 	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
 			throws InterruptedException {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		aquisitionhomepage.validateCallSamContent(tfnNumber);
+		aquisitionhomepage.validateCallSamContent();
 
-	}
+	} */
 
 	@Then("^user verify the Chat at its original state$")
 	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
@@ -3821,8 +3819,7 @@ public class VppPlanDetailMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		aquisitionhomepage.validateCallSamContent(tfnNumber);
+		aquisitionhomepage.validateCallSamContent();
 
 	}
 
