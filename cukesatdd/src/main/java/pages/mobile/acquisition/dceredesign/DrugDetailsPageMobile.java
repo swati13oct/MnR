@@ -32,10 +32,12 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
+import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DrugDetailsPageMobile extends UhcDriver {
 
@@ -444,6 +446,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "[class^='uhc-modal__content'] button[class$='donebutton']")
 	public WebElement StageInfo_Modal_DoneBtn;
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement DrugCosts_EnrollInPlanBtn;
 
 	@FindBy(css = "[class^='uhc-modal__header'] button#cancelicon")
 	public WebElement StageInfo_Modal_Close;
@@ -1179,6 +1184,18 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"
 							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
+	}
+	
+	public WelcomePageMobile clickEnrollinPlanbtn() {
+		validateNew(DrugCosts_EnrollInPlanBtn);
+		jsClickNew(DrugCosts_EnrollInPlanBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page displayed ");
+			return new WelcomePageMobile(driver);
+		} else {
+			return null;
+		}
 	}
 
 	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {

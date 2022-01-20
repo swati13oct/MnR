@@ -640,7 +640,7 @@ public class WelcomePageMobile extends UhcDriver {
 		}
 	}
 
-	public SaveandReturnOLEModal OpensavereturnOLEPages() {
+	public SaveandReturnOLEModalMobile OpensavereturnOLEPages() {
 		validate(SaveEnrollmentLinkOLE);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
@@ -663,7 +663,7 @@ public class WelcomePageMobile extends UhcDriver {
 			Saveclosepopup.isDisplayed();
 			// Saveclosepopup.click();
 			jsClickNew(Saveclosepopup);
-			return new SaveandReturnOLEModal(driver);
+			return new SaveandReturnOLEModalMobile(driver);
 		}
 		return null;
 	}

@@ -216,12 +216,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     @vppPlanCompareCommon_AARP01New @regressionAARP
     Examples: 
       | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
-      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
+      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
 
     @vppPlanCompareCommon_UHC01New @prodRegression_UAT @regressionUHC
     Examples: 
       | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
-      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
+      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
 
   Scenario Outline: <Scenario> To test VPP stand alone widget from Shop pages
     Given the user is on medicare acquisition site landing page
