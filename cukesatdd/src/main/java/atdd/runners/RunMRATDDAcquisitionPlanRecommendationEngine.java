@@ -16,7 +16,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
 						"timeline:target" },
-				tags = "@CSNPGoldSilverRanking")
+				tags = "@regressionAARP")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
