@@ -935,7 +935,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	@FindBy(xpath = "(//*[contains(text(),'Compare plans')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Compare Plan')])[1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -1046,7 +1046,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='statedrpdwn']")
 	private WebElement stateDropDown;
 
-	@FindBy(xpath = "//span[@id='header-number']")
+	@FindBy(xpath = "(//span[contains(@class,'plans-count')])[1]")
 	private WebElement shoppingCartSaveCount;
 
 	@FindBy(xpath = "//span[contains(text(),'View Saved Plans')]")
@@ -2752,24 +2752,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
-		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
-		/*
-		 * try {
-		 *
-		 * System.out.println(" The text is "
-		 * +AnnualDeductibleForPlan.getAttribute("textContent").trim());
-		 * System.out.println(" The text from feature file is " +annualDeductible);
-		 *
-		 * } catch (Exception e) { System.out.println(" The text is"
-		 * +AnnualDeductibleForPlan.getText()); }
-		 */
-		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
-			System.out.println("Annual Deductible for the plan is " + planDeductible);
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)"));
+		// Actions action = new Actions(driver);
+		// action.moveToElement(toolTip).build().perform();
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("annual deductible")) {
+			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
 		} else
-			Assertion.fail("Annual Deductible for the plan is incorrect : " + planName);
+			Assertion.fail("Tool Tip is not working");
 	}
 
 	/*
@@ -2826,21 +2822,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
-		/*
-		 * Actions action = new Actions(driver);
-		 * action.moveToElement(toolTip).build().perform();
-		 */
-		jsMouseOver(toolTip);
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)"));
+		// Actions action = new Actions(driver);
+		// action.moveToElement(toolTip).build().perform();
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Tool Tip is not working");
-		jsMouseOut(toolTip);
 	}
 
 	/* Navigation to DCE for all plan types having a plan name */
@@ -7317,6 +7311,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
+		if(planType.contains("MA"))
+			planType = "MAPD";
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)

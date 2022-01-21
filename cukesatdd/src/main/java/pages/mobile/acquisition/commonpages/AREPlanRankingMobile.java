@@ -251,7 +251,6 @@ public class AREPlanRankingMobile extends UhcDriver {
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
 		applyBtn.click();
-		threadsleep(3000);
 		boolean dropClose = validate(applyBtn, 10);
 		System.out.println("Drop close : " + dropClose);
 		Assert.assertFalse(dropClose);
@@ -261,7 +260,6 @@ public class AREPlanRankingMobile extends UhcDriver {
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", true);
 		applyBtn.click();
-		threadsleep(3000);
 		dropClose = validate(applyBtn, 10);
 		System.out.println("Drop close : " + dropClose);
 		Assert.assertFalse(dropClose);

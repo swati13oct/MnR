@@ -145,7 +145,7 @@ public class DCEPageMobile extends UhcDriver {
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
 			validate(drugsearchBox, 30);
-			threadsleep(2000);
+			waitforElement(drugsearchBox);
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
@@ -161,7 +161,7 @@ public class DCEPageMobile extends UhcDriver {
 			}
 			threadsleep(2000);
 		} else {
-			threadsleep(10000);
+			waitforElement(drugsAutoList.get(0));
 			jsClickNew(drugsAutoList.get(0));
 		}
 
@@ -221,7 +221,6 @@ public class DCEPageMobile extends UhcDriver {
 				.findElement(By.xpath("//uhc-list-item[contains(.,'" + dosage + "')]//button[2]"));
 		jsClickNew(deleteLink);
 
-		threadsleep(2000);
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
