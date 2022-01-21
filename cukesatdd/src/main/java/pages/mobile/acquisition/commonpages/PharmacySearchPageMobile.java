@@ -850,13 +850,6 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}
-	
-	public void clickResetFilter() {
-		//breadCrumbLink.click();
-		jsClickNew(resetfilterlink);
-		waitForPageLoadSafari();
-		validateNew(pharmacyList);
-	}
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		/*
