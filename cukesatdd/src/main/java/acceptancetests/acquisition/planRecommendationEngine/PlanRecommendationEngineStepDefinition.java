@@ -278,15 +278,6 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
 	}
 	
-	@And("^user validating No CSNP and DSNP in Special Needs Page")
-	public void no_special_page(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorSpecialneedspage.nospecialneedspage(inputValues.get("state Type"));	
-		String status = "Positive";
-		planSelectorSpecialneedspage.specialneedspage(inputValues.get("SNP Options"),status);	
-	}
-	
 	@And("^user validate elements in doctors page$")
     public void elements_doctor_page() {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -346,17 +337,6 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorDoctorspage.doctorspageCancel(inputValues.get("Doctors Search Text"), inputValues.get("Multi Doctor"));
 	}
     
-    @And("^user edit doctors in doctors page$")
-    public void edit_doctor_page(DataTable givenAttributes) throws Throwable {
-                    readfeaturedata(givenAttributes);
-                    PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-                    String doctor = inputValues.get("Doctors");
-                    String status = "Positive_NextPageName";
-                    if (!(doctor.isEmpty())) {
-                                    planSelectorDoctorspage.editdoctorspageFunctional(inputValues.get("Doctors"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
-                    }
-    }
-    
     @And("^user validate elements in drugs page$")
     public void elements_drugs_page() {
     				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -397,16 +377,10 @@ public class PlanRecommendationEngineStepDefinition {
      	public void edit_drugs_page_WithoutContinue(DataTable givenAttributes) {
      		readfeaturedata(givenAttributes);
      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-     		planSelectorDrugspage.editDrugs(inputValues.get("Edit Dosage"));
+     		planSelectorDrugspage.editDrugs();
      		planSelectorDrugspage.editdrugsHandlerWithdetails(inputValues.get("Edit Details"));
+     		planSelectorDrugspage.drugnamesList();
      	}
-       
-       @Then("^user selects edit on drug and check Brand and Generic options in Drug Model Page$")
-    	public void edit_drugs_options(DataTable givenAttributes) {
-    		readfeaturedata(givenAttributes);
-    		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-    		planSelectorDrugspage.drugsOptions(inputValues.get("Drug Names"));
-    	}
        
        @Then("^user added drug Quantity number prefix with zeros in Drug page$")
        public void qty_withzero(DataTable givenAttributes) {
@@ -446,22 +420,6 @@ public class PlanRecommendationEngineStepDefinition {
    		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
    		planSelectorDrugspage.continueNextpageZeroDrug();
    	}
-       
-       @Then("^user selects add brand and generic drugs with same dosage in Drug page$")
-      	public void add_same_dosage(DataTable givenAttributes) {
-      		readfeaturedata(givenAttributes);
-      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-      		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
-      		planSelectorDrugspage.drugsHandlerWithSamedetails(inputValues.get("Drug Details"));
-      	}
-       
-       @Then("^user validate error message in Drug Model Page$")
-     	public void error_msg() {
-     		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-     		planSelectorDrugspage.errorValidation();
-     	}
-       
-       
        
        @Then("^user selects add drug option and comparing DCE and Drug page$")
       	public void verify_drugs_dce_drug_page(DataTable givenAttributes) {
@@ -872,7 +830,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigate to Drug page using edit drugs from PREResult page$")
    	public void edit_drugs_preResult_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.usereditDrugsPREResult();
+		planSelectorResultspage.useraddDrugsPREResult();
    	}
 	
 	@Then("^user navigate from VPP to DCE tool$")
@@ -1297,15 +1255,10 @@ public class PlanRecommendationEngineStepDefinition {
     }
 	
 	@Then("^user navigates to PRE doctorpage to add providers$")
+	@Then("^user navigates to PRE doctorpage to edit providers$")
 	public void addDoctorLink() {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.addDoctorsLink();
-	}
-	
-	@Then("^user navigates to PRE doctorpage to edit providers$")
-	public void editDoctorLink() {
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.editDoctorsLink();
 	}
 	
 	@Then("^user updating providers to PRE doctorpage$")
