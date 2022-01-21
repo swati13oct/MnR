@@ -380,22 +380,25 @@ public class CampaignTFNPage extends UhcDriver {
 
 	}
 
-	/*public HashMap<String, String> retrieveTFNcookie() {
+	public HashMap<String, String> retrieveTFNcookie() {
 		System.out.println("Current URL - " + driver.getCurrentUrl());
 		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
-		System.out.println("TFN Cookie Value - " + str);*/
+		System.out.println("TFN Cookie Value - " + str);
+		
 		/*
-		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
-		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 * String sep = str.contains(",") ? "," : "%2C"; String[] arrOfStr =
+		 * str.split("%2C"); arrOfStr = str.split(sep);
 		 */
+		
 
-		/*String[] arrStr = str.split(";");
+		
+		String[] arrStr = str.split(";"); 
 		String[] arrOfStr = arrStr[0].split("%2C");
 		if (str.contains(",")) { arrOfStr = str.split(","); }
-		 */
-		/*String PSC_Code;
+		
+		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN;
 		String SRC_Code;
@@ -422,13 +425,15 @@ public class CampaignTFNPage extends UhcDriver {
 		tfnCookieValues.put("Fed TFN", FedTFN);
 		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
 		System.out.println(tfnCookieValues);
-		return tfnCookieValues; */
+		return tfnCookieValues; 
 
+		
 		/*
 		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
 		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
 		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
-		 */
+		 */	
+		}
 
 	
 
@@ -863,9 +868,8 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	// @FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,
-	// 'display: block'))]")
+	//@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block'))]")
 	private WebElement HomeLogo;
 
 	@FindBy(xpath = "//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")

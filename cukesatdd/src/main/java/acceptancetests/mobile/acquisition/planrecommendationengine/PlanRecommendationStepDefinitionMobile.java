@@ -79,8 +79,9 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		wd = getLoginScenario().getMobileDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		readfeaturedataMobile(inputdata);
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE");
 		aquisitionhomepage.openPRE(inputValues.get("Site"));
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

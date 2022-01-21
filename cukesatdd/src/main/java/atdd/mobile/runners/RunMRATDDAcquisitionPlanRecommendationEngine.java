@@ -17,9 +17,9 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
 						"timeline:target" },
-				tags = "@regressionAARPmobile", dryRun=false)
+				tags = "@kiriti", dryRun=false)
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
