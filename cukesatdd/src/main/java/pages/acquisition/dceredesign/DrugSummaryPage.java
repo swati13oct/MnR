@@ -870,7 +870,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void ValidateNotCoveredPharMessage() {
 		pageloadcomplete();
 		sleepBySec(3);
-		CommonUtility.waitForPageLoadNew(driver, DrugPricingSpecialtyPharmacyText, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugPricingNotCoveredPharmacyText, 30);
 		if (validateNew(DrugPricingNotCoveredPharmacyText)) {
 			System.out.println("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is Displayed");
 		} else

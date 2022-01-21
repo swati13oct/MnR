@@ -19,6 +19,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 public class oleCommonStepDefinition {
 
@@ -171,7 +172,7 @@ public class oleCommonStepDefinition {
 	@When("^user clicks on pharmacy link on OLE page$")
 	public void user_clicks_on_pharmacy_link_on_OLE_page() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		PharmacySearchPage pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
+		PharmacySearchPageNew pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
 
