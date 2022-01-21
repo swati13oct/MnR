@@ -80,3 +80,28 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds                  |
       | UHC  |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing,None |
       | UHC  |   21212 | YES           | Baltimore County | None          | [blank]                       |
+
+  @PRE @specialneedspage @specialneedspageerrorScenario @F372729
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate special needs page error scenarios in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user validating No CSNP and DSNP in Special Needs Page
+      | state Type  | <stateType>    |
+      | SNP Options | <specialNeeds> |
+
+    @FunctionalAARP
+    Examples: 
+      | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | stateType |
+      | AARP |   21213 | NO            | Baltimore City | MAPD          | Medicaid     | MD        |
+
+    @FunctionalUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | stateType |
+      | UHC  |   21213 | NO            | Baltimore City | MAPD          | Medicaid     | MD        |
