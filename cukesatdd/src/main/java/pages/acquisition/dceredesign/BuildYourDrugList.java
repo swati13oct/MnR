@@ -189,7 +189,7 @@ public class BuildYourDrugList extends UhcDriver {
         WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
         WebElement TopDrug = driver.findElement(By.xpath("//uhc-list-item//span[1]"));
-        if(TopDrug.getText().contains(drugName))
+        if(TopDrug.getText().toLowerCase().contains(drugName.toLowerCase()))
 		{
 			 validateNew(SelectDrug);
 			 jsClickNew(SelectDrug);
