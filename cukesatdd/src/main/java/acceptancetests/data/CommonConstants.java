@@ -878,6 +878,7 @@ public class CommonConstants {
 	
 	
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";
+	public static final String SAUCELABS_NOTUNNEL_MOBILE_TUNNEL = "";
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.21.0";

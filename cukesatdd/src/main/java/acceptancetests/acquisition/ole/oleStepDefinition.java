@@ -126,8 +126,12 @@ public class oleStepDefinition {
 			 * ,(new VPPPlanSummaryPage((WebDriver)getLoginScenario()
 			 * .getBean(CommonConstants.WEBDRIVER))));
 			 */
-			TFN = planSummaryPage.GetTFNforPlanType();
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 
+			TFN = planSummaryPage.GetTFNforPlanType();
+			getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+			System.out.println("TFN for Plan Type is : " + TFN);
+		}
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
 			PlanPremium=planSummaryPage.GetMonthlyPremiumValue();
@@ -140,13 +144,13 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
+
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
@@ -280,7 +284,6 @@ public class oleStepDefinition {
 	/**
 	 * @author sdwaraka To start Enroll Now and land on Welcome Page from Plan
 	 *         Details Page of VPP
-	 * @param planAttributes
 	 * @throws Throwable
 	 */
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
@@ -386,7 +389,7 @@ public class oleStepDefinition {
 	/**
 	 * @author sdwaraka To Validate the Plan Details carried forward from VPP on
 	 *         Welcome Page of VPP
-	 * @param planAttributes
+
 	 * @throws Throwable
 	 */
 	@Then("^the user validates the Plan details on OLE$")
@@ -2167,7 +2170,7 @@ public class oleStepDefinition {
 	}
 
 	/**
-	 * @param planName
+
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in
 	 *                UHC VPP page are same
 	 */
@@ -2225,7 +2228,7 @@ public class oleStepDefinition {
 	 */
 
 	/**
-	 * @param planName
+
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in AARP VPP page are same
 	 */
 	@Then("^the User navigates to PCP Page and validates PCP Providers listed in the AARP VPP displayed$")
@@ -2288,7 +2291,7 @@ public class oleStepDefinition {
 	 * 
 	 * To Validate the OLE WELCOME Page Marketing bullets
 	 * 
-	 * @param planAttributes
+
 	 * @throws Throwable
 	 */
 	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
@@ -3307,12 +3310,23 @@ public class oleStepDefinition {
 	}
 
 	@Then("^the user validates Footer links on Welcome OLE Page$")
-	public void the_user_validates_footer_links_welcome_OLE_Page() throws Throwable {
+	public void the_user_validates_footer_links_welcome_OLE_Page(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String plantype = memberAttributesMap.get("Plan Type");
 		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 			//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		if(plantype.contentEquals("MA") && plantype.contentEquals("SNP")){
 			welcomePage.ValidateFooterEnrollmentChecklistLink();
 			welcomePage.ValidateFooterListaVerificationLink();
+			welcomePage.ValidateFooterFitBitLink();
+			welcomePage.ValidateFooterMedicaidLink();
+		}
+		else if(plantype.contentEquals("PDP")){
+			welcomePage.ValidateFooterExtrahelpLink();
+			welcomePage.ValidateFooterAARPPharmacyLink();
+			}
 		}
 	}
 	

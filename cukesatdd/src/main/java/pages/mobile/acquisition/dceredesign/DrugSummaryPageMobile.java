@@ -22,6 +22,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -124,6 +125,18 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(css = "#cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
+	
+	@FindBy(xpath = "//p[contains(text(),'able to find any Standard Pharmacy')]")
+	public WebElement dynamicStandardErrorMessage;
+	
+	@FindBy(xpath = "(//div[contains(@class,'uhc-list__item')]//p)[2]")
+	public WebElement dynamicStandardPreferredErrorMessage;
+	
+	@FindBy(xpath = "//p[contains(text(),'able to find any Preferred Pharmacy results')]")
+	public WebElement dynamicPreferredErrorMessage;
+	
+	@FindBy(xpath = "//p[contains(text(),'able to find any results for')]")
+	public WebElement dynamicErrorMessage;
 
 	@FindBy(xpath = "//*[contains(@class,'modal__content')]//*[contains(text(),'Current Pharmacy')]")
 	public WebElement selectedPharmacyLink;
@@ -134,10 +147,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(css = "#pharmacyfilter > button")
+	@FindBy(xpath="//*[contains(@class, 'uhc-modal__content')]//button[contains(@type,'submit')]")
 	public WebElement pharmacySearchBtn;
 
-	@FindBy(css = "#mailSelectPharmacyBtn0")
+	@FindBy(xpath="//*[contains(@id, 'mailSelectPharmacyBtn')]")
 	public WebElement preferredMailPharmacy;
 
 	@FindBy(css = "#optumRxTxt")
@@ -146,7 +159,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "[role='tabpanel'][class^='uhc-list']")
 	public WebElement pharmacyListSection;
 
-	@FindBy(css = "div[class*='mobile-filter']")
+	@FindBy(xpath = "//h2[contains(@id,'matchingLbl')]")
 	public WebElement matchingPharmacyCount;
 
 	@FindBy(css = "#sortDropdown")
@@ -287,8 +300,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h4[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[@id='editdruglist']//h5[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[@id='editdruglist']//h5[contains(text(), '" + currentAddedDrug + "')]/parent::li/following-sibling::li[contains(text(),'$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
@@ -508,16 +521,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.clear();
 		sendkeysMobile(PharmacyFilterTxtBx, filterText);
-		System.out.println("Filter text entered : " + filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
-		System.out.println("Apply button clicked for filter text" + filterText);
+		System.out.println("FIlter text entered : "+filterText);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
+		System.out.println("Search button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
-			System.out.println("Pharmacy Name : " + PharmacyName.getText());
-			if (!PharmacyName.getText().contains(filterText)) {
-				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "
-						+ PharmacyName + "  Filter Text : " + filterText);
+			System.out.println("Pharmacy Name : "+PharmacyName.getText());
+			if(!PharmacyName.getText().contains(filterText)) {
+				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
 			}
 		}
 		System.out.println("All Pharmacy have filter text");
@@ -598,6 +611,48 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
+	}
+	
+	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
+		boolean flag = false;
+		if(pharmacyErrorType.equalsIgnoreCase("None")){
+			flag = validateNew(dynamicErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed for Change Pharmacy Modal on Summary and Detail Page for Non PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("Preferred")){
+			flag = validateNew(dynamicPreferredErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoStandardWithPreferred")){
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Preferred")){
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+						"no Pharmacies available for Standard Tab but on Preferred Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else if(pharmacyErrorType.equalsIgnoreCase("NoPreferredWithStandard")){
+			flag = validateNew(dynamicStandardPreferredErrorMessage);
+			if(dynamicStandardPreferredErrorMessage.getText().contains("Standard")){
+				Assert.assertTrue(flag , "Dynamic Error Message Displayed on Preferred Tab for " +
+						"no Pharmacies available for Preferred Tab but on Standard Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			}
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
+		else{
+			flag = validateNew(dynamicStandardErrorMessage);
+			Assert.assertTrue(flag , "Dynamic Error Message Displayed on Standard Tab for " +
+					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
+			jsClickNew(selectPharmacyModalCloseBtn);
+			System.out.println("Dynamic Error Message Displayed");
+		}
 	}
 
 	public DrugSummaryPageMobile verifySNPPlanToggle() {
@@ -855,7 +910,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public DrugSummaryPageMobile validateSelectPharmacyPage() throws InterruptedException {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
-				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
+				&& validateNew(preferredMailPharmacy)/* && validateNew(pharmacyListSection)*/
 				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
 			return new DrugSummaryPageMobile(driver);
@@ -936,7 +991,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		mobileSelectOption(sortDrpdown, sortOption, true);
 	}
 
-	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div[contains(text(), 'OptumRx Home')]")
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div//span[contains(text(), 'Mail service')]")
 	private WebElement mailOrderPharmacyMsg;
 
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
@@ -1012,7 +1067,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(preferredMailPharmacy);
 	}
 
-	@FindBy(css = "ul[role='tabpanel'] > li address>h4")
+	@FindBy(xpath="//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
 
 	public void validatePharmaciesAscendingOrder() {

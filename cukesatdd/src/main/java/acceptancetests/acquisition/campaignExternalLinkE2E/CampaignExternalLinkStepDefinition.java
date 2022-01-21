@@ -198,6 +198,8 @@ public class CampaignExternalLinkStepDefinition {
 	public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String env = MRScenario.environment;
+		campaignExternalLinkspage.updateHrefUrlVPP_Script1(env);
 		campaignExternalLinkspage.clickFindPlansPricing();
 	}
 
@@ -1324,6 +1326,30 @@ public class CampaignExternalLinkStepDefinition {
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 
 		campaignExternalLinkspage.validateTFNNoonRightRailforMSExternal(TFNXpath, ExpectedTFNNo);
+
+	}
+
+	@Then("^the user validates SAM icons on privacy page from external link$")
+	public void the_user_validates_SAM_icons_on_privacy_Page(DataTable givenAttributes) throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				//.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		//aquisitionhomepage.validateChatSam();
+		campaignExternalLinkspage.validateCallpopuponaExternalprivacypage(TFNXpath, ExpecetdTFNNo);
 
 	}
 

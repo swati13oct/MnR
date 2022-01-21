@@ -27,6 +27,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -344,7 +345,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectsPlanYear(testPlanYear);
+			pharmacySearchPage.selectYearOption(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 
@@ -419,6 +420,18 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validateMoreInfoContent();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
+	}
+	
+	@And("the user selects plan year toggle$")
+	public void user_selects_plan_year_toggle(DataTable givenAttributes) {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String PlanYear = givenAttributesMap.get("Plan Year");
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.selectYearOption(PlanYear);
+		
 	}
 
 	/**
@@ -583,7 +596,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectsPlanYear(testPlanYear);
+			pharmacySearchPage.selectYearOption(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 

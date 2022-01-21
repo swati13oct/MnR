@@ -19,6 +19,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
 
 /**
  * @author pperugu
@@ -55,7 +56,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
-	@FindBy(xpath = "//*[@id='finishAndReturnButton']")
+	@FindBy(xpath = "//*[text()='Finish & Return']")
 	private WebElement FinishReturnButton;
 
 	@FindBys(value = {
@@ -113,6 +114,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
 	private WebElement AllPrimaryCare;
+	
+	@FindBy(xpath="(//a[@data-test-id='provider-name-link'])[1]")
+	private WebElement providerNameVerify;
 
 	@FindBy(xpath = "//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
 	private WebElement Savebtn;
@@ -324,8 +328,35 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new PlanDetailsPageMobile(driver);
 
 	}
+	
+	@FindBy(xpath = "//h2[contains(@class,'whatCanWeHelpYouFindNear')]")
+	private WebElement peoplesPage;
+	
+	public void providerCheckHomePage() {
+		
+		if(!peoplesPage.isDisplayed()) {	
+			CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
+			jsClickNew(GetStarted);
+	
+			CommonUtility.waitForPageLoadNew(driver, MedicalDirectory, 30);
+			jsClickNew(MedicalDirectory);
+		}
+
+		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		jsClickNew(People);
+
+		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		jsClickNew(Primary);
+
+		CommonUtility.waitForPageLoadNew(driver, AllPrimaryCare, 30);
+		jsClickNew(AllPrimaryCare);
+		
+		validateNew(providerNameVerify);
+		
+	}
 
 	public String selectsProvider() {
+		CommonUtility.checkPageIsReadyNew(driver);
 
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
 		jsClickNew(GetStarted);
@@ -392,12 +423,13 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		} else
 			System.out.println("Issue with Xpath");
 
-		threadsleep(3);
+		threadsleep(5);
 		// waitForCountDecrement(2);
 //		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-		validateNew(vppFirstPlanCard);
-//		return new VPPPlanSummaryPageMobile(driver);
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")){
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());}
+		validate(vppFirstPlanCard);
+		//return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
 	}
 
@@ -788,6 +820,23 @@ public class ProviderSearchPageMobile extends UhcDriver {
 //		return new VPPPlanSummaryPageMobile(driver);
 		validateNew(vppFirstPlanCard);
 		return BehaviourSaved;
+	}
+	
+	public PlanDetailsPageMobile navigatebacktoPlanDetails() {
+		// TODO Auto-generated method stub
+
+		CommonUtility.waitForPageLoadNew(driver, FinishReturnButton, 45);
+		validateNew(FinishReturnButton);
+		jsClickNew(FinishReturnButton);
+
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+
+		return new PlanDetailsPageMobile(driver);
+
 	}
 	
 	public String selectsDental() {

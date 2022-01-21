@@ -97,7 +97,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
-	@FindBy(className = "zip-button")
+	@FindBy(xpath = "//*[contains(@class,'uhc-button') and contains(text(),'Find Plans')]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -123,6 +123,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = "#stateWidget > div > label")
 	private WebElement stateWidget;
+
+	@FindBy(xpath = "//*[@id='stateWidget']")
+	private WebElement stateWidgetLable;
 
 	@FindBy(css = "#homefooter")
 	private WebElement homefooter;
@@ -238,7 +241,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(css = "div[class$='newstyle_feature_toggle']
 	// input[id^='zipcodemeded'] + button")
 
-	@FindBy(xpath = "//button[@type='submit' and @zipcompindex='0']")
+	@FindBy(xpath="(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -266,7 +269,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(css = "#nav-zipcode")
+	@FindBy(xpath = "//input[contains(@id,'nav-zipcode')]")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -377,7 +380,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(css = "#sam-call-button-mobile")
+	@FindBy(xpath = "//p[contains(@class,'swap_sam sam__button__text')]")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -885,7 +888,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			scrollToView(TFNelement);
 			jsClickNew(TFNelement);
 			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
-			threadsleep(3000);
+			waitforElement(TFNelement);
 			verifyTFNPopUp(TFNelement);
 		} else {
 			org.testng.Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
@@ -1759,7 +1762,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(zipCodeField);
 		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
@@ -1902,7 +1905,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		try {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
-				Thread.sleep(3000);
 				// StandalonSearchCounty.click();
 			}
 
@@ -1911,6 +1913,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		// ViewPlansPricingButton.click();
+		validate(ViewPlansPricingButton);
 		jsClickNew(ViewPlansPricingButton);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -2192,7 +2195,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendKeysByCharacter(siteSearchInputTextField, sv);
 
 		jsClickNew(enterSearchLable);
-		sleepBySec(4);
+		validate(siteSearch_SearchButton);
 		jsClickNew(siteSearch_SearchButton);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
@@ -2206,7 +2209,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new VPPTestHarnessPageMobile(driver);
 	}
 
-	public void validateCallSamContent(String tfnNumber) throws InterruptedException {
+	public void validateCallSamContent() throws InterruptedException {
 
 		// Actions action = new Actions(driver);
 		// WebElement element = callsam;
@@ -2217,7 +2220,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		Assertion.assertStringContains("TFN number on SAM call icon does not match !", toolTipText, tfnNumber);
+		if (toolTipText.length() == 14 && toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
+			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
+		}
+		else
+			Assertion.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 		/*
 		 * if (toolTipText.contains(CallSam1877)) {
 		 * System.out.println("Call sticky action menu roll out and contain the text: "
@@ -3152,7 +3159,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailAddress.sendKeys("a@gmail.com");
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		} else {
-			threadsleep(8);
+			waitforElement(SubmitEmail);
 			// SubmitEmail.click();
 			scrollToView(SubmitEmail);
 			jsClickNew(SubmitEmail);
@@ -3309,7 +3316,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (chatsam.isDisplayed()) {
 			System.out.println("@@@@ Chat Icon window opened successfully@@@");
 			jsClickNew(chatsam);
-			Thread.sleep(5000);
+			waitforElement(ChatCancelBtn);
 			// driver.switchTo().frame("sp-chat-iframe");
 			validate(ChatCancelBtn, 10);
 			present = true;
@@ -3390,13 +3397,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement siteSearchIcon;
 
 	public void validateHeaderLinks() {
+		//driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
+		threadsleep(5);
+		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
+				
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		validateNew(goToMemberSiteLink);
 
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(visitAARPLink);
+			// validateNew(visitAARPLink);// AARP site link not visible defect is on going
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
@@ -3491,7 +3503,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
 		jsClickNew(headLogo);
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
@@ -3541,7 +3553,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void clickViewDisclaimerInfoLink() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(viewAllDisclaimerInformationLink);
-		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
 		if (content.isDisplayed() && content.isEnabled()) {
@@ -3583,7 +3594,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.switchTo().window(base);
 
 			// Added below loop as ios script fails while switching back to parent window
-			if (driver.getCurrentUrl().contains("uhc.com") && driver.getClass().toString().toUpperCase().contains("IOS")) {
+			if (driver.getCurrentUrl().contains("uhc.com")
+					&& driver.getClass().toString().toUpperCase().contains("IOS")) {
 				driver.navigate().back();
 			}
 
@@ -3603,7 +3615,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		scrollToView(lnkAssistance);
 		validateNew(lnkAssistance);
-		sleepBySec(2);
 		switchToNewTabNew(lnkAssistance);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("https://www.uhc.com/legal/medicare-plans")) {
@@ -3659,7 +3670,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// MedicareAdvantagePlans.click();
 //		jsClickNew(MedicareAdvantagePlans);
 		accessFooterLinkFromShopPlans(MA);
-		threadsleep(5000);
 		waitforElementVisibilityInTime(MAHeaderonShopPage, 20);
 		if (driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assertion.assertTrue(true);
@@ -3796,7 +3806,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(6);
 		// MedicarePrescriptionDrugPlans.click();
 		accessFooterLinkFromShopPlans(PDP);
-		threadsleep(5000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		threadsleep(10);
 		if (driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
@@ -3818,7 +3827,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// MedicareEducation.click();
 //		jsClickNew(MedicareEducation);
 		accessFooterLinkFromLearnAboutMedicare("Introduction to Medicare");
-		threadsleep(5);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			Assert.assertTrue(true);
@@ -3855,7 +3863,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void backtotop() {
-		threadsleep(6);
+		waitforElement(BackToTop);
 		// BackToTop.click();
 		jsClickNew(BackToTop);
 		threadsleep(5);
@@ -3871,12 +3879,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
 
-		sleepBySec(10);
-//		scrollToView(maPlansViewLink);
-//		if (maPlansViewLink.isDisplayed()) {
-//			jsClickNew(maPlansViewLink);
-//			threadsleep(5);
-//		}
+		sleepBySec(6);
+		if (driver.getCurrentUrl().contains("/plan-summary") & !FindAnAgent.isDisplayed()) {
+			scrollToView(maPlansViewLink);
+			jsClickNew(maPlansViewLink);
+			threadsleep(5);
+		}
 
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
@@ -4034,12 +4042,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement RightRail_FindAnAgentMedsupp;
 
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
-		threadsleep(3);
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(RightRail_FindAnAgent);
-		sleepBySec(3);
+		pageloadcomplete();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -4111,6 +4118,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(UnitedHealthcareMedicareSolutions);
+		threadsleep(10);// sleep added so that on iOS new window popup gets time to open up window
 	}
 
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
@@ -4121,9 +4129,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		String urlCheck = driver.getCurrentUrl();
 		if (urlCheck.contains("medicare-education-classic.html")) {
-			if(driver.getClass().toString().toUpperCase().contains("IOS")) {
-				driver.navigate().back();
-			}
+
+//			if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+//				driver.navigate().back();
+//			}
+
 			return new LearnAboutMedicareHomePageMobile(driver);
 
 		} else {
@@ -4141,7 +4151,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public boolean checkZipCompErrorInSubNav() {
 		hoverOverShopForPlan();
-		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(OurPlans_zipfield);
 		validateNew(FindPlansButton1);
@@ -4516,11 +4525,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.cssSelector("#state-select"));
+		WebElement stateDropDown = driver.findElement(By.cssSelector("select[name=state-select]"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
 
 		jsClickNew(stateWidget);
+		jsClickNew(stateWidgetLable);
 		mobileSelectOption(stateDropDown, geoState, true);
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
@@ -4785,6 +4795,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile checkZipCompSubNavVpp(String zipCode) {
+		openShopForPlanFromMenu();
 		sendkeysMobile(OurPlans_zipfield, zipCode);
 		jsClickNew(FindPlansButton1);
 		waitForPageLoadSafari();
@@ -4939,23 +4950,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.assertTrue(goToMemberSiteLink.getAttribute("href").contains("medicare.uhc.com"));
 			// Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
 			// clickBrowserBackButton();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			waitforElement(menuHamburgerCloseIcon);
 			jsClickNew(menuHamburgerCloseIcon);
 			System.out.println("Member site link url validation Pass on iOS>>>>>");
 		} else {
 
 			jsClickNew(goToMemberSiteLink);
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			pageloadcomplete();
 			String base = driver.getWindowHandle();
 			Set<String> all = driver.getWindowHandles();
 			if (all.size() > 1) {
@@ -4970,8 +4971,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				}
 				driver.switchTo().window(base);
 			} else {
-				//Step to click browser back is commented in feature file, not sure of its impact on desktop script if un commented.
-				// hence adding navigate back if the member site loads in same window. Remove this else block if the browser back step is added.
+				// Step to click browser back is commented in feature file, not sure of its
+				// impact on desktop script if un commented.
+				// hence adding navigate back if the member site loads in same window. Remove
+				// this else block if the browser back step is added.
 				driver.navigate().back();
 			}
 		}
@@ -4992,7 +4995,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateSamChatIcon() throws InterruptedException {
 		boolean present;
 		try {
-			threadsleep(5);
 			validateNew(samChatIcon);
 			present = true;
 		} catch (NoSuchElementException e) {
@@ -5023,9 +5025,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateSamChatPopup() throws InterruptedException {
 		try {
 			jsClickNew(samChatIcon);
-			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(

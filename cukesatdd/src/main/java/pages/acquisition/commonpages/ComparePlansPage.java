@@ -27,6 +27,7 @@ import org.testng.Assert;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -128,7 +129,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
-	@FindBy(xpath = "//*[contains(@class,'delete-plan ng-scope')]")
+	@FindBy(xpath="//*[contains(@aria-label,'Remove Plan')]")
 	private WebElement removeLink;
 
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
@@ -158,7 +159,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-compare-table-header']/div/div[2]/div[1]/button")
 	private WebElement backArrow;
 
-	@FindBy(xpath = "//button[@id='add-plan-menu_button']")
+	@FindBy(xpath = "//span[contains(text(),'Another Plan')]/..")
 	private WebElement addPlanButton;
 
 	@FindBy(xpath = "//h3[@id='favouriteplanSelect2']")
@@ -203,7 +204,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
 	private WebElement providerSumamryHeaderCount;
 
-	@FindBy(xpath = "//*[@id=\"your-doctors-table\"]/tbody/tr[4]/th/span")
+	@FindBy(xpath="(//*[@id='your-doctors-table']//span[contains(@class,'boldinPrint')])[2]")
 	private WebElement FirstProviderName;
 	
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/th[1]/span")
@@ -290,7 +291,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(@class,'heading2')]")
 	public WebElement planComparePlansAvailableLabel;
 
-	@FindBy(xpath = "//a[contains(text(),'Show All')]")
+	@FindBy(xpath = "(//a[contains(text(),'Show All')])[3]")
 	public WebElement viewAllplansButton;
 
 	@FindBy(xpath = "//*[contains(text(),'Medical Benefits')]//following::span[@class='uhc-switch__slider'][1]")
@@ -323,7 +324,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
 	private WebElement allSetDrugsProvidersInfo;
 
-	@FindBy(xpath = "//*[text()='View Plan Details']")
+	@FindBy(xpath="(//*[text()='View Plan Details'])[2]")
 	private WebElement viewPlanDetailslink;
 
 	@FindBy(xpath = "//button[contains(@id,'headerSavePlan')]//img[contains(@class,'liked savePlanIcon')][1]")
@@ -332,7 +333,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'headerSavePlan')]//img[contains(@class,'unliked savePlanIcon')][1]")
 	private WebElement viewUnSaveIcon;
 
-	@FindBy(xpath = "//*[@id='viewallplansBtnId']")
+	@FindBy(xpath = "(//*[@id='viewallplansBtnId'])[3]")
 	private WebElement ViewAllPlans;
 
 	@FindBy(xpath = "//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
@@ -417,13 +418,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='helpTextinAB']")
 	private WebElement OONTextAdditionalBenefit;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Tooth_1C_RGB.png'][2]")
 	private WebElement DentalIcon;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/commontools/vpp/Icon_Stethoscope_1C_RGB.png'][2]")
 	private WebElement DoctorIcon;
 	
-	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png']")
+	@FindBy(xpath = "//img[@src='/content/dam/MRD/images/icons/Behave.png'][2]")
 	private WebElement BehaviourIcon;
 	
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available')]/following-sibling::a[@dtmname='Plan Compare:MA:View All Plans']")
@@ -432,7 +433,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available (No Hidden)')]")
 	private WebElement AllPlansVisible;
 	
-	@FindBy(xpath = "//span[@class=\"dentalTextFont ng-binding\"]/p/b[not(contains(text(), 'No coverage'))][3]")
+	@FindBy(xpath = "//td[3]//a[text()='Click here for details']")
 	private WebElement DentalLinkText;
 	
 	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")
@@ -440,6 +441,8 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
 	private WebElement planNameOnBaseLinePopup;
+	
+	
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -970,9 +973,9 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void validateIcons() {
-		validateNew(DentalIcon);
-		validateNew(DoctorIcon);
-		validateNew(BehaviourIcon);
+		validate(DentalIcon);
+		validate(DoctorIcon);
+		validate(BehaviourIcon);
 		
 	}
 	
@@ -1501,9 +1504,6 @@ public class ComparePlansPage extends UhcDriver {
 
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
-		if (!planName.contains("PDP")) {
-			i++;
-		}
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-" + i + "')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
@@ -1628,7 +1628,7 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement ele;
 		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
 		for (String index : (TreeSet<String>) mySet.descendingSet()) {
-			if (Integer.parseInt(index) > 3) {
+			if (Integer.parseInt(index) > 2) {
 				jsClickNew(forwardArrow);
 			} else {
 				jsClickNew(backArrow);
@@ -1637,8 +1637,7 @@ public class ComparePlansPage extends UhcDriver {
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
 			ele = driver.findElement(By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
-			validateNew(ele);
-			ele.click();
+			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}
@@ -1659,7 +1658,13 @@ public class ComparePlansPage extends UhcDriver {
 		viewAllplansButton.click();
 		System.out.println("Count of plans on compare after button is clicked"
 				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
-		Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		try {
+			if(viewAllplansButton.isDisplayed())
+				Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		}
+		catch(NoSuchElementException e) {
+			
+		}
 		Assertion.assertEquals("Plan Counts mismatch", planCount,
 				driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	}
@@ -1797,14 +1802,18 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(viewPlanDetailslink);
 //		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
-		validateNew(addPlanButton);
+		int count = 0;
+		while(!addPlanButton.isDisplayed() && count!=10) {
+			jsClickNew(forwardArrow);
+			count++;
+		}
 		System.out.println("Validated all links plan compare");
 
 	}
 
 	public void validateViewALLplanButtonNotDisplayed() {
-		Assertion.assertFalse("view all plans button must not be visible", !(driver
-				.findElements(By.xpath("//*[@id='viewallplansBtnId' and contains(@class,'ng-hide')]")).size() > 0));
+		Assertion.assertFalse("view all plans button must not be visible", (driver
+				.findElement(By.xpath("//div[contains(@class,'text-bold ng-scope')]")).getText()).contains("Show All"));
 		System.out.println("Validated view all plans link not displayed on plan compare");
 	}
 
@@ -1926,7 +1935,8 @@ public class ComparePlansPage extends UhcDriver {
 		jsClickNew(drugCostDetailsBtn);
 		Assertion.assertEquals(drugName,
 				driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
-		jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		//jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		jsClickNew(driver.findElement(By.xpath("(//*[contains(text(),'Return to plan compare')])[1]")));
 		// driver.findElement(By.xpath("//span[text()='Return to
 		// Compare']/parent::button")).click();
 		waitforElement(drugCostDetailsBtn);
@@ -2159,4 +2169,36 @@ public void saveaPlan(String plans) {
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
 	}
+	
+	public void validateProvidersCovered() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(MRConstants.PROV_NAME);
+		System.out.println(MRConstants.BEHAV_NAME);
+		System.out.println(MRConstants.DENT_NAME);
+		WebElement DoctorCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.PROV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div")) ;
+		System.out.println(DoctorCoveredText.getText());
+		WebElement BehaviourCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.BEHAV_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div"));
+		System.out.println(BehaviourCoveredText.getText());
+		WebElement DentalCoveredText = driver.findElement(By.xpath("//*[@id='your-doctors-table']/..//text()[contains(. ,'"+MRConstants.DENT_NAME.substring(0, 6)+"')]/ancestor::span/ancestor::th/following-sibling::td/div"));;
+		System.out.println(DentalCoveredText.getText());
+		validate(DoctorCoveredText);
+		validate(BehaviourCoveredText);
+		validate(DentalCoveredText);
+		
+		Assert.assertEquals("Not Covered\n" + 
+				"View Locations", DentalCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", BehaviourCoveredText.getText());
+		Assert.assertEquals("Covered\n" + 
+				"View Locations", DoctorCoveredText.getText());
+
+	}
+
 }

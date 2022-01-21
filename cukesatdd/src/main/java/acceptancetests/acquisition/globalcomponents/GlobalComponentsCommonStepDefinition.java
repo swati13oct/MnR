@@ -849,6 +849,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage vppPlanSummaryPage = aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
 		if (vppPlanSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("Vpp Plan Summary Page opened Successfully");
 			Assertion.assertTrue(true);
 		} else
@@ -1409,7 +1410,7 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@Then("^Verify AARP Membership links in header not present on page$")
+	@Then("^Verify AARP Membership links in header not present on home page$")
 	public void verifyAARPMembershipLinksNotPresentOnOtherPage() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);

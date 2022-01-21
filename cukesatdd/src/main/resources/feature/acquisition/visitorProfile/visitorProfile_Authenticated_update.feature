@@ -251,12 +251,12 @@ Feature: 1.08. UAT- Visitor profile
     @visitorProfile_AARP @visitorProfileAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
-      | AARP | New York |   10001 | NO              | New York County | uatscenario2 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | AARP | New York |   10001 | NO              | New York County | uatscenario2 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @visitorProfileUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName      | password   | plantype | planname                             |
-      | UHC  | New York |   10001 | NO              | New York County | uatscenario2 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | UHC  | New York |   10001 | NO              | New York County | uatscenario2 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 	
 
  Scenario Outline: Validate that M&R Prospective client has the ability to Add plan, remove plan, view plan details

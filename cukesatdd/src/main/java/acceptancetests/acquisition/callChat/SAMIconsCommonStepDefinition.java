@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
@@ -17,6 +18,9 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
+import pages.acquisition.tfn.CampaignTFNPage;
 
 public class SAMIconsCommonStepDefinition {
 	
@@ -397,7 +401,8 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		aquisitionhomepage.validateTFNNoonZipCodeComponent(TFNXpath, ExpectedTFNNo);
-
+		CampaignTFNPage tfnPage=new CampaignTFNPage(wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE,tfnPage);
 	}
 	
 	@Then("^the user validates TFN Number on SNP Right Rail OLE page$")
@@ -437,5 +442,51 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateProactiveChat();
 		aquisitionhomepage.validateProactiveChatPopup();		
 	}
+	
+	@Then("^the user validates SAM icons on the DCE page$")
+	public void the_user_validates_SAM_icons_on_the_DCE_page(DataTable givenAttributes) throws InterruptedException {
 
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		//aquisitionhomepage.validateChatSam();
+		getStartedPage.validateSamChatIcon();
+		getStartedPage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
+
+	
+	@Then("^the user validates SAM icons on the Pharmacy page$")
+	public void the_user_validates_SAM_icons_on_the_Pharmacy_page(DataTable givenAttributes) throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPageNew pharmacySearchPage=(PharmacySearchPageNew)getLoginScenario().getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		//aquisitionhomepage.validateChatSam();
+		pharmacySearchPage.validateSamChatIcon();
+		pharmacySearchPage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
 }

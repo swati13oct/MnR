@@ -23,14 +23,14 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Drugname | <drug1> |
 
     @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
-    Examples: 
+    Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | AARP |
+      | Alabama | Lipitor | 90210   | AARP |
 
     @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @vbfGate
-    Examples: 
+    Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | UHC  |
+      | Alabama | Lipitor | 90210   | UHC  |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile in <site> site - zip -<zipCode>
@@ -51,18 +51,18 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Drugname | <drug1> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
-    Examples: 
+    Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | AARP |
+      | Alabama | Lipitor | 90210   | AARP |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate @sanity
-    Examples: 
+    Examples:
       | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | UHC  |
+      | Alabama | Lipitor | 90210   | UHC  |
 
   #commenting this out as it is already there in the UAT feature file for VP
   #@addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
-  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
+  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile in <site> site- zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -88,17 +88,18 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Test Plans | <testPlans> |
 
     #@visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP
-    Examples: 
+    @vbfGate
+    Examples:
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP | Alabama | US1770330 | future   | 90210   | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
     #@visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @prodRegression
-    Examples: 
+    Examples:
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | UHC  | Alabama | US1770330 | future   | 90210   | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionAARP
-  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile in <site> site - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -129,28 +130,28 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
       | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @vbfGate @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
-    Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
+    Examples:
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                      | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-    @nextYear @regressionAARP
-    Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                  | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. Home delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only) | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+#    @nextYear @regressionAARP
+#    Examples:
+#      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                  | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+#     | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. Home delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only) | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
     @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC
-    Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+    Examples:
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                      | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-    @nextYear @regressionAARP
-    Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                  | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. Home delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only) | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+#    @nextYear @regressionAARP
+#    Examples:
+#      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                  | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+#      | UHC  | Alabama | US1770330 | 53503   | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. Home delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only) | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
   @vpOLE
-  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE in <site> site - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -254,27 +255,27 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
-      | AARP | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | current  |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | K          |
-
-    @nextYear @regressionAARP
-    Examples: 
+    Examples:
       | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
-      | AARP | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | K          |
+      | AARP | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | current  | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
+
+  #  @nextYear @regressionAARP
+  #  Examples:
+  #    | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
+  #    | AARP | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | future   | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag |  |
-      | UHC  | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | current  |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     |  |
-
-    @nextYear @regressionAARP
-    Examples: 
+    Examples:
       | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
-      | UHC  | Florida |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | K          |
+      | UHC  | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | current  | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
+
+#    @nextYear @regressionAARP
+#    Examples:
+#      | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
+#      | UHC  | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | future   | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
 
   @vpMSSavePlan
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile in <site> site - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -297,17 +298,19 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
-      | AARP | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+    Examples:
+      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
+#      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
-      | UHC  | Alabama |   10001 | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+    Examples:
+      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
+#      | UHC  | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
+      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
 
   @providerFlow
-  Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
+  Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page in <site> site - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -339,17 +342,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | PlanName | <planname> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP
-    Examples: 
+    Examples:
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | AARP | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | AARP | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC
-    Examples: 
+    Examples:
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | UHC  | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompareTest @planCompareULayerSmoke @visitorProfileRegressionAARP
-  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
+  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile in <site> site - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -373,17 +376,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Test Plans | <testPlans> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
-    Examples: 
+    Examples:
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | AARP | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate
-    Examples: 
+    Examples:
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @importDrugsDocs @nonProd
-  Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile
+  Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile in <site> site - member -<member>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -396,24 +399,24 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Member    | <member>    |
 
     #Then the user validates the Drugs and Doctors
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @regressionAARP
-    Examples: 
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @regressionAARP @importDrugsFunctionality
+    Examples:
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
-      | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
-      | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
+      | AARP | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 | 10010   |             | ciprofloxacin hcl TAB 500MG                                                        |           |
       | AARP | Aetna     |           |          |            |         |             |                                                                                    |           |
       | AARP | Humana    |           |          |            |         |             |                                                                                    |           |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC
-    Examples: 
+    Examples:
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
-      | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 |   06902 | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
-      | UHC  | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 |   10010 |             | ciprofloxacin hcl TAB 500MG                                                        |           |
+      | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
+      | UHC  | NonMember | DFONNMDF  | DFONNMDL | 06/30/1948 | 10010   |             | ciprofloxacin hcl TAB 500MG                                                        |           |
       | UHC  | Aetna     |           |          |            |         |             |                                                                                    |           |
       | UHC  | Humana    |           |          |            |         |             |                                                                                    |           |
 
   @vppMSSP4.0
-  Scenario Outline: Verify user save Medsupp plans 4.0 with plan details,start application, learn more,add your information on unauthenticated visitor profile-Medsup4.0 - zipcode - <zipcode>
+  Scenario Outline: Verify user save Medsupp plans 4.0 with plan details,start application, learn more,add your information on unauthenticated visitor profile-Medsup4.0 in <site> site- zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -450,33 +453,66 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | MS_testPlans | <MS_testPlans> |
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
-    Examples: 
+    Examples:
       | site | zipcode | isMultiCounty | plantype | county            | MS_testPlans                                      | MS_Plan                  | component_code |
-      | AARP |   07303 | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   20906 | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   30002 | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
-      | AARP |   06011 | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   63113 | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   19706 | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | AARP |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
-      | AARP |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
+      | AARP | 07303   | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 20906   | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 30002   | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 66113   | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
+      | AARP | 06011   | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 63113   | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 19706   | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 39206   | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 70726   | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 40475   | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | AARP | 73008   | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
+      | AARP | 77070   | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
-    Examples: 
+    Examples:
       | site | zipcode | isMultiCounty | plantype | county            | MS_testPlans                                      | MS_Plan                  | component_code |
-      | UHC  |   07303 | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   20906 | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   30002 | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   66113 | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
-      | UHC  |   06011 | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   63113 | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   19706 | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   39206 | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   70726 | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   40475 | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
-      | UHC  |   73008 | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
-      | UHC  |   77070 | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
+      | UHC  | 07303   | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 20906   | NO            | MS       | Montgomery County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 30002   | NO            | MS       | DeKalb County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 66113   | NO            | MS       | Wyandotte County  | Plan G,Plan A                                     | Plan G                   | WB27375KS      |
+      | UHC  | 06011   | NO            | MS       | Hartford County   | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 63113   | NO            | MS       | St. Louis City    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 19706   | NO            | MS       | New Castle County | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 39206   | NO            | MS       | Hinds County      | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 70726   | NO            | MS       | Livingston Parish | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 40475   | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
+      | UHC  | 73008   | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
+      | UHC  | 77070   | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
+
+
+    @vpMS4Start_Feb
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county          | MS_testPlans  | MS_Plan | component_code |
+      | AARP | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
+      | AARP | 10001   | NO            | MS       | New York County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 05401   | NO            | MS       | Chittenden County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 71613   | NO            | MS       | Jefferson County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 96701   | NO            | MS       | Honolulu County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 02860   | NO            | MS       | Providence County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 99501   | NO            | MS       | Anchorage Municipality | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
+      | UHC  | 10001   | NO            | MS       | New York County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 05401   | NO            | MS       | Chittenden County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 71613   | NO            | MS       | Jefferson County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 96701   | NO            | MS       | Honolulu County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 02860   | NO            | MS       | Providence County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 99501   | NO            | MS       | Anchorage Municipality | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |

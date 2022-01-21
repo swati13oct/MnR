@@ -41,6 +41,7 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * @author pperugu
@@ -313,7 +314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement providerSearchFromGlobalHeader;
 
 	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]/a")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//*[@class='toolsLinks-forAnalytics links-forAnalytics']//p[4]/a")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -766,7 +767,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
 	private WebElement samChatPopup;
 
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header') and contains(text(),'Message')]")
 	private WebElement samChatPopupHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
@@ -1627,7 +1628,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocator() {
+	public PharmacySearchPageNew navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
 		scrollToView(navigationSectionHomeLink);
@@ -1638,7 +1639,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 
@@ -3421,6 +3422,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		threadsleep(3);
 		driver.switchTo().activeElement();
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
@@ -3780,11 +3782,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
-		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		/*if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
-		}
+		}*/
 		validateLogo();
 		validateNew(globalSiteSearchTxtBox);
 		validateNew(headerTfn);
@@ -5315,7 +5317,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public PharmacySearchPage navigateToPharmacyLocatorFromPlanType() {
+	public PharmacySearchPageNew navigateToPharmacyLocatorFromPlanType() {
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
 		jsClickNew(planTypePDPLink);
@@ -5326,7 +5328,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 
@@ -5388,7 +5390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -5737,6 +5739,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
+		threadsleep(3);
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
@@ -7415,7 +7418,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			jsClickNew(samChatIcon);
 			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
+			threadsleep(5);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(
@@ -8059,7 +8062,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateAARPMembershipLinks(String linkText) throws Exception {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
-		
+
 		// validateNew(headerRegisterLink);
 		if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 			Assert.assertEquals(driver.findElements(By.xpath("//li[contains(@class,'aarpMembership_wrap')]//button[normalize-space()='AARP Membership']")).size(), 0, "*** AARP Membership links header should NOT present on current page. ***");
@@ -8105,7 +8108,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			driver.switchTo().window(base);
 		}
-		
+
 	}
 	public void validateAARPMembershipcancel(String linkText) throws Exception {
 		// validateNew(headerSignInLink);

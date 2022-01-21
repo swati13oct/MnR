@@ -26,6 +26,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 
 public class DrugDetailsPage extends UhcDriver {
@@ -42,7 +43,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	@FindBy(xpath = "//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -238,7 +239,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(xpath = "//*[@role='tabpanel' or @role='list']")
+	@FindBy(xpath = "//*[(@role='tabpanel' or @role='list') and contains(@class, 'uhc-list')]")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
@@ -680,8 +681,11 @@ public class DrugDetailsPage extends UhcDriver {
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Quantity Limit')]"));
 		List<WebElement> SevenDayDrugs = driver.findElements(By
 				.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Seven Day')]"));
-		List<WebElement> LADrugs = driver.findElements(By.xpath(
-				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
+		// Limited Access is no more availabel for any drug for 2022 plans.
+		//		List<WebElement> LADrugs = driver.findElements(By.xpath(
+//				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+
 		List<WebElement> DLDrugs = driver.findElements(By.xpath(
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Dispensing Limits')]"));
 		if (Tier1Drugs.size() > 0) {
@@ -734,10 +738,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Drug text NOT Displayed in Your Drug Section!!!");
 
+/*
 		if (LADrugs.size() > 0) {
 			System.out.println("Total No. of Limited Access Drugs Added: " + LADrugs.size());
 		} else
 			Assertion.fail("Limited Access Drug text NOT Displayed in Your Drug Section!!!");
+*/
 
 		if (DLDrugs.size() > 0) {
 			System.out.println("Total No. of Dispensing Limits Drugs Added: " + DLDrugs.size());
@@ -767,8 +773,10 @@ public class DrugDetailsPage extends UhcDriver {
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Quantity Limit')]"));
 		WebElement SevenDayInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Seven Day')]"));
+/*
 		WebElement LAInfo = driver.findElement(
 				By.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Limited Access')]"));
+*/
 		WebElement DLInfo = driver.findElement(By
 				.xpath("//h3[contains(text(), 'Plan Formulary')]/following::h3[contains(text(), 'Dispensing Limit')]"));
 		WebElement ST_PDF_Link = driver.findElement(
@@ -838,10 +846,12 @@ public class DrugDetailsPage extends UhcDriver {
 		} else
 			Assertion.fail("Seven Day Supply Limit Info NOT Displayed in Important Information Section !!!");
 
+/*
 		if (validateNew(LAInfo)) {
 			System.out.println("Limited Access Info Displayed in Important Information Section : " + LAInfo.getText());
 		} else
 			Assertion.fail("Limited Access Info NOT Displayed in Important Information Section  !!!");
+*/
 
 		if (validateNew(DLInfo)) {
 			System.out
@@ -932,7 +942,8 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
 				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
+				// && validateNew(matchingPharmacyCount)
+				&& validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
 			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
@@ -1085,6 +1096,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public SwitchToGeneric clickSwitchGeneric(String brandDrug) {
 		WebElement SwitchLink = driver.findElement(By
 				.xpath("//*[contains(@id, 'drugtable')]//*[contains(@aria-label, 'Switch') and contains(@aria-label, '" +brandDrug+ "')]"));
+		CommonUtility.waitForPageLoadNew(driver, SwitchLink, 20);
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
@@ -1471,63 +1483,131 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
 		validateNew(Pharmacy_DistanceDropDwn);
 		System.out.println("Pharmacy Seacth for default Zip " + Pharmacy_ZipCodeTxt.getText());
-
+		String PharmacyCount;
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		Pharmacy_Distance_Select1Mile.click();
 		// validateNew(Pharmacy_Distance_Select1Mile);
 		jsClickNew(Pharmacy_Distance_Select1Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCount);
 
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		Pharmacy_Distance_Select2Mile.click();
 		// validateNew(Pharmacy_Distance_Select2Mile);
 		jsClickNew(Pharmacy_Distance_Select2Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCount);
 
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		// validateNew(Pharmacy_Distance_Select5Mile);
 		Pharmacy_Distance_Select5Mile.click();
 		jsClickNew(Pharmacy_Distance_Select5Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCount);
 
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		// validateNew(Pharmacy_Distance_Select10Mile);
 		Pharmacy_Distance_Select10Mile.click();
 		jsClickNew(Pharmacy_Distance_Select10Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCount);
 
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		// validateNew(Pharmacy_Distance_Select15Mile);
 		Pharmacy_Distance_Select15Mile.click();
 		jsClickNew(Pharmacy_Distance_Select15Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCount);
 
 		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		// validateNew(Pharmacy_Distance_Select25Mile);
 		Pharmacy_Distance_Select25Mile.click();
 		jsClickNew(Pharmacy_Distance_Select25Mile);
-		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCount);
 
 		validateNew(Pharmacy_ZipCodeTxt);
 		Pharmacy_ZipCodeTxt.clear();
 		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
 		validateNew(Pharmacy_SearchBtn);
 		Pharmacy_SearchBtn.click();
-		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+		System.out.println("Pharmacy Searchh for Zip Expected - " + pharmacyZipCode + "  : Entered : "
 				+ Pharmacy_ZipCodeTxt.getText());
-		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCount);
 
 	}
 
@@ -1579,15 +1659,13 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
 		// !validate(LIS_CopayHeader) &&
-				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_Alert)) {
+				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
 			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
 			System.out.println("***** $0 Deductible for LIS Buydown *****");
 			System.out.println(LIS_Deductible.getText());
-			System.out.println("***** Page level Alert Displayed for LIS Buydown *****");
-			System.out.println(LIS_Alert.getText());
 		} else
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
@@ -2081,9 +2159,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
+/*
+FIlter Apply button is removed
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement PharmacyFilterApplyBtn;
-	
+*/
+
 	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
 	public WebElement PharmacyFilterClearTextX;
 
@@ -2093,7 +2174,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
-		validateNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
 		PharmacyFilterTxtBx.sendKeys("a");
 		System.out.println("FIlter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
@@ -2103,22 +2184,25 @@ public class DrugDetailsPage extends UhcDriver {
 		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
 	}
 
+/*
+Blank error message is removed
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
 		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
 		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
+*/
 
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
 		PharmacyFilterTxtBx.clear();
 		PharmacyFilterTxtBx.sendKeys(filterText);
 		System.out.println("FIlter text entered : "+filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
 			System.out.println("Pharmacy Name : "+PharmacyName.getText());
@@ -2666,5 +2750,29 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(saveDrugs);
 		jsClickNew(saveDrugs);
 			}
-		
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement Enrollbtn;
+	public void ClickEnrollbtn(String Enroll_flag){
+		if(Enroll_flag.equalsIgnoreCase("true")){
+			if(validateNew(Enrollbtn)){
+				jsClickNew(Enrollbtn);
+				waitForPageLoadSafari();
+				if (driver.getCurrentUrl().contains("welcome")) {
+					System.out.println("OLE Welcome Page displayed ");
+					driver.navigate().back();
+					System.out.println("Validation Passed - Enroll option is displayed and OLE Welclme page is displayed on Enroll Btn click");
+				}
+			}
+			else
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is NOT displayed <<<<<");
+		}
+		else{
+			if(!validate(Enrollbtn))
+				System.out.println("Validation Passed for Enroll option not displayed");
+			else if(validateNew(Enrollbtn))
+				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
+		}
+	}
+
 }

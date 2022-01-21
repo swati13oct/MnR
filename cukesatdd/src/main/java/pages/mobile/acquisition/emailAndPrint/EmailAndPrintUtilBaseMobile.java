@@ -15,6 +15,10 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.android.nativekey.PressesKey;
 
 public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile {
 
@@ -205,6 +209,12 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			boolean flag = false;// flag will be used to determine a new window was opened after the click of
 									// print button
 			// note: switch to handle the new print window
+			
+			sleepBySec(6);
+			
+			((PressesKey) driver).pressKey(new KeyEvent().withKey(AndroidKey.BACK));
+
+			
 			for (String winHandle : driver.getWindowHandles()) {
 				if (!winHandle.equals(winHandleBefore)) {
 					driver.switchTo().window(winHandle);
