@@ -335,13 +335,13 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP @NextYear
     Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                                | planyear |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current   |
 
   @dceRedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP @regressionAARP
     Examples:
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
-      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                                | planyear |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current   |
 
   @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
@@ -355,8 +355,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dceRedesign_PlanSave_SNP_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   | planyear |
-      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Nursing Home Plan 1 (PPO I-SNP) | current   |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                                | planyear |
+      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current   |
 
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP @decRelease
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy

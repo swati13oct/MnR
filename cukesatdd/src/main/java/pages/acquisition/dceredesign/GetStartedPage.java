@@ -335,7 +335,7 @@ public void yahooSearch(String searchParameter) {
 		sendkeys(Member_Ziptxtbx, member_zip);
 		sendkeys(Member_MBItxtbx, member_mbi);
 		validateNew(Member_VieDrugsDrBtn);
-		jsClickNew(Member_VieDrugsDrBtn);
+		Member_VieDrugsDrBtn.click();
 		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
 		validateNew(DataImportStatusPopup);
