@@ -59,7 +59,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
-	@FindBy(css = "app-add-plans > div[class^='uhc-card'] button[dlassetid^='vp_findplans']")
+	@FindBy(xpath="(//span[contains(text(),'Find Plans')])[3]/..")
 	private WebElement addPlans;
 
 	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
@@ -218,10 +218,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a[class$='back-to-plans']")
 	private WebElement backToPlansLink;
 
-	@FindBy(xpath = "//h3[text()='Basic Costs']")
+	@FindBy(xpath="//*[text()='Basic Costs']")
 	private WebElement basicCostsHeader;
 
-	@FindBy(xpath = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath="//*[text()='Doctor Visits']")
 	private WebElement doctorVisitsHeader;
 
 	@FindBy(css = "header[class*='mobile']")
@@ -1323,8 +1323,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void validateMSLearnMorePage() {
 		Assertion.assertTrue("Back To Profile link is not displayed on Learn More page !",
 				validateNew(backToProfileLinkLearnMorePage));
-		Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !",
-				validateNew(gymMembershipHeader));
+	//	Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !",
+	//			validateNew(gymMembershipHeader));
 		Assertion.assertTrue("Brain Health header is not displayed on Learn More page !",
 				validateNew(brainHealthHeader));
 	}
