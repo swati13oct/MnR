@@ -1030,11 +1030,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
 				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
+				// && validateNew(matchingPharmacyCount)
+				&& validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
-			System.out.println("Select Pharmacy Modal validated");
+			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
-			Assertion.fail("Select Pharmacy Modal not as expected");
+			Assertion.fail("Select Pharmacy Modal not as expected - DCE Details Page");
 		}
 	}
 

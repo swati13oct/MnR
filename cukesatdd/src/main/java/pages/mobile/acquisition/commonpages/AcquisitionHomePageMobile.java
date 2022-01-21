@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.commonpages;
 
 import static acceptancetests.data.CommonConstants.LEARNABOUTMEDICARE_INTRODUCTION.BENEFITS;
@@ -379,7 +380,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(css = "#sam-call-button-mobile")
+	@FindBy(xpath = "//p[contains(@class,'swap_sam sam__button__text')]")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -3398,6 +3399,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateHeaderLinks() {
 		//driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
+		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
+				
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
 
