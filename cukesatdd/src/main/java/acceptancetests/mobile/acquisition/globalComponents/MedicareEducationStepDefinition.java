@@ -1056,11 +1056,12 @@ public class MedicareEducationStepDefinition {
         String geoState = memberAttributesMap.get("GeoState");
         String stateSelected= aquisitionhomepage.getSelectedState();
 
-        if (!geoState.equalsIgnoreCase(stateSelected)){
+        if (!stateSelected.contains(geoState)){
             Assert.fail("State selected is not correct: "+stateSelected);
         }
         else {
             System.out.println("State selected is correct: "+ stateSelected);
+            stateSelected = geoState;
             getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
         }
     }

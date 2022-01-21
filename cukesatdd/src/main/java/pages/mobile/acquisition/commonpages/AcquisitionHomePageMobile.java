@@ -4535,7 +4535,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
 
-		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
+		Assertion.assertTrue("Wrong state selected for geotarget", geoTargetSelectedState.contains(geoState));
+		geoTargetSelectedState = geoState;
 
 		/*
 		 * if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) { >>>>>>> branch
