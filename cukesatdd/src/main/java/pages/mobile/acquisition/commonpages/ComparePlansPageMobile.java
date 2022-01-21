@@ -310,7 +310,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
 
-	@FindBy(xpath = "(//span[@class='dentalTextFont ng-binding']/p/b[not(contains(text(), 'No coverage'))])[3]")
+	@FindBy(xpath = "//td[3]//a[text()='Click here for details']")
 	private WebElement DentalLinkText;
 
 	@FindBys(value = { @FindBy(css = "table#your-doctors-table tbody>tr") })
