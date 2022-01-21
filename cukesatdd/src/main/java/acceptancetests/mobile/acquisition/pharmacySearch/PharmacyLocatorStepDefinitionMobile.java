@@ -828,6 +828,15 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
+	
+	@Then("^the user clicks on Reset filter on pharmacy search page$")
+	public void user_clicks_on_Reset_Filter_on_pharmacy_search_page()  {
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickResetFilter();
+	}
+	
+	
 
 	@Then("^the user validates error message displayed when filter results in no match|the user validate error message displayed when filter results in no match$")
 	public void the_user_validates_the_no_pharmacies_error_message() {
