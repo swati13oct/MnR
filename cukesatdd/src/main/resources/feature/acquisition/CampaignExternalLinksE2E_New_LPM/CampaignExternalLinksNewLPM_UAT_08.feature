@@ -167,7 +167,7 @@ Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take
       | TFNxpath | <TFNxpath3> |
       | TFNflag  | <tfnFlag>   |
     And Navigate to Visitor Profile page
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
+    Then the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates whether call icon is visible
