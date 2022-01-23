@@ -29,11 +29,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
+	
+	@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(1)")
+	private WebElement coverageTitle;
 
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(css = "h1[class^='text-display']")
+	@FindBy(xpath="//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 
 	@FindBy(css = "div[class*='get-started-banner'] img")
@@ -113,10 +116,102 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "#errorMessage")
 	private WebElement errorMessage;
+	
+	@FindBy(css = "iframe[title*=' Survey']")
+	private WebElement popupFrame;
+	
+	@FindBy(css = "button[id*='no']")
+	private WebElement popupNo;
+	
+	@FindBy(id = "MultipleCounty")
+	private WebElement PRECounty;
 
 	@Override
 	public void openAndValidate() {
 		waitforElementVisibilityInTime(getStartedBtn, 30);
+	}
+	
+	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
+		waitTillElementClickableInTime(getStartedBtn, 45);
+		System.out.println("Before clicking GetStarted");
+		threadsleep(5000);
+		waitforElementVisibilityInTime(zipCode, 45);
+		sendkeys(zipCode, zipcode);
+		threadsleep(5000);
+		jsClickNew(getStartedBtn);
+		threadsleep(2000);
+		System.out.println("After clicking GetStarted");
+		waitforElementVisibilityInTime(coverageTitle, 30);
+	
+	}
+	
+	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
+		
+		Thread.sleep(20000);
+		driver.switchTo().defaultContent();
+		waitTillElementClickableInTime(getStartedBtn, 45);
+		waitforElementVisibilityInTime(zipCode, 45);
+		sendkeys(zipCode, zip_code);
+		Thread.sleep(2000);
+//		zipcodePagemultiCounty();
+		waitforElementVisibilityInTime(PRECounty, 45);
+		selectFromDropDownByText(driver, PRECounty, County);
+		threadsleep(5000);
+		jsClickNew(getStartedBtn);
+		Thread.sleep(2000);
+		waitforElementVisibilityInTime(coverageTitle, 30);
+	}
+	
+	public void landingpage() {
+		System.out.println("Validating Title: ");
+//		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+//		Assertion.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+		String ExpectedTitle = "plan";
+		validate(landingpageHeader, 30);
+		String ActualTitle = landingpageHeader.getText();
+		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));
+		System.out.println("Validating Animation Images: ");
+		validate(landingpageAnimationImage, 30);
+		System.out.println("Validating Text: ");
+/*		validate(landingpageText, 30);
+		String ExpectedText = " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. ";
+		String ActualText = landingpageText.getText();
+		System.out.println(ActualText.equalsIgnoreCase(ExpectedText));*/
+		validate(getStartedBtn, 30);
+		validate(landingpageMainInner, 30);
+		System.out.println("Validating Title in Inner Section: ");
+		validate(landingpageInnerTitle, 30);
+/*		String ExpectedText1 = "How does this work?";
+		String ActualText1 = landingpageInnerTitle.getText();
+		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));*/
+		for(int i=1; i<=3; i++) {
+			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" +i+ "]"))).getText();
+			System.out.println(landingpageTracker);
+		}
+		for(int j=1; j<=2; j++) {
+			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +j+ "]/span"))).getText();
+			System.out.println(landingpageTextPoints);
+		}
+		validate(landingpageImage, 30);
+		String landingpageLabelText = landingpageLabel.getText();
+		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));
+		waitTillElementClickableInTime(getStartedBtn, 45);
+	}
+	
+	public boolean close_Popup() {
+		boolean popup_presents = false;
+		System.out.println("Checking Popup Status...");
+		if(validate(popupNo, 20)) {
+			if(validate(popupFrame, 5))
+				driver.switchTo().frame(popupFrame);
+			threadsleep(1000);
+//			popupNo.click();
+			jsClickNew(popupNo);
+			threadsleep(1000);
+			popup_presents = true;
+		}
+		driver.switchTo().defaultContent();
+		return popup_presents;
 	}
 
 	public void landingpageElementsmobile() {
@@ -240,7 +335,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	public void edit_location(String zipcode,String multi,String county) {
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
-		mobileactionsendkeys(zipCode, zipcode);
+		sendkeysMobile(zipCode, zipcode);
 		if(multi.equalsIgnoreCase("Yes")) {
 			mobileSelectOption(multicountySelect, county,true);
 		}

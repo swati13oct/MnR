@@ -670,11 +670,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
 				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
@@ -723,6 +725,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+		clickUpdateLaterBrowserButton();
 		return offline_prod;
 	}
 

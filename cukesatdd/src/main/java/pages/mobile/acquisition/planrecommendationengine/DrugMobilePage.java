@@ -6,6 +6,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JacksonAnnotation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -202,14 +203,14 @@ public class DrugMobilePage extends UhcDriver {
 
 	public void chooseOption(String drugsSelection) {
 		if (drugsSelection.equalsIgnoreCase("Yes")) {
-			mobileUtils.mobileLocateElementClick(drugAddOption);
+			jsClickNew(drugAddOption);
 			System.out.println("Plan Type " + drugsSelection + " Clicked");
 		} else if (drugsSelection.equalsIgnoreCase("No")) {
-			mobileUtils.mobileLocateElementClick(drugSkipOption);
+			jsClickNew(drugSkipOption);
 			System.out.println("Plan Type " + drugsSelection + " Clicked");
 		} else {
 			if (drugsSelection.isEmpty()) {
-				mobileUtils.mobileLocateElementClick(continueBtn);
+				jsClickNew(continueBtn);
 				mobileUtils.mobleErrorValidation(page);
 			}
 		}
@@ -217,7 +218,7 @@ public class DrugMobilePage extends UhcDriver {
 
 	public void skipDrugs(String drugsSelection) {
 		chooseOption(drugsSelection);
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
@@ -328,23 +329,33 @@ public class DrugMobilePage extends UhcDriver {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
+			sendkeysMobile(drugsearchBox, drugName);
 			hidekeypad();
 			if (searchButtonClick) {
-				mobileUtils.mobileLocateElementClick(drugsearchButton);
+				jsClickNew(drugsearchButton);
 				validate(modalSelcetedDrug, 30);
 				threadsleep(2000);
 				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
 						"Drug name is not Matched :" + drugName);
 				// Select modal
-				modalcontinue.click();
+				jsClickNew(modalcontinue);
 				threadsleep(2000);
 			} else {
-				mobileUtils.mobileLocateElementClick(drugsAutoList.get(0));
+				jsClickNew(drugsAutoList.get(0));
 			}
 
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
+			
+			if (GenericDrug) {
+				validate(modalGenericSwitchLabel, 30);
+				threadsleep(2000);
+				// Generic modal
+				if (switchGeneric) 
+					jsClickNew(modalGenericSwitchLabel);
+				threadsleep(2000);
+			}
+			
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
 			
@@ -357,10 +368,11 @@ public class DrugMobilePage extends UhcDriver {
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
-				mobileactionsendkeys(modalQuantity, count);
-				modalheader.click();
+				sendkeysMobile(modalQuantity, count);
+				jsClickNew(modalheader);
 				threadsleep(2000);
 			}
+			
 			
 			mobileSelectOption(modalFrequencySelect, frequency,true);
 			
@@ -372,17 +384,8 @@ public class DrugMobilePage extends UhcDriver {
 			count = modalQuantity.getAttribute("ng-reflect-model").trim();
 			String frequence = freq.getFirstSelectedOption().getText().trim();
 
-			modalcontinue.click();
-			if (GenericDrug) {
-				validate(modalGenericDrug, 30);
-				threadsleep(2000);
-				// Generic modal
-				if (switchGeneric) {
-					clickSwitchdrug();
-					drugName = modalGenericDrug.getText();
-				}
-				modalcontinue.click();
-			}
+			jsClickNew(modalcontinue);
+			
 			validateAddedDrugname(drugName, dosage, count, frequence);
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
@@ -390,7 +393,7 @@ public class DrugMobilePage extends UhcDriver {
 	}
 	
 	public void clickSwitchdrug() {
-		modalGenericSwitchLabel.click();
+		jsClickNew(modalGenericSwitchLabel);
 		threadsleep(2000);
 		//modalGenericSwitchRadio.click();
 		//mobileactiontap(modalGenericSwitch);
