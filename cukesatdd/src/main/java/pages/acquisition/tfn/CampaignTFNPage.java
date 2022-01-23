@@ -122,8 +122,9 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement YahooSearchField;
 
 	// @FindBy(xpath = "//*[@id='uh-search-button']")
-	// @FindBy(xpath = "//button[contains(@id,'search-button')]")
-	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	// @FindBy(xpath = "//button[contains(@id,'ybar-search')]")
+	//@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	@FindBy(xpath = "//*[@id='ybar-search']")
 	public WebElement YahooSearchBttn;
 
 	// @FindBy(xpath = "//h3//a[contains(text(),'AARP� Medicare Advantage (Part C)
@@ -396,7 +397,7 @@ public class CampaignTFNPage extends UhcDriver {
 		
 		String[] arrStr = str.split(";"); 
 		String[] arrOfStr = arrStr[0].split("%2C");
-		if (str.contains(",")) { arrOfStr = str.split(","); }
+		//if (str.contains(",")) { arrOfStr = str.split(","); }
 		
 		String PSC_Code;
 		String FedTFN;
