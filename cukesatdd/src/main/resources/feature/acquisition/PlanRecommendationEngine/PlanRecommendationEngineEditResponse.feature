@@ -76,7 +76,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
 
     #Then user validate UI and API recommendation rankings in results page
-    @regressionAARP @kiriti
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_Zipcode | E_isMultiCounty | E_county          | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   10003 | NO            | New York | PDP           | No             |     33143 | NO              | Miami-Dade County | Yes              | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                     |
