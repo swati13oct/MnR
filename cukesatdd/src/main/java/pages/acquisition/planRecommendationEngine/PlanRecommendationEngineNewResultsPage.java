@@ -21,6 +21,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.SessionStorage;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,10 +32,12 @@ import org.testng.Assert;
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -157,10 +160,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "#modal")
 	private WebElement drugModel;
-	
+
 	@FindBy(css = "#modal a[class*='buttonLink']")
 	private WebElement editDurglink;
-	
+
 	@FindBy(css = "#modal td.plan-drug-deductible")
 	private WebElement deductible;
 
@@ -309,6 +312,21 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".planRemoveSort svg")
 	private WebElement removeBreadCrumbs;
 
+	@FindBy(xpath = "//*[contains(@dlassetid,'pre_plan_pn_2')]")
+	private WebElement NextButtonPRE;
+	
+	@FindBy(xpath = "//*[contains(text(),'My Saved Items ')]")
+	private WebElement MySavedPlan;
+	
+	@FindBy(xpath = "(//*[contains(text(),'View Saved Items')])[1]")
+	private WebElement ViewSavedPlan;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Or, Sign In to your Profile ')])[1]")
+	private WebElement SignInUser;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	private WebElement signOut;
+
 	// Result Loading Page Element Verification Method
 
 	public void resultsloadingpage() {
@@ -428,26 +446,34 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		waitforResultsPage();
 		threadsleep(3000);
 		try {
-			String pageCount1 = pagenoLabel.getText().trim();
-			System.out.println("Total Page Count : " + pageCount1);
-			int currentPage = Integer
-					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
-			if (currentPage != 1) {
-				for (int c = 1; c < currentPage; c++) {
-					pagePreviousButton.click();
-					threadsleep(2000);
+			String pageCount1 = "";
+			if (validate(pagenoLabel, 10)) {
+				pageCount1 = pagenoLabel.getText().trim();
+				int currentPage = Integer
+						.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+				if (currentPage != 1) {
+					for (int c = 1; c < currentPage; c++) {
+						pagePreviousButton.click();
+						threadsleep(2000);
+					}
 				}
 			}
 			boolean planAvailable = false;
 			// String uniqueName = "Plan 1 (Regional PPO)";
 			// int totalPlans = plantiles.size();
 			// String pageCount1 = pagenoLabel.getText().trim();
-			int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+			int totalPage = 1;
+			if (pageCount1 == "") {
+				totalPage = 1;
+			} else {
+				totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
+			}
 			int i = 1, planIndex = 0;
 			do {
 				// 3 plans per page
 				for (int k = 0; k < 3; k++) {
 					String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
+					System.out.println("planName "+planName);
 					if (exactName) {
 						if (planName.equalsIgnoreCase(uniqueName.trim())) { // Changing to equals as we have Plan G and
 																			// Plan G+
@@ -503,7 +529,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdata(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
 		// String drugText =
@@ -555,7 +581,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctordata(String planName, String doctorName, String doctorStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
 		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()),
@@ -637,7 +663,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifySNPdata(String planName, String snpName, String snpStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String snpText = plantiles.get(planIndex).findElement(By.cssSelector("*[class*='special-needs-ul']")).getText()
 				.trim();
 		Assert.assertTrue(snpText.contains(snpName), "SNP details not found in plan - " + planName);
@@ -667,11 +693,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String[] planDetails = planInfo.split(",");
 		planName = planDetails[0];
 		planAction = planDetails[1];
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 
 		if (planAction.toLowerCase().contains("link")) {
 			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
 			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
+			threadsleep(5000);
 			if (planName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
 					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
 					|| planName.contains("Plan N")) {
@@ -753,18 +780,19 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		String PlanName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
 		threadsleep(2000);
 		System.out.println("PlanName is: " + PlanName);
 
 		if (PlanName.contains("supplement")) {
-			WebElement DrugTitle = plantiles.get(planIndex)
-					.findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+			WebElement DocTitle = plantiles.get(planIndex)
+					.findElement(By.cssSelector("div[class*='providerSection'] h3"));
 			WebElement MSPlanName = plantiles.get(planIndex).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
-			scrollToView(DrugTitle);
+			scrollToView(DocTitle);
 			planName = MSPlanName.getText().trim();
-			WebElement viewModel = plantiles.get(planIndex).findElement(By.cssSelector(".buttonLinkSection button:nth-child(2)"));
+			WebElement viewModel = plantiles.get(planIndex)
+					.findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
 			jsClickNew(viewModel);
 			threadsleep(2000);
 
@@ -780,8 +808,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
-		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"), "Edit Drug List not found in drug model - " + planName);
-		Assert.assertTrue(deductible.getText().contains("Deductible"), "Deductible not found in drug model - " + planName);
+		Assert.assertTrue(editDurglink.getText().contains("Edit Drug List"),
+				"Edit Drug List not found in drug model - " + planName);
+		Assert.assertTrue(deductible.getText().contains("Deductible"),
+				"Deductible not found in drug model - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
 		covered = drugModel.findElements(By.cssSelector("span[class^='covered']")).size();
@@ -802,7 +832,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugShowMore(String planName, String drugName) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
+		WebElement DrugTitle = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] h3"));
+		scrollToView(DrugTitle);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
 		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
 				.trim();
@@ -811,7 +843,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDrugWhySeparateMdel(String planName) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
 		threadsleep(2000);
 		Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
@@ -826,7 +858,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 
 	public void verifyDoctorShowMore(String planName, String doctorName) {
-		int planIndex = findPlan(planName,false);
+		int planIndex = findPlan(planName, false);
 		plantiles.get(planIndex).findElement(By.cssSelector("a[id*='showAllDoctorsId']")).click();
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
@@ -890,7 +922,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")).click();
 		threadsleep(3000);
 	}
-	
+
 	public void editDoctorsLink() {
 		threadsleep(5000);
 		System.out.println("Editing doctors from PRE Result page");
@@ -1026,7 +1058,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			VerifyPlanTile(options[i]);
 		}
 	}
-	
+
 	public void sortByFuncWithoutVerify(String plan) {
 		System.out.println("Sorting  Options: " + plan);
 		String options[] = plan.split(",");
@@ -1097,24 +1129,95 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				pageNextButton.click();
 				threadsleep(2000);
 			}
-			PlanType = plantiles.get(i).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+			PlanType = plantiles.get(i).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 			Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
 		}
 
 	}
-	
+
 	public void csnRanking(String snpOption) {
 		String FirstplanName;
 		String SecondplanName;
 		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
 		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
-		if(snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+		if (snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
 			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
-			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");			
-		}else {
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");
+		} else {
 			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
 			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
 		}
 	}
 
+
+	public VisitorProfilePage validatePlanNamesPREforOLEFlow(String planName ) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(NextButtonPRE);
+		NextButtonPRE.click();
+		WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+		CommonUtility.waitForPageLoadNew(driver, PRESaveaPlan, 30);
+		System.out.println("Plan Name on PRE Page" + PRESaveaPlan);
+		jsClickNew(PRESaveaPlan);
+		System.out.println("Save a plan Link is clicked for MA plan" + planName);
+		Actions builder = new Actions(driver);
+		WebElement mySavedItem = driver.findElement(By.xpath("(//*[contains(text(),'My Saved Items')])[1]"));
+		// builder.moveToElement(mySavedItem).build().perform();
+		WebElement viewSavedItem = driver.findElement(By.xpath("(//*[contains(text(),'View Saved Items')])[1]"));
+
+		builder.moveToElement(mySavedItem).perform();
+		builder.moveToElement(viewSavedItem).click().perform();
+		String[] listOfTestPlans = planName.split(",");
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan : listOfTestPlans) {
+			System.out.println("Checking Saved Plan on VP for : " + plan);
+			WebElement addedPlan = driver
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			validateNew(addedPlan);
+
+			System.out.println(addedPlan.getText());
+
+			Assertion.assertEquals(plan, addedPlan.getText().trim());
+
+			System.out.println("Verified plans are added on visitior profile page");
+		}
+
+		return new VisitorProfilePage(driver);
+
+
+	}
+
+	public void validateSignInUser(String username, String password){
+
+		try {
+			validate(SignInUser);
+			jsClickNew(SignInUser);
+
+			waitForPageLoadSafari();
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+	}
 }

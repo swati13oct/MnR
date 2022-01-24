@@ -132,8 +132,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
     Examples:
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) |  Eyewear           | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                      | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
 #    @nextYear @regressionAARP
 #    Examples:
@@ -142,8 +142,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC
     Examples:
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  |  Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) |  Eyewear           | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                      | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
 #    @nextYear @regressionAARP
 #    Examples:
@@ -299,15 +299,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #| MS Test Plans | <MS_testPlans> |
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP
     Examples:
-      | site | state    | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
+      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
 #      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | AARP | Virginia | 23666   | NO            | MS       | future   | 11/11/1949 | Hampton City    | Plan G,Plan A |
+      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples:
-      | site | state    | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  |
+      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
 #      | UHC  | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | UHC  | Virginia | 23666   | NO            | MS       | future   | 11/11/1949 | Hampton City    | Plan G,Plan A |
+      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page in <site> site - zip -<zipcode>
@@ -399,7 +399,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Member    | <member>    |
 
     #Then the user validates the Drugs and Doctors
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_05 @regressionAARP @importDrugsFunctionality
     Examples:
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | AARP | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
@@ -483,3 +483,36 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 40475   | NO            | MS       | Madison County    | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
       | UHC  | 73008   | NO            | MS       | Oklahoma County   | Plan G,Plan A                                     | Plan G                   | WB27375OK      |
       | UHC  | 77070   | NO            | MS       | Harris County     | Plan G + wellness extras,Plan F + wellness extras | Plan F + wellness extras | WB27375TX      |
+
+
+    @vpMS4Start_Feb
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county          | MS_testPlans  | MS_Plan | component_code |
+      | AARP | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
+      | AARP | 10001   | NO            | MS       | New York County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 05401   | NO            | MS       | Chittenden County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 71613   | NO            | MS       | Jefferson County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 96701   | NO            | MS       | Honolulu County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 02860   | NO            | MS       | Providence County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 99501   | NO            | MS       | Anchorage Municipality | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
+      | AARP | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
+      | UHC  | 10001   | NO            | MS       | New York County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 05401   | NO            | MS       | Chittenden County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 71613   | NO            | MS       | Jefferson County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 96701   | NO            | MS       | Honolulu County        | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 02860   | NO            | MS       | Providence County      | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 99501   | NO            | MS       | Anchorage Municipality | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
+      | UHC  | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |

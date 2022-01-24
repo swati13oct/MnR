@@ -38,6 +38,8 @@ import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * Functionality:DCE Acquisition
@@ -1307,6 +1309,8 @@ public class DCEStepDefinitionAARP {
          * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
          */
         GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+        BuildYourDrugList bd = getStartedPage.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, bd);
         if (null != getStartedPage) {
             getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
         } else
@@ -1828,7 +1832,7 @@ public class DCEStepDefinitionAARP {
     }
 //Commenting out the following step as View Compare button is not displayed for Compare flow as of Dec 2021 release.
 
-/*
+
 	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_View_Plan_Compare_button_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
@@ -1842,7 +1846,7 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assertion.fail("VPP Plan Compare not loaded");
 	}
-*/
+
 
     @Then("^the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal$")
     public void the_user_clicks_on_Back_to_Compare_link_and_validates_Plan_Compare_page() throws Throwable {

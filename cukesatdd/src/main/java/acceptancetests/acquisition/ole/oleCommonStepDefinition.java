@@ -18,7 +18,6 @@ import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 public class oleCommonStepDefinition {
@@ -175,5 +174,75 @@ public class oleCommonStepDefinition {
 		PharmacySearchPageNew pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
+
+	@Then("^the user clicks on Enroll Now through SignInUser to start the OLE flow on the site$")
+	public void the_user_clicks_on_Enroll_Now_through_SignInUser_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		String PlanName = givenAttributesMap.get("Plan Name");
+		String PlanType = givenAttributesMap.get("Plan Type");
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String County = givenAttributesMap.get("County Name");
+		//String premium = givenAttributesMap.get("Monthly Premium");
+		String SiteName;
+		String PlanPremium = "";
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+
+
+		SiteName = givenAttributesMap.get("Site");
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		System.out.println("Site Name is : " + SiteName);
+
+	//-----------------------------------------------------------------------------------------------------
+	WelcomePage welcomePage;
+		if(SiteName.contains("UHC_ACQ")){
+            VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+                    .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+            //TFN = planSummaryPage.GetTFNforPlanType();
+
+            welcomePage = visitorProfilePage.Enroll_OLE_Plan_SignInUser(PlanName);
+
+	}
+		else{
+		  VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+                    .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+            //TFN = planSummaryPage.GetTFNforPlanType();
+
+            welcomePage = visitorProfilePage.Enroll_OLE_Plan_SignInUser(PlanName);
+
+	}
+
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+	getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		System.out.println("Plan Name is : "+PlanName);
+		System.out.println("Plan Type is : "+PlanType);
+		System.out.println("Plan Zip Code is : "+ZipCode);
+		System.out.println("Plan County Name is : "+County);
+		System.out.println("Plan Plan Premium is : "+PlanPremium);
+		System.out.println("Plan Year is : "+PlanYear);
+		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+
+		if (welcomePage != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+				welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assertion.assertTrue(true);
+	}
+		else
+				Assertion.fail("Error in validating the OLE Welcome Page");
+}
+
 
 }

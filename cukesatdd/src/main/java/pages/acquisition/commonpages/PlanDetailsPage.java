@@ -127,7 +127,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 
-	@FindBy(id = "planDocuments")
+	@FindBy(xpath="//div[contains(@id,'planDocuments')]")
 	private WebElement planDocumentSection;
 
 	// Right Rail Element - TFN
@@ -2160,4 +2160,6 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail(
 					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_Catastrophic.getText()+" <<<<<");
 	}
+	
+
 }

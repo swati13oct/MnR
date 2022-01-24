@@ -1505,6 +1505,17 @@ public class CampaignTFNCommonStepDefinition {
 			tfnPage.ms3BackToAllPlans();
 
 }
+	@Then("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP$")
+	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN_on_LP() throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookieLP();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
+	}
 	
 	
 }

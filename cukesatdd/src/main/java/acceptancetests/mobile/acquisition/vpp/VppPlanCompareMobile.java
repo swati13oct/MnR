@@ -33,7 +33,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
@@ -75,7 +77,7 @@ public class VppPlanCompareMobile {
 		return loginScenario;
 	}
 
-	// AppiumDriver wd;
+	AppiumDriver wd;// = getLoginScenario().getMobileDriver();
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -726,6 +728,57 @@ public class VppPlanCompareMobile {
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+//		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
+	
+	@Then("^verify all links on plan compare page is loaded$")
+	public void verify_alllinks_on_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateALLFiledsPlanComparePage();
+	}
+	
+	@Then("^verify view all plan button is not displayed$")
+	public void verifyviewallplanbuttonisnotdisplayed() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewALLplanButtonNotDisplayed();
+	}
+	
+	@And("^I click on Add Places from Hospitals find care page$")
+	public void I_click_on_Add_Hospitals_on_plan_compare_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageMobile planComparePage = findCarePage.HospitalPlaces();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assertion.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^validate all subtabs displayed on plan details$")
+	public void validateplandetaillinks() throws Throwable {
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatealllinksonPlanDetails();
+	}
+	
+	@Then("^User click on provider link on Medical tab and navigates to rally page$")
+	public void user_EditProvider_on_PlanDetailsPage() {
+
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateEditDocotrsProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
 
 	}
 
@@ -2699,16 +2752,15 @@ public class VppPlanCompareMobile {
 		 */
 	}
 
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
+/*	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
 			throws InterruptedException {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String tfnNumber = (String) getLoginScenario().getBean(CommonConstants.TFN);
-		aquisitionhomepage.validateCallSamContent(tfnNumber);
+		aquisitionhomepage.validateCallSamContent(); 
 
-	}
+	} */
 
 	@Then("^user verify the popup and content$")
 	public void user_verify_the_popup_and_content() throws InterruptedException {
@@ -3939,9 +3991,8 @@ public class VppPlanCompareMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(plantype);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
-//		plansummaryPage.viewPlanSummary(plantype);
+
+		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
@@ -4797,12 +4848,6 @@ public class VppPlanCompareMobile {
 	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page$")
 	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page() throws Exception {
 		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCare();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);

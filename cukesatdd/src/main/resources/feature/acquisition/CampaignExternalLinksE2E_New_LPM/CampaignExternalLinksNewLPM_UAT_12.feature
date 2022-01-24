@@ -51,8 +51,8 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
     Then user clicks on view plans and pricing and navigates to VPP
 #    Then user should be navigated on Shop for a plan page
     Then user should be navigated on VPP summary page
-    And the user selects plan year
-      | Plan Year | <planyear> |
+#   And the user selects plan year
+#      | Plan Year | <planyear> |
     Then the user verify TFN on landing pages
       | TFN Xpath| <TFNxpath3> |
       | TFNflag  | <tfnFlag>   |
@@ -60,7 +60,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
 #      | TFN Xpath | <TFNxpath2> |
 #    And the user validates TFN Number on Zipcode component
 #      | TFN Xpath | <TFNxpath4> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
     And the user validates PSC code
       | PSC Code | <pscCode> |
 #    When the user performs plan search using following information using external link

@@ -26,6 +26,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 
 public class DrugDetailsPage extends UhcDriver {
