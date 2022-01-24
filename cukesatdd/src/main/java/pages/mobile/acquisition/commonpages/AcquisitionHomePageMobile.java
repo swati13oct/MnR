@@ -670,11 +670,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
 				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
@@ -693,9 +695,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(AARP_ACQISITION_PAGE_URL);
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
@@ -723,6 +725,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+		clickUpdateLaterBrowserButton();
 		return offline_prod;
 	}
 
@@ -4535,7 +4538,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		Select geoStateSelect = new Select(stateDropDown);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
 
-		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
+		Assertion.assertTrue("Wrong state selected for geotarget", geoTargetSelectedState.contains(geoState));
+		geoTargetSelectedState = geoState;
 
 		/*
 		 * if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) { >>>>>>> branch

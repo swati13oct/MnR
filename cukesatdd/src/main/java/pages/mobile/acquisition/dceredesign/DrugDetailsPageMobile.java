@@ -181,7 +181,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(css = "#pharmacyfilter > button[class*='searchbutton']")
+	@FindBy(xpath = "//button[contains(@class,'searchbuttonmobile')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(css = "#mailSelectPharmacyBtn0")
