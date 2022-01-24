@@ -237,8 +237,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void select_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
-		String status = "Positive";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
+		String status = "Positive_NextPageName";
+		doctorpage.doctorspage(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"), status);
 	}
 

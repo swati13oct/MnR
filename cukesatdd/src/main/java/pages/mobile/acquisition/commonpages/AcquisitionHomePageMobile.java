@@ -695,9 +695,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(AARP_ACQISITION_PAGE_URL);
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
