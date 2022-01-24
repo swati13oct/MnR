@@ -26,8 +26,8 @@ Feature: 1.17.1 Agent Recommendation Engine -AEP - Verify ARE elements
 
     Examples: 
       | User                   | Pass          | Email                    | username | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
-      | areddstage@givmail.com | Password@12345 | ATDD5STG@MEMBERDD.COM    | OCT-15   | None          | future   |          10001 | fitness,lowpremium                    | NO                 | YES           | [blank]                                                                                                                                 |
-      | areddstage@givmail.com | Password@12345 | ATDD3STG@NONMEMBERDD.COM | DEC-31   | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Prime(HMO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan2(HMO),Plan1(HMO),Patriot(HMO) |
+      | areddstage@givmail.com | Password@123456 | ATDD5STG@MEMBERDD.COM    | OCT-15   | None          | future   |          10001 | fitness,lowpremium                    | NO                 | YES           | [blank]                                                                                                                                 |
+      | areddstage@givmail.com | Password@123456 | ATDD3STG@NONMEMBERDD.COM | DEC-31   | None          | future   |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | Choice(PPO),Plan1(RegionalPPO),Prime(HMO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan2(HMO),Plan1(HMO),Patriot(HMO) |
 
   @ARE @EstimateMedicalCostFuture @F441593 @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in AEP ARE for MCE
@@ -53,4 +53,4 @@ Feature: 1.17.1 Agent Recommendation Engine -AEP - Verify ARE elements
 
     Examples: 
       | User                   | Pass          | Email                 | username | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | areddstage@givmail.com | Password@12345 | ATDD2STG@MEMBERDD.COM | DEC-01   | None          | future   | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
+      | areddstage@givmail.com | Password@123456 | ATDD2STG@MEMBERDD.COM | DEC-01   | None          | future   | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
