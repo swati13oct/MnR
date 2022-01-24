@@ -2741,6 +2741,16 @@ public class DCEStepDefinitionAARP {
         drugSummaryPage.ApplyPharmacyFilter(FilterText);
     }
 
+    @Then("^the user applies pharmacy filter for following text on Details page - Change Pharmacy Page$")
+    public void the_user_applies_pharmacy_filter_for_following_text_on_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+        String FilterText = memberAttributesMap.get("PharmacyFilterText");
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.ApplyPharmacyFilter(FilterText);
+    }
+
     @Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page$")
     public void the_user_validates_Pharmacy_Filter_Error_message_and_x_cancel_function_is_working_on_Details_page_Change_Pharmacy_Page() throws Throwable {
         DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()

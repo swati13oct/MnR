@@ -73,16 +73,16 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user validates planName on LearnMore page matches plan Name in VPP
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page
 
-    @dce_DrugDetailsValidation_AARP @regressionAARP
-    Examples: 
+  @dce_DrugDetailsValidation_AARP @regressionAARP
+    Examples:
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
-      | ativ                 | Humalog | Fanapt |         2 | Day        | Every 3 Months |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  |
+      | ativ                 | Humalog | Fanapt | 2         | Day        | Every 3 Months | 80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  |
 
-    @dce_DrugDetailsValidation_UHC @regressionUHC
-    Examples: 
+  @dce_DrugDetailsValidation_UHC @regressionUHC
+    Examples:
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
-      | ativ                 | Humalog | Fanapt |        20 | Week       | Every 1 Month  |   33111 | MAPD     | MedicareMax (HMO)                             | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
-      | ativ                 | Humalog | Fanapt |       200 | Month      | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
+      | ativ                 | Humalog | Fanapt | 20        | Week       | Every 1 Month  | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
+      | ativ                 | Humalog | Fanapt | 200       | Month      | Every 3 Months | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
 
   @dce_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay
@@ -148,16 +148,16 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Pharmacy Selection | <StandardPharSelected> |
     Then the user validates link to Drug Summary Page
 
-    @dce_DrugDetailsCopay_Preferred_AARP @regressionAARP
-    Examples: 
+  @dce_DrugDetailsCopay_Preferred_AARP @regressionAARP
+    Examples:
       | drug1      | drug2  | zipCode | pharmacyZipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
-      | vigabatrin | Fanapt |   80001 | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
+      | vigabatrin | Fanapt | 80001   | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
 
-    @dce_DrugDetailsCopay_Preferred_UHC @regressionUHC
-    Examples: 
+  @dce_DrugDetailsCopay_Preferred_UHC @regressionUHC
+    Examples:
       | drug1      | drug2  | zipCode | pharmacyZipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
-      | vigabatrin | Fanapt |   80001 | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
- 
+      | vigabatrin | Fanapt | 80001   | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
+
 
   @dce_DrugDetailsDynamicCopay_Standard
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Standard Pharmacy Copay and Not covered Pharmacy View - <planType>
@@ -197,26 +197,27 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Pharmacy Selection | <MailPharSelected> |
     And user clicks on change pharmacy link from details page
     Then the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page
-      | PharmacyZipCode | <pharmacyZipCode> |
+      | PharmacyZipCode | <SpecialtyPharmacyZip> |
+    Then the user applies pharmacy filter for following text on Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SpecialtyPharmacy> |
     Then the user selects following pharmacy and returns to DCE Details page
-      | SelectPharmacy | <SelectPharmacy> |
+      | SelectPharmacy | <SpecialtyPharmacy> |
     Then the user validates Not Covered Pharmacy view for DCE Details Page
     And the user validates link to Drug Summary Page
     And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
 
-    @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
-    Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-#      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $35          | $105          |
-      | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
+  @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
+    Examples:
+      | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
+      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $45           |
 
-    @dce_DrugDetailsCopay_Standard_UHC @regressionUHC
-    Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $30          | $90           |
-      | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
+  @dce_DrugDetailsCopay_Standard_UHC @regressionUHC
+    Examples:
+      | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
+      | vigabatrin | Fanapt | 33111   | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $30          | $90           |
+      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $45           |
 
   @dce_DrugDetailsPremiumValidation
   Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>
@@ -245,19 +246,19 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Premium | <premium> |
     And verify DCE NBA is displayed on drug details page
 
-    @dce_DrugDetailsPremiumValidation_AARP @regressionAARP
-    Examples: 
+  @dce_DrugDetailsPremiumValidation_AARP @regressionAARP
+    Examples:
       | drug1   | zipCode | planType | planName                                                   | site | premium |
-      | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
+      | Orkambi | 90210   | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
+      | Orkambi | 75002   | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
+      | Orkambi | 75002   | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
 
-    @dce_DrugDetailsPremiumValidation_UHC @regressionUHC
-    Examples: 
+  @dce_DrugDetailsPremiumValidation_UHC @regressionUHC
+    Examples:
       | drug1   | zipCode | planType | planName                                                   | site | premium |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0      |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | UHC  | $0 - $  |
-      | Orkambi |   66032 | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | UHC  | $0 - $  |
+      | Orkambi | 75002   | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0      |
+      | Orkambi | 75002   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | UHC  | $0 - $  |
+      | Orkambi | 66032   | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | UHC  | $0 - $  |
 
   @dce_DrugDetailsLISBuyDown
   Scenario Outline: To verify DCE Details Page  <site> site - for LIS Buydown Plans
@@ -288,15 +289,15 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | NotCoveredDrug | <drug2> |
     Then the user validates LIS text for coverages stages popups on DCE details page
 
-    @dce_DrugDetailsLISBuyDown_AARP @regressionAARP
-    Examples: 
+  @dce_DrugDetailsLISBuyDown_AARP @regressionAARP
+    Examples:
       | drug1  | drug2   | zipCode | planType | planName                                   | site |
-      | Fanapt | Lipitor |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP |
+      | Fanapt | Lipitor | 75002   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP |
 
-    @dce_DrugDetailsLISBuyDown_UHC @regressionUHC
-    Examples: 
+  @dce_DrugDetailsLISBuyDown_UHC @regressionUHC
+    Examples:
       | drug1  | drug2   | zipCode | planType | planName                                   | site |
-      | Fanapt | Lipitor |   10001 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
+      | Fanapt | Lipitor | 10001   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
 
   @dce_DrugDetailsNonBuyDownLIS
   Scenario Outline: To verify DCE Details Page  <site> site - for LIS Non Buydown Plans
@@ -324,15 +325,15 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
     Then the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page
-    Then the user validates Non-LIS text for coverages stages popups on DCE details page
+    Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     And verify DCE NBA is displayed on drug details page
 
-    @dce_DrugDetailsNonBuyDownLIS_AARP @regressionAARP
-    Examples: 
-      | drug1  | drug2   | zipCode | planType | planName                                                   | site |
-      | Fanapt | Lipitor |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | AARP |
+  @dce_DrugDetailsNonBuyDownLIS_AARP @regressionAARP
+    Examples:
+      | drug1  | drug2   | zipCode | planType | planName                                              | site |
+      | Fanapt | Lipitor | 75002   | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | AARP |
 
-    @dce_DrugDetailsNonBuyDownLIS_UHC @regressionUHC
-    Examples: 
-      | drug1  | drug2   | zipCode | planType | planName                                                   | site |
-      | Fanapt | Lipitor |   78006 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  |
+  @dce_DrugDetailsNonBuyDownLIS_UHC @regressionUHC
+    Examples:
+      | drug1  | drug2   | zipCode | planType | planName                                              | site |
+      | Fanapt | Lipitor | 78006   | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  |
