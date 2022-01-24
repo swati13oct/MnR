@@ -15,7 +15,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down UI plancompare page
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear |
       | areddstage@givmail.com | Password@123456 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
@@ -32,7 +32,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down not displaying in plancompare page
 
     Examples: 
-      | User                   | Pass           | Email                  | IfMultiCounty | PlanYear |
+      | User                   | Pass            | Email                  | IfMultiCounty | PlanYear |
       | areddstage@givmail.com | Password@123456 | ATDD4STG@MEMBERDD.COM  | None          | current  |
       | areddstage@givmail.com | Password@123456 | EMILYN@MACIEJEWSKI.COM | None          | current  |
 
@@ -50,7 +50,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates view plan details in plancompare page
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear |
       | areddstage@givmail.com | Password@123456 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @SavePlansARE @F439411
@@ -68,7 +68,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Plan Year | <PlanYear> |
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear |
       | areddstage@givmail.com | Password@123456 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @EnrollPlansARE @F439411
@@ -85,7 +85,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates enroll plans in plancompare page
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear |
       | areddstage@givmail.com | Password@123456 | ATDD1STG@MEMBERDD.COM | None          | current  |
 
   @ARE @PlansReorder @F487396
@@ -107,7 +107,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                        | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       #| areddstage@givmail.com  | Password@123456 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
       | areddstage@givmail.com | Password@123456 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                    | NO                 | YES           | [blank]    |
       | areddstage@givmail.com | Password@123456 | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,lowpremium,drug,doctor | NO                 | YES           | [blank]    |
@@ -131,7 +131,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | areddstage@givmail.com | Password@123456 | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | NO                 | YES           | [blank]    |
 
   @ARE @PlansReorder @MCE @F487422
@@ -155,7 +155,7 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User                   | Pass           | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | areddstage@givmail.com | Password@123456 | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | NO                 | YES           | [blank]    |
 
   @ARE @PlansReorder @NOMCE @F487422
@@ -175,6 +175,6 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
       | Ranking Options | <RankingOptions> |
 
     Examples: 
-      | User                   | Pass           | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
+      | User                   | Pass            | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
       | areddstage@givmail.com | Password@123456 | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
       | areddstage@givmail.com | Password@123456 | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
