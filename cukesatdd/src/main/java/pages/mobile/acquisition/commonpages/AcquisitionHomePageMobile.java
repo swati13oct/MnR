@@ -4525,16 +4525,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.cssSelector("select[name=state-select]"));
+		WebElement stateDropDownAfter = driver.findElement(By.cssSelector("#state-select"));
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
-
-//		jsClickNew(stateWidget);
-//		jsClickNew(stateWidgetLable);
+		scrollToView(stateDropDown);
+		stateDropDown.click();
 		mobileSelectOption(stateDropDown, geoState, true);
-		Select geoStateSelect = new Select(stateDropDown);
-		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
-
+		Select geoStateSelect = new Select(stateDropDownAfter);
+		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText().trim();
+		System.out.println("First option from State drop down was >>>>" + geoTargetSelectedState);
 		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
 
 		/*
