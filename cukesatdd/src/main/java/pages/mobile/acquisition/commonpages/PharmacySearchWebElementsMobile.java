@@ -210,10 +210,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#miles")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
+	@FindBy(xpath = "//p[contains(@class,'field-error-msg')]")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
+	@FindBy(xpath="//div[@id='zipError']//p[contains(@class,'field-error-msg')]")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath = "#zipError > p")
