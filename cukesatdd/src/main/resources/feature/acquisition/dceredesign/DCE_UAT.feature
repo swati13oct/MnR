@@ -420,7 +420,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SpecialtyPharmacy> |
     Then the user validates Covered Drug display for NC Pharmacy selection
-    Then the user validates Speciality pharmacy message DCE Summary Page plan card
+#    Then the user validates Speciality pharmacy message DCE Summary Page plan card
+    Then the user validates Not Covered Pharmacy message DCE Summary Page plan card
     And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
@@ -547,9 +548,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
   @dce_E2E_Scenario7_UAT_AARP @regressionAARP @visitorProfileAuthenticated
     Examples:
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | E2E_Scenario7_UAT_UHC | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E_Scenario7_UAT_UHC | AARP | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | false         | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
   @dce_E2E_Scenario7_UAT_UHC @regressionUHC @visitorProfileAuthenticated
     Examples:
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | true          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E_Scenario7_UAT_UHC | UHC  | 78006   | 10/20/1942 | 06096         | 2ED7ET4TC62 | true     | false          | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
