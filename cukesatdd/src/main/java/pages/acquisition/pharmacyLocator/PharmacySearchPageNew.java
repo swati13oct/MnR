@@ -245,11 +245,12 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	public void validateMapSectionContent() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		pageloadcomplete();
-		try {
+/*		try {
 			wait(3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		*/
 		scrollToView(mapCollapse);
 //		moveMouseToElement(map_resultSection);
 //		Assertion.assertTrue("PROBLEM - unable to locate the map", pharmacyValidate(map_mapImg));
