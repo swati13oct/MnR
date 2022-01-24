@@ -167,6 +167,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
+	
+	@FindBy(xpath = "//*[contains(text(),'View Plan Summary')]")
+	private WebElement viewPlanSummaryBtn;
 
 	@FindBy(xpath = "//*[@id='popupClose']")
 	private WebElement closeProfilePopup;
@@ -1276,6 +1279,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
 		sleepBySec(5);
+		jsClickNew(viewPlanSummaryBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 

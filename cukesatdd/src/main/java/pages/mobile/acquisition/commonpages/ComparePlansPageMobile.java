@@ -196,6 +196,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[@id='add-plan-menu_button']")
 	private WebElement addPlanButton;
+	
+	@FindBy(xpath = "//img[contains(@class,'d-block mx-auto md-right-scroll-image')]")
+	private WebElement scrollBtnToAddBtn;
 
 	@FindBy(xpath = "//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
@@ -259,7 +262,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "#yourdrugsheading")
 	private WebElement yourDrugsBanner;
 
-	@FindBy(css = "[dtmname='Plan Compare:Add Drugs']")
+	@FindBy(xpath = "//*[contains(text(),'Add Drugs') and contains(@class,'button')]")
 	private WebElement addDrugsLink;
 
 	@FindBy(css = "[dtmname='Plan Compare:Edit Drugs']")
@@ -1020,7 +1023,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(viewPlanDetailslink);
 //		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
-		validateNew(addPlanButton);
+//		validateNew(addPlanButton);
+		validateNew(scrollBtnToAddBtn);
 		System.out.println("Validated all links plan compare");
 
 	}

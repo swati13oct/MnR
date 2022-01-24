@@ -89,14 +89,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "input#zip-code")
 	private WebElement zipCode;
 
-	@FindBy(css = ".container div>button[class*='primary button']")
+	@FindBy(css = "#location-save-btn")
 	private WebElement continueBtn;
 
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 
 	// zip code actions elements
-	@FindBy(css = "#zipInfo")
+	@FindBy(css = "input#zip-code")
 	private WebElement countyInfo;
 
 	@FindBy(css = "label[for='MultipleCounty']")
@@ -175,6 +175,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		zipCode.clear();
 
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
+      
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
@@ -187,6 +188,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
 			//Select multicounty = new Select(multicountySelect);
+			//below line of code added to click on county label so county dropdown will open (iOS issue)
+			driver.findElement(By.xpath("//*[@for='MultipleCounty']")).click();
 			mobileSelectOption(multicountySelect, inputdata.get("County Name"),true);
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
