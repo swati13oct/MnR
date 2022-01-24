@@ -1046,7 +1046,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//select[@id='statedrpdwn']")
 	private WebElement stateDropDown;
 
-	@FindBy(xpath = "//span[@id='header-number']")
+	@FindBy(xpath = "(//span[contains(@class,'plans-count')])[1]")
 	private WebElement shoppingCartSaveCount;
 
 	@FindBy(xpath = "//span[contains(text(),'View Saved Plans')]")
@@ -2596,10 +2596,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement premiumForPlan = null;
 		if (planName.contains("SNP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Monthly Premium')])"));
 		} else if (planName.contains("PDP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//*[contains(text(),'Monthly Premium')])"));
 		} else
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
@@ -2619,7 +2619,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Provider')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Primary Care Provider')]"));
 		} else if (planName.contains("PDP")) {
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Provider')]"));
@@ -2651,7 +2651,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Specialist')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Specialist')]"));
 		} else if (planName.contains("PDP")) {
 			specialistForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Specialist')]"));
@@ -2680,7 +2680,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (planName.contains("SNP")) {
 			referralRequiredForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Referral')])"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Referral')])"));
 		} else if (planName.contains("PDP")) {
 			referralRequiredForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Referral')])"));
@@ -2708,10 +2708,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			
 		} else if (planName.contains("PDP")) {
 			outOfPocketForPlan = driver.findElement(By.xpath("(//*[normalize-space(text())=\'" + planName
-					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Out of Pocket')])"));
+					+ "\']/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//*[contains(text(),'Out of Pocket')])"));
 		} else
 			outOfPocketForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li[contains(text(),'Out of Pocket')]"));
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//*[contains(text(),'Out of Pocket')]"));
 		validateNew(outOfPocketForPlan);
 		/*
 		 * String OOPMax = OOPForPlan.getText(); if(OOPMax.equals(outOfPocketMaximum)){
@@ -2728,7 +2728,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (!prescriptionDrugsTier1.contains("No drug coverage")) {
 			if (planType.equalsIgnoreCase("SNP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Prescription Drugs')])"));
+						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'benefits-table')]//*[contains(text(),'Prescription Drugs')])"));
 			} else if (planType.equalsIgnoreCase("PDP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 						+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li)[3]"));
@@ -2752,24 +2752,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
-		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]/span)[2]/span/span"));
-		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
-		/*
-		 * try {
-		 *
-		 * System.out.println(" The text is "
-		 * +AnnualDeductibleForPlan.getAttribute("textContent").trim());
-		 * System.out.println(" The text from feature file is " +annualDeductible);
-		 *
-		 * } catch (Exception e) { System.out.println(" The text is"
-		 * +AnnualDeductibleForPlan.getText()); }
-		 */
-		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
-			System.out.println("Annual Deductible for the plan is " + planDeductible);
+		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])"));
+		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)"));
+		// Actions action = new Actions(driver);
+		// action.moveToElement(toolTip).build().perform();
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
+		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		if (toolTipText.contains("annual deductible")) {
+			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
 		} else
-			Assertion.fail("Annual Deductible for the plan is incorrect : " + planName);
+			Assertion.fail("Tool Tip is not working");
 	}
 
 	/*
@@ -2811,6 +2807,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * Actions action = new Actions(driver); scrollToView(toolTip);
 		 * action.moveToElement(toolTip).build().perform();
 		 */
+		
 		jsMouseOver(toolTip);
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
@@ -2825,21 +2822,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
-		/*
-		 * Actions action = new Actions(driver);
-		 * action.moveToElement(toolTip).build().perform();
-		 */
-		jsMouseOver(toolTip);
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)"));
+		// Actions action = new Actions(driver);
+		// action.moveToElement(toolTip).build().perform();
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Tool Tip is not working");
-		jsMouseOut(toolTip);
 	}
 
 	/* Navigation to DCE for all plan types having a plan name */
@@ -7316,6 +7311,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
+		if(planType.contains("MA"))
+			planType = "MAPD";
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)

@@ -325,13 +325,13 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
       | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      | AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
     @MedSuppOnlyPages_GlobalCompsUHC
     Examples: 
       | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
       | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
   @GlobalComponentsAARPShopPages
   Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
@@ -1066,7 +1066,7 @@ Feature: 1.12 ACQ - Global Components Validation
     @Header_Medsup_AARP_Membership
     Examples: 
       | site | path                                                                      | pageName                                   |
-      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
+      #| AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| AARP | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
       | AARP | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
       #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
@@ -1081,7 +1081,7 @@ Feature: 1.12 ACQ - Global Components Validation
     @Header_Medsup_UHC_Membership
     Examples: 
       | site | path                                                                      | pageName                                   |
-      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
+      #| UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| UHC | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
       | UHC  | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
       #| UHC | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |

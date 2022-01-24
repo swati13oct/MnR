@@ -86,6 +86,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	private WebElement radioselect;
 
 // Doctors Page Modal popup
+	
+	@FindBy(css = "div[class*='edit-list-button'] button")
+	private WebElement modalEditDoctor;
 
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalFinddoctors;
@@ -103,6 +106,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
+	
+	@FindBy(css = "span[class*='zeroProvider']")
+	private List<WebElement> docWarningMsg;
 
 	@FindBy(css = "#modal .modal-content .row:nth-of-type(1) p")
 	private WebElement modalDoctorsCount;
@@ -222,7 +228,9 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-//		modalFinddoctors.click();
+		threadsleep(3000);
+		if(validate(modalEditDoctor))
+			jsClickNew(modalEditDoctor);
 		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count, locationCount);
 		threadsleep(5000);
@@ -244,6 +252,41 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 //		modalContinuedoctors.click();
 		jsClickNew(modalContinuedoctors);
 	}
+	
+//Doctors Page Function Verification                      
+
+		public void editdoctorspageFunctional(String doctor, String doctorsName, String multiDoctor, String status) {
+			System.out.println("Doctor Page Functional Operations");
+			if (status.toUpperCase().contains("POSITIVE")) {
+				doctorspageOptions(doctor);
+				jsClickNew(continueBtn);
+				if (doctor.equalsIgnoreCase("Lookup")) {
+					if (multiDoctor.equalsIgnoreCase("YES"))
+						editdoctorModellookup(doctorsName, 3);
+					else
+						editdoctorModellookup(doctorsName, 1);
+				}
+			} else {
+				if (doctor.isEmpty()) {
+					jsClickNew(continueBtn);
+					desktopCommonUtils.desktopErrorValidation(page);
+				}
+			}
+		}
+	
+//Editing doctor
+
+		public void editdoctorModellookup(String search, int count) {
+			String curWindow = driver.getWindowHandle();
+			System.out.println(curWindow);
+			threadsleep(3000);
+			if(validate(modalEditDoctor))
+				jsClickNew(modalEditDoctor);
+			jsClickNew(modalFinddoctors);
+			validateLinksanotherWindow(curWindow, "Doctors", search, count, locationCount);
+			threadsleep(5000);
+			jsClickNew(modalContinuedoctors);
+		}
 
 	public void doctorModellookupElements() {
 		validate(modalDescription);
@@ -431,7 +474,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
 //		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
-		jsClickNew(modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")));
+		jsClickNew(modalDoctorsList.get(1).findElement(By.cssSelector("div[class*='editButton'] button")));
 		int afterRemove = modalDoctorsList.size();
 		if (beforeRemove != afterRemove) {
 			System.out.println("Remove Results Count mismatch");
@@ -585,6 +628,11 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
+		threadsleep(2000);
+		String Msg1 = docWarningMsg.get(0).getText().trim(); //Added for Feb. feature
+		String Msg2 = docWarningMsg.get(1).getText().trim();
+		Assert.assertTrue(Msg1.contains("Edit your list"),"Edit your list is not displaying in Doctor popup"); 
+		Assert.assertTrue(Msg2.contains("Continue"),"Continue is not displaying in Doctor popup");
 		threadsleep(2000);
 		jsClickNew(modalContinuedoctors);
 		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
