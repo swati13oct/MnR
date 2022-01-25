@@ -935,9 +935,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	//@FindBy(xpath = "(//*[contains(text(),'Compare Plan')])[1]")
+	//@FindBy(xpath = "//*[contains(text(),'Compare Plan')])[1]")
 	
-	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide plan-card ng-scope compare-add')]//button[contains(text(),'Compare plans')][1]")
+	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
