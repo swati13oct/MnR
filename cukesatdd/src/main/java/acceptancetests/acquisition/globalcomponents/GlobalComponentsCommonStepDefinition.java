@@ -96,6 +96,7 @@ public class GlobalComponentsCommonStepDefinition {
 		String site = memberAttributesMap.get("Site");
 		//AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
+		scenario.log(aquisitionhomepage.returnCookieValue());
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
