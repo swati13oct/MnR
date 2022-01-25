@@ -188,14 +188,14 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	protected WebElement filterOptions;
 
 //	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
-	@FindBy(xpath="//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/../..")
+	@FindBy(xpath = "//span[contains(text(),'/')]/..//input[contains(@id,'checkbox')]/../..")
 	protected WebElement indian_tribal_label_filter;
 
 	@FindBy(css = "#indian-tribal")
 	protected WebElement indian_tribal_filter;
 
 //	@FindBy(css = "#noResultsFoundErrorMessage")
-	@FindBy (xpath= "//div[@id='searcherrorcontainer']//p")
+	@FindBy(xpath = "//div[@id='searcherrorcontainer']//p")
 	protected WebElement noPharmaciesErrorMessage;
 
 	@FindBy(xpath = "//*[@id='emptyzipcodeerror_id']/p")
@@ -210,10 +210,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#miles")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 p-0 d-block']")
+	@FindBy(xpath = "//p[contains(@class,'field-error-msg')]")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 p-0 d-block']")
+	@FindBy(xpath = "//div[@id='zipError']//p[contains(@class,'field-error-msg')]")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath = "#zipError > p")
@@ -250,11 +250,11 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h4[@id = 'selectedplanname']")
 	protected WebElement PharmacyFoundCount;
-	
-	@FindBy(xpath="//button[contains(@id, 'showfilter')]/span")
+
+	@FindBy(xpath = "//button[contains(@id, 'showfilter')]/span")
 	protected WebElement Filter;
-	
-	@FindBy(xpath="//button[contains(@dlassetid, 'apply-filter-btn')]")
+
+	@FindBy(xpath = "//button[contains(@dlassetid, 'apply-filter-btn')]")
 	protected WebElement FilterApplyBtn;
 
 	@FindBy(xpath = "//button[@dlassetid='ps-show-on-map']//span[contains(@class,'uhc-button_text')]")
@@ -443,7 +443,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInEnglish;
 
-	@FindBy(xpath = "//html[@lang='en']")//DOM does not get update after language change to Chinese or Spanish
+	@FindBy(xpath = "//html[@lang='en']") // DOM does not get update after language change to Chinese or Spanish
 	protected WebElement pgInChinese;
 
 	@FindBy(xpath = "//html[@lang='en']")

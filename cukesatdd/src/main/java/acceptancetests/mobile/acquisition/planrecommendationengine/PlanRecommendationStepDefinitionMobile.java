@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
@@ -79,27 +80,29 @@ public class PlanRecommendationStepDefinitionMobile {
 		}
 	}
 
+	public void checkpopup() {
+		if (if_offline_prod && !popup_clicked) {
+			LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+			popup_clicked = planSelectorhomepage.close_Popup();
+		}
+	}
+
 	boolean if_offline_prod = false, popup_clicked = false;
 
 	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		wd = getLoginScenario().getMobileDriver();
 		readfeaturedataMobile(inputdata);
-//		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-//		aquisitionhomepage.openPRE(inputValues.get("Site"));
-//		aquisitionhomepage.fixPrivateConnectionMobile();
-//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE"); // changed on 3/3/21 as
-																									// part of AARP/UHC
-																									// cleanup
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE");
 		if_offline_prod = aquisitionhomepage.openPRE(inputValues.get("Site"));
-		if (MRScenario.environment.contains("digital-devv2"))
-			aquisitionhomepage.fixPrivateConnection();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-//		checkpopup();
+
+		checkpopup();
+
 	}
 
 	@When("^user navigates to PRE landing page mobile$")
@@ -116,10 +119,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigates_to_zipcode_page_mobile() {
-		HeaderFooterMobile header = new HeaderFooterMobile(wd);
-		header.navigatePRELandingpageMobile();
-		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
-		prelandingpage.navigatezipcodepagemobile();
+		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+		planSelectorhomepage.landingpage();
 	}
 
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -158,10 +159,26 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	@And("^clicks on get started button and runs questionnaire$")
-	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) {
-		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
+	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) throws Exception {
 		readfeaturedataMobile(inputdata);
-		prezipcodemobile.zipcodepageValidationmobile(inputValues);
+		String zipcode = inputValues.get("Zip Code");
+		System.out.println("Zipcode is:" + zipcode);
+		String county = inputValues.get("CountyDropDown");
+		System.out.println("Email is:" + county);
+		String isMultiCounty = inputValues.get("Is Multi County");
+		System.out.println("Entered Search Key is:" + isMultiCounty);
+		checkpopup();
+
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+		if (isMultiCounty.equalsIgnoreCase("NO")) {
+			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
+		} else {
+			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+		}
 	}
 
 	@Then("^clicks on get started button and check error scenarios$")
@@ -229,8 +246,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void select_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
-		String status = "Positive";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
+		String status = "Positive_NextPageName";
+		doctorpage.doctorspage(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"), status);
 	}
 

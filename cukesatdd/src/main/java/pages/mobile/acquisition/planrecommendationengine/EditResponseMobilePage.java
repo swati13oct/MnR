@@ -47,6 +47,9 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	@FindBy(css = "button[class*='button-secondary']")
 	private WebElement cancelButton;
+	
+	@FindBy(css = ".editPref button")
+	private WebElement editYourResponse;
 
 	@FindBy(css = "button[class*='button-primary']")
 	private WebElement saveButton;
@@ -196,16 +199,16 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void navigateEditResponsePageMobile(String flow) {
 		if (flow.equalsIgnoreCase("pdp")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink);
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				mobileUtils.mobileLocateElementClick(MAViewPlansLink); // Have zip with snp for all flows
-				mapdEditResponseButton.click();
+				jsClickNew(MAViewPlansLink); // Have zip with snp for all flows
+				jsClickNew(mapdEditResponseButton);
 			}
 			else {
 				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
-				snpEditResponseButton.click();
+				jsClickNew(snpEditResponseButton);
 			}
 		}
 		validate(editResponseTitle);
@@ -309,11 +312,11 @@ public class EditResponseMobilePage extends GlobalWebElements {
 				if (click) {// Edit button Click
 					if (section.equalsIgnoreCase("location")) {
 						boolean lookup = validate(changeDocLink, 5);
-						mobileUtils.mobileLocateElementClick(elem.findElement(By.cssSelector("button")));
+						jsClickNew(elem.findElement(By.cssSelector("button")));
 						if (lookup)
-							mobileUtils.mobileLocateElementClick(locationModalConfirm);
+							jsClickNew(locationModalConfirm);
 					} else {
-						mobileUtils.mobileLocateElementClick(elem.findElement(By.cssSelector("button")));
+						jsClickNew(elem.findElement(By.cssSelector("button")));
 					}
 				}
 				break;
@@ -424,12 +427,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
 
+	public void navigateEditResponsePage(String flow) {
+		waitForPageLoadSafari();
+		validate(editYourResponse, 10);
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
+		validate(editResponseTitle);
+		validate(returnToPlanLink, 30);
+	}
 	
 	public void editUserResponse(HashMap<String, String> userInput) {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
-		plansLoader();
-		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
+		pageloadcomplete();
+		navigateEditResponsePage(inputValues.get("Plan Type"));
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
 		Assert.assertTrue(validate(viewUpdateButton, 10), "View Updated Button should be displayed");
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
@@ -550,7 +561,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	
 	public void plansLoader() {
 		pageloadcomplete();
-		validate(planLoaderscreen, 60);
+		//validate(planLoaderscreen, 60);
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		validate(planZipInfo, 60);
 		threadsleep(5000);// Plan loader

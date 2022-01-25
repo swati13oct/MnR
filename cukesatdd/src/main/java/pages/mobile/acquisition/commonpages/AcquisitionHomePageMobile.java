@@ -670,11 +670,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL);
+				startNewMobile(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
 				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
@@ -693,9 +696,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(AARP_ACQISITION_PAGE_URL);
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
@@ -723,6 +728,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+		clickUpdateLaterBrowserButton();
 		return offline_prod;
 	}
 
@@ -2220,10 +2226,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (toolTipText.length() == 14 && toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
+		if (toolTipText.length() == 14
+				&& toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
-		}
-		else
+		} else
 			Assertion.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 		/*
 		 * if (toolTipText.contains(CallSam1877)) {
@@ -3403,7 +3409,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(5);
 		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
-				
+
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -4535,6 +4541,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(stateDropDown);
 		stateDropDown.click();
 		mobileSelectOption(stateDropDown, geoState, true);
+
 		Select geoStateSelect = new Select(stateDropDownAfter);
 		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText().trim();
 		System.out.println("First option from State drop down was >>>>" + geoTargetSelectedState);
