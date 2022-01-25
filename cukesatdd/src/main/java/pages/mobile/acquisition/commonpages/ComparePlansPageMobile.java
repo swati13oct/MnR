@@ -1024,7 +1024,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 //		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
 //		validateNew(addPlanButton);
-		validateNew(scrollBtnToAddBtn);
+//		validateNew(scrollBtnToAddBtn);
 		System.out.println("Validated all links plan compare");
 
 	}

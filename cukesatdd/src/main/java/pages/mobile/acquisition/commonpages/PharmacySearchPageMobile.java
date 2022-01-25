@@ -865,6 +865,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 //		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
 //			driver.findElement(By.cssSelector("#plan-type-label")).click();
 //		}
+		seletPlandropdown.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 
 //		if (!loadingBlock.isEmpty())

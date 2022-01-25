@@ -135,6 +135,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 					 * driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+
 					 * county + "')]"));
 					 */
+					countyModal.click();
 					mobileSelectOption(countyModal, county, true);
 					// jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);

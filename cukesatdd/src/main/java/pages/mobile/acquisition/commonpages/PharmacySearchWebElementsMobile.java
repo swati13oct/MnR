@@ -377,7 +377,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@dlassetid='ps_tfncard_tfn_2']//h3/../../.")
 	protected WebElement callUnitedHealthCareText;
 
-	@FindBy(xpath = "//h3[contains(text(),'Preferred Mail')]/../../..")
+	@FindBy(xpath="//div[contains(@ng-show,'preferredmailservice')]")
 	protected WebElement widget_preferredMailServicePharmacy;
 
 	@FindBy(xpath = "//a[contains(@href,'mail-order')]")

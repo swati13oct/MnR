@@ -5392,6 +5392,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
 		sleepBySec(10);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
