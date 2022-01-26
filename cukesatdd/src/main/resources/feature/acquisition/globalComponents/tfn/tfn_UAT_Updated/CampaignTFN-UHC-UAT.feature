@@ -390,8 +390,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN Xpath | <TFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    Then the user navigates to plan tab for any plan
-      | Plan Type | <MAplantype> |
+    #Then the user navigates to plan tab for any plan
+     # | Plan Type | <MAplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number

@@ -692,8 +692,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | PSC Code | <pscCode> |
     #And the user views the plans of the below plan type
     #| Plan Type | <plantype> |
-    Then the user navigates to plan tab for any plan
-      | Plan Type | <MAplantype> |
+    #Then the user navigates to plan tab for any plan
+     # | Plan Type | <MAplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number
@@ -726,7 +726,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     @Scenario_9_External_Link_UAT_Medsup3.0
     Examples: 
       | scenario                      | site | zipcode | MAplantype | pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
-      | Scenerio 9-ExternalLink - AMP | AARP |   24010 | MA         | 8000158 | Alabama | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
+      | Scenerio 9-ExternalLink - AMP | AARP |   24010 | MA         | 8000158 | Alabama | health-plans.html?zipcode=24010&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
 
     @Scenario_9_External_Link_UAT_Medsup4.0
     Examples: 
