@@ -1144,10 +1144,10 @@ public class CampaignExternalLinkStepDefinition {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		String PlanPremium = campaignExternalLinkspage.getPlanPremium(PlanName, planType);
+		//String PlanPremium = campaignExternalLinkspage.getPlanPremium(PlanName, planType);
 		// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM,
 		// PlanPremium);
-		campaignExternalLinkspage.clickOnViewMoreForPlan(PlanName);
+		campaignExternalLinkspage.clickOnViewMorePlan(PlanName);
 		CampaignExternalLinks campaignExternalLinkspagevppDetails = campaignExternalLinkspage
 				.navigateToPlanDetails(PlanName, planType);
 		if (campaignExternalLinkspage != null) {
