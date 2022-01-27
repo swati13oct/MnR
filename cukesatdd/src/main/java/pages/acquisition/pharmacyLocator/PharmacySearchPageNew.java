@@ -245,11 +245,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 	public void validateMapSectionContent() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		pageloadcomplete();
-		try {
-			wait(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+        CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath("//*[@id='map']/div/div"),5);
 		scrollToView(mapCollapse);
 //		moveMouseToElement(map_resultSection);
 //		Assertion.assertTrue("PROBLEM - unable to locate the map", pharmacyValidate(map_mapImg));

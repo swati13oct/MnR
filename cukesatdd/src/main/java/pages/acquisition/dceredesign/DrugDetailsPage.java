@@ -1613,7 +1613,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void SelectPharmacy(String PharmacytoSelect) {
 
-		validateSelectPharmacyPage();
+		//validateSelectPharmacyPage();
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));

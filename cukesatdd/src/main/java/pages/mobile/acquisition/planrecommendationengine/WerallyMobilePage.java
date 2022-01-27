@@ -110,10 +110,11 @@ public class WerallyMobilePage extends UhcDriver {
 				searchParameter = s;
 				validate(searchBox, 30);
 				if (type.toUpperCase().contains("DOCTOR")) {
-					mobileactionsendkeys(searchBox, searchParameter);
+					sendkeysMobile(searchBox, searchParameter);
 					hidekeypad();
-					mobileswipe("50%", false);
-					mobileactiontap(searchButton);
+				//	mobileswipe("50%", false);
+				//	mobileactiontap(searchButton);
+					jsClickNew(searchButton);
 					pageloadcomplete();
 					int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 					if (actualResultscount >= count) {
@@ -125,7 +126,7 @@ public class WerallyMobilePage extends UhcDriver {
 													.findElement(By.cssSelector("span[data-test-id='specialty']"))
 													.getText().trim());
 							WebElement saveButton = searchResults.get(i)
-									.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
+									.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 							threadsleep(1000);
 
 							//jsClickNew(saveButton);
@@ -162,7 +163,7 @@ public class WerallyMobilePage extends UhcDriver {
 				// pageloadcomplete();
 				String zipinfo = location.getText().trim();
 				String zip = zipinfo.split(" ")[zipinfo.split(" ").length - 1];
-				jsSendkeys(searchBox, searchParameter);
+				sendkeysMobile(searchBox, searchParameter);
 
 				/*
 				 * Clicking is not navigating to search results //mobileswipe("50%",2, false);
