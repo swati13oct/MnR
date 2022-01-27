@@ -139,9 +139,9 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		Assert.assertTrue(visionQuestion.getText().contains("Vision"));
 		validate(fitnessQuestion, 30);
 		Assert.assertTrue(fitnessQuestion.getText().contains("Fitness"));
-		mobileUtils.mobileLocateElementClick(dentalYes);
+		jsClickNew(dentalYes);
 		mobileUtils.mobileLocateElement(previousBtn);
-		mobileUtils.mobileLocateElementClick(previousBtn);
+		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		if(drugInfo.toUpperCase().contains("NO"))
 			mobileUtils.previousPageValidation(page.toUpperCase()+"skip");
@@ -157,35 +157,35 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		validate(visionQuestion);
 		validate(fitnessQuestion);
 		if (dental.equalsIgnoreCase("Yes")) {
-			mobileUtils.mobileLocateElementClick(dentalYes);
+			jsClickNew(dentalYes);
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
-			mobileUtils.mobileLocateElementClick(dentalNo);
+			jsClickNew(dentalNo);
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (hearing.equalsIgnoreCase("Yes")) {
-			mobileUtils.mobileLocateElementClick(hearingYes);
+			jsClickNew(hearingYes);
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (hearing.equalsIgnoreCase("No")) {
-			mobileUtils.mobileLocateElementClick(hearingNo);
+			jsClickNew(hearingNo);
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("Yes")) {
-			mobileUtils.mobileLocateElementClick(visionYes);
+			jsClickNew(visionYes);
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("No")) {
-			mobileUtils.mobileLocateElementClick(visionNo);
+			jsClickNew(visionNo);
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("Yes")) {
-			mobileUtils.mobileLocateElementClick(fitnessYes);
+			jsClickNew(fitnessYes);
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("No")) {
-			mobileUtils.mobileLocateElementClick(fitnessNo);
+			jsClickNew(fitnessNo);
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 	}
@@ -195,7 +195,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		System.out.println("Additional Page Functional Operations");
 		additionalpageOptions(additionalOptions.split(",")[0], additionalOptions.split(",")[1],
 				additionalOptions.split(",")[2], additionalOptions.split(",")[3]);
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
@@ -203,7 +203,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	// Additional Page Error Function Verification
 	public void additionalpageerror(String additionalOptions) {
 		System.out.println("Additional option is not selected - Error Scenario in Additional Page");
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		Assert.assertTrue(dentalError.getText().toUpperCase().contains("NO"));
 		Assert.assertTrue(hearingError.getText().toUpperCase().contains("NO"));
 		Assert.assertTrue(visionError.getText().toUpperCase().contains("NO"));
@@ -226,7 +226,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 			System.out.println("Fitness Error is not closed");
 			Assert.assertTrue(false);
 		}
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}

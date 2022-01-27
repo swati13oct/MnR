@@ -507,16 +507,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
-		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> " + PharmacyFilterErrorMsg.getText()
-				+ " <<<<<<<");
-		Assertion.assertTrue(
-				"Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<",
-				(validateNew(PharmacyFilterErrorMsg)
-						&& PharmacyFilterErrorMsg.getText().contains("least two characters")));
+		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
+		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
 
 	public void ApplyPharmacyFilter(String filterText) {
@@ -546,8 +542,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
-	@FindBy(css = "button[dtmname$='pharmacy search:search']")
-	public WebElement PharmacyFilterApplyBtn;
+//	@FindBy(css = "button[dtmname$='pharmacy search:search']")
+//	public WebElement PharmacyFilterApplyBtn;
 
 	@FindBy(css = "#pharmacy-name-filter + button")
 	public WebElement PharmacyFilterClearTextX;
@@ -558,7 +554,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
-		validateNew(PharmacyFilterApplyBtn);
+//		validateNew(PharmacyFilterApplyBtn);
 		
 		sendkeysMobile(PharmacyFilterTxtBx, "a");
 		System.out.println("FIlter text entered : a");
@@ -1195,7 +1191,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(css = "#pharmacyfilter > button[class*='searchbuttonmobile']")
+	@FindBy(xpath="//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	public void validateOptumRxConsistentDisplay_PharmacyPage() {
