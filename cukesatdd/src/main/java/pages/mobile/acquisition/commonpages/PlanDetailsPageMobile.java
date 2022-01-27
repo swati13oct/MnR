@@ -84,7 +84,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#medicalbenefits")
 	private List<WebElement> medBenefitsTab;
-	
+
 	@FindBy(xpath = "//div[contains(@id,'planDocuments')]")
 	private WebElement planDocumentSection;
 
@@ -112,14 +112,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	@FindBy(xpath = "//div[contains(@id,'planDocuments')]")
 	private WebElement planCostsTab;
-	
+
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan;
-	
-	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+
+	@FindBy(xpath = "//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
 	private WebElement palncompareCheckbox;
-	
-	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+
+	@FindBy(xpath = "//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
 	private WebElement palncompareLink;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -518,13 +518,18 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
 
+//  LearnMore changes End
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
 	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
 
 		validateNew(editDrugLinkPlanCost, 20);
 		jsClickNew(editDrugLinkPlanCost);
 
-		if (validateNew(BuildDrugPageHeader)) {
-			Assertion.assertTrue("Navigated to Build Drug List Page", true);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -721,7 +726,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue(false);
 
 	}
-	
+
 	public void validatealllinksonPlanDetails() {
 		validateNew(medBenefitsTab.get(0));
 		validateNew(presDrugTab1.get(0));
@@ -1201,13 +1206,12 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				WebElement AdditionalBenefitType1 = driver.findElement(By.xpath("//p[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/.."));
+				WebElement AdditionalBenefitType1 = driver
+						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
 				scrollToView(AdditionalBenefitType1);
 				// System.out.println("The additional Benefit to Valuidate : ");
 				ActualTextforBenefit = driver
-						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
-								+ "')]/.."));
+						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
@@ -1630,7 +1634,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(compareBox);
 		jsClickNew(compareBox);
 	}
-	
+
 	public ProviderSearchPageMobile validateEditDocotrsProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(editProviderButtonOnPlanDetails);

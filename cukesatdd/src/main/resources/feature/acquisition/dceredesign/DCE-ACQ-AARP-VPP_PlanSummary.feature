@@ -52,13 +52,13 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
 
     @dce_Redesign_VPP_PlanSummary_SNP_AARP @prodRegression_AARP @regressionAARP
     Examples: 
-      | site | zipcode | plantype | planyear	|	county       | isMultutiCounty | drug1   | planname                                                   |
-      | AARP |   78006 | SNP      | future		|	Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      | site | zipcode | plantype | planyear	|	county       | isMultutiCounty | drug1   | planname                                  |
+      | AARP |   78006 | SNP      | future		|	Bexar County | yes             | Orkambi |  UnitedHealthcare Dual Complete (HMO D-SNP) |
 
     @dce_Redesign_VPP_PlanSummary_SNP_UHC @prodRegression_UHC @prodRegression @regressionUHC
     Examples: 
-      | site | zipcode | plantype |	planyear	| county       | isMultutiCounty | drug1   | planname                                                   |
-      | UHC  |   78006 | SNP      | future		|	Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      | site | zipcode | plantype |	planyear	| county       | isMultutiCounty | drug1   | planname                                    |
+      | UHC  |   78006 | SNP      | future		|	Bexar County | yes             | Orkambi |  UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @dceRedesingDrugSummarytoVPPdetail @470713
   Scenario Outline: Test to Verify that user navigates to vpp detail page from drug summary page to validate drug cost estimator and view plan summary
