@@ -551,7 +551,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
