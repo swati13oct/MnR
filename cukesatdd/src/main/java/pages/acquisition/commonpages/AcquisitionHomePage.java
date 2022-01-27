@@ -539,7 +539,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	@FindBy(xpath = "(//span[contains(text(),'Submit')])[2]")
+	@FindBy(xpath = "((//span[contains(text(),'Submit')])[2]")
 	private WebElement SubmitEmail;
 
 	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
@@ -5558,17 +5558,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void enterAndvalidateEmail() {
 		threadsleep(8);
-		int size = driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+		int size = driver.findElements(By.xpath("(//span[contains(text(),'Submit')])[2]")).size();
 		System.out.println("size of sign up" + size);
 		if (size > 0) {
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			driver.findElement(By.xpath("(//span[contains(text(),'Submit')])[2]")).click();
 			threadsleep(4);
 			Assertion.assertEquals(ErrorEmailAddress.getText(), "Error: Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			driver.findElement(By.xpath("(//span[contains(text(),'Submit')])[2]")).click();
 		} else {
 			threadsleep(8);
 			// SubmitEmail.click();
