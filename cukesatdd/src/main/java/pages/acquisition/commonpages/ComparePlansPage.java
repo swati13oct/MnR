@@ -1439,7 +1439,7 @@ public class ComparePlansPage extends UhcDriver {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of doctors & dentists loaded: " + "0"));
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
 				Assertion.assertTrue(
