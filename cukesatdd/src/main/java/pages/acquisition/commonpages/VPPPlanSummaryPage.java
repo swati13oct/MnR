@@ -388,14 +388,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	// MedSupp Resume application
+	
+	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
-	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
+	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
