@@ -391,7 +391,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
-
 	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
