@@ -37,6 +37,7 @@ import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DrugDetailsPageMobile extends UhcDriver {
 
@@ -180,7 +181,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(css = "#pharmacyfilter > button[class*='searchbutton']")
+	@FindBy(xpath = "//button[contains(@class,'searchbuttonmobile')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(css = "#mailSelectPharmacyBtn0")
@@ -1029,11 +1030,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
 				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
+				// && validateNew(matchingPharmacyCount)
+				&& validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
-			System.out.println("Select Pharmacy Modal validated");
+			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
-			Assertion.fail("Select Pharmacy Modal not as expected");
+			Assertion.fail("Select Pharmacy Modal not as expected - DCE Details Page");
 		}
 	}
 
@@ -1185,13 +1187,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
 	
-	public WelcomePage clickEnrollinPlanbtn() {
+	public WelcomePageMobile clickEnrollinPlanbtn() {
 		validateNew(DrugCosts_EnrollInPlanBtn);
 		jsClickNew(DrugCosts_EnrollInPlanBtn);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page displayed ");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		} else {
 			return null;
 		}

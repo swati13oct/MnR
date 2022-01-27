@@ -115,7 +115,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		System.out.println("Coverage Page Selections");
 		coverageOptionMobile(planType);
 		if (proceed) {
-			mobileUtils.mobileLocateElementClick(continueBtn);
+			jsClickNew(continueBtn);
 			System.out.println("Validating " + page + " page Continue button functionality");
 			mobileUtils.nextPageValidation(page.toUpperCase());
 		}
@@ -142,13 +142,13 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void coverageOptionMobile(String planType) {
 		System.out.println("Coverage Page Selections");
 		if (planType.equalsIgnoreCase("MAPD")) {
-			mobileUtils.mobileLocateElementClick(plantypeMAPD);
+			jsClickNew(plantypeMAPD);
 		} else if (planType.equalsIgnoreCase("MA")) {
-			mobileUtils.mobileLocateElementClick(plantypeMA);
+			jsClickNew(plantypeMA);
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			mobileUtils.mobileLocateElementClick(plantypePDP);
+			jsClickNew(plantypePDP);
 		} else if (planType.equalsIgnoreCase("NONE")) {
-			mobileUtils.mobileLocateElementClick(plantypeNone);
+			jsClickNew(plantypeNone);
 		}
 		System.out.println("Plan Type " + planType + " Clicked");
 	}

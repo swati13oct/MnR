@@ -204,7 +204,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
 	private WebElement providerSumamryHeaderCount;
 
-	@FindBy(xpath="//*[@id='your-doctors-table']//tr[4]/th/span")
+	@FindBy(xpath="(//*[@id='your-doctors-table']//span[contains(@class,'boldinPrint')])[2]")
 	private WebElement FirstProviderName;
 	
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[5]/th[1]/span")
@@ -213,7 +213,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[6]/th[1]/span")
 	private WebElement SecondProviderName;
 
-	@FindBy(xpath="(//*[contains(@id,'viewLocationLink-0')])[2]")
+	@FindBy(linkText = "View Locations")
 	private WebElement viewlocationsLink;
 
 	@FindBy(xpath = "//*[contains(@id,'yourdrugsheading')]")
@@ -433,7 +433,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Plans Available (No Hidden)')]")
 	private WebElement AllPlansVisible;
 	
-	@FindBy(xpath = "(//span[@class='dentalTextFont ng-binding']/p/b[not(contains(text(), 'No coverage'))])[3]")
+	@FindBy(xpath = "//td[3]//a[text()='Click here for details']")
 	private WebElement DentalLinkText;
 	
 	@FindBy(xpath = "//span[contains(@id,'viewBaseLineLink-1')]")
@@ -1628,8 +1628,7 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement ele;
 		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
 		for (String index : (TreeSet<String>) mySet.descendingSet()) {
-			if (Integer.parseInt(index) > 3) {
-				jsClickNew(forwardArrow);
+			if (Integer.parseInt(index) > 2) {
 				jsClickNew(forwardArrow);
 			} else {
 				jsClickNew(backArrow);
@@ -1638,8 +1637,7 @@ public class ComparePlansPage extends UhcDriver {
 			int tempVal = Integer.parseInt(index);
 			tempVal = tempVal + 2;
 			ele = driver.findElement(By.xpath("//*[@id='printPlans']/th[" + tempVal + "]/div/a"));
-			validateNew(ele);
-			ele.click();
+			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}

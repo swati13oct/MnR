@@ -38,6 +38,7 @@ import pages.acquisition.dceredesign.*;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
@@ -842,7 +843,7 @@ public class DCEStepDefinitionAARP {
     @Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
     public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable {
         DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-        WelcomePageMobile welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+        WelcomePage welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
         if (null != welcomepage) {
             getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
         } else
@@ -1308,6 +1309,8 @@ public class DCEStepDefinitionAARP {
          * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
          */
         GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
+        BuildYourDrugList bd = getStartedPage.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, bd);
         if (null != getStartedPage) {
             getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
         } else
@@ -1786,6 +1789,12 @@ public class DCEStepDefinitionAARP {
         drugSummaryPage.ValidateSpecialtyPharmMessage();
     }
 
+    @Then("^the user validates Not Covered Pharmacy message DCE Summary Page plan card$")
+    public void the_user_validates_drug_pricing_message_for_notcovered_Pharmacy_selection_dce_summary_page() throws Throwable {
+        DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugSummary);
+        drugSummaryPage.ValidateNotCoveredPharMessage();
+    }
 
     @Then("^the user clicks on View Drug Information link for the following Plan and lands on DCE details$")
     public void the_user_clicks_on_View_Drug_Information_link_for_the_following_Plan_and_lands_on_DCE_details(
@@ -1823,7 +1832,7 @@ public class DCEStepDefinitionAARP {
     }
 //Commenting out the following step as View Compare button is not displayed for Compare flow as of Dec 2021 release.
 
-/*
+
 	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_View_Plan_Compare_button_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
@@ -1837,7 +1846,7 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assertion.fail("VPP Plan Compare not loaded");
 	}
-*/
+
 
     @Then("^the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal$")
     public void the_user_clicks_on_Back_to_Compare_link_and_validates_Plan_Compare_page() throws Throwable {
@@ -2734,6 +2743,16 @@ public class DCEStepDefinitionAARP {
         String FilterText = memberAttributesMap.get("PharmacyFilterText");
         DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
         drugSummaryPage.ApplyPharmacyFilter(FilterText);
+    }
+
+    @Then("^the user applies pharmacy filter for following text on Details page - Change Pharmacy Page$")
+    public void the_user_applies_pharmacy_filter_for_following_text_on_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+        String FilterText = memberAttributesMap.get("PharmacyFilterText");
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.ApplyPharmacyFilter(FilterText);
     }
 
     @Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page$")

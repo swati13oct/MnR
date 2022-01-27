@@ -124,7 +124,7 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 		int provider_max_benefits_Count = 3, j = 1;
 		for (int i = 1; i <= provider_max_benefits_Count; i++) {
 
-			if (i == 3 && planName.toLowerCase().contains("medicare supplement insurance plan"))
+			if (i == 3 && planName.toLowerCase().contains("medicare supplement insurance "))
 				break;
 
 			String header = formatString(plantiles.get(planIndex)

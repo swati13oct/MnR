@@ -114,7 +114,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "a[dtmname*=' Drugs']")
 	private WebElement AddDrugsLink;
 
-	@FindBy(xpath = "//a//span[contains(text(),'Doctors')]")
+	@FindBy(css = "#your-doctors-table >thead th:nth-child(2)>a")
 	private WebElement AddDoctorsLink;
 
 	@FindBy(css = "a[dtmname*=' Hospitals']")
@@ -126,7 +126,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#printPlans th[class*='text-blue-primary'] div >span")
 	private List<WebElement> plancards;
 	
-	@FindBy(css = ".uhc-compare-header__controls button[class*='compare-plans-next']")
+	@FindBy(css = ".uhc-compare-header button[class*='slide-btn-right'] > img")
     private WebElement viewMorePlansinPlanCompare;
 
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
@@ -176,6 +176,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "a[dtmname*='Edit Drugs']")
 	private WebElement editDrugs;
+	
+	@FindBy(css = "#your-drugs-table tr[class*='row--desktop'] span[class*='provider-name-spt']")
+	private List<WebElement> drugsInPlanCompare;
 
 	@FindBy(css = "a[dtmname*='Edit Doctors']")
 	private WebElement editDoctors;
@@ -198,7 +201,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']")
 	private List<WebElement> planNameSection;
 
-	@FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
+	@FindBy(css = "table.uhc-slide-table #printPlans th span[class*='headerPlanName']")
 	private List<WebElement> planNamesOnly;
 
 	@FindBy(css = "#printPlans th[class*='text-blue-primary'] a[class*='uhc-link-button']")
@@ -388,6 +391,14 @@ public class AREPlanRanking extends UhcDriver {
 	public void DrugsInPlanCompare(String drugDetails) {
 		pageloadcomplete();
 		System.out.println("Validate Added Drugs in Plan Compare page : ");
+		List<String> drugsName = new ArrayList<String>();		
+		String options[] = drugDetails.split(":");
+		for (int i = 0; i < options.length; i++) {
+			String drugName = drugsInPlanCompare.get(i).getText().trim().toLowerCase();
+			drugsName.add(drugName);
+			threadsleep(1000);
+		}
+		Assert.assertTrue(drugsName.contains(options[0].toLowerCase()) || drugsName.contains(options[1].toLowerCase()), "Plans are not Re-ordered");		
 	}
 
 	public void DeleteinDCE(String drugDetails) {
@@ -403,7 +414,6 @@ public class AREPlanRanking extends UhcDriver {
 		pageloadcomplete();
 		System.out.println("Validate Adding Doctors from Plan Compare page : ");
 		validate(AddDoctorsLink);
-		AddDoctorsLink.click();
 		doctorModellookup(doctors);
 	}
 
@@ -411,6 +421,7 @@ public class AREPlanRanking extends UhcDriver {
 		WerallyPage rallyobj = new WerallyPage(driver);
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
+		jsClickNew(AddDoctorsLink);
 		rallyobj.validateLinksanotherWindow(curWindow, "Adding Doctors", search);
 		threadsleep(5000);
 	}
@@ -460,7 +471,7 @@ public class AREPlanRanking extends UhcDriver {
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
 				for (int i = 0; i < viewplandetails.size(); i++) {
-					if(i>3) {
+					if(i>=3) {
 						validate(viewMorePlansinPlanCompare);
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
@@ -486,7 +497,7 @@ public class AREPlanRanking extends UhcDriver {
 			pageloadcomplete();
 			actualplanName = planNameVPPDetailsPage.getText().split("\n")[0].toUpperCase();
 			System.out.println("Plan Name in VPP Details Page: " + actualplanName);
-			Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+			Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---expcted: "+exceptedplanName+ " & Actual:"+actualplanName);
 //			WebElement comparePlanlink = backtoComparePlans.get(0);
 //			comparePlanlink.click();
 			browserBack();
@@ -790,7 +801,7 @@ public class AREPlanRanking extends UhcDriver {
 		Assert.assertTrue(zipInfo.getText().contains(zip), "Not Expected Zip Code");
 		List<String> plansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement elem : planNameSection) {
+		for (WebElement elem : planNamesOnly) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			plansDetails.add(val);
@@ -914,6 +925,7 @@ public class AREPlanRanking extends UhcDriver {
 			String val = planName.trim().toUpperCase().replace(" ", "");
 			drugplansDetails.add(val);
 		}
+		System.out.println("Plans After Applying ranking: "+drugplansDetails);
 	}
 
 	public void OriginalPlanOrder(String rankOptions) {
@@ -941,13 +953,12 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		List<String> newplansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		for (WebElement elem : planNameSection) {
+		for (WebElement elem : planNamesOnly) {
 			String planName = (String) js.executeScript("return arguments[0].innerText;", elem);
-			String val = planName.trim().toUpperCase().replace(" ", "").split("SAVEPLAN")[0].split("CLOSE")[0]
-					.split("\n")[0];
+			String val = planName.trim().toUpperCase().replace(" ", "");
 			newplansDetails.add(val);
 		}
-		System.out.println(newplansDetails);
+		System.out.println("Plans After rerun ranking: "+newplansDetails);
 
 		// Validate Ranking Order
 
@@ -1113,7 +1124,7 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Verify Drug option disabled after deleting drugs in DCE");
 		//Actions action = new Actions(driver);
 		scrollToView(print);
-		scrollToView(AddDoctorsLink);
+//		scrollToView(AddDoctorsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
 		//action.moveToElement(planRankingDropdown).perform();

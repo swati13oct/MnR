@@ -4,7 +4,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
   @PRE @planrecommendation @doctorspage @doctorelementValidation @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate doctors page Elements in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site PRE landing page
-    	| Site | <site> |
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -15,15 +15,15 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | SNP Options | <specialNeeds> |
     Then user validate elements in doctors page
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             |
-      | AARP |   90201 | NO            | [blank]| MAPD          | Medicaid,chronic,nursing |
-      
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds             |
+      | AARP |   90201 | NO            | [blank] | MAPD          | Medicaid,chronic,nursing |
+
     @FunctionalUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             |
-      | UHC  |   90201 | NO            | [blank]| MAPD          | Medicaid,chronic,nursing |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds             |
+      | UHC  |   90201 | NO            | [blank] | MAPD          | Medicaid,chronic,nursing |
 
   @PRE @planrecommendation @doctorspage @doctorpageoptionselection @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page positive scenarios in Plan Recommendation Engine
@@ -43,21 +43,21 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
       | AARP |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
       | AARP |   12345 | NO            | [blank]          | MAPD          | None                     | AcceptsMedicare | [blank]     | [blank]       |
       | AARP |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | UHGNetwork      | [blank]     | [blank]       |
-      | AARP |   21212 | YES           | Baltimore County | None          | nursing                  | AcceptsMedicare | [blank]     | [blank]       |
-      
+      | AARP |   21212 | YES           | Baltimore County | None          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       |
+
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
       | UHC  |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
       | UHC  |   12345 | NO            | [blank]          | MAPD          | None                     | AcceptsMedicare | [blank]     | [blank]       |
       | UHC  |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | UHGNetwork      | [blank]     | [blank]       |
-      | UHC  |   21212 | YES           | Baltimore County | None          | nursing                  | AcceptsMedicare | [blank]     | [blank]       |
+      | UHC  |   21212 | YES           | Baltimore County | None          | Medicaid                 | AcceptsMedicare | [blank]     | [blank]       |
 
   @PRE @planrecommendation @doctorspage @doctorspageerrorScenario @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page error scenarios in Plan Recommendation Engine
@@ -75,12 +75,12 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     And user validating error scenario in doctors Page
       | Doctors | <doctors> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors |
       | AARP |   90201 | NO            | [blank]      | MAPD          | Medicaid                 | [blank] |
       | AARP |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing | [blank] |
-      
+
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors |
@@ -105,17 +105,17 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
-     | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
-     | AARP |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
-     | AARP |   45634 | NO            | [blank]      | None          | None                     | AcceptsMedicare | [blank]     | [blank]       |
-     
-   @FunctionalUHC
+      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
+      | AARP |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
+      | AARP |   45634 | NO            | [blank]      | None          | None                     | AcceptsMedicare | [blank]     | [blank]       |
+
+    @FunctionalUHC
     Examples: 
-     | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
-     | UHC  |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
-     | UHC  |   45634 | NO            | [blank]      | None          | None                     | AcceptsMedicare | [blank]     | [blank]       |
+      | site | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor |
+      | UHC  |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | UHGNetwork      | [blank]     | [blank]       |
+      | UHC  |   45634 | NO            | [blank]      | None          | None                     | AcceptsMedicare | [blank]     | [blank]       |
 
   @doctorspage @doctorspage @doctorspageConfirmationmodel @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate doctors page Confirmation Model scenarios in Plan Recommendation Engine
@@ -135,17 +135,17 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName | isMultiDoctor |
-      | AARP |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Arash Lalezary MD        | YES           |
-      | AARP |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Robert W Fields MD       | YES           |
-      
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName  | isMultiDoctor |
+      | AARP |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Lillian, MD  | YES           |
+      | AARP |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Teresa T, MD | YES           |
+
     @FunctionalUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName | isMultiDoctor |
-      | UHC  |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Arash Lalezary MD        | YES           |
-      | UHC  |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Robert W Fields MD       | YES           |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | doctors | DoctorsName  | isMultiDoctor |
+      | UHC  |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | Lookup  | Lillian, MD  | YES           |
+      | UHC  |   10002 | NO            | New York | MAPD          | nursing                  | Lookup  | Teresa T, MD | YES           |
 
   @PRE @planrecommandonation @doctorspage @doctorspagepagecancel @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  , <doctor> - To validate Doctors page modal cancel functions in Plan Recommendation Engine
@@ -164,12 +164,12 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
       | AARP |   10001 | NO            | New York    | None          | None         | [blank]     | [blank]       |
       | AARP |   35035 | YES           | Bibb County | None          | None         | robert      | NO            |
-      
+
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | DoctorsName | isMultiDoctor |
@@ -195,12 +195,12 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Doctors Search Text2 | <DoctorsName2>   |
       | Multi Doctor2        | <isMultiDoctor2> |
 
-		@FunctionalAARP
+    @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1 | isMultiDoctor1 | DoctorsName2 | isMultiDoctor2 |
-      | AARP |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD          | NO             | Robert W Fields MD       | NO             |
-      
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1   | isMultiDoctor1 | DoctorsName2       | isMultiDoctor2 |
+      | AARP |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD | NO             | Robert W Fields MD | NO             |
+
     @FunctionalUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1 | isMultiDoctor1 | DoctorsName2 | isMultiDoctor2 |
-      | UHC  |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD          | NO             | Robert W Fields MD       | NO             |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName1   | isMultiDoctor1 | DoctorsName2       | isMultiDoctor2 |
+      | UHC  |   10001 | NO            | New York | MAPD          | None         | Ricky K Hsu MD | NO             | Robert W Fields MD | NO             |
