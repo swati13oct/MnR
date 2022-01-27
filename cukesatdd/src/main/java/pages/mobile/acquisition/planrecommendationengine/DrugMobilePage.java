@@ -301,7 +301,10 @@ public class DrugMobilePage extends UhcDriver {
 	}
 
 	public void continueNextpageZeroDrug() {
-		clickDrugContinue();
+		validate(drugsearchBox, 30);
+		threadsleep(2000);
+		jsClickNew(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 	
@@ -309,7 +312,7 @@ public class DrugMobilePage extends UhcDriver {
 		validate(drugsearchBox, 30);
 		threadsleep(2000);
 		//jsClickNew(continueBtn);
-		mobileUtils.mobileLocateElement(continueBtn);
+		validate(continueBtn);
 		//mobileactiontap(continueBtn);
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");

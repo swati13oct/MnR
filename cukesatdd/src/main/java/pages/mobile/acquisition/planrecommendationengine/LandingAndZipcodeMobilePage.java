@@ -123,7 +123,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "button[id*='no']")
 	private WebElement popupNo;
 	
-	@FindBy(id = "MultipleCounty")
+	@FindBy(xpath = "//select[@id='MultipleCounty']")
 	private WebElement PRECounty;
 
 	@Override

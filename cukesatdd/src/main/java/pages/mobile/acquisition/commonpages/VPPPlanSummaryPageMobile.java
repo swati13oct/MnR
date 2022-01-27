@@ -5265,7 +5265,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
-			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+			WebElement dceLink = driver.findElement(By.xpath("//a[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			scrollToView(dceLink);
 			if (validate(dceLink))

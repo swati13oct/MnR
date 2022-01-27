@@ -127,7 +127,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	@FindBy(css = "#backToPlanRecommendation")
 	private WebElement returnToPlanLink;
 
-	@FindBy(css = "uhc-list-item.list-item")
+	@FindBy(xpath = ".//uhc-list-item[contains(@class,'list-item')]")
 	private List<WebElement> allQuestionSection;
 
 	@FindBy(css = "div.viewUpdateSection:nth-of-type(1)>button")
@@ -304,19 +304,24 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		for (WebElement elem : allQuestionSection) {
-			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
+		System.out.println("section : " + section);
+	//	for (WebElement elem : allQuestionSection) {
+		for (int i=1; i<=allQuestionSection.size();i++) {
+			WebElement head = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//h2"));
+			WebElement button = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//button"));
+			System.out.println("\n\n======"+head+"==\n====="+button+"===\n\n");
+			String tempTxt = head.getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
 			if (tempTxt.contains(section)) {
 				editButton = true;
 				if (click) {// Edit button Click
 					if (section.equalsIgnoreCase("location")) {
 						boolean lookup = validate(changeDocLink, 5);
-						jsClickNew(elem.findElement(By.cssSelector("button")));
+						jsClickNew(button);
 						if (lookup)
 							jsClickNew(locationModalConfirm);
 					} else {
-						jsClickNew(elem.findElement(By.cssSelector("button")));
+						jsClickNew(button);
 					}
 				}
 				break;
