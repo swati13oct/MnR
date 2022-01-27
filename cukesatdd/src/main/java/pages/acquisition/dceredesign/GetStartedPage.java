@@ -296,7 +296,7 @@ public void yahooSearch(String searchParameter) {
 	public WebElement Member_Ziptxtbx;
 	@FindBy(xpath = "//input[@id='member-medicare-number']")
 	public WebElement Member_MBItxtbx;
-	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'view your drugs and doctors')]/span")
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'view your drugs and doctors')]")
 	public WebElement Member_VieDrugsDrBtn;
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@id, 'name-capital')]/span")
 	public WebElement Member_NameDisplay;
@@ -335,7 +335,7 @@ public void yahooSearch(String searchParameter) {
 		sendkeys(Member_Ziptxtbx, member_zip);
 		sendkeys(Member_MBItxtbx, member_mbi);
 		validateNew(Member_VieDrugsDrBtn);
-		jsClickNew(Member_VieDrugsDrBtn);
+		Member_VieDrugsDrBtn.click();
 		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
 		validateNew(DataImportStatusPopup);

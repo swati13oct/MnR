@@ -220,7 +220,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(3) div>p:nth-child(8)>a")
     private WebElement headerFAQLink;
     
-    @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(1)  div>p:nth-child(8)>a")
+    @FindBy(css = "#learnmore-scroll div[class*='desktop-sctn sctn']:nth-child(1) div[class*='sctn-artcl']:nth-child(1) p>a")
     private WebElement headerMedicareArticles;
     
     @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(1)")
@@ -452,6 +452,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 //	Header Element Click Verification Method 
 	
 		public void headerLinkvalidation(){
+		driver.navigate().refresh();
 		String curURL = driver.getCurrentUrl();			
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
@@ -650,11 +651,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 			jsClickNew(headerNavigationBarLearnAboutMedicareTab);
 			jsClickNew(headerMedicareArticles);
 			validate(HeaderBreadcrumb, 30);
-			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles"), "Medicare Articles page not opened");
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Articles"), "Medicare Articles page not opened");
 			validate(HeaderEnrollMedicareArticles, 30);
 			jsClickNew(HeaderEnrollMedicareArticles);
 			validate(HeaderBreadcrumb, 30);
-			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles / Eligibility & Enrollment"),"Medicare and COBRA page not opened");
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Eligibility & Enrollment"),"Medicare and COBRA page not opened");
 			scrollToView(HeaderGetStartedMedicareArticles);
 			validate(HeaderGetStartedMedicareArticles, 30);
 			jsClickNew(HeaderGetStartedMedicareArticles);
@@ -688,22 +689,22 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 //				jsClickNew(headerNavigationBarLearnAboutMedicareTab);
 				headerEligibilityLink.click();
 				validate(HeaderBreadcrumb, 30);
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Eligibility"), "Medicare Eligibility page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Eligibility"), "Medicare Eligibility page not opened");
 				PRE();
 				scrollToView(CoverageOptionsLink);
 				validate(CoverageOptionsLink);
 				CoverageOptionsLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Coverage Options"), "Coverage Choices page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Coverage Options"), "Coverage Choices page not opened");
 				PRE();
 				scrollToView(MedicareCostBasicsLink);
 				validate(MedicareCostBasicsLink);
 				MedicareCostBasicsLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Cost Basics"), "Medicare Cost Basics page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Medicare Cost Basics"), "Medicare Cost Basics page not opened");
 				PRE();
 				scrollToView(OriginalMedicareLink);
 				validate(OriginalMedicareLink);
 				OriginalMedicareLink.click();
-				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Original Medicare"), "Original Medicare page not opened");
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Original Medicare"), "Original Medicare page not opened");
 				PRE();
 			}	
 			
