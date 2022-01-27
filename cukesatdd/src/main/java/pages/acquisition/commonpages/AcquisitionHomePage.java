@@ -988,6 +988,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(site);
+		
+		
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -1087,6 +1089,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
+		
+		
 	}
 
 	public void openAndValidate(boolean alreadyOnSite) {
@@ -8164,5 +8168,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void verifyElementNotPresent() {
 		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
+	}
+	
+	public String returnCookieValue() {
+		
+		String cookieName = (getCookieName("rxVisitor").toString());
+		System.out.println("visitor cookie : "+cookieName);
+		return cookieName;
 	}
 }
