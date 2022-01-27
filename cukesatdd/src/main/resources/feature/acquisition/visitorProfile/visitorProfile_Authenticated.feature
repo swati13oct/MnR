@@ -31,12 +31,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName    | password   |
-      | AARP | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
+      | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
 
     @visitorProfile_UHC @regressionUHC @authenticatedUHC
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName        | password   |
-      | UHC  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
+      | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
 
   @addDrugAuthenticated @authenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
@@ -122,12 +122,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
     @visitorProfile_UHC @regressionUHC
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
   @vppartialOLEAndRemove @authenticated
   Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
