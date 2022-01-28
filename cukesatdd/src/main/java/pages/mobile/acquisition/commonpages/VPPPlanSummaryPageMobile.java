@@ -238,7 +238,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//label[@for='EmailChange_2']")
 	private WebElement EmailAddressNo;
-	
+
 	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
 	List<WebElement> mapdOrSnpPlansNameOnSummary;
 	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
@@ -282,10 +282,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='togglenextYear']/a")
 	private WebElement toggleplanYear;
-	
+
 	@FindBy(xpath = "(//span[@class='view--more'])[1]")
 	private WebElement viewMoreLink;
-	
+
 	@FindBy(xpath = "(//span[@class='view--less'])[1]")
 	private WebElement viewLessLink;
 
@@ -475,10 +475,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private List<WebElement> nextBestActionModalMsg;
-	
+
 	@FindBy(xpath = "//button[@id='pop-btn-1']")
 	private WebElement savedPlansContinueShoppingButton;
-	
+
 	@FindBy(xpath = "(//span[contains(@class,'plans-count')])[1]")
 	private WebElement shoppingCartSaveCount;
 
@@ -659,7 +659,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// code')]")
 	@FindBy(xpath = "//a[contains(text(),'Resume Application')]")
 	private WebElement resumeApplication;
-	
+
 	@FindBy(xpath = "//*[contains(text(),'plans available')]")
 	private WebElement planSummaryPage;
 
@@ -785,10 +785,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	 * xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
 	 * private WebElement planYearPopup;
 	 */
-	@FindBy(xpath="//div[@class='uhc-modal__content']//h3[@id='modalTitle']")
+	@FindBy(xpath = "//div[@class='uhc-modal__content']//h3[@id='modalTitle']")
 	private WebElement planYearPopup;
 
-	@FindBy(xpath="(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
+	@FindBy(xpath = "(//*[contains(@id, 'currentyear') or contains(@id, 'currentYearPlans')])[1]")
 	private WebElement currentYearSelection;
 
 	@FindBy(xpath = "//h3[@id='doctorsAlertTitle']")
@@ -951,12 +951,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
-		
+
 		swipeToPlanCard(planName);
 		WebElement planCard = element
 				.findElement(By.xpath(".//div[contains(@class,'segment-title')]//*[contains(text(),'" + planName
 						+ "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
-		System.out.println("\n\n============"+element.getText()+"====================\n\n");
+		System.out.println("\n\n============" + element.getText() + "====================\n\n");
 		if (planCard.getText().trim().contains(planName)) {
 			return true;
 		} else {
@@ -1627,7 +1627,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		jsClickNew(Checkbox);
 
 	}
-	
+
 	public void validatePlanNames(String planType, String planList) {
 		List<String> expectedPlanNames = new ArrayList<String>();
 		List<String> actualPlanNames = new ArrayList<String>();
@@ -1644,7 +1644,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				"Plan listed are not shown correctly expected:" + expectedPlanNames + " Actual: " + actualPlanNames,
 				actualPlanNames.containsAll(expectedPlanNames));
 	}
-	
+
 	public void validateViewMoreAndLessLinks() {
 		jsClickNew(viewLessLink);
 		System.out.println("view less link clicked");
@@ -1658,9 +1658,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
 
 	}
-	
+
 	public void savePlansOnSummaryAndVerifyCountOnCart(String counter, String planType) {
-		if(planType.contains("MA"))
+		if (planType.contains("MA"))
 			planType = "MAPD";
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
@@ -1676,7 +1676,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				.findElement(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])[1]")));
 		List<WebElement> allPlans = driver
 				.findElements(By.xpath("(//a[contains(@dtmname,'" + planType + ":Favorite') and not(@style)])"));
-		System.out.println("\n\n================="+allPlans.size()+"========="+selectPlanIndexes.size()+"===="+count+"====\n\n");
+		System.out.println("\n\n=================" + allPlans.size() + "=========" + selectPlanIndexes.size() + "===="
+				+ count + "====\n\n");
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
 				scrollToView(allPlans.get(i));
@@ -1693,7 +1694,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validate(shoppingCartSaveCount);
 		Assertion.assertEquals("Shopping cart count not updated with save plan count", count,
 				Integer.parseInt(shoppingCartSaveCount.getText()));
-		System.out.println("\n\n========"+shoppingCartSaveCount.getText()+"===========\n\n");
+		System.out.println("\n\n========" + shoppingCartSaveCount.getText() + "===========\n\n");
 	}
 
 	public boolean plantitlematch(String planname, String plantype) {
@@ -2646,7 +2647,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		 * } catch (Exception e) { System.out.println(" The text is"
 		 * +AnnualDeductibleForPlan.getText()); }
 		 */
-		System.out.println("\n\n================="+annualDeductible+"============="+planDeductible+"=================\n\n");
+		System.out.println("\n\n=================" + annualDeductible + "=============" + planDeductible
+				+ "=================\n\n");
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
 			Assertion.assertTrue(true);
@@ -3321,9 +3323,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		planOverviewZipCodeFieldBox.sendKeys(zipcode);
+		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
 		jsClickNew(planOverviewFindPlanButton);
-		if(!planSummaryPage.isDisplayed())
+		if (!planSummaryPage.isDisplayed())
 			jsClickNew(backToPlans);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
@@ -3684,17 +3686,21 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// part_B_monthDrpDwn.click();
 		jsClickNew(part_B_monthDrpDwn);
 		Thread.sleep(2000);
-		Part_B_monthDrpDwnOption.click();;
+		Part_B_monthDrpDwnOption.click();
+		;
 		Thread.sleep(2000);
 		// part_B_yearDrpDwn.click();
-		part_B_yearDrpDwn.click();;
+		part_B_yearDrpDwn.click();
+		;
 		Thread.sleep(2000);
-		Part_B_yearDrpDwnOption.click();;
+		Part_B_yearDrpDwnOption.click();
+		;
 		Thread.sleep(2000);
 		// startDrpDwn.click();
 		startDrpDwn.click();
 		Thread.sleep(2000);
-		startDrpDwnOption.click();;
+		startDrpDwnOption.click();
+		;
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
 		jsClickNew(ViewPlanMedSupPage);
@@ -4037,8 +4043,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(css = "button#nextyear")
 	private WebElement nextYearToggle;
-	
-	@FindBy(xpath="(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
+
+	@FindBy(xpath = "(//*[contains(@id, 'nextyear') or contains(@id, 'nextYearPlans')])[1]")
 	private WebElement futureYearSelection;
 
 	public void handlePlanYearSelectionPopup(String planYear) {
@@ -4047,13 +4053,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			System.out.println("Popup is present for AEP : ");
 			if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 				jsClickNew(currentYearSelection);
-			}
-			else {
+			} else {
 				jsClickNew(futureYearSelection);
 			}
 			waitForPageLoadSafari();
-			//validateNew(planYearPopupGoButton);
-			//planYearPopupGoButton.click();
+			// validateNew(planYearPopupGoButton);
+			// planYearPopupGoButton.click();
 		} else { // if the plan year popup is not displayed
 			if (validate(CurrentYearPlansBtn, 20) && planYear.equalsIgnoreCase("current")) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());

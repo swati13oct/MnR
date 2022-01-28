@@ -29,7 +29,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
 	protected WebElement summary_maPrintOption;
 
-	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")
+	@FindBy(xpath = "//a[@dlassetid='nba-btn-2']")
 	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//a[@dlassetid='nba-btn-1']")

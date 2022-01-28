@@ -59,7 +59,20 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user validates TFN Number
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
-    #Given the user Starts WebDriver
+      
+    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup3.0 @prodRegression
+    Examples: 
+      | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                    | MedsuppTFNxpath                   | TFNxpath2                           | plantype | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 |
+      | Sc. 3.08 - UMS |  880188 |         880187 |   24010 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')] | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   | 1-800-607-2877 | 1-888-378-0849 | 8EC        | 1-800-811-2341 | 1-888-378-0849 | 8EC         |
+
+    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup4.0
+    Examples: 
+      | scenario       | pscCode | Precedence1PSC | zipcode | county             | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                                                  | MedsuppTFNxpath                                    | TFNxpath2                           | plantype | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 |
+      | Sc. 3.08 - UMS |  880188 |         880187 |   90210 | Los Angeles County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS4.0      | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   | 1-800-607-2877 | 1-888-378-0849 | 8EC        | 1-800-811-2341 | 1-888-378-0849 | 8EC         |
+    
+    @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prodRegression_UAT 
+  	Scenario Outline: - <scenario> <zipcode> 3.1 Google search UHC Medicare Advantage Plan
+    Given the user Starts WebDriver
     Given user is on Bing and search UHC Medicare Advantage Plan to navigate to navigate to UHC page
     Then the user navigates to refresh page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
