@@ -167,7 +167,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "(//input[contains(@id,'zipcodemeded')])[2]")
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeShopField;
 	// @FindBy(xpath =
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
@@ -1162,9 +1162,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 		// for mobile devices the tfn xpath passed from feature file may not work always
 		// for mobile devices - 10/28/2021
-		WebElement ActualTFNelement = null;
-		String TFNXpathMobile = null;
-		try {
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validate(ActualTFNelement);
+/*		try {
 			ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 			if (Objects.nonNull(ActualTFNelement)) {
 				scrollToView(ActualTFNelement);
@@ -1181,7 +1181,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			}
 		}
 
-		validateNew(ActualTFNelement);
+		validateNew(ActualTFNelement); */
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 		// Skipping because of invoca tfn number changes
 		/*
@@ -1372,8 +1372,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-		insuredStatus.click();
+	//	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+	//	insuredStatus.click();
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -1383,8 +1383,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		sendkeysMobile(firstName,FirstName);
+		sendkeysMobile(lastName,LastName);
 		jsClickNew(nextButton);
 		/*
 		 * Thread.sleep(2000); String ResumeKey = resumeKey.getText();
@@ -1552,7 +1552,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollMedsuppButton);
 		waitForPageLoadSafari();
 

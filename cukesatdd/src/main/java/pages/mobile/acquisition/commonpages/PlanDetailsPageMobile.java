@@ -110,7 +110,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	private WebElement estimateDrugBtn;
 
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
-	@FindBy(xpath = "//div[contains(@id,'planDocuments')]")
+	@FindBy(xpath = "//*[contains(@id,'plancosts')]")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
@@ -517,13 +517,17 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
+	
+	@FindBy(xpath = "//*[@id='plancosts']")
+	private WebElement PlanCost;
 
 //  LearnMore changes End
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
 	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
-
+		
+		validateNew(PlanCost);
 		validateNew(editDrugLinkPlanCost, 20);
 		jsClickNew(editDrugLinkPlanCost);
 

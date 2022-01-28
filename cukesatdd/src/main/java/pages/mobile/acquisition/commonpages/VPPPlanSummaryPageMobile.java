@@ -167,9 +167,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[2]/div/span[3]")
 	private WebElement showMsPlans;
-	
-	@FindBy(xpath = "//*[contains(text(),'View Plan Summary')]")
-	private WebElement viewPlanSummaryBtn;
 
 	@FindBy(xpath = "//*[@id='popupClose']")
 	private WebElement closeProfilePopup;
@@ -1279,7 +1276,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
 		sleepBySec(5);
-		jsClickNew(viewPlanSummaryBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
@@ -5269,7 +5265,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
-			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+			WebElement dceLink = driver.findElement(By.xpath("//a[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			scrollToView(dceLink);
 			if (validate(dceLink))
@@ -5384,17 +5380,15 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
 		sleepBySec(10);
-		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Provider Search Link has been clicked");
-		CommonUtility.checkPageIsReadyNew(driver);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
