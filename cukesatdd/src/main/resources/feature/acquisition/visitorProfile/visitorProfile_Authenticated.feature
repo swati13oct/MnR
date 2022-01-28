@@ -30,13 +30,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @authenticatedAARP
     Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName    | password   |
-      | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01 | Password@1 |
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
+      | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
     @visitorProfile_UHC @regressionUHC @authenticatedUHC
     Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county          | MS_testPlans  | userName        | password   |
-      | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A | vdmsatdd_01_uhc | Password@1 |
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
+      | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
 
   @addDrugAuthenticated @authenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
