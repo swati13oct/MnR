@@ -198,19 +198,10 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	}
 
 	public void navigateEditResponsePageMobile(String flow) {
-		if (flow.equalsIgnoreCase("pdp")) {
-			jsClickNew(PDPViewPlansLink);
-			pdpEditResponseButton.click();
-		} else {
-			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				jsClickNew(MAViewPlansLink); // Have zip with snp for all flows
-				jsClickNew(mapdEditResponseButton);
-			}
-			else {
-				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
-				jsClickNew(snpEditResponseButton);
-			}
-		}
+		waitForPageLoadSafari();
+		validate(editYourResponse, 10);
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
@@ -332,9 +323,9 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void returnVPP(String button) {
 		if (button.toLowerCase().contains("update"))
-			viewUpdateButton.click();
+			jsClickNew(viewUpdateButton);
 		else
-			returnToPlanLink.click();
+			jsClickNew(returnToPlanLink);
 	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
@@ -536,7 +527,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		pageloadcomplete();
 		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
-		changeDocLink.click();
+		jsClickNew(changeDocLink);
 		DoctorsMobilePage doc = new DoctorsMobilePage(driver);
 		doc.addProviderEdit(inputValues.get("Doctors Search Text"));
 		checkContent("doctor");
