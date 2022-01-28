@@ -3321,7 +3321,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		planOverviewZipCodeFieldBox.sendKeys(zipcode);
+		sendkeysMobile(planOverviewZipCodeFieldBox,zipcode);
 		jsClickNew(planOverviewFindPlanButton);
 		if(!planSummaryPage.isDisplayed())
 			jsClickNew(backToPlans);
