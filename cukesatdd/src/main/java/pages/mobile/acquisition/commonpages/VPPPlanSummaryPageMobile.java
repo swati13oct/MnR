@@ -5384,8 +5384,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
@@ -5394,6 +5394,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sleepBySec(10);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Provider Search Link has been clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;

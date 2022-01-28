@@ -22,7 +22,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     Then the user validates drug is displayed on the plan compare page
       | DrugName | <drug1> |
 
-    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP @PCdebug
+    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP 
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | febuxostat | AARP Medicare Advantage SecureHorizons Focus (HMO) |
