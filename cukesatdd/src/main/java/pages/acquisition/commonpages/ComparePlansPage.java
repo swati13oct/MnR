@@ -695,8 +695,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	private int findindexofPlan_PlanCompare(String planName) {
 		int index = 0;
-		List<WebElement> PlanHeadings = driver.findElements(By.xpath(
-				"//table[@id='plan-summary-table']//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));
+		/*List<WebElement> PlanHeadings = driver.findElements(By.xpath(
+				"//table[@id='plan-summary-table']//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));*/
+		List<WebElement> PlanHeadings = driver.findElements(By.xpath("(//table[@class='uhc-slide-table'])[1]//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1439,7 +1440,7 @@ public class ComparePlansPage extends UhcDriver {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of doctors & dentists loaded: " + "0"));
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
 				Assertion.assertTrue(

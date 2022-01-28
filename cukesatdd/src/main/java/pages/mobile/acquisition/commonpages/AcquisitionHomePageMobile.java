@@ -666,21 +666,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
-				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 				offline_prod = true;
-			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
-				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
+				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
-				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			}
 		} else { // For jenkins job
 			String jenkinsTagLists = MRScenario.getTagLists();
@@ -701,26 +701,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(UMS_ACQISITION_PAGE_URL);
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 					}
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
-						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
-						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
-						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
-						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 				}
 			}
 		}
@@ -2559,9 +2559,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
-		jsClickNew(more);
-		CommonUtility.checkPageIsReadyNew(driver);
-
+		if(!aboutLink.isDisplayed()) {
+			jsClickNew(more);
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);

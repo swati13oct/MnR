@@ -3,6 +3,8 @@
  */
 package acceptancetests.data;
 
+import java.util.LinkedHashMap;
+
 /**
  * @author pjaising
  *
@@ -28,6 +30,8 @@ public class CommonConstantsMobile {
 	public static final String MOBILE_BROWSER_CHECK_DATA_BLUELAYER = "browsercheck_uhcm.json";
 
 	public static final String MOBILE_EXPECTED_DIRECTORY = "/jsonresponse/mobile/member";
+	
+	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
 
 
 	public static final String SITE_ULAYER_MEMBER = "ulayer";
