@@ -675,7 +675,7 @@ public class CampaignExternalLinkStepDefinition {
 		String env = MRScenario.environment;
 		campaignExternalLinkspage.updateHrefUrlVPP_Script7_1(env);
 		campaignExternalLinkspage.viewPlansAndPricing();
-
+		
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = campaignExternalLinkspage.searchPlansWithOutCountyForPDPExternalPage(zipcode);
 		} else {
@@ -1351,6 +1351,12 @@ public class CampaignExternalLinkStepDefinition {
 		//aquisitionhomepage.validateChatSam();
 		campaignExternalLinkspage.validateCallpopuponaExternalprivacypage(TFNXpath, ExpecetdTFNNo);
 
+	}
+	
+	@And("^the user closes the browser tab$")
+	public void closes_new_browser_tab() {
+		VPPPlanSummaryPage plansummaryPage=(VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.closeBrowserTab();
 	}
 
 }
