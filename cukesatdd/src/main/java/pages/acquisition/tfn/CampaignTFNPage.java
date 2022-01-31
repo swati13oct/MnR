@@ -167,7 +167,7 @@ public class CampaignTFNPage extends UhcDriver {
 	// @FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
 	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
 	
-	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans']")
+	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans - UHC']")
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -628,22 +628,23 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void BingSearchUHC() {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
-
 		bingSearchField.click();
 		bingSearchField.clear();
 		bingSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
 		System.out.println("Looking for UHC medicare Plans link , please bear with me :) ");
 		System.out.println("Current URL is ==  " + driver.getCurrentUrl());
-		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 30);
-		if (UHCSearchLinkfromBing.isDisplayed())
+		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 20);
+		if (UHCSearchLinkfromBing.isDisplayed()) {
 			System.out.println("Bing search result found");
+		}
 		else {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
 		UHCSearchLinkfromBing.click();
 		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
-	}
+}
+	
 
 	public void navigateToPDPPlans() {
 		(driver.findElement(By.xpath("//a[contains(@dtmname,'PDP:View Plans')]"))).click();
