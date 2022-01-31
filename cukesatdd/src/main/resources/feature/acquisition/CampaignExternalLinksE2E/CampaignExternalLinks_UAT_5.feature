@@ -250,6 +250,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | TFN Xpath | <TFNxpath5> |
 
     #And the user closes the new browser tab
+    
     @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage @Scenario5_AARP_Stage_VPP_Summary @campaignExternalTFNStageMS
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                           | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           |

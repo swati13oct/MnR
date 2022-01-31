@@ -130,6 +130,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | Scenerio 9-ExternalLink - AMP | ULayer |   90210 | MA         | 8000158 | Alabama | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=420&state=36#/plan-summary | medicare-articles/medicare-made-clear.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID39 | TiggerTigger10 | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | 1-844-850-6592 | 1-844-850-6592 | RRZ        |
 
   #######################Script 1: Direct traffic########################################
+ 
   @Scenario_1_2_DirectTraffic__UHC_UAT_PROD @UATRegression
   Scenario Outline: <scenario> <zipcode> Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page

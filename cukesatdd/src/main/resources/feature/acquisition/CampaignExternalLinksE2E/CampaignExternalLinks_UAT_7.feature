@@ -425,6 +425,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | TFN No    | <TFNNo1>    |
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
+    
     @Scenario7_AARP_Stage4 @regressionAARP @campaignExternalStage @campaignExternalTFNStageMS
     Examples: 
       | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                            | pscCode | zipcode | isMultutiCounty | county            | PDPplantype | PDPplanname                     | TFNxpath3                                                                  | planIndex | planIndex1 | TFNxpath4                         | MAplantype | MAplanname                           | SNPPlanType | SNPPlanName                                       | drug1 | drug2   | drug3   | drug4   | zipCode | Medsupplantype | TFNNo1         | defaultPharmacy       | testPlans                                | zipcode1 | distance | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | planyear |

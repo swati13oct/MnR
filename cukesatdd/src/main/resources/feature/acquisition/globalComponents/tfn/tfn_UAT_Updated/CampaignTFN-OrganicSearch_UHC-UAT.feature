@@ -123,6 +123,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | TFN Xpath | <TFNxpath> |
 
 # Removing prod tag and adding regression tag - scenario taking more time in prod thus inclusing coverage in lower env.
+   
     @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup3.0 @regressionUHC @campaignTFNProdMS
     Examples: 
       | scenario       | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                    | MedsuppTFNxpath                   | TFNxpath2                           | plantype | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 |

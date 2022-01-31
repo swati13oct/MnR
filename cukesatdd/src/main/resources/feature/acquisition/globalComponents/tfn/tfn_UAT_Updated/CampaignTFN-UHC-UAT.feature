@@ -297,6 +297,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | Scenario 2 - UMS | blayer | 8003728 |   90210 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary | enroll/ma-enrollment.html | /contact-us.html | 1-855-448-4586 | 1-866-271-0607 | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | MA         | MS4.0         | PDP         | SNP         |1-855-448-4586|1-866-271-0607|G3Y|//span[contains(@class, 'invoca_swap_sam')] |01/01/1950 |//span[contains(@class, 'invoca_swap_sam')]|//*[contains(@class,'headline')]//a |
 
   #######################Script 5: Email Validation########################################
+ 
   @Scenario_5_2_DirectTraffic_Email_UHC_UAT @UATRegression @prodRegression_UAT @campaignTFNProdMS @campaignTFNStageMS
   Scenario Outline: <scenario> <zipcode> Verify TFN through Email validation
     Given the user is on medicare acquisition site landing page

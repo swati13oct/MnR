@@ -178,6 +178,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   10001 | No            | New York County | MAPD       | 1-866-979-3947 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //span[contains(@class, 'invoca_swap_sam')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[3] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap_sam')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012869 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[contains(@class,'invoca_swap tel tfn')] | (//span[contains(@class, 'tel')])[1] | Retail Chain Pharmacy |
 
   #Find Plans in your Area and SNP plantype*****#
+ 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links for SNP
     Given user is on campaign external Links page
       | External Link | <externallink> |
