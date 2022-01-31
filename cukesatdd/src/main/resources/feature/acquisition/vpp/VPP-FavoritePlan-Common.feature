@@ -120,7 +120,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
 
-    @vppFavoritePlanCommon_AARP_3 @regressionAARP @prodRegression
+    @vppFavoritePlanCommon_AARP_3 @regressionAARP
     Examples: 
       | UID     | site | zipcode | isMultiCounty | county           | MA_testPlans                                                                              | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
       | 1598162 | AARP |   80001 | NO            | Jefferson County | AARP Medicare Advantage Patriot (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Chronic Complete (HMO C-SNP) | future   |
@@ -129,6 +129,12 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
     Examples: 
       | UID     | site | zipcode | isMultiCounty | county           | MA_testPlans                                                                              | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
       | 1598162 | UHC  |   80001 | NO            | Jefferson County | AARP Medicare Advantage Patriot (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | current   |
+
+  @vppFavoritePlanCommon_AARP_3 @prodRegression
+    Examples: 
+      | UID     | site | zipcode | isMultiCounty | county           | MA_testPlans                                                                              | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
+      | 1598162 | AARP |   80001 | NO            | Jefferson County | AARP Medicare Advantage Patriot (HMO) | AARP MedicareRx Preferred (PDP)| UnitedHealthcare Chronic Complete (HMO C-SNP) | future   |
+
 
   #@feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer4 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabAarp @thePredators @Apr_release_2019  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer4 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page by switching window tabs on <site> site
