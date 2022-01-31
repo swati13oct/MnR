@@ -1295,5 +1295,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 	}
 
+	public void enterPharmacyName(String pharmacyNameFilter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void validateBreadCrumb(String breadCrumb) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
