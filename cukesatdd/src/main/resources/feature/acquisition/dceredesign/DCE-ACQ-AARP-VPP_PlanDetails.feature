@@ -111,6 +111,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | 90210   | AARP | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | future   |
 
   @dce_Redesign_DCE_Detail_to_Vpp_Details_PDP @regressionAARP 
+  Examples:
       | zipcode | site | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
       | 80002   | AARP | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
 
