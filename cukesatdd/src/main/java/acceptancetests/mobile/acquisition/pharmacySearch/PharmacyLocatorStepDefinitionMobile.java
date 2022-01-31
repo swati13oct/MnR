@@ -925,6 +925,13 @@ public class PharmacyLocatorStepDefinitionMobile {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateQuestionsWidget();
 	}
+	
+	@Then("^the user clicks on Reset filter on pharmacy search page$")
+	public void user_clicks_on_Reset_Filter_on_pharmacy_search_page()  {
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickResetFilter();
+	}
 
 	/** Verifying the pharmacy search tool in Spanish language */
 	@Then("^the user selects Spanish Language to translate$")
