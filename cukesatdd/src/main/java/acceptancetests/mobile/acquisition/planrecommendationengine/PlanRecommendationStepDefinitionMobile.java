@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -76,7 +77,12 @@ public class PlanRecommendationStepDefinitionMobile {
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : " + PREflow);
+
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - " + curID + " for the flow " + PREflow);
+			// CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			CommonConstantsMobile.PRE_FLOW.put(curID, PREflow);
+
 		}
 	}
 
@@ -558,9 +564,11 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	@Then("^user validate UI and API recommendation rankings in results page$")
+
 	public void verify_UIAPI_rankings_results_page_mobile() {
 		ResultsMobilePage resultpage = new ResultsMobilePage(wd);
-		resultpage.validateUIAPIRecommendations();
+//		resultpage.validateUIAPIRecommendations();
+
 		resultpage.validateUIAPIRankingPlans();
 	}
 
@@ -664,11 +672,31 @@ public class PlanRecommendationStepDefinitionMobile {
 
 /////////////////////////////////////////////////////// New Results Page //////////////////////////////
 
-	@Then("^user validate elements in PRE results page$")
-	public void elements_new_results_page_mobile(DataTable givenAttributes) {
+	@Then("^user validates Sort By drop down UI PRE-Result page$")
+	public void sortBy() {
+		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
+		newResultpage.validateSortByElements();
+	}
+
+	@Then("^user validates Sort By elements visibility PRE-Result page$")
+	public void sortBy_Visibility(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
-		newResultpage.preResultsUI(inputValues.get("Zip Code"), inputValues.get("CountyDropDown"));
+		newResultpage.optionVisibility(inputValues.get("Visibility Info"));
+	}
+
+	@Then("^user removed filtered planType and Check Breadcrumbs in PRE-Result page$")
+	public void sortBy_Remove() {
+		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
+		newResultpage.removeBreadcrumb();
+		newResultpage.sortByBreadcrumb();
+	}
+
+	@Then("^user validates Sort By using PlanType in PRE-Result page$")
+	public void sortBy_planType(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
+		newResultpage.sortByFunc(inputValues.get("Sort PlanType"));
 	}
 
 	@Then("^user validate pagination in PRE results page$")

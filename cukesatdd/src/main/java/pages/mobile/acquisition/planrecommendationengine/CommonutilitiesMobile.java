@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
@@ -283,153 +285,129 @@ public class CommonutilitiesMobile extends UhcDriver {
 	}
 
 	public void findPagedetails(String pageName) {
-		flow = PlanRecommendationStepDefinitionMobile.PREflow;
+		String curID = String.valueOf(Thread.currentThread().getId());
+		flow = CommonConstantsMobile.PRE_FLOW.get(String.valueOf(Thread.currentThread().getId()));//PlanRecommendationEngineStepDefinition.PREflow;
+		System.out.println("**** Current Thread ID is - "+curID+" for the flow "+flow+" ****");
 		currentPageName = pageName.toUpperCase().trim();
+		currrentPagePercentage = new String();
 		previousPageName = new String();
 		previousPagePercentage = new String();
 		nextPageName = new String();
 		nextPagePercentage = new String();
-		currrentPagePercentage = new String();
-		// Update the else as else if for each page
-					if (currentPageName.contains("LOCATION")) {
-						nextPageName = "Coverage";
-						nextPagePercentage = "11%";
-						currrentPagePercentage = "0%";
-					}
-					// Update the else and else if for each page
-					if (flow.equalsIgnoreCase("PDP")) {
-						if (currentPageName.contains("COVERAGE")) {
-							previousPageName = "Location";
-							previousPagePercentage = "11%";
-							nextPageName = "Drug";
-							nextPagePercentage = "50%";
-							currrentPagePercentage = "11%";
-						}
-						if (currentPageName.contains("DRUG")) {
-							previousPageName = "Coverage";
-							previousPagePercentage = "50%";
-							nextPageName = "NULL";
-							nextPagePercentage = "NULL";
-							currrentPagePercentage = "50%";
-//							if (currentPageName.contains("SKIP")) {
-//								nextPageName = "NULL";
-//								nextPagePercentage = "NULL";
-//								return;
-//							}
-						}
-//						if (currentPageName.contains("PHARMACY")) {
-//							previousPageName = "Drug";
-//							previousPagePercentage = "53%";
-//							nextPageName = "NULL";
-//							nextPagePercentage = "NULL";
-//							currrentPagePercentage = "53%";
-//							return;
-//						}
-					} else {
-						if (currentPageName.contains("COVERAGE")) {
-							previousPageName = "Location";
-							previousPagePercentage = "11%";
-							nextPageName = "Special";
-							nextPagePercentage = "22%";
-							currrentPagePercentage = "11%";
-							if (flow.equalsIgnoreCase("MA")) {
-								nextPagePercentage = "25%";
-							}
-							if (flow.equalsIgnoreCase("PDPTOMAPD")) {
-								nextPagePercentage = "33%";
-							}
-						} else if (currentPageName.contains("SPECIAL")) {
-							previousPageName = "Coverage";
-							previousPagePercentage = "22%";
-							nextPageName = "Doctor";
-							nextPagePercentage = "33%";
-							currrentPagePercentage = "22%";
-							if (flow.equalsIgnoreCase("MA")) {
-								previousPagePercentage = "25%";
-								currrentPagePercentage = "25%";
-								nextPagePercentage = "38%";
-							}
-							if (flow.equalsIgnoreCase("PDPTOMAPD")) {
-								nextPagePercentage = "44%";
-							}
-						} else if (currentPageName.contains("DOCTOR")) {
-							previousPageName = "Special";
-							previousPagePercentage = "33%";
-							nextPageName = "Drug";
-							nextPagePercentage = "44%";
-							currrentPagePercentage = "33%";
-							if (flow.equalsIgnoreCase("MA")) {
-								previousPagePercentage = "38%";
-								currrentPagePercentage = "38%";
-								nextPageName = "Additional";
-								nextPagePercentage = "50%";
-							}
-							if (flow.equalsIgnoreCase("PDPTOMAPD")) {
-								nextPagePercentage = "56%";
-							}
-						} else if (currentPageName.contains("DRUG")) {
-							previousPageName = "Doctor";
-							previousPagePercentage = "44%";
-							//nextPageName = "Pharmacy";
-							//nextPagePercentage = "60%";
-							currrentPagePercentage = "44%";
-							//if (currentPageName.contains("SKIP"))
-//								if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
-									nextPageName = "Additional";
-									nextPagePercentage = "56%";
-//								}
-						}
-//						else if (currentPageName.contains("PHARMACY")) {
-//							previousPageName = "Drug";
-//							previousPagePercentage = "60%";
-//							nextPageName = "Additional";
-//							nextPagePercentage = "70%";
-//							currrentPagePercentage = "60%";
-//						} 
-					else if (currentPageName.contains("ADDITIONAL")) {
-							previousPageName = "Drug";
-							previousPagePercentage = "56%";
-							nextPageName = "Cost";
-							nextPagePercentage = "67%";
-							currrentPagePercentage = "56%";
-							if (flow.equalsIgnoreCase("MA")) {
-								previousPageName = "Doctor";
-								previousPagePercentage = "50%";
-								currrentPagePercentage = "50%";
-								nextPagePercentage = "63%";
-							}
-//							if (currentPageName.contains("SKIP")) {
-//								previousPageName = "Drug";
-//								previousPagePercentage = "60%";
-//							}
-						} else if (currentPageName.contains("COST")) {
-							previousPageName = "Additional";
-							previousPagePercentage = "67%";
-							nextPageName = "Priorities";
-							nextPagePercentage = "78%";
-							currrentPagePercentage = "67%";
-							if (flow.equalsIgnoreCase("MA")) {
-								previousPagePercentage = "63%";
-								currrentPagePercentage = "63%";
-								nextPagePercentage = "75%";
-							}
-						}else if (currentPageName.contains("PRIORITIES")) {
-							previousPageName = "Cost";
-							previousPagePercentage = "78%";
-							nextPageName = "NULL";
-							nextPagePercentage = "NULL";
-							currrentPagePercentage = "78%";
-							if (flow.equalsIgnoreCase("MA")) {
-								previousPagePercentage = "75%";
-								currrentPagePercentage = "75%";
-							}
-						} else {
-							previousPageName = "";
-							previousPagePercentage = "";
-							nextPageName = "";
-							nextPagePercentage = "";
-						}
-					}
+		// Update the else and else if for each page
+		if (flow.equalsIgnoreCase("PDP")) {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
+			if (currentPageName.contains("COVERAGE")) {
+				previousPageName = "Location";
+				previousPagePercentage = "11%";
+				nextPageName = "Drug";
+				nextPagePercentage = "50%";
+				currrentPagePercentage = "11%";
+			}
+			if (currentPageName.contains("DRUG")) {
+				previousPageName = "Coverage";
+				previousPagePercentage = "50%";
+				nextPageName = "NULL";
+				nextPagePercentage = "NULL";
+				currrentPagePercentage = "50%";
+			}
+		} else {
+			if (currentPageName.contains("LOCATION")) {
+				nextPageName = "Coverage";
+				nextPagePercentage = "11%";
+				currrentPagePercentage = "0%";
+			}
+			if (currentPageName.contains("COVERAGE")) {
+				previousPageName = "Location";
+				previousPagePercentage = "11%";
+				nextPageName = "Special";
+				nextPagePercentage = "22%";
+				currrentPagePercentage = "11%";
+				if (flow.equalsIgnoreCase("MA")) {
+					nextPagePercentage = "25%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "33%";
+				}
+			} else if (currentPageName.contains("SPECIAL")) {
+				previousPageName = "Coverage";
+				previousPagePercentage = "22%";
+				nextPageName = "Doctor";
+				nextPagePercentage = "33%";
+				currrentPagePercentage = "22%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "25%";
+					currrentPagePercentage = "25%";
+					nextPagePercentage = "38%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "44%";
+				}
+			} else if (currentPageName.contains("DOCTOR")) {
+				previousPageName = "Special";
+				previousPagePercentage = "33%";
+				nextPageName = "Drug";
+				nextPagePercentage = "44%";
+				currrentPagePercentage = "33%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "38%";
+					currrentPagePercentage = "38%";
+					nextPageName = "Services";
+					nextPagePercentage = "50%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "56%";
+				}
+			} else if (currentPageName.contains("DRUG")) {
+				previousPageName = "Doctor";
+				previousPagePercentage = "44%";
+				currrentPagePercentage = "44%";
+				nextPageName = "Services";
+				nextPagePercentage = "56%";
+			} else if (currentPageName.contains("SERVICES")) {
+				previousPageName = "Drug";
+				previousPagePercentage = "56%";
+				nextPageName = "Cost";
+				nextPagePercentage = "67%";
+				currrentPagePercentage = "56%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPageName = "Doctor";
+					previousPagePercentage = "50%";
+					currrentPagePercentage = "50%";
+					nextPagePercentage = "63%";
+				}
+			} else if (currentPageName.contains("COST")) {
+				previousPageName = "Services";
+				previousPagePercentage = "67%";
+				nextPageName = "Priorities";
+				nextPagePercentage = "78%";
+				currrentPagePercentage = "67%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "63%";
+					currrentPagePercentage = "63%";
+					nextPagePercentage = "75%";
+				}
+			} else if (currentPageName.contains("PRIORITIES")) {
+				previousPageName = "Cost";
+				previousPagePercentage = "78%";
+				nextPageName = "NULL";
+				nextPagePercentage = "NULL";
+				currrentPagePercentage = "78%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "75%";
+					currrentPagePercentage = "75%";
+				}
+			} else {
+				previousPageName = "";
+				previousPagePercentage = "";
+				nextPageName = "";
+				nextPagePercentage = "";
+			}
+		}
 		previousPagePercentage = previousPagePercentage + " COMPLETE";
 		nextPagePercentage = nextPagePercentage + " COMPLETE";
 		currrentPagePercentage = currrentPagePercentage + " COMPLETE";

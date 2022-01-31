@@ -18,6 +18,8 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.tfn.CampaignTFNPage;
@@ -487,6 +489,49 @@ public class SAMIconsCommonStepDefinition {
 		//aquisitionhomepage.validateChatSam();
 		pharmacySearchPage.validateSamChatIcon();
 		pharmacySearchPage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
+	
+	@Then("^the user validates SAM icons on the VPP page$")
+	public void the_user_validates_SAM_icons_on_the_vpp_page(DataTable givenAttributes) throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		//WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		VPPPlanSummaryPage plansummaryPage=(VPPPlanSummaryPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		//aquisitionhomepage.validateChatSam();
+		plansummaryPage.validateSamChatIcon();
+		plansummaryPage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
+	
+	@Then("^the user validates SAM icons on the Privacy page$")
+	public void the_user_validates_SAM_icons_on_the_Privacy_page(DataTable givenAttributes) throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PrivacyPolicyAARPPage privacyPolicyPage=new PrivacyPolicyAARPPage(wd);
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		//aquisitionhomepage.validateChatSam();
+		privacyPolicyPage.validateSamChatIcon();
+		privacyPolicyPage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
 
 	}
 }

@@ -43,7 +43,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | current  |
-      | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current  |
 
     @sanity @prodRegression
     Examples: 
@@ -54,12 +54,12 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | current  |
-      | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current  |
 
     @prodRegression @sanity
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
-      | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete Plan 1 - EVC (HMO D-SNP) | current  |
 
   Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Global Header
     Given the user is on medicare acquisition site landing page

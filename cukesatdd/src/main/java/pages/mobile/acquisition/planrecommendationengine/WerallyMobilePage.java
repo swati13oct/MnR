@@ -40,7 +40,7 @@ public class WerallyMobilePage extends UhcDriver {
 	@FindBy(css = ".providerCoverageWelcome button")
 	private WebElement getStarted;
 
-	@FindBy(css = "input#search")
+	@FindBy(xpath = ".//input[@id='search']")
 	private WebElement searchBox;
 
 	@FindBy(css = "button[name='primary-search-box-action']")
@@ -108,9 +108,17 @@ public class WerallyMobilePage extends UhcDriver {
 
 			for (String s : searchParameterList) {
 				searchParameter = s;
-				validate(searchBox, 30);
 				if (type.toUpperCase().contains("DOCTOR")) {
-					sendkeysMobile(searchBox, searchParameter);
+					try {
+						if(searchBox.isDisplayed())
+							sendkeysMobile(searchBox, searchParameter);
+					}
+					catch(Exception e) {
+						jsClickNew(driver.findElement(By.xpath("(//*[@id=\"connectHeader\"]//button[contains(@class,'toggle')])[1]")));
+						jsClickNew(driver.findElement(By.xpath("//*[@id=\"connectHeader\"]//span[contains(text(),'Find Care')]")));
+						pageloadcomplete();
+						sendkeysMobile(searchBox, searchParameter);
+					}
 					hidekeypad();
 				//	mobileswipe("50%", false);
 				//	mobileactiontap(searchButton);

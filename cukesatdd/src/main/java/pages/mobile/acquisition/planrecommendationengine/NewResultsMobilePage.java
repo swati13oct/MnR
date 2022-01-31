@@ -54,8 +54,11 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "body>div#overlay")
 		private WebElement planLoaderscreen;
 
-		@FindBy(css = "div[class*='resultsPre'] h1")
+		@FindBy(xpath = "//*[@class='mobileHeader']")
 		private WebElement planZipInfo;
+		
+		@FindBy(css = ".planRemoveSort svg")
+		private WebElement removeBreadCrumbs;
 
 		@FindBy(css = ".editPref button")
 		private WebElement editYourResponse;
@@ -82,6 +85,9 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(css = ".paginationSection button[class*='view-plans-next']")
 		private WebElement pageNextButton;
+		
+		@FindBy(css = ".planRemoveSort span")
+		private WebElement sortBreadCrumbs;
 
 		@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
 		private WebElement pageNextButtonDisabled;
@@ -94,7 +100,7 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		// Plan Tile Elements
 
-		@FindBy(css = "li.planTileGrid")
+		@FindBy(xpath = ".//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]")
 		private List<WebElement> plantiles;
 
 		@FindBy(css = "#modal")
@@ -116,8 +122,20 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Advantage Plans'] .accordion-title h3")
 		private WebElement mapdPlanTypesTitle;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']")
+		private WebElement MAPDCheckOption;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']")
+		private WebElement MedigapCheckOption;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']")
+		private WebElement PDPCheckOption;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']")
+		private WebElement SNPCheckOption;
 
-		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Advantage Plans'] span[class*='accordion-arrow'] svg")
+		@FindBy(xpath = ".//uhc-accordion[contains(@ng-reflect-title,'Medicare Advantage Plans')]//span[contains(@class,'accordion-arrow')]")
 		private WebElement mapdPlanTypesFlipArrow;
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Advantage Plans'] p")
@@ -134,6 +152,18 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Supplement Insurance'] p")
 		private WebElement madsupPlanTypesPara;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD'] span.checkbox-square")
+		private WebElement MAPDCheck;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare'] span.checkbox-square")
+		private WebElement MedigapCheck;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP'] span.checkbox-square")
+		private WebElement PDPCheck;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP'] span.checkbox-square")
+		private WebElement SNPCheck;
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Supplement Insurance'] a")
 		private WebElement madsupPlanTypesLearnmoreLink;
@@ -141,7 +171,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Prescription Drug'] .accordion-title h3")
 		private WebElement pdpPlanTypesTitle;
 
-		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Prescription Drug'] span[class*='accordion-arrow'] svg")
+		@FindBy(xpath = ".//uhc-accordion[contains(@ng-reflect-title,'Medicare Prescription Drug')]//span[contains(@class,'accordion-arrow')]")
 		private WebElement pdpPlanTypesFlipArrow;
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Medicare Prescription Drug'] p")
@@ -153,7 +183,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Dual Special Needs'] .accordion-title h3")
 		private WebElement dsnpPlanTypesTitle;
 
-		@FindBy(css = "uhc-accordion[ng-reflect-title*='Dual Special Needs'] span[class*='accordion-arrow'] svg")
+		@FindBy(xpath = ".//uhc-accordion[contains(@ng-reflect-title,'Dual Special Needs')]//span[contains(@class,'accordion-arrow')]")
 		private WebElement dsnpPlanTypesFlipArrow;
 
 		@FindBy(css = "uhc-accordion[ng-reflect-title*='Dual Special Needs'] p")
@@ -166,6 +196,108 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(css = "div.content h2")
 		private WebElement planNameDetailsPage;
+		
+		@FindBy(xpath = ".//div[contains(concat(' ',normalize-space(@class),' '),' sortBySection ')]//*[@id='plansSorting']")
+		private WebElement sortByDropdown;
+		
+		@FindBy(css = "div.sortBySection div.applySec>button")
+		private WebElement applyBtn;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
+		private WebElement SNPCheckLabel;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
+		private WebElement PDPCheckLabel;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
+		private WebElement MedigapCheckLabel;
+		
+		@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']>label")
+		private WebElement MAPDCheckLabel;
+		
+		@FindBy(css = "a#ghn_lnk_1")
+		private WebElement Home;
+		
+		public void applySort(String planType) {
+			Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+			sortByDropdown.click();
+			threadsleep(2000);
+
+			if (planType.equalsIgnoreCase("mapd")) {
+				validate(MAPDCheck, 20);
+				MAPDCheck.click();
+			}
+			if (planType.equalsIgnoreCase("medigap")) {
+				validate(MedigapCheck, 20);
+				MedigapCheck.click();
+			}
+			if (planType.equalsIgnoreCase("pdp")) {
+				validate(PDPCheck, 20);
+				PDPCheck.click();
+			}
+			if (planType.equalsIgnoreCase("snp")) {
+				validate(SNPCheck, 20);
+				SNPCheck.click();
+			}
+			Assert.assertTrue(validate(applyBtn), "apply Button is missing");
+			applyBtn.click();
+			threadsleep(2000);
+		}
+		
+		public void VerifyPlanTile(String plan) {
+			System.out.println("Verify the PlanType after applied Filter");
+			String PlanType = null;
+			String text = null;
+			if (plan.equalsIgnoreCase("mapd"))
+				text = "Part C";
+			else if (plan.equalsIgnoreCase("medigap"))
+				text = "Supplement";
+			else if (plan.equalsIgnoreCase("pdp"))
+				text = "Part D";
+			else if (plan.equalsIgnoreCase("snp"))
+				text = "Special";
+
+			int plancount = plantiles.size();
+			Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
+					"BreadCrumbs not showing for " + plan + " PlanType");
+			for (int i = 0; i < plancount; i++) {
+				// System.out.println("I count is: "+i);
+				PlanType = plantiles.get(i).findElement(By.xpath(".//div[contains(@class,'planNameType')]")).getText().trim();
+				System.out.println("\n\n===============->"+PlanType+"===================->"+text+"==============\n\n");
+				Assert.assertTrue(PlanType.contains(text), "Sort By Functionality is not working");
+				try {
+					pageNextButton.click();
+					threadsleep(2000);
+				}
+				catch(Exception e) {
+				//	mobileswipeHorizantal("40%", true);
+				}
+			}
+
+		}
+		
+		public void sortByFunc(String plan) {
+			System.out.println("Sorting  Options: " + plan);
+			String options[] = plan.split(",");
+			for (int i = 0; i < options.length; i++) {
+				applySort(options[i]);
+				VerifyPlanTile(options[i]);
+			}
+		}
+		
+		public void removeBreadcrumb() {
+			System.out.println("Removing Filtered BreadCrumb");
+			Assert.assertTrue(sortBreadCrumbs.isDisplayed(), "BreadCrumbs is not displaying");
+			removeBreadCrumbs.click();
+			threadsleep(5000);
+			Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after remove breadcrumb");
+		}
+		
+		public void sortByBreadcrumb() {
+			System.out.println("Sorting Breadcrumb validation after PlanYear Toggle");
+			threadsleep(5000);
+			Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after PlanYear Toggle");
+		}
 
 	public void validateDrugInfo(String drugsInfo, String location) {
 		System.out.println("Validating Drug Info...");
@@ -213,6 +345,118 @@ public class NewResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
 		}
 
+	}
+	
+	public void validateNoSortByElements() {
+		System.out.println("Validate No Sort By UI ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		scrollToView(sortByDropdown);
+		Assert.assertFalse(validate(sortByDropdown), "SortBy Dropdown is displaying");
+	}
+	
+	public void validateSortByElements() {
+		System.out.println("Validate Sort By UI Elements : ");
+		String currentPageUrl = driver.getCurrentUrl();
+		System.out.println("Current URL : " + currentPageUrl);
+		scrollToView(Home);
+		threadsleep(2000);
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		jsClickNew(sortByDropdown);
+		Assert.assertTrue(validate(MAPDCheckLabel), "MAPD Checkbox is missing");
+		Assert.assertTrue(validate(MedigapCheckLabel), "Medigap Checkbox is missing");
+		Assert.assertTrue(validate(PDPCheckLabel), "PDP Checkbox is missing");
+		Assert.assertTrue(validate(SNPCheckLabel), "SNP Checkbox is missing");
+		Assert.assertTrue(validate(applyBtn), "Apply button is missing");
+
+		Assert.assertFalse(MAPDCheck.isSelected(), "MAPD is selected by default");
+		Assert.assertFalse(MedigapCheck.isSelected(), "Medigap is selected by default");
+		Assert.assertFalse(PDPCheck.isSelected(), "PDP is selected by default");
+		Assert.assertFalse(SNPCheck.isSelected(), "SNP is selected by default");
+
+		// Deselect All
+		validate(applyBtn);
+		optionSelection("MAPD,Medigap,PDP,SNP", false);
+		applyBtn.click();
+		threadsleep(3000);
+		boolean dropClose = validate(applyBtn, 10);
+		System.out.println("Drop close : " + dropClose);
+		Assert.assertFalse(dropClose);
+
+	}
+	
+	public void optionSelection(String option, boolean select) {
+		String options[] = option.split(",");
+		for (int i = 0; i < options.length; i++) {
+			checkUncheck(options[i], select);
+			threadsleep(1000);
+		}
+	}
+	
+	public void checkUncheck(String checkOption, boolean select) {
+		System.out.println("Selecting Option " + checkOption + " : " + select);
+		WebElement elemCheck = null, elemClick = null;
+		if (checkOption.equalsIgnoreCase("mapd")) {
+			elemCheck = MAPDCheck;
+			elemClick = MAPDCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("medigap")) {
+			elemCheck = MedigapCheck;
+			elemClick = MedigapCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("pdp")) {
+			elemCheck = PDPCheck;
+			elemClick = PDPCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("snp")) {
+			elemCheck = SNPCheck;
+			elemClick = SNPCheckLabel;
+		}
+
+		if (select && !elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+		if (!select && elemCheck.isSelected()) {
+			jsClickNew(elemClick);
+		}
+
+		if (select)
+			Assert.assertTrue(elemCheck.isSelected(), "Unable to Select " + elemCheck);
+		else
+			Assert.assertFalse(elemCheck.isSelected(), "Unable to Deselect " + elemCheck);
+	}
+	
+	public void optionVisibility(String option) {
+		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
+		sortByDropdown.click();
+		String options[] = option.split(":");
+		for (int i = 0; i < options.length; i++) {
+			String optionInfo = options[i];
+			if (optionInfo.trim().length() > 0) {
+				String[] optionDetails = optionInfo.split(",");
+				String planType = optionDetails[0];
+				String visibility = optionDetails[1];
+				disableCheck(planType, visibility);
+			}
+			threadsleep(2000);
+			sortByDropdown.click();
+		}
+	}
+	
+	public void disableCheck(String planType, String visibility) {
+		System.out.println("Validating " + planType + " Option: " + visibility);
+		if (planType.equalsIgnoreCase("mapd"))
+			Assert.assertEquals(MAPDCheckOption.getAttribute("ng-reflect-disabled"), visibility,
+					"MAPD is not Disabled");
+		if (planType.equalsIgnoreCase("medigap"))
+			Assert.assertEquals(MedigapCheckOption.getAttribute("ng-reflect-disabled"), visibility,
+					"Medigap is not Disabled");
+		if (planType.equalsIgnoreCase("pdp"))
+			Assert.assertEquals(PDPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "PDP is not Disabled");
+		if (planType.equalsIgnoreCase("snp"))
+			Assert.assertEquals(SNPCheckOption.getAttribute("ng-reflect-disabled"), visibility, "SNP is not Disabled");
 	}
 	
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
@@ -309,11 +553,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		System.out.println("Validating PRE Results UI Page: ");
 		waitforResultsPage();
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4]) > 0, "Total Plan count is less than 1");
+	//	Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[0]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
-		Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results button");
-		Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans button");
+		// Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results
+		// button");
+		// Assert.assertTrue(validate(viewMSPlans, 60), " Issue in View MS Plans
+		// button");
 		// Assert.assertTrue(sortByLabel.getText().contains("Sort By :"), "Invalid Sort
 		// Text");
 		// Assert.assertTrue(resourcesTitle.getText().contains("Resources"), "Invalid
@@ -331,7 +577,8 @@ public class NewResultsMobilePage extends UhcDriver {
 		// Supplement Insurance Plans (Medigap)"),
 		// "Invalid MADSUP Text");
 		// validate(madsupPlanTypesPara, 60);
-		Assert.assertFalse(validate(madsupPlanTypesPara, 10), "Medsub section should not display for July release");
+		Assert.assertTrue(validate(madsupPlanTypesPara, 10),
+				"Medsub section should not display for PDP flow/Non-approved states");
 		// Assert.assertTrue(madsupPlanTypesLearnmoreLink.getText().contains("Learn More
 		// About"),
 		// "Learn More About link not displayed");
@@ -344,16 +591,16 @@ public class NewResultsMobilePage extends UhcDriver {
 		Assert.assertTrue(validate(dsnpPlanTypesPara, 60), " Issue in DSNP Text Area");
 		Assert.assertTrue(validate(dsnpPlanTypesLearnmoreLink, 60), " Issue in DSNP Learnmore linke");
 		threadsleep(3000);
-		mapdPlanTypesFlipArrow.click();
+		jsClickNew(mapdPlanTypesFlipArrow);
 		validateNonPresenceOfElement(mapdPlanTypesLearnmoreLink);
 		threadsleep(3000);
 		// madsupPlanTypesFlipArrow.click();
 		// validateNonPresenceOfElement(madsupPlanTypesLearnmoreLink);
 		// threadsleep(3000);
-		pdpPlanTypesFlipArrow.click();
+		jsClickNew(pdpPlanTypesFlipArrow);
 		validateNonPresenceOfElement(pdpPlanTypesLearnmoreLink);
 		threadsleep(3000);
-		dsnpPlanTypesFlipArrow.click();
+		jsClickNew(dsnpPlanTypesFlipArrow);
 		validateNonPresenceOfElement(dsnpPlanTypesFlipArrow);
 	}
 

@@ -110,7 +110,7 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	@FindBy(xpath = "(//h3[normalize-space()='Learn More About Medicare Advantage Plans'])[2]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -870,7 +870,7 @@ public class CampaignTFNPage extends UhcDriver {
 	}
 
 	//@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block'))]")
+	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block') or (@style=''))]")
 	private WebElement HomeLogo;
 
 	@FindBy(xpath = "//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")

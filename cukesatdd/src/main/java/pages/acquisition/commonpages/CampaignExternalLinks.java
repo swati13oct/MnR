@@ -2290,7 +2290,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		return PlanPremium;
 	}
 
-	public void clickOnViewMoreForPlan(String planName) {
+	public void clickOnViewMorePlan(String planName) {
 
 		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));

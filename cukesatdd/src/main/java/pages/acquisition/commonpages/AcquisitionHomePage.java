@@ -539,7 +539,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	@FindBy(xpath = "(//span[contains(text(),'Submit')])[2]")
+	//@FindBy(xpath = "//span[contains(text(),'Sign Up')]")
+	@FindBy(xpath = "//button[contains(@class,'uhc-email-button')]")
 	private WebElement SubmitEmail;
 
 	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
@@ -551,7 +552,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")

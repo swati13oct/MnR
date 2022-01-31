@@ -548,9 +548,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | County Name     | <county>          |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the VPP page
       | TFN Xpath | <TFNxpath2> |
-    And the user closes the new browser tab
+    And the user closes the browser tab
     ##--------------------------------- Vpp flow from Vpp link on External Page------------------------##
     And the user clicks on View Plans and Pricing button on PDP external page in lower env
        | Zip Code        | <zipcode>         |
@@ -558,12 +558,12 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
        | County Name     | <county>          |
     And the user selects plan year
       | Plan Year | <planyear> |
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the VPP page
       | TFN Xpath | <TFNxpath2> |
-    And the user closes the new browser tab
+    And the user closes the browser tab
     ##--------------------------------- Privacy Policy from External Page------------------------##
     Then the user navigate back to aarp medicare plans11 page privacy link in lower env
-    And the user validates SAM icons on the page
+    And the user validates SAM icons on the Privacy page
       #| TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
     #And the user closes the new browser tab

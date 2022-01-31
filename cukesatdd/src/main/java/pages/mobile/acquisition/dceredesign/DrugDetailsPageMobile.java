@@ -405,8 +405,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
-		PlanNameElement.getText().replaceAll("\u00A00", " ").trim();
+		WebElement PlanNameElement = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
 		} else
@@ -2274,6 +2273,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// jsClickNew(DrugCosts_PlanDetailsBtn);
+		sleepBySec(3);
 		scrollToView(DrugCosts_PlanDetailsBtn);
 		DrugCosts_PlanDetailsBtn.click();
 		waitForPageLoadSafari();

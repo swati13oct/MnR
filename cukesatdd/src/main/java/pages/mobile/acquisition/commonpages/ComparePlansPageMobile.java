@@ -1478,7 +1478,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
 	public WebElement viewAllplansButton;
 
-	@FindBy(xpath = "//*[contains(text(),'Add Drugs') and contains(@class,'button')]")
+	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement addMyDrugsButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
@@ -1494,6 +1494,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
+		scrollToView(addMyDrugsButton);
 		if (validateNew(addMyDrugsButton)) {
 			System.out.println("User is on DCE Get started Page");
 			return new GetStartedPageMobile(driver);
