@@ -2139,14 +2139,19 @@ public void PREStage(String primaryWindow, String aarp) {
 				driver.switchTo().window(window);
 				System.out.println(driver.getCurrentUrl());
 				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
+			}else {
+				driver.switchTo().window(window);
+				threadsleep(2000);
 			}
-			if(aarp.contains("aarpmedicareplans")) {
+		}
+			if(aarp.contains("aarpmedicareplans")) 
 				driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html");
+			else {
+				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");				
+				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
+				threadsleep(2000);
 			}
-			else
-				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
-				driver.navigate().to("https://steelcase.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
-			}
+		
 	}
 	threadsleep(5000);
 //	driver.switchTo().window(primaryWindow);
