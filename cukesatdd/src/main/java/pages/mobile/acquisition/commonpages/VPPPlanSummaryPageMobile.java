@@ -6284,6 +6284,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 	}
 
+
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
