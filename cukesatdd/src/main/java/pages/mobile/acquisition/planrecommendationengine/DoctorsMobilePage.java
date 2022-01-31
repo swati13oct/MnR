@@ -63,7 +63,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	@FindBy(css = "#errorMessage")
 	private WebElement errorMessage;
 
-	@FindBy(css = ".container div>button[class*='primary button']")
+	@FindBy(xpath="//button[contains(text(),'Continue')]")
 	private WebElement continueBtn;
 
 	@FindBy(css = ".container div>button[class*='secondary']")
@@ -149,33 +149,25 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public void doctorspage(String doctorsSelection, String doctorsName, String multiDoctor, String status) {
+		System.out.println("Doctor Page Functional Operations");
 		if (status.toUpperCase().contains("POSITIVE")) {
-			if (doctorsSelection.equalsIgnoreCase("UHCNetwork")) {
-				jsClickNew(doctorUHCNetworkOption);
-				System.out.println("Plan Type " + doctorsSelection + " Clicked");
-				jsClickNew(continueBtn);
-			} else if (doctorsSelection.equalsIgnoreCase("AcceptsMedicare")) {
-				jsClickNew(doctorWantOption);
-				System.out.println("Plan Type " + doctorsSelection + " Clicked");
-				jsClickNew(continueBtn);
-			} else if (doctorsSelection.equalsIgnoreCase("lookup")) {
-				jsClickNew(doctorLookupOption);
-				System.out.println("Plan Type " + doctorsSelection + " Clicked");
-				jsClickNew(continueBtn);
+			doctorspageOptions(doctorsSelection);
+			jsClickNew(continueBtn);
+			if (doctorsSelection.equalsIgnoreCase("Lookup")) {
 				if (multiDoctor.equalsIgnoreCase("YES"))
 					doctorlookup(doctorsName, 3);
 				else
 					doctorlookup(doctorsName, 1);
 			}
 			System.out.println("Validating " + page + " page Continue button functionality");
-			if(!status.toUpperCase().contains("NEXTPAGENAME"))
+			if (!status.toUpperCase().contains("NEXTPAGENAME"))
 				mobileUtils.nextPageValidation(page.toUpperCase());
 			else
-				mobileUtils.nextPageNameValidation(page.toUpperCase());
+				mobileUtils.nextPageValidation(page.toUpperCase());
 		} else {
 			if (doctorsSelection.isEmpty()) {
 				jsClickNew(continueBtn);
-				mobileUtils.mobleErrorValidation(page);
+				mobileUtils.nextPageValidation(page.toUpperCase());
 			}
 		}
 	}
@@ -439,7 +431,7 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 	
 	public void doctorspageOptions(String doctorsSelection) {
-			if (doctorsSelection.equalsIgnoreCase("UHCNetwork")) {
+			if (doctorsSelection.equalsIgnoreCase("UHGNetwork")) {
 				jsClickNew(doctorUHCNetworkOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				jsClickNew(continueBtn);
@@ -447,7 +439,7 @@ public class DoctorsMobilePage extends UhcDriver {
 				jsClickNew(doctorWantOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 				jsClickNew(continueBtn);
-			} else if (doctorsSelection.equalsIgnoreCase("lookup")) {
+			} else if (doctorsSelection.equalsIgnoreCase("Lookup")) {
 				jsClickNew(doctorLookupOption);
 				System.out.println("Plan Type " + doctorsSelection + " Clicked");
 			}
@@ -457,11 +449,11 @@ public class DoctorsMobilePage extends UhcDriver {
 		doctorspageOptions(doctor);
 		jsClickNew(continueBtn);
 		if(validate(modalEditdoctors)) {
-			modalEditdoctors.click();
+			jsClickNew(modalEditdoctors);
 		}
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-		modalFinddoctors.click();
+		jsClickNew(modalFinddoctors);
 		threadsleep(5000);
 		if (doctor.equalsIgnoreCase("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
@@ -469,7 +461,7 @@ public class DoctorsMobilePage extends UhcDriver {
 			else
 				validateWerallySearchanotherWindowmobile(curWindow, "Doctors", doctorsName, 1);
 		}
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 	}
 	
 	public void addProviderEdit(String search) {
