@@ -1094,6 +1094,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
 	}
+	
+	public void clickResetFilter() {
+		//breadCrumbLink.click();
+		jsClickNew(resetfilterlink);
+		waitForPageLoadSafari();
+		validateNew(pharmacyList);
+	}
 
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl,
 			String testPdfLinkTextDate) throws InterruptedException {

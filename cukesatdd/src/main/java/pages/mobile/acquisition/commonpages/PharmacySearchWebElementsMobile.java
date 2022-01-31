@@ -120,8 +120,11 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#collapseMap")
 	protected WebElement mapView;
 
-	@FindBy(xpath = "//*[@class='pharmacy-list']")
+	@FindBy(xpath = "//div[contains(@class,'mt-10')]//*[contains(@class,'row')]")
 	protected WebElement pharmacyList;
+	
+	@FindBy(xpath="(//button[contains(@class, 'uhc-link-button')])[2]")
+	protected WebElement resetfilterlink;
 
 	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	protected List<WebElement> pharmacyListItems;
