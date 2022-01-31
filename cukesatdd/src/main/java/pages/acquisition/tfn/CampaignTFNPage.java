@@ -110,7 +110,8 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	@FindBy(xpath = "(//h3[normalize-space()='Learn More About Medicare Advantage Plans'])[2]")
+	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
