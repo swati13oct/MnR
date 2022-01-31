@@ -124,7 +124,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | TFN Xpath | <TFNxpath5> |
 
     #And the user closes the new browser tab
-    @Scenario5_AARP @Scenario5_AARP_VPP_Summary
+    @Scenario5_AARP @Scenario5_AARP_VPP_Summary @campaignExternalTFNProdMS
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                 | TFNxpath3                           | TFNxpath4                             | pscCode | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                                                         | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            |
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //a[contains(@class,'invoca_swap')] | (//div[@class= 'twineTfn'])[2]/div[2] | 8002977 |   24010 | NO            | Roanoke City | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] |
@@ -250,7 +250,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | TFN Xpath | <TFNxpath5> |
 
     #And the user closes the new browser tab
-    @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage @Scenario5_AARP_Stage_VPP_Summary
+    
+    @Scenario5_AARP_Stage @regressionAARP @campaignExternalStage @Scenario5_AARP_Stage_VPP_Summary @campaignExternalTFNStageMS
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                            | TFNxpath3                           | TFNxpath4                                             | pscCode | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | 1stRecommendation | 2ndRecommendation | plantype | planName                             | plantypePDP | plantypeSNP | plantypeMS | TFNxpath5                            | planyear | TFNxpath6                           |
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'invoca_swap')] | //a[contains(@class,'invoca_swap')] | (//div[contains(@class,'calluswidgets')]//p[2]//a)[2] | 8002977 |   24010 | NO            | Roanoke City | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | PDP               | MA                | MA       | AARP Medicare Advantage Choice (PPO) | PDP         | SNP         | MS         | (//span[contains(@class, 'tel')])[1] | current  | //a[contains(@class,'invoca_swap')] |
