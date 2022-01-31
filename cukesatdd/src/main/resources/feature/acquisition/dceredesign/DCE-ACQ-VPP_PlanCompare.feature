@@ -22,7 +22,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     Then the user validates drug is displayed on the plan compare page
       | DrugName | <drug1> |
 
-    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP @PCdebug
+    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP @PCdebug @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | febuxostat | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -32,7 +32,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | febuxostat | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP @vbfGate
+    @dce_Redesign_VPP_PlanCompare_AARP @regressionAARP @vbfGate @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | febuxostat | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
@@ -88,12 +88,12 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1  | drug2                | drug3   | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dce_Redesign_VPP_PlanCompare1_UHC @regressionUHC
+    @dce_Redesign_VPP_PlanCompare1_UHC @regressionUHC @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | drug3   | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | febuxostat | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dce_Redesign_VPP_PlanCompare1_AARP @regressionAARP
+    @dce_Redesign_VPP_PlanCompare1_AARP @regressionAARP @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3   | planname                        |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | febuxostat | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
@@ -133,12 +133,12 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | febuxostat | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dce_Redesign_VPP_PlanCompare3_UHC @regressionUHC
+    @dce_Redesign_VPP_PlanCompare3_UHC @regressionUHC @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | febuxostat | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dce_Redesign_VPP_PlanCompare3_AARP @regressionAARP
+    @dce_Redesign_VPP_PlanCompare3_AARP @regressionAARP @featureGate
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | planname                        |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | febuxostat | diclofenac potassium | AARP MedicareRx Walgreens (PDP) |
