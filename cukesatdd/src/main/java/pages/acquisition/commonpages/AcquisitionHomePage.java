@@ -8173,7 +8173,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public String returnCookieValue() {
 		
-		String cookieName = (getCookieName("rxVisitor").toString());
+		String cookieName = "NULL";
+		if(getCookieName("rxVisitor")!=null)
+			cookieName = (getCookieName("rxVisitor").toString());
 		System.out.println("visitor cookie : "+cookieName);
 		return cookieName;
 	}

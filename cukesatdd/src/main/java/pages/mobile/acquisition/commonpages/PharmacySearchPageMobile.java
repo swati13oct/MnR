@@ -29,41 +29,6 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		openAndValidate();
 	}
 
-	@FindBy(id = "filtertext")
-	protected WebElement pharmacyNameOptionalTxt;
-
-	public void enterPharmacyName(String pharmacyName) {
-		CommonUtility.waitForPageLoad(driver, pharmacyNameOptionalTxt, 5);
-		sleepBySec(3);
-		CommonUtility.waitForPageLoadNew(driver, pharmacyNameOptionalTxt, 60);
-		scrollToView(pharmacyNameOptionalTxt);
-		validateOneCharPharmacyError(pharmacyName.split("")[0]);
-		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		if (pharmacyName != null) {
-			pharmacyNameOptionalTxt.clear();
-			sleepBySec(3);
-			pharmacyNameOptionalTxt.sendKeys(pharmacyName);
-		}
-	}
-
-	@FindBy(xpath="//div[@id='filterError']//p")
-	protected WebElement pharmacyNameOptionalErrorMessage;
-	
-	public void validateOneCharPharmacyError(String pharmacyName) {
-		pharmacyNameOptionalTxt.clear();
-		sleepBySec(3);
-		pharmacyNameOptionalTxt.sendKeys(pharmacyName);
-		searchbtn.click();
-		sleepBySec(2);
-		CommonUtility.waitForPageLoadNew(driver, pharmacyNameOptionalErrorMessage, 10);
-		Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(pharmacyNameOptionalErrorMessage));
-	}
-
-	public void validateBreadCrumb(String breadcrumb) {
-		validateNew(breadCrumbLink);
-		Assertion.assertTrue("Expected breadcrumb" + breadcrumb + "not displayed",
-				breadcrumb.equals(breadCrumbLink.getText()));
-	}
 	/*
 	 * @Override public void openAndValidate() {
 	 * CommonUtility.checkPageIsReadyNew(driver); if
@@ -897,6 +862,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		sleepBySec(2);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
 			driver.findElement(By.cssSelector("#plan-type-label")).click();
 		}
 		mobileSelectOption(seletPlandropdown, planName, true);
@@ -1084,11 +1050,14 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		String indian_tribal_text = "";
 		try {
 			indian_tribal_text = indian_tribal_label_filter_text.getText();
-		} catch (Exception ex) {
+		}
+
+		catch (Exception ex) {
 		}
 		if (indian_tribal_text.contains("Servicio de salud ind")) {
 			indian_tribal_label_filter = driver
 					.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
+
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
@@ -1326,6 +1295,16 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			System.out.println("AEP Year Toggle Radio and Modal is NOT displayed on Pharmacy Page : ");
 			e.printStackTrace();
 		}
+	}
+
+	public void enterPharmacyName(String pharmacyNameFilter) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void validateBreadCrumb(String breadCrumb) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
