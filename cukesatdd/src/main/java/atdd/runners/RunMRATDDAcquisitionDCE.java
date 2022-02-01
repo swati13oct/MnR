@@ -17,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@dce_E2E_Scenario3_UAT_AARP")
 
-@RetryCountIfFailed(0)
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)
