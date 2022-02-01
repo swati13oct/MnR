@@ -122,7 +122,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class^='mob-sctn']:nth-of-type(4) a[dtmname$='Special Needs Plans']")
 	private WebElement specialNeedsPlansLink;
 
-	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'])[2]")
+	@FindBy(xpath = "//*[@id='learnmore-scroll']/div[2]/div[4]/p")
 	private WebElement medicareFAQLink;
 
 	@FindBy(xpath = "(//a[@dtmname='NavLinks:Medicare Education:Glossary'])[2]")
