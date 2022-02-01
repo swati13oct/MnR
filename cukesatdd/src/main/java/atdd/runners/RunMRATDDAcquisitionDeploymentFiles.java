@@ -17,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regressionDeployentFiles")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionDeploymentFiles extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)

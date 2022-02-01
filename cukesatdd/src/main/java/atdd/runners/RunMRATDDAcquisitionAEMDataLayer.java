@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
                 "timeline:target"},
         tags = "@AEM_DataLayer")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionAEMDataLayer extends BaseTestConfig {
     @Test(dataProvider = ScenarioDataProvider)
     public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {

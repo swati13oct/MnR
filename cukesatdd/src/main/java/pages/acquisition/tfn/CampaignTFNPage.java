@@ -110,7 +110,8 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	@FindBy(xpath = "(//h3[normalize-space()='Learn More About Medicare Advantage Plans'])[2]")
+	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -166,7 +167,7 @@ public class CampaignTFNPage extends UhcDriver {
 	// "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
 	// @FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
 	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
-	
+
 	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans - UHC']")
 	public WebElement UHCSearchLinkfromBing;
 
