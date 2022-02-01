@@ -113,7 +113,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
 	
-	@FindBy(css = "div[data-rel='#plan-list-3'] a")
+	@FindBy(xpath = ".//div[@data-rel='#plan-list-3']//a")
 	private WebElement PDPViewPlansLink;
 	
 	@FindBy(css = "div[data-rel='#plan-list-4'] a")
@@ -210,7 +210,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			jsClickNew(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink); 
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
@@ -295,14 +295,14 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		System.out.println("section : " + section);
 	//	for (WebElement elem : allQuestionSection) {
 		for (int i=1; i<=allQuestionSection.size();i++) {
 			WebElement head = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//h2"));
 			WebElement button = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//button"));
-			System.out.println("\n\n======"+head+"==\n====="+button+"===\n\n");
+			scrollToView(button);
 			String tempTxt = head.getText().toLowerCase();
-			System.out.println("tempTxt : " + tempTxt);
+			System.out.println("\n\ntempTxt : " + tempTxt);
+			System.out.println("section : " + section);
 			if (tempTxt.contains(section)) {
 				editButton = true;
 				if (click) {// Edit button Click
@@ -351,22 +351,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		mapd.put(0, "location");
 		mapd.put(1, "coverage");
 		mapd.put(2, "special");
-		mapd.put(3, "travel");
-		mapd.put(4, "doctor");
-		mapd.put(5, "drugs");
-		mapd.put(6, "additional");
-		mapd.put(7, "cost");
-		mapd.put(8, "priorities");
+		mapd.put(3, "doctor");
+		mapd.put(4, "drugs");
+		mapd.put(5, "services");
+		mapd.put(6, "cost");
+		mapd.put(7, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
 		ma.put(1, "coverage");
 		ma.put(2, "special");
-		ma.put(3, "travel");
-		ma.put(4, "doctor");
-		ma.put(5, "additional");
-		ma.put(6, "cost");
-		ma.put(7, "priorities");
+		ma.put(3, "doctor");
+		ma.put(4, "services");
+		ma.put(5, "cost");
+		ma.put(6, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");

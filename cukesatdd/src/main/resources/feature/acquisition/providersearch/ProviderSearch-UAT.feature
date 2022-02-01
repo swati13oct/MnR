@@ -10,8 +10,9 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
       | Year      | <year>     |
-    When user select a provider from home page and save it
-
+   # When user select a provider from home page and save it
+   # Obul : in homepage flow we will not have save option
+   
     @ProviderSearchCommon_AARP @prodRegression @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
@@ -69,7 +70,8 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Zip Code  | <zipcode>  |
       | Plan Name | <planname> |
       | Year      | <year>     |
-    When user select a provider from home page and save it
+   # When user select a provider from home page and save it
+    # Obul : in homepage flow we will not have save option
 
     @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @sanity
     Examples: 

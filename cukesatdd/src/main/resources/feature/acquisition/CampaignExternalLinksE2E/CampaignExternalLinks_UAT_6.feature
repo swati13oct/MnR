@@ -237,7 +237,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
 
-    @CampaignExternalLink_E2E_Scenario @CampaignExternalLink_E2E_Scenario_6_MS
+    @CampaignExternalLink_E2E_Scenario @CampaignExternalLink_E2E_Scenario_6_MS @campaignExternalTFNProdMS
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county       | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                  | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                                             | planIndex | planIndex1 | TFNxpath4                                  | pscCode | address             | city   | state    | county2         | isMultiCounty2 |
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | current  | future   |   24010 | NO              | Roanoke City | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'invoca_swap tel ng-binding')]) |         1 |          2 | (//a[contains(@class, 'invoca_swap tel')]) | 8000158 | 12205 Albany County | Albany | New York | New York County | no             |
@@ -470,6 +470,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
     Then user closes current tab and navigate to previous tab
+    
     #---------------------Privacy link in Medicare plans 11 page--------------------
     Then the user navigate back to aarp medicare plans11 privacy link in lower env
     #Then the user validates SAM icons on privacy page
@@ -478,7 +479,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
 
-    @CampaignExternalLink_E2E_Scenario_6_Stage @regressionAARP @campaignExternalStage @CampaignExternalLink_E2E_Scenario_6_Stage_MS
+    @CampaignExternalLink_E2E_Scenario_6_Stage @regressionAARP @campaignExternalStage @CampaignExternalLink_E2E_Scenario_6_Stage_MS @campaignExternalTFNStageMS
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county       | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                  | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                                                                 | planIndex | planIndex1 | TFNxpath4                                                                  | pscCode | address              | city   | state    | county2         | isMultiCounty2 |
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | current  | future   |   24010 | NO              | Roanoke City | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-877-850-2073 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] |         1 |          2 | (//*[contains(@class,'paragraph')]//a[contains(@class,'tel tfn desktop')]) | 8000158 | 584 MAIN AVE NORWALK | Albany | New York | New York County | no             |

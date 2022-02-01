@@ -18,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 				tags = "@DCEDEBUG",
 				dryRun = false)
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)
