@@ -980,7 +980,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*
 		 * else checkModelPopup(driver, 30);
 		 */
@@ -3333,6 +3333,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		sleepBySec(3);
 		waitForPageLoadSafari();
+		if(backToPlans.isDisplayed()) {
+			jsClickNew(backToPlans);
+		}
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -4043,7 +4046,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		if (validate(planYearPopup, 20)) { // if plan year popup is displayed
+		if (validate(planYearPopup, 10)) { // if plan year popup is displayed
 			System.out.println("Popup is present for AEP : ");
 			if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 				jsClickNew(currentYearSelection);
@@ -4055,7 +4058,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			//validateNew(planYearPopupGoButton);
 			//planYearPopupGoButton.click();
 		} else { // if the plan year popup is not displayed
-			if (validate(CurrentYearPlansBtn, 20) && planYear.equalsIgnoreCase("current")) {
+			if (validate(CurrentYearPlansBtn, 10) && planYear.equalsIgnoreCase("current")) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 				jsClickNew(CurrentYearPlansBtn);
 				waitForPageLoadSafari();

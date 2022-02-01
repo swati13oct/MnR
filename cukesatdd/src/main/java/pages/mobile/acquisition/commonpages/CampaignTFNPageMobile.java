@@ -1075,8 +1075,16 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		// }
 	//	CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		sleepBySec(2);
-		if(!zipcodeChangeLink.isDisplayed()) {
-			jsClickNew(ms4BackToPlanList);
+		try {
+			if(ms4BackToPlanList.isDisplayed()) {
+				jsClickNew(ms4BackToPlanList);
+			}
+			if(msPlansHeading.isDisplayed()) {
+				driver.navigate().back();
+			}
+		}
+		catch (Exception e) {
+			
 		}
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
