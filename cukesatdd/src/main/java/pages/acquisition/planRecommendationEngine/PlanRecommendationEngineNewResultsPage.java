@@ -111,6 +111,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
+	
+	@FindBy(css = "div[class*='resultsPre'] p.locationDesc")
+	private WebElement planLocaInfo;
 
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
@@ -150,7 +153,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".uhc-button-group button[class*='view-plans-prev']>svg")
 	private WebElement pagePreviousButton;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-prev disabled']")
+	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-prev disabled']")
 	private WebElement pagePreviousButtonDisabled;
 
 	// Plan Tile Elements
@@ -273,7 +276,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']")
 	private WebElement MAPDCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']>label")
 	private WebElement MAPDCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
@@ -282,7 +285,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']")
 	private WebElement MedigapCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
 	private WebElement MedigapCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
@@ -291,7 +294,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']")
 	private WebElement PDPCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
 	private WebElement PDPCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
@@ -300,10 +303,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']")
 	private WebElement SNPCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
 	private WebElement SNPCheck;
 
-	@FindBy(css = "div.sortBySection div.applySec>button")
+	@FindBy(css = "div.sortBySection div.applySec>button#applyButton")
 	private WebElement applyBtn;
 
 	@FindBy(css = ".planRemoveSort span")
@@ -350,9 +353,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void preResultsUI(String zip, String county) {
 		System.out.println("Validating PRE Results UI Page: ");
 		waitforResultsPage();
-		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
+		Assert.assertTrue(planLocaInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4]) > 0, "Total Plan count is less than 1");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
 		// Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results
 		// button");

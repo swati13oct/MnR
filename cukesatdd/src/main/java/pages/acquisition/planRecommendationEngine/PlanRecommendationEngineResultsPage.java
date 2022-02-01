@@ -107,6 +107,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
    
     @FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
     private List<WebElement> planNamesOnlyComparepage;
+    
+    @FindBy(css = "div[class*='resultsPre'] p.locationDesc")
+	private WebElement planLocaInfo;
 	
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
@@ -575,9 +578,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		validate(planZipInfo,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
-		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
+		Assert.assertTrue(planLocaInfo.getText().contains(zip),"Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3])>0,"Total Plan count is less than 1");
 		String recom = "Recommended";
 		String recom1 = "#1 Recommendation";
 		String recom2 = "#2 Recommendation";
@@ -1391,7 +1394,7 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 //Fetching API Ranking Plan details for AEP Years
 
 public List<String> getAEPAPIPlansRanking(String rankingJSON, String Year) {
-	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
