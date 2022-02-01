@@ -114,7 +114,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 	
-	@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 	
 	@FindBy(css = "div[class*='overview-main'] h2")
@@ -1352,7 +1352,7 @@ public void waitforResultsPage() {
 }
 
 public List<String> getAPIPlansRanking(String rankingJSON) {
-	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
