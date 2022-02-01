@@ -976,7 +976,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					+ "Expect='" + totalBefore + "' | Actual='" + totalAfter + "'", totalBefore >= totalAfter);
 			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
 					pharmacyValidate(pharmaciesAvailable));
-			System.out.println("\n\nTotal pharmacy count : "+totalAfter+"\n\n");
+			System.out.println("\n\n======="+PharmacyFoundCount+"\n\n==============Total pharmacy count : "+totalAfter+"\n\n");
 			if (totalAfter > 10) {
 				WebElement contactUsLink = contactUnitedHealthCare;
 				if (!pharmacyValidate(contactUnitedHealthCare))
