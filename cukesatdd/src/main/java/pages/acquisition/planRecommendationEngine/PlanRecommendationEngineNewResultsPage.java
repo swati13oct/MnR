@@ -141,13 +141,13 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 
 	@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
 	private WebElement pageNextButtonDisabled;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-prev']")
+	@FindBy(css = ".uhc-button-group button[class*='view-plans-prev']>svg")
 	private WebElement pagePreviousButton;
 
 	@FindBy(css = ".paginationSection button[class*='view-plans-prev disabled']")
@@ -1184,6 +1184,83 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		return new VisitorProfilePage(driver);
 
 
+	}
+	
+	public void PharmacyFunc(String planInfo, String pharmacy) {
+		threadsleep(5000);
+		System.out.println("Navigating Plans Info...");
+		String planName = "", planAction = "";
+		String[] planlist = planInfo.split(":");
+		for (int i = 0; i < planlist.length; i++) {
+			String planinfo = planlist[i];
+			if (planinfo.trim().length() > 0) {
+				String[] planDetails = planinfo.split(",");
+				planName = planDetails[0];
+				planAction = planDetails[1];
+				int planIndex = findPlan(planName, false);
+		
+		if (planAction.toLowerCase().contains("oon")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarning div.warning-desc")).getText().trim();
+			threadsleep(5000);
+			if (planFullName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
+					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
+					|| planName.contains("Plan N")) {
+				threadsleep(10000);
+				Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+				Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+				Assert.assertFalse(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"))),"View Individual Drug Costs is displayed MS Plan in Result page");
+				
+			} else {
+				Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+				Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+//				Assert.assertFalse(pharDes.contains("Change Pharmacy"),"View Individual Drug Costs is not displayed in Result page");
+			}
+		}
+		if (planAction.toLowerCase().contains("inn")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarningTFN div.warning-desc")).getText().trim();
+			System.out.println("******"+pharDes+"*******************");
+			threadsleep(5000);
+			Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+			Assert.assertTrue(pharDes.contains("UnitedHealthCare"),	"TFN is not displayed in Result page");
+			Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+//			Assert.assertFalse(pharDes.contains("Change Pharmacy"),"View Individual Drug Costs is not displayed in Result page");
+		}
+		if (planAction.toLowerCase().contains("yes")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] .drug-price-sec>p")).getText().trim();
+			Assert.assertTrue(pharDes.contains("estimated monthly"),"Drug cost not displayed in Result page");
+			Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"))),"View Individual Drug Costs is not displayed in Result page");
+//			Assert.assertFalse(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"))),"Change Pharmacy Costs is not displayed in Result page");
+			
+		}
+			}
+		}
+		
+	}
+	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+	public void UpdatePharmacyFunc(String zipcode,String planInfo) {
+		threadsleep(5000);
+		System.out.println("Navigating Plans Info...");
+		String planName = "", updatePharmacy = "", coverage ="" ;
+		String[] planlist = planInfo.split(":");
+		for (int i = 0; i < planlist.length; i++) {
+			String planinfo = planlist[i];
+			if (planinfo.trim().length() > 0) {
+				String[] planDetails = planInfo.split(",");
+				planName = planDetails[0];
+				coverage = planDetails[1];
+				updatePharmacy = planDetails[2];
+				int planIndex = findPlan(planName, false);
+				threadsleep(3000);
+				if(coverage.equalsIgnoreCase("OON"))
+					plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarning div.warning-desc>a")).click();
+				if(coverage.equalsIgnoreCase("INN"))
+					plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarningTFN div.warning-desc>a")).click();
+				dce.selectPharmacy(zipcode, updatePharmacy);
+			}
+		}
 	}
 
 	public void validateSignInUser(String username, String password){

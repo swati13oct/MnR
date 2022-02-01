@@ -863,6 +863,14 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@Then("^user adds Drugs and Pharmacy in vpp summary page$")
+   	public void add_drugs_Pharmacy_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		planSelectorResultspage.useraddDrugsDCE(inputValues.get("Drug Details"),inputValues.get("Zip Code"),inputValues.get("Pharmacy Name"));
+   	}
+	
 	@When("^user navigate to Drug page to add drugs from PREResult page$")
    	public void add_drugs_preResult_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -1364,6 +1372,20 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorNewResultspage.sortByFuncWithoutVerify(inputValues.get("Sort PlanType"));
 		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
+	}
+	
+	@Then("^user validate pharmacy coverage and Change Pharmacy Link in Result page$")
+	public void pharmacy_result_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.PharmacyFunc(inputValues.get("Plan Info"),inputValues.get("Pharmacy Name"));
+	}
+	
+	@Then("^user update Pharmacy using Change Pharmacy Link in result page$")
+	public void update_pharmacy(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.UpdatePharmacyFunc(inputValues.get("New ZipCode"),inputValues.get("New PharmacyName"));
 	}
 	
 	@Then("^the user do poc$")

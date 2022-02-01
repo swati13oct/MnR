@@ -1753,6 +1753,15 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.choosePharmacyandBacktoPlans();
 }
 
+public void useraddDrugsDCE(String drugDetails, String Zip, String pharmacy) {
+	threadsleep(10000);
+	userPreDCE();
+	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+	dce.drugsHandlerWithdetails(drugDetails);
+	dce.getDrugsDCE();
+	dce.choosePharmacy(Zip, pharmacy);
+}
+
 public void useraddDrugsPREResult() {
 	threadsleep(10000);
 	System.out.println("Adding drugs from PRE Result page");
