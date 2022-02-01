@@ -1279,6 +1279,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
+		if(maPlansViewLink.isDisplayed())
+			jsClickNew(maPlansViewLink);
+		
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
