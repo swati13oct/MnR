@@ -22,6 +22,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
@@ -187,6 +188,22 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_check_coveragepage_elements_mobile() {
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
 		coveragepage.coverageOptionpageElementsMobile();
+	}
+	
+	@Given("^the user is on flagsmith UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_flagsmith_uhc_medicaresolutions_Site(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		wd = getLoginScenario().getMobileDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
+		if_offline_prod = aquisitionhomepage.openAEPPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		if (MRScenario.environment.contains("digital-uatv2") || MRScenario.environment.contains("digital-devv2")) 
+			aquisitionhomepage.fixPrivateConnection();
+		
+		aquisitionhomepage.loginflagSmithPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+		checkpopup();
 	}
 
 	@Then("^user selects plan type in coverage options page$")

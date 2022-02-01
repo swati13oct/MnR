@@ -295,14 +295,13 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		System.out.println("section : " + section);
 	//	for (WebElement elem : allQuestionSection) {
 		for (int i=1; i<=allQuestionSection.size();i++) {
 			WebElement head = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//h2"));
 			WebElement button = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//button"));
-			System.out.println("\n\n======"+head+"==\n====="+button+"===\n\n");
 			String tempTxt = head.getText().toLowerCase();
-			System.out.println("tempTxt : " + tempTxt);
+			System.out.println("\n\ntempTxt : " + tempTxt);
+			System.out.println("section : " + section);
 			if (tempTxt.contains(section)) {
 				editButton = true;
 				if (click) {// Edit button Click

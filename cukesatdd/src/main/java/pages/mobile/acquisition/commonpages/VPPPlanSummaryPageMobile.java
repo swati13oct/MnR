@@ -3333,6 +3333,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		sleepBySec(3);
 		waitForPageLoadSafari();
+		if(backToPlans.isDisplayed()) {
+			jsClickNew(backToPlans);
+		}
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
