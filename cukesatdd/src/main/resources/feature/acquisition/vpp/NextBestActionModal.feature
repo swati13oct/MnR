@@ -1,6 +1,6 @@
 @vppNBAValidations_unauthenticatedUser @nextBestAction @vpp
 Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
-	
+
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -16,7 +16,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_MAPD_AARP01  
+    @NBA_MAPD_AARP01
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     |
@@ -25,7 +25,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     |
-	
+
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when Drug cost exists in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -52,7 +52,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Find a Provider button on NBA
     Then user should be redirected to Provider search Rally page
 
-    @NBA_MAPD_AARP01  
+    @NBA_MAPD_AARP01
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -92,16 +92,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prodRegression @regressionAARP @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-
-      | AARP |   19019 | No              | Iowa County | MAPD     | future     | Lipitor |
-
+      | AARP |   12345 | No              | Schenectady County | MAPD     | future   | Lipitor |
 
     @NBA_MAPD_UHC01 @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-
-      | UHC  |   19019 | No              | Iowa County | MAPD     | future     | Lipitor |
-
+      | UHC  |   12345 | No              | Schenectady County | MAPD     | future   | Lipitor |
 
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when drug added from DCE
     Given the user is on medicare acquisition site landing page
@@ -125,13 +121,13 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     @NBA_MAPD_AARP02 @regressionAARP
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
+      | AARP |   12345 | No              | Schenectady County | MAPD     | next     | Lipitor |
 
     @NBA_MAPD_UHC02 @regressionUHC @prodRegression
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
+      | UHC  |   12345 | No              | Schenectady County | MAPD     | next     | Lipitor |
 
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD plan when Provider exists
     Given the user is on medicare acquisition site landing page
@@ -239,14 +235,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_MAPD_AARP01 @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
-      | AARP |   10001 | No              | New York County | MAPD     | future     | Lipitor |
-
+      | AARP |   10001 | No              | New York County | MAPD     | future   | Lipitor |
 
     @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prodRegression @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
-      | UHC  |   10001 | No              | New York County | MAPD     | future     | Lipitor |
-
+      | UHC  |   10001 | No              | New York County | MAPD     | future   | Lipitor |
 
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when user adds Drug cost from MAPD page
     Given the user is on medicare acquisition site landing page
@@ -280,16 +274,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_MAPD_AARP02 @NBA_MAPD_Sanity_AARP_01 @prodRegression @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
-
-      | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | future     |
-
+      | AARP |   12345 | No              | Schenectady County | MAPD     | PDP       | Lipitor | future   |
 
     @NBA_MAPD_UHC02 @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
-
-      | UHC  |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | future     |
-
+      | UHC  |   12345 | No              | Schenectady County | MAPD     | PDP       | Lipitor | future   |
 
   ################################################## PDP  Plan type #########################################################
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for PDP Plan when no Drug cost/provider is added
@@ -307,12 +297,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_PDP_AARP01 
+    @NBA_PDP_AARP01
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | PDP      | next     |
 
-    @NBA_PDP_UHC01 
+    @NBA_PDP_UHC01
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | PDP      | next     |
@@ -344,12 +334,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_PDP_AARP01 @regressionAARP @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | AARP |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
+      | AARP |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
 
     @NBA_PDP_UHC01 @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | UHC  |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
+      | UHC  |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
 
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for enrollment on VPP summary page for PDP Plan when drug added from DCE
     Given the user is on medicare acquisition site landing page
@@ -373,13 +363,13 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     @NBA_PDP_AARP01 @NBA_PDP_Sanity_AARP @prodRegression @regressionAARP
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | AARP |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
+      | AARP |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
 
     @NBA_PDP_UHC01 @NBA_PDP_Sanity_UHC @regressionUHC
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
-      | UHC  |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
+      | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
+      | UHC  |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
 
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when user clicks on "Enroll in Plan" button and when plans are saved for PDP plan type
     Given the user is on medicare acquisition site landing page
@@ -415,16 +405,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_PDP_AARP02 @NBA_PDP_Sanity_AARP @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
-
-      | AARP |   10001 | No              | New York County | PDP      | future     | Lipitor | AARP MedicareRx Walgreens (PDP) |
-
+      | AARP |   10001 | No              | New York County | PDP      | future   | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
     @NBA_PDP_UHC02 @NBA_PDP_Sanity_UHC @prodRegression @regressionUHC @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
-
-      | UHC  |   10001 | No              | New York County | PDP      | future     | Lipitor | AARP MedicareRx Walgreens (PDP) |
-
+      | UHC  |   10001 | No              | New York County | PDP      | future   | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when user clicks on "Enroll in Plan" button and when no plans are saved for PDP plan type
     Given the user is on medicare acquisition site landing page
@@ -496,12 +482,12 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_PDP_AARP02 @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
-      | AARP |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | next     |
+      | AARP |   12345 | No              | Schenectady County | PDP      | MAPD      | Lipitor | next     |
 
     @NBA_PDP_UHC02 @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
-      | UHC  |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | next     |
+      | UHC  |   12345 | No              | Schenectady County | PDP      | MAPD      | Lipitor | next     |
 
   ################################################# Additional Flows ##########################################################
   Scenario Outline: UserStory: Test to verify the Next action modal is not displayed on VPP summary page when user navigates from PRE
@@ -691,11 +677,11 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | AARP |   19019 | No              | Iowa County | MAPD     | next   | Lipitor | next   |
+      | AARP |   12345 | No              | Schenectady County | MAPD     | next     | Lipitor | next      |
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next   |
+      | UHC  |   12345 | No              | Schenectady County | MAPD     | next     | Lipitor | next      |
 
   ############################################## AEP Scenarios - 10/15 ################################################################
   Scenario Outline: UserStory: Test to verify NBA for AEP period 10/15
@@ -728,11 +714,11 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next   |
+      | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next      |
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next   |
+      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next      |
 
   ############################################## AEP Scenarios - 12/8 ################################################################
   Scenario Outline: UserStory: Test to verify NBA for AEP period 12/8
@@ -765,8 +751,8 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next   |
+      | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next      |
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   | planyear1 |
-      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next   |
+      | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor | next      |
