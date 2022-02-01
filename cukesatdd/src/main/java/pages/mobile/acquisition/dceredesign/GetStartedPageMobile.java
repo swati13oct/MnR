@@ -131,7 +131,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		validateNew(getStartedTab);
 		validateNew(AddMyDrugsBtn);
 
