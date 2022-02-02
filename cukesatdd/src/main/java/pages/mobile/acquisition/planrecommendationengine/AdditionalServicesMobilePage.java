@@ -234,5 +234,9 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 	public void edit_additional(String additionalOptions) {
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
 	}
+	
+	public void edit_Services(String additionalOptions) {
+		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
+	}
 
 }

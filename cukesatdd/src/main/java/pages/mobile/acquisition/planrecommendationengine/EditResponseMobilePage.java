@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 
 public class EditResponseMobilePage extends GlobalWebElements {
 
@@ -258,27 +259,21 @@ public class EditResponseMobilePage extends GlobalWebElements {
 				UIValue = "not sure".toLowerCase();
 		} else if (section.equalsIgnoreCase("special")) {
 			UIValue = inputValues.get("SNP Options");
-		} else if (section.equalsIgnoreCase("travel")) {
-
-			UIValue = inputValues.get("Travel Options");
-			UIValue = UIValue.replace("withinUS", "within").replace("OutsideUS", "another part").replace("regular",
-					"routine");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			UIValue = inputValues.get("Doctors");
-			UIValue = UIValue.replace("UHCNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
+			UIValue = UIValue.replace("UHGNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
 					.replace("Lookup", "Look up");
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("additional")) {
-			UIValue = inputValues.get("Additional Option");
+		} else if (section.equalsIgnoreCase("services")) {
+			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
 		} else if (section.equalsIgnoreCase("priorities")) {
 			UIValue = inputValues.get("Priorities");
 		}
-
 		return UIValue.toLowerCase();
 	}
 
@@ -458,7 +453,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	}
 
 	public void editValue(String section) {
-
+		System.out.println("\n\nSection = "+section+"\n\n");
 		if (section.equalsIgnoreCase("location")) {
 			String zipcode = inputValues.get("Zip Code");
 			String multi = inputValues.get("Is Multi County");
@@ -487,16 +482,11 @@ public class EditResponseMobilePage extends GlobalWebElements {
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("travel")) {
-			TravelMobilePage travel = new TravelMobilePage(driver);
-			travel.edit_travel(inputValues.get("Travel Options"));
-			jsClickNew(saveBtn);
-			checkContent("travel");
-		} else if (section.equalsIgnoreCase("additional")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			AdditionalServicesMobilePage add = new AdditionalServicesMobilePage(driver);
-			add.edit_additional(inputValues.get("Additional Option"));
+			add.edit_Services(inputValues.get("Services Option"));
 			jsClickNew(saveBtn);
-			checkContent("additional");
+			checkContent("Services");
 		} else if (section.equalsIgnoreCase("cost")) {
 			CostPreferencesMobilePage cost = new CostPreferencesMobilePage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
