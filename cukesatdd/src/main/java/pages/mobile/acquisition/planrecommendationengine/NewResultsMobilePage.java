@@ -416,6 +416,38 @@ public class NewResultsMobilePage extends UhcDriver {
 		}
 	}
 	
+	public void addDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Adding doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				pagePreviousButton.click();
+				threadsleep(2000);
+			}
+		}
+		jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")));
+		threadsleep(3000);
+	}
+	
+	public void editDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Editing doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				jsClickNew(pagePreviousButton);
+				threadsleep(2000);
+			}
+		}
+		jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] button[dlassetid*='editDoc']")));
+		threadsleep(3000);
+	}
+	
 	public void checkUncheck(String checkOption, boolean select) {
 		System.out.println("Selecting Option " + checkOption + " : " + select);
 		WebElement elemCheck = null, elemClick = null;
@@ -683,7 +715,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		int planIndex = findPlan(planName);
 		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
 				.getText().trim();
-		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
+		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()), "Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
 		covered = plantiles.get(planIndex)
@@ -802,13 +834,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		String curURL = driver.getCurrentUrl();
 
 		if (learnMore.contains("Advantage"))
-			mapdPlanTypesLearnmoreLink.click();
+			jsClickNew(mapdPlanTypesLearnmoreLink);
 		if (learnMore.contains("Supplement"))
-			madsupPlanTypesLearnmoreLink.click();
+			jsClickNew(madsupPlanTypesLearnmoreLink);
 		if (learnMore.contains("Drug"))
-			pdpPlanTypesLearnmoreLink.click();
+			jsClickNew(pdpPlanTypesLearnmoreLink);
 		if (learnMore.contains("Special"))
-			dsnpPlanTypesLearnmoreLink.click();
+			jsClickNew(dsnpPlanTypesLearnmoreLink);
 
 		threadsleep(5000);
 		String newURL = driver.getCurrentUrl();

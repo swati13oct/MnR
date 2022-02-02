@@ -263,6 +263,25 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 		return confirmationResults;
 	}
+	
+	public void editdoctorspageFunctional(String doctor, String doctorsName, String multiDoctor, String status) {
+		System.out.println("Doctor Page Functional Operations");
+		if (status.toUpperCase().contains("POSITIVE")) {
+			doctorspageOptions(doctor);
+			jsClickNew(continueBtn);
+			if (doctor.equalsIgnoreCase("Lookup")) {
+				if (multiDoctor.equalsIgnoreCase("YES"))
+					doctorlookup(doctorsName, 3);
+				else
+					doctorlookup(doctorsName, 1);
+			}
+		} else {
+			if (doctor.isEmpty()) {
+				jsClickNew(continueBtn);
+				mobileUtils.mobleErrorValidation(page);
+			}
+		}
+	}
 
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		String env = MRScenario.environment;
@@ -284,7 +303,7 @@ public class DoctorsMobilePage extends UhcDriver {
 					 */
 					driver.switchTo().window(window);
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  )
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  || env.equalsIgnoreCase("offline-prod"))
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
 								"Prod Connected to Incorrect Rally");
 					else
