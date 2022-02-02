@@ -197,7 +197,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "div.content h2")
 		private WebElement planNameDetailsPage;
 		
-		@FindBy(xpath = ".//div[contains(concat(' ',normalize-space(@class),' '),' sortBySection ')]//*[@id='plansSorting']")
+		@FindBy(css="div.sortBySection #plansSorting")
 		private WebElement sortByDropdown;
 		
 		@FindBy(css = "div.sortBySection div.applySec>button")
@@ -347,13 +347,34 @@ public class NewResultsMobilePage extends UhcDriver {
 
 	}
 	
+	public void csnRanking(String snpOption) {
+		String FirstplanName;
+		String SecondplanName;
+		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
+		if (snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");
+		} else {
+			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
+			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
+		}
+	}
+	
+	public void sortByFuncWithoutVerify(String plan) {
+		System.out.println("Sorting  Options: " + plan);
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+		}
+	}
+	
 	public void validateNoSortByElements() {
 		System.out.println("Validate No Sort By UI ");
 		String currentPageUrl = driver.getCurrentUrl();
 		System.out.println("Current URL : " + currentPageUrl);
 		scrollToView(Home);
 		threadsleep(2000);
-		scrollToView(sortByDropdown);
 		Assert.assertFalse(validate(sortByDropdown), "SortBy Dropdown is displaying");
 	}
 	
@@ -506,7 +527,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		System.out.println("Finding a Plan...");
 		waitforResultsPage();
 		String pageCount1 = pagenoLabel.getText().trim();
-		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if(currentPage != 1) {
 			for(int c = 1; c < currentPage; c++) {
 				pagePreviousButton.click();
@@ -521,14 +542,14 @@ public class NewResultsMobilePage extends UhcDriver {
 		int i = 1, planIndex = 0;
 		do {
 			// 3 plans per page
-			for (int k = 0; k < 3; k++) {
-				String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
+
+				String planName = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//h2//a)["+(planIndex+1)+"]")).getText().trim();
 				if (planName.contains(uniqueName.trim())) {
 					planAvailable = true;
 					break;
 				}
 				planIndex++;
-			}
+				
 			if (i == totalPage || planAvailable) {
 				break;
 			}
@@ -627,13 +648,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		for (int i = 1; i <= totalPage; i++) {
 			pageCount1 = pagenoLabel.getText().trim();
 			int currentPage = Integer
-					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 			Assert.assertEquals(i, currentPage, "Page count is mismatch after pagenation");
 			if (i == totalPage) {
 				Assert.assertTrue(validate(pageNextButtonDisabled, 60), " Next button Enabled in pagination");
 //				Assert.assertTrue(returnToBeginning.getText().contains("Return to beginning"),"Invalid Return to beginning Text");
 			} else {
-				pageNextButton.click();
+				jsClickNew(pageNextButton);
 				threadsleep(2000);
 			}
 		}

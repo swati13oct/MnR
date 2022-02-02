@@ -667,6 +667,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		prioritiesMobile.prioritiesFunctional(inputValues.get("Priority Option"),inputValues.get("Priorities"));
 		prioritiesMobile.continuePriority();
 	}
+	
+	@Then("^user Filter SNP Plantype and validate CSNP Plans Ranking in PRE results page$")
+	public void csnp_ranking(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.sortByFuncWithoutVerify(inputValues.get("Sort PlanType"));
+		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
+	}
 
 	@Then("^user validate elements in priorities page$")
 	public void user_validate_prioritiesElements() {
@@ -721,6 +729,19 @@ public void drugDetails_new_results_page_mobile(DataTable givenAttributes) {
 	readfeaturedataMobile(givenAttributes);
 	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
 	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"tile");
+}
+
+@And("^user selects empty doctors in doctors page$")
+public void zeroDoctor_doctor_page(DataTable givenAttributes) throws Throwable {
+    readfeaturedataMobile(givenAttributes);
+    DoctorsMobilePage planSelectorDoctorspage =  new DoctorsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+    planSelectorDoctorspage.addZeroProviders(inputValues.get("Doctors Search Text"));
+ }
+
+@Then("^user validates Sort By dropdown will not display in UI PRE-Result page$")
+public void sortBy_No() {
+	NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	planSelectorNewResultspage.validateNoSortByElements();
 }
 
 @Then("^user validate doctors info in PRE results page$")
