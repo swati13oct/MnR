@@ -18,7 +18,7 @@ Scenario Outline: TID: <Scenario> -OLE End to end from VPP Plan Summary for <pla
      Then the user validates TFN on Welcome OLE Page
    Then the user validate widgets on Welcome OLE Page
     Then the user validates Save Return Later modal for OLE Page
-    Then the user validates Logo Image on Welcome OLE
+    #Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
   Then the user validates Footer links on Welcome OLE Page
@@ -46,8 +46,8 @@ Scenario Outline: TID: <Scenario> -OLE End to end from VPP Plan Summary for <pla
       | Home Number        | <phoneno>                      |
       | Mobile Number      | <mobileno>                     |
     Then the user navigates to Medicare Information Page
-		Then the user validates cancellation and Save Return Later modal for OLE Page
-		Then the user validate widgets on OLE Pages
+	Then the user validates cancellation and Save Return Later modal for OLE Page
+	#Then the user validate widgets on OLE Pages
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
