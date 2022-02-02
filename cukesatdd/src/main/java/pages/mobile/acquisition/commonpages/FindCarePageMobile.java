@@ -432,8 +432,13 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 	private WebElement selectThisProviderHospitalButton;
 	public ComparePlansPageMobile placesfromHospital() throws Exception {
 		String ParentWindow = null;
-		CommonUtility.waitForPageLoadNew(driver, GetstartedButton, 45);
-		jsClickNew(GetstartedButton);
+		try {
+			if(GetstartedButton.isDisplayed())
+				jsClickNew(GetstartedButton);
+		}
+		catch(Exception e) {
+			
+		}
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);

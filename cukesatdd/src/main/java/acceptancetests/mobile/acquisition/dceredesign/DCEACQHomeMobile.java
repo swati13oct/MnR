@@ -1598,7 +1598,6 @@ public class DCEACQHomeMobile {
 
 	@Then("^the user verify the drug cost estimator and view plan summary on VPP detail page in AARP$")
 	public void the_user_verify_the_drug_cost_estimator() throws Throwable {
-		Thread.sleep(10000);
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 

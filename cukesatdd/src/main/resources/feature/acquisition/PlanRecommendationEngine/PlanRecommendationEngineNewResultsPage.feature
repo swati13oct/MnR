@@ -22,7 +22,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
       | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
@@ -104,7 +104,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate drugDetails in PRE results page
       | DrugInfo | <DrugInfo> |
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugInfo                               |
       | AARP |   10003 | NO            | New York | PDP           | No             | Mosaic Choice (PPO),add your drugs,N/A |
@@ -227,8 +227,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @BHDHProviders
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                            | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                             |
-      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Virginia S Hogan MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Virginia S Hogan MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                        |
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Tiffany Nix MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Tiffany Nix MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
 
     @regressionUHC
     Examples: 
@@ -277,16 +277,16 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo1> |
     Then user navigates to PRE doctorpage to edit providers
-    And user selects doctors in doctors page
+    And user edit doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName2>  |
       | Multi Doctor        | <isMultiDoctor> |
+    Then user return to vpp page using "update" from edit response page
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo2> |
-    Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @PREMSPlanTile @dec
+    @regressionAARP @PREMSPlanTile
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                              | doctorsInfo1                           | DoctorsName2       | doctorsInfo2                       |
       | AARP |   35004 | NO            | St. Clair County | MAPD          | Chronic,Nursing | Lookup  | Harold E Simon MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Home Plan (PPO I-SNP),Add your doctors,N/A:Plan 3 (HMO),Add your doctors,N/A:Plan L,Add your doctors,N/A | Walgreens (HMO),Harold E Simon MD,True | Fuller, Justin, NP | Plan K,Justin Fuller NP,MSCoverage |
@@ -487,15 +487,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
 
     @regressionAARP @PREMSPlanTile
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors | DoctorsName                                                                | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                              |
-      | AARP |   10001 | NO            | New York    | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD        | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
-      | AARP |   35035 | YES           | Bibb County | MAPD          | Chronic      | Lookup  | Michael W Luther MD:Watkins Roschanda NP:Preston Loretta NP:Gantt Emily NP | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan K,Roschanda Watkins NP,N/A          |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors | DoctorsName                                                                  | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                              |
+      | AARP |   10001 | NO            | New York    | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD          | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
+      | AARP |   35035 | YES           | Bibb County | MAPD          | Chronic      | Lookup  | Michael W Luther MD:Watkins Roschanda NP:Gantt Emily NP:Michele M Daggett MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan K,Roschanda Watkins NP,N/A          |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors | DoctorsName                                                                | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                              |
-      | UHC  |   10001 | NO            | New York    | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD        | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
-      | UHC  |   35035 | YES           | Bibb County | MAPD          | Chronic      | Lookup  | Michael W Luther MD:Watkins Roschanda NP:Preston Loretta NP:Gantt Emily NP | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan K,Michael W Luther MD,N/A           |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors | DoctorsName                                                                  | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                              |
+      | UHC  |   10001 | NO            | New York    | MAPD          | Chronic      | Lookup  | Phyllis C Suen MD:John N Chuey MD:Ghulam A Choudhry PA:Su S Aung MD          | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,N/A |
+      | UHC  |   35035 | YES           | Bibb County | MAPD          | Chronic      | Lookup  | Michael W Luther MD:Watkins Roschanda NP:Gantt Emily NP:Michele M Daggett MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan K,Michael W Luther MD,N/A           |
 
   @PRE @planrecommendation @MSshowMoreDrug @MSviewIndividualDrug @MSWhySeparateModel
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
@@ -573,7 +573,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Sort PlanType | <sortInfo> |
     Then user removed filtered planType and Check Breadcrumbs in PRE-Result page
 
-    @regressionAARP @dec
+    @regressionAARP
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo             |
       | AARP |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,MEDIGAP,PDP,SNP |

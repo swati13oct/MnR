@@ -173,8 +173,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebEle
 	
 	public void navigatezipcodepage() {
 		pageloadcomplete();
-		getStartedBtn.click();
 		validate(zipCode,30);
+		getStartedBtn.click();
 	}
 	
 	

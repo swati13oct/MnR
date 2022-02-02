@@ -84,6 +84,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#medicalbenefits")
 	private List<WebElement> medBenefitsTab;
+	
+	@FindBy(xpath = "//div[contains(@id,'planDocuments')]")
+	private WebElement planDocumentSection;
 
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
@@ -107,7 +110,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	private WebElement estimateDrugBtn;
 
 //	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
-	@FindBy(css = "#plancosts")
+	@FindBy(xpath = "//*[contains(@id,'plancosts')]")
 	private WebElement planCostsTab;
 	
 	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
@@ -382,14 +385,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			checkModelPopup(driver, 30);
 		else
 			checkModelPopup(driver, 10);
-		// validateNew(planCostsTab);
-		scrollToView(planCostsTab);
+		validateNew(planDocumentSection);
 
 	}
 
 	public void openAndValidate(String planType) {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*
 		 * else checkModelPopup(driver, 10);
 		 */
@@ -411,8 +413,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
 			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
-		validateNew(planCostsTab);
-		scrollToView(validatePrintButtonOnPlanDetails);
+		validateNew(planDocumentSection);
 		// note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -516,9 +517,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
+	
+	@FindBy(xpath = "//*[@id='plancosts']")
+	private WebElement PlanCost;
 
 	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
-
+		
+		validateNew(PlanCost);
 		validateNew(editDrugLinkPlanCost, 20);
 		jsClickNew(editDrugLinkPlanCost);
 

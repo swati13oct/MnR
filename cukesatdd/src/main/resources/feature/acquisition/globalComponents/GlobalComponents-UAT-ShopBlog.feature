@@ -226,7 +226,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PagePath | <path>     |
     Then the user validates whether chat icon is visible
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario           | site | path                                                | pageName                |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            |
@@ -238,7 +238,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            |
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario           | site | path                                                | pageName                |
       | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            |
@@ -250,7 +250,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
       | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario           | site | path                                      | pageName                |
       | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              |
@@ -261,7 +261,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario           | site | path                                      | pageName                |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              |
@@ -272,7 +272,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       |
       | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario           | site | path                                | pageName                     |
       | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
@@ -284,7 +284,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
       | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario           | site | path                                | pageName                     |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |

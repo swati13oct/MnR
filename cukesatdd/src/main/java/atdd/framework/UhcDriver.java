@@ -657,6 +657,7 @@ public abstract class UhcDriver {
 			scrollToView(element);
 		}
 		js.executeScript("arguments[0].click();", element);
+		System.out.println("Element clicked");
 
 		/*
 		 * if (driver.getClass().toString().toUpperCase().contains("IOS")) {

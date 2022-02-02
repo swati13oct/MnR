@@ -127,7 +127,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 
-	@FindBy(id = "planDocuments")
+	@FindBy(xpath="//div[contains(@id,'planDocuments')]")
 	private WebElement planDocumentSection;
 
 	// Right Rail Element - TFN
@@ -424,7 +424,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*else
 			checkModelPopup(driver, 10);*/
 		validateNew(planDocumentSection);
@@ -437,7 +437,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public void openAndValidate(String planType) {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*else
 			checkModelPopup(driver, 10);*/
 

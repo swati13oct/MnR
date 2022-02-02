@@ -432,6 +432,7 @@ public class VppCommonStepDefinition {
 		String annualDeductible = memberAttributesMap.get("Annual Deductible");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validatePlanPremium(planName, monthlyPremium);

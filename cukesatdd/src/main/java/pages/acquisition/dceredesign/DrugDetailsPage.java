@@ -26,6 +26,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 
 public class DrugDetailsPage extends UhcDriver {
@@ -1612,7 +1613,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void SelectPharmacy(String PharmacytoSelect) {
 
-		validateSelectPharmacyPage();
+		//validateSelectPharmacyPage();
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));

@@ -240,7 +240,7 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
       | TFN Xpath| <TFNxpath3> |
       | TFNflag  | <tfnFlag>   |
     And Navigate to Visitor Profile page
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
     Then the user validates PSC code
       | PSC Code | <pscCode> |
 #    Then the user validates SAM icons on the page

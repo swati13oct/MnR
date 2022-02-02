@@ -120,8 +120,11 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#collapseMap")
 	protected WebElement mapView;
 
-	@FindBy(xpath = "//*[@class='pharmacy-list']")
+	@FindBy(xpath = "//div[contains(@class,'mt-10')]//*[contains(@class,'row')]")
 	protected WebElement pharmacyList;
+	
+	@FindBy(xpath="(//button[contains(@class, 'uhc-link-button')])[2]")
+	protected WebElement resetfilterlink;
 
 	@FindBy(xpath = "//*[@class='pharmacy-list']/li")
 	protected List<WebElement> pharmacyListItems;
@@ -210,10 +213,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(css = "#miles")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
+	@FindBy(xpath = "//p[contains(@class,'field-error-msg')]")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath = "//div[@id='zipError']//p[@class='field-error-msg f-14 mt-10 d-block']")
+	@FindBy(xpath="//div[@id='zipError']//p[contains(@class,'field-error-msg')]")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath = "#zipError > p")

@@ -969,6 +969,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if (PharmacyCount > 0) {
+			sleepBySec(5);
 			totalLine = PharmacyFoundCount.getText().trim();
 			totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
 			int totalAfter = Integer.parseInt(totalString);
@@ -1093,6 +1094,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					"Anchor link and Messaging NOT Displayed for No Pharmacy Results for ITU/HS/LTC filter selection - >>>>Validation FAILED <<<<");
 		}
 		System.out.println("Both Message and anchor link for PDFs are displayed - Validation PASSED");
+	}
+	
+	public void clickResetFilter() {
+		//breadCrumbLink.click();
+		jsClickNew(resetfilterlink);
+		waitForPageLoadSafari();
+		validateNew(pharmacyList);
 	}
 
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl,

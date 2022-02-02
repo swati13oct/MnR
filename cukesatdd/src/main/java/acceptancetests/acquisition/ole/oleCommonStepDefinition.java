@@ -18,7 +18,7 @@ import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 public class oleCommonStepDefinition {
 
@@ -171,13 +171,13 @@ public class oleCommonStepDefinition {
 	@When("^user clicks on pharmacy link on OLE page$")
 	public void user_clicks_on_pharmacy_link_on_OLE_page() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		PharmacySearchPage pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
+		PharmacySearchPageNew pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
-	
+
 	@Then("^the user clicks on Enroll Now through SignInUser to start the OLE flow on the site$")
 	public void the_user_clicks_on_Enroll_Now_through_SignInUser_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
-		
+
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		String PlanName = givenAttributesMap.get("Plan Name");
@@ -187,7 +187,7 @@ public class oleCommonStepDefinition {
 		//String premium = givenAttributesMap.get("Monthly Premium");
 		String SiteName;
 		String PlanPremium = "";
-		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 
@@ -195,7 +195,7 @@ public class oleCommonStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		
+
 		SiteName = givenAttributesMap.get("Site");
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		System.out.println("Site Name is : " + SiteName);

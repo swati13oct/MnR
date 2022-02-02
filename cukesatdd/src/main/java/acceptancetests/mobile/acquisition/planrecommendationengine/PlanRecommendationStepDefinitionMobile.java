@@ -5,7 +5,9 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.CommonConstantsMobile;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -20,6 +22,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
@@ -72,19 +75,31 @@ public class PlanRecommendationStepDefinitionMobile {
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
+			String curID = String.valueOf(Thread.currentThread().getId());
+			System.out.println("Current Thread ID is - "+curID+" for the flow "+PREflow);
+			//CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			CommonConstantsMobile.PRE_FLOW.put(curID, PREflow);
 		}
 	}
 	
+	public void checkpopup() {
+		if(if_offline_prod && !popup_clicked) {
+			LandingAndZipcodeMobilePage planSelectorhomepage =  new LandingAndZipcodeMobilePage(wd);
+			popup_clicked = planSelectorhomepage.close_Popup();
+		}
+	}
+	
+	boolean if_offline_prod = false, popup_clicked = false;
 	@Given("^the user is on UHC medicare acquisition site PRE landing page$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile(DataTable inputdata) {
 		wd = getLoginScenario().getMobileDriver();
 		readfeaturedataMobile(inputdata);
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openPRE(inputValues.get("Site"));
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE");
+		if_offline_prod = aquisitionhomepage.openPRE(inputValues.get("Site"));
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		checkpopup();
 	}
 	
 	@When("^user navigates to PRE landing page mobile$")
@@ -101,10 +116,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigates_to_zipcode_page_mobile() {
-		HeaderFooterMobile header = new HeaderFooterMobile(wd);
-		header.navigatePRELandingpageMobile();
-		LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
-		prelandingpage.navigatezipcodepagemobile();
+		LandingAndZipcodeMobilePage planSelectorhomepage =  new LandingAndZipcodeMobilePage(wd);
+		planSelectorhomepage.landingpage();
 	}
 
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -142,10 +155,26 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	@And("^clicks on get started button and runs questionnaire$")
-	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) {
-		LandingAndZipcodeMobilePage prezipcodemobile = new LandingAndZipcodeMobilePage(wd);
+	public void user_runs_questionnaire_zipcodepage_mobile(DataTable inputdata) throws Exception {
 		readfeaturedataMobile(inputdata);
-		prezipcodemobile.zipcodepageValidationmobile(inputValues);
+		String zipcode = inputValues.get("Zip Code");
+		System.out.println("Zipcode is:"+zipcode);
+		String county = inputValues.get("CountyDropDown");
+		System.out.println("Email is:"+county);
+		String isMultiCounty = inputValues.get("Is Multi County");
+		System.out.println("Entered Search Key is:"+isMultiCounty);
+		checkpopup();
+		
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+		
+		LandingAndZipcodeMobilePage planSelectorhomepage =  new LandingAndZipcodeMobilePage(wd);
+		if (isMultiCounty.equalsIgnoreCase("NO")) {
+			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
+		} else {
+			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+		}
 	}
 
 	@Then("^clicks on get started button and check error scenarios$")
@@ -159,6 +188,22 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_check_coveragepage_elements_mobile() {
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
 		coveragepage.coverageOptionpageElementsMobile();
+	}
+	
+	@Given("^the user is on flagsmith UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_flagsmith_uhc_medicaresolutions_Site(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		wd = getLoginScenario().getMobileDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
+		if_offline_prod = aquisitionhomepage.openAEPPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		if (MRScenario.environment.contains("digital-uatv2") || MRScenario.environment.contains("digital-devv2")) 
+			aquisitionhomepage.fixPrivateConnection();
+		
+		aquisitionhomepage.loginflagSmithPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+		checkpopup();
 	}
 
 	@Then("^user selects plan type in coverage options page$")
@@ -213,8 +258,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void select_doctors_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		DoctorsMobilePage doctorpage = new DoctorsMobilePage(wd);
-		String status = "Positive";
-		doctorpage.doctorspage(inputValues.get("Doctors Selection"), inputValues.get("Doctors Search Text"),
+		String status = "Positive_NextPageName";
+		doctorpage.doctorspage(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"), status);
 	}
 
@@ -527,7 +572,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate UI and API recommendation rankings in results page$")
    	public void verify_UIAPI_rankings_results_page_mobile() {
 		ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
-		resultpage.validateUIAPIRecommendations();
+//		resultpage.validateUIAPIRecommendations();
 		resultpage.validateUIAPIRankingPlans();
    	}
 	
@@ -591,7 +636,7 @@ public class PlanRecommendationStepDefinitionMobile {
    	public void navigate_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
-		preEditMobile.navigateEditResponsePageMobile(inputValues);
+		preEditMobile.navigateEditResponsePageMobile(inputValues.get("Plan Type"));
    	}
 
 	@Then("^user edits coverage value in edit response page$")
@@ -636,6 +681,33 @@ public void elements_new_results_page_mobile(DataTable givenAttributes) {
 	readfeaturedataMobile(givenAttributes);
 	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
 	newResultpage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+}
+
+@Then("^user validates Sort By drop down UI PRE-Result page$")
+public void sortBy() {
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateSortByElements();
+}
+
+@Then("^user validates Sort By elements visibility PRE-Result page$")
+public void sortBy_Visibility(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.optionVisibility(inputValues.get("Visibility Info"));
+}
+
+@Then("^user removed filtered planType and Check Breadcrumbs in PRE-Result page$")
+public void sortBy_Remove() {
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.removeBreadcrumb();
+	newResultpage.sortByBreadcrumb();
+}
+
+@Then("^user validates Sort By using PlanType in PRE-Result page$")
+public void sortBy_planType(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.sortByFunc(inputValues.get("Sort PlanType"));
 }
 
 @Then("^user validate pagination in PRE results page$")
