@@ -121,7 +121,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
 
-	@FindBy(css = "#stateWidget > div > label")
+	@FindBy(id = "stateWidget")
 	private WebElement stateWidget;
 
 	@FindBy(xpath = "//*[@id='stateWidget']")
@@ -241,7 +241,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(css = "div[class$='newstyle_feature_toggle']
 	// input[id^='zipcodemeded'] + button")
 
-	@FindBy(xpath="(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -669,7 +669,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+				startNewMobile(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 				offline_prod = true;
@@ -694,9 +695,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
@@ -2328,10 +2331,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (toolTipText.length() == 14 && toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
+		if (toolTipText.length() == 14
+				&& toolTipText.matches("[0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]")) {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
-		}
-		else
+		} else
 			Assertion.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 		/*
 		 * if (toolTipText.contains(CallSam1877)) {
@@ -3506,11 +3509,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement siteSearchIcon;
 
 	public void validateHeaderLinks() {
-		//driver.navigate().refresh();// Refresh added cause sometimes on emulator menu hamburger is not visible
+		if (!driver.findElement(By.cssSelector("#Lock-ups")).isDisplayed()) {
+			driver.navigate().refresh();
+		} // Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
 		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
-				
+
 		jsClickNew(MenuMobile);
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -3611,8 +3616,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
+
+		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo')][1]"));
+
 		jsClickNew(headLogo);
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
@@ -4634,18 +4640,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectStateForGeotargeting(String geoState) {
-		WebElement stateDropDown = driver.findElement(By.cssSelector("select[name=state-select]"));
+		WebElement stateDropDownAfter = driver.findElement(By.cssSelector("#state-select"));
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		System.out.println("State to be Selected: " + geoState);
-
-		jsClickNew(stateWidget);
-		jsClickNew(stateWidgetLable);
+		scrollToView(stateDropDown);
+		stateDropDown.click();
 		mobileSelectOption(stateDropDown, geoState, true);
-		Select geoStateSelect = new Select(stateDropDown);
-		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText();
 
-		Assertion.assertTrue("Wrong state selected for geotarget", geoTargetSelectedState.contains(geoState));
-		geoTargetSelectedState = geoState;
+		Select geoStateSelect = new Select(stateDropDownAfter);
+		String geoTargetSelectedState = geoStateSelect.getFirstSelectedOption().getText().trim();
+		System.out.println("First option from State drop down was >>>>" + geoTargetSelectedState);
+		Assertion.assertTrue("Wrong state selected for geotarget", geoState.equalsIgnoreCase(geoTargetSelectedState));
 
 		/*
 		 * if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) { >>>>>>> branch
@@ -4937,7 +4943,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(menuHamburgerCrossToClose);
 		}
 
-		jsClickNew(stateWidget);
+		// jsClickNew(stateWidget);
 		// validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 		/*

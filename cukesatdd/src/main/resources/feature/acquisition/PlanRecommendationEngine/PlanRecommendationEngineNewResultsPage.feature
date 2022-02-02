@@ -22,7 +22,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
 
-    @regressionAARP
+    @regressionAARP @predebug
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
       | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
