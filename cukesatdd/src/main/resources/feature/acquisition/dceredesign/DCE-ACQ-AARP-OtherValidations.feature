@@ -37,7 +37,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Acq Home to NEW DCE Flows other validatio
     #Examples:
     # | path                                  | pageName                   | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            |
     # | health-plans/estimate-drug-costs.html | DCE Redesign - Get Started | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
-    @dce_ErrorMessages_AEP_AARP @regressionAARP @vbfGate
+    @dce_ErrorMessages_AEP_AARP @regressionAARP @vbfGate @featureGate
     Examples: 
       | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            | site |
       | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP |
@@ -131,7 +131,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Acq Home to NEW DCE Flows other validatio
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @dce_DrugListTiersLimits_AEP_AARP @regressionAARP
+    @dce_DrugListTiersLimits_AEP_AARP @regressionAARP @featureGate
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17  | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            | site |
       | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | amoxicillin | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |
