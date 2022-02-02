@@ -136,7 +136,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zipcode);
+		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
 		threadsleep(2000);

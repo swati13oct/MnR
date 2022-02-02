@@ -19,6 +19,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
@@ -391,7 +393,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	public void openAndValidate(String planType) {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*
 		 * else checkModelPopup(driver, 10);
 		 */
@@ -515,9 +517,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	@FindBy(xpath = "(//button[normalize-space()='Edit'][1]) | (//button[@id='edityourdrug'][1]) | //*[@id='planCosts']/div[1]/table/tbody/tr[3]/td[1]/a")
 	private WebElement editDrugLinkPlanCost;
-	
+
 	@FindBy(xpath = "//*[@id='plancosts']")
 	private WebElement PlanCost;
 
@@ -526,13 +528,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
 	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
-		
-		validateNew(PlanCost);
-		validateNew(editDrugLinkPlanCost, 20);
-		jsClickNew(editDrugLinkPlanCost);
 
+		validateNew(PlanCost);
+		validateNew(editDrugLinkPlanCost, 30);
+		jsClickNew(editDrugLinkPlanCost);
+		
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+		if (BuildDrugPage_EnterDrugNameTxt.isDisplayed()) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}

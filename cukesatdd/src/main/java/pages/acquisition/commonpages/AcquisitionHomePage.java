@@ -552,7 +552,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	@FindBy(xpath = "(//*[contains(@class,'field-ename-error-msg')])")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
@@ -1016,11 +1016,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -1051,11 +1051,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				start(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
@@ -7312,11 +7312,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				driver.navigate().to(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.navigate().to(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				driver.navigate().to(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -7347,11 +7347,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				driver.navigate().to(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.navigate().to(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				driver.navigate().to(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);

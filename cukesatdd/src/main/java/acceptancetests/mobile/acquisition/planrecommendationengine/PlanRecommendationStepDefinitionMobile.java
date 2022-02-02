@@ -199,6 +199,22 @@ public class PlanRecommendationStepDefinitionMobile {
 		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
 		coveragepage.coverageOptionpageElementsMobile();
 	}
+	
+	@Given("^the user is on flagsmith UHC medicare acquisition site PRE landing page$")
+	public void the_user_on_flagsmith_uhc_medicaresolutions_Site(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		wd = getLoginScenario().getMobileDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
+		if_offline_prod = aquisitionhomepage.openAEPPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		if (MRScenario.environment.contains("digital-uatv2") || MRScenario.environment.contains("digital-devv2")) 
+			aquisitionhomepage.fixPrivateConnection();
+		
+		aquisitionhomepage.loginflagSmithPRE(inputValues.get("Site"), inputValues.get("User Name"));
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+		checkpopup();
+	}
 
 	@Then("^user selects plan type in coverage options page$")
 	public void select_plan_type_coverage_page_mobile(DataTable inputdata) throws Throwable {
@@ -631,9 +647,11 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user navigates to edit response page$")
 	public void navigate_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		EditResponseMobilePage preEditMobile = new EditResponseMobilePage(wd);
-		preEditMobile.navigateEditResponsePageMobile(inputValues);
-	}
+
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.navigateEditResponsePageMobile(inputValues.get("Plan Type"));
+   	}
+
 
 	@Then("^user edits coverage value in edit response page$")
 	public void edit_coverage_editResponse_page(DataTable givenAttributes) {

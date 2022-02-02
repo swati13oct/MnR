@@ -76,7 +76,8 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   | enrollFlag | 
       | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) | Every 3 Months | true       |
 
-    @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression @sanity
+
+    @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @sanity
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   | enrollFlag |
 
@@ -119,7 +120,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | AARP |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |
 
-    @vpp_NBA_DCE_Redesign_Integration_UHC @regressionUHC
+    @vpp_NBA_DCE_Redesign_Integration_UHC @regressionUHC @prodRegression
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | UHC  |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |
