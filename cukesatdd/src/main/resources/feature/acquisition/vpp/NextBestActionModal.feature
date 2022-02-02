@@ -94,7 +94,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   12345 | No              | Schenectady County | MAPD     | future   | Lipitor |
 
-    @NBA_MAPD_UHC01 @regressionUHC
+    @NBA_MAPD_UHC01 @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   12345 | No              | Schenectady County | MAPD     | future   | Lipitor |
@@ -119,7 +119,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Find a Provider button on NBA
     Then user should be redirected to Provider search Rally page
 
-    @NBA_MAPD_AARP02 @regressionAARP
+    @NBA_MAPD_AARP02 @regressionAARP @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
       | AARP |   12345 | No              | Schenectady County | MAPD     | next     | Lipitor |
@@ -147,7 +147,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_MAPD_AARP02 @regressionAARP
+    @NBA_MAPD_AARP02 @regressionAARP @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | planname                             |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
@@ -196,7 +196,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                            |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @NBA_MAPD_UHC02 @regressionUHC
+    @NBA_MAPD_UHC02 @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                            |
       | UHC  |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
@@ -237,7 +237,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | AARP |   10001 | No              | New York County | MAPD     | future   | Lipitor |
 
-    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prodRegression @regressionUHC
+    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prodRegression @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | UHC  |   10001 | No              | New York County | MAPD     | future   | Lipitor |
@@ -271,7 +271,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP02 @NBA_MAPD_Sanity_AARP_01 @prodRegression @regressionAARP
+    @NBA_MAPD_AARP02 @NBA_MAPD_Sanity_AARP_01 @prodRegression @regressionAARP @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | AARP |   12345 | No              | Schenectady County | MAPD     | PDP       | Lipitor | future   |
@@ -331,7 +331,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_PDP_AARP01 @regressionAARP @sanity
+    @NBA_PDP_AARP01 @regressionAARP @sanity @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
@@ -366,7 +366,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
       | AARP |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
 
-    @NBA_PDP_UHC01 @NBA_PDP_Sanity_UHC @regressionUHC
+    @NBA_PDP_UHC01 @NBA_PDP_Sanity_UHC @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county             | plantype | planyear | drug1   |
       | UHC  |   12345 | No              | Schenectady County | PDP      | next     | Lipitor |
@@ -402,7 +402,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
 
-    @NBA_PDP_AARP02 @NBA_PDP_Sanity_AARP @regressionAARP
+    @NBA_PDP_AARP02 @NBA_PDP_Sanity_AARP @regressionAARP @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
       | AARP |   10001 | No              | New York County | PDP      | future   | Lipitor | AARP MedicareRx Walgreens (PDP) |
@@ -445,7 +445,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | AARP |   10001 | No              | New York County | PDP      | next     | Lipitor |
 
-    @NBA_PDP_UHC02 @regressionUHC
+    @NBA_PDP_UHC02 @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | UHC  |   10001 | No              | New York County | PDP      | next     | Lipitor |
@@ -479,7 +479,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to add providers on the VPP summary page
 
-    @NBA_PDP_AARP02 @regressionAARP
+    @NBA_PDP_AARP02 @regressionAARP @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | AARP |   12345 | No              | Schenectady County | PDP      | MAPD      | Lipitor | next     |
@@ -571,7 +571,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | planname                                        | plantype1 | drug1   | plantype2 |
       | AARP |   19019 | No              | Iowa County | SNP      | next     | UnitedHealthcare Dual Complete - PA (HMO D-SNP) | PDP       | Lipitor | MAPD      |
 
-    @NBA_UHC03 @regressionUHC
+    @NBA_UHC03 @regressionUHC @featureGate
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | planname                                        | plantype1 | drug1   | plantype2 |
       | UHC  |   19019 | No              | Iowa County | SNP      | next     | UnitedHealthcare Dual Complete - PA (HMO D-SNP) | PDP       | Lipitor | MAPD      |
@@ -602,7 +602,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | drug1   | zipCode | site | plantype |
       | Orkambi |   80002 | AARP | PDP      |
 
-    @dce_NBA_ShopPagesPDP_UHC @regressionUHC
+    @dce_NBA_ShopPagesPDP_UHC @regressionUHC @featureGate
     Examples: 
       | drug1   | zipCode | site | plantype |
       | Orkambi |   80002 | UHC  | PDP      |
@@ -636,7 +636,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype1> |
     Then user should see the Get started NBA on VPP
 
-    @dce_NBA_ShopPagesPDP_AARP @regressionAARP
+    @dce_NBA_ShopPagesPDP_AARP @regressionAARP @featureGate
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site | plantype | planyear | plantype1 |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP | MAPD     | next     | PDP       |

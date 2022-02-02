@@ -109,7 +109,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user clicks on browser back button
     Then verify plan compare page is loaded
 
-    @vppPlanCompareCommon_AARP01New @prodRegression_UAT @regressionAARP
+    @vppPlanCompareCommon_AARP01New @prodRegression_UAT @regressionAARP @featureGate
     Examples: 
       | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount | planIndices | drug1  | drug2                | drug3   | removePlanIndices | planNamesList                                                                                                           |
       | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 3 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              | [blank]          | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            | [blank]                 | [blank]       | [blank]             | [blank]               | $0  copay                 | $0 for Tier 1$310 for Tiers 2-5											 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Choice (Regional PPO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -213,7 +213,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
-    @vppPlanCompareCommon_AARP01New @regressionAARP
+    @vppPlanCompareCommon_AARP01New @regressionAARP @featureGate
     Examples: 
       | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
       | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2022 | current  | $45            | $540          | Dental Platinum | $40            |
@@ -283,7 +283,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | https://www.myuhcagent.com/ |
 
-    @vppPlanCompareCommon_UHC01New @regressionUHC
+    @vppPlanCompareCommon_UHC01New @regressionUHC @featureGate
     Examples: 
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | https://www.myuhcagent.com/ |
@@ -406,12 +406,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @vppPlanCompareCommon_AARP01New @regressionAARP @test001
+    @vppPlanCompareCommon_AARP01New @regressionAARP @test001 
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_AMP | AARP |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
 
-    @vppPlanCompareCommon_UHC01New @regressionUHC
+    @vppPlanCompareCommon_UHC01New @regressionUHC @featureGate
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_UMS | UHC  |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |

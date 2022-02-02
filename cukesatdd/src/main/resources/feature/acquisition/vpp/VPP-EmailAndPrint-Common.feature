@@ -25,7 +25,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then I click back to all plans button and verify that all plans are still selected on summary page on site
     Then user loads page using email deeplink and validate vpp compare page content on site
 
-    @vppEmailandPrintCommon_AARP_1 @regressionAARP
+    @vppEmailandPrintCommon_AARP_1 @regressionAARP @featureGate
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | AARP |   90210 | MA       | NO            | future     |
@@ -70,7 +70,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | 15531 | AARP |   80001 | MA       | No              | Jefferson County | future     |
       | 15531 | AARP |   80001 | PDP      | No              | Jefferson County | future     |
 
-    @vppEmailandPrintCommon_UHC_2 @regressionUHC
+    @vppEmailandPrintCommon_UHC_2 @regressionUHC @featureGate
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | county           | planyear |
       | 15531 | UHC  |   80001 | MA       | No              | Jefferson County | future     |
@@ -112,7 +112,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | future     |
       | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | future     |
 
-    @vppEmailandPrintCommon_UHC_3 @regressionUHC
+    @vppEmailandPrintCommon_UHC_3 @regressionUHC @featureGate
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | future     |
