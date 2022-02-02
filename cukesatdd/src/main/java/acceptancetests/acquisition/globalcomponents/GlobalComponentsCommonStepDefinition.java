@@ -114,6 +114,10 @@ public class GlobalComponentsCommonStepDefinition {
 				
 				//aquisitionhomepage.validateSubtitle();
 		//}
+			
+		if (MRScenario.environment.equalsIgnoreCase("offline") ||  MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("prod")){
+			aquisitionhomepage.handleSurveyPopup();
+		}
 		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
 		}

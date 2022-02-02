@@ -16,6 +16,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class DoctorsMobilePage extends UhcDriver {
@@ -243,24 +245,41 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
-		threadsleep(2000);
-		werallyResults = null;
-		Set<String> windows = driver.getWindowHandles();
+		String env = MRScenario.environment;
+		threadsleep(6000);
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {
-				for (String window : windows) {
-					if (!window.equals(primaryWindow)) {
-						driver.switchTo().window(window);
-						System.out.println(driver.getCurrentUrl());
-						mobileUtils.fixLeavingProceedMobile();
-						mobileUtils.fixPrivateConnectionMobile();
-						mobileUtils.fixFormResubmission(true);
-						pageloadcomplete();
-						System.out.println(driver.getCurrentUrl());
-						werallyResults = werally.werallySearch(type, search, count);
-					}
-					driver.switchTo().window(primaryWindow);
+			for (String window : windows) {
+				System.out.println(window.replace("page-", ""));
+				/*
+				 * String a =
+				 * "window.open('https://connect.int.werally.in/welcome-to-check-provider-coverage');";
+				 * ((JavascriptExecutor)driver).executeScript(a);
+				 */
+				if (!window.equals(primaryWindow)) {
+					/*
+					 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
+					driver.switchTo().window(window);
+					System.out.println(driver.getCurrentUrl());
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  )
+						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
+								"Prod Connected to Incorrect Rally");
+					else
+						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
+								"Non Prod Connected to Incorrect Rally");
+					werallyResults = werally.werallySearch(type, search, count);
+					String curID = String.valueOf(Thread.currentThread().getId());
+					System.out.println("Current Thread ID is - "+curID+" Provider saved in werally "+werallyResults);
+					CommonConstants.PRE_Rally_Providers.put(curID, werallyResults);
+					System.out.println("werallyResults Size is : " + werallyResults.size());
+					System.out.println("werallyResults Content is : " + werallyResults);
 				}
+				threadsleep(5000);
+				driver.switchTo().window(primaryWindow);
+			}
 			System.out.println(driver.getCurrentUrl());
 			threadsleep(1000);
 		} else {
@@ -455,7 +474,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		System.out.println(curWindow);
 		jsClickNew(modalFinddoctors);
 		threadsleep(5000);
-		if (doctor.equalsIgnoreCase("Lookup")) {
+		if (doctor.equals("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
 				validateWerallySearchanotherWindowmobile(curWindow, "Doctors", doctorsName, 3);
 			else
