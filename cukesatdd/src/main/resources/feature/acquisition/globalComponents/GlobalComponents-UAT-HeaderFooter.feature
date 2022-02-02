@@ -56,7 +56,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP 
+    @globalfooter_AARP @regressionAARP @featureGate
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
@@ -122,7 +122,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 AMP | AARP |   80001 | No              | Jefferson |
 
-    @globalfooter_UHC @regressionUHC 
+    @globalfooter_UHC @regressionUHC @featureGate 
     Examples: 
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 UMS | UHC  |   80001 | No              | Jefferson |
@@ -180,7 +180,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
 
-    @globalfooter_UHC @regressionUHC
+    @globalfooter_UHC @regressionUHC @featureGate
     Examples: 
       | Scenario           | site |
       | E2E Scenario_4 UMS | UHC  |
@@ -233,7 +233,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP
+    @globalfooter_AARP @regressionAARP @featureGate
     Examples: 
       | Scenario           | site |
       | E2E Scenario_5 AMP | AARP |
@@ -293,7 +293,7 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
-    @globalheader_AARP @regressionAARP
+    @globalheader_AARP @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                                      | pagename                                                    |
       | E2E Scenario_2 AMP | AARP | health-plans.html#/zipcode                                | Shop for a Plan                                             |
@@ -303,7 +303,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | shop/medicare-advantage-plans/health-care-management.html | Clinical Programs: Condition Management and Care Management |
       | E2E Scenario_2 AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html       | Medicare Advantage Plan Benefits                            |
 
-    @globalheader_AARP_1 @regressionAARP
+    @globalheader_AARP_1 @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                              | pagename                                             |
       | E2E Scenario_2 AMP | AARP | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
@@ -314,7 +314,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | shop/compare.html                 | Shop: Compare Plans                                  |
 
     #|E2E Scenario_2 AMP|AARP|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |Appeals and Grievances|
-    @globalheader_AARP_2 @regressionAARP
+    @globalheader_AARP_2 @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                | pagename                                               |
       | E2E Scenario_2 AMP | AARP | shop/estimate.html                  | Shop: Estimate Costs                                   |
@@ -324,7 +324,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | enroll/ma-enrollment.html           | Medicare Advantage Enrollment Information              |
       | E2E Scenario_2 AMP | AARP | enroll/pdp-enrollment.html          | Medicare Prescription Drug Plan Enrollment Information |
 
-    @globalheader_AARP_3 @regressionAARP
+    @globalheader_AARP_3 @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                                                              | pagename                                        |
       | E2E Scenario_2 AMP | AARP | resources.html                                                                    | Resources Hub                                   |
@@ -336,7 +336,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | Explanation of Benefits                         |
       | E2E Scenario_2 AMP | AARP | resources/disenrollment-information.html                                          | Disenrollment Rights and Responsibilities       |
 
-    @globalheader_AARP_4 @regressionAARP
+    @globalheader_AARP_4 @regressionAARP 
     Examples: 
       | Scenario           | site | path                                                 | pagename                              |
       | E2E Scenario_2 AMP | AARP | resources/mail-order-pharmacy.html                   | Preferred Mail Home Delivery          |
@@ -346,7 +346,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | resources/how-to-appoint-a-representative.html       | How to Appoint a Representative       |
       | E2E Scenario_2 AMP | AARP | resources/medication-therapy-management-program.html | Medication Therapy Management Program |
 
-    @globalheader_AARP_5 @regressionAARP
+    @globalheader_AARP_5 @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                                          | pagename                                                          |
       | E2E Scenario_2 AMP | AARP | resources/prescription-drug-appeals.html                      | Prescription Drug Coverage Determinations, Appeals and Grievances |
@@ -356,7 +356,7 @@ Feature: 1.12 UAT - Header and Footer flows
       #| E2E Scenario_2 AMP | AARP | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 AMP | AARP | medicare-education.html                                       | Understanding Medicare                                            |
 
-    @globalheader_AARP_6 @regressionAARP
+    @globalheader_AARP_6 @regressionAARP 
     Examples: 
       | Scenario           | site | path                                                       | pagename                                       |
       | E2E Scenario_2 AMP | AARP | medicare-education/medicare-eligibility.html               | Medicare Eligibility                           |
@@ -366,7 +366,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | medicare-education/medicare-medicaid-dual-eligibility.html | Medicare, Medicaid and Dual Eligibility        |
       | E2E Scenario_2 AMP | AARP | medicare-education/extra-help-program.html                 | Get Help with Medicare Prescription Drug Costs |
 
-    @globalheader_AARP_7 @regressionAARP
+    @globalheader_AARP_7 @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                                  | pagename                                  |
       | E2E Scenario_2 AMP | AARP | medicare-education/medicare-advantage-plans.html      | Medicare Advantage (Part C) Plans         |
@@ -376,7 +376,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | site-search.html/?q1=medicare&searchloc=header        | Site search page                          |
       | E2E Scenario_2 AMP | AARP | medicare-articles.html                                | Blog Homepage                             |
 
-    @globalheader_AARP_8 @regressionAARP
+    @globalheader_AARP_8 @regressionAARP 
     Examples: 
       | Scenario           | site | path                                                                                    | pagename          |
       | E2E Scenario_2 AMP | AARP | medicare-articles/eligibility-and-enrollment.html                                       | Category Page     |
@@ -430,7 +430,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | Explanation of Benefits                         |
       | E2E Scenario_2 UMS | UHC  | resources/disenrollment-information.html                                          | Disenrollment Rights and Responsibilities       |
 
-    @globalheader_UHC_4 @regressionUHC
+    @globalheader_UHC_4 @regressionUHC @featureGate
     Examples: 
       | Scenario           | site | path                                                 | pagename                              |
       | E2E Scenario_2 UMS | UHC  | resources/mail-order-pharmacy.html                   | Preferred Mail Home Delivery          |
@@ -450,7 +450,7 @@ Feature: 1.12 UAT - Header and Footer flows
       #| E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 UMS | UHC  | medicare-education.html                                       | Understanding Medicare                                            |
 
-    @globalheader_UHC_6 @regressionUHC
+    @globalheader_UHC_6 @regressionUHC @featureGate
     Examples: 
       | Scenario           | site | path                                                       | pagename                                       |
       | E2E Scenario_2 UMS | UHC  | medicare-education/medicare-eligibility.html               | Medicare Eligibility                           |
@@ -469,7 +469,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | medicare-education/enrollment-and-changing-plans.html | Enrollment & Changing Plans               |
       | E2E Scenario_2 UMS | UHC  | site-search.html/?q1=medicare&searchloc=header        | Site search page                          |
 
-    @globalheader_UHC_8 @regressionUHC
+    @globalheader_UHC_8 @regressionUHC @featureGate
     Examples: 
       | Scenario           | site | path                                                                                    | pagename          |
       | E2E Scenario_2 UMS | UHC  | medicare-articles.html                                                                  | Blog Homepage     |
