@@ -69,7 +69,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @featureGate
     Examples:
       | Scenario           | site | path                                                | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -104,7 +104,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC 
     Examples:
       | Scenario           | site | path                                      | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |

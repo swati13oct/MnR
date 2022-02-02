@@ -41,7 +41,7 @@ Feature:Medicare Education Pages flows for New Pages
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP @featureGate
     Examples:
       | Scenario     | site | geoState | pageName                    | tfnXpath                                                            | tfnFlag |
       | Avengers AMP | AARP | Alabama  | Medicare Education Hub Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    |
@@ -76,7 +76,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Coverage Choice link in Next Step Section
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP @featureGate
     Examples:
       | Scenario           | site | geoState | pageName                 | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | Arkansas | Medicare Eligibility New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -111,7 +111,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on How to Enroll link in Read Next section
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | geoState | pageName                       | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
       | UAT E2E Scenario 6_AMP | AARP | Alabama  | Initial Enrollment Period Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
@@ -143,7 +143,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Prescriptions Providers and Benefits link in Read Next Section
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 2_AMP | AARP | Alabama  | Coverage Options New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -177,7 +177,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Cost Basics link in Read Next Section
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                                | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | Alabama  | Prescriptions, Providers & Benefits New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -218,7 +218,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user clicks on Learn more about Medicare Advantage Plans link in Read Next Section
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 4_AMP | AARP | Alabama  | Cost Basics Page New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -253,7 +253,7 @@ Feature:Medicare Education Pages flows for New Pages
 
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                           | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_AMP | AARP | Alabama  | Medicare Advantage Part C Plan New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -284,7 +284,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user clicks on Agent link from new Medicare Education Pages
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_AMP | AARP | Alabama  | Medicare Supplement Plans New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
@@ -316,7 +316,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user validates Learn more about how to enroll on Medicare Advantage Plans Page
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                     | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_AMP | AARP | Alabama  | Prescription Drugs Plans New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -346,7 +346,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user validates Medicare Enrollment on Special Needs Plans Page
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario     | site | geoState | pageName                | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | Avengers AMP | AARP | Alabama  | Special Needs Plans New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -384,7 +384,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user validates the Learn how to change Medicare plans link on new Enrollment page
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_AMP | AARP | Alabama  | When to Enroll Page New | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -416,7 +416,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user validates the Types of Medicare and Medigap Insurance Plans link on new Original Medicare page
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario     | site | geoState | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | Avengers AMP | AARP | Alabama  | Original Medicare | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -446,7 +446,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario     | site | geoState | pageName               | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | Avengers AMP | AARP | Alabama  | Overview of Plan Types | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -479,7 +479,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user clicks on Agent link from new Medicare Education Pages
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | geoState | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
       | UAT E2E Scenario 6_AMP | AARP | Alabama  | Working Past 65 Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | WP65     |
@@ -512,7 +512,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user validates Changing Plan link on new How to Enroll Page
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_AMP | AARP | Alabama  | How to Enroll | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -546,7 +546,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user validates Medicare When Working Past Age 65 Next link on new Chaning Plan Page
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_AMP | AARP | Alabama  | Changing Medicare Plans | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -577,7 +577,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user clicks on Agent link from new Medicare Education Pages
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario     | site | geoState | path                 | pageName                        | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
       | Avengers AMP | AARP | Alabama  | iep-guide.html       | Initial Enrollment Period Guide | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
@@ -609,7 +609,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user validates PDF Viewer on the page
       | PDFName | <pdfName> |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario     | site | geoState | path                                | pageName                            | header                              | pdfName                    |
       | Avengers AMP | AARP | Alabama  | getting-started-medicare-guide.html | Getting Started with Medicare       | Getting Started with Medicare       | getting-started.pdf        |
