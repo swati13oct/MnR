@@ -857,15 +857,17 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		 */
 		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
-		sleepBySec(1);
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
-		sleepBySec(2);
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			selectFromDropDownByText(driver, seletPlandropdown, planName);
+			sleepBySec(2);
+		}
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
-			driver.findElement(By.cssSelector("#plan-type-label")).click();
+			driver.findElement(By.cssSelector("#plans")).click();
+			mobileSelectOption(seletPlandropdown, planName, true);
 		}
-		mobileSelectOption(seletPlandropdown, planName, true);
+
 		sleepBySec(2);
 //		if (!loadingBlock.isEmpty())
 		// waitforElementDisapper(By.className("loading-block"), 90);

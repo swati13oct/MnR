@@ -89,7 +89,7 @@ Feature: 1.16 ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prodRegression @regressionAARP @sanity
+    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prodRegression @regressionAARP @sanity @NBADBG
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   12345 | No              | Schenectady County | MAPD     | future   | Lipitor |
