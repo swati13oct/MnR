@@ -969,6 +969,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		if (!pharmacyValidate(noResultMsg))
 			PharmacyCount = PharmacyResultList.size();
 		if (PharmacyCount > 0) {
+			sleepBySec(5);
 			totalLine = PharmacyFoundCount.getText().trim();
 			totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
 			int totalAfter = Integer.parseInt(totalString);
