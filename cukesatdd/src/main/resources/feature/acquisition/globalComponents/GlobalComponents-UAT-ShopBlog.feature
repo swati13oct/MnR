@@ -47,7 +47,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @regressionUHC
+    @avengersRegressionUHC @regressionUHC @featureGate
     Examples:
       | Scenario           | site | path                                      | pageName                | UHCUrl                      |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ |

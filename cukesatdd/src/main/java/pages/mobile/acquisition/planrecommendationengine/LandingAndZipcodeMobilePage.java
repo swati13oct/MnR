@@ -139,6 +139,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+		// getStartedBtn.click();
 		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);
@@ -208,6 +209,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	public boolean close_Popup() {
 		boolean popup_presents = false;
+
 		System.out.println("Checking Popup Status...");
 		if (validate(popupNo, 20)) {
 			if (validate(popupFrame, 5))
@@ -218,6 +220,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			threadsleep(1000);
 			popup_presents = true;
 		}
+
 		driver.switchTo().defaultContent();
 		return popup_presents;
 	}

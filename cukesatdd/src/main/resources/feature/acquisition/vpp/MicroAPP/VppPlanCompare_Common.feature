@@ -23,7 +23,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
      # | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | current  |
      # | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | next     |
@@ -78,7 +78,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
     #  | 00005 | AARP |   90210 | NO            | Los Angeles County | MAPD     | current  |
 
-    @VBFTEAMC @regressionAARP @nextYear
+    @VBFTEAMC @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00005 | AARP |   90210 | NO            | Los Angeles County | MAPD     | next     |
@@ -132,7 +132,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
      # | 00007 | UHC  |   90210 | No            | Los Angeles County | MAPD     | current  |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | UHC  |   90210 | No            | Los Angeles County | MAPD     | next     |
@@ -167,7 +167,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
      # | 00008 | UHC  |   90210 | No            | Los Angeles County | MAPD     | current  |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | UHC  |   90210 | No            | Los Angeles County | MAPD     | next     |
@@ -195,7 +195,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
     #  | 00009 | AARP |   90210 | NO            | Los Angeles County | MAPD     | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | AARP |   90210 | NO            | Los Angeles County | MAPD     | next     |
@@ -228,7 +228,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And check one plan and add it to plancompare
     Then Verify newly added plan displayed on new plan compare page
 
-    @regressionAARP @prodRegression @vbfGate
+    @regressionAARP @prodRegression @vbfGate @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
      # | 00010 | AARP |   90210 | NO            | Los Angeles County | MAPD     |     2 | current  |
@@ -286,7 +286,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
    #   | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
       | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
@@ -317,7 +317,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
      # | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |
@@ -360,7 +360,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future  |
 
-    @regressionUHC @prodRegression
+    @regressionUHC @prodRegression @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | UHC  |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future  |
@@ -392,7 +392,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
      # | 00014 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00014 | AARP |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | next     |
@@ -428,7 +428,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
     #  | 00015 | AARP |   55343 | NO            | Hennepin County | MAPD     |                 1 | current  |           5 |
 
-    @vppPlanCompareAARP12 @regressionAARP @nextYear
+    @vppPlanCompareAARP12 @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00015 | AARP |   55343 | NO            | Hennepin County | MAPD     |                 1 | next     |           5 |
@@ -465,7 +465,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
      # | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | current  |           5 |
      # | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |               2,1 | current  |           4 |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county            | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County   | MAPD     |             3,1,2 | next     |           5 |
@@ -520,7 +520,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
     #  | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | current  |           4 |               4,1 |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | next     |           5 |               5,3 |
@@ -545,7 +545,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear | planIndices |
      # | 00018 | AARP |   90210 | No            | Los Angeles County | MAPD     | current  |           5 |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear | planIndices |
       | 00018 | AARP |   90210 | No            | Los Angeles County | MAPD     | next     |           5 |
@@ -590,7 +590,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planName                                       | planIndices | planyear |
     #  | 00019 | UHC  |   90210 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |           4 | current  |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planName                                       | planIndices | planyear |
       | 00019 | UHC  |   90210 | No            | Los Angeles County | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |           4 | next     |
@@ -616,7 +616,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
     #  | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
       | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | next     |
@@ -662,7 +662,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | count | planIndices | planyear |
     #  | 00021 | UHC  |   10010 | No            | New York County | MAPD     |     1 |           2 | current  |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | count | planIndices | planyear |
       | 00021 | UHC  |   10010 | No            | New York County | MAPD     |     1 |           2 | next     |
@@ -733,7 +733,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
     #  | 00026 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
       | 00026 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
@@ -786,7 +786,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     #  | 00029 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |         78006 | YES                 | Bexar County       | Click on Find Plan button |
     #  | 00030 | AARP |   78006 | Yes           | Bexar County       | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |         90210 | NO                  | Los Angeles County | Click Enter               |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode | ChangeisMultiCounty | Changecounty       | ClickEnter                |
       | 00029 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |         78006 | YES                 | Bexar County       | Click on Find Plan button |
@@ -815,7 +815,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
     #  | 00031 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |         00000 |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
       | 00031 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |         00000 |
@@ -853,7 +853,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
     #  | 00033 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |         96799 |
 
-    @regressionUHC @nextYear
+    @regressionUHC @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear | Changezipcode |
       | 00033 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | next     |         96799 |
@@ -899,7 +899,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
     #  | 00035 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                              | planyear |
       | 00035 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage Harmony (HMO) | next     |
@@ -936,7 +936,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
     #  | 00036 | AARP |   78006 | NO            | Kendall County | MAPD     | current  |           2 |
 
-    @regressionAARP @nextYear
+    @regressionAARP @nextYear @featureGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county         | plantype | planyear | planIndices |
       | 00036 | AARP |   78006 | YES            | Kendall County | MAPD     | next     |           2 |

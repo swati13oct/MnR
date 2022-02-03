@@ -513,7 +513,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP
+    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP @featureGate
     Examples: 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
@@ -686,7 +686,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
-    @GeoTarget_MedSup_GlobalCompsUHC @regressionUHC
+    @GeoTarget_MedSup_GlobalCompsUHC @regressionUHC @featureGate
     Examples: 
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
@@ -771,7 +771,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site |
       | AARP |
 
-    @learnAboutMedicareNav_UHC @regressionUHC
+    @learnAboutMedicareNav_UHC @regressionUHC @featureGate
     Examples: 
       | site |
       | UHC  |
