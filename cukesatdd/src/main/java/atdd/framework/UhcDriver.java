@@ -1,5 +1,6 @@
 package atdd.framework;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Duration;
@@ -39,10 +40,13 @@ import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.collect.ImmutableMap;
@@ -55,6 +59,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.PushesFiles;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
@@ -1322,6 +1327,50 @@ public abstract class UhcDriver {
 		for (int i = 1; i <= count; i++) {
 			mobileswipe(percentage, swipeup);
 		}
+	}
+	
+	/**
+	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
+	 *         screen for given %
+	 */
+	public boolean mobileUpload(String initialLocation, String newLocation ,WebElement element) {
+		boolean uploadSuccess = true;
+		AppiumDriver mobiledriver = (AppiumDriver) driver;
+		WebDriverWait wait = new WebDriverWait(mobiledriver, 5);
+		mobiledriver.setFileDetector(new LocalFileDetector());
+		//Push file to device
+		 try {
+			((PushesFiles) mobiledriver).pushFile(initialLocation, new File(newLocation));
+			//driver.pushFile("/sdcard/Download/image.jpg", new File("/Users/johndoe/Desktop/image.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+       //Switch to Native_App
+        Set<String> contextNames = mobiledriver.getContextHandles();
+        for (String strContextName : contextNames) {
+            if (strContextName.contains("NATIVE_APP")) {
+            	mobiledriver.context("NATIVE_APP");
+                break;
+            }
+        }
+        
+        
+        //Click on 'Allow' - permission
+        By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
+        mobiledriver.findElement(elementView).click();
+        
+        if (element.isDisplayed()) {
+        	element.click();
+        }
+        
+        else {
+        	uploadSuccess = false;
+        }
+	
+		return uploadSuccess;
 	}
 
 	/**

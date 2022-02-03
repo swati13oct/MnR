@@ -3,12 +3,14 @@
  */
 package pages.mobile.acquisition.ole;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.testng.Assert;
+import org.apache.poi.xslf.model.geom.IfElseExpression;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -96,7 +98,17 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	@FindBy(css = "#SSN")
 	private WebElement SSNField;
-
+	
+	@FindBy(xpath = "//*[@id='camera-capture-icon']")
+	private WebElement cameraIcon;
+	
+	@FindBy(xpath = "//*[@id='selectFromLibrary']") 
+	private WebElement btnSelectLibrary;
+	
+	@FindBy(xpath = "//*[@id='usePhotoBtn']")
+	private WebElement usePhotoBtn;
+	
+	
 	@FindBy(css = "#SSN2")
 	private WebElement SSNNumberField;
 
@@ -398,8 +410,31 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
 		return false;
 	}
+	
+	//New method
+	public boolean select_from_library() throws IOException {
+		
+		boolean flag = false;
+		
+		if (cameraIcon.isDisplayed()) {
+			cameraIcon.click();
+			if (btnSelectLibrary.isDisplayed()) {
+				flag = mobileUpload("path1", "path2", usePhotoBtn);
+			} else {
+				System.out.println("select from library button is not displayed");
+				flag = false;
+			}
+			
+		}
+		else
+		{
+			System.out.println("camera icon is not displayed");
+			flag = false;
+		}
+		return flag;
 
-	public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
+}
+			public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);

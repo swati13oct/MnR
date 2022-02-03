@@ -647,6 +647,23 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Medicare Info data entry failed");
 	}
+	@Then("^the user clicks on camera icon to scan Medicare Card$")
+	public void the_user_clicks_on_camera_icon_to_scan_Medicare_Card() throws Throwable {
+				MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.select_from_library();
+		if (isInformationFilled) {
+
+			//getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+						getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
 
 	@Then("^the site user clicks on Start Application Button proceed to next pages$")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
@@ -2483,6 +2500,8 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Medicare Info data entry failed");
 	}
+	
+	
 
 	@Then("^the user validates the long term questions in Medicare Information Page$")
 	public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
