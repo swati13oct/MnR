@@ -78,7 +78,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
       | ativ                 | Humalog | Fanapt | 2         | Day        | Every 3 Months | 80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  |
 
-  @dce_DrugDetailsValidation_UHC @regressionUHC
+  @dce_DrugDetailsValidation_UHC @regressionUHC @featureGate
     Examples:
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
       | ativ                 | Humalog | Fanapt | 20        | Week       | Every 1 Month  | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
@@ -148,7 +148,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Pharmacy Selection | <StandardPharSelected> |
     Then the user validates link to Drug Summary Page
 
-  @dce_DrugDetailsCopay_Preferred_AARP @regressionAARP
+  @dce_DrugDetailsCopay_Preferred_AARP @regressionAARP @featureGate
     Examples:
       | drug1      | drug2  | zipCode | pharmacyZipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
       | vigabatrin | Fanapt | 80001   | 10001           | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      | DUANE READE             | CONTINUED CARE  | Test@123        |
@@ -213,7 +213,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
       | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $45           |
 
-  @dce_DrugDetailsCopay_Standard_UHC @regressionUHC
+  @dce_DrugDetailsCopay_Standard_UHC @regressionUHC @featureGate
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
       | vigabatrin | Fanapt | 33111   | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $30          | $90           |
@@ -246,7 +246,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | Premium | <premium> |
     And verify DCE NBA is displayed on drug details page
 
-  @dce_DrugDetailsPremiumValidation_AARP @regressionAARP
+  @dce_DrugDetailsPremiumValidation_AARP @regressionAARP @featureGate
     Examples:
       | drug1   | zipCode | planType | planName                                                   | site | premium |
       | Orkambi | 90210   | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
@@ -294,7 +294,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | drug1  | drug2   | zipCode | planType | planName                                   | site |
       | Fanapt | Lipitor | 75002   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | AARP |
 
-  @dce_DrugDetailsLISBuyDown_UHC @regressionUHC
+  @dce_DrugDetailsLISBuyDown_UHC @regressionUHC @featureGate
     Examples:
       | drug1  | drug2   | zipCode | planType | planName                                   | site |
       | Fanapt | Lipitor | 10001   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
@@ -328,7 +328,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user validates the text for coverage stages modal popups for Non-LIS Plans for Next Year
     And verify DCE NBA is displayed on drug details page
 
-  @dce_DrugDetailsNonBuyDownLIS_AARP @regressionAARP
+  @dce_DrugDetailsNonBuyDownLIS_AARP @regressionAARP @featureGate
     Examples:
       | drug1  | drug2   | zipCode | planType | planName                                              | site |
       | Fanapt | Lipitor | 75002   | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | AARP |

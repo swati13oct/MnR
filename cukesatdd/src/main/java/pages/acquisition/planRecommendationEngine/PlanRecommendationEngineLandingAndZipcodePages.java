@@ -294,6 +294,7 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 	}
 	
 	public boolean close_Popup() {
+		
 		boolean popup_presents = false;
 		System.out.println("Checking Popup Status...");
 		if(validate(popupNo, 20)) {

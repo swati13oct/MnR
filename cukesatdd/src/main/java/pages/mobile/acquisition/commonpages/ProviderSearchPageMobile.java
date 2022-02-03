@@ -429,7 +429,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")){
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());}
 		validate(vppFirstPlanCard);
-		//return new VPPPlanSummaryPageMobile(driver);
+//		return new VPPPlanSummaryPageMobile(driver);
 		return providerSaved;
 	}
 
@@ -747,6 +747,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		// TODO Auto-generated method stub
 		driver.close();
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
+		driver.navigate().back();
 //		return new AcquisitionHomePageMobile(driver);
 	}
 	

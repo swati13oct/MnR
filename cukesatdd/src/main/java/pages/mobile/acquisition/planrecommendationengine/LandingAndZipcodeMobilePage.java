@@ -29,14 +29,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
-	
+
 	@FindBy(css = "#custom-radio-group>fieldset>legend>span:nth-child(1)")
 	private WebElement coverageTitle;
 
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath="//h1[contains(@class,'text-display')]")
+	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
 	private WebElement landingpageHeader;
 
 	@FindBy(css = "div[class*='get-started-banner'] img")
@@ -92,14 +92,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	@FindBy(css = "input#zip-code")
 	private WebElement zipCode;
 
-	@FindBy(css = ".container div>button[class*='primary button']")
+	@FindBy(css = "#location-save-btn")
 	private WebElement continueBtn;
 
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
 
 	// zip code actions elements
-	@FindBy(css = "#zipInfo")
+	@FindBy(css = "input#zip-code")
 	private WebElement countyInfo;
 
 	@FindBy(css = "label[for='MultipleCounty']")
@@ -116,13 +116,13 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	@FindBy(css = "#errorMessage")
 	private WebElement errorMessage;
-	
+
 	@FindBy(css = "iframe[title*=' Survey']")
 	private WebElement popupFrame;
-	
+
 	@FindBy(css = "button[id*='no']")
 	private WebElement popupNo;
-	
+
 	@FindBy(xpath = "//select[@id='MultipleCounty']")
 	private WebElement PRECounty;
 
@@ -130,23 +130,24 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	public void openAndValidate() {
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 	}
-	
+
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zipcode);
+		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+		// getStartedBtn.click();
 		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);
-	
+
 	}
-	
+
 	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
-		
+
 		Thread.sleep(20000);
 		driver.switchTo().defaultContent();
 		waitTillElementClickableInTime(getStartedBtn, 45);
@@ -161,7 +162,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		Thread.sleep(2000);
 		waitforElementVisibilityInTime(coverageTitle, 30);
 	}
-	
+
 	public void landingpage() {
 		System.out.println("Validating Title: ");
 //		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
@@ -173,36 +174,45 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		System.out.println("Validating Animation Images: ");
 		validate(landingpageAnimationImage, 30);
 		System.out.println("Validating Text: ");
-/*		validate(landingpageText, 30);
-		String ExpectedText = " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. ";
-		String ActualText = landingpageText.getText();
-		System.out.println(ActualText.equalsIgnoreCase(ExpectedText));*/
+		/*
+		 * validate(landingpageText, 30); String ExpectedText =
+		 * " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. "
+		 * ; String ActualText = landingpageText.getText();
+		 * System.out.println(ActualText.equalsIgnoreCase(ExpectedText));
+		 */
 		validate(getStartedBtn, 30);
 		validate(landingpageMainInner, 30);
 		System.out.println("Validating Title in Inner Section: ");
 		validate(landingpageInnerTitle, 30);
-/*		String ExpectedText1 = "How does this work?";
-		String ActualText1 = landingpageInnerTitle.getText();
-		System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));*/
-		for(int i=1; i<=3; i++) {
-			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" +i+ "]"))).getText();
+		/*
+		 * String ExpectedText1 = "How does this work?"; String ActualText1 =
+		 * landingpageInnerTitle.getText();
+		 * System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
+		 */
+		for (int i = 1; i <= 3; i++) {
+			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
+					.getText();
 			System.out.println(landingpageTracker);
 		}
-		for(int j=1; j<=2; j++) {
-			String landingpageTextPoints = (driver.findElement(By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" +j+ "]/span"))).getText();
+		for (int j = 1; j <= 2; j++) {
+			String landingpageTextPoints = (driver.findElement(By.xpath(
+					"//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + j + "]/span")))
+							.getText();
 			System.out.println(landingpageTextPoints);
 		}
 		validate(landingpageImage, 30);
 		String landingpageLabelText = landingpageLabel.getText();
-		System.out.println(landingpageLabelText.contains("It may help to have the following information before getting started:"));
+		System.out.println(
+				landingpageLabelText.contains("It may help to have the following information before getting started:"));
 		waitTillElementClickableInTime(getStartedBtn, 45);
 	}
-	
+
 	public boolean close_Popup() {
 		boolean popup_presents = false;
+
 		System.out.println("Checking Popup Status...");
-		if(validate(popupNo, 20)) {
-			if(validate(popupFrame, 5))
+		if (validate(popupNo, 20)) {
+			if (validate(popupFrame, 5))
 				driver.switchTo().frame(popupFrame);
 			threadsleep(1000);
 //			popupNo.click();
@@ -210,6 +220,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			threadsleep(1000);
 			popup_presents = true;
 		}
+
 		driver.switchTo().defaultContent();
 		return popup_presents;
 	}
@@ -225,24 +236,27 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		System.out.println("Validating Text: ");
 		validate(landingpageText, 30);
 		mobileswipe("70%", true);
-		//String ExpectedText = "plan recommendation";
-		//String ActualText = landingpageText.getText();
-		//System.out.println(ActualText.contains(ExpectedText));
+		// String ExpectedText = "plan recommendation";
+		// String ActualText = landingpageText.getText();
+		// System.out.println(ActualText.contains(ExpectedText));
 		validate(getStartedBtn, 30);
 		validate(landingpageMainInner, 30);
 		System.out.println("Validating Title in Inner Section: ");
 		validate(landingpageInnerTitle, 30);
-		//String ExpectedText1 = "How does this work?";
-		//String ActualText1 = landingpageInnerTitle.getText();
-		//System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
+		// String ExpectedText1 = "How does this work?";
+		// String ActualText1 = landingpageInnerTitle.getText();
+		// System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
 		for (int i = 1; i <= 3; i++) {
-			//String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
-			//		.getText();
+			// String landingpageTracker =
+			// (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i +
+			// "]")))
+			// .getText();
 			validate(driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")));
-			//System.out.println(landingpageTracker);
-			if(i<3)
-			validate(driver.findElement(By.xpath(
-					"//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i + "]/span")));
+			// System.out.println(landingpageTracker);
+			if (i < 3)
+				validate(driver.findElement(
+						By.xpath("//*[@class='get-started-main-inner']//*[@class='your-medicare-id-car mt-2']/li[" + i
+								+ "]/span")));
 		}
 		mobileUtils.mobileFindElementBeforeCallBanner(getStartedBtn1, "50%", 5, true);
 		validate(landingpageImage, 30);
@@ -270,6 +284,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		zipCode.clear();
 
 		sendkeysMobile(zipCode, inputdata.get("Zip Code"));
+
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
@@ -281,8 +296,11 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			validate(zipcodePageCountyQuestionMark, 20);
 			Assert.assertTrue(defaultmultioptioninnerText.getText().contains("Select"));
 			validate(multicountySelect, 20);
-			//Select multicounty = new Select(multicountySelect);
-			mobileSelectOption(multicountySelect, inputdata.get("County Name"),true);
+			// Select multicounty = new Select(multicountySelect);
+			// below line of code added to click on county label so county dropdown will
+			// open (iOS issue)
+			driver.findElement(By.xpath("//*[@for='MultipleCounty']")).click();
+			mobileSelectOption(multicountySelect, inputdata.get("County Name"), true);
 		}
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
@@ -300,13 +318,13 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void navigatezipcodepagemobile() {
-		//driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
-		//pageloadcomplete();
-		///driver.navigate().refresh();
-		
+		// driver.navigate().to(driver.getCurrentUrl()+"/plan-recommendation-engine.html");
+		// pageloadcomplete();
+		/// driver.navigate().refresh();
+
 		pageloadcomplete();
 		mobileUtils.mobileLocateElementClick(getStartedBtn);
-		validate(zipCode,30);
+		validate(zipCode, 30);
 	}
 
 	public void validatecontains(String primarystring, String substring) {
@@ -315,11 +333,12 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	public void zipcodeInfoValidationmobile(HashMap<String, String> inputdata) {
 		System.out.println("Verify Zip Info");
 		validate(zipCode, 20);
-		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").equals(inputdata.get("Zip Code")),"Invalid Zip code");
+		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").equals(inputdata.get("Zip Code")),
+				"Invalid Zip code");
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {
 			validate(countyInfo, 20);
 //			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()),"County Name Error");
@@ -327,17 +346,18 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 			mobileUtils.mobileFindElementBeforeCallBanner(continueBtn, "50%", 5, true);
 			validate(multicountySelect, 20);
 			Select multicounty = new Select(multicountySelect);
-			Assert.assertTrue(multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(inputdata.get("County Name")),
+			Assert.assertTrue(
+					multicounty.getFirstSelectedOption().getText().equalsIgnoreCase(inputdata.get("County Name")),
 					"Invalid County Name");
 		}
 	}
 
-	public void edit_location(String zipcode,String multi,String county) {
+	public void edit_location(String zipcode, String multi, String county) {
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
 		sendkeysMobile(zipCode, zipcode);
-		if(multi.equalsIgnoreCase("Yes")) {
-			mobileSelectOption(multicountySelect, county,true);
+		if (multi.equalsIgnoreCase("Yes")) {
+			mobileSelectOption(multicountySelect, county, true);
 		}
 		threadsleep(3000);
 	}
