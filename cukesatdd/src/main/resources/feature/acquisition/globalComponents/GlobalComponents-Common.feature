@@ -44,9 +44,9 @@ Feature: 1.12 ACQ - Global Components Validation
     #Then the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
+
     #And user clicks on visit aarp.org link in the header
     #And user clicks on visit aarp.org link in the header for cancel
-
     @globalheader
     Examples: 
       | site |
@@ -323,16 +323,16 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MedSuppOnlyPages_GlobalCompsAARP
     Examples: 
-      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName       | tfnXpath       | tfnFlag |
+      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
+    #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
     @MedSuppOnlyPages_GlobalCompsUHC
     Examples: 
-      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName       | tfnXpath       | tfnFlag |
+      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
+  #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
   @GlobalComponentsAARPShopPages
   Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
     Given the user is on medicare acquisition site landing page
@@ -1065,29 +1065,51 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Header_Medsup_AARP_Membership
     Examples: 
-      | site | path                                                                      | pageName                                   |
+      | site | path                                                              | pageName                                   |
       #| AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| AARP | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
-      | AARP | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
+      | AARP | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                |
       #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
       #| AARP | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
-      | AARP | enroll/ms-apply.html                                                      | MedsupEnroll:Medsup Enroll Page            |
-      | AARP | medicare-education-classic/medicare-supplement-plans-classic.html         | MedsupClassic:Medsup Classic Page          |
-      | AARP | medicare-education/medicare-supplement-plans.html                         | Medsupeducation:Medsup Education Page      |
-      | AARP | shop/compare/compare-ms.html                                              | MedsupShopCompare:Medsup Shop Compare Page |
-      | AARP | shop/estimate/ms-costs.html                                               | MedsupShopCost:Medsup Shop Cost Page       |
+      | AARP | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page            |
+      | AARP | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page          |
+      | AARP | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page      |
+      | AARP | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page |
+      | AARP | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page       |
 
     #| AARP | shop/medicare-supplement-plans/at-your-best.html                  | MedsupShop:Medsup Shop Page                         |
     @Header_Medsup_UHC_Membership
     Examples: 
-      | site | path                                                                      | pageName                                   |
+      | site | path                                                              | pageName                                   |
       #| UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| UHC | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
-      | UHC  | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
+      | UHC  | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                |
       #| UHC | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
       #| UHC | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
-      | UHC  | enroll/ms-apply.html                                                      | MedsupEnroll:Medsup Enroll Page            |
-      | UHC  | medicare-education-classic/medicare-supplement-plans-classic.html         | MedsupClassic:Medsup Classic Page          |
-      | UHC  | medicare-education/medicare-supplement-plans.html                         | Medsupeducation:Medsup Education Page      |
-      | UHC  | shop/compare/compare-ms.html                                              | MedsupShopCompare:Medsup Shop Compare Page |
-      | UHC  | shop/estimate/ms-costs.html                                               | MedsupShopCost:Medsup Shop Cost Page       |
+      | UHC  | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page            |
+      | UHC  | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page          |
+      | UHC  | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page      |
+      | UHC  | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page |
+      | UHC  | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page       |
+
+  Scenario Outline: To verify the affiliate link on header for Geo Targeting state <Texas>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then user validate affiliate link on header for geo target state
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
+    Then user validate affiliate for non-geo target states
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | state               | code | state1 | code1 |
+      | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | state               | code | state1 | code1 |
+      | UHC  | U.S. Virgin Islands | VI   | Texas  | TX    |
