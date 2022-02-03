@@ -1345,8 +1345,8 @@ public abstract class UhcDriver {
 	}
 	
 	/**
-	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
-	 *         screen for given %
+	 * @author Prashan - peknath This method will perform file upload on mobile
+	 *         
 	 */
 	public boolean mobileUpload(String initialLocation, String newLocation ,WebElement element) {
 		boolean uploadSuccess = true;
