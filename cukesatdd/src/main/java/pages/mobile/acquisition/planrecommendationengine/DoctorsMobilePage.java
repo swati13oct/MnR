@@ -107,6 +107,9 @@ public class DoctorsMobilePage extends UhcDriver {
 	// Doctors Page Confirmation Modal popup
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
+	
+	@FindBy(css = "div[class*='edit-list-button'] button")
+	private WebElement modalEditDoctor;
 
 	@FindBy(css = "#modal div[class*='edit']>button")
 	private WebElement modalEditdoctors;
@@ -178,22 +181,15 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public void doctorlookup(String search, int count) {
-		String curdriverhandle = driver.getWindowHandle();
-		modalFinddoctors.click();
-		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		threadsleep(3000);
+		if(validate(modalEditDoctor))
+			jsClickNew(modalEditDoctor);
+		jsClickNew(modalFinddoctors);
+		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, count);
 		threadsleep(5000);
-		// Changing the count for multiple doc with : separated
-		if (search.contains(":")) {
-			count = search.split(":").length;
-		}
-		confirmationProviderResults = getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
-		if (count > 2 && !search.contains(":")) {
-			removeDoctors();
-			count = count - 1;
-			confirmationProviderResults = getConfimationPopupResults(count);
-		}
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 	}
 
 	public void doctorModellookupElements() {
@@ -268,6 +264,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		System.out.println("Doctor Page Functional Operations");
 		if (status.toUpperCase().contains("POSITIVE")) {
 			doctorspageOptions(doctor);
+			System.out.println("\n\nDoctor :"+doctor+"\n\n");
 			jsClickNew(continueBtn);
 			if (doctor.equalsIgnoreCase("Lookup")) {
 				if (multiDoctor.equalsIgnoreCase("YES"))

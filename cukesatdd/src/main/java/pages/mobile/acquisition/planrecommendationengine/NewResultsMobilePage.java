@@ -718,10 +718,8 @@ public class NewResultsMobilePage extends UhcDriver {
 		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()), "Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
-		covered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("div[class*='providerSection'] span[class^='covered']")).size();
-		nonCovered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("div[class*='providerSection'] span[class^='non-covered']")).size();
+		covered = driver.findElements(By.xpath(".//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'providerSection')]//span[starts-with(@class,'covered')]")).size();
+		nonCovered = driver.findElements(By.xpath(".//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'providerSection')]//span[starts-with(@class,'non-covered')]")).size();
 		System.out.println("Validating Doctor Coverage...");
 		if (doctorStatus.toLowerCase().contains("true")) {
 			// Below is the Text to be validated

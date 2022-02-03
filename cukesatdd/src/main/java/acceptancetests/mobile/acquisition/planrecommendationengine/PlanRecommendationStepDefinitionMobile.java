@@ -731,7 +731,7 @@ public void edit_doctor_page(DataTable givenAttributes) throws Throwable {
 	String doctor = inputValues.get("Doctors");
 	String status = "Positive_NextPageName";
 	if (!(doctor.isEmpty())) {
-		planSelectorDoctorspage.editdoctorspageFunctional(inputValues.get("Doctors"),inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
+		planSelectorDoctorspage.editdoctorspageFunctional(doctor,inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
 	}
 }
 
