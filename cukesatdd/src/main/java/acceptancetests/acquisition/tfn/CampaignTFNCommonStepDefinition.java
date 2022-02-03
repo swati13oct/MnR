@@ -897,12 +897,13 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		AcquisitionHomePage acqusitionHomePage=new AcquisitionHomePage(driver);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String Zip = memberAttributesMap.get("Zip Code");
 		tfnPage.HomepagePlanSearch(Zip);
 		VPPPlanSummaryPage plansummaryPage = tfnPage.ViewPlanSummary(PlanType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
 
 	@Then("^the user navigates to Plan Details Page for DCE Flow$")
@@ -1517,5 +1518,17 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
 	}
 	
-	
+	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP$")
+	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN_on_VPP() throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
+	}
 }
