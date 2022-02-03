@@ -40,6 +40,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Go Green           | <goGreen>                      |
       | Home Number        | <phoneno>                      |
       | Mobile Number      | <mobileno>                     |
+    #comment
     Then the user navigates to Medicare Information Page
     Then the user clicks on camera icon to scan Medicare Card #New step
     #2/2Then the user enters following required Medicare Information

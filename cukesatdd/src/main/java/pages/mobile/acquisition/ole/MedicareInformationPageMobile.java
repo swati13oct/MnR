@@ -413,7 +413,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	
 	//New method
 	public boolean select_from_library() throws IOException {
-		
+		//comment
 		boolean flag = false;
 		
 		if (cameraIcon.isDisplayed()) {

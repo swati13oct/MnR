@@ -1361,7 +1361,7 @@ public abstract class UhcDriver {
         By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
         mobiledriver.findElement(elementView).click();
-        
+        //
         if (element.isDisplayed()) {
         	element.click();
         }
