@@ -431,3 +431,76 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Examples: 
       | scenario                      | site   | state   | pscCode | campaignUrl                                                                                                                                                                                                                           | medEdURL1               | medEdTFN                           | shoppagesUrl                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | MAplantype |FedTFNNo       | MedSupTFNNo    | sourceCode |
       | Scenerio 6-ExternalLink - UMS2 | blayer | Alabama | 8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=90210&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | /medicare-articles.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | TiggerOptumID3331 | FebruarY##123$! | 1-877-755-5345 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | MA         |1-877-755-5345|1-877-755-5345|MOR|
+
+      
+      #######################Script 7: Source Code in URL ########################################
+  @Scenario_7_SourceCodeInURL_UAT @UATRegression
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN and source code from URL
+    Given the user Starts WebDriver
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+      Then the user enter zipcode in homepage
+      | Zip Code  | <zipcode>    |
+      | Plan Type | <MSPlantype> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    When Navigate to Visitor Profile page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      | MedEd URL | <medEdURL1> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    When user click on "Contact" link under more
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+      
+   @Scenario_7_SourceCodeInURL_UAT_Medsup3.0 @campaignTFNStageMS
+    Examples: 
+      | scenario                      | site | zipcode | MAplantype |MSPlantype| pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenerio 7-SourceCodeInURL - UMS | BLayer |   24010 | MA         |MS| 810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
+      
+      
+      @Scenario_7_SourceCodeInURL_UAT_Medsup4.0 @campaignTFNStageMS
+    Examples: 
+      | scenario                      | site | zipcode | MAplantype |MSPlantype| pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
+      | Scenerio 7-SourceCodeInURL - UMS | BLayer |   90210 | MA         |MS4.0| 810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
+      
