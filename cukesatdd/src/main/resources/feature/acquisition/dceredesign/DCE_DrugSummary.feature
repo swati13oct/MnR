@@ -71,7 +71,7 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
-    @dce_DrugSummary_Page_AARP @regressionAARP
+    @dce_DrugSummary_Page_AARP @regressionAARP @featureGate
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy4 |SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | Test@123        |ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
@@ -127,7 +127,7 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | AARP | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |
 
-    @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate
+    @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate @featureGate
     Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | UHC  | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |

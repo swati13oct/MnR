@@ -108,7 +108,7 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @prodRegression
+    @regressionAARP @prodRegression @PREDBG
     Examples: 
       | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | AARP |   15537 | NO            | Bedford | MA            | None         | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
