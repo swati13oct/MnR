@@ -552,7 +552,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	@FindBy(xpath = "(//*[contains(@class,'field-ename-error-msg')])")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
@@ -989,6 +989,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(site);
+		
+		
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -1088,6 +1090,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
+		
+		
 	}
 
 	public void openAndValidate(boolean alreadyOnSite) {
@@ -8165,5 +8169,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void verifyElementNotPresent() {
 		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
+	}
+	
+	public String returnCookieValue() {
+		
+		String cookieName = "NULL";
+		if(getCookieName("rxVisitor")!=null)
+			cookieName = (getCookieName("rxVisitor").toString());
+		System.out.println("visitor cookie : "+cookieName);
+		return cookieName;
 	}
 }

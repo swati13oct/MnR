@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 
 public class EditResponseMobilePage extends GlobalWebElements {
 
@@ -113,7 +114,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
 	
-	@FindBy(css = "div[data-rel='#plan-list-3'] a")
+	@FindBy(xpath = ".//div[@data-rel='#plan-list-3']//a")
 	private WebElement PDPViewPlansLink;
 	
 	@FindBy(css = "div[data-rel='#plan-list-4'] a")
@@ -210,7 +211,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			jsClickNew(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink); 
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
@@ -258,27 +259,21 @@ public class EditResponseMobilePage extends GlobalWebElements {
 				UIValue = "not sure".toLowerCase();
 		} else if (section.equalsIgnoreCase("special")) {
 			UIValue = inputValues.get("SNP Options");
-		} else if (section.equalsIgnoreCase("travel")) {
-
-			UIValue = inputValues.get("Travel Options");
-			UIValue = UIValue.replace("withinUS", "within").replace("OutsideUS", "another part").replace("regular",
-					"routine");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			UIValue = inputValues.get("Doctors");
-			UIValue = UIValue.replace("UHCNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
+			UIValue = UIValue.replace("UHGNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
 					.replace("Lookup", "Look up");
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("additional")) {
-			UIValue = inputValues.get("Additional Option");
+		} else if (section.equalsIgnoreCase("services")) {
+			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
 		} else if (section.equalsIgnoreCase("priorities")) {
 			UIValue = inputValues.get("Priorities");
 		}
-
 		return UIValue.toLowerCase();
 	}
 
@@ -295,14 +290,14 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		System.out.println("section : " + section);
 	//	for (WebElement elem : allQuestionSection) {
 		for (int i=1; i<=allQuestionSection.size();i++) {
 			WebElement head = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//h2"));
 			WebElement button = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//button"));
-			System.out.println("\n\n======"+head+"==\n====="+button+"===\n\n");
+			scrollToView(button);
 			String tempTxt = head.getText().toLowerCase();
-			System.out.println("tempTxt : " + tempTxt);
+			System.out.println("\n\ntempTxt : " + tempTxt);
+			System.out.println("section : " + section);
 			if (tempTxt.contains(section)) {
 				editButton = true;
 				if (click) {// Edit button Click
@@ -351,22 +346,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		mapd.put(0, "location");
 		mapd.put(1, "coverage");
 		mapd.put(2, "special");
-		mapd.put(3, "travel");
-		mapd.put(4, "doctor");
-		mapd.put(5, "drugs");
-		mapd.put(6, "additional");
-		mapd.put(7, "cost");
-		mapd.put(8, "priorities");
+		mapd.put(3, "doctor");
+		mapd.put(4, "drugs");
+		mapd.put(5, "services");
+		mapd.put(6, "cost");
+		mapd.put(7, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
 		ma.put(1, "coverage");
 		ma.put(2, "special");
-		ma.put(3, "travel");
-		ma.put(4, "doctor");
-		ma.put(5, "additional");
-		ma.put(6, "cost");
-		ma.put(7, "priorities");
+		ma.put(3, "doctor");
+		ma.put(4, "services");
+		ma.put(5, "cost");
+		ma.put(6, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -460,7 +453,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	}
 
 	public void editValue(String section) {
-
+		System.out.println("\n\nSection = "+section+"\n\n");
 		if (section.equalsIgnoreCase("location")) {
 			String zipcode = inputValues.get("Zip Code");
 			String multi = inputValues.get("Is Multi County");
@@ -489,16 +482,11 @@ public class EditResponseMobilePage extends GlobalWebElements {
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("travel")) {
-			TravelMobilePage travel = new TravelMobilePage(driver);
-			travel.edit_travel(inputValues.get("Travel Options"));
-			jsClickNew(saveBtn);
-			checkContent("travel");
-		} else if (section.equalsIgnoreCase("additional")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			AdditionalServicesMobilePage add = new AdditionalServicesMobilePage(driver);
-			add.edit_additional(inputValues.get("Additional Option"));
+			add.edit_Services(inputValues.get("Services Option"));
 			jsClickNew(saveBtn);
-			checkContent("additional");
+			checkContent("Services");
 		} else if (section.equalsIgnoreCase("cost")) {
 			CostPreferencesMobilePage cost = new CostPreferencesMobilePage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));

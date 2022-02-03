@@ -114,8 +114,8 @@ public class WerallyMobilePage extends UhcDriver {
 							sendkeysMobile(searchBox, searchParameter);
 					}
 					catch(Exception e) {
-						jsClickNew(driver.findElement(By.xpath("(//*[@id=\"connectHeader\"]//button[contains(@class,'toggle')])[1]")));
-						jsClickNew(driver.findElement(By.xpath("//*[@id=\"connectHeader\"]//span[contains(text(),'Find Care')]")));
+						jsClickNew(driver.findElement(By.xpath("(//*[@id='connectHeader']//button[contains(@class,'toggle')])[1]")));
+						jsClickNew(driver.findElement(By.xpath("//*[@id='connectHeader']//span[contains(text(),'Find Care')]")));
 						pageloadcomplete();
 						sendkeysMobile(searchBox, searchParameter);
 					}

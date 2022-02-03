@@ -14,7 +14,7 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | site |
       | [blank]  | AARP |
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP @regressionAARP @featureGate
     Examples: 
       | pagename                                                 | site |
       | profile/guest                                            | AARP |
@@ -614,7 +614,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | plantype | planName                        |
       | AARP |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @samIconsUHC @regressionAARP
+    @samIconsUHC @regressionAARP @featureGate
     Examples: 
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
@@ -654,7 +654,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipCode | planType | planName                                            | drug1   |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
 
-    @samIconsUHC @regressionUHC
+    @samIconsUHC @regressionUHC @featureGate
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
@@ -703,7 +703,7 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | site |
       | [blank]  | AARP |
 
-    @ProactiveChatAARP @regressionAARP
+    @ProactiveChatAARP @regressionAARP @featureGate
     Examples: 
       | pagename                                                 | site |
       | profile/guest                                            | AARP |
