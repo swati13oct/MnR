@@ -1099,17 +1099,31 @@ Feature: 1.12 ACQ - Global Components Validation
       | State | <state1> |
       | Code  | <code1>  |
     Then user validate affiliate link on header for geo target state
-    When user updates the state drop down value on the home page
+    Then user updates the state drop down value on the home page
       | State | <state> |
       | Code  | <code>  |
+    Then user validate affiliate for non-geo target states
+    Then the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And user validate affiliate link on header for geo target state
+    Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state1>  |
+    When the user clicks on Find plans on vpp using following information
+      | County Name2     | <county2>        |
+      | Is Multi County2 | <isMultiCounty2> |
     Then user validate affiliate for non-geo target states
 
     @GeoTarget_Affiliate
     Examples: 
-      | site | state               | code | state1 | code1 |
-      | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |
+      | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
 
     @GeoTarget_Affiliate
     Examples: 
-      | site | state               | code | state1 | code1 |
-      | UHC  | U.S. Virgin Islands | VI   | Texas  | TX    |
+      | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | UHC  | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
