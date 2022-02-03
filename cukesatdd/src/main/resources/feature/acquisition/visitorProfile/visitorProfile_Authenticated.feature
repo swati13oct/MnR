@@ -33,7 +33,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
       | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
-    @visitorProfile_UHC @regressionUHC @authenticatedUHC
+    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
       | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
@@ -68,7 +68,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state   | userName  | password     | drug1   | zipCode |
       | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state   | userName      | password     | drug1   | zipCode |
       | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
@@ -100,7 +100,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             |
       | AARP | New York | 10010   | NO              | New York County | vdatdd_13 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | userName      | password     | plantype | planname                             |
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
@@ -124,7 +124,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
       | AARP | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password     | plantype | planname                             | status      | monthlyPremium |
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
@@ -177,7 +177,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And the user cancel the enrollment
       | Plan Name | <planName> |
 
-    @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP
+    @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP @featureGate
     Examples:
       | site | state    | userName  | password     | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
       | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
@@ -197,7 +197,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan summary page
       | User Name | <userName> |
 
-    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+    @visitorProfile_AARP @regressionAARP @authenticatedAARP @featureGate
     Examples:
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
@@ -226,7 +226,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
@@ -252,7 +252,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |

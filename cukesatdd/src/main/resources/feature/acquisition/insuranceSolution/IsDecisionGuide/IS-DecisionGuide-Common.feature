@@ -23,7 +23,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
      Then the user clicks Submit to submit Decision Guide
     Then the user validates Thank You Page and land on Medsupp Page
     
-    @insuranceSolution_DecisionGuide_Common_AARP @UATRegression @regressionAARP @sanity @insuranceSolution @insuranceSolution_AARP @nonProd
+    @insuranceSolution_DecisionGuide_Common_AARP @UATRegression @regressionAARP @sanity @insuranceSolution @insuranceSolution_AARP @nonProd @featureGate
     Examples: 
       | Scenario                                      | site | zipcode | isMultutiCounty | county             | plantype |	firstname  		| lastname    	| distributionmethod | email              | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
       | IS Decision Guide Request - E2E Scenario_AARP | AARP |   58103 | NO              | Cass County | MS       |	MNRtestKumar	| MNRtestSai 		| mail               | [blank]            | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
@@ -64,7 +64,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
      # | IS Decision Guide Request - E2E Scenario 1_AARP | AARP |   58103 | NO              | Cass County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                    | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
       | IS Decision Guide Request - E2E Scenario 1_AARP | AARP |   58103 | NO              | Cass County | MS       | MNRtestSai | MNRtestKumar | email              | venkata.kanagala@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
-    @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution @sanity @nonProd
+    @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution @sanity @nonProd @featureGate
     Examples: 
       | Scenario                                       | site | zipcode | isMultutiCounty | county             | plantype | firstname  | lastname     | distributionmethod | email                    | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
      # | IS Decision Guide Request - E2E Scenario 1_UMS | UHC  |   58103 | NO              | Cass County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
