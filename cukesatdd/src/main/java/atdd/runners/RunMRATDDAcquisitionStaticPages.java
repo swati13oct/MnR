@@ -8,7 +8,7 @@ import io.cucumber.testng.PickleWrapper;
 import org.testng.annotations.Test;
 
 @CucumberOptions(glue = {"atdd.framework", "acceptancetests.acquisition"},
-        features = {"src/main/resources/feature/staticPages"},
+        features = {"src/main/resources/feature/acquisition/staticPages"},
         monochrome = true,
         plugin = {"pretty",
                 "html:reports/test-report.html",
