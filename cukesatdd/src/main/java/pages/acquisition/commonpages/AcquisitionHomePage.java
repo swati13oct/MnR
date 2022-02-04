@@ -314,7 +314,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement providerSearchFromGlobalHeader;
 
 	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]/a")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//*[@class='toolsLinks-forAnalytics links-forAnalytics']//p[4]/a")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -539,7 +539,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	@FindBy(xpath = "(//span[contains(text(),'Submit')])[2]")
+	//@FindBy(xpath = "//span[contains(text(),'Sign Up')]")
+	@FindBy(xpath = "//button[contains(@class,'uhc-email-button')]")
 	private WebElement SubmitEmail;
 
 	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
@@ -551,7 +552,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'field-ename-error-msg')])")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
@@ -767,7 +768,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]")
 	private WebElement samChatPopup;
 
-	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header')]")
+	@FindBy(xpath = "//*[contains(@class,'lp_maximized')]//span[contains(@class,'lpc_maximized-header') and contains(text(),'Message')]")
 	private WebElement samChatPopupHeader;
 
 	@FindBy(xpath = "//*[contains(@id,'lp_line_bubble_0')]")
@@ -988,6 +989,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(site);
+		
+		
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -1013,11 +1016,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -1048,11 +1051,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				start(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
@@ -1087,6 +1090,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
+		
+		
 	}
 
 	public void openAndValidate(boolean alreadyOnSite) {
@@ -3422,6 +3427,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		threadsleep(3);
 		driver.switchTo().activeElement();
 		validate(CallSamTFN);
 		String ExpectedCallSAMTFN = CallSamTFN.getText();
@@ -5389,7 +5395,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// driver.navigate().back();
 		WebElement headLogo = driver
-				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
+				.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and (contains(@style,'display: block'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -5738,6 +5744,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
+		threadsleep(3);
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
@@ -7305,11 +7312,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				driver.navigate().to(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.navigate().to(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				driver.navigate().to(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -7340,11 +7347,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				driver.navigate().to(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.navigate().to(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 30);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				driver.navigate().to(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -7416,7 +7423,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			jsClickNew(samChatIcon);
 			threadsleep(3);
 			validateNew(samChatPopup);
-			threadsleep(3);
+			threadsleep(5);
 			validateNew(samChatPopupHeader);
 			validateNew(samChatPopupMsg);
 			Assertion.assertTrue("Expected message not displayed in popup", samChatPopupMsg.getText().trim().equals(
@@ -8162,5 +8169,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void verifyElementNotPresent() {
 		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
+	}
+	
+	public String returnCookieValue() {
+		
+		String cookieName = "NULL";
+		if(getCookieName("rxVisitor")!=null)
+			cookieName = (getCookieName("rxVisitor").toString());
+		System.out.println("visitor cookie : "+cookieName);
+		return cookieName;
 	}
 }

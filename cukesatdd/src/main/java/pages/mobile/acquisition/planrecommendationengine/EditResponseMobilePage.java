@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 
 public class EditResponseMobilePage extends GlobalWebElements {
 
@@ -47,6 +48,9 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	@FindBy(css = "button[class*='button-secondary']")
 	private WebElement cancelButton;
+	
+	@FindBy(css = ".editPref button")
+	private WebElement editYourResponse;
 
 	@FindBy(css = "button[class*='button-primary']")
 	private WebElement saveButton;
@@ -110,7 +114,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
 	
-	@FindBy(css = "div[data-rel='#plan-list-3'] a")
+	@FindBy(xpath = ".//div[@data-rel='#plan-list-3']//a")
 	private WebElement PDPViewPlansLink;
 	
 	@FindBy(css = "div[data-rel='#plan-list-4'] a")
@@ -124,7 +128,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	@FindBy(css = "#backToPlanRecommendation")
 	private WebElement returnToPlanLink;
 
-	@FindBy(css = "uhc-list-item.list-item")
+	@FindBy(xpath = ".//uhc-list-item[contains(@class,'list-item')]")
 	private List<WebElement> allQuestionSection;
 
 	@FindBy(css = "div.viewUpdateSection:nth-of-type(1)>button")
@@ -195,19 +199,10 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	}
 
 	public void navigateEditResponsePageMobile(String flow) {
-		if (flow.equalsIgnoreCase("pdp")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
-			pdpEditResponseButton.click();
-		} else {
-			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				mobileUtils.mobileLocateElementClick(MAViewPlansLink); // Have zip with snp for all flows
-				mapdEditResponseButton.click();
-			}
-			else {
-				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
-				snpEditResponseButton.click();
-			}
-		}
+		waitForPageLoadSafari();
+		validate(editYourResponse, 10);
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
@@ -216,7 +211,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			jsClickNew(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink); 
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
@@ -264,27 +259,21 @@ public class EditResponseMobilePage extends GlobalWebElements {
 				UIValue = "not sure".toLowerCase();
 		} else if (section.equalsIgnoreCase("special")) {
 			UIValue = inputValues.get("SNP Options");
-		} else if (section.equalsIgnoreCase("travel")) {
-
-			UIValue = inputValues.get("Travel Options");
-			UIValue = UIValue.replace("withinUS", "within").replace("OutsideUS", "another part").replace("regular",
-					"routine");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			UIValue = inputValues.get("Doctors");
-			UIValue = UIValue.replace("UHCNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
+			UIValue = UIValue.replace("UHGNetwork", "UnitedHealthcare").replace("AcceptsMedicare", "any doctor")
 					.replace("Lookup", "Look up");
 
 		} else if (section.equalsIgnoreCase("drugs")) {
 			UIValue = inputValues.get("Drug Selection");
-		} else if (section.equalsIgnoreCase("additional")) {
-			UIValue = inputValues.get("Additional Option");
+		} else if (section.equalsIgnoreCase("services")) {
+			UIValue = inputValues.get("Services Option");
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
 		} else if (section.equalsIgnoreCase("priorities")) {
 			UIValue = inputValues.get("Priorities");
 		}
-
 		return UIValue.toLowerCase();
 	}
 
@@ -301,19 +290,24 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		for (WebElement elem : allQuestionSection) {
-			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
-			System.out.println("tempTxt : " + tempTxt);
+	//	for (WebElement elem : allQuestionSection) {
+		for (int i=1; i<=allQuestionSection.size();i++) {
+			WebElement head = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//h2"));
+			WebElement button = driver.findElement(By.xpath("(.//uhc-list-item[contains(@class,'list-item')])["+i+"]//button"));
+			scrollToView(button);
+			String tempTxt = head.getText().toLowerCase();
+			System.out.println("\n\ntempTxt : " + tempTxt);
+			System.out.println("section : " + section);
 			if (tempTxt.contains(section)) {
 				editButton = true;
 				if (click) {// Edit button Click
 					if (section.equalsIgnoreCase("location")) {
 						boolean lookup = validate(changeDocLink, 5);
-						mobileUtils.mobileLocateElementClick(elem.findElement(By.cssSelector("button")));
+						jsClickNew(button);
 						if (lookup)
-							mobileUtils.mobileLocateElementClick(locationModalConfirm);
+							jsClickNew(locationModalConfirm);
 					} else {
-						mobileUtils.mobileLocateElementClick(elem.findElement(By.cssSelector("button")));
+						jsClickNew(button);
 					}
 				}
 				break;
@@ -324,9 +318,9 @@ public class EditResponseMobilePage extends GlobalWebElements {
 
 	public void returnVPP(String button) {
 		if (button.toLowerCase().contains("update"))
-			viewUpdateButton.click();
+			jsClickNew(viewUpdateButton);
 		else
-			returnToPlanLink.click();
+			jsClickNew(returnToPlanLink);
 	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
@@ -352,22 +346,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		mapd.put(0, "location");
 		mapd.put(1, "coverage");
 		mapd.put(2, "special");
-		mapd.put(3, "travel");
-		mapd.put(4, "doctor");
-		mapd.put(5, "drugs");
-		mapd.put(6, "additional");
-		mapd.put(7, "cost");
-		mapd.put(8, "priorities");
+		mapd.put(3, "doctor");
+		mapd.put(4, "drugs");
+		mapd.put(5, "services");
+		mapd.put(6, "cost");
+		mapd.put(7, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
 		ma.put(1, "coverage");
 		ma.put(2, "special");
-		ma.put(3, "travel");
-		ma.put(4, "doctor");
-		ma.put(5, "additional");
-		ma.put(6, "cost");
-		ma.put(7, "priorities");
+		ma.put(3, "doctor");
+		ma.put(4, "services");
+		ma.put(5, "cost");
+		ma.put(6, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -424,12 +416,20 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
 
+	public void navigateEditResponsePage(String flow) {
+		waitForPageLoadSafari();
+		validate(editYourResponse, 10);
+		jsClickNew(editYourResponse);
+//		editYourResponse.click();
+		validate(editResponseTitle);
+		validate(returnToPlanLink, 30);
+	}
 	
 	public void editUserResponse(HashMap<String, String> userInput) {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
-		plansLoader();
-		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
+		pageloadcomplete();
+		navigateEditResponsePage(inputValues.get("Plan Type"));
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
 		Assert.assertTrue(validate(viewUpdateButton, 10), "View Updated Button should be displayed");
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
@@ -453,7 +453,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	}
 
 	public void editValue(String section) {
-
+		System.out.println("\n\nSection = "+section+"\n\n");
 		if (section.equalsIgnoreCase("location")) {
 			String zipcode = inputValues.get("Zip Code");
 			String multi = inputValues.get("Is Multi County");
@@ -482,16 +482,11 @@ public class EditResponseMobilePage extends GlobalWebElements {
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
-		} else if (section.equalsIgnoreCase("travel")) {
-			TravelMobilePage travel = new TravelMobilePage(driver);
-			travel.edit_travel(inputValues.get("Travel Options"));
-			jsClickNew(saveBtn);
-			checkContent("travel");
-		} else if (section.equalsIgnoreCase("additional")) {
+		} else if (section.equalsIgnoreCase("services")) {
 			AdditionalServicesMobilePage add = new AdditionalServicesMobilePage(driver);
-			add.edit_additional(inputValues.get("Additional Option"));
+			add.edit_Services(inputValues.get("Services Option"));
 			jsClickNew(saveBtn);
-			checkContent("additional");
+			checkContent("Services");
 		} else if (section.equalsIgnoreCase("cost")) {
 			CostPreferencesMobilePage cost = new CostPreferencesMobilePage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
@@ -520,7 +515,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		pageloadcomplete();
 		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
-		changeDocLink.click();
+		jsClickNew(changeDocLink);
 		DoctorsMobilePage doc = new DoctorsMobilePage(driver);
 		doc.addProviderEdit(inputValues.get("Doctors Search Text"));
 		checkContent("doctor");
@@ -550,7 +545,7 @@ public class EditResponseMobilePage extends GlobalWebElements {
 	
 	public void plansLoader() {
 		pageloadcomplete();
-		validate(planLoaderscreen, 60);
+		//validate(planLoaderscreen, 60);
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		validate(planZipInfo, 60);
 		threadsleep(5000);// Plan loader

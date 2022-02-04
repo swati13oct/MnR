@@ -74,7 +74,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-3-button")
 	public WebElement learnAboutMedicareFooterButton;
 
-	@FindBy(css = "#accordion-4-button > div")
+	@FindBy(xpath = ".//*[@id='accordion-4-button']/div")
 	public WebElement more;
 
 	@FindBy(css = "#accordion-1-content [href*='medicare-advantage-plans']")
@@ -107,7 +107,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(linkText = "Back to Top")
 	public WebElement footerNavigationBackToTopLink;
 
-	@FindBy(xpath = ".//*[contains(@class, 'viewdisclaimerstext')]")
+	@FindBy(css = "#accordion-disclaimer-button")
 	public WebElement viewAllDisclaimerInformationLink;
 
 	// @FindBy(linkText = "Hide disclaimer information")
@@ -317,13 +317,13 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(css = "#accordion-3-content [href*='medicare-faq']")
 	public WebElement medicareFaqLink;
 
-	@FindBy(css = "#accordion-4-content [href*='about-us']")
+	@FindBy(xpath="//*[@id='accordion-4-content']//a[text()='About']")
 	public WebElement aboutLink;
 
-	@FindBy(css = "#accordion-4-content [href*='contact-us']")
+	@FindBy(xpath="//*[@id='accordion-4-content']//a[text()='Contact']")
 	public WebElement contactLink;
 
-	@FindBy(css = "#accordion-4-content [href*='language-assistance']")
+	@FindBy(xpath="//*[@id='accordion-4-content']//a[text()='Language Assistance']")
 	public WebElement languageAssistanceLink;
 
 	@FindBy(css = "#accordion-4-content [href*='aarp.org']")
@@ -619,7 +619,7 @@ public class GlobalWebElements extends UhcDriver {
 
 		jsClickNew(MenuMobile);
 
-		sleepBySec(5);
+		waitforElement(shopForAPlan);
 		// validateNew(mobileNav, 5);
 
 		jsClickNew(shopForAPlan);

@@ -10,11 +10,14 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | Zip Code    | <zipcode>    |
       | Distance    | <distance>   |
       | County Name | <countyName> |
+    And the user enters pharmacy name for pharmacy search
+      | Pharmacy Name | CVS |
     And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates the searched pharmacy
     Then the user validates the pharmacies results
       | Language | English |
 
@@ -119,7 +122,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | Ulayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | Ulayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | Ulayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | Ulayer   |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2022 | MedicareMax (HMO)                                                | Home Infusion and Specialty | False                 | False            | True                 |
 
   @pharmacylocatorulayer02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
@@ -166,7 +169,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | 15583 | Ulayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | Ulayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | Ulayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | Ulayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | Ulayer   |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2022 | MedicareMax (HMO)                                                | Home Infusion and Specialty | False                 | False            | True                 |
 
   @pharmacylocatorulayer03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
@@ -357,3 +360,24 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
       | TID   | state     | siteName |
       | xxxxx | Ohio      | Ulayer   |
       | xxxxx | Minnesota | Ulayer   |
+
+  @pharmacylocatorulayer09
+  Scenario Outline: To verify available pharmacies
+    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
+      | Site Name | <siteName> |
+    And the user enters following details for pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user enters pharmacy name for pharmacy search
+      | Pharmacy Name | Test@123 |
+    And the user chooses a plan from dropdown list
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates no result error message
+
+    Examples:
+      | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                         | ny_planYear | ny_planName                                         | plantype |
+      | Ulayer   |   80002 |       25 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | MA       |

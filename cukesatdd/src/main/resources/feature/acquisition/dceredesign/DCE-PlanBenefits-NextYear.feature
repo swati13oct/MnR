@@ -360,3 +360,46 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | Preferred Medicare Assist Plan 1 (HMO D-SNP) | AARP | $0 - $34    | $0         | $0         | 25%        | 25%        | 25%        |                   | Tier 1, Tier 2: $0;Tier 3, Tier 4, Tier 5: $480 | false          | $0     | $0     | 25%    | 25%    | N/A    |                       |
       | meloxicam | diclofenac potassium | febuxostat | buprenorphine | vigabatrin | Humalog     | 33111   | Miami-Dade County | SNP      | MedicareMax Plus 1 (HMO D-SNP)               | AARP | $0 - $34.30 | $0         | $0         | 25%        | 25%        | 25%        |                   | Tier 1, Tier 2: $0;Tier 3, Tier 4, Tier 5: $480 | false          | $0     | $0     | 25%    | 25%    | N/A    |                       |
 
+
+  @dce_EnrollSupression
+  Scenario Outline: To verify DCE Details Page <site> Enroll option is enabled/disabled forplan as per flag
+    #Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county for Multi county as follows
+      | ZipCode | <zipCode> |
+      | County  | <county>  |
+    And user clicks on continue button in Zip Entry Page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user validates enroll option as per following flag
+      | EnrollFlag | <enrollFlag> |
+
+
+  @dce_EnrollSupression @NextYearPlanBenefits
+    Examples:
+
+      | drug1  | drug2   | zipCode | county             | planType | planName                                              | site | enrollFlag |
+      | Fanapt | Lipitor | 50599   | Wright County      | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)            | AARP | false      |
+      | Fanapt | Lipitor | 65746   | Wright County      | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)            | AARP | false      |
+      | Fanapt | Lipitor | 68979   | York County        | SNP      | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)     | AARP | false      |
+      | Fanapt | Lipitor | 72943   | Yell County        | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                  | AARP | false      |
+      | Fanapt | Lipitor | 72943   | Yell County        | MAPD     | AARP Medicare Advantage Plan 2 (HMO)                  | AARP | false      |
+      | Fanapt | Lipitor | 87068   | Valencia County    | MAPD     | AARP Medicare Advantage (HMO)                         | AARP | false      |
+      | Fanapt | Lipitor | 87594   | Santa Fe County    | MAPD     | AARP Medicare Advantage (HMO)                         | AARP | false      |
+      | Fanapt | Lipitor | 66216   | Wyandotte County   | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)    | AARP | false      |
+      | Fanapt | Lipitor | 01772   | Worcester County   | SNP      | UnitedHealthcare Senior Care Options (HMO D-SNP)      | AARP | false      |
+      | Fanapt | Lipitor | 01772   | Worcester County   | SNP      | UnitedHealthcare Senior Care Options NHC (HMO D-SNP)  | AARP | false      |
+      | Fanapt | Lipitor | 08886   | Warren County      | SNP      | UnitedHealthcare Dual Complete ONE (HMO D-SNP)        | AARP | false      |
+
+      | Fanapt | Lipitor | 90210   | Los Angeles County | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)      | AARP | true       |
+      | Fanapt | Lipitor | 78006   | Bexar County       | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | UHC  | true       |

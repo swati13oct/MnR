@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -58,7 +59,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
-	@FindBy(css = "app-add-plans > div[class^='uhc-card'] button[dlassetid^='vp_findplans']")
+	@FindBy(xpath="(//span[contains(text(),'Find Plans')])[3]/..")
 	private WebElement addPlans;
 
 	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
@@ -88,7 +89,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "(//*[@class='text-small header-link-mobile'])[3]")
+	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
 
 	@FindBy(css = "#enrollment-next-button")
@@ -217,10 +218,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a[class$='back-to-plans']")
 	private WebElement backToPlansLink;
 
-	@FindBy(xpath = "//h3[text()='Basic Costs']")
+	@FindBy(xpath="//*[text()='Basic Costs']")
 	private WebElement basicCostsHeader;
 
-	@FindBy(xpath = "//h3[text()='Doctor Visits']")
+	@FindBy(xpath="//*[text()='Doctor Visits']")
 	private WebElement doctorVisitsHeader;
 
 	@FindBy(css = "header[class*='mobile']")
@@ -1012,11 +1013,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		for (String plans : planNames) {
 			String[] listOfTestPlans = plans.split(",");
 			for (String plan : listOfTestPlans) {
-				System.out.println("Checking Saved Plan on VP for : " + plan);
-				WebElement addedPlan = driver.findElement(By.cssSelector("[dtmname$='Card:" + plan + "']"));
-				validateNew(addedPlan);
-				Assertion.assertEquals(plan, addedPlan.getText().trim());
-				System.out.println("Verified plans are added on visitior profile page");
+				if(!plan.contains("I-SNP"))	{
+					System.out.println("Checking Saved Plan on VP for : " + plan);
+					WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+					validateNew(addedPlan);
+					Assertion.assertEquals(plan, addedPlan.getText().trim());
+					System.out.println("Verified plans are added on visitior profile page");
+				}
 			}
 		}
 	}
@@ -1320,8 +1323,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void validateMSLearnMorePage() {
 		Assertion.assertTrue("Back To Profile link is not displayed on Learn More page !",
 				validateNew(backToProfileLinkLearnMorePage));
-		Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !",
-				validateNew(gymMembershipHeader));
+	//	Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !",
+	//			validateNew(gymMembershipHeader));
 		Assertion.assertTrue("Brain Health header is not displayed on Learn More page !",
 				validateNew(brainHealthHeader));
 	}
@@ -1364,6 +1367,18 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		WebElement componentCodeText = driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]"));
 		Assertion.assertTrue("Component code is not shown on Visitor Profile Page !", validateNew(componentCodeText));
 	}
+	
+//	@FindBy(xpath = "//span[contains(text(),'Get')]")
+//    private WebElement btnPREGetStarted;
+//	
+//	@FindBy(xpath = "//a[contains(text(),'Import')]")
+//    private WebElement lnkImport;
+//	
+//	public void validateMSSP4ProfilePage(String componentCode) {
+//		Assert.assertTrue(btnPREGetStarted.isDisplayed());
+//		Assert.assertTrue(lnkImport.isDisplayed());
+//		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'"+componentCode+"')]")).isDisplayed());
+//	}
 
 	public void removeMSPlans(String plans) {
 		try {

@@ -41,7 +41,7 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='enrollment-next-button']")
 	private WebElement NextBtn;
 
-	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
+	// @FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
 	@FindBy(css = "a[id^='ole-form-cancel-button']")
 	private WebElement CancelEnrollmentLink;
 
@@ -73,25 +73,27 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[contains(text(),'Medicare Insurance Information')]")
 	private WebElement welcomepageHeader;
 
-	/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
-	private WebElement DisclaimerAgreeCheckBx;
+	/*
+	 * @FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']") private
+	 * WebElement DisclaimerAgreeCheckBx;
 	 */
-	//@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
+	// @FindBy(xpath =
+	// "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
 	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeSelect;
 
-	//Right Rail Elements
+	// Right Rail Elements
 
-	//	@FindBy(xpath = "//*[contains(text(),'Need Help? Call')]/u")
+	// @FindBy(xpath = "//*[contains(text(),'Need Help? Call')]/u")
 	@FindBy(xpath = "//*[contains(@class,'tel tfn')]")
 	private WebElement TFNNoWidget;
-	
-	//@FindBy(xpath = "//u[contains(@class,'tel')]")
+
+	// @FindBy(xpath = "//u[contains(@class,'tel')]")
 	@FindBy(xpath = "(//a[contains(@class,'tel')])[3]")
 	private WebElement TFNNoNeedHelp;
-	
+
 	@FindBy(xpath = "(//u[contains(@class,'tel')])[2]")
-	private WebElement TFNNoSaveWelcomeOLE;	
+	private WebElement TFNNoSaveWelcomeOLE;
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
@@ -116,23 +118,22 @@ public class WelcomePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
-	
+
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
 	private WebElement PrivacyPolicy;
-	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
-	
-	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+
+	@FindBy(xpath = "//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
-	
-	//@FindBy(xpath="//*[contains(text(),'View Plan Details')]")
-	@FindBy(xpath="//*[contains(@class,'view-plan-link')]")
+
+	// @FindBy(xpath="//*[contains(text(),'View Plan Details')]")
+	@FindBy(xpath = "//*[contains(@class,'view-plan-link')]")
 	public WebElement ViewPlanDetails;
-	
-	
+
 	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
-	private WebElement SaveEnrollmentLinkOLE;		
+	private WebElement SaveEnrollmentLinkOLE;
 	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
 	private WebElement SaveModalOLE;
 
@@ -144,28 +145,28 @@ public class WelcomePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
 	private WebElement Saveclosepopup;
-	
+
 	@FindBy(xpath = "(//input[contains(@id,'DentalPlatinum_selectedRiders')]/../label)[1]")
 	private WebElement Ridersoption_Yes;
-	
+
 	@FindBy(xpath = "(//input[contains(@id,'N_selectedRiders')]/../label)[1]")
 	private WebElement Ridersoption_No;
-	
+
 	@FindBy(xpath = "(//a[contains(@class,'sitelogo')])[1]")
 	private WebElement LogoImage;
-	
+
 	@FindBy(xpath = "//button[contains(@id,'proceed')]")
 	private WebElement LeaveOnlineApplication;
-	
+
 	@FindBy(xpath = "//button[contains(@id,'leaveOleAlertBack')]")
 	private WebElement OLEImageBackButton;
-	
+
 	@FindBy(xpath = "(//div[contains(@id,'leavingSite')])[1]")
 	private WebElement LogoModalOLE;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'olesections')]")
 	private WebElement WidgetsImage;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'sticky-planname')]")
 	private WebElement OLEStickyPlanName;
 
@@ -199,9 +200,9 @@ public class WelcomePageMobile extends UhcDriver {
 		/*
 		 * else checkModelPopup(driver,10);
 		 */
-		
+
 		validateNew(WelcomePageHeader);
-		//validateNew(PlanYear_PlanName);
+		// validateNew(PlanYear_PlanName);
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
@@ -209,59 +210,50 @@ public class WelcomePageMobile extends UhcDriver {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
-		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
-		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
-		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
+		System.out.println("Plan Year and Plan Name Displayed on OLE : " + PlanYear_PlanName_Text);
+		System.out.println("Zip Code is Displayed on OLE : " + Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : " + Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
-		
-		if(validateNew(ViewPlanDetails)){
+
+		if (validateNew(ViewPlanDetails)) {
 			jsClickNew(ViewPlanDetails);
 //			Thread.sleep(500);
 			CommonUtility.checkPageIsReadyNew(driver);
 			flag = driver.getCurrentUrl().contains("details");
-			if(flag){
+			if (flag) {
 				String elementPath = "[class^='module-plan-summary']:nth-of-type(1) a[dtmname='Plans Detail:Tab:Enroll in Plan']";
 				WebElement enrollInPlan = driver.findElement(By.cssSelector(elementPath));
 				jsClickNew(enrollInPlan);
 //				Thread.sleep(500);
 				CommonUtility.checkPageIsReadyNew(driver);
 				flag = driver.getCurrentUrl().contains("welcome");
-				if (flag){
+				if (flag) {
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
 							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
 				}
 
 			}
 		}
-		
-		System.out.println("Plan Details are Validated : "+flag);
+
+		System.out.println("Plan Details are Validated : " + flag);
 		return flag;
-			
+
 	}
 
-	/*public boolean ValidateTFN(String TFN) {
-		// iosScroll(RightRailTFN);
-		scrollToView(RightRailTFN);
-		if (validateNew(RightRailTFN)) {
-			String TFN_OLE = RightRailTFN.getText();
-			System.out.println(TFN);
-			System.out.println(TFN_OLE);
-			if (TFN_OLE.contains(TFN)) {
-				System.out.println("TFN is validated in OLE Welcome Page" + TFN);
-				return true;
-			} else {
-				System.out.println("TFN does not match");
-				System.out.println("TFN in VPP page : " + TFN);
-				System.out.println("TFN in OLE Right Rail : " + TFN_OLE);
-				return false;
-			}
-		}
-		System.out.println("TFN not displayed in OLE right rail");
-		return false;
-	}*/
+	/*
+	 * public boolean ValidateTFN(String TFN) { // iosScroll(RightRailTFN);
+	 * scrollToView(RightRailTFN); if (validateNew(RightRailTFN)) { String TFN_OLE =
+	 * RightRailTFN.getText(); System.out.println(TFN); System.out.println(TFN_OLE);
+	 * if (TFN_OLE.contains(TFN)) {
+	 * System.out.println("TFN is validated in OLE Welcome Page" + TFN); return
+	 * true; } else { System.out.println("TFN does not match");
+	 * System.out.println("TFN in VPP page : " + TFN);
+	 * System.out.println("TFN in OLE Right Rail : " + TFN_OLE); return false; } }
+	 * System.out.println("TFN not displayed in OLE right rail"); return false; }
+	 */
 
 	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 
@@ -432,6 +424,116 @@ public class WelcomePageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//a[contains(text(),'www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html')]")
+	private WebElement AARPPharmacy;
+
+	public void ValidateFooterAARPPharmacyLink() throws InterruptedException, IOException {
+
+		validateNew(AARPPharmacy);
+		CommonUtility.waitForPageLoadNew(driver, AARPPharmacy, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(AARPPharmacy);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
+
+		if (CurrentPageURL.contains("Pharmacy-Search-English")) {
+			System.out.println("****************Pharmacy-Search-English is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Pharmacy-Search-English is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(text(),'Extra Help')]")
+	private WebElement Extrahelp;
+
+	public void ValidateFooterExtrahelpLink() throws InterruptedException, IOException {
+
+		validateNew(Extrahelp);
+		CommonUtility.waitForPageLoadNew(driver, Extrahelp, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(Extrahelp);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentPageURL = driver.getCurrentUrl();
+		System.out.println(" Page is displayed : " + CurrentPageURL);
+
+		if (CurrentPageURL.contains("prescription-drug-costs-help.html")) {
+			System.out.println("****************prescription-drug-costs-help is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************prescription-drug-costs-help is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(text(),'www.fitbit.com/legal/trademark-list')]")
+	private WebElement FitbitLink;
+
+	public void ValidateFooterFitBitLink() throws InterruptedException, IOException {
+		try {
+			validateNew(FitbitLink);
+			CommonUtility.waitForPageLoadNew(driver, FitbitLink, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(FitbitLink);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+					break;
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentPageURL = driver.getCurrentUrl();
+			System.out.println(" Page is displayed : " + CurrentPageURL);
+
+			if (CurrentPageURL.contains("legal/trademark-list")) {
+				System.out.println("****************legal/trademark-list is displayed  ***************");
+
+				Assertion.assertTrue(true);
+			} else {
+				Assertion.fail("****************legal/trademark-list is not loaded ***************");
+			}
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		} catch (Exception e) {
+			System.out.println("****************legal/trademark-list Link is not displayed  ***************");
+		}
+	}
+
 	public void ValidateFooterEnrollmentChecklistLink() throws InterruptedException, IOException {
 		PDDocument document;
 		validateNew(EnrollmentChecklistLink);
@@ -477,7 +579,6 @@ public class WelcomePageMobile extends UhcDriver {
 		}
 
 	}
-
 
 	public PharmacySearchPageMobile clickPharamcyLinkAndSwitchTab() {
 		/*
@@ -538,62 +639,62 @@ public class WelcomePageMobile extends UhcDriver {
 
 		}
 	}
-	
-	
-	public SaveandReturnOLEModal OpensavereturnOLEPages() {
+
+	public SaveandReturnOLEModalMobile OpensavereturnOLEPages() {
 		validate(SaveEnrollmentLinkOLE);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
-		
-		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
-		
-		//CancelEnrollmentLink.click();
+
+		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
+		// CancelEnrollmentLink);
+
+		// CancelEnrollmentLink.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(validate(SaveModalOLE)){
+		if (validate(SaveModalOLE)) {
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			validate(CreateProfilesave);
 			CreateProfilesave.isDisplayed();
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-			//Saveclosepopup.click();
+			// Saveclosepopup.click();
 			jsClickNew(Saveclosepopup);
-			return new SaveandReturnOLEModal(driver);
+			return new SaveandReturnOLEModalMobile(driver);
 		}
 		return null;
 	}
-	
+
 	public Map<Boolean, String> validate_Supplemental_Riders(String riderflag) {
-		boolean flag=false;
+		boolean flag = false;
 		String riderText = null;
-		HashMap map = new HashMap<Boolean,String>();
+		HashMap map = new HashMap<Boolean, String>();
 		String elementPath = "//*[contains(text(),'Optional Supplemental Benefits')]";
 		WebElement benefit = driver.findElement(By.xpath(elementPath));
 		flag = validateNew(benefit);
-		if(flag){
+		if (flag) {
 			flag = validateNew(Ridersoption_Yes) && validateNew(Ridersoption_No);
-			if(flag && riderflag.equalsIgnoreCase("true_yes")){
+			if (flag && riderflag.equalsIgnoreCase("true_yes")) {
 				jsClickNew(Ridersoption_Yes);
 				riderText = Ridersoption_Yes.getText().trim();
-			}else{
+			} else {
 				jsClickNew(Ridersoption_No);
 				riderText = Ridersoption_No.getText().trim();
 			}
 		}
-		map.put(flag,riderText);
+		map.put(flag, riderText);
 		return map;
 	}
-	
+
 	public String GetMonthlyPremiumValue() {
-		
+
 		if (validateNew(PremiumDisplay, 45)) {
-		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			// System.out.println("Monthly Premium is displayed on Welcome OLE Page");
 			String Monthly_Premium = PremiumDisplay.getText();
-			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" + Monthly_Premium);
 			return Monthly_Premium;
 		}
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
@@ -607,57 +708,54 @@ public class WelcomePageMobile extends UhcDriver {
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
 		String StickyPlanName = OLEStickyPlanName.getText();
-		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
-		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
-		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
-		System.out.println("OLE Sticky PlanName on Welcome OLE Page : "+StickyPlanName);
+		System.out.println("Plan Year and Plan Name Displayed on OLE : " + PlanYear_PlanName_Text);
+		System.out.println("Zip Code is Displayed on OLE : " + Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : " + Premium);
+		System.out.println("OLE Sticky PlanName on Welcome OLE Page : " + StickyPlanName);
 
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 
-
-
 		flag = driver.getCurrentUrl().contains("welcome");
-		if (flag){
-			flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
-					&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
+		if (flag) {
+			flag = PlanYear_PlanName_Text.contains(Expected_PlanName) && Zip_County_Text.contains(Expected_ZipCode)
+					&& Premium.contains(Expected_Premium) && StickyPlanName.contains(Expected_PlanName);
 		}
 
-		System.out.println("WELCOME OLE Page are Validated : "+flag);
+		System.out.println("WELCOME OLE Page are Validated : " + flag);
 		return flag;
 
 	}
 
 	public WelcomePage ValidateLogoonWelcomeOLE() {
 		validate(LogoImage);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", LogoImage);
-		
-		
+
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		if(validate(LogoModalOLE)){
+		if (validate(LogoModalOLE)) {
 			System.out.println("OLE logo modalis Displayed");
 			validate(LeaveOnlineApplication);
 			LeaveOnlineApplication.isDisplayed();
 			validate(OLEImageBackButton);
-			OLEImageBackButton.isDisplayed();			
+			OLEImageBackButton.isDisplayed();
 			jsClickNew(OLEImageBackButton);
-			
+
 			return new WelcomePage(driver);
 		}
 		return null;
 	}
-	
+
 	public boolean ValidateTFNonWelcomeOLE(String ExpectedTFNNo) {
-		//TFN no  above the continue button
-		
+		// TFN no above the continue button
+
 		boolean flag = false;
 
 		scrollToView(TFNNoWidget);
@@ -665,54 +763,53 @@ public class WelcomePageMobile extends UhcDriver {
 
 		scrollToView(TFNNoNeedHelp);
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
-			
-		
-		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
-		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
-		
-		//String Expected_TFN = planDetailsMap.get("TFN");
-		
-		System.out.println("TFN in VPP page : "+ExpectedTFNNo);
-				flag = driver.getCurrentUrl().contains("welcome");
-				if (flag){
-					flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
-				}			
-		
-		System.out.println("TFN not displayed in OLE right rail"+flag);
+
+		System.out.println("TFN in OLE Right Rail : " + TFNNeedHelp_OLE);
+		System.out.println("TFN in OLE Right Rail : " + TFNWidget_OLE);
+
+		// String Expected_TFN = planDetailsMap.get("TFN");
+
+		System.out.println("TFN in VPP page : " + ExpectedTFNNo);
+		flag = driver.getCurrentUrl().contains("welcome");
+		if (flag) {
+			flag = TFNWidget_OLE.contains(ExpectedTFNNo) && TFNNeedHelp_OLE.contains(ExpectedTFNNo);
+		}
+
+		System.out.println("TFN not displayed in OLE right rail" + flag);
 		return flag;
-		
-		
+
 	}
-	
+
 	public boolean ValidateTFNOLEPages(Map<String, String> planDetailsMap) {
-		//TFN no  above the continue button
-		
+		// TFN no above the continue button
+
 		boolean flag = false;
-		
+
 		String TFNWidget_OLE = TFNNoWidget.getText();
-		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
-		
+		System.out.println("TFN in OLE Right Rail : " + TFNWidget_OLE);
+
 		String Expected_TFN = planDetailsMap.get("TFN");
-		
-		System.out.println("TFN in VPP page : "+Expected_TFN);
-			//	flag = driver.getCurrentUrl().contains("welcome");
-				if (flag){
-					flag = TFNWidget_OLE.contains(Expected_TFN);
-				}			
-		
-		System.out.println("TFN not displayed in OLE right rail"+flag);
-		return flag;		
-		
+
+		System.out.println("TFN in VPP page : " + Expected_TFN);
+		// flag = driver.getCurrentUrl().contains("welcome");
+		if (flag) {
+			flag = TFNWidget_OLE.contains(Expected_TFN);
+		}
+
+		System.out.println("TFN not displayed in OLE right rail" + flag);
+		return flag;
+
 	}
+
 	public WelcomePage ValidateWidgetsonWelcomeOLE(String ExpectedTFNNo) {
 		validate(WidgetsImage);
-		if(validate(WidgetsImage)){
+		if (validate(WidgetsImage)) {
 			System.out.println("OLE Widgets Image is Displayed");
 			String TFNNoWidget_OLE = TFNNoWidget.getText();
-			System.out.println("TFN in OLE ExitModels : "+TFNNoWidget_OLE);
-		
-			System.out.println("TFN in VPP page : "+ExpectedTFNNo);
-			System.out.println("TFN No is validated"+TFNNoWidget_OLE.contains(ExpectedTFNNo));			
+			System.out.println("TFN in OLE ExitModels : " + TFNNoWidget_OLE);
+
+			System.out.println("TFN in VPP page : " + ExpectedTFNNo);
+			System.out.println("TFN No is validated" + TFNNoWidget_OLE.contains(ExpectedTFNNo));
 			validateNew(PrivacyPolicy);
 			CommonUtility.waitForPageLoadNew(driver, PrivacyPolicy, 30);
 			String parentWindow = driver.getWindowHandle();
@@ -731,7 +828,7 @@ public class WelcomePageMobile extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			String CurrentPageURL = driver.getCurrentUrl();
 			System.out.println(" Page is displayed : " + CurrentPageURL);
-			
+
 			if (CurrentPageURL.contains("privacy-policy.html")) {
 				System.out.println("****************privacy policy is displayed  ***************");
 
@@ -741,10 +838,10 @@ public class WelcomePageMobile extends UhcDriver {
 			}
 			driver.close();
 			driver.switchTo().window(parentWindow);
-			
+
 			return new WelcomePage(driver);
 		}
 		return null;
 	}
-	
+
 }

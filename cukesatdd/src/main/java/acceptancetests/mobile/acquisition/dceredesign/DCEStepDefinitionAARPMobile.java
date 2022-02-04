@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -19,16 +20,24 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DCEStepDefinitionAARPMobile {
 
@@ -116,6 +125,16 @@ public class DCEStepDefinitionAARPMobile {
 
 		drugDetailsPage.savePlan();
 	}
+	
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page$")
+    public void the_user_clicks_on_Enroll_in_plan_and_validates_the_Welcome_to_OLE_Page() throws Throwable {
+        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+        WelcomePageMobile welcomepage = drugDetailsPage.clickEnrollinPlanbtn();
+        if (null != welcomepage) {
+            getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+        } else
+            Assertion.fail("Welcome page  not loaded");
+    }
 
 	@Then("^the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_for_following_quantity_frequency_and_Supplylength_to_Drug_List(
@@ -227,6 +246,18 @@ public class DCEStepDefinitionAARPMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateNBAModal();
 	}
+	
+	@Then("the user clicks edit drugs on Compare page to land on Build Drug List Page")
+	public void the_user_clicks_edit_drugs_on_compare_page_to_land_on_build_drug_list_page() {
+		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		DrugCostEstimatorPageMobile buildYourDrugList = planComparepage.clickonEdityourDrugs();
+		if (null != buildYourDrugList) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugList);
+		} else
+			Assertion.fail("DCE Redesign page object not loaded");
+
+	}
 
 	@Then("^the user validates OptumRx consistently displays on DCE Details - Pharmacy Page$")
 	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Details_Pharmacy_Page() throws Throwable {
@@ -265,6 +296,17 @@ public class DCEStepDefinitionAARPMobile {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.selectPlanYearOLE(planYear);
+	}
+	
+	@Then("^the user validates the dynamic error message displayed for filter that has no result$")
+	public void the_user_validates_the_dynamic_error_message_displayed_for_filter_that_has_no_result(DataTable givenAttributes) throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pharmacyErrorType = givenAttributesMap.get("PharmacyErrorType");
+
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
 
 }

@@ -345,7 +345,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectsPlanYear(testPlanYear);
+			pharmacySearchPage.selectYearOption(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 
@@ -533,15 +533,28 @@ public class PharmacyLocatorStepDefinitionMobile {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
+	/** user enters following details for pharmacy search */
+	@And("^the user enters pharmacy name for pharmacy search$")
+	public void user_enters_pharmacy_name_for_pharmacy_search(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyNameFilter = inputAttributesMap.get("Pharmacy Name");
+		if(pharmacyNameFilter==null)
+			pharmacyNameFilter="";
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL,pharmacyNameFilter);
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.enterPharmacyName(pharmacyNameFilter);
+	}
+	
 	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
 	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*
-		 * pharmacySearchPage.validateBreadCrumb(breadCrumb);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
-		 * PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-		 */
+	
+		 pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		 getLoginScenario().saveBean(PharmacySearchCommonConstants.
+		 PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	
 		System.out.println("skipping the step for verify breadcrumb for mobile execution");
 	}
 
@@ -596,7 +609,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
-			pharmacySearchPage.selectsPlanYear(testPlanYear);
+			pharmacySearchPage.selectYearOption(testPlanYear);
 			noteList.add("Has plan year dropdown, testing for year=" + testPlanYear + " and plan name=" + testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 
@@ -924,6 +937,13 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateQuestionsWidget();
+	}
+	
+	@Then("^the user clicks on Reset filter on pharmacy search page$")
+	public void user_clicks_on_Reset_Filter_on_pharmacy_search_page()  {
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickResetFilter();
 	}
 
 	/** Verifying the pharmacy search tool in Spanish language */

@@ -745,7 +745,6 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 				+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
-		Thread.sleep(3000);
 		waitforElement(confdelpopup_del_button);
 		confdelpopup_del_button.click();
 		Thread.sleep(3000);
@@ -880,7 +879,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void clickstep2Search() throws InterruptedException {
-		Thread.sleep(12000);
+		waitforElement(zipSearchBtn);
 		zipSearchBtn.click();
 
 	}
@@ -1012,9 +1011,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void select_first_pharmacy_result() throws InterruptedException {
 		// waitforElement(first_pharmacy_select_btn);
-		Thread.sleep(10000);
+		waitforElement(first_pharmacy_select_btn);
 		first_pharmacy_select_btn.click();
-		Thread.sleep(15000);
+		Thread.sleep(10000);
 	}
 
 	public void verify_summary_cost(String total_cost) { // waitforElement(summary_tot_cost);
@@ -1557,7 +1556,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		zipcodeBtn.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 
-		Thread.sleep(15000);
+		waitforElement(viewPlans);
 
 		viewPlans.click();
 		Thread.sleep(5000);
@@ -1606,12 +1605,6 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void validatePharmacy() {
 		String pharmacyActual = pharmacyLink.getText();
-		try {
-			Thread.sleep(20000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		CommonUtility.waitForPageLoad(driver, pharmacyLink, 60);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(pharmacyLink));
@@ -1913,12 +1906,6 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void clickButtonViewCost() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		validateNew(getBtnViewCost());
 		// scrollToView(btnViewCost);
 		jsClickNew(getBtnViewCost());

@@ -16,8 +16,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -92,6 +94,9 @@ public class DCEACQVPPPlanCompareMobile {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		GetStartedPageMobile getStartedPageMobile = planComparepage.navigateToDCERedesign();
+		BuildYourDrugListMobile bd = getStartedPageMobile.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, bd);
+//		getStartedPageMobile.clickAddsDrugs();
 		if (null != getStartedPageMobile) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPageMobile);
 		} else

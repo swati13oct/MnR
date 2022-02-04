@@ -32,10 +32,10 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         }
     }
 
-    @FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')]")
+    @FindBy(xpath = "//h2[contains(text(),'Medicare Made Clear')]")
     private WebElement pageHeader;
 
-    @FindBy(xpath = "//h1[contains(text(),'Medicare Made Clear')]")
+    @FindBy(xpath = "(//div[contains(@class,'breadcrumb')]//a[contains(@href,'medicare-education')])[1]")
     private WebElement breadCrumb;
 
     @FindBy(xpath = "//span[contains(text(),'Medicare Eligibility')]")
@@ -256,7 +256,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     }
 
     public boolean checkAllLinks() {
-        if (validateNew(breadCrumb) || validateNew(lnkBenefits) || validateNew(lnkCostBasics) || validateNew(lnkCoverageChoices) || validateNew(lnkEnrollment) ||
+        if (validateNew(pageHeader) || validateNew(lnkBenefits) || validateNew(lnkCostBasics) || validateNew(lnkCoverageChoices) || validateNew(lnkEnrollment) ||
                 validateNew(lnkLearnMoreMedicareIEP) || validateNew(lnkLearnMoreMedicareWP65) || validateNew(lnkMAPlans) || validateNew(lnkMedicareEligibility) ||
                 validateNew(lnkMedSuppPlans) || validateNew(lnkOriginalMedicare) || validateNew(lnkOverviewOfPlans) || validateNew(lnkPDPPlans) || validateNew(lnkSNPPlans)) {
             return true;

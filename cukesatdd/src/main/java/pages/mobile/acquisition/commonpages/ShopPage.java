@@ -290,7 +290,7 @@ public class ShopPage extends GlobalWebElements {
 		validateNew(seeMoreBenefitsLink);
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(seeMoreBenefitsLink);
-		Thread.sleep(4000);
+		pageloadcomplete();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -322,7 +322,7 @@ public class ShopPage extends GlobalWebElements {
 			sendkeysMobile(zipcodeFieldShopPage, zipCode);
 			System.out.println("\n\n1========"+driver.getCurrentUrl()+"======"+driver.getTitle()+"==============\n\n");
 			jsClickNew(GetStartedShopPage);
-			Thread.sleep(20000);
+			pageloadcomplete();
 			System.out.println("\n\n2========"+driver.getCurrentUrl()+"==========="+driver.getTitle()+"=========\n\n");
 			String vppPageTitle = driver.getTitle();
 			if (driver.getWindowHandles().size() > 1) {
@@ -390,10 +390,10 @@ public class ShopPage extends GlobalWebElements {
 
 	public void comparePlans() {
 		// CommonUtility.checkPageIsReadyNew(driver);
-		sleepBySec(3);
+		validate(comparePlanBtn);
 		jsClickNew(comparePlanBtn);
 		// comparePlanBtn.click();
-		sleepBySec(3);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("compare-ma.html")) {
 			driver.navigate().back();
@@ -404,7 +404,7 @@ public class ShopPage extends GlobalWebElements {
 	}
 
 	public void estimateCosts() {
-		CommonUtility.checkPageIsReadyNew(driver);
+		validate(LearnEstimateCosts);
 		jsClickNew(LearnEstimateCosts);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
@@ -419,7 +419,7 @@ public class ShopPage extends GlobalWebElements {
 	public void switchPlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(howToSwitchPlans);
-		sleepBySec(3);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if (!driver.getCurrentUrl().contains("shop/switch.html"))
@@ -481,7 +481,7 @@ public class ShopPage extends GlobalWebElements {
 			validateNew(findAProviderBtn);
 			String parentWindow = driver.getWindowHandle();
 			jsClickNew(findAProviderBtn);
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			Set<String> tabs_windows = driver.getWindowHandles();
 			Iterator<String> itr = tabs_windows.iterator();

@@ -1760,6 +1760,13 @@ public void useraddDrugsPREResult() {
 	threadsleep(3000);
 }
 
+public void usereditDrugsPREResult() {
+	threadsleep(10000);
+	System.out.println("Adding drugs from PRE Result page");
+	jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='drugDetails'] a.buttonLink")));
+	threadsleep(3000);
+}
+
 
 public void userPreDCE() {
 	if(validate(MAViewPlansLink,15) ) {
@@ -2049,7 +2056,8 @@ public void validateDrugProvider() {
 	ArrayList<String> vpdrugs = new ArrayList<String>();
 	ArrayList<String> vpProviders = new ArrayList<String>();
 	String curID = String.valueOf(Thread.currentThread().getId());
-	DrugsInPRE = CommonConstants.PRE_Drugs.get(String.valueOf(Thread.currentThread().getId()));
+	threadsleep(2000);
+	DrugsInPRE = CommonConstants.PRE_Drugs.get(curID);
 	System.out.println("**** Current Thread ID is - "+curID+" Drugs in PRE "+DrugsInPRE+" ****");
 //	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = CommonConstants.PRE_Providers.get(String.valueOf(Thread.currentThread().getId()));

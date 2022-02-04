@@ -923,4 +923,42 @@ public class VisitorProfileStepDefinition {
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(componentCode);
 		visitorProfilePage.validateMSSP4ProfilePage(plannameAttributesMap.get("Component Code"));
 	}
+
+	@Then("^the user validate the name on visitor profile flyout$")
+	public void validate_the_name_on_visitor_profile_flyout(DataTable data){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+		String name = memberAttributesMap.get("Name");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateNameOnFlyout(name);
+	}
+
+	@Then("^the user clicks on import drugs link$")
+	public void the_user_clicks_on_import_drugs_link(){
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickOnImportLinkOnDCE();
+	}
+
+	@Then("^the user starts the import of the drugs$")
+	public void the_user_starts_the_import_of_the_drugs(DataTable data){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.importOnDCE(data);
+	}
+
+	@Then("^the user signs in with optum Id credentials on DCE import$")
+	public void the_user_signs_in_with_optum_Id_credentials_on_DCE_import(DataTable credentials) {
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.signInOnDCEImport(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+		getLoginScenario().saveBean(VisitorProfileCommonConstants.VP_USER_TYPE, username);
+	}
 }

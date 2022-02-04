@@ -5,6 +5,8 @@ import java.util.*;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.Assertion;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -113,7 +115,10 @@ public class PharmacyLocatorStepDefinitionNew {
 
 	}
 	
-	/** user chooses a plan from dropdown */
+/*
+	*/
+/** user chooses a plan from dropdown *//*
+
 	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
@@ -169,6 +174,7 @@ public class PharmacyLocatorStepDefinitionNew {
 		pharmacySearchPage.selectsPlanName(testPlanName, testSiteUrl);
 	}
 	
+*/
 
 	@Then("^the user validates the pharmacies results$")
 	public void validatesPharmaciesResults(DataTable inputAttributes) throws InterruptedException {
@@ -292,8 +298,66 @@ public class PharmacyLocatorStepDefinitionNew {
 				expectedPlanYearDropdown==actualPlanYearDropdown);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
-	} 
+	}
 
+	@And("^the user validates Front Matter PDF link$")
+	public void the_user_validates_Front_Matter_PDF_link() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateFrontMatterPdfResults(testPlanName);
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed",
+				pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
+		System.out.println("Front Matter Result Page is Displayed");
+	}
 	
+//	@When("^the user selects Pharmacy Types to Filter$")
+//	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
+//		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+//		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
+//		String language = inputAttributesMap.get("Language");
+//		System.out.println("Filter Type to Select : "+pharmacyType);
+//		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+//				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+//		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
+//		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
+//	}
+
+	/** user enters following details for pharmacy search */
+	@And("^the user enters pharmacy name for pharmacy search$")
+	public void user_enters_pharmacy_name_for_pharmacy_search(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String pharmacyNameFilter = inputAttributesMap.get("Pharmacy Name");
+		if(pharmacyNameFilter==null)
+			pharmacyNameFilter="";
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL,pharmacyNameFilter);
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.enterPharmacyName(pharmacyNameFilter);
+	}
+
+	@Then("^the user validates the searched pharmacy$")
+	public void the_user_validates_the_searched_pharmacy() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String pharmacyName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PHARMACY_NAME_OPTIONAL);
+		if(pharmacySearchPage.validateSearchedPharmacy(pharmacyName)){
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Searched Pharmacy is not Available in the Results");
+		}
+	}
+
+	@Then("^the user validates no result error message$")
+	public void the_user_validates_no_result_error_message() throws InterruptedException {
+		PharmacySearchPageNew pharmacySearchPage = (PharmacySearchPageNew) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		if(pharmacySearchPage.validateNoPharmacyResultError()){
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("User experience error message not displayed for no pharmacy result");
+		}
+	}
 
 }
