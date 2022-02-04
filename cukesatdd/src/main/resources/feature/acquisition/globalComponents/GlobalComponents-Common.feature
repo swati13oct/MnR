@@ -44,9 +44,9 @@ Feature: 1.12 ACQ - Global Components Validation
     #Then the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
+
     #And user clicks on visit aarp.org link in the header
     #And user clicks on visit aarp.org link in the header for cancel
-
     @globalheader
     Examples: 
       | site |
@@ -323,16 +323,16 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MedSuppOnlyPages_GlobalCompsAARP
     Examples: 
-      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName       | tfnXpath       | tfnFlag |
+      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
+    #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
     @MedSuppOnlyPages_GlobalCompsUHC
     Examples: 
-      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName       | tfnXpath       | tfnFlag |
+      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide | //*[@id='tfn'] | true    |
 
+  #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
   @GlobalComponentsAARPShopPages
   Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
     Given the user is on medicare acquisition site landing page
@@ -1065,29 +1065,135 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Header_Medsup_AARP_Membership
     Examples: 
-      | site | path                                                                      | pageName                                   |
+      | site | path                                                              | pageName                                   |
       #| AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| AARP | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
-      | AARP | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
+      | AARP | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                |
       #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
       #| AARP | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
-      | AARP | enroll/ms-apply.html                                                      | MedsupEnroll:Medsup Enroll Page            |
-      | AARP | medicare-education-classic/medicare-supplement-plans-classic.html         | MedsupClassic:Medsup Classic Page          |
-      | AARP | medicare-education/medicare-supplement-plans.html                         | Medsupeducation:Medsup Education Page      |
-      | AARP | shop/compare/compare-ms.html                                              | MedsupShopCompare:Medsup Shop Compare Page |
-      | AARP | shop/estimate/ms-costs.html                                               | MedsupShopCost:Medsup Shop Cost Page       |
+      | AARP | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page            |
+      | AARP | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page          |
+      | AARP | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page      |
+      | AARP | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page |
+      | AARP | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page       |
 
     #| AARP | shop/medicare-supplement-plans/at-your-best.html                  | MedsupShop:Medsup Shop Page                         |
     @Header_Medsup_UHC_Membership
     Examples: 
-      | site | path                                                                      | pageName                                   |
+      | site | path                                                              | pageName                                   |
       #| UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Medsup:Medsup Page                         |
       #| UHC | health-plans/medicare-supplement-plans/medicare-information.html  | Medsup:Medsup Page                                  |
-      | UHC  | shop/medicare-supplement-plans.html                                       | MedsupShop:Medsup Shop Page                |
+      | UHC  | shop/medicare-supplement-plans.html                               | MedsupShop:Medsup Shop Page                |
       #| UHC | health-plans/medicare-supplement-plans/agent-appointment.html     | Medsupagentppointment:Medsup Agent Appointment Page |
       #| UHC | health-plans/medicare-supplement-plans/Resume                     | MedsupResume:Medsup Resume Page                     |
-      | UHC  | enroll/ms-apply.html                                                      | MedsupEnroll:Medsup Enroll Page            |
-      | UHC  | medicare-education-classic/medicare-supplement-plans-classic.html         | MedsupClassic:Medsup Classic Page          |
-      | UHC  | medicare-education/medicare-supplement-plans.html                         | Medsupeducation:Medsup Education Page      |
-      | UHC  | shop/compare/compare-ms.html                                              | MedsupShopCompare:Medsup Shop Compare Page |
-      | UHC  | shop/estimate/ms-costs.html                                               | MedsupShopCost:Medsup Shop Cost Page       |
+      | UHC  | enroll/ms-apply.html                                              | MedsupEnroll:Medsup Enroll Page            |
+      | UHC  | medicare-education-classic/medicare-supplement-plans-classic.html | MedsupClassic:Medsup Classic Page          |
+      | UHC  | medicare-education/medicare-supplement-plans.html                 | Medsupeducation:Medsup Education Page      |
+      | UHC  | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page |
+      | UHC  | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page       |
+
+  @F722580
+  Scenario Outline: To verify the affiliate link on header for Geo Targeting state <Texas>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then user validate affiliate link on header for geo target state
+    Then user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
+    Then user validate affiliate for non-geo target states
+    Then the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And user validate affiliate link on header for geo target state
+    Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state1>  |
+    When the user clicks on Find plans on vpp using following information
+      | County Name2     | <county2>        |
+      | Is Multi County2 | <isMultiCounty2> |
+    Then user validate affiliate for non-geo target states
+
+    @GeoTarget_Affiliate123
+    Examples: 
+      | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | UHC  | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+
+  @F722580
+  Scenario Outline: To verify the affiliate link on header for Geo Targeting state <Texas> - <site> -  <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then user validate affiliate link on header for geo target state
+    And the user clicks on browser back button
+    Then user click on "Medicare Advantage Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Search Doctors" link under Tools & Resources
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "When to Enroll" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "How to Enroll" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Changing Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Working Past 65" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Overview of Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Special Needs Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then user validate affiliate link on header for geo target state
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | path                                                      | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | AARP | profile                                                   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | shop/switch.html                                          | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | state                                                     | code                | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city                 | state1      | isMultiCounty2 | county2          |                  |
+      | UHC  | U.S. Virgin Islands                                       | VI                  | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD            | CONNECTICUT | NO             | Fairfield County |                  |
+      | UHC  | shop/switch.html                                          | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
