@@ -237,7 +237,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String headerPremiumText = "Header not found";
 		String learnMoreLink = "";
 		if(planName.contains("PDP"))
-			learnMoreLink = planCard + "//span[contains(@ng-if,'!= 0')]//*[contains(@ng-click,'lispopup')]";
+			learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
 		else
 			learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
 		

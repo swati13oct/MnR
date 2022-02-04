@@ -142,7 +142,9 @@ public class VppPlanValidationStepDefinition {
 		                	 try {
 		                		 currentCellValue = cell.getStringCellValue();
 		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~]", "");
+		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~}", "");
 		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~", "");
+		                		 
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
 		                		// currentCellValue = currentCellValue.replace(currentColName, "");
 		                	 }catch (Exception e) {
@@ -341,7 +343,9 @@ public class VppPlanValidationStepDefinition {
 		                		 currentCellValue = cell.getStringCellValue();
 		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue().trim();
 		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~]", "");
+		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~}", "");
 		                		 currentCellValue= currentCellValue.replaceAll("\\[~/n~", "");
+		                		 
 		                	 }catch (Exception e) {
 		                		 System.out.println("Internal Error - Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
 		                		 System.out.println(e);
@@ -396,7 +400,7 @@ public class VppPlanValidationStepDefinition {
 								 if(rowIndex==1) {//this will initialize the arraylist of colors to value of 0's for each benefit
 									  benefitsArray.add(cellIndex, 0);
 								  }
-								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") ||currentColName.equalsIgnoreCase("DSNP Sub type")||currentColName.equalsIgnoreCase("Business Area")|| currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
+								 if(!(currentColName.equalsIgnoreCase("Plan Detail link parameter") ||currentColName.equalsIgnoreCase("business area")||currentColName.equalsIgnoreCase("DSNP Sub type")||currentColName.equalsIgnoreCase("Business Area")|| currentColName.equalsIgnoreCase("Product") || currentColName.equalsIgnoreCase("Out-of-Network Benefits")|| currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {
 
 								 	if(sheetName.contains("PDP") && currentColName.trim().equalsIgnoreCase("Drug Costs from Formulary"))
 									{
@@ -648,7 +652,7 @@ public class VppPlanValidationStepDefinition {
 								 if(rowIndex==1) {//this will initialize the arraylist of colors to value of 0's for each benefit
 									  benefitsArray.add(cellIndex, 0);
 								  }
-								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("plan id qa script")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.contains("Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("business area")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("plan id qa script")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.contains("Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
 									 
 									 resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
