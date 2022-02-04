@@ -43,7 +43,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		
 		
 		for (int i=0; i<listOfTabHeaders.size(); i++) { //note: loop through each table and store info
-			listOfTabHeaders.get(i).click();
+			jsClickNew(listOfTabHeaders.get(i));
 			CommonUtility.checkPageIsReady(driver);
 			int tabIndex=(i+1);
 			keepSessionAlive(forWhat, origDriver);

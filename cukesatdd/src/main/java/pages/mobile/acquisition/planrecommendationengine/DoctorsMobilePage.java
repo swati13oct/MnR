@@ -16,6 +16,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 public class DoctorsMobilePage extends UhcDriver {
@@ -105,6 +107,9 @@ public class DoctorsMobilePage extends UhcDriver {
 	// Doctors Page Confirmation Modal popup
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
+	
+	@FindBy(css = "div[class*='edit-list-button'] button")
+	private WebElement modalEditDoctor;
 
 	@FindBy(css = "#modal div[class*='edit']>button")
 	private WebElement modalEditdoctors;
@@ -114,6 +119,9 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#modal .modal-content .row:nth-of-type(2) uhc-list-item")
 	private List<WebElement> modalDoctorsList;
+	
+	@FindBy(css = "span[class*='zeroProvider']")
+	private List<WebElement> docWarningMsg;
 
 	// Find doctor element and lookup for name
 	@FindBy(css = ".list-item-content")
@@ -173,22 +181,15 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public void doctorlookup(String search, int count) {
-		String curdriverhandle = driver.getWindowHandle();
-		modalFinddoctors.click();
-		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		threadsleep(3000);
+		if(validate(modalEditDoctor))
+			jsClickNew(modalEditDoctor);
+		jsClickNew(modalFinddoctors);
+		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, count);
 		threadsleep(5000);
-		// Changing the count for multiple doc with : separated
-		if (search.contains(":")) {
-			count = search.split(":").length;
-		}
-		confirmationProviderResults = getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
-		if (count > 2 && !search.contains(":")) {
-			removeDoctors();
-			count = count - 1;
-			confirmationProviderResults = getConfimationPopupResults(count);
-		}
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 	}
 
 	public void doctorModellookupElements() {
@@ -225,6 +226,23 @@ public class DoctorsMobilePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	public void addZeroProviders(String doctorsName) {
+		jsClickNew(doctorLookupOption);
+		System.out.println("Lookup Type Clicked");
+		jsClickNew(continueBtn);
+		providerlookup(doctorsName, 1);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
+		threadsleep(2000);
+		String Msg1 = docWarningMsg.get(0).getText().trim(); //Added for Feb. feature
+		String Msg2 = docWarningMsg.get(1).getText().trim();
+		Assert.assertTrue(Msg1.contains("Edit your list"),"Edit your list is not displaying in Doctor popup"); 
+		Assert.assertTrue(Msg2.contains("Continue"),"Continue is not displaying in Doctor popup");
+		threadsleep(2000);
+		jsClickNew(modalContinuedoctors);
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+	}
 
 	public ArrayList<String> getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
@@ -241,26 +259,63 @@ public class DoctorsMobilePage extends UhcDriver {
 		}
 		return confirmationResults;
 	}
+	
+	public void editdoctorspageFunctional(String doctor, String doctorsName, String multiDoctor, String status) {
+		System.out.println("Doctor Page Functional Operations");
+		if (status.toUpperCase().contains("POSITIVE")) {
+			doctorspageOptions(doctor);
+			System.out.println("\n\nDoctor :"+doctor+"\n\n");
+			jsClickNew(continueBtn);
+			if (doctor.equalsIgnoreCase("Lookup")) {
+				if (multiDoctor.equalsIgnoreCase("YES"))
+					doctorlookup(doctorsName, 3);
+				else
+					doctorlookup(doctorsName, 1);
+			}
+		} else {
+			if (doctor.isEmpty()) {
+				jsClickNew(continueBtn);
+				mobileUtils.mobleErrorValidation(page);
+			}
+		}
+	}
 
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
-		threadsleep(2000);
-		werallyResults = null;
-		Set<String> windows = driver.getWindowHandles();
+		String env = MRScenario.environment;
+		threadsleep(6000);
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {
-				for (String window : windows) {
-					if (!window.equals(primaryWindow)) {
-						driver.switchTo().window(window);
-						System.out.println(driver.getCurrentUrl());
-						mobileUtils.fixLeavingProceedMobile();
-						mobileUtils.fixPrivateConnectionMobile();
-						mobileUtils.fixFormResubmission(true);
-						pageloadcomplete();
-						System.out.println(driver.getCurrentUrl());
-						werallyResults = werally.werallySearch(type, search, count);
-					}
-					driver.switchTo().window(primaryWindow);
+			for (String window : windows) {
+				System.out.println(window.replace("page-", ""));
+				/*
+				 * String a =
+				 * "window.open('https://connect.int.werally.in/welcome-to-check-provider-coverage');";
+				 * ((JavascriptExecutor)driver).executeScript(a);
+				 */
+				if (!window.equals(primaryWindow)) {
+					/*
+					 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
+					driver.switchTo().window(window);
+					System.out.println(driver.getCurrentUrl());
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  || env.equalsIgnoreCase("offline-prod"))
+						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
+								"Prod Connected to Incorrect Rally");
+					else
+						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
+								"Non Prod Connected to Incorrect Rally");
+					werallyResults = werally.werallySearch(type, search, count);
+					String curID = String.valueOf(Thread.currentThread().getId());
+					System.out.println("Current Thread ID is - "+curID+" Provider saved in werally "+werallyResults);
+					CommonConstants.PRE_Rally_Providers.put(curID, werallyResults);
+					System.out.println("werallyResults Size is : " + werallyResults.size());
+					System.out.println("werallyResults Content is : " + werallyResults);
 				}
+				threadsleep(5000);
+				driver.switchTo().window(primaryWindow);
+			}
 			System.out.println(driver.getCurrentUrl());
 			threadsleep(1000);
 		} else {
@@ -455,7 +510,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		System.out.println(curWindow);
 		jsClickNew(modalFinddoctors);
 		threadsleep(5000);
-		if (doctor.equalsIgnoreCase("Lookup")) {
+		if (doctor.equals("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
 				validateWerallySearchanotherWindowmobile(curWindow, "Doctors", doctorsName, 3);
 			else

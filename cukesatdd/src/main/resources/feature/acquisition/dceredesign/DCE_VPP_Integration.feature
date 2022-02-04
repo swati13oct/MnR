@@ -71,10 +71,11 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     And the user clicks on Return to details link on Drug Details page
     And the user verifies the drug information on plan costs tab
 
-    @dce_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP
+    @dce_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP @featureGate
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   | enrollFlag | 
       | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) | Every 3 Months | true       |
+
 
     @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @sanity
     Examples: 
@@ -114,7 +115,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user clicks on DCE button to return to Review Drug cost page
 
-    @vpp_NBA_DCE_Redesign_Integration_AARP @regressionAARP @vbfGate
+    @vpp_NBA_DCE_Redesign_Integration_AARP @regressionAARP @vbfGate @featureGate
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | AARP |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |
