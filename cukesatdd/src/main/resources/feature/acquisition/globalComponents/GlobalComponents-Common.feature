@@ -1092,6 +1092,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | shop/compare/compare-ms.html                                      | MedsupShopCompare:Medsup Shop Compare Page |
       | UHC  | shop/estimate/ms-costs.html                                       | MedsupShopCost:Medsup Shop Cost Page       |
 
+  @F722580
   Scenario Outline: To verify the affiliate link on header for Geo Targeting state <Texas>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -1118,7 +1119,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | Is Multi County2 | <isMultiCounty2> |
     Then user validate affiliate for non-geo target states
 
-    @GeoTarget_Affiliate
+    @GeoTarget_Affiliate123
     Examples: 
       | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
       | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
@@ -1127,3 +1128,72 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
       | UHC  | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+
+  @F722580
+  Scenario Outline: To verify the affiliate link on header for Geo Targeting state <Texas> - <site> -  <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then user validate affiliate link on header for geo target state
+    And the user clicks on browser back button
+    Then user click on "Medicare Advantage Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    When user click on "Search Doctors" link under Tools & Resources
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "When to Enroll" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "How to Enroll" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Changing Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Working Past 65" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Overview of Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Special Needs Plans" link under learn about medicare
+    Then user validate affiliate link on header for geo target state
+    Then the user clicks on browser back button
+    Then user validate affiliate link on header for geo target state
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | path                                                      | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | AARP | profile                                                   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | shop/switch.html                                          | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+
+    @GeoTarget_Affiliate
+    Examples: 
+      | site | state                                                     | code                | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city                 | state1      | isMultiCounty2 | county2          |                  |
+      | UHC  | U.S. Virgin Islands                                       | VI                  | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD            | CONNECTICUT | NO             | Fairfield County |                  |
+      | UHC  | shop/switch.html                                          | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
