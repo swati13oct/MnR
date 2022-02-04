@@ -20,7 +20,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     Then Verify X out of Y provider covered information is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP @regressionAARP @featureGate
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
@@ -74,7 +74,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
 
-    @ProviderSearchCommon_UHC @regressionUHC @sanity
+    @ProviderSearchCommon_UHC @regressionUHC @sanity @featureGate
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current   |
@@ -96,7 +96,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP @regressionAARP @featureGate
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planName                              | planyear |
       |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Patriot (HMO) | current   |
@@ -140,7 +140,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | zipcode | site | plancount | year   |
       |   10001 | AARP |        10 | current |
 
-    @ProviderSearchCommon_UHC @regressionUHC
+    @ProviderSearchCommon_UHC @regressionUHC @featureGate
     Examples: 
       | zipcode | site | plancount | year   |
       |   10001 | UHC  |        10 | current |
@@ -164,7 +164,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP @regressionAARP @featureGate
     Examples: 
       | zipcode | site | plancount | year   |
       |   10001 | AARP |        10 | current |

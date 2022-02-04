@@ -127,6 +127,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 
+	@FindBy(xpath="//div[contains(@id,'planDocuments')]")
+	private WebElement planDocumentSection;
+
 	// Right Rail Element - TFN
 //	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	@FindBy(xpath = "//*[contains(@class,'invoca_swap tel ng-binding')]")
@@ -421,16 +424,20 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate() {
 
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*else
 			checkModelPopup(driver, 10);*/
-		validateNew(planCostsTab);
+		validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 
 	}
 
 	public void openAndValidate(String planType) {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*else
 			checkModelPopup(driver, 10);*/
 
@@ -452,7 +459,11 @@ public class PlanDetailsPage extends UhcDriver {
 			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
 					"Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
-		validateNew(planCostsTab);
+				validateNew(planDocumentSection);
+		/**
+		 * With MCARE change - Plan Cost tab will not be displayed for all plans
+		 * 		validateNew(planCostsTab);
+		 */
 		// note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -1105,9 +1116,10 @@ public class PlanDetailsPage extends UhcDriver {
 		WebElement rider = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/following::label[1]"));
 		// rider.click();
 		jsClickNew(rider);
-		String optionalRiderPremium = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong")).getText()
-				.trim();
+		String optionalRiderPremium = (driver
+				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//p")).getText()
+				.trim()).split(" ")[1];
+		
 		return optionalRiderPremium;
 	}
 
@@ -2148,4 +2160,6 @@ public String GetMonthlyPremiumValue() {
 			Assertion.fail(
 					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT_NextYear+"; Actual - "+CoverageStages_Modal_Catastrophic.getText()+" <<<<<");
 	}
+	
+
 }

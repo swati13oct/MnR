@@ -48,6 +48,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	PlanRecommendationEngineDrugsPage drug = new PlanRecommendationEngineDrugsPage(driver);
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
+	PlanRecommendationEngineSpecialNeedsPage planSelectorSpecialneedspage =  new PlanRecommendationEngineSpecialNeedsPage(driver);
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -180,6 +181,18 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
 	private WebElement headerNavigationBarHomeTab;
+	
+	@FindBy(css = "#modal .modal-inner h2")
+	private WebElement modelStateTitle;
+	
+	@FindBy(css = "#modal .modal-inner p")
+	private WebElement modelStatePara;	
+	
+	@FindBy(css = "#modal .modal-inner span>button")
+	private WebElement modelStateCancelButton;	
+	
+	@FindBy(css = "#modal .modal-inner div[class*='buttonPanel']>button")
+	private WebElement modelStateConfirmButton;	
 
 	// Variables
 
@@ -239,7 +252,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String curID = String.valueOf(Thread.currentThread().getId());
 		scrollToView(headerNavigationBarHomeTab);
 		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		planType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
 		System.out.println("Current Thread ID is - "+curID+" for the flow "+firstRecomPlanName);
@@ -565,6 +578,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		// cancelButton.click();
 		// Assertion.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
 	}
+	
 
 	public void editValue(String section) {
 
@@ -576,6 +590,17 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 					driver);
 			loc.edit_location(zipcode, multi, county);
 			jsClickNew(saveBtn);
+			if(county.toLowerCase().contains("baltimore")) {
+				if(validate(modelStateTitle)) {
+					Assert.assertTrue(modelStateTitle.getText().toLowerCase().contains("zip") && modelStatePara.getText().toLowerCase().contains("reselect"),
+							"Model popup not having warning Messages");
+					validate(modelStateCancelButton);
+					validate(modelStateConfirmButton);
+					jsClickNew(modelStateConfirmButton);
+					threadsleep(3000);
+					planSelectorSpecialneedspage.nospecialneedspage("MD");
+				}
+			}
 			checkContent("location");
 		} else if (section.equalsIgnoreCase("drugs")) {
 			String drugSelect = inputValues.get("Drug Selection");
@@ -706,7 +731,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String curID = String.valueOf(Thread.currentThread().getId());
 		scrollToView(headerNavigationBarHomeTab);
 		RecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		RecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		RecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		CommonConstants.firstRecommentionPlanName.put(curID, firstRecomPlanName);
 		CommonConstants.firstRecommentionplanType.put(curID, planType);
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+RecomPlanName);
@@ -725,7 +750,7 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		String R1PlanType = CommonConstants.firstRecommentionplanType.get(curID);
 		scrollToView(headerNavigationBarHomeTab);
 		editedRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
-		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		editedRecomplanType = plantiles.get(0).findElement(By.cssSelector("div[class*='planNameType']")).getText().trim();
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Name is: "+editedRecomPlanName);
 		System.out.println("Current Thread ID is - "+curID+" Recom Plan Type is: "+editedRecomplanType);
 		Assert.assertNotEquals(R1PlanType, editedRecomplanType, "Original and Edited Recommendation PlanType are same");

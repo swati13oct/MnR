@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 
 public class ProviderSearchCommonStepDefinitionMobile {
@@ -45,6 +49,17 @@ public class ProviderSearchCommonStepDefinitionMobile {
 //		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 		String savedProvider = providerSearchPage.selectsDental();
 		getLoginScenario().saveBean(VPPCommonConstants.SAVED_PROVIDER_RALLY,savedProvider);
+	}
+	
+	@When("^user click on Finish Retun button on rally page navigates to plan details page$")
+	public void userclickonFinishRetunbuttononrallypagenavigatestoplandetailspage() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPageMobile planDetailsPage = providerSearchPage.navigatebacktoPlanDetails();
+			Assertion.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
 	}
 
 }

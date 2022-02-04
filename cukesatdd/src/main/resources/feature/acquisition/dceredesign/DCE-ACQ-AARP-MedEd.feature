@@ -30,7 +30,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
       | Flags | <ZipPage_ZipAdded> |
     And user clicks on continue button in Zip Entry Page
 
-    @dce_MedEdPage_AARP    @regressionAARP @sanity
+    @dce_MedEdPage_AARP    @regressionAARP @sanity @featureGate
     Examples: 
       | site | drug1   | drug2  | drug3   | drug4    | zipCode | GetStartedHeader | DrugListPage_NoDrugs | DrugListPage_DrugsAdded | ZipPage_ZipAdded |
       | AARP | Orkambi | Fanapt | Humalog | Adderall |   80002 | C:E:D            | E:C:D                | E:C:E                   | E:E:E            |

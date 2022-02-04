@@ -26,11 +26,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
+import io.appium.java_client.android.nativekey.PressesKey;
+import io.appium.java_client.windows.PressesKeyCode;
 
 public class CampaignTFNPageMobile extends GlobalWebElements {
 
@@ -116,6 +121,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//span[text()='Search']")
 	public WebElement YahooSearchField;
+	
+	@FindBy(xpath = "//input[contains(@aria-label,'Search')]")
+	public WebElement YahooSearchField2;
 
 	// @FindBy(xpath = "//*[@id='uh-search-button']")
 	// @FindBy(xpath = "//button[contains(@id,'search-button')]")
@@ -137,7 +145,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C)
 	// Plans')]")
 	// @FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
-	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(text(),'Learn More About Medicare Advantage (Part C) Plans')]")
+	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(text(),'Learn More About Medicare Advantage')]")
 	public WebElement YahooSearchResultUHC;
 
 	@FindBy(xpath = "//*[@id='sb_form_q']")
@@ -187,7 +195,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(xpath = "//input[@id='msVppZipCode']")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
@@ -230,7 +238,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
-	@FindBy(xpath = "//button[contains(text(),'View Plans')]")
+	@FindBy(xpath="(//button[contains(text(),'Start application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
 	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
@@ -574,6 +582,106 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
+	
+	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp']//span[@class='uhc-button__text'][normalize-space()='Cancel']")
+	private WebElement cancelMS4FormModal;
+	
+	@FindBy(xpath = "//a[@class='backToPrevPage']")
+	private WebElement backToPreviousDG;
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLE;
+	
+	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp' and @plancode='F01']//span[@class='uhc-button__text'][normalize-space()='Start Application']")
+	private WebElement startMS4OLE;
+	
+	@FindBy(xpath = "//a[@class='cancel-button modal-link' and normalize-space()= 'Cancel Application']")
+	private WebElement cancelMS3OLE;
+
+	@FindBy(xpath = "//a[@class='cta-button action_end_session' and normalize-space()= 'Cancel Application']")
+	private WebElement cancelMS3OLEModal;
+	
+	@FindBy(xpath = "//a[@class='uhc-link-button plandetails view-more-link' and @plancode='F01']")
+	private WebElement ms4ViewPlanDetails;
+	
+	@FindBy(xpath = "//*[@id='ip-no']")
+	private WebElement surveyPopupNoBtn;
+	
+	@FindBy(xpath = "//button[@aria-describedby='View plan details Plan F']")
+	private WebElement ms3ViewPlanDetails;
+	
+	@FindBy(xpath = "(//a[contains(@class,'back-to-plans')])[1]")
+	private WebElement ms4BackToPlanList;
+	
+	@FindBy(xpath = "//a[@class='back-to-plans resTopPadding10 back-arrow-left leftPadding20' and normalize-space()='Back to all plans']")
+	private WebElement ms3BackToAllPlans;
+	
+	public void decisionGuidenotPresent() {
+		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		// driver.navigate().back();
+
+	}
+	
+	public void ms3ViewPlanDetails() {
+
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		validate(ms3ViewPlanDetails);
+		jsClickNew(ms3ViewPlanDetails);
+
+	}
+	
+	public void ms4BackToPlanList() {
+
+		jsClickNew(ms4BackToPlanList);
+	}
+	
+	public void ms3BackToAllPlans() {
+
+		jsClickNew(ms3BackToAllPlans);
+	}
+	
+	public void ms4ViewPlanDetails() {
+
+		validate(ms4ViewPlanDetails);
+		jsClickNew(ms4ViewPlanDetails);
+	}
+	
+	public void clickStartMS4Ole() {
+		jsClickNew(startMS4OLE);
+	}
+	
+	public void clickStartMS3Ole() {
+		jsClickNew(startMS3OLE);
+	}
+	
+	public void backtoPreviousDGMedsup3() {
+		validate(backToPreviousDG);
+		jsClickNew(backToPreviousDG);
+	}
+	
+	public void clickCancelMS4Ole() {
+		validate(cancelMS4FormModal);
+		jsClickNew(cancelMS4FormModal);
+	}
+	
+	public void clickCancelMS3Ole() {
+		validate(cancelMS3OLE);
+		jsClickNew(cancelMS3OLE);
+		validate(cancelMS3OLEModal);
+		jsClickNew(cancelMS3OLEModal);
+	}
+	
+	public void backtoPreviousDGMedsup4() {
+		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
+		jsClickNew(cancelMS4FormModal);
+		// driver.navigate().back();
+	}
 
 	public void googleSearchUHC() {
 		try {
@@ -606,9 +714,11 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public void YahooSearchUHC() {
 
 		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
-		YahooSearchField.sendKeys("UHC Medicare Advantage Plan");
-		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
-		YahooSearchBttn.click();
+		jsClickNew(YahooSearchField);
+	    sendkeysMobile(YahooSearchField2, "UHC Medicare Advantage Plan");
+//		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+//		jsClickNew(YahooSearchBttn);
+	    ((PressesKey) driver).pressKey(new KeyEvent(AndroidKey.ENTER));
 		System.out.println("Yahoo Search entered for : UHC Medicare Advantage Plan");
 
 		CommonUtility.waitForPageLoad(driver, YahooSearchResultUHC, 30);
@@ -618,9 +728,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			System.out.println("yahoo search result not found");
 			Assertion.assertFalse("no yahoo search result found", false);
 		}
-		YahooSearchResultUHC.click();
+		jsClickNew(YahooSearchResultUHC);
 		System.out.println("Yahoo Results - UHC Medicare Advantage Plan - Link Clicked");
-		switchToNewTab();
+	//	switchToNewTab();
 		CheckPageLoad();
 	}
 
@@ -735,7 +845,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".back-to-plans")
 	private WebElement backToPlanResultsLink;
-
+	
+	@FindBy(xpath = "//a[contains(@class,'back-to-portfolio')]")
+	private WebElement backToPlanResultsLink2;
+	
 	/**
 	 * For mobile view plans link for a plan type are not seen on the same page
 	 * while viewing plans, hence navigating back. For medsupp 3.0, back to plan
@@ -744,14 +857,16 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	 * homepage.
 	 */
 	public void navigateBackToPlanResultPage() {
-		if (validate(backToPlanResultsLink)) {
+		if (validate(backToPlanResultsLink) || validate(backToPlanResultsLink2)) {
 			jsClickNew(backToPlanResultsLink);
 		} else if (validate(msPlansHeading)) {
 //			driver.navigate().back();
 			String currentURL = driver.getCurrentUrl();
-			if (currentURL.contains("health-plans.html#/plan-summary")) {
-				String newURL = currentURL.replace("health-plans.html#/plan-summary", "health-plans.html");
-				driver.navigate().to(newURL);
+			if (currentURL.contains("plan-summary")) {
+				if(currentURL.contains("aarp"))
+					driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/health-plans.html");
+				else
+					driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/health-plans.htm");
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
@@ -789,7 +904,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile ViewPlanSummary(String planType) {
 		CheckPageLoad();
-//		CheckiPerseptions();
+		CheckiPerseptions();
 
 		navigateBackToPlanResultPage();
 
@@ -954,10 +1069,23 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollButton);
 		waitForPageLoadSafari();
 		// }
+	//	CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		sleepBySec(2);
+		try {
+			if(ms4BackToPlanList.isDisplayed()) {
+				jsClickNew(ms4BackToPlanList);
+			}
+			if(msPlansHeading.isDisplayed()) {
+				driver.navigate().back();
+			}
+		}
+		catch (Exception e) {
+			
+		}
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -982,7 +1110,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyArticlePage(String zipcode) throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ArticlesEnrollButton);
 		waitForPageLoadSafari();
 		// }
@@ -1024,10 +1152,23 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : " + planType, false);
 		}
 	}
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to
+																			// CommonUtility.waitForPageLoadNew as we're
+																			// not trying to fail the test if it isn't
+																			// found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
 
 	public void validateFederalTFNNo(String TFNXpath, String ExpectedTFNNo) {
 		CheckPageLoad();
-//		CheckiPerseptions();
+		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1039,9 +1180,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 		// for mobile devices the tfn xpath passed from feature file may not work always
 		// for mobile devices - 10/28/2021
-		WebElement ActualTFNelement = null;
-		String TFNXpathMobile = null;
-		try {
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validate(ActualTFNelement);
+/*		try {
 			ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 			if (Objects.nonNull(ActualTFNelement)) {
 				scrollToView(ActualTFNelement);
@@ -1058,7 +1199,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			}
 		}
 
-		validateNew(ActualTFNelement);
+		validateNew(ActualTFNelement); */
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 		// Skipping because of invoca tfn number changes
 		/*
@@ -1095,7 +1236,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		//
 	}
 
-	@FindBy(xpath = "(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
+	@FindBy(xpath = "(//button//span[contains(text(),'View plan') or contains(text(),'Plan Detail')])[2]")
 	private WebElement firstPlanDetailsLinkdce;
 
 	public void NavigateToPlanDetailsdce(String planType) {
@@ -1249,8 +1390,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
-		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-		insuredStatus.click();
+	//	CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+	//	insuredStatus.click();
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -1260,8 +1401,8 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		firstName.sendKeys(FirstName);
-		lastName.sendKeys(LastName);
+		sendkeysMobile(firstName,FirstName);
+		sendkeysMobile(lastName,LastName);
 		jsClickNew(nextButton);
 		/*
 		 * Thread.sleep(2000); String ResumeKey = resumeKey.getText();
@@ -1429,7 +1570,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 			throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(ShopEnrollMedsuppButton);
 		waitForPageLoadSafari();
 
@@ -1466,10 +1607,10 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//input[@id='zipcodeTxt']")
+	@FindBy(xpath = "//input[@id='zip-code']")
 	private WebElement ZipcodePharmacy;
 
-	@FindBy(xpath = "//select[@id='plan-type']")
+	@FindBy(xpath = "//select[@id='plans']")
 	private WebElement seletPlandropdown;
 
 	@FindBy(xpath = "(//button/span)[1]")
@@ -1477,6 +1618,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	private WebElement PreferredRetailedPharmacy;
+	
+	@FindBy(xpath = "//button[contains(@dtmid, 'pharmacy')] //span[normalize-space()='Search']")
+	private WebElement searchPharmacy;
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county, String planName)
 			throws InterruptedException {
@@ -1496,7 +1640,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
-		jsClickNew(ContinuePharmacy);
+		jsClickNew(searchPharmacy);
 		try {
 			Thread.sleep(5000);
 		} catch (Exception e1) {
@@ -1542,7 +1686,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		jsClickNew(decisionGuideClick);
 	}
 
-	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	@FindBy(xpath = "//a[contains(@class,'uhc-button uhc-button--outlined')]")
 	private WebElement FindAnAgentMedsupp;
 
 	public void clickOnAgentLinkMedSup(String TFNXpath, String ExpecetdTFNNo) {
@@ -1554,11 +1698,16 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
-		while (itr.hasNext()) {
-			String window = itr.next();
-			if (!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
+		if(tabs_windows.size()>1) {
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
 			}
+		}
+		else {
+			
 		}
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1591,8 +1740,13 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		else {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
 		}
-
-		driver.switchTo().window(parentWindow);
+		
+		if(tabs_windows.size()>1) {
+			driver.switchTo().window(parentWindow);
+		}
+		else {
+			driver.navigate().back();
+		}
 	}
 
 	public void openURLNewTabAARP(String url) {

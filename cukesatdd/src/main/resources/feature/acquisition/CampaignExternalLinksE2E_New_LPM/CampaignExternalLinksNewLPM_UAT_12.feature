@@ -18,6 +18,12 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
+
+		@CampaignExternal_Scenario12_AARP @featureGate
+    Examples:
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-prescription-drug-plans.html |
+
     @CampaignExternal_Scenario12_AARP @StageLP
     Examples:
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |
@@ -51,8 +57,8 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
     Then user clicks on view plans and pricing and navigates to VPP
 #    Then user should be navigated on Shop for a plan page
     Then user should be navigated on VPP summary page
-    And the user selects plan year
-      | Plan Year | <planyear> |
+#   And the user selects plan year
+#      | Plan Year | <planyear> |
     Then the user verify TFN on landing pages
       | TFN Xpath| <TFNxpath3> |
       | TFNflag  | <tfnFlag>   |
@@ -60,7 +66,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
 #      | TFN Xpath | <TFNxpath2> |
 #    And the user validates TFN Number on Zipcode component
 #      | TFN Xpath | <TFNxpath4> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user retrieves TFNSessionCookie and Federal and MedSupp TFN on LP
     And the user validates PSC code
       | PSC Code | <pscCode> |
 #    When the user performs plan search using following information using external link

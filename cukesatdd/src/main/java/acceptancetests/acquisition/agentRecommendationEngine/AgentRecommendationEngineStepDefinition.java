@@ -104,7 +104,7 @@ public class AgentRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AREPlanRanking addDrug = new AREPlanRanking(wd);
-		//addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
+		addDrug.DrugsInPlanCompare(inputValues.get("Drugs Names"));
 		//addDrug.DeleteinDCE(inputValues.get("Drugs Names"));
 		//addDrug.returnToPlanCompare();
 		addDrug.checkDeleteAllDrugs();

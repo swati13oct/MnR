@@ -32,10 +32,12 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
+import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class DrugDetailsPageMobile extends UhcDriver {
 
@@ -72,7 +74,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "a[dtmname$='plans in your area']")
 	public WebElement LinkToDrugSummary;
 
-	@FindBy(css = "#drugdetails div>div>a:only-child[class^='uhc-link'][dtmname*='return']")
+	@FindBy(xpath="//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
 
 //	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Edit Your Drug List')]")
@@ -103,7 +105,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "div[class='uhc-card__content'] > div[class*='d-block'] > div > p:nth-child(4) > span")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//*[@id='viewplan']/span[text()='View Plan Details']")
+	@FindBy(xpath="//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(css = "#printdetails")
@@ -179,7 +181,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(css = "#pharmacyfilter > button[class*='searchbutton']")
+	@FindBy(xpath = "//button[contains(@class,'searchbuttonmobile')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(css = "#mailSelectPharmacyBtn0")
@@ -403,8 +405,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
-		PlanNameElement.getText().replaceAll("\u00A00", " ").trim();
+		WebElement PlanNameElement = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
 		} else
@@ -444,6 +445,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(css = "[class^='uhc-modal__content'] button[class$='donebutton']")
 	public WebElement StageInfo_Modal_DoneBtn;
+	
+	@FindBy(xpath = "//button/span[contains(text(), 'Enroll in Plan')]")
+	public WebElement DrugCosts_EnrollInPlanBtn;
 
 	@FindBy(css = "[class^='uhc-modal__header'] button#cancelicon")
 	public WebElement StageInfo_Modal_Close;
@@ -1025,11 +1029,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
 				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
 				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
+				// && validateNew(matchingPharmacyCount)
+				&& validateNew(sortDrpdown) && validateNew(backBtn)
 				&& validateNew(nextBtn)) {
-			System.out.println("Select Pharmacy Modal validated");
+			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
-			Assertion.fail("Select Pharmacy Modal not as expected");
+			Assertion.fail("Select Pharmacy Modal not as expected - DCE Details Page");
 		}
 	}
 
@@ -1180,6 +1185,18 @@ public class DrugDetailsPageMobile extends UhcDriver {
 							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
+	
+	public WelcomePageMobile clickEnrollinPlanbtn() {
+		validateNew(DrugCosts_EnrollInPlanBtn);
+		jsClickNew(DrugCosts_EnrollInPlanBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page displayed ");
+			return new WelcomePageMobile(driver);
+		} else {
+			return null;
+		}
+	}
 
 	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
 		WebElement DrugYouPay = driver.findElement(By.xpath("//*[@buttonid='edityourdrug']//p[contains(text(), '"
@@ -1196,7 +1213,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
 	}
 
-	@FindBy(css = "button[id='plancompare']")
+	@FindBy(xpath = "//a[contains(@dtmname, 'compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
 
 	public ComparePlansPageMobile clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
@@ -2045,10 +2062,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
 
-	@FindBy(css = "[dtmname$='Modal:Drug Cost Details']")
+	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
-	@FindBy(css = "#closeIconId")
+	@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
@@ -2256,9 +2273,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// jsClickNew(DrugCosts_PlanDetailsBtn);
+		sleepBySec(3);
 		scrollToView(DrugCosts_PlanDetailsBtn);
-		DrugCosts_PlanDetailsBtn.click();
+		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		sleepBySec(5);
 		if (driver.getCurrentUrl().contains("details")) {
 			System.out.println("Plan Details Page displayed ");
 			return new PlanDetailsPageMobile(driver);

@@ -29,5 +29,6 @@ public class PharmacySearchCommonConstants {
 	public static final String TEST_SYSTEM_YEAR = "test_system_year";
 	public static final String TEST_SYSTEM_MONTH = "test_system_month";
 	public static final String TEST_PDF_LINK_TEXT_DATE = "test_pdf_link_text_date";
+	public static final String PHARMACY_NAME_OPTIONAL = "pharmacy";
 	
 }

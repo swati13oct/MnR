@@ -1020,6 +1020,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
 		if (vppPlanSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("Vpp Plan Summary Page opened Successfully");
 			Assertion.assertTrue(true);
 		} else

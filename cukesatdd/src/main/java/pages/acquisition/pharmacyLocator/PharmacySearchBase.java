@@ -44,9 +44,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
 		
 		if (distance.equals("1"))
-			distance = distance + " mile";
+			distance = distance + " Mile";
 		else
-			distance = distance + " miles";
+			distance = distance + " Miles";
 
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);

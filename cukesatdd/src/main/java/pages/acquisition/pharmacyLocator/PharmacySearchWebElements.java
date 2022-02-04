@@ -13,10 +13,10 @@ import atdd.framework.UhcDriver;
 
 public class PharmacySearchWebElements extends UhcDriver {
 
-	@FindBy(xpath="//input[@id='zipcodeTxt']")
+	@FindBy(xpath="//input[@id='zip-code']")
 	protected WebElement zipcodeField;
 
-	@FindBy(xpath="//*[@id='zipcode-wrapper']//button[@class='uhc-button']")
+	@FindBy(xpath="//button[@id='search']")
 	protected WebElement searchbtn;
 
 	@FindBy(id = "selectmultycounty_box")
@@ -146,7 +146,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	protected WebElement pharmacyBodyContentSpanish;
 
-	@FindBy(xpath="//select[@id='distance']")
+	@FindBy(xpath="//select[@id='miles']")
 	protected WebElement distanceDropownID;
 
 	@FindBy(xpath = "//div[@class='modal-title']")

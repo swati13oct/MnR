@@ -140,12 +140,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 			if (MRScenario.environment.equals("offline")) {
 				tempUrl=AARP_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(tempUrl+deeplinkUrl);
-				checkModelPopup(driver,45);
+				checkModelPopup(driver,30);
 				
 			} else if (MRScenario.environment.equals("prod")) {
 				tempUrl=AARP_ACQISITION_PROD_PAGE_URL+deeplinkUrl;
 				driver.get(tempUrl+deeplinkUrl);
-				checkModelPopup(driver,45);
+				checkModelPopup(driver,30);
 				
 			} else {
 				tempUrl=AARP_ACQISITION_PAGE_URL;

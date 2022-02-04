@@ -110,7 +110,10 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	//@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	
+	@FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans | UnitedHealthcare']")
+	
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -122,8 +125,9 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement YahooSearchField;
 
 	// @FindBy(xpath = "//*[@id='uh-search-button']")
-	// @FindBy(xpath = "//button[contains(@id,'search-button')]")
-	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	// @FindBy(xpath = "//button[contains(@id,'ybar-search')]")
+	//@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	@FindBy(xpath = "//*[@id='ybar-search']")
 	public WebElement YahooSearchBttn;
 
 	// @FindBy(xpath = "//h3//a[contains(text(),'AARP� Medicare Advantage (Part C)
@@ -165,8 +169,8 @@ public class CampaignTFNPage extends UhcDriver {
 	// "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
 	// @FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
 	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
-	
-	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans']")
+
+	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans - UHC']")
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -386,16 +390,18 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - " + str);
+		
 		/*
-		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
-		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 * String sep = str.contains(",") ? "," : "%2C"; String[] arrOfStr =
+		 * str.split("%2C"); arrOfStr = str.split(sep);
 		 */
+		
 
-		String[] arrStr = str.split(";");
+		
+		String[] arrStr = str.split(";"); 
 		String[] arrOfStr = arrStr[0].split("%2C");
-		/*
-		 * if (str.contains(",")) { arrOfStr = str.split(","); }
-		 */
+		//if (str.contains(",")) { arrOfStr = str.split(","); }
+		
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN;
@@ -423,15 +429,17 @@ public class CampaignTFNPage extends UhcDriver {
 		tfnCookieValues.put("Fed TFN", FedTFN);
 		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
 		System.out.println(tfnCookieValues);
-		return tfnCookieValues;
+		return tfnCookieValues; 
 
+		
 		/*
 		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
 		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
 		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
-		 */
+		 */	
+		}
 
-	}
+	
 
 	public void validatePSCcode(String ExpectedpscCode, String actualPscCode) {
 
@@ -623,22 +631,23 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void BingSearchUHC() {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
-
 		bingSearchField.click();
 		bingSearchField.clear();
 		bingSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
 		System.out.println("Looking for UHC medicare Plans link , please bear with me :) ");
 		System.out.println("Current URL is ==  " + driver.getCurrentUrl());
-		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 30);
-		if (UHCSearchLinkfromBing.isDisplayed())
+		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 20);
+		if (UHCSearchLinkfromBing.isDisplayed()) {
 			System.out.println("Bing search result found");
+		}
 		else {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
 		UHCSearchLinkfromBing.click();
 		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
-	}
+}
+	
 
 	public void navigateToPDPPlans() {
 		(driver.findElement(By.xpath("//a[contains(@dtmname,'PDP:View Plans')]"))).click();
@@ -864,9 +873,8 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	// @FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,
-	// 'display: block'))]")
+	//@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block') or (@style=''))]")
 	private WebElement HomeLogo;
 
 	@FindBy(xpath = "//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
@@ -1770,4 +1778,59 @@ public class CampaignTFNPage extends UhcDriver {
 
 		jsClickNew(ms3BackToAllPlans);
 	}
+	
+	public HashMap<String, String> retrieveTFNcookieLP() {
+		System.out.println("Current URL - " + driver.getCurrentUrl());
+		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
+		System.err.println(cookietfn);
+		String str = cookietfn.toString();
+		System.out.println("TFN Cookie Value - " + str);
+		/*
+		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
+		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 */
+
+		String[] arrStr = str.split(",");
+		/*String[] arrOfStr = arrStr[0].split(";");
+		/*
+		 * if (str.contains(",")) { arrOfStr = str.split(","); }
+		 */
+		String PSC_Code;
+		String FedTFN;
+		String MedSuppTFN;	
+		String SRC_Code;
+
+		/*for (String a : arrOfStr)
+
+		*	System.out.println(a);*/
+		String PSC_Code_Str = arrStr[0];
+		String[] arrStr_1 = PSC_Code_Str.split("=");
+
+		PSC_Code = arrStr_1[1];
+		FedTFN = arrStr[2];
+		MedSuppTFN = arrStr[3];
+		SRC_Code = arrStr[4];
+
+		System.out.println("Campaign PSC code - " + PSC_Code);
+		System.out.println("Source code - " + SRC_Code);
+		System.out.println("Federal TFN - " + FedTFN);
+		System.out.println("MedSupp TFN - " + MedSuppTFN);
+
+		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
+		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
+		tfnCookieValues.put("Fed TFN", FedTFN);
+		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
+		System.out.println(tfnCookieValues);
+		return tfnCookieValues;
+
+		/*
+		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
+		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
+		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
+		 */
+
+	}
+
 }
+

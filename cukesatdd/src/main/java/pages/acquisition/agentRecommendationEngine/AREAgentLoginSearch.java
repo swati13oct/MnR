@@ -90,6 +90,9 @@ public class AREAgentLoginSearch extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(text(),'One')]")
 	private WebElement btnOneHealthCareId;
+	
+	@FindBy(xpath="//*[@id='collapseTwo']//div/label[2]/span[contains(text(),'No')]")
+	private WebElement dataImportNo;
 
 	public void login(String user, String pass) {
 		System.out.println("Clicking on OneHealthIDLogin Button");
@@ -205,7 +208,9 @@ public class AREAgentLoginSearch extends UhcDriver {
 			Assert.assertTrue(countyName.equalsIgnoreCase("Select County"),"County Name not selected");
 		}else {
 			System.out.println("Zipcode and County are selected");
-		}		
+		}
+		threadsleep(3000);
+		dataImportNo.click();
 //		Assertion.assertEquals(email.toLowerCase(), emailId.getText().toLowerCase());
 		cloakIn.click();
 		threadsleep(3000);
