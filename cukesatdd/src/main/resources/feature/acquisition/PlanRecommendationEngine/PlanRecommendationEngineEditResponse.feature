@@ -76,12 +76,12 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
 
     #Then user validate UI and API recommendation rankings in results page
-    @regressionAARP
+    @regressionAARP 
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_Zipcode | E_isMultiCounty | E_county          | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | AARP |   10003 | NO            | New York | PDP           | No             |     33143 | NO              | Miami-Dade County | Yes              | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                     |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_Zipcode | E_isMultiCounty | E_county          | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | UHC  |   10003 | NO            | New York | PDP           | No             |     33143 | NO              | Miami-Dade County | Yes              | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                     |
@@ -129,7 +129,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @sanity
+    @regressionAARP @sanity @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors    | DoctorsName    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName    | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities       |
       | AARP |   10002 | NO            | New York | MAPD          | Medicaid     | Lookup     | Ricky K Hsu MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                |     35035 | YES             | Bibb County | MAPD            | nursing        | Lookup    | Mila H Valdez MD | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Month,1,YES,NO                                  | No,No,No,No                     | Higher                 | both             | Drug Cost, Doctors |
@@ -186,7 +186,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
       | AARP |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Vision,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
       | UHC  |   35035 | Yes           | Bibb County | MA            | nursing      | UHGNetwork | [blank]     | [blank]       | Yes,Yes,Yes,Yes               | Lower                | both           | Vision,Doctors |     10002 | NO              | New York | MA              | chronic        | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
@@ -223,7 +223,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName    | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_doctors | E_DoctorsName    |
       | AARP |   10001 | NO            | New York | MAPD          | Medicaid     | Lookup  | Ricky K Hsu MD | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Lower                | Lookup    | Mila H Valdez MD |
@@ -267,7 +267,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
-    @EditResponsePage_MAPDtoMA @regressionAARP @EditResponsePage_IDKtoPDP
+    @EditResponsePage_MAPDtoMA @regressionAARP @EditResponsePage_IDKtoPDP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
       | AARP |   33143 | NO            | Miami-Dade | MAPD          | Medicaid     | Lookup  | Maria D Rivero MD | NO            | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO             | Yes,Yes,Yes,Yes               | Lower                | MA              |
@@ -321,7 +321,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
       | AARP |   32115 | NO            | Volusia  | MA            | Medicaid     | Lookup  | David B. Auerbach  | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
       | AARP |   10004 | NO            | New York | MA            | Medicaid     | Lookup  | Robert W Fields MD | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Doctors, Health Care Premium | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                     |
 
-    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionUHC
+    @EditResponsePage_MAtoPDP @EditResponsePage_MAtoIDK @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors | DoctorsName        | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
       | UHC  |   32115 | NO            | Volusia  | MA            | Medicaid     | Lookup  | David B. Auerbach  | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,Week,1,YES,NO                                    |
@@ -359,7 +359,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
       | Preference Option | <E_costPreferenceOption> |
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName     | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | AARP |   33143 | NO            | Miami-Dade | PDP           | No             | PDPTOMAPD       | nursing        | Lookup    | Maria D Rivero MD | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,Week,1,YES,NO                                   | No,No,No,No                     | Higher                 |
@@ -403,7 +403,7 @@ Feature: 1.18.5 Plan Recommendation Engine flow - Verify PRE flows with Edit res
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName     | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | AARP |   33143 | NO            | Miami-Dade | PDP           | No             | MA              | nursing        | Lookup    | Maria D Rivero MD | NO              | No,No,No,No                     | Lower                  |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_doctors | E_DoctorsName     | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
       | UHC  |   33143 | NO            | Miami-Dade | PDP           | No             | MA              | nursing        | Lookup    | Maria D Rivero MD | NO              | No,No,No,No                     | Lower                  |
