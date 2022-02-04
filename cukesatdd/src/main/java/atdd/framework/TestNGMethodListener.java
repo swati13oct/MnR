@@ -50,6 +50,8 @@ public class TestNGMethodListener implements IInvokedMethodListener, IAnnotation
 			for (String MicroApp : selectedMicroApps) {
 				String runnerFileName = testMethod.getDeclaringClass().getSimpleName();
 				if (runnerFileName.contains(MicroApp)) {
+					if(runnerFileName.contains("LPM"))
+						continue;
 					annotation.setEnabled(true);
 					selectedRunners.add(runnerFileName);
 					System.out.println("Enabling " + runnerFileName + " for " + MicroApp);
