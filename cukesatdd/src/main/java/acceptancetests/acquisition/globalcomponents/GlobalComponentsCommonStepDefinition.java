@@ -1422,5 +1422,21 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.verifyElementNotPresent();
 	}
+	
+	@Then("^user validate affiliate link on header for geo target state$")
+	public void Verifiy_affiliate_Link() {
+		scenario.log("Changes made on 2/13- Step added for affiliate company name header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.verifiyAffiliatelink();
+	}
+	
+	@Then("^user validate affiliate for non-geo target states$")
+	public void Verifiy_affiliate_Text() {
+		scenario.log("Changes made on 2/13- Step added for affiliate label header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.verifiyAffiliateText();
+	}
 }
 
