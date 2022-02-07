@@ -28,7 +28,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @mededdebug @featureGate
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @mededdebug @featureGate @vbfGate
     Examples:
       | Scenario           | site | geoState    | path                                      | pageName                            | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | Puerto Rico | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -64,7 +64,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     #Then the user come back to Med-ed page 71613
     Then the user click on next article link
 
-    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP 
+    @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP @vbfGate
     Examples:
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -104,7 +104,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState    | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 2_AMP | AARP | Puerto Rico | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @vbfGate
     Examples:
       | Scenario           | site | geoState    | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 2_UMS | UHC  | Puerto Rico | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -139,7 +139,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState    | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 4_AMP | AARP | Puerto Rico | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC @vbfGate
     Examples:
       | Scenario           | site | geoState    | path                                   | pageName    | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 4_UMS | UHC  | Puerto Rico | medicare-education/medicare-costs.html | Cost Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
