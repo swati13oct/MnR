@@ -1,4 +1,4 @@
-@agentRecommendationEngine @ARERegression @regressionAARP @nonProd
+@agentRecommendationEngine @ARERegression @regressionAARP @nonProd  @featureGate
 Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
   @ARE @AREElements @dropdownUI @F439411 @sanity

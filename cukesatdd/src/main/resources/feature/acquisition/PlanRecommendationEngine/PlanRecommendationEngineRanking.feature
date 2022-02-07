@@ -37,7 +37,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
       | AARP |   12345 | NO            | Schenectady | MAPD          | None         | UHGNetwork | [blank]             | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
       | AARP |   12345 | NO            | Schenectady | MAPD          | None         | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                   | Yes,Yes,Yes,Yes               | Higher               | None           | Doctors, Drug Cost |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
       | UHC  |   12345 | NO            | Schenectady | MAPD          | None         | UHGNetwork | [blank]             | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
@@ -77,7 +77,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                |
       | AARP |   12345 | NO            | Schenectady | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Care Premium, None |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                |
       | UHC  |   12345 | NO            | Schenectady | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Care Premium, None |
@@ -98,7 +98,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
       | AARP |   35035 | Yes           | Bibb County | PDP           | Yes            |
@@ -125,7 +125,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP 
+    @regressionAARP  @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county               | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  |
       | AARP |   35035 | Yes           | Bibb County          | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Month,1,YES,NO                                                                  |
@@ -171,7 +171,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
       | AARP |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |
       | AARP |   32111 | No            | Marion | MAPD          | Nursing                  | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       | UHC  |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |
