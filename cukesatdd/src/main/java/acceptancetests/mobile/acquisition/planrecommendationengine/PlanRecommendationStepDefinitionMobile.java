@@ -66,21 +66,15 @@ public class PlanRecommendationStepDefinitionMobile {
 	public static String PREflow = "";
 
 	public void readfeaturedataMobile(DataTable data) {
-//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
 		inputValues = DataTableParser.readDataTableAsMaps(data);
-		/*
-		 * for (int i = 0; i < inputRow.size(); i++) {
-		 * inputValues.put(inputRow.get(i).getCells().get(0),
-		 * inputRow.get(i).getCells().get(1)); }
-		 */
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-
+			//System.out.println("\n\n\n\n\n\n");
 			String curID = String.valueOf(Thread.currentThread().getId());
-			System.out.println("Current Thread ID is - " + curID + " for the flow " + PREflow);
-			// CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			System.out.println("Current Thread ID is - "+curID+" for the flow "+PREflow);
+			//CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
 			CommonConstantsMobile.PRE_FLOW.put(curID, PREflow);
 
 		}
@@ -807,8 +801,8 @@ public void sortBy_No() {
 	@Then("^user views plan details from results page$")
 	public void viewDetails_new_results_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
-		newResultpage.viewPlanInfo(inputValues.get("planInfo"));
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
 	}
 
 	@Then("^user views learn more from results page$")
