@@ -387,6 +387,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		LoadingMobilePage loadingpage = new LoadingMobilePage(wd);
 		loadingpage.loadingresultspage();
 	}
+	
+	@Then("^user validate elements in PRE results page$")
+   	public void elements_new_results_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		planSelectorNewResultspage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+   	}
 
 	@Then("^user validate recommendations in results page mobile$")
 	public void view_recommendations_results_page_mobile(DataTable givenAttributes) {
