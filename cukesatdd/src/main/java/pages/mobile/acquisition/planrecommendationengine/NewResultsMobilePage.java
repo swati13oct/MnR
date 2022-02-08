@@ -103,6 +103,9 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(xpath = ".//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]")
 		private List<WebElement> plantiles;
 		
+		@FindBy(css = "li.planTileGrid")
+		private List<WebElement> plantiles1;
+		
 		@FindBy(css = "div.modal-inner button[class*='modal-close']")
 		private WebElement modelCloseICon;
 		
@@ -358,8 +361,10 @@ public class NewResultsMobilePage extends UhcDriver {
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
-		covered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'displayDrugsUI')]//span[contains(@class,'covered')])["+planIndex+"]")).size();
-		nonCovered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'displayDrugsUI')]//span[contains(@class,'non-covered'])["+planIndex+"]")).size();
+		covered = plantiles1.get(planIndex-1)
+				.findElements(By.cssSelector("div[class*='displayDrugsUI'] span[class^='covered']")).size();
+		nonCovered = plantiles1.get(planIndex-1)
+				.findElements(By.cssSelector("div[class*='displayDrugsUI'] span[class^='non-covered']")).size();
 		System.out.println("Validating Drug Coverage...");
 		if (drugStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all drugs covered for a plan");
@@ -368,6 +373,12 @@ public class NewResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all drugs covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
+			if (!planName.toUpperCase().contains("PATRIOT"))
+				Assert.assertTrue(
+						validate(plantiles.get(planIndex)
+								.findElement(By.cssSelector("div[class*='displayDrugsUI'] a.buttonLink"))),
+						"Add Drug link is not available");
+			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
 		}
@@ -606,6 +617,7 @@ public class NewResultsMobilePage extends UhcDriver {
 			// 3 plans per page
 
 				String planName = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//h2//a)["+(planIndex)+"]")).getText().trim();
+				scrollToView(driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//h2//a)["+(planIndex)+"]")));
 				if (planName.contains(uniqueName.trim())) {
 					planAvailable = true;
 					break;
