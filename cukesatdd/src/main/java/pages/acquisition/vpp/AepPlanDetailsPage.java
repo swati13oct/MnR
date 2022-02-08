@@ -351,6 +351,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
 			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 	//replace all the next lines and spaces from the string
 			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 		//replace all the next lines and spaces from the string
+			benefitValueUI= benefitValueUI.replaceAll("\\[~/n~]", "");
+			benefitValueUI= benefitValueUI.replaceAll("\\[~/n~}", "");
+			benefitValueUI= benefitValueUI.replaceAll("\\[~/n~", "");
 			
 			if(key.contains("Passport"))
 				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol
@@ -372,6 +375,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			else if(key.contains("fitness")) {
 				key = key.replace("\n", "").replaceAll("footnote", "");
+			}
+			
+			if(key.contains("initial coverage stage")||columnName.contains("initial coverage stage")) {
+				key.replaceAll("\\s+", "");
+				columnName.replaceAll("\\s+", "");
 			}
 			
 			//removing all the footnote words from the UI string and the superscripts
@@ -560,7 +568,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
 							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
-						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")) {
+						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")||columnName.equalsIgnoreCase("Special Eligibility Requirement")) {
 							if(benefitValueUI.contains(benefitValue)) {
 								flag=true; break;
 							}else {

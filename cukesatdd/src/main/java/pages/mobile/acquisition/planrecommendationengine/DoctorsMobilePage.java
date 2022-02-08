@@ -107,6 +107,9 @@ public class DoctorsMobilePage extends UhcDriver {
 	// Doctors Page Confirmation Modal popup
 	@FindBy(css = "#modal div>button[class*='primary button']")
 	private WebElement modalContinuedoctors;
+	
+	@FindBy(css = "div[class*='edit-list-button'] button")
+	private WebElement modalEditDoctor;
 
 	@FindBy(css = "#modal div[class*='edit']>button")
 	private WebElement modalEditdoctors;
@@ -116,6 +119,9 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	@FindBy(css = "#modal .modal-content .row:nth-of-type(2) uhc-list-item")
 	private List<WebElement> modalDoctorsList;
+	
+	@FindBy(css = "span[class*='zeroProvider']")
+	private List<WebElement> docWarningMsg;
 
 	// Find doctor element and lookup for name
 	@FindBy(css = ".list-item-content")
@@ -175,22 +181,15 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public void doctorlookup(String search, int count) {
-		String curdriverhandle = driver.getWindowHandle();
-		modalFinddoctors.click();
-		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		threadsleep(3000);
+		if(validate(modalEditDoctor))
+			jsClickNew(modalEditDoctor);
+		jsClickNew(modalFinddoctors);
+		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, count);
 		threadsleep(5000);
-		// Changing the count for multiple doc with : separated
-		if (search.contains(":")) {
-			count = search.split(":").length;
-		}
-		confirmationProviderResults = getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
-		if (count > 2 && !search.contains(":")) {
-			removeDoctors();
-			count = count - 1;
-			confirmationProviderResults = getConfimationPopupResults(count);
-		}
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 	}
 
 	public void doctorModellookupElements() {
@@ -227,6 +226,23 @@ public class DoctorsMobilePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	public void addZeroProviders(String doctorsName) {
+		jsClickNew(doctorLookupOption);
+		System.out.println("Lookup Type Clicked");
+		jsClickNew(continueBtn);
+		providerlookup(doctorsName, 1);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[appearance*='secondary']")));
+		threadsleep(2000);
+		String Msg1 = docWarningMsg.get(0).getText().trim(); //Added for Feb. feature
+		String Msg2 = docWarningMsg.get(1).getText().trim();
+		Assert.assertTrue(Msg1.contains("Edit your list"),"Edit your list is not displaying in Doctor popup"); 
+		Assert.assertTrue(Msg2.contains("Continue"),"Continue is not displaying in Doctor popup");
+		threadsleep(2000);
+		jsClickNew(modalContinuedoctors);
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+	}
 
 	public ArrayList<String> getConfimationPopupResults(int count) {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
@@ -242,6 +258,26 @@ public class DoctorsMobilePage extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 		return confirmationResults;
+	}
+	
+	public void editdoctorspageFunctional(String doctor, String doctorsName, String multiDoctor, String status) {
+		System.out.println("Doctor Page Functional Operations");
+		if (status.toUpperCase().contains("POSITIVE")) {
+			doctorspageOptions(doctor);
+			System.out.println("\n\nDoctor :"+doctor+"\n\n");
+			jsClickNew(continueBtn);
+			if (doctor.equalsIgnoreCase("Lookup")) {
+				if (multiDoctor.equalsIgnoreCase("YES"))
+					doctorlookup(doctorsName, 3);
+				else
+					doctorlookup(doctorsName, 1);
+			}
+		} else {
+			if (doctor.isEmpty()) {
+				jsClickNew(continueBtn);
+				mobileUtils.mobleErrorValidation(page);
+			}
+		}
 	}
 
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
@@ -264,7 +300,7 @@ public class DoctorsMobilePage extends UhcDriver {
 					 */
 					driver.switchTo().window(window);
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  )
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline")  || env.equalsIgnoreCase("offline-prod"))
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
 								"Prod Connected to Incorrect Rally");
 					else
