@@ -752,6 +752,7 @@ public class VisitorProfilePage extends UhcDriver {
             }
             jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
             waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
             CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
         } catch (Exception e) {
