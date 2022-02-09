@@ -166,37 +166,37 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#selectaPharmacyHeader")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(css = "#cancelicon")
+	@FindBy(xpath = "//*[contains(@id,'cancelicon')]")
 	public WebElement selectPharmacyModalCloseBtn;
 
-	@FindBy(css = "div[class*='changepharmacy'] h3 > span")
+	@FindBy(xpath="//*[contains(@class,'modal__content')]//*[contains(text(),'Current Pharmacy')]")
 	public WebElement selectedPharmacyLink;
 
-	@FindBy(css = "#milesDropdown")
+	@FindBy(xpath = "//*[contains(@id,'milesDropdown')]")
 	public WebElement distanceDrpDown;
 
 	@FindBy(xpath = "//*[@id='pharmacyfilter']/div[1]/label")
 	public WebElement distanceLable;
 
-	@FindBy(css = "#pharmacy-zip-filter")
+	@FindBy(xpath = "//*[contains(@id,'pharmacy-zip-filter')]")
 	public WebElement pharmacyZipcodeSearch;
 
 	@FindBy(xpath = "//button[contains(@class,'searchbuttonmobile')]")
 	public WebElement pharmacySearchBtn;
 
-	@FindBy(css = "#mailSelectPharmacyBtn0")
+	@FindBy(xpath = "//span[contains(text(),'Select ')]")
 	public WebElement preferredMailPharmacy;
 
 	@FindBy(css = "#optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(css = "div[class*='changepharmacy'] [class^='uhc-list'][role='tabpanel']")
+	@FindBy(xpath="//*[(@role='tabpanel' or @role='list') and contains(@class, 'uhc-list')]")
 	public WebElement pharmacyListSection;
 
-	@FindBy(css = "div[class*='changepharmacy'] div[class*='mobile-filter']")
+	@FindBy(xpath = "//*[contains(@id,'matchingLbl')]")
 	public WebElement matchingPharmacyCount;
 
-	@FindBy(css = "#sortDropdown")
+	@FindBy(xpath = "//*[contains(@id,'sortDropdown')]")
 	public WebElement sortDrpdown;
 
 	@FindBy(css = "#paginationBackBtn")
@@ -903,15 +903,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
 		sendkeysMobile(PharmacyFilterTxtBx, filterText);
-		System.out.println("Filter text entered : " + filterText);
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
-		System.out.println("Apply button clicked for filter text" + filterText);
+		System.out.println("FIlter text entered : "+filterText);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
+		System.out.println("Apply button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
-			System.out.println("Pharmacy Name : " + PharmacyName.getText());
-			if (!PharmacyName.getText().contains(filterText)) {
-				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "
-						+ PharmacyName + "  Filter Text : " + filterText);
+			System.out.println("Pharmacy Name : "+PharmacyName.getText());
+			if(!PharmacyName.getText().contains(filterText)) {
+				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
 			}
 		}
 		System.out.println("All Pharmacy have filter text");
