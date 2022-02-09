@@ -849,20 +849,22 @@ public class NewResultsMobilePage extends UhcDriver {
 
 	public void verifySNPdata(String planName, String snpName, String snpStatus) {
 		int planIndex = findPlan(planName);
-		String snpText = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')])["+planIndex+"]")).getText()
+		String snpText = plantiles1.get(planIndex-1).findElement(By.cssSelector("*[class*='special-needs-ul']")).getText()
 				.trim();
 		Assert.assertTrue(snpText.contains(snpName), "SNP details not found in plan - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
-		covered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')]//span[contains(@class,'covered')])["+planIndex+"]")).size();
-		nonCovered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')]//span[contains(@class,'non-covered')])["+planIndex+"]")).size();
+		covered = plantiles1.get(planIndex-1)
+				.findElements(By.cssSelector("*[class*='special-needs-ul'] span[class^='covered']")).size();
+		nonCovered = plantiles1.get(planIndex-1)
+				.findElements(By.cssSelector("*[class*='special-needs-ul'] span[class^='non-covered']")).size();
 		System.out.println("Validating SNP Coverage...");
 		if (snpStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered.");
-			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered");
 		} else if (snpStatus.toLowerCase().contains("false")) {
-			Assert.assertTrue(covered < 1, "Mismatch in Covered.");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered.");
+		} else if (snpStatus.toLowerCase().contains("noicon")) {
+			System.out.println("No Coverage Icon for Non-SNP plans");
 		} else {
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be No coverage icon");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be No coverage icon");
