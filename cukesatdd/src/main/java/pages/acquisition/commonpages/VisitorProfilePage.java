@@ -1556,6 +1556,7 @@ public class VisitorProfilePage extends UhcDriver {
 			txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
 			jsClickNew(chkAttest);
 			jsClickNew(btnNonMemViewDrugsAndDocs);
+			sleepBySec(15);
 			waitforElementNew(savedDrugsAndDoctorsHeader);
 			break;
 
@@ -1576,7 +1577,8 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void clickOnMSPlanDetailsPage(String planName) {
 	    //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
-	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
+	    CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
 		jsClickNew(btnMSPlanDetails);
 		waitforElementNew(lnkbackToProfile);
 	}

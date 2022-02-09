@@ -48,7 +48,7 @@ Feature: 1.09. ACQ- Shopper Profile
     @team-e @regressionSPTeamE @featureGate
     Examples:
       | username | password       | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName | planName                             | zipcode | county          | drugNames | providers | pcps |
-      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 3b2db19f-6e92-49ef-bcf0-b6d1406d1a2c | [blank]          | AARP Medicare Advantage Plan 1 (HMO) | 10010   | New York County | no        | no        | no   |
+      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 3b2db19f-6e92-49ef-bcf0-b6d1406d1a2c | [blank]          | AARP Medicare Advantage Plan 1 (HMO) | 36132   | New York County | no        | no        | no   |
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples:
