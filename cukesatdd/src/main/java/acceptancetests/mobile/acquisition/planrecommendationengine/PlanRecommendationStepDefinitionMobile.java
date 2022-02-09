@@ -66,21 +66,15 @@ public class PlanRecommendationStepDefinitionMobile {
 	public static String PREflow = "";
 
 	public void readfeaturedataMobile(DataTable data) {
-//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
 		inputValues = DataTableParser.readDataTableAsMaps(data);
-		/*
-		 * for (int i = 0; i < inputRow.size(); i++) {
-		 * inputValues.put(inputRow.get(i).getCells().get(0),
-		 * inputRow.get(i).getCells().get(1)); }
-		 */
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-
+			//System.out.println("\n\n\n\n\n\n");
 			String curID = String.valueOf(Thread.currentThread().getId());
-			System.out.println("Current Thread ID is - " + curID + " for the flow " + PREflow);
-			// CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
+			System.out.println("Current Thread ID is - "+curID+" for the flow "+PREflow);
+			//CommonConstants.PRE_FLOW = new LinkedHashMap<String,String>();
 			CommonConstantsMobile.PRE_FLOW.put(curID, PREflow);
 
 		}
@@ -387,6 +381,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		LoadingMobilePage loadingpage = new LoadingMobilePage(wd);
 		loadingpage.loadingresultspage();
 	}
+	
+	@Then("^user validate elements in PRE results page$")
+   	public void elements_new_results_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		planSelectorNewResultspage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+   	}
 
 	@Then("^user validate recommendations in results page mobile$")
 	public void view_recommendations_results_page_mobile(DataTable givenAttributes) {
@@ -681,6 +683,14 @@ public class PlanRecommendationStepDefinitionMobile {
 		prioritiesMobile.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
 		prioritiesMobile.continuePriority();
 	}
+	
+	@Then("^user Filter SNP Plantype and validate CSNP Plans Ranking in PRE results page$")
+	public void csnp_ranking(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.sortByFuncWithoutVerify(inputValues.get("Sort PlanType"));
+		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
+	}
 
 	@Then("^user validate elements in priorities page$")
 	public void user_validate_prioritiesElements() {
@@ -696,12 +706,43 @@ public class PlanRecommendationStepDefinitionMobile {
 		newResultpage.validateSortByElements();
 	}
 
-	@Then("^user validates Sort By elements visibility PRE-Result page$")
-	public void sortBy_Visibility(DataTable givenAttributes) {
-		readfeaturedataMobile(givenAttributes);
-		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
-		newResultpage.optionVisibility(inputValues.get("Visibility Info"));
+@Then("^user navigates to PRE doctorpage to add providers$")
+public void addDoctorLink() {
+	NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	planSelectorNewResultspage.addDoctorsLink();
+}
+
+@Then("^user navigates to PRE doctorpage to edit providers$")
+public void editDoctorLink() {
+	NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	planSelectorNewResultspage.editDoctorsLink();
+}
+
+@Then("^user updating providers to PRE doctorpage$")
+public void providerUpdate(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	DoctorsMobilePage doc = new DoctorsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
+			inputValues.get("Multi Doctor"));
+}
+
+@And("^user edit doctors in doctors page$")
+public void edit_doctor_page(DataTable givenAttributes) throws Throwable {
+	readfeaturedataMobile(givenAttributes);
+	DoctorsMobilePage planSelectorDoctorspage =  new DoctorsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	String doctor = inputValues.get("Doctors");
+	String status = "Positive_NextPageName";
+	if (!(doctor.isEmpty())) {
+		planSelectorDoctorspage.editdoctorspageFunctional(doctor,inputValues.get("Doctors Search Text"),inputValues.get("Multi Doctor"),status);
 	}
+}
+
+@Then("^user validates Sort By elements visibility PRE-Result page$")
+public void sortBy_Visibility(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.optionVisibility(inputValues.get("Visibility Info"));
+}
 
 	@Then("^user removed filtered planType and Check Breadcrumbs in PRE-Result page$")
 	public void sortBy_Remove() {
@@ -730,7 +771,20 @@ public class PlanRecommendationStepDefinitionMobile {
 		newResultpage.validateDrugInfo(inputValues.get("DrugInfo"), "tile");
 	}
 
-	@Then("^user validate doctors info in PRE results page$")
+@And("^user selects empty doctors in doctors page$")
+public void zeroDoctor_doctor_page(DataTable givenAttributes) throws Throwable {
+    readfeaturedataMobile(givenAttributes);
+    DoctorsMobilePage planSelectorDoctorspage =  new DoctorsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+    planSelectorDoctorspage.addZeroProviders(inputValues.get("Doctors Search Text"));
+ }
+
+@Then("^user validates Sort By dropdown will not display in UI PRE-Result page$")
+public void sortBy_No() {
+	NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+	planSelectorNewResultspage.validateNoSortByElements();
+}
+
+@Then("^user validate doctors info in PRE results page$")
 	public void doctorDetails_new_results_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
@@ -747,8 +801,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user views plan details from results page$")
 	public void viewDetails_new_results_page_mobile(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
-		newResultpage.viewPlanInfo(inputValues.get("planInfo"));
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
 	}
 
 	@Then("^user views learn more from results page$")

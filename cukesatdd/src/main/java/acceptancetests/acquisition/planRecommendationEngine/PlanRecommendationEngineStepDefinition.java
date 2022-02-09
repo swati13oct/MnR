@@ -1235,7 +1235,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void viewDetails_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
    	}
 	
 	@Then("^user views learn more from results page$")

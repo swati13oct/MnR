@@ -102,6 +102,21 @@ public class NewResultsMobilePage extends UhcDriver {
 
 		@FindBy(xpath = ".//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]")
 		private List<WebElement> plantiles;
+		
+		@FindBy(css = "li.planTileGrid")
+		private List<WebElement> plantiles1;
+		
+		@FindBy(css = "div.modal-inner button[class*='modal-close']")
+		private WebElement modelCloseICon;
+		
+		@FindBy(css = "div.modal-inner .bodyContent p")
+		private WebElement modelPara;
+
+		@FindBy(css = "div.modal-inner div[class*='separatePlanImages']")
+		private WebElement modelImage;
+		
+		@FindBy(css = "div.modal-inner h2#modal-label")
+		private WebElement modelTiltle;
 
 		@FindBy(css = "#modal")
 		private WebElement drugModel;
@@ -197,7 +212,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "div.content h2")
 		private WebElement planNameDetailsPage;
 		
-		@FindBy(xpath = ".//div[contains(concat(' ',normalize-space(@class),' '),' sortBySection ')]//*[@id='plansSorting']")
+		@FindBy(css="div.sortBySection #plansSorting")
 		private WebElement sortByDropdown;
 		
 		@FindBy(css = "div.sortBySection div.applySec>button")
@@ -298,6 +313,21 @@ public class NewResultsMobilePage extends UhcDriver {
 			threadsleep(5000);
 			Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after PlanYear Toggle");
 		}
+		
+		public void verifyDrugWhySeparateMdel(String planName) {
+			int planIndex = findPlan(planName);
+			plantiles.get(planIndex).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+			threadsleep(2000);
+			Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
+					"Why is a separate model not found in plan - " + planName);
+			Assert.assertTrue(modelPara.getText().trim().contains("Part D"),
+					"Why is a separate model not found in plan - " + planName);
+			Assert.assertTrue(modelImage.getText().trim().contains("Supplement"),
+					"Why is a separate model not found in plan - " + planName);
+			validate(modelCloseICon);
+			modelCloseICon.click();
+			threadsleep(2000);
+		}
 
 	public void validateDrugInfo(String drugsInfo, String location) {
 		System.out.println("Validating Drug Info...");
@@ -316,22 +346,24 @@ public class NewResultsMobilePage extends UhcDriver {
 					verifyDrugdataModel(planName, drugName, drugStatus);
 				if (location.toLowerCase().contains("show"))
 					verifyDrugShowMore(planName, drugName);
+				if (location.toLowerCase().contains("whyseparatemodel"))
+					verifyDrugWhySeparateMdel(planName);
 			}
 		}
 	}
 	
 	public void verifyDrugdata(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
+		String drugText = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'displayDrugsUI')])["+planIndex+"]")).getText()
 				.trim();
 		// String drugText =
 		// plantiles.get(planIndex).findElement(drugInfo).getText().trim();
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
-		covered = plantiles.get(planIndex)
+		covered = plantiles1.get(planIndex-1)
 				.findElements(By.cssSelector("div[class*='displayDrugsUI'] span[class^='covered']")).size();
-		nonCovered = plantiles.get(planIndex)
+		nonCovered = plantiles1.get(planIndex-1)
 				.findElements(By.cssSelector("div[class*='displayDrugsUI'] span[class^='non-covered']")).size();
 		System.out.println("Validating Drug Coverage...");
 		if (drugStatus.toLowerCase().contains("true")) {
@@ -341,10 +373,38 @@ public class NewResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all drugs covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all drugs not covered for a plan");
 		} else {
+			if (!planName.toUpperCase().contains("PATRIOT"))
+				Assert.assertTrue(
+						validate(plantiles.get(planIndex)
+								.findElement(By.cssSelector("div[class*='displayDrugsUI'] a.buttonLink"))),
+						"Add Drug link is not available");
+			threadsleep(3000);
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero drugs");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero drugs");
 		}
 
+	}
+	
+	public void csnRanking(String snpOption) {
+		String FirstplanName;
+		String SecondplanName;
+		FirstplanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		SecondplanName = plantiles.get(1).findElement(By.cssSelector("h2>a")).getText().trim();
+		if (snpOption.contains("nursing") || snpOption.contains("Medicaid")) {
+			Assert.assertTrue(FirstplanName.contains("Silver"), "FirstplanName is not CSNP Silver Plan");
+			Assert.assertTrue(SecondplanName.contains("D-SNP"), "SecondplanName is not D-SNP Plan");
+		} else {
+			Assert.assertTrue(FirstplanName.contains("Gold"), "FirstplanName is not CSNP Gold Plan");
+			Assert.assertTrue(SecondplanName.contains("Silver"), "SecondplanName is not CSNP Silver Plan");
+		}
+	}
+	
+	public void sortByFuncWithoutVerify(String plan) {
+		System.out.println("Sorting  Options: " + plan);
+		String options[] = plan.split(",");
+		for (int i = 0; i < options.length; i++) {
+			applySort(options[i]);
+		}
 	}
 	
 	public void validateNoSortByElements() {
@@ -353,7 +413,6 @@ public class NewResultsMobilePage extends UhcDriver {
 		System.out.println("Current URL : " + currentPageUrl);
 		scrollToView(Home);
 		threadsleep(2000);
-		scrollToView(sortByDropdown);
 		Assert.assertFalse(validate(sortByDropdown), "SortBy Dropdown is displaying");
 	}
 	
@@ -393,6 +452,38 @@ public class NewResultsMobilePage extends UhcDriver {
 			checkUncheck(options[i], select);
 			threadsleep(1000);
 		}
+	}
+	
+	public void addDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Adding doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				pagePreviousButton.click();
+				threadsleep(2000);
+			}
+		}
+		jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] a.buttonLink")));
+		threadsleep(3000);
+	}
+	
+	public void editDoctorsLink() {
+		threadsleep(5000);
+		System.out.println("Editing doctors from PRE Result page");
+		String pageCount1 = pagenoLabel.getText().trim();
+		int currentPage = Integer
+				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+		if (currentPage != 1) {
+			for (int c = 1; c < currentPage; c++) {
+				jsClickNew(pagePreviousButton);
+				threadsleep(2000);
+			}
+		}
+		jsClickNew(plantiles.get(0).findElement(By.cssSelector("div[class*='provider'] button[dlassetid*='editDoc']")));
+		threadsleep(3000);
 	}
 	
 	public void checkUncheck(String checkOption, boolean select) {
@@ -486,11 +577,14 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public void verifyDrugShowMore(String planName, String drugName) {
 		int planIndex = findPlan(planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showAllDrugsId']")).click();
-		String drugText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI']")).getText()
+		System.out.println("\nPlan Index :"+planIndex);
+		WebElement showMore = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//button[contains(@id,'showAllDrugsId')])["+planIndex+"]"));
+		scrollToView(showMore);
+		jsClickNew(showMore);
+		String drugText = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'displayDrugsUI')])["+planIndex+"]")).getText()
 				.trim();
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in plan - " + planName);
-		plantiles.get(planIndex).findElement(By.cssSelector("button[id*='showLessDrugsId']")).click();
+		jsClickNew(driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//button[@id='showLessDrugsId'])["+planIndex+"]")));
 	}
 	
 	public void verifyDoctorShowMore(String planName, String doctorName) {
@@ -506,7 +600,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		System.out.println("Finding a Plan...");
 		waitforResultsPage();
 		String pageCount1 = pagenoLabel.getText().trim();
-		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if(currentPage != 1) {
 			for(int c = 1; c < currentPage; c++) {
 				pagePreviousButton.click();
@@ -518,21 +612,22 @@ public class NewResultsMobilePage extends UhcDriver {
 		// int totalPlans = plantiles.size();
 //		String pageCount1 = pagenoLabel.getText().trim();
 		int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
-		int i = 1, planIndex = 0;
+		int i = 1, planIndex = 1;
 		do {
 			// 3 plans per page
-			for (int k = 0; k < 3; k++) {
-				String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
+
+				String planName = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//h2//a)["+(planIndex)+"]")).getText().trim();
+				scrollToView(driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//h2//a)["+(planIndex)+"]")));
 				if (planName.contains(uniqueName.trim())) {
 					planAvailable = true;
 					break;
 				}
 				planIndex++;
-			}
+				
 			if (i == totalPage || planAvailable) {
 				break;
 			}
-			pageNextButton.click();
+			jsClickNew(pageNextButton);
 			threadsleep(2000);
 			i++;
 		} while (i <= totalPage);
@@ -627,13 +722,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		for (int i = 1; i <= totalPage; i++) {
 			pageCount1 = pagenoLabel.getText().trim();
 			int currentPage = Integer
-					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("page", ""));
+					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 			Assert.assertEquals(i, currentPage, "Page count is mismatch after pagenation");
 			if (i == totalPage) {
 				Assert.assertTrue(validate(pageNextButtonDisabled, 60), " Next button Enabled in pagination");
 //				Assert.assertTrue(returnToBeginning.getText().contains("Return to beginning"),"Invalid Return to beginning Text");
 			} else {
-				pageNextButton.click();
+				jsClickNew(pageNextButton);
 				threadsleep(2000);
 			}
 		}
@@ -660,22 +755,23 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public void verifyDoctordata(String planName, String doctorName, String doctorStatus) {
 		int planIndex = findPlan(planName);
-		String doctorText = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='providerSection']"))
+		String doctorText = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'providerSection'])["+planIndex+"]"))
 				.getText().trim();
-		Assert.assertTrue(doctorText.contains(doctorName), "Doctor details not found in plan - " + planName);
+		Assert.assertTrue(doctorText.toLowerCase().contains(doctorName.toLowerCase()),
+				"Doctor details not found in plan - " + planName);
 		// Either all True or all False Doctors for a plan
 		int covered = 0, nonCovered = 0;
-		covered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("div[class*='providerSection'] span[class^='covered']")).size();
-		nonCovered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("div[class*='providerSection'] span[class^='non-covered']")).size();
+		covered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[class*='providerSection']//span[contains(@class,'covered')])["+planIndex+"]")).size();
+		nonCovered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[contains(@class,'providerSection')]//span[contains(@class,'non-covered')])["+planIndex+"]")).size();
 		System.out.println("Validating Doctor Coverage...");
 		if (doctorStatus.toLowerCase().contains("true")) {
 			// Below is the Text to be validated
 			if (doctorName.toLowerCase().contains("Access to doctors".toLowerCase())
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
-					|| doctorName.toLowerCase().contains("any provider".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())
+					|| doctorName.toLowerCase().contains("unitedhealthcare network".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -693,7 +789,9 @@ public class NewResultsMobilePage extends UhcDriver {
 					|| doctorName.toLowerCase().contains("Access to in-network".toLowerCase())
 					|| doctorName.toLowerCase().contains("local or National".toLowerCase())
 					|| doctorName.toLowerCase().contains("any provider".toLowerCase())
-					|| doctorName.toLowerCase().contains("do not provide".toLowerCase())) {
+					|| doctorName.toLowerCase().contains("do not include".toLowerCase())
+					|| doctorName.toLowerCase().contains("provider nation".toLowerCase())
+					|| doctorName.toLowerCase().contains("unitedhealthcare network".toLowerCase())) {
 				Assert.assertTrue(
 						doctorText.toLowerCase().replace(" ", "").contains(doctorName.toLowerCase().replace(" ", "")),
 						"Doctor Description is Invalid in plan - " + planName);
@@ -706,6 +804,13 @@ public class NewResultsMobilePage extends UhcDriver {
 			}
 			Assert.assertTrue(covered < 1, "Mismatch in Covered. Make all Doctors covered for a plan");
 			Assert.assertTrue(nonCovered > 0, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
+		} else if (doctorStatus.toLowerCase().contains("mscoverage")) {
+			Assert.assertTrue(
+					doctorText.toLowerCase().replace("\n", "")
+							.contains(doctorName.toLowerCase() + "Accept Medicare Patient".toLowerCase()),
+					"Doctor details Invalid in plan - " + planName);
+			Assert.assertTrue(covered > 0, "Mismatch in Covered. Make all Doctors covered for a plan");
+			Assert.assertTrue(nonCovered < 1, "Mismatch in Not Covered. Make all Doctors not covered for a plan");
 		} else {
 			Assert.assertTrue(covered == 0, "Mismatch in Covered. Should be Zero Doctors");
 			Assert.assertTrue(nonCovered == 0, "Mismatch in Not Covered. Should be Zero Doctors");
@@ -730,15 +835,13 @@ public class NewResultsMobilePage extends UhcDriver {
 
 	public void verifySNPdata(String planName, String snpName, String snpStatus) {
 		int planIndex = findPlan(planName);
-		String snpText = plantiles.get(planIndex).findElement(By.cssSelector("*[class*='special-needs-ul']")).getText()
+		String snpText = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')])["+planIndex+"]")).getText()
 				.trim();
 		Assert.assertTrue(snpText.contains(snpName), "SNP details not found in plan - " + planName);
 		// Either all True or all False drugs for a plan
 		int covered = 0, nonCovered = 0;
-		covered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("*[class*='special-needs-ul'] span[class^='covered']")).size();
-		nonCovered = plantiles.get(planIndex)
-				.findElements(By.cssSelector("*[class*='special-needs-ul'] span[class^='non-covered']")).size();
+		covered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')]//span[contains(@class,'covered')])["+planIndex+"]")).size();
+		nonCovered = driver.findElements(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(@class,'special-needs-ul')]//span[contains(@class,'non-covered')])["+planIndex+"]")).size();
 		System.out.println("Validating SNP Coverage...");
 		if (snpStatus.toLowerCase().contains("true")) {
 			Assert.assertTrue(covered > 0, "Mismatch in Covered.");
@@ -753,6 +856,7 @@ public class NewResultsMobilePage extends UhcDriver {
 	}
 	
 	public void viewPlanInfo(String planInfo) {
+		threadsleep(5000);
 		System.out.println("Navigating Plans Info...");
 		String planName = "", planAction = "";
 		String[] planDetails = planInfo.split(",");
@@ -761,15 +865,15 @@ public class NewResultsMobilePage extends UhcDriver {
 		int planIndex = findPlan(planName);
 
 		if (planAction.toLowerCase().contains("link")) {
-			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
-			plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).click();
+			String planFullName = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(concat(' ',normalize-space(@class),' '),' planName ')]//a)["+planIndex+"]")).getText().trim();
+			jsClickNew(driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(concat(' ',normalize-space(@class),' '),' planName ')]//a)["+planIndex+"]")));
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
 		}
 		if (planAction.toLowerCase().contains("viewbutton")) {
-			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
-			plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection>.sub-content button")).click();
+			String planFullName = driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//*[contains(concat(' ',normalize-space(@class),' '),' planName ')]//a)["+planIndex+"]")).getText().trim();
+			jsClickNew(driver.findElement(By.xpath("(.//li[contains(concat(' ',normalize-space(@class),' '),' planTileGrid ')]//div[@class='enrollSection']//button[text()='View Plan '])["+planIndex+"]")));
 			validate(planNameDetailsPage, 60);
 			Assert.assertTrue(planNameDetailsPage.getText().toLowerCase().contains(planFullName.toLowerCase()),
 					"Not navigated to Plan details page");
@@ -781,13 +885,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		String curURL = driver.getCurrentUrl();
 
 		if (learnMore.contains("Advantage"))
-			mapdPlanTypesLearnmoreLink.click();
+			jsClickNew(mapdPlanTypesLearnmoreLink);
 		if (learnMore.contains("Supplement"))
-			madsupPlanTypesLearnmoreLink.click();
+			jsClickNew(madsupPlanTypesLearnmoreLink);
 		if (learnMore.contains("Drug"))
-			pdpPlanTypesLearnmoreLink.click();
+			jsClickNew(pdpPlanTypesLearnmoreLink);
 		if (learnMore.contains("Special"))
-			dsnpPlanTypesLearnmoreLink.click();
+			jsClickNew(dsnpPlanTypesLearnmoreLink);
 
 		threadsleep(5000);
 		String newURL = driver.getCurrentUrl();

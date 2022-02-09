@@ -18,6 +18,12 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
+		@CampaignExternal_Scenario11_AARP   @featureGate
+    Examples:
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | MAplantype | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | externallink                                                       |
+      | Campaign External Links - E2E Scenario 11_AMP | 65656        | 33111         | Yes           | Stone County | MAPD       | true    | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | 1         | 2          | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-plans.html |
+
+
     @CampaignExternal_Scenario11_AARP   @StageLP
     Examples:
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | MAplantype | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | externallink                                                       |
@@ -247,6 +253,11 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
 #      | TFN No    | <TFNNo>    |
 #      | TFN Xpath | <TFNxpath> |
 
+
+ 		@CampaignExternalLink_E2E_Scenario_11_AARP    @featureGate
+ 		Examples:
+      | Scenario                       | site | externallink                                                       | pscCode | workingHrs                              | zipcode | zipcodeMS | isMultiCounty | county            | MAplantype | planyear | plantype | planname                             | tfnFlag | TFNNo          | TFNxpath                                                                                   | TFNxpath1                            | PDPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath3                         | TFNxpathMS1                      | TFNxpathMS2                      | planIndex | planIndex1 | TFNNo1         | TFNxpath5                            | testPlans                                         |
+      | E2E Scenario 11_medicare-plans | AARP | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-plans.html | 8012869 | Hours: 8 a.m. to 8 p.m., 7 days a week* | 33111   | 10001     | NO            | Miami-Dade County | MAPD       | future   | MAPD     | AARP Medicare Advantage Choice (PPO) | true    | 1-855-264-3792 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'tel tfn')])[1] | PDP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | (//a[contains(@class, 'tel')])[3] | (//a[contains(@href, 'tel')])[1] | (//a[contains(@href, 'tel')])[2] | 1         | 2          | 1-866-408-5545 | (//span[contains(@class, 'tel')])[1] | UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
 
     @CampaignExternalLink_E2E_Scenario_11_AARP    @StageLP
     Examples:
