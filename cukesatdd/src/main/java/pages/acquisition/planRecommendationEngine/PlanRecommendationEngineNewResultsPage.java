@@ -144,7 +144,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 
-	@FindBy(css = ".uhc-button-group button#nextButton>svg")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg>path")
 	private WebElement pageNextButton;
 
 	@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
@@ -495,7 +495,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					break;
 				}
 				pageNextButton.click();
-				threadsleep(2000);
+				threadsleep(3000);
 				i++;
 			} while (i <= totalPage);
 			System.out.println("planAvailable - " + planAvailable);
