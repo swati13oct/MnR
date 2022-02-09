@@ -50,6 +50,7 @@ import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.NewResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineResultsPageMobile;
 
 public class PlanRecommendationStepDefinitionMobile {
 
@@ -749,6 +750,15 @@ public void sortBy_Visibility(DataTable givenAttributes) {
 		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
 		newResultpage.removeBreadcrumb();
 		newResultpage.sortByBreadcrumb();
+	}
+	
+	@Then("^user validates Sort By breadcrumb after Plan Year Toggle in PRE-Result page$")
+	public void sortBy_planYear(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.changePlanyear(inputValues.get("Sort PlanYear"));
+		planSelectorNewResultspage.sortByBreadcrumb();
 	}
 
 	@Then("^user validates Sort By using PlanType in PRE-Result page$")
