@@ -1591,7 +1591,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates Fed TFN
       | TFN No | <FedTFNNo> |
     Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
+      | TFN No | <MSPlantype> |
       
    @Scenario_10_SourceCodeInURL_UAT_Medsup3.0 @campaignTFNStageMS
     Examples: 
