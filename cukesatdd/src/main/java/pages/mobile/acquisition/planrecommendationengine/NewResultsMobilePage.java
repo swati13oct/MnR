@@ -718,11 +718,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		String pageCount2 = pagenoLabel.getText().trim();
 		Assert.assertEquals(pageCount1, pageCount2, "Page count in not matching");
 		int totalPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[1]);
-
+		driver.navigate().refresh();
+		threadsleep(2000);
 		for (int i = 1; i <= totalPage; i++) {
+			scrollToView(pagenoLabel);
 			pageCount1 = pagenoLabel.getText().trim();
 			int currentPage = Integer
-					.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
+					.parseInt(pageCount1.split(" ")[1]);
 			Assert.assertEquals(i, currentPage, "Page count is mismatch after pagenation");
 			if (i == totalPage) {
 				Assert.assertTrue(validate(pageNextButtonDisabled, 60), " Next button Enabled in pagination");
