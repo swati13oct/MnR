@@ -311,6 +311,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = ".planRemoveSort span")
 	private WebElement sortBreadCrumbs;
+	
+	@FindBy(css = "div[class*='selectedFilterUI']>span")
+	private WebElement sortedPlanCount;
 
 	@FindBy(css = ".planRemoveSort svg")
 	private WebElement removeBreadCrumbs;
@@ -1083,7 +1086,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);
 		Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after remove breadcrumb");
 	}
-
+	String FilteredPlanCount = "";
 	public void applySort(String planType) {
 		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
 		sortByDropdown.click();
@@ -1106,6 +1109,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			SNPCheck.click();
 		}
 		Assert.assertTrue(validate(applyBtn), "apply Button is missing");
+		FilteredPlanCount = applyBtn.getText().trim().split(" ")[1];
 		applyBtn.click();
 		threadsleep(2000);
 	}
@@ -1126,6 +1130,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int plancount = plantiles.size();
 		Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
 				"BreadCrumbs not showing for " + plan + " PlanType");
+		Assert.assertTrue(sortedPlanCount.getText().trim().split(" ")[1].equals(FilteredPlanCount),
+				"Filtered PlanCount not Matching " );
+		Assert.assertTrue(sortedPlanCount.getText().trim().split(" ")[3].equals(planZipInfo.getText().trim().split(" ")[3]),
+				"Total PlanCount not Matching " );
 		for (int i = 0; i < plancount; i++) {
 			// System.out.println("I count is: "+i);
 			if (i == 3 || i == 6 || i == 9) {
