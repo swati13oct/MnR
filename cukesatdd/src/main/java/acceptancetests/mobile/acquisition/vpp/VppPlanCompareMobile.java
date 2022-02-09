@@ -3111,6 +3111,86 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
 	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan compare page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page()
+			throws InterruptedException {
+		ComparePlansPageMobile planCompare = (ComparePlansPageMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planCompare.clickOnEmailField();
+	}
+
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan compare page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(
+			DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPageMobile planCompare = (ComparePlansPageMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 *
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String email = memberAttributesMap.get("User Name");
+		planCompare.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan details page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page()
+			throws InterruptedException {
+		PlanDetailsPageMobile planDetails = (PlanDetailsPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetails.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan detail page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(
+			DataTable givenAttributes) throws InterruptedException {
+		PlanDetailsPageMobile planDetails = (PlanDetailsPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 *
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String email = memberAttributesMap.get("User Name");
+		planDetails.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan summary page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page()
+			throws InterruptedException {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan summary page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(
+			DataTable givenAttributes) throws InterruptedException {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 *
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String email = memberAttributesMap.get("User Name");
+		plansummaryPage.validatePrepopulatedEmail(email);
+	}
 
 	@Then("^user clicks on Select by Address and Enter fileds in AARP Site$")
 	public void user_clicks_on_Select_by_Address_and_Enter_fileds_in_UMS_Site(DataTable givenAttributes)
