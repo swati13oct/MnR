@@ -3679,4 +3679,44 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 	}
 
+	@Then("^the user enters following required Medicare Information for Medicare Card Scan$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page_Medicare_Card_Scan(DataTable planAttributes) throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		if (CardType.contains("HICN")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n) + "C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		} else if (CardType.contains("RRID")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID" + Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		}
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		if (SSNflag.contains("true")) {
+			MedicareDetailsMap.put("SSN Number", "123456789");
+		}
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.MedicareScanImage_Success(MedicareDetailsMap);
+		if (isInformationFilled) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered through Medicare Card Scan and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
 }
