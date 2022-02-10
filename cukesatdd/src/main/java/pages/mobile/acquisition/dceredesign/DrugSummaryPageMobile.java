@@ -792,14 +792,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		validate(alertTextImg);
 	}
-	
-	public void vdrugPricingDeductText() {
-		if (drugPricingDeductText.getText().contains("$0 or $99")
-				|| drugPricingDeductText.getText().contains("$0 or $92")) 
-			System.out.println(drugPricingDeductText.getText());
-		else 
-			Assert.fail("Expected Deductible LIS message not displayed");
-	}
 
 	public void verifyDrugPricingText() {
 
@@ -809,14 +801,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pageloadcomplete();
-		waitForPageLoadSafari();
-		validateNew(drugTitle);
-		validateNew(drugPricingDeductText);
-		vdrugPricingDeductText();
-		//String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+		validate(drugTitle);
+//		validate(switchToGenericBtn);
+		validate(drugPricingDeductText);
+		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
 //		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
-		//Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
+		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
 		validateNew(drugClose);
 		jsClickNew(drugClose);
 
