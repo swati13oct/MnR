@@ -22,41 +22,39 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
-	
-	//@FindBy(css = "#providerName")
+
+	// @FindBy(css = "#providerName")
 	@FindBy(xpath = "//input[@id='providerName']")
 	private WebElement ProviderName;
-	
-	//@FindBy(css = "#providerStreetAddress")
-	@FindBy(xpath= "//input[@id='providerStreetAddress']")
+
+	// @FindBy(css = "#providerStreetAddress")
+	@FindBy(xpath = "//input[@id='providerStreetAddress']")
 	private WebElement ProviderStreetAddress;
-	
+
 //	@FindBy(css = "#providerCity")
 	@FindBy(xpath = "//input[@id='providerCity']")
-	private WebElement ProviderCity;	
+	private WebElement ProviderCity;
 
-	//@FindBy(css = "#state")
+	// @FindBy(css = "#state")
 	@FindBy(xpath = "//select[@id='state']")
 	private WebElement StateDropDown;
-	
-	
+
 //	@FindBy(css = "#providerZip")
 	@FindBy(xpath = "//input[@id='providerZip']")
 	private WebElement ZipCode;
-	
-	//@FindBy(css = "#providePhoneNumber")
+
+	// @FindBy(css = "#providePhoneNumber")
 	@FindBy(xpath = "//input[@id='providePhoneNumber']")
 	private WebElement ProvidePhoneNumber;
-	
+
 	@FindBy(css = "#ole-form-back-button")
 	private WebElement BackButton;
-	
+
 	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextButton;
-	
+
 	@FindBy(css = "#ole-form-cancel-button")
 	private WebElement CancelEnrolButton;
-	
 
 	public UseAndDisclosureAuthorizationPageMobile(WebDriver driver) {
 		super(driver);
@@ -77,13 +75,16 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 		String ProviderZip = MedicareDetailsMap.get("Zip");
 		String ProviderNumber = MedicareDetailsMap.get("Provider Phone Number");
 		String Mailing_State = MedicareDetailsMap.get("Mailing_State");
-		
+
 		sendkeysMobile(ProviderName, Providername);
 		sendkeysMobile(ProviderStreetAddress, ProviderAddress);
 		sendkeysMobile(ProviderCity, Providercity);
 		sendKeysByCharacter(ProvidePhoneNumber, ProviderNumber);
 		sendkeysMobile(ZipCode, ProviderZip);
-		StateDropDown.click();
+		// Below code is added for ios click issue
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			StateDropDown.click();
+		}
 		selectFromDropDownByValue(StateDropDown, Mailing_State);
 //		mobileSelectOption(StateDropDown, Mailing_State, true);
 
