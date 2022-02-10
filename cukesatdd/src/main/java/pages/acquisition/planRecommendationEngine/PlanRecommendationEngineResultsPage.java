@@ -225,7 +225,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 	
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) #responsiveplan .status-bar img.unliked")
+	@FindBy(css = "div.swiper-wrapper div[class*='plan-card-component']:nth-child(1) div.card-actionbar button[class*='save-plan']")
 	private WebElement MS1stPlanSaveImg;
 	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -491,7 +491,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = ".subheading-text a")
 		private WebElement EditMyResponsesLink;
 		
-		@FindBy(css = "li[class*='view-ms-plans']")
+		@FindBy(css = "li[class*='viewMedigap']>a")
 		private WebElement viewMedigapPlansLink;
 
 		@FindBy(css = "div.uhc-pre-card")
@@ -2292,7 +2292,7 @@ public void SavingMsplan() {
 		MSViewPlansLink.click();
 		threadsleep(5000);
 	}
-	submitMSform();
+//	submitMSform();
 	threadsleep(2000);
 	validate(MS1stPlanSaveImg, 20);
 	MS1stPlanSaveImg.click();
