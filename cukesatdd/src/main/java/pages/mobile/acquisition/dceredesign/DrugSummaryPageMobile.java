@@ -583,6 +583,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(mapdPlanToggle);
 		jsClickNew(mapdPlanToggle);
 	}
+	
+	public void ValidateNotCoveredPharMessage() {
+		pageloadcomplete();
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, DrugPricingNotCoveredPharmacyText, 30);
+		if (validateNew(DrugPricingNotCoveredPharmacyText)) {
+			System.out.println("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is Displayed");
+		} else
+			Assertion.fail("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is NOT Displayed");
+	}
 
 	// @FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
 	@FindBy(css = "#changepharmacymobile h3 > span")
@@ -1003,11 +1013,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
-				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+				mailOrderPharmacyMsg.getText().trim().contains(expectedMsg));
 	}
 
 	@FindBy(css = "input[name='plans-filter'][value='MAPD']")
 	public WebElement mapdPlanToggle;
+	
+	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'the pharmacy you selected does not provide Prescription Drug Coverage under this plan. We are unable to provide the drug pricing.')])[1]")
+	public WebElement DrugPricingNotCoveredPharmacyText;
 
 	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	public WebElement pdpPlanToggle;
@@ -1201,7 +1214,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath="//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
+	@FindBy(xpath="//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	public void validateOptumRxConsistentDisplay_PharmacyPage() {

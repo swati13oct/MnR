@@ -118,6 +118,13 @@ public class DCEStepDefinitionAARPMobile {
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
+	
+	@Then("^the user validates Not Covered Pharmacy message DCE Summary Page plan card$")
+    public void the_user_validates_drug_pricing_message_for_notcovered_Pharmacy_selection_dce_summary_page() throws Throwable {
+        DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugSummary);
+        drugSummaryPage.ValidateNotCoveredPharMessage();
+    }
 
 	@Then("^user save the plan on drug detail page$")
 	public void user_save_the_plan_on_drug_detail_page() throws Throwable {
