@@ -31,7 +31,7 @@ Feature: 1.18.1 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP 
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
       | AARP |   12345 | NO            | Schenectady | MAPD          | None         | UHGNetwork | [blank]             | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
