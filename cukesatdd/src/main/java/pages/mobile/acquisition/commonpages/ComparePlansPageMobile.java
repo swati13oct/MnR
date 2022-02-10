@@ -309,6 +309,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#changes-submitted button")
 	private WebElement popupAccept;
+	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
 
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
@@ -336,6 +339,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//strong[contains(text(),'Monthly Premium')])[1]")
 	private WebElement PremiumDisplay;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	private WebElement proactiveChatExitBtn;
@@ -1432,6 +1438,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("#########No Drugs available for this member#########");
 		}
 	}
+	
+	public void clickOnEmailField() {
+
+		jsClickNew(summary_maEmailOption);
+	}
 
 	public void allSet() {
 		try {
@@ -2087,5 +2098,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = " + populatedEmail);
+		Assertion.assertEquals(email, populatedEmail);
 	}
 }
