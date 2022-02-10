@@ -579,7 +579,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		validate(planZipInfo,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
 		Assert.assertTrue(planLocaInfo.getText().contains(zip),"Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
+		Assert.assertTrue(planLocaInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3])>0,"Total Plan count is less than 1");
 		String recom = "Recommended";
 		String recom1 = "#1 Recommendation";
