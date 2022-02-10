@@ -444,17 +444,21 @@ Feature: 1.09. ACQ- Shopper Profile
       | ZipCode            | <zipcode>          |
       | County             | <county>           |
     Then validate base line benefit popup
-      | Plan Name              | <planName>             |
-      | Medical Deductible     | <medicalDeductible>    |
-      | Primary Care Physician | <primaryCarePhysician> |
-      | Specialist             | <specialist>           |
+      | Plan Name                  | <planName>             |
+      | Medical Deductible         | <medicalDeductible>    |
+      | Primary Care Physician     | <primaryCarePhysician> |
+      | Specialist                 | <specialist>           |
+      | Total Monthly Plan Premium | <monthlypremium>       |
+      | Specialist Referral        | <splReferral>          |
+      | Prescription Deductible    | <pcpDeductible>        |
 
     @team-e_searchProfileAndVPPPlanDetail @regressionSPTeamE
     Examples:
-      | username | password       | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician          | specialist                     |
-      | ocpuser2 | Password@12345 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 | 97426   | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay | In: $45 copay / Out: $65 copay |
+      | username | password       | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician          | specialist                     | monthlypremium | splReferral | pcpDeductible                      |
+      | ocpuser2 | Password@12345 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 | 97426   | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay | In: $45 copay / Out: $65 copay | $0             | No          | $0 for Tiers 1-2$250 for Tiers 3-5 |
 
-    @stage_searchProfileAndVPPPlanDetail @SPBaseLinePopupStage
+    @stage_searchProfileAndVPPPlanDetail @SPBaseLinePopupStageDESK
     Examples:
-      | username | password       | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician          | specialist                     |
-      | ocpuser2 | Password@12345 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 | 97426   | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay | In: $45 copay / Out: $65 copay |
+      | username | password       | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                       | plantype | drugNames | providers | medicalDeductible | primaryCarePhysician            | specialist                     | monthlypremium | splReferral | pcpDeductible                      |
+      | ocpuser2 | Password@12345 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 | 97426   | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO)        | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: $25 copay   | In: $45 copay / Out: $65 copay | $0             | No          | $0 for Tiers 1-2$250 for Tiers 3-5 |
+      | ocpuser2 | Password@12345 | net@ulla.com      | 6C06-DQ3-NU44 | 10/13/1930 | 90002   | ULLA   | NET    | 4c603266-44aa-420a-8c70-827808fc6002 | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        | In: $0 / Out: $0  | In: $0 copay / Out: No Coverage | In: $0 copay / Out: $40 copay  | $0             | Yes         | $0                                 |
