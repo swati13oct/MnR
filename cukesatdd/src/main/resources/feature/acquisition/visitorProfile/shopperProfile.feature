@@ -330,11 +330,11 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples:
-      | username | password       | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName  | planName                                                         | drugNames | providers |
-      | ocpuser2 | Password@12345 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER | 33134   | MedicareMax (HMO) | MedicareMax (HMO)                                                | No        | No        |
-      | ocpuser2 | Password@12345 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    | 10010   | [blank]           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No        |
+      | username | password       | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers |
+      | ocpuser2 | Password@12345 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER | 33134   | Medica HealthCare Plans MedicareMax (HMO) | MedicareMax (HMO)                                                | No        | No        |
+      | ocpuser2 | Password@12345 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    | 10010   | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No        |
 
-  @createProfileNonMemberSP @regressionSPStage @regressionAARP @featureGate
+
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -365,6 +365,11 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name | <fname>     |
       | Last Name  | <lname>     |
 
+    @team-e_searchProfileAndVPPPlanDetail @regressionSPTeamE @featureGate
+    Examples:
+      | username | password       | email                  | dob        | mbi | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                                                                          | providers                                                                                                                        |
+      | ocpuser2 | Password@12345 | DFONNMUF@NONMEMBER.COM | 08/20/1946 |     | female | DFONNMUF | DFONNMUL | 10010   | AARP Medicare Advantage Plan 1 (HMO) | nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG,trazodone hcl TAB 50MG,simvastatin TAB 20MG,nifedipine TAB 60MG ER Osmotic,levothyroxine sodium (tablets) TAB 75MCG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011 |
+    @createProfileNonMemberSP @regressionSPStage @regressionAARP
     Examples:
       | username | password       | email                  | dob        | mbi | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                                                                          | providers                                                                                                                                                                                                                                                  |
       | ocpuser2 | Password@12345 | DFONNMUF@NONMEMBER.COM | 08/20/1946 |     | female | DFONNMUF | DFONNMUL | 10010   | AARP Medicare Advantage Plan 1 (HMO) | nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG,trazodone hcl TAB 50MG,simvastatin TAB 20MG,nifedipine TAB 60MG ER Osmotic,levothyroxine sodium (tablets) TAB 75MCG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 120, Cuyahoga, OH, 44145;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
