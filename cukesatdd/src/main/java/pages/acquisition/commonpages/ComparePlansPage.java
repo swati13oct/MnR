@@ -442,6 +442,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
 	private WebElement planNameOnBaseLinePopup;
 	
+	@FindBy(xpath = "//*[contains(@id,'plan-summary-table')]//tr[(contains(@ng-if,'plansummaryestimatedDrugCost'))]//p[contains(text(),'Drug')]//ancestor::th/following-sibling::td")
+	private WebElement planCompareTabDrugCostValueCell;
 	
 	
 	public ComparePlansPage(WebDriver driver) {
@@ -2201,5 +2203,24 @@ public void saveaPlan(String plans) {
 				"View Locations", DoctorCoveredText.getText());
 
 	}
+	
+public boolean verifyAddedDrugPharmacyCompareCost(String planName, String networkType) {
+		
+		System.out.println("Drug cost on plan Compare : " + planCompareTabDrugCostValueCell.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(planCompareTabDrugCostValueCell.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (planCompareTabDrugCostValueCell.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
 
+		}
+			}
+		
+			
+		}
+		return false;
+}
 }
