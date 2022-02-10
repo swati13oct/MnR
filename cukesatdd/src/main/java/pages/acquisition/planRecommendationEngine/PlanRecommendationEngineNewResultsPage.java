@@ -147,7 +147,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".uhc-button-group button#nextButton>svg>path")
 	private WebElement pageNextButton;
 
-	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-prev disabled']")
+	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-next disabled']")
 	private WebElement pageNextButtonDisabled;
 
 	@FindBy(css = ".uhc-button-group button[class*='view-plans-prev']>svg")
