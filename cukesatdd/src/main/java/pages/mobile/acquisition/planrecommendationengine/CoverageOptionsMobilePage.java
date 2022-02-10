@@ -124,7 +124,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	// Coverage Option Page Function Verification
 	public void coverageOptionpageErrormobile() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		mobileUtils.mobleErrorValidation(page);
 	}
 
@@ -133,7 +133,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		System.out.println("Previous page Validation");
 		if (radioselect.isDisplayed()) {
 			mobileUtils.mobileLocateElement(previousBtn);
-			mobileUtils.mobileLocateElementClick(previousBtn);
+			jsClickNew(previousBtn);
 			System.out.println("Validationg " + page + " page Previous button functionality");
 			mobileUtils.previousPageValidation(page.toUpperCase());
 		}

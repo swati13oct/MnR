@@ -328,7 +328,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		/// driver.navigate().refresh();
 
 		pageloadcomplete();
-		mobileUtils.mobileLocateElementClick(getStartedBtn);
+		jsClickNew(getStartedBtn);
 		validate(zipCode, 30);
 	}
 

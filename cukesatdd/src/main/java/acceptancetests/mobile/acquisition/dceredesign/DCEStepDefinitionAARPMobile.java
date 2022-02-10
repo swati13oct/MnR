@@ -1,6 +1,7 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -308,5 +309,15 @@ public class DCEStepDefinitionAARPMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
+	
+	 @Then("^the user applies pharmacy filter for following text on Details page - Change Pharmacy Page$")
+	    public void the_user_applies_pharmacy_filter_for_following_text_on_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+	        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	        memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	        String FilterText = memberAttributesMap.get("PharmacyFilterText");
+	        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+	        drugDetailsPage.ApplyPharmacyFilter(FilterText);
+	    }
 
 }

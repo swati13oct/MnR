@@ -3513,6 +3513,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.navigate().refresh();
 		} // Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
+		scrollToView(driver.findElement(By.xpath("//a[contains(text(),'Accessibility')]")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
 
