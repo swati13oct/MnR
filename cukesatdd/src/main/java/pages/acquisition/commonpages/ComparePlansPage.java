@@ -2164,13 +2164,20 @@ public void saveaPlan(String plans) {
 		String medicalDeductible = memberAttributesMap.get("Medical Deductible");
 		String pcp = memberAttributesMap.get("Primary Care Physician");
 		String Specialist = memberAttributesMap.get("Specialist");
+		String TotalMonthlyPlanPremium = memberAttributesMap.get("Total Monthly Plan Premium");
+		String SpecialistReferral = memberAttributesMap.get("Specialist Referral");
+		String SpecialistDeductible = memberAttributesMap.get("Prescription Deductible");
 		WebElement moreOps = driver.findElement(By.xpath("(//span[text()='"+planName+"'])[1]/following::span[contains(text(),'More Options')][1]"));
 		moreOps.click();
 		baseLineBenefitslink.click();
 		Assert.assertEquals(planNameOnBaseLinePopup.getText().trim(), planName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Total Monthly Plan Premium')]/following-sibling::td/span")).getText().trim(), TotalMonthlyPlanPremium);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Medical Deductible')]/following-sibling::td/span")).getText().trim(), medicalDeductible);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist Referral')]/following-sibling::td")).getText().trim(), SpecialistReferral);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Prescription Deductible')]/following-sibling::td")).getText().trim(), SpecialistDeductible);
+        System.out.println("Validated Baseline Benefit Values on Popup.");
 	}
 	
 	public void validateProvidersCovered() {
