@@ -33,7 +33,7 @@ public class DCEMobilePage extends UhcDriver {
 
 	// DCE Page Elements
 
-	@FindBy(css = "#adddrugfooter")
+	@FindBy(xpath = "(//*[contains(text(),'Add My Drug')])[2]")
 	private WebElement drugAddBtn;
 
 	@FindBy(css = "input#drugsearch")
@@ -141,7 +141,7 @@ public class DCEMobilePage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				mobileUtils.mobileLocateElementClick(drugAddBtn);
+				jsClickNew(drugAddBtn);
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -157,11 +157,11 @@ public class DCEMobilePage extends UhcDriver {
     System.out.println("returning to plans...");
 	validate(drugpageButtons.get(0));
 	threadsleep(2000);
-	drugpageButtons.get(0).click();
+	jsClickNew(drugpageButtons.get(0));
 	pageloadcomplete();
 	threadsleep(2000);
 	validate(backtoPlansButton.get(0));
-	mobileUtils.mobileLocateElementClick(backtoPlansButton.get(0));
+	jsClickNew(backtoPlansButton.get(0));
 	pageloadcomplete();
 	threadsleep(2000);
 }
@@ -173,7 +173,7 @@ public class DCEMobilePage extends UhcDriver {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
+			sendkeysMobile(drugsearchBox, drugName);
 			//hidekeypad(); Implement if needed
 //			if (searchButtonClick) {
 //				mobileUtils.mobileLocateElementClick(drugsearchButton);
@@ -204,7 +204,7 @@ public class DCEMobilePage extends UhcDriver {
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
-				mobileactionsendkeys(modalQuantity, count);
+				sendkeysMobile(modalQuantity, count);
 				modalheader.click();
 				threadsleep(2000);
 			}
