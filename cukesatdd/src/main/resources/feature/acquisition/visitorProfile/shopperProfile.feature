@@ -32,8 +32,8 @@ Feature: 1.09. ACQ- Shopper Profile
       | Email              | <email>            |
       | ZipCode            | <zipcode>          |
       | County             | <county>           |
-#    Then the user validates the view drug information on Plan Compare page
-#      | Drugs | <drugNames> |
+    Then the user validates the view drug information on Plan Compare page
+      | Drugs | <drugNames> |
     Then the user Select PCP popup modal on Plan Compare page
       | PCPs | <pcps> |
     Then the user clicks on back on all plan linnk in Plan Compare page
@@ -47,8 +47,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @team-e @regressionSPTeamE @featureGate
     Examples:
-      | username | password       | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName | planName                             | zipcode | county          | drugNames | providers | pcps |
-      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 3b2db19f-6e92-49ef-bcf0-b6d1406d1a2c | [blank]          | AARP Medicare Advantage Plan 1 (HMO) | 36132   | New York County | no        | no        | no   |
+      | username | password       | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        | pcps                                                               |
+      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | 10010   | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; | Niva Shakya MD [825 Euclid Ave # Q112764, Kansas City, MO, 64124]; |
 
     @stageSearchProfileEmail @regressionSPStage @sanity @regressionAARP
     Examples:
@@ -95,8 +95,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @team-e @regressionSPTeamE @featureGate
     Examples:
-      | username | password       | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName | planName                             | zipcode | county          | drugNames | providers |
-      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 03bebc20-b607-4ce8-9ed4-4f090c84fef9 | [blank]          | AARP Medicare Advantage Plan 1 (HMO) | 36132   | New York County | no        | no        |
+      | username | password       | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                        |
+      | ocpuser2 | Password@12345 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | 10010   | New York County | Lipitor TAB 10MG | Niva Shakya MD 825 Euclid Ave # Q112764, Kansas City, MO, 64124; |
 
     @stage123 @regressionSPStage @sanity @regressionAARP
     Examples:
@@ -142,8 +142,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     @team-e_AddPlans @regressionSPTeamE @featureGate
     Examples:
-      | username | password       | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                               | plantype | planName                             | testPlans                                                                                         | zipcode | county          | drugNames | providers |
-      | ocpuser2 | Password@12345 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 5015274f-416c-4ec9-9dcf-e5c3557c3465 | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) | 90210   | New York County | no        | no        |
+      | username | password       | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                  | plantype | planName                             | testPlans                                                                                         | zipcode | county          | drugNames                                                                                                                                                  | providers                                                                                       |
+      | ocpuser2 | Password@12345 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 5015274f-416c-4ec9-9dcf-e5c3557c3465 | AARP Medicare Advantage (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) | 90210   | New York County | BD Hypodermic Needle Regular Bevel Thin Wall 18G X 1-1/2" MIS 18GX1.5",levothyroxine sodium (tablets) TAB 25MCG,Onetouch Ultra TES ULTRA,Lipitor TAB 40MG, | Nicolas Gandola DDS; Justin Elfert DDS;Haleemah Ahmad DDS;Scott Stoddard DDS; John Schwerer DMD |
 
     @stage_AddPlans @regressionSPStage @sanity @regressionAARP
     Examples:
