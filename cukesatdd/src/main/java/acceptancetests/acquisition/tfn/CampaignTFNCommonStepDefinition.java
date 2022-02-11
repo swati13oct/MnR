@@ -873,10 +873,12 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		VPPPlanSummaryPage plansummaryPage=new VPPPlanSummaryPage(driver);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.ViewPlanSummary(PlanType);
 		// tfnPage.NavigateToPlanDetails(PlanType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
 	}
 
 	@Then("^the user navigates back to page$")
@@ -1548,17 +1550,17 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String zipCode = inputAttributesMap.get("Zip Code");
 
-		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
-	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("24010")) ? true
-						: (msPlansHeading && zipCode.equals("24010")
-								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
+		boolean msPlanDetailsHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h2[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plan insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlanDetailsHeading && zipCode.equals("90210")
+				|| !msPlanDetailsHeading && zipCode.equals("24010")) ? true
+						: (msPlanDetailsHeading && zipCode.equals("24010")
+								|| !msPlanDetailsHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
-			"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlanDetailsHeading + "' for zipCode : '" + zipCode + "'");
 
-		if (msPlansHeading) {
+		if (msPlanDetailsHeading) {
 			tfnPage.clickStartMS4OleFromPlanDetails();
 		} else
 
