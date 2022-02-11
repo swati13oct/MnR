@@ -364,7 +364,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	//@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
 	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
@@ -4387,7 +4388,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				// initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
 						+ plan + "']";
-			} else {
+			}else if(planType.equalsIgnoreCase("PDP")){
+				initial_savePlanIconXpath = "//*[contains(text(),'" + plan
+						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
+			}
+			else {
 				initial_savePlanIconXpath = "//a[contains(text(),'" + plan
 						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
 			}
@@ -7885,5 +7890,26 @@ public String GetMonthlyPremiumValue() {
 			}
 		}
 
+	}
+	
+	public boolean verifyAddedDrugPharmacySummaryCost(String planName, String networkType) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + networkType);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(drugCost.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (drugCost.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
+		}
+			}
+		
+			
+		}
+		return false;
 	}
 }
