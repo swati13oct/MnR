@@ -147,7 +147,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".uhc-button-group button#nextButton>svg>path")
 	private WebElement pageNextButton;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
+	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-next disabled']")
 	private WebElement pageNextButtonDisabled;
 
 	@FindBy(css = ".uhc-button-group button[class*='view-plans-prev']>svg")
@@ -357,7 +357,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		System.out.println("Validating PRE Results UI Page: ");
 		waitforResultsPage();
 		Assert.assertTrue(planLocaInfo.getText().contains(zip), "Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		Assert.assertTrue(planLocaInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
 		// Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results
