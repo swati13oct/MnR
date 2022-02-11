@@ -21,8 +21,10 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -81,6 +83,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	// @FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
 	@FindBy(css = "[class^='uhc-card border']:nth-of-type(1) div[class*='d-block'] p:nth-of-type(5) span[class*='inline-block']")
 	public WebElement drugsCovered;
+	
+	@FindBy(xpath = "//*[text()='Return to plan compare']")
+	public WebElement returnToCompareLink;
 
 	@FindBy(css = "[header ='What is Average Monthly Drug Cost?'] #accordion-1-button")
 	public WebElement whyAverageLink;
@@ -617,6 +622,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
+	}
+	
+	public ComparePlansPageMobile ClickReturnToCompare() {
+		validateNew(returnToCompareLink);
+		jsClickNew(returnToCompareLink);
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		return new ComparePlansPageMobile(driver);
 	}
 	
 	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
