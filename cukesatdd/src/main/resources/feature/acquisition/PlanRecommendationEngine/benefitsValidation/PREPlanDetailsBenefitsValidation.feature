@@ -42,6 +42,11 @@ Feature: PRE Plans benefits validation
       | excelPath                   | workSheet    | site | AEP | USER   | YEAR |
       | 2022_MA_SNP_PlanDetails_PRE | PREBENEFITS6 | AARP | No  | OCT-15 | 2022 |
 
+    @PREPlanBenefitsAARP @MA_SNP_PREBENEFITS_AARP @MA_SNP_PREBENEFITS7_AARP
+    Examples: 
+      | excelPath                   | workSheet    | site | AEP | USER   | YEAR |
+      | 2022_MA_SNP_PlanDetails_PRE | PREBENEFITS7 | AARP | No  | OCT-15 | 2022 |
+
     @PREPlanBenefitsAARP @PDP_PREBENEFITS_AARP
     Examples: 
       | excelPath                | workSheet   | site | AEP | USER   | YEAR |
