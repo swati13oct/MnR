@@ -52,10 +52,15 @@ Feature: PRE Plans benefits validation
       | excelPath                | workSheet   | site | AEP | USER   | YEAR |
       | 2022_PDP_PlanDetails_PRE | PREBENEFITS | AARP | No  | OCT-15 | 2022 |
 
-    @PREPlanBenefitsAARP @MS_PREBENEFITS_AARP
+    @PREPlanBenefitsAARP @MS_PREBENEFITS_AARP @MS_PREBENEFITS1_AARP
     Examples: 
-      | excelPath               | workSheet   | site | AEP | USER   | YEAR |
-      | 2022_MS_PlanDetails_PRE | PREBENEFITS | AARP | No  | OCT-15 | 2022 |
+      | excelPath               | workSheet    | site | AEP | USER   | YEAR |
+      | 2022_MS_PlanDetails_PRE | PREBENEFITS1 | AARP | No  | OCT-15 | 2022 |
+
+    @PREPlanBenefitsAARP @MS_PREBENEFITS_AARP @MS_PREBENEFITS2_AARP
+    Examples: 
+      | excelPath               | workSheet    | site | AEP | USER   | YEAR |
+      | 2022_MS_PlanDetails_PRE | PREBENEFITS2 | AARP | No  | OCT-15 | 2022 |
 
     @PREPlanBenefitsAARP_UAT @MA_SNP_PDP_PREBENEFITS_AARP_UAT
     Examples: 
