@@ -1798,6 +1798,47 @@ public class VppCommonStepDefinition {
 		Assertion.assertTrue("Drug cost is displayed incorrectly",
 				plansummaryPage.verifyAddedDrugCost(planName, annualDrugCost));
 	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan summary page for the selected plan$")
+	public void verify_Pharmacy_drug_cost(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				plansummaryPage.verifyAddedDrugPharmacySummaryCost(planName, networkType );
+	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan details page for the selected plan$")
+	public void verify_Pharmacy_drug_cost_PlanDetails(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		vppPlanDetailsPage.verifyAddedDrugPharmacyDetailsCost(planName, networkType);
+
+	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan compare page for the selected plan$")
+	public void verify_Pharmacy_drug_cost_PlanCompare(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		planComparePage.verifyAddedDrugPharmacyCompareCost(planName, networkType);
+
+	}
 
 	@Then("^the user validates the added drug name on plan summary page for a selected plan$")
 	public void verify_drugs_added_VPP(DataTable givenAttributes) {
