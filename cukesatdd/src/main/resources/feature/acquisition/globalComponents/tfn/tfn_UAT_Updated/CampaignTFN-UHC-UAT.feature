@@ -504,3 +504,55 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | scenario                      | site | zipcode | MAplantype |MSPlantype| pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
       | Scenerio 7-SourceCodeInURL - UMS | BLayer |   90210 | MA         |MS4.0| 810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
       
+      
+      ####################### Script IS_ Scenario 4: Source Code in URL ########################################
+  @Scenario_IS_Scenario4_UHCReferralTraffic_UAT @UATRegression
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN show correctly from UHC Referral Traffic 
+    Given the user Starts WebDriver
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
+    Then the user navigates to plan tab for any plan
+      | Plan Type | <MSPlantype> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+    	| TFN No | <MedSupStaticTFNNo> |
+   	And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+    	| TFN No | <MedSupStaticTFNNo> |
+   And user click on Start Application from MS plan details
+      | Zip Code | <zipcode> |
+    When Navigate to Visitor Profile page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+      
+      @Scenario_IS-4_UHCReferralTraffic_UAT_Medsup4.0 @campaignTFNStageMS @test123
+    Examples: 
+      | scenario                      | site | zipcode | MAplantype |MSPlantype| pscCode | state   | campaignUrl                                                                        | medEdURL1                                  | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName        | password      | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |MedSupStaticTFNNo|
+      | Scenerio IS-4-UHCReferralTraffic - UMS | BLayer |   90210 | MA         |MS4.0| 832935 | Alabama | health-plans.html?WT.mc_id=832935&test_version=UMS&zipcode=90210#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$!  | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-259-8119 | 1-866-462-4046 | 2RZ        |1-866-603-3424|
+      
