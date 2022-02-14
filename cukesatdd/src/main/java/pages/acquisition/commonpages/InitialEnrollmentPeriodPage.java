@@ -20,15 +20,16 @@ public class InitialEnrollmentPeriodPage extends GlobalWebElements {
 
     @Override
     public void openAndValidate() {
-        Assert.assertEquals(header.getText(),"Initial Enrollment Period (IEP)");
+        Assert.assertEquals(header.getText(),"Medicare Initial Enrollment Period (IEP)");
         checkInpageNavigation();
     }
 
     @FindBy(xpath = "//ul[@class='uhc-side-nav']//li")
     public List<WebElement> inPageNavigationLinks;
 
-    @FindBy(xpath = "//h1[contains(text(),'Initial Enrollment Period (IEP)')]")
+    @FindBy(xpath = "(//h1[contains(text(),'Medicare Initial Enrollment Period (IEP)')])[1]")
     public WebElement header;
+    //Hello world
 
     @FindBy(xpath = "//a[contains(@href,'/medicare-education/medicare-while-working.html')]//span[contains(text(),'Delay')]")
     public WebElement lnkDelay;
