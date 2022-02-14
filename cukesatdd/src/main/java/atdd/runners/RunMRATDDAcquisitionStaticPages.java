@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
                 "html:reports/test-report.html",
                 "json:target/cucumber-RunMRATDDAcquisitionStaticPages.json",
                 "timeline:target"},
-        tags = "@regressionAARP")
+        tags = "@featureGate")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionStaticPages extends BaseTestConfig {
