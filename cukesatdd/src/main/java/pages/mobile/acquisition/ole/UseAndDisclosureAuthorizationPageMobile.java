@@ -36,7 +36,7 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 	private WebElement ProviderCity;
 
 	// @FindBy(css = "#state")
-	@FindBy(xpath = "//select[@id='state']")
+	@FindBy(xpath = "//select[@id='state0']")
 	private WebElement StateDropDown;
 
 //	@FindBy(css = "#providerZip")

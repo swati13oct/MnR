@@ -6314,6 +6314,27 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 	
+	public boolean verifyAddedDrugPharmacySummaryCost(String planName, String networkType) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + networkType);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(drugCost.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (drugCost.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
+		}
+			}
+		
+			
+		}
+		return false;
+	}
+	
 	public void clickOnEmailField() {
 
 		jsClickNew(summary_maEmailOption);

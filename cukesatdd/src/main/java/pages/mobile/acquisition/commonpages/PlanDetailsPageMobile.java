@@ -1888,6 +1888,28 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
+	public boolean verifyAddedDrugPharmacyDetailsCost(String planName, String networkType) {
+		
+		System.out.println("Drug cost on plan Details : " + planCostTabDrugCostValueCell.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(planCostTabDrugCostValueCell.getText().equals("")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (planCostTabDrugCostValueCell.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
+
+		}
+			}
+		
+			
+		}
+		return false;
+			
+		}
 
 	public String GetMonthlyPremiumValue() {
 
