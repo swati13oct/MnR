@@ -808,11 +808,36 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public DrugDetailsPageMobile clickBackToDCELink() {
 		jsClickNew(backToDrugCostEstimatorLink);
 		waitForPageLoadSafari();
+		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("drugdetails")) {
 			return new DrugDetailsPageMobile(driver);
 		} else
 			return null;
 	}
+	
+	public void deleteAllDrugs(String drugList) {
+		if (validate(savedDrug, 45)) {
+			CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
+			if (drugList.contains(",")) {
+				String[] drugs = drugList.split(",");
+				for (String drugName : drugs) {
+					driver.findElement(
+							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
+							.click();
+					jsClickNew(removeDrugBtn);
+				}
+			} else {
+				driver.findElement(
+						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
+						.click();
+				jsClickNew(removeDrugBtn);
+			}
+		}
+
+
+        CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
+        Assertion.assertTrue(importLnk.isDisplayed());
+    }
 
 	/**
 	 * Enroll in a plan
@@ -1003,6 +1028,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
+	
+	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
+	private WebElement savedDrug;
+	
+	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
+	private List<WebElement> savedDrugsList;
+	
+	@FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
+	private WebElement removeDrugBtn;
 
 	public void validateBackToDceLink() {
 		validate(backToDrugCostEstimatorLink);
