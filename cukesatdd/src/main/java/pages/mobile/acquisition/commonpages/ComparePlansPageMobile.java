@@ -46,11 +46,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
-	
+
 	@FindBy(xpath = "//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
 	private WebElement DceClosebutton;
 
-	@FindBy(xpath=".//*[contains(@id,'backtoplansummarypage')]")
+	@FindBy(xpath = ".//*[contains(@id,'backtoplansummarypage')]")
 	private WebElement backToAllPlansLink;
 
 	@FindBy(css = "#backtoprofilepage")
@@ -59,10 +59,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div/div[@class='text-semibold text-small text-lg-normal mb-20 ng-binding ng-scope']")
 	private WebElement planAvailableText;
 
-	@FindBy(xpath=".//*[@id='printComparison']")
+	@FindBy(xpath = ".//*[@id='printComparison']")
 	private WebElement validateprintbutton;
 
-	@FindBy(xpath=".//*[@id='emailComparison']")
+	@FindBy(xpath = ".//*[@id='emailComparison']")
 	private WebElement validateemailbutton;
 
 	@FindBy(xpath = ".//*[@id='emailcompareDescription']")
@@ -153,12 +153,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
-	@FindBy(xpath="//*[contains(@aria-label,'Remove Plan')]")
+	@FindBy(xpath = "//*[contains(@aria-label,'Remove Plan')]")
 	private WebElement removeLink;
-	
+
 	@FindBy(xpath = "//*[@id='viewallplansBtnId']")
 	private WebElement ViewAllPlans;
-	
+
 	@FindBy(xpath = "(//*[text()='View Plan Details'])[2]")
 	private WebElement viewPlanDetailslink;
 
@@ -197,6 +197,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='add-plan-menu_button']")
 	private WebElement addPlanButton;
 
+	@FindBy(xpath = "//img[contains(@class,'d-block mx-auto md-right-scroll-image')]")
+	private WebElement scrollBtnToAddBtn;
+
 	@FindBy(xpath = "//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
 
@@ -209,17 +212,17 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a//span[contains(text(),'Edit Hospitals')]")
 	private WebElement editHospitalsLink;
 
-	@FindBy(xpath="(//*[@id='your-hospitals-table']//span[contains(@class,'text-bold')])[1]")
+	@FindBy(xpath = "(//*[@id='your-hospitals-table']//span[contains(@class,'text-bold')])[1]")
 	private WebElement HospitalSummaryHeader;
 
-	@FindBy(xpath="//*[@id='your-hospitals-table']/tbody/tr[2]/td[2]/div")
+	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[2]/td[2]/div")
 	private WebElement HospitalSummaryCoverageHeader;
 
 	// @FindBy(xpath =
 	// "//tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
 	@FindBy(xpath = "//*[@id='your-hospitals-table']//span[contains(@class,'text-bold ng-binding')]")
 	private WebElement HospitalProviderName;
-	
+
 	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[5]/td[1]")
 	private WebElement HospitalProviderName1;
 
@@ -259,7 +262,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(css = "#yourdrugsheading")
 	private WebElement yourDrugsBanner;
 
-	@FindBy(css = "[dtmname='Plan Compare:Add Drugs']")
+	@FindBy(xpath = "//*[contains(text(),'Add Drugs') and contains(@class,'button')]")
 	private WebElement addDrugsLink;
 
 	@FindBy(css = "[dtmname='Plan Compare:Edit Drugs']")
@@ -306,11 +309,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#changes-submitted button")
 	private WebElement popupAccept;
+	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
 
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
 
-	@FindBy(xpath = "//td[3]//a[text()='Click here for details']")
+	@FindBy(xpath = "(//span[@class='dentalTextFont ng-binding']/p/b[not(contains(text(), 'No coverage'))])[3]")
 	private WebElement DentalLinkText;
 
 	@FindBys(value = { @FindBy(css = "table#your-doctors-table tbody>tr") })
@@ -333,6 +339,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//strong[contains(text(),'Monthly Premium')])[1]")
 	private WebElement PremiumDisplay;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	private WebElement proactiveChatExitBtn;
@@ -567,7 +576,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i += 1;
 		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath(
-				"(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["
+				"(//table[not(contains(@class, 'ng-hide'))]//tr[contains(@class, 'uhc-slide-table__row') and not(@id='printHeadingHide')]//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["
 						+ i + "]"));
 
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
@@ -874,10 +883,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	public void validateViewALLplanButtonNotDisplayed() {
-		Assertion.assertFalse("view all plans button must not be visible", (driver
-				.findElement(By.xpath("//div[contains(@class,'text-bold ng-scope')]")).getText()).contains("Show All"));
+		Assertion.assertFalse("view all plans button must not be visible",
+				(driver.findElement(By.xpath("//div[contains(@class,'text-bold ng-scope')]")).getText())
+						.contains("Show All"));
 		System.out.println("Validated view all plans link not displayed on plan compare");
 	}
 
@@ -940,7 +950,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} else
 			Assertion.assertTrue(false);
 	}
-	
+
 	public void dceModelClosepopup() {
 		validateNew(DceClosebutton);
 		jsClickNew(DceClosebutton);
@@ -995,7 +1005,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validateEditHospitals() {
-		
+
 		validateNew(backToAllPlansLink);
 		validateNew(yourHospitalsBanner);
 		validateNew(editHospitalsLink);
@@ -1011,7 +1021,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Verified Edit Hospitals Section header and Summary section");
 
 	}
-	
+
 	public void validateALLFiledsPlanComparePage() {
 		validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
@@ -1020,7 +1030,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(viewPlanDetailslink);
 //		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
-		validateNew(addPlanButton);
+//		validateNew(addPlanButton);
+//		validateNew(scrollBtnToAddBtn);
 		System.out.println("Validated all links plan compare");
 
 	}
@@ -1172,7 +1183,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (validate(FindCareLink)) {
 			jsClickNew(FindCareLink);
 			System.out.println("User is on Find care Page");
-			
+
 			return new FindCarePageMobile(driver);
 		} else
 			return null;
@@ -1427,6 +1438,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("#########No Drugs available for this member#########");
 		}
 	}
+	
+	public void clickOnEmailField() {
+
+		jsClickNew(summary_maEmailOption);
+	}
 
 	public void allSet() {
 		try {
@@ -1474,7 +1490,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Show All')]")
 	public WebElement viewAllplansButton;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement addMyDrugsButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
@@ -1490,6 +1506,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(addDrugsLink, 30);
 		jsClickNew(addDrugsLink);
+		scrollToView(addMyDrugsButton);
 		if (validateNew(addMyDrugsButton)) {
 			System.out.println("User is on DCE Get started Page");
 			return new GetStartedPageMobile(driver);
@@ -1600,11 +1617,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Count of plans on compare after button is clicked"
 				+ driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 		try {
-			if(viewAllplansButton.isDisplayed())
+			if (viewAllplansButton.isDisplayed())
 				Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
-		}
-		catch(NoSuchElementException e) {
-			
+		} catch (NoSuchElementException e) {
+
 		}
 		Assertion.assertEquals("Plan Counts mismatch", planCount,
 				driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
@@ -1725,13 +1741,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	// START >>>>> F&F - Added Code for DCE flow - View Drug COsts from View Drug
 	// Info Modal
 
-
-	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+	@FindBy(xpath = "//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
-		System.out.println("\n"+i+"\n");
+		System.out.println("\n" + i + "\n");
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-" + i + "')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
@@ -1766,7 +1781,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//div[contains(@class,'uhc-button__text btn_styles')])[1]")
 	public WebElement DrugCostDetailsButton;
-	
+
 	public DrugDetailsPageMobile clickDrugCostDetails_DrugInfoModal() {
 		validateNew(DrugCostDetailsButton);
 		jsClickNew(DrugCostDetailsButton);
@@ -1800,13 +1815,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 		for (i = 0; i <= DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath(
-					"//*[(@id='viewDrugInformationPopup')]//*[contains(text(), '" + currentAddedDrug + "')]"));
-			
+			WebElement DrugName = driver.findElement(
+					By.xpath("//*[(@id='viewDrugInformationPopup')]//*[contains(text(), '" + currentAddedDrug + "')]"));
+
 			WebElement DrugYouPay = driver
 					.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '" + currentAddedDrug
 							+ "')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
-			
+
 //			WebElement DrugYouPay = driver.findElement(
 //					By.xpath("(//*[contains(@id, 'accordion-1-content') and contains(@class,'accordion__content')])[2]"
 //							+ "//*[contains(text(), '" + currentAddedDrug
@@ -1815,7 +1830,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 			// which fails the scripts ahead
 			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
-			} else {
+			} else if (MRScenario.browserName.equalsIgnoreCase("Safari") & driver.getClass().toString().toUpperCase().contains("IOS")) 
+			{
+				drugYouPay = DrugYouPay.getText().trim();
+			} else 
+			{
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
 			}
 
@@ -1856,12 +1875,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			try{
+			try {
 				WebElement DrugName = driver.findElement(By.xpath(
 						"//*[@id='your-drugs-table']//tr[starts-with(@ng-repeat,'drug in') and not(contains(@class, 'desktop'))]//span[contains(text(), '"
 								+ currentDrug + "')]"));
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				WebElement DrugName = driver.findElement(By.xpath(
 						"//*[@id='your-drugs-table']//tr[starts-with(@ng-repeat,'drug in') and not(contains(@class, 'desktop'))]//span[contains(text(), '"
 								+ currentDrug.toUpperCase() + "')]"));
@@ -2080,5 +2098,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = " + populatedEmail);
+		Assertion.assertEquals(email, populatedEmail);
 	}
 }

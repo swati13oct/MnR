@@ -989,6 +989,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate(site);
+		
+		
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -1088,6 +1090,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Proactive chat popup not displayed");
 			}
 		}
+		
+		
 	}
 
 	public void openAndValidate(boolean alreadyOnSite) {
@@ -8165,5 +8169,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void verifyElementNotPresent() {
 		Assert.assertFalse(validate(aarpMembership), "Verify if the AARP Membership links are displayed on HomePage.");
+	}
+	
+	public String returnCookieValue() {
+		
+		String cookieName = "NULL";
+		if(getCookieName("rxVisitor")!=null)
+			cookieName = (getCookieName("rxVisitor").toString());
+		System.out.println("visitor cookie : "+cookieName);
+		return cookieName;
+	}
+
+
+	@FindBy(xpath = "//*[@id='companyNameLink']")
+	private WebElement affiliateLink;
+	
+	@FindBy(xpath = "//*[@id='companyNameFlyout']")
+	private WebElement affiliateFlyOut;
+
+	public void verifiyAffiliatelink() {
+		
+		if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			Assert.assertEquals(driver.findElements(By.xpath("//*[@id='companyNameLink']")).size(), 0, "*** Affiliate link not present. ***");
+		} else if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			Actions action = new Actions(driver);
+			action.moveToElement(affiliateLink).perform();
+			//validateNew(affiliateFlyOut);
+			
+}
+	}
+	
+	@FindBy(xpath = "//*[@id='companyNameLabel']")
+	private WebElement affiliateText;
+	
+	public void verifiyAffiliateText() {
+		Assert.assertFalse(validate(affiliateLink), "Verify if affilliate Link present.");
+		if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			Assert.assertEquals(driver.findElements(By.xpath("//*[@id='companyNameLabel']")).size(), 0, "*** Affiliate link not present. ***");
+		} else if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			 validateNew(affiliateText);
+			
+}
 	}
 }

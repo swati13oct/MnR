@@ -51,6 +51,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='text-small header-link-mobile'][normalize-space()='Or, Sign In to your Profile']")
 	private WebElement signIn;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement signIn1;
 
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
@@ -91,6 +94,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+	private WebElement signOut1;
 
 	@FindBy(css = "#enrollment-next-button")
 	private WebElement NextBtn;
@@ -746,24 +752,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public void signIn(String username, String password) {
 		try {
-			/*
-			 * if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
-			 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-			 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
-			 * "Puerto Rico") ||
-			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
-			 */
-			String State = CommonConstants.getSelectedState();
-			// if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
-			// StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
-				Thread.sleep(3000);
-				// signInLegacy.click();
-				jsClickNew(signIn);
-
-			} else {
-				System.out.println("Clicking on SignIn from Visitor Profile guest page");
-				jsClickNew(signIn);
+			try {
+				if(signIn.isDisplayed())
+					jsClickNew(signIn);
+			}
+			catch(Exception e) {
+				jsClickNew(signIn1);
 			}
 			Thread.sleep(3000);
 			waitForPageLoadSafari();
@@ -797,7 +791,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			}
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			try {
+				if(signOut.isDisplayed())
+					validateNew(signOut);
+			}
+			catch(Exception e) {
+				validateNew(signOut1);
+			}
 
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
@@ -808,11 +808,36 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public DrugDetailsPageMobile clickBackToDCELink() {
 		jsClickNew(backToDrugCostEstimatorLink);
 		waitForPageLoadSafari();
+		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("drugdetails")) {
 			return new DrugDetailsPageMobile(driver);
 		} else
 			return null;
 	}
+	
+	public void deleteAllDrugs(String drugList) {
+		if (validate(savedDrug, 45)) {
+			CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
+			if (drugList.contains(",")) {
+				String[] drugs = drugList.split(",");
+				for (String drugName : drugs) {
+					driver.findElement(
+							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
+							.click();
+					jsClickNew(removeDrugBtn);
+				}
+			} else {
+				driver.findElement(
+						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
+						.click();
+				jsClickNew(removeDrugBtn);
+			}
+		}
+
+
+        CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
+        Assertion.assertTrue(importLnk.isDisplayed());
+    }
 
 	/**
 	 * Enroll in a plan
@@ -1003,6 +1028,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
+	
+	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
+	private WebElement savedDrug;
+	
+	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
+	private List<WebElement> savedDrugsList;
+	
+	@FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
+	private WebElement removeDrugBtn;
 
 	public void validateBackToDceLink() {
 		validate(backToDrugCostEstimatorLink);

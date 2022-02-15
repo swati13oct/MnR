@@ -1570,6 +1570,27 @@ public class PlanDetailsPage extends UhcDriver {
 			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
 
 	}
+	
+	public boolean verifyAddedDrugPharmacyDetailsCost(String planName, String networkType) {
+		
+		System.out.println("Drug cost on plan Details : " + planCostTabDrugCostValueCell.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(planCostTabDrugCostValueCell.getText().equals("")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (planCostTabDrugCostValueCell.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
+
+		}
+			}
+		
+			
+		}
+		return false;
+			
+		}
 
 	public DrugDetailsPage returnToReviewDrugCost() {
 		// TODO Auto-generated method stub

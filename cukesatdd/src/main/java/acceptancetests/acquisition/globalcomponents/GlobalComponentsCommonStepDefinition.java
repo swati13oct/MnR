@@ -96,6 +96,8 @@ public class GlobalComponentsCommonStepDefinition {
 		String site = memberAttributesMap.get("Site");
 		//AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
+		if(aquisitionhomepage.returnCookieValue()!= null)
+			scenario.log(aquisitionhomepage.returnCookieValue());
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
@@ -112,6 +114,10 @@ public class GlobalComponentsCommonStepDefinition {
 				
 				//aquisitionhomepage.validateSubtitle();
 		//}
+			
+		if (MRScenario.environment.equalsIgnoreCase("offline") ||  MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("prod")){
+			aquisitionhomepage.handleSurveyPopup();
+		}
 		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
 		}
@@ -1415,6 +1421,22 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.verifyElementNotPresent();
+	}
+	
+	@Then("^user validate affiliate link on header for geo target state$")
+	public void Verifiy_affiliate_Link() {
+		scenario.log("Changes made on 2/13- Step added for affiliate company name header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.verifiyAffiliatelink();
+	}
+	
+	@Then("^user validate affiliate for non-geo target states$")
+	public void Verifiy_affiliate_Text() {
+		scenario.log("Changes made on 2/13- Step added for affiliate label header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.verifiyAffiliateText();
 	}
 }
 

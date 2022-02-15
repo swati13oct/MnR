@@ -136,37 +136,36 @@ public class VppPlanSummaryMobile {
 
 		String planName = givenAttributesMap.get("Plan Name").trim();
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		// getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
+
 		try {
 			String plantype = givenAttributesMap.get("Plan Type").trim();
 			planSummaryPage.viewPlanSummary(plantype);
-		}
-		catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 		Assertion.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 
 	}
-	
+
 	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
 	public void I_validate_planNames_on_planSummary(String planType, String planNames) throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validatePlanNames(planType, planNames);
 	}
-	
+
 	@Then("^I validate view more and view less links on plan summary$")
 	public void i_validate_viewMore_and_viewLess() throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateViewMoreAndLessLinks();
 	}
-	
+
 	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
 	public void i_save_plans_and_verify_plan_count(String planType, String Counter) throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -181,7 +180,7 @@ public class VppPlanSummaryMobile {
 			break;
 		}
 	}
-	
+
 	@Then("^user click on close button on Drug info Modal popup")
 	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -1429,7 +1428,9 @@ public class VppPlanSummaryMobile {
 	public void user_validate_Find_a_Provider_NBA_on_VPP() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		plansummaryPage.validateProviderNBA();
+
 	}
 
 	@When("^user clicks on Find a Provider button on NBA$")

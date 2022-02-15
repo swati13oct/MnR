@@ -32,7 +32,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
     Then user validate drugs details from VPP to DCE page
       | Drugs Name | <DrugsName> |
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | DrugInfo                                                                                                                                              | DrugsName                         |
       | AARP |   94203 | NO            | Sacramento | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:Actiq,NO,,,,Week,1,YES,NO         | Yes,No,No,Yes                 | Lower                | Assure (HMO),Actiq LOZ 200MCG,False:Assure (HMO),Lipitor TAB 20MG,False:Walgreens (PDP),Actiq LOZ 200MCG,False:Walgreens (PDP),Lipitor TAB 20MG,False | Lipitor TAB 20MG:Actiq LOZ 200MCG |
@@ -66,7 +66,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
       | AARP |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 | Lipitor TAB 80MG,,10,Day,3,YES,NO                         |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch1 |
       | UHC  |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,Week,1,YES,NO                                 | Lipitor TAB 80MG,,10,Day,3,YES,NO                         |
@@ -96,7 +96,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
     And user verifies doctors session in Doctors page
       | Multi Doctor | <isMultiDoctor> |
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | DoctorsName      | isMultiDoctor |
       | AARP |   10003 | NO            | New York | MAPD          | None         | Ricky K. Hsu, MD | NO            |
@@ -134,7 +134,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
       | AARP |   35035 | YES           | Bibb County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | DrugsName                                     |
       | UHC  |   35035 | YES           | Bibb County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Lipitor TAB 20MG:morphine sulfate CAP 10MG ER |
@@ -161,7 +161,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
       | AARP |   35035 | YES           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
 
-    @regressionUHC
+    @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
       | UHC  |   35035 | YES           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO |
@@ -183,7 +183,7 @@ Feature: 1.18.4 Plan Recommendation Engine flow - Verify PRE flows functionaliti
     Then user validate zipcode saved in PRE session	and reflected in home page
       | Zip Code | <Zipcode> |
 
-    @regressionAARP
+    @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
       | AARP |   37902 | NO            | Knox County | PDP           | No             |

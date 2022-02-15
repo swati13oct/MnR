@@ -18,6 +18,12 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 12 related to N
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
+
+		@CampaignExternal_Scenario12_AARP @featureGate
+    Examples:
+      | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |
+      | Campaign External Links - E2E Scenario 12_AMP | 65656        | 33111         | Yes           | Stone County | 1-855-264-3792 | true    | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-prescription-drug-plans.html |
+
     @CampaignExternal_Scenario12_AARP @StageLP
     Examples:
       | Scenario                                      | zipcodeMulti | zipcodeSingle | isMultiCounty | county       | TFNNo          | tfnFlag | TFNxpath1                   | workingHrs                              | externallink                                                                         |

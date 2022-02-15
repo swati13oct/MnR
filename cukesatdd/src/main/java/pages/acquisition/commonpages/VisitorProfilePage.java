@@ -752,6 +752,7 @@ public class VisitorProfilePage extends UhcDriver {
             }
             jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
             waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
             CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
         } catch (Exception e) {
@@ -834,7 +835,8 @@ public class VisitorProfilePage extends UhcDriver {
     public ComparePlansPage planCompare(String plans) {
 
         jsClickNew(comparePlans);
-        validateNew(enrollBtn);
+        //validateNew(enrollBtn);
+		validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")));
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -1554,6 +1556,7 @@ public class VisitorProfilePage extends UhcDriver {
 			txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
 			jsClickNew(chkAttest);
 			jsClickNew(btnNonMemViewDrugsAndDocs);
+			sleepBySec(15);
 			waitforElementNew(savedDrugsAndDoctorsHeader);
 			break;
 
@@ -1574,7 +1577,8 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void clickOnMSPlanDetailsPage(String planName) {
 	    //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
-	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
+	    CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
 		jsClickNew(btnMSPlanDetails);
 		waitforElementNew(lnkbackToProfile);
 	}

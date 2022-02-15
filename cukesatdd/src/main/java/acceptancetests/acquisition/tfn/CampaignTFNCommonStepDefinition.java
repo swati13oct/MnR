@@ -178,6 +178,7 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.OpenPath(Acq_Site, CampaignPath);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
 	}
 
@@ -872,10 +873,12 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		VPPPlanSummaryPage plansummaryPage=new VPPPlanSummaryPage(driver);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.ViewPlanSummary(PlanType);
 		// tfnPage.NavigateToPlanDetails(PlanType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
 	}
 
 	@Then("^the user navigates back to page$")
@@ -897,12 +900,13 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		AcquisitionHomePage acqusitionHomePage=new AcquisitionHomePage(driver);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String Zip = memberAttributesMap.get("Zip Code");
 		tfnPage.HomepagePlanSearch(Zip);
 		VPPPlanSummaryPage plansummaryPage = tfnPage.ViewPlanSummary(PlanType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
 
 	@Then("^the user navigates to Plan Details Page for DCE Flow$")
@@ -1517,5 +1521,52 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
 	}
 	
+	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP$")
+	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN_on_VPP() throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
+	}
 	
+	@Then("the user validates TFN in Already an insured section")
+	public void the_user_validates_tfn_in_already_an_insured_section(DataTable inputAttributese) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(inputAttributese);	
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		tfnPage.validateStaticMedsupTFNNo(ExpecetdTFNNo);
+	}
+
+	@And("^user click on Start Application from MS plan details$")
+	public void the_user_clicks_on_Start_MS_OLE_plan_details(DataTable attributes) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(attributes);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlanDetailsHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h2[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plan insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlanDetailsHeading && zipCode.equals("90210")
+				|| !msPlanDetailsHeading && zipCode.equals("24010")) ? true
+						: (msPlanDetailsHeading && zipCode.equals("24010")
+								|| !msPlanDetailsHeading && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlanDetailsHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlanDetailsHeading) {
+			tfnPage.clickStartMS4OleFromPlanDetails();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.clickStartMS3Ole();
+
+	}
 }
