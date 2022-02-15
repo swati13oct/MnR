@@ -1,6 +1,7 @@
 package pages.acquisition.dceredesign;
 
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
@@ -27,7 +29,18 @@ public class DCEDetailsPage extends UhcDriver {
     private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
     private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
     private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+    @Autowired
+    MRScenario loginScenario;
 
+    @FindBy(xpath="//h2[@class='heading-2 noborder text-blue-primary']")
+    private WebElement planName;
+
+    @FindBy(xpath="//h3[text()='Monthly Premium']/following-sibling::p")
+    private WebElement monthly_Premium;
+
+    public MRScenario getLoginScenario() {
+        return loginScenario;
+    }
     public DCEDetailsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -66,11 +79,27 @@ public class DCEDetailsPage extends UhcDriver {
         threadsleep(2000);
         driver.navigate().refresh();
         threadsleep(5000);
-        if(driver.findElement(By.xpath("//a[@id='DrugListDetails']")).isDisplayed()){
-            System.out.println("Link is Displayed");
-            driver.findElement(By.xpath("//a[@id='DrugListDetails']")).click();
+        try {
+            if(driver.findElement(By.id("estimateYourDrugsLink")).isDisplayed()){
+                driver.findElement(By.id("estimateYourDrugsLink")).click();
+                threadsleep(5000);
+                driver.findElement(By.id("adddrug")).click();
+                driver.findElement(By.xpath("//input[contains(@id, 'drugsearch')]")).sendKeys("lipitor");
+                driver.findElement(By.xpath("//button[(@id= 'search')]")).click();
+                threadsleep(5000);
+                driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + "Lipitor" + "')]")).click();
+                threadsleep(5000);
+                driver.findElement(By.xpath("//button//*[contains(text(),'Add to drug List')]")).click();
+                threadsleep(2000);
+                driver.findElement(By.xpath("(//button/span[text()='Next: Review Drug Costs'])[1]")).click();
+            }
         }
-
+        catch (Exception ex){
+            if(driver.findElement(By.xpath("//a[@id='DrugListDetails']")).isDisplayed()){
+                System.out.println("Link is Displayed");
+                driver.findElement(By.xpath("//a[@id='DrugListDetails']")).click();
+            }
+        }
     }
 
     //this method is used for direct deeplink to plan details page for plan validation
@@ -142,11 +171,12 @@ public class DCEDetailsPage extends UhcDriver {
     }
 
     public HashMap<String, String> collectInfoVppPlanDetailPg() {
-//        System.out.println("Proceed to collect the info on vpp detail page =====");
-//
-//        HashMap<String, String> result=new HashMap<String, String>();
-//
-//        result.put("Plan Name", planName.getText());
+        System.out.println("Proceed to collect the info on DCE detail page =====");
+
+        HashMap<String, String> result=new HashMap<String, String>();
+
+        result.put("Plan Name", planName.getText());
+        result.put("Monthly Premium", monthly_Premium.getText());
 //        String key="Total Tabs";
 //        String value = "";
 //        result.put(key, String.valueOf(listOfTabHeaders.size()));

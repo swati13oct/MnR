@@ -131,15 +131,6 @@ public class DCEPlanValidationStepDefinition {
                             System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
                             new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
                             planDetailsPage = new DCEDetailsPage(wd);
-
-									/*  if(sheetName.contains("PDP")) {
-										  if(!row.getCell(6).getStringCellValue().contains("NA")) {
-											  //planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
-											  //benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
-											  //planDetailsPage.editDrugListAndRemoveDrug();
-										  }else
-											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
-									  }else*/
                             benefitsMap = planDetailsPage.collectInfoDCEPlanDetailPg(sheetName,rowIndex);              //  stores all the table info into hashmap
 
                         }//end if cellIndex = 0
