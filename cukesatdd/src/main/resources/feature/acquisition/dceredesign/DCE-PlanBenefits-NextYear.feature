@@ -60,8 +60,8 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | TierCopay | <mailT3> |
     Then the user validates Tier 4 Copay in copay section and in Your Drugs section
       | TierCopay | <mailT4> |
-   #Then the user validates Tier 5 Copay in copay section and in Your Drugs section
-   #  | TierCopay | <mailT5> |
+   Then the user validates Tier 5 Copay in copay section and in Your Drugs section
+      | TierCopay | <mailT5> |
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinFlag_MailCopay> |
       | Insulin Drug | <InsulinDrug>           |
