@@ -218,7 +218,7 @@ Feature: 1.09. ACQ- Shopper Profile
     @team-e_AddProvider @regressionSPTeamE @featureGate
     Examples:
       | username | password       | email             | mbi           | dob        | zipcode | fname  | lname   | uuid                                 | enrolledplanName                                    | planname                                            | plantype | drugNames | providers |
-      | ocpuser2 | Password@12345 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 | 80229   | NANINE | SLOVICK | 473768c6-466d-4a32-9c3b-2c66b712aaf4 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
+      | ocpuser2 | Password@12345 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 | 80229   | NANINE | SLOVICK | 0fcae3c0-4e75-375b-a48d-f606c2d6fea7 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
 
     @stage_AddProvider @regressionSPStage @sanity @regressionAARP
     Examples:
