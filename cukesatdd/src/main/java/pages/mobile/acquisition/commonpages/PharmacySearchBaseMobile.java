@@ -159,6 +159,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		} else {
 			System.out.println("*****Zip format is not right******");
 		}
+		if(zipcode.equals("")) {
+			jsClickNew(countyModal);
+			jsClickNew(searchbtn);
+		}
 		return testNote;
 	}
 
