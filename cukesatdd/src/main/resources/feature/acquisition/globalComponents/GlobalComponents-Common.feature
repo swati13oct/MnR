@@ -1119,7 +1119,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | Is Multi County2 | <isMultiCounty2> |
     Then user validate affiliate for non-geo target states
 
-    @GeoTarget_Affiliate123
+    @GeoTarget_Affiliate
     Examples: 
       | site | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
       | AARP | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
@@ -1182,18 +1182,18 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @GeoTarget_Affiliate
     Examples: 
-      | site | path                                                      | state               | code | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
-      | AARP | profile                                                   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
-      | AARP | shop/switch.html                                          | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
-      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
-      | AARP | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
-      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | site | path                                                      | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | AARP | profile                                                   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | shop/switch.html                                          | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | AARP | plan-recommendation-engine.html                           | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
 
     @GeoTarget_Affiliate
     Examples: 
-      | site | state                                                     | code                | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city                 | state1      | isMultiCounty2 | county2          |                  |
-      | UHC  | U.S. Virgin Islands                                       | VI                  | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD            | CONNECTICUT | NO             | Fairfield County |                  |
-      | UHC  | shop/switch.html                                          | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
-      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
-      | UHC  | plan-recommendation-engine.html                           | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
-      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | U.S. Virgin Islands | VI     | Texas | TX      |           77083 | yes              | Fort Bend County     | 584 MAIN AVE NORWALK | FAIRFIELD   | CONNECTICUT    | NO               | Fairfield County |
+      | site | path                                                      | state1 | code1 | zipcode | isMultutiCounty | county           | address              | city      | state1      | isMultiCounty2 | county2          |
+      | UHC  | profile                                                   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | shop/switch.html                                          | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | plan-recommendation-engine.html                           | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Texas  | TX    |   77083 | yes             | Fort Bend County | 584 MAIN AVE NORWALK | FAIRFIELD | CONNECTICUT | NO             | Fairfield County |
