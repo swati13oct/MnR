@@ -266,7 +266,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@dlassetid='ps-view-pdf-lnk']/span[contains(@class,'uhc-button_text')]")
 	protected WebElement viewsearchpdf;
 
-	@FindBy(xpath = "//a[@id='viewImportantInformationpdf_id']")
+	@FindBy(xpath="(//div[@id='viewpdf']//a)[2]")
 	protected WebElement viewFrontMatterPdf;
 
 	@FindBy(xpath = "//span[@class='accordion__header text-bold text-sans-serif text-gray-800 text-normal']")
@@ -365,10 +365,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath = "//h3[contains(text(),'Walgreens – Preferred Retail Pharmacy ')]/../../..")
+	@FindBy(xpath="(//h3[contains(text(),'Walgreens')]/../../..)[2]")
 	protected WebElement widget_walgreens;
 
-	@FindBy(xpath = "//h3[contains(text(),'Preferred Retail Pharmacy Network ')]/../../..")
+	@FindBy(xpath="//h3[@class='m-0 text-bold']/../../..//p[contains(text(),'MedicareRx Preferred (PDP)')]/../../..")
 	protected WebElement widget_preferredRetailPharmacyNetwork;
 
 	@FindBy(xpath = "//*[contains(@id, 'errorcontainer')]//*[contains(@class, 'errtext')]")
@@ -386,7 +386,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'mail-order')]")
 	protected WebElement widget_prefMailServPhar_learnMore;
 
-	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
+	@FindBy(xpath="//div[@class='uhc-card__content text-left']//p//a[@href='/health-plans/estimate-drug-costs.html#/drug-cost-estimator']")
 	protected WebElement widget_prefRetPhaNet_estYurDrugCosts;
 
 	@FindBy(xpath = "//a[contains(text(),'Estimate your drug costs at a Walgreens preferred retail pharmacy')]")
