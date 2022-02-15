@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Duration;
@@ -13,6 +14,11 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+
+
+import java.util.Base64;
+import static org.apache.commons.io.IOUtils.toByteArray;
+
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.client.HttpClient;
@@ -1345,48 +1351,64 @@ public abstract class UhcDriver {
 	}
 	
 	/**
-	 * @author Prashan - peknath This method will perform file upload on mobile
+	 * @author Prashant This method will perform file upload to mobile
+	 * @throws InterruptedException 
 	 *         
 	 */
-	public boolean mobileUpload(String initialLocation, String newLocation ,WebElement element) {
-		boolean uploadSuccess = true;
-		AppiumDriver mobiledriver = (AppiumDriver) driver;
-		WebDriverWait wait = new WebDriverWait(mobiledriver, 5);
-		mobiledriver.setFileDetector(new LocalFileDetector());
-		//Push file to device
-		 try {
-			((PushesFiles) mobiledriver).pushFile(initialLocation, new File(newLocation));
-			//driver.pushFile("/sdcard/Download/image.jpg", new File("/Users/johndoe/Desktop/image.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
+		boolean uploadSuccess = false;
+		String curHandle = ((IOSDriver) driver).getContext();
+		System.out.println("curHandle - " + curHandle);
+		System.out.println(((IOSDriver) driver).getContextHandles());
+		 Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
+	        for (String strContextName : contextNames) {
+	            if (strContextName.contains("NATIVE_APP")) {
+	            	((IOSDriver) driver).context("NATIVE_APP");
+	                break;
+	            }
+	        }
+			/*Click on 'Allow' - permission
+        	By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
+        	wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
+        	mobiledriver.findElement(elementView).click();
+			 */
+	        //TO-DO:Replace with Id of Browse button instead of done
+	        ((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
+	        
+	        getFiletoUpload("card");
+	        if(uploadBtn.isDisplayed()) {
+	        	uploadSuccess = true;
+	        }
+	        uploadBtn.click();
+	        Thread.sleep(500);
+			((IOSDriver) driver).context(curHandle);
+			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
+			return uploadSuccess;
+	}
+	
+	/**
+	 * Gets the image file from mobile.
+	 *
+	 * @author Prashant
+	 * @param fileName the file name with jpg extension
+	 * @return the file for uploading to mobile
+	 */
+
+	public byte[] getFiletoUpload(String fileName) {
+		byte[] content = null;
+		try {
+			if (!fileName.isEmpty()) {
+				AppiumDriver mobileDriver = (AppiumDriver) driver;
+				content = mobileDriver.pullFile("/sdcard/Download/" + fileName + ".jpg");
+			}
+		} catch (Exception e) {
+			Assertion.fail("Unable to read file " + fileName + " from sdcard/Download/");
 		}
 
-       //Switch to Native_App
-        Set<String> contextNames = mobiledriver.getContextHandles();
-        for (String strContextName : contextNames) {
-            if (strContextName.contains("NATIVE_APP")) {
-            	mobiledriver.context("NATIVE_APP");
-                break;
-            }
-        }
-        
-        
-        //Click on 'Allow' - permission
-        By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
-        mobiledriver.findElement(elementView).click();
-        //
-        if (element.isDisplayed()) {
-        	element.click();
-        }
-        
-        else {
-        	uploadSuccess = false;
-        }
-	
-		return uploadSuccess;
+		return content;
 	}
+	
+
 
 	/**
 	 * @author Murali - mmurugas This method will hide mobile keypad

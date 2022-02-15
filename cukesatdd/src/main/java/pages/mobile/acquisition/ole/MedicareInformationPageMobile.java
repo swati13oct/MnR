@@ -472,7 +472,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	}
 	
 	//New method
-	public boolean select_from_library() throws IOException {
+/*	public boolean select_from_library() throws IOException {
 		//comment
 		boolean flag = false;
 		
@@ -493,7 +493,35 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		}
 		return flag;
 
+}*/
+	public boolean select_from_library() throws IOException {
+		//comment
+		boolean flag = false;
+		
+		if (cameraIcon.isDisplayed()) {
+			cameraIcon.click();
+			if (btnSelectLibrary.isDisplayed()) {
+				try {
+					flag = mobileUpload("file", UsePhoto);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("select from library button is not displayed");
+				flag = false;
+			}
+			
+		}
+		else
+		{
+			System.out.println("camera icon is not displayed");
+			flag = false;
+		}
+		return flag;
+
 }
+
 			public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
 
 		validateNew(NextBtn);
