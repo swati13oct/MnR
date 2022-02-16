@@ -801,55 +801,63 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
     int rowIndex;
 
     public HashMap<String, String> collectInfoPharmacyPage(String planName, String zipcode, String countyName, String planYear, String sheetName, int rowIndex) {
+        HashMap<String, String> result = null;
+        for (int i = 0; i < 5; i++) {
+            try {
+                System.out.println("Input : " + zipcode + "; " + countyName + "; " + planName);
+                zipcodeField.clear();
 
-        System.out.println("Input : "+zipcode+"; "+countyName+"; "+planName);
-        zipcodeField.clear();
+                zipcodeField.sendKeys(zipcode);
 
-        zipcodeField.sendKeys(zipcode);
+                selectFromDropDownByText(driver, distanceDropownID, "25 Miles");
+                sleepBySec(3);
+                jsClickNew(countyDrpDwn);
+                sleepBySec(1);
+                countyName = countyName + " County";
+                selectFromDropDownByText(driver, countyDrpDwn, countyName);
+                sleepBySec(3);
 
-        selectFromDropDownByText(driver, distanceDropownID, "25 Miles");
-        sleepBySec(3);
-        jsClickNew(countyDrpDwn);
-        sleepBySec(1);
-        countyName = countyName+" County";
-        selectFromDropDownByText(driver, countyDrpDwn, countyName);
-        sleepBySec(3);
+                jsClickNew(seletPlandropdown);
+                sleepBySec(1);
+                selectFromDropDownByText(driver, seletPlandropdown, planName);
+                sleepBySec(2);
+                jsClickNew(searchbtn);
 
-        jsClickNew(seletPlandropdown);
-        sleepBySec(1);
-        selectFromDropDownByText(driver, seletPlandropdown, planName);
-        sleepBySec(2);
-        jsClickNew(searchbtn);
+                sleepBySec(5);
 
-        sleepBySec(5);
+                this.sheetName = sheetName;
+                this.rowIndex = rowIndex;
 
-        this.sheetName = sheetName;
-        this.rowIndex = rowIndex;
+                result = new HashMap<String, String>();
+                String key = "";
+                String value = "";
 
-        HashMap<String, String> result = new HashMap<String, String>();
-        String key = "";
-        String value = "";
+                key = "Days supply";
+                value = getDaysSupply();
+                result.put(key, value);
 
-        key = "Days supply";
-        value = getDaysSupply();
-        result.put(key, value);
+                key = "WalgreensWidget";
+                value = (validate(widget_walgreens)) ? "YES" : "NO";
+                result.put(key, value);
 
-        key = "WalgreensWidget";
-        value = (validate(widget_walgreens))? "YES" : "NO";
-        result.put(key, value);
+                key = "PreferredWidget";
+                value = (validate(widget_preferredRetailPharmacyNetwork)) ? "YES" : "NO";
+                result.put(key, value);
 
-        key = "PreferredWidget";
-        value = (validate(widget_preferredRetailPharmacyNetwork))? "YES" : "NO";
-        result.put(key, value);
+                key = "PreferredMail";
+                value = (validate(widget_preferredMailServicePharmacy)) ? "YES" : "NO";
+                result.put(key, value);
 
-        key = "PreferredMail";
-        value = (validate(widget_preferredMailServicePharmacy))? "YES" : "NO";
-        result.put(key, value);
-
-        key = "PreferredRetail";
-        value = getPreferredPlan();
-        result.put(key, value);
-
+                key = "PreferredRetail";
+                value = getPreferredPlan();
+                result.put(key, value);
+            }
+            catch (Exception ex){
+                driver.navigate().refresh();
+                System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed after Exception");
+                continue;
+            }
+        }
         return result;
     }
 
