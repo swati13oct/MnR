@@ -356,7 +356,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
-	@FindBy(id="dateOfBirth")
+	//@FindBy(id="dateOfBirth")
+	@FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
 	private WebElement msDOB;
 	
 	@FindBy(xpath = "//span[text()='Continue Application']")
