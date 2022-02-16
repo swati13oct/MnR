@@ -417,7 +417,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | ZipCode | <SpecialtyPharmacyZip> |
     Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
       | PharmacyFilterText | <SpecialtyPharmacy> |
-    Then the user selects following pharmacy and returns to DCE Summary pageo
+    Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SpecialtyPharmacy> |
     Then the user validates Covered Drug display for NC Pharmacy selection
     Then the user validates Speciality pharmacy message DCE Summary Page plan card
