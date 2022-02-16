@@ -57,7 +57,7 @@ Feature: To validate pages on AEM
       #| admin    | admin    | /content/aarpmedicareplans/en/shop/compare/compare-ms    |
       | admin    | admin    | /content/aarpmedicareplans/en/medicare-articles |
 
-    
+
   Scenario Outline: To Validate AEM Data Layer for Dynamic Pages
     Given the user login in AEM
       | Username | <username> |

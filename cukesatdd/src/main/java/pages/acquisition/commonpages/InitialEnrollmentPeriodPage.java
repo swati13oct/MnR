@@ -29,13 +29,12 @@ public class InitialEnrollmentPeriodPage extends GlobalWebElements {
 
     @FindBy(xpath = "(//h1[contains(text(),'Medicare Initial Enrollment Period (IEP)')])[1]")
     public WebElement header;
-    //Hello world
 
     @FindBy(xpath = "//a[contains(@href,'/medicare-education/medicare-while-working.html')]//span[contains(text(),'Delay')]")
     public WebElement lnkDelay;
 
-    @FindBy(xpath = "//a[contains(@href,'/medicare-education/medicare-parts-and-medigap-plans.html')]//span[contains(text(),'Medicare')]")
-    public WebElement lnkPartsCombined;
+    @FindBy(xpath = "//a[contains(@href,'/medicare-articles/what-if-i-missed-my-initial-enrollment-period.html')]")
+    public WebElement lnkMissingIEP;
 
     @FindBy(xpath ="//span[contains(text(),'How to Enroll')]")
     public WebElement lnkHowToEnroll;
@@ -65,39 +64,41 @@ public class InitialEnrollmentPeriodPage extends GlobalWebElements {
         }
     }
     public void checkInnerLinks(){
-        WebElement lnkAutoEnroll=driver.findElement(By.xpath("//a//span[contains(text(),'Am I automatically enrolled')]"));
-        WebElement backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
-        jsClickNew(lnkAutoEnroll);
-        jsClickNew(backtotop);
-        System.out.println(" Link Clicked: Am I automatically enrolled in Medicare at 65? ");
+    	 WebElement lnkMedIEP=driver.findElement(By.xpath("//a//span[contains(text(),'Medicare Initial Enrollment Period (IEP)')]"));
+         WebElement backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[1]"));
+         jsClickNew(lnkMedIEP);
+         jsClickNew(backtotop);
+         System.out.println(" Link Clicked: The Medicare Initial Enrollment Period (IEP) ");
 
-        WebElement lnkWhenEnroll=driver.findElement(By.xpath("//a//span[contains(text(),'When can I enroll')]"));
-        backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
-        jsClickNew(lnkWhenEnroll);
-        jsClickNew(backtotop);
-        System.out.println(" Link Clicked: When can I enroll in Medicare? ");
+         WebElement lnkAutoEnroll=driver.findElement(By.xpath("//a//span[contains(text(),'Am I automatically enrolled')]"));
+         backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[2]"));
+         jsClickNew(lnkAutoEnroll);
+         jsClickNew(backtotop);
+         System.out.println(" Link Clicked: Am I automatically enrolled in Medicare at 65? ");
 
-        WebElement lnkMissIEP=driver.findElement(By.xpath("//a//span[contains(text(),'miss my Initial Enrollment Period')]"));
-        backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
-        jsClickNew(lnkMissIEP);
-        jsClickNew(backtotop);
-        System.out.println(" Link Clicked: What happens if I miss my Initial Enrollment Period? ");
+         WebElement lnkNeedMedicare=driver.findElement(By.xpath("//a//span[contains(text(),'Do I need Medicare')]"));
+         backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[3]"));
+         jsClickNew(lnkNeedMedicare);
+         jsClickNew(backtotop);
+         System.out.println(" Link Clicked: Do I need Medicare if working past 65? ");
 
-        WebElement lnkNeedMedicare=driver.findElement(By.xpath("//a//span[contains(text(),'Do I need Medicare')]"));
-        backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[4]"));
-        jsClickNew(lnkNeedMedicare);
-        jsClickNew(backtotop);
-        System.out.println(" Link Clicked: Do I need Medicare if working past 65? ");
+         WebElement lnkWhenEnroll=driver.findElement(By.xpath("//a//span[contains(text(),'when you can enroll')]"));
+         //backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[4]"));
+         jsClickNew(lnkWhenEnroll);
+         //jsClickNew(backtotop);
+         System.out.println(" Link Clicked: Find out when you can enroll in Medicare ");
 
-        WebElement lnkWhichPart=driver.findElement(By.xpath("//a//span[contains(text(),'which parts of Medicare')]"));
-        backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[5]"));
-        jsClickNew(lnkNeedMedicare);
-        jsClickNew(backtotop);
-        System.out.println(" Link Clicked: How do I know which parts of Medicare I need? ");
+         WebElement lnkMissIEP=driver.findElement(By.xpath("//a//span[contains(text(),'miss my Initial Enrollment Period')]"));
+         backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[4]"));
+         jsClickNew(lnkMissIEP);
+         jsClickNew(backtotop);
+         System.out.println(" Link Clicked: What happens if I miss my Initial Enrollment Period? ");
 
-        WebElement lnkCvgChoices=driver.findElement(By.xpath("//a//span[contains(text(),'Medicare coverage choices?')]"));
-        jsClickNew(lnkCvgChoices);
-        System.out.println(" Link Clicked: What are my Medicare coverage choices?? ");
+         WebElement lnkCvgChoices=driver.findElement(By.xpath("//a//span[contains(text(),'what Medicare coverage')]"));
+         backtotop = driver.findElement(By.xpath("(//a//span[contains(text(),'Back to Top')])[5]"));
+         jsClickNew(lnkCvgChoices);
+         jsClickNew(backtotop);
+         System.out.println(" Link Clicked: How do I know what Medicare coverage I need? ");
 
     }
     public void clickOnFindDelayLink(){
@@ -113,17 +114,17 @@ public class InitialEnrollmentPeriodPage extends GlobalWebElements {
             Assert.fail("Medicare When Working Past Age 65 opened from Initial Enrollment Period page not successful");
         }
     }
-    public void clickOnPartsCombinedLink(){
-        jsClickNew(lnkPartsCombined);
-        System.out.println("See How All the Parts of Medicare Can be Combined link on Initial Enrollment Period Page clicked");
+    public void clickOnMissingIEP(){
+        jsClickNew(lnkMissingIEP);
+        System.out.println("Learn more about missing your Initial Enrollment Period here link on Initial Enrollment Period Page clicked");
         CommonUtility.checkPageIsReadyNew(driver);
-        if(driver.getCurrentUrl().contains("/medicare-education/medicare-parts-and-medigap-plans.html")){
+        if(driver.getCurrentUrl().contains("/medicare-articles/what-if-i-missed-my-initial-enrollment-period.html")){
             Assert.assertTrue(true);
-            System.out.println("Coverage Options Page opened from Initial Enrollment Period page successful");
+            System.out.println("Medicare Article Page opened from Initial Enrollment Period page successful");
             driver.navigate().back();
             CommonUtility.checkPageIsReadyNew(driver);
         }else{
-            Assert.fail("Coverage Options opened from Initial Enrollment Period page not successful");
+            Assert.fail("Medicare Article opened from Initial Enrollment Period page not successful");
         }
     }
 
