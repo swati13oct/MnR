@@ -365,7 +365,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacywidgets section']/../../../div[not(contains(@class,'ng-hide'))]")
 	protected List<WebElement> pharmacyWidgets;
 
-	@FindBy(xpath = "//h3[contains(text(),'Walgreens – Preferred Retail Pharmacy ')]/../../..")
+	@FindBy(xpath="(//h3[contains(text(),'Walgreens')]/../../..)[2]")
 	protected WebElement widget_walgreens;
 
 	@FindBy(xpath="//h3[@class='m-0 text-bold']/../../..//p[contains(text(),'MedicareRx Preferred (PDP)')]/../../..")
