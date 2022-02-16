@@ -8,10 +8,30 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @2022planSummaryBenefitsAARP01 @2022PharmSearchAARPPDP
+    @2022PharmSearchAARPPDP_Sheet_1 @2022PharmSearchAARPPDP
     Examples: 
-      | excelPath                       | workSheet   | site |
-      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred | AARP |
+      | excelPath                          | workSheet       | site |
+      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred_1 | AARP |
+
+    @2022PharmSearchAARPPDP_Sheet_2 @2022PharmSearchAARPPDP
+    Examples:
+      | excelPath                          | workSheet       | site |
+      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred_2 | AARP |
+
+    @2022PharmSearchAARPPDP_Sheet_3 @2022PharmSearchAARPPDP
+    Examples:
+      | excelPath                          | workSheet       | site |
+      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred_3 | AARP |
+
+    @2022PharmSearchAARPPDP_Sheet_4 @2022PharmSearchAARPPDP
+    Examples:
+      | excelPath                          | workSheet       | site |
+      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred_4 | AARP |
+
+    @2022PharmSearchAARPPDP_Sheet_5 @2022PharmSearchAARPPDP
+    Examples:
+      | excelPath                          | workSheet       | site |
+      | Pharmacy Search Benefits_Data_2022 | PDP_Preferred_5 | AARP |
 
     @2022planSummaryBenefitsAARP02 @2022PharmSearchAARPMAPD
     Examples: 
