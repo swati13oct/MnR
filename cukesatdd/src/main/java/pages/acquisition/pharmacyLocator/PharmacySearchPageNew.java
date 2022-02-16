@@ -813,7 +813,9 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
                 sleepBySec(3);
                 jsClickNew(countyDrpDwn);
                 sleepBySec(1);
-                countyName = countyName + " County";
+                if(!zipcode.equalsIgnoreCase("70821")){
+                    countyName = countyName + " County";
+                }
                 selectFromDropDownByText(driver, countyDrpDwn, countyName);
                 sleepBySec(3);
 
