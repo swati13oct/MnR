@@ -895,7 +895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
+	@FindBy(xpath = "(//img[contains(@src,'RockyMountainLogo')])[1]")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -2642,7 +2642,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]//following::span[3]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Deductible')]//following::span[3]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
@@ -2874,6 +2874,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void enterRequiredFieldsForMedicareGuide(Map<String, String> memberAttributesMap) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.navigate().back();
+			System.out.println("This if loop added for ios as coming back to Parent window failing..");
+		}
+		
 		String FirstName = memberAttributesMap.get("First Name");
 		String LastName = memberAttributesMap.get("Last Name");
 		String EmailAddress = memberAttributesMap.get("Email Address");
@@ -4976,7 +4981,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
-		// ChangeLocationLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(ChangeLocationLink);
 		validate(ZipCodeTxtBx);
 		// ZipCodeTxtBx.click();
