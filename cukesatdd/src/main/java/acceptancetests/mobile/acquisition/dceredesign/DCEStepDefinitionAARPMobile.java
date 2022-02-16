@@ -118,6 +118,13 @@ public class DCEStepDefinitionAARPMobile {
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
+	
+	@Then("^the user validates Not Covered Pharmacy message DCE Summary Page plan card$")
+    public void the_user_validates_drug_pricing_message_for_notcovered_Pharmacy_selection_dce_summary_page() throws Throwable {
+        DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugSummary);
+        drugSummaryPage.ValidateNotCoveredPharMessage();
+    }
 
 	@Then("^user save the plan on drug detail page$")
 	public void user_save_the_plan_on_drug_detail_page() throws Throwable {
@@ -252,13 +259,39 @@ public class DCEStepDefinitionAARPMobile {
 	public void the_user_clicks_edit_drugs_on_compare_page_to_land_on_build_drug_list_page() {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		DrugCostEstimatorPageMobile buildYourDrugList = planComparepage.clickonEdityourDrugs();
+		BuildYourDrugListMobile buildYourDrugList = planComparepage.clickonEdityourDrug();
 		if (null != buildYourDrugList) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildYourDrugList);
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 
 	}
+	
+	@Then("the user validates default Plan type on DCE Summary page as follows")
+    public void the_user_validates_default_plan_type_on_dce_summary_page_as_follows(DataTable givenAttributes) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+        String planType = memberAttributesMap.get("Plan Type");
+        System.out.println(planType);
+        String PlanTypeText = "";
+        if (planType.contains("MA")) {
+            PlanTypeText = "Medicare Advantage Plan";
+        } else if (planType.contains("PDP")) {
+            PlanTypeText = "Prescription Drug Plan";
+        } else {
+            PlanTypeText = "Special Needs Plan";
+        }
+        DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+        drugSummaryPage.verifyDefaultPlanType(PlanTypeText);
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+    }
+	
+	@Then("the user clicks Return to Compare on DCE Summary Page to return to Compare page")
+    public void the_user_clicks_return_to_compare_on_dce_summary_page_to_return_to_compare_page() {
+        DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+        ComparePlansPageMobile comparePlansPlans = drugSummaryPage.ClickReturnToCompare();
+    }
 
 	@Then("^the user validates OptumRx consistently displays on DCE Details - Pharmacy Page$")
 	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Details_Pharmacy_Page() throws Throwable {

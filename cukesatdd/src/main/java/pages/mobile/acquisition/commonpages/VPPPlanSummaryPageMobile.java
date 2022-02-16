@@ -800,7 +800,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(xpath = "//*[contains(@id,'msVppZipCode')]")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[text()='View Plans']")
