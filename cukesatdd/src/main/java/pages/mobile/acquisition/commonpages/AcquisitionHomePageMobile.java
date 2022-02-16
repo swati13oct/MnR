@@ -1236,7 +1236,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
 
-		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
+		if (driver.getCurrentUrl().contains("about-us")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			driver.navigate().back();
 			try {
 				Thread.sleep(3000);
