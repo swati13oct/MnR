@@ -812,11 +812,10 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
                 selectFromDropDownByText(driver, distanceDropownID, "25 Miles");
                 sleepBySec(3);
                 jsClickNew(countyDrpDwn);
-                sleepBySec(1);
-                if(!zipcode.equalsIgnoreCase("70821")){
-                    countyName = countyName + " County";
-                }
-                selectFromDropDownByText(driver, countyDrpDwn, countyName);
+                sleepBySec(2);
+                //selectFromDropDownByText(driver, countyDrpDwn, countyName);
+                String countyDrpDwn = "//select[@id='county']//option[contains(text(),'replace')]";
+                driver.findElement(By.xpath(countyDrpDwn.replace("replace",countyName))).click();
                 sleepBySec(3);
 
                 jsClickNew(seletPlandropdown);
@@ -833,6 +832,15 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
                 result = new HashMap<String, String>();
                 String key = "";
                 String value = "";
+
+//               if(validateNew(noResultMsg)){
+//                   result.put("Days supply", "NO");
+//                   result.put("WalgreensWidget", "NO");
+//                   result.put("PreferredWidget", "NO");
+//                   result.put("PreferredMail", "NO");
+//                   result.put("PreferredRetail", "NO");
+//                   break;
+//               }
 
                 key = "Days supply";
                 value = getDaysSupply();
