@@ -4818,9 +4818,17 @@ public class VppCommonStepDefinition {
 	public void user_updates_form_details() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.updatePersonalDetailsForMedsup();
-		//Assertion.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
+		boolean result=plansummaryPage.updatePersonalDetailsForMedsup();
+		Assertion.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
 		
+	}
+	
+	@When("^user selects medsup plans to compare$")
+	public void user_selects_medsup_plans_to_compare() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.compareAllMSPlans();
+			System.out.println("Selected All MS plans for Plan Compare");
 	}
 
 }

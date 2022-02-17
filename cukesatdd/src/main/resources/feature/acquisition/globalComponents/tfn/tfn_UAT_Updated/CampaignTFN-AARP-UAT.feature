@@ -920,7 +920,20 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     And user updates Medsup form for user details
     Then the user validates TFN in Already an insured section
     	| TFN No | <MedSupStaticTFNNo> |
-    When Navigate to Visitor Profile page
+   When user selects medsup plans to compare
+   And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+    	| TFN No | <MedSupStaticTFNNo> |
+   And user click on Start Application in MS plan compare page
+      | Zip Code | <zipcode> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -930,27 +943,6 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | TFN No | <FedTFNNo> |
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
-     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL | <medEdURL1> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MedSupTFNNo> |
-    When user click on "Contact" link under more
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates Fed TFN
-      | TFN No | <FedTFNNo> |
-    Then the user validates MedSup TFN
-      | TFN No | <MSPlantype> |
       
    @Scenario_IS_TFN_E2E_Scenario_8_Medsup4.0 @campaignTFNStageMS @test123
     Examples: 

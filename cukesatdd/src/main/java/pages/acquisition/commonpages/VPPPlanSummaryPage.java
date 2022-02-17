@@ -7913,7 +7913,7 @@ public String GetMonthlyPremiumValue() {
 		return false;
 	}
 	
-	@FindBy(xpath = "//*[@id='dateOfBirth']")
+	@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
 	private WebElement updateDOBDetailsForMedsup;
 	
 	@FindBy(xpath = "//*[@id='gender']/..//input[@id='Female']")
@@ -7927,14 +7927,42 @@ public String GetMonthlyPremiumValue() {
 	
 	public boolean updatePersonalDetailsForMedsup() {
 		validateNew(updateDOBDetailsForMedsup);
+		updateDOBDetailsForMedsup.clear();
 		updateDOBDetailsForMedsup.sendKeys("05/05/1945");
-		//updateGenderDetailsForMedsup.click();
+		threadsleep(5);
 		jsClickNew(updateGenderDetailsForMedsup);
-		saveAndUpdatePremiumsBtn.click();
+		//saveAndUpdatePremiumsBtn.click();
+		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
 			return true;
 		}
 		return false;
+	}
+	
+	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
+	private WebElement firstComparePlanButtonForMS;
+	
+	public void compareAllMSPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS);
 	}
 }

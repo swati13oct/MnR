@@ -1463,7 +1463,7 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = inputAttributesMap.get("Zip Code");
 
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//h2[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plan insured by UnitedHealthcare')]"), 20);
+				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
 				|| !msPlansHeading && zipCode.equals("97266")) ? true
 						: (msPlansHeading && zipCode.equals("97266")
@@ -1567,6 +1567,31 @@ public class CampaignTFNCommonStepDefinition {
 			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
 			tfnPage.clickStartMS3Ole();
+
+	}
+	
+	@And("^user click on Start Application in MS plan compare page$")
+	public void the_user_clicks_on_Start_MS_OLE_in_MS_plan_compare_page(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h1[contains(normalize-space(),'Compare AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
+				|| !msPlansHeading && zipCode.equals("97266")) ? true
+						: (msPlansHeading && zipCode.equals("97266")
+								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlansHeading) {
+			tfnPage.clickStartMS4OlePlanCompare();
+		} else
+			tfnPage.clickStartMS3OlePlanCompare();
 
 	}
 }
