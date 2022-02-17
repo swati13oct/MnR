@@ -4830,5 +4830,11 @@ public class VppCommonStepDefinition {
 			plansummaryPage.compareAllMSPlans();
 			System.out.println("Selected All MS plans for Plan Compare");
 	}
-
+	@Then("^user click to close MS application Modal$")
+	public void click_close_MS_Application_Page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		plansummaryPage.clickCloseMSApplication();
+	}
+	
 }
