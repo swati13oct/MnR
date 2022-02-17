@@ -1049,6 +1049,8 @@ public class CommonConstants {
 	
 	public static LinkedHashMap<String,String> PRE_FLOW = new LinkedHashMap<String,String>();
 	
+	public static LinkedHashMap<String,ArrayList<String>> PRE_Ranking_Order = new LinkedHashMap<String,ArrayList<String>>();
+	
 	public static LinkedHashMap<String,ArrayList<String>> PRE_Rally_Providers = new LinkedHashMap<String,ArrayList<String>>();
 	
 	public static LinkedHashMap<String,ArrayList<String>> PRE_Providers = new LinkedHashMap<String,ArrayList<String>>();
