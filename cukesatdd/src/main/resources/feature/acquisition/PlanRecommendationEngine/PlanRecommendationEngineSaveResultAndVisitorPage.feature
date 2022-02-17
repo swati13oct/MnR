@@ -27,15 +27,15 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password | PlanYear | PlanInfo                                          |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]    | [blank]  | current  | Preferred (PDP):Plan 1 (HMO):Complete (HMO D-SNP) |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile2 | Test@123 | current  | Preferred (PDP):Plan 1 (HMO):Complete (HMO D-SNP) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password  | PlanYear | PlanInfo                                        |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]    | [blank]   | current  | Preferred (PDP):Plan 1 (HMO):Plan 1 (HMO D-SNP) |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile2 | Test@1234 | current  | Preferred (PDP):Plan 1 (HMO):Plan 1 (HMO D-SNP) |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password | PlanYear | PlanInfo                                          |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]    | [blank]  | current  | Preferred (PDP):Plan 1 (HMO):Complete (HMO D-SNP) |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile2 | Test@123 | current  | Preferred (PDP):Plan 1 (HMO):Complete (HMO D-SNP) |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password  | PlanYear | PlanInfo                                        |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]    | [blank]   | current  | Preferred (PDP):Plan 1 (HMO):Plan 1 (HMO D-SNP) |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile2 | Test@1234 | current  | Preferred (PDP):Plan 1 (HMO):Plan 1 (HMO D-SNP) |
 
   @PRE @SaveResultWithMS
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection> , <UserType>  - To Visitor Profile with MS Plans
@@ -59,15 +59,15 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]  |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password    |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]     |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234567 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]  |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName | password    |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Guest         | [blank]  | [blank]     |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDstage  | Test1234567 |
 
   @PRE @MAFlow
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
@@ -107,17 +107,17 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password | PlanYear | PlanInfo               |
-      | AARP |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@123 | current  | Preferred (PDP)        |
-      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@123 | current  | Plan F:Walgreens (PDP) |
-      | AARP |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@123 | current  | Plan 4 (Regional PPO)  |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password  | PlanYear | PlanInfo               |
+      | AARP |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234 | current  | Preferred (PDP)        |
+      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234 | current  | Plan F:Walgreens (PDP) |
+      | AARP |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234 | current  | Plan 4 (Regional PPO)  |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password | PlanYear | PlanInfo               |
-      | UHC  |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@123 | current  | Preferred (PDP)        |
-      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@123 | current  | Plan F:Walgreens (PDP) |
-      | UHC  |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@123 | current  | Plan 4 (Regional PPO)  |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password  | PlanYear | PlanInfo               |
+      | UHC  |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234 | current  | Preferred (PDP)        |
+      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234 | current  | Plan F:Walgreens (PDP) |
+      | UHC  |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234 | current  | Plan 4 (Regional PPO)  |
 
   @PRE @MAPDFlowScenario6 @F614720
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <UserType>  - To Validate Scenario6 PRE Widget Reommendations in visitor profile page
@@ -154,15 +154,15 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password |
-      | AARP |   10001 | NO            | New York           | None          | Medicaid     | Lookup          | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DDProfile | Test@123 |
-      | AARP |   90002 | NO            | Los Angeles County | None          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Higher               | SNP               | MA                | Authenticated | DDProfile | Test@123 |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | AARP |   10001 | NO            | New York           | None          | Medicaid     | Lookup          | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | AARP |   90002 | NO            | Los Angeles County | None          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Higher               | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password |
-      | UHC  |   10001 | NO            | New York           | None          | Medicaid     | Lookup          | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DDProfile | Test@123 |
-      | AARP |   90002 | NO            | Los Angeles County | None          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Higher               | SNP               | MA                | Authenticated | DDProfile | Test@123 |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | UHC  |   10001 | NO            | New York           | None          | Medicaid     | Lookup          | sue         | NO            | No             | Yes,No,No,Yes                 | Lower                | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | AARP |   90002 | NO            | Los Angeles County | None          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Higher               | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
   @PRE @PDPFlow @F607619
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <pharmacyoption>, <UserType>  - To Validate Scenario2 PRE Widget Reommendations in visitor profile page
@@ -194,13 +194,13 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password |
-      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password    |
+      | AARP |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234567 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password |
-      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | 1stRecommendation | 2ndRecommendation | UserType      | userName | password    |
+      | UHC  |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | PDP               | MA                | Authenticated | DDstage  | Test1234567 |
 
   @PRE @ViewRecommendationEditResponseBtn
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection> , <UserType>  - To Validate Scenario4 PRE Widget Reommendations in visitor profile page
@@ -229,13 +229,13 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password    |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123456 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password    |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123456 |
 
   @PRE @DeeplinkforMSPlans
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page
