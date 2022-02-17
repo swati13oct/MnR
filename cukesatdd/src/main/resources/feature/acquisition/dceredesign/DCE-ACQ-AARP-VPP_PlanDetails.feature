@@ -284,8 +284,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | ZipCode | <zipCode1> |
     When user updates the distance to "2 Miles" from drug details
     Then user clicks on search button
-    Then no results message should be displayed from drug details
-      | NoResultsMessage | <message> |
+#    Then no results message should be displayed from drug details
+#      | NoResultsMessage | <message> |
 
   @dceRedesign_ChangePharmacyDetailsNoResults_AARP @drugDetailschangePharmacyAARP @regressionAARP @featureGate
     Examples:
@@ -352,7 +352,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
   @dceRedesign_PlanSave_SNP_UHC @dceDrugDetailSaveUHC @regressionUHC
     Examples:
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                              | planyear |
-      | UHC  | 10001   | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete Plan 1 | current  |
+      | UHC  | 33111   | SNP      | none   | no              | meloxicam | Preferred Medicare Assist Plan 2 (HMO D-SNP) | current  |
 
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP @decRelease
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy

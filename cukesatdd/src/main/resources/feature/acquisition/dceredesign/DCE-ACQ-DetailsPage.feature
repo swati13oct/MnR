@@ -81,7 +81,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
   @dce_DrugDetailsValidation_UHC @regressionUHC @featureGate
     Examples:
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
-      | ativ                 | Humalog | Fanapt | 20        | Week       | Every 1 Month  | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
+#      | ativ                 | Humalog | Fanapt | 20        | Week       | Every 1 Month  | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
       | ativ                 | Humalog | Fanapt | 200       | Month      | Every 3 Months | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
 
   @dce_DrugDetailsDynamicCopay_Preferred
@@ -211,13 +211,13 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
   @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
+      | vigabatrin | Fanapt | 33111   | SNP      | MedicareMax Plus 1 (HMO D-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
 
   @dce_DrugDetailsCopay_Standard_UHC @regressionUHC @featureGate
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $20          | $50           |
-      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
+#      | vigabatrin | Fanapt | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $20          | $50           |
+      | vigabatrin | Fanapt | 33111   | SNP      | MedicareMax Plus 1 (HMO D-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
 
   @dce_DrugDetailsPremiumValidation
   Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>
