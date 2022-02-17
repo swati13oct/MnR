@@ -337,7 +337,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
   @dceRedesign_PlanSave_SNP_AARP @dceDrugDetailSaveAARP @regressionAARP @featureGate
     Examples:
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                              | planyear |
-      | AARP | 10001   | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete Plan 1 | current  |
+      | AARP | 33111   | SNP      | future   | none   | no              | Lipitor | Preferred Medicare Assist Plan 2 (HMO D-SNP) | current  |
 
   @dceRedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC @regressionUHC @featureGate
     Examples:
