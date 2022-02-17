@@ -83,6 +83,27 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
 	
+	@FindBy(css = "div[class*='d-none'] button#changePharmacyLink")
+	private WebElement changePharmacyLink;
+	
+	@FindBy(css = "div[class*='d-none']>span:nth-child(2)")
+	private WebElement selectedPharmacyName;
+	
+	@FindBy(css = "#modal button[class*='keepPharmacyLink']")
+	private WebElement keepPharmacyLink;
+	
+	@FindBy(css = "#pharmacy-zip-filter")
+	private WebElement pharmacyZip;
+	
+	@FindBy(css = "input#pharmacy-name-filter")
+	private WebElement pharmacyName;
+	
+	@FindBy(css = "button[type='submit']>span[class*='uhc-button']")
+	private WebElement searchButton;
+	
+	@FindBy(css = "ul[class*='uhc-list'] li")
+	private List<WebElement> pharmacyList;       
+	
 	// Dosage Modal
 
 	@FindBy(css = "#drugModal #popup3 section>h2")
@@ -182,7 +203,34 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		threadsleep(2000);
 		waitForPageLoadSafari();
 }
+    
+    public void choosePharmacy(String zipcode, String pharamacyName) {
+    	validate(drugpageButtons.get(0));
+		jsClickNew(drugpageButtons.get(0));
+		pageloadcomplete();
+		threadsleep(2000);
+		validate(changePharmacyLink);
+		jsClickNew(changePharmacyLink);
+		pageloadcomplete();
+		selectPharmacy(zipcode, pharamacyName);
+		Assert.assertTrue(selectedPharmacyName.getText().trim().equals(pharamacyName.toUpperCase()), "Pharamacy name is not matching");
+    }
 	
+    public void selectPharmacy(String zipcode, String pharamacyName) {
+    	validate(keepPharmacyLink);
+		validate(pharmacyZip);
+		pharmacyZip.clear();
+		pharmacyZip.sendKeys(zipcode);
+		validate(pharmacyName);
+		pharmacyName.sendKeys(pharamacyName);
+		validate(searchButton);
+		searchButton.click();
+		threadsleep(2000);
+		pharmacyList.get(0).findElement(By.cssSelector("#selectPharmacyBtn0>span")).click();
+		pharmacyList.get(0).findElement(By.cssSelector("div:nth-child(3) button>span")).click();
+		pageloadcomplete();
+		threadsleep(2000);
+    }
 	
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
