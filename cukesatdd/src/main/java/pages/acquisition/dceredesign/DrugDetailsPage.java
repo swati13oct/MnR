@@ -88,7 +88,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='editdrugcontainer']")
 	public WebElement YourDrugs_Table;
 
-	@FindBy(xpath = "//div[@id='editdrugcontainer']//label[contains(text(), 'Drug')]")
+	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_DrugsTxt;
 
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//th//span[contains(text(), 'You Pay')]")
