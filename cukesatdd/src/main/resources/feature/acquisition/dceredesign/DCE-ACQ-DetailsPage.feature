@@ -211,13 +211,13 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
   @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $45           |
+      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | AARP | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
 
   @dce_DrugDetailsCopay_Standard_UHC @regressionUHC @featureGate
     Examples:
       | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | SpecialtyPharmacyZip | SpecialtyPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $30          | $90           |
-      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $45           |
+      | vigabatrin | Fanapt | 33111   | MAPD     | MedicareMax (HMO)                             | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $20          | $50           |
+      | vigabatrin | Fanapt | 33111   | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
 
   @dce_DrugDetailsPremiumValidation
   Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>
@@ -296,8 +296,8 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
 
   @dce_DrugDetailsLISBuyDown_UHC @regressionUHC @featureGate
     Examples:
-      | drug1  | drug2   | zipCode | planType | planName                                   | site |
-      | Fanapt | Lipitor | 10001   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
+      | drug1  | drug2   | zipCode | planType | planName                                          | site |
+      | Fanapt | Lipitor | 10001   | SNP      | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | UHC  |
 
   @dce_DrugDetailsNonBuyDownLIS
   Scenario Outline: To verify DCE Details Page  <site> site - for LIS Non Buydown Plans
