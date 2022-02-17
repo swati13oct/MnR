@@ -1106,6 +1106,47 @@ public class CommonConstants {
 		
 	}
 	
+	public static enum LEARNABOUTMEDICARE_MOREABOUTMEDICARE {
+		ARTICLSANDSPECIALTOPICS("Articles and Special Topics");
+
+		private String option;
+
+		LEARNABOUTMEDICARE_MOREABOUTMEDICARE(String option) {
+			this.option = option;
+		}
+
+		public static LEARNABOUTMEDICARE_MOREABOUTMEDICARE getMoreAbtMedicareEnum(String option) {
+			for (LEARNABOUTMEDICARE_MOREABOUTMEDICARE learnAboutMedicareOption : LEARNABOUTMEDICARE_MOREABOUTMEDICARE.values()) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+
+	}
+
+	public static enum LEARNABOUTMEDICARE_FAQ {
+
+		MEDICAREFAQ("Medicare FAQ"), GLOSSARY("Glossary");
+
+		private String option;
+
+		LEARNABOUTMEDICARE_FAQ(String option) {
+			this.option = option;
+		}
+
+		public static LEARNABOUTMEDICARE_FAQ getMedicareFaqEnumFor(String option) {
+			for (LEARNABOUTMEDICARE_FAQ learnAboutMedicareOption : LEARNABOUTMEDICARE_FAQ.values()) {
+				if (learnAboutMedicareOption.option.equalsIgnoreCase(option)) {
+					return learnAboutMedicareOption;
+				}
+			}
+			return null;
+		}
+
+	}
+	
 	public static enum LEARNABOUTMEDICARE_TYPESOFPLANS {
 		OVERVIEW ("Overview of Plans"),
 		MA ("Medicare Advantage Plans"), 
