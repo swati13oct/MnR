@@ -969,6 +969,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.addSNPEditResponse(inputValues);
+		preEditpage.updateLocationLink();
 		preEditpage.addLocationEditResponse(inputValues);
    	}
 	
@@ -1388,11 +1389,27 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.UpdatePharmacyFunc(inputValues.get("New ZipCode"),inputValues.get("New PharmacyName"));
 	}
 	
-	@Then("^the user do poc$")
-   	public void poc_new_results_page() {
+	@Then("^user selects plans to validate compare functionality in result page$")
+	public void compare(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.poc();
-   	}
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Add Plan");
+	}
+	
+	@Then("^user selects Max plans to validate compare functionality in result page$")
+	public void compareMaxPlan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Max compare plans");
+	}
+	
+	@Then("^user delete a plan and add some other plan for compare in result page$")
+	public void deleteAddPlanCompare(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Delete Plan");
+		planSelectorNewResultspage.deleteAddComparePlan(inputValues.get("Delete PlanInfo"), inputValues.get("Add PlanInfo"));
+	}
 
 	
 }
