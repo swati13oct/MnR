@@ -834,7 +834,8 @@ public class VisitorProfilePage extends UhcDriver {
     public ComparePlansPage planCompare(String plans) {
 
         jsClickNew(comparePlans);
-        validateNew(enrollBtn);
+        //validateNew(enrollBtn);
+		validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")));
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");

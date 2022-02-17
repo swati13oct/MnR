@@ -364,7 +364,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	//@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
 	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
@@ -393,7 +394,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 	
-	@FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
 	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
@@ -401,7 +402,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-    @FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
@@ -4387,7 +4388,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				// initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
 						+ plan + "']";
-			} else {
+			}else if(planType.equalsIgnoreCase("PDP")){
+				initial_savePlanIconXpath = "//*[contains(text(),'" + plan
+						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
+			}
+			else {
 				initial_savePlanIconXpath = "//a[contains(text(),'" + plan
 						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
 			}
