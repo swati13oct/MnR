@@ -327,10 +327,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
-	
+
 	@FindBy(css = "a#emailPlanDetail")
 	protected WebElement summary_maEmailOption;
-	
+
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 
@@ -538,7 +538,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(PlanCost);
 		validateNew(editDrugLinkPlanCost, 30);
 		jsClickNew(editDrugLinkPlanCost);
-		
+
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (BuildDrugPage_EnterDrugNameTxt.isDisplayed()) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
@@ -1198,40 +1198,47 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
-		// boolean validationFlag = true;
-		WebElement AdditionalBenefitType;
-		WebElement ActualTextforBenefit;
-		String displayedText;
 
-		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
-			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				WebElement AdditionalBenefitType1 = driver.findElement(By.xpath("//div[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
-				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType1.getText());
-				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
-						+ additionalBenefits.get(i).get(1)
-						+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
-				displayedText = ActualTextforBenefit.getText();
-				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
-				System.out.println(displayedText);
-				if (!displayedText.contains(additionalBenefits.get(i + 1).get(1))) {
-					Assertion.fail("Proper value not found");
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			System.out.println("Plan benefit skipped ..");
+		} else {
+			// boolean validationFlag = true;
+			WebElement AdditionalBenefitType;
+			WebElement ActualTextforBenefit;
+			String displayedText;
+
+			for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
+				if (additionalBenefits.get(i).get(1).contains("Fitness")) {
+					WebElement AdditionalBenefitType1 = driver
+							.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
+									+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+					System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType1.getText());
+					ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
+							+ additionalBenefits.get(i).get(1)
+							+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
+					displayedText = ActualTextforBenefit.getText();
+					System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+					System.out.println(displayedText);
+					if (!displayedText.contains(additionalBenefits.get(i + 1).get(1))) {
+						Assertion.fail("Proper value not found");
+					}
+				} else {
+					WebElement AdditionalBenefitType1 = driver.findElement(
+							By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
+					scrollToView(AdditionalBenefitType1);
+					// System.out.println("The additional Benefit to Valuidate : ");
+					ActualTextforBenefit = driver.findElement(
+							By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
+					displayedText = ActualTextforBenefit.getText();
+					System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
+					System.out.println(displayedText);
+					if (!displayedText.contains(additionalBenefits.get(i + 1).get(1))) {
+						Assertion.fail("Proper value not found");
+					}
 				}
-			} else {
-				WebElement AdditionalBenefitType1 = driver
-						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
-				scrollToView(AdditionalBenefitType1);
-				// System.out.println("The additional Benefit to Valuidate : ");
-				ActualTextforBenefit = driver
-						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1) + "')]/.."));
-				displayedText = ActualTextforBenefit.getText();
-				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
-				System.out.println(displayedText);
-				if (!displayedText.contains(additionalBenefits.get(i + 1).get(1))) {
-					Assertion.fail("Proper value not found");
-				}
+
 			}
-
 		}
 	}
 
@@ -1888,28 +1895,26 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return null;
 	}
-	
-	
+
 	public boolean verifyAddedDrugPharmacyDetailsCost(String planName, String networkType) {
-		
+
 		System.out.println("Drug cost on plan Details : " + planCostTabDrugCostValueCell.getText());
 		if (networkType.equalsIgnoreCase("false")) {
-			if(planCostTabDrugCostValueCell.getText().equals("")) {
-			Assertion.assertTrue(true);
-			System.out.println("Drug cost is coming blank as expected");
+			if (planCostTabDrugCostValueCell.getText().equals("")) {
+				Assertion.assertTrue(true);
+				System.out.println("Drug cost is coming blank as expected");
 			} else {
-			if (planCostTabDrugCostValueCell.getText().contains("$")) {
-			Assertion.assertTrue(true);
-			System.out.println("Drug cost contains amount as expected");
+				if (planCostTabDrugCostValueCell.getText().contains("$")) {
+					Assertion.assertTrue(true);
+					System.out.println("Drug cost contains amount as expected");
+
+				}
+			}
 
 		}
-			}
-		
-			
-		}
 		return false;
-			
-		}
+
+	}
 
 	public String GetMonthlyPremiumValue() {
 
@@ -1923,17 +1928,17 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		return null;
 	}
-	
+
 	public void clickOnEmailField() {
-		
+
 		jsClickNew(summary_maEmailOption);
 	}
-	
+
 	public void validatePrepopulatedEmail(String email) {
 		emailPlanSummaryFieldBox.click();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
-		System.out.println("populatedEmail = "+populatedEmail);
+		System.out.println("populatedEmail = " + populatedEmail);
 		Assertion.assertEquals(email, populatedEmail);
 	}
 

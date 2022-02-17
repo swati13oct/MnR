@@ -1879,7 +1879,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		// validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {

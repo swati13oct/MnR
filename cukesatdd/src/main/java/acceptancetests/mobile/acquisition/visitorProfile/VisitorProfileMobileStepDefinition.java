@@ -374,6 +374,8 @@ public class VisitorProfileMobileStepDefinition {
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
 	}
 

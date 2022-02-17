@@ -787,7 +787,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(securityAnswer, "number1");
 			}
 
-			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID") | driver.getClass().toString().toUpperCase().contains("IOS")) {
 				jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			}
 			waitForPageLoadSafari();
@@ -1296,7 +1296,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		waitforElementNew(visitorProfileDashboard);
 	}
 
-	@FindBy(css = "#dateOfBirth")
+	@FindBy(css = "#dateOfBirthInput")
 	private WebElement msDOB;
 
 	public void clickOnMStartApplication(String planName) {
