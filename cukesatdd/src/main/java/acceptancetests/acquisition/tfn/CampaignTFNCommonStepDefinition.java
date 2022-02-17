@@ -1463,7 +1463,7 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = inputAttributesMap.get("Zip Code");
 
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
+				"//h2[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plan insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
 				|| !msPlansHeading && zipCode.equals("24010")) ? true
 						: (msPlansHeading && zipCode.equals("24010")

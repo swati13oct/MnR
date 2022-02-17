@@ -7912,4 +7912,29 @@ public String GetMonthlyPremiumValue() {
 		}
 		return false;
 	}
+	
+	@FindBy(xpath = "//*[@id='dateOfBirth']")
+	private WebElement updateDOBDetailsForMedsup;
+	
+	@FindBy(xpath = "//*[@id='gender']/..//input[@id='Female']")
+	private WebElement updateGenderDetailsForMedsup;
+	
+	@FindBy(xpath = "//button[contains(@dtmname,'Save and Update')]")
+	private WebElement saveAndUpdatePremiumsBtn;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
+	private WebElement EditYourInformationLink;
+	
+	public boolean updatePersonalDetailsForMedsup() {
+		validateNew(updateDOBDetailsForMedsup);
+		updateDOBDetailsForMedsup.sendKeys("05/05/1945");
+		//updateGenderDetailsForMedsup.click();
+		jsClickNew(updateGenderDetailsForMedsup);
+		saveAndUpdatePremiumsBtn.click();
+		threadsleep(5);
+		if(validate(EditYourInformationLink)) {
+			return true;
+		}
+		return false;
+	}
 }
