@@ -7965,4 +7965,16 @@ public String GetMonthlyPremiumValue() {
 		}
 		jsClickNew(firstComparePlanButtonForMS);
 	}
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addMSPlans;
+	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+	private WebElement closebBtnMSApplication;
+
+
+	public void clickCloseMSApplication() {
+		jsClickNew(closebBtnMSApplication);
+		waitforElementNew(addMSPlans);
+	}
+	
 }
