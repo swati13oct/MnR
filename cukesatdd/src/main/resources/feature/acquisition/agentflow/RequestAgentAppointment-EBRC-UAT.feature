@@ -38,7 +38,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     #Examples:
     # | scenario           | site | path                                | pageName                     | UHCUrl                      |
     #| E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
-    @agentFlowEBRCUlayer @UATRegression @regressionAARP
+    @agentFlowEBRCUlayer @UATRegression @regressionAARP @featureGate
     Examples: 
       | scenario           | site | path                                                                                                                                                                                                                                                                                                                          | pageName                     | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2021&planId=H0543168000&planYear=2021&systemYear=2021&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD       | https://www.myuhcagent.com/ |
@@ -58,7 +58,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
-    @agentFlowEBRCUlayer @UATRegression @regressionAARP  @sanity
+    @agentFlowEBRCUlayer @UATRegression @regressionAARP  @sanity @featureGate
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_AMP |   10001 | AARP |
@@ -87,7 +87,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   23666 | NO              | New York           | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP @regressionUHC
+    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP @regressionUHC @featureGate
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_AMP |   23666 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |

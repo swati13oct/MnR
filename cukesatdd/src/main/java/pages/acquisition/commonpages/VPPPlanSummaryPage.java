@@ -3,6 +3,7 @@
  */
 package pages.acquisition.commonpages;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,12 +14,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,6 +29,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -360,7 +364,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 
-	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	//@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
 	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
@@ -388,14 +393,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	// MedSupp Resume application
+	
+	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
-	@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
+	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
 	// application')])[1]")
@@ -935,7 +943,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//*[contains(@class,'show
 	// active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare
 	// plans')])[1]")
-	@FindBy(xpath = "(//*[contains(text(),'Compare Plan')])[1]")
+	//@FindBy(xpath = "//*[contains(text(),'Compare Plan')])[1]")
+	
+	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
 	private WebElement compareButton;
 
 	// @FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -1257,7 +1267,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		/*
 		 * else checkModelPopup(driver, 10);
 		 */
@@ -4093,7 +4103,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	CommonUtility.checkPageIsReady(driver);
 
-	if (validate(planYearPopup, 20)) { // if plan year popup is displayed
+	if (validate(planYearPopup, 10)) { // if plan year popup is displayed
 		System.out.println("Popup is present for AEP : ");
 		if (validate(currentYearSelection) && planYear.equalsIgnoreCase("current")) {
 			currentYearSelection.click();
@@ -4105,7 +4115,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//validateNew(planYearPopupGoButton);
 		//planYearPopupGoButton.click();
 	} else { // if the plan year popup is not displayed
-		if (validate(CurrentYearPlansBtn, 20) && planYear.equalsIgnoreCase("current")) {
+		if (validate(CurrentYearPlansBtn, 10) && planYear.equalsIgnoreCase("current")) {
 			System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 			jsClickNew(CurrentYearPlansBtn);
 			waitForPageLoadSafari();
@@ -4378,7 +4388,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				// initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
 				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
 						+ plan + "']";
-			} else {
+			}else if(planType.equalsIgnoreCase("PDP")){
+				initial_savePlanIconXpath = "//*[contains(text(),'" + plan
+						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
+			}
+			else {
 				initial_savePlanIconXpath = "//a[contains(text(),'" + plan
 						+ "')]/following::a[contains(@aria-selected,'false')][1]" + savePlanImgXpath;
 			}
@@ -7759,5 +7773,143 @@ public String GetMonthlyPremiumValue() {
 		// jsClickNew(nextButton);
 		return LastName;
 
+	}
+	
+	@FindBy(xpath = "//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]")
+	private WebElement samChatIcon;
+	public void validateSamChatIcon() throws InterruptedException {
+		boolean present;
+		try {
+			threadsleep(10);
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(35))
+					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+					.ignoring(TimeoutException.class);
+			fwait.until(new Function<WebDriver, WebElement>() {
+				public WebElement apply(WebDriver driver) {
+					return driver
+							.findElement(By.xpath("//*[contains(@id,'LPMcontainer')]//*[contains(text(),'Chat Now')]"));
+				}
+			});
+			validateNew(samChatIcon);
+			present = true;
+		} catch (Exception e) {
+			present = false;
+			if (driver.getCurrentUrl().contains("welcome"))
+				;
+			driver.navigate().refresh();
+			present = validateNew(samChatIcon);
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to see Chat Icon @@@@@@@@@");
+
+		} else
+			System.out.println("@@@@@@@@@ Chat Icon not available @@@@@@@@@");
+
+	}
+	
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
+	private WebElement CallSamTFN;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
+	private WebElement CallSamTFNtimezone;
+
+	@FindBy(xpath = "//div[@id='sam-call-modal']//p[contains(text(),'Already a member')]")
+	private WebElement CallSamTFNMember;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
+	private WebElement CallSamTFNClose;
+	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+		// driver.navigate().refresh();
+		CommonUtility.checkPageIsReady(driver);
+		threadsleep(3);
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+		validate(ActualTFNelement);
+		String ActualCallSAMTFN = ActualTFNelement.getText();
+		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+		jsClickNew(ActualTFNelement);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		validate(CallSamTFN);
+		String ExpectedCallSAMTFN = CallSamTFN.getText();
+		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
+		/*if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+			System.out
+					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
+					+ ExpectedCallSAMTFN);
+		}*/
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		validate(CallSamTFNtimezone);
+		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
+		System.out.println(ExpectedCallSamTFNtimezone);
+		System.out.println(ActualCallSamTFNtimezone);
+		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+			System.out.println(
+					"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+
+		} else {
+			System.out.println(
+					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+		}
+		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+		// ActualCallSamTFNMember.replace("", " ");
+		// WebElement strCallSamTFNMember=
+		// driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
+		validate(CallSamTFNMember);
+		String ActualCallSamTFNMember = CallSamTFNMember.getText();
+		System.out.println(ExpectedCallSamTFNMember);
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************TFN Member Content was  found macthing with the SAM call Popup  ***************");
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail(
+					"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+		}
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
+		
+	}
+	
+	public void closeBrowserTab() {
+		if (driver.getWindowHandles().size() > 1) {
+			String currentPage = driver.getWindowHandle();
+			Set<String> newWindow = driver.getWindowHandles();
+			for (String tabs : newWindow) {
+				if (!tabs.equalsIgnoreCase(currentPage)) {
+					driver.switchTo().window(currentPage).close();
+					driver.switchTo().window(tabs);
+					CommonUtility.checkPageIsReadyNew(driver);
+				}
+			}
+		}
+
+	}
+	
+	public boolean verifyAddedDrugPharmacySummaryCost(String planName, String networkType) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + networkType);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(drugCost.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (drugCost.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
+		}
+			}
+		
+			
+		}
+		return false;
 	}
 }

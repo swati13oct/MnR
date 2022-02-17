@@ -1269,6 +1269,19 @@ public class DCEStepDefinitionAARP {
         drugDetailsPage.selectPharmacyModalDisplayed();
         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
     }
+    
+    @Then("^the user selects pharmacy on Drug details page$")
+    public void the_user_selects_pharmacy_on_Drug_details_page(DataTable givenAttributes) throws InterruptedException {
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String pharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+        String distance = memberAttributesMap.get("Distance");
+        String pharmacyName = memberAttributesMap.get("PharmacyName");
+        drugDetailsPage.EnterPharmacyDetailsPage(pharmacyZipCode, distance, pharmacyName);
+        
+    }
 
     @Then("^user verify details page change pharmacy modal$")
     public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {
@@ -1789,6 +1802,12 @@ public class DCEStepDefinitionAARP {
         drugSummaryPage.ValidateSpecialtyPharmMessage();
     }
 
+    @Then("^the user validates Not Covered Pharmacy message DCE Summary Page plan card$")
+    public void the_user_validates_drug_pricing_message_for_notcovered_Pharmacy_selection_dce_summary_page() throws Throwable {
+        DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugSummary);
+        drugSummaryPage.ValidateNotCoveredPharMessage();
+    }
 
     @Then("^the user clicks on View Drug Information link for the following Plan and lands on DCE details$")
     public void the_user_clicks_on_View_Drug_Information_link_for_the_following_Plan_and_lands_on_DCE_details(
@@ -2737,6 +2756,16 @@ public class DCEStepDefinitionAARP {
         String FilterText = memberAttributesMap.get("PharmacyFilterText");
         DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
         drugSummaryPage.ApplyPharmacyFilter(FilterText);
+    }
+
+    @Then("^the user applies pharmacy filter for following text on Details page - Change Pharmacy Page$")
+    public void the_user_applies_pharmacy_filter_for_following_text_on_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+        Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+        String FilterText = memberAttributesMap.get("PharmacyFilterText");
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.ApplyPharmacyFilter(FilterText);
     }
 
     @Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page$")

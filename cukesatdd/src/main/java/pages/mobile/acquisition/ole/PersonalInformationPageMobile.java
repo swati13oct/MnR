@@ -426,6 +426,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 					WebElement label = driver.findElement(By.cssSelector("label[for='state0']"));
 					jsClickNew(label);
 				}
+				MailingAdd_State_DropDown.click();
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 			}

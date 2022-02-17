@@ -27,7 +27,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | AARP |
 
-    @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @vbfGate
+    @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @vbfGate @featureGate
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | UHC  |
@@ -50,7 +50,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP @featureGate
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | AARP |
@@ -130,7 +130,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
       | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP @featureGate
     Examples:
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                                                                                                                                      | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama | US1770330 | 53503   | NO            | MAPD     | current  | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay; up to $200 every year for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full.\n\nHome delivered eyewear available nationwide only through UnitedHealthcare Vision (select products only). | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
@@ -254,7 +254,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @regressionAARP @featureGate
     Examples:
       | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
       | AARP | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | current  | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
@@ -297,7 +297,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
     Examples:
       | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
 #      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
@@ -346,13 +346,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | AARP | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC
+    @visitorProfile_UHC @VP_ProdRegression_UHC @regressionUHC @featureGate
     Examples:
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York | 10001   | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompareTest @planCompareULayerSmoke @visitorProfileRegressionAARP
-  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile in <site> site - zip -<zipcode>
+  Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile in <site> site - zip -<zipcode> for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -379,11 +379,19 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Examples:
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
       | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+#      | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+#      | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate @featureGate
     Examples:
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
       | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+
+    #    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC
+#    Examples:
+#      | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                          |
+#      | UHC  | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                    |
+#      | UHC  | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
 
   @importDrugsDocs @nonProd
   Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile in <site> site - member -<member>
@@ -407,7 +415,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | AARP | Aetna     |           |          |            |         |             |                                                                                    |           |
       | AARP | Humana    |           |          |            |         |             |                                                                                    |           |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_05 @regressionUHC @featureGate
     Examples:
       | site | member    | firstName | lastName | dob        | zipcode | mbi         | Drugs                                                                              | Providers |
       | UHC  | UHC       | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | amlodipine besylate TAB 5MG;Lipitor TAB 20MG;lisinopril TAB 10MG;Levoxyl TAB 88MCG |           |
@@ -452,7 +460,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS_testPlans | <MS_testPlans> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start  @featureGate
     Examples:
       | site | zipcode | isMultiCounty | plantype | county            | MS_testPlans                                      | MS_Plan                  | component_code |
       | AARP | 07303   | NO            | MS       | Hudson County     | Plan G,Plan A                                     | Plan G                   | WB27375ST      |
@@ -491,7 +499,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | AARP | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
       | UHC  | 10001   | NO            | MS       | New York County | Plan G,Plan A | Plan G  | WB27375ST      |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @featureGate
     Examples:
       | site | zipcode | isMultiCounty | plantype | county                 | MS_testPlans  | MS_Plan | component_code |
       | AARP | 10001   | NO            | MS       | New York County        | Plan G,Plan A | Plan G  | WB27375ST      |

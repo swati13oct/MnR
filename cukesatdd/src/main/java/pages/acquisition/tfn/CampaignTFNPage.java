@@ -110,7 +110,11 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans']")
+	// @FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage
+	// Plans']")
+
+	@FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans | UnitedHealthcare']")
+
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare�')])[2]")
@@ -123,7 +127,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	// @FindBy(xpath = "//*[@id='uh-search-button']")
 	// @FindBy(xpath = "//button[contains(@id,'ybar-search')]")
-	//@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	// @FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
 	@FindBy(xpath = "//*[@id='ybar-search']")
 	public WebElement YahooSearchBttn;
 
@@ -165,9 +169,12 @@ public class CampaignTFNPage extends UhcDriver {
 	// @FindBy(xpath =
 	// "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')]")
 	// @FindBy(xpath = "//h2//a[contains(text(),'Find Medicare Plans ')]")
-	//@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
-	
-	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans']")
+	// @FindBy(xpath =
+	// "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or
+	// contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or
+	// contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
+
+	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans - UHC']")
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -281,13 +288,16 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='back-to-plans resTopPadding10 back-arrow-left leftPadding20' and normalize-space()='Back to all plans']")
 	private WebElement ms3BackToAllPlans;
-	
+
 	@FindBy(xpath = "//a[@class='uhc-link-button plandetails view-more-link' and @plancode='F01']")
 	private WebElement ms4ViewPlanDetails;
 
-	@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	//@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	@FindBy(xpath = "//div[contains(@class,'med-supp-plans')]//a[normalize-space()='Back to plan list']")
 	private WebElement ms4BackToPlanList;
 
+	@FindBy(xpath = "//*[@class='insured-member']//a[@class='tfn-call']/span")
+	private WebElement msStaticTFN;
 
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
@@ -387,18 +397,16 @@ public class CampaignTFNPage extends UhcDriver {
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - " + str);
-		
+
 		/*
 		 * String sep = str.contains(",") ? "," : "%2C"; String[] arrOfStr =
 		 * str.split("%2C"); arrOfStr = str.split(sep);
 		 */
-		
 
-		
-		String[] arrStr = str.split(";"); 
+		String[] arrStr = str.split(";");
 		String[] arrOfStr = arrStr[0].split("%2C");
-		//if (str.contains(",")) { arrOfStr = str.split(","); }
-		
+		// if (str.contains(",")) { arrOfStr = str.split(","); }
+
 		String PSC_Code;
 		String FedTFN;
 		String MedSuppTFN;
@@ -426,17 +434,14 @@ public class CampaignTFNPage extends UhcDriver {
 		tfnCookieValues.put("Fed TFN", FedTFN);
 		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
 		System.out.println(tfnCookieValues);
-		return tfnCookieValues; 
+		return tfnCookieValues;
 
-		
 		/*
 		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
 		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
 		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
-		 */	
-		}
-
-	
+		 */
+	}
 
 	public void validatePSCcode(String ExpectedpscCode, String actualPscCode) {
 
@@ -628,16 +633,15 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void BingSearchUHC() {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
-
 		bingSearchField.click();
 		bingSearchField.clear();
 		bingSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
 		System.out.println("Looking for UHC medicare Plans link , please bear with me :) ");
 		System.out.println("Current URL is ==  " + driver.getCurrentUrl());
-		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 30);
-		if (UHCSearchLinkfromBing.isDisplayed())
+		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 20);
+		if (UHCSearchLinkfromBing.isDisplayed()) {
 			System.out.println("Bing search result found");
-		else {
+		} else {
 			Assertion.assertFalse("Bing search result not found", false);
 		}
 		UHCSearchLinkfromBing.click();
@@ -869,8 +873,9 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 	}
 
-	//@FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
-	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block'))]")
+	// @FindBy(xpath = "(//a[contains(@dtmname, 'Top Nav:Logo') and
+	// not(contains(@style, 'display:'))])[1]")
+	@FindBy(xpath = "//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style,'display: block') or (@style=''))]")
 	private WebElement HomeLogo;
 
 	@FindBy(xpath = "//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
@@ -929,7 +934,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ip-no']")
 	private WebElement surveyPopupNoBtn;
 
-	public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
+	public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipCode) throws InterruptedException {
 		try {
 			validate(surveyPopupNoBtn, 20);
 			if (surveyPopupNoBtn.isDisplayed())
@@ -939,7 +944,7 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeys(zipCodeShopField, zipCode);
 		jsClickNew(ShopEnrollButton);
 		waitForPageLoadSafari();
 		// }
@@ -1329,14 +1334,16 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		/*if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
-
-		}
-
-		else {
-			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-		}*/
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		 * System.out.println("TFN is Displayed on Page : " +
+		 * ActualTFNelement.getText());
+		 * 
+		 * }
+		 * 
+		 * else { Assertion.fail("TFN elemnet is not found / displayed on page : " +
+		 * TFNXpath); }
+		 */
 
 		driver.switchTo().window(parentWindow);
 
@@ -1424,11 +1431,9 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@dtmid,'pharmacy')]//span[contains(text(),'Search')]")
 	private WebElement ContinuePharmacy;
-	
-	
+
 	@FindBy(xpath = "//button[contains(@dtmid, 'pharmacy')] //span[normalize-space()='Search']")
 	private WebElement searchPharmacy;
-	
 
 	@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
 	private WebElement PreferredRetailedPharmacy;
@@ -1686,14 +1691,16 @@ public class CampaignTFNPage extends UhcDriver {
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		/*if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
-
-		}
-
-		else {
-			Assertion.fail("TFN elemnet is not found / displayed on page : " + TFNXpath);
-		}*/
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		 * System.out.println("TFN is Displayed on Page : " +
+		 * ActualTFNelement.getText());
+		 * 
+		 * }
+		 * 
+		 * else { Assertion.fail("TFN elemnet is not found / displayed on page : " +
+		 * TFNXpath); }
+		 */
 
 		driver.navigate().back();
 
@@ -1774,7 +1781,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 		jsClickNew(ms3BackToAllPlans);
 	}
-	
+
 	public HashMap<String, String> retrieveTFNcookieLP() {
 		System.out.println("Current URL - " + driver.getCurrentUrl());
 		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
@@ -1787,18 +1794,20 @@ public class CampaignTFNPage extends UhcDriver {
 		 */
 
 		String[] arrStr = str.split(",");
-		/*String[] arrOfStr = arrStr[0].split(";");
 		/*
-		 * if (str.contains(",")) { arrOfStr = str.split(","); }
+		 * String[] arrOfStr = arrStr[0].split(";"); /* if (str.contains(",")) {
+		 * arrOfStr = str.split(","); }
 		 */
 		String PSC_Code;
 		String FedTFN;
-		String MedSuppTFN;	
+		String MedSuppTFN;
 		String SRC_Code;
 
-		/*for (String a : arrOfStr)
-
-		*	System.out.println(a);*/
+		/*
+		 * for (String a : arrOfStr)
+		 * 
+		 * System.out.println(a);
+		 */
 		String PSC_Code_Str = arrStr[0];
 		String[] arrStr_1 = PSC_Code_Str.split("=");
 
@@ -1828,5 +1837,34 @@ public class CampaignTFNPage extends UhcDriver {
 
 	}
 
-}
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo) {
+		CheckPageLoad();
+		CheckiPerseptions();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(msStaticTFN);
+		if (ExpecetdTFNNo.contains(msStaticTFN.getText())) {
+			System.out.println("TFN is Displayed on Page : " + msStaticTFN.getText());
+		} else {
+			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+		}
+	}
+	
+	@FindBy(xpath = "//span[@class='uhc-button__text'][normalize-space()='Start Application']")
+	private WebElement startMS4OLE_PlanDetails;
 
+	public void clickStartMS4OleFromPlanDetails() {
+		jsClickNew(startMS4OLE_PlanDetails);
+	}
+	
+	@FindBy(id = "planDetailStartApp")
+	private WebElement startMS3OLE_PlanDetails;
+
+	public void clickStartMS3OleFromPlanDetails() {
+		jsClickNew(startMS3OLE_PlanDetails);
+	}
+}

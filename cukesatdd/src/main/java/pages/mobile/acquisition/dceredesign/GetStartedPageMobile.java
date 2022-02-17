@@ -57,7 +57,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(css = "#member-medicare-number")
 	private WebElement Member_MBItxtbx;
 	
-	@FindBy(css = "button[dtmname*='import drugs and doctors'][dtmname$='view your drugs and doctors']")
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'view your drugs and doctors')]")
 	private WebElement Member_ViewDrugsDoctorsButton;
 	
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@id, 'name-capital')]/span")
@@ -131,7 +131,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
+			checkModelPopup(driver, 30);
 		validateNew(getStartedTab);
 		validateNew(AddMyDrugsBtn);
 
@@ -276,6 +276,12 @@ public class GetStartedPageMobile extends UhcDriver {
 		sendkeysMobile(Member_Ziptxtbx, member_zip);
 		sendkeysMobile(Member_MBItxtbx, member_mbi);
 		jsClickNew(Member_ViewDrugsDoctorsButton);
+		try {
+			jsClickNew(Member_ViewDrugsDoctorsButton);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
 		if(!validateNew(DataImportStatusPopup)){
 			Assertion.fail(">>>>>>>> Import FAILED <<<<<<<< - Import Status Modal not displayed");

@@ -83,10 +83,10 @@ public class PrioritiesMobilePage extends UhcDriver {
 		validate(previousBtn);
 		Assert.assertTrue(validate(topSelect, 30));
 		validate(addAnotherLink, 30);
-		mobileUtils.mobileLocateElementClick(addAnotherLink);
+		jsClickNew(addAnotherLink);
 		Assert.assertTrue(validate(secondSelect, 30));
 		mobileUtils.mobileLocateElement(previousBtn);
-		mobileUtils.mobileLocateElementClick(previousBtn);
+		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
 	}
@@ -100,7 +100,7 @@ public class PrioritiesMobilePage extends UhcDriver {
 			System.out.println("Top Priority value " + value + " selected");
 		} else {
 			if (validate(addAnotherLink)) {
-				mobileUtils.mobileLocateElementClick(addAnotherLink);
+				jsClickNew(addAnotherLink);
 				threadsleep(1000);
 			}
 			mobileSelectOption(secondSelect, value, true);
@@ -119,7 +119,7 @@ public class PrioritiesMobilePage extends UhcDriver {
 			System.out.println("Top Priority value " + mandatoryOpt1 + " selected");
 		}
 		if (validate(addAnotherLink)) {
-			mobileUtils.mobileLocateElementClick(addAnotherLink);
+			jsClickNew(addAnotherLink);
 			threadsleep(1000);
 		}
 		mobileSelectOption(secondSelect, value, true);
@@ -142,7 +142,7 @@ public class PrioritiesMobilePage extends UhcDriver {
 	}
 
 	public void continuePriority() {
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 	}
 

@@ -83,7 +83,7 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 		sendkeysMobile(ProviderCity, Providercity);
 		sendKeysByCharacter(ProvidePhoneNumber, ProviderNumber);
 		sendkeysMobile(ZipCode, ProviderZip);
-
+		StateDropDown.click();
 		selectFromDropDownByValue(StateDropDown, Mailing_State);
 //		mobileSelectOption(StateDropDown, Mailing_State, true);
 

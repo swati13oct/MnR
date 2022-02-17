@@ -106,12 +106,16 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	   // sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 		scrollToView(distanceDropownID);
-		sleepBySec(3);
-		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
-		mobileSelectOption(distanceDropownID, distance, true);
+	
+//		driver.findElement(By.xpath("//h2[contains(@class,'m-0')]")).click();
+//		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 
-		String initialZipVal = zipcodeField.getAttribute("value");
+//		String initialZipVal = zipcodeField.getAttribute("value"); //not working in android 12
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String initialZipVal = js.executeScript("return arguments[0].value",zipcodeField).toString();
+		
 		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		validateNoresultsZipcodeError(zipcode);
@@ -135,6 +139,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 					 * driver.findElement(By.xpath("//*[@id='county']//option[contains(text(),'"+
 					 * county + "')]"));
 					 */
+					countyModal.click();
 					mobileSelectOption(countyModal, county, true);
 					// jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);

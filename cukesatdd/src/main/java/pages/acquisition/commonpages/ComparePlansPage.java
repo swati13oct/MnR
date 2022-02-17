@@ -442,6 +442,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
 	private WebElement planNameOnBaseLinePopup;
 	
+	@FindBy(xpath = "//*[contains(@id,'plan-summary-table')]//tr[(contains(@ng-if,'plansummaryestimatedDrugCost'))]//p[contains(text(),'Drug')]//ancestor::th/following-sibling::td")
+	private WebElement planCompareTabDrugCostValueCell;
 	
 	
 	public ComparePlansPage(WebDriver driver) {
@@ -695,8 +697,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	private int findindexofPlan_PlanCompare(String planName) {
 		int index = 0;
-		List<WebElement> PlanHeadings = driver.findElements(By.xpath(
-				"//table[@id='plan-summary-table']//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));
+		/*List<WebElement> PlanHeadings = driver.findElements(By.xpath(
+				"//table[@id='plan-summary-table']//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));*/
+		List<WebElement> PlanHeadings = driver.findElements(By.xpath("(//table[@class='uhc-slide-table'])[1]//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -1439,7 +1442,7 @@ public class ComparePlansPage extends UhcDriver {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of doctors & dentists loaded: " + "0"));
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
 				Assertion.assertTrue(
@@ -2161,13 +2164,20 @@ public void saveaPlan(String plans) {
 		String medicalDeductible = memberAttributesMap.get("Medical Deductible");
 		String pcp = memberAttributesMap.get("Primary Care Physician");
 		String Specialist = memberAttributesMap.get("Specialist");
+		String TotalMonthlyPlanPremium = memberAttributesMap.get("Total Monthly Plan Premium");
+		String SpecialistReferral = memberAttributesMap.get("Specialist Referral");
+		String SpecialistDeductible = memberAttributesMap.get("Prescription Deductible");
 		WebElement moreOps = driver.findElement(By.xpath("(//span[text()='"+planName+"'])[1]/following::span[contains(text(),'More Options')][1]"));
 		moreOps.click();
 		baseLineBenefitslink.click();
 		Assert.assertEquals(planNameOnBaseLinePopup.getText().trim(), planName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Total Monthly Plan Premium')]/following-sibling::td/span")).getText().trim(), TotalMonthlyPlanPremium);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Medical Deductible')]/following-sibling::td/span")).getText().trim(), medicalDeductible);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist Referral')]/following-sibling::td")).getText().trim(), SpecialistReferral);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Prescription Deductible')]/following-sibling::td")).getText().trim(), SpecialistDeductible);
+        System.out.println("Validated Baseline Benefit Values on Popup.");
 	}
 	
 	public void validateProvidersCovered() {
@@ -2200,5 +2210,24 @@ public void saveaPlan(String plans) {
 				"View Locations", DoctorCoveredText.getText());
 
 	}
+	
+public boolean verifyAddedDrugPharmacyCompareCost(String planName, String networkType) {
+		
+		System.out.println("Drug cost on plan Compare : " + planCompareTabDrugCostValueCell.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(planCompareTabDrugCostValueCell.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (planCompareTabDrugCostValueCell.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
 
+		}
+			}
+		
+			
+		}
+		return false;
+}
 }

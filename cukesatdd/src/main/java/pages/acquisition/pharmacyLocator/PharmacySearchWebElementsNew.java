@@ -59,7 +59,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class, 'uhc-toggle__inner')]//button[2]")
 	protected WebElement NextYearLink;
 	
-	@FindBy(xpath="//div[@id='zipError']//p[contains(@class,'field-error-msg')]")
+	@FindBy(xpath="//p[contains(@class,'field-error-msg')]")
 	protected WebElement noZipcode;
 	
 	@FindBy(xpath = "//div[@id='zipError']//p[contains(@class,'field-error-msg')]")

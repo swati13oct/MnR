@@ -73,6 +73,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath = "//*[@id='ip-no']")
+	private WebElement surveyPopupNoBtn;
 
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
 	public WebElement IPerceptionNoBtn;
@@ -657,6 +660,7 @@ public abstract class UhcDriver {
 			scrollToView(element);
 		}
 		js.executeScript("arguments[0].click();", element);
+		System.out.println("Element clicked");
 
 		/*
 		 * if (driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -784,6 +788,18 @@ public abstract class UhcDriver {
 	 * 
 	 * @param Element
 	 */
+	
+	public void handleSurveyPopup() {
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+	}
+	
+	
 	public void switchToNewTabNew(WebElement Element) {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());

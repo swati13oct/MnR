@@ -94,9 +94,9 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		//Assertion.assertTrue(lowerPremium.getText().contains("lower"));
 		validate(higherPremium, 30);
 		//Assertion.assertTrue(higherPremium.getText().contains("higher"));
-		mobileUtils.mobileLocateElementClick(higherPremium);
+		jsClickNew(higherPremium);
 		mobileUtils.mobileLocateElement(previousBtn);
-		mobileUtils.mobileLocateElementClick(previousBtn);
+		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
 	}
@@ -106,11 +106,11 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		System.out.println("Cost Preferences option selection in Cost Preferences Page");
 		if (costpreferenceoption.equalsIgnoreCase("Lower")) {
 			validate(lowerPremium);
-			mobileUtils.mobileLocateElementClick(lowerPremium);
+			jsClickNew(lowerPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		} else if (costpreferenceoption.equalsIgnoreCase("Higher")) {
 			validate(higherPremium);
-			mobileUtils.mobileLocateElementClick(higherPremium);
+			jsClickNew(higherPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		}
 	}
@@ -119,14 +119,14 @@ public class CostPreferencesMobilePage extends UhcDriver {
 	public void costPreferencepageFunctional(String preference) {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 	}
 
 	// Cost Preference Page Error Function Verification
 	public void costPreferencepageerror() {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
-		mobileUtils.mobileLocateElementClick(continueBtn);
+		jsClickNew(continueBtn);
 		mobileUtils.mobleErrorValidation(page);
 	}
 

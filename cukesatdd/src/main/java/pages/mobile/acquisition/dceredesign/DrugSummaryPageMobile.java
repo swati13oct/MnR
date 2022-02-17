@@ -21,8 +21,10 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -81,6 +83,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	// @FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
 	@FindBy(css = "[class^='uhc-card border']:nth-of-type(1) div[class*='d-block'] p:nth-of-type(5) span[class*='inline-block']")
 	public WebElement drugsCovered;
+	
+	@FindBy(xpath = "//*[text()='Return to plan compare']")
+	public WebElement returnToCompareLink;
 
 	@FindBy(css = "[header ='What is Average Monthly Drug Cost?'] #accordion-1-button")
 	public WebElement whyAverageLink;
@@ -507,16 +512,12 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateXcleartextPharmacyFilter() {
-		validateNew(PharmacyFilterApplyBtn);
-		jsClickNew(PharmacyFilterApplyBtn);
+		validateNew(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
-		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> " + PharmacyFilterErrorMsg.getText()
-				+ " <<<<<<<");
-		Assertion.assertTrue(
-				"Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<",
-				(validateNew(PharmacyFilterErrorMsg)
-						&& PharmacyFilterErrorMsg.getText().contains("least two characters")));
+		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
+		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
 
 	public void ApplyPharmacyFilter(String filterText) {
@@ -546,8 +547,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
-	@FindBy(css = "button[dtmname$='pharmacy search:search']")
-	public WebElement PharmacyFilterApplyBtn;
+//	@FindBy(css = "button[dtmname$='pharmacy search:search']")
+//	public WebElement PharmacyFilterApplyBtn;
 
 	@FindBy(css = "#pharmacy-name-filter + button")
 	public WebElement PharmacyFilterClearTextX;
@@ -558,7 +559,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
-		validateNew(PharmacyFilterApplyBtn);
+//		validateNew(PharmacyFilterApplyBtn);
 		
 		sendkeysMobile(PharmacyFilterTxtBx, "a");
 		System.out.println("FIlter text entered : a");
@@ -587,6 +588,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(mapdPlanToggle);
 		jsClickNew(mapdPlanToggle);
 	}
+	
+	public void ValidateNotCoveredPharMessage() {
+		pageloadcomplete();
+		sleepBySec(3);
+		CommonUtility.waitForPageLoadNew(driver, DrugPricingNotCoveredPharmacyText, 30);
+		if (validateNew(DrugPricingNotCoveredPharmacyText)) {
+			System.out.println("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is Displayed");
+		} else
+			Assertion.fail("Drug Summary Page, Message for Not Covered Pharmacy Not able to provide Drug Pricing is NOT Displayed");
+	}
 
 	// @FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
 	@FindBy(css = "#changepharmacymobile h3 > span")
@@ -611,6 +622,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
+	}
+	
+	public ComparePlansPageMobile ClickReturnToCompare() {
+		validateNew(returnToCompareLink);
+		jsClickNew(returnToCompareLink);
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		return new ComparePlansPageMobile(driver);
 	}
 	
 	public void validateDynamicErrorMessageDisplay(String pharmacyErrorType) {
@@ -796,6 +815,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		validate(alertTextImg);
 	}
+	
+	public void vdrugPricingDeductText() {
+		if (drugPricingDeductText.getText().contains("$0 or $99")
+				|| drugPricingDeductText.getText().contains("$0 or $92")) 
+			System.out.println(drugPricingDeductText.getText());
+		else 
+			Assert.fail("Expected Deductible LIS message not displayed");
+	}
 
 	public void verifyDrugPricingText() {
 
@@ -805,12 +832,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(drugTitle);
-//		validate(switchToGenericBtn);
-		validate(drugPricingDeductText);
-		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+		pageloadcomplete();
+		waitForPageLoadSafari();
+		validateNew(drugTitle);
+		validateNew(drugPricingDeductText);
+		vdrugPricingDeductText();
+		//String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
 //		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
-		Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
+		//Assertion.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
 		validateNew(drugClose);
 		jsClickNew(drugClose);
 
@@ -997,11 +1026,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
-				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+				mailOrderPharmacyMsg.getText().trim().contains(expectedMsg));
 	}
 
 	@FindBy(css = "input[name='plans-filter'][value='MAPD']")
 	public WebElement mapdPlanToggle;
+	
+	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'the pharmacy you selected does not provide Prescription Drug Coverage under this plan. We are unable to provide the drug pricing.')])[1]")
+	public WebElement DrugPricingNotCoveredPharmacyText;
 
 	@FindBy(css = "input[name='plans-filter'][value='PDP']")
 	public WebElement pdpPlanToggle;
@@ -1195,7 +1227,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#pharmacy-zip-filter")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(css = "#pharmacyfilter > button[class*='searchbuttonmobile']")
+	@FindBy(xpath="//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	public void validateOptumRxConsistentDisplay_PharmacyPage() {

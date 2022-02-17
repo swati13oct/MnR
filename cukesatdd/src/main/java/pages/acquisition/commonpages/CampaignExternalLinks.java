@@ -1179,7 +1179,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	public void updateHrefUrlVPP_Script1(String env) {
 		WebElement element = driver
-				.findElement(By.xpath("(//*[contains(@id,'button') and contains(@href,'available-plans')])[1]"));
+				.findElement(By.xpath("(//*[contains(@role,'button') and contains(@href,'available-plans')])[1]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			if (env.equalsIgnoreCase("stage")) {
@@ -2290,7 +2290,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		return PlanPremium;
 	}
 
-	public void clickOnViewMoreForPlan(String planName) {
+	public void clickOnViewMorePlan(String planName) {
 
 		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));

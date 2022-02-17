@@ -18,13 +18,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 
 /**
  * @author sdwaraka
@@ -516,12 +516,12 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 
-	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+	public PharmacySearchPageNew clickPharamcyLinkAndSwitchTab() {
 		/*pharmacyLink.click();
 		switchToNewTab();*/
 		switchToNewTabNew(pharmacyLink);
 		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
-			return new PharmacySearchPage(driver);
+			return new PharmacySearchPageNew(driver);
 		}
 		return null;
 	}
