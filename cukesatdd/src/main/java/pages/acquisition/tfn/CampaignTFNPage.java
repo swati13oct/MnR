@@ -1867,4 +1867,18 @@ public class CampaignTFNPage extends UhcDriver {
 	public void clickStartMS3OleFromPlanDetails() {
 		jsClickNew(startMS3OLE_PlanDetails);
 	}
+	
+	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
+	private WebElement startMS4OLEPlanCompare;
+
+	public void clickStartMS4OlePlanCompare() {
+		jsClickNew(startMS4OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLEPlanCompare;
+
+	public void clickStartMS3OlePlanCompare() {
+		jsClickNew(startMS3OLEPlanCompare);
+	}
 }
