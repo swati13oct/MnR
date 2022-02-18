@@ -274,7 +274,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 #      | site | state   | zipcode | isMultiCounty | testPlans                                              | plantype | planName          | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | middlename |
 #      | UHC  | Florida | 33143   | Yes           | AARP Medicare Advantage Choice (PPO),MedicareMax (HMO) | MAPD     | MedicareMax (HMO) | future   | 33143   | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   | 01012010  | 01012010  | 0123456789     | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           | 33143      | test@test.com | moved outside of the service area | 01012018   | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      | 655                | MINNEAPOLIS   | 55455        | 1235678901           | FRIEND                | MN             | Agree              | 566       | 677          | true     | K          |
 
-#  @vpMSSavePlan
+  @vpMSSavePlan
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile in <site> site - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -297,13 +297,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-#    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
     Examples:
       | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
 #      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
       | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
 
-#    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples:
       | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
 #      | UHC  | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
@@ -377,10 +377,10 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
     Examples:
-      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-#      | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
-#      | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
+      | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
+      | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+      | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate @featureGate
     Examples:
@@ -520,3 +520,19 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
       | UHC  | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
       | UHC  | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @featureGate
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county           | MS_testPlans                           | MS_Plan    | component_code |
+      | AARP | 96910   | NO            | MS       | Guam             | Plan G,Plan A                          | Plan G     | WB27375ST      |
+      | AARP | 55343   | NO            | MS       | Hennepin County  | Basic Plan,Extended Basic 2020 Plan    | Basic Plan | WB27375S1      |
+      | AARP | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
+      | AARP | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county           | MS_testPlans                           | MS_Plan    | component_code |
+      | UHC  | 96910   | NO            | MS       | Guam             | Plan G,Plan A                          | Plan G     | WB27375ST      |
+      | UHC  | 55343   | NO            | MS       | Hennepin County  | Basic Plan,Extended Basic 2020 Plan    | Basic Plan | WB27375S1      |
+      | UHC  | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
+      | UHC  | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
