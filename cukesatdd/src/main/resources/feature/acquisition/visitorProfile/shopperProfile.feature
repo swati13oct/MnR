@@ -218,7 +218,7 @@ Feature: 1.09. ACQ- Shopper Profile
     @team-e_AddProvider @regressionSPTeamE @featureGate
     Examples:
       | username | password       | email             | mbi           | dob        | zipcode | fname  | lname   | uuid                                 | enrolledplanName                                    | planname                                            | plantype | drugNames | providers |
-      | ocpuser2 | Password@12345 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 | 80229   | NANINE | SLOVICK | 473768c6-466d-4a32-9c3b-2c66b712aaf4 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
+      | ocpuser2 | Password@12345 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 | 80229   | NANINE | SLOVICK | 0fcae3c0-4e75-375b-a48d-f606c2d6fea7 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
 
     @stage_AddProvider @regressionSPStage @sanity @regressionAARP
     Examples:
@@ -323,7 +323,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | County             | <county>           |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <enrolledplanName> |
+      | Enrolled Plan Name | <enrolledplanName1> |
       | Plan Name          | <planName>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
@@ -331,9 +331,9 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples:
-      | username | password       | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers |
-      | ocpuser2 | Password@12345 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER | 33134   | Medica HealthCare Plans MedicareMax (HMO) | MedicareMax (HMO)                                                | No        | No        |
-      | ocpuser2 | Password@12345 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    | 10010   | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No        |
+      | username | password       | email                    | dob        | mbi           | gender | fname   | lname      | zipCode | enrolledplanName  | enrolledplanName1                         | planName                                                         | drugNames | providers |
+      | ocpuser2 | Password@12345 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | male   | MANISHA | BOOKWALTER | 33134   | MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO) | MedicareMax (HMO)                                                | No        | No        |
+      | ocpuser2 | Password@12345 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | male   | LEONEL  | DREHMER    | 10010   | [blank]           | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No        |
 
 
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
