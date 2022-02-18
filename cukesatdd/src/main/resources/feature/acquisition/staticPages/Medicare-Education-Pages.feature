@@ -164,7 +164,7 @@ Feature:Medicare Education Pages flows for New Pages
       | GeoState | <geoState> |
     Then the user navigates to new Benefits page
     Then the user validates inner links on new Benefits Page
-    Then the user clicks on DCE link on new Medicare Education Page
+#    Then the user clicks on DCE link on new Medicare Education Page
     Then the user clicks on Look up Provider link on new Medicare Education Page
     Then the user clicks on Medicare Annual Enrollment link on new Benefits Page
     Then the user clicks on Medicare Advantage Plans link on new Benefits Page
