@@ -292,7 +292,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='uhc-link-button plandetails view-more-link' and @plancode='F01']")
 	private WebElement ms4ViewPlanDetails;
 
-	@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	//@FindBy(xpath = "//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']")
+	@FindBy(xpath = "//div[contains(@class,'med-supp-plans')]//a[normalize-space()='Back to plan list']")
 	private WebElement ms4BackToPlanList;
 
 	@FindBy(xpath = "//*[@class='insured-member']//a[@class='tfn-call']/span")
@@ -933,7 +934,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ip-no']")
 	private WebElement surveyPopupNoBtn;
 
-	public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
+	public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipCode) throws InterruptedException {
 		try {
 			validate(surveyPopupNoBtn, 20);
 			if (surveyPopupNoBtn.isDisplayed())
@@ -943,7 +944,7 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
-		sendkeys(zipCodeShopField, zipcode);
+		sendkeys(zipCodeShopField, zipCode);
 		jsClickNew(ShopEnrollButton);
 		waitForPageLoadSafari();
 		// }
@@ -1865,5 +1866,19 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void clickStartMS3OleFromPlanDetails() {
 		jsClickNew(startMS3OLE_PlanDetails);
+	}
+	
+	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
+	private WebElement startMS4OLEPlanCompare;
+
+	public void clickStartMS4OlePlanCompare() {
+		jsClickNew(startMS4OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLEPlanCompare;
+
+	public void clickStartMS3OlePlanCompare() {
+		jsClickNew(startMS3OLEPlanCompare);
 	}
 }

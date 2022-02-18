@@ -16,7 +16,7 @@ Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
 
-		@CampaignExternal_Scenario8_AARP @teamAvengersLP @featureGate
+    @CampaignExternal_Scenario8_AARP @teamAvengersLP @featureGate
     Examples:
       | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | tfnFlag | workingHrs                              | externallink                                                       |
       | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | true    | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/take-advantage.html |
