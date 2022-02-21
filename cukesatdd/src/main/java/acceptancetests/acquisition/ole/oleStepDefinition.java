@@ -1907,7 +1907,7 @@ public class oleStepDefinition {
 		
 		String ConfirmationNumber="";
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")) ||MRScenario.environment.equalsIgnoreCase("team-acme")) {
 			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
@@ -1935,7 +1935,7 @@ public class oleStepDefinition {
 	public void the_user_validates_Plan_and_Membber_Details_on_Confirmation_Page() throws Throwable {
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod") ||MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {
@@ -1970,32 +1970,33 @@ public class oleStepDefinition {
 
 	@Then("^the user Validates Next Steps in Confirmation Page for the Plan Type\\.$")
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
-		
 
-		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-		if (oleConfirmationPage != null) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 
-			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (oleConfirmationPage != null) {
 
-			boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
-			if(Validation_Status){
-				System.out.println("OLE Confirmation Page : Next Steps Validated");
+				String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+
+				boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
+				if (Validation_Status) {
+					System.out.println("OLE Confirmation Page : Next Steps Validated");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+							oleConfirmationPage);
+					Assertion.assertTrue(true);
+				} else {
+					System.out.println("Review and Submit Page : Next Steps  NOT validated");
+					Assertion.fail();
+				}
+			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
 						oleConfirmationPage);
-				Assertion.assertTrue(true);
-			} else {
-				System.out.println("Review and Submit Page : Next Steps  NOT validated");
-				Assertion.fail();
+				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
 			}
+			// }
 		}
-		else{
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-					oleConfirmationPage);
-			System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
-		}
-		// }
 	}
-
 	@Then("^the user validates the presence for Preliminary Questions on Page$")
 	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes)
 			throws Throwable {
