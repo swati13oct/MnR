@@ -1907,7 +1907,7 @@ public class oleStepDefinition {
 		
 		String ConfirmationNumber="";
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")) ||MRScenario.environment.equalsIgnoreCase("team-acme")) {
+				|| MRScenario.environment.equalsIgnoreCase("prod") ||MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
