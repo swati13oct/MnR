@@ -1296,19 +1296,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		waitforElementNew(visitorProfileDashboard);
 	}
 
-	@FindBy(css = "#dateOfBirth")
+	@FindBy(xpath="(//*[contains(@id,'dateOfBirth')])[1]")
 	private WebElement msDOB;
 
 	public void clickOnMStartApplication(String planName) {
-		WebElement msPlanHeader = driver
-				.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
-		if (!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
-			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
-			jsClickNew(expandAccordionButton);
-		}
-
-		WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName
-				+ "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'start-application')]"));
+		WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Start Application'][1]"));
 		jsClickNew(btnStartApplication);
 		waitforElementNew(msDOB);
 	}
