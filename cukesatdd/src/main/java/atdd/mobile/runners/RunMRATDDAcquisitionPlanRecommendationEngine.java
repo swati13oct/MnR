@@ -9,15 +9,11 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/acquisition/PlanRecommendationEngine"},
-				monochrome = true,
-				plugin = { "pretty",
-						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
-						"timeline:target" },
-				tags = "@regressionAARP", dryRun=false)
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+		"src/main/resources/feature/acquisition/PlanRecommendationEngine" }, monochrome = true, plugin = { "pretty",
+				"html:reports/test-report.html",
+				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
+				"timeline:target" }, tags = "@regressionAARP", dryRun = false)
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
@@ -26,4 +22,3 @@ public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
-

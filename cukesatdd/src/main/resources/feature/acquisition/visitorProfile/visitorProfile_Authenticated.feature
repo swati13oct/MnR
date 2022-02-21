@@ -3,7 +3,7 @@
 @visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
-  @vpMSSavePlanAuthenticated @authenticated
+#  @vpMSSavePlanAuthenticated @authenticated
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -28,12 +28,14 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
-    @visitorProfile_AARP @regressionAARP @authenticatedAARP @VPDEBUG
+
+#    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
       | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
-    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
+#    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
       | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |

@@ -872,12 +872,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | TFN No | <MedSupStaticTFNNo> |
     And user click on Back to Plan in MS Plan Details
       | Zip Code | <zipcode> |
-    Then the user fills all the details in MedsuppPage for TFN
-      | DOB      | <dob>     |
-      | Zip Code | <zipcode> |
     And user clicks on Edit Your Information link and navigate back to micro form
-    #And user updates Medsup form for user details
-    Then user click to close MS application Modal
+    And user updates Medsup form for user details
     Then the user validates TFN in Already an insured section
       | TFN No | <MedSupStaticTFNNo> |
     When user selects medsup plans to compare
@@ -907,7 +903,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
-    @MSScenario1
+    @MSScenario @campaignTFNStageMS
     Examples: 
       | scenario         | site | dob        | zipcode | FedTFNNo       | MedSupTFNNo    | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | MSplantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                    | DCETFNxpath                                                               | MSplantype | userName          | password        | TFNxpath1                         | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | plantype | MSplantype | MS_Plan | MedSupStaticTFNNo |
       | Scenario 1 - AMP | AARP | 11/11/1950 |   90210 | 1-877-699-5710 | 1-866-408-5545 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MS4.0      | No              | future   | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MS4.0      | (//a[contains(@class, 'tel')])[3] | //*[contains(@class, 'invoca_swap text-bold tel')] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | TiggerOptumID3331 | FebruarY##123$! | (//a[contains(@class, 'tel')])[1] | future   | 1-877-699-5710 | 1-866-408-5545 | AEP        | MA       | MS4.0      | Plan G  | 1-866-603-3424    |

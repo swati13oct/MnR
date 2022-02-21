@@ -149,15 +149,15 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		jsClickNew(getStartedBtn);
 
 		try {
-			if (driver.toString().contains("IOS")) {
+			if(driver.toString().contains("IOS")) {
 				jsClickNew(zipCode);
-				MobileElement mobileElement = (MobileElement) driver
-						.findElement(By.xpath("//input[contains(@id,'zip-code')]"));
-				// mobileElement.click();
+				MobileElement mobileElement = (MobileElement) driver.findElement(By.xpath("//input[contains(@id,'zip-code')]"));
+			//	mobileElement.click();
 				mobileElement.sendKeys(zipcode);
 				jsClickNew(getStartedBtn);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 		}
 		// getStartedBtn.click();
 
