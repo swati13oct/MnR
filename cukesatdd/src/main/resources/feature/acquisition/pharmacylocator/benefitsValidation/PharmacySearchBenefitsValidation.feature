@@ -1,7 +1,7 @@
 @pharmacySearchBenefits
 Feature: ACQ-Plan benefits validation
 
-  @planSummary_ExcelValidation @2022planSummaryAARP @2022planSummaryBenefits
+  @pharmacySearchBenefits @2022pharmacySearchBenefits
   Scenario Outline: Verify plan benefits on the Pharmacy Search Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to Pharmacy Search page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |

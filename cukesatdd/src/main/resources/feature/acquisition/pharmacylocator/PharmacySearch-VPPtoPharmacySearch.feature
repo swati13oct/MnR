@@ -51,17 +51,17 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
     Then the user validate error message displayed when filter results in no match
     Then the user validates the question widget
 
-    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP @HPA
+    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP @HPA #@featureGate
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | English - Pharmacy | AARP | English  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2022&planId=H0543168000&planYear=2022&systemYear=2022&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_AARP @regressionAARP
+    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_AARP @regressionAARP #@featureGate
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Chinese - Pharmacy | AARP | Chinese  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2022&planId=H0543168000&planYear=2022&systemYear=2022&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_AARP @regressionAARP
+    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_AARP @regressionAARP #@featureGate
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Spanish - Pharmacy | AARP | Spanish  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2022&planId=H0543168000&planYear=2022&systemYear=2022&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -106,7 +106,7 @@ Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
       | Scenario                   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Language Drop Down Removal | AARP |   14143 |       15 | None       | 2022        | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
 
-    @Pharmacy_Locator_ITU_HI_LTC_Messaging_UHC @regressionUHC
+    @Pharmacy_Locator_ITU_HI_LTC_Messaging_UHC @regressionUHC @featureGate
     Examples: 
       | Scenario                   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Language Drop Down Removal | UHC  |   14143 |       15 | None       |        2022 | AARP MedicareRx Preferred (PDP) |        2022 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
