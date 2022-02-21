@@ -870,6 +870,7 @@ public class MRScenario {
 			} else {
 				capabilities.setCapability("browserName", "Safari");
 				capabilities.setCapability("autoAcceptAlerts", "true");
+				capabilities.setCapability("autoGrantPermissions", "true");
 				capabilities.setCapability("safariAllowPopups", "true");
 				capabilities.setCapability("locationServicesEnabled", "true");
 				capabilities.setCapability("locationServicesAuthorized", "true");
