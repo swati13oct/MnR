@@ -93,13 +93,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "#msVppZipCode")
 		private WebElement zipcodeMSForm;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
+		@FindBy(css = "button[class*='view-plans-next disabled']")
 		private WebElement pageNextButtonDisabled;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-prev']")
+		@FindBy(css = "button[class*='view-plans-prev']")
 		private WebElement pagePreviousButton;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-prev disabled']")
+		@FindBy(css = "button[class*='view-plans-prev disabled']")
 		private WebElement pagePreviousButtonDisabled;
 
 		// Plan Tile Elements
