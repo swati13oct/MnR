@@ -4,9 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -439,6 +441,21 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 
 		@FindBy(css = "div h3[class*='plan-name']")
 		private List<WebElement> planNamesVisitorPrf;
+		
+		@FindBy(css = "#landrover div[class*='plan-card'] div[role='listitem']:nth-child(1)>h3")
+		private List<WebElement> PremiumVisitorPrf;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] h2")
+		private WebElement MSplanNamesVisitorPrf;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] #undefined-content div[class*='page-lead-large']")
+		private WebElement MSPremiumVisitorPrf;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] button[class*='start-application']")
+		private WebElement MSStartApplication;
+		
+		@FindBy(css = "div[class*='med-supp-profile-card'] #undefined-button h2")
+		private WebElement VPMSPlanName;
 
 		@FindBy(css = ".planTileSection .visitingProfileContainer h3")
 		private WebElement MSPlanSection;
@@ -521,6 +538,32 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		@FindBy(css = "div.content h2")
 		private WebElement planNameinPlanDetailsPage;
+		
+// OLE Page from VP Page
+		
+		@FindBy(css = "#dateOfBirthInput")
+		private WebElement DOB;
+		
+		@FindBy(css = "label[for='Female']")
+		private WebElement genderFemale;
+		
+		@FindBy(css = "div[class*='electronicDiscountParent'] div[role='radiogroup'] label:nth-child(2)")
+		private WebElement answeringQues;
+		
+		@FindBy(css = "button[class*='continue-application']")
+		private WebElement continApp;
+		
+		@FindBy(css = "div[class*='wizardpagebody'] p:nth-child(2)")
+		private WebElement OLEPlanName;
+		
+		@FindBy(css = "div[class*='wizardpagebody'] ul.bottomMargin5>li:nth-child(1)")
+		private List<WebElement> OLEZip;
+		
+		@FindBy(css = "#ole-form-controls div>div>a[class*='cancel-button']")
+		private WebElement cancelLink;
+		
+		@FindBy(css = "#ole-cancel-confirm .modal-footer>a:nth-child(2)")
+		private WebElement cancelButton;
 	
 // External page elements
 	
@@ -1876,14 +1919,29 @@ public void validateSavePlan(String planInfo, String year) {
 		}
 			
 	}
-	Collections.sort(vppPlans);
-	System.out.println(vppPlans);
+	String[] str ;
+	String planme="",prem="" ;
+//	vppPlansPremium.add(vppPlans.get(planInfo));
+	str = vppPlans.toString().trim().replace("{", "").replace("}", "").split(",");
+	for (int i = 0; i < vppPlans.size(); i++) {
+		String compareInfo = str[i];
+		if (compareInfo.trim().length() > 0) {
+			String[] planDetails = compareInfo.split("=");
+			planme = planDetails[0];
+			prem = planDetails[1];
+		}
+		planNames.add(planme);
+		vppPlansPremium.add(prem);
+	}
+	System.out.println(vppPlansPremium);
+	System.out.println(planNames);
 	threadsleep(3000);
 	scrollToView(mySavedItems);
 	actions.clickAndHold(mySavedItems).build().perform();
 	validate(guestViewSavedBtn);
 	guestViewSavedBtn.click();
-	verifySavePlans(year, vppPlans);
+	verifySavePlans(year, planNames);
+	verifyPlanPremium(year, vppPlansPremium);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
 
@@ -1894,7 +1952,6 @@ public void savingPlansInPRE(String planInfo, String year) {
 	for (int i = 0; i < planslist.length; i++) {
 		plan = planslist[i];
 		threadsleep(3000);
-		saveplans(plan);
 		threadsleep(3000);
 		if(i==1) {
 			validate(keepshoppingPlansBtn);
@@ -1903,8 +1960,8 @@ public void savingPlansInPRE(String planInfo, String year) {
 		}
 			
 	}
-	Collections.sort(vppPlans);
-	System.out.println(vppPlans);
+	Collections.sort(vppPlansPremium);
+	System.out.println(vppPlansPremium);
 	threadsleep(3000);
 }
 
@@ -1958,11 +2015,17 @@ public void viewplanLink(List<WebElement> plansName) {
 		SNPViewPlansLink.click();
 	}
 }
- ArrayList<String> vppPlans = new ArrayList<String>();
-public ArrayList<String> saveplans(String plan) {
+ArrayList<String> vppPlansPremium = new ArrayList<String>();
+ArrayList<String> planNames = new ArrayList<String>();
+public LinkedHashMap<String,String> vppPlans = new LinkedHashMap<String,String>();
+public String  planName = "";
+public String  premium = "";
+public LinkedHashMap<String, String> saveplans(String plan) {
 	int planIndex = planSelectorNewResultspage.findPlan(plan,false);
 	System.out.println("Plans Index is :" +planIndex);
-	vppPlans.add(plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim());
+	planName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+	premium = plantiles.get(planIndex).findElement(By.cssSelector("p.monthlyPremium>strong")).getText().trim();
+	vppPlans.put(planName,premium);
 	threadsleep(3000);
 	WebElement planSaveBtn = plantiles.get(planIndex).findElement(By.cssSelector(".enrollSection span.saveButton"));
 	scrollToView(planSaveBtn);
@@ -1970,9 +2033,9 @@ public ArrayList<String> saveplans(String plan) {
 	if (save.contains("Save") || save.contains("Save Plan")) { 
 		threadsleep(3000);
 		jsClickNew(planSaveBtn);
-	}
+	}	
 	return vppPlans;
-}
+	}
 
 public ArrayList<String> savecomboplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
 	System.out.println("Plans Count :" +plansName.size());
@@ -1989,6 +2052,13 @@ public void verifySavePlans(String year, ArrayList<String> vppPlans) {
 	changePlanyearVisitorProfile(year);
 	visitorprofile(planNamesVisitorPrf, vppPlans);
 	System.out.println("Plan Name compared Successful Clicks on Save Plan");
+}
+
+public void verifyPlanPremium(String year, ArrayList<String> vppPlans) {
+	threadsleep(3000);
+	changePlanyearVisitorProfile(year);
+	premiumCheck(PremiumVisitorPrf, vppPlans);
+	System.out.println("Plan Benefits verified in Visitor Profile");
 }
 
 public void verifyPlansVPandPDP(List<WebElement> plansName) {
@@ -2053,13 +2123,32 @@ public boolean changePlanyearVisitorProfile(String year) {
 
 public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
 	System.out.println("Plan Name in VPP Page: " + vppPlans);
-	String actualplanName = "";
+	String actualplanName = ""; int k=0;
 	pageloadcomplete();
-	System.out.println(plansName.size());
-	for (int i = 0; i < plansName.size(); i++) {
-		actualplanName = plansName.get(i).getText().trim();
+	System.out.println(vppPlans.size());
+	for (int i = 0; i < vppPlans.size(); i++) {
+		if(vppPlans.get(i).contains("Insurance")) 
+				actualplanName = MSplanNamesVisitorPrf.getText().trim();
+		else
+			actualplanName = plansName.get(i).getText().trim();
+				
 		System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
-		Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
+		Assert.assertTrue(vppPlans.get(i).contains(actualplanName), "--- Plan name are not matches---");
+	}
+}
+
+public void premiumCheck(List<WebElement> plansName, List<String> vppPlans) {
+	System.out.println("Plan Premium in VPP Page: " + vppPlans);
+	String actualplanName = ""; int k=0;
+	pageloadcomplete();
+	System.out.println(vppPlans.size());
+	for (int i = 0; i < vppPlans.size(); i++) {
+		if(vppPlans.get(i).contains("*"))
+			actualplanName = MSPremiumVisitorPrf.getText().trim().replace(" ", "");
+		else
+			actualplanName = plansName.get(i).getText().trim();
+		System.out.println("Plan Premium in Visitor Profile Page: " + actualplanName);
+		Assert.assertTrue(vppPlans.get(i).contains(actualplanName), "--- Plan Premium are not matches---");
 	}
 }
 
@@ -2106,10 +2195,40 @@ public void validateDrugProvider() {
 	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
 }
 
+public void validateOLEDetails(String zip) {
+	driver.navigate().back();
+	driver.navigate().refresh();
+	pageloadcomplete();
+	Assert.assertTrue(driver.getCurrentUrl().contains("guest"),"--- VP page not loaded---");
+	String plnMS = VPMSPlanName.getText().trim().toUpperCase();
+	MSStartApplication.click();
+	threadsleep(2000);
+	fillMSform();
+	threadsleep(3000);
+	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html"),"--- OLE Plan Details page not loaded---");
+	Assert.assertTrue(OLEPlanName.getText().toUpperCase().equals(plnMS),"PlanName is not matching in OLE Details Page");
+	Assert.assertTrue(OLEZip.get(0).getText().contains(zip),"ZIPCOde is not matching in OLE Details Page");
+	cancelLink.click();
+	cancelButton.click();
+	pageloadcomplete();
+	Assert.assertTrue(driver.getCurrentUrl().contains("plan-summary"),"--- VPP page not loaded---");
+}
+
 public void Pharmacytype() {
 	threadsleep(5000);
 	int count = Druglist.size();
 	Assert.assertTrue(Druglist.get(count-1).findElement(By.cssSelector("span")).getText().trim().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
+}
+
+public void fillMSform() {
+	DOB.sendKeys("01/06/1940");
+	jsClickNew(genderFemale);
+	threadsleep(8000);
+	jsClickNew(genderFemale);
+	threadsleep(3000);		
+	answeringQues.click();
+	continApp.click();
+	pageloadcomplete();
 }
 
 public void navigatePRE(HashMap<String, String> inputdata) {

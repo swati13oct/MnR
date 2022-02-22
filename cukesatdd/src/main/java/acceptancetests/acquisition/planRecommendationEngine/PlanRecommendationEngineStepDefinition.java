@@ -1009,6 +1009,12 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateDrugProvider();
 	}
 	
+	@Then("^user Validate Zipcode and Plantype using StartApplication in Visitor profile page$")
+	public void user_verify_OLE(DataTable givenAttributes) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.validateOLEDetails(inputValues.get("Zip Code"));
+	}
+	
 	@Given("^the user is on external acquisition site landing page$")
 	public void the_user_on_external_Site(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);

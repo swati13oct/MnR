@@ -124,7 +124,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
 
-	@FindBy(css = "li.view-ms-plans a.buttonLink")
+	@FindBy(css = "li[class*='viewMedigap'] a.buttonLink")
 	private WebElement viewMedigapLink;
 
 	@FindBy(css = ".view-ms-plans a")
