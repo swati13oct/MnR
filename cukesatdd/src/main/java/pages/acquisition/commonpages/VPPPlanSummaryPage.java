@@ -7925,13 +7925,17 @@ public String GetMonthlyPremiumValue() {
 	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
 	private WebElement EditYourInformationLink;
 	
+	@FindBy(id = "part-b-month")
+	private WebElement partBDropdown;
+	
 	public boolean updatePersonalDetailsForMedsup() {
 		validateNew(updateDOBDetailsForMedsup);
 		updateDOBDetailsForMedsup.clear();
 		updateDOBDetailsForMedsup.sendKeys("05/05/1945");
 		threadsleep(5);
 		jsClickNew(updateGenderDetailsForMedsup);
-		//saveAndUpdatePremiumsBtn.click();
+		threadsleep(5);
+		jsClickNew(partBDropdown);
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
