@@ -84,7 +84,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = ".returnSection span#viewMorePlans")
 		private WebElement pagenoLabel;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+		@FindBy(css = "button[class*='view-plans-next']")
 		private WebElement pageNextButton;
 		
 		@FindBy(css = ".planRemoveSort span")
@@ -265,7 +265,7 @@ public class NewResultsMobilePage extends UhcDriver {
 				SNPCheck.click();
 			}
 			Assert.assertTrue(validate(applyBtn), "apply Button is missing");
-			applyBtn.click();
+			jsClickNew(applyBtn);
 			threadsleep(2000);
 		}
 		
