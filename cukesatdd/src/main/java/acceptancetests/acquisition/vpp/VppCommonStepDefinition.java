@@ -4833,7 +4833,7 @@ public class VppCommonStepDefinition {
 	@Then("^user click to close MS application Modal$")
 	public void click_close_MS_Application_Page() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickCloseMSApplication();
 	}
 	
