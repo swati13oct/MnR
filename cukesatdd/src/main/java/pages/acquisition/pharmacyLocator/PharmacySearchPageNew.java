@@ -914,7 +914,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
         String Resultsdaysupply = ResultsDaysSupplyDisplayed.getText().trim();
         if (filterdaysupply.contentEquals(Resultsdaysupply)) {
             filterdaysupply = Resultsdaysupply.split("\\(")[1].split("\\)")[0];
-            DaySupply = filterdaysupply;
+            DaySupply = filterdaysupply + "s";
             System.out.println("Days Supply match for Filter and results : "+DaySupply);
         } else {
             DaySupply = "Filter : "+filterdaysupply+"; and results : "+Resultsdaysupply+" days supply don't match";
