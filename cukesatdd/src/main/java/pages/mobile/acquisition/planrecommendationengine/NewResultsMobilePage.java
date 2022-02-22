@@ -613,7 +613,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		scrollToView(pagePreviousButton);
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver; 
-		js.executeScript("window.scrollBy(0,800)");
+		js.executeScript("window.scrollBy(0,-800)");
 		
 		String pageCount1 = pagenoLabel.getText().trim();
 		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
