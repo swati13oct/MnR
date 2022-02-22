@@ -1092,8 +1092,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
 	boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("97266")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("97266")
+				|| !isAddInfoLinkVisible && zipCode.equals("23666")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("23666")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1120,8 +1120,8 @@ public class CampaignTFNCommonStepDefinition {
 				By.xpath("//input[@id='dateOfBirthInput']"), 20);
 
 		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
-				|| !isMedsup4DOBVisible && zipCode.equals("97266")) ? true
-						: (isMedsup4DOBVisible && zipCode.equals("97266")
+				|| !isMedsup4DOBVisible && zipCode.equals("23666")) ? true
+						: (isMedsup4DOBVisible && zipCode.equals("23666")
 								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1347,8 +1347,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("97266")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("97266")
+				|| !isAddInfoLinkVisible && zipCode.equals("23666")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("23666")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1382,8 +1382,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("97266")) ? true
-						: (isMedsup4DOB && zipCode.equals("97266")
+				|| !isMedsup4DOB && zipCode.equals("23666")) ? true
+						: (isMedsup4DOB && zipCode.equals("23666")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1409,8 +1409,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("97266")) ? true
-						: (msPlansHeading && zipCode.equals("97266")
+				|| !msPlansHeading && zipCode.equals("23666")) ? true
+						: (msPlansHeading && zipCode.equals("23666")
 								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1437,8 +1437,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//*[@id='dateOfBirthInput']"), 20);
 	boolean assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("97266")) ? true
-						: (isMedsup4DOB && zipCode.equals("97266")
+				|| !isMedsup4DOB && zipCode.equals("23666")) ? true
+						: (isMedsup4DOB && zipCode.equals("23666")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1465,8 +1465,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("97266")) ? true
-						: (msPlansHeading && zipCode.equals("97266")
+				|| !msPlansHeading && zipCode.equals("23666")) ? true
+						: (msPlansHeading && zipCode.equals("23666")
 								|| !msPlansHeading&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1493,8 +1493,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//div[contains(@class,'med-supp-plans')]//a[normalize-space()='Back to plan list']"), 20);
 	boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
-				|| !msPlansDetailsBackToAllPlans && zipCode.equals("97266")) ? true
-						: (msPlansDetailsBackToAllPlans && zipCode.equals("97266")
+				|| !msPlansDetailsBackToAllPlans && zipCode.equals("23666")) ? true
+						: (msPlansDetailsBackToAllPlans && zipCode.equals("23666")
 								|| !msPlansDetailsBackToAllPlans&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1581,8 +1581,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'Compare AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("97266")) ? true
-						: (msPlansHeading && zipCode.equals("97266")
+				|| !msPlansHeading && zipCode.equals("23666")) ? true
+						: (msPlansHeading && zipCode.equals("23666")
 								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
