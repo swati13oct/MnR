@@ -563,7 +563,31 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		jsClickNew(plantiles1.get(planIndex-1).findElement(By.cssSelector(".buttonLinkSection button")));
+		String PlanName = plantiles1.get(planIndex-1).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
+		threadsleep(2000);
+		System.out.println("PlanName is: " + PlanName);
+
+		if (PlanName.contains("supplement")) {
+			WebElement DocTitle = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("div[class*='providerSection'] h3"));
+			WebElement MSPlanName = plantiles1.get(planIndex-1).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
+			scrollToView(DocTitle);
+			planName = MSPlanName.getText().trim();
+			WebElement viewModel = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
+			jsClickNew(viewModel);
+			threadsleep(2000);
+
+		} else {
+			System.out.println("PlanIndex is: " + planIndex);
+			WebElement viewind = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
+			scrollToView(viewind);
+			threadsleep(2000);
+			jsClickNew(viewind);
+			threadsleep(2000);
+		}	
+		
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -613,6 +637,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		scrollToView(pagePreviousButton);
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver; 
+		js.executeScript("window.scrollBy(0,-800)");
 		js.executeScript("window.scrollBy(0,-800)");
 		
 		String pageCount1 = pagenoLabel.getText().trim();
