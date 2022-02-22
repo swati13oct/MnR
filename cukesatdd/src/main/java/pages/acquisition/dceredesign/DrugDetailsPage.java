@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -393,6 +395,9 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
 	public WebElement LIS_Extrahelp;
+	
+	@FindBy(xpath = "//*[contains(@id, 'milesDropdown') or contains(@name, 'miles')]")
+	public WebElement pharmacydistance;
 
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -958,6 +963,34 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(pharmacyZipcodeSearch);
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 		validateSelectPharmacyPage();
+	}
+	
+	public void EnterPharmacyDetailsPage(String zipcode, String distance , String pharmacyName) {
+		validateNew(DrugDetails_ChangePharmacyLnk);
+		jsClickNew(DrugDetails_ChangePharmacyLnk);
+		pageloadcomplete();
+		validateNew(pharmacyZipcodeSearch);
+		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
+		validateSelectPharmacyPage();
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(zipcode);
+		validateNew(pharmacydistance);
+		Pharmacy_DistanceDropDwn.click();
+		
+		WebElement Pharmacy_Distance_SelectMile =driver.findElement(By.xpath("//select[contains(@id, 'milesDropdown')]//option[contains(text(), '"+distance+"')]"));
+		Pharmacy_Distance_SelectMile.click();
+		// validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_SelectMile);
+		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.sendKeys(pharmacyName);
+		jsClickNew(Pharmacy_SearchBtn);
+		WebElement pharmacySelect = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//button[contains(@id, 'Pharmacy')]/span[contains(text(), 'Select')]"));
+	    
+		jsClickNew(pharmacySelect);
+		validateNew(saveDrugBtn);
+		jsClickNew(saveDrugBtn);
+		//saveDrugBtn.click();
+		
 	}
 
 

@@ -61,7 +61,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "div[class*='hangingBoxMobile'] a[class^='tel tfn'] > u[class^='invoca']")
 	private WebElement telTFNLink;
 
-	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	@FindBy(xpath = "//div[@class='header-row']//*[contains(text(),'or an affiliate')]")
 	private WebElement UHCICSubTitle;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
@@ -1166,7 +1166,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 */
 	public void clickUpdateLaterBrowserButton() {
 
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+/*		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			if (validate(upgradeBrowserVersionBanner)) {
 				System.out.println("Update browser banner shown !");
 				jsClickNew(updateLaterButton);
@@ -1177,7 +1177,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				}
 
 			}
-		}
+		} */  //Pop-up not visible for now
 	}
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
@@ -3513,6 +3513,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			driver.navigate().refresh();
 		} // Refresh added cause sometimes on emulator menu hamburger is not visible
 		threadsleep(5);
+		scrollToView(driver.findElement(By.xpath("//a[contains(text(),'Accessibility')]")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
+		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		jsClickNew(driver.findElement(By.xpath("//*[@id='accordion-4-button']")));
 		scrollToView(driver.findElement(By.xpath("//*[@id='accordion-1-button']")));
 

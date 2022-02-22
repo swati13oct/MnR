@@ -12,7 +12,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP 
+    @avengersRegressionAARP @vbfGate
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ |
@@ -908,7 +908,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama  | medicare-articles/how-to-evaluate-medicare-plan-costs.html                                                                 | Article Page 78   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home.html                          | Article Page 79   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/how-avoid-paying-more-prescription-drug-coverage.html                                                    | Article Page 80   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama  | medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period.html                                  | Article Page 81   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | AARP | Alabama  | medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period.html                                  | Article Page 81   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/how-to-appeal-a-medicare-decision.html                                                                   | Article Page 82   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/replacing-your-medicare-card-just-got-a-whole-lot-easier.html                                            | Article Page 83   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me.html                                             | Article Page 84   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -944,7 +944,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama  | medicare-articles/medicare-memo-what-are-advance-directives.html                                                           | Article Page  114 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/does-medicare-cover-a-colonoscopy.html                                                                   | Article Page  115 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/4-types-of-medicare-savings-programs-and-what-they-cover.html                                            | Article Page  116 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | AARP | Alabama  | medicare-articles/what-is-the-medicare-advantage-open-enrollment-period.html                                               | Article Page  117 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | AARP | Alabama  | medicare-articles/what-is-the-medicare-advantage-open-enrollment-period.html                                               | Article Page  117 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/parte-b-de-medicare-conceptos-basicos.html                                                               | Article Page  118 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/colon-cancer-screening-tests-without-the-ouch.html                                                       | Article Page  119 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/does-medicare-cover-diabetes-prevention-program.html                                                     | Article Page  120 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -986,7 +986,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 #      | AARP | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-
+      | AARP  | Alabama  | medicare-articles/does-medicare-cover-you-on-a-cruise-ship.html                                                           | Article Page  159 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP  | Alabama  | medicare-articles/when-to-apply-for-a-medigap-insurance-plan.html                                                         | Article Page  160 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                         | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                               | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | AARP  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      
 
 
     @validateSocialShareComponentUHC @avengersRegressionUHC @Validate3packCTA_Article_UHC
@@ -1150,3 +1155,9 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 #      | UHC  | Alabama  | medicare-articles/what-will-medicare-cost-in-2020.html                                                                     | Article Page  156 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/hsas-and-medicare.html                                                                                   | Article Page  157 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/are-medicare-premiums-based-on-income.html                                                               | Article Page  158 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | medicare-articles/does-medicare-cover-you-on-a-cruise-ship.html                                                            | Article Page  159 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | medicare-articles/when-to-apply-for-a-medigap-insurance-plan.html                                                          | Article Page  160 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                          | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                                | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      | UHC  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+      

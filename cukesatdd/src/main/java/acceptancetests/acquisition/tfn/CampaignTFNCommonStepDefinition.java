@@ -178,6 +178,7 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.OpenPath(Acq_Site, CampaignPath);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
 	}
 
@@ -872,10 +873,12 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		VPPPlanSummaryPage plansummaryPage=new VPPPlanSummaryPage(driver);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.ViewPlanSummary(PlanType);
 		// tfnPage.NavigateToPlanDetails(PlanType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
 	}
 
 	@Then("^the user navigates back to page$")
@@ -1089,8 +1092,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean isAddInfoLinkVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']"), 20);
 	boolean assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("10001")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("10001")
+				|| !isAddInfoLinkVisible && zipCode.equals("97266")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("97266")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1114,11 +1117,11 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 
 		boolean isMedsup4DOBVisible = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver,
-				By.xpath("//input[@id='dateOfBirth']"), 20);
+				By.xpath("//input[@id='dateOfBirthInput']"), 20);
 
 		boolean assertionToFailOrPass = (isMedsup4DOBVisible && zipCode.equals("90210")
-				|| !isMedsup4DOBVisible && zipCode.equals("24010")) ? true
-						: (isMedsup4DOBVisible && zipCode.equals("24010")
+				|| !isMedsup4DOBVisible && zipCode.equals("97266")) ? true
+						: (isMedsup4DOBVisible && zipCode.equals("97266")
 								|| !isMedsup4DOBVisible && zipCode.equals("90210")) ? false : true;
 
 		//Assert.assertTrue(assertionToFailOrPass,
@@ -1344,8 +1347,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isAddInfoLinkVisible && zipCode.equals("90210")
-				|| !isAddInfoLinkVisible && zipCode.equals("24010")) ? true
-						: (isAddInfoLinkVisible && zipCode.equals("24010")
+				|| !isAddInfoLinkVisible && zipCode.equals("97266")) ? true
+						: (isAddInfoLinkVisible && zipCode.equals("97266")
 								|| !isAddInfoLinkVisible && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1375,12 +1378,12 @@ public class CampaignTFNCommonStepDefinition {
 
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//*[@id='dateOfBirth']"), 20);
+				"//*[@id='dateOfBirthInput']"), 20);
 		boolean assertionToFailOrPass = false;
 
 		assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
-						: (isMedsup4DOB && zipCode.equals("24010")
+				|| !isMedsup4DOB && zipCode.equals("97266")) ? true
+						: (isMedsup4DOB && zipCode.equals("97266")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1406,8 +1409,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("24010")) ? true
-						: (msPlansHeading && zipCode.equals("24010")
+				|| !msPlansHeading && zipCode.equals("97266")) ? true
+						: (msPlansHeading && zipCode.equals("97266")
 								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1432,10 +1435,10 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = inputAttributesMap.get("Zip Code");
 
 		boolean isMedsup4DOB = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//*[@id='dateOfBirth']"), 20);
+				"//*[@id='dateOfBirthInput']"), 20);
 	boolean assertionToFailOrPass = (isMedsup4DOB && zipCode.equals("90210")
-				|| !isMedsup4DOB && zipCode.equals("24010")) ? true
-						: (isMedsup4DOB && zipCode.equals("24010")
+				|| !isMedsup4DOB && zipCode.equals("97266")) ? true
+						: (isMedsup4DOB && zipCode.equals("97266")
 								|| !isMedsup4DOB && zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1462,8 +1465,8 @@ public class CampaignTFNCommonStepDefinition {
 		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
 				"//h1[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
 	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
-				|| !msPlansHeading && zipCode.equals("24010")) ? true
-						: (msPlansHeading && zipCode.equals("24010")
+				|| !msPlansHeading && zipCode.equals("97266")) ? true
+						: (msPlansHeading && zipCode.equals("97266")
 								|| !msPlansHeading&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1488,10 +1491,10 @@ public class CampaignTFNCommonStepDefinition {
 		String zipCode = inputAttributesMap.get("Zip Code");
 
 		boolean msPlansDetailsBackToAllPlans = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
-				"//a[@class='uhc-link-button back-to-plans' and normalize-space()='Back to plan list']"), 20);
+				"//div[contains(@class,'med-supp-plans')]//a[normalize-space()='Back to plan list']"), 20);
 	boolean assertionToFailOrPass = (msPlansDetailsBackToAllPlans && zipCode.equals("90210")
-				|| !msPlansDetailsBackToAllPlans && zipCode.equals("24010")) ? true
-						: (msPlansDetailsBackToAllPlans && zipCode.equals("24010")
+				|| !msPlansDetailsBackToAllPlans && zipCode.equals("97266")) ? true
+						: (msPlansDetailsBackToAllPlans && zipCode.equals("97266")
 								|| !msPlansDetailsBackToAllPlans&& zipCode.equals("90210")) ? false : true;
 
 		Assert.assertTrue(assertionToFailOrPass,
@@ -1530,5 +1533,65 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
 		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
 		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
+	}
+	
+	@Then("the user validates TFN in Already an insured section")
+	public void the_user_validates_tfn_in_already_an_insured_section(DataTable inputAttributese) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(inputAttributese);	
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		tfnPage.validateStaticMedsupTFNNo(ExpecetdTFNNo);
+	}
+
+	@And("^user click on Start Application from MS plan details$")
+	public void the_user_clicks_on_Start_MS_OLE_plan_details(DataTable attributes) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(attributes);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlanDetailsHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h2[contains(normalize-space(),'AARP® Medicare Supplement Insurance Plan insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlanDetailsHeading && zipCode.equals("90210")
+				|| !msPlanDetailsHeading && zipCode.equals("24010")) ? true
+						: (msPlanDetailsHeading && zipCode.equals("24010")
+								|| !msPlanDetailsHeading && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlanDetailsHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlanDetailsHeading) {
+			tfnPage.clickStartMS4OleFromPlanDetails();
+		} else
+
+			// String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+			// tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+			tfnPage.clickStartMS3Ole();
+
+	}
+	
+	@And("^user click on Start Application in MS plan compare page$")
+	public void the_user_clicks_on_Start_MS_OLE_in_MS_plan_compare_page(DataTable arg1) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		//String TFNXpath = inputAttributesMap.get("TFN Xpath");
+		//String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+		String zipCode = inputAttributesMap.get("Zip Code");
+
+		boolean msPlansHeading = CommonUtility.waitAndVerifyIfElementVisibleOnPage(driver, By.xpath(
+				"//h1[contains(normalize-space(),'Compare AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare')]"), 20);
+	boolean assertionToFailOrPass = (msPlansHeading && zipCode.equals("90210")
+				|| !msPlansHeading && zipCode.equals("97266")) ? true
+						: (msPlansHeading && zipCode.equals("97266")
+								|| !msPlansHeading && zipCode.equals("90210")) ? false : true;
+
+		Assert.assertTrue(assertionToFailOrPass,
+			"*** imsPlan4HeadingVisible/Invisible : '" + msPlansHeading + "' for zipCode : '" + zipCode + "'");
+
+		if (msPlansHeading) {
+			tfnPage.clickStartMS4OlePlanCompare();
+		} else
+			tfnPage.clickStartMS3OlePlanCompare();
+
 	}
 }

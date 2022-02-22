@@ -359,8 +359,11 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
 
-	@FindBy(css = "label[for='currentYear']")
-	private WebElement currentPlanYear;
+	@FindBy(css = "div#toggleYearSection button[class*='current-year']")
+	private WebElement currentPlanYear; // Future Year
+	
+	@FindBy(css = "div#toggleYearSection button[class*='prev-year']")
+	private WebElement previousPlanYear; // Current Year
 
 	@FindBy(css = "label[for='futureYear']")
 	private WebElement futurePlanYear;
@@ -1577,31 +1580,33 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 	}
 
 	public boolean changePlanyear(String year) {
-
-		jsClickNew(MAViewPlansLink);
+		threadsleep(5000);
+		if(validate(previousPlanYear, 15) || validate(currentPlanYear, 15)) {
 		// Checking and Changing to Current Year
 		if (year.equalsIgnoreCase("current")) {
-			if (validate(currentPlanYear, 15)) {
-				jsClickNew(currentPlanYear);
-				Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length() > 0,
-						"Current Plan Year is not Selected");
-				threadsleep(5000);
+			if (validate(previousPlanYear, 15)) {
+				jsClickNew(previousPlanYear);
+				Assert.assertTrue(previousPlanYear.getAttribute("aria-selected").contains("true"),"Current Plan Year is not Selected");
+				threadsleep(10000);
+				System.out.println("Toggling to Current Year");
 				return true;
 			}
 		}
 
 		// Checking and Changing Future Year
 		if (year.equalsIgnoreCase("future")) {
-			if (validate(futurePlanYear, 15)) {
-				jsClickNew(futurePlanYear);
-				Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length() > 0,
-						"Future Plan Year is not Selected");
+			if (validate(currentPlanYear, 15)) {
+				jsClickNew(currentPlanYear);
+				Assert.assertTrue(currentPlanYear.getAttribute("aria-selected").contains("true"),"Future Plan Year is not Selected");
 				threadsleep(5000);
+				System.out.println("Toggling to Future Year");
 				return true;
 			} else {
 				Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
 			}
 		}
+		}
+		System.out.println("PlanYear Toggle is not displaying in PRE Result page");
 		return false;
 	}
 
