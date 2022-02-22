@@ -867,6 +867,7 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
                 System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed after Exception");
                 continue;
             }
+            break;
         }
         return result;
     }
@@ -874,14 +875,23 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
     private String getPreferredPlan() {
         String PreferredRetail = "";
         jsClickNew(Filter);
-        WebElement PreferredPharmacyFilter = driver.findElement(By.xpath("//div[@id='filtercontainer']//fieldset//*[contains(text(), 'Preferred Network')]"));
-        PreferredRetail = (validate(PreferredPharmacyFilter))? "YES":"NO";
+        try {
+            WebElement PreferredPharmacyFilter = driver.findElement(By.xpath("//div[@id='filtercontainer']//fieldset//*[contains(text(), 'Preferred Network')]"));
+            PreferredRetail = (validate(PreferredPharmacyFilter)) ? "YES" : "NO";
+        }
+        catch (Exception ex){
+            PreferredRetail = "NO";
+        }
         jsClickNew(Filter);
         sleepBySec(2);
         System.out.println("Preferred Retails Pharmacy Type Filter is displayed YES/NO - "+PreferredRetail);
-        WebElement PreferredBalloon = driver.findElement(By.xpath("//img[contains(@class, 'pharmacypin')]//parent::p[contains(text(), 'Preferred Retail')]"));
-
-        PreferredRetail = (PreferredRetail.equalsIgnoreCase("YES") && validate(PreferredBalloon))? "YES":"NO";
+        try {
+            WebElement PreferredBalloon = driver.findElement(By.xpath("//img[contains(@class, 'pharmacypin')]//parent::p[contains(text(), 'Preferred Retail')]"));
+            PreferredRetail = (PreferredRetail.equalsIgnoreCase("YES") && validate(PreferredBalloon)) ? "YES" : "NO";
+        }
+        catch (Exception ex){
+            PreferredRetail = "NO";
+        }
         System.out.println("Preferred Retail Balloon icon is Displayed YES/NO - "+PreferredRetail);
         return PreferredRetail;
 
@@ -892,7 +902,13 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew {
         jsClickNew(Filter);
         WebElement RetailPharmacyFilter = driver.findElement(By.xpath("(//div[@id='filtercontainer']//label)[6]"));
         String filterdaysupply = RetailPharmacyFilter.getText().trim();
+        if(filterdaysupply.contains("100") || filterdaysupply.contains("90")){
 
+        }
+        else {
+            RetailPharmacyFilter = driver.findElement(By.xpath("(//div[@id='filtercontainer']//label)[4]"));
+            filterdaysupply = RetailPharmacyFilter.getText().trim();
+        }
         jsClickNew(Filter);
         WebElement ResultsDaysSupplyDisplayed = driver.findElement(By.xpath("(//div[@class='mt-10']//*[contains(@class,'row')]//*[contains(@class,'list-item')]//li[contains(text(), 'Retail Pharmacy (')])[1]"));
         String Resultsdaysupply = ResultsDaysSupplyDisplayed.getText().trim();
