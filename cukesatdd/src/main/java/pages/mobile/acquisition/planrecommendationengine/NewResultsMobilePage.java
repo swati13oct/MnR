@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import io.appium.java_client.AppiumDriver;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 
 public class NewResultsMobilePage extends UhcDriver {
@@ -608,7 +609,12 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public int findPlan(String uniqueName) {
 		System.out.println("Finding a Plan...");
-		waitforResultsPage();
+//		waitforResultsPage();
+		scrollToView(pagePreviousButton);
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver; 
+		js.executeScript("window.scrollBy(0,800)");
+		
 		String pageCount1 = pagenoLabel.getText().trim();
 		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if(currentPage != 1) {
