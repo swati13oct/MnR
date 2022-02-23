@@ -1357,9 +1357,12 @@ public abstract class UhcDriver {
 	 */
 	public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
 		boolean uploadSuccess = false;
+
+		//------------iOS Code-------------
 		String curHandle = ((IOSDriver) driver).getContext();
 		System.out.println("curHandle - " + curHandle);
 		System.out.println(((IOSDriver) driver).getContextHandles());
+
 		 Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
 	        for (String strContextName : contextNames) {
 	            if (strContextName.contains("NATIVE_APP")) {
@@ -1373,17 +1376,62 @@ public abstract class UhcDriver {
         	mobiledriver.findElement(elementView).click();
 			 */
 	        //TO-DO:Replace with Id of Browse button instead of done
+
+
 	        ((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
-	        
-	        getFiletoUpload("card");
+			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
+			Thread.sleep(500);
+			((IOSDriver) driver).findElement(MobileBy.Xpath("//XCUElementTypeImage[1]")).click();
+			Thread.sleep(500);
+	       /* getFiletoUpload("card");
 	        if(uploadBtn.isDisplayed()) {
 	        	uploadSuccess = true;
 	        }
 	        uploadBtn.click();
 	        Thread.sleep(500);
 			((IOSDriver) driver).context(curHandle);
-			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
-			return uploadSuccess;
+			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
+		Set<String> contextNames1 = driver.getContextHandles();
+		for (String strContextName : contextNames1) {
+			if (strContextName.contains("SAFARI")) {
+				driver.context("SAFARI");
+				break;
+			}
+
+			//------------iOS Code-------------
+			//-------Android Code-----------------
+
+			Set<String> AndroidcontextNames = driver.getContextHandles();
+		for (String strContextName : AndroidcontextNames) {
+			if (strContextName.contains("NATIVE_APP")) {
+				driver.context("NATIVE_APP");
+				break;
+			}
+		}
+
+		By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(AllowButton));
+		driver.findElement(AllowButton).click();
+		//Click on Browse button on Android
+		By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(Browse));
+		driver.findElement(Browse).click();
+
+		//select a file from browse
+		By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(SelectFile));
+		driver.findElement(SelectFile).click();
+
+		//Switch to  browser
+		Set<String> contextNamesAndroid = driver.getContextHandles();
+		for (String strContextName : contextNamesAndroid) {
+			if (strContextName.contains("CHROMIUM")) {
+				driver.context("CHROMIUM");
+				break;
+			}
+
+		//-------Android Code-----------------
+		return uploadSuccess;
 	}
 	
 	/**
