@@ -107,6 +107,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
    
     @FindBy(css = "#compare-table div[class*='flex'][class*='scope']>div[class*='flex']>div")
     private List<WebElement> planNamesOnlyComparepage;
+    
+    @FindBy(css = "div[class*='resultsPre'] p.locationDesc")
+	private WebElement planLocaInfo;
 	
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
@@ -114,7 +117,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 	
-	@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 	
 	@FindBy(css = "div[class*='overview-main'] h2")
@@ -222,7 +225,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 	
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) #responsiveplan .status-bar img.unliked")
+	@FindBy(css = "div.swiper-wrapper div[class*='plan-card-component']:nth-child(1) div.card-actionbar button[class*='save-plan']")
 	private WebElement MS1stPlanSaveImg;
 	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -488,7 +491,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = ".subheading-text a")
 		private WebElement EditMyResponsesLink;
 		
-		@FindBy(css = "li[class*='view-ms-plans']")
+		@FindBy(css = "li[class*='viewMedigap']>a")
 		private WebElement viewMedigapPlansLink;
 
 		@FindBy(css = "div.uhc-pre-card")
@@ -575,9 +578,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		validate(planZipInfo,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
-		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
+		Assert.assertTrue(planLocaInfo.getText().contains(zip),"Invalid Zip");
+		Assert.assertTrue(planLocaInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3])>0,"Total Plan count is less than 1");
 		String recom = "Recommended";
 		String recom1 = "#1 Recommendation";
 		String recom2 = "#2 Recommendation";
@@ -1352,7 +1355,7 @@ public void waitforResultsPage() {
 }
 
 public List<String> getAPIPlansRanking(String rankingJSON) {
-	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
@@ -1391,7 +1394,7 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 //Fetching API Ranking Plan details for AEP Years
 
 public List<String> getAEPAPIPlansRanking(String rankingJSON, String Year) {
-	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[4]);
+	int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 	List<String> rankingOrder = new ArrayList<String>();
 	JSONParser parser = new JSONParser();
 	JSONArray jarray = new JSONArray();
@@ -1751,6 +1754,15 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
+}
+
+public void useraddDrugsDCE(String drugDetails, String Zip, String pharmacy) {
+	threadsleep(10000);
+	userPreDCE();
+	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+	dce.drugsHandlerWithdetails(drugDetails);
+	dce.getDrugsDCE();
+	dce.choosePharmacy(Zip, pharmacy);
 }
 
 public void useraddDrugsPREResult() {
@@ -2139,14 +2151,19 @@ public void PREStage(String primaryWindow, String aarp) {
 				driver.switchTo().window(window);
 				System.out.println(driver.getCurrentUrl());
 				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
+			}else {
+				driver.switchTo().window(window);
+				threadsleep(2000);
 			}
-			if(aarp.contains("aarpmedicareplans")) {
+		}
+			if(aarp.contains("aarpmedicareplans")) 
 				driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html");
+			else {
+				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");				
+				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
+				threadsleep(2000);
 			}
-			else
-				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
-				driver.navigate().to("https://steelcase.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
-			}
+		
 	}
 	threadsleep(5000);
 //	driver.switchTo().window(primaryWindow);
@@ -2275,7 +2292,7 @@ public void SavingMsplan() {
 		MSViewPlansLink.click();
 		threadsleep(5000);
 	}
-	submitMSform();
+//	submitMSform();
 	threadsleep(2000);
 	validate(MS1stPlanSaveImg, 20);
 	MS1stPlanSaveImg.click();

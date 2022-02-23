@@ -7259,7 +7259,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String childWindow = I.next();
 			if (!base.equals(childWindow)) {
 				driver.switchTo().window(childWindow);
-				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com") || driver.getCurrentUrl().contains("medicare.int.werally.in"));
 				driver.close();
 			}
 		}

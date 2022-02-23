@@ -39,7 +39,7 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 	}
 	
 	public void openAndValidate() {
-		MRScenario.environment = "stage";
+		//MRScenario.environment = "stage";
 		if (MRScenario.environment.equals("offline-stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
 			CommonUtility.waitForPageLoadNew(driver, username, 45);
@@ -54,6 +54,9 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 			 */
 		}else if (MRScenario.environment.equals("team-e")) {
 			start(MRConstants.AARP_TELESALES_AGENT_TEAM_E_PAGE_URL);
+		}
+		else if (MRScenario.environment.equals("chargers-qa")) {
+			start(MRConstants.AARP_TELESALES_AGENT_TEAM_CHARGERS_PAGE_URL);
 		}
 		else {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);

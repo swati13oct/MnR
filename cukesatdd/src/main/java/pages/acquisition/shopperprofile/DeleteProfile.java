@@ -79,7 +79,7 @@ public class DeleteProfile extends UhcDriver {
 		 */
 		//jsClickNew(deleteProfile);
 		deleteProfile.click();
-		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 15);
+		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 30);
 	}
 	
 	/**

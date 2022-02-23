@@ -309,6 +309,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "#changes-submitted button")
 	private WebElement popupAccept;
+	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
 
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
@@ -336,6 +339,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//strong[contains(text(),'Monthly Premium')])[1]")
 	private WebElement PremiumDisplay;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	private WebElement proactiveChatExitBtn;
@@ -570,7 +576,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i += 1;
 		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath(
-				"(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["
+				"(//table[not(contains(@class, 'ng-hide'))]//tr[contains(@class, 'uhc-slide-table__row') and not(@id='printHeadingHide')]//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["
 						+ i + "]"));
 
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
@@ -667,7 +673,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-compare")) {
 			driver.navigate().back();
 		}
-
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
@@ -886,18 +891,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnBacktoPlans() {
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			backToPlanSummary_PlanCompare_iOS();
-			System.out.println(
-					"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
-		} else {
+	//	if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+	//		backToPlanSummary_PlanCompare_iOS();
+	//		System.out.println(
+	//				"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
+	//	} else {
 
 			scrollToView(backToAllPlansLink);
 			validateNew(backToAllPlansLink);
 			jsClickNew(backToAllPlansLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Clicked on Back to plans");
-		}
+	//	}
 	}
 
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
@@ -1431,6 +1436,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} else {
 			System.out.println("#########No Drugs available for this member#########");
 		}
+	}
+	
+	public void clickOnEmailField() {
+
+		jsClickNew(summary_maEmailOption);
 	}
 
 	public void allSet() {
@@ -2087,5 +2097,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
 		return null;
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = " + populatedEmail);
+		Assertion.assertEquals(email, populatedEmail);
 	}
 }

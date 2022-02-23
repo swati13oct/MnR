@@ -45,6 +45,9 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(css = "#member-last-name")
 	private WebElement Last_Nametxtbx;
 	
+	@FindBy(xpath = "//*[contains(@formgroupname,'memberDetailsForm')]//p[2]")
+	public WebElement Bluealert_msg;
+	
 	@FindBy(css = "#member-attestation-field")
 	private WebElement attestation_ckbx;
 	
@@ -57,7 +60,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(css = "#member-medicare-number")
 	private WebElement Member_MBItxtbx;
 	
-	@FindBy(css = "button[dtmname*='import drugs and doctors'][dtmname$='view your drugs and doctors']")
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'view your drugs and doctors')]")
 	private WebElement Member_ViewDrugsDoctorsButton;
 	
 	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@id, 'name-capital')]/span")
@@ -237,13 +240,13 @@ public class GetStartedPageMobile extends UhcDriver {
 	public void ClickImportValidateModals(String Authenticated_Flag) {
 		validateNew(importDrugsLink);
 		jsClickNew(importDrugsLink);
-		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
-		validateNew(ImportModal_GetStartedBtn);
+	//	CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
+	//	validateNew(ImportModal_GetStartedBtn);
 		if(Authenticated_Flag.equalsIgnoreCase("false")){
 			//Sign-in link hidden for Unauthenticated Drug Import flow
 			//validateNew(SignIn_Link);
 		}
-		jsClickNew(ImportModal_GetStartedBtn);
+	//	jsClickNew(ImportModal_GetStartedBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);
 		validateNew(ImportModal_MemberRadio);
 		validateNew(ImportModal_NonMemberRadio);
@@ -264,9 +267,16 @@ public class GetStartedPageMobile extends UhcDriver {
 			jsClickNew(attestation_ckbx);
 		}
 		if(authenticated_flag.equalsIgnoreCase("true")){
-			CommonUtility.waitForPageLoadNew(driver, Member_NameDisplay, 20);
-			validateNew(Member_NameDisplay);
-			System.out.println("Member Name Displayed - "+Member_NameDisplay);
+			validateNew(Bluealert_msg);
+			if(First_Nametxtbx.getText()==null || First_Nametxtbx.getText()=="")
+			{
+				Assertion.fail("Member First Name not Displayed");
+			}
+			if(Last_Nametxtbx.getText()==null || Last_Nametxtbx.getText()=="")
+			{
+				Assertion.fail("Member Last Name not Displayed");
+			}
+			System.out.println("Member Name Displayed - "+First_Nametxtbx.getText()+ Last_Nametxtbx.getText());
 		}
 		validateNew(Member_DOBtxtbx);
 		validateNew(Member_Ziptxtbx);
@@ -276,6 +286,12 @@ public class GetStartedPageMobile extends UhcDriver {
 		sendkeysMobile(Member_Ziptxtbx, member_zip);
 		sendkeysMobile(Member_MBItxtbx, member_mbi);
 		jsClickNew(Member_ViewDrugsDoctorsButton);
+		try {
+			jsClickNew(Member_ViewDrugsDoctorsButton);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
 		if(!validateNew(DataImportStatusPopup)){
 			Assertion.fail(">>>>>>>> Import FAILED <<<<<<<< - Import Status Modal not displayed");

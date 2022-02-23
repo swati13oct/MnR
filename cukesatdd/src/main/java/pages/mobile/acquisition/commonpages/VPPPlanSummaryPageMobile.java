@@ -511,6 +511,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
 	private WebElement providerListPlanCard;
+	
+	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
+	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
 	private List<WebElement> removeProviderListPlanCard;
@@ -797,7 +800,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(xpath = "//*[contains(@id,'msVppZipCode')]")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[text()='View Plans']")
@@ -1046,6 +1049,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		if(driver.toString().contains("IOS"))
+			sleepBySec(80);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -1286,6 +1291,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
 		validateNew(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
@@ -6186,11 +6192,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
-			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
-			} else {
+	//		if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+	//			allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+	//		} else {
 				allPlanNames.add(plan.getText().trim());
-			}
+	//		}
 
 		}
 		return allPlanNames;
@@ -6308,5 +6314,18 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
+	}
+	
+	public void clickOnEmailField() {
+
+		jsClickNew(summary_maEmailOption);
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		jsClickNew(emailPlanSummaryFieldBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = " + populatedEmail);
+		Assertion.assertEquals(email, populatedEmail);
 	}
 }
