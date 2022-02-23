@@ -327,7 +327,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		
 		public void verifyDrugWhySeparateMdel(String planName) {
 			int planIndex = findPlan(planName);
-			plantiles1.get(planIndex-1).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+			jsClickNew(plantiles1.get(planIndex-1).findElement(By.cssSelector("button[id*='seperatePlanLink']")));
 			threadsleep(2000);
 			Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
 					"Why is a separate model not found in plan - " + planName);
@@ -469,6 +469,11 @@ public class NewResultsMobilePage extends UhcDriver {
 		threadsleep(5000);
 		System.out.println("Adding doctors from PRE Result page");
 		String pageCount1 = pagenoLabel.getText().trim();
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver; 
+		js.executeScript("window.scrollBy(0,-800)");
+		js.executeScript("window.scrollBy(0,-800)");
+		
 		int currentPage = Integer
 				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if (currentPage != 1) {
