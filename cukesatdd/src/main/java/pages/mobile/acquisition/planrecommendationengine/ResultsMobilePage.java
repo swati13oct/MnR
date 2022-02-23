@@ -158,7 +158,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(xpath = "//span[@id='viewMorePlans']")
 	private WebElement pagenoLabel;
 	
-	@FindBy(xpath = ".//*[contains(concat(' ',normalize-space(@class),' '),' paginationSection ')]//button[contains(@class,'view-plans-next')]")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 	
 	@FindBy(css = "div[data-rel='#plan-list-4'] span.ng-binding")
@@ -844,7 +844,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public List<String> getAPIPlansRanking(String rankingJSON) {
 		System.out.println("\n\n======="+planZipInfo.getText()+"===========\n\n");
-		int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[0]);
+		int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 		List<String> rankingOrder = new ArrayList<String>();
 		JSONParser parser = new JSONParser();
 		JSONArray jarray = new JSONArray();
@@ -917,6 +917,12 @@ public class ResultsMobilePage extends UhcDriver {
 			scrollToView(e);
 			threadsleep(2000);
 			vppPlans.add(getplanId(e));
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver; 
+			js.executeScript("window.scrollBy(0,-800)");
+			js.executeScript("window.scrollBy(0,-800)");
+			
+			String s = pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("plan", "");
 			int currentPage = Integer.parseInt(pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 			System.out.println("planName in loop count: " +value);
 			if(value==currentPage) {
