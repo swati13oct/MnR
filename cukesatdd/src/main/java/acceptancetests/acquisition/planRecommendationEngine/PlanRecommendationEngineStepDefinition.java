@@ -1416,6 +1416,19 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Delete Plan");
 		planSelectorNewResultspage.deleteAddComparePlan(inputValues.get("Delete PlanInfo"), inputValues.get("Add PlanInfo"));
 	}
+	
+	@Then("^user validates Important Resources section not enabled in PRE-Result page$")
+	public void No_Imp_Res() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.noImportantResource();
+	}
+	
+	@Then("^user validates Important Resources section enabled in PRE-Result page$")
+	public void Imp_Res(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.importantResourceSection(inputValues.get("Resources Links"));
+	}
 
 	
 }

@@ -21,13 +21,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By drop down UI PRE-Result page
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
+    Then user validates Important Resources section not enabled in PRE-Result page
 
-    @FunctionalAARP
+    @FunctionalAARP1234
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
-      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
-      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | Visibleinfo  |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Medigap,true |
 
+    #| AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
@@ -54,7 +55,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | AARP |   10003 | NO            | New York | PDP           | No             |
 
-    @FunctionalUHC     
+    @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | UHC  |   10003 | NO            | New York | PDP           | No             |
@@ -174,11 +175,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate elements in PRE results page
       | Zip Code       | <Zipcode> |
       | CountyDropDown | <county>  |
+    Then user validates Important Resources section enabled in PRE-Result page
+      | Resources Links | <ResourcesInfo> |
 
-    @FunctionalAARP
+    @FunctionalAARP1234
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
-      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | ResourcesInfo               |
+      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Wrap,CMS Guide,OOC,SELECTHD |
 
     @FunctionalUHC
     Examples: 
@@ -214,6 +217,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Priorities      | <priorities>     |
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo> |
+    Then user validates Important Resources section enabled in PRE-Result page
+      | Resources Links | <ResourcesInfo> |
 
     @regressionAARP @PREMSPlanTile @featureGate
     Examples: 
@@ -225,10 +230,10 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               |
       | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  |
 
-    @regressionAARP @BHDHProviders @featureGate
+    @regressionAARP @BHDHProviders @featureGate @FunctionalAARP1234
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                        |
-      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Tiffany Nix MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Tiffany Nix MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                        | ResourcesInfo                                     |
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Tiffany Nix MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Tiffany Nix MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
 
     @regressionUHC
     Examples: 
