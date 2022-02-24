@@ -7933,9 +7933,11 @@ public String GetMonthlyPremiumValue() {
 		updateDOBDetailsForMedsup.clear();
 		updateDOBDetailsForMedsup.sendKeys("05/05/1945");
 		threadsleep(5);
+		//jsClickNew(partBDropdown);
+		partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		jsClickNew(partBDropdown);
+		
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {

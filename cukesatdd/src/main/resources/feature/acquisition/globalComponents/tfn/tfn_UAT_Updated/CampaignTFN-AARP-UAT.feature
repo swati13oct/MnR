@@ -898,6 +898,8 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | TFN No | <FedTFNNo> |
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
+   	Then user click on Cancel Application in MS plan
+      | Zip Code | <zipcode> |
     And the user clicks on the shopping cart icon
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
