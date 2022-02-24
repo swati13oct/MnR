@@ -5,6 +5,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.UhcDriver;
 
 public class ResultsMobilePage extends UhcDriver {
@@ -61,6 +63,9 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
+	
+	@FindBy(css = "div[class*='list-item-content']")
+	private List<WebElement> drugsListinDCE; 
 	
 	@FindBy(css = "div[class*='overview-main'] h2")
 	private WebElement planZipInfoinVPP;
@@ -627,13 +632,17 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public ArrayList<String> getDrugsVPP() {
 		threadsleep(5000);
-		validate(drugsInfoMA1stPlan, 60);
-		validate(drugsInfoMA1stPlan);
-		jsClickNew(drugsInfoMA1stPlan);
+		String curID = String.valueOf(Thread.currentThread().getId());
+		int count = drugsListinDCE.size();
 		vppDrugsResults = new ArrayList<String>();
-		for (WebElement e : drugsListMA1stPlan) {
-			vppDrugsResults.add(e.getText().replace("\n", " ").replace("  ", " ").trim());
+		for (int i = count-1; i >= 0; i--){
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
+		Collections.sort(vppDrugsResults);
+		System.out.println("Current Thread ID is - "+curID+" Drugs in DCE flow "+vppDrugsResults);
+		CommonConstants.DCE_Drugs.put(curID, vppDrugsResults);
+		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
 		return vppDrugsResults;
 	}
 
@@ -961,8 +970,8 @@ public class ResultsMobilePage extends UhcDriver {
 		jsClickNew(enterDrugsInfoMA1stPlan);
 		DCEMobilePage dcemobile = new DCEMobilePage(driver);
 		dcemobile.drugsHandlerWithdetails(drugDetails);
-		dcemobile.choosePharmacyandBacktoPlans();
 		getDrugsVPP();
+		dcemobile.choosePharmacyandBacktoPlans();
 	}
 
 	public void checkVPP(boolean isPREVPP) {
