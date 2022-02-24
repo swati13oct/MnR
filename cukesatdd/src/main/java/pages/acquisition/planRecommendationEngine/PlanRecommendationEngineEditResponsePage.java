@@ -193,6 +193,11 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(css = "#modal .modal-inner div[class*='buttonPanel']>button")
 	private WebElement modelStateConfirmButton;	
+	
+	//Result Header section elements
+	
+	@FindBy(css = "p.locationDesc>button")
+	private WebElement locationLinkButton;
 
 	// Variables
 
@@ -686,6 +691,17 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 				"Progres Bar does not have required Info");
 		editValue("special");
 		System.out.println("******  Add SpecialNeeds Completed ******");
+	}
+	
+	public void updateLocationLink() {
+		System.out.println("Clicking on Update Button and Click Location link in Header section");
+		viewUpdateButton.click();
+		pageloadcomplete();
+		locationLinkButton.click();
+		threadsleep(2000);
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue(driver.getCurrentUrl().contains("editmypreferences"),
+				"Link not navigated to editmypreferences page");
 	}
 	
 	public void addLocationEditResponse(HashMap<String, String> userInput) {

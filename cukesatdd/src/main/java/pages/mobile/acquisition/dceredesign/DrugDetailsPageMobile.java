@@ -181,7 +181,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'pharmacy-zip-filter')]")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(xpath = "//button[contains(@class,'searchbuttonmobile')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Select ')]")
@@ -951,16 +951,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void validatePharmacyFilterErrormessage() {
 		validateNew(PharmacyFilterLabel);
 		validateNew(PharmacyFilterTxtBx);
-		validateNew(PharmacyFilterApplyBtn);
-
-		sendkeysMobile(PharmacyFilterTxtBx, "a");
-		System.out.println("Filter text entered : a");
+		validateNew(pharmacySearchBtn);
+		sendkeysMobile(PharmacyFilterTxtBx,"a");
+		System.out.println("FIlter text entered : a");
 		validateNew(PharmacyFilterClearTextX);
 		System.out.println("X button for Filter text clearing is Displayed");
 		jsClickNew(PharmacyFilterClearTextX);
 		System.out.println("Clear Text is clicked for Pharmacy Filter");
-		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<",
-				PharmacyFilterTxtBx.getText().isEmpty());
+		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
 	}
 
 	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
@@ -1837,49 +1835,147 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '25 Mile')]")
 	public WebElement Pharmacy_Distance_Select25Mile;
+	
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]")
+	public WebElement Pharmacy_SearchBtn;
+	
+	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
+	public WebElement Pharmacy_ZipCodeTxt;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
+	public WebElement Pharmacy_DistanceDropDwn;
+	
+	@FindBy(xpath = "//h2[contains(@id, 'matchingLbl')]")
+	public WebElement PharmacyCountTxt;
 
 	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
-		validateNew(distanceDrpDown);
-		System.out.println("Pharmacy Search for default Zip " + pharmacyZipcodeSearch.getText());
+		validateNew(Pharmacy_DistanceDropDwn);
+		System.out.println("Pharmacy Seacth for default Zip " + Pharmacy_ZipCodeTxt.getText());
+		String PharmacyCount;
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_Distance_Select1Mile);
+		// validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_Select1Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "1 Mile", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + matchingPharmacyCount.getText());
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_Distance_Select2Mile);
+		// validateNew(Pharmacy_Distance_Select2Mile);
+		jsClickNew(Pharmacy_Distance_Select2Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "2 Miles", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 2 Miles Distance for Zip : " + matchingPharmacyCount.getText());
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		// validateNew(Pharmacy_Distance_Select5Mile);
+		jsClickNew(Pharmacy_Distance_Select5Mile);
+		jsClickNew(Pharmacy_Distance_Select5Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "5 Miles", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 5 Miles Distance for Zip : " + matchingPharmacyCount.getText());
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		// validateNew(Pharmacy_Distance_Select10Mile);
+		jsClickNew(Pharmacy_Distance_Select10Mile);
+		jsClickNew(Pharmacy_Distance_Select10Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "10 Miles", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 10 Miles Distance for Zip : " + matchingPharmacyCount.getText());
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		// validateNew(Pharmacy_Distance_Select15Mile);
+		jsClickNew(Pharmacy_Distance_Select15Mile);
+		jsClickNew(Pharmacy_Distance_Select15Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "15 Miles", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 15 Miles Distance for Zip : " + matchingPharmacyCount.getText());
+		// jsClickNew(Pharmacy_DistanceDropDwn);
+		jsClickNew(Pharmacy_DistanceDropDwn);
+		// validateNew(Pharmacy_Distance_Select25Mile);
+		jsClickNew(Pharmacy_Distance_Select25Mile);
+		jsClickNew(Pharmacy_Distance_Select25Mile);
+		//Adding code to check pharmacy count for preferred plans
+		jsClickNew(Pharmacy_SearchBtn);
+		pageloadcomplete();
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCount);
 
-		mobileSelectOption(distanceDrpDown, "25 Miles", true);
-		jsClickNew(pharmacySearchBtn);
-		validateNew(matchingPharmacyCount);
-		System.out.println("Pharmacy Count for 25 Miles Distance for Zip : " + matchingPharmacyCount.getText());
-
-		validateNew(pharmacyZipcodeSearch);
-		sendkeysMobile(pharmacyZipcodeSearch, pharmacyZipCode);
-		validateNew(pharmacySearchBtn);
-		jsClickNew(pharmacySearchBtn);
-		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
-				+ pharmacyZipcodeSearch.getText());
-		System.out.println(
-				"Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + matchingPharmacyCount.getText());
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		sendkeysMobile(Pharmacy_ZipCodeTxt,pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		jsClickNew(Pharmacy_SearchBtn);
+		System.out.println("Pharmacy Searchh for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		if(!validate(PharmacyCountTxt, 6)){
+			List<WebElement> PreferredPlanPharCnt = driver.findElements(By.xpath("//*[contains(@class, 'pharmacyconut')]"));
+			PharmacyCount = PreferredPlanPharCnt.get(0).getText() + PreferredPlanPharCnt.get(1).getText();
+		}
+		else {
+			validateNew(PharmacyCountTxt);
+			PharmacyCount  = PharmacyCountTxt.getText();
+		}
+		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCount);
 
 	}
 

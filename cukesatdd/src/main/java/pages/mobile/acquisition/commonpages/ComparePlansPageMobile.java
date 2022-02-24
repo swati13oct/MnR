@@ -576,7 +576,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i += 1;
 		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath(
-				"(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["
+				"(//table[not(contains(@class, 'ng-hide'))]//tr[contains(@class, 'uhc-slide-table__row') and not(@id='printHeadingHide')]//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["
 						+ i + "]"));
 
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
@@ -673,7 +673,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-compare")) {
 			driver.navigate().back();
 		}
-
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToAllPlans() throws InterruptedException {
@@ -892,18 +891,18 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnBacktoPlans() {
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			backToPlanSummary_PlanCompare_iOS();
-			System.out.println(
-					"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
-		} else {
+	//	if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+	//		backToPlanSummary_PlanCompare_iOS();
+	//		System.out.println(
+	//				"BackToViewAllPlans link click not working on iOS hence skipped(Click(),jsclick() both failing)");
+	//	} else {
 
 			scrollToView(backToAllPlansLink);
 			validateNew(backToAllPlansLink);
 			jsClickNew(backToAllPlansLink);
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Clicked on Back to plans");
-		}
+	//	}
 	}
 
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
