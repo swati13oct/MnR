@@ -502,7 +502,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			cameraIcon.click();
 			if (btnSelectLibrary.isDisplayed()) {
 				try {
-					flag = mobileUpload("file", UsePhoto);
+					//flag = mobileUpload("file", UsePhoto);
+					flag = mobileUpload("file");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1479,11 +1480,12 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 
 
-	public boolean MedicareScanImage_Success(Map<String, String> MedicareDetailsMap) {
+	public boolean MedicareScanImage_Success(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
 
 		boolean flag=false;
 		validateNew(MedicareScanImage);
@@ -1493,7 +1495,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
 			validateNew(SelectFromlibrary, 5);
 			//-------Write Code for Take Photo or choose LLibrary----------
-
+			mobileUpload(uploadBtn);
 			//-------Write Code for Take Photo or choose LLibrary----------
 			validateNew(confirmPhotoTitleText, 10);
 			String ConfirmPhotoTitleText = confirmPhotoTitleText.getText();
@@ -1517,11 +1519,12 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		return flag;
 	}
 
-	public boolean MedicareScanImage_oopsErrorMessage(Map<String, String> MedicareDetailsMap) {
+	public boolean MedicareScanImage_oopsErrorMessage(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
 
 		boolean flag=false;
 		validateNew(MedicareScanImage);
@@ -1531,7 +1534,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
 			validateNew(SelectFromlibrary, 5);
 			//-------Write Code for Take Photo or choose LLibrary----------
-
+			mobileUpload(uploadBtn);
 			//-------Write Code for Take Photo or choose LLibrary----------
 			validateNew(confirmPhotoTitleText, 10);
 			String ConfirmPhotoTitleText = confirmPhotoTitleText.getText();

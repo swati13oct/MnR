@@ -788,7 +788,7 @@ public abstract class UhcDriver {
 	 * the method clicks on an element and the wait till another tab gets open and
 	 * switches to it
 	 *
-	 * @param Element
+	 * @param
 	 */
 
 	public void handleSurveyPopup() {
@@ -977,7 +977,7 @@ public abstract class UhcDriver {
 	 * the method waits for maximum 30 sec till element gets disapper throwing an
 	 * exception
 	 *
-	 * @param element
+	 * @param
 	 */
 	public void waitforElementDisapper(By by, long timeout) {
 
@@ -1347,35 +1347,39 @@ public abstract class UhcDriver {
 	 *
 	 * @return
 	 */
-	public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
+
+
+	//public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
+	public boolean mobileUpload(String uploadBtn) throws InterruptedException {
 		boolean uploadSuccess = false;
 
 		//------------iOS Code-------------
-		String curHandle = ((IOSDriver) driver).getContext();
-		System.out.println("curHandle - " + curHandle);
-		System.out.println(((IOSDriver) driver).getContextHandles());
+		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - " + curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
 
-		Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
-		for (String strContextName : contextNames) {
-			if (strContextName.contains("NATIVE_APP")) {
-				((IOSDriver) driver).context("NATIVE_APP");
-				break;
+			Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
+			for (String strContextName : contextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
+					((IOSDriver) driver).context("NATIVE_APP");
+					break;
+				}
 			}
-		}
 			/*Click on 'Allow' - permission
         	By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
         	wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
         	mobiledriver.findElement(elementView).click();
 			 */
-		//TO-DO:Replace with Id of Browse button instead of done
+			//TO-DO:Replace with Id of Browse button instead of done
 
 
-		((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
-		//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
-		Thread.sleep(500);
-		((IOSDriver) driver).findElement(MobileBy.xpath("//XCUElementTypeImage[1]")).click();
-		Thread.sleep(500);
-	       /* getFiletoUpload("card");
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
+			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
+			Thread.sleep(500);
+			((IOSDriver) driver).findElement(MobileBy.xpath("//XCUElementTypeImage[1]")).click();
+			Thread.sleep(500);
+	       /*getFiletoUpload("card");
 	        if(uploadBtn.isDisplayed()) {
 	        	uploadSuccess = true;
 	        }
@@ -1383,19 +1387,20 @@ public abstract class UhcDriver {
 	        Thread.sleep(500);
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
-		Set<String> contextNames1 = ((IOSDriver) driver).getContextHandles();
-		for (String strContextName : contextNames1) {
-			if (strContextName.contains("SAFARI")) {
-				((IOSDriver) driver).context("SAFARI");
-				break;
+			Set<String> contextNames1 = ((IOSDriver) driver).getContextHandles();
+			for (String strContextName : contextNames1) {
+				if (strContextName.contains("SAFARI")) {
+					((IOSDriver) driver).context("SAFARI");
+					break;
+				}
 			}
 		}
-			//------------iOS Code-------------
+		else {//------------iOS Code-------------
 			//-------Android Code-----------------
 
 			Set<String> AndroidcontextNames = ((AndroidDriver) driver).getContextHandles();
-			for (String strContextNameAndroid : AndroidcontextNames) {
-				if (strContextNameAndroid.contains("NATIVE_APP")) {
+			for (String strContextName : AndroidcontextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
 					((AndroidDriver) driver).context("NATIVE_APP");
 					break;
 				}
@@ -1411,10 +1416,10 @@ public abstract class UhcDriver {
 			By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
 			driver.findElement(SelectFile).click();
 
-			//Switch to  browser
+			//Switch to  chrome browser
 			Set<String> contextNamesAndroid = ((AndroidDriver) driver).getContextHandles();
-			for (String strContextNameAndroid : contextNamesAndroid) {
-				if (strContextNameAndroid.contains("CHROMIUM")) {
+			for (String strContextName : contextNamesAndroid) {
+				if (strContextName.contains("CHROMIUM")) {
 					((AndroidDriver) driver).context("CHROMIUM");
 					break;
 				}
@@ -1422,6 +1427,7 @@ public abstract class UhcDriver {
 				//-------Android Code-----------------
 				//
 			}
+		}
 		return uploadSuccess;
 	}
 	/**
