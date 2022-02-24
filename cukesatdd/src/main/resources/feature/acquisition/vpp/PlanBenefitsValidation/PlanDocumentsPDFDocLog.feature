@@ -174,6 +174,16 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | excelPath                            | workSheet   | site |
       | PlanCompareDocs_Validation_Data_2022 | Sheet2022_5 | UHC  |
 
+    @pdfDocLogUHC06
+    Examples: 
+      | excelPath                            | workSheet      | site |
+      | PlanCompareDocs_Validation_Data_2022 | PDPSheet2022_1 | UHC  |
+
+    @pdfDocLogUHC07
+    Examples: 
+      | excelPath                            | workSheet      | site |
+      | PlanCompareDocs_Validation_Data_2022 | PDPSheet2022_2 | UHC  |
+
     @pdfDocLogAARP01
     Examples: 
       | excelPath                            | workSheet   | site |
@@ -198,3 +208,13 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
     Examples: 
       | excelPath                            | workSheet   | site |
       | PlanCompareDocs_Validation_Data_2022 | Sheet2022_5 | AARP |
+
+    @pdfDocLogAARP06
+    Examples: 
+      | excelPath                            | workSheet      | site |
+      | PlanCompareDocs_Validation_Data_2022 | PDPSheet2022_1 | AARP |
+
+    @pdfDocLogAARP07
+    Examples: 
+      | excelPath                            | workSheet      | site |
+      | PlanCompareDocs_Validation_Data_2022 | PDPSheet2022_2 | AARP |
