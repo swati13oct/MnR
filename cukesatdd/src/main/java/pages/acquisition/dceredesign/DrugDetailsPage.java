@@ -11,7 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -393,6 +395,9 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(text(),'If you qualify')]")
 	public WebElement LIS_Extrahelp;
+	
+	@FindBy(xpath = "//*[contains(@id, 'milesDropdown') or contains(@name, 'miles')]")
+	public WebElement pharmacydistance;
 
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -958,6 +963,34 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(pharmacyZipcodeSearch);
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 		validateSelectPharmacyPage();
+	}
+	
+	public void EnterPharmacyDetailsPage(String zipcode, String distance , String pharmacyName) {
+		validateNew(DrugDetails_ChangePharmacyLnk);
+		jsClickNew(DrugDetails_ChangePharmacyLnk);
+		pageloadcomplete();
+		validateNew(pharmacyZipcodeSearch);
+		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
+		validateSelectPharmacyPage();
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(zipcode);
+		validateNew(pharmacydistance);
+		Pharmacy_DistanceDropDwn.click();
+		
+		WebElement Pharmacy_Distance_SelectMile =driver.findElement(By.xpath("//select[contains(@id, 'milesDropdown')]//option[contains(text(), '"+distance+"')]"));
+		Pharmacy_Distance_SelectMile.click();
+		// validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_SelectMile);
+		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.sendKeys(pharmacyName);
+		jsClickNew(Pharmacy_SearchBtn);
+		WebElement pharmacySelect = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//button[contains(@id, 'Pharmacy')]/span[contains(text(), 'Select')]"));
+	    
+		jsClickNew(pharmacySelect);
+		validateNew(saveDrugBtn);
+		jsClickNew(saveDrugBtn);
+		//saveDrugBtn.click();
+		
 	}
 
 
@@ -2622,7 +2655,7 @@ Blank error message is removed
 
 	private static String INITIAL_COVERAGE_TEXT_NextYear = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,430 you then move to the Coverage Gap Stage.";
 	private static String COVERAGE_GAP_TEXT_NextYear = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $7,050 in year-to-date out-of-pocket costs.";
-	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 15% coinsurance, whichever is greater.";
+	private static String CATASTROPHIC_TEXT_NextYear = "You enter the Catastrophic Coverage Stage after $7,050 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.95 copay for generic drugs, $9.85 copay for brand name drugs or a 5% coinsurance, whichever is greater.";
 
 	public void validateCoveragestagePopUpTextNextYear() {
 		validateNew(MonthlyDrugStage_InitialCoverageLink);

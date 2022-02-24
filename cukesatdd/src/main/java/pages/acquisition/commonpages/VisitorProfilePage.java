@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atdd.framework.MRScenario;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -355,7 +356,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
-	@FindBy(id="dateOfBirth")
+	//@FindBy(id="dateOfBirth")
+	@FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
 	private WebElement msDOB;
 	
 	@FindBy(xpath = "//span[text()='Continue Application']")
@@ -752,6 +754,7 @@ public class VisitorProfilePage extends UhcDriver {
             }
             jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
             waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
             CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
         } catch (Exception e) {
@@ -834,7 +837,8 @@ public class VisitorProfilePage extends UhcDriver {
     public ComparePlansPage planCompare(String plans) {
 
         jsClickNew(comparePlans);
-        validateNew(enrollBtn);
+        //validateNew(enrollBtn);
+		validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")));
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -1554,6 +1558,7 @@ public class VisitorProfilePage extends UhcDriver {
 			txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
 			jsClickNew(chkAttest);
 			jsClickNew(btnNonMemViewDrugsAndDocs);
+			sleepBySec(15);
 			waitforElementNew(savedDrugsAndDoctorsHeader);
 			break;
 
@@ -1574,7 +1579,8 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void clickOnMSPlanDetailsPage(String planName) {
 	    //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
-	    WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
+	    CommonUtility.checkPageIsReadyNew(driver);
+		WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()=' Plan Details' or text()='Plan Details'][1]"));
 		jsClickNew(btnMSPlanDetails);
 		waitforElementNew(lnkbackToProfile);
 	}
@@ -1675,9 +1681,11 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public void importOnDCE(DataTable data) {
 		Map<String, String> testData = data.asMap(String.class, String.class);
-		WebElement btnGetStarted =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
-		validateNew(btnGetStarted);
-		jsClickNew(btnGetStarted);
+		if(MRScenario.environment.equalsIgnoreCase("prod")||MRScenario.environment.equalsIgnoreCase("offline")) {
+			WebElement btnGetStarted = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
+			validateNew(btnGetStarted);
+			jsClickNew(btnGetStarted);
+		}
 		sleepBySec(1);
 		WebElement rdbYes=driver.findElement(By.xpath("//span[contains(@class,'radio-button__label') and contains(text(),'Yes')]"));
 		jsClickNew(rdbYes);

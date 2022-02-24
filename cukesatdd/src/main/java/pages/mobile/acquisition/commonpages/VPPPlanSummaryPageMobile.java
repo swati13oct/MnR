@@ -512,6 +512,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
 	private WebElement providerListPlanCard;
 
+	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
+	protected WebElement summary_maEmailOption;
+
 	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
 	private List<WebElement> removeProviderListPlanCard;
 
@@ -797,7 +800,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(xpath = "//*[contains(@id,'msVppZipCode')]")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[text()='View Plans']")
@@ -892,7 +895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
+	@FindBy(xpath = "(//img[contains(@src,'RockyMountainLogo')])[1]")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -1279,13 +1282,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
-		if(maPlansViewLink.isDisplayed())
+		if (maPlansViewLink.isDisplayed())
 			jsClickNew(maPlansViewLink);
-		
+
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
 		validateNew(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
@@ -2638,7 +2642,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]//following::span[3]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Deductible')]//following::span[3]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
@@ -2870,6 +2874,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void enterRequiredFieldsForMedicareGuide(Map<String, String> memberAttributesMap) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.navigate().back();
+			System.out.println("This if loop added for ios as coming back to Parent window failing..");
+		}
+
 		String FirstName = memberAttributesMap.get("First Name");
 		String LastName = memberAttributesMap.get("Last Name");
 		String EmailAddress = memberAttributesMap.get("Email Address");
@@ -3338,7 +3347,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		sleepBySec(3);
 		waitForPageLoadSafari();
-		if(backToPlans.isDisplayed()) {
+		if (backToPlans.isDisplayed()) {
 			jsClickNew(backToPlans);
 		}
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
@@ -4320,6 +4329,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
 		jsClickNew(driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")));
+//IOS drop down does nt open with jsClick hence normal click added with driver type condition
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			stateDropDown.click();
+		}
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
@@ -4972,7 +4985,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
-		// ChangeLocationLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(ChangeLocationLink);
 		validate(ZipCodeTxtBx);
 		// ZipCodeTxtBx.click();
@@ -6290,7 +6303,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 	}
 
-
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6308,5 +6320,38 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
+	}
+
+	public boolean verifyAddedDrugPharmacySummaryCost(String planName, String networkType) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + networkType);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if (drugCost.getText().equals("")) {
+				Assertion.assertTrue(true);
+				System.out.println("Drug cost is coming blank as expected");
+			} else {
+				if (drugCost.getText().contains("$")) {
+					Assertion.assertTrue(true);
+					System.out.println("Drug cost contains amount as expected");
+				}
+			}
+
+		}
+		return false;
+	}
+
+	public void clickOnEmailField() {
+
+		jsClickNew(summary_maEmailOption);
+	}
+
+	public void validatePrepopulatedEmail(String email) {
+		jsClickNew(emailPlanSummaryFieldBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = " + populatedEmail);
+		Assertion.assertEquals(email, populatedEmail);
 	}
 }

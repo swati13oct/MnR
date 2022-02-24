@@ -772,7 +772,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				Assertion.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
 						!pharmacyValidate(widget_walgreens));
 				expUrl = "health-plans/estimate-drug-costs.html";
-				// expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+//				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 			}
 		} else {
@@ -785,7 +785,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				if (language.equalsIgnoreCase("English")) {
 					Assertion.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
 							pharmacyValidate(widget_walgreens));
-					// expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+//					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
 					expUrl = "health-plans/estimate-drug-costs.html";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 				} else {
@@ -811,7 +811,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
 		// learnMoreElement.click();
 		jsClickNew(learnMoreElement);
-		sleepBySec(8);
+		sleepBySec(10);
 		CommonUtility.checkPageIsReady(driver);
 		ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
 		if (newTb.size() > 1)
@@ -1044,7 +1044,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 	}
 
-	@FindBy(xpath = "//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
+	@FindBy(xpath="//span[text()='Servicio de salud ind�gena, tribal o ind�gena urbano']")
 	protected WebElement indian_tribal_label_filter_text;
 
 	public boolean validateNoPharmaciesErrorMessage() {
@@ -1056,10 +1056,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
 		catch (Exception ex) {
 		}
-		if (indian_tribal_text.contains("Servicio de salud ind")) {
-			indian_tribal_label_filter = driver
-					.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
-
+		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud ind�gena, tribal o ind�gena urbano")){
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud ind�gena, tribal o ind�gena urbano']/.."));
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);

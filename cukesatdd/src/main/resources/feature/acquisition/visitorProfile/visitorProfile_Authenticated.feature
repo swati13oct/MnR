@@ -3,8 +3,8 @@
 @visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
-  @vpMSSavePlanAuthenticated @authenticated
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+#  @vpMSSavePlanAuthenticated @authenticated
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -28,18 +28,20 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
-    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+
+#    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
       | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
-    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
+#    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
     Examples:
       | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
       | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
 
   @addDrugAuthenticated @authenticated
-  Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
+  Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -74,7 +76,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
 
   @providerFlowAuthenticated @authenticated
-  Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
+  Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -106,7 +108,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_13_uhc | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @oleAuthenticatedValidations @authenticatedd
-  Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
+  Scenario Outline: Verify OLE validations for authenticated Visitor Profile page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -130,7 +132,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
   @vppartialOLEAndRemove @authenticated
-  Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
+  Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -183,7 +185,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
-  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -208,7 +210,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanDetailAuthenticated @authenticated
-  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -232,7 +234,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanCompareAuthenticated @authenticated
-  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -258,7 +260,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @validateHeaderWidget @authenticated
-  Scenario Outline: Verify Visitor Profile page Header
+  Scenario Outline: Verify Visitor Profile page Header on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -279,7 +281,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | Alabama | 10010   | NO              | New York County | VD   | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
 
   @validateVPFlyoutName @authenticated
-  Scenario Outline: Verify name is appearing for the signed in user
+  Scenario Outline: Verify name is appearing for the signed in user on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -300,7 +302,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
 
   @authenticated @DCEImportSignIn
-  Scenario Outline: Verify DCE Redirect
+  Scenario Outline: Verify DCE Redirect  on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
