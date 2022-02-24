@@ -166,7 +166,7 @@ public class MRConstants {
 
 	public static final String UHC_URL_NEW = "https://stage-0-uhcmedicaresolutions."
 			+ getDomain() + "/";
-	public static final String CHARGERS_UHC_URL="https://chargers-uhc."+ getDomain() + "/medicare";
+	public static final String CHARGERS_UHC_URL="https://chargers-uhc."+ getDomain() + "/medicare/";
 	
 	public static final String UHC_URL_OFFLINE = "https://offline.uhcmedicaresolutions.com/";
 
