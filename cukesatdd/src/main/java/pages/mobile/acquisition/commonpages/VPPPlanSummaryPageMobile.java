@@ -1049,6 +1049,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		if(driver.toString().contains("IOS"))
+			sleepBySec(80);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -6199,11 +6201,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
-			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
-			} else {
+	//		if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+	//			allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+	//		} else {
 				allPlanNames.add(plan.getText().trim());
-			}
+	//		}
 
 		}
 		return allPlanNames;
