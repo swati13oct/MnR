@@ -13,8 +13,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+
+import static org.apache.commons.io.IOUtils.toByteArray;
+
+
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -28,7 +31,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
@@ -73,7 +75,7 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public WebElement IPerceptionsFrame;
-	
+
 	@FindBy(xpath = "//*[@id='ip-no']")
 	private WebElement surveyPopupNoBtn;
 
@@ -386,7 +388,7 @@ public abstract class UhcDriver {
 
 		/*
 		 * //CM
-		 * 
+		 *
 		 * JavascriptExecutor jse = (JavascriptExecutor)driver;
 		 * jse.executeScript("window.scrollBy(0,-50)", ""); try {
 		 * waitforElement(element); if (element.isDisplayed()) { Actions actions = new
@@ -396,7 +398,7 @@ public abstract class UhcDriver {
 		 * element.getText() + "is found@@@"); } } catch (Exception e) {
 		 * Assertion.fail("The element " + element.getText() + "is not  found"); return
 		 * false; }
-		 * 
+		 *
 		 * return true;
 		 */
 	}
@@ -664,9 +666,9 @@ public abstract class UhcDriver {
 
 		/*
 		 * if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-		 * 
+		 *
 		 * To handle iOS specific click problem By: Harshal Ahire
-		 * 
+		 *
 		 * iOSClick(element); } else { JavascriptExecutor js = (JavascriptExecutor)
 		 * driver; if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 		 * scrollToView(element); } js.executeScript("arguments[0].click();", element);
@@ -747,7 +749,7 @@ public abstract class UhcDriver {
 
 	/***
 	 * the method imposes an implicit wait of 10 sec and navigates to provided URL
-	 * 
+	 *
 	 * @param url
 	 */
 	public void startNewPRE(String url, String browser) {
@@ -772,7 +774,7 @@ public abstract class UhcDriver {
 	/***
 	 * the method waits for upto 30 sec till element gets visible before throwing an
 	 * exception
-	 * 
+	 *
 	 * @param element
 	 */
 	public void waitforElementNew(WebElement element, long timeoutInSec) {
@@ -785,10 +787,10 @@ public abstract class UhcDriver {
 	/***
 	 * the method clicks on an element and the wait till another tab gets open and
 	 * switches to it
-	 * 
-	 * @param Element
+	 *
+	 * @param
 	 */
-	
+
 	public void handleSurveyPopup() {
 		try {
 			validate(surveyPopupNoBtn, 20);
@@ -798,8 +800,8 @@ public abstract class UhcDriver {
 			System.out.println("survey popup not displayed");
 		}
 	}
-	
-	
+
+
 	public void switchToNewTabNew(WebElement Element) {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
@@ -820,9 +822,9 @@ public abstract class UhcDriver {
 	}
 	/*
 	 * Author: Harshal Ahire
-	 * 
+	 *
 	 * To interact with Shadow element for IOS
-	 * 
+	 *
 	 * @Params driver, shadowHost, cssOfShadowElement
 	 */
 
@@ -846,7 +848,7 @@ public abstract class UhcDriver {
 
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1
-	 * 
+	 *
 	 * @param initialCount
 	 */
 	public void waitForCountIncrement(int initialCount) {
@@ -858,7 +860,7 @@ public abstract class UhcDriver {
 
 	/***
 	 * the method waits for 60 sec till current windows count decrement by 1
-	 * 
+	 *
 	 * @param initialCount
 	 */
 	public void waitForCountDecrement(int initialCount) {
@@ -870,7 +872,7 @@ public abstract class UhcDriver {
 	/***
 	 * the method first scroll to particular field 9after waiting) and the writes in
 	 * that field
-	 * 
+	 *
 	 * @param element
 	 * @param message
 	 */
@@ -884,7 +886,7 @@ public abstract class UhcDriver {
 
 	/***
 	 * the method first scroll to the element and then waits till it is visible
-	 * 
+	 *
 	 * @param element
 	 * @return : boolean
 	 */
@@ -974,8 +976,8 @@ public abstract class UhcDriver {
 	/***
 	 * the method waits for maximum 30 sec till element gets disapper throwing an
 	 * exception
-	 * 
-	 * @param element
+	 *
+	 * @param
 	 */
 	public void waitforElementDisapper(By by, long timeout) {
 
@@ -988,7 +990,7 @@ public abstract class UhcDriver {
 	/***
 	 * Created by - agarg119 The method waits for 2 seconds (increasing timeout may
 	 * affect execution performance) to validate element is not present on screen.
-	 * 
+	 *
 	 * @param element
 	 * @return boolean
 	 */
@@ -1007,7 +1009,7 @@ public abstract class UhcDriver {
 	/***
 	 * Created By - agarg119 the method waits for mentioned seconds till element
 	 * gets visible before throwing an exception
-	 * 
+	 *
 	 * @param element
 	 */
 	public void waitforElementVisibilityInTime(WebElement element, long timeout) {
@@ -1020,7 +1022,7 @@ public abstract class UhcDriver {
 	/***
 	 * Created By - agarg119 the method waits for mentioned seconds till element
 	 * gets clickable throwing an exception
-	 * 
+	 *
 	 * @param element
 	 */
 	public void waitTillElementClickableInTime(WebElement element, long timeout) {
@@ -1033,7 +1035,7 @@ public abstract class UhcDriver {
 	/***
 	 * Created By - agarg119 the method waits for mentioned seconds till dropdown
 	 * options gets visible throwing an exception
-	 * 
+	 *
 	 * @param element
 	 * @param timeout
 	 */
@@ -1047,7 +1049,7 @@ public abstract class UhcDriver {
 	/*
 	 * Created By - hahire It will move to the element and clicks (without
 	 * releasing) in the middle of the given element (Use for IOS)
-	 * 
+	 *
 	 * @param element
 	 */
 
@@ -1060,7 +1062,7 @@ public abstract class UhcDriver {
 	/***
 	 * Created By - agarg119 the method waits for the iframe to be available and
 	 * switch to it throwing an exception
-	 * 
+	 *
 	 * @param element
 	 */
 	public void waitTillFrameAvailabeAndSwitch(WebElement element, long timeout) {
@@ -1140,7 +1142,7 @@ public abstract class UhcDriver {
 	 * so just get the current time (the build system) note: and format it the same
 	 * like the one using getSystemTime from MRRestWAR note: keep the format: Mon
 	 * Oct 14 17:14:06 UTC 2019
-	 * 
+	 *
 	 * @return
 	 */
 	@FindBy(xpath = "//body")
@@ -1191,7 +1193,7 @@ public abstract class UhcDriver {
 
 	/*
 	 * Method created for Pharmacy testURL to get systemDate
-	 * 
+	 *
 	 * @params testURL/EndPointURL
 	 */
 
@@ -1281,7 +1283,7 @@ public abstract class UhcDriver {
 			}
 			driver.close();
 			driver.switchTo().window(winHandleBefore);
-			
+
 		}
 		return timeStr;
 
@@ -1338,6 +1340,119 @@ public abstract class UhcDriver {
 			mobileswipe(percentage, swipeup);
 		}
 	}
+
+	/**
+	 * @author Prashant This method will perform file upload to mobile
+	 * @throws InterruptedException
+	 *
+	 * @return
+	 */
+
+
+	//public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
+	public boolean mobileUpload(String uploadBtn) throws InterruptedException {
+		boolean uploadSuccess = false;
+
+		//------------iOS Code-------------
+		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - " + curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
+
+			Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
+			for (String strContextName : contextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
+					((IOSDriver) driver).context("NATIVE_APP");
+					break;
+				}
+			}
+			/*Click on 'Allow' - permission
+        	By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
+        	wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
+        	mobiledriver.findElement(elementView).click();
+			 */
+			//TO-DO:Replace with Id of Browse button instead of done
+
+
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
+			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
+			Thread.sleep(500);
+			((IOSDriver) driver).findElement(MobileBy.xpath("//XCUElementTypeImage[1]")).click();
+			Thread.sleep(500);
+	       /*getFiletoUpload("card");
+	        if(uploadBtn.isDisplayed()) {
+	        	uploadSuccess = true;
+	        }
+	        uploadBtn.click();
+	        Thread.sleep(500);
+			((IOSDriver) driver).context(curHandle);
+			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
+			Set<String> contextNames1 = ((IOSDriver) driver).getContextHandles();
+			for (String strContextName : contextNames1) {
+				if (strContextName.contains("SAFARI")) {
+					((IOSDriver) driver).context("SAFARI");
+					break;
+				}
+			}
+		}
+		else {//------------iOS Code-------------
+			//-------Android Code-----------------
+
+			Set<String> AndroidcontextNames = ((AndroidDriver) driver).getContextHandles();
+			for (String strContextName : AndroidcontextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
+					((AndroidDriver) driver).context("NATIVE_APP");
+					break;
+				}
+			}
+
+			By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+			driver.findElement(AllowButton).click();
+			//Click on Browse button on Android
+			By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
+			driver.findElement(Browse).click();
+
+			//select a file from browse
+			By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
+			driver.findElement(SelectFile).click();
+
+			//Switch to  chrome browser
+			Set<String> contextNamesAndroid = ((AndroidDriver) driver).getContextHandles();
+			for (String strContextName : contextNamesAndroid) {
+				if (strContextName.contains("CHROMIUM")) {
+					((AndroidDriver) driver).context("CHROMIUM");
+					break;
+				}
+
+				//-------Android Code-----------------
+				//
+			}
+		}
+		return uploadSuccess;
+	}
+	/**
+	 * Gets the image file from mobile.
+	 *
+	 * @author Prashant
+	 * @param fileName the file name with jpg extension
+	 * @return the file for uploading to mobile
+	 */
+
+	public byte[] getFiletoUpload(String fileName) {
+		byte[] content = null;
+		try {
+			if (!fileName.isEmpty()) {
+				AppiumDriver mobileDriver = (AppiumDriver) driver;
+				content = mobileDriver.pullFile("/sdcard/Download/" + fileName + ".jpg");
+			}
+		} catch (Exception e) {
+			Assertion.fail("Unable to read file " + fileName + " from sdcard/Download/");
+		}
+
+		return content;
+	}
+
+
 
 	/**
 	 * @author Murali - mmurugas This method will hide mobile keypad
@@ -1454,7 +1569,7 @@ public abstract class UhcDriver {
 
 	/*
 	 * @author : Harshal Ahire
-	 * 
+	 *
 	 * @Params: dropdwon option
 	 *
 	 * To select value in dropdpwn via JsScript in IOS device
@@ -1619,17 +1734,17 @@ public abstract class UhcDriver {
 
 	/*
 	 * public void jsClickMobile(WebElement element) {
-	 * 
+	 *
 	 * if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
 	 * driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
 	 * JavascriptExecutor js = (JavascriptExecutor) driver;
 	 * js.executeScript("arguments[0].click();", element); } else if
 	 * (driver.getClass().toString().toUpperCase().contains("IOS")) {
-	 * 
+	 *
 	 * iOSClick(element);
-	 * 
+	 *
 	 * }
-	 * 
+	 *
 	 * }
 	 */
 
@@ -1715,7 +1830,7 @@ public abstract class UhcDriver {
 	 *
 	 * @param element the element
 	 * @return true, if successful
-	 * 
+	 *
 	 *         Note: Use in combination with jsMouseOver
 	 */
 	public boolean jsMouseOut(WebElement element) {
@@ -1736,7 +1851,7 @@ public abstract class UhcDriver {
 	 *
 	 * @param element the element
 	 * @return true, if successful
-	 * 
+	 *
 	 *         Note: use the jsMouseOut if using jsMouseOver for tooltip
 	 */
 	public boolean jsMouseOver(WebElement element) {
@@ -1839,7 +1954,7 @@ public abstract class UhcDriver {
 
 	/**
 	 * Delete downloaded file from Android device.
-	 * 
+	 *
 	 * @author amahale This is not working as of now. Since Appium server needs a
 	 *         flag to be set while starting. this isn't possible on saucelabs as of
 	 *         now
