@@ -800,7 +800,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
 
-	@FindBy(css = "#msVppZipCode")
+	@FindBy(xpath = "//*[contains(@id,'msVppZipCode')]")
 	private WebElement medSuppZipCode;
 
 	@FindBy(xpath = "//button[text()='View Plans']")
@@ -895,7 +895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
+	@FindBy(xpath="//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -1049,6 +1049,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		if(driver.toString().contains("IOS"))
+			sleepBySec(80);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -2707,7 +2709,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
-		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		String toolTipText = tooltipContent.getText().trim();
 		if (toolTipText.contains("Why is my premium")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
@@ -2879,9 +2881,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String EmailAddress = memberAttributesMap.get("Email Address");
 		// sendkeysNew(firstNameField, FirstName);
 		scrollToView(firstNameField);
-		jsSendkeys(firstNameField, FirstName);
-		jsSendkeys(lastNameField, LastName);
-		jsSendkeys(emailField, EmailAddress);
+		sendkeysMobile(firstNameField, FirstName);
+		sendkeysMobile(lastNameField, LastName);
+		sendkeysMobile(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
 		CommonUtility.waitForPageLoadNew(driver, medicareGuidePopup, 10);
@@ -6190,11 +6192,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
-			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
-			} else {
+	//		if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+	//			allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+	//		} else {
 				allPlanNames.add(plan.getText().trim());
-			}
+	//		}
 
 		}
 		return allPlanNames;

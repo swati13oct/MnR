@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import atdd.framework.MRScenario;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -355,7 +356,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath  = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 	
-	@FindBy(id="dateOfBirth")
+	//@FindBy(id="dateOfBirth")
+	@FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
 	private WebElement msDOB;
 	
 	@FindBy(xpath = "//span[text()='Continue Application']")
@@ -1679,9 +1681,11 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public void importOnDCE(DataTable data) {
 		Map<String, String> testData = data.asMap(String.class, String.class);
-		WebElement btnGetStarted =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
-		validateNew(btnGetStarted);
-		jsClickNew(btnGetStarted);
+		if(MRScenario.environment.equalsIgnoreCase("prod")||MRScenario.environment.equalsIgnoreCase("offline")) {
+			WebElement btnGetStarted = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
+			validateNew(btnGetStarted);
+			jsClickNew(btnGetStarted);
+		}
 		sleepBySec(1);
 		WebElement rdbYes=driver.findElement(By.xpath("//span[contains(@class,'radio-button__label') and contains(text(),'Yes')]"));
 		jsClickNew(rdbYes);

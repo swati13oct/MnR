@@ -22,6 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
+import io.appium.java_client.AppiumDriver;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 
 public class NewResultsMobilePage extends UhcDriver {
@@ -84,7 +85,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = ".returnSection span#viewMorePlans")
 		private WebElement pagenoLabel;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+		@FindBy(css = "button[class*='view-plans-next']")
 		private WebElement pageNextButton;
 		
 		@FindBy(css = ".planRemoveSort span")
@@ -93,13 +94,13 @@ public class NewResultsMobilePage extends UhcDriver {
 		@FindBy(css = "#msVppZipCode")
 		private WebElement zipcodeMSForm;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
+		@FindBy(css = "button[class*='view-plans-next disabled']")
 		private WebElement pageNextButtonDisabled;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-prev']")
+		@FindBy(css = "button[class*='view-plans-prev']")
 		private WebElement pagePreviousButton;
 
-		@FindBy(css = ".paginationSection button[class*='view-plans-prev disabled']")
+		@FindBy(css = "button[class*='view-plans-prev disabled']")
 		private WebElement pagePreviousButtonDisabled;
 
 		// Plan Tile Elements
@@ -265,7 +266,7 @@ public class NewResultsMobilePage extends UhcDriver {
 				SNPCheck.click();
 			}
 			Assert.assertTrue(validate(applyBtn), "apply Button is missing");
-			applyBtn.click();
+			jsClickNew(applyBtn);
 			threadsleep(2000);
 		}
 		
@@ -326,7 +327,7 @@ public class NewResultsMobilePage extends UhcDriver {
 		
 		public void verifyDrugWhySeparateMdel(String planName) {
 			int planIndex = findPlan(planName);
-			plantiles1.get(planIndex-1).findElement(By.cssSelector("button[id*='seperatePlanLink']")).click();
+			jsClickNew(plantiles1.get(planIndex-1).findElement(By.cssSelector("button[id*='seperatePlanLink']")));
 			threadsleep(2000);
 			Assert.assertTrue(modelTiltle.getText().trim().contains("required"),
 					"Why is a separate model not found in plan - " + planName);
@@ -468,6 +469,11 @@ public class NewResultsMobilePage extends UhcDriver {
 		threadsleep(5000);
 		System.out.println("Adding doctors from PRE Result page");
 		String pageCount1 = pagenoLabel.getText().trim();
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver; 
+		js.executeScript("window.scrollBy(0,-800)");
+		js.executeScript("window.scrollBy(0,-800)");
+		
 		int currentPage = Integer
 				.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if (currentPage != 1) {
@@ -562,7 +568,31 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public void verifyDrugdataModel(String planName, String drugName, String drugStatus) {
 		int planIndex = findPlan(planName);
-		jsClickNew(plantiles1.get(planIndex-1).findElement(By.cssSelector(".buttonLinkSection button")));
+		String PlanName = plantiles1.get(planIndex-1).findElement(By.cssSelector("h2>a")).getText().trim().toLowerCase();
+		threadsleep(2000);
+		System.out.println("PlanName is: " + PlanName);
+
+		if (PlanName.contains("supplement")) {
+			WebElement DocTitle = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("div[class*='providerSection'] h3"));
+			WebElement MSPlanName = plantiles1.get(planIndex-1).findElement(By.cssSelector("h4[class*='pdpPlanName'] a"));
+			scrollToView(DocTitle);
+			planName = MSPlanName.getText().trim();
+			WebElement viewModel = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"));
+			jsClickNew(viewModel);
+			threadsleep(2000);
+
+		} else {
+			System.out.println("PlanIndex is: " + planIndex);
+			WebElement viewind = plantiles1.get(planIndex-1)
+					.findElement(By.cssSelector("button[dlassetid*='drug_modal']"));
+			scrollToView(viewind);
+			threadsleep(2000);
+			jsClickNew(viewind);
+			threadsleep(2000);
+		}	
+		
 		String drugText = drugModel.getText().trim();
 		Assert.assertTrue(drugText.contains(planName), "Plan Name not found in drug model - " + planName);
 		Assert.assertTrue(drugText.contains(drugName), "Drug details not found in drug model - " + planName);
@@ -608,7 +638,13 @@ public class NewResultsMobilePage extends UhcDriver {
 	
 	public int findPlan(String uniqueName) {
 		System.out.println("Finding a Plan...");
-		waitforResultsPage();
+//		waitforResultsPage();
+		scrollToView(pagePreviousButton);
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver; 
+		js.executeScript("window.scrollBy(0,-800)");
+		js.executeScript("window.scrollBy(0,-800)");
+		
 		String pageCount1 = pagenoLabel.getText().trim();
 		int currentPage = Integer.parseInt(pageCount1.toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 		if(currentPage != 1) {

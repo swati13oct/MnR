@@ -570,6 +570,8 @@ public class MRConstants {
 
 	public static final String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
+	public static final String AARP_TELESALES_AGENT_TEAM_CHARGERS_PAGE_URL = "https://www.chargers-qa-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
+
 	public static final String AARP_TELESALES_AGENT_PAGE_URL_Team = "https://www." + MRScenario.environment
 			+ "-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 

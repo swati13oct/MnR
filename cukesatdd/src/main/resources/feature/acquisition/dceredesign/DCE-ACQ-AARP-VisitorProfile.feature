@@ -156,7 +156,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @regressionAARP @featureGate
+  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @regressionAARP
+    #@featureGate
     Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName           | password   |
       | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@3 |
