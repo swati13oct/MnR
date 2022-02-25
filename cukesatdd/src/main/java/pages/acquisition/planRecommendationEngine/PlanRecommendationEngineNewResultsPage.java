@@ -1118,14 +1118,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(ImpResSectionPDFLinks.isEmpty(), "ImportantResource having PDF Links in Result Page");
 	}
 	
-	public boolean isElementPresent(WebElement impResSection2) {
-	    try {
-	    	driver.findElement((By) impResSection2);
-	        return true;
-	    } catch (org.openqa.selenium.NoSuchElementException e) {
-	        return false;
-	    }
-	}
+	
 	
 	public void importantResourceSection(String ImpRes) {
 		System.out.println("Validate ImportantResource Present and Links");
