@@ -497,11 +497,11 @@ public class MedicareEducationStepDefinition {
         initialEnrollmentPeriodPage.clickOnFindDelayLink();
     }
 
-    @Then("^the user validates See How All the Parts of Medicare Can be Combined link on new Initial Enrollment Period Page$")
-    public void validates_See_How_All_the_Parts_of_Medicare_Can_be_Combined_link_on_new_Initial_Enrollment_Period_Page() {
+    @Then("^the user validates Learn more about missing your Initial Enrollment Period here link on new Initial Enrollment Period Page$")
+    public void validates_Learn_more_about_missing_your_Initial_Enrollment_Period_here_link_on_new_Initial_Enrollment_Period_Page() {
         InitialEnrollmentPeriodPage initialEnrollmentPeriodPage = (InitialEnrollmentPeriodPage) getLoginScenario()
                 .getBean(PageConstants.INITIAL_ENROLLMENT_PERIOD_PAGE);
-        initialEnrollmentPeriodPage.clickOnPartsCombinedLink();
+        initialEnrollmentPeriodPage.clickOnMissingIEP();
     }
 
     @Then("^the user validates Enrollment Date Calculator$")

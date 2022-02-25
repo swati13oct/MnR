@@ -23,10 +23,15 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | TFNflag   | <tfnFlag>   |
 
 
-		@CampaignExternal_Scenario10_AARP @featureGate
+    @CampaignExternal_Scenario10_AARP @teamAvengersLP @featureGate
     Examples:
       | Scenario                                      | externallink                                                                 | zipcodeSingle | zipcodeMulti | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | TFNNo2         | externallink2                                                                                 |
       | Campaign External Links - E2E Scenario 10_AMP | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html | 33111         | 65656        | true    | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | 1-877-322-0782 | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272 |
+
+    @CampaignExternal_Scenario10_AARP @teamAvengersLP @featureGate
+    Examples:
+      | Scenario                                      | externallink                                                                 | zipcodeSingle | zipcodeMulti | tfnFlag | TFNNo          | TFNxpath1                   | workingHrs                              | TFNNo2         | externallink2                                                                                 |
+      | Campaign External Links - E2E Scenario 10_AMP | https://www.team-avengers-uhcmedicaresolutions.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html | 33111         | 65656        | true    | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | 1-877-322-0782 | https://www.team-avengers-uhcmedicaresolutions.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272 |
 
     @CampaignExternal_Scenario10_AARP @StageLP
     Examples:

@@ -534,7 +534,6 @@ public class DCEACQHomeMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePharmacyFilterErrormessage();
-		drugDetailsPage.validateXcleartextPharmacyFilter();
 	}
 
 	@Then("^the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page$")
@@ -567,7 +566,6 @@ public class DCEACQHomeMobile {
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validatePharmacyFilterErrormessage();
-		drugSummaryPage.validateXcleartextPharmacyFilter();
 	}
 
 	@Then("^the user validates PLan Toggle on Drug Summary Page$")

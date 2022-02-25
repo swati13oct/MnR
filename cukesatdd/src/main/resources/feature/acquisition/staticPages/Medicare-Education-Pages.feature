@@ -96,9 +96,9 @@ Feature:Medicare Education Pages flows for New Pages
       | GeoState | <geoState> |
     Then the user navigates to Initial Enrollment Period page
     Then the user validates inner links on new Initial Enrollment Period Page
-    Then the user gather information through video
+ #   Then the user gather information through video
     Then the user validates Find Out If You Can Delay Enrolling in Medicare link on new Initial Enrollment Period Page
-    Then the user validates See How All the Parts of Medicare Can be Combined link on new Initial Enrollment Period Page
+    Then the user validates Learn more about missing your Initial Enrollment Period here link on new Initial Enrollment Period Page
     Then the user validates Enrollment Date Calculator
     Then the user validates email form component on new Medicare Education Page
       | Endpoint | <endpoint> |
@@ -111,7 +111,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on How to Enroll link in Read Next section
 
-    @avengersRegressionAARP @regressionAARP
+    @avengersRegressionAARP @regressionAARP @check123
     Examples:
       | Scenario               | site | geoState | pageName                       | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
       | UAT E2E Scenario 6_AMP | AARP | Alabama  | Initial Enrollment Period Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
@@ -164,7 +164,7 @@ Feature:Medicare Education Pages flows for New Pages
       | GeoState | <geoState> |
     Then the user navigates to new Benefits page
     Then the user validates inner links on new Benefits Page
-    Then the user clicks on DCE link on new Medicare Education Page
+#    Then the user clicks on DCE link on new Medicare Education Page
     Then the user clicks on Look up Provider link on new Medicare Education Page
     Then the user clicks on Medicare Annual Enrollment link on new Benefits Page
     Then the user clicks on Medicare Advantage Plans link on new Benefits Page

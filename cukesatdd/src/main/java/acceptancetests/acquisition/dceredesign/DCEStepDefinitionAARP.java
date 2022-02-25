@@ -1269,6 +1269,19 @@ public class DCEStepDefinitionAARP {
         drugDetailsPage.selectPharmacyModalDisplayed();
         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
     }
+    
+    @Then("^the user selects pharmacy on Drug details page$")
+    public void the_user_selects_pharmacy_on_Drug_details_page(DataTable givenAttributes) throws InterruptedException {
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String pharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+        String distance = memberAttributesMap.get("Distance");
+        String pharmacyName = memberAttributesMap.get("PharmacyName");
+        drugDetailsPage.EnterPharmacyDetailsPage(pharmacyZipCode, distance, pharmacyName);
+        
+    }
 
     @Then("^user verify details page change pharmacy modal$")
     public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {

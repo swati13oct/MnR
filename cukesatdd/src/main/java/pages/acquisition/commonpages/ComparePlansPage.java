@@ -1,5 +1,9 @@
 package pages.acquisition.commonpages;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +14,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -442,6 +448,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "(//span[contains(@class,'vpp-drug-plan-name')])[2]")
 	private WebElement planNameOnBaseLinePopup;
 	
+	@FindBy(xpath = "//*[contains(@id,'plan-summary-table')]//tr[(contains(@ng-if,'plansummaryestimatedDrugCost'))]//p[contains(text(),'Drug')]//ancestor::th/following-sibling::td")
+	private WebElement planCompareTabDrugCostValueCell;
 	
 	
 	public ComparePlansPage(WebDriver driver) {
@@ -2162,13 +2170,20 @@ public void saveaPlan(String plans) {
 		String medicalDeductible = memberAttributesMap.get("Medical Deductible");
 		String pcp = memberAttributesMap.get("Primary Care Physician");
 		String Specialist = memberAttributesMap.get("Specialist");
+		String TotalMonthlyPlanPremium = memberAttributesMap.get("Total Monthly Plan Premium");
+		String SpecialistReferral = memberAttributesMap.get("Specialist Referral");
+		String SpecialistDeductible = memberAttributesMap.get("Prescription Deductible");
 		WebElement moreOps = driver.findElement(By.xpath("(//span[text()='"+planName+"'])[1]/following::span[contains(text(),'More Options')][1]"));
 		moreOps.click();
 		baseLineBenefitslink.click();
 		Assert.assertEquals(planNameOnBaseLinePopup.getText().trim(), planName);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Total Monthly Plan Premium')]/following-sibling::td/span")).getText().trim(), TotalMonthlyPlanPremium);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Medical Deductible')]/following-sibling::td/span")).getText().trim(), medicalDeductible);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Primary Care Physician')]/following-sibling::td/span")).getText().trim(), pcp);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist')]/following-sibling::td/span")).getText().trim(), Specialist);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Specialist Referral')]/following-sibling::td")).getText().trim(), SpecialistReferral);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Prescription Deductible')]/following-sibling::td")).getText().trim(), SpecialistDeductible);
+        System.out.println("Validated Baseline Benefit Values on Popup.");
 	}
 	
 	public void validateProvidersCovered() {
@@ -2201,5 +2216,131 @@ public void saveaPlan(String plans) {
 				"View Locations", DoctorCoveredText.getText());
 
 	}
+	
+public boolean verifyAddedDrugPharmacyCompareCost(String planName, String networkType) {
+		
+		System.out.println("Drug cost on plan Compare : " + planCompareTabDrugCostValueCell.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if(planCompareTabDrugCostValueCell.getText().equals("")) {
+			Assertion.assertTrue(true);	
+			System.out.println("Drug cost is coming blank as expected");
+			} else {
+			if (planCompareTabDrugCostValueCell.getText().contains("$")) {
+			Assertion.assertTrue(true);
+			System.out.println("Drug cost contains amount as expected");
 
+		}
+			}
+		
+			
+		}
+		return false;
+}
+
+public ArrayList<String> getDocNameAndLanguage(String colName){
+	String english = "English", spanish = "Spanish", chinese = "Chinese", lang = "", docName = "";
+	ArrayList<String> result=new ArrayList<String>();
+	
+	if(colName.contains("Enrollment")) { lang = english;docName = "Application";	}
+	else if(colName.contains("Summary of Benefits")) { lang = english; docName = "Summary of Benefits";}
+	else if(colName.contains("Evidence of Coverage")) {lang = english;docName = "Evidence of Coverage"; }
+	else if(colName.contains("Benefit Highlights")) {lang = english;docName = "Benefit Highlights";}
+	else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
+	else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
+	else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
+	
+	result.add(0, docName);
+	result.add(1,lang);
+	return result;
+}
+
+public HashMap<Boolean,String> clickAndValidatePDFText_URL(String pdfType) {
+	List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(text(), 'Plan Documents')]/ancestor::div/following-sibling::div//a[contains(text(), '"+pdfType+"')]"));
+	//List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pdfType+"')]"));
+	String documentCode = "",pdfHref ="";
+	boolean validationFlag = true; String validationString = "NA";
+	HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+	String parentHandle = driver.getWindowHandle();
+	
+	if(PDFlink.size()!=0) {
+		if(pdfType.contains("Step Therapy")) {
+			documentCode = "Step Therapy";
+		}else if(pdfType.contains("Prior Auth")) {
+			documentCode = "Prior Authorization";
+		}else if(pdfType.contains("Formulary Additions")){
+			documentCode = "FORMULARY ADDITIONS";
+		}else if(pdfType.contains("Formulary Deletions")){
+			documentCode = "FORMULARY DELETIONS";
+		}else {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				pdfHref = PDFlink.get(0).getAttribute("href");
+				String a = "/";
+				 int posA = pdfHref.lastIndexOf(a);
+			     int adjustedPosA = posA + a.length();
+			     documentCode = pdfHref.substring(adjustedPosA);  
+		}
+		
+		System.out.println("Expected Document code :"+documentCode);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
+		executor.executeScript("arguments[0].click();", PDFlink.get(0));
+		int initialCount = driver.getWindowHandles().size();
+		//PDFlink.click();
+
+		//waitForCountIncrement(initialCount);
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		//String currentHandle = null;
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		//System.out.println("Switched to new window : Passed");
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			System.out.println(TestURL);
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			System.out.println(TestURL);
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			
+		
+			validationString = documentCode;
+
+			if(PDFText.contains(documentCode)){
+				 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
+				 validationFlag= true;
+				// validationString = "PASSED";
+			 }
+			 else{
+				 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
+				 if(PDFText.contains("PDF coming soon"))
+					 validationString = "PDF coming soon";
+				 else if(PDFText.contains("404")||PDFText.contains("Not Found"))
+					 validationString = "404 Not Found";
+				 validationFlag = false;
+			 }
+
+		} catch (MalformedURLException e) {
+			 System.out.println("FAILURE, Exception in Reading PDF");
+		} catch (IOException e) {
+			 System.out.println("FAILURE, Exception in Reading PDF");
+		}
+		driver.close();
+		driver.switchTo().window(parentHandle);
+	}
+	//changing the component codes for these formularies to match with what's in the Doclog files
+	
+	comparedResult.put(validationFlag, validationString);
+	
+	return comparedResult;
+}
 }

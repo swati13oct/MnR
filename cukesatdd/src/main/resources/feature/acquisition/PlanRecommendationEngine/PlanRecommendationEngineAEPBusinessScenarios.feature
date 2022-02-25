@@ -32,12 +32,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear @featureGate
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
       | AARP | OCT-01   |   13673 | NO            | Jefferson | MAPD          | Nursing      | Lookup  | Jennifer    | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Yes,Yes,Yes,Yes               | Lower                | both           | Drug Cost, Doctors |
 
-    @regressionUHCAEP @regressionUHC @nextYear
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
       | UHC  | OCT-15   |   13673 | NO            | Jefferson | MAPD          | Nursing      | Lookup  | Jennifer    | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Yes,Yes,Yes,Yes               | Lower                | both           | Drug Cost, Doctors |
@@ -72,12 +72,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities   |
       | AARP | OCT-15   |   55419 | No            | Hennepin | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Lower                | 1st            | Dental, None |
 
-    @regressionUHCAEP @regressionUHC @nextYear @featureGate
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities   |
       | UHC  | OCT-15   |   55419 | No            | Hennepin | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Lower                | 1st            | Dental, None |
@@ -110,13 +110,13 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear @featureGate
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | doctors    | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | AARP | OCT-15   |   10001 | NO            | New York         | MA            | None         | UHGNetwork | [blank]           | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
       | AARP | DEC-01   |   35004 | NO            | St. Clair County | MA            | Medicaid     | Lookup     | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher               | None           | Dental, Doctors              |
 
-    @regressionUHCAEP @regressionUHC @nextYear 
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors    | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       | UHC  | OCT-15   |   10001 | NO            | New York         | MA            | None             | UHGNetwork | [blank]           | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
@@ -139,12 +139,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | AARP | OCT-15   |   10001 | NO            | New York | PDP           | No             |
 
-    @regressionUHCAEP @regressionUHC @nextYear @featureGate
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | UHC  | DEC-01   |   10001 | NO            | New York | PDP           | No             |
@@ -167,12 +167,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear @featureGate
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
       | AARP | OCT-15   |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO |
 
-    @regressionUHCAEP @regressionUHC @nextYear
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                |
       | UHC  | OCT-15   |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO |
@@ -203,12 +203,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       | AARP | OCT-15   |   35004 | NO            | St. Clair County | MA            | nursing      | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher               |
 
-    @regressionUHCAEP @regressionUHC @nextYear @featureGate
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds     | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       | UHC  | OCT-15   |   35004 | NO            | St. Clair County | MA            | Medicaid,nursing | Lookup  | Simon Harold E MD | NO            | Yes,Yes,Yes,Yes               | Higher               |
@@ -244,12 +244,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARPAEP @regressionAARP @nextYear @featureGate
+    @regressionAARPAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       | AARP | JAN-01   |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
-    @regressionUHCAEP @regressionUHC @nextYear
+    @regressionUHCAEP @nextYear
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       | UHC  | JAN-01   |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
@@ -288,12 +288,12 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validates Sort By breadcrumb after Plan Year Toggle in PRE-Result page
       | Sort PlanYear | <PlanYear> |
 
-    @regressionAARP  @featureGate
+    @regressionAARPAEP
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo | PlanYear |
       | AARP | DEC-01   |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,PDP | current  |
 
-    @regressionUHC
+    @regressionUHCAEP
     Examples: 
       | site | Username | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | sortInfo | PlanYear |
       | UHC  | DEC-01   |   90002 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Vision | MAPD,PDP | current  |

@@ -305,12 +305,13 @@ public class PREBenefitsValidationStepDefinition {
 	// County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
 
 	public String getSessionInfo(String sessionObj) {
-		String preferencePRE = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness membership\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],";
-		String planYear = "2021";
+		String preferencePRE = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],";
+		String planYear = "2022";
 		String pYear = "\"planYear\":" + planYear + ",";
 		String locationObj = "\"location\":";
 		String msObj = "\"medsuppUserInfo\":";
 		String plansObj = "\"plans\":[],";
+		String fewMore = ",\"prevYearPlans\":null,\"plansFilter\":null,\"comparedPlans\":null,\"editResponse\":false";
 		// {\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New
 		// York
 		// County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
@@ -330,8 +331,8 @@ public class PREBenefitsValidationStepDefinition {
 		}
 
 		System.out.println(
-				preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + "}");
-		return preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + "}";
+				preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + fewMore +"}");
+		return preferencePRE + plansObj + pYear + locationObj + locationValues + "," + msObj + medsubValues + fewMore + "}";
 	}
 
 	public void checkpopup() {

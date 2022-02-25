@@ -6,6 +6,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,10 +34,10 @@ public class DCEMobilePage extends UhcDriver {
 
 	// DCE Page Elements
 
-	@FindBy(css = "#adddrugfooter")
+	@FindBy(xpath = "(//*[contains(text(),'Add My Drug')])[2]")
 	private WebElement drugAddBtn;
 
-	@FindBy(css = "input#drugsearch")
+	@FindBy(css = "input#drugsearchmobile")
 	private WebElement drugsearchBox;
 
 	@FindBy(css = "#listPop li")
@@ -56,7 +57,7 @@ public class DCEMobilePage extends UhcDriver {
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> searchList;
 
-	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
+	@FindBy(css="#buildyourdruglist button span[class*='tabButtontext ']")
 	private List<WebElement> drugpageButtons;
 	
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
@@ -106,7 +107,7 @@ public class DCEMobilePage extends UhcDriver {
 	@FindBy(css = "#nextSummary")
 	private WebElement viewCostButton;
 
-	@FindBy(css = "a[class*='ng-star-inserted']:nth-of-type(1)")
+	@FindBy(css = "a[class*='ng-star-inserted']")
 	private List<WebElement> backtoPlansButton;
 
 	@FindBy(css = "button.delete-drug-confirm")
@@ -141,7 +142,7 @@ public class DCEMobilePage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				mobileUtils.mobileLocateElementClick(drugAddBtn);
+				jsClickNew(drugAddBtn);
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -157,11 +158,11 @@ public class DCEMobilePage extends UhcDriver {
     System.out.println("returning to plans...");
 	validate(drugpageButtons.get(0));
 	threadsleep(2000);
-	drugpageButtons.get(0).click();
+	jsClickNew(drugpageButtons.get(0));
 	pageloadcomplete();
 	threadsleep(2000);
 	validate(backtoPlansButton.get(0));
-	mobileUtils.mobileLocateElementClick(backtoPlansButton.get(0));
+	jsClickNew(backtoPlansButton.get(0));
 	pageloadcomplete();
 	threadsleep(2000);
 }
@@ -173,52 +174,50 @@ public class DCEMobilePage extends UhcDriver {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			mobileUtils.mobileLocateElementSendkeys(drugsearchBox, drugName);
-			//hidekeypad(); Implement if needed
-//			if (searchButtonClick) {
-//				mobileUtils.mobileLocateElementClick(drugsearchButton);
-//				validate(modalSelcetedDrug, 30);
-//				threadsleep(2000);
-//				Assertion.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
-//						"Drug name is not Matched :" + drugName);
-//				// Select modal
-//				modalcontinue.click();
-//				threadsleep(2000);
-//			} else {
-				threadsleep(10000);
-				//mobileUtils.mobileLocateElementClick(drugsAutoList.get(0));
-				drugsAutoList.get(0).click();
-//			}
+			sendkeysMobile(drugsearchBox, drugName);
+			if (searchButtonClick) {
+			jsClickNew(drugsearchButton);
+			//Select modal
+			validate(searchList.get(0), 30);
+			threadsleep(2000);
+			for(WebElement elm:searchList) {
+				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
+					jsClickNew(elm.findElement(By.cssSelector("button")));
+					break;
+				}
+			}
+			threadsleep(2000);
+		} else {
+			threadsleep(10000);
+			jsClickNew(drugsAutoList.get(0));
+		}
 
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
 			Select dos = new Select(modalDosageSelect);
-			//Select freq = new Select(modalFrequencySelect);
 
 			if (!dosage.isEmpty())
 				mobileSelectOption(modalDosageSelect, dosage,true);
+			
 			if (!packageName.isEmpty()) {
-				Select pack = new Select(modalPackageSelect);
 				mobileSelectOption(modalPackageSelect, packageName,true);
-				packageName = pack.getFirstSelectedOption().getText().trim();
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
-				mobileactionsendkeys(modalQuantity, count);
-				modalheader.click();
-				threadsleep(2000);
+				sendkeysMobile(modalQuantity, count);
 			}
 			if (threeeMonthfrequency)
-				mobileSelectOption(modalFrequencySelect, "Every 3 Months",true);
+				mobileSelectOption(modalSupplySelect, "Every 3 Months",true);
+
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
 			jsClickNew(addDrugButton);
-			threadsleep(2000);
-//			Not Covered switch generic as it is not DD scope in DCE page
+			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
+			
 	}
 	static ArrayList<String> addedDrugNames = new ArrayList<String>();
 }

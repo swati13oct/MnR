@@ -13,6 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSDriver;
 
 public class LandingAndZipcodeMobilePage extends UhcDriver {
 
@@ -139,6 +141,17 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+		try {
+			if(driver.toString().contains("IOS")) {
+				jsClickNew(zipCode);
+				MobileElement mobileElement = (MobileElement) driver.findElement(By.xpath("//input[contains(@id,'zip-code')]"));
+			//	mobileElement.click();
+				mobileElement.sendKeys(zipcode);
+				jsClickNew(getStartedBtn);
+			}
+		}
+		catch (Exception e) {
+		}
 		// getStartedBtn.click();
 		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
@@ -323,7 +336,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		/// driver.navigate().refresh();
 
 		pageloadcomplete();
-		mobileUtils.mobileLocateElementClick(getStartedBtn);
+		jsClickNew(getStartedBtn);
 		validate(zipCode, 30);
 	}
 

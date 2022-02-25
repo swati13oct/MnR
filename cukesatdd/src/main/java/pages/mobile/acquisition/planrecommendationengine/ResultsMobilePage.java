@@ -5,6 +5,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.UhcDriver;
 
 public class ResultsMobilePage extends UhcDriver {
@@ -61,6 +63,12 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] a")
 	private WebElement MAViewPlansLink;
+	
+	@FindBy(css = "div[class*='list-item-content']")
+	private List<WebElement> drugsListinDCE; 
+	
+	@FindBy(css = "div[class*='overview-main'] h2")
+	private WebElement planZipInfoinVPP;
 
 	@FindBy(css = "div[data-rel='#plan-list-1'] .title small")
 	private WebElement MAViewPlansTab;
@@ -155,7 +163,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(xpath = "//span[@id='viewMorePlans']")
 	private WebElement pagenoLabel;
 	
-	@FindBy(xpath = ".//*[contains(concat(' ',normalize-space(@class),' '),' paginationSection ')]//button[contains(@class,'view-plans-next')]")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 	
 	@FindBy(css = "div[data-rel='#plan-list-4'] span.ng-binding")
@@ -190,6 +198,12 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "input#zipcodemeded-0")
 	private WebElement homePageZiptxt;
+	
+	@FindBy(css = "#ghn_lnk_1>span")
+	private WebElement headerNavigationBarHomeTab;
+	
+	@FindBy(xpath = "//div[contains(@class,'nav-toggle')]")
+	private WebElement menuFromPRE;
 
 	@FindBy(css = "button[class*='uhc-zip-button']")
 	private WebElement homePageFindPlans;
@@ -365,14 +379,14 @@ public class ResultsMobilePage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		boolean isDSNP = true;
 		if (R1.equalsIgnoreCase("MA")) {
-			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+			jsClickNew(MAViewPlansLink);
 			validate(MA1stPlanName, 60);
 			// Assertion.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "MA Invalid Plan Ranking");
 			clickEnrollmobile(MA1stPlanEnroll, needhelptxt);
 		}
 		if (R1.equalsIgnoreCase("MS")) {
-			mobileUtils.mobileLocateElementClick(MSViewPlansLink);
+			jsClickNew(MSViewPlansLink);
 			submitMSform();
 			validate(MS1stPlanName, 60);
 			// Assertion.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
@@ -380,14 +394,14 @@ public class ResultsMobilePage extends UhcDriver {
 			clickEnrollmobile(MS1stPlanEnroll, needhelptxtMS);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink);
 			validate(PDP1stPlanName, 60);
 			// Assertion.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "PDP Invalid Plan Ranking");
 			clickEnrollmobile(PDP1stPlanEnroll, needhelptxt);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
-			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			// Assertion.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "SNP Invalid Plan Ranking");
@@ -408,9 +422,9 @@ public class ResultsMobilePage extends UhcDriver {
 		// Zip value is pre-populated by default
 		mobileactionsendkeys(MSPlanDOB, "01/01/1940");
 		hidekeypad();
-		mobileUtils.mobileLocateElementClick(MSPlanGender);
+		jsClickNew(MSPlanGender);
 		threadsleep(8000);
-		mobileUtils.mobileLocateElementClick(MSPlanGender);
+		jsClickNew(MSPlanGender);
 		Select temp = new Select(MSPlanPartAMonth);
 		mobileSelectOption(MSPlanPartAMonth, "January 1",true);
 		temp = new Select(MSPlanPartAYear);
@@ -422,7 +436,7 @@ public class ResultsMobilePage extends UhcDriver {
 		temp = new Select(MSPlanStartMonth);
 		mobileSelectOption(MSPlanStartMonth, "January 1, 2022",true);
 		mobileUtils.mobileLocateElement(MSViewPlanButton);
-		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
+		jsClickNew(MSViewPlanButton);
 	}
 
 	public void clickEnrollmobile(WebElement enrollButton, WebElement needhelp) {
@@ -482,22 +496,31 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void navigateVPP(HashMap<String, String> inputdata) {
-		validate(homePageZiptxt, 60);
-		mobileactionsendkeys(homePageZiptxt, inputdata.get("Zip Code"));
-		hidekeypad();
-		mobileUtils.mobileLocateElementClick(homePageFindPlans);
-		if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
-			if (selectMultiZip.get(0).getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()))
-				selectMultiZip.get(0).click();
-			// mobileUtils.mobileLocateElementClick(selectMultiZip.get(0));
-			else if (selectMultiZip.get(1).getText().toUpperCase().contains(inputdata.get("County Name").toUpperCase()))
-				selectMultiZip.get(1).click();
-			// mobileUtils.mobileLocateElementClick(selectMultiZip.get(1));
-		}
-		validate(planZipInfo, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen, 60);
-		threadsleep(5000);// Plan loader
-		Assert.assertTrue(planZipInfo.getText().contains(inputdata.get("Zip Code")), "Invalid Zip");
+		validate(menuFromPRE,20);
+		jsClickNew(menuFromPRE);
+		validate(headerNavigationBarHomeTab,20);
+        jsClickNew(headerNavigationBarHomeTab);
+        String zipcode =inputdata.get("Zip Code");
+        pageloadcomplete();
+        waitForPageLoadSafari();
+        validate(homePageZiptxt,60);
+        sendkeysMobile(homePageZiptxt,zipcode);
+        jsClickNew(homePageFindPlans);
+        if (inputdata.get("Is Multi County").equalsIgnoreCase("yes")) {
+            if (selectMultiZip.get(0).getText().toUpperCase().contains(inputdata.get("CountyDropDown").toUpperCase()))
+                selectMultiZip.get(0).click();
+            // jsClickNew(selectMultiZip.get(0));
+            else if (selectMultiZip.get(1).getText().toUpperCase().contains(inputdata.get("CountyDropDown").toUpperCase()))
+                selectMultiZip.get(1).click();
+            // jsClickNew(selectMultiZip.get(1));
+        }
+        validate(planZipInfoinVPP, 60);
+        waitforElementInvisibilityInTime(planLoaderscreen,60);
+        threadsleep(5000);// Plan loader
+        Assert.assertTrue(planZipInfoinVPP.getText().contains(inputdata.get("Zip Code")),"Invalid Zip");       
+        jsClickNew(MAViewPlansLink);
+        pageloadcomplete();
+        waitForPageLoadSafari();
 	}
 
 	static ArrayList<String> werallyResults = new ArrayList<String>();
@@ -508,10 +531,10 @@ public class ResultsMobilePage extends UhcDriver {
 	int count = 1;
 
 	public void addProviderVPP(String name, String multi) {
-		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		jsClickNew(MAViewPlansLink);
 		String curdriverhandle = driver.getWindowHandle();
 		mobileUtils.mobileLocateElement(enterProvidersInfoMA1stPlan);
-		mobileUtils.mobileLocateElementClick(enterProvidersInfoMA1stPlan);
+		jsClickNew(enterProvidersInfoMA1stPlan);
 		if (multi.equalsIgnoreCase("Yes"))
 			count = 3;
 		werallyResults = docmobile.validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", name, count);
@@ -521,7 +544,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public ArrayList<String> getProvidersVPP() {
 		threadsleep(5000);
-		mobileUtils.mobileLocateElementClick(providersInfoMA1stPlan);
+		jsClickNew(providersInfoMA1stPlan);
 		vppProviderResults = new ArrayList<String>();
 		for (WebElement e : providersListMA1stPlan) {
 			vppProviderResults.add(e.getText().trim());
@@ -569,7 +592,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public void navigatePRE() {
 		mobileUtils.mobileLocateElement(startnowButton);
-		mobileUtils.mobileLocateElementClick(startnowButton);
+		jsClickNew(startnowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
 		// driver.navigate().refresh();
@@ -582,7 +605,7 @@ public class ResultsMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
 		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(startnowButton);
-		mobileUtils.mobileLocateElementClick(startnowButton);
+		jsClickNew(startnowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
 	}
@@ -593,7 +616,7 @@ public class ResultsMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
 		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(pdpstartoverButton);
-		mobileUtils.mobileLocateElementClick(pdpstartoverButton);
+		jsClickNew(pdpstartoverButton);
 		modalstartoverButton.click();
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
@@ -602,27 +625,31 @@ public class ResultsMobilePage extends UhcDriver {
 	public void verifyProviderPREVPP() {
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
-		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		jsClickNew(MAViewPlansLink);
 		getProvidersVPP();
 		containsname(DoctorsMobilePage.confirmationProviderResults, vppProviderResults);
 	}
 
 	public ArrayList<String> getDrugsVPP() {
 		threadsleep(5000);
-		validate(drugsInfoMA1stPlan, 60);
-		mobileUtils.mobileLocateElement(drugsInfoMA1stPlan);
-		mobileUtils.mobileLocateElementClick(drugsInfoMA1stPlan);
+		String curID = String.valueOf(Thread.currentThread().getId());
+		int count = drugsListinDCE.size();
 		vppDrugsResults = new ArrayList<String>();
-		for (WebElement e : drugsListMA1stPlan) {
-			vppDrugsResults.add(e.getText().replace("\n", " ").replace("  ", " ").trim());
+		for (int i = count-1; i >= 0; i--){
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase());
 		}
+		Collections.sort(vppDrugsResults);
+		System.out.println("Current Thread ID is - "+curID+" Drugs in DCE flow "+vppDrugsResults);
+		CommonConstants.DCE_Drugs.put(curID, vppDrugsResults);
+		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
 		return vppDrugsResults;
 	}
 
 	public void verifyDrugPREVPP() {
 		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
-		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		jsClickNew(MAViewPlansLink);
 		getDrugsVPP();
 		containsname(vppDrugsResults, DrugMobilePage.addedDrugNames);
 	}
@@ -638,7 +665,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Validating Plans Ranking : ");
 		plansLoader();
 		if (Recom.equalsIgnoreCase("MA")) {
-			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+			jsClickNew(MAViewPlansLink);
 			validate(MA1stPlanName, 60);
 			//mobileUtils.mobileLocateElement(MA1stPlanEnroll);
 			//verifyRankings(MAPlansName, plans);
@@ -647,13 +674,13 @@ public class ResultsMobilePage extends UhcDriver {
 			Assert.assertTrue(false, "MS Plans ranking is not Implemented");
 		}
 		if (Recom.equalsIgnoreCase("PDP")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink);
 			validate(PDP1stPlanName, 60);
 			//mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 			//verifyRankings(PDPPlansName, plans);
 		}
 		if (Recom.equalsIgnoreCase("SNP")) {
-			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			//mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			//verifyRankings(SNPPlansName, plans);
@@ -742,18 +769,18 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Email Plan list from VPP : ");
 		plansLoader();
 		if (plan.equalsIgnoreCase("PDP")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink);
 			mobileUtils.mobileLocateElement(pdpemailList);
-			mobileUtils.mobileLocateElementClick(pdpemailList);
+			jsClickNew(pdpemailList);
 		} else if (plan.equalsIgnoreCase("MA")) {
-			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+			jsClickNew(MAViewPlansLink);
 			mobileUtils.mobileLocateElement(pdpemailList);
-			mobileUtils.mobileLocateElementClick(maemailList);
+			jsClickNew(maemailList);
 
 		} else if (plan.equalsIgnoreCase("SNP")) {
-			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			mobileUtils.mobileLocateElement(pdpemailList);
-			mobileUtils.mobileLocateElementClick(snpemailList);
+			jsClickNew(snpemailList);
 
 		} else {
 			Assert.assertTrue(false, "Print Email is not configured for the given Plan :" + plan);
@@ -826,7 +853,7 @@ public class ResultsMobilePage extends UhcDriver {
 
 	public List<String> getAPIPlansRanking(String rankingJSON) {
 		System.out.println("\n\n======="+planZipInfo.getText()+"===========\n\n");
-		int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[0]);
+		int uiPlanCount = Integer.parseInt(planZipInfo.getText().split(" ")[3]);
 		List<String> rankingOrder = new ArrayList<String>();
 		JSONParser parser = new JSONParser();
 		JSONArray jarray = new JSONArray();
@@ -899,6 +926,12 @@ public class ResultsMobilePage extends UhcDriver {
 			scrollToView(e);
 			threadsleep(2000);
 			vppPlans.add(getplanId(e));
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver; 
+			js.executeScript("window.scrollBy(0,-800)");
+			js.executeScript("window.scrollBy(0,-800)");
+			
+			String s = pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("plan", "");
 			int currentPage = Integer.parseInt(pagenoLabel.getText().trim().toLowerCase().replace(" ", "").split("of")[0].replace("plan", ""));
 			System.out.println("planName in loop count: " +value);
 			if(value==currentPage) {
@@ -932,13 +965,13 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void useraddDrugsVPP(String drugDetails) {
-		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
-		mobileUtils.mobileLocateElement(enterDrugsInfoMA1stPlan);
-		mobileUtils.mobileLocateElementClick(enterDrugsInfoMA1stPlan);
+		jsClickNew(MAViewPlansLink);
+		validate(enterDrugsInfoMA1stPlan);
+		jsClickNew(enterDrugsInfoMA1stPlan);
 		DCEMobilePage dcemobile = new DCEMobilePage(driver);
 		dcemobile.drugsHandlerWithdetails(drugDetails);
-		dcemobile.choosePharmacyandBacktoPlans();
 		getDrugsVPP();
+		dcemobile.choosePharmacyandBacktoPlans();
 	}
 
 	public void checkVPP(boolean isPREVPP) {

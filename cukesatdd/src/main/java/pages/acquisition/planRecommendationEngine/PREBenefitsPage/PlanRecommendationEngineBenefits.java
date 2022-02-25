@@ -66,7 +66,6 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 		} catch (Exception e1) {
 			System.out.println("data");
 		}
-
 	}
 
 	String sheetName = "";
@@ -89,7 +88,7 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 		// Gather sticky header value for give plan name
 
 		String value = formatString(plantiles.get(planIndex)
-				.findElement(By.cssSelector("div.premiumValues p.monthlyPremium strong")).getText());
+				.findElement(By.cssSelector("div.premium-val p.monthlyPremium strong")).getText());
 		preResult.put(formatString("Monthly Premium : "), value);
 
 		if (planName.contains("(PDP)")) {
@@ -97,7 +96,7 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 		}
 
 		value = formatString(plantiles.get(planIndex)
-				.findElement(By.cssSelector("div.premiumValues p[class*='outOfPocket'] strong")).getText());
+				.findElement(By.cssSelector("div.premium-val p[class*='outOfPocket'] strong")).getText());
 		preResult.put(formatString("Out-of-Pocket Maximum : "), value);
 
 		if (zip.contains("88042") && planName.contains("Medicare Supplement Insurance Plan")) {
@@ -168,7 +167,7 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 	public String formatString(String inp) {
 		return inp.toLowerCase().replace("in network", "").replace("out of network", "").replace("in-network", "")
 				.replace("out-of-network", "").replace(":", "").replace("  ", "").replace("\n", "").replace("\",\"", "")
-				.replace("\"", "").replace(",", "").replace("-", "").trim();
+				.replace("\"", "").replace(",", "").replace("-", "").replace(" ", "").trim();
 	}
 
 	public HashMap<Boolean, String> comparePREBenefits(String columnName, String benefitValue,
@@ -195,8 +194,8 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 				}
 			} else if (key.contains(columnName) || columnName.contains(key)) {
 				counter++;
-				benefitValueUI = benefitValueUI.replace("\n", "").replace(" ", "").replaceAll("\\s+", "");
-				benefitValue = benefitValue.replace("\n", "").replace(" ", "").replaceAll("\\s+", "");
+				benefitValueUI = benefitValueUI.replace("\n", "").replace(" ", "").replace("/", "").replaceAll("\\s+", "");
+				benefitValue = benefitValue.replace("\n", "").replace(" ", "").replace("/", "").replaceAll("\\s+", "");
 
 				benefitValue = formatString(benefitValue);
 				benefitValueUI = formatString(benefitValueUI);

@@ -64,7 +64,7 @@ public class DrugMobilePage extends UhcDriver {
 	@FindBy(css = "#errorMessage")
 	private WebElement errorMessage;
 
-	@FindBy(css = ".container div>button[class*='primary button']")
+	@FindBy(xpath="//button[contains(text(),'Continue')]")
 	private WebElement continueBtn;
 
 	@FindBy(css = ".container div[class*='buttonPanel']>button[class*='secondary']")
@@ -170,7 +170,7 @@ public class DrugMobilePage extends UhcDriver {
 	@FindBy(css = "uhc-temp-display p[role='alert']")
 	private WebElement modaldrugsCount;
 
-	@FindBy(css = "uhc-list uhc-list-item")
+	@FindBy(xpath = "//*[contains(@class,'selectDrug')]")
 	private List<WebElement> drugsList;
 
 	// Find drug element and lookup for name
@@ -269,9 +269,9 @@ public class DrugMobilePage extends UhcDriver {
 			}
 		}
 		validateResultsCount();
-		checkRemove(drugslist.length);
-		validateResultsCount();
-		getDrugsdetails();
+//		checkRemove(drugslist.length);
+//		validateResultsCount();
+//		getDrugsdetails();
 	}
 	
 	public static ArrayList<String> drugNames = new ArrayList<String>();
@@ -358,21 +358,22 @@ public class DrugMobilePage extends UhcDriver {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			sendkeysMobile(drugsearchBox, drugName);
-			hidekeypad();
+			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
 				jsClickNew(drugsearchButton);
+				threadsleep(6000);
 				validate(modalSelcetedDrug, 30);
 				threadsleep(2000);
 				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
 						"Drug name is not Matched :" + drugName);
 				// Select modal
+				threadsleep(2000);
 				jsClickNew(modalcontinue);
 				threadsleep(2000);
 			} else {
 				jsClickNew(drugsAutoList.get(0));
 			}
-
+			
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
 			
@@ -385,38 +386,47 @@ public class DrugMobilePage extends UhcDriver {
 				threadsleep(2000);
 			}
 			
+			
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
+			Select slen = new Select(modalSLengthSelect);
 			
-			if (!dosage.isEmpty())
-				mobileSelectOption(modalDosageSelect, dosage,true);
+			if (!dosage.isEmpty()) {
+				if(switchGeneric) {
+					String branName = modalGenericKeep.getText().trim().replace(" (Brand)", "");
+					String genName = modalGenericSwitch.getText().trim().replace(" (Generic)", "").toLowerCase();
+					drugName = dosage.replace(branName, genName);
+					dos.selectByVisibleText(drugName);
+					threadsleep(2000);}
+				else {
+					dos.selectByVisibleText(dosage);
+					threadsleep(2000);
+				}
+			}
+				
 			if (!packageName.isEmpty()) {
 				Select pack = new Select(modalPackageSelect);
-				mobileSelectOption(modalPackageSelect, packageName,true);
-				packageName = pack.getFirstSelectedOption().getText().trim();
+				pack.selectByVisibleText(packageName);
 			}
 			if (!count.isEmpty()) {
 				modalQuantity.clear();
-				sendkeysMobile(modalQuantity, count);
-				jsClickNew(modalheader);
-				threadsleep(2000);
+				modalQuantity.sendKeys(count);
 			}
 			
-			
-			mobileSelectOption(modalFrequencySelect, frequency,true);
+			freq.selectByVisibleText(frequency);
 			
 			if (threeeMonthfrequency)
-				mobileSelectOption(modalSLengthSelect, "Every 3 Months",true);
-			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
-					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
-			threadsleep(2000);
-			count = modalQuantity.getAttribute("ng-reflect-model").trim();
-			String frequence = freq.getFirstSelectedOption().getText().trim();
-
-			jsClickNew(modalcontinue);
+				slen.selectByVisibleText("Every 3 Months");
 			
-			validateAddedDrugname(drugName, dosage, count, frequence);
-		} catch (Exception e) {
+			
+
+			threadsleep(4000);
+			jsClickNew(modalcontinue);
+
+
+			validateAddedDrugname(drugName);
+		} 
+		catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
 	}
@@ -469,7 +479,7 @@ public class DrugMobilePage extends UhcDriver {
 	public void removedrug() {
 		// By default removing 2nd drug
 		int beforeRemove = drugsList.size();
-		WebElement remove = drugsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
+		WebElement remove = driver.findElement(By.xpath("(//*[contains(@class,'selectDrug')]//button[text()='Remove '])[1]"));
 		//jsClickNew(remove);
 		mobileUtils.mobileLocateElement(remove);
 		jsClickNew(remove);
