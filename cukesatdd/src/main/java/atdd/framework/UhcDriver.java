@@ -1382,11 +1382,12 @@ public abstract class UhcDriver {
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
-
-			//((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Use Photo']")).click();
+			Thread.sleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+			Thread.sleep(500);
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
-				Thread.sleep(500);
+			Thread.sleep(500);
 	       /*getFiletoUpload("card");
 	        if(uploadBtn.isDisplayed()) {
 	        	uploadSuccess = true;

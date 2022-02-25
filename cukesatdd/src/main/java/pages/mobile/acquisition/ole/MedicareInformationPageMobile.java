@@ -1507,7 +1507,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			validateNew(ConfirmMedicareNumberText, 6);
 			String confirmMedicareNumberText = ConfirmMedicareNumberText.getText();
 			System.out.println("User click on Confirm Photo Page and navigate to ConfirmMedicareNumberText:" + confirmMedicareNumberText);
-			*/
+
 			validateNew(captureMedicareCancelBtn);
 
 			validateNew(captureMedicareretakePhotoBtn);
@@ -1518,7 +1518,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			Assert.assertTrue(validateNew(FieldValidation_EditMedicareNumber), "Validate the field Error message is displayed");
 			sendKeysByCharacter(EditMedicareNumber, MedicareNumber);
 			jsClickNew(ConfirmMedicareNumberButton);
-
+*/
 		}
 		return flag;
 	}
