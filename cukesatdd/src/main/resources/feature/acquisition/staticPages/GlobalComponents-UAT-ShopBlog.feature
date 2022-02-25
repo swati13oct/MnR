@@ -511,7 +511,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates Medicare Education Navigation link
-    Then the user validates whether chat icon is visible
+#    Then the user validates whether chat icon is visible
 
     @avengersRegressionAARP
     Examples:
@@ -1077,7 +1077,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/how-to-evaluate-medicare-plan-costs.html                                                                 | Article Page 78   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home.html                          | Article Page 79   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/how-avoid-paying-more-prescription-drug-coverage.html                                                    | Article Page 80   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period.html                                  | Article Page 81   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | UHC  | Alabama  | medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period.html                                  | Article Page 81   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/how-to-appeal-a-medicare-decision.html                                                                   | Article Page 82   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/replacing-your-medicare-card-just-got-a-whole-lot-easier.html                                            | Article Page 83   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me.html                                             | Article Page 84   | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -1113,7 +1113,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/medicare-memo-what-are-advance-directives.html                                                           | Article Page  114 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/does-medicare-cover-a-colonoscopy.html                                                                   | Article Page  115 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/4-types-of-medicare-savings-programs-and-what-they-cover.html                                            | Article Page  116 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      | UHC  | Alabama  | medicare-articles/what-is-the-medicare-advantage-open-enrollment-period.html                                               | Article Page  117 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
+#      | UHC  | Alabama  | medicare-articles/what-is-the-medicare-advantage-open-enrollment-period.html                                               | Article Page  117 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/parte-b-de-medicare-conceptos-basicos.html                                                               | Article Page  118 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/colon-cancer-screening-tests-without-the-ouch.html                                                       | Article Page  119 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/does-medicare-cover-diabetes-prevention-program.html                                                     | Article Page  120 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
