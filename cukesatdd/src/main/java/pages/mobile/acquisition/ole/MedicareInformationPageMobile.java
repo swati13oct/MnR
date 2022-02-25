@@ -1487,7 +1487,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		String uploadBtn = MedicareDetailsMap.get("upload Btn");
 
-		boolean flag=false;
+		boolean flag=true;
 		validateNew(MedicareScanImage);
 		if(MedicareScanImage.isDisplayed()) {
 			jsClickNew(MedicareScanImage);
