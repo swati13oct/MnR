@@ -1494,6 +1494,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String MedicareTitle = CaptureMedicareTitleText.getText();
 			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
 			validateNew(SelectFromlibrary, 5);
+			jsClickNew(SelectFromlibrary);
 			//-------Write Code for Take Photo or choose LLibrary----------
 			mobileUpload(uploadBtn);
 			//-------Write Code for Take Photo or choose LLibrary----------
