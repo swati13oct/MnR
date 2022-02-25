@@ -1383,7 +1383,9 @@ public abstract class UhcDriver {
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 
-			((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Use Photo']")).click();
+			//((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Use Photo']")).click();
+			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+
 				Thread.sleep(500);
 	       /*getFiletoUpload("card");
 	        if(uploadBtn.isDisplayed()) {
