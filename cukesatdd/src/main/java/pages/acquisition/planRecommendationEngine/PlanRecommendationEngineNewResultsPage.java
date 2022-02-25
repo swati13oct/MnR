@@ -1135,7 +1135,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	}
 	
 	public void findPDF(String uniqueName) {
-		System.out.println("Finding a Plan... " + uniqueName);
+		System.out.println("Finding a PDF... " + uniqueName);
 		if(uniqueName.contains("wrap")) 
 			pdfLink("AARP Medicare","WR1000");
 		if(uniqueName.contains("cms guide")) 
@@ -1161,15 +1161,21 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 		for(int p=0; p<ImpResSectionPDFLinks.size(); p++) {
-			Assert.assertTrue(ImpResSectionPDFLinks.get(p).getText().contains(pdfname), "PDF Link is not correct one");
-			pdfindex = p;
-			break;
+			try {
+				ImpResSectionPDFLinks.get(p).getText().contains(pdfname);
+				pdfindex = p;
+				break;
+			}
+			catch (Exception e) {
+				System.out.println("Unable to find PDF with : " + p);
+			}
 		}
 		windowSwape(pdfindex,curWindow,pdflink);
 		
 	}
 	
 	public void windowSwape(int p, String curWindow, String pdf ) {
+		threadsleep(2000);
 		ImpResSectionPDFLinks.get(p).click();
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
@@ -1179,7 +1185,8 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 				driver.switchTo().window(window);
 				Assert.assertTrue(driver.getCurrentUrl().contains(pdf), "PDF doc is not correct one");
 				driver.close();
-			}
+			}else
+				System.out.println("It is Primary Window");
 			threadsleep(5000);
 			driver.switchTo().window(curWindow);
 		}
@@ -1188,6 +1195,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void ImportantResource() {
 		System.out.println("Validate ImportantResource Not Present");
 		Assert.assertTrue(isElementPresent(ImpResSection), "ImportantResource is not displaying in Result Page");
+		scrollToView(ImpResSection);
 		threadsleep(3000);
 		Assert.assertTrue(ImpResSectionPDFLinks.size()>0, "ImportantResource is not having PDF Links in Result Page");
 	}
