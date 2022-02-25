@@ -371,7 +371,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@id='captureMedicareNumTitle']//.)[2]")
 	private WebElement CaptureMedicareTitleText;
-	@FindBy(xpath = "//*[@id='confirmPhotoTitle']//.")
+	@FindBy(xpath = "//*[contains(text(),'Confirm Photo')]")
 	private WebElement confirmPhotoTitleText;
 
 	@FindBy(xpath = "//*[@id='usePhotoBtn']")
@@ -1494,11 +1494,12 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String MedicareTitle = CaptureMedicareTitleText.getText();
 			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
 			validateNew(SelectFromlibrary, 5);
-			jsClickNew(SelectFromlibrary);
+			iOSClick(SelectFromlibrary);
+
 			//-------Write Code for Take Photo or choose LLibrary----------
 			mobileUpload(uploadBtn);
 			//-------Write Code for Take Photo or choose LLibrary----------
-			validateNew(confirmPhotoTitleText, 10);
+			/*validateNew(confirmPhotoTitleText, 10);
 			String ConfirmPhotoTitleText = confirmPhotoTitleText.getText();
 			System.out.println("User Selected from Library and Navigated to Confirm Photo Page:" + ConfirmPhotoTitleText);
 			validateNew(UsePhoto, 5);
@@ -1506,7 +1507,9 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			validateNew(ConfirmMedicareNumberText, 6);
 			String confirmMedicareNumberText = ConfirmMedicareNumberText.getText();
 			System.out.println("User click on Confirm Photo Page and navigate to ConfirmMedicareNumberText:" + confirmMedicareNumberText);
+			*/
 			validateNew(captureMedicareCancelBtn);
+
 			validateNew(captureMedicareretakePhotoBtn);
 			System.out.println("User will click on Edit Button now");
 			jsClickNew(captureMedicareEditBtn);
