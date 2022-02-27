@@ -1490,6 +1490,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		boolean flag=true;
 		validateNew(MedicareScanImage);
 		if(MedicareScanImage.isDisplayed()) {
+
 			jsClickNew(MedicareScanImage);
 			String MedicareTitle = CaptureMedicareTitleText.getText();
 			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
