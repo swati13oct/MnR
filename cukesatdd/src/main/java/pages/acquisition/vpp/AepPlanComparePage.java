@@ -426,9 +426,10 @@ public class AepPlanComparePage extends UhcDriver {
 		try {
 			if (sheetName.contains("SNP") || sheetName.contains("MAPD")) {
 
-				Thread.sleep(5000);
+				Thread.sleep(15000);
 				if (sheetName.contains("SNP")) {
 					driver.navigate().refresh();
+					
 					WebDriverWait wait = new WebDriverWait(driver, 30);
 					wait.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']")));
@@ -563,7 +564,7 @@ public class AepPlanComparePage extends UhcDriver {
 			System.out.println("SNP toggle is not working.");
 		}
 		if (sheetName.contains("PDP")) {
-			Thread.sleep(5000);
+			Thread.sleep(15000);
 			try {
 				List<WebElement> PDP = driver.findElements(By.xpath("//h1[@ng-if= \"planSelectedType == 'PDP'\"]"));
 
@@ -703,18 +704,7 @@ public class AepPlanComparePage extends UhcDriver {
 			if ((benefitValue.contains("NA") || benefitValue.contains("N/A"))) {
 				counter++;
 
-				if (key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { // since we have
-																										// two types of
-																										// plan where we
-																										// can see
-																										// Prescription
-																										// Drugs, Tier 1
-																										// or
-																										// Prescription
-																										// Drugs, we
-																										// have to add
-																										// this
-																										// condition
+				if (key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { 
 					flag = false;
 					tmpUIString2 = tmpUIString1;
 					break;
