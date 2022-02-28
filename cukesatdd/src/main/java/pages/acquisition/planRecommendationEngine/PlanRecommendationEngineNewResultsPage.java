@@ -1126,12 +1126,16 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(3000);
 		System.out.println("Validating PDF document Info...");
 		String resName = "";
-		String[] resDetails = ImpRes.split(",");
-		for (int i = 0; i < resDetails.length; i++) {
-			resName = resDetails[i].toLowerCase();
-			findPDF(resName);
+		if(ImpRes.isEmpty())
+			System.out.println("Resources is Empty ");
+		else
+		{
+			String[] resDetails = ImpRes.split(",");
+			for (int i = 0; i < resDetails.length; i++) {
+				resName = resDetails[i].toLowerCase();
+				findPDF(resName);
+			}
 		}
-		
 	}
 	
 	public void findPDF(String uniqueName) {
