@@ -478,6 +478,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			Assert.assertTrue(!driver.getCurrentUrl().contains("Pharmacy"), "PDF opened on iOS successfully..");
 
 			driver.navigate().back();
+			driver.navigate().back();
 
 //			String winHandleBefore = driver.getWindowHandle();
 //			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -811,6 +812,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
 		// learnMoreElement.click();
 		jsClickNew(learnMoreElement);
+		if(driver.toString().contains("IOS"))
+			sleepBySec(60);
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
 		ArrayList<String> newTb = new ArrayList<String>(driver.getWindowHandles());
@@ -920,6 +923,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	/** Changing of pharmacyType filter */
 	public void validatePlanTypeFilter(String pharmacyType, String language) {
 		// CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		try {
+			if(driver.toString().contains("IOS")) {
+				searchbtn.click();
+				sleepBySec(60);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		String totalLine = PharmacyFoundCount.getText().trim();
 		String totalString = totalLine.contains(" ") ? totalLine.split(" ")[0] : totalLine;
 		int totalBefore = Integer.parseInt(totalString);
