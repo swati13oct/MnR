@@ -1487,7 +1487,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
 		String uploadBtn = MedicareDetailsMap.get("upload Btn");
 
-		boolean flag=true;
+		//boolean flag=true;
 		validateNew(MedicareScanImage);
 		if(MedicareScanImage.isDisplayed()) {
 
@@ -1521,7 +1521,20 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			jsClickNew(ConfirmMedicareNumberButton);
 */
 		}
-		return flag;
+		if (SSNflag.contains("true")) {
+			String SSNnumber = MedicareDetailsMap.get("SSN Number");
+			// sendkeysMobileMobileNew(SSNField, SSNnumber);
+			sendKeysByCharacter(SSNField, SSNnumber);
+
+		}
+		System.out.println("All Medicare Details are entered");
+		scrollToView(NextBtn);
+		if (NextBtn.isEnabled()) {
+			System.out.println("Next Button is enabled to navigate to Next Page");
+			return true;
+		} else
+			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
+		return false;
 	}
 
 	public boolean MedicareScanImage_oopsErrorMessage(Map<String, String> MedicareDetailsMap) throws InterruptedException {
