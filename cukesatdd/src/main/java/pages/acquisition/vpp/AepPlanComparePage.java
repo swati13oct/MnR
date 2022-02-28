@@ -16,6 +16,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
@@ -39,6 +41,11 @@ public class AepPlanComparePage extends UhcDriver {
     private List<WebElement> listOfCmpPlansColumns;
 
     int retryCnt = 1;
+    String sheetName = "";
+	int rowIndex;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-detail-table')]")
+	private WebElement lisPlanTable;
 
 
     public AepPlanComparePage(WebDriver driver) {
@@ -374,4 +381,400 @@ public class AepPlanComparePage extends UhcDriver {
         Map<String, String> map = new TreeMap<String, String>(benefitsDetailMap);
         return map;
     }
-}
+    
+    public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
+		this.sheetName = sheetName;
+		this.rowIndex = rowIndex;
+
+        HashMap<String, String> result=new HashMap<String, String>();
+        int minBenefitListCnt = 5;
+
+        if(planName.contains("(PDP)"))
+		{
+			minBenefitListCnt = 2;
+		}
+
+        for(int i=0;i<5;i++)
+        {
+            //checkForMultiCountyPopup(countyName);
+           // selectYearOption(planYear);
+            result = collectInfoVppPlanCompareBaselinePg(planName, sheetName);
+            int benefitUICnt = result.size();
+            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
+            if(benefitUICnt < minBenefitListCnt )
+            {
+                driver.navigate().refresh();
+                System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Page Refreshed");
+                continue;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        return result;
+    }
+    
+	public HashMap<String, String> collectInfoVppPlanCompareBaselinePg(String planName, String sheetName)
+			throws InterruptedException {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		System.out.println(sheetName + "_" + rowIndex
+				+ " - Proceed to collect the plan benefits info on vpp Compare baseline page");
+
+		HashMap<String, String> result = new HashMap<String, String>();
+		try {
+			if (sheetName.contains("SNP") || sheetName.contains("MAPD")) {
+
+				Thread.sleep(5000);
+				if (sheetName.contains("SNP")) {
+					driver.navigate().refresh();
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					wait.until(ExpectedConditions.visibilityOfElementLocated(
+							By.xpath("//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']")));
+					if (driver
+							.findElements(By.xpath(
+									"//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']"))
+							.size() != 0) {
+						WebElement SNPToggle = driver.findElement(
+								By.xpath("//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']"));
+						SNPToggle.click();
+					}
+				}
+
+				List<WebElement> PlanNames = driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]"));
+				Thread.sleep(5000);
+				int totalPlans = PlanNames.size();
+				String planNameRunTime = "";
+				for (int i = 0; i < totalPlans; i++) {
+					planNameRunTime = PlanNames.get(i).getText();
+					if (driver.findElement(By.xpath(
+							"//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "')) ]"))
+							.isDisplayed() == false) {
+						for (int j = 0; j <= totalPlans - 3; j++) {
+							driver.findElement(By.xpath(
+									("//button[@dtmname = 'Plan Compare:View More Plans' and contains(@class,'leftScrollBtnStyle') and (contains(@ng-class, 'isEnrolledDataNotAvailable'))]")))
+									.click();
+							if (driver.findElement(
+									By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+											+ planName + "')) ]"))
+									.isDisplayed() == true) {
+								planNameRunTime = planName;
+								break;
+							}
+						}
+
+					}
+				}
+				totalPlans = PlanNames.size();
+				for (int k = 0; k < totalPlans; k++) {
+					planNameRunTime = PlanNames.get(k).getText();
+					if (planNameRunTime.equalsIgnoreCase(planName)) {
+						List<WebElement> MoreOptions = driver
+								.findElements(By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='"
+										+ planName + "']//ancestor::div//*[contains(text() , 'More Options')]"));
+						MoreOptions.get(k).click();
+						WebElement BaseineBenefit = driver.findElement(
+								By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='" + planName
+										+ "']/ancestor::div//*[@id = 'moreOptionsId']//span[contains(text() , 'Baseline Benefits')]"));
+						BaseineBenefit.click();
+						// String planNameRunTime =
+						// driver.findElement(By.xpath("//*[@id='baseline-benefits-popup']//span[contains(@class,
+						// 'plan-name')]")).getText();
+						System.out.println("Plan Name on Baseline Benefits : " + planNameRunTime);
+						break;
+					}
+				}
+				String rowXpath = "//*[@id='baseline-benefits-popup']/div/table/tbody/tr[contains(@ng-if, 'baseLinePlanType')]";
+				List<WebElement> listOfRowsPerTable = driver.findElements(By.xpath(rowXpath));
+				String key = "";
+				String value = "";
+				String MonthlyPremium = driver
+						.findElement(By.xpath(("//*[@id='baseline-benefits-popup']/div/table/tbody/tr/td"))).getText();
+				System.out.println(MonthlyPremium);
+				key = MonthlyPremium;
+				String MonthlyPremiumValue = driver
+						.findElement(By.xpath(("//*[@id='baseline-benefits-popup']/div/table/tbody/tr/td[2]/span")))
+						.getText();
+				System.out.println(MonthlyPremiumValue);
+				value = MonthlyPremiumValue;
+				result.put(key, value);
+
+				for (int rowIndex = 1; rowIndex <= 3; rowIndex++) { // note: loop through each row
+					String cellsXpath = "", benefitValueXpath = "";
+					String rowText = "", benefitValueText = "";
+
+					cellsXpath = rowXpath + "[" + rowIndex + "]" + "/td";
+
+					benefitValueXpath = rowXpath + "[" + rowIndex + "]" + "/td/span";// xpath for the benefit value for
+																						// the cell
+
+					// the below code gets the benefit name from the table before the : symbol
+					WebElement e = driver.findElement(By.xpath(cellsXpath));
+					rowText = e.getText();
+					System.out.println(rowText);
+
+					key = rowText;
+
+					// the below code gets the benefit value from the table after the : symbol
+					WebElement j = driver.findElement(By.xpath(benefitValueXpath));
+
+					benefitValueText = j.getText();
+					System.out.println(benefitValueText);
+					value = benefitValueText;
+
+					result.put(key, value);
+				}
+				String SpecialistReferral = driver
+						.findElement(By.xpath("//*[@id='baseline-benefits-popup']/div/table/tbody/tr[5]/td")).getText();
+				key = SpecialistReferral;
+				String SpecialistReferralValue = driver
+						.findElement(By.xpath("//*[@id='baseline-benefits-popup']/div/table/tbody/tr[5]/td[2]"))
+						.getText();
+				value = SpecialistReferralValue;
+				result.put(key, value);
+
+				if (driver.findElements(By.xpath("//*[@id='baseline-benefits-popup']/div/table/tbody/tr[6]/td"))
+						.size() != 0) {
+					String Prescription = driver
+							.findElement(By.xpath("//*[@id='baseline-benefits-popup']/div/table/tbody/tr[6]/td"))
+							.getText();
+					key = Prescription;
+					String PrescriptionValue = driver
+							.findElement(
+									By.xpath("//*[@id='baseline-benefits-popup']/div/table/tbody/tr[6]/td[2]/span"))
+							.getText();
+					value = PrescriptionValue;
+					result.put(key, value);
+				}
+				WebElement Close = driver.findElement(By.xpath(("//*[@ng-click='closeBaseLinePopup()']/div")));
+				Close.click();
+
+				// commenting the below lines of coe to reduce the log on Jenkins job
+
+				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+				System.out.println(sheetName + "_" + rowIndex
+						+ " - Finished to collect the plan benefits info on vpp summary page - Benefits Map count - "
+						+ result.size());
+
+			}
+		} catch (Exception e) {
+			System.out.println("SNP toggle is not working.");
+		}
+		if (sheetName.contains("PDP")) {
+			Thread.sleep(5000);
+			try {
+				List<WebElement> PDP = driver.findElements(By.xpath("//h1[@ng-if= \"planSelectedType == 'PDP'\"]"));
+
+				if (PDP.size() == 0) {
+
+					if (driver
+							.findElement(By.xpath(
+									"//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewallplansbtn']"))
+							.isDisplayed() == true) {
+						driver.navigate().refresh();
+						WebDriverWait wait = new WebDriverWait(driver, 30);
+						wait.until(ExpectedConditions.visibilityOfElementLocated(By
+								.xpath("//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewallplansbtn']")));
+						driver.findElement(
+								By.xpath("//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewallplansbtn']"))
+								.click();
+					}
+				}
+				List<WebElement> PlanNames = driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]"));
+				Thread.sleep(5000);
+				int totalPlans = PlanNames.size();
+				String planNameRunTime = "";
+				for (int i = 0; i < totalPlans; i++) {
+					planNameRunTime = PlanNames.get(i).getText();
+					if (driver.findElement(By.xpath(
+							"//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "')) ]"))
+							.isDisplayed() == false) {
+						for (int j = 0; j <= totalPlans - 3; j++) {
+							driver.findElement(By.xpath(
+									("//button[@dtmname = 'Plan Compare:View More Plans' and contains(@class,'leftScrollBtnStyle') and (contains(@ng-class, 'isEnrolledDataNotAvailable'))]")))
+									.click();
+							if (driver.findElement(
+									By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+											+ planName + "')) ]"))
+									.isDisplayed() == true) {
+								planNameRunTime = planName;
+								break;
+							}
+						}
+
+					}
+				}
+				totalPlans = PlanNames.size();
+				for (int k = 0; k < totalPlans; k++) {
+					planNameRunTime = PlanNames.get(k).getText();
+					if (planNameRunTime.equalsIgnoreCase(planName)) {
+						List<WebElement> MoreOptions = driver
+								.findElements(By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='"
+										+ planName + "']//ancestor::div//*[contains(text() , 'More Options')]"));
+						MoreOptions.get(k).click();
+						WebElement BaseineBenefit = driver.findElement(
+								By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='" + planName
+										+ "']/ancestor::div//*[@id = 'moreOptionsId']//span[contains(text() , 'Baseline Benefits')]"));
+						BaseineBenefit.click();
+						// String planNameRunTime =
+						// driver.findElement(By.xpath("//*[@id='baseline-benefits-popup']//span[contains(@class,
+						// 'plan-name')]")).getText();
+						System.out.println("Plan Name on Baseline Benefits : " + planNameRunTime);
+						break;
+					}
+				}
+				String rowXpath = "//*[@id='baseline-benefits-popup']/div/table/tbody/tr[contains(@ng-if, 'baseLinePlanType')]";
+				List<WebElement> listOfRowsPerTable = driver.findElements(By.xpath(rowXpath));
+				String key = "";
+				String value = "";
+				String MonthlyPremium = driver
+						.findElement(By.xpath(("//*[@id='baseline-benefits-popup']/div/table/tbody/tr/td"))).getText();
+				System.out.println(MonthlyPremium);
+				key = MonthlyPremium;
+				String MonthlyPremiumValue = driver
+						.findElement(By.xpath(("//*[@id='baseline-benefits-popup']/div/table/tbody/tr/td[2]/span")))
+						.getText();
+				System.out.println(MonthlyPremiumValue);
+				value = MonthlyPremiumValue;
+				result.put(key, value);
+
+				for (int rowIndex = 1; rowIndex < 2; rowIndex++) { // note: loop through each row
+					String cellsXpath = "", benefitValueXpath = "";
+					String rowText = "", benefitValueText = "";
+
+					cellsXpath = rowXpath + "[" + rowIndex + "]" + "/td";
+
+					benefitValueXpath = rowXpath + "[" + rowIndex + "]" + "/td/span";// xpath for the benefit value for
+																						// the cell
+
+					// the below code gets the benefit name from the table before the : symbol
+					WebElement e = driver.findElement(By.xpath(cellsXpath));
+					rowText = e.getText();
+					System.out.println(rowText);
+
+					key = rowText;
+
+					// the below code gets the benefit value from the table after the : symbol
+					WebElement j = driver.findElement(By.xpath(benefitValueXpath));
+
+					benefitValueText = j.getText();
+					System.out.println(benefitValueText);
+					value = benefitValueText;
+
+					result.put(key, value);
+				}
+
+				WebElement Close = driver.findElement(By.xpath(("//*[@ng-click='closeBaseLinePopup()']/div")));
+				Close.click();
+			} catch (Exception e) {
+				System.out.println("PDP Plan is not getting displayed");
+			}
+		}
+		for (String keyValue : result.keySet()) {
+			System.out.println("Key : " + keyValue + " Value: " + result.get(keyValue));
+			System.out.println(
+					"_________________________________________________________________________________________________");
+		}
+		return result;
+	}
+
+	public HashMap<Boolean, String> compareBaselineBenefits(String columnName, String benefitValue,
+			HashMap<String, String> benefitsMap) {
+		boolean flag = true;
+		int counter = 0;
+		String tmpUIString1 = "", tmpUIString2 = "", benefitValueUI = "", headerPremiumString = "";
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+
+		benefitValue = benefitValue.replaceAll("\\s+", "");
+
+		for (String key : benefitsMap.keySet()) {
+			benefitValueUI = benefitsMap.get(key).replaceAll("\\s+", "");
+
+			tmpUIString1 = benefitValueUI;
+			key = key.toLowerCase().trim();
+			// key = key.replace(",", "");
+			columnName = columnName.toLowerCase().trim();
+			if (key.contains("%"))
+				key = key.replaceAll("\\s+", "");
+			if (columnName.contains("%"))
+				columnName = columnName.replaceAll("\\s+", "");
+			if ((benefitValue.contains("NA") || benefitValue.contains("N/A"))) {
+				counter++;
+
+				if (key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { // since we have
+																										// two types of
+																										// plan where we
+																										// can see
+																										// Prescription
+																										// Drugs, Tier 1
+																										// or
+																										// Prescription
+																										// Drugs, we
+																										// have to add
+																										// this
+																										// condition
+					flag = false;
+					tmpUIString2 = tmpUIString1;
+					break;
+				} else if (key.equalsIgnoreCase(columnName)) {
+					flag = false;
+					tmpUIString2 = tmpUIString1;
+					break;
+				}
+
+			} else if (columnName.equalsIgnoreCase("prescription drugs")) {
+				if (key.equalsIgnoreCase(columnName)) {
+					counter++;
+					if (benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;
+						break;
+					} else {
+						flag = false;
+						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 "
+								+ columnName + " Excel: " + headerPremiumString + " | UI: " + benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+				}
+
+			} else if (key.contains(columnName)) {
+
+				counter++;
+				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
+				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+
+			} else if (columnName.contains(key)) {
+				counter++;
+				benefitValueUI = benefitValueUI.replaceAll("\\s+", "");
+				benefitValue = benefitValue.replaceAll("\\s+", "");
+				if (benefitValueUI.equalsIgnoreCase(benefitValue)) {
+					flag = true;
+					break;
+				} else {
+					flag = false;
+					System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:4 " + columnName
+							+ " Excel: " + benefitValue + " | UI: " + benefitValueUI);
+					tmpUIString2 = tmpUIString1;
+					break;
+				}
+
+			}
+		}
+
+		if (counter == 0) {
+			flag = false;
+			System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 " + columnName
+					+ " Excel: " + benefitValue + " | UI: BENEFIT NOT FOUND");
+			tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+		}
+
+		comparedResult.put(flag, tmpUIString2);
+		return comparedResult;
+
+	}
+
+	}
+	
+
