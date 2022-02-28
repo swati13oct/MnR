@@ -292,7 +292,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 				
-					WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
+					WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 					jsClickNew(stateLable);
 
 				}
