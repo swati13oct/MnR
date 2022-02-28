@@ -1751,7 +1751,7 @@ public class OLEStepDefinitionMobile {
 		// issue.
 		// An incident is logged with the external Rally team. Remove this condition
 		// once fixed.
-				&& !MRScenario.environment.contains("mnr-acq-ci")) {
+				&& !MRScenario.environment.contains("mnr-acq-ci") &&!MRScenario.mobileDeviceOSName.contains("IOS") && !MRScenario.mobileDeviceOSName.contains("Android")) {
 			System.out.println("Validating Provider Look Up Provider for MA, MAPD, DSNP non-PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_Lookup(planType);
 			if (Validation_Status) {
