@@ -1350,19 +1350,19 @@ public abstract class UhcDriver {
 
 
 	//public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
-	public boolean mobileUpload(String uploadBtn) throws InterruptedException {
-		boolean uploadSuccess = false;
+	public boolean  mobileUpload(String uploadBtn) throws InterruptedException {
+		boolean uploadSuccess = true;
 
 		//------------iOS Code-------------
 		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
-			String curHandle = ((IOSDriver) driver).getContext();
+			String curHandle = ((AppiumDriver) driver).getContext();
 			System.out.println("curHandle - " + curHandle);
-			System.out.println(((IOSDriver) driver).getContextHandles());
+			System.out.println(((AppiumDriver) driver).getContextHandles());
 
-			Set<String> contextNames = ((IOSDriver) driver).getContextHandles();
+			Set<String> contextNames = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNames) {
 				if (strContextName.contains("NATIVE_APP")) {
-					((IOSDriver) driver).context("NATIVE_APP");
+					((AppiumDriver) driver).context("NATIVE_APP");
 					break;
 				}
 			}
@@ -1374,18 +1374,18 @@ public abstract class UhcDriver {
 			//TO-DO:Replace with Id of Browse button instead of done
 
 
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
 			Thread.sleep(500);
-			((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
+			((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
 			Thread.sleep(500);
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 			Thread.sleep(500);
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
 			Thread.sleep(500);
-			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
 			Thread.sleep(500);
 	       /*getFiletoUpload("card");
@@ -1396,14 +1396,18 @@ public abstract class UhcDriver {
 	        Thread.sleep(500);
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
-			Set<String> contextNames1 = ((IOSDriver) driver).getContextHandles();
+			Set<String> contextNames1 = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNames1) {
-				if (strContextName.contains("SAFARI")) {
-					((IOSDriver) driver).context("SAFARI");
+				if (strContextName.contains("WEBVIEW_1")) {
+					System.out.println("Web view:");
+					((AppiumDriver) driver).context("WEBVIEW_1");
 					break;
 				}
+				System.out.println("Web view of current window:" +strContextName);
 			}
+
 		}
+
 		else {//------------iOS Code-------------
 			//-------Android Code-----------------
 

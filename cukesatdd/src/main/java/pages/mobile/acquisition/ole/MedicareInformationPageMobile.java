@@ -3,25 +3,22 @@
  */
 package pages.mobile.acquisition.ole;
 
+import io.appium.java_client.TouchAction;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.UhcDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.testng.Assert;
-import org.apache.poi.xslf.model.geom.IfElseExpression;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author sdwaraka
@@ -1521,6 +1518,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			jsClickNew(ConfirmMedicareNumberButton);
 */
 		}
+		
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
 			// sendkeysMobileMobileNew(SSNField, SSNnumber);
@@ -1528,7 +1526,15 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 		}
 		System.out.println("All Medicare Details are entered");
+
+		mobileswipe("20%",true);
 		scrollToView(NextBtn);
+		//JavascriptExecutor js = (JavascriptExecutor) driver;
+		//js.executeScript("return arguments[0].value",NextBtn);
+	//	TouchAction Touch=new TouchAction(driver);
+	//	Touch.scroll(NextBtn,10,100);
+	//	Touch.perform();
+
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is enabled to navigate to Next Page");
 			return true;
