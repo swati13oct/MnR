@@ -1398,9 +1398,10 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
 			Set<String> contextNames1 = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNames1) {
-				if (strContextName.contains("WEBVIEW_1")) {
+				if (strContextName.contains("WEBVIEW")) {
 					System.out.println("Web view:");
-					((AppiumDriver) driver).context("WEBVIEW_1");
+					((AppiumDriver) driver).context(strContextName);
+
 					break;
 				}
 				System.out.println("Web view of current window:" +strContextName);
@@ -1411,10 +1412,10 @@ public abstract class UhcDriver {
 		else {//------------iOS Code-------------
 			//-------Android Code-----------------
 
-			Set<String> AndroidcontextNames = ((AndroidDriver) driver).getContextHandles();
+			Set<String> AndroidcontextNames = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : AndroidcontextNames) {
 				if (strContextName.contains("NATIVE_APP")) {
-					((AndroidDriver) driver).context("NATIVE_APP");
+					((AppiumDriver) driver).context("NATIVE_APP");
 					break;
 				}
 			}
@@ -1430,13 +1431,16 @@ public abstract class UhcDriver {
 			driver.findElement(SelectFile).click();
 
 			//Switch to  chrome browser
-			Set<String> contextNamesAndroid = ((AndroidDriver) driver).getContextHandles();
+
+
+			Set<String> contextNamesAndroid = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNamesAndroid) {
-				if (strContextName.contains("CHROMIUM")) {
-					((AndroidDriver) driver).context("CHROMIUM");
+				if (strContextName.contains("WEBVIEW")) {
+					System.out.println("Web view:");
+					((AppiumDriver) driver).context(strContextName);
+
 					break;
 				}
-
 				//-------Android Code-----------------
 				//
 			}

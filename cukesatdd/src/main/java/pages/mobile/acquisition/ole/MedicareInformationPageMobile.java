@@ -1518,7 +1518,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			jsClickNew(ConfirmMedicareNumberButton);
 */
 		}
-		
+
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
 			// sendkeysMobileMobileNew(SSNField, SSNnumber);
@@ -1529,12 +1529,6 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 		mobileswipe("20%",true);
 		scrollToView(NextBtn);
-		//JavascriptExecutor js = (JavascriptExecutor) driver;
-		//js.executeScript("return arguments[0].value",NextBtn);
-	//	TouchAction Touch=new TouchAction(driver);
-	//	Touch.scroll(NextBtn,10,100);
-	//	Touch.perform();
-
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is enabled to navigate to Next Page");
 			return true;
