@@ -38,6 +38,33 @@ public class DCEDetailsPage extends UhcDriver {
     @FindBy(xpath="//h3[text()='Monthly Premium']/following-sibling::p")
     private WebElement monthly_Premium;
 
+    @FindBy(xpath="//h2[text()='Coverage Gap Stage']/../../../../../..//p")
+    private WebElement coverageGapStageModalText;
+
+    @FindBy(xpath="//h2[text()='Catastrophic Coverage Stage']/../../../../../..//p")
+    private WebElement catastrophicCoverageStageModalText;
+
+    @FindBy(xpath="//h2[text()='Initial Coverage Stage']/../../../../../..//p")
+    private WebElement initialCoverageStageModalText;
+
+    @FindBy(xpath="//button[text()='What is the Initial Coverage stage?']")
+    private WebElement initialCoverageStageModalLink;
+
+    @FindBy(xpath="//button[text()=' What is the Coverage Gap stage?']")
+    private WebElement coverageGapStageModalLink;
+
+    @FindBy(xpath="//button[text()=' What is the Catastrophic Coverage stage?']")
+    private WebElement catastrophicCoverageStageModalLink;
+
+    @FindBy(xpath="//h2[text()='Initial Coverage Stage']/../../../../../..//span[text()='Done']")
+    private WebElement initialCoverageStageModalCloseBtn;
+
+    @FindBy(xpath="//h2[text()='Coverage Gap Stage']/../../../../../..//span[text()='Done']")
+    private WebElement coverageGapStageModalCloseBtn;
+
+    @FindBy(xpath="//h2[text()='Catastrophic Coverage Stage']/../../../../../..//span[text()='Done']")
+    private WebElement catastrophicCoverageStageModalCloseBtn;
+
     public MRScenario getLoginScenario() {
         return loginScenario;
     }
@@ -67,12 +94,16 @@ public class DCEDetailsPage extends UhcDriver {
     @Override
     public void openAndValidate() {
         //validate(backToAllPlans,30);
+        String ReturnValue = "";
         validate(plandetails,10);
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         threadsleep(5000);
         try {
+            ReturnValue = (String) js
+                    .executeScript(String.format("return window.getCookieDataInStringFormat('%s')", "userSessionCookie"));
+            threadsleep(5000);
             String drugJson = "{\"drugs\":[{\"brandName\":\"Lipitor\",\"dosageStrength\":\"Lipitor TAB 10MG\",\"drugId\":\"13158\",\"frequency\":\"Month\",\"drugType\":\"Brand\",\"drugDescriptionType\":\"(Brand)\",\"dosageID\":\"1N1V3S593B\",\"genericDosageID\":\"0JBCNTL5BC\",\"supplyLength\":\"Every 1 Month\",\"genericDosageName\":\"atorvastatin calcium TAB 10MG\",\"genericDrugId\":\"46497\",\"genericndcCode\":\"60505257808\",\"isGeneric\":true,\"packageName\":null,\"packageQuantity\":null,\"packageSize\":null,\"proxyNdcCode\":\"00071015523\",\"quantity\":30,\"genericDrugName\":\"atorvastatin calcium\",\"ariaid\":\"Lipitor\"}],\"zipCode\":\"\",\"countyObj\":null,\"pharmacy\":{\"distanceFromSearchLocation\":1012.71,\"eprescription\":true,\"indianTribalUnion\":false,\"latitude\":44.6936383,\"longTermCare\":false,\"longitude\":-93.2836152,\"mailOrder\":false,\"network\":\"true\",\"ninetyDay\":true,\"npiNumber\":\"1841206489YN\",\"pharmacyName\":\"Retail Chain Pharmacy\",\"pharmacyNumber\":\"2426814\",\"pharmacySaver\":false,\"pharmacyType\":\"4\",\"preferredNetwork\":false,\"retail\":true,\"twentyFourHour\":false,\"year\":null},\"sessionId\":\"90715139\"}";
-            js.executeScript(String.format("window.localStorage.setItem('%s','%s');", "ucp_drugList", drugJson.replace("/","")));
+            js.executeScript(String.format("window.localStorage.setItem('%s','%s');", "ucp_drugList", drugJson.replace("90715139",ReturnValue)));
         } catch (Exception e1) {
             System.out.println("data");
         }
@@ -80,25 +111,15 @@ public class DCEDetailsPage extends UhcDriver {
         driver.navigate().refresh();
         threadsleep(5000);
         try {
-            if(driver.findElement(By.id("estimateYourDrugsLink")).isDisplayed()){
-                driver.findElement(By.id("estimateYourDrugsLink")).click();
+            if(driver.findElement(By.xpath("//a[@id='DrugListDetails']")).isDisplayed()){
+                System.out.println("Link is Displayed");
+                driver.findElement(By.xpath("//a[@id='DrugListDetails']")).click();
                 threadsleep(5000);
-                driver.findElement(By.id("adddrug")).click();
-                driver.findElement(By.xpath("//input[contains(@id, 'drugsearch')]")).sendKeys("lipitor");
-                driver.findElement(By.xpath("//button[(@id= 'search')]")).click();
-                threadsleep(5000);
-                driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + "Lipitor" + "')]")).click();
-                threadsleep(5000);
-                driver.findElement(By.xpath("//button//*[contains(text(),'Add to drug List')]")).click();
-                threadsleep(2000);
                 driver.findElement(By.xpath("(//button/span[text()='Next: Review Drug Costs'])[1]")).click();
             }
         }
         catch (Exception ex){
-            if(driver.findElement(By.xpath("//a[@id='DrugListDetails']")).isDisplayed()){
-                System.out.println("Link is Displayed");
-                driver.findElement(By.xpath("//a[@id='DrugListDetails']")).click();
-            }
+
         }
     }
 
@@ -177,6 +198,19 @@ public class DCEDetailsPage extends UhcDriver {
 
         result.put("Plan Name", planName.getText());
         result.put("Monthly Premium", monthly_Premium.getText());
+
+        coverageGapStageModalLink.click();
+        result.put("Coverage Gap Stage",coverageGapStageModalText.getText());
+        coverageGapStageModalCloseBtn.click();
+
+        catastrophicCoverageStageModalLink.click();
+        result.put("Catastrophic Coverage Stage",catastrophicCoverageStageModalText.getText());
+        catastrophicCoverageStageModalCloseBtn.click();
+
+        initialCoverageStageModalLink.click();
+        result.put("",initialCoverageStageModalText.getText());
+        initialCoverageStageModalCloseBtn.click();
+
 //        String key="Total Tabs";
 //        String value = "";
 //        result.put(key, String.valueOf(listOfTabHeaders.size()));
@@ -307,8 +341,7 @@ public class DCEDetailsPage extends UhcDriver {
 //                    "_________________________________________________________________________________________________"
 //            ); }
 
-//        return result;
-        return null ;
+        return result;
     }
 
     public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
