@@ -428,6 +428,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 				Thread.sleep(15000);
 				if (sheetName.contains("SNP")) {
+					driver.manage().deleteAllCookies();
 					driver.navigate().refresh();
 					
 					WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -564,6 +565,7 @@ public class AepPlanComparePage extends UhcDriver {
 			System.out.println("SNP toggle is not working.");
 		}
 		if (sheetName.contains("PDP")) {
+			
 			Thread.sleep(15000);
 			try {
 				List<WebElement> PDP = driver.findElements(By.xpath("//h1[@ng-if= \"planSelectedType == 'PDP'\"]"));
@@ -574,6 +576,7 @@ public class AepPlanComparePage extends UhcDriver {
 							.findElement(By.xpath(
 									"//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewallplansbtn']"))
 							.isDisplayed() == true) {
+						driver.manage().deleteAllCookies();
 						driver.navigate().refresh();
 						WebDriverWait wait = new WebDriverWait(driver, 30);
 						wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -701,44 +704,47 @@ public class AepPlanComparePage extends UhcDriver {
 				key = key.replaceAll("\\s+", "");
 			if (columnName.contains("%"))
 				columnName = columnName.replaceAll("\\s+", "");
-			if ((benefitValue.contains("NA") || benefitValue.contains("N/A"))) {
+			if ((benefitValue.equals("NA") || benefitValue.equals("N/A"))) {
 				counter++;
-
-				if (key.contains(columnName) && !columnName.equalsIgnoreCase("prescription drugs")) { 
-					flag = false;
-					tmpUIString2 = tmpUIString1;
-					break;
-				} else if (key.equalsIgnoreCase(columnName)) {
-					flag = false;
-					tmpUIString2 = tmpUIString1;
-					break;
-				}
-
-			} else if (columnName.equalsIgnoreCase("prescription drugs")) {
-				if (key.equalsIgnoreCase(columnName)) {
-					counter++;
-					if (benefitValueUI.equalsIgnoreCase(benefitValue)) {
-						flag = true;
-						break;
-					} else {
-						flag = false;
-						System.out.println(sheetName + "_" + rowIndex + " - Values did not match for col:5 "
-								+ columnName + " Excel: " + headerPremiumString + " | UI: " + benefitValueUI);
-						tmpUIString2 = tmpUIString1;
-						break;
-					}
-				}
 
 			} else if (key.contains(columnName)) {
 
 				counter++;
 				benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 				benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "");
+				if(benefitValueUI.contains("In:")) {
+				int m = benefitValueUI.indexOf(":");
+				int n = benefitValueUI.indexOf("/");
+				int j = benefitValueUI.indexOf(":", n);
+				int l = benefitValueUI.length();
+				String Inntemp = benefitValueUI.substring(m+1,n);
+				String Outtemp = benefitValueUI.substring(j+1,l);
+				benefitValueUI = Inntemp.concat(Outtemp);
+				System.out.println(benefitValueUI);
+				}
+				if (benefitValueUI.equalsIgnoreCase(benefitValue)) {
+					flag = true;
+					break;
+				}else {
+					flag = false;
+					tmpUIString2 = tmpUIString1;
+					break;
+				}	
 
 			} else if (columnName.contains(key)) {
 				counter++;
 				benefitValueUI = benefitValueUI.replaceAll("\\s+", "");
 				benefitValue = benefitValue.replaceAll("\\s+", "");
+				if(benefitValueUI.contains("In:")) {
+					int m = benefitValueUI.indexOf(":");
+					int n = benefitValueUI.indexOf("/");
+					int j = benefitValueUI.indexOf(":", n);
+					int l = benefitValueUI.length();
+					String Inntemp = benefitValueUI.substring(m+1,n);
+					String Outtemp = benefitValueUI.substring(j+1,l);
+					benefitValueUI = Inntemp.concat(Outtemp);
+					System.out.println(benefitValueUI);
+					}
 				if (benefitValueUI.equalsIgnoreCase(benefitValue)) {
 					flag = true;
 					break;
