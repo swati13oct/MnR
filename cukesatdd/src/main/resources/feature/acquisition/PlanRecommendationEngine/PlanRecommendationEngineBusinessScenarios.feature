@@ -70,10 +70,10 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @featureGate
+    @regressionAARP @featureGate @TestRun
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
-      | AARP |   33143 | No            | Miami-Dade | MAPD          | None         | Lookup          | Perez, Martha Regina, MD | [blank]       | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision |
+      #| AARP |   33143 | No            | Miami-Dade | MAPD          | None         | Lookup          | Perez, Martha Regina, MD | [blank]       | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision |
       | AARP |   55419 | No            | Hennepin   | MAPD          | None         | AcceptsMedicare | [blank]                  | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None   |
 
     @regressionUHC @sanity
