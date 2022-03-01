@@ -430,7 +430,7 @@ public class AepPlanComparePage extends UhcDriver {
 				if (sheetName.contains("SNP")) {
 					driver.manage().deleteAllCookies();
 					driver.navigate().refresh();
-					
+					sleepBySec(5);
 					WebDriverWait wait = new WebDriverWait(driver, 30);
 					wait.until(ExpectedConditions.visibilityOfElementLocated(
 							By.xpath("//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']")));
@@ -578,6 +578,7 @@ public class AepPlanComparePage extends UhcDriver {
 							.isDisplayed() == true) {
 						driver.manage().deleteAllCookies();
 						driver.navigate().refresh();
+						sleepBySec(3);
 						WebDriverWait wait = new WebDriverWait(driver, 30);
 						wait.until(ExpectedConditions.visibilityOfElementLocated(By
 								.xpath("//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewallplansbtn']")));
