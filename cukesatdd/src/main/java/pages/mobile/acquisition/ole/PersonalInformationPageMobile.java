@@ -284,7 +284,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				jsClickNew(SameMailingAddressNo);
 
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
-				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
+				sendkeysMobile(MailingAdd_Aptno, "301");
 				sendkeysMobile(MailingAdd_City, Mailing_City);
 				
 				// Select SelectState = new Select(MailingAdd_State_DropDown);
@@ -297,8 +297,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 				}
 				
-		checkElementisEnabled(MailingAdd_State_DropDown);
-				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+		//checkElementisEnabled(MailingAdd_State_DropDown);
+			//	selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+				MailingAdd_State_DropDown.click();
+				mobileSelectOption(MailingAdd_State_DropDown,"ALASKA",true);
+
 
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 			}

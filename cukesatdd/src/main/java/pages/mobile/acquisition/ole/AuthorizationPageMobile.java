@@ -248,8 +248,13 @@ public class AuthorizationPageMobile extends UhcDriver {
 				jsClickNew(stateLable);
 				//stateLabel1.click();
 			}
-			checkElementisEnabled(Authorized_State);
-			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
+		//	checkElementisEnabled(Authorized_State);
+		//	selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
+
+
+			Authorized_State.click();
+			mobileSelectOption(Authorized_State,"ALABAMA",true);
+
 
 //			scrollToView(Authorized_ZipCode);
 			sendKeysByCharacter(Authorized_ZipCode, AuthorizationZip);
