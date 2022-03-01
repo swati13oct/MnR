@@ -119,6 +119,9 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 	
+	@FindBy(css = "button#location")
+	private WebElement editLocation;
+	
 	@FindBy(css = ".uhc-button-group button#nextButton>svg")
 	private WebElement pageNextButton;
 	
@@ -1593,8 +1596,26 @@ public String getplanId(WebElement plan) {
 	planName = plan.getText().trim();
 	threadsleep(3000);
 	System.out.println(planName);
-	if(planName.contains("AARP Medicare Supplement Insurance"))
-		planId = planName.split("Plan ")[1].trim() + "01";
+	if(planName.contains("AARP Medicare Supplement Insurance")) {
+		planName = planName.split("AARP Medicare Supplement Insurance")[1].trim();
+		if(editLocation.getText().contains("NC") || editLocation.getText().contains("SC") || editLocation.getText().contains("OH")) {
+			if(planName.contains("+ wellness extras"))
+				planId = planName.replace("+ wellness extras", "").split("Plan ")[1].trim() + "01";
+			else
+				planId = planName.split("Plan ")[1].trim() + "02";
+		}
+		else if(planName.contains("Basic")) {
+			if(planName.equalsIgnoreCase("Basic Plan"))
+				planId = "TW1";
+			if(planName.equalsIgnoreCase("Extended Basic Plan"))
+				planId = "UW1";
+			if(planName.equalsIgnoreCase("Extended Basic 2020 Plan"))
+				planId = "RW1";
+			}
+		else
+			planId = planName.split("Plan ")[1].trim() + "01";
+	}
+		
 	else
 		planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
 	//System.out.println("UI Plan Name : "+planName);
