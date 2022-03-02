@@ -1377,9 +1377,27 @@ public abstract class UhcDriver {
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
 			Thread.sleep(500);
-			((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
-			Thread.sleep(500);
-		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
+			if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")) {
+				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
+				Thread.sleep(500);
+			}
+			else {
+				try {
+					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
+
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
+					Thread.sleep(500);
+
+					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("For lower version on Mobile devices");
+				}
+
+			}
+
+			//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 			Thread.sleep(500);
@@ -1388,6 +1406,7 @@ public abstract class UhcDriver {
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
 			Thread.sleep(500);
+
 	       /*getFiletoUpload("card");
 	        if(uploadBtn.isDisplayed()) {
 	        	uploadSuccess = true;
