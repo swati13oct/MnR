@@ -590,7 +590,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		Thread.sleep(3000);
 		// Updated the get url title SEP Page with Other Health insurance...OLERedesign
-		if (driver.getCurrentUrl().contains("other-health-insurance")) {
+		if (driver.getCurrentUrl().contains("other-health-insurance")|| driver.getCurrentUrl().contains("prescription-drug-coverage")) {
 			Assert.assertTrue(
 					driver.getCurrentUrl().contains("other-health-insurance")
 							|| driver.getCurrentUrl().contains("prescription-drug-coverage")|| driver.getCurrentUrl().contains("chronic-questions"),

@@ -1385,7 +1385,7 @@ public abstract class UhcDriver {
 				try {
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
 
-					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[5]//XCUIElementTypeOther")).click();
 					Thread.sleep(500);
 
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();

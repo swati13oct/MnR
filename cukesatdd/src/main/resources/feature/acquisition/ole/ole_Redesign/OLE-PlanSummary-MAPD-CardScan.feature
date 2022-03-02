@@ -121,7 +121,7 @@ Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site>
     And the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
-    Then the user validates the Plan details on OLE
+   # Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
@@ -208,7 +208,7 @@ Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site>
  @OLE_MedicareScan @OLE_MedicareScan_PDP
    Examples:
       | TID   | UploadBtn| site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county        | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | rxBinnumber|inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |medicarenumber1 |
-      | 15503 | true     | AARP | PDP-MBI  | next     | next   |   80210 | NO              | Denver County | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | TEST_PORTALS_PDP | TEST_PORTALS_PDP|5N60TE6RQ50    | false   |  10011995 |  10011995|     0123456789 | false     | 10261930  | Female | 002 Morris Rd | Los Angeles | No                     | 802 MailingSt | Mailing LA  | AK           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |156789| InValid       | TEST_PORTALS_K         | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | AL             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |2EE4TE2UG10|
+      | 15503 | true     | AARP | PDP-MBI  | next     | next   |   80210 | NO              | Denver County | PDP      | AARP MedicareRx Saver Plus (PDP) | MBI      | TEST_PORTALS_PDP | TEST_PORTALS_PDP|5N60TE6RQ50    | false   |  10011995 |  10011995|     0123456789 | false     | 10261956  | Female | 002 Morris Rd | Los Angeles | No                     | 802 MailingSt | Mailing LA  | AK           |      80210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |156789| Valid       | TEST_PORTALS_K         | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | AL             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |2EE4TE2UG10|
 
  Scenario Outline: TID: <TID> -OLE End to end from VPP Plan Summary for C&S-> <plantype> Plans
     Given the user is on medicare acquisition site landing page
@@ -224,7 +224,7 @@ Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site>
    # And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
-	Then the user validates the Plan details on OLE
+	#Then the user validates the Plan details on OLE
    Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
