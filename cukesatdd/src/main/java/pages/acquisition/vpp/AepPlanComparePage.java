@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -428,7 +429,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 				Thread.sleep(15000);
 				if (sheetName.contains("SNP")) {
-					driver.manage().deleteAllCookies();
+					
 					driver.navigate().refresh();
 					sleepBySec(5);
 					WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -473,12 +474,10 @@ public class AepPlanComparePage extends UhcDriver {
 					planNameRunTime = PlanNames.get(k).getText();
 					if (planNameRunTime.equalsIgnoreCase(planName)) {
 						List<WebElement> MoreOptions = driver
-								.findElements(By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='"
-										+ planName + "']//ancestor::div//*[contains(text() , 'More Options')]"));
+								.findElements(By.xpath("//tr//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "'))]//ancestor::div//*[contains(text() , 'More Options')]"));
 						MoreOptions.get(k).click();
 						WebElement BaseineBenefit = driver.findElement(
-								By.xpath("//tr//span[contains(@class,'headerPlanName') and text()='" + planName
-										+ "']/ancestor::div//*[@id = 'moreOptionsId']//span[contains(text() , 'Baseline Benefits')]"));
+								By.xpath("//tr//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "'))]/ancestor::div//*[@id = 'moreOptionsId']//span[contains(text() , 'Baseline Benefits')]"));
 						BaseineBenefit.click();
 						// String planNameRunTime =
 						// driver.findElement(By.xpath("//*[@id='baseline-benefits-popup']//span[contains(@class,
@@ -562,7 +561,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 			}
 		} catch (Exception e) {
-			System.out.println("SNP toggle is not working.");
+			e.printStackTrace();
 		}
 		if (sheetName.contains("PDP")) {
 			
@@ -674,7 +673,7 @@ public class AepPlanComparePage extends UhcDriver {
 				WebElement Close = driver.findElement(By.xpath(("//*[@ng-click='closeBaseLinePopup()']/div")));
 				Close.click();
 			} catch (Exception e) {
-				System.out.println("PDP Plan is not getting displayed");
+				e.printStackTrace();
 			}
 		}
 		for (String keyValue : result.keySet()) {
@@ -682,6 +681,9 @@ public class AepPlanComparePage extends UhcDriver {
 			System.out.println(
 					"_________________________________________________________________________________________________");
 		}
+		driver.manage().deleteAllCookies();
+		driver.get("chrome://settings/clearBrowserData");
+	    driver.findElement(By.xpath(("//settings-ui"))).sendKeys(Keys.ENTER);
 		return result;
 	}
 
