@@ -1907,7 +1907,9 @@ public class oleStepDefinition {
 		
 		String ConfirmationNumber="";
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod") ||MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	||MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
@@ -1935,7 +1937,9 @@ public class oleStepDefinition {
 	public void the_user_validates_Plan_and_Membber_Details_on_Confirmation_Page() throws Throwable {
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod") ||MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	||MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {
@@ -1972,7 +1976,9 @@ public class oleStepDefinition {
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	|| MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 
 			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {

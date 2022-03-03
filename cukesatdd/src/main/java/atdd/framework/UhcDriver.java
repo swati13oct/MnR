@@ -1,6 +1,9 @@
 package atdd.framework;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.regex.Pattern;
 import static org.apache.commons.io.IOUtils.toByteArray;
 
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -41,6 +45,7 @@ import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -62,6 +67,7 @@ import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.skyscreamer.jsonassert.comparator.JSONCompareUtil;
 
 /**
  * @author pjaising
@@ -1366,13 +1372,6 @@ public abstract class UhcDriver {
 					break;
 				}
 			}
-			/*Click on 'Allow' - permission
-        	By elementView = By.id("com.android.permissioncontroller:id/permission_allow_button");
-        	wait.until(ExpectedConditions.visibilityOfElementLocated(elementView));
-        	mobiledriver.findElement(elementView).click();
-			 */
-			//TO-DO:Replace with Id of Browse button instead of done
-
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
@@ -1440,6 +1439,10 @@ public abstract class UhcDriver {
 				}
 			}
 
+			//curl -F "payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE" -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" 'https://api.us-west-1.saucelabs.com/v1/storage/upload'
+		//
+		//	((AppiumDriver) driver).pushFile("/storage/self/primary/sauce-bot-coding.png', codingBot", new File("C:\\Users\\vkanagal\\ATDD\\MRATDD\\cukesatdd\\src\\main\\resources\\Images\\OLE"));
+			uploadFile();
 			By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
 			driver.findElement(AllowButton).click();
 			//Click on Browse button on Android
@@ -2042,6 +2045,33 @@ public abstract class UhcDriver {
 			mobileDriver.context(webContext);
 
 		}
+	}
+
+	public static String uploadFile() {
+
+		String cmd = "curl -F payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE/ -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY 'https://api.us-west-1.saucelabs.com/v1/storage/upload'";
+
+				ProcessBuilder process=new ProcessBuilder(cmd);
+
+
+			Process p;
+		try {
+			p=process.start();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			StringBuilder builder = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				builder.append(line);
+				builder.append(System.getProperty("line.separator"));
+			}
+		/*	String result= builder.toString();
+			JSONObject obj = new JSONObject(result);
+			key=obj.getString("")*/
+
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
