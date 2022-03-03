@@ -1594,4 +1594,24 @@ public class CampaignTFNCommonStepDefinition {
 			tfnPage.clickStartMS3OlePlanCompare();
 
 	}
+	
+	@Then("^the user enter zipcode in plan search page$")
+	public void the_user_enter_zipcode_in_plan_search_page(DataTable attributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = attributes.getGherkinRows(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String PlanType = memberAttributesMap.get("Plan Type");
+		AcquisitionHomePage acqusitionHomePage=new AcquisitionHomePage(driver);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String Zip = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage plansummaryPage=tfnPage.planSearch(Zip);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
+	}
 }
