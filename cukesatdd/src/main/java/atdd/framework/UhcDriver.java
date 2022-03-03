@@ -1376,17 +1376,22 @@ public abstract class UhcDriver {
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
 			Thread.sleep(500);
-			if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")) {
+			//-------For higher Version of IOS----------//
+			//if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max") ||MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone X")) {
+
+			if (MRScenario.mobileDeviceOSVersion.contains("14.")) {
 				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
 				Thread.sleep(500);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 				Thread.sleep(500);
+				//-------For higher Version of IOS----------//
 			}
+			//-------For lower Version of IOS----------//
 			else {
 				try {
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
 
-					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[5]//XCUIElementTypeOther")).click();
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
 					Thread.sleep(500);
 
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
@@ -1397,9 +1402,9 @@ public abstract class UhcDriver {
 				}
 
 			}
-
 			//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Cancel']")).click();
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
+						//-------For lower Version of IOS----------//
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
 			Thread.sleep(500);
@@ -1427,8 +1432,8 @@ public abstract class UhcDriver {
 			}
 
 		}
-
-		else {//------------iOS Code-------------
+					//------------iOS Code-------------
+		else {
 			//-------Android Code-----------------
 
 			Set<String> AndroidcontextNames = ((AppiumDriver) driver).getContextHandles();
@@ -1453,9 +1458,7 @@ public abstract class UhcDriver {
 			By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
 			driver.findElement(SelectFile).click();
 
-
 			//Switch to  chrome browser
-
 
 			Set<String> contextNamesAndroid = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNamesAndroid) {

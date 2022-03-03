@@ -1576,15 +1576,24 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 				String ActualErrorMessage = UnabletoCaptureImageText.getText();
 				String ExpectedErrorMessage = "We were unable to capture your number.";
-				System.out.println("User Validate the Error Message for OOPS" + ExpectedErrorMessage.contains(ActualErrorMessage));
+				System.out.println("User Validate the Expecetd Error Message: " + ExpectedErrorMessage);
+				System.out.println("User Validate the Actual Error Message:  " + ActualErrorMessage);
+				Assert.assertTrue(ExpectedErrorMessage.contains(ActualErrorMessage));
 
 				String ActualOopsMessage1 = OopsMessage1_ErrorMessage.getText();
+				//ActualOopsMessage1.replace("'")
 				String ExpectedOopsMessage1 = "Select 'Start over' if you'd like to try again. Be sure to follow our tips for a good photo.";
-				System.out.println("User Validate the Error Message for OOPS Message 1" + ExpectedOopsMessage1.contains(ActualOopsMessage1));
+				System.out.println("User Validate the Expected oops Error Message1: " + ExpectedOopsMessage1);
+				System.out.println("User Validate the Actual Oops Error Message1: " + ActualOopsMessage1);
+				Assert.assertTrue(ActualOopsMessage1.contains(ExpectedOopsMessage1));
+
 
 				String ActualOopsMessage2 = OopsMessage2_ErrorMessage.getText();
 				String ExpectedOopsMessage2 = "Select 'Cancel' if you'd like to enter your Medicare ID number yourself.";
-				System.out.println("User Validate the Error Message for OOPS Message 2" + ExpectedOopsMessage2.contains(ActualOopsMessage2));
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedOopsMessage2);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualOopsMessage2);
+				Assert.assertTrue(ActualOopsMessage2.contains(ExpectedOopsMessage2));
+
 
 				Assert.assertTrue(validateNew(StartOverButton_ErrorMessage), "Start Over button is displayed");
 				Assert.assertTrue(validateNew(OopsCancelButton_ErrorMessage), "Cancel Button is displayed");
@@ -1600,11 +1609,16 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 				String ActualErrorMessage = ErrorMessageTimeout1.getText();
 				String ExpectedErrorMessage = "Please try again";
-				System.out.println("User Validate the Error Message for OOPS" + ExpectedErrorMessage.contains(ActualErrorMessage));
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedErrorMessage);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualErrorMessage);
+				Assert.assertTrue(ExpectedErrorMessage.contains(ActualErrorMessage));
+
 
 				String ActualTimeOutErrorMessage = ErrorMessageTimeout2.getText();
 				String ExpectedTimeoutErrorMessage = "Your request has been timed out. Please try again.";
-				System.out.println("User Validate the Error Message for OOPS" + ExpectedTimeoutErrorMessage.contains(ActualTimeOutErrorMessage));
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedTimeoutErrorMessage);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualTimeOutErrorMessage);
+				Assert.assertTrue(ExpectedTimeoutErrorMessage.contains(ActualTimeOutErrorMessage));
 
 
 				Assert.assertTrue(validateNew(StartOverButton_ErrorMessage), "Start Over button is displayed");
@@ -1640,17 +1654,23 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
 			Thread.sleep(500);
-			if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")) {
+			//-------For higher Version of IOS----------//
+		//	if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")) {
+				if (MRScenario.mobileDeviceOSVersion.contains("14.")) {
 				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
 				Thread.sleep(500);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 				Thread.sleep(500);
+					//-------For higher Version of IOS----------//
 			}
+				//-------For Lower Version of IOS----------//
 			else {
 				try {
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
 
-					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[5]//XCUIElementTypeOther")).click();
+					//mobileswipe("20%",false);
+
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
 					Thread.sleep(500);
 
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
@@ -1661,7 +1681,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 				}
 
 			}
-
+			//-------For Lower Version of IOS----------//
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
 			Thread.sleep(500);
