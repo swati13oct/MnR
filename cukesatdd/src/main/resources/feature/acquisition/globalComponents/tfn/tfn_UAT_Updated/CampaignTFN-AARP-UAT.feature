@@ -1065,7 +1065,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
-    @IS_TFN_E2E_Scenario_2 @campaignTFNStageMS @test123
+    @IS_TFN_E2E_Scenario_2 @campaignTFNStageMS
     Examples: 
       | scenario                          | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl   | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |MedSupStaticTFNNo|
       | IS_TFN_E2E_Scenario_2 - AMP | ULayer |   90210 | MA         | MS4.0      |  8003077 | Alabama | health-plans.html?WT.mc_id=8KH&product=medsup&intref=AARPMedicareSupplement.com&EBRC=https%3A%2F%2Fwww.aarpmedicaresupplement.com%2Fmedicare-information-guide.html&state=TX&HASHID=2475451813&mrcid=email_is_p&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645783090#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        |1-866-603-3424|

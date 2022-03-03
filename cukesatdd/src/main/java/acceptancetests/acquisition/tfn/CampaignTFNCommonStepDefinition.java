@@ -1611,7 +1611,6 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		String Zip = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage=tfnPage.planSearch(Zip);
-		//VPPPlanSummaryPage plansummaryPage = tfnPage.ViewPlanSummary(PlanType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
