@@ -1295,6 +1295,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(20);
+			driver.navigate().refresh();
+			sleepBySec(20);
+		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
@@ -2146,9 +2151,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
-
+		//	enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
+		//			+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(@class,'plan-name-heading') and contains(text(), '" + planName + "')]/following::*[contains(text(),'Enroll in Plan')][2]"));
 		}
 		if (enrollForPlan != null) {
 
@@ -5452,6 +5457,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(60);
+			driver.navigate().refresh();
+		}
 		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
