@@ -544,7 +544,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 // OLE Page from VP Page
 		
-		@FindBy(css = "input#dateOfBirth")
+		@FindBy(css = "div#AddYourInfoForm div:nth-child(3) input#dateOfBirthInput")
 		private WebElement DOB;
 		
 		@FindBy(css = "label[for='Female']")
@@ -2242,6 +2242,7 @@ public void Pharmacytype() {
 }
 
 public void fillMSform() {
+	DOB.click();
 	DOB.sendKeys("01/06/1940");
 	jsClickNew(genderFemale);
 	threadsleep(8000);
