@@ -544,7 +544,7 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 // OLE Page from VP Page
 		
-		@FindBy(css = "#dateOfBirthInput")
+		@FindBy(css = "input#dateOfBirth")
 		private WebElement DOB;
 		
 		@FindBy(css = "label[for='Female']")
