@@ -1580,15 +1580,15 @@ public class MedicareInformationPageMobile extends UhcDriver {
 				System.out.println("User Validate the Actual Error Message:  " + ActualErrorMessage);
 				Assert.assertTrue(ExpectedErrorMessage.contains(ActualErrorMessage));
 
-				String ActualOopsMessage1 = OopsMessage1_ErrorMessage.getText();
-				//ActualOopsMessage1.replace("'")
+				String ActualOopsMessage1 = OopsMessage1_ErrorMessage.getText().replace("\"","'");
+				//ActualOopsMessage1.replace("\"","'");
 				String ExpectedOopsMessage1 = "Select 'Start over' if you'd like to try again. Be sure to follow our tips for a good photo.";
 				System.out.println("User Validate the Expected oops Error Message1: " + ExpectedOopsMessage1);
 				System.out.println("User Validate the Actual Oops Error Message1: " + ActualOopsMessage1);
 				Assert.assertTrue(ActualOopsMessage1.contains(ExpectedOopsMessage1));
 
 
-				String ActualOopsMessage2 = OopsMessage2_ErrorMessage.getText();
+				String ActualOopsMessage2 = OopsMessage2_ErrorMessage.getText().replace("\"","'");
 				String ExpectedOopsMessage2 = "Select 'Cancel' if you'd like to enter your Medicare ID number yourself.";
 				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedOopsMessage2);
 				System.out.println("User Validate the Actual Oops Error Message2: " + ActualOopsMessage2);
