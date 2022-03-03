@@ -895,7 +895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
+	@FindBy(xpath="//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -2709,7 +2709,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
-		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		String toolTipText = tooltipContent.getText().trim();
 		if (toolTipText.contains("Why is my premium")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
@@ -2881,9 +2881,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String EmailAddress = memberAttributesMap.get("Email Address");
 		// sendkeysNew(firstNameField, FirstName);
 		scrollToView(firstNameField);
-		jsSendkeys(firstNameField, FirstName);
-		jsSendkeys(lastNameField, LastName);
-		jsSendkeys(emailField, EmailAddress);
+		sendkeysMobile(firstNameField, FirstName);
+		sendkeysMobile(lastNameField, LastName);
+		sendkeysMobile(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
 		CommonUtility.waitForPageLoadNew(driver, medicareGuidePopup, 10);
