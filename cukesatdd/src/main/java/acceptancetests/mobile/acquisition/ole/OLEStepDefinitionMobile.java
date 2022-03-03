@@ -3747,7 +3747,7 @@ public class OLEStepDefinitionMobile {
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 
-		boolean isInformationFilled = medicareInfoPage.MedicareScanImage_Success(MedicareDetailsMap);
+		boolean isInformationFilled = medicareInfoPage.MedicareScanImage_oopsErrorMessage(MedicareDetailsMap);
 		if (isInformationFilled) {
 
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
