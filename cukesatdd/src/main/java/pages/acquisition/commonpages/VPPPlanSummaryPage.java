@@ -7934,10 +7934,10 @@ public String GetMonthlyPremiumValue() {
 		updateDOBDetailsForMedsup.sendKeys("05/05/1945");
 		threadsleep(5);
 		//jsClickNew(partBDropdown);
-		partBDropdown.click();
+		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		
+		selectFromDropDownByText(driver, partBDropdown, "May");
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {

@@ -501,7 +501,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | scenario                         | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl   | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode |
       | Scenerio 7-SourceCodeInURL - UMS | BLayer |   90210 | MA         | MS4.0      |  810106 | Alabama | ?WT.mc_id=5T9 | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-800-850-6807 | 1-866-327-1593 | 5T9        |
 
-  ####################### Script IS_ Scenario 4: Source Code in URL ########################################
+  ####################### Script IS_ Scenario 4: UHC Referral TrafficL ########################################
   @Scenario_IS_Scenario4_UHCReferralTraffic_UAT @UATRegression
   Scenario Outline: <scenario> <zipcode>1.0 Verify TFN show correctly from UHC Referral Traffic
     Given the user Starts WebDriver
@@ -547,7 +547,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
-    @Scenario_IS-4_UHCReferralTraffic_UAT_Medsup4.0 @campaignTFNStageMS
+    @Scenario_IS-4_UHCReferralTraffic_UAT_Medsup4.0 @campaignTFNStageMS @IS_TFN_E2E_Scenario_4
     Examples: 
       | scenario                               | site   | zipcode | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                    | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo |
       | Scenerio IS-4-UHCReferralTraffic - UMS | BLayer |   90210 | MA         | MS4.0      |  832935 | Alabama | health-plans.html?WT.mc_id=832935&test_version=UMS&zipcode=90210#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-259-8119 | 1-866-462-4046 | 2RZ        | 1-866-603-3424    |
@@ -621,7 +621,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN No | <MedSupTFNNo> |
 
     Examples: 
-      @Scenario_1_2_DirectTraffic__UHC_UAT_medsup4.0 @campaignTFNStageMS
+      @Scenario_1_2_DirectTraffic__UHC_UAT_medsup4.0 @campaignTFNStageMS @IS_TFN_Scenario_6
       Examples:
 
       | scenario         | site | zipcode | FedTFNNo       | MedSupTFNNo    | isMultutiCounty | county             | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                                           | DCETFNxpath                                                               | MSplantype | EnrollTFNxpath                    | userName          | password        | FedTFNNo       | MedSupTFNNo    | sourceCode | decisionGuideTFN                            | MedsuppFormTFNxpath                         | dob        | agentXpath                          | MedSupStaticTFNNo |
