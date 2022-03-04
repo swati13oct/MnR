@@ -1487,7 +1487,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 
 
-	public boolean MedicareScanImage_Success(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public boolean MedicareScanImage_Success(Map<String, String> MedicareDetailsMap) throws InterruptedException, IOException {
 
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
 		String CardType = MedicareDetailsMap.get("Card Type");

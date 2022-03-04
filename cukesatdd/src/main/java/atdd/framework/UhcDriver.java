@@ -68,6 +68,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.skyscreamer.jsonassert.comparator.JSONCompareUtil;
+import org.testng.Assert;
 
 /**
  * @author pjaising
@@ -1356,7 +1357,7 @@ public abstract class UhcDriver {
 
 
 	//public boolean mobileUpload(String imageLocation, WebElement uploadBtn) throws InterruptedException {
-	public boolean  mobileUpload(String uploadBtn) throws InterruptedException {
+	public boolean  mobileUpload(String uploadBtn) throws InterruptedException, IOException {
 		boolean uploadSuccess = true;
 
 		//------------iOS Code-------------
@@ -1397,6 +1398,8 @@ public abstract class UhcDriver {
 					Thread.sleep(500);
 
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+					Thread.sleep(500);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1444,11 +1447,10 @@ public abstract class UhcDriver {
 					break;
 				}
 			}
+		//--Uploading the file for Android File----
 
-			//curl -F "payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE" -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" 'https://api.us-west-1.saucelabs.com/v1/storage/upload'
-		//
-		//	((AppiumDriver) driver).pushFile("/storage/self/primary/sauce-bot-coding.png', codingBot", new File("C:\\Users\\vkanagal\\ATDD\\MRATDD\\cukesatdd\\src\\main\\resources\\Images\\OLE"));
-			uploadFile();
+				uploadFileToRealDevice();
+
 			By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
 			driver.findElement(AllowButton).click();
 			//Click on Browse button on Android
@@ -2051,7 +2053,7 @@ public abstract class UhcDriver {
 		}
 	}
 
-	public static String uploadFile() {
+	/*public static String uploadFile() {
 
 		String cmd = "curl -F payload=@/Users/vkanagal/ATDD/MRATDD/cukesatdd/src/main/resources/Images/OLE/ -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY 'https://api.us-west-1.saucelabs.com/v1/storage/upload'";
 
@@ -2068,14 +2070,22 @@ public abstract class UhcDriver {
 				builder.append(line);
 				builder.append(System.getProperty("line.separator"));
 			}
-		/*	String result= builder.toString();
-			JSONObject obj = new JSONObject(result);
-			key=obj.getString("")*/
+
 
 		}catch (IOException e){
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
+		public void uploadFileToRealDevice() throws InterruptedException, IOException {
+
+		AndroidDriver mobileDriver = (AndroidDriver) driver;
+
+			String codingBot = "src/main/resources/Images/OLE/MedicareNo-1.jpg";
+			File codingBotFile = new File(codingBot);
+			mobileDriver.pushFile("/storage/self/primary/MedicareNo-1.jpg", codingBotFile);
+
+
+		}
 
 }
