@@ -556,10 +556,10 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		@FindBy(css = "button[class*='continue-application']")
 		private WebElement continApp;
 		
-		@FindBy(css = "div[class*='wizardpagebody'] p:nth-child(2)")
+		@FindBy(css = "#ole-form-content div[class*='wizardpagebody'] p:nth-child(2)")
 		private WebElement OLEPlanName;
 		
-		@FindBy(css = "div[class*='wizardpagebody'] ul.bottomMargin5>li:nth-child(1)")
+		@FindBy(css = "#ole-form-content div[class*='wizardpagebody'] ul.bottomMargin5>li:nth-child(1)")
 		private List<WebElement> OLEZip;
 		
 		@FindBy(css = "#ole-form-controls div>div>a[class*='cancel-button']")
@@ -2230,6 +2230,7 @@ public void validateOLEDetails(String zip) {
 	Assert.assertTrue(OLEPlanName.getText().toUpperCase().equals(plnMS),"PlanName is not matching in OLE Details Page");
 	Assert.assertTrue(OLEZip.get(0).getText().contains(zip),"ZIPCOde is not matching in OLE Details Page");
 	cancelLink.click();
+	threadsleep(1000);
 	cancelButton.click();
 	pageloadcomplete();
 	Assert.assertTrue(driver.getCurrentUrl().contains("plan-summary"),"--- VPP page not loaded---");
