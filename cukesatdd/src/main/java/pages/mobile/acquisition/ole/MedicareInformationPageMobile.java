@@ -1661,6 +1661,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 				Thread.sleep(500);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 				Thread.sleep(500);
+				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+					Thread.sleep(500);
 					//-------For higher Version of IOS----------//
 			}
 				//-------For Lower Version of IOS----------//

@@ -1384,6 +1384,8 @@ public abstract class UhcDriver {
 				Thread.sleep(500);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
 				Thread.sleep(500);
+				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+				Thread.sleep(500);
 				//-------For higher Version of IOS----------//
 			}
 			//-------For lower Version of IOS----------//
@@ -1406,8 +1408,7 @@ public abstract class UhcDriver {
 		//	((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeStaticText[@name='Choose']")).click();
 						//-------For lower Version of IOS----------//
 
-			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
-			Thread.sleep(500);
+
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
 			Thread.sleep(500);
