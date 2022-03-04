@@ -1541,5 +1541,16 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("Dynamic Error Message Displayed");
 		}
 	}
+	
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				returnToProfileLink.click();
+			}
+		} catch (Exception e) {
+			Assertion.fail("Return to profile not displayed");
+		}
+	}
 
 }

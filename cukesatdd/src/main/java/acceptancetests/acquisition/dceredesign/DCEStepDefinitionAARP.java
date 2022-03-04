@@ -3333,5 +3333,21 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
+	
+
+     @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
+     
+     @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+        
+     }
 
 }

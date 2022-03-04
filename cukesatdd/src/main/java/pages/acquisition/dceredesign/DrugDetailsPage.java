@@ -2807,5 +2807,13 @@ Blank error message is removed
 				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
 		}
 	}
+	
+	public DrugDetailsPage validateDrugDetailsPage(){
+		if (validateNew(DrugDetails_ChangePharmacyLnk) &&
+			validateNew(DrugCosts_PlanDetailsBtn) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPage(driver);
+		}
+		return null;
+	}
 
 }
