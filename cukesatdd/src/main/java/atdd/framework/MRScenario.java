@@ -395,7 +395,7 @@ public class MRScenario {
 			if (environment.contains("stage-0"))
 				domain = "ocp-elr-dmz-nonprod.optum.com";
 			else if (environment.equals("stage") || environment.equals("stage-aarp")
-					|| environment.equals("offline-stage-aarp") || environment.equals("offline-stage"))
+					|| environment.equals("offline-stage-aarp") || environment.equals("offline-stage") || environment.equals("uhc-test2"))
 				domain = "uhc.com";
 			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")
 					|| environment.equals("team-e") || environment.equals("team-t") || environment.equals("team-v1")
