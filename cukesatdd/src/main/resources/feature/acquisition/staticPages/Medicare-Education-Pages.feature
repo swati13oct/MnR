@@ -111,7 +111,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on How to Enroll link in Read Next section
 
-    @avengersRegressionAARP @regressionAARP @check123
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | geoState | pageName                       | tfnXpath                                                            | tfnFlag | UHCUrl                      | endpoint |
       | UAT E2E Scenario 6_AMP | AARP | Alabama  | Initial Enrollment Period Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ | IEP      |
