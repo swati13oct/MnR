@@ -324,7 +324,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			} else
 				// goGreenNoBtn.click();
 				jsClickNew(goGreenNoBtn);
-
+			scrollToView(Email);
 			sendkeysMobile(Email, EmailAddress);
 		}
 		result = Clickoncontinuebutton("language-preference");

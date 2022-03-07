@@ -1447,19 +1447,56 @@ public abstract class UhcDriver {
 					break;
 				}
 			}
-		//--Uploading the file for Android File----
+			//--Uploading the file for Android File----
 
-				uploadFileToRealDevice();
+			uploadFileToRealDevice();
 
-			By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
-			driver.findElement(AllowButton).click();
-			//Click on Browse button on Android
-			By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
-			driver.findElement(Browse).click();
 
-			//select a file from browse
-			By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
-			driver.findElement(SelectFile).click();
+			if (MRScenario.mobileDeviceOSVersion.contains("11") || MRScenario.mobileDeviceOSVersion.contains("10")) {
+
+				By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+				driver.findElement(AllowButton).click();
+				//Click on Browse button on Android
+
+				By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
+				driver.findElement(Browse).click();
+
+				//Click on Hamburger menu to navigate to gallery
+				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Show roots")).click();
+
+				//Click on gallery button
+				By Gallery = By.xpath("//android.widget.TextView[@text='Gallery']");
+				driver.findElement(Gallery).click();
+
+				//Select a folder in gallery
+				By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
+				driver.findElement(SelectFile).click();
+
+				//select a file from browse
+				By SelectFile1 = By.id("com.android.documentsui:id/icon_thumb");
+				driver.findElement(SelectFile1).click();
+			} else {
+				try {
+					By AllowButton = By.id("com.google.android.permissioncontroller:id/permission_allow_button");
+					driver.findElement(AllowButton).click();
+
+					By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
+					driver.findElement(Browse).click();
+
+					By SelectFile1 = By.id("com.google.android.documentsui:id/icon_thumb");
+					driver.findElement(SelectFile1).click();
+
+			} catch(Exception e){
+				e.printStackTrace();
+				System.out.println("For lower version on Mobile devices");
+			}
+		}
+			By UsePhoto = By.xpath("//android.widget.TextView[@text='Use photo']");
+			driver.findElement(UsePhoto).click();
+
+			By ConfirmNumber = By.xpath("//android.widget.TextView[@text='Confirm Number']");
+			driver.findElement(ConfirmNumber).click();
+
 
 			//Switch to  chrome browser
 
@@ -1470,11 +1507,13 @@ public abstract class UhcDriver {
 					((AppiumDriver) driver).context(strContextName);
 
 					break;
+					}
+				System.out.println("Web view of current window:" +strContextName);
 				}
 				//-------Android Code-----------------
 				//
 			}
-		}
+
 		return uploadSuccess;
 	}
 	/**
