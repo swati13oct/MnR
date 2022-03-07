@@ -4182,6 +4182,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(RightRail_FindAnAgent);
 		pageloadcomplete();
+		waitForPageLoadSafari();
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(10);
+		}
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {

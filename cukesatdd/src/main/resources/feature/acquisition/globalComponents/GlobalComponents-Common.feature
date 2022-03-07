@@ -21,12 +21,12 @@ Feature: 1.12 ACQ - Global Components Validation
 
     #And user verifies home link of agents&brokers page
     #Then user clicks on back to top link of home page
-    @globalfooter
+    @globalfooter 
     Examples: 
       | site | state  |
       | AARP | Alaska |
 
-    @globalfooter
+    @globalfooter @uhcmedicare
     Examples: 
       | site | state  | code |
       | UHC  | Alaska | AK   |
