@@ -1499,8 +1499,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		if(MedicareScanImage.isDisplayed()) {
 
 			jsClickNew(MedicareScanImage);
-			String MedicareTitle = CaptureMedicareTitleText.getText();
-			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
+//			String MedicareTitle = CaptureMedicareTitleText.getText();
+//			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
 			validateNew(SelectFromlibrary, 5);
 			iOSClick(SelectFromlibrary);
 
