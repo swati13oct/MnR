@@ -964,7 +964,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-
+	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
+	private static String UMS_ACQISITION_UHC_TEST2_URL = MRConstants.UHC_TEST2_URL;
+	private static String UMS_ACQISITION_UHC_STAGE_URL = MRConstants.UHC_STAGE_URL;
 	private PageData globalFooter;
 
 	public boolean isHealthPlan = false;
@@ -1024,7 +1026,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			} else {
+			}else if (MRScenario.environment.contains("chargers-uhc")) {
+				startNew(UMS_ACQISITION_CHARGERS_UHC_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else if (MRScenario.environment.contains("uhc-test2")) {
+				startNew(UMS_ACQISITION_UHC_TEST2_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else if (MRScenario.environment.contains("uhc-stg")) {
+				startNew(UMS_ACQISITION_UHC_STAGE_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
@@ -7259,7 +7273,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String childWindow = I.next();
 			if (!base.equals(childWindow)) {
 				driver.switchTo().window(childWindow);
-				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com") || driver.getCurrentUrl().contains("medicare.int.werally.in"));
 				driver.close();
 			}
 		}

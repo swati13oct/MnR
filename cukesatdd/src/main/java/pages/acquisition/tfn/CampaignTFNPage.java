@@ -110,10 +110,9 @@ public class CampaignTFNPage extends UhcDriver {
 	// from UnitedHealthcare')])/..")
 	// @FindBy(xpath = "(//h3[contains(text(),'Learn More About Medicare Advantage
 	// Plans')]")
-	// @FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage
-	// Plans']")
+	@FindBy(xpath = "//h3[normalize-space()='Learn More About Medicare Advantage Plans'][1]")
 
-	@FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans | UnitedHealthcare']")
+	//@FindBy(xpath = "//h3[normalize-space()='Comparing Medicare Advantage Plans | UnitedHealthcare']")
 
 	public WebElement UHCSearchLinkfromGoogle;
 
@@ -1866,5 +1865,50 @@ public class CampaignTFNPage extends UhcDriver {
 
 	public void clickStartMS3OleFromPlanDetails() {
 		jsClickNew(startMS3OLE_PlanDetails);
+	}
+	
+	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
+	private WebElement startMS4OLEPlanCompare;
+
+	public void clickStartMS4OlePlanCompare() {
+		jsClickNew(startMS4OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLEPlanCompare;
+
+	public void clickStartMS3OlePlanCompare() {
+		jsClickNew(startMS3OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement planSearchEnterZip;
+	
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	private WebElement planSearchBtn;
+	
+	@FindBy(id = "change-location")
+	private WebElement changeLocationLink;
+	
+	public VPPPlanSummaryPage planSearch(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		validate(planSearchEnterZip);
+		planSearchEnterZip.click();
+		planSearchEnterZip.sendKeys(zip);
+		validate(planSearchBtn);
+		planSearchBtn.click();
+		if (validate(changeLocationLink))
+			return new VPPPlanSummaryPage(driver);
+		else 
+			return null;
 	}
 }

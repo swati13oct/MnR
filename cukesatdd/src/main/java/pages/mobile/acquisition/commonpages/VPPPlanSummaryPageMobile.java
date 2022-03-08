@@ -806,7 +806,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[text()='View Plans']")
 	private WebElement viewPlansBtnMedSupp;
 
-	@FindBy(css = "#mpaed-month")
+	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
 	private WebElement part_A_monthDrpDwn;
 
 	@FindBy(css = "#mpaed-year")
@@ -895,7 +895,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
+	@FindBy(xpath="//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -1049,6 +1049,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		if(driver.toString().contains("IOS"))
+			sleepBySec(80);
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			if (driver.getCurrentUrl().contains("werally")) {
@@ -1293,6 +1295,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(20);
+			driver.navigate().refresh();
+			sleepBySec(20);
+		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
@@ -2144,9 +2151,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
-
+		//	enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
+		//			+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(@class,'plan-name-heading') and contains(text(), '" + planName + "')]/following::*[contains(text(),'Enroll in Plan')][2]"));
 		}
 		if (enrollForPlan != null) {
 
@@ -2707,7 +2714,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
-		String toolTipText = tooltipContent.getAttribute("textContent").trim();
+		String toolTipText = tooltipContent.getText().trim();
 		if (toolTipText.contains("Why is my premium")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assertion.assertTrue(true);
@@ -2879,9 +2886,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String EmailAddress = memberAttributesMap.get("Email Address");
 		// sendkeysNew(firstNameField, FirstName);
 		scrollToView(firstNameField);
-		jsSendkeys(firstNameField, FirstName);
-		jsSendkeys(lastNameField, LastName);
-		jsSendkeys(emailField, EmailAddress);
+		sendkeysMobile(firstNameField, FirstName);
+		sendkeysMobile(lastNameField, LastName);
+		sendkeysMobile(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
 		CommonUtility.waitForPageLoadNew(driver, medicareGuidePopup, 10);
@@ -3678,39 +3685,87 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		jsClickNew(DOB);
-		DOB.sendKeys(DateOfBirth);
+		sendkeysMobile(DOB,DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
 		Thread.sleep(2000);
-		jsClickNew(part_A_monthDrpDwn);
-		Thread.sleep(2000);
-		jsClickNew(Part_A_monthDrpDwnOption);
-		Thread.sleep(2000);
-		System.out.println("Effective date- month value selected");
-		jsClickNew(part_A_yearDrpDwn);
-		Thread.sleep(2000);
-		jsClickNew(Part_A_yearDrpDwnOption);
-		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
+
 		// part_B_monthDrpDwn.click();
-		jsClickNew(part_B_monthDrpDwn);
-		Thread.sleep(2000);
-		Part_B_monthDrpDwnOption.click();
-		;
-		Thread.sleep(2000);
-		// part_B_yearDrpDwn.click();
-		part_B_yearDrpDwn.click();
-		;
-		Thread.sleep(2000);
-		Part_B_yearDrpDwnOption.click();
-		;
-		Thread.sleep(2000);
-		// startDrpDwn.click();
-		startDrpDwn.click();
-		Thread.sleep(2000);
-		startDrpDwnOption.click();
-		;
+		if(driver.toString().toUpperCase().contains("ANDROID")) {
+			jsClickNew(part_A_monthDrpDwn);
+			Thread.sleep(2000);
+			jsClickNew(Part_A_monthDrpDwnOption);
+			Thread.sleep(2000);
+			System.out.println("Effective date- month value selected");
+			jsClickNew(part_A_yearDrpDwn);
+			Thread.sleep(2000);
+			jsClickNew(Part_A_yearDrpDwnOption);
+			System.out.println("Effective date- year value selected");
+			Thread.sleep(2000);
+			jsClickNew(part_B_monthDrpDwn);
+			Thread.sleep(2000);
+			Part_B_monthDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// part_B_yearDrpDwn.click();
+			part_B_yearDrpDwn.click();
+			;
+			Thread.sleep(2000);
+			Part_B_yearDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// startDrpDwn.click();
+			startDrpDwn.click();
+			Thread.sleep(2000);
+			startDrpDwnOption.click();
+			;
+		}
+		else {
+		//	jsClickNew(part_A_monthDrpDwn);
+			
+			part_A_monthDrpDwn.click();
+			
+//			Select dropdown = new Select(part_A_monthDrpDwn);
+//			dropdown.selectByVisibleText("January");
+			
+			
+			mobileSelectOption(part_A_monthDrpDwn, "January 1",true);	
+			Thread.sleep(2000);
+			System.out.println("Effective date- month value selected");
+		//	jsClickNew(part_A_yearDrpDwn);
+			
+			part_A_yearDrpDwn.click();
+			
+			mobileSelectOption(part_A_yearDrpDwn, "2022",true);
+			Thread.sleep(2000);
+			System.out.println("Effective date- year value selected");
+			Thread.sleep(2000);
+			part_B_monthDrpDwn.click();
+	//		Thread.sleep(2000);
+			
+			mobileSelectOption(part_B_monthDrpDwn, "January 1",true);
+			;
+			Thread.sleep(2000);
+			// part_B_yearDrpDwn.click();
+//			part_B_yearDrpDwn.click();
+			;
+			Thread.sleep(2000);
+			
+			part_B_yearDrpDwn.click();
+			
+			mobileSelectOption(part_B_yearDrpDwn, "2022",true);
+			
+//			Part_B_yearDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// startDrpDwn.click();
+			startDrpDwn.click();
+			Thread.sleep(2000);
+			
+			mobileSelectOption(startDrpDwn, "March 1, 2022",true);
+			;
+		}
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
 		jsClickNew(ViewPlanMedSupPage);
@@ -5402,6 +5457,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(60);
+			driver.navigate().refresh();
+		}
 		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
@@ -6190,11 +6249,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
 			scrollToView(plan);
-			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
-			} else {
+	//		if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+	//			allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+	//		} else {
 				allPlanNames.add(plan.getText().trim());
-			}
+	//		}
 
 		}
 		return allPlanNames;

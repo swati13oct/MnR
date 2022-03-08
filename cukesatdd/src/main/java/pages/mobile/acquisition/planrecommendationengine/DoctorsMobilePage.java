@@ -187,6 +187,9 @@ public class DoctorsMobilePage extends UhcDriver {
 		if(validate(modalEditDoctor))
 			jsClickNew(modalEditDoctor);
 		jsClickNew(modalFinddoctors);
+		if(driver.toString().contains("IOS")){
+			sleepBySec(60);
+		}
 		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, count);
 		threadsleep(5000);
 		jsClickNew(modalContinuedoctors);
@@ -283,6 +286,8 @@ public class DoctorsMobilePage extends UhcDriver {
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		String env = MRScenario.environment;
 		threadsleep(6000);
+		if(driver.toString().contains("IOS"))
+			sleepBySec(60);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {
