@@ -8,4 +8,4 @@ Feature: 2.02-VBF-Acq-To test 301 redirects in AARP site Ulayer
 
     Examples: 
       | url                                       |
-      | http://www.ci-aarpmedicareplans.uhc.com// |
+      |  http://www.stage-aarpmedicareplans.uhc.com/ |
