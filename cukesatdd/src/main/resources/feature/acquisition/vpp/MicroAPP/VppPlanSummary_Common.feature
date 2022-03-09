@@ -406,7 +406,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | 15550 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 | UHC  |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
-  Scenario Outline: FID: <FID> -plan type: <plantype> - plan name: -<planName> To test the pharmacy search API change for PlanType :  <plantype> from vpp Plan Summary
+  Scenario Outline: FID: <FID> -plan type: <plantype> - plan name: -<planname> To test the pharmacy search API change for PlanType :  <plantype> from vpp Plan Summary - network type : <networkType>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
