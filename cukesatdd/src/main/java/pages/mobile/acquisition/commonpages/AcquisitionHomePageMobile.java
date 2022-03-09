@@ -333,6 +333,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//select[@id='state-select']")
 	private WebElement stateDropDown;
 
+	@FindBy(css = "#stateWidget > div > label")
+	private WebElement stateLabel;
+
 	@FindBy(xpath = "//*[@id='mobile-nav']/div[1]/div/div[1]/div[1]/button[2]")
 	public WebElement menuHamburgerCrossToClose;
 
@@ -665,22 +668,28 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+				startNewMobile(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
 			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 				startNewMobile(
 						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
-				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/",
+						".com/plan-recommendation-engine.html#/get-started"));
 				offline_prod = true;
-			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
-				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")
+					|| MRScenario.environment.equalsIgnoreCase("offline")) {
+				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/",
+						".com/plan-recommendation-engine.html#/get-started"));
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
-				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/",
+						".com/plan-recommendation-engine.html#/get-started"));
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/",
+						".com/plan-recommendation-engine.html#/get-started"));
 			}
 		} else { // For jenkins job
 			String jenkinsTagLists = MRScenario.getTagLists();
@@ -703,26 +712,32 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					}
 					if (rname.toUpperCase().contains("UHC") && site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 						else
-							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/",
+									".com/plan-recommendation-engine.html#/get-started"));
 					}
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
-						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com/",
+								".com/plan-recommendation-engine.html#/get-started"));
 					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
-						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com/",
+								".com/plan-recommendation-engine.html#/get-started"));
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				for (String rname : jenkinsTagLists.split(",")) {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
-						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL.replace(".com/",
+								".com/plan-recommendation-engine.html#/get-started"));
 					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
-						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started"));
+						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL.replace(".com/",
+								".com/plan-recommendation-engine.html#/get-started"));
 				}
 			}
 		}
@@ -730,7 +745,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		clickUpdateLaterBrowserButton();
 		return offline_prod;
 	}
-	
+
 	public boolean openAEPPRE(String site, String user) {
 		boolean offline_prod = false;
 		if (!(MRScenario.getProps() == null)) {// If running from local
@@ -745,7 +760,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
 						.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""));
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
-				startNewMobile(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""));
+				startNewMobile(
+						UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/fsem/featuretest.html").replace("www.", ""));
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
 						".com/fsem/featuretest.html"));
@@ -759,7 +775,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/fsem/featuretest.html"));
 				offline_prod = true;
-			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")
+					|| MRScenario.environment.equalsIgnoreCase("offline")) {
 				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/fsem/featuretest.html"));
 				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
@@ -821,7 +838,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		return offline_prod;
 	}
-	
+
 	public void loginflagSmithPRE(String site, String user) {
 //		driver.findElement(By.id("username")).sendKeys(user);
 		sendkeysMobile(driver.findElement(By.xpath("//*[contains(@id,'username')]")), user);
@@ -1166,18 +1183,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 */
 	public void clickUpdateLaterBrowserButton() {
 
-/*		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			if (validate(upgradeBrowserVersionBanner)) {
-				System.out.println("Update browser banner shown !");
-				jsClickNew(updateLaterButton);
-				System.out.println("Clicked 'Update later' button");
-				sleepBySec(2);
-				if (!upgradeBrowserVersionBanner.isDisplayed()) {
-					System.out.println("Update browser banner disappeared.");
-				}
-
-			}
-		} */  //Pop-up not visible for now
+		/*
+		 * if (driver.getClass().toString().toUpperCase().contains("ANDROID")) { if
+		 * (validate(upgradeBrowserVersionBanner)) {
+		 * System.out.println("Update browser banner shown !");
+		 * jsClickNew(updateLaterButton);
+		 * System.out.println("Clicked 'Update later' button"); sleepBySec(2); if
+		 * (!upgradeBrowserVersionBanner.isDisplayed()) {
+		 * System.out.println("Update browser banner disappeared."); }
+		 * 
+		 * } }
+		 */ // Pop-up not visible for now
 	}
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
@@ -1236,7 +1252,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
 
-		if (driver.getCurrentUrl().equalsIgnoreCase("https://www.uhc.com/about-us")) {
+		if (driver.getCurrentUrl().contains("about-us")) {
+			CommonUtility.checkPageIsReadyNew(driver);
 			driver.navigate().back();
 			try {
 				Thread.sleep(3000);
@@ -1878,7 +1895,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		// validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -2667,7 +2684,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
-		if(!aboutLink.isDisplayed()) {
+		if (!aboutLink.isDisplayed()) {
 			jsClickNew(more);
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
@@ -4952,7 +4969,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		// jsClickNew(stateWidget);
 		// validateNew(stateDropDown);
+		jsClickNew(stateLabel);
 		selectFromDropDownByValue(stateDropDown, state);
+
+//		iosDropDownSelection(state);
 		/*
 		 * String StateSessionStorage = returnDriverStorageJS("sessionStorage",
 		 * "ucp_geotrackingState"); System.out.println("State selected : " + state);
@@ -5008,7 +5028,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				}
 			} else {
 				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
-						+ "') and contains(@dtmname,'" + linkName + "')]"));
+						+ "') and contains(@dtmname,'" + linkName
+						+ "')]|(//a[@dtmname='NavLinks:Medicare Education:Medicare FAQ'and @href='/medicare-education/medicare-faq.html'])[2]"));
 				waitforElement(link);
 				jsClickNew(link);
 				CommonUtility.checkPageIsReadyNew(driver);

@@ -728,7 +728,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	 * Validate Widgets From copy deck: Preferred Retail Pharmacy Network Only
 	 * display the Preferred Retail Pharmacy Network tile for plans that have a
 	 * Preferred Retail Pharmacy benefit. Do not display for the AARP MedicareRx
-	 * Walgreens plan Walgreens â€“ Preferred Retail Pharmacy Only display the
+	 * Walgreens plan Walgreens – Preferred Retail Pharmacy Only display the
 	 * Walgreens tile for AARP MedicareRx Walgreens plan members Preferred Mail
 	 * Service Pharmacy Only display the Preferred Mail Service Pharmacy tile for
 	 * plans that have a Preferred Mail Service Pharmacy benefit. Do not display for
@@ -1056,7 +1056,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 	}
 
-	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
+	@FindBy(xpath="//span[text()='Servicio de salud ind?gena, tribal o ind?gena urbano']")
 	protected WebElement indian_tribal_label_filter_text;
 
 	public boolean validateNoPharmaciesErrorMessage() {
@@ -1068,8 +1068,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
 		catch (Exception ex) {
 		}
-		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
-			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']/.."));
+		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud ind?gena, tribal o ind?gena urbano")){
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud ind?gena, tribal o ind?gena urbano']/.."));
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
