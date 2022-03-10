@@ -283,12 +283,12 @@ Feature: ACQ M&R- To test SAM Icons
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @samIconsUHC @regressionUHC @uhcmedicare
+    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @samIconsUHC @regressionUHC @uhcmedicare
+    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -321,7 +321,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @samIconsUHC @uhcmedicare
+    @samIconsUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -604,7 +604,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | plantype | planName                                            |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS)|
 
-    @samIconsUHC @regressionUHC @uhcmedicare
+    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -614,7 +614,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | plantype | planName                        |
       | AARP |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @samIconsUHC @regressionAARP @featureGate @uhcmedicare
+    @samIconsUHC @regressionAARP @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
@@ -654,7 +654,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipCode | planType | planName                                            | drug1   |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
 
-    @samIconsUHC @regressionUHC @featureGate @uhcmedicare
+    @samIconsUHC @regressionUHC @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
@@ -686,7 +686,7 @@ Feature: ACQ M&R- To test SAM Icons
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
 
-    @samIconsUHC @uhcmedicare
+    @samIconsUHC @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
@@ -972,12 +972,12 @@ Feature: ACQ M&R- To test SAM Icons
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @ProactiveChatUHC @regressionUHC @uhcmedicare
+    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @ProactiveChatUHC @regressionUHC @uhcmedicare
+    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -1010,7 +1010,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @ProactiveChatUHC @uhcmedicare
+    @ProactiveChatUHC @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -1302,7 +1302,7 @@ Feature: ACQ M&R- To test SAM Icons
       | /?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 | AARP |
       | /?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 | AARP |
 
-    @samIconsUHC @regressionUHC @samIconsEmailExternal @uhcmedicare
+    @samIconsUHC @regressionUHC @samIconsEmailExternal @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                             | site |
       | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650   | UHC  |
