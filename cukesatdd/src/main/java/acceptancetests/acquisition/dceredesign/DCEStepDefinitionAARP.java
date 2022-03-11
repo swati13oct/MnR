@@ -3333,5 +3333,18 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
+	
+	//This Method is used to validate sort by under your drug section on Detail page 
+	@And("the user selects the sort by under your drugs")
+	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
+		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String sortBy = givenAttributesMap.get("Sort By");
+		System.out.println("Sort by to Select : "+sortBy);
+		 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);  
+		 drugDetailsPage.validateDrugSortBy(sortBy);
+		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
 
 }
