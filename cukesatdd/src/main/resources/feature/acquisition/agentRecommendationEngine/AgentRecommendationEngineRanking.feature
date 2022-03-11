@@ -1,4 +1,4 @@
-@agentRecommendationEngine @ARERegression @regressionAARP @nonProd  @featureGate
+@agentRecommendationEngine @ARERegression @regressionAARP @nonProd @featureGate
 Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
 
   @ARE @AREElements @dropdownUI @F439411 @sanity
@@ -32,9 +32,9 @@ Feature: 1.17.1 Agent Recommendation Engine - Verify ARE elements
     Then agent validates plan ranking drop down not displaying in plancompare page
 
     Examples: 
-      | User                   | Pass            | Email                  | IfMultiCounty | PlanYear |
-      | areddstage@givmail.com | Password@123456 | ATDD4STG@MEMBERDD.COM  | None          | current  |
-      | areddstage@givmail.com | Password@123456 | EMILYN@MACIEJEWSKI.COM | None          | current  |
+      | User                   | Pass            | Email                 | IfMultiCounty | PlanYear |
+      | areddstage@givmail.com | Password@123456 | ATDD4STG@MEMBERDD.COM | None          | current  |
+      | areddstage@givmail.com | Password@123456 | ZYJOS@BOXIMAIL.COM    | None          | current  |
 
   @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
