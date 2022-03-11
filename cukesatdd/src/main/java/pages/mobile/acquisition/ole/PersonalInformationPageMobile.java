@@ -286,18 +286,23 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
 				sendkeysMobile(MailingAdd_City, Mailing_City);
-				
+
 				// Select SelectState = new Select(MailingAdd_State_DropDown);
 				// SelectState.selectByValue(Mailing_State);
 
 				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-				
+
 					WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
 					jsClickNew(stateLable);
 
 				}
-				
-		checkElementisEnabled(MailingAdd_State_DropDown);
+
+				checkElementisEnabled(MailingAdd_State_DropDown);
+
+				//Below code is added for ios click issue
+				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+					MailingAdd_State_DropDown.click();
+				}
 				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
