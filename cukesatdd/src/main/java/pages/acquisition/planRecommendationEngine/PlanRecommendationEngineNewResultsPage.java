@@ -124,7 +124,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
 
-	@FindBy(css = "li.view-ms-plans a.buttonLink")
+	@FindBy(css = "li[class*='viewMedigap'] a.buttonLink")
 	private WebElement viewMedigapLink;
 
 	@FindBy(css = ".view-ms-plans a")
@@ -332,6 +332,12 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	private WebElement signOut;
+	
+	@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section']")
+	private WebElement ImpResSection;
+	
+	@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section'] p")
+	private List<WebElement> ImpResSectionPDFLinks;
 	
 // Compare Functionality elements
 	
@@ -1104,6 +1110,101 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);
 		Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after remove breadcrumb");
 	}
+	
+	public void noImportantResource() {
+		System.out.println("Validate ImportantResource Not Present");
+		Assert.assertFalse(isElementPresent(ImpResSection), "ImportantResource is displaying in Result Page");
+		threadsleep(5000);
+		Assert.assertTrue(ImpResSectionPDFLinks.isEmpty(), "ImportantResource having PDF Links in Result Page");
+	}
+	
+	
+	
+	public void importantResourceSection(String ImpRes) {
+		System.out.println("Validate ImportantResource Present and Links");
+		ImportantResource();
+		threadsleep(3000);
+		System.out.println("Validating PDF document Info...");
+		String resName = "";
+		if(ImpRes.isEmpty())
+			System.out.println("Resources is Empty ");
+		else
+		{
+			String[] resDetails = ImpRes.split(",");
+			for (int i = 0; i < resDetails.length; i++) {
+				resName = resDetails[i].toLowerCase();
+				findPDF(resName);
+			}
+		}
+	}
+	
+	public void findPDF(String uniqueName) {
+		System.out.println("Finding a PDF... " + uniqueName);
+		if(uniqueName.contains("wrap")) 
+			pdfLink("AARP Medicare","WR1000");
+		if(uniqueName.contains("cms guide")) 
+			pdfLink("Health Insurance","GU25125ST");
+		if(uniqueName.contains("pov")) 
+			pdfLink("plan overview","POV");
+		if(uniqueName.contains("rate pages")) 
+			pdfLink("Rate Pages","RP");
+		if(uniqueName.contains("rd")) 
+			pdfLink("Rules and Disclosures","RD");
+		if(uniqueName.contains("bt")) 
+			pdfLink("Benefit Tables","RD");
+		if(uniqueName.contains("ooc")) 
+			pdfLink("Outline of Coverage","OOC");
+		if(uniqueName.contains("creeed enroll")) 
+			pdfLink("Enrollment Discount","WB");
+		if(uniqueName.contains("selecthd")) 
+			pdfLink("Select Provider","HD1000");
+	}
+	
+	public void pdfLink(String pdfname, String pdflink) {
+		int pdfindex = 0;
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		for(int p=0; p<ImpResSectionPDFLinks.size(); p++) {
+			try {
+				ImpResSectionPDFLinks.get(p).getText().contains(pdfname);
+				pdfindex = p;
+				break;
+			}
+			catch (Exception e) {
+				System.out.println("Unable to find PDF with : " + p);
+			}
+		}
+		windowSwape(pdfindex,curWindow,pdflink);
+		
+	}
+	
+	public void windowSwape(int p, String curWindow, String pdf ) {
+		threadsleep(2000);
+		ImpResSectionPDFLinks.get(p).click();
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(windows);
+		for (String window : windows) {
+			System.out.println(window.replace("page-", ""));
+			if (!window.equals(curWindow)) {
+				driver.switchTo().window(window);
+				Assert.assertTrue(driver.getCurrentUrl().contains(pdf), "PDF doc is not correct one");
+				driver.close();
+			}else
+				System.out.println("It is Primary Window");
+			threadsleep(5000);
+			driver.switchTo().window(curWindow);
+		}
+	}
+	
+	public void ImportantResource() {
+		System.out.println("Validate ImportantResource Not Present");
+		Assert.assertTrue(isElementPresent(ImpResSection), "ImportantResource is not displaying in Result Page");
+		scrollToView(ImpResSection);
+		threadsleep(3000);
+		Assert.assertTrue(ImpResSectionPDFLinks.size()>0, "ImportantResource is not having PDF Links in Result Page");
+	}
+	
+	
 	String FilteredPlanCount = "";
 	public void applySort(String planType) {
 		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");

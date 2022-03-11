@@ -61,7 +61,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
 
-    @globalfooter_UHC @regressionUHC @sanity
+    @globalfooter_UHC @regressionUHC @sanity @uhcmedicare
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 UMS | UHC  |
@@ -122,7 +122,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 AMP | AARP |   80001 | No              | Jefferson |
 
-    @globalfooter_UHC @regressionUHC @featureGate 
+    @globalfooter_UHC @regressionUHC @featureGate @uhcmedicare
     Examples: 
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 UMS | UHC  |   80001 | No              | Jefferson |
@@ -180,7 +180,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
 
-    @globalfooter_UHC @regressionUHC @featureGate
+    @globalfooter_UHC @regressionUHC @featureGate @uhcmedicare
     Examples: 
       | Scenario           | site |
       | E2E Scenario_4 UMS | UHC  |
@@ -238,7 +238,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_5 AMP | AARP |
 
-    @globalfooter_UHC @regressionUHC
+    @globalfooter_UHC @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site |
       | E2E Scenario_5 UMS | UHC  |
@@ -387,7 +387,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | about-our-plans.html                                                                    | Why Choose UHC?   |
       | E2E Scenario_2 AMP | AARP | profile/guest                                                                           | Your Profile      |
 
-    @globalheader_UHC @regressionUHC
+    @globalheader_UHC @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                      | pagename                                                    |
       | E2E Scenario_2 UMS | UHC  | health-plans.html#/zipcode                                | Shop for a Plan                                             |
@@ -397,7 +397,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | shop/medicare-advantage-plans/health-care-management.html | Clinical Programs: Condition Management and Care Management |
       | E2E Scenario_2 UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html       | Medicare Advantage Plan Benefits                            |
 
-    @globalheader_UHC_1 @regressionUHC
+    @globalheader_UHC_1 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                              | pagename                                             |
       | E2E Scenario_2 UMS | UHC  | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
@@ -408,7 +408,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | shop/compare.html                 | Shop: Compare Plans                                  |
 
     #| E2E Scenario_2 UMS | UHC  | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html        | Appeals and Grievances                                 |
-    @globalheader_UHC_2 @regressionUHC
+    @globalheader_UHC_2 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                                | pagename                                               |
       | E2E Scenario_2 UMS | UHC  | shop/estimate.html                  | Shop: Estimate Costs                                   |
@@ -418,7 +418,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | enroll/ma-enrollment.html           | Medicare Advantage Enrollment Information              |
       | E2E Scenario_2 UMS | UHC  | enroll/pdp-enrollment.html          | Medicare Prescription Drug Plan Enrollment Information |
 
-    @globalheader_UHC_3 @regressionUHC
+    @globalheader_UHC_3 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                                              | pagename                                        |
       | E2E Scenario_2 UMS | UHC  | resources.html                                                                    | Resources Hub                                   |
@@ -430,7 +430,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | Explanation of Benefits                         |
       | E2E Scenario_2 UMS | UHC  | resources/disenrollment-information.html                                          | Disenrollment Rights and Responsibilities       |
 
-    @globalheader_UHC_4 @regressionUHC @featureGate
+    @globalheader_UHC_4 @regressionUHC @featureGate @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                 | pagename                              |
       | E2E Scenario_2 UMS | UHC  | resources/mail-order-pharmacy.html                   | Preferred Mail Home Delivery          |
@@ -440,7 +440,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | resources/how-to-appoint-a-representative.html       | How to Appoint a Representative       |
       | E2E Scenario_2 UMS | UHC  | resources/medication-therapy-management-program.html | Medication Therapy Management Program |
 
-    @globalheader_UHC_5 @regressionUHC
+    @globalheader_UHC_5 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                          | pagename                                                          |
       | E2E Scenario_2 UMS | UHC  | resources/prescription-drug-appeals.html                      | Prescription Drug Coverage Determinations, Appeals and Grievances |
@@ -450,7 +450,7 @@ Feature: 1.12 UAT - Header and Footer flows
       #| E2E Scenario_2 UMS | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html | Health Insurance Free Agent Appointment                           |
       | E2E Scenario_2 UMS | UHC  | medicare-education.html                                       | Understanding Medicare                                            |
 
-    @globalheader_UHC_6 @regressionUHC @featureGate
+    @globalheader_UHC_6 @regressionUHC @featureGate @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                       | pagename                                       |
       | E2E Scenario_2 UMS | UHC  | medicare-education/medicare-eligibility.html               | Medicare Eligibility                           |
@@ -460,7 +460,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | medicare-education/medicare-medicaid-dual-eligibility.html | Medicare, Medicaid and Dual Eligibility        |
       | E2E Scenario_2 UMS | UHC  | medicare-education/extra-help-program.html                 | Get Help with Medicare Prescription Drug Costs |
 
-    @globalheader_UHC_7 @regressionUHC
+    @globalheader_UHC_7 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                  | pagename                                  |
       | E2E Scenario_2 UMS | UHC  | medicare-education/medicare-advantage-plans.html      | Medicare Advantage (Part C) Plans         |
@@ -469,7 +469,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | medicare-education/enrollment-and-changing-plans.html | Enrollment & Changing Plans               |
       | E2E Scenario_2 UMS | UHC  | site-search.html/?q1=medicare&searchloc=header        | Site search page                          |
 
-    @globalheader_UHC_8 @regressionUHC @featureGate
+    @globalheader_UHC_8 @regressionUHC @featureGate @uhcmedicare
     Examples: 
       | Scenario           | site | path                                                                                    | pagename          |
       | E2E Scenario_2 UMS | UHC  | medicare-articles.html                                                                  | Blog Homepage     |
@@ -542,7 +542,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | health-insurance-brokers.html | Agents & Brokers |
       #| E2E Scenario_2 AMP | AARP | about-us.html                 | About Us         |
 
-    @globalheader_UHC_9 @regressionUHC
+    @globalheader_UHC_9 @regressionUHC @uhcmedicare
     Examples: 
       | Scenario           | site | path                          | pagename         |
       | E2E Scenario_2 UMS | UHC  | contact-us.html               | Contact Us       |
