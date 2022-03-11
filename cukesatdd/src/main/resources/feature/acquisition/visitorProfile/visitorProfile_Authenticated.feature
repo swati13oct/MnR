@@ -293,13 +293,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP
     Examples:
-      | site | name | userName              | password   |
-      | AARP | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | AARP | VD   | vdatdd_17@getnada.com | Password@123 |
 
     @visitorProfile_UHC
     Examples:
-      | site | name | userName              | password   |
-      | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | UHC  | VD   | vdatdd_17@getnada.com | Password@123 |
 
   @authenticated @DCEImportSignIn
   Scenario Outline: Verify DCE Redirect  on <site> site
