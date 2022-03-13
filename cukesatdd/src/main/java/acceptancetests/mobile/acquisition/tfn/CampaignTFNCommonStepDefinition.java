@@ -28,6 +28,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.CampaignTFNPageMobile;
@@ -59,6 +60,20 @@ public class CampaignTFNCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		return memberAttributesMap;
+	}
+	
+	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP$")
+	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN_on_VPP() throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		CampaignTFNPageMobile tfnPage = new CampaignTFNPageMobile(driver);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		HashMap<String, String> tfnCookieValue = tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE, tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.SRC_CODE, tfnCookieValue.get("Source Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN, tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN, tfnCookieValue.get("Medsup TFN"));
 	}
 
 	// private WebDriver driver;

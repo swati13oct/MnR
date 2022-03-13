@@ -662,6 +662,18 @@ public abstract class UhcDriver {
 			System.out.println("Click and JsClick failed");
 		}
 	}
+	
+	public boolean isElementPresent(WebElement element) {
+	    try {
+	    	if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			}
+	    } catch (org.openqa.selenium.NoSuchElementException e) {
+	    	System.out.println("Element Not found!!!!");
+	    }
+	    return false;	    
+	}
 
 	public void jsClickNew(WebElement element) {
 

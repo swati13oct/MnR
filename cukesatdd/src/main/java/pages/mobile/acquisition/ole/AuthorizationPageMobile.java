@@ -243,10 +243,11 @@ public class AuthorizationPageMobile extends UhcDriver {
 			// affect Android execution
 			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 				WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
-				//WebElement stateLabel1 = driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
-				//stateLable.click();
+				// WebElement stateLabel1 =
+				// driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
+				// stateLable.click();
 				jsClickNew(stateLable);
-				//stateLabel1.click();
+				// stateLabel1.click();
 			}
 		//	checkElementisEnabled(Authorized_State);
 		//	selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);

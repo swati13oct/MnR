@@ -170,7 +170,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	@FindBy(xpath = "//*[@id='zipcodemeded-1']")
 	private WebElement zipCodeShopField;
 	// @FindBy(xpath =
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
@@ -1207,10 +1207,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		 * System.out.println("TFN is Displayed on Page : " +
 		 * ActualTFNelement.getText());
 		 * 
-		 * >>>>>>> branch 'AndroidChrome_TestNG' of
-		 * https://github.optum.com/gov-prog-digital/mratdd/ } <<<<<<< HEAD
-		 * 
-		 * // } =======
+
 		 * 
 		 * else { Assertion.fail("TFN elemnet is not found / displayed on page : " +
 		 * TFNXpath); }

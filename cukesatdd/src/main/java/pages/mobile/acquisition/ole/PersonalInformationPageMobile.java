@@ -286,12 +286,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno, "301");
 				sendkeysMobile(MailingAdd_City, Mailing_City);
-				
+
 				// Select SelectState = new Select(MailingAdd_State_DropDown);
 				// SelectState.selectByValue(Mailing_State);
 
 				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-				
+
 					WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 					jsClickNew(stateLable);
 
