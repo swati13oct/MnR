@@ -21,6 +21,7 @@ import static org.apache.commons.io.IOUtils.toByteArray;
 
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import io.appium.java_client.MobileElement;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -373,6 +374,7 @@ public abstract class UhcDriver {
 	public boolean validateNew(WebElement element) {
 		return validateNew(element, defaultTimeoutInSec);
 	}
+
 
 	public void waitforElementNew(WebElement element) {
 		waitforElementNew(element, defaultTimeoutInSec);
@@ -1376,31 +1378,32 @@ public abstract class UhcDriver {
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
 			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
-			Thread.sleep(500);
+			sleepBySec(5);
 			//-------For higher Version of IOS----------//
 			//if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max") ||MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone X")) {
 
 			if (MRScenario.mobileDeviceOSVersion.contains("14.")) {
 				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
-				Thread.sleep(500);
+				sleepBySec(5);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
-				Thread.sleep(500);
+				sleepBySec(5);
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
-				Thread.sleep(500);
+				sleepBySec(5);
 				//-------For higher Version of IOS----------//
 			}
 			//-------For lower Version of IOS----------//
 			else {
 				try {
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
+					sleepBySec(10);
+					//((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]")).click();
+					sleepBySec(10);
 
-					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
-					Thread.sleep(500);
-
-					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+				//	((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+			//		sleepBySec(5);
 					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
-					Thread.sleep(500);
-
+					sleepBySec(5);
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("For lower version on Mobile devices");
@@ -1414,16 +1417,7 @@ public abstract class UhcDriver {
 
 			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Confirm Number")).click();
 
-			Thread.sleep(500);
-
-	       /*getFiletoUpload("card");
-	        if(uploadBtn.isDisplayed()) {
-	        	uploadSuccess = true;
-	        }
-	        uploadBtn.click();
-	        Thread.sleep(500);
-			((IOSDriver) driver).context(curHandle);
-			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());*/
+			sleepBySec(5);
 			Set<String> contextNames1 = ((AppiumDriver) driver).getContextHandles();
 			for (String strContextName : contextNames1) {
 				if (strContextName.contains("WEBVIEW")) {
@@ -1452,47 +1446,54 @@ public abstract class UhcDriver {
 			uploadFileToRealDevice();
 
 
-			if (MRScenario.mobileDeviceOSVersion.contains("11") || MRScenario.mobileDeviceOSVersion.contains("10") ||MRScenario.mobileDeviceOSVersion.contains("12")) {
+			if (MRScenario.mobileDeviceOSVersion.contains("11") || MRScenario.mobileDeviceOSVersion.contains("10") ){
+					//||MRScenario.mobileDeviceOSVersion.contains("12")) {
 
-				By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+				//By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+				By AllowButton = By.xpath("//android.widget.Button[@text='Allow']");
 				driver.findElement(AllowButton).click();
+
 				//Click on Browse button on Android
-				Thread.sleep(500);
+
+				sleepBySec(5);
 				By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
 				driver.findElement(Browse).click();
-				Thread.sleep(500);
+				sleepBySec(5);
 				//Click on Hamburger menu to navigate to gallery
 				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Show roots")).click();
-				Thread.sleep(5000);
+				sleepBySec(5);
 				//Click on gallery button
-			//	By Gallery = By.xpath("//android.widget.TextView[@text='Gallery']");
-
-				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Gallery")).click();
-				Thread.sleep(5000);
-			//	driver.findElement(Gallery).click();
-				Thread.sleep(5000);
+				By Gallery = By.xpath("//android.widget.TextView[@text='Gallery']");
+				driver.findElement(Gallery).click();
+				sleepBySec(5);
 				//Select a folder in gallery
+			//	By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
 				By SelectFile = By.id("com.android.gallery3d.id/gl_root_view");
 				driver.findElement(SelectFile).click();
-				Thread.sleep(5000);
+				sleepBySec(5);
 				//select a file from browse
 				By SelectFile1 = By.id("com.android.documentsui:id/icon_thumb");
 				driver.findElement(SelectFile1).click();
-				Thread.sleep(500);
+				sleepBySec(5);
 			} else {
 				try {
+
+				//	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+				//	public WebElement IPerceptionsFrame;
 					By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
-				//	By AllowButton = By.xpath("//android.widget.TextView[@text='Allow']");
 					driver.findElement(AllowButton).click();
-					Thread.sleep(500);
+
+					sleepBySec(5);
+
+					System.out.println("Printing");
 					//((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Allow")).click();
 					By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
 					driver.findElement(Browse).click();
-					Thread.sleep(500);
+					sleepBySec(5);
 
-					By SelectFile1 = By.id("com.google.android.documentsui:id/icon_thumb");
+					By SelectFile1 = By.id("com.android.documentsui:id/icon_thumb");
 					driver.findElement(SelectFile1).click();
-					Thread.sleep(500);
+					sleepBySec(5);
 
 			} catch(Exception e){
 				e.printStackTrace();
@@ -1501,10 +1502,10 @@ public abstract class UhcDriver {
 		}
 			By UsePhoto = By.xpath("//android.widget.TextView[@text='Use photo']");
 			driver.findElement(UsePhoto).click();
-			Thread.sleep(500);
+			sleepBySec(5);
 			By ConfirmNumber = By.xpath("//android.widget.TextView[@text='Confirm Number']");
 			driver.findElement(ConfirmNumber).click();
-			Thread.sleep(500);
+			sleepBySec(5);
 
 			//Switch to  chrome browser
 
@@ -1524,6 +1525,8 @@ public abstract class UhcDriver {
 
 		return uploadSuccess;
 	}
+
+
 	/**
 	 * Gets the image file from mobile.
 	 *
