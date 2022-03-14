@@ -308,7 +308,13 @@ public class ReviewSubmitPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
 	private WebElement AuthRelationship;
-	
+
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information')]")
+	private WebElement EditPersonalInformation;
+
+	@FindBy(id = "dob")
+	private WebElement DOBtxtFld;
+
 	@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
 	private WebElement EditMedicareInformation;
 	
@@ -675,17 +681,24 @@ public class ReviewSubmitPage extends UhcDriver{
 		return outputDate;	
 	}
 	
-	public boolean Review_page_enter_required_Medicare_details(Map<String, String> MedicareDetailsMap) throws InterruptedException{
+	public boolean Review_page_enter_required_Pesornal_Medicare_details(Map<String, String> MedicareDetailsMap) throws InterruptedException{
 		
 		boolean result = true;
 		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
-//		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
-//		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date1");
-		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date1"); 
-		
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date1");
+		String DOB = MedicareDetailsMap.get("DOB1");
+
+		validate(EditPersonalInformation);
+		jsClickNew(EditPersonalInformation);
+
+		sendkeys(DOBtxtFld,DOB);
+
+		validateNew(ReviewEditSavechanges);
+		jsClickNew(ReviewEditSavechanges);
+
 		validate(EditMedicareInformation);
 		jsClickNew(EditMedicareInformation);
 		
@@ -696,33 +709,25 @@ public class ReviewSubmitPage extends UhcDriver{
 		//Thread.sleep(5000);
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
-	//	sendkeysNew(medicaidNumberField,"12345876");
-	//	Thread.sleep(5000);
-	/*try {
-		if (partAStartDateField.isDisplayed() || partBStartDateField.isDisplayed()) {
-			sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			Thread.sleep(2000);
-			//jsClickNew(ReviewEditSavechanges);
-			//validateNew(ReviewEditSavechanges);
-			jsClickNew(ReviewEditSavechanges);
-			System.out.println(" MedicareNumber Details and part a , Part b are edited from Review Page");
-		}
-	}
-	catch (Exception e){
-				System.out.println(" MedicareNumber Details are edited from Review Page and proceed to Review Page");
 
+		if(driver.getCurrentUrl().contains("eligibility")) {
+			if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
+				System.out.println("OLE Confirm your Eligibility is Displayed");
+
+				sendkeysNew(partAStartDateField, PartAeffectiveDate);
+				sendkeysNew(partBStartDateField, PartBeffectiveDate);
+				validateNew(ReviewEditSavechanges);
+				jsClickNew(ReviewEditSavechanges);
+				validateNew(Submit_Disclaimer);
+				driver.getCurrentUrl().contains("review") ;
+				}
 			}
-		*/	
-		
-			/*
-		if(ReviewEditSavechanges.isEnabled()){
-			System.out.println("User navigate back to Review Page");
-			return true;
+		else{
+			validateNew(Submit_Disclaimer);
+			driver.getCurrentUrl().contains("review") ;
 		}
-		else
-			System.out.println("savechanges is disabled, User not navigated back to Review Page");
-		return false;*/
+
 		return result;
 	}
-	}
+
+}
