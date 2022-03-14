@@ -493,8 +493,8 @@ Feature: 1.09. ACQ- Shopper Profile
       | ZipCode            | <zipcode>          |
       | County             | <county>           |
     Then user Validates Show DSNP and PDP Link available
-    #Then user clicks on Show DSNP Toggle and validate DSNP Plan
-    #  | DSNPPlan | <DSNPPlan> |
+    Then user clicks on Show DSNP Toggle and validate DSNP Plan
+      | DSNPPlan | <DSNPPlan> |
     Then User Click on PDP Link and Validate PDP Plans are loaded
       | PDPPlan | <PDPPlan> |
     Then User Switch backs to MAPD Plans

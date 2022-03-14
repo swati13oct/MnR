@@ -2379,23 +2379,10 @@ public void clickDSNPToggleValidateSNPPlan(Map<String, String> memberAttributesM
 	List <WebElement> closeChat = driver.findElements(By.xpath("//*[@class ='proactive-chat-cross']"));
 	
 	if(closeChat.size() != 0) {
-		Dimension dimension = new Dimension(800, 400);
+		Dimension dimension = new Dimension(1600, 920);
 		//Resize current window to the set dimension
 		driver.manage().window().setSize(dimension);
-		/*Robot robot = new Robot();
-		for (int i = 0; i < 4; i++) {
-			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_SUBTRACT);
-			robot.keyRelease(KeyEvent.VK_SUBTRACT);
-			robot.keyRelease(KeyEvent.VK_CONTROL);
-			}*/
-		/*driver.findElement(By.xpath("//*[@id='proactive-chat-widget-new']//*[@class='proactive-chat-button-blue']")).click();
-		sleepBySec(5);
-		//driver.findElement(By.xpath("//*[@data-lp-point = 'minimize']")).click();
-		Actions action = new Actions(driver);
-		WebElement fromElement = driver.findElement(By.xpath("//div[@aria-label='Chat window']"));
 		
-		action.dragAndDropBy(fromElement, 400, 300).build().perform();*/
 		
 	}
 	
