@@ -286,6 +286,8 @@ public class DoctorsMobilePage extends UhcDriver {
 	public ArrayList<String> validateWerallySearchanotherWindowmobile(String primaryWindow, String type, String search, int count) {
 		String env = MRScenario.environment;
 		threadsleep(6000);
+		if(driver.toString().contains("IOS"))
+			sleepBySec(60);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() == 2) {

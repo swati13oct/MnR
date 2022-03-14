@@ -1880,4 +1880,35 @@ public class CampaignTFNPage extends UhcDriver {
 	public void clickStartMS3OlePlanCompare() {
 		jsClickNew(startMS3OLEPlanCompare);
 	}
+	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement planSearchEnterZip;
+	
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	private WebElement planSearchBtn;
+	
+	@FindBy(id = "change-location")
+	private WebElement changeLocationLink;
+	
+	public VPPPlanSummaryPage planSearch(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
+		try {
+			validate(surveyPopupNoBtn, 20);
+			if (surveyPopupNoBtn.isDisplayed())
+				jsClickNew(surveyPopupNoBtn);
+		} catch (Exception e) {
+			System.out.println("survey popup not displayed");
+		}
+		validate(planSearchEnterZip);
+		planSearchEnterZip.click();
+		planSearchEnterZip.sendKeys(zip);
+		validate(planSearchBtn);
+		planSearchBtn.click();
+		if (validate(changeLocationLink))
+			return new VPPPlanSummaryPage(driver);
+		else 
+			return null;
+	}
 }

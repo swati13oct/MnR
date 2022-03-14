@@ -511,7 +511,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
 	private WebElement providerListPlanCard;
-	
+
 	@FindBy(xpath = "//a[contains(@class,'print')]/following-sibling::a[contains(@class,'email')]")
 	protected WebElement summary_maEmailOption;
 
@@ -806,7 +806,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//button[text()='View Plans']")
 	private WebElement viewPlansBtnMedSupp;
 
-	@FindBy(css = "#mpaed-month")
+	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
 	private WebElement part_A_monthDrpDwn;
 
 	@FindBy(css = "#mpaed-year")
@@ -894,6 +894,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
+
+
+	//@FindBy(xpath = "(//img[contains(@src,'RockyMountainLogo')])[1]")
 
 	@FindBy(xpath="//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
@@ -1284,9 +1287,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
-		if(maPlansViewLink.isDisplayed())
+		if (maPlansViewLink.isDisplayed())
 			jsClickNew(maPlansViewLink);
-		
+
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 
@@ -1295,6 +1298,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(20);
+			driver.navigate().refresh();
+			sleepBySec(20);
+		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
@@ -2146,9 +2154,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
-
+		//	enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
+		//			+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(@class,'plan-name-heading') and contains(text(), '" + planName + "')]/following::*[contains(text(),'Enroll in Plan')][2]"));
 		}
 		if (enrollForPlan != null) {
 
@@ -2644,7 +2652,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void validateAnnualDeductible(String planName, String annualDeductible) {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Prescription Deductible')]//following::span[3]"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Deductible')]//following::span[3]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
 		/*
 		 * try {
@@ -2876,6 +2884,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void enterRequiredFieldsForMedicareGuide(Map<String, String> memberAttributesMap) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			driver.navigate().back();
+			System.out.println("This if loop added for ios as coming back to Parent window failing..");
+		}
+
 		String FirstName = memberAttributesMap.get("First Name");
 		String LastName = memberAttributesMap.get("Last Name");
 		String EmailAddress = memberAttributesMap.get("Email Address");
@@ -3344,7 +3357,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		sleepBySec(3);
 		waitForPageLoadSafari();
-		if(backToPlans.isDisplayed()) {
+		if (backToPlans.isDisplayed()) {
 			jsClickNew(backToPlans);
 		}
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
@@ -3680,39 +3693,87 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		jsClickNew(DOB);
-		DOB.sendKeys(DateOfBirth);
+		sendkeysMobile(DOB,DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
 		Thread.sleep(2000);
-		jsClickNew(part_A_monthDrpDwn);
-		Thread.sleep(2000);
-		jsClickNew(Part_A_monthDrpDwnOption);
-		Thread.sleep(2000);
-		System.out.println("Effective date- month value selected");
-		jsClickNew(part_A_yearDrpDwn);
-		Thread.sleep(2000);
-		jsClickNew(Part_A_yearDrpDwnOption);
-		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
+
 		// part_B_monthDrpDwn.click();
-		jsClickNew(part_B_monthDrpDwn);
-		Thread.sleep(2000);
-		Part_B_monthDrpDwnOption.click();
-		;
-		Thread.sleep(2000);
-		// part_B_yearDrpDwn.click();
-		part_B_yearDrpDwn.click();
-		;
-		Thread.sleep(2000);
-		Part_B_yearDrpDwnOption.click();
-		;
-		Thread.sleep(2000);
-		// startDrpDwn.click();
-		startDrpDwn.click();
-		Thread.sleep(2000);
-		startDrpDwnOption.click();
-		;
+		if(driver.toString().toUpperCase().contains("ANDROID")) {
+			jsClickNew(part_A_monthDrpDwn);
+			Thread.sleep(2000);
+			jsClickNew(Part_A_monthDrpDwnOption);
+			Thread.sleep(2000);
+			System.out.println("Effective date- month value selected");
+			jsClickNew(part_A_yearDrpDwn);
+			Thread.sleep(2000);
+			jsClickNew(Part_A_yearDrpDwnOption);
+			System.out.println("Effective date- year value selected");
+			Thread.sleep(2000);
+			jsClickNew(part_B_monthDrpDwn);
+			Thread.sleep(2000);
+			Part_B_monthDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// part_B_yearDrpDwn.click();
+			part_B_yearDrpDwn.click();
+			;
+			Thread.sleep(2000);
+			Part_B_yearDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// startDrpDwn.click();
+			startDrpDwn.click();
+			Thread.sleep(2000);
+			startDrpDwnOption.click();
+			;
+		}
+		else {
+		//	jsClickNew(part_A_monthDrpDwn);
+			
+			part_A_monthDrpDwn.click();
+			
+//			Select dropdown = new Select(part_A_monthDrpDwn);
+//			dropdown.selectByVisibleText("January");
+			
+			
+			mobileSelectOption(part_A_monthDrpDwn, "January 1",true);	
+			Thread.sleep(2000);
+			System.out.println("Effective date- month value selected");
+		//	jsClickNew(part_A_yearDrpDwn);
+			
+			part_A_yearDrpDwn.click();
+			
+			mobileSelectOption(part_A_yearDrpDwn, "2022",true);
+			Thread.sleep(2000);
+			System.out.println("Effective date- year value selected");
+			Thread.sleep(2000);
+			part_B_monthDrpDwn.click();
+	//		Thread.sleep(2000);
+			
+			mobileSelectOption(part_B_monthDrpDwn, "January 1",true);
+			;
+			Thread.sleep(2000);
+			// part_B_yearDrpDwn.click();
+//			part_B_yearDrpDwn.click();
+			;
+			Thread.sleep(2000);
+			
+			part_B_yearDrpDwn.click();
+			
+			mobileSelectOption(part_B_yearDrpDwn, "2022",true);
+			
+//			Part_B_yearDrpDwnOption.click();
+			;
+			Thread.sleep(2000);
+			// startDrpDwn.click();
+			startDrpDwn.click();
+			Thread.sleep(2000);
+			
+			mobileSelectOption(startDrpDwn, "March 1, 2022",true);
+			;
+		}
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
 		jsClickNew(ViewPlanMedSupPage);
@@ -4326,6 +4387,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		sendkeysMobile(addressInput, address);
 		sendkeysMobile(cityInput, city);
 		jsClickNew(driver.findElement(By.xpath("(//label/sup[contains(text(),'*')])[3]")));
+//IOS drop down does nt open with jsClick hence normal click added with driver type condition
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			stateDropDown.click();
+		}
 		mobileSelectOption(stateDropDown, state.toUpperCase(), true);
 		// selectFromDropDown(stateDropDownValues, state.toUpperCase());
 		System.out.println("Selecting state from Drop down");
@@ -4978,7 +5043,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
-		// ChangeLocationLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(ChangeLocationLink);
 		validate(ZipCodeTxtBx);
 		// ZipCodeTxtBx.click();
@@ -5404,6 +5469,10 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		int initialCount = driver.getWindowHandles().size();
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
+		if(driver.toString().contains("IOS")) {
+			sleepBySec(60);
+			driver.navigate().refresh();
+		}
 		sleepBySec(10);
 		System.out.println("Provider Search Link has been clicked");
 		waitForCountIncrement(initialCount);
@@ -6296,7 +6365,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 	}
 
-
 	public ProviderSearchPageMobile ProviderCovered(String planName) {
 
 		sleepBySec(5);
@@ -6315,12 +6383,32 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
+
+	public boolean verifyAddedDrugPharmacySummaryCost(String planName, String networkType) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + networkType);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (networkType.equalsIgnoreCase("false")) {
+			if (drugCost.getText().equals("")) {
+				Assertion.assertTrue(true);
+				System.out.println("Drug cost is coming blank as expected");
+			} else {
+				if (drugCost.getText().contains("$")) {
+					Assertion.assertTrue(true);
+					System.out.println("Drug cost contains amount as expected");
+				}
+			}
+
+		}
+		return false;
+	}
+
 	public void clickOnEmailField() {
 
 		jsClickNew(summary_maEmailOption);
 	}
-	
+
 	public void validatePrepopulatedEmail(String email) {
 		jsClickNew(emailPlanSummaryFieldBox);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
