@@ -597,10 +597,10 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     @LTCPharmacyVPUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
-      | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+      | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
 
-  Scenario Outline: User verify LTC pharmacy scenario in <site> site- zipcode - <zipcode>
+  Scenario Outline: User verify LTC pharmacy scenario in <site> site for no drug coverage message- zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
