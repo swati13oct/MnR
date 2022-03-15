@@ -722,6 +722,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
 
+		validate(partAStartDateField) ;
 		if(driver.getCurrentUrl().contains("eligibility")) {
 			if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))){
 				System.out.println("OLE Confirm your Eligibility is Displayed");
