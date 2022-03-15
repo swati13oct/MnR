@@ -309,7 +309,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
 	private WebElement AuthRelationship;
 
-	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information')]")
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information') or contains(@aria-label,'Edit Optional')]")
 	private WebElement EditPersonalInformation;
 
 	@FindBy(id = "dob")
@@ -361,8 +361,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	public OLEconfirmationPage submitEnrollment() throws InterruptedException {
 		
 
-		validateNew(SubmitApplicationBtn);
+
 		scrollToView(SubmitApplicationBtn);
+		validateNew(SubmitApplicationBtn);
 	//	Thread.sleep(4000);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
@@ -382,7 +383,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			return new OLEconfirmationPage(driver);
 		}
 		else if(validateNew(SubmitApplicationBtn)){
-			//SubmitApplicationBtn.click();
+			scrollToView(SubmitApplicationBtn);
 			jsClickNew(SubmitApplicationBtn);
 			if(driver.getCurrentUrl().contains("confirmation")){
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
