@@ -104,6 +104,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user validate on Review Page and click on Edit information for Medicare Information Page
+         | Rider Flag | <riderflag> |
        | DOB1            | <dob1>             |
       | Medicare Number1 | <medicarenumber1> |
       | Card Type        | <cardtype>        |
@@ -232,6 +233,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user validate on Review Page and click on Edit information for Medicare Information Page
+         | Rider Flag | <riderflag> |
           | DOB1            | <dob1>             |
          | Medicare Number1 | <medicarenumber1> |
          | Card Type        | <cardtype>        |
@@ -373,6 +375,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user validate on Review Page and click on Edit information for Medicare Information Page
+         | Rider Flag | <riderflag> |
           | DOB1            | <dob1>             |
          | Medicare Number1 | <medicarenumber1> |
          | Card Type        | <cardtype>        |
@@ -495,6 +498,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user validate on Review Page and click on Edit information for Medicare Information Page
+         | Rider Flag | <riderflag> |
           | DOB1            | <dob1>             |
          | Medicare Number1 | <medicarenumber1> |
          | Card Type        | <cardtype>        |
@@ -640,6 +644,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user navigates to Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
    Then the user validate on Review Page and click on Edit information for Medicare Information Page
+        | Rider Flag | <riderflag> |
          | DOB1            | <dob1>             |
         | Medicare Number1 | <medicarenumber1> |
         | Card Type        | <cardtype>        |

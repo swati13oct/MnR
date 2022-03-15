@@ -309,8 +309,11 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
 	private WebElement AuthRelationship;
 
-	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information') or contains(@aria-label,'Edit Optional')]")
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information')]")
 	private WebElement EditPersonalInformation;
+
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Personal Information') or contains(@aria-label,'Edit Optional')]")
+	private WebElement EditPersonalInformation1;
 
 	@FindBy(id = "dob")
 	private WebElement DOBtxtFld;
@@ -691,10 +694,18 @@ public class ReviewSubmitPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date1");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date1");
 		String DOB = MedicareDetailsMap.get("DOB1");
-
-		validate(EditPersonalInformation);
-		jsClickNew(EditPersonalInformation);
-
+		String RiderFlag = MedicareDetailsMap.get("Rider Flag");
+		if(RiderFlag.contains("true_yes")) {
+			validate(EditPersonalInformation);
+			jsClickNew(EditPersonalInformation);
+		}
+		else {
+			validate(EditPersonalInformation1);
+			jsClickNew(EditPersonalInformation1);
+		}
+		validateNew(DOBtxtFld);
+		DOBtxtFld.clear();
+		validateNew(DOBtxtFld);
 		sendkeys(DOBtxtFld,DOB);
 
 		validateNew(ReviewEditSavechanges);
