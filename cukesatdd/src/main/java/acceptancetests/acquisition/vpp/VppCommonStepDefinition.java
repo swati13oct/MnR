@@ -64,6 +64,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
+import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 
 /**
@@ -5201,5 +5202,43 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickCloseMSApplication();
 	}
+	
+	@Then("^user Validates Show DSNP and PDP Link available")
+	public void user_Validates_Show_DSNP_and_PDP_Link_available(){
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateShowDSNPPDPLink();
+		
+	}
+	
+	@Then("^user clicks on Show DSNP Toggle and validate DSNP Plan")
+	public void user_clicks_on_Show_DSNP_Toggle_and_validate_DSNP_Plan(DataTable givenAttributes) throws Exception{
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickDSNPToggleValidateSNPPlan(memberAttributesMap);
+		
+	}
+	
+	@Then("^User Click on PDP Link and Validate PDP Plans are loaded")
+	public void User_Click_on_PDP_Link_and_Validate_PDP_Plans_are_loaded(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickPDPValidatePDPPlan(memberAttributesMap);
+	}
+	
+	@Then("^User Switch backs to MAPD Plans")
+	public void User_Switch_backs_to_MAPD_Plans(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickMAPDValidateMAPDPlan(memberAttributesMap);
+		
+	}
+
 	
 }
