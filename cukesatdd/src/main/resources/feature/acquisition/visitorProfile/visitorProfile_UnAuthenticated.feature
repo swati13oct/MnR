@@ -299,15 +299,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #| MS Test Plans | <MS_testPlans> |
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
     Examples:
-      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
-#      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | site | state    | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  |
+#      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | AARP | Virginia | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples:
       | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
-#      | UHC  | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+#      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | UHC | Virginia | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page in <site> site - zip -<zipcode>
