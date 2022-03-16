@@ -173,7 +173,7 @@ public class CampaignTFNPage extends UhcDriver {
 	// contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or
 	// contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
 
-	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans - UHC']")
+	@FindBy(xpath = "//a[normalize-space()='Learn More About Medicare Advantage Plans']")
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -1176,7 +1176,8 @@ public class CampaignTFNPage extends UhcDriver {
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
-		part_B_monthDrpDwn.click();
+		//part_B_monthDrpDwn.click();
+		jsClickNew(part_B_monthDrpDwn);
 		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
@@ -1647,10 +1648,11 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckiPerseptions();
 		validate(addYourInformation, 30);
 		jsClickNew(addYourInformation);
-
+		Thread.sleep(3000);
+		jsClickNew(cancelMS4FormModal);
 	}
 
-	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp']//span[@class='uhc-button__text'][normalize-space()='Cancel']")
+	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp']//div[@class='uhc-button__text'][normalize-space()='Cancel']")
 	private WebElement cancelMS4FormModal;
 
 	public void decisionGuidenotPresent() {
@@ -1910,5 +1912,160 @@ public class CampaignTFNPage extends UhcDriver {
 			return new VPPPlanSummaryPage(driver);
 		else 
 			return null;
+	}
+	
+	public void updateURLGoogleSearchUHC(String env) {
+		validateNew(GoogleSearchField);
+		GoogleSearchField.sendKeys("UHC Medicare Advantage Plans" + Keys.ENTER);
+		System.out.println("Google Search entered for : UHC Medicare Advantage Plan");
+		validateNew(UHCSearchLinkfromGoogle);
+		// UHCSearchLinkfromGoogle.click();
+		WebElement element = driver
+				.findElement(By.xpath("//h3[normalize-space()='Learn More About Medicare Advantage Plans'][1]/.."));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (env.equalsIgnoreCase("stage")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
+						element);
+			} 
+			else if (env.equalsIgnoreCase("offline")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
+						element);
+			}else
+			{
+				System.out.println("Executing on Prod environment");
+			}
+		jsClickNew(UHCSearchLinkfromGoogle);
+		System.out.println("Google Results - UHC Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
+	}
+	
+	
+	public void updateURLBingSearchUHC(String env) {
+		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
+		bingSearchField.click();
+		bingSearchField.clear();
+		bingSearchField.sendKeys("UHC Medicare Advantage Plan" + Keys.ENTER);
+		System.out.println("Looking for UHC medicare Plans link , please bear with me :) ");
+		System.out.println("Current URL is ==  " + driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, UHCSearchLinkfromBing, 20);
+		if (UHCSearchLinkfromBing.isDisplayed()) {
+			System.out.println("Bing search result found");
+		} else {
+			Assertion.assertFalse("Bing search result not found", false);
+		}
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (env.equalsIgnoreCase("stage")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
+						UHCSearchLinkfromBing);
+			} 
+			else if (env.equalsIgnoreCase("offline")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
+						UHCSearchLinkfromBing);
+			}else
+			{
+				System.out.println("Executing on Prod environment");
+			}
+			UHCSearchLinkfromBing.click();
+			System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
+			CheckPageLoad();
+	}
+	
+	public void updateURLYahooSearchUHC(String env) {
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys("UHC Medicare Advantage Plan");
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for : UHC Medicare Advantage Plan");
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResultUHC, 30);
+		if (YahooSearchResultUHC.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assertion.assertFalse("no yahoo search result found", false);
+		}
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if (env.equalsIgnoreCase("stage")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://stage-uhcmedicaresolutions.uhc.com/shop/medicare-advantage-plans.html')",
+					YahooSearchResultUHC);
+		} 
+		else if (env.equalsIgnoreCase("offline")) {
+			js.executeScript(
+					"arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')",
+					YahooSearchResultUHC);
+		}else
+		{
+			System.out.println("Executing on Prod environment");
+		}
+		YahooSearchResultUHC.click();
+		System.out.println("Yahoo Results - UHC Medicare Advantage Plan - Link Clicked");
+		switchToNewTab();
+		CheckPageLoad();
+	}
+	
+	public void updateURLGoogleSearchAARP(String env) {
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
+		validateNew(GoogleSearchField);
+		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
+		System.out.println("Google Search entered for : AARP Medicare Advantage Plan");
+		validateNew(AARPSearchLinkfromGoogle_alternative);
+		WebElement element = driver
+				.findElement(By.xpath("//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]/.."));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (env.equalsIgnoreCase("stage")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')",
+						element);
+			} 
+			else if (env.equalsIgnoreCase("offline")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')",
+						element);
+			}else
+			{
+				System.out.println("Executing on Prod environment");
+			}
+			AARPSearchLinkfromGoogle_alternative.click();
+			System.out.println("Google Results - AARP Medicare Advantage Plan - Link Clicked");
+			CheckPageLoad();
+	}
+	
+	public void updateURLBingSearchAARP(String env) {
+		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
+
+		bingSearchField.click();
+		bingSearchField.clear();
+		bingSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
+		System.out.println("Looking for AARP medicare Plans link , please bear with me :) ");
+		System.out.println("Current URL is ==  " + driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, AARPSearchLinkfromBing, 30);
+		if (AARPSearchLinkfromBing.isDisplayed())
+			System.out.println("Bing search result found");
+		else {
+			Assertion.assertFalse("Bing search result not found", false);
+		}
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (env.equalsIgnoreCase("stage")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://stage-aarpmedicareplans.uhc.com')",
+						AARPSearchLinkfromBing);
+			} 
+			else if (env.equalsIgnoreCase("offline")) {
+				js.executeScript(
+						"arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com')",
+						AARPSearchLinkfromBing);
+			}else
+			{
+				System.out.println("Executing on Prod environment");
+			}
+		AARPSearchLinkfromBing.click();
+		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
+		CheckPageLoad();
 	}
 }
