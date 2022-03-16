@@ -36,6 +36,7 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.android.nativekey.PressesKey;
 import io.appium.java_client.windows.PressesKeyCode;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class CampaignTFNPageMobile extends GlobalWebElements {
 
@@ -263,6 +264,20 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public void openAndValidate() {
 		System.out.println("Current URL - " + driver.getCurrentUrl());
 
+	}
+	
+	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
+	private WebElement startMS4OLEPlanCompare;
+
+	public void clickStartMS4OlePlanCompare() {
+		jsClickNew(startMS4OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLEPlanCompare;
+
+	public void clickStartMS3OlePlanCompare() {
+		jsClickNew(startMS3OLEPlanCompare);
 	}
 
 	public void openUrl(String url) {
@@ -766,6 +781,15 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//button[contains(@id,'zipcodebtn')]")
 	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
+	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement planSearchEnterZip;
+	
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	private WebElement planSearchBtn;
+	
+	@FindBy(css = "#change-location")
+	private WebElement changeLocationLink;
 
 	// @FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
@@ -824,6 +848,20 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validate(findPlansButton);
 
 		jsClickNew(findPlansButton);
+	}
+	
+	public VPPPlanSummaryPageMobile planSearch(String zip) {
+		CheckPageLoad();
+
+		validate(planSearchEnterZip);
+		jsClickNew(planSearchEnterZip);
+		sendkeysMobile(planSearchEnterZip, zip);
+		validate(planSearchBtn);
+		jsClickNew(planSearchBtn);
+		if (validate(changeLocationLink))
+			return new VPPPlanSummaryPageMobile(driver);
+		else 
+			return null;
 	}
 
 	public void HomepagePlanSearchOLE(String zip) {
@@ -2035,6 +2073,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
 	private WebElement addYourInformation;
+	
+	@FindBy(xpath = "//*[@class='insured-member']//a[@class='tfn-call']/span")
+	private WebElement msStaticTFN;
 
 	public void addInfoAndMedSupFormTFN() throws InterruptedException {
 		CheckPageLoad();
@@ -2042,5 +2083,21 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validate(addYourInformation, 30);
 		jsClickNew(addYourInformation);
 
+	}
+	
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo) {
+		CheckPageLoad();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(msStaticTFN);
+		if (ExpecetdTFNNo.contains(msStaticTFN.getText())) {
+			System.out.println("TFN is Displayed on Page : " + msStaticTFN.getText());
+		} else {
+			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+		}
 	}
 }
