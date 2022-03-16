@@ -7946,7 +7946,7 @@ public String GetMonthlyPremiumValue() {
 		return false;
 	}
 	
-	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
 	private WebElement firstComparePlanButtonForMS;
 	
 	public void compareAllMSPlans() {
