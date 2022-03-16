@@ -7957,7 +7957,7 @@ public String GetMonthlyPremiumValue() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
+				.findElements(By.xpath("//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label"));
 		int plansForCompare = allMSPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
