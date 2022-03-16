@@ -86,11 +86,10 @@ public class DCEPlanValidationStepDefinition {
             System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
             HSSFRow resultsRowNew = null;
             //Looping over total rows with values
-            for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+            for(int rowIndex=0; rowIndex<=20; rowIndex++)
             {
                 int failureCounter = 0, mcareFailureCounter = 0;
                 int cellIndex = 0;
-
                 XSSFRow row = (XSSFRow) sheet.getRow(rowIndex);
                 Iterator<Cell> cellIterator = row.cellIterator();
                 HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
@@ -111,6 +110,12 @@ public class DCEPlanValidationStepDefinition {
                         currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
                         // currentCellValue = currentCellValue.replace(currentColName, "");
                     }catch (Exception e) {
+                        currentCellValue = cell.getRawValue();
+                        currentCellValue= currentCellValue.replaceAll("\\[~/n~]", "");
+                        currentCellValue= currentCellValue.replaceAll("\\[~/n~}", "");
+                        currentCellValue= currentCellValue.replaceAll("\\[~/n~", "");
+
+                        currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
                         System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
                         System.out.println(e);
                     }
@@ -136,7 +141,18 @@ public class DCEPlanValidationStepDefinition {
                         }//end if cellIndex = 0
 
 
-                        if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("Business Area")||currentColName.equalsIgnoreCase("Product Focus <Next Year>")||currentColName.equalsIgnoreCase("MCARE Error count"))) {
+                        if(!(currentColName.equalsIgnoreCase("Link Parameters")
+                                ||currentColName.equalsIgnoreCase("Product Focus")
+                                ||currentColName.equalsIgnoreCase("Product")
+                                ||currentColName.equalsIgnoreCase("Portal labels")
+                                ||currentColName.equalsIgnoreCase("Contract PBP Segment ID")
+                                ||currentColName.equalsIgnoreCase("OON_IN")
+                                ||currentColName.equalsIgnoreCase("County")
+                                ||currentColName.equalsIgnoreCase("ZipCode")
+                                ||currentColName.equalsIgnoreCase("Fips")
+                                ||currentColName.equalsIgnoreCase("Annual Prescription Deductible")
+                                ||currentColName.equalsIgnoreCase("Coverage Gap Stage")
+                                ||currentColName.equalsIgnoreCase("Catastrophic Coverage Stage"))) {
 
                             resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
                             if(resultMap.containsKey(false))
@@ -174,9 +190,19 @@ public class DCEPlanValidationStepDefinition {
                             newCell.setCellValue(mcareFailureCounter);
                         }else {
                             if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
-                                newCell.setCellValue(cell.getStringCellValue());
+                                try {
+                                    newCell.setCellValue(cell.getStringCellValue());
+                                }
+                                catch (Exception ex){
+                                    newCell.setCellValue(cell.getNumericCellValue());
+                                }
                             } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
-                                newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));
+                                try {
+                                    newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));
+                                }
+                                catch (Exception ex){
+                                    newCell.setCellValue("Excel Value: "+cell.getNumericCellValue()+" / UI Value: "+resultMap.get(false));
+                                }
                             }
                         }
 

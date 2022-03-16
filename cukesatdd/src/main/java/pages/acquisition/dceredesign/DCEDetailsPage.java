@@ -5,6 +5,9 @@ import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +114,8 @@ public class DCEDetailsPage extends UhcDriver {
         threadsleep(2000);
         driver.navigate().refresh();
         threadsleep(5000);
+        driver.findElement(By.xpath("//a[@id='prescriptiondrug']")).click();
+        threadsleep(2000);
         try {
             if(driver.findElement(By.xpath("//a[@id='DrugListDetails']")).isDisplayed()){
                 System.out.println("Link is Displayed");
@@ -171,7 +177,7 @@ public class DCEDetailsPage extends UhcDriver {
 
         for (int i = 0; i < 5; i++) {
             try {
-                result = collectInfoVppPlanDetailPg();
+                result = collectInfoVppPlanDetailPg(sheetName);
                 int benefitUICnt = result.size();
                 System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Benefits Map count - " + benefitUICnt);
                 if (benefitUICnt < 1) {
@@ -191,157 +197,255 @@ public class DCEDetailsPage extends UhcDriver {
         return result;
     }
 
-    public HashMap<String, String> collectInfoVppPlanDetailPg() {
+    public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName) {
         System.out.println("Proceed to collect the info on DCE detail page =====");
+
+        String sessionID = "";
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        threadsleep(5000);
+        try {
+            sessionID = (String) js
+                    .executeScript(String.format("return window.getCookieDataInStringFormat('%s')", "userSessionCookie"));
+        } catch (Exception e1) {
+        }
+        String pharmacyJson = "";
+        threadsleep(5000);
+        try {
+            pharmacyJson = (String) js
+                    .executeScript(String.format("return window.localStorage.getItem('%s')", "ucp_drugList"));
+        } catch (Exception e1) {
+        }
+        Object obj = null;
+        JSONObject jo = null;
+        try {
+            obj = new JSONParser().parse(pharmacyJson);
+            jo = (JSONObject) obj;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        threadsleep(5);
+        //List<WebElement> drugCopays = driver.findElements(By.xpath("(//div[@id='copayInsuranceSection']//ul)[1]//li//span"));
+        //List<WebElement> drugCopays = driver.findElements(By.xpath("(//h3[text()='Drug Copays & Coinsurance']/../..//ul)[1]//span"));
 
         HashMap<String, String> result=new HashMap<String, String>();
 
         result.put("Plan Name", planName.getText());
         result.put("Monthly Premium", monthly_Premium.getText());
 
-        coverageGapStageModalLink.click();
-        result.put("Coverage Gap Stage",coverageGapStageModalText.getText());
-        coverageGapStageModalCloseBtn.click();
+//        coverageGapStageModalLink.click();
+//        result.put("Coverage Gap Stage",coverageGapStageModalText.getText());
+//        coverageGapStageModalCloseBtn.click();
+//
+//        catastrophicCoverageStageModalLink.click();
+//        result.put("Catastrophic Coverage Stage",catastrophicCoverageStageModalText.getText());
+//        catastrophicCoverageStageModalCloseBtn.click();
+//
+//        initialCoverageStageModalLink.click();
+//        result.put("Initial Coverage Stage",initialCoverageStageModalText.getText());
+//        initialCoverageStageModalCloseBtn.click();
 
-        catastrophicCoverageStageModalLink.click();
-        result.put("Catastrophic Coverage Stage",catastrophicCoverageStageModalText.getText());
-        catastrophicCoverageStageModalCloseBtn.click();
+        if(sheetName.contains("MAPD_SNP_DCE")){
+            for(int i = 0; i < 2 ; i++){
+                if(i == 0){
+                    setPharmacy("Preferred Mail", sessionID , jo);
+                    List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
+                    for(int j = 0; j < drugCopays.size(); j++){
 
-        initialCoverageStageModalLink.click();
-        result.put("",initialCoverageStageModalText.getText());
-        initialCoverageStageModalCloseBtn.click();
+                        try {
+                            Integer.parseInt(drugCopays.get(j).getText().trim().split("")[1]);
+                            continue;
+                        }
+                        catch (Exception ex){ }
 
-//        String key="Total Tabs";
-//        String value = "";
-//        result.put(key, String.valueOf(listOfTabHeaders.size()));
-//        //	System.out.println("TEST - "+forWhat+" - key="+key+" | value="+result.get(key));
-//
-//        for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
-//            listOfTabHeaders.get(tab).click();
-//            sleepBySec(3);
-//            int tabIndex=(tab+1);
-//            CommonUtility.checkPageIsReady(driver);
-//
-//            //System.out.println("Before Tab: "+tabIndex+" "+new Timestamp(System.currentTimeMillis()));
-//
-//            WebElement estimatedTotalValue =null;
-//            String estimatedTotalXpath = "//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//table//tr[not(contains(@class,'ng-hide'))]//*[contains(text(),'Estimated')]/ancestor::td//following-sibling::td";
-//
-//            if(listOfTabHeaders.get(tab).getText().contains("Plan Costs")) {
-//                estimatedTotalValue=driver.findElement(By.xpath(estimatedTotalXpath));System.out.println(estimatedTotalValue.getText());
-//                result.put("Estimated Annual Total No riders", estimatedTotalValue.getText());
-//            }
-//            //note: store section table
-//            int numSectionTable=listOfSectionHeaderForActiveTab.size();
-//            //result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
-//
-//            for(int sectionIndex=1; sectionIndex<=numSectionTable; sectionIndex++) { //note: loop through each section table
-//                String rowXpath="";
-//                if(tab==0)
-//                    rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr";
-//                else
-//                    rowXpath ="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr";
-//
-//                List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
-//                int numRows=listOfRowsPerTable.size();
-//
-//                //result.put("Total Rows For T"+tabIndex+"S"+sectionIndex,String.valueOf(numRows));
-//
-//                if (numRows==0) { //note: no table so check for box
-//
-//                    String boxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]";
-//                    List<WebElement> listOfBoxes=driver.findElements(By.xpath(boxXpath));
-//                    result.put("Total Boxs For T"+tabIndex+"S"+sectionIndex, String.valueOf(listOfBoxes.size()));
-//
-//                    for(int boxIndex=1; boxIndex<=listOfBoxes.size(); boxIndex++) { //note: loop through each box
-//                        String eachBoxXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//div[contains(@class,'box') and not(contains(@class,'ng-hide'))]["+boxIndex+"]";
-//
-//                        WebElement e=driver.findElement(By.xpath(eachBoxXpath));
-//                        key=e.getText();
-//                        value=e.getText();
-//                        result.put(key, value);
-//                        System.out.println("TEST - key="+key+" | value="+result.get(key));
-//                    }
-//
-//                    //note: assume this is the optional service tab
-//                    //note: after going through all the box should be no more section, don't iterate the rest of the section counts
-//                    break;
-//                } else {
-//
-//                    for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
-//                        String cellsPerRowXpath="";
-//                        value = "";
-//
-//                        if(tab==0)
-//                            cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
-//                        else
-//                            cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
-//
-//                        List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
-//
-//                        for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
-//                            String eachCellXpath = "";
-//
-//                            if(tab==0)
-//                                eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table[not(contains(@class,'drug')) and not(contains(@id,'network'))]//tr["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
-//                            else
-//                                eachCellXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]["+cellIndex+"]";
-//
-//
-//                            WebElement e=driver.findElement(By.xpath(eachCellXpath));
-//                            if(e.getText().contains("Platinum Dental") && e.getText().contains("Optional Rider")) {
-//                                platinumDentalCheckbox.click();
-//                                result.put("Estimated Annual Total Platinum Dental",estimatedTotalValue.getText());
-//                            }
-//
-//                            if(listOfCellsPerRow.size()==2) {
-//                                System.out.println(e.getText());
-//                                if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Rider") ) {
-//                                    highOptionDentalCheckbox.click();
-//                                    key=e.getText();
-//                                    WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
-//                                    value = g.getText();
-//                                    result.put("Estimated Annual Total High Option Dental",estimatedTotalValue.getText());
-//                                    //optionalDentalCheckbox.click();
-//
-//                                }else if(cellIndex==1) {
-//                                    key=e.getText();//System.out.println("key :"+ key);
-//                                }else {
-//                                    value = value + e.getText();//System.out.println("after :"+ value);
-//                                }
-//                            }else if(listOfCellsPerRow.size()==3){
-//                                if(cellIndex==1)
-//                                    key=e.getText();
-//                                else if(cellIndex==3)
-//                                    value= value+"/"+e.getText();
-//                                else
-//                                    value= value+e.getText();
-//                            }else {
-//                                if(cellIndex==1) {
-//                                    key=e.getText();
-//                                    value= e.getText();
-//
-//                                }else {
-//                                    value= value+e.getText();
-//
-//                                }
-//
-//                            }
-//                            result.put(key, value);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        System.out.println("Finished collecting the info on vpp detail page =====");
-//
-//        for(String keyValue : result.keySet()) {
-//            System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-//            System.out.println(
-//                    "_________________________________________________________________________________________________"
-//            ); }
+                        if(drugCopays.get(j).getText().contains("Tier 1 (Preferred Generic)")){
+                            result.put("Tier 1 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 2 (Generic)")){
+                            result.put("Tier 2 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Preferred Brand)")){
+                            result.put("Tier 3 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Select Insulin Drugs)")){
+                            result.put("Tier 3 Preferred Mail Order (Insulin)", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 4 (Non-Preferred)")){
+                            result.put("Tier 4 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 5 (Specialty)")){
+                            if(!drugCopays.get(j+1).getText().contains("N/A")) {
+                                result.put("Tier 5: Specialty Tier Drugs", drugCopays.get(j + 1).getText());
+                            }
+                            break;
+                        }
+                    }
+                }
+                if(i == 1){
+                    setPharmacy("Standard Retail", sessionID , jo);
+                    List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
+                    for(int j = 0; j < drugCopays.size(); j++){
+
+                        try {
+                            Integer.parseInt(drugCopays.get(j).getText().trim().split("")[1]);
+                            continue;
+                        }
+                        catch (Exception ex){ }
+
+                        if(drugCopays.get(j).getText().contains("Tier 1 (Preferred Generic)")){
+                            result.put("Tier 1 Standard Network Pharmacy", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 2 (Generic)")){
+                            result.put("Tier 2 Standard Network Pharmacy", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Preferred Brand)")){
+                            result.put("Tier 3 Standard Network Pharmacy", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Select Insulin Drugs)")){
+                            result.put("Tier 3 Standard Network Pharmacy (Insulin)", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 4 (Non-Preferred)")){
+                            result.put("Tier 4 Standard Network Pharmacy", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 5 (Specialty)")){
+                            result.put("Tier 5: Specialty Tier Drugs", drugCopays.get(j+1).getText().replace("%",""));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else if(sheetName.contains("MAPD_Preferred") || sheetName.contains("PDP_Preferred")){
+            for(int i = 0; i < 3 ; i++){
+                if(i == 0){
+                    setPharmacy("Preferred Mail", sessionID , jo);
+                    //8drugCopayDeductible = new HashMap<String, String>();
+                }
+                if(i == 1){
+                    setPharmacy("Standard Retail", sessionID , jo);
+                    //drugCopayDeductible = new HashMap<String, String>();
+                }
+                if(i == 2){
+                    setPharmacy("Preferred Retail", sessionID , jo);
+                    //drugCopayDeductible = new HashMap<String, String>();
+                }
+//                drugCopayDeductible.put("","");
+//                drugCopayDeductible.put("","");
+//                drugCopayDeductible.put("","");
+//                drugCopayDeductible.put("","");
+//                drugCopayDeductible.put("","");
+//                drugCopayDeductibleAllType.put("",drugCopayDeductible);
+
+            }
+        }
+
+        System.out.println("Finished collecting the info on vpp detail page =====");
+
+        for(String keyValue : result.keySet()) {
+            System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+            System.out.println(
+                    "_________________________________________________________________________________________________"
+            ); }
 
         return result;
+    }
+
+    private void setPharmacy(String pharmacyType , String sessionID , JSONObject jo){
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        if(pharmacyType.equalsIgnoreCase("Preferred Mail")){
+           String preferredMail = "{\n" +
+                    "\t\t\"pharmacyAddress\": null,\n" +
+                    "\t\t\"pharmacyName\": \"OptumRx Mail Service Pharmacy\",\n" +
+                    "\t\t\"pharmacyNumber\": \"05TSC\",\n" +
+                    "\t\t\"pharmacySaver\": null,\n" +
+                    "\t\t\"preferredNetwork\": null,\n" +
+                    "\t\t\"mailOrder\": true\n" +
+                    "\t}";
+            JSONParser parser = new JSONParser();
+            JSONObject jsonPharmaCY = null;
+            try {
+                jsonPharmaCY = (JSONObject) parser.parse(preferredMail);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            jo.remove("pharmacy");
+            jo.put("pharmacy",jsonPharmaCY);
+            jo.put("sessionId",sessionID);
+            try {
+                threadsleep(5000);
+                js.executeScript(String.format("window.localStorage.setItem('%s','%s');", "ucp_drugList", jo.toString()));
+            } catch (Exception e1) {
+            }
+            driver.navigate().refresh();
+        }
+        else if(pharmacyType.equalsIgnoreCase("Standard Retail")){
+            String standardRetail = "{\n" +
+                    "\t\t\"pharmacyAddress\": {\n" +
+                    "\t\t\t\"addressLine1\": \"1116 WHEELING AVE\",\n" +
+                    "\t\t\t\"addressLine2\": \"\",\n" +
+                    "\t\t\t\"city\": \"CAMBRIDGE\",\n" +
+                    "\t\t\t\"state\": \"OH\",\n" +
+                    "\t\t\t\"zipCode\": \"43725\",\n" +
+                    "\t\t\t\"phoneNumber\": \"7404393502\",\n" +
+                    "\t\t\t\"tty\": \"711\"\n" +
+                    "\t\t},\n" +
+                    "\t\t\"pharmacyName\": \"CVS PHARMACY #03472 03472\",\n" +
+                    "\t\t\"pharmacyNumber\": \"3610551\",\n" +
+                    "\t\t\"pharmacySaver\": false,\n" +
+                    "\t\t\"preferredNetwork\": false,\n" +
+                    "\t\t\"mailOrder\": false\n" +
+                    "\t}";
+            JSONParser parser = new JSONParser();
+            JSONObject jsonPharmaCY = null;
+            try {
+                jsonPharmaCY = (JSONObject) parser.parse(standardRetail);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            jo.remove("pharmacy");
+            jo.put("pharmacy",jsonPharmaCY);
+            jo.put("sessionId",sessionID);
+            try {
+                threadsleep(5000);
+                js.executeScript(String.format("window.localStorage.setItem('%s','%s');", "ucp_drugList", jo.toString()));
+            } catch (Exception e1) {
+            }
+            driver.navigate().refresh();
+        }
+        else{
+            String preferredRetail = "{\n" +
+                    "\t\t\"pharmacyAddress\": {\n" +
+                    "\t\t\t\"addressLine1\": \"957 CURRY ROAD\",\n" +
+                    "\t\t\t\"addressLine2\": null,\n" +
+                    "\t\t\t\"city\": \"ROTTERDAM\",\n" +
+                    "\t\t\t\"state\": \"NY\",\n" +
+                    "\t\t\t\"zipCode\": \"12306\",\n" +
+                    "\t\t\t\"phoneNumber\": \"5183566310\",\n" +
+                    "\t\t\t\"tty\": \"711\"\n" +
+                    "\t\t},\n" +
+                    "\t\t\"pharmacyName\": \"WALGREENS #19611 19611\",\n" +
+                    "\t\t\"pharmacyNumber\": \"5821928\",\n" +
+                    "\t\t\"pharmacySaver\": false,\n" +
+                    "\t\t\"preferredNetwork\": true,\n" +
+                    "\t\t\"mailOrder\": false\n" +
+                    "\t}";
+            JSONParser parser = new JSONParser();
+            JSONObject jsonPharmaCY = null;
+            try {
+                jsonPharmaCY = (JSONObject) parser.parse(preferredRetail);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            jo.remove("pharmacy");
+            jo.put("pharmacy",jsonPharmaCY);
+            jo.put("sessionId",sessionID);
+            try {
+                threadsleep(5000);
+                js.executeScript(String.format("window.localStorage.setItem('%s','%s');", "ucp_drugList", jo.toString()));
+            } catch (Exception e1) {
+            }
+            driver.navigate().refresh();
+        }
+
     }
 
     public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
@@ -349,260 +453,46 @@ public class DCEDetailsPage extends UhcDriver {
         String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
         HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
-        if(columnName.equalsIgnoreCase("Plan Premium Zero"))
-            columnName = columnName.replace(" Zero", "");
-        for(String key : benefitsMap.keySet()) {
-            benefitValueUI = benefitsMap.get(key);
-            tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
-            tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
-            benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 	//replace all the next lines and spaces from the string
-            benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 		//replace all the next lines and spaces from the string
-            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~]", "");
-            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~}", "");
-            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~", "");
+        if(columnName.equalsIgnoreCase("Tier 5: Specialty Tier Drugs")){
 
-            if(key.contains("Passport"))
-                key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol
+            DecimalFormat df = new DecimalFormat("0.00");
+            df.setMaximumFractionDigits(0);
+            benefitValue = df.format(Float.parseFloat(benefitValue)*100);
 
-            key = key.toLowerCase();
-            columnName = columnName.toLowerCase();
-            benefitValue = benefitValue.toLowerCase();
-            benefitValueUI = benefitValueUI.toLowerCase();
-            if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
-                key = key.replace(":","");
-
-            if(key.contains("monthly premium")) {
-                key = key.replace("\n", "").replaceAll("footnote1", "").replaceAll("footnote", "");
-            }
-
-            if(key.endsWith("1"))
-                key = 	StringUtils.trimTrailingCharacter(key, '1');
-            else if(key.endsWith("2"))
-                key = 	StringUtils.trimTrailingCharacter(key, '2');
-            else if(key.contains("fitness")) {
-                key = key.replace("\n", "").replaceAll("footnote", "");
-            }
-
-            if(key.contains("initial coverage stage")||columnName.contains("initial coverage stage")) {
-                key.replaceAll("\\s+", "");
-                columnName.replaceAll("\\s+", "");
-            }
-
-            //removing all the footnote words from the UI string and the superscripts
-            if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
-                if(benefitValueUI.endsWith("footnote2"))
-                    benefitValueUI = benefitValueUI.replace("footnote2", "");
-                else if(benefitValueUI.endsWith("footnote1"))
-                    benefitValueUI = benefitValueUI.replace("footnote1", "");
-                else if(benefitValueUI.endsWith("1"))
-                    benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '1');
-                else if(benefitValueUI.endsWith("2"))
-                    benefitValueUI = 	StringUtils.trimTrailingCharacter(benefitValueUI, '2');
-                else if(benefitValueUI.contains("Out-of-NetworkBenefits")&&columnName.equalsIgnoreCase("Out-of-Network Benefits")) {
-                    benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
-                    benefitValue = benefitValue.replace("Opensinanewwindow", "");
-                }else if(key.equalsIgnoreCase("Routine Dental")||key.equalsIgnoreCase("Out-of-Network Benefits")) {
-                    //benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
-                    benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
-                    benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
-                    benefitValueUI = benefitValueUI.replace("opensinnewwindow", "");
-                }
-
-                if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {
-                    benefitValue = 	StringUtils.trimTrailingCharacter(benefitValue, '1');
-                }
-            }
-            //removing footnote values from the end of the key values if any
-
-
-            //if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
-            if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A"))) {
-                counter++;
-                flag = true;
-                if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
-                    columnName = columnName.replace("PS","");
-                    if(key.contains(columnName)) {
-                        flag = false;
-                        if(key.contains("footnotes") && columnName.equalsIgnoreCase("footnotes"))
-                            tmpUIString2 = tmpKeyString;
-                        else
-                            tmpUIString2 = tmpUIString1;
-                        break;
-                    }
-
-                }else if(key.equalsIgnoreCase(columnName)) {
-                    flag= false;
-                    tmpUIString2 = tmpUIString1;
-                    break;
-                }
-
-            }else if(columnName.equalsIgnoreCase("Platinum DentalPS")||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
-
-                columnName = columnName.replace("ps","");
-                if(key.contains("optional rider")&& key.contains(columnName)) {
-                    counter++;
-                    if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
-                        flag = true;
-                        break;
-                    }else {
-                        flag = false;
-                        System.out.println("Values did not match for col:PS "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-                        tmpUIString2 = tmpUIString1;
-                        break;
-                    }
-
-                }
-                columnName = columnName+"PS";
-            }else if(columnName.equalsIgnoreCase("Dental Platinum")||columnName.equalsIgnoreCase("Optional Dental")||columnName.equalsIgnoreCase("High Option Dental") || columnName.equalsIgnoreCase("silversneakers")||columnName.equalsIgnoreCase("Footnotes")||columnName.equalsIgnoreCase("Estimated annual total")) {
-
-
-                benefitValueUI = benefitValueUI.replaceAll("\\u2022", "");
-                benefitValue = benefitValue.replaceAll("\\u2022", "");
-                benefitValueUI = benefitValueUI.replaceAll("\\u00AE", "");
-                benefitValue = benefitValue.replaceAll("\\u00AE", "");
-                if(columnName.equalsIgnoreCase("Footnotes")&& key.contains("footnotes")) {
-                    key = key.replace("\n", "");
-                    key = key.replaceAll("\\s+", "").replaceAll("\\*", "");
-                    counter++;
-                    //removing footnote values from the string
-
-                    if(key.contains("footnote1") || key.contains("footnotes1")) {
-                        key = key.replaceAll("footnote1", "");
-                        key = key.replaceAll("footnotes1", "");
-                    }else if(key.contains("footnote2")||key.contains("footnotes2")) {
-                        key = key.replaceAll("footnote2", "");
-                        key = key.replaceAll("footnotes2", "");
-                    }
-
-
-                    //removing footnote values from the string
-                    if(key.contains(".2"))
-                        key = key.replace(".2", ".");
-                    else if(key.contains(".1"))
-                        key = key.replace(".1", ".");
-                    else if(key.contains(".3"))
-                        key = key.replace(".3", ".");
-
-                    //key = key.replaceAll(".", "");
-                    benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
-                    benefitValue = benefitValue.toLowerCase();
-                    benefitValue = benefitValue.replaceAll("\\*", "").replace("footnotes2", "");
-                    benefitValue = benefitValue.replace("footnotes", "");
-                    if(key.contains(benefitValue)) {
-                        flag = true;break;
-                    }else {
-                        flag = false;
-                        System.out.println("Values did not match for col:2 "+columnName+"\n Excel value: "+benefitValue+"\n UI Value: "+key);
-                        tmpUIString2 = tmpKeyString;
-                        break;
-                    }
-
-
-                }else if(key.contains(columnName)&& !key.contains("optional rider")) {
-                    counter++;
-                    if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
-                        flag = true;break;
-                    }else {
-                        flag = false;
-                        System.out.println("Values did not match for col:3 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-                        tmpUIString2 = tmpUIString1;
-                        break;
-                    }
-                }
-            }else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Routine Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
-
-
-                if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
-                    if(benefitValueUI.contains("footnote1"))
-                        benefitValueUI = benefitValueUI.replace("footnote1", "");
-                    else if(benefitValueUI.contains("1."))
-                        benefitValueUI = benefitValueUI.replace("1.", ".");
-
-                    if(benefitValueUI.contains(".2"))
-                        benefitValueUI = benefitValueUI.replace(".2", ".");
-                    else if(benefitValueUI.contains(".1"))
-                        benefitValueUI = benefitValueUI.replace(".1", ".");
-                }
-                benefitValue = benefitValue.replace("-opensinnewwindow", "");
-                if(key.equalsIgnoreCase(columnName)) {
-                    counter++;
-                    benefitValueUI = benefitValueUI.replace("/", "");
-
-                    if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
-                        flag = true;break;
-                    }else {
-                        flag = false;
-                        System.out.println("Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-                        tmpUIString2 = tmpUIString1;
-                        break;
-                    }
-                }
-
-
-            }else if(key.equalsIgnoreCase(columnName)||key.contains(columnName)) {
-
-                counter++;
-                //the following code is used to remove the footnote values from the benefit value string.
-                if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
-                    benefitValueUI = benefitValueUI.replace("footnote2", "");
-                    benefitValueUI = benefitValueUI.replace("footnote1", "");
-                }else if(benefitValueUI.contains("footnote2"))
-                    benefitValueUI = benefitValueUI.replace("footnote2", "");
-                else if(benefitValueUI.contains("footnote1"))
-                    benefitValueUI = benefitValueUI.replace("footnote1", "");
-                else if(benefitValueUI.contains("1/"))
-                    benefitValueUI = benefitValueUI.replaceAll("1/", "");
-                else if(benefitValueUI.contains("2/"))
-                    benefitValueUI = benefitValueUI.replaceAll("2/", "");
-                else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor"))
-                    benefitValueUI =benefitValueUI.replaceAll("/", "");
-                else if(key.equalsIgnoreCase("plan name")) {
-                    benefitValueUI = benefitValueUI.substring(0, benefitValueUI.indexOf(")")+1);
-                }
-                else if(benefitValueUI.contains("monthlyvaries2")) {
-                    benefitValueUI = benefitValueUI.replaceAll("monthlyvaries2", "monthlyvaries");
-                }
-                if(!columnName.contains("doctors/providers"))
-                    benefitValueUI = benefitValueUI.replaceAll("/", "");
-
-						/*if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
-							 if(benefitValueUI.contains(".1"))
-								benefitValueUI = benefitValueUI.replace(".1", "");
-						}*/
-
-                //the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
-                if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
-                    if(benefitValueUI.contains(".2"))
-                        benefitValueUI = benefitValueUI.replace(".2", ".");
-                }else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")||columnName.equalsIgnoreCase("Special Eligibility Requirement")) {
-                    if(benefitValueUI.contains(benefitValue)) {
-                        flag=true; break;
-                    }else {
-                        flag=false;
-                        System.out.println("Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-                        tmpUIString2 = tmpUIString1;
-                        break;
-                    }
-                }
-
-                if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
-                    flag = true;break;
-                }else {
-                    flag = false;
-                    System.out.println("Values did not match for col:6 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
-                    tmpUIString2 = tmpUIString1;
-                    break;
-                }
-
-            }
         }
 
-
-        if(counter == 0) {
+        if(benefitsMap.get(columnName).contains(benefitValue)) {
+            flag = true;
+        }else {
             flag = false;
-            System.out.println("Values did not match for col:7 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
-            tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+            System.out.println("Values did not match for col:6 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+            tmpUIString2 = benefitsMap.get(columnName);
         }
+//        for(String key : benefitsMap.keySet()) {
+//            benefitValueUI = benefitsMap.get(key);
+//            tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
+//            tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
+////            benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 	//replace all the next lines and spaces from the string
+////            benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 		//replace all the next lines and spaces from the string
+////            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~]", "");
+////            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~}", "");
+////            benefitValueUI= benefitValueUI.replaceAll("\\[~/n~", "");
+//                if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+//                    flag = true;break;
+//                }else {
+//                    flag = false;
+//                    System.out.println("Values did not match for col:6 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+//                    tmpUIString2 = tmpUIString1;
+//                    break;
+//                }
+//
+//            }
+
+//        if(counter == 0) {
+//            flag = false;
+//            System.out.println("Values did not match for col:7 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+//            tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
+//        }
 
         comparedResult.put(flag, tmpUIString2);
         return comparedResult;

@@ -1,7 +1,7 @@
 @dceUlayer
 Feature: ACQ-Plan benefits validation
 
-  @PlanDetails_ExcelValidation @2022PlanDetialsAARP
+  @PlanDetails_ExcelValidation @2022DCEPlanDetialsAARP
   Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to DCE plan details and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
@@ -11,7 +11,7 @@ Feature: ACQ-Plan benefits validation
     @2022planDetailsBenefitsAARP01 @planDetailsMA
     Examples: 
       | excelPath                       | workSheet   | site |
-      | DCE_MBD | PDP_Preferred | AARP |
+      | DCE_MBD | MAPD_SNP_DCE | AARP |
 
     @2022planDetailsBenefitsAARP02 @planDetailsMA
     Examples: 
