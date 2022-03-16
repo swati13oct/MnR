@@ -43,8 +43,6 @@ public class TestNGMethodListener implements IInvokedMethodListener, IAnnotation
 	@Override
 	public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
 		String MicroApps = System.getProperty("microapps") == null ? "" : System.getProperty("microapps");
-		String fileData = System.getProperty("filedata");
-		System.out.println("\n\nFile Data:\n"+fileData+"\n\n");
 		List<String> selectedMicroApps = MicroApps.isEmpty() ? new ArrayList<String>()
 				: Arrays.asList(MicroApps.split(","));
 		Set<String> selectedRunners = new HashSet<String>();
