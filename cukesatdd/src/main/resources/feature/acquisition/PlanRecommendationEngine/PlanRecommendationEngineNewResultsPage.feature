@@ -678,7 +678,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | UHC  |   30004 | YES           | Forsyth County | MAPD          | Medicaid,chronic,nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
       
   
-  @viewIndividualDrugModel @F774397
+  @viewIndividualDrugCosts @F774397
    Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -711,11 +711,11 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
      @regressionAARP @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                                                                                                                                 | 
-      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Plan L,Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,Lipitor TAB 20MG,False:Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
     
     @regressionUHC 
     Examples: 
       | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                                                                                                                                 | 
-      | UHC  |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Plan L,Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
+      | UHC  |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,Lipitor TAB 20MG,False:Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
 
   
