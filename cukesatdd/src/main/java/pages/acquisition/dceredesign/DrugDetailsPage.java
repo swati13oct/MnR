@@ -2826,7 +2826,7 @@ Blank error message is removed
 	@FindBy(xpath="//div[@id='editdrugcontainer']//div[@id='accordion-1-content']//p[@class='text-bold']")
 	private List<WebElement> DrugCost;
 	
-	@FindBy(xpath="//div[@id='drugtable']//span[contains(text(),'Tier')]")
+	@FindBy(xpath="//div[@id='drugtable']//*[contains(text(),'Tier')]")
 	private List<WebElement> Coveredd;
 	
 	@FindBy(xpath="//div[@id='drugtable']//li[contains(text(),'Not Covered*')]")
@@ -2895,20 +2895,28 @@ Blank error message is removed
         	System.out.println("<<< Sort option is disabled for one drug >>>>>");
         }else {
         	validateNew(YourDrugs_DrugsTxt);
-        	if(sortBy.equalsIgnoreCase("A-Z")){
+        	if(sortBy.equals("Default")) {
+        		validateNew(Defaultclick);
+        		System.out.println("<<<<< Default text is displayed >>>>");
+        	}else if(sortBy.equalsIgnoreCase("A-Z")){
         		boolean azflag=false;
         		List<String> druglist = new ArrayList();
         		String drug=null;
-        		for (int i=1;i<Drugcnt;i++) {
-        			validateNew(Drugname.get(i));
-        			drug=Drugname.get(i).getText();
+        		for(WebElement we : Drugname ) {
+        			drug=we.getText().toLowerCase();
         			druglist.add(drug);
         		}
         		Collections.sort(druglist);
-        		for(int i=1;i<Drugcnt;i++){
-        			if(Drugname.get(i).getText().equals(druglist.get(i-1))) {
+        		int i=0;
+        		for(WebElement we : Drugname){
+        			if(we.getText().toLowerCase().equals(druglist.get(i))) {
         				azflag=true;
         			}
+        			else {
+        				azflag=false;
+        				break;
+        			}
+        			i++;
         		}
         		if(azflag==true) {
         			System.out.println("Drugs sorted in A-Z format");
@@ -2919,16 +2927,20 @@ Blank error message is removed
         		boolean zaflag=false;
         		List<String> druglist = new ArrayList();
         		String drug=null;
-        		for (int i=1;i<Drugcnt;i++) {
-        			validateNew(Drugname.get(i));
-        			drug=Drugname.get(i).getText();
+        		for (WebElement we : Drugname) {
+        			drug=we.getText().toLowerCase();
         			druglist.add(drug);
         		}
-                Collections.sort(druglist,Collections.reverseOrder());  
-        		for(int i=1;i<Drugcnt;i++){
-        			if(Drugname.get(i).getText().equals(druglist.get(i-1))) {
+                Collections.sort(druglist,Collections.reverseOrder()); 
+                int i=0;
+        		for(WebElement we : Drugname){
+        			if(we.getText().toLowerCase().equals(druglist.get(i))) {
         				zaflag=true;
+        			}else {
+        				zaflag=false;
+        				break;
         			}
+        			i++;
         		}
             		if(zaflag==true) {
             			System.out.println("Drugs sorted in Z-A format");
@@ -2939,16 +2951,20 @@ Blank error message is removed
         		 boolean costflag=false;
         		 List<Double> costlist=new ArrayList();
         		 Double a=0.0;
-        		 for(int i=1;i<Drugcnt;i++) {
-        			 validateNew(DrugCost.get(i));
-        			 a=Double.parseDouble(DrugCost.get(i).getText().substring(1));
+        		 for(WebElement we : DrugCost){
+        			 a=Double.parseDouble(we.getText().substring(1));
         			 costlist.add(a);
         		 }
         		 Collections.sort(costlist,Collections.reverseOrder());
-        		 for(int i=1;i<Drugcnt;i++){
-         			if(Double.parseDouble(DrugCost.get(i).getText().substring(1))==(costlist.get(i-1))) {
+        		 int i=0;
+        		 for(WebElement we : DrugCost){
+         			if(Double.parseDouble(we.getText().substring(1))==(costlist.get(i))) {
          				costflag=true;
+         			}else {
+         				costflag=false;
+         				break;
          			}
+         			i++;
          		}        		 
         		 if(costflag==true) {
         			 System.out.println("Durgs sorted by cost high to low");
@@ -2956,45 +2972,146 @@ Blank error message is removed
         			 Assertion.fail(">>>>>> Drugs Not sorted by cost <<<<<");
         		 }        		
         	}else if(sortBy.equalsIgnoreCase("Tier")) {
-        		/*boolean tierflag=false;
-        		List<String> tierlist=new ArrayList();
-        		String tier=null;
-        		for(int i=1;i<tierdrugcount;i++) {
-        		//	tier=Covered.get(i).getText().substring(0,6);
-        			tierlist.add(tier);
+        		boolean ncflag=false;
+        		boolean cflag=false;
+        		boolean dflag=false;
+        		boolean dflag1=false;
+        		if(Drugcnt-tierdrugcount >0) {
+            		List<String> notcoveredlist = new ArrayList();
+            		String notcovered=null;
+            		List<String> druglist = new ArrayList();
+            		String drug=null;
+            		for(WebElement we : NotCovered) {
+            			notcovered=we.getText();
+            			notcoveredlist.add(notcovered);
+            		}
+            		int i=0;
+            		for (WebElement we : Drugname) {
+            			if(i==Drugcnt-tierdrugcount) {
+            				break;
+            			}
+            			drug=we.getText().toLowerCase();
+            			druglist.add(drug);
+            			i++;
+            		}
+            		Collections.sort(druglist);
+            		int j=0;
+            		for (WebElement we : Drugname) {  
+            			if(j==Drugcnt-tierdrugcount) {
+            				break;
+            			}
+            			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+            				dflag=true;
+            			}else {
+            				dflag=false;
+            				break;
+            			}
+            			j++;
+            			}
+            		int k=0;
+            		for(WebElement we1 : NotCovered ){
+            			if(we1.getText().equals(notcoveredlist.get(k))){
+            				ncflag=true;
+            			}else {
+            				ncflag=false;
+            				break;
+            			}
+            			k++;
+            		}        			
         		}
-        		Collections.sort(tierlist); // Tier 1, Tier 2, Tier 3
-        		for(int i=1;i<tierdrugcount;i++) {
-        	//		if(Covered.get(i).getText().substring(0,6).equals(tierlist.get(i-1))) {
-        				tierflag=true;
-        			}
+        		if(tierdrugcount >0) {
+            		List<String> coveredlist = new ArrayList();
+            		String covered=null;
+            		List<String> druglist = new ArrayList();
+            		String drug=null;
+            		for(WebElement we : Coveredd) {
+            			covered=we.getText().substring(0,6);
+            			coveredlist.add(covered);
+            		}
+            		Collections.sort(coveredlist);
+            		int i=0;
+            		for (WebElement we : Drugname) {
+            			if(i<tierdrugcount) {
+            			drug=we.getText().toLowerCase();
+            			druglist.add(drug);
+            			}
+            			i++;
+            		}
+            		int j=0;
+            		for (WebElement we : Drugname) {
+            			if(j<tierdrugcount) {
+            			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+            				dflag1=true;
+            			}else {
+            				dflag1=false;
+            				break;
+            			}
+            			j++;
+            			}
+            		}
+            		int k=0;
+            		for(WebElement we : Coveredd){
+            			if(we.getText().substring(0,6).equals(coveredlist.get(k))){
+            				cflag=true;
+            			}else {
+            				cflag=false;
+            				break;
+            			}
+            			k++;
+            		}
         		}
-        	//	if(tierflag==true) {
-        			System.out.println("Drugs sorted by tier Low to high");
-        		}else{
-        			Assertion.fail(">>>>> Drugs Not Sorted By tier <<<<<<");
-        		} */      		
+        		if(Drugcnt-tierdrugcount==0 && cflag==true && dflag1==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		} else if(tierdrugcount==0 && ncflag==true && dflag==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		}else if(cflag==true && ncflag==true && dflag==true && dflag1==true) {
+        			System.out.println("Drugs sorted by tier low to high");
+        		}else {
+        			Assertion.fail(">>>>> Drugs Not sorted by tier low to high <<<<<<< ");
+        		}       		
         	}else if(sortBy.equalsIgnoreCase("Covered")) {
         		boolean cflag=false;
         		List<String> coveredlist = new ArrayList();
         		String covered=null;
         		List<String> druglist = new ArrayList();
         		String drug=null;
-        		for(int i=1;i<tierdrugcount;i++) {
-        			covered=Coveredd.get(i).getText();
+        		for(WebElement we : Coveredd) {
+        			covered=we.getText().substring(0,6);
         			coveredlist.add(covered);
         		}
-        		for (int i=1;i<tierdrugcount;i++) {
-        			drug=Drugname.get(i).getText();
+        		int i=0;
+        		for (WebElement we : Drugname) {
+        			if(i<tierdrugcount) {
+        			drug=we.getText().toLowerCase();
         			druglist.add(drug);
+        			}
+        			i++;
         		}
         		Collections.sort(druglist);
-        		for(int i=1;i<tierdrugcount;i++){
-        			if(Drugname.get(i).getText().equals(druglist.get(i-1)) && Coveredd.get(i).getText().equals(coveredlist.get(i-1))){
-        				cflag=true;
+        		int j=0;
+        		boolean dflag=false;
+        		for (WebElement we : Drugname) {
+        			if(j<tierdrugcount) {
+        			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+        				dflag=true;
+        			}else {
+        				dflag=false;
+        				break;
+        			}
+        			j++;
         			}
         		}
-            		if(cflag==true) {
+        		int k=0;
+        		for(WebElement we : Coveredd){
+        			if(we.getText().substring(0,6).equals(coveredlist.get(k))){
+        				cflag=true;
+        			}else {
+        				cflag=false;
+        				break;
+        			}
+        			k++;
+        		}
+            		if(cflag==true && dflag==true) {
             			System.out.println("Drugs sorted in Covered format");
             		}else{
                            Assertion.fail(">>>>>> Drugs Not sorted in Covered format <<<<<<<");
@@ -3006,21 +3123,45 @@ Blank error message is removed
         		String notcovered=null;
         		List<String> druglist = new ArrayList();
         		String drug=null;
-        		for(int i=1;i<Drugcnt-tierdrugcount;i++) {
-        			notcovered=NotCovered.get(i).getText();
+        		for(WebElement we : NotCovered) {
+        			notcovered=we.getText();
         			notcoveredlist.add(notcovered);
         		}
-        		for (int i=1;i<Drugcnt-tierdrugcount;i++) {
-        			drug=Drugname.get(i).getText();
+        		int i=0;
+        		for (WebElement we : Drugname) {
+        			if(i==Drugcnt-tierdrugcount) {
+        				break;
+        			}
+        			drug=we.getText().toLowerCase();
         			druglist.add(drug);
+        			i++;
         		}
         		Collections.sort(druglist);
-        		for(int i=1;i<Drugcnt-tierdrugcount;i++){
-        			if(Drugname.get(i).getText().equals(druglist.get(i-1)) && NotCovered.get(i).getText().equals(notcoveredlist.get(i-1))){
-        				ncflag=true;
+        		int j=0;
+        		boolean dflag=false;
+        		for (WebElement we : Drugname) {  
+        			if(j==Drugcnt-tierdrugcount) {
+        				break;
         			}
+        			if(we.getText().toLowerCase().equals(druglist.get(j))) {
+        				dflag=true;
+        			}else {
+        				dflag=false;
+        				break;
+        			}
+        			j++;
+        			}
+        		int k=0;
+        		for(WebElement we1 : NotCovered ){
+        			if(we1.getText().equals(notcoveredlist.get(k))){
+        				ncflag=true;
+        			}else {
+        				ncflag=false;
+        				break;
+        			}
+        			k++;
         		}
-            		if(ncflag==true) {
+            		if(ncflag==true && dflag==true) {
             			System.out.println("Drugs sorted in Not covered format");
             		}else{
                            Assertion.fail(">>>>>> Drugs Not sorted in Not covered format <<<<<<<");

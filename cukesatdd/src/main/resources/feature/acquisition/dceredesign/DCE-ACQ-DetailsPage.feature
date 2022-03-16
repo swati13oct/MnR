@@ -352,12 +352,12 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
-    # Then the user searches and adds the following Drug to Drug List
-    #  | DrugName | <drug5> |
-    # Then the user searches and adds the following Drug to Drug List
-    # | DrugName | <drug6> |
-    # Then the user searches and adds the following Drug to Drug List
-    #  | DrugName | <drug7> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug5> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug6> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug7> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
@@ -369,9 +369,21 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
     Then the user validates planName matches plan Name in VPP
     Then the user validates Your Drugs sections
     And the user selects the sort by under your drugs
-      | Sort By | <sortBy> |
+      | Sort By | <sortByaz> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortByza> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortBycost> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortBytier> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortBycovered> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortBynotcovered> |
+    And the user selects the sort by under your drugs
+      | Sort By | <sortBydefault> |
 
     @dce_sortdetails_scenario
     Examples: 
-      | drug1   | drug2  | drug3   | drug4                     | zipCode | planType | planName                        | site | sortBy       |
-      | Lipitor | Fanapt | Welchol | Repatha Pushtronex System |   75002 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Not Covered  |
+      | drug1   | drug2         | drug3    | drug4    | drug5      | drug6   | drug7      | zipCode | planType | planName                        | site | sortByaz | sortByza | sortBycost | sortBytier | sortBycovered | sortBynotcovered | sortBydefault |
+      | Humalog | buprenorphine | tramadol | Suboxone | febuxostat | Welchol | vigabatrin |   75002 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | A-Z      | Z-A      | Cost       | Tier       | Covered       | Not Covered      | Default       |
