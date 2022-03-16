@@ -1,3 +1,4 @@
+@campaignTFNStageMS
 Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
 
 @Scenario_1_MS
