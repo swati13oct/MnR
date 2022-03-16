@@ -529,6 +529,23 @@ public class VppPlanCompareMobile {
 
 		// dce.validateTotalEstimatedAnnualDrugCosts(totalAnnualDrugCost);
 	}
+	
+	@Then("user updates Medsup form for user details")
+	public void user_updates_form_details() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result=plansummaryPage.updatePersonalDetailsForMedsup();
+		Assertion.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
+		
+	}
+	
+	@When("^user selects medsup plans to compare$")
+	public void user_selects_medsup_plans_to_compare() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.compareAllMSPlans();
+			System.out.println("Selected All MS plans for Plan Compare");
+	}
 
 	@Then("^the user selects a pharmacy from the list of pharmacies in AARP site$")
 	public void the_user_selects_a_pharmacy_from_the_list_of_pharmacies_in_AARP_site(DataTable data) throws Throwable {
@@ -1207,6 +1224,29 @@ public class VppPlanCompareMobile {
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
+	}
+	
+	@When("^user select \"([^\"]*)\" plans to compare$")
+	public void user_select_plans_to_compare(String planIndex) {
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex, plantype);
+
+	}
+	
+	@Then("^user clicks on compare button$")
+	public void user_clicks_on_compare_button() {
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickCompareButton();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@When("^the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site$")
@@ -5072,6 +5112,7 @@ public class VppPlanCompareMobile {
 		WelcomePageMobile welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assertion.fail("Error Loading Welcome Page for OLE");
 		}
