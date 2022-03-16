@@ -18,7 +18,9 @@ public class TestNGMethodListener implements IInvokedMethodListener, IAnnotation
 
 	@Override
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-
+		String fileData = System.getProperty("filedata");
+		System.out.println("\n\nFile Data:\n"+fileData+"\ntype:"+fileData.getClass().getName()+"\n");
+		
 	}
 
 	/**
