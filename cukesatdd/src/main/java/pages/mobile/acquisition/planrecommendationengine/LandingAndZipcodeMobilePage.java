@@ -3,16 +3,24 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.time.Duration;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSDriver;
 
 public class LandingAndZipcodeMobilePage extends UhcDriver {
 
@@ -139,7 +147,20 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+
+		try {
+			if(driver.toString().contains("IOS")) {
+				jsClickNew(zipCode);
+				MobileElement mobileElement = (MobileElement) driver.findElement(By.xpath("//input[contains(@id,'zip-code')]"));
+			//	mobileElement.click();
+				mobileElement.sendKeys(zipcode);
+				jsClickNew(getStartedBtn);
+			}
+		}
+		catch (Exception e) {
+		}
 		// getStartedBtn.click();
+
 		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);

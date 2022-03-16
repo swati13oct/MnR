@@ -75,11 +75,14 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
       | AARP |   33143 | No            | Miami-Dade | MAPD          | None         | Lookup          | Perez, Martha Regina, MD | [blank]       | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision |
       | AARP |   55419 | No            | Hennepin   | MAPD          | None         | AcceptsMedicare | [blank]                  | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None   |
+      | AARP |   27007 | No            | Surry      | MAPD          | None         | AcceptsMedicare | [blank]                  | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None   |
 
     @regressionUHC @sanity
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      | UHC  |   15537 | NO            | Bedford | MAPD          | None         | UHGNetwork | [blank]     | [blank]       | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
+      | UHC  |   15537 | NO            | Bedford  | MAPD          | None         | UHGNetwork      | [blank]     | [blank]       | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
+      | UHC  |   55419 | No            | Hennepin | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None                 |
+      | UHC  |   27007 | No            | Surry    | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None                 |
 
   @PRE @APIRanking @MAFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
@@ -108,12 +111,12 @@ Feature: 1.18.2 Plan Recommendation Engine Ranking - Verify PRE flows functional
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP @prodRegression @PREDBG
+    @regressionAARP @prodRegression
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      | AARP |   15537 | NO            | Bedford | MA            | None         | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
+      | site | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
+      | AARP |   15537 | NO            | Bedford       | MA            | None             | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
+      | AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
-    #| AARP |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
     @regressionUHC @featureGate
     Examples: 
       | site | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |

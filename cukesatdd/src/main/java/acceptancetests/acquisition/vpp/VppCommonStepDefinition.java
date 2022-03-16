@@ -64,6 +64,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
+import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 
 /**
@@ -79,7 +80,7 @@ public class VppCommonStepDefinition {
 		return loginScenario;
 	}
 
-	//	WebDriver wd;
+	// WebDriver wd;
 	public String PREflow = "";
 
 	/**
@@ -92,27 +93,29 @@ public class VppCommonStepDefinition {
 		this.scenario = scenario;
 	}
 
-//	@Given("^the user is on medicare acquisition site landing page$")
-//	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-//		wd = getLoginScenario().getWebDriverNew();
-//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-//		for (int i = 0; i < memberAttributesRow.size(); i++) {
-//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-//					memberAttributesRow.get(i).getCells().get(1));
-//		}
-//		String site = memberAttributesMap.get("Site");
-//		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-//
-//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-//		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
-//		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
-//
-//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-//		if (site.equalsIgnoreCase("AARP"))
-//			aquisitionhomepage.validateSubtitle();
-//	}
+	// @Given("^the user is on medicare acquisition site landing page$")
+	// public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+	// wd = getLoginScenario().getWebDriverNew();
+	// List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	// Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	// for (int i = 0; i < memberAttributesRow.size(); i++) {
+	// memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+	// memberAttributesRow.get(i).getCells().get(1));
+	// }
+	// String site = memberAttributesMap.get("Site");
+	// AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+	//
+	// getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	// getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+	// aquisitionhomepage);
+	// getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+	// getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, "
+	// ");
+	//
+	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+	// if (site.equalsIgnoreCase("AARP"))
+	// aquisitionhomepage.validateSubtitle();
+	// }
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
@@ -127,7 +130,7 @@ public class VppCommonStepDefinition {
 		 * memberAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String site = memberAttributesMap.get("Site");
-		//	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+		// AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -178,7 +181,7 @@ public class VppCommonStepDefinition {
 	@Then("^the user navigates to the plan details for the given plan type$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
-//		wd.manage().window().maximize(); //Can be handled from MRScenario
+		// wd.manage().window().maximize(); //Can be handled from MRScenario
 		// Remove the commented code
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
@@ -297,7 +300,6 @@ public class VppCommonStepDefinition {
 		planComparePage.DentalLinkText();
 	}
 
-
 	@And("^the user views the plans of the below plan type and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -371,7 +373,7 @@ public class VppCommonStepDefinition {
 
 	/**
 	 * @toDo:user view plan details of the above selected plan in AARP site and
-	 * validates
+	 *            validates
 	 */
 	@Then("^the user views plan details of the above selected plan and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
@@ -432,7 +434,7 @@ public class VppCommonStepDefinition {
 		String annualDeductible = memberAttributesMap.get("Annual Deductible");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
+
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validatePlanPremium(planName, monthlyPremium);
@@ -535,7 +537,7 @@ public class VppCommonStepDefinition {
 
 	@And("^user clicks on compare button and navigate to plan compare page for \"([^\"]*)\" time$")
 	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(String attempt,
-																				DataTable givenAttributes) throws Throwable {
+			DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*
@@ -566,7 +568,7 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean result = plansummaryPage.addTwoMorePlansForComparing();
-	//	Assertion.assertTrue("User successfully add two more plans", result);
+		// Assertion.assertTrue("User successfully add two more plans", result);
 		System.out.println("User successfully add two more plans");
 
 	}
@@ -992,7 +994,7 @@ public class VppCommonStepDefinition {
 	@Then("^the user validates the following Additional Benefits of Plan for the plan$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(
 			DataTable givenAttributes) throws Throwable {
-//		List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -1272,14 +1274,15 @@ public class VppCommonStepDefinition {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
-		//	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-		//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		// VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		// .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = givenAttributesMap.get("Plan Type");
-		//	String SiteName = givenAttributesMap.get("Site");
+		// String SiteName = givenAttributesMap.get("Site");
 		String planName = givenAttributesMap.get("Plan Name");
 		PlanDetailsPage plandetailsPage;
 
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage = new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage = new PlanRecommendationEngineNewResultsPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		// TFN = planSummaryPage.GetTFNforPlanType();
 
 		plandetailsPage = planSelectorNewResultspage.validatePlanNamesPRE(planName);
@@ -1798,7 +1801,7 @@ public class VppCommonStepDefinition {
 		Assertion.assertTrue("Drug cost is displayed incorrectly",
 				plansummaryPage.verifyAddedDrugCost(planName, annualDrugCost));
 	}
-	
+
 	@Then("^the user validates the pharmacy drug cost on plan summary page for the selected plan$")
 	public void verify_Pharmacy_drug_cost(DataTable Planname) {
 
@@ -1809,9 +1812,9 @@ public class VppCommonStepDefinition {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-				plansummaryPage.verifyAddedDrugPharmacySummaryCost(planName, networkType );
+		plansummaryPage.verifyAddedDrugPharmacySummaryCost(planName, networkType);
 	}
-	
+
 	@Then("^the user validates the pharmacy drug cost on plan details page for the selected plan$")
 	public void verify_Pharmacy_drug_cost_PlanDetails(DataTable Planname) {
 
@@ -1821,11 +1824,11 @@ public class VppCommonStepDefinition {
 		String networkType = plannameAttributesMap.get("NetworkType");
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		
+
 		vppPlanDetailsPage.verifyAddedDrugPharmacyDetailsCost(planName, networkType);
 
 	}
-	
+
 	@Then("^the user validates the pharmacy drug cost on plan compare page for the selected plan$")
 	public void verify_Pharmacy_drug_cost_PlanCompare(DataTable Planname) {
 
@@ -1835,7 +1838,7 @@ public class VppCommonStepDefinition {
 		String networkType = plannameAttributesMap.get("NetworkType");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		
+
 		planComparePage.verifyAddedDrugPharmacyCompareCost(planName, networkType);
 
 	}
@@ -2005,12 +2008,12 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-//		if (planType.equals("MAPD")) {
-//			// plansummaryPage.clickonViewPlans();
-//			plansummaryPage.checkMAPlansOnly(Counter);
-//			System.out.println("Selected All MAPD plans for Plan Compare");
-//		}
-//		else
+		// if (planType.equals("MAPD")) {
+		// // plansummaryPage.clickonViewPlans();
+		// plansummaryPage.checkMAPlansOnly(Counter);
+		// System.out.println("Selected All MAPD plans for Plan Compare");
+		// }
+		// else
 		plansummaryPage.checkPlansForCompare(Counter, planType);
 
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
@@ -2049,14 +2052,12 @@ public class VppCommonStepDefinition {
 		planComparePage.validateIcons();
 	}
 
-
 	@Then("^click on Show All button on plan compare page$")
 	public void click_on_Show_All_button() {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.showAllButton();
 	}
-
 
 	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
 	public void verify_all_doctors_covered() {
@@ -2982,23 +2983,23 @@ public class VppCommonStepDefinition {
 		String planType = memberAttributesMap.get("Plan Type");
 
 		switch (planType) {
-			case "MAPD":
-				plansummaryPage.savePlans(savePlanNames, planType);
-				break;
-			case "MA":
-				plansummaryPage.savePlans(savePlanNames, planType);
-				break;
-			case "SNP":
-				plansummaryPage.viewPlanSummary(planType);
-				plansummaryPage.savePlans(savePlanNames, planType);
-				break;
-			case "PDP":
-				plansummaryPage.viewPlanSummary(planType);
-				plansummaryPage.savePlans(savePlanNames, planType);
-				break;
+		case "MAPD":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "MA":
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "SNP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
+		case "PDP":
+			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.savePlans(savePlanNames, planType);
+			break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 	}
 
@@ -3260,14 +3261,12 @@ public class VppCommonStepDefinition {
 		planComparePage.ClickOONToggle();
 	}
 
-
 	@Then("^validate text under additional benefits$")
 	public void validate_text_under_additional_benefits() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONTextAdditionalBenefit();
 	}
-
 
 	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
 	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
@@ -3479,12 +3478,12 @@ public class VppCommonStepDefinition {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-			//	plansummaryPage.medsuppOLEPlanOvervieworOutlineCoverage();
-			//	plansummaryPage.medsuppOLEBenefitsTable();
-			//	plansummaryPage.medsuppOLERulesandDisclosures();
+			// plansummaryPage.medsuppOLEPlanOvervieworOutlineCoverage();
+			// plansummaryPage.medsuppOLEBenefitsTable();
+			// plansummaryPage.medsuppOLERulesandDisclosures();
 			plansummaryPage.medsuppOLEHealthInsurance();
 			plansummaryPage.medsuppOLEAARPSupplementPlans();
-			//	 plansummaryPage.medsuppOLEPrintandSaveApplication();
+			// plansummaryPage.medsuppOLEPrintandSaveApplication();
 			plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
 
 		}
@@ -4269,13 +4268,13 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		switch (planType.toUpperCase()) {
-			case "MAPD":
-			case "MA":
-				plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, "MA");
-				break;
-			default:
-				plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, planType.toUpperCase());
-				break;
+		case "MAPD":
+		case "MA":
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, "MA");
+			break;
+		default:
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, planType.toUpperCase());
+			break;
 		}
 	}
 
@@ -4566,7 +4565,8 @@ public class VppCommonStepDefinition {
 	}
 
 	@Then("^the user validates the view drug information on Plan Compare page")
-	public void user_clicks_validates_view_drug_info_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+	public void user_clicks_validates_view_drug_info_on_PlanCompare_AARP(DataTable givenAttributes)
+			throws InterruptedException {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -4576,7 +4576,6 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
-
 
 	@Then("^user selects keepshopping on the pop-up$")
 	public void user_selects_keepshopping_on_popup() {
@@ -4606,7 +4605,6 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
-
 
 	@Then("Verify Change Zip Code Link is displayed on compare Page")
 	public void verify_Change_Zip_Code() {
@@ -4766,30 +4764,31 @@ public class VppCommonStepDefinition {
 		}
 	}
 
-
 	@Then("^the user validates the available plans for selected plan types PRE Flows for OLE$")
 	public void user_validates_available_plans_aarp_PREflows_OLE(DataTable givenAttributes) {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
-		/*VPPPlanSummaryPage PlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
+		/*
+		 * VPPPlanSummaryPage PlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		 */
 		String planType = givenAttributesMap.get("Plan Type");
 		String SiteName = givenAttributesMap.get("Site");
 		String planName = givenAttributesMap.get("Plan Name");
 
 		String username = givenAttributesMap.get("User Name");
 		String password = givenAttributesMap.get("Password");
-		//PlanDetailsPage PlanDetailsPage;
+		// PlanDetailsPage PlanDetailsPage;
 		VisitorProfilePage visitorProfilePage;
 
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage = new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage = new PlanRecommendationEngineNewResultsPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 
 		visitorProfilePage = planSelectorNewResultspage.validatePlanNamesPREforOLEFlow(planName);
-		//planSelectorNewResultspage.validateSignInUser(username,password);
+		// planSelectorNewResultspage.validateSignInUser(username,password);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
-
 
 		if (visitorProfilePage != null) {
 			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
@@ -4798,7 +4797,8 @@ public class VppCommonStepDefinition {
 			System.out.println("User navigates from PRE Page through Visitor profile and navigate to OLE Flow");
 			Assertion.assertTrue(true);
 		} else
-			Assertion.fail("Error in validating User navigates from PRE Page through Visitor profile and navigate to OLE Flow");
+			Assertion.fail(
+					"Error in validating User navigates from PRE Page through Visitor profile and navigate to OLE Flow");
 
 	}
 
@@ -4814,5 +4814,431 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfilePage.signIn(username, password);
 	}
+	
+	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel on Plan Compare$")
+	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL_on_PlanCompare(
+			DataTable givenAttributes) throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes .getGherkinRows();
+		 * for (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String ExcelName = givenAttributesMap.get("ExcelFile");
+		String ExcelNameDocLog = givenAttributesMap.get("ExcelFileDocLog");
+		String sheetName = givenAttributesMap.get("WorkSheetName");
+		String sheetNameDocLog = "Doc Log";
+		String siteType = givenAttributesMap.get("Site");
+		System.out.println("Set of TFNs from Sheet : " + sheetName);
 
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		// Getting Date
+		DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+		Date RunDate = new Date();
+		String DateCreated = dateFormat.format(RunDate);
+		String parentDirectory = null;
+		Sheet sheetDocLog = null;
+		parentDirectory = new java.io.File(".").getCanonicalPath();
+		String InputFilePath = parentDirectory + "/src/main/resources/database/PlanDocs/" + ExcelName + ".xls";
+		String InputFilePathDocLog = parentDirectory + "/src/main/resources/database/PlanDocs/MADocLog.xls";
+		String InputFilePathDocLogPDP = parentDirectory + "/src/main/resources/database/PlanDocs/PDPDocLog.xls";
+
+		String OutputFilePath = parentDirectory + "/target/PDFvalidation_Results_" + sheetName + "_" + siteType + "_"
+				+ DateCreated + ".xls";
+
+		// Reading the input file
+		File InputFile = new File(InputFilePath);
+		FileInputStream inputStream = new FileInputStream(InputFile);
+		Workbook workbook = new HSSFWorkbook(inputStream);
+		Sheet sheet = workbook.getSheet(sheetName);
+		int lastRow = sheet.getLastRowNum();
+
+		// Reading the MADocLog file
+		File InputFileDocLog = new File(InputFilePathDocLog);
+		FileInputStream inputStreamDocLog = new FileInputStream(InputFileDocLog);
+		Workbook workbookDocLog = new HSSFWorkbook(inputStreamDocLog);
+		Sheet sheetDocLogMA = workbookDocLog.getSheet(sheetNameDocLog);
+		int lastRowDocLogMA = sheetDocLogMA.getLastRowNum();
+
+		// Reading the PDPDocLog file
+		File InputFileDocLogPDP = new File(InputFilePathDocLogPDP);
+		FileInputStream inputStreamDocLogPDP = new FileInputStream(InputFileDocLogPDP);
+		Workbook workbookDocLogPDP = new HSSFWorkbook(inputStreamDocLogPDP);
+		Sheet sheetDocLogPDP = workbookDocLogPDP.getSheet(sheetNameDocLog);
+		int lastRowDocLogPDP = sheetDocLogPDP.getLastRowNum();
+
+		// Creating the results excel book
+		Workbook ResultWorkbook = new HSSFWorkbook();
+		Sheet ResultsSheet = ResultWorkbook.createSheet(sheetName);
+
+		// Creating styles to use to highlight cells with colors
+		CellStyle stylePassed = ResultWorkbook.createCellStyle();
+		stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+		stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+
+		CellStyle styleFailed = ResultWorkbook.createCellStyle();
+		styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
+		styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		try {
+			ComparePlansPage planComparePage = null;
+			String currentCellValue = "";
+			String currentColName = "";
+			System.out.println(sheetName + " SAUCE URL: " + getLoginScenario().returnJobURL());
+			HashMap<String, Integer> colNamesMapMA = new HashMap<String, Integer>();
+			HashMap<String, Integer> colNamesMapPDP = new HashMap<String, Integer>();
+
+			HSSFRow rowDocLog1 = (HSSFRow) sheetDocLogMA.getRow(0);
+			Iterator<Cell> cellIteratorDocLog = rowDocLog1.cellIterator();
+			HSSFRow rowDocLogPDP = (HSSFRow) sheetDocLogPDP.getRow(0);
+			Iterator<Cell> cellIteratorDocLogPDP = rowDocLog1.cellIterator();
+
+			String header = "";
+			int ci = 0, ci1 = 0;
+			// loops around column headers for MADoclog file and puts the header names in a
+			// map with an integer for each
+			while (cellIteratorDocLog.hasNext()) {
+				HSSFCell cell = (HSSFCell) cellIteratorDocLog.next();
+				if (cell.getStringCellValue() != null)
+					header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+				try {
+					// System.out.println("header "+ci+" : "+header);
+					colNamesMapMA.put(header, ci);
+				} catch (Exception e) {
+					System.out.println("Error in getting cell values from Doc log headers");
+				}
+				ci++;
+			}
+			// loops around column headers for PDPDoclog file and puts the header names in a
+			// map with an integer for each
+			header = "";
+			while (cellIteratorDocLogPDP.hasNext()) {
+				HSSFCell cell = (HSSFCell) cellIteratorDocLogPDP.next();
+				if (cell.getStringCellValue() != null)
+					header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+				try {
+					// System.out.println("header "+ci+" : "+header);
+					colNamesMapPDP.put(header, ci1);
+				} catch (Exception e) {
+					System.out.println("Error in getting cell values from Doc log headers");
+				}
+				ci1++;
+			}
+
+			int docTypeColIndex = 0;
+			int langColIndex = 0;
+			int componentCodeIndex = 0;
+			int planIDIndexDocLog = 0;
+			int planNameIndexDocLog = 0;
+			int yearIndexDocLog = 0;
+
+			// getting the respective col numbers for the following headers in MADocLog
+			int docTypeColIndexMA = colNamesMapMA.get("DocType");
+			int langColIndexMA = colNamesMapMA.get("OCP/ODP");
+			int componentCodeIndexMA = colNamesMapMA
+					.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+			int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
+			int planNameIndexDocLogMA = colNamesMapMA.get("DocumentDescription");
+			int yearIndexDocLogMA = colNamesMapMA.get("Year");
+
+			// getting the respective col numbers for the following headers in PDPDocLog
+			int docTypeColIndexPDP = colNamesMapPDP.get("DocType");
+			int langColIndexPDP = colNamesMapPDP.get("OCP/ODP");
+			int componentCodeIndexPDP = colNamesMapPDP
+					.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+			int planIDIndexDocLogPDP = colNamesMapPDP.get("Contract-PBP-SegmentID");
+			int planNameIndexDocLogPDP = colNamesMapPDP.get("DocumentDescription");
+			int yearIndexDocLogPDP = colNamesMapMA.get("Year");
+			String planType = "";
+			for (int rowIndex = 0; rowIndex <= lastRow; rowIndex++) {
+
+				int cellIndex = 0;
+
+				HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+				Iterator<Cell> cellIterator = row.cellIterator();
+				HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
+
+				// looping through columns until an empty column is found
+				while (cellIterator.hasNext()) {
+					HashMap<Boolean, String> resultMap = new HashMap<Boolean, String>();
+					boolean valueMatches = true;
+
+					HSSFCell cell = (HSSFCell) cellIterator.next();
+
+					try {
+						currentCellValue = cell.getStringCellValue();
+						currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+					} catch (Exception e) {
+						System.out
+								.println("Error getting value for " + sheetName + " Row " + rowIndex + " Cell " + cell);
+						System.out.println(e);
+					}
+					HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex);
+					if (rowIndex == 0) {
+						newCell.setCellValue(cell.getStringCellValue());
+
+					}
+					if (rowIndex != 0) { // skip the header row
+						if (cellIndex == 0) {
+
+							System.out.println("Validating " + sheetName + " Row " + rowIndex
+									+ " ************************************************************");
+							new VppCommonPage(wd, siteType, currentCellValue); // gets the partial deeplink fromt the
+							// excel and appends it with the
+							// environment URL and navigates to plan
+							// details page
+							planComparePage = new ComparePlansPage(wd);
+						}
+
+						// based on the column headers, determines the equivalent name of the pdf in the
+						// doclog file and the language for that pdf to match in the doclog file
+						ArrayList<String> docLangList = planComparePage.getDocNameAndLanguage(currentColName);
+						int rowIndexOfDocCode = 0;
+						String planId = "", planYear = "", planName = "";
+
+						if (currentColName.equalsIgnoreCase("plan id"))
+							planId = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("plan type"))
+							planType = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("year"))
+							planYear = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("plan name"))
+							planName = cell.getStringCellValue();
+
+						boolean flag = false;
+						String failedMessage = "";
+						if (!(currentColName.contains("Link") || currentColName.contains("Year")
+								|| currentColName.equalsIgnoreCase("zipcode")
+								|| currentColName.equalsIgnoreCase("county")
+								|| currentColName.equalsIgnoreCase("plan name")
+								|| currentColName.equalsIgnoreCase("fips")
+								|| currentColName.equalsIgnoreCase("plan type")
+								|| currentColName.equalsIgnoreCase("plan id"))) {
+							resultMap = planComparePage.clickAndValidatePDFText_URL(currentColName); // method returns
+							// true/false
+							// value along
+							// with the
+							// document code
+							// in hashmap
+
+							if (resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")
+									|| currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth")
+									|| currentColName.contains("Formulary Additions")
+									|| currentColName.contains("Formulary Deletions"))) {
+								newCell.setCellStyle(stylePassed);
+								newCell.setCellValue(resultMap.get(true));
+							} else if (resultMap.containsKey(true)) {// if the validatePDF returns True
+
+								int lastRowDocLog = 0;
+								String compCode = resultMap.get(true);
+								if (planType.equalsIgnoreCase("PDP")) {
+									lastRowDocLog = lastRowDocLogPDP;
+									sheetDocLog = sheetDocLogPDP;
+									docTypeColIndex = docTypeColIndexPDP;
+									langColIndex = langColIndexPDP;
+									componentCodeIndex = componentCodeIndexPDP;
+									planIDIndexDocLog = planIDIndexDocLogPDP;
+									planNameIndexDocLog = planNameIndexDocLogPDP;
+									yearIndexDocLog = yearIndexDocLogPDP;
+								} else {
+									lastRowDocLog = lastRowDocLogMA;
+									sheetDocLog = sheetDocLogMA;
+									docTypeColIndex = docTypeColIndexMA;
+									langColIndex = langColIndexMA;
+									componentCodeIndex = componentCodeIndexMA;
+									planIDIndexDocLog = planIDIndexDocLogMA;
+									planNameIndexDocLog = planNameIndexDocLogMA;
+									yearIndexDocLog = yearIndexDocLogMA;
+								}
+
+								// loops through all of the rows in the DOCLog (either PDP or MA based on
+								// plantype) excel file for the column that contains the component code and
+								// checks if the code exists. if it does, then it returns the index of that row
+								for (int rowIndexDocLog = 1; rowIndexDocLog <= lastRowDocLog; rowIndexDocLog++) {
+									String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog)
+											.getCell(componentCodeIndex).getStringCellValue();
+									if (cellValueOfCompCode.contains(compCode)) {
+										rowIndexOfDocCode = rowIndexDocLog;
+										break;
+									}
+								}
+								double yearDocLog = 0;
+								String planYearDocLog = "";
+								String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex)
+										.getStringCellValue(); // document type value from the doclog file
+								String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex)
+										.getStringCellValue(); // language value from doclog file
+								String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog)
+										.getStringCellValue(); // plan id from the doclog file
+								String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode)
+										.getCell(planNameIndexDocLog).getStringCellValue(); // plan name from the doclog
+								// file
+
+								// if plan year cell contains a numeric value then converts to a string
+								if (sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+										.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+									yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+											.getNumericCellValue(); // plan year from the doclog file
+									planYearDocLog = String.valueOf(yearDocLog);
+									planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
+								} else {
+									planYearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+											.getStringCellValue();
+								}
+								// checks if the doc type matches for this component code
+								if (docTypeDocLog.contains(docLangList.get(0))) {
+									// checks if the language matches for this component code
+									if (langDocLog.contains(docLangList.get(1))) {
+										// checks if plan id matches for the component code
+										if (planIDDocLog.contains(planId)) {
+											// checks if plan name matches for the component code
+											if (planNameDocLog.contains(planName)) {
+												// checks if plan year matches the component code
+												if (planYearDocLog.contains(planYear)) {
+													flag = true;
+													newCell.setCellStyle(stylePassed);
+													newCell.setCellValue(resultMap.get(true));
+												} else {
+													failedMessage = "Failed to match the component code with the plan year: "
+															+ planYearDocLog;
+													newCell.setCellStyle(styleFailed);
+													newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+												}
+											} else {
+												failedMessage = "Failed to match the component code with the plan name: "
+														+ planNameDocLog;
+												newCell.setCellStyle(styleFailed);
+												newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+											}
+
+										} else {// else for plan id check
+											failedMessage = "Failed to match the component code with the plan ID: "
+													+ planIDDocLog;
+											newCell.setCellStyle(styleFailed);
+											newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+										}
+									} else { // else for language check in the DOclog
+										failedMessage = "Failed to match the component code with the Language: "
+												+ langDocLog;
+										newCell.setCellStyle(styleFailed);
+										newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+									}
+								} else { // else for document code check in the doclog
+									failedMessage = "Failed to match the component code with the document type: "
+											+ docTypeDocLog;
+									newCell.setCellStyle(styleFailed);
+									newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+								}
+
+								if (failedMessage != "")
+									System.out.println("Excel comparison Failed: " + failedMessage);
+								else
+									System.out.println("Excel comparison Passed for " + resultMap.get(true));
+
+							} else { // else for if the valiatePDF method returns false
+								newCell.setCellStyle(styleFailed);
+								newCell.setCellValue(resultMap.get(false));
+							}
+							/*
+							 * if (resultMap.containsKey(true)) { newCell.setCellStyle(stylePassed);
+							 * newCell.setCellValue(resultMap.get(true)); } else {
+							 * newCell.setCellStyle(styleFailed);
+							 * newCell.setCellValue(resultMap.get(false));
+							 *
+							 * }
+							 */
+						} else { // else for if the columns are the first few columns where validation is not
+							// needed. e.x link, plan name, etc.
+							newCell.setCellValue(cell.getStringCellValue());
+						}
+					}
+
+					cellIndex++;
+
+				} // while loop end
+			} // for loop end
+			File OutputFile = new File(OutputFilePath);
+			FileOutputStream outputStream = new FileOutputStream(OutputFile);
+			ResultWorkbook.write(outputStream);
+			inputStream.close();
+			outputStream.flush();
+			outputStream.close();
+		} catch (Exception e) {
+			File OutputFile = new File(OutputFilePath);
+			FileOutputStream outputStream = new FileOutputStream(OutputFile);
+			ResultWorkbook.write(outputStream);
+			inputStream.close();
+			outputStream.flush();
+			outputStream.close();
+			e.printStackTrace();
+		}
+
+	}
+
+
+	@Then("user updates Medsup form for user details")
+	public void user_updates_form_details() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result=plansummaryPage.updatePersonalDetailsForMedsup();
+		Assertion.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
+		
+	}
+	
+	@When("^user selects medsup plans to compare$")
+	public void user_selects_medsup_plans_to_compare() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.compareAllMSPlans();
+			System.out.println("Selected All MS plans for Plan Compare");
+	}
+	@Then("^user click to close MS application Modal$")
+	public void click_close_MS_Application_Page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickCloseMSApplication();
+	}
+	
+	@Then("^user Validates Show DSNP and PDP Link available")
+	public void user_Validates_Show_DSNP_and_PDP_Link_available(){
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateShowDSNPPDPLink();
+		
+	}
+	
+	@Then("^user clicks on Show DSNP Toggle and validate DSNP Plan")
+	public void user_clicks_on_Show_DSNP_Toggle_and_validate_DSNP_Plan(DataTable givenAttributes) throws Exception{
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickDSNPToggleValidateSNPPlan(memberAttributesMap);
+		
+	}
+	
+	@Then("^User Click on PDP Link and Validate PDP Plans are loaded")
+	public void User_Click_on_PDP_Link_and_Validate_PDP_Plans_are_loaded(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickPDPValidatePDPPlan(memberAttributesMap);
+	}
+	
+	@Then("^User Switch backs to MAPD Plans")
+	public void User_Switch_backs_to_MAPD_Plans(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickMAPDValidateMAPDPlan(memberAttributesMap);
+		
+	}
+
+	
 }

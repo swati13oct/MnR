@@ -863,6 +863,14 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@Then("^user adds Drugs and Pharmacy in vpp summary page$")
+   	public void add_drugs_Pharmacy_vpp_summary_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		checkpopup();
+		planSelectorResultspage.useraddDrugsDCE(inputValues.get("Drug Details"),inputValues.get("Zip Code"),inputValues.get("Pharmacy Name"));
+   	}
+	
 	@When("^user navigate to Drug page to add drugs from PREResult page$")
    	public void add_drugs_preResult_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -961,6 +969,7 @@ public class PlanRecommendationEngineStepDefinition {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		preEditpage.addSNPEditResponse(inputValues);
+		preEditpage.updateLocationLink();
 		preEditpage.addLocationEditResponse(inputValues);
    	}
 	
@@ -998,6 +1007,12 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_verify_drug_provider() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.validateDrugProvider();
+	}
+	
+	@Then("^user Validate Zipcode and Plantype using StartApplication in Visitor profile page$")
+	public void user_verify_OLE(DataTable givenAttributes) {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.validateOLEDetails(inputValues.get("Zip Code"));
 	}
 	
 	@Given("^the user is on external acquisition site landing page$")
@@ -1235,7 +1250,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void viewDetails_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.viewPlanInfo(inputValues.get("planInfo"));
+		planSelectorNewResultspage.viewPlanInfo(inputValues.get("Plan Info"));
    	}
 	
 	@Then("^user views learn more from results page$")
@@ -1366,11 +1381,54 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorNewResultspage.csnRanking(inputValues.get("SNP Options"));
 	}
 	
-	@Then("^the user do poc$")
-   	public void poc_new_results_page() {
+	@Then("^user validate pharmacy coverage and Change Pharmacy Link in Result page$")
+	public void pharmacy_result_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorNewResultspage.poc();
-   	}
+		planSelectorNewResultspage.PharmacyFunc(inputValues.get("Plan Info"),inputValues.get("Pharmacy Name"));
+	}
+	
+	@Then("^user update Pharmacy using Change Pharmacy Link in result page$")
+	public void update_pharmacy(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.UpdatePharmacyFunc(inputValues.get("New ZipCode"),inputValues.get("New PharmacyName"));
+	}
+	
+	@Then("^user selects plans to validate compare functionality in result page$")
+	public void compare(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Add Plan");
+	}
+	
+	@Then("^user selects Max plans to validate compare functionality in result page$")
+	public void compareMaxPlan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Max compare plans");
+	}
+	
+	@Then("^user delete a plan and add some other plan for compare in result page$")
+	public void deleteAddPlanCompare(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validatecompareInfo(inputValues.get("Compare PlanInfo"), "Delete Plan");
+		planSelectorNewResultspage.deleteAddComparePlan(inputValues.get("Delete PlanInfo"), inputValues.get("Add PlanInfo"));
+	}
+	
+	@Then("^user validates Important Resources section not enabled in PRE-Result page$")
+	public void No_Imp_Res() {
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.noImportantResource();
+	}
+	
+	@Then("^user validates Important Resources section enabled in PRE-Result page$")
+	public void Imp_Res(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.importantResourceSection(inputValues.get("Resources Links"));
+	}
 
 	
 }

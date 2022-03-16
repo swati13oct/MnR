@@ -2365,6 +2365,37 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				"Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'milesDropdown') or contains(@name, 'miles')]")
+	public WebElement pharmacydistance;
+	
+	public void EnterPharmacyDetailsPage(String zipcode, String distance , String pharmacyName) {
+		validateNew(DrugDetails_ChangePharmacyLnk);
+		jsClickNew(DrugDetails_ChangePharmacyLnk);
+		pageloadcomplete();
+		validateNew(pharmacyZipcodeSearch);
+		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
+		validateSelectPharmacyPage();
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(zipcode);
+		validateNew(pharmacydistance);
+		Pharmacy_DistanceDropDwn.click();
+		
+		WebElement Pharmacy_Distance_SelectMile =driver.findElement(By.xpath("//select[contains(@id, 'milesDropdown')]//option[contains(text(), '"+distance+"')]"));
+		Pharmacy_Distance_SelectMile.click();
+		// validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_SelectMile);
+		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.sendKeys(pharmacyName);
+		jsClickNew(Pharmacy_SearchBtn);
+		WebElement pharmacySelect = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//button[contains(@id, 'Pharmacy')]/span[contains(text(), 'Select')]"));
+	    
+		jsClickNew(pharmacySelect);
+		validateNew(saveDrugBtn);
+		jsClickNew(saveDrugBtn);
+		//saveDrugBtn.click();
+		
+	}
+
 	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// jsClickNew(DrugCosts_PlanDetailsBtn);

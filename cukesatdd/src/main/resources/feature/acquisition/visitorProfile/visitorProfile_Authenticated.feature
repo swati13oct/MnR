@@ -3,7 +3,7 @@
 @visitorProfileAuthenticated @visitorProfile @nonProd
 Feature: 1.09. UAT - Visitor profile Authenticated
 
-  @vpMSSavePlanAuthenticated @authenticated
+#  @vpMSSavePlanAuthenticated @authenticated
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -28,15 +28,17 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
-    @visitorProfile_AARP @regressionAARP @authenticatedAARP
-    Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
-      | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
-    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
+#    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+
     Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
-      | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName    | password     |
+      | AARP | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01 | Password@123 |
+
+#    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName        | password     |
+      | UHC  | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
 
   @addDrugAuthenticated @authenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile on <site> site
@@ -291,13 +293,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP
     Examples:
-      | site | name | userName              | password   |
-      | AARP | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | AARP | VD   | vdatdd_17@getnada.com | Password@123 |
 
     @visitorProfile_UHC
     Examples:
-      | site | name | userName              | password   |
-      | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | UHC  | VD   | vdatdd_17@getnada.com | Password@123 |
 
   @authenticated @DCEImportSignIn
   Scenario Outline: Verify DCE Redirect  on <site> site

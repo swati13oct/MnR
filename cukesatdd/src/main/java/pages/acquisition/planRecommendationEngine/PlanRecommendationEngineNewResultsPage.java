@@ -111,6 +111,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
+	
+	@FindBy(css = "div[class*='resultsPre'] p.locationDesc")
+	private WebElement planLocaInfo;
 
 	@FindBy(css = "div[class*='resultsPre'] h1")
 	private WebElement planZipInfo;
@@ -121,7 +124,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".saveRes button")
 	private WebElement saveYourResults;
 
-	@FindBy(css = "li.view-ms-plans a.buttonLink")
+	@FindBy(css = "li[class*='viewMedigap'] a.buttonLink")
 	private WebElement viewMedigapLink;
 
 	@FindBy(css = ".view-ms-plans a")
@@ -141,16 +144,16 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = ".returnSection span#viewMorePlans")
 	private WebElement pagenoLabel;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-next']")
+	@FindBy(css = ".uhc-button-group button#nextButton>svg>path")
 	private WebElement pageNextButton;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-next disabled']")
+	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-next disabled']")
 	private WebElement pageNextButtonDisabled;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-prev']")
+	@FindBy(css = ".uhc-button-group button[class*='view-plans-prev']>svg")
 	private WebElement pagePreviousButton;
 
-	@FindBy(css = ".paginationSection button[class*='view-plans-prev disabled']")
+	@FindBy(css = "div[class*='newPagination'] button[class*='view-plans-prev disabled']")
 	private WebElement pagePreviousButtonDisabled;
 
 	// Plan Tile Elements
@@ -273,7 +276,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']")
 	private WebElement MAPDCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='MAPD']>label")
 	private WebElement MAPDCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
@@ -282,7 +285,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']")
 	private WebElement MedigapCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='Medicare']>label")
 	private WebElement MedigapCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
@@ -291,7 +294,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']")
 	private WebElement PDPCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='PDP']>label")
 	private WebElement PDPCheck;
 
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
@@ -300,14 +303,17 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']")
 	private WebElement SNPCheckOption;
 
-	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP'] span.checkbox-square")
+	@FindBy(css = "div.sortBySection uhc-checkbox[ng-reflect-name*='SNP']>label")
 	private WebElement SNPCheck;
 
-	@FindBy(css = "div.sortBySection div.applySec>button")
+	@FindBy(css = "div.sortBySection div.applySec>button#applyButton")
 	private WebElement applyBtn;
 
 	@FindBy(css = ".planRemoveSort span")
 	private WebElement sortBreadCrumbs;
+	
+	@FindBy(css = "div[class*='selectedFilterUI']>span")
+	private WebElement sortedPlanCount;
 
 	@FindBy(css = ".planRemoveSort svg")
 	private WebElement removeBreadCrumbs;
@@ -326,6 +332,30 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	private WebElement signOut;
+	
+	@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section']")
+	private WebElement ImpResSection;
+	
+	@FindBy(css = "div[class*='bottomPaginationSec'] div[class*='pdf-section'] p")
+	private List<WebElement> ImpResSectionPDFLinks;
+	
+// Compare Functionality elements
+	
+	@FindBy(css = "div.compare-align>button")
+	private WebElement compareButton;
+	
+	@FindBy(css = "div.add-plans button")
+	private WebElement addPlansButton;
+	
+	@FindBy(css = "#resultHeader>span")
+	private WebElement compareText;
+	
+	@FindBy(css = "ul[class*='editSection']>li")
+	private WebElement backtoResultPage;
+	
+	@FindBy(css = "div.clearAll>button")
+	private WebElement clearAll;
+	
 
 	// Result Loading Page Element Verification Method
 
@@ -350,9 +380,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	public void preResultsUI(String zip, String county) {
 		System.out.println("Validating PRE Results UI Page: ");
 		waitforResultsPage();
-		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
-		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
-		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4]) > 0, "Total Plan count is less than 1");
+		Assert.assertTrue(planLocaInfo.getText().contains(zip), "Invalid Zip");
+		Assert.assertTrue(planLocaInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[3]) > 0, "Total Plan count is less than 1");
 		Assert.assertTrue(validate(editYourResponse, 60), " Issue in Edit Your Response button");
 		// Assert.assertTrue(validate(saveYourResults, 60), " Issue in Save Your Results
 		// button");
@@ -492,7 +522,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 					break;
 				}
 				pageNextButton.click();
-				threadsleep(2000);
+				threadsleep(3000);
 				i++;
 			} while (i <= totalPage);
 			System.out.println("planAvailable - " + planAvailable);
@@ -1080,7 +1110,102 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		threadsleep(5000);
 		Assert.assertFalse(validate(sortBreadCrumbs, 20), "BreadCrumbs is displaying after remove breadcrumb");
 	}
-
+	
+	public void noImportantResource() {
+		System.out.println("Validate ImportantResource Not Present");
+		Assert.assertFalse(isElementPresent(ImpResSection), "ImportantResource is displaying in Result Page");
+		threadsleep(5000);
+		Assert.assertTrue(ImpResSectionPDFLinks.isEmpty(), "ImportantResource having PDF Links in Result Page");
+	}
+	
+	
+	
+	public void importantResourceSection(String ImpRes) {
+		System.out.println("Validate ImportantResource Present and Links");
+		ImportantResource();
+		threadsleep(3000);
+		System.out.println("Validating PDF document Info...");
+		String resName = "";
+		if(ImpRes.isEmpty())
+			System.out.println("Resources is Empty ");
+		else
+		{
+			String[] resDetails = ImpRes.split(",");
+			for (int i = 0; i < resDetails.length; i++) {
+				resName = resDetails[i].toLowerCase();
+				findPDF(resName);
+			}
+		}
+	}
+	
+	public void findPDF(String uniqueName) {
+		System.out.println("Finding a PDF... " + uniqueName);
+		if(uniqueName.contains("wrap")) 
+			pdfLink("AARP Medicare","WR1000");
+		if(uniqueName.contains("cms guide")) 
+			pdfLink("Health Insurance","GU25125ST");
+		if(uniqueName.contains("pov")) 
+			pdfLink("plan overview","POV");
+		if(uniqueName.contains("rate pages")) 
+			pdfLink("Rate Pages","RP");
+		if(uniqueName.contains("rd")) 
+			pdfLink("Rules and Disclosures","RD");
+		if(uniqueName.contains("bt")) 
+			pdfLink("Benefit Tables","RD");
+		if(uniqueName.contains("ooc")) 
+			pdfLink("Outline of Coverage","OOC");
+		if(uniqueName.contains("creeed enroll")) 
+			pdfLink("Enrollment Discount","WB");
+		if(uniqueName.contains("selecthd")) 
+			pdfLink("Select Provider","HD1000");
+	}
+	
+	public void pdfLink(String pdfname, String pdflink) {
+		int pdfindex = 0;
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		for(int p=0; p<ImpResSectionPDFLinks.size(); p++) {
+			try {
+				ImpResSectionPDFLinks.get(p).getText().contains(pdfname);
+				pdfindex = p;
+				break;
+			}
+			catch (Exception e) {
+				System.out.println("Unable to find PDF with : " + p);
+			}
+		}
+		windowSwape(pdfindex,curWindow,pdflink);
+		
+	}
+	
+	public void windowSwape(int p, String curWindow, String pdf ) {
+		threadsleep(2000);
+		ImpResSectionPDFLinks.get(p).click();
+		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+		System.out.println(windows);
+		for (String window : windows) {
+			System.out.println(window.replace("page-", ""));
+			if (!window.equals(curWindow)) {
+				driver.switchTo().window(window);
+				Assert.assertTrue(driver.getCurrentUrl().contains(pdf), "PDF doc is not correct one");
+				driver.close();
+			}else
+				System.out.println("It is Primary Window");
+			threadsleep(5000);
+			driver.switchTo().window(curWindow);
+		}
+	}
+	
+	public void ImportantResource() {
+		System.out.println("Validate ImportantResource Not Present");
+		Assert.assertTrue(isElementPresent(ImpResSection), "ImportantResource is not displaying in Result Page");
+		scrollToView(ImpResSection);
+		threadsleep(3000);
+		Assert.assertTrue(ImpResSectionPDFLinks.size()>0, "ImportantResource is not having PDF Links in Result Page");
+	}
+	
+	
+	String FilteredPlanCount = "";
 	public void applySort(String planType) {
 		Assert.assertTrue(validate(sortByDropdown), "SortBy Dropdown is missing");
 		sortByDropdown.click();
@@ -1103,6 +1228,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			SNPCheck.click();
 		}
 		Assert.assertTrue(validate(applyBtn), "apply Button is missing");
+		FilteredPlanCount = applyBtn.getText().trim().split(" ")[1];
 		applyBtn.click();
 		threadsleep(2000);
 	}
@@ -1123,6 +1249,10 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		int plancount = plantiles.size();
 		Assert.assertTrue(sortBreadCrumbs.getText().trim().contains(text),
 				"BreadCrumbs not showing for " + plan + " PlanType");
+		Assert.assertTrue(sortedPlanCount.getText().trim().split(" ")[1].equals(FilteredPlanCount),
+				"Filtered PlanCount not Matching " );
+		Assert.assertTrue(sortedPlanCount.getText().trim().split(" ")[3].equals(planZipInfo.getText().trim().split(" ")[3]),
+				"Total PlanCount not Matching " );
 		for (int i = 0; i < plancount; i++) {
 			// System.out.println("I count is: "+i);
 			if (i == 3 || i == 6 || i == 9) {
@@ -1184,6 +1314,223 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		return new VisitorProfilePage(driver);
 
 
+	}
+	
+	public void PharmacyFunc(String planInfo, String pharmacy) {
+		threadsleep(5000);
+		System.out.println("Navigating Plans Info...");
+		String planName = "", planAction = "";
+		String[] planlist = planInfo.split(":");
+		for (int i = 0; i < planlist.length; i++) {
+			String planinfo = planlist[i];
+			if (planinfo.trim().length() > 0) {
+				String[] planDetails = planinfo.split(",");
+				planName = planDetails[0];
+				planAction = planDetails[1];
+				int planIndex = findPlan(planName, false);
+		
+		if (planAction.toLowerCase().contains("oon")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarning div.warning-desc")).getText().trim();
+			threadsleep(5000);
+			if (planFullName.contains("Plan A") || planName.contains("Plan B") || planName.contains("Plan F")
+					|| planName.contains("Plan G") || planName.contains("Plan K") || planName.contains("Plan L")
+					|| planName.contains("Plan N")) {
+				threadsleep(10000);
+				Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+				Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+				Assert.assertFalse(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='pre_res_drug_modal']"))),"View Individual Drug Costs is displayed MS Plan in Result page");
+				
+			} else {
+				Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+				Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+//				Assert.assertFalse(pharDes.contains("Change Pharmacy"),"View Individual Drug Costs is not displayed in Result page");
+			}
+		}
+		if (planAction.toLowerCase().contains("inn")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarningTFN div.warning-desc")).getText().trim();
+			System.out.println("******"+pharDes+"*******************");
+			threadsleep(5000);
+			Assert.assertTrue(pharDes.contains(pharmacy.toUpperCase()),	"Phatmacy detail not displayed in Result page");
+			Assert.assertTrue(pharDes.contains("UnitedHealthCare"),	"TFN is not displayed in Result page");
+			Assert.assertTrue(pharDes.contains("Change Pharmacy"),	"Change Pharmacy Link not displayed in Result page");
+//			Assert.assertFalse(pharDes.contains("Change Pharmacy"),"View Individual Drug Costs is not displayed in Result page");
+		}
+		if (planAction.toLowerCase().contains("yes")) {
+			String planFullName = plantiles.get(planIndex).findElement(By.cssSelector(".planName a")).getText().trim();
+			String pharDes = plantiles.get(planIndex).findElement(By.cssSelector("div[class*='displayDrugsUI'] .drug-price-sec>p")).getText().trim();
+			Assert.assertTrue(pharDes.contains("estimated monthly"),"Drug cost not displayed in Result page");
+			Assert.assertTrue(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"))),"View Individual Drug Costs is not displayed in Result page");
+//			Assert.assertFalse(validate(plantiles.get(planIndex).findElement(By.cssSelector("button[dlassetid*='drug_modal']"))),"Change Pharmacy Costs is not displayed in Result page");
+			
+		}
+			}
+		}
+		
+	}
+	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+	public void UpdatePharmacyFunc(String zipcode,String planInfo) {
+		threadsleep(5000);
+		System.out.println("Navigating Plans Info...");
+		String planName = "", updatePharmacy = "", coverage ="" ;
+		String[] planlist = planInfo.split(":");
+		for (int i = 0; i < planlist.length; i++) {
+			String planinfo = planlist[i];
+			if (planinfo.trim().length() > 0) {
+				String[] planDetails = planInfo.split(",");
+				planName = planDetails[0];
+				coverage = planDetails[1];
+				updatePharmacy = planDetails[2];
+				int planIndex = findPlan(planName, false);
+				threadsleep(3000);
+				if(coverage.equalsIgnoreCase("OON"))
+					plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarning div.warning-desc>a")).click();
+				if(coverage.equalsIgnoreCase("INN"))
+					plantiles.get(planIndex).findElement(By.cssSelector("#pharmacyWarningTFN div.warning-desc>a")).click();
+				dce.selectPharmacy(zipcode, updatePharmacy);
+			}
+		}
+	}
+	
+	public ArrayList<String> rankingOrder = new ArrayList<String>();
+	public ArrayList<String> compareOrder = new ArrayList<String>();
+	
+	public void validatecompareInfo(String compareplanInfo, String location) {
+		int count = compareplanInfo.split(":").length;
+				if (location.toLowerCase().contains("add plan")) {
+					splitPlan(compareplanInfo,location);
+					verifyRankingCompare(curID, count);
+				}
+				else if (location.toLowerCase().contains("max compare plans")) {
+					splitPlan(compareplanInfo,location);
+					verifyRankingCompare(curID, count);
+					ArrayList<String> list = new ArrayList<>(Arrays.asList("1","2","3","4","5","6"));
+					String indx = "";
+					for(int k=0;k<rankingOrder.size();k++) {
+						if(list.get(k) == rankingOrder.get(k))
+							System.out.println("NUmber Persent"+list.get(k));
+						else {
+							indx = list.get(k);
+							System.out.println("Plan Index for Disabled Add to Compare Button"+indx);
+							break;
+							}
+					}
+					AddtoCompareDisable("false", indx);
+				}
+				else if (location.toLowerCase().contains("delete plan")) {
+					splitPlan(compareplanInfo,location);
+					compareandRanking(curID, count);
+				}
+			}
+	
+	public String curID = String.valueOf(Thread.currentThread().getId());
+	public String splitPlan(String compareplanInfo, String location) {
+		System.out.println("Validating compare plan Info...");
+		String planName = "",  Planselection = "";
+		String[] planslist = compareplanInfo.split(":");
+		for (int i = 0; i < planslist.length; i++) {
+			String compareInfo = planslist[i];
+			if (compareInfo.trim().length() > 0) {
+				String[] planDetails = compareInfo.split(",");
+				planName = planDetails[0];
+				Planselection = planDetails[1];
+				rankingOrder.addAll(verifyCompareAddPlan(planName, Planselection));
+			}
+		}
+		return curID;
+	}
+	
+	public void deleteAddComparePlan(String delPlan, String addPlan) {
+		String curID = String.valueOf(Thread.currentThread().getId());
+		System.out.println("Delete a Plan");
+		int planIndex = findPlan(delPlan, false);
+		plantiles.get(planIndex).findElement(By.cssSelector("div[class*='compareCheckbox']>svg")).click();
+		threadsleep(2000);
+		addPlansButton.click();
+		pageloadcomplete();
+		System.out.println("Adding a Plan");
+		planIndex = findPlan(addPlan, false);
+		WebElement planselectValue = plantiles.get(planIndex).findElement(By.cssSelector("label.checkbox-label>span:nth-child(2)"));
+		scrollToView(planselectValue);
+		plantiles.get(planIndex).findElement(By.cssSelector("label.checkbox-label")).click();
+		threadsleep(2000);
+		Assert.assertTrue(planselectValue.getText().trim().contains("Added"),"Plan selected for compare");
+		String count = compareButton.getText().trim().split(" ")[1];
+		compareandRanking(curID, Integer.parseInt(count));
+	}
+	
+	public ArrayList<String> VerifyRanking(int planCount){
+		ArrayList<String> comparedpageOrder = new ArrayList<String>();
+		for(int i=0;i<planCount;i++) {
+			if(i==3)
+				pageNextButton.click();
+			comparedpageOrder.add(plantiles.get(i).findElement(By.cssSelector("p[class*='recommendation']>span:nth-child(1)")).getText().trim().split("#")[1]);
+		}
+		return comparedpageOrder;
+	}
+	
+	public void addPlansButton() {
+		int compPlanCount = Integer.parseInt(planZipInfo.getText().trim().split(" ")[1]);
+		if(compPlanCount>=4 && compPlanCount != 6 ) {
+			pageNextButton.click();
+			threadsleep(3000);
+			Assert.assertTrue(validate(addPlansButton,20),"Add Plans Button is not displayed");
+			pagePreviousButton.click();
+			threadsleep(2000);
+		}else if(compPlanCount < 3 && compPlanCount != 6){
+			Assert.assertTrue(validate(addPlansButton,20),"Add Plans Button is not displayed");
+		}
+			
+	}
+	
+	public void verifyRankingCompare(String curID, int count) {
+		System.out.println("Current Thread ID is - "+curID+" Ranking Order "+rankingOrder);
+		CommonConstants.PRE_Ranking_Order.put(curID, rankingOrder);
+		compareandRanking(curID, count);
+		boolean isEqual = rankingOrder.equals(compareOrder);      //true
+        System.out.println(isEqual);
+        String compareTxt = compareText.getText().replace("ing", "e").toLowerCase();
+        backtoResultPage.click();
+        pageloadcomplete();
+        Assert.assertTrue(compareTxt.equals(compareButton.getText().toLowerCase()),"Compare Plans text is not matched");
+        clearAll.click();
+        Assert.assertTrue(validate(editYourResponse,20),"Edit Your Response Button is not displayed");
+        Assert.assertTrue(validate(sortByDropdown,20),"sortBy Dropdown Button is not displayed");
+	}
+	
+	public void compareandRanking(String curID, int count) {
+		compareButton.click();
+		threadsleep(2000);
+		addPlansButton();		
+		compareOrder.addAll(VerifyRanking(count));
+		System.out.println("Current Thread ID is - "+curID+" Ranking Order "+compareOrder);
+	}
+	
+	public ArrayList<String> verifyCompareAddPlan(String planName, String selection ) {
+		ArrayList<String> rankingNumber = new ArrayList<String>();
+		int planIndex = findPlan(planName, false);
+		threadsleep(3000);
+		rankingNumber.add(plantiles.get(planIndex).findElement(By.cssSelector("p[class*='recommendation']>span:nth-child(1)")).getText().trim().split("#")[1]);
+		WebElement planselectValue = plantiles.get(planIndex).findElement(By.cssSelector("label.checkbox-label>span:nth-child(2)"));
+		Assert.assertTrue(planselectValue.getText().trim().equalsIgnoreCase("Add to Compare"),"Plan Already selected");
+		if(planselectValue.getText().trim().contains("Added") || selection.equalsIgnoreCase("false"))
+			System.out.println("Selected PlanName is "+planName);
+		else {
+			scrollToView(planselectValue);
+			plantiles.get(planIndex).findElement(By.cssSelector("label.checkbox-label")).click();
+			threadsleep(2000);
+			Assert.assertTrue(planselectValue.getText().trim().contains("Added"),"Plan selected for compare");
+		}
+		
+		Collections.sort(rankingNumber);
+		return rankingNumber;
+	}
+	
+	public void AddtoCompareDisable(String disabled,String indx) {
+		System.out.println("Validating Add to Compare Button disability");
+			Assert.assertEquals(plantiles.get(Integer.parseInt(indx)).findElement(By.cssSelector("div.checkboxAlign>uhc-checkbox")).getAttribute("ng-reflect-disabled"), disabled,
+					"Add to Compare is not Disabled");
 	}
 
 	public void validateSignInUser(String username, String password){

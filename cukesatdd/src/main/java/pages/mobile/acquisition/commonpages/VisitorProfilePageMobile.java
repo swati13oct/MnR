@@ -51,7 +51,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='text-small header-link-mobile'][normalize-space()='Or, Sign In to your Profile']")
 	private WebElement signIn;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
 	private WebElement signIn1;
 
@@ -62,7 +62,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
-	@FindBy(xpath="(//span[contains(text(),'Find Plans')])[3]/..")
+	@FindBy(xpath = "(//span[contains(text(),'Find Plans')])[3]/..")
 	private WebElement addPlans;
 
 	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
@@ -94,7 +94,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut1;
 
@@ -224,10 +224,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a[class$='back-to-plans']")
 	private WebElement backToPlansLink;
 
-	@FindBy(xpath="//*[text()='Basic Costs']")
+	@FindBy(xpath = "//*[text()='Basic Costs']")
 	private WebElement basicCostsHeader;
 
-	@FindBy(xpath="//*[text()='Doctor Visits']")
+	@FindBy(xpath = "//*[text()='Doctor Visits']")
 	private WebElement doctorVisitsHeader;
 
 	@FindBy(css = "header[class*='mobile']")
@@ -753,10 +753,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void signIn(String username, String password) {
 		try {
 			try {
-				if(signIn.isDisplayed())
+				if (signIn.isDisplayed())
 					jsClickNew(signIn);
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				jsClickNew(signIn1);
 			}
 			Thread.sleep(3000);
@@ -787,15 +786,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				sendkeysMobile(securityAnswer, "number1");
 			}
 
-			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+					| driver.getClass().toString().toUpperCase().contains("IOS")) {
 				jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			}
 			waitForPageLoadSafari();
 			try {
-				if(signOut.isDisplayed())
+				if (signOut.isDisplayed())
 					validateNew(signOut);
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				validateNew(signOut1);
 			}
 
@@ -814,7 +813,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		} else
 			return null;
 	}
-	
+
 	public void deleteAllDrugs(String drugList) {
 		if (validate(savedDrug, 45)) {
 			CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
@@ -834,10 +833,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 		}
 
-
-        CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
-        Assertion.assertTrue(importLnk.isDisplayed());
-    }
+		CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
+		Assertion.assertTrue(importLnk.isDisplayed());
+	}
 
 	/**
 	 * Enroll in a plan
@@ -1028,13 +1026,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
-	
+
 	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
 	private WebElement savedDrug;
-	
+
 	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
 	private List<WebElement> savedDrugsList;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
 	private WebElement removeDrugBtn;
 
@@ -1047,9 +1045,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		for (String plans : planNames) {
 			String[] listOfTestPlans = plans.split(",");
 			for (String plan : listOfTestPlans) {
-				if(!plan.contains("I-SNP"))	{
+				if (!plan.contains("I-SNP")) {
 					System.out.println("Checking Saved Plan on VP for : " + plan);
-					WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+					WebElement addedPlan = driver
+							.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
 					validateNew(addedPlan);
 					Assertion.assertEquals(plan, addedPlan.getText().trim());
 					System.out.println("Verified plans are added on visitior profile page");
@@ -1296,19 +1295,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		waitforElementNew(visitorProfileDashboard);
 	}
 
-	@FindBy(css = "#dateOfBirth")
+	@FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
 	private WebElement msDOB;
 
 	public void clickOnMStartApplication(String planName) {
-		WebElement msPlanHeader = driver
-				.findElement(By.xpath("//h2[text()='" + planName + "']/ancestor::div[contains(@class,'header')]"));
-		if (!Boolean.parseBoolean(CommonUtility.getElementAttribute(msPlanHeader, "aria-expanded"))) {
-			WebElement expandAccordionButton = msPlanHeader.findElement(By.xpath("/*[local-name()='svg']"));
-			jsClickNew(expandAccordionButton);
-		}
-
-		WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName
-				+ "']/ancestor::div[contains(@class,'plan-card')]//button[contains(@class,'start-application')]"));
+		WebElement btnStartApplication = driver.findElement(
+				By.xpath("//h2[text()='" + planName + "']/following::span[text()='Start Application'][1]"));
 		jsClickNew(btnStartApplication);
 		waitforElementNew(msDOB);
 	}
@@ -1357,8 +1349,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void validateMSLearnMorePage() {
 		Assertion.assertTrue("Back To Profile link is not displayed on Learn More page !",
 				validateNew(backToProfileLinkLearnMorePage));
-	//	Assertion.assertTrue("Gym Membership header is not displayed on Learn More page !",
-	//			validateNew(gymMembershipHeader));
+		// Assertion.assertTrue("Gym Membership header is not displayed on Learn More
+		// page !",
+		// validateNew(gymMembershipHeader));
 		Assertion.assertTrue("Brain Health header is not displayed on Learn More page !",
 				validateNew(brainHealthHeader));
 	}
@@ -1401,7 +1394,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		WebElement componentCodeText = driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]"));
 		Assertion.assertTrue("Component code is not shown on Visitor Profile Page !", validateNew(componentCodeText));
 	}
-	
+
 //	@FindBy(xpath = "//span[contains(text(),'Get')]")
 //    private WebElement btnPREGetStarted;
 //	

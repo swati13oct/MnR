@@ -299,15 +299,15 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #| MS Test Plans | <MS_testPlans> |
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
     Examples:
-      | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
-#      | AARP | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | site | state    | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  |
+#      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | AARP | Virginia | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
     Examples:
       | site | state        | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  |
-#      | UHC  | Alabama  | 10001   | NO            | MS       | future   | 11/11/1949 | New York County | Plan G,Plan A |
-      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+#      | UHC  | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
+      | UHC | Virginia | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page in <site> site - zip -<zipcode>
@@ -377,21 +377,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
     Examples:
-      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-#      | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
-#      | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
+      | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
+      | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+      | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
     @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate @featureGate
     Examples:
-      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                   |
-      | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-
-    #    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC
-#    Examples:
-#      | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                          |
-#      | UHC  | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                    |
-#      | UHC  | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
+      | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
+      | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | UHC  | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
+      | UHC  | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
   @importDrugsDocs @nonProd
   Scenario Outline: Verify user is able to import drugs and doctors for unauthenticated visitor profile in <site> site - member -<member>
@@ -524,3 +520,143 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 57103   | NO            | MS       | Minnehaha County       | Plan G,Plan A | Plan G  | WB27375ST      |
       | UHC  | 00982   | NO            | MS       | Carolina Municipio     | Plan G,Plan A | Plan G  | WB27375ST      |
       | UHC  | 00840   | NO            | MS       | St. Croix Island       | Plan G,Plan A | Plan G  | WB27375ST      |
+
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @featureGate
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county           | MS_testPlans                           | MS_Plan    | component_code |
+      | AARP | 96910   | NO            | MS       | Guam             | Plan G,Plan A                          | Plan G     | WB27375ST      |
+      | AARP | 55343   | NO            | MS       | Hennepin County  | Basic Plan,Extended Basic 2020 Plan    | Basic Plan | WB27375S1      |
+      | AARP | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
+      | AARP | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
+
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @prodRegression @regressionUHC
+    Examples:
+      | site | zipcode | isMultiCounty | plantype | county           | MS_testPlans                           | MS_Plan    | component_code |
+      | UHC  | 96910   | NO            | MS       | Guam             | Plan G,Plan A                          | Plan G     | WB27375ST      |
+      | UHC  | 55343   | NO            | MS       | Hennepin County  | Basic Plan,Extended Basic 2020 Plan    | Basic Plan | WB27375S1      |
+      | UHC  | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
+      | UHC  | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
+
+
+  Scenario Outline: User verify LTC pharmacy scenario in <site> site- zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add plans button in the profile
+    When the user enters zipcode on health plans page
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+      | Plan Type | <plantype> |
+    Then user saves all plans as favorite
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then Navigate to Visitor Profile page
+    And user validates the added plans on visitor profile page
+      | Test Plans | <testPlans> |
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    And user clicks on change pharmacy link from summary page
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy> |
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
+    And the user clicks on the shopping cart icon on DCE page
+    Then the user should be able to see the Drug information in the guest profile page
+      | Drugname | <drug1> |
+    Then the user should be able to see the changed pharmacy
+      | pharmacyName | <SelectPharmacy> |
+    Then the user validate the show drug coverage message on visitor profile
+      | pharmacyName | <SelectPharmacy> |
+    Then user validate no average cost is visible
+    Then the user validates TFN on the page
+      | TFNxpath | <tfnXpath> |
+      | TFNflag  | <tfnFlag>  |
+    Then the user click on Change Pharmacy link on Visitor Profile Page
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy1> |
+    Then the user select pharmacy and return to visitor profile
+      | SelectPharmacy | <SelectPharmacy1> |
+    Then the user should be able to see the changed pharmacy
+      | pharmacyName | <SelectPharmacy1> |
+
+    @LTCPharmacyVPAARP
+    Examples:
+      | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
+      | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+
+    @LTCPharmacyVPUHC
+    Examples:
+      | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
+      | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+
+
+  Scenario Outline: User verify LTC pharmacy scenario in <site> site for no drug coverage message- zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add plans button in the profile
+    When the user enters zipcode on health plans page
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+      | Plan Type | <plantype> |
+    Then user saves all plans as favorite
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then Navigate to Visitor Profile page
+    And user validates the added plans on visitor profile page
+      | Test Plans | <testPlans> |
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    And user clicks on change pharmacy link from summary page
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy> |
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
+    And the user clicks on the shopping cart icon on DCE page
+    Then the user should be able to see the Drug information in the guest profile page
+      | Drugname | <drug1> |
+    Then the user should be able to see the changed pharmacy
+      | pharmacyName | <SelectPharmacy> |
+    Then the user validate the show no drug coverage message on visitor profile
+      | pharmacyName | <SelectPharmacy> |
+    Then user validate no average cost is visible
+    Then user clicks on drug pricing link for the below plan
+      | PlanName | <testPlans> |
+    Then the user validate the show no drug coverage message on visitor profile drug pricing modal
+      | pharmacyName | <SelectPharmacy> |
+    Then the user click on Change Pharmacy link on Visitor Profile Page Drug Pricing Modal
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy1> |
+    Then the user select pharmacy and return to visitor profile
+      | SelectPharmacy | <SelectPharmacy1> |
+    Then the user should be able to see the changed pharmacy
+      | pharmacyName | <SelectPharmacy1> |
+
+    @LTCPharmacyVPAARP
+    Examples:
+      | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
+      | AARP | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
+    @LTCPharmacyVPUHC
+    Examples:
+      | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
+      | UHC  | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
