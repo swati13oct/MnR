@@ -11,12 +11,12 @@ Feature: ACQ-Plan benefits validation
     @2022planDetailsBenefitsAARP01 @planDetailsMA
     Examples: 
       | excelPath                       | workSheet   | site |
-      | DCE_MBD | MAPD_SNP_DCE | AARP |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_1 | AARP |
 
-    @2022planDetailsBenefitsAARP02 @planDetailsMA
-    Examples: 
+    @2022planDetailsBenefitsAARP01 @planDetailsMA
+    Examples:
       | excelPath                       | workSheet   | site |
-      | Plan Details Benefits_Data_2022 | Sheet2022_2 | AARP |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_2 | AARP |
 
     @2022planDetailsBenefitsAARP03 @planDetailsMA
     Examples: 
