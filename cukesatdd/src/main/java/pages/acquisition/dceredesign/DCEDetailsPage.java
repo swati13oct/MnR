@@ -461,6 +461,10 @@ public class DCEDetailsPage extends UhcDriver {
 
         }
 
+        if(benefitValue.equalsIgnoreCase("")){
+            benefitValue = "Not Available";
+        }
+
         if(benefitsMap.get(columnName).contains(benefitValue)) {
             flag = true;
         }else {
