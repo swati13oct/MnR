@@ -54,7 +54,14 @@ public class DCEPlanValidationStepDefinition {
         String DateCreated = dateFormat.format(RunDate);
         String parentDirectory = null;
         parentDirectory = new java.io.File(".").getCanonicalPath();
-        String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xlsx";
+        String InputFilePath = "";
+        try{
+            InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xlsx";
+        }
+        catch (Exception ex){
+            InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
+        }
+
         String OutputFilePath = parentDirectory+"/target/DCEPlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 
         //Reading Excel.xls file
