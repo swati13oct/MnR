@@ -1,5 +1,6 @@
+#3-17-22 : Aayush - This scenarios are already there in SAMChatCall.feature file
 @globalComponent @samIcons
-Feature: ACQ M&R- To test SAM Icons
+Feature: 1.15.4 ACQ M&R- To test SAM Icons
 
   Scenario Outline: To test the SAM icons on Acq site on <site> <pagename>
     Given the user is on medicare acquisition site landing page

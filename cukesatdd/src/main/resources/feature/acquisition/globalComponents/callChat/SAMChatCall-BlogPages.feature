@@ -1,24 +1,24 @@
 @globalComponent
-Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
+Feature: 1.15.1 ACQ - To test SAM Icons in Blog Pages
 
-  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> - <pagename>
+  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> - <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And user opens the page to validate M&R Sites
-      | pagename | <pagename> |
+      | pagename | <pageName> |
     Then the user validates whether call icon is visible
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
  		@vbfGate1 #these are used in the gate and are taken from below examples
     Examples: 
-      | pagename                                                                                                    | site |                                                         
+      | pageName                                                                                                    | site |                                                         
       | medicare-articles/medicare-benefits-and-coverage.html                                                       | AARP |
       | medicare-articles/medicare-costs.html 																																			| AARP |
 
-    @samChatRegressionAARPblog1
+    @samChatRegressionAARPblog1  @regressionAARP
     Examples: 
-      | pagename                                                                                                    | site |
+      | pageName                                                                                                    | site |
       | medicare-articles.html                                                                                      | AARP |
       | medicare-articles/medicare-made-clear.html                                                                  | AARP |
       | medicare-articles/eligibility-and-enrollment.html                                                           | AARP |
@@ -40,9 +40,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/medicare-doesnt-cover-everything-what-you-need-know                                       | AARP |
       | medicare-articles/6-timely-medicare-tips-for-turning-65                                                     | AARP |
 
-    @samChatRegressionAARPblog2
+    @samChatRegressionAARPblog2 @regressionAARP
     Examples: 
-      | pagename                                                                                  | site |
+      | pageName                                                                                  | site |
       | medicare-articles/should-i-get-part-b-if-im-working-past-65                               | AARP |
       | medicare-articles/try-to-avoid-medicare-late-enrollment-premium-penalties                 | AARP |
       | medicare-articles/what-is-the-difference-between-original-medicare-and-medicare-advantage | AARP |
@@ -64,9 +64,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/what-is-the-medicare-annual-enrollment-period                           | AARP |
       | medicare-articles/aep-change-or-renew                                                     | AARP |
 
-    @samChatRegressionAARPblog3
+    @samChatRegressionAARPblog3 @regressionAARP
     Examples: 
-      | pagename                                                                                                              | site |
+      | pageName                                                                                                              | site |
       | medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period | AARP |
       | medicare-articles/2-ways-to-prescription-drug-coverage                                                                | AARP |
       | medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan                                                        | AARP |
@@ -89,9 +89,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/how-do-tricare-and-medicare-work-together                                                           | AARP |
       | medicare-articles/youre-65-working-medicare                                                                           | AARP |
 
-    @samChatRegressionAARPblog4
+    @samChatRegressionAARPblog4 @regressionAARP
     Examples: 
-      | pagename                                                                                        | site |
+      | pageName                                                                                        | site |
       | medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare             | AARP |
       | medicare-articles/pharmacists-answering-your-medicare-prescription-drug-questions               | AARP |
       | medicare-articles/why-you-and-your-spouse-might-need-different-medicare-plans                   | AARP |
@@ -118,9 +118,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/what-s-the-difference-between-medicare-and-medicaid                           | AARP |
       | medicare-articles/how-to-appeal-a-medicare-decision                                             | AARP |
 
-    @samChatRegressionAARPblog5
+    @samChatRegressionAARPblog5 @regressionAARP
     Examples: 
-      | pagename                                                                                     | site |
+      | pageName                                                                                     | site |
       | medicare-articles/how-avoid-paying-more-prescription-drug-coverage                           | AARP |
       | medicare-articles/3-ways-to-dispose-of-your-old-unused-medications-safely                    | AARP |
       | medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me                    | AARP |
@@ -143,9 +143,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/what-medicare-medical-savings-account-plan                                 | AARP |
       | medicare-articles/copd-medicare                                                              | AARP |
 
-    @samChatRegressionAARPblog6 
+    @samChatRegressionAARPblog6  @regressionAARP
     Examples: 
-      | pagename                                                                  | site |
+      | pageName                                                                  | site |
       | medicare-articles/decoding-medicare                                       | AARP |
       | medicare-articles/does-medicare-cover-a-colonoscopy                       | AARP |
       | medicare-articles/does-medicare-cover-blood-tests-for-cholesterol         | AARP |
@@ -163,9 +163,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/how-to-become-a-medicare-authorized-representative      | AARP |
       | medicare-articles/what-is-a-transition-refill                             | AARP |
 
-    @samChatRegressionAARPblog7
+    @samChatRegressionAARPblog7 @regressionAARP
     Examples: 
-      | pagename                                                                        | site |
+      | pageName                                                                        | site |
       | medicare-articles/got-coverage-for-the-new-year                                 | AARP |
       | medicare-articles/medicare-and-your-private-medical-information                 | AARP |
       | medicare-articles/medicare-memo-what-are-advance-directives                     | AARP |
@@ -186,9 +186,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/medicare-part-a-the-basics                                    | AARP |
       | medicare-articles/medicare-part-c-basics                                        | AARP |
 
-    @samChatRegressionAARPblog8
+    @samChatRegressionAARPblog8 @regressionAARP
     Examples: 
-      | pagename                                                                                            | site |
+      | pageName                                                                                            | site |
       | medicare-articles/does-medicare-cover-a-chiropractor                                                | AARP |
       | medicare-articles/what-does-medicare-cover-after-a-stroke                                           | AARP |
       | medicare-articles/dual-special-needs-plans                                                          | AARP |
@@ -209,9 +209,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/medicare-coverage-for-cancer-screenings-chemo-and-radiation                       | AARP |
       | medicare-articles/how-to-compare-medicare-advantage-plan-costs                                      | AARP |
 
-    @samChatRegressionUHCblog1
+    @samChatRegressionUHCblog1 @regressionUHC
     Examples: 
-      | pagename                                                                                                    | site |
+      | pageName                                                                                                    | site |
       | medicare-articles.html                                                                                      | UHC  |
       | medicare-articles/medicare-made-clear.html                                                                  | UHC  |
       | medicare-articles/eligibility-and-enrollment.html                                                           | UHC  |
@@ -233,9 +233,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/medicare-doesnt-cover-everything-what-you-need-know                                       | UHC  |
       | medicare-articles/6-timely-medicare-tips-for-turning-65                                                     | UHC  |
 
-    @samChatRegressionUHCblog2
+    @samChatRegressionUHCblog2 @regressionUHC
     Examples: 
-      | pagename                                                                                  | site |
+      | pageName                                                                                  | site |
       | medicare-articles/should-i-get-part-b-if-im-working-past-65                               | UHC  |
       | medicare-articles/try-to-avoid-medicare-late-enrollment-premium-penalties                 | UHC  |
       | medicare-articles/what-is-the-difference-between-original-medicare-and-medicare-advantage | UHC  |
@@ -257,9 +257,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/what-is-the-medicare-annual-enrollment-period                           | UHC  |
       | medicare-articles/aep-change-or-renew                                                     | UHC  |
 
-    @samChatRegressionUHCblog3
+    @samChatRegressionUHCblog3 @regressionUHC
     Examples: 
-      | pagename                                                                                                              | site |
+      | pageName                                                                                                              | site |
       | medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period | UHC  |
       | medicare-articles/2-ways-to-prescription-drug-coverage                                                                | UHC  |
       | medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan                                                        | UHC  |
@@ -294,9 +294,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/wheres-my-original-medicare-card                                                                    | UHC  |
       | medicare-articles/the-truth-your-medicare-part-b-premium                                                              | UHC  |
 
-    @samChatRegressionUHCblog4
+    @samChatRegressionUHCblog4 @regressionUHC
     Examples: 
-      | pagename                                                                                        | site |
+      | pageName                                                                                        | site |
       | medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan                            | UHC  |
       | medicare-articles/outpatient-mental-health-care-services                                        | UHC  |
       | medicare-articles/medicare-increases-coverage-mental-health-care                                | UHC  |
@@ -325,9 +325,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/10-tips-choosing-primary-care-doctor                                          | UHC  |
       | medicare-articles/avoid-sticker-shock-medicare-billing                                          | UHC  |
 
-    @samChatRegressionUHCblog5
+    @samChatRegressionUHCblog5 @regressionUHC
     Examples: 
-      | pagename                                                                                     | site |
+      | pageName                                                                                     | site |
       | medicare-articles/does-medicare-part-a-cost-anything                                         | UHC  |
       | medicare-articles/how-much-does-medicare-part-b-cost                                         | UHC  |
       | medicare-articles/what-is-co-insurance                                                       | UHC  |
@@ -346,9 +346,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear                          | UHC  |
       | medicare-articles/medicare-transportation-services                                           | UHC  |
 
-    @samChatRegressionUHCblog6
+    @samChatRegressionUHCblog6 @regressionUHC
     Examples: 
-      | pagename                                                                     | site |
+      | pageName                                                                     | site |
       | medicare-articles/are-you-living-with-chronic-heart-failure                  | UHC  |
       | medicare-articles/how-prepare-your-medicare-wellness-visit                   | UHC  |
       | medicare-articles/will-medicare-cover-a-cpap-machine                         | UHC  |
@@ -365,9 +365,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered | UHC  |
       | medicare-articles/medicare-coverage-for-inpatient-rehabilitation             | UHC  |
 
-    @samChatRegressionUHCblog7
+    @samChatRegressionUHCblog7 @regressionUHC
     Examples: 
-      | pagename                                                                        | site |
+      | pageName                                                                        | site |
       | medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy       | UHC  |
       | medicare-articles/medicare-coverage-for-prostate-cancer-screening               | UHC  |
       | medicare-articles/medicare-part-benefit-periods-deductibles                     | UHC  |
@@ -382,9 +382,9 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
       | medicare-articles/what-does-medicare-cover-after-a-stroke                       | UHC  |
       | medicare-articles/dual-special-needs-plans                                      | UHC  |
 
-    @samChatRegressionUHCblog8
+    @samChatRegressionUHCblog8 @regressionUHC
     Examples: 
-      | pagename                                                                                            | site |
+      | pageName                                                                                            | site |
       | medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid                                   | UHC  |
       | medicare-articles/cuatro-programas-de-asistencia-para-pagar-sus-costos-de-medicare                  | UHC  |
       | medicare-articles/guia-paso-paso-para-inscribirse-en-medicare-los-65-anos                           | UHC  |
