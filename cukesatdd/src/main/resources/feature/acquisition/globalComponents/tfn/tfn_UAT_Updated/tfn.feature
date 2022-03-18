@@ -163,7 +163,7 @@ Feature: 1.19.1 UAT Scripts-To test Campaign TFN in all flows on AARP site
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC @regressionAARP
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario           | site | path                                                  | pageName      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
