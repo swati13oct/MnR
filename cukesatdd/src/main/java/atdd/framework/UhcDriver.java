@@ -1462,7 +1462,7 @@ public abstract class UhcDriver {
 					//||MRScenario.mobileDeviceOSVersion.contains("12")) {
 
 				//By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
-				By AllowButton = By.xpath("//android.widget.Button[@text='Allow']");
+				By AllowButton = By.xpath("//android.widget.Button[@text='ALLOW']");
 				driver.findElement(AllowButton).click();
 
 				//Click on Browse button on Android
