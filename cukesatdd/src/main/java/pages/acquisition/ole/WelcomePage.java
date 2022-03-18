@@ -278,8 +278,8 @@ public class WelcomePage extends UhcDriver{
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
 			
 		
-		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
-		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		System.out.println("TFN On  Need help section OLE : "+TFNNeedHelp_OLE);
+		System.out.println("TFN on widgets OLE : "+TFNWidget_OLE);
 		
 		//String Expected_TFN = planDetailsMap.get("TFN");
 		
