@@ -1,3 +1,4 @@
+#To be deprecated : Aayush -These scripts are already present in the SAMIcons-Common.feature file.
 @globalComponent
 Feature: 1.15.2 ACQ - To test SAM Icons in Blog Pages
 
