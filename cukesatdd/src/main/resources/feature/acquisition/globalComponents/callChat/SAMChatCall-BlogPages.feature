@@ -1,5 +1,5 @@
 @globalComponent
-Feature: 1.15.1 ACQ - To test SAM Icons in Blog Pages
+Feature: 1.15.2 ACQ - To test SAM Icons in Blog Pages
 
   Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> - <pageName>
     Given the user is on medicare acquisition site landing page
