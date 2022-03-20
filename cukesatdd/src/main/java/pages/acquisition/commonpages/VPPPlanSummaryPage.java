@@ -7937,7 +7937,7 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		selectFromDropDownByText(driver, partBDropdown, "May");
+		selectFromDropDownByText(driver, partBDropdown, "March");
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -7965,6 +7965,7 @@ public String GetMonthlyPremiumValue() {
 		}
 		if (allMSPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
 				jsClickNew(allMSPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
@@ -7980,7 +7981,7 @@ public String GetMonthlyPremiumValue() {
 
 	public void clickCloseMSApplication() {
 		jsClickNew(closebBtnMSApplication);
-		waitforElementNew(addMSPlans);
+		//waitforElementNew(addMSPlans);
 	}
 	
 }

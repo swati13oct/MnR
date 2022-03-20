@@ -1855,7 +1855,7 @@ public class CampaignTFNPage extends UhcDriver {
 		}
 	}
 	
-	@FindBy(xpath = "//span[@class='uhc-button__text'][normalize-space()='Start Application']")
+	@FindBy(xpath = "//button[contains(@class,'uhc-button')][normalize-space()='Start Application']")
 	private WebElement startMS4OLE_PlanDetails;
 
 	public void clickStartMS4OleFromPlanDetails() {
