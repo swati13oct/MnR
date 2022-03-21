@@ -5,7 +5,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
   # Author: Aayush Shah
   # Date : 5/4/20
   # Test case added to test the plan summary flow for the gate. This is a subset test case of other flows in this feature file.
-  @vbfGate
+  @vbfGate 
   Scenario Outline: Gated: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -82,7 +82,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | 00002 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                    | current  |
       | 00003 |   90210 | AARP | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tiers 1-2$445 for Tiers 3-5 | current  |
 
-    @sanity
+    @sanity @customEvent #customEvent tag added for Monitoring Team - Aayush 3/18/22
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                        | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                   | planyear |
       | 00003 |   90210 | AARP | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tiers 1-2$445 for Tiers 3-5 | current  |
