@@ -216,6 +216,23 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//u[contains(@class,'tel')]")
 	private WebElement TFNNoNeedHelp;
+
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
+
+	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
+	private WebElement ReturntoEnrollment;
 	
 	
 	public PersonalInformationPage(WebDriver driver) {
@@ -873,6 +890,36 @@ public class PersonalInformationPage extends UhcDriver{
 			System.out.println("OLE SEP page is Displayed : Navigation from Prescription Drug  Coverage page Failed");
 			return null;
 		}
+	}
+
+
+
+	public SaveandReturnOLEModal OpensavereturnOLEPages() {
+		validate(SaveEnrollmentLinkOLE);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
+
+		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
+		// CancelEnrollmentLink);
+
+		// CancelEnrollmentLink.click();
+		/*
+		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
+		if (validate(SaveModalOLE)) {
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfilesave);
+			CreateProfilesave.isDisplayed();
+			validate(SaveSignIn);
+			SaveSignIn.isDisplayed();
+			Saveclosepopup.isDisplayed();
+			// Saveclosepopup.click();
+			ReturntoEnrollment.isDisplayed();
+			jsClickNew(SaveSignIn);
+			return new SaveandReturnOLEModal(driver);
+		}
+		return null;
 	}
 	
 }

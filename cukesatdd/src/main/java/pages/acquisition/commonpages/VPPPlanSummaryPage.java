@@ -2136,6 +2136,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
+
+		try {
+			Thread.sleep(7);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validateNew(RightRail_TFN, 45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();

@@ -5240,5 +5240,18 @@ public class VppCommonStepDefinition {
 		
 	}
 
+	@And("^the user signIn with optum Id for OLE$")
+	public void the_user_signIn_with_optum_Id_OLE(DataTable credentials) {
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.signInOLE(username, password);
+	}
+
 	
 }
