@@ -329,6 +329,20 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 			campaignExternalLinkspage.navigateToPREGetStarted();
 		}
+	
+	@Then("^the user verify TFN on landing pages$")
+	public void the_user_verify_TFN_on_landing_pages(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String TFNflag = memberAttributesMap.get("TFNflag");
+		CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		if (TFNflag.equalsIgnoreCase("true")) {
+			campaignExternalLinkspage.validateLPPages(TFNXpath);
+			getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, TFNXpath);
+		}
+	}
 
 	@When("user clicks on Start Now to get start the Pharmacy flow from external page")
 	public void user_clicks_on_Start_Now_to_Get_Started_Pharmacy_Flow() {

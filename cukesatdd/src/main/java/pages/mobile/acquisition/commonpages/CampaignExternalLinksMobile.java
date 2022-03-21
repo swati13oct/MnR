@@ -1683,6 +1683,40 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			
 		}
 		
+		public void validateLPPages(String tfnXpath) {
+			threadsleep(5);
+			sleepBySec(8);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			threadsleep(5);
+
+			if (driver.getCurrentUrl().contains("aarpmedicareplans.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("AARP External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("UHC External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("stage-aarpmedicareplans.uhc.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("AARP External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("stage-uhcmedicaresolutions.uhc.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("UHC External Link Page opens successsfully");
+			} else
+				Assertion.fail("AARP/UHC External Link page is not opening up");
+			sleepBySec(8);
+			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+			jse.executeScript("window.scrollBy(0,-500)");
+			validate(TFNelement, 45);
+			System.out.println(">>>>>>>>>>>>> :" + TFNelement.getText());
+			System.out.print(TFNelement.getText());
+			if (validate(workingHrs)) {
+				System.out.println("Working hours Displayed on Page : " + workingHrs);
+			}
+		}
+		
 		public void validateDCEExternallinkMA() {
 			parentWindow = driver.getWindowHandle();
 			dceexternallinkMA.click();
