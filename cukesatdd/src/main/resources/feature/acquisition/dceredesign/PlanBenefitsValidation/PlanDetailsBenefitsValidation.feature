@@ -112,25 +112,6 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet    | site |
       | Plan Details Benefits_Data_2022 | Sheet2022_15 | UHC  |
 
-    @2022planDetailsBenefitsUHC16 @planDetailsMA
-    Examples: 
-      | excelPath                       | workSheet    | site |
-      | Plan Details Benefits_Data_2022 | Sheet2022_16 | UHC  |
-
-    @2022planDetailsBenefitsUHC17 @planDetailsMA
-    Examples: 
-      | excelPath                       | workSheet    | site |
-      | Plan Details Benefits_Data_2022 | Sheet2022_17 | UHC  |
-
-    @2022planDetailsBenefitsUHC18 @planDetailsMA
-    Examples: 
-      | excelPath                       | workSheet    | site |
-      | Plan Details Benefits_Data_2022 | Sheet2022_18 | UHC  |
-
-    @2022planDetailsBenefitsUHC19 @planDetailsMA
-    Examples: 
-      | excelPath                       | workSheet    | site |
-      | Plan Details Benefits_Data_2022 | Sheet2022_19 | UHC  |
 
     @2022planDetailsBenefitsPDPUHC01
     Examples: 
