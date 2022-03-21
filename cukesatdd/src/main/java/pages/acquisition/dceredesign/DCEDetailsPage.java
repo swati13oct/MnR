@@ -590,6 +590,7 @@ public class DCEDetailsPage extends UhcDriver {
             benefitValue = "Not Available";
         }
 
+        try{
         if(benefitsMap.get(columnName).contains(benefitValue)) {
             flag = true;
         }else {
@@ -597,6 +598,12 @@ public class DCEDetailsPage extends UhcDriver {
             System.out.println("Values did not match for col:6 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
             tmpUIString2 = benefitsMap.get(columnName);
         }
+        }
+        catch (Exception ex){
+            flag = false;
+            tmpUIString2 = "Exception Occurs";
+        }
+
 //        for(String key : benefitsMap.keySet()) {
 //            benefitValueUI = benefitsMap.get(key);
 //            tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
