@@ -318,23 +318,134 @@ public class DCEDetailsPage extends UhcDriver {
             for(int i = 0; i < 3 ; i++){
                 if(i == 0){
                     setPharmacy("Preferred Mail", sessionID , jo);
-                    //8drugCopayDeductible = new HashMap<String, String>();
-                }
-                if(i == 1){
-                    setPharmacy("Standard Retail", sessionID , jo);
-                    //drugCopayDeductible = new HashMap<String, String>();
-                }
-                if(i == 2){
-                    setPharmacy("Preferred Retail", sessionID , jo);
-                    //drugCopayDeductible = new HashMap<String, String>();
-                }
-//                drugCopayDeductible.put("","");
-//                drugCopayDeductible.put("","");
-//                drugCopayDeductible.put("","");
-//                drugCopayDeductible.put("","");
-//                drugCopayDeductible.put("","");
-//                drugCopayDeductibleAllType.put("",drugCopayDeductible);
+                    List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
+                    for(int j = 0; j < drugCopays.size(); j++){
 
+                        try {
+                            Integer.parseInt(drugCopays.get(j).getText().trim().split("")[1]);
+                            continue;
+                        }
+                        catch (Exception ex){ }
+
+                        if(drugCopays.get(j).getText().contains("Tier 1 (Preferred Generic)")){
+                            result.put("Tier 1 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 2 (Generic)")){
+                            result.put("Tier 2 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Preferred Brand)")){
+                            result.put("Tier 3 Prefered Mail Order", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 3 (Select Insulin Drugs)")){
+                            result.put("Tier 3 Preferred Mail Order (Insulin)", drugCopays.get(j+1).getText());
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 4 (Non-Preferred)")){
+                            if(sheetName.contains("PDP_Preferred")){
+                              double value =  Integer.parseInt(drugCopays.get(j+1).getText().replace("%", ""));
+                                value = value/100.0;
+                                result.put("Tier 4 Prefered Mail Order", value + "");
+                            }
+                            else{
+                                result.put("Tier 4 Prefered Mail Order", drugCopays.get(j+1).getText());
+                            }
+                        }
+                        else if(drugCopays.get(j).getText().contains("Tier 5 (Specialty)")){
+                            if(!drugCopays.get(j+1).getText().contains("N/A")) {
+                                result.put("Tier 5: Specialty Tier Drugs", drugCopays.get(j + 1).getText());
+                            }
+                            break;
+                        }
+                    }
+                }
+                if(i == 1) {
+                    setPharmacy("Standard Retail", sessionID, jo);
+                    List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
+                    if (drugCopays.size() == 0) {
+                        result.put("Tier 1 Standard Network Pharmacy", "");
+                        result.put("Tier 2 Standard Network Pharmacy", "");
+                        result.put("Tier 3 Standard Network Pharmacy", "");
+                        result.put("Tier 3 Standard Network Pharmacy (Insulin)", "");
+                        result.put("Tier 4 Standard Network Pharmacy", "");
+                        result.put("Tier 5 Standard Network Pharmacy", "");
+                    } else {
+                        for (int j = 0; j < drugCopays.size(); j++) {
+
+                            try {
+                                Integer.parseInt(drugCopays.get(j).getText().trim().split("")[1]);
+                                continue;
+                            } catch (Exception ex) {
+                            }
+
+                            if (drugCopays.get(j).getText().contains("Tier 1 (Preferred Generic)")) {
+                                result.put("Tier 1 Standard Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 2 (Generic)")) {
+                                result.put("Tier 2 Standard Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 3 (Preferred Brand)")) {
+                                result.put("Tier 3 Standard Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 3 (Select Insulin Drugs)")) {
+                                result.put("Tier 3 Standard Network Pharmacy (Insulin)", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 4 (Non-Preferred)")) {
+                                if(sheetName.contains("PDP_Preferred")){
+                                    double value =  Integer.parseInt(drugCopays.get(j + 1).getText().replace("%", ""));
+                                    value = value/100.0;
+                                    result.put("Tier 4 Standard Network Pharmacy", value + "");
+                                }
+                                else{
+                                    result.put("Tier 4 Standard Network Pharmacy", drugCopays.get(j + 1).getText());
+                                }
+
+                            } else if (drugCopays.get(j).getText().contains("Tier 5 (Specialty)")) {
+                                result.put("Tier 5 Standard Network Pharmacy", drugCopays.get(j + 1).getText().replace("%", ""));
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(i == 2) {
+                    setPharmacy("Preferred Retail", sessionID, jo);
+                    List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
+                    if (drugCopays.size() == 0) {
+                        result.put("Tier 1 Prefered Network Pharmacy", "");
+                        result.put("Tier 2 Prefered Network Pharmacy", "");
+                        result.put("Tier 3 Prefered Network Pharmacy", "");
+                        result.put("Tier 3 Prefered Network Pharmacy (Insulin)", "");
+                        result.put("Tier 4 Prefered Network Pharmacy", "");
+                        result.put("Tier 5 Prefered Network Pharmacy", "");
+                    } else {
+                        for (int j = 0; j < drugCopays.size(); j++) {
+
+                            try {
+                                Integer.parseInt(drugCopays.get(j).getText().trim().split("")[1]);
+                                continue;
+                            } catch (Exception ex) {
+                            }
+
+                            if (drugCopays.get(j).getText().contains("Tier 1 (Preferred Generic)")) {
+                                result.put("Tier 1 Prefered Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 2 (Generic)")) {
+                                result.put("Tier 2 Prefered Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 3 (Preferred Brand)")) {
+                                result.put("Tier 3 Prefered Network Pharmacy", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 3 (Select Insulin Drugs)")) {
+                                result.put("Tier 3 Prefered Network Pharmacy (Insulin)", drugCopays.get(j + 1).getText());
+                            } else if (drugCopays.get(j).getText().contains("Tier 4 (Non-Preferred)")) {
+                                if(sheetName.contains("PDP_Preferred")){
+                                    double value =  Integer.parseInt(drugCopays.get(j + 1).getText().replace("%", ""));
+                                    value = value/100.0;
+                                    result.put("Tier 4 Prefered Network Pharmacy", value + "");
+                                }
+                                else{
+                                    result.put("Tier 4 Prefered Network Pharmacy", drugCopays.get(j + 1).getText());
+                                }
+                            } else if (drugCopays.get(j).getText().contains("Tier 5 (Specialty)")) {
+                                if (!drugCopays.get(j + 1).getText().contains("N/A")) {
+                                    result.put("Tier 5 Prefered Network Pharmacy", drugCopays.get(j + 1).getText().replace("%", ""));
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -454,6 +565,20 @@ public class DCEDetailsPage extends UhcDriver {
         HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 
         if(columnName.equalsIgnoreCase("Tier 5: Specialty Tier Drugs")){
+
+            DecimalFormat df = new DecimalFormat("0.00");
+            df.setMaximumFractionDigits(0);
+            benefitValue = df.format(Float.parseFloat(benefitValue)*100);
+
+        }
+        if(columnName.equalsIgnoreCase("Tier 5 Standard Network Pharmacy")){
+
+            DecimalFormat df = new DecimalFormat("0.00");
+            df.setMaximumFractionDigits(0);
+            benefitValue = df.format(Float.parseFloat(benefitValue)*100);
+
+        }
+        if(columnName.equalsIgnoreCase("Tier 5 Prefered Network Pharmacy")){
 
             DecimalFormat df = new DecimalFormat("0.00");
             df.setMaximumFractionDigits(0);

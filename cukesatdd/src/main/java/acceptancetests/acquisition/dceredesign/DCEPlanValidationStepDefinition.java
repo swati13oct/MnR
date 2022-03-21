@@ -54,19 +54,20 @@ public class DCEPlanValidationStepDefinition {
         String DateCreated = dateFormat.format(RunDate);
         String parentDirectory = null;
         parentDirectory = new java.io.File(".").getCanonicalPath();
-        String InputFilePath = "";
-        try{
-            InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xlsx";
-        }
-        catch (Exception ex){
-            InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-        }
-
+        String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xlsx";
         String OutputFilePath = parentDirectory+"/target/DCEPlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 
         //Reading Excel.xls file
-        File InputFile = new File(InputFilePath);
-        FileInputStream inputStream = new FileInputStream(InputFile);
+        FileInputStream inputStream = null;
+        try{
+            File InputFile = new File(InputFilePath);
+            inputStream = new FileInputStream(InputFile);
+        }
+        catch(Exception ex){
+            InputFilePath = InputFilePath.replace("xlsx","xls");
+            File InputFile = new File(InputFilePath);
+            inputStream = new FileInputStream(InputFile);
+        }
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet sheet = workbook.getSheet(sheetName);
         int lastRow =sheet.getLastRowNum();
@@ -93,8 +94,12 @@ public class DCEPlanValidationStepDefinition {
             System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
             HSSFRow resultsRowNew = null;
             //Looping over total rows with values
-            for(int rowIndex=0; rowIndex<=1; rowIndex++)
+            for(int rowIndex=0; rowIndex<=5; rowIndex++)
             {
+                if(rowIndex == 3){
+                    System.out.println(rowIndex);
+                }
+
                 int failureCounter = 0, mcareFailureCounter = 0;
                 int cellIndex = 0;
                 XSSFRow row = (XSSFRow) sheet.getRow(rowIndex);
