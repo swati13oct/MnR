@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import atdd.framework.Assertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -233,8 +234,33 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
 	private WebElement ReturntoEnrollment;
-	
-	
+
+	@FindBy(xpath = "//*[contains(@id,'enrollStatus') and contains(text(),'In Progress')]")
+	private WebElement StatusonVP;
+
+	@FindBy(xpath = "(//*[contains(text(),'Status')]//following::span)[1]")
+	private WebElement VPPlanNameStatus;
+	@FindBy(xpath = "(//*[contains(text(),'Zip Code')]//following::span)[1]")
+	private WebElement VPPlanNameZipcode;
+	@FindBy(xpath = "(//*[contains(text(),'Plan Year')]//following::span)[1]")
+	private WebElement VPPlanNamePlanYear;
+	@FindBy(xpath = "(//*[contains(text(),'Monthly Premium')]//following::span)[1]")
+	private WebElement VPPlanNameMonthlyPremium;
+
+	@FindBy(xpath = "//*[contains(text(),'Language Preferences')]")
+	private WebElement ContinueEnrollment_LanguagePage;
+
+	@FindBy(xpath = "//*[@id='signInOptumID']")
+	WebElement SignInHeader;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	private WebElement signOut;
+
+	@FindBy(xpath = "//*[@id='agreeButton']")
+	private WebElement AgreeButtonSignIn;
+
+
+
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -920,6 +946,81 @@ public class PersonalInformationPage extends UhcDriver{
 			return new SaveandReturnOLEModal(driver);
 		}
 		return null;
+	}
+
+	public boolean validateVPOLEDetails(Map<String, String> planDetailsMap) {
+
+		boolean flag = false;
+		String Expected_PlanName = planDetailsMap.get("Plan Name");
+		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String Expected_Premium = planDetailsMap.get("Plan Premium");
+
+		WebElement PlanNameVP = driver.findElement(By.xpath("//*[contains(@class,'enrollment-card')]//*contains(text(),'" + Expected_PlanName + "')]"));
+		String ActualPlanNameVP=PlanNameVP.getText();
+		String ActualzipcodeVP= VPPlanNameZipcode.getText();
+		String ActualPremiumVP= VPPlanNameZipcode.getText();
+
+
+		validateNew(StatusonVP);
+
+		flag = driver.getCurrentUrl().contains("authenticated");
+		if (flag){
+			flag = ActualPlanNameVP.contains(Expected_PlanName)
+					&& ActualzipcodeVP.contains(Expected_ZipCode) && ActualPremiumVP.contains(Expected_Premium);
+
+		}
+
+		System.out.println("Visitor Profile Page OLE details are Validated : "+flag);
+
+		WebElement ContinueEnrollment = driver.findElement(By.xpath("//*contains(text(),'" + Expected_PlanName + "')]//following::button[1]"));
+		jsClickNew(ContinueEnrollment);
+		if (driver.getCurrentUrl().contains("language-preference")){
+
+		validateNew(ContinueEnrollment_LanguagePage);
+		}
+		System.out.println("user is not navigated back to OLE Page");
+
+		return flag;
+
+	}
+
+
+
+	public void signInOLE(String username, String password) {
+		try {
+			waitForPageLoadSafari();
+			validateNew(SignInHeader);
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
+			if(validateNew(AgreeButtonSignIn)) {
+				jsClickNew(AgreeButtonSignIn);
+			}
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+
 	}
 	
 }

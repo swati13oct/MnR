@@ -1995,38 +1995,6 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 
-	public void signInOLE(String username, String password) {
-		try {
-			waitForPageLoadSafari();
-			validateNew(SignInHeader);
-			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
-			waitForPageLoadSafari();
-			Thread.sleep(3000);
-			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
-			waitforElement(securityAnswer);
-			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-				System.out.println("Question is related to friendname");
-				securityAnswer.sendKeys("name1");
-			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-				System.out.println("Question is related to color");
-				securityAnswer.sendKeys("color1");
-			} else {
-				System.out.println("Question is related to phone");
-				securityAnswer.sendKeys("number1");
-			}
-			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
-			waitForPageLoadSafari();
-			CommonUtility.checkPageIsReadyNew(driver);
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
-		} catch (Exception e) {
-			Assertion.fail("###############Optum Id Sign In failed###############");
-		}
-
-	}
 }
 

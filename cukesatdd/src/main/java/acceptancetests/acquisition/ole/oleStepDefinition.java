@@ -3621,11 +3621,35 @@ public class oleStepDefinition {
 	@Then("^the user validates Save Return Later modal for OLE Page$")
 	public void the_user_validates_save_and_return_later_for_OLE_pages() throws Throwable {
 		scenario.log("Sai - Change made 03/21- Validate to save return --");
-		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		personalInformationPage.OpensavereturnOLEPages();
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			personalInformationPage.OpensavereturnOLEPages();
 			System.out.println("OLE Save Return Later modal on OLE Pages");
 		}
+		}
+	@Then("^the user click on continue enrollment in visitor profile and navigate for OLE Page$")
+	public void the_user_validates_continue_enrollment_navigate_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return  continue enrollment--");
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			boolean Validation_Status = personalInformationPage.validateVPOLEDetails(PlanDetailsMap);
+			if (Validation_Status) {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status + " - Validation Passed");
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
+			System.out.println("continue enrollment on OLE Pages");
+		}
 
-
+	}
 
 }
