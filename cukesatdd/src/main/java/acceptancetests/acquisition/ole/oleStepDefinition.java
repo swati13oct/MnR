@@ -3618,13 +3618,14 @@ public class oleStepDefinition {
 			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
 
-	@Then("^the user validates Save Return Later modal for OLE Page$")
-	public void the_user_validates_save_and_return_later_for_OLE_pages() throws Throwable {
+	@Then("^the user validates Save and Return Later modal for OLE Page$")
+	public void the_user_save_and_return_later_OLE_pages() throws Throwable {
 		scenario.log("Sai - Change made 03/21- Validate to save return --");
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-			personalInformationPage.OpensavereturnOLEPages();
+		personalInformationPage.OpensavereturnOLEPages();
 			System.out.println("OLE Save Return Later modal on OLE Pages");
 		}
 		}
