@@ -1,18 +1,19 @@
-@globalComponent
-Feature: 1.15 ACQ M&R- To test SAM Icons
+#To be deprecated : 3-17-22 : Aayush - This scenarios are already there in SAMIcons-Common.feature file
+#@globalComponent
+Feature: 1.15.3 ACQ M&R- To test SAM Icons
 
-  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> <pagename>
+  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And user opens the page to validate M&R Sites
-      | pagename | <pagename> |
+      | pagename | <pageName> |
     Then the user validates whether call icon is visible
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatRegressionAARP1 
+#    @samChatRegressionAARP1   
     Examples: 
-      | pagename                                                   | site |
+      | pageName                                                   | site |
       | /                                                          | AARP |
       | medicare-education/medicare-eligibility.html               | AARP |
       | medicare-education/medicare-parts-and-medigap-plans.html   | AARP |
@@ -27,9 +28,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-medicaid-dual-eligibility.html | AARP |
       | medicare-education/extra-help-program.html                 | AARP |
 
-    @samChatRegressionAARP2 
+#    @samChatRegressionAARP2  
     Examples: 
-      | pagename                                                  | site |
+      | pageName                                                  | site |
       | shop.html                                                 | AARP |
       | shop/connect                                              | AARP |
       | shop/compare.html                                         | AARP |
@@ -57,9 +58,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | enroll/pdp-enrollment.html                                | AARP |
       | enroll/ms-apply.html                                      | AARP |
 
-    @samChatRegressionAARP3
+#    @samChatRegressionAARP3 
     Examples: 
-      | pagename                                                     | site |
+      | pageName                                                     | site |
       | resources.html                                               | AARP |
       | resources/medication-therapy-management-program.html         | AARP |
       | resources/how-to-appoint-a-representative.html               | AARP |
@@ -75,9 +76,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | resources/ma-pdp-information-forms/medicare-appeal.html      | AARP |
       | resources/ma-pdp-information-forms/explanation-benefits.html | AARP |
 
-    @samChatRegressionAARP4
+#    @samChatRegressionAARP4 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | AARP |
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | AARP |
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | AARP |
@@ -92,9 +93,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | contact-us.html                                                                                                                                                                                                                                                                                                               | AARP |
       | privacy-policy.html                                                                                                                                                                                                                                                                                                           | AARP |
 
-    @samChatRegressionUHC1 
+#    @samChatRegressionUHC1  
     Examples: 
-      | pagename                                                   | site |
+      | pageName                                                   | site |
       | /                                                          | UHC  |
       | medicare-education/medicare-eligibility.html               | UHC  |
       | medicare-education/medicare-parts-and-medigap-plans.html   | UHC  |
@@ -109,9 +110,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-medicaid-dual-eligibility.html | UHC  |
       | medicare-education/extra-help-program.html                 | UHC  |
 
-    @samChatRegressionUHC2 
+ #   @samChatRegressionUHC2  
     Examples: 
-      | pagename                                                  | site |
+      | pageName                                                  | site |
       | shop.html                                                 | UHC  |
       | shop/connect                                              | UHC  |
       | shop/compare.html                                         | UHC  |
@@ -139,9 +140,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | enroll/pdp-enrollment.html                                | UHC  |
       | enroll/ms-apply.html                                      | UHC  |
 
-    @samChatRegressionUHC3
+#    @samChatRegressionUHC3 
     Examples: 
-      | pagename                                                     | site |
+      | pageName                                                     | site |
       | resources.html                                               | UHC  |
       | resources/medication-therapy-management-program.html         | UHC  |
       | resources/how-to-appoint-a-representative.html               | UHC  |
@@ -157,9 +158,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | resources/ma-pdp-information-forms/explanation-benefits.html | UHC  |
       | resources/ma-pdp-information-forms.html                      | UHC  |
 
-    @samChatRegressionUHC4
+#    @samChatRegressionUHC4 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
@@ -175,9 +176,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | privacy-policy.html                                                                                                                                                                                                                                                                                                           | UHC  |
 
     #############Updated for Regression Suite Team  #################################
-    @samChatRegressionAARP7
+#    @samChatRegressionAARP7 
     Examples: 
-      | pagename                                                 | site |
+      | pageName                                                 | site |
       | /                                                        | AARP |
       | medicare-education/medicare-eligibility.html             | AARP |
       | medicare-education/medicare-parts-and-medigap-plans.html | AARP |
@@ -189,9 +190,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/when-to-enroll.html                   | AARP |
       | medicare-education/medicare-faq.html                     | AARP |
 
-    @samChatRegressionAARP8
+#    @samChatRegressionAARP8 
     Examples: 
-      | pagename                            | site |
+      | pageName                            | site |
       | shop.html                           | AARP |
       | shop/connect                        | AARP |
       #   | shop/compare.html  | AARP|
@@ -202,9 +203,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | shop/prescription-drug-plans.html   | AARP |
       | shop/dual-special-needs-plans.html  | AARP |
 
-    @samChatRegressionAARP9
+#    @samChatRegressionAARP9 
     Examples: 
-      | pagename                                             | site |
+      | pageName                                             | site |
       | enroll.html                                          | AARP |
       | enroll/ma-enrollment.html                            | AARP |
       | enroll/pdp-enrollment.html                           | AARP |
@@ -216,16 +217,16 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | resources/how-to-pay-your-premium.html               | AARP |
       | resources/disenrollment-information.html             | AARP |
 
-    @samChatRegressionAARP10
+ #   @samChatRegressionAARP10 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | AARP |
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | AARP |
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | AARP |
 
-    @samChatRegressionAARP11
+ #   @samChatRegressionAARP11 
     Examples: 
-      | pagename            | site |
+      | pageName            | site |
       | profile/guest       | AARP |
       | about-us.html       | AARP |
       | sitemap.html        | AARP |
@@ -234,9 +235,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | contact-us.html     | AARP |
       | privacy-policy.html | AARP |
 
-    @samChatRegressionAARP12
+#    @samChatRegressionAARP12 
     Examples: 
-      | pagename                                          | site |
+      | pageName                                          | site |
       | medicare-articles.html                            | AARP |
       | medicare-articles/medicare-made-clear.html        | AARP |
       | medicare-articles/eligibility-and-enrollment.html | AARP |
@@ -245,9 +246,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
 
     #  |medicare-articles/shopping-for-medicare.html           |AARP|
     #  |medicare-articles/medicare-when-working-past-65.html   |AARP|
-    @samChatRegressionUHC7
+#    @samChatRegressionUHC7 
     Examples: 
-      | pagename                                                 | site |
+      | pageName                                                 | site |
       | /                                                        | UHC  |
       | medicare-education/medicare-eligibility.html             | UHC  |
       | medicare-education/medicare-parts-and-medigap-plans.html | UHC  |
@@ -259,9 +260,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/when-to-enroll.html                   | UHC  |
       | medicare-education/medicare-faq.html                     | UHC  |
 
-    @samChatRegressionUHC8
+#    @samChatRegressionUHC8 
     Examples: 
-      | pagename                            | site |
+      | pageName                            | site |
       | shop.html                           | UHC  |
       | shop/connect                        | UHC  |
       # | shop/compare.html  | UHC|
@@ -272,9 +273,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | shop/prescription-drug-plans.html   | UHC  |
       | shop/dual-special-needs-plans.html  | UHC  |
 
-    @samChatRegressionUHC9
+#    @samChatRegressionUHC9 
     Examples: 
-      | pagename                                             | site |
+      | pageName                                             | site |
       | enroll.html                                          | UHC  |
       | enroll/ma-enrollment.html                            | UHC  |
       | enroll/pdp-enrollment.html                           | UHC  |
@@ -286,16 +287,16 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | resources/how-to-pay-your-premium.html               | UHC  |
       | resources/disenrollment-information.html             | UHC  |
 
-    @samChatRegressionUHC10
+#    @samChatRegressionUHC10 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | UHC  |
 
-    @samChatRegressionUHC11
+#    @samChatRegressionUHC11 
     Examples: 
-      | pagename            | site |
+      | pageName            | site |
       | profile/guest       | UHC  |
       | about-us.html       | UHC  |
       | sitemap.html        | UHC  |
@@ -304,9 +305,9 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | contact-us.html     | UHC  |
       | privacy-policy.html | UHC  |
 
-    @samChatRegressionUHC12
+#    @samChatRegressionUHC12 
     Examples: 
-      | pagename                                          | site |
+      | pageName                                          | site |
       | medicare-articles.html                            | UHC  |
       | medicare-articles/medicare-made-clear.html        | UHC  |
       | medicare-articles/eligibility-and-enrollment.html | UHC  |
