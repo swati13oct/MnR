@@ -1,4 +1,4 @@
-@NewMedEdPages
+@NewMedEdPages @staticPages
 Feature:Medicare Education Pages flows for New Pages
 
   Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
@@ -46,7 +46,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario     | site | geoState | pageName                    | tfnXpath                                                            | tfnFlag |
       | Avengers AMP | AARP | Alabama  | Medicare Education Hub Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario     | site | geoState | pageName                    | tfnXpath                                                            | tfnFlag |
       | Avengers UMS | UHC  | Alabama  | Medicare Education Hub Page | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    |
