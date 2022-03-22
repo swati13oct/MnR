@@ -28,6 +28,26 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet   | site |
       | DCE_MBD | PDP_Preferred | AARP |
 
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_1 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_2 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_3 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_4 | AARP |
+
 
   @PlanDetails_ExcelValidation @2022PlanDetialsUHC
   Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
