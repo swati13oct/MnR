@@ -199,7 +199,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan summary page
       | User Name | <userName> |
 
-    @visitorProfile_AARP @regressionAARP @authenticatedAARP @featureGate @check
+    @visitorProfile_AARP @regressionAARP @authenticatedAARP @featureGate
     Examples:
       | site | state   | zipcode | isMultutiCounty | county          | userName              | password     | plantype | planname                            |
       | AARP | Alabama | 10010   | NO              | New York County | vdatdd_16@getnada.com | Password@123 | MAPD     | AARP Medicare Advantage Prime (HMO) |

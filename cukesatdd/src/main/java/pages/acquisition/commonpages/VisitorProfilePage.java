@@ -756,7 +756,7 @@ public class VisitorProfilePage extends UhcDriver {
             jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
             waitForPageLoadSafari();
             CommonUtility.checkPageIsReadyNew(driver);
-            CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+            CommonUtility.waitForPageLoadNew(driver, signOut, 25);
 
         } catch (Exception e) {
             Assertion.fail("###############Optum Id Sign In failed###############");
@@ -2140,11 +2140,18 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(viewDetailsPRECard);
         sleepBySec(5);
         CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
         sleepBySec(5);
-        waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
-        Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
+        //waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
+        if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(10);
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")),15), "Plan Details page not opened");
+        } else {
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
+        }
         clickOnBackToProfile();
         CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
         WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
         scrollToView(btnEnrollPRECard);
         jsClickNew(btnEnrollPRECard);
@@ -2154,8 +2161,9 @@ public class VisitorProfilePage extends UhcDriver {
         if (!plantype.trim().equalsIgnoreCase("MS")) {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Online Enrollment')]"))), "OLE Page not opened");
         } else if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(10);
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")),15), "Start Application Page not opened");
             validateMSStartApplicationPage();
-            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]"))), "Start Application Page not opened");
         }
     }
 }
