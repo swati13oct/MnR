@@ -379,12 +379,12 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "//span[contains(text(),'Get')]")
     private WebElement btnPREGetStarted;
 
-	WebElement btnReviewDrugs;
     @FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
-    WebElement btnReviewDrugs;
+    private WebElement btnReviewDrugs;
+    //WebElement btnReviewDrugs;
 
-	@FindBy(xpath = "//*[@id='signInOptumID']")
-	WebElement SignInHeader;
+//	@FindBy(xpath = "//*[@id='signInOptumID']")
+//	WebElement SignInHeader;
 
 
 
