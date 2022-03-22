@@ -7937,7 +7937,7 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		selectFromDropDownByText(driver, partBDropdown, "May");
+		selectFromDropDownByText(driver, partBDropdown, "March");
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -7946,7 +7946,7 @@ public String GetMonthlyPremiumValue() {
 		return false;
 	}
 	
-	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
 	private WebElement firstComparePlanButtonForMS;
 	
 	public void compareAllMSPlans() {
@@ -7957,7 +7957,7 @@ public String GetMonthlyPremiumValue() {
 			e.printStackTrace();
 		}
 		List<WebElement> allMSPlans = driver
-				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
+				.findElements(By.xpath("//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label"));
 		int plansForCompare = allMSPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
@@ -7965,6 +7965,7 @@ public String GetMonthlyPremiumValue() {
 		}
 		if (allMSPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
 				jsClickNew(allMSPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
@@ -7980,7 +7981,7 @@ public String GetMonthlyPremiumValue() {
 
 	public void clickCloseMSApplication() {
 		jsClickNew(closebBtnMSApplication);
-		waitforElementNew(addMSPlans);
+		//waitforElementNew(addMSPlans);
 	}
 	
 }

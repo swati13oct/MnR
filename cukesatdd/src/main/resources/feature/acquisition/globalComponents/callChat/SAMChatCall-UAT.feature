@@ -1,23 +1,23 @@
 @globalComponent 
-Feature: 1.14 - UAT Scripts - To test SAM Icons
+Feature: 1.15.2 - UAT Scripts - To test SAM Icons
 
   Scenario Outline: <scenario> 1.19.1.1 To test the SAM icons on Acq site on <site> Homepage
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And user opens the page to validate M&R Sites
-      | pagename | <pagename> |
+      | pagename | <pageName> |
     Then the user validates whether call icon is visible
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
     @samChatCallulayer @UATRegression @sanity  @vbfGate1 @regressionAARP
     Examples: 
-      | pagename | site | scenario           |
+      | pageName | site | scenario           |
       | /        | AARP | E2E Scenario 1_AMP |
 
     @samChatCallblayer @UATRegression @regressionUHC
     Examples: 
-      | pagename | site | scenario           |
+      | pageName | site | scenario           |
       | /        | UHC  | E2E Scenario 1_UMS |
 
   
@@ -33,27 +33,27 @@ Feature: 1.14 - UAT Scripts - To test SAM Icons
 
     @samChatCallulayer @UATRegression   @regressionAARP
     Examples: 
-      | pagename | site | scenario           |
+      | pageName | site | scenario           |
       | /        | AARP | E2E Scenario 3_AMP |
 
     @samChatCallblayer @UATRegression @vbfGate1  @regressionUHC
         Examples: 
-      | pagename | site | scenario           |
+      | pageName | site | scenario           |
       | /        | UHC  | E2E Scenario 3_UMS |
 
-  Scenario Outline: <scenario> 1.19.1.3 To test the SAM icons on Acq site on <site> chat agent not available hours <pagename>
+  Scenario Outline: <scenario> 1.19.1.3 To test the SAM icons on Acq site on <site> chat agent not available hours <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And user opens the page to validate M&R Sites
-      | pagename | <pagename> |
+      | pagename | <pageName> |
     Then the user validates whether call icon is visible
     Then user validates whether chat Agent is not Available
     And the user hovers screen over the shop for a plan
     And click on provider search link on shop pages
 
-    @samChatnonhoursulayer @UATRegression @regressionAARP
+    @samChatnonhoursulayer @UATRegression 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
       | /                                                                                                                                                                                                                                                                                                                             | AARP | E2E Scenario 4_AMP |  |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP | E2E Scenario 4_AMP |  |
       | medicare-education/medicare-parts-and-medigap-plans.html                                                                                                                                                                                                                                                                      | AARP | E2E Scenario 4_AMP |  |
@@ -115,9 +115,9 @@ Feature: 1.14 - UAT Scripts - To test SAM Icons
       | contact-us.html                                                                                                                                                                                                                                                                                                               | AARP | E2E Scenario 4_AMP |  |
       | privacy-policy.html                                                                                                                                                                                                                                                                                                           | AARP | E2E Scenario 4_AMP |  |
 
-    @samChatnonhoursblayer @UATRegression @regressionUHC
+    @samChatnonhoursblayer @UATRegression 
     Examples: 
-      | pagename                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
+      | pageName                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
       | /                                                                                                                                                                                                                                                                                                                             | UHC  | E2E Scenario 4_UMS |  |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  | E2E Scenario 4_UMS |  |
       | medicare-education/medicare-parts-and-medigap-plans.html                                                                                                                                                                                                                                                                      | UHC  | E2E Scenario 4_UMS |  |
