@@ -83,6 +83,11 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_7 | AARP |
 
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown | AARP |
+
 
 
   @PlanDetails_ExcelValidation @2022PlanDetialsUHC

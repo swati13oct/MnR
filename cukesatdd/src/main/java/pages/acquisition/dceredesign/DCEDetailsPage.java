@@ -448,6 +448,18 @@ public class DCEDetailsPage extends UhcDriver {
                 }
             }
         }
+        else if(sheetName.contains("LIS_Buydown")){
+            for(int i = 0; i < 1 ; i++){
+                if(i == 0){
+                    setPharmacy("Preferred Mail", sessionID , jo);
+                    threadsleep(2);
+                    WebElement deductible = driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li"));
+                    WebElement intialCoverage = driver.findElement(By.xpath("//span[text()='Drug Copays & Deductible ']/../../../..//p[contains(text(),'All')]"));
+                    result.put("Deductible", deductible.getText());
+                    result.put("Initial Coverage Stage", intialCoverage.getText());
+                }
+            }
+        }
 
         System.out.println("Finished collecting the info on vpp detail page =====");
 
