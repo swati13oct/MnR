@@ -601,7 +601,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
             EmailtxtFirstName.sendKeys("John");
             EmailtxtLastName.sendKeys("Wick");
-            EmailtxtEmail.sendKeys("test@test.com");
+            EmailtxtEmail.sendKeys("test@gmail.com");
             EmailtxtDOB.sendKeys("02241955");
             sleepBySec(1);
             jsClickNew(EmailbtnSubmit);
