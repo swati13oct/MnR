@@ -86,7 +86,37 @@ Feature: ACQ-Plan benefits validation
     @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
-      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown | AARP |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_1 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_2 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_3 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_4 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_5 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_6 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_7 | AARP |
 
 
 
