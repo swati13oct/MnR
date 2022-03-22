@@ -3653,4 +3653,35 @@ public class oleStepDefinition {
 
 	}
 
+	@Then("^the user Validates plan status on visitor profile page after submission$")
+	public void the_user_Validates_plan_status_on_vp_submission() throws Throwable {
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+				//	|| MRScenario.environment.equalsIgnoreCase("team-acme")
+			)) {
+
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (oleConfirmationPage != null) {
+
+				boolean Validation_Status = oleConfirmationPage.ValidateOLESubmittedDetailsonVP(PlanDetailsMap);
+				if (Validation_Status) {
+					System.out.println("Visitor profile Page submission details validation : Next Steps Validated");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+							oleConfirmationPage);
+					Assertion.assertTrue(true);
+				} else {
+					System.out.println("Visitor profile Page submission details validation : Next Steps  NOT validated");
+					Assertion.fail();
+				}
+			}
+		}
+	}
+
 }

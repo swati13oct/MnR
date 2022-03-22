@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -528,6 +529,60 @@ public class OLEconfirmationPage extends UhcDriver{
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+	@FindBy(xpath = "//*[contains(@class,'uhc-header__logo aarpLogo')]")
+	private WebElement LogoImageConfirmationPage;
+
+
+
+	public boolean ValidateOLESubmittedDetailsonVP(Map<String, String> planDetailsMap) {
+
+		boolean flag = false;
+		String Expected_PlanName = planDetailsMap.get("Plan Name");
+		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String Expected_Premium = planDetailsMap.get("Plan Premium");
+		String Expected_Premium1=Expected_Premium.substring(16,20).trim();
+		//-------User Clicked on Logo image on AARP OR UHC Site confirmation page
+
+		validateNew(LogoImageConfirmationPage);
+		jsClickNew(LogoImageConfirmationPage);
+		//-----
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("authenticated")) {
+			WebElement SubmittedPlanNameVP = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]"));
+			String ActualPlanNameVP = SubmittedPlanNameVP.getText();
+
+			WebElement StatusVP = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]/following::div[1]//*[contains(text(),'Status')]/following::span[1]"));
+			StatusVP.getText().equalsIgnoreCase("Submitted");
+
+			WebElement SubmittedZipcode = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]/following::div[1]//*[contains(text(),'Zip Code')]/following::span[1]"));
+
+			String ActualzipcodeVP = SubmittedZipcode.getText();
+			WebElement SubmittedMonthlyPremium = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]/following::div[1]//*[contains(text(),'Monthly')]/following::span[1]"));
+
+			String ActualPremiumVP = SubmittedMonthlyPremium.getText();
+
+			System.out.println("Actual PlanName: " + ActualPlanNameVP);
+			System.out.println("Actual Zipcode: " + ActualzipcodeVP);
+			System.out.println("Actual Premium: " + ActualPremiumVP);
+
+			System.out.println("Expected PlanName: " + Expected_PlanName);
+			System.out.println("Expected Zipcode: " + Expected_ZipCode);
+			System.out.println("Expected Premium: " + Expected_Premium1);
+
+			flag = driver.getCurrentUrl().contains("authenticated");
+			if (flag) {
+				flag = ActualPlanNameVP.contains(Expected_PlanName)
+						&& ActualzipcodeVP.contains(Expected_ZipCode)
+					&& ActualPremiumVP.contains(Expected_Premium1);
+			}
+		}
+		System.out.println("Visitor Profile Page OLE details are Validated : "+flag);
+
+
+		return flag;
+
 	}
 }
 	

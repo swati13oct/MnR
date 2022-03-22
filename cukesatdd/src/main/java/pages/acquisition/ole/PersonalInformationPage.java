@@ -921,27 +921,16 @@ public class PersonalInformationPage extends UhcDriver{
 
 
 	public SaveandReturnOLEModal OpensavereturnOLEPages() {
-		validate(SaveEnrollmentLinkOLE);
+		validateNew(SaveEnrollmentLinkOLE);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
 
-		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
-		// CancelEnrollmentLink);
-
-		// CancelEnrollmentLink.click();
-		/*
-		 * try { Thread.sleep(6000); } catch (InterruptedException e) {
-		 * e.printStackTrace(); }
-		 */
-		if (validate(SaveModalOLE)) {
-			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+		if (validateNew(SaveModalOLE)) {
+			System.out.println("OLE Save Enrollment Modal is Displayed");
 			validate(CreateProfilesave);
 			CreateProfilesave.isDisplayed();
-			validate(SaveSignIn);
-			SaveSignIn.isDisplayed();
-			Saveclosepopup.isDisplayed();
-			// Saveclosepopup.click();
 			ReturntoEnrollment.isDisplayed();
+			validateNew(SaveSignIn);
 			jsClickNew(SaveSignIn);
 			return new SaveandReturnOLEModal(driver);
 		}
@@ -950,29 +939,42 @@ public class PersonalInformationPage extends UhcDriver{
 
 	public boolean validateVPOLEDetails(Map<String, String> planDetailsMap) {
 
-		boolean flag = false;
-		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		String Expected_ZipCode = planDetailsMap.get("Zip Code");
-		String Expected_Premium = planDetailsMap.get("Plan Premium");
+			boolean flag = false;
+			String Expected_PlanName = planDetailsMap.get("Plan Name");
+			String Expected_ZipCode = planDetailsMap.get("Zip Code");
+			String Expected_Premium = planDetailsMap.get("Plan Premium");
+			String Expected_Premium1=Expected_Premium.substring(16,20).trim();
 
-		WebElement PlanNameVP = driver.findElement(By.xpath("//*[contains(@class,'enrollment-card')]//*contains(text(),'" + Expected_PlanName + "')]"));
+
+			WebElement PlanNameVP = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]"));
 		String ActualPlanNameVP=PlanNameVP.getText();
-		String ActualzipcodeVP= VPPlanNameZipcode.getText();
-		String ActualPremiumVP= VPPlanNameZipcode.getText();
 
+		String ActualzipcodeVP= VPPlanNameZipcode.getText();
+
+		WebElement VPPlanNameMonthlyPremium1 = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]/following::div[1]//*[contains(text(),'Monthly')]/following::span[1]"));
+		String ActualPremiumVP= VPPlanNameMonthlyPremium1.getText();
+
+		System.out.println("Actual PlanName: "+ActualPlanNameVP);
+		System.out.println("Actual Zipcode: " +ActualzipcodeVP);
+		System.out.println("Actual Premium: "+ActualPremiumVP);
+
+		System.out.println("Expected PlanName: "+Expected_PlanName);
+		System.out.println("Expected Zipcode: " +Expected_ZipCode);
+		System.out.println("Expected Premium: "+Expected_Premium1);
 
 		validateNew(StatusonVP);
 
 		flag = driver.getCurrentUrl().contains("authenticated");
 		if (flag){
 			flag = ActualPlanNameVP.contains(Expected_PlanName)
-					&& ActualzipcodeVP.contains(Expected_ZipCode) && ActualPremiumVP.contains(Expected_Premium);
+					&& ActualzipcodeVP.contains(Expected_ZipCode)
+					&& ActualPremiumVP.contains(Expected_Premium1);
 
 		}
 
 		System.out.println("Visitor Profile Page OLE details are Validated : "+flag);
 
-		WebElement ContinueEnrollment = driver.findElement(By.xpath("//*contains(text(),'" + Expected_PlanName + "')]//following::button[1]"));
+		WebElement ContinueEnrollment = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]//following::button[1]"));
 		jsClickNew(ContinueEnrollment);
 		if (driver.getCurrentUrl().contains("language-preference")){
 
@@ -1014,13 +1016,14 @@ public class PersonalInformationPage extends UhcDriver{
 			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
-			if(validateNew(AgreeButtonSignIn)) {
+			/*if(validateNew(AgreeButtonSignIn)) {
 				jsClickNew(AgreeButtonSignIn);
-			}
+			}*/
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
 
 	}
-	
+
+
 }
