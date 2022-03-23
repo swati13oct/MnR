@@ -118,7 +118,7 @@ public class OLECommonPages extends UhcDriver{
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
-		String Expected_Premium1=Expected_Premium.substring(16,20).trim();
+		String Expected_Premium1=Expected_Premium.substring(16,20).replace(".","").trim();
 
 
 		WebElement PlanNameVP = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]"));
