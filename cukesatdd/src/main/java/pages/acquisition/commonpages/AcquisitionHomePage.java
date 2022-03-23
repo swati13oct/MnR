@@ -36,6 +36,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.UHCCP.Contact_Us_Page;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.OLETestHarnessPage;
@@ -951,6 +952,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[contains(@dtmid,'cta_acq_county_modal')]")
 	public WebElement selectCounty;
+	
+	//UHCCP elements
+	@FindBy(xpath = "//a[contains(@class,'c-navigation__logo')]")
+	public WebElement uhccpLogo;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -964,6 +969,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+	private static String UHCCP_PROD_URL=MRConstants.UHCCP_URL_PROD;
+	private static String UHCCP_STAGE_URL=MRConstants.UHCCP_URL_STAGE;
 
 	private PageData globalFooter;
 
@@ -1070,9 +1077,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
 																									// part of AARP/UHC
 																									// cleanup
+		} else if (site.equalsIgnoreCase("UHCCP")) {
+			if (MRScenario.environment.equals("prod")) {
+				startNew(UHCCP_PROD_URL);
+			} else if (MRScenario.environment.equals("stage")) {
+				startNew(UHCCP_STAGE_URL);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, uhccpLogo, 20);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			checkModelPopup(driver, 20);
+			testSiteUrl = driver.getCurrentUrl();
 		}
 
-		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
+		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE") || site.equalsIgnoreCase("UHCCP"))) { // adding this condition temporarily to
 																				// bypass PRE/ARE flows
 			// CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -8201,14 +8219,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[@id='companyNameLabel']")
 	private WebElement affiliateText;
-	
+
 	public void verifiyAffiliateText() {
 		Assert.assertFalse(validate(affiliateLink), "Verify if affilliate Link present.");
-		if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
-			Assert.assertEquals(driver.findElements(By.xpath("//*[@id='companyNameLabel']")).size(), 0, "*** Affiliate link not present. ***");
+		if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			Assert.assertEquals(driver.findElements(By.xpath("//*[@id='companyNameLabel']")).size(), 0,
+					"*** Affiliate link not present. ***");
 		} else if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			 validateNew(affiliateText);
-			
-}
+			validateNew(affiliateText);
+
+		}
 	}
+
 }
