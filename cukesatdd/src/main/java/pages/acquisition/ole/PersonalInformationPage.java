@@ -5,6 +5,7 @@ package pages.acquisition.ole;
 
 import java.util.Map;
 
+import atdd.framework.Assertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -216,8 +217,50 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//u[contains(@class,'tel')]")
 	private WebElement TFNNoNeedHelp;
-	
-	
+
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
+
+	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
+	private WebElement ReturntoEnrollment;
+
+	@FindBy(xpath = "//*[contains(@id,'enrollStatus') and contains(text(),'In Progress')]")
+	private WebElement StatusonVP;
+
+	@FindBy(xpath = "(//*[contains(text(),'Status')]//following::span)[1]")
+	private WebElement VPPlanNameStatus;
+	@FindBy(xpath = "(//*[contains(text(),'Zip Code')]//following::span)[1]")
+	private WebElement VPPlanNameZipcode;
+	@FindBy(xpath = "(//*[contains(text(),'Plan Year')]//following::span)[1]")
+	private WebElement VPPlanNamePlanYear;
+	@FindBy(xpath = "(//*[contains(text(),'Monthly Premium')]//following::span)[1]")
+	private WebElement VPPlanNameMonthlyPremium;
+
+	@FindBy(xpath = "//*[contains(text(),'Language Preferences')]")
+	private WebElement ContinueEnrollment_LanguagePage;
+
+	@FindBy(xpath = "//*[@id='signInOptumID']")
+	WebElement SignInHeader;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	private WebElement signOut;
+
+	@FindBy(xpath = "//*[@id='agreeButton']")
+	private WebElement AgreeButtonSignIn;
+
+
+
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -874,5 +917,5 @@ public class PersonalInformationPage extends UhcDriver{
 			return null;
 		}
 	}
-	
+
 }
