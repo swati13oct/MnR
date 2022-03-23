@@ -224,6 +224,13 @@ public abstract class UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
+		
+		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","true");
+			driver.manage().addCookie(cookieName);
+			driver.navigate().refresh();
+			
+		}
 	}
 
 	public UhcDriver(WebDriver driver) {
@@ -651,6 +658,18 @@ public abstract class UhcDriver {
 			System.out.println("Click and JsClick failed");
 		}
 	}
+	
+	public boolean isElementPresent(WebElement element) {
+	    try {
+	    	if (element.isDisplayed()) {
+				System.out.println("Element found!!!!");
+				return true;
+			}
+	    } catch (org.openqa.selenium.NoSuchElementException e) {
+	    	System.out.println("Element Not found!!!!");
+	    }
+	    return false;	    
+	}
 
 	public void jsClickNew(WebElement element) {
 
@@ -767,6 +786,13 @@ public abstract class UhcDriver {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
+		
+		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
+			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","true");
+			driver.manage().addCookie(cookieName);
+			driver.navigate().refresh();
+			
+		}
 	}
 
 	/***

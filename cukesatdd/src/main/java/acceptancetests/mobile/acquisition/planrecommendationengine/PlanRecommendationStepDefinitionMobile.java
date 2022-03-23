@@ -835,6 +835,13 @@ public void sortBy_No() {
 		NewResultsMobilePage newResultpage = new NewResultsMobilePage(wd);
 		newResultpage.validateDrugInfo(inputValues.get("DrugInfo"), "show");
 	}
+	
+	@Then("^user validate WhySeparateModel plan in PRE results page$")
+   	public void WhySeparateModel_new_results_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		NewResultsMobilePage planSelectorNewResultspage =  new NewResultsMobilePage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorNewResultspage.validateDrugInfo(inputValues.get("DrugInfo"),"whyseparatemodel");
+   	}
 
 	@Then("^user validate showmoreDoctor in PRE results page$")
 	public void doctorShowMore_new_results_page_mobile(DataTable givenAttributes) {

@@ -4,7 +4,7 @@
 Feature: 1.09. UAT - Visitor profile Authenticated
 
 #  @vpMSSavePlanAuthenticated @authenticated
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
+  Scenario Outline: <UID> : Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -28,18 +28,20 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
+
 #    @visitorProfile_AARP @regressionAARP @authenticatedAARP
+
     Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName    | password     |
-      | AARP | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01 | Password@123 |
+      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName    | password     |
+      | Visitor Profile - E2E Scenario 7 _AMP | AARP | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01 | Password@123 |
 
 #    @visitorProfile_UHC @regressionUHC @authenticatedUHC @featureGate
     Examples:
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county      | MS_testPlans  | userName        | password     |
-      | UHC  | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
+      | UID                                   | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  | userName        | password     |
+      | Visitor Profile - E2E Scenario 7 _UHC | UHC  | 23223   | YES           | MS       | future   | 11/11/1949 | Richmond City | Plan G,Plan A | vdmsatdd_01_uhc | Password@123 |
 
   @addDrugAuthenticated @authenticated
-  Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile on <site> site
+  Scenario Outline: <UID> : Verify user is able to add drug information to the authenticated visitor profile on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -65,13 +67,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @sanity @authenticatedAARP
     Examples:
-      | site | state   | userName  | password     | drug1   | zipCode |
-      | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
+      | UID                                   | site | state   | userName  | password     | drug1   | zipCode |
+      | Visitor Profile - E2E Scenario 6 _AMP | AARP | Alabama | vdatdd_02 | Password@123 | Lipitor | 90210   |
 
     @visitorProfile_UHC @regressionUHC @featureGate
     Examples:
-      | site | state   | userName      | password     | drug1   | zipCode |
-      | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
+      | UID                                   | site | state   | userName      | password     | drug1   | zipCode |
+      | Visitor Profile - E2E Scenario 6 _UHC | UHC  | Alabama | vdatdd_02_uhc | Password@123 | Lipitor | 90210   |
 
   @providerFlowAuthenticated @authenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page on <site> site
@@ -130,7 +132,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | New York | 10010   | NO              | New York County | vdatdd_14 | Password@123 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34            |
 
   @vppartialOLEAndRemove @authenticated
-  Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page on <site> site
+  Scenario Outline: <UID>: Verify Partial enrollment and cancel or remove the enrollment from profile page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -179,8 +181,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP @regressionAARP @vbfGate1 @authenticatedAARP @featureGate
     Examples:
-      | site | state    | userName  | password     | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
-      | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
+      | UID                                   | site | state    | userName  | password     | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | middlename | dob      | gender | permstreet    | permcity | mailingaptno | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium | homeNumber | emailConfirmation | goGreen |
+      | Visitor Profile - E2E Scenario 4 _AMP | AARP | New York | vdatdd_15 | Password@123 | 10010   | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | test       | 01011903 | Male   | 003 Morris Rd | NY       | test         | NY           | 10001      | test@test.com | 2n22C33YK33    | false   | 09011997  | 11012002  | 431665465      | In Progress | $0             | 1111111111 | No                | No      |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page on <site> site
@@ -291,13 +293,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
 
     @visitorProfile_AARP
     Examples:
-      | site | name | userName              | password   |
-      | AARP | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | AARP | VD   | vdatdd_17@getnada.com | Password@123 |
 
     @visitorProfile_UHC
     Examples:
-      | site | name | userName              | password   |
-      | UHC  | VD   | vdatdd_17@getnada.com | Password@1 |
+      | site | name | userName              | password     |
+      | UHC  | VD   | vdatdd_17@getnada.com | Password@123 |
 
   @authenticated @DCEImportSignIn
   Scenario Outline: Verify DCE Redirect  on <site> site
@@ -327,3 +329,56 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Examples:
       | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
       | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
+
+
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user clicks on the shopping cart icon
+    Then the user click on Get Started to land on Plan Recommendation Page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    And user selects skip option in Drug page
+      | Drug Selection | <Drug Selection> |
+    And user selects additional services option in additional services page
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
+    Then user selects cost preferences option in cost preferences page
+      | Preference Option | <costPreferenceOption> |
+    #And verify continue function on "Priorities" page
+    #Then user validate elements in loading results page
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
+    Then user validate elements in loading results page
+    Then user click on save result option for PRE and signs in to VP
+      | User Name | <userName> |
+      | Password  | <password> |
+    Then user validate plan recommendation plan card on visitor profile
+      | PlanName | <testPlan> |
+      | Premium  | <Premium>  |
+      | PlanType | <plantype> |
+    Then user validate view Plan details on PRE plan card and check enroll or start application button
+      | PlanType | <plantype> |
+
+    @SavePlanPRE_AARP
+    Examples:
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName              | password     | Premium | plantype |
+      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
+      | AARP | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19@getnada.com | Password@123 | [blank] | MS       |
+
+    @SavePlanPRE_UHC
+    Examples:
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName                  | password     | Premium | plantype |
+      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
+      | UHC  | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19_uhc@getnada.com | Password@123 | [blank] | MS       |
