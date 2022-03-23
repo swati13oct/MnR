@@ -1,5 +1,5 @@
 @globalComponent @samIcons
-Feature: ACQ M&R- To test SAM Icons
+Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
 
   Scenario Outline: To test the SAM icons on Acq site on <site> <pagename>
     Given the user is on medicare acquisition site landing page
@@ -7,14 +7,14 @@ Feature: ACQ M&R- To test SAM Icons
     When user opens the page to validate M&R Sites
       | pagename | <pagename> |
     Then the user validates whether call icon is visible
-    And the user validates the chat icon
+    And the user validates whether chat icon is visible
 
-    @samIconsAARP @regressionAARP @flagsmithTestScenario
+    @samIconsAARP  @flagsmithTestScenario
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @samIconsAARP @regressionAARP @featureGate
+    @samIconsAARP  @featureGate
     Examples: 
       | pagename                                                 | site |
       | profile/guest                                            | AARP |
@@ -43,7 +43,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/medication-therapy-management-program.html     | AARP |
       | resources/how-to-appoint-a-representative.html           | AARP |
 
-    @samIconsAARP
+    @samIconsAARP 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP |
@@ -283,12 +283,12 @@ Feature: ACQ M&R- To test SAM Icons
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
+    @samIconsUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
+    @samIconsUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -321,7 +321,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @samIconsUHC @uhcmedicareSAMIcons
+    @samIconsUHC @uhcmedicareSAMIcons 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -599,22 +599,22 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     Then the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP 
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS)|
 
-    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons
+    @samIconsUHC  @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP 
     Examples: 
       | site | zipcode | plantype | planName                        |
       | AARP |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @samIconsUHC @regressionAARP @featureGate @uhcmedicareSAMIcons
+    @samIconsUHC  @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
@@ -649,12 +649,12 @@ Feature: ACQ M&R- To test SAM Icons
     And the user validates the chat icon
     And the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP 
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
 
-    @samIconsUHC @regressionUHC @featureGate @uhcmedicareSAMIcons
+    @samIconsUHC  @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
@@ -681,12 +681,12 @@ Feature: ACQ M&R- To test SAM Icons
     And the user clicks the plans of the below plan type
       | Plan Type | <planType> |
 
-    @samIconsAARP
+    @samIconsAARP 
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
 
-    @samIconsUHC @uhcmedicareSAMIcons
+    @samIconsUHC @uhcmedicareSAMIcons 
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
@@ -698,12 +698,12 @@ Feature: ACQ M&R- To test SAM Icons
       | pagename | <pagename> |
     Then the user validates the proactive chat
 
-    @ProactiveChatAARP @regressionAARP
+    @ProactiveChatAARP 
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @ProactiveChatAARP @regressionAARP @featureGate
+    @ProactiveChatAARP  @featureGate
     Examples: 
       | pagename                                                 | site |
       | profile/guest                                            | AARP |
@@ -732,7 +732,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/medication-therapy-management-program.html     | AARP |
       | resources/how-to-appoint-a-representative.html           | AARP |
 
-    @ProactiveChatAARP
+    @ProactiveChatAARP 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP |
@@ -972,12 +972,12 @@ Feature: ACQ M&R- To test SAM Icons
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons
+    @ProactiveChatUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons
+    @ProactiveChatUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -1010,7 +1010,7 @@ Feature: ACQ M&R- To test SAM Icons
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @ProactiveChatUHC @uhcmedicareSAMIcons
+    @ProactiveChatUHC @uhcmedicareSAMIcons 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -1254,12 +1254,12 @@ Feature: ACQ M&R- To test SAM Icons
     Then the user validates whether call icon is visible
     And the user validates the chat icon
 
-    @samIconsAARP @regressionAARP
+    @samIconsAARP 
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @samIconsAARP @regressionAARP @samIconsEmailExternal_01
+    @samIconsAARP  @samIconsEmailExternal_01
     Examples: 
       | pagename                                                           | site |
       | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650 | AARP |
@@ -1270,7 +1270,7 @@ Feature: ACQ M&R- To test SAM Icons
       | ?WT.mc_id=8027679&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027679    | AARP |
       | ?WT.mc_id=8027682&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027682    | AARP |
 
-    @samIconsAARP @regressionAARP @samIconsEmailExternal_02
+    @samIconsAARP  @samIconsEmailExternal_02
     Examples: 
       | pagename                                                                                                                                           | site |
       | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015755&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015755 | AARP |
@@ -1281,7 +1281,7 @@ Feature: ACQ M&R- To test SAM Icons
       | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8017352&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8017352 | AARP |
       | ?WT.mc_id=8027587&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027587                                                                                    | AARP |
 
-    @samIconsAARP @regressionAARP @samIconsEmailExternal_03
+    @samIconsAARP  @samIconsEmailExternal_03
     Examples: 
       | pagename                                                             | site |
       | ?WT.mc_id=8027588&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027588      | AARP |
@@ -1302,7 +1302,7 @@ Feature: ACQ M&R- To test SAM Icons
       | /?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 | AARP |
       | /?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 | AARP |
 
-    @samIconsUHC @regressionUHC @samIconsEmailExternal @uhcmedicareSAMIcons
+    @samIconsUHC  @samIconsEmailExternal @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                             | site |
       | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650   | UHC  |
