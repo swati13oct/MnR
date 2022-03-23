@@ -232,7 +232,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | Scenerio IS-4-UHCReferralTraffic - UMS Medsup 4.0 | BLayer |   90210 | MA         | MS4.0      |  832935 | Alabama | health-plans.html?WT.mc_id=832935&test_version=UMS&zipcode=90210#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-259-8119 | 1-866-462-4046 | 2RZ        | 1-866-603-3424    |
       
       
-      #######################Script 10: Source Code in URL ########################################
+      #######################Script 5: Source Code in URL ########################################
   @Scenario_5_SourceCodeInURL_UAT @UATRegression
   Scenario Outline: <scenario> <zipcode>1.0 Verify TFN and source code from URL
     Given the user Starts WebDriver
