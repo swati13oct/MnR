@@ -25,12 +25,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.commonpages.*;
 import pages.acquisition.ole.*;
+import pages.acquisition.ole.ProposedEffectiveDatePage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 
 /**
  * @author sdwaraka Functionality:OLE Common Tool for both AAPR and UHC
@@ -3621,18 +3619,24 @@ public class oleStepDefinition {
 	@Then("^the user validates Save and Return Later modal for OLE Page$")
 	public void the_user_save_and_return_later_OLE_pages() throws Throwable {
 		scenario.log("Sai - Change made 03/21- Validate to save return --");
-		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		//PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	//	OLECommonPages saveAndReturnLater = (OLECommonPages) getLoginScenario().getBean(OLE_PageConstants.OLE_COMMONPAGES);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPages saveAndReturnLater=new OLECommonPages(wd);
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-		personalInformationPage.OpensavereturnOLEPages();
+			saveAndReturnLater.OpensavereturnOLEPages();
 			System.out.println("OLE Save Return Later modal on OLE Pages");
 		}
 		}
 	@Then("^the user click on continue enrollment in visitor profile and navigate for OLE Page$")
 	public void the_user_validates_continue_enrollment_navigate_for_OLE_pages() throws Throwable {
 		scenario.log("Sai - Change made 03/21- Validate to save return  continue enrollment--");
-		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	//	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPages ContinueEnrollment=new OLECommonPages(wd);
+
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
@@ -3640,7 +3644,7 @@ public class oleStepDefinition {
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-			boolean Validation_Status = personalInformationPage.validateVPOLEDetails(PlanDetailsMap);
+			boolean Validation_Status = ContinueEnrollment.validateVPOLEDetails(PlanDetailsMap);
 			if (Validation_Status) {
 				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status + " - Validation Passed");
 				Assertion.assertTrue(true);
