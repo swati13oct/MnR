@@ -15,7 +15,9 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import org.testng.Assert;
 
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -116,10 +118,10 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 //	--- locators for scenario 5
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
+	@FindBy(xpath="(//input[contains(@id,'find-plans-zip-zipfinder')])[1]")
 	private WebElement zipcodeEnterFld;
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
+	@FindBy(xpath = "(//a[contains(@href,'#modal--zip-finder')])[1]")
 	private WebElement locateZipcodeLink;
 
 	@FindBy(xpath = "//span[contains(@class,'link-text') and contains(text(),'Medicare Supplement')]")
@@ -127,8 +129,14 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@href,'/medicare-plans.html')]")
 	private WebElement getHelpFindingPlanBtn;
+	
+	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
+	private WebElement rightRailSectionTFNHeaderMedsupp;
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
+	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
+	private WebElement rightRailSectionTFNHeaderMedsupp1;
+
+	@FindBy(xpath = "(//button[contains(text(),'Find a Plan')])[1]")
 	private WebElement findPlanSubmitBtn;
 
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
@@ -136,6 +144,18 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
 	private WebElement accessibilitylink;
+	
+	@FindBy(xpath = "(//div[@class='uhc-container']//h2)[1]")
+	private WebElement rightRailSectionTFNHeader;
+	
+	@FindBy(xpath = "//div[@class='label-icon']//following-sibling::div/div")
+	private WebElement rightRailsectionTFNtimezone;
+	
+	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
+	private WebElement rightRailSectionTFNHeader1;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[3]")
+	private WebElement footertextsectioncallus;
 
 	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
 	private WebElement footerInfo;
@@ -685,12 +705,31 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		}
 	}
 	
+	public void goBacktoExternalPage(String url) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		driver.navigate().to(url);
+		sleepBySec(2);
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+	
+	public VPPPlanSummaryPageMobile validateVPPEntryPage() {
+		if (driver.getCurrentUrl().contains("/health-plans/")
+				|| driver.getCurrentUrl().contains("/health-plans.html")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+	
 	public AcquisitionHomePageMobile validateShopForPlanLoaded() {
 		if (driver.getCurrentUrl().contains("WT.mc_id=8012869")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new AcquisitionHomePageMobile(driver, true);
+		} else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePageMobile(driver);
-		}
-		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+		} else if (driver.getCurrentUrl().contains("health-plans.html")
+				|| driver.getCurrentUrl().contains("/health-plans/")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePageMobile(driver);
 		}
@@ -888,6 +927,72 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		validateNew(footerInfo);
 	}
 	
+	public void validateTFNNoonRightRailFromExternal(String TFNXpath, String ExpecetdTFNNo)
+			throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+		// checkModelPopup(driver, 10);
+		// CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at (TTY 711)";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ")
+				.replaceAll("[0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9] ", "");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validate(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+		 * System.out.println("TFN is Displayed on Right Rail on the Page : " +
+		 * ActualTFNelement.getText()); else Assert.
+		 * fail("TFN element is not found / displayed on Right rail on the page : ");
+		 */
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m.,\n7 days a week";
+		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a
+		// week";
+		// String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
+		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************TFN Timezone Content was  found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
+	}
+	
 	public void navigateBacktoExternalurl(String url) {
 		// TODO Auto-generated method stub
 		start(url);
@@ -1006,11 +1111,63 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		waitForPageLoadSafari();
 		checkModelPopup(driver, 10);
 
-		validateNew(vppTop, 30);
+		//validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
 			return null;
+	}
+	
+	public void validateTFNNoonRightRailforMSExternal(String TFNXpath, String ExpecetdTFNNo) {
+
+		CommonUtility.checkPageIsReady(driver);
+		// checkModelPopup(driver, 10);
+
+		System.out.println("########Validating TFN Info in RIght Rail section for Medsupp########");
+
+		if (validate(rightRailSectionTFNHeaderMedsupp)) {
+			scrollToView(rightRailSectionTFNHeaderMedsupp);
+			System.out.println(rightRailSectionTFNHeaderMedsupp.getText());
+			System.out.println(rightRailSectionTFNHeaderMedsupp1.getText());
+		}
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+		 * System.out.println("TFN is Displayed on Right Rail on the Page : " +
+		 * ActualTFNelement.getText()); else Assert.
+		 * fail("TFN element is not found / displayed on Right rail on the page : ");
+		 */
+
+		// String ActualCallSamTFNtimezone =
+		// rightRailsectionTFNtimezoneMedsupp.getText();
+
+		/*
+		 * String ExpectedCallSamTFNtimezone =
+		 * "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
+		 * = rightRailsectionTFNtimezone.getText();
+		 * 
+		 * System.out.
+		 * println("########Validating TFN Time zone in Right Rail section for Medsupp#####"
+		 * ); System.out.println("Expected TFN time zone: " +
+		 * ExpectedCallSamTFNtimezone); System.out.println("Actual TFN time zone: " +
+		 * ActualCallSamTFNtimezone);
+		 * 
+		 * if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone Content was found matching with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone Content was not found matching with the SAM call Popup  ***************"
+		 * );
+		 */
+
 	}
 
 	public VPPPlanSummaryPageMobile searchPlanswithCountyForMorganStanley(String zipcode, String countyName) {
@@ -1454,12 +1611,11 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	//https://www.uhc.com/legal/accessibility
 
 	public void validatePrivacy() {
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(PrivacyPolicy);
-		String parentwindow=driver.getWindowHandle();
-		jsClickNew(PrivacyPolicy);
-		//PrivacyPolicy.click();
-		//switchToNewTab();
-		//CommonUtility.waitForPageLoadNew(driver, Heading, 30);
+		String parentwindow = driver.getWindowHandle();
+		switchToNewTabNew(PrivacyPolicy);
+		CommonUtility.waitForPageLoadNew(driver, Heading, 30);
 		Assert.assertEquals("Privacy Policy", Heading.getText());
 		driver.close();
 		driver.switchTo().window(parentwindow);
@@ -1473,6 +1629,14 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 //		Accessibility.click();
 //		switchToNewTab();
 		threadsleep(8);
+		Set<String> handles = driver.getWindowHandles();
+		System.out.println(handles);
+		for(String handle1:handles)
+		    if(!parentwindow.equals(handle1))
+		    {
+		        driver.switchTo().window(handle1);
+		        System.out.println(handle1);
+		    }
 		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
 		driver.close();
 		driver.switchTo().window(parentwindow);
@@ -1480,39 +1644,36 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public void validateErrorMsgtakeadvantage() {
 		threadsleep(8);
-		validateNew(GetMoreInformation);
-		GetMoreInformation.click();
+		validateNew(RequestAnAppointMent);
+		jsClickNew(RequestAnAppointMent);
 		threadsleep(8);
-		scrollToView(ReqAppsubmitBtn);
 		validateNew(ReqAppsubmitBtn);
 		ReqAppsubmitBtn.click();
 		threadsleep(8);
-		scrollToView(FirstNameErroMsg);
 		validateNew(FirstNameErroMsg);
-		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
-		scrollToView(LastNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes",
+				FirstNameErroMsg.getText());
 		validateNew(LastNameErroMsg);
-		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
-		scrollToView(AddressErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes",
+				LastNameErroMsg.getText());
 		validateNew(AddressErroMsg);
-		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
-		scrollToView(CityErroMsg);
+		Assert.assertEquals(
+				"Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space",
+				AddressErroMsg.getText());
 		validateNew(CityErroMsg);
-		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
-		scrollToView(SelectStateErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space",
+				CityErroMsg.getText());
 		validateNew(SelectStateErroMsg);
 		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
-		scrollToView(ZipErroMsg);
 		validateNew(ZipErroMsg);
 		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
-		scrollToView(EmailErroMsg);
 		validateNew(EmailErroMsg);
 		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
-		scrollToView(PhoneErroMsg);
 		validateNew(PhoneErroMsg);
-		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		// Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter 10
+		// digit valid Phone Number"));
 		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
-		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@" + PhoneErroMsg.getText());
 
 	}
 
@@ -1547,28 +1708,29 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	
 	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(LocationLink);
+		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
 		LocationLink.click();
+		threadsleep(8);
+		InputZipCode.clear();
+		//InputZipCode.sendKeys(zipcodeMulti);
+		sendkeysMobile(InputZipCode, zipcodeMulti);
+		jsClickNew(LocationBtn);
+		FirstZipCode.click();
+		jsClickNew(LocationBtn);
+		driver.navigate().refresh();
+		validateNew(LocationLink);
+		jsClickNew(LocationLink);
 		threadsleep(5);
 		validateNew(LocationBtn);
 		LocationBtn.click();
 		threadsleep(5);
 		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
 		InputZipCode.clear();
-		InputZipCode.sendKeys(zipcodeSingle);
+		//InputZipCode.sendKeys(zipcodeSingle);
+		sendkeysMobile(InputZipCode, zipcodeSingle);
 		threadsleep(8);
 		LocationBtn.click();
 		threadsleep(8);
-		driver.navigate().refresh();
-		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
-		LocationLink.click();
-		threadsleep(8);
-		InputZipCode.clear();
-		InputZipCode.sendKeys(zipcodeMulti);
-		jsClickNew(LocationBtn);
-		FirstZipCode.click();
-		jsClickNew(LocationBtn);
-		
 			
 	}
 
@@ -1627,7 +1789,9 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			waitforElementNew(viewPricingBtn);
 			viewPricingBtn.click();
 			threadsleep(4);
-			waitforElementNew(samTfn);
+			if (!driver.getCurrentUrl().contains("health-plan")) {
+				Assert.fail("VPP not opened successfully");
+			}
 			
 		}
 
