@@ -596,6 +596,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
 
 	private static String AARP_TELESALES_AGENT_PAGE_URL = MRConstants.AARP_TELESALES_AGENT_PAGE_URL;
 	private static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE;
@@ -1106,6 +1107,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNewMobile(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
+			}else if (MRScenario.environment.contains("chargers-uhc")) {
+					startNewMobile(UMS_ACQISITION_CHARGERS_UHC_URL);
+					checkModelPopup(driver, 20); 
+				
 			} else {
 				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
