@@ -83,6 +83,21 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_7 | AARP |
 
+    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_8 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_9 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_10 | AARP |
+
     @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
