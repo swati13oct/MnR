@@ -148,9 +148,15 @@ public class OLECommonPages extends UhcDriver{
 
 		WebElement ContinueEnrollment = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]//following::button[1]"));
 		jsClickNew(ContinueEnrollment);
-		if (driver.getCurrentUrl().contains("language-preference")){
+		if (driver.getCurrentUrl().contains("language-preference")  || driver.getCurrentUrl().contains("special-election-period")
+				||driver.getCurrentUrl().contains("effective-date") ||driver.getCurrentUrl().contains("provider-search")
+				||driver.getCurrentUrl().contains("monthly-premium") ||driver.getCurrentUrl().contains("authorization")
+				||driver.getCurrentUrl().contains("statement-of-understanding")
+				//||driver.getCurrentUrl().contains("review")
+		){
 
-			validateNew(ContinueEnrollment_LanguagePage);
+			//validateNew(ContinueEnrollment_LanguagePage);
+			validateNew(PageHeader);
 		}
 		System.out.println("user is not navigated back to OLE Page");
 
