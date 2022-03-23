@@ -94,11 +94,8 @@ public class DCEPlanValidationStepDefinition {
             System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
             HSSFRow resultsRowNew = null;
             //Looping over total rows with values
-            for(int rowIndex=0; rowIndex<=5; rowIndex++)
+            for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
             {
-                if(rowIndex == 3){
-                    System.out.println(rowIndex);
-                }
 
                 int failureCounter = 0, mcareFailureCounter = 0;
                 int cellIndex = 0;
