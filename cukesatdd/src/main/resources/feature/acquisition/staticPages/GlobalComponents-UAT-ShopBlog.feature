@@ -1,7 +1,7 @@
-@UATRegression @F448210 @globalComponent
+@UATRegression @F448210 @staticPages
 Feature: 1.13 UAT - Shop Blog Pages flows
 
-  @GlobalComponentsAARPShopPages
+  
   Scenario Outline: <Scenario> : To verify Zip code and Agent link for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
