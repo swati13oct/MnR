@@ -87,12 +87,12 @@ public class OLECommonPages extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-
+		System.out.println("Validating OLE Page is loading");
 		//CommonUtility.waitForPageLoadNew(driver, PageHeader, 10);
-	if(validateNew(PageHeader) || validateNew(SignInHeader)){
+		/*	if(validateNew(PageHeader) || validateNew(SignInHeader)){
 
 		System.out.println("Validating OLE Page is loading");
-		}
+		}*/
 	}
 
 	public SaveandReturnOLEModal OpensavereturnOLEPages() {
