@@ -3665,7 +3665,7 @@ public class oleStepDefinition {
 		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-
+		PlanDetailsMap.put("SiteName", (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME));
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")
 				//	|| MRScenario.environment.equalsIgnoreCase("team-acme")

@@ -532,7 +532,11 @@ public class OLEconfirmationPage extends UhcDriver{
 	}
 
 	@FindBy(xpath = "//*[contains(@class,'uhc-header__logo aarpLogo')]")
-	private WebElement LogoImageConfirmationPage;
+	private WebElement LogoImageConfirmationPageAARP;
+
+	@FindBy(xpath = "(//*[contains(@class,'uhc-header__logo uhcLogo')])[1]")
+	private WebElement LogoImageConfirmationPageUHC;
+
 
 	@FindBy(xpath = "//*[contains(text(),'My Saved Items ')]")
 	private WebElement MySavedPlans;
@@ -545,12 +549,19 @@ public class OLEconfirmationPage extends UhcDriver{
 		boolean flag = false;
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String site = planDetailsMap.get("SiteName");
+
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_Premium1=Expected_Premium.substring(16,20).replace(".","").trim();
 		//-------User Clicked on Logo image on AARP OR UHC Site confirmation page
-
-		validateNew(LogoImageConfirmationPage);
-		jsClickNew(LogoImageConfirmationPage);
+	if(site.contains("AARP")) {
+	validateNew(LogoImageConfirmationPageAARP);
+	jsClickNew(LogoImageConfirmationPageAARP);
+	}
+		else{
+	validateNew(LogoImageConfirmationPageUHC);
+	jsClickNew(LogoImageConfirmationPageUHC);
+		}
 		//-----
 		validateNew(MySavedPlans);
 		if (MySavedPlans.isDisplayed()) {
