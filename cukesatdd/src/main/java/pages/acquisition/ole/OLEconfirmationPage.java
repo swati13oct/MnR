@@ -534,7 +534,11 @@ public class OLEconfirmationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'uhc-header__logo aarpLogo')]")
 	private WebElement LogoImageConfirmationPage;
 
+	@FindBy(xpath = "//*[contains(text(),'My Saved Items ')]")
+	private WebElement MySavedPlans;
 
+	@FindBy(xpath = "(//*[contains(text(),'View Saved Items')])[2]")
+	private WebElement ViewSavedItems;
 
 	public boolean ValidateOLESubmittedDetailsonVP(Map<String, String> planDetailsMap) {
 
@@ -548,6 +552,11 @@ public class OLEconfirmationPage extends UhcDriver{
 		validateNew(LogoImageConfirmationPage);
 		jsClickNew(LogoImageConfirmationPage);
 		//-----
+		validateNew(MySavedPlans);
+		if (MySavedPlans.isDisplayed()) {
+			jsMouseOver(MySavedPlans);
+			jsClickNew(ViewSavedItems);
+		}
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("authenticated")) {
 			WebElement SubmittedPlanNameVP = driver.findElement(By.xpath("//*[contains(text(),'" + Expected_PlanName + "')]"));
