@@ -58,12 +58,15 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.OLECommonPages;
+import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPageNew;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.vpp.VppCommonPage;
+import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 
 /**
@@ -5202,4 +5205,59 @@ public class VppCommonStepDefinition {
 		plansummaryPage.clickCloseMSApplication();
 	}
 	
+	@Then("^user Validates Show DSNP and PDP Link available")
+	public void user_Validates_Show_DSNP_and_PDP_Link_available(){
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateShowDSNPPDPLink();
+		
+	}
+	
+	@Then("^user clicks on Show DSNP Toggle and validate DSNP Plan")
+	public void user_clicks_on_Show_DSNP_Toggle_and_validate_DSNP_Plan(DataTable givenAttributes) throws Exception{
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickDSNPToggleValidateSNPPlan(memberAttributesMap);
+		
+	}
+	
+	@Then("^User Click on PDP Link and Validate PDP Plans are loaded")
+	public void User_Click_on_PDP_Link_and_Validate_PDP_Plans_are_loaded(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickPDPValidatePDPPlan(memberAttributesMap);
+	}
+	
+	@Then("^User Switch backs to MAPD Plans")
+	public void User_Switch_backs_to_MAPD_Plans(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickMAPDValidateMAPDPlan(memberAttributesMap);
+		
+	}
+
+	@And("^the user signIn with optum Id for OLE$")
+	public void the_user_signIn_with_optum_Id_OLE(DataTable credentials) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+			//PersonalInformationPage SignIntoEnrollment = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			OLECommonPages SignIntoEnrollment=new OLECommonPages(wd);
+
+			SignIntoEnrollment.signInOLE(username, password);
+		}
+
+	}
 }

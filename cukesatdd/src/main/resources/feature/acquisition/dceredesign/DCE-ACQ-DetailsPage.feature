@@ -220,7 +220,7 @@ Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Pa
       | vigabatrin | Fanapt | 33111   | SNP      | MedicareMax Plus 1 (HMO D-SNP) | UHC  | Standard Retail | Standard Mail    | 80002                | US BIOSERVICES    | insulin lispro | $15          | $35           |
 
   @dce_DrugDetailsPremiumValidation
-  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>
+  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<planType> for premium - <premium>
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

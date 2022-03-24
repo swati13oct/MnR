@@ -1552,5 +1552,4 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Return to profile not displayed");
 		}
 	}
-
 }

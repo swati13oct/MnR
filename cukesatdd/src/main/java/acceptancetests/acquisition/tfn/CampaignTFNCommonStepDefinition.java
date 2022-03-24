@@ -19,6 +19,7 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -191,7 +192,15 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
-		tfnPage.googleSearchAARP();
+		if(MRScenario.environment.equalsIgnoreCase("Stage")) {
+			tfnPage.updateURLGoogleSearchAARP("Stage");
+		}else if (MRScenario.environment.equalsIgnoreCase("Offline")) {
+			tfnPage.updateURLGoogleSearchAARP("Offline");
+		}
+		else {
+			tfnPage.googleSearchAARP();
+		}
+		
 
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	}
@@ -222,8 +231,14 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
-		tfnPage.BingSearchAARP();
-
+		if(MRScenario.environment.equalsIgnoreCase("Stage")) {
+			tfnPage.updateURLBingSearchAARP("Stage");
+		}else if (MRScenario.environment.equalsIgnoreCase("Offline")) {
+			tfnPage.updateURLBingSearchAARP("Offline");
+		}
+		else {
+			tfnPage.BingSearchAARP();
+		}
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
 	}
@@ -238,8 +253,14 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
+		if(MRScenario.environment.equalsIgnoreCase("Stage")) {
+			tfnPage.updateURLGoogleSearchUHC("Stage");
+		}else if (MRScenario.environment.equalsIgnoreCase("Offline")) {
+			tfnPage.updateURLGoogleSearchUHC("Offline");
+		}
+		else {
 		tfnPage.googleSearchUHC();
-
+		}
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	}
 
@@ -252,7 +273,15 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
-		tfnPage.YahooSearchUHC();
+		if(MRScenario.environment.equalsIgnoreCase("Stage")) {
+			tfnPage.updateURLYahooSearchUHC("Stage");
+		}else if (MRScenario.environment.equalsIgnoreCase("Offline")) {
+			tfnPage.updateURLYahooSearchUHC("Offline");
+		}
+		else {
+			tfnPage.YahooSearchUHC();
+		}
+
 
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
@@ -266,7 +295,15 @@ public class CampaignTFNCommonStepDefinition {
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
-		tfnPage.BingSearchUHC();
+		if(MRScenario.environment.equalsIgnoreCase("Stage")) {
+			tfnPage.updateURLBingSearchUHC("Stage");
+		}else if (MRScenario.environment.equalsIgnoreCase("Offline")) {
+			tfnPage.updateURLBingSearchUHC("Offline");
+		}
+		else {
+			tfnPage.BingSearchUHC();
+		}
+		
 
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
@@ -1593,5 +1630,25 @@ public class CampaignTFNCommonStepDefinition {
 		} else
 			tfnPage.clickStartMS3OlePlanCompare();
 
+	}
+	
+	@Then("^the user enter zipcode in plan search page$")
+	public void the_user_enter_zipcode_in_plan_search_page(DataTable attributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = attributes.getGherkinRows(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String PlanType = memberAttributesMap.get("Plan Type");
+		AcquisitionHomePage acqusitionHomePage=new AcquisitionHomePage(driver);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		String Zip = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPage plansummaryPage=tfnPage.planSearch(Zip);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
 }
