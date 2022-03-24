@@ -2484,4 +2484,37 @@ public void clickMAPDValidateMAPDPlan(Map<String, String> memberAttributesMap) {
 	}
     System.out.println("Validated MAPD Plan");
 }
+	@FindBy(xpath = "//a[@id='ms-plans-link']")
+	WebElement lnkAgentMedSupCompare;
+
+	@FindBy(xpath = "//a[@id='fed-plans-link']")
+	WebElement lnkAgentMAPDCompare;
+
+	@FindBy(xpath = "//div[contains(@class,'ms-plans-section')]")
+	WebElement agentMedSupCompareTable;
+
+
+	public void validateAgentMedSupCompareLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(lnkAgentMAPDCompare,15);
+		validateNew(lnkAgentMedSupCompare,15);
+		jsClickNew(lnkAgentMedSupCompare);
+		sleepBySec(15);
+		if (!agentMedSupCompareTable.isDisplayed() && validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Basic Costs')]")))){
+			Assert.fail("MS Compare not visible on Agent Plan Compare");
+		}
+	}
+
+	public void validateAgentMAPDCompareLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(4);
+		jsClickNew(lnkAgentMAPDCompare);
+		sleepBySec(15);
+		if (validateNew(ChangeZipCodeLink,15)){
+			validateShowDSNPPDPLink();
+			System.out.println("MAPD Plan Compare link working correctly");
+		}else{
+			Assert.fail("MAPD Plan Compare link not working correctly");
+		}
+	}
 }
