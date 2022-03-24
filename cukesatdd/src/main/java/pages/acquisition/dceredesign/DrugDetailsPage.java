@@ -1677,7 +1677,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Initial Coverage Stage')]//parent::div")
 	public WebElement LIS_CopayHeader;
 
-	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
+	@FindBy(xpath = "//h3[contains(text(), 'Initial Coverage Stage')]//following-sibling::*[contains(text(), 'All covered drugs:')]")
 	public WebElement LIS_BuyDown_Copay;
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//parent::div")
