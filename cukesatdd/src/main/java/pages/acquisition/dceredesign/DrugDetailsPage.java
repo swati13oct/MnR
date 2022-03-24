@@ -670,15 +670,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
 		List<WebElement> Tier1Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 1')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 1')]"));
 		List<WebElement> Tier2Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 2')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 2')]"));
 		List<WebElement> Tier3Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 3')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 3')]"));
 		List<WebElement> Tier4Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 4')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 4')]"));
 		List<WebElement> Tier5Drugs = driver.findElements(
-				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 5')]"));
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//*[contains(text(), 'Tier 5')]"));
 		List<WebElement> NotCoveredDrugs = driver.findElements(By.xpath(
 				"//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Not Covered')]"));
 		List<WebElement> PADrugs = driver.findElements(By.xpath(
