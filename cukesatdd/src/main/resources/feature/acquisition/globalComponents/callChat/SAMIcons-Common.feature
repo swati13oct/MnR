@@ -134,7 +134,7 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
-                                                                                                                                                                                                                                                                                  | UHC  |
+                                                                                                                                                                                                                                                                                  
 
   Scenario Outline: To test the SAM icons on Acq site from External Email Campaign <site> <pagename>
     Given the user is on medicare acquisition site landing page
