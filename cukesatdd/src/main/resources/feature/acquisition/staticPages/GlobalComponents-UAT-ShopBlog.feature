@@ -841,4 +841,106 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                          | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                                | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-      
+     
+     
+  Scenario Outline: To verify the components present on the Shop page on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers screen over the shop for a plan
+    Then the user clicks on the Shop link and lands on the shop page
+    Then the user clicks on the Shop button for Medicare Advantage Plan and navigates to MA plans page
+    Then the user clicks on browser back button
+    Then the user clicks on the Shop button for Prescription Drugs Plan and navigates to PDP plans page
+    Then the user clicks on browser back button
+    Then the user clicks on the Shop button for Medicare DSNP Plan and navigates to DSNP plans page
+    Then the user clicks on browser back button
+    Then the user clicks on Compare Plans button and navigate to Shop Plan Compare Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn button and navigate to Shop Plan Estimate Costs Page
+    Then the user clicks on browser back button
+    Then the user clicks on How To button and navigate to Shop Plan Switch Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn More button and navigate to Safe Shopping Page
+    Then the user clicks on browser back button
+    Then the user clicks on Get Resources button and navigate to Member Resources Page
+    Then the user clicks on browser back button
+    Then the user validates Personalize Your Results section in Shop page
+    Then the user clicks on Check Drug Costs button and navigate to DCE Page
+    Then the user clicks on browser back button
+    Then the user clicks on Locate a Pharmacy button and navigate to Pharmacy Page
+    Then the user clicks on browser back button
+    Then the user clicks on Find a Provider button and navigate to Werally Page
+    Then the user validate ZipCode Components on Shop pages using ZipCode "10001"
+    Then the user clicks on Agent link and validates the correct URL is loaded from article page
+      | UHC Agent URL | <UHCUrl> |
+    Then the user validates TFN on the page
+      | TFNxpath | <tfnXpath> |
+      | TFNflag  | <tfnFlag>  |
+    Then the user validates whether call icon is visible
+
+     @regressionAARP @avengersRegressionAARP @featureGate
+    Examples: 
+      | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
+      | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
+
+     @regressionUHC @avengersRegressionUHC @uhcmedicare
+    Examples: 
+      | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
+      | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
+
+
+  Scenario Outline: To verify the components present on the Enroll page on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers screen over the shop for a plan
+    Then the user click on Enroll link and lands on Enroll Page
+    Then the user clic	Enroll Page
+    Then the user clicks on browser back button
+    Then the user click on PDP Enroll Start button on Enroll Page
+    Then the user clicks on browser back button
+    Then the user click on MedSupp Enroll Start button on Enroll Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn About Eligibility link on Enroll Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn About Enrollment link on Enroll Page
+
+     @avengersRegressionAARP @regressionAARP
+    Examples: 
+      | site |
+      | AARP |
+
+     @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples: 
+      | site |
+      | UHC  |
+
+  
+  Scenario Outline: To verify the components present on the Resources page on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers screen over the shop for a plan
+    Then the user clicks on Member Resources link and lands on Resource Page
+    Then the user clicks on Search Now button to land on Plan Doc search Page
+    Then the user clicks on browser back button
+    Then user click on Find Information button and Plan Info page
+    Then the user clicks on browser back button
+    Then user click on Plan Benefit link
+    Then the user clicks on browser back button
+    Then user click on Wellness Resources link
+    Then the user clicks on browser back button
+    Then user click on Clinical Program link
+    Then the user clicks on browser back button
+    Then user click on Learn more link for mail order pharmacy
+    Then the user clicks on browser back button
+    Then user click on Get Informed button for Preventing Medical Fraud link
+    Then the user clicks on browser back button
+
+     @avengersRegressionAARP @regressionAARP
+    Examples: 
+      | site |
+      | AARP |
+
+     @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples: 
+      | site |
+      | UHC  |   

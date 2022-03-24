@@ -9,72 +9,72 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     Then the user validates whether call icon is visible
     And the user validates whether chat icon is visible
 
-    @samIconsAARP @regressionAARP  @flagsmithTestScenario
+#    @samIconsAARP @regressionAARP  @flagsmithTestScenario
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @samIconsAARP @regressionAARP  @featureGate
+#    @samIconsAARP @regressionAARP  @featureGate
     Examples: 
       | pagename                                                 | site |
-      | profile/guest                                            | AARP |
-      | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English | AARP |
+#      | profile/guest                                            | AARP |
+ #     | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English | AARP |
       #|about-us.html|AARP|
-      | sitemap.html                                             | AARP |
-      | terms-of-use.html                                        | AARP |
-      | disclaimer.html                                          | AARP |
-      | contact-us.html                                          | AARP |
-      | privacy-policy.html                                      | AARP |
+ #     | sitemap.html                                             | AARP |
+#      | terms-of-use.html                                        | AARP |
+ #     | disclaimer.html                                          | AARP |
+ #     | contact-us.html                                          | AARP |
+#      | privacy-policy.html                                      | AARP |
       | medicare-articles.html                                   | AARP |
-      | medicare-education/medicare-advantage-plans.html         | AARP |
-      | medicare-education/medicare-supplement-plans.html        | AARP |
-      | medicare-education/medicare-faq.html                     | AARP |
-      | medicare-education.html                                  | AARP |
-      | shop.html                                                | AARP |
-      | shop/connect                                             | AARP |
-      | shop/compare.html                                        | AARP |
-      | shop/estimate.html                                       | AARP |
-      | shop/switch.html                                         | AARP |
-      | shop/medicare-advantage-plans.html                       | AARP |
-      | shop/medicare-supplement-plans.html                      | AARP |
-      | enroll.html                                              | AARP |
-      | enroll/ma-enrollment.html                                | AARP |
-      | resources.html                                           | AARP |
+ #     | medicare-education/medicare-advantage-plans.html         | AARP |
+#      | medicare-education/medicare-supplement-plans.html        | AARP |
+#      | medicare-education/medicare-faq.html                     | AARP |
+#      | medicare-education.html                                  | AARP |
+#      | shop.html                                                | AARP |
+#      | shop/connect                                             | AARP |
+ #     | shop/compare.html                                        | AARP |
+#      | shop/estimate.html                                       | AARP |
+#      | shop/switch.html                                         | AARP |
+#      | shop/medicare-advantage-plans.html                       | AARP |
+#      | shop/medicare-supplement-plans.html                      | AARP |
+#      | enroll.html                                              | AARP |
+#      | enroll/ma-enrollment.html                                | AARP |
+#      | resources.html                                           | AARP |
       | resources/medication-therapy-management-program.html     | AARP |
       | resources/how-to-appoint-a-representative.html           | AARP |
 
-    @samIconsAARP @regressionAARP 
+ #   @samIconsAARP @regressionAARP 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
-      | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP |
-      | medicare-education/medicare-parts-and-medigap-plans.html                                                                                                                                                                                                                                                                      | AARP |
-      | medicare-education/medicare-benefits.html                                                                                                                                                                                                                                                                                     | AARP |
-      | medicare-education/medicare-part-d.html                                                                                                                                                                                                                                                                                       | AARP |
-      | medicare-education/medicare-costs.html                                                                                                                                                                                                                                                                                        | AARP |
-      | medicare-education/when-to-enroll.html                                                                                                                                                                                                                                                                                        | AARP |
+ #     | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP |
+ #     | medicare-education/medicare-parts-and-medigap-plans.html                                                                                                                                                                                                                                                                      | AARP |
+ #     | medicare-education/medicare-benefits.html                                                                                                                                                                                                                                                                                     | AARP |
+ #     | medicare-education/medicare-part-d.html                                                                                                                                                                                                                                                                                       | AARP |
+ #     | medicare-education/medicare-costs.html                                                                                                                                                                                                                                                                                        | AARP |
+ #     | medicare-education/when-to-enroll.html                                                                                                                                                                                                                                                                                        | AARP |
       | medicare-education/medicare-medicaid-dual-eligibility.html                                                                                                                                                                                                                                                                    | AARP |
       | medicare-education/extra-help-program.html                                                                                                                                                                                                                                                                                    | AARP |
-      | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | AARP |
-      | shop/dual-special-needs-plans.html                                                                                                                                                                                                                                                                                            | AARP |
+#      | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | AARP |
+#      | shop/dual-special-needs-plans.html                                                                                                                                                                                                                                                                                            | AARP |
       | safe-shopping.html                                                                                                                                                                                                                                                                                                            | AARP |
-      | shop/compare/compare-pdp.html                                                                                                                                                                                                                                                                                                 | AARP |
-      | shop/compare/compare-ma.html                                                                                                                                                                                                                                                                                                  | AARP |
-      | shop/estimate/ma-costs.html                                                                                                                                                                                                                                                                                                   | AARP |
-      | shop/estimate/pdp-costs.html                                                                                                                                                                                                                                                                                                  | AARP |
-      | shop/medicare-advantage-plans/wellness-discounts.html                                                                                                                                                                                                                                                                         | AARP |
-      | shop/medicare-advantage-plans/health-care-management.html                                                                                                                                                                                                                                                                     | AARP |
+#      | shop/compare/compare-pdp.html                                                                                                                                                                                                                                                                                                 | AARP |
+ #     | shop/compare/compare-ma.html                                                                                                                                                                                                                                                                                                  | AARP |
+ #     | shop/estimate/ma-costs.html                                                                                                                                                                                                                                                                                                   | AARP |
+#     | shop/estimate/pdp-costs.html                                                                                                                                                                                                                                                                                                  | AARP |
+#      | shop/medicare-advantage-plans/wellness-discounts.html                                                                                                                                                                                                                                                                         | AARP |
+#      | shop/medicare-advantage-plans/health-care-management.html                                                                                                                                                                                                                                                                     | AARP |
       | shop/medicare-advantage-plans/ma-plan-benefits.html                                                                                                                                                                                                                                                                           | AARP |
-      | shop/renew-active.html                                                                                                                                                                                                                                                                                                        | AARP |
+#      | shop/renew-active.html                                                                                                                                                                                                                                                                                                        | AARP |
       | shop/medicare-advantage-veteran-plan.html                                                                                                                                                                                                                                                                                     | AARP |
-      | shop/estimate/ms-costs.html                                                                                                                                                                                                                                                                                                   | AARP |
-      | shop/compare/compare-ma-ms.html                                                                                                                                                                                                                                                                                               | AARP |
-      | shop/compare/compare-ms.html                                                                                                                                                                                                                                                                                                  | AARP |
-      | enroll/pdp-enrollment.html                                                                                                                                                                                                                                                                                                    | AARP |
-      | enroll/ms-apply.html                                                                                                                                                                                                                                                                                                          | AARP |
+ #     | shop/estimate/ms-costs.html                                                                                                                                                                                                                                                                                                   | AARP |
+ #     | shop/compare/compare-ma-ms.html                                                                                                                                                                                                                                                                                               | AARP |
+ #     | shop/compare/compare-ms.html                                                                                                                                                                                                                                                                                                  | AARP |
+#      | enroll/pdp-enrollment.html                                                                                                                                                                                                                                                                                                    | AARP |
+#      | enroll/ms-apply.html                                                                                                                                                                                                                                                                                                          | AARP |
       | resources/prescription-drug-costs-help.html                                                                                                                                                                                                                                                                                   | AARP |
       | resources/healthcare-fraud.html                                                                                                                                                                                                                                                                                               | AARP |
       | resources/how-to-pay-your-premium.html                                                                                                                                                                                                                                                                                        | AARP |
-      | resources/mail-order-pharmacy.html                                                                                                                                                                                                                                                                                            | AARP |
+#      | resources/mail-order-pharmacy.html                                                                                                                                                                                                                                                                                            | AARP |
       | resources/prescription-drug-appeals.html                                                                                                                                                                                                                                                                                      | AARP |
       | resources/prescription-drug-transition.html                                                                                                                                                                                                                                                                                   | AARP |
       | resources/disenrollment-information.html                                                                                                                                                                                                                                                                                      | AARP |
@@ -283,12 +283,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @samIconsUHC @regressionUHC  @uhcmedicareSAMIcons
+#    @samIconsUHC @regressionUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @samIconsUHC @regressionUHC  @uhcmedicareSAMIcons
+#   @samIconsUHC @regressionUHC  @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -321,7 +321,7 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons 
+#    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -698,12 +698,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | pagename | <pagename> |
     Then the user validates the proactive chat
 
-    @ProactiveChatAARP @regressionAARP 
+#    @ProactiveChatAARP @regressionAARP 
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @ProactiveChatAARP @regressionAARP  @featureGate
+#    @ProactiveChatAARP @regressionAARP  @featureGate
     Examples: 
       | pagename                                                 | site |
       | profile/guest                                            | AARP |
@@ -732,7 +732,7 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | resources/medication-therapy-management-program.html     | AARP |
       | resources/how-to-appoint-a-representative.html           | AARP |
 
-    @ProactiveChatAARP @regressionAARP 
+#    @ProactiveChatAARP @regressionAARP 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | AARP |
@@ -972,12 +972,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | medicare-education/keep-or-change-coverage.html                                                                                                                                                                                                                                                                               | AARP |
       | resources/ma-pdp-information-forms.html                                                                                                                                                                                                                                                                                       | AARP |
 
-    @ProactiveChatUHC @regressionUHC  @uhcmedicareSAMIcons
+ #   @ProactiveChatUHC   @uhcmedicareSAMIcons
     Examples: 
       | pagename | site |
       | [blank]  | UHC  |
 
-    @ProactiveChatUHC @regressionUHC  @uhcmedicareSAMIcons
+#    @ProactiveChatUHC   @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                   | site |
       | profile/guest                                              | UHC  |
@@ -1010,7 +1010,7 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | resources/how-to-appoint-a-representative.html             | UHC  |
       | resources/prescription-drug-costs-help.html                | UHC  |
 
-    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons 
+#    @ProactiveChatUHC @regressionUHC @uhcmedicareSAMIcons 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site |
       | medicare-education/medicare-eligibility.html                                                                                                                                                                                                                                                                                  | UHC  |
@@ -1047,12 +1047,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | resources/ma-pdp-information-forms/member-rights.html                                                                                                                                                                                                                                                                         | UHC  |
       | resources/ma-pdp-information-forms/medicare-appeal.html                                                                                                                                                                                                                                                                       | UHC  |
       | resources/ma-pdp-information-forms/explanation-benefits.html                                                                                                                                                                                                                                                                  | UHC  |
-      | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
-      | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
-      | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
-      | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
-      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | UHC  |
-      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | UHC  |
+#      | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
+#      | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
+#      | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC  |
+#      | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC  |
+#      | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | UHC  |
+#      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | UHC  |
       | medicare-articles/medicare-benefits-and-coverage.html                                                                                                                                                                                                                                                                         | UHC  |
       | medicare-articles/medicare-costs.html                                                                                                                                                                                                                                                                                         | UHC  |
       | about-our-plans.html                                                                                                                                                                                                                                                                                                          | UHC  |
@@ -1254,12 +1254,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     Then the user validates whether call icon is visible
     And the user validates the chat icon
 
-    @samIconsAARP @regressionAARP 
+    @samIconsAARP 
     Examples: 
       | pagename | site |
       | [blank]  | AARP |
 
-    @samIconsAARP @regressionAARP  @samIconsEmailExternal_01
+    @samIconsAARP  @samIconsEmailExternal_01
     Examples: 
       | pagename                                                           | site |
       | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650 | AARP |
@@ -1270,18 +1270,18 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | ?WT.mc_id=8027679&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027679    | AARP |
       | ?WT.mc_id=8027682&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027682    | AARP |
 
-    @samIconsAARP @regressionAARP  @samIconsEmailExternal_02
+    @samIconsAARP  @samIconsEmailExternal_02
     Examples: 
       | pagename                                                                                                                                           | site |
-      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015755&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015755 | AARP |
-      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015756&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015756 | AARP |
-      | /medicare-articles/aep-change-or-renew.html?WT.mc_id=8015751&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015751                                          | AARP |
-      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015752&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015752 | AARP |
-      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8015753&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8015753 | AARP |
-      | /medicare-education/medicare-videos/medicare-prescription-drug-coverage-webinar.html?WT.mc_id=8017352&mrcid=em:Acq:MR%7CMMC%7CEGEM3561%7C::8017352 | AARP |
-      | ?WT.mc_id=8027587&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027587                                                                                    | AARP |
+			| ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650 | AARP |
+      | ?WT.mc_id=8027651&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027651 | AARP |
+      | ?WT.mc_id=8027652&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027652 | AARP |
+      | ?WT.mc_id=8027677&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027677    | AARP |
+      | ?WT.mc_id=8027678&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027678    | AARP |
+      | ?WT.mc_id=8027679&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027679    | AARP |
+      | ?WT.mc_id=8027682&mrcid=em:Acq:MR%7CAEP2%7CEGEM3545%7C::8027682    | AARP |
 
-    @samIconsAARP @regressionAARP  @samIconsEmailExternal_03
+    @samIconsAARP  @samIconsEmailExternal_03
     Examples: 
       | pagename                                                             | site |
       | ?WT.mc_id=8027588&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027588      | AARP |
@@ -1302,7 +1302,7 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
       | /?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 | AARP |
       | /?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 | AARP |
 
-    @samIconsUHC @regressionUHC  @samIconsEmailExternal @uhcmedicareSAMIcons
+    @samIconsUHC  @samIconsEmailExternal @uhcmedicareSAMIcons
     Examples: 
       | pagename                                                             | site |
       | ?WT.mc_id=8027650&mrcid=em:Acq:MR%7CWelcome%7CEGEM3543%7C::8027650   | UHC  |
