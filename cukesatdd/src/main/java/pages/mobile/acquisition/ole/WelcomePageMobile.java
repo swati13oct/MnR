@@ -678,6 +678,7 @@ public class WelcomePageMobile extends UhcDriver {
 		if (flag) {
 			flag = validateNew(Ridersoption_Yes) && validateNew(Ridersoption_No);
 			if (flag && riderflag.equalsIgnoreCase("true_yes")) {
+				sleepBySec(6);
 				jsClickNew(Ridersoption_Yes);
 				riderText = Ridersoption_Yes.getText().trim();
 			} else {

@@ -380,11 +380,17 @@ public class VisitorProfilePage extends UhcDriver {
     private WebElement btnPREGetStarted;
 
     @FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
-    WebElement btnReviewDrugs;
+    private WebElement btnReviewDrugs;
+    //WebElement btnReviewDrugs;
 
-    public VisitorProfilePage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
+//	@FindBy(xpath = "//*[@id='signInOptumID']")
+//	WebElement SignInHeader;
+
+
+
+	public VisitorProfilePage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
 
         openAndValidate();
     }
@@ -2166,5 +2172,7 @@ public class VisitorProfilePage extends UhcDriver {
             validateMSStartApplicationPage();
         }
     }
+
+
 }
 
