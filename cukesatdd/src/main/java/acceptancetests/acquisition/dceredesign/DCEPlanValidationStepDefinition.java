@@ -94,7 +94,7 @@ public class DCEPlanValidationStepDefinition {
             System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
             HSSFRow resultsRowNew = null;
             //Looping over total rows with values
-            for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+            for(int rowIndex=0; rowIndex<=2; rowIndex++)
             {
 
                 int failureCounter = 0, mcareFailureCounter = 0;
@@ -160,8 +160,6 @@ public class DCEPlanValidationStepDefinition {
                                 ||currentColName.equalsIgnoreCase("ZipCode")
                                 ||currentColName.equalsIgnoreCase("Fips")
                                 ||currentColName.equalsIgnoreCase("Annual Prescription Deductible")
-                                ||currentColName.equalsIgnoreCase("Coverage Gap Stage")
-                                ||currentColName.equalsIgnoreCase("Catastrophic Coverage Stage")
                                 ||currentColName.equalsIgnoreCase("Tier 1 Standard Mail Order")
                                 ||currentColName.equalsIgnoreCase("Tier 2 Standard Mail Order")
                                 ||currentColName.equalsIgnoreCase("Tier 3 Standard Mail Order")

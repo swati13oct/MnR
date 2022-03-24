@@ -232,17 +232,17 @@ public class DCEDetailsPage extends UhcDriver {
         result.put("Plan Name", planName.getText());
         result.put("Monthly Premium", monthly_Premium.getText());
 
-//        coverageGapStageModalLink.click();
-//        result.put("Coverage Gap Stage",coverageGapStageModalText.getText());
-//        coverageGapStageModalCloseBtn.click();
-//
-//        catastrophicCoverageStageModalLink.click();
-//        result.put("Catastrophic Coverage Stage",catastrophicCoverageStageModalText.getText());
-//        catastrophicCoverageStageModalCloseBtn.click();
-//
-//        initialCoverageStageModalLink.click();
-//        result.put("Initial Coverage Stage",initialCoverageStageModalText.getText());
-//        initialCoverageStageModalCloseBtn.click();
+        coverageGapStageModalLink.click();
+        result.put("Coverage Gap Stage",coverageGapStageModalText.getText());
+        coverageGapStageModalCloseBtn.click();
+
+        catastrophicCoverageStageModalLink.click();
+        result.put("Catastrophic Coverage Stage",catastrophicCoverageStageModalText.getText());
+        catastrophicCoverageStageModalCloseBtn.click();
+
+        initialCoverageStageModalLink.click();
+        result.put("Initial Coverage Stage Modal",initialCoverageStageModalText.getText());
+        initialCoverageStageModalCloseBtn.click();
 
         if(sheetName.contains("MAPD_SNP_DCE")){
             for(int i = 0; i < 2 ; i++){
