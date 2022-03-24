@@ -8,25 +8,55 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @2022planDetailsBenefitsAARP01 @planDetailsMA
+    @2022planDetailsBenefitsAARP01 @DCE_MAPD_SNP
     Examples: 
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_1 | AARP |
 
-    @2022planDetailsBenefitsAARP02 @planDetailsMA
+    @2022planDetailsBenefitsAARP02 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_2 | AARP |
 
-    @2022planDetailsBenefitsAARP03 @planDetailsMA
+    @2022planDetailsBenefitsAARP03 @DCE_MAPD_SNP
     Examples: 
       | excelPath                       | workSheet   | site |
-      | DCE_MBD | MAPD_Preferred | AARP |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_3 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @planDetailsMA
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
-      | DCE_MBD | PDP_Preferred | AARP |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_4 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_5 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_6 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_7 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_8 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_9 | AARP |
+
+    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_10 | AARP |
 
     @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
     Examples:
