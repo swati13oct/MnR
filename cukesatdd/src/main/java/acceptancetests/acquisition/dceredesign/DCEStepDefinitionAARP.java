@@ -3360,5 +3360,6 @@ public class DCEStepDefinitionAARP {
          drugDetailsPage.validateDrugDetailsPage();
          getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
+        
      }
 }
