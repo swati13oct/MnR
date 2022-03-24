@@ -1886,8 +1886,8 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateDefaultDistanceDrugDetails() {
 		Select distance = new Select(clickDistanceDefaultMile);
-		Assertion.assertTrue("Default distance is not 15 miles",
-				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+		Assertion.assertTrue("Default distance is not 10 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("10 Miles"));
 	}
 
 	public void sortPharmaciesDrugDetails(String sortOption) {
