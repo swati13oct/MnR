@@ -68,7 +68,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the User validates Shop for a Plan Navigation link
     Then the user validates Medicare Education Navigation link
     Then the user validates whether call icon is visible
-    Then the user validates whether call icon is visible
+    And the user validates whether chat icon is visible
 	Then the user validates the proactive chat
                 
     @regressionAARP
