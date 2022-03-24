@@ -278,8 +278,8 @@ public class WelcomePage extends UhcDriver{
 		String TFNNeedHelp_OLE = TFNNoNeedHelp.getText();
 			
 		
-		System.out.println("TFN in OLE Right Rail : "+TFNNeedHelp_OLE);
-		System.out.println("TFN in OLE Right Rail : "+TFNWidget_OLE);
+		System.out.println("TFN On  Need help section OLE : "+TFNNeedHelp_OLE);
+		System.out.println("TFN on widgets OLE : "+TFNWidget_OLE);
 		
 		//String Expected_TFN = planDetailsMap.get("TFN");
 		
@@ -793,8 +793,6 @@ public void ValidateFooterAARPPharmacyLink()  throws InterruptedException, IOExc
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-		String TFNNoSaveWelcome_OLE = TFNNoSaveWelcomeOLE.getText();
-			System.out.println("TFN in OLE ExitModels : "+TFNNoSaveWelcome_OLE);
 			jsClickNew(Saveclosepopup);
 			validate(OLEStickyHeader);
 			OLEStickyHeader.isDisplayed();

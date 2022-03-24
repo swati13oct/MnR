@@ -2318,7 +2318,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		if (enrollForPlan != null) {
 
-//			scrollToView(enrollForPlan);
+			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
 		}

@@ -3,23 +3,25 @@
  */
 package pages.mobile.acquisition.ole;
 
+import atdd.framework.MRScenario;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.TouchAction;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.UhcDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.testng.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
-import acceptancetests.util.CommonUtility;
-import atdd.framework.Assertion;
-import atdd.framework.UhcDriver;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author sdwaraka
@@ -96,7 +98,17 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	@FindBy(css = "#SSN")
 	private WebElement SSNField;
-
+	
+	@FindBy(xpath = "//*[@id='camera-capture-icon']")
+	private WebElement cameraIcon;
+	
+	@FindBy(xpath = "//*[@id='selectFromLibrary']") 
+	private WebElement btnSelectLibrary;
+	
+	@FindBy(xpath = "//*[@id='usePhotoBtn']")
+	private WebElement usePhotoBtn;
+	
+	
 	@FindBy(css = "#SSN2")
 	private WebElement SSNNumberField;
 
@@ -347,7 +359,74 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@title,'Privacy Policy')]")
 	private WebElement PrivacyPolicy;
-	
+
+	@FindBy(xpath = "//*[@class='medicare-cam-icon']")
+	private WebElement MedicareScanImage;
+
+	@FindBy(xpath = "//*[@id='selectFromLibrary']")
+	private WebElement SelectFromlibrary;
+
+	@FindBy(xpath = "//*[@id='captureMedicareCardClose']")
+	private WebElement XbuttonOnCaptureMedicarePage;
+
+	@FindBy(xpath = "(//*[@id='captureMedicareNumTitle']//.)[2]")
+	private WebElement CaptureMedicareTitleText;
+	@FindBy(xpath = "//*[contains(text(),'Confirm Photo')]")
+	private WebElement confirmPhotoTitleText;
+
+	@FindBy(xpath = "//*[@id='usePhotoBtn']")
+	private WebElement UsePhoto;
+
+	@FindBy(xpath = "//*[@id='unableToCaptureMsg']")
+	private WebElement UnabletoCaptureImageText;
+
+	@FindBy(xpath = "//*[@id='startOverBtn']")
+	private WebElement StartOverButton_ErrorMessage;
+
+	@FindBy(xpath = "//*[@id='oopsCancelBtn']")
+	private WebElement OopsCancelButton_ErrorMessage;
+
+	@FindBy(xpath = "(//*[@id='oopsErrorMsg']//.//li)[1]")
+	private WebElement OopsMessage1_ErrorMessage;
+
+	@FindBy(xpath = "(//*[@id='oopsErrorMsg']//.//li)[2]")
+	private WebElement OopsMessage2_ErrorMessage;
+
+	@FindBy(xpath = "//*[@id='getMidCancelBtn']")
+	private WebElement CancelButtonMedicareCapture;
+
+	@FindBy(xpath = "//*[@id='capturedPhotoClose']")
+	private WebElement CloseButtonMedicareCapture;
+
+	@FindBy(xpath = "(//*[contains(text(),'Confirm Medicare Number')])[2]")
+	private WebElement ConfirmMedicareNumberText;
+
+	@FindBy(xpath = "//*[@id='confirmNumberBtn']")
+	private WebElement ConfirmMedicareNumberButton;
+
+	@FindBy(xpath = "//*[@id='captureEditBtn']")
+	private WebElement captureMedicareEditBtn;
+
+	@FindBy(xpath = "//*[@id='editMedicareClaimNumberTxt']")
+	private WebElement EditMedicareNumber;
+
+	@FindBy(xpath = "//*[@id='caputureCancelBtn']")
+	private WebElement captureMedicareCancelBtn;
+
+	@FindBy(xpath = "//*[@id='retakePhotoBtn']")
+	private WebElement captureMedicareretakePhotoBtn;
+
+	@FindBy(xpath = "//*[contains(text(),' Please enter a valid Medicare Number')]")
+	private WebElement FieldValidation_EditMedicareNumber;
+
+	@FindBy(xpath = "(//*[@id='timoutError']//*[contains(text(),'Please try again')])[1]")
+	private WebElement ErrorMessageTimeout1;
+
+	@FindBy(xpath = "(//*[@id='timoutError']//*[contains(text(),'Your request')])[1]")
+	private WebElement ErrorMessageTimeout2;
+
+
+
 	public MedicareInformationPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -398,8 +477,60 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
 		return false;
 	}
+	
+	//New method
+/*	public boolean select_from_library() throws IOException {
+		//comment
+		boolean flag = false;
+		
+		if (cameraIcon.isDisplayed()) {
+			cameraIcon.click();
+			if (btnSelectLibrary.isDisplayed()) {
+				flag = mobileUpload("path1", "path2", usePhotoBtn);
+			} else {
+				System.out.println("select from library button is not displayed");
+				flag = false;
+			}
+			
+		}
+		else
+		{
+			System.out.println("camera icon is not displayed");
+			flag = false;
+		}
+		return flag;
 
-	public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
+}*/
+	public boolean select_from_library() throws IOException {
+		//comment
+		boolean flag = false;
+		
+		if (cameraIcon.isDisplayed()) {
+			cameraIcon.click();
+			if (btnSelectLibrary.isDisplayed()) {
+				try {
+					//flag = mobileUpload("file", UsePhoto);
+					flag = mobileUpload("file");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("select from library button is not displayed");
+				flag = false;
+			}
+			
+		}
+		else
+		{
+			System.out.println("camera icon is not displayed");
+			flag = false;
+		}
+		return flag;
+
+}
+
+			public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -1352,6 +1483,262 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			return new MedicareInformationPageMobile(driver);
 		}
 		return null;
+	}
+
+
+
+	public boolean MedicareScanImage_Success(Map<String, String> MedicareDetailsMap) throws InterruptedException, IOException {
+
+		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
+
+		//boolean flag=true;
+		validateNew(MedicareScanImage);
+		if(MedicareScanImage.isDisplayed()) {
+
+			jsClickNew(MedicareScanImage);
+			String MedicareTitle = CaptureMedicareTitleText.getText();
+			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
+			validateNew(SelectFromlibrary, 5);
+			iOSClick(SelectFromlibrary);
+
+			//-------Write Code for Take Photo or choose LLibrary----------
+			mobileUpload(uploadBtn);
+			//-------Write Code for Take Photo or choose LLibrary----------
+			/*validateNew(confirmPhotoTitleText, 10);
+			String ConfirmPhotoTitleText = confirmPhotoTitleText.getText();
+			System.out.println("User Selected from Library and Navigated to Confirm Photo Page:" + ConfirmPhotoTitleText);
+			validateNew(UsePhoto, 5);
+			jsClickNew(UsePhoto);
+			validateNew(ConfirmMedicareNumberText, 6);
+			String confirmMedicareNumberText = ConfirmMedicareNumberText.getText();
+			System.out.println("User click on Confirm Photo Page and navigate to ConfirmMedicareNumberText:" + confirmMedicareNumberText);
+
+			validateNew(captureMedicareCancelBtn);
+
+			validateNew(captureMedicareretakePhotoBtn);
+			System.out.println("User will click on Edit Button now");
+			jsClickNew(captureMedicareEditBtn);
+			validateNew(EditMedicareNumber);
+			EditMedicareNumber.clear();
+			Assert.assertTrue(validateNew(FieldValidation_EditMedicareNumber), "Validate the field Error message is displayed");
+			sendKeysByCharacter(EditMedicareNumber, MedicareNumber);
+			jsClickNew(ConfirmMedicareNumberButton);
+*/
+		}
+
+		if (SSNflag.contains("true")) {
+			String SSNnumber = MedicareDetailsMap.get("SSN Number");
+			// sendkeysMobileMobileNew(SSNField, SSNnumber);
+			sendKeysByCharacter(SSNField, SSNnumber);
+
+		}
+		System.out.println("All Medicare Details are entered");
+
+		mobileswipe("20%",true);
+		scrollToView(NextBtn);
+		if (NextBtn.isEnabled()) {
+			System.out.println("Next Button is enabled to navigate to Next Page");
+			return true;
+		} else
+			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
+		return false;
+	}
+
+	public boolean MedicareScanImage_oopsErrorMessage(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+
+		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
+		String ErrorMessage = MedicareDetailsMap.get("Error Message");
+
+		boolean flag=true;
+		validateNew(MedicareScanImage);
+		if(MedicareScanImage.isDisplayed()) {
+
+			jsClickNew(MedicareScanImage);
+			String MedicareTitle = CaptureMedicareTitleText.getText();
+			System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitle);
+			validateNew(SelectFromlibrary, 5);
+			iOSClick(SelectFromlibrary);
+
+			//-------Write Code for Take Photo or choose LLibrary----------
+			//mobileUpload(uploadBtn);
+			mobileUploadforErrorMessage(uploadBtn);
+
+			if(ErrorMessage.equalsIgnoreCase("wrong image")) {
+				validateNew(ConfirmMedicareNumberText, 6);
+				String confirmMedicareNumberText = ConfirmMedicareNumberText.getText();
+				System.out.println("User click on Confirm Photo Page and navigate to ConfirmMedicareNumberText:" + confirmMedicareNumberText);
+
+				String ActualErrorMessage = UnabletoCaptureImageText.getText();
+				String ExpectedErrorMessage = "We were unable to capture your number.";
+				System.out.println("User Validate the Expecetd Error Message: " + ExpectedErrorMessage);
+				System.out.println("User Validate the Actual Error Message:  " + ActualErrorMessage);
+				Assert.assertTrue(ExpectedErrorMessage.contains(ActualErrorMessage));
+
+				String ActualOopsMessage1 = OopsMessage1_ErrorMessage.getText().replace("\"","'");
+				//ActualOopsMessage1.replace("\"","'");
+				String ExpectedOopsMessage1 = "Select 'Start over' if you'd like to try again. Be sure to follow our tips for a good photo.";
+				System.out.println("User Validate the Expected oops Error Message1: " + ExpectedOopsMessage1);
+				System.out.println("User Validate the Actual Oops Error Message1: " + ActualOopsMessage1);
+				Assert.assertTrue(ActualOopsMessage1.contains(ExpectedOopsMessage1));
+
+
+				String ActualOopsMessage2 = OopsMessage2_ErrorMessage.getText().replace("\"","'");
+				String ExpectedOopsMessage2 = "Select 'Cancel' if you'd like to enter your Medicare ID number yourself.";
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedOopsMessage2);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualOopsMessage2);
+				Assert.assertTrue(ActualOopsMessage2.contains(ExpectedOopsMessage2));
+
+
+				Assert.assertTrue(validateNew(StartOverButton_ErrorMessage), "Start Over button is displayed");
+				Assert.assertTrue(validateNew(OopsCancelButton_ErrorMessage), "Cancel Button is displayed");
+				jsClickNew(StartOverButton_ErrorMessage);
+				String MedicareTitleRetry = CaptureMedicareTitleText.getText();
+				System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitleRetry);
+				validateNew(XbuttonOnCaptureMedicarePage);
+				jsClickNew(XbuttonOnCaptureMedicarePage);
+			}else{
+				validateNew(ConfirmMedicareNumberText, 6);
+				String confirmMedicareNumberText = ConfirmMedicareNumberText.getText();
+				System.out.println("User click on Confirm Photo Page and navigate to ConfirmMedicareNumberText:" + confirmMedicareNumberText);
+
+				String ActualErrorMessage = ErrorMessageTimeout1.getText();
+				String ExpectedErrorMessage = "Please try again";
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedErrorMessage);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualErrorMessage);
+				Assert.assertTrue(ExpectedErrorMessage.contains(ActualErrorMessage));
+
+
+				String ActualTimeOutErrorMessage = ErrorMessageTimeout2.getText();
+				String ExpectedTimeoutErrorMessage = "Your request has been timed out. Please try again.";
+				System.out.println("User Validate the Expected oops Error Message2: " + ExpectedTimeoutErrorMessage);
+				System.out.println("User Validate the Actual Oops Error Message2: " + ActualTimeOutErrorMessage);
+				Assert.assertTrue(ExpectedTimeoutErrorMessage.contains(ActualTimeOutErrorMessage));
+
+
+				Assert.assertTrue(validateNew(StartOverButton_ErrorMessage), "Start Over button is displayed");
+				Assert.assertTrue(validateNew(OopsCancelButton_ErrorMessage), "Cancel Button is displayed");
+				jsClickNew(StartOverButton_ErrorMessage);
+				String MedicareTitleRetry = CaptureMedicareTitleText.getText();
+				System.out.println("User clicked on Medicare Scan Image and Navigated to click on Select from Library:" + MedicareTitleRetry);
+				validateNew(XbuttonOnCaptureMedicarePage);
+				jsClickNew(XbuttonOnCaptureMedicarePage);
+
+			}
+		}
+		return flag;
+	}
+
+	public boolean  mobileUploadforErrorMessage(String uploadBtn) throws InterruptedException {
+		boolean uploadSuccess = true;
+
+		//------------iOS Code-------------
+		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
+			String curHandle = ((AppiumDriver) driver).getContext();
+			System.out.println("curHandle - " + curHandle);
+			System.out.println(((AppiumDriver) driver).getContextHandles());
+
+			Set<String> contextNames = ((AppiumDriver) driver).getContextHandles();
+			for (String strContextName : contextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
+					((AppiumDriver) driver).context("NATIVE_APP");
+					break;
+				}
+			}
+
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Photo Library")).click();
+			//((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Choose File")).click();
+			Thread.sleep(500);
+			//-------For higher Version of IOS----------//
+		//	if (MRScenario.mobileDeviceName.equalsIgnoreCase("iPhone 12 Pro Max")) {
+				if (MRScenario.mobileDeviceOSVersion.contains("14.")) {
+				((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeImage[1]")).click();
+				Thread.sleep(500);
+				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Choose")).click();
+				Thread.sleep(500);
+				((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+					Thread.sleep(500);
+					//-------For higher Version of IOS----------//
+			}
+				//-------For Lower Version of IOS----------//
+			else {
+				try {
+					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("All Photos")).click();
+
+					//mobileswipe("20%",false);
+
+					((AppiumDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypeCell[1]//XCUIElementTypeOther")).click();
+					Thread.sleep(500);
+
+					((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("For lower version on Mobile devices");
+				}
+
+			}
+			//-------For Lower Version of IOS----------//
+
+			((AppiumDriver) driver).findElement(MobileBy.AccessibilityId("Use photo")).click();
+			Thread.sleep(500);
+
+			Set<String> contextNames1 = ((AppiumDriver) driver).getContextHandles();
+			for (String strContextName : contextNames1) {
+				if (strContextName.contains("WEBVIEW")) {
+					System.out.println("Web view:");
+					((AppiumDriver) driver).context(strContextName);
+
+					break;
+				}
+				System.out.println("Web view of current window:" +strContextName);
+			}
+
+		}
+
+		else {//------------iOS Code-------------
+			//-------Android Code-----------------
+
+			Set<String> AndroidcontextNames = ((AppiumDriver) driver).getContextHandles();
+			for (String strContextName : AndroidcontextNames) {
+				if (strContextName.contains("NATIVE_APP")) {
+					((AppiumDriver) driver).context("NATIVE_APP");
+					break;
+				}
+			}
+
+			By AllowButton = By.id("com.android.permissioncontroller:id/permission_allow_button");
+			driver.findElement(AllowButton).click();
+			//Click on Browse button on Android
+			By Browse = By.xpath("//android.widget.TextView[@text='Browse']");
+			driver.findElement(Browse).click();
+
+			//select a file from browse
+			By SelectFile = By.id("com.android.documentsui:id/icon_thumb");
+			driver.findElement(SelectFile).click();
+
+
+			//Switch to  chrome browser
+
+
+			Set<String> contextNamesAndroid = ((AppiumDriver) driver).getContextHandles();
+			for (String strContextName : contextNamesAndroid) {
+				if (strContextName.contains("WEBVIEW")) {
+					System.out.println("Web view:");
+					((AppiumDriver) driver).context(strContextName);
+
+					break;
+				}
+				//-------Android Code-----------------
+				//
+			}
+		}
+		return uploadSuccess;
 	}
 
 }

@@ -1,5 +1,5 @@
 @UATRegression @insuranceSolution @nonProd
-Feature: 1.05.9 UAT-OLE MedSupp Flow
+Feature: 1.05.9 E2E-OLE MedSupp Flow
 
   @MedSupp_OLE_Common
   Scenario Outline: <scenario> MedSup E2E Flow through Shop Pages
