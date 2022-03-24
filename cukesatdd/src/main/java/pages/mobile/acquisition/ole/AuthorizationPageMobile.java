@@ -242,14 +242,20 @@ public class AuthorizationPageMobile extends UhcDriver {
 			// Clicking on label first as dropdown is not opening in iOS - this will not
 			// affect Android execution
 			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-				WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
-				//WebElement stateLabel1 = driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
-				//stateLable.click();
+				WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
+				// WebElement stateLabel1 =
+				// driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
+				// stateLable.click();
 				jsClickNew(stateLable);
-				//stateLabel1.click();
+				// stateLabel1.click();
 			}
-			checkElementisEnabled(Authorized_State);
-			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
+		//	checkElementisEnabled(Authorized_State);
+		//	selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
+
+
+			Authorized_State.click();
+			mobileSelectOption(Authorized_State,"ALABAMA",true);
+
 
 //			scrollToView(Authorized_ZipCode);
 			sendKeysByCharacter(Authorized_ZipCode, AuthorizationZip);

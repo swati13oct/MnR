@@ -3058,8 +3058,8 @@ public class DCEStepDefinitionAARP {
 
     @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
     public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
 
         DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
         BuildYourDrugList buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
@@ -3068,8 +3068,8 @@ public class DCEStepDefinitionAARP {
 
     @Then("the user clicks on Review Button on Build Drug Page to land on DCE Summary page")
     public void the_user_clicks_on_review_button_on_build_drug_page_to_land_on_dce_summary_page() {
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
-        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+        scenario.log("Sneha Dwarakanath - Change made for July Release - F603797:ï¿½step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
         BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
         DrugSummaryPage drugSummaryPage = buildDrugListPage.navigateToDrugSummaryPage();
         drugSummaryPage.validateDrugSummaryPage();
@@ -3361,5 +3361,4 @@ public class DCEStepDefinitionAARP {
          getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
      }
-
 }

@@ -107,17 +107,17 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password  | PlanYear | PlanInfo               |
-      | AARP |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234 | current  | Preferred (PDP)        |
-      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234 | current  | Plan F:Walgreens (PDP) |
-      | AARP |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234 | current  | Plan 4 (Regional PPO)  |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password     | PlanYear | PlanInfo               |
+      | AARP |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234    | current  | Preferred (PDP)        |
+      | AARP |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234    | current  | Plan F:Walgreens (PDP) |
+      | AARP |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234567 | current  | Plan 4 (Regional PPO)  |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password  | PlanYear | PlanInfo               |
-      | UHC  |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234 | current  | Preferred (PDP)        |
-      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234 | current  | Plan F:Walgreens (PDP) |
-      | UHC  |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234 | current  | Plan 4 (Regional PPO)  |
+      | site | Zipcode | isMultiCounty | county                 | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | 1stRecommendation | 2ndRecommendation | UserType      | userName   | password     | PlanYear | PlanInfo               |
+      | UHC  |   00610 | NO            | Anasco                 | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | both           | Dental, Doctors              | MS                | [blank]           | Authenticated | DDProfile3 | Test@1234    | current  | Preferred (PDP)        |
+      | UHC  |   59620 | NO            | Lewis and Clark County | MA            | None         | AcceptsMedicare | [blank]     | [blank]       | Yes,No,No,No                  | Higher               | both           | Health Care Premium, Doctors | MS                | [blank]           | Authenticated | DDProfile2 | Test@1234    | current  | Plan F:Walgreens (PDP) |
+      | UHC  |   00501 | NO            | Suffolk                | MA            | chronic      | UHGNetwork      | [blank]     | [blank]       | No,No,No,No                   | Higher               | 1st            | Doctors, Health Care Premium | MA                | MS                | Authenticated | DDProfile1 | Test@1234567 | current  | Plan 4 (Regional PPO)  |
 
   @PRE @MAPDFlowScenario6 @F614720
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <UserType>  - To Validate Scenario6 PRE Widget Reommendations in visitor profile page
@@ -229,13 +229,13 @@ Feature: 1.18.6 Plan Recommendation Engine flow - Verify Save Results functional
 
     @DDregressionAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password    |
-      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123456 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password     |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@1234567 |
 
     @DDregressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password    |
-      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@123456 |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | UserType      | userName   | password     |
+      | UHC  |   10003 | NO            | New York | PDP           | No             | Authenticated | DDProfile1 | Test@1234567 |
 
   @PRE @DeeplinkforMSPlans
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> , <UserType>  - To Validate PRE Widget Reommendations in visitor profile page

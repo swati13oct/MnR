@@ -1,4 +1,4 @@
-@F625004 @UATRegression @GlobalcomponentshomePage
+@F625004 @UATRegression @GlobalcomponentshomePage @globalComponent
 Feature: 1.12 homePage flows
 
   @GlobalcomponentshomePage

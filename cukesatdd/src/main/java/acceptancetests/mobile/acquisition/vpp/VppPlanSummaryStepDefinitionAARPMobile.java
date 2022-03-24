@@ -21,13 +21,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
@@ -80,6 +86,60 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		String providerFromRally = (String) getLoginScenario().getBean(VPPCommonConstants.SAVED_PROVIDER_RALLY);
 		plansummaryPage.verifyproviderName(planName, providerFromRally);
 	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan compare page for the selected plan$")
+	public void verify_Pharmacy_drug_cost_PlanCompare(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		planComparePage.verifyAddedDrugPharmacyCompareCost(planName, networkType);
+
+	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan summary page for the selected plan$")
+	public void verify_Pharmacy_drug_cost(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				plansummaryPage.verifyAddedDrugPharmacySummaryCost(planName, networkType );
+	}
+	
+	@Then("^the user validates the pharmacy drug cost on plan details page for the selected plan$")
+	public void verify_Pharmacy_drug_cost_PlanDetails(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		String planName = plannameAttributesMap.get("Plan Name");
+		String networkType = plannameAttributesMap.get("NetworkType");
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		vppPlanDetailsPage.verifyAddedDrugPharmacyDetailsCost(planName, networkType);
+
+	}
+	
+	 @Then("^the user selects pharmacy on Drug details page$")
+	    public void the_user_selects_pharmacy_on_Drug_details_page(DataTable givenAttributes) throws InterruptedException {
+	        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+	        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	        String pharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+	        String distance = memberAttributesMap.get("Distance");
+	        String pharmacyName = memberAttributesMap.get("PharmacyName");
+	        drugDetailsPage.EnterPharmacyDetailsPage(pharmacyZipCode, distance, pharmacyName);
+	        
+	    }
 
 //	/**
 //	 * @throws InterruptedException

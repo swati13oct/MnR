@@ -1,8 +1,8 @@
-@UATRegression @F448210 @globalComponent
+@UATRegression @F448210 @staticPages
 Feature: 1.13 UAT - Shop Blog Pages flows
 
-  @GlobalComponentsAARPShopPages
-  Scenario Outline: To verify Zip code and Agent link for the page mentioned of <site> site <pageName> : <path>
+  
+  Scenario Outline: <Scenario> : To verify Zip code and Agent link for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -12,7 +12,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
 
-    @avengersRegressionAARP @vbfGate
+    @avengersRegressionAARP @vbfGate @regressionAARP
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ |
@@ -24,7 +24,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ |
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario           | site | path                                                | pageName                | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ |
@@ -58,8 +58,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ |
       | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ |
 
-
-  Scenario Outline: To verify TFN on page for the page mentioned of <site> site <pageName> : <path>
+#------------To be moved to Chargers-----------
+  Scenario Outline: <Scenario> : To verify TFN on page for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -69,7 +69,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP @featureGate
+    
     Examples:
       | Scenario           | site | path                                                | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -81,7 +81,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario           | site | path                                                | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -93,7 +93,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/renew-active.html                              | Renew Active            | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario           | site | path                                      | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -104,7 +104,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
-    @avengersRegressionUHC 
+    
     Examples:
       | Scenario           | site | path                                      | pageName                | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -115,7 +115,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario               | site | path                                | pageName                     | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_AMP     | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -127,7 +127,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_AMP     | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_AMP     | AARP | shop/estimate.html                  | Estimate                     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | false   |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario               | site | path                                | pageName                     | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS     | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -139,165 +139,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_UMS     | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_UMS     | UHC  | shop/estimate.html                  | Estimate                     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | false   |
 
-  Scenario Outline: To verify proactive chat popup for the page mentioned of <site> site <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates proactive chat popup
 
-
-    Examples:
-      | Scenario           | site | path                                                | pageName                |
-      | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ms.html                        | ShopPlan: Compare       |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
-      | E2E Scenario 4_AMP | AARP | safe-shopping.html                                  | ShopPlan: Shop          |
-      | E2E Scenario 5_AMP | AARP | contact-us.html                                     | Request more help       |
-      | E2E Scenario 5_AMP | AARP | shop/estimate/ma-costs.html                         | Estimate  MA            |
-      | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
-
-
-    Examples:
-      | Scenario           | site | path                                                | pageName                |
-      | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            |
-      | E2E Scenario 5_UMS | UHC  | contact-us.html                                     | Request more help       |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
-      | E2E Scenario 5_UMS | UHC  | shop/renew-active.html                              | Renew Active            |
-      | E2E Scenario 5_UMS | UHC  | shop/estimate/ma-costs.html                         | Estimate  MA            |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ms.html                        | ShopPlan: Compare       |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
-      | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          |
-
-
-    Examples:
-      | Scenario           | site | path                                      | pageName                |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-pdp.html             | Compare PDP             |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         |
-      | E2E Scenario 5_AMP | AARP | enroll/ma-enrollment.html                 | MA Enrollment           |
-      | E2E Scenario 5_AMP | AARP | enroll/pdp-enrollment.html                | PDP Enrollment          |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       |
-      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
-
-
-    Examples:
-      | Scenario           | site | path                                      | pageName                |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-pdp.html             | Compare PDP             |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         |
-      | E2E Scenario 5_UMS | UHC  | enroll/ma-enrollment.html                 | MA Enrollment           |
-      | E2E Scenario 5_UMS | UHC  | enroll/pdp-enrollment.html                | PDP Enrollment          |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       |
-      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
-
-
-    Examples:
-      | Scenario           | site | path                                | pageName                     |
-      | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                   | ShopPlan: Compare            |
-      | E2E Scenario 4_AMP | AARP | enroll.html                         | ShopPlan: Enroll             |
-      | E2E Scenario 4_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           |
-      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan |
-      | E2E Scenario 4_AMP | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      |
-      | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
-      | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     |
-
-
-    Examples:
-      | Scenario           | site | path                                | pageName                     |
-      | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
-      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan |
-      | E2E Scenario 4_UMS | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      |
-      | E2E Scenario 4_UMS | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                   | ShopPlan: Compare            |
-      | E2E Scenario 4_UMS | UHC  | enroll.html                         | ShopPlan: Enroll             |
-      | E2E Scenario 4_UMS | UHC  | shop.html                           | ShopPlan: Shop Hub           |
-      | E2E Scenario 5_UMS | UHC  | shop/estimate.html                  | Estimate                     |
-
-
-  Scenario Outline: To verify Global Components chat icon for the page mentioned of <site> site <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates whether chat icon is visible
-
-    
-    Examples:
-      | Scenario           | site | path                                                | pageName                |
-      | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ms.html                        | ShopPlan: Compare       |
-      | E2E Scenario 4_AMP | AARP | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
-      | E2E Scenario 4_AMP | AARP | safe-shopping.html                                  | ShopPlan: Shop          |
-      | E2E Scenario 5_AMP | AARP | contact-us.html                                     | Request more help       |
-      | E2E Scenario 5_AMP | AARP | shop/estimate/ma-costs.html                         | Estimate  MA            |
-      | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
-
-    
-    Examples:
-      | Scenario           | site | path                                                | pageName                |
-      | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            |
-      | E2E Scenario 5_UMS | UHC  | contact-us.html                                     | Request more help       |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        |
-      | E2E Scenario 5_UMS | UHC  | shop/renew-active.html                              | Renew Active            |
-      | E2E Scenario 5_UMS | UHC  | shop/estimate/ma-costs.html                         | Estimate  MA            |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ms.html                        | ShopPlan: Compare       |
-      | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS |
-      | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          |
-
-    
-    Examples:
-      | Scenario           | site | path                                      | pageName                |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              |
-      | E2E Scenario 5_AMP | AARP | shop/compare/compare-pdp.html             | Compare PDP             |
-      | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         |
-      | E2E Scenario 5_AMP | AARP | enroll/ma-enrollment.html                 | MA Enrollment           |
-      | E2E Scenario 5_AMP | AARP | enroll/pdp-enrollment.html                | PDP Enrollment          |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       |
-      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
-
-    
-    Examples:
-      | Scenario           | site | path                                      | pageName                |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              |
-      | E2E Scenario 5_UMS | UHC  | shop/compare/compare-pdp.html             | Compare PDP             |
-      | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         |
-      | E2E Scenario 5_UMS | UHC  | enroll/ma-enrollment.html                 | MA Enrollment           |
-      | E2E Scenario 5_UMS | UHC  | enroll/pdp-enrollment.html                | PDP Enrollment          |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       |
-      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment |
-
-    
-    Examples:
-      | Scenario           | site | path                                | pageName                     |
-      | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                   | ShopPlan: Compare            |
-      | E2E Scenario 4_AMP | AARP | enroll.html                         | ShopPlan: Enroll             |
-      | E2E Scenario 4_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           |
-      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan |
-      | E2E Scenario 4_AMP | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      |
-      | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
-      | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     |
-
-    
-    Examples:
-      | Scenario           | site | path                                | pageName                     |
-      | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       |
-      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan |
-      | E2E Scenario 4_UMS | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      |
-      | E2E Scenario 4_UMS | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                   | ShopPlan: Compare            |
-      | E2E Scenario 4_UMS | UHC  | enroll.html                         | ShopPlan: Enroll             |
-      | E2E Scenario 4_UMS | UHC  | shop.html                           | ShopPlan: Shop Hub           |
-      | E2E Scenario 5_UMS | UHC  | shop/estimate.html                  | Estimate                     |
-
-
-  Scenario Outline: To verify Global Components TFN on need help section for the page mentioned of <site> site <pageName> : <path>
+  Scenario Outline: <Scenario> To verify Global Components TFN on need help section for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -307,7 +150,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP
+   
     Examples:
       | Scenario           | site | path                                | pageName                     | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -319,7 +162,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | false   |
 
-    @avengersRegressionUHC
     Examples:
       | Scenario           | site | path                                | pageName                     | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -330,7 +172,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_UMS | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 4_UMS | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_UMS | UHC  | shop/estimate.html                  | Estimate                     | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | false   |
-
+#-----------
 
   Scenario Outline: <Scenario>- To verify Zip code and agent link on medicare article pages for the page mentioned on <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
@@ -344,7 +186,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC Agent URL | <UHCUrl> |
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | path                                              | pageName                                | UHCUrl                      |
       | UAT E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  | https://www.myuhcagent.com/ |
@@ -352,7 +194,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UAT E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsUHC
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario               | site | path                                              | pageName                                | UHCUrl                      |
       | UAT E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  | https://www.myuhcagent.com/ |
@@ -360,21 +202,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UAT E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsAARP
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | UHCUrl                      |
       | UAT E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | https://www.myuhcagent.com/ |
       | UAT E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsUHC
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionAARP
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | UHCUrl                      |
       | UAT E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | https://www.myuhcagent.com/ |
       | UAT E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsAARP
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
@@ -384,7 +226,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsUHC
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
@@ -393,7 +235,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
-
+#------------To be moved to Chargers-----------
   Scenario Outline: <Scenario>- To verify TFN on medicare article pages for the page mentioned on <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -405,33 +247,33 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario               | site | path                                              | pageName                                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario               | site | path                                              | pageName                                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario           | site | path                                                  | pageName      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -440,7 +282,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    
     Examples:
       | Scenario           | site | path                                                  | pageName      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -449,167 +291,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-
-  Scenario Outline: <Scenario>- To verify proactive chat popup on medicare article pages for the page mentioned on <site> site <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates Medicare Education Navigation link
-    Then the user validates proactive chat popup
-
-
-    Examples:
-      | Scenario           | site | path                                              | pageName                                |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-
-    Examples:
-      | Scenario           | site | path                                              | pageName                                |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-
-    Examples:
-      | Scenario           | site | path                                                                                    | pageName                |
-      | E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-
-    Examples:
-      | Scenario           | site | path                                                                                    | pageName                |
-      | E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page |
-
-
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page |
-
-
-  Scenario Outline: <Scenario>- To verify chat icon on medicare article pages for the page mentioned on <site> site <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates Medicare Education Navigation link
-#    Then the user validates whether chat icon is visible
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario           | site | path                                              | pageName                                |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario           | site | path                                              | pageName                                |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario           | site | path                                                                                    | pageName                |
-      | E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario           | site | path                                                                                    | pageName                |
-      | E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page |
-
-
-  Scenario Outline: <Scenario>- To verify call icon on medicare article pages for the page mentioned on <site> site <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates Medicare Education Navigation link
-    Then the user validates whether call icon is visible
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario               | site | path                                              | pageName                                |
-      | UAT E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home                  |
-      | UAT E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | UAT E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario               | site | path                                              | pageName                                |
-      | UAT E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home                  |
-      | UAT E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-      | UAT E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page                                |
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario               | site | path                                                                                    | pageName                |
-      | UAT E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | UAT E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario               | site | path                                                                                    | pageName                |
-      | UAT E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
-      | UAT E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
-
-    @avengersRegressionAARP
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page |
-
-    @avengersRegressionUHC
-    Examples:
-      | Scenario           | site | path                                                  | pageName      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page |
 
 
   Scenario Outline: <Scenario>- To verify TFN on right rail of medicare article pages for the page mentioned on <site> site <pageName> : <path>
@@ -623,19 +304,19 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @avengersRegressionAARP
+    
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+   
     Examples:
       | Scenario               | site | path                                                                                    | pageName                | tfnXpath                                                           | tfnFlag |
       | UAT E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | UAT E2E Scenario 4_UMS | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-
+#-----------
   Scenario Outline: <Scenario>- To verify email on medicare article pages for the page mentioned on <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -645,25 +326,25 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validates Medicare Education Navigation link
     Then the user enters and validate the fields and clicks on submit
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | path                                       | pageName               |
       | UAT E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home |
       | UAT E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario               | site | path                                       | pageName               |
       | UAT E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home |
       | UAT E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | Scenario               | site | path                                                                                    | pageName                |
       | UAT E2E Scenario 3_AMP | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
       | UAT E2E Scenario 4_AMP | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Retiree Health Coverage |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC  @regressionUHC
     Examples:
       | Scenario               | site | path                                                                                    | pageName                |
       | UAT E2E Scenario 3_UMS | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Enrolling After Age 65  |
@@ -678,11 +359,11 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PagePath | <path>     |
     Then the user click on Get a Plan Recommendation Button and gets back to medicare articles page
 
-    @avengersRegressionAARP @featurePass
+    @avengersRegressionAARP @featurePass  @regressionAARP
     Examples:
       | Scenario               | site | path                                              | pageName                                |
       | UAT E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
-    @avengersRegressionUHC
+    @avengersRegressionUHC  @regressionUHC
     Examples:
       | Scenario               | site | path                                              | pageName                                |
       | UAT E2E Scenario 2_AMP | UHC  | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
@@ -706,7 +387,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC Agent URL | <UHCUrl> |
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP  @regressionAARP
     Examples:
       | Scenario                           | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | UAT E2E Regression Scenario 1_AARP | AARP | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -716,7 +397,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UAT E2E Regression Scenario 4_AARP | AARP | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | Avengers AARP                      | AARP | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | Scenario                          | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | UAT E2E Regression Scenario 1_UMS | UHC  | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -726,7 +407,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UAT E2E Regression Scenario 4_UMS | UHC  | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | Avengers UMS                      | UHC  | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @regressionAARP
     Examples:
       | site | geoState    | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | AARP | Puerto Rico | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -765,7 +446,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | AARP | Alabama     | contact-us.html                                                          | Footer: Contact Us                            | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | AARP | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-    @avengersRegressionUHC
+    @avengersRegressionUHC @regressionUHC
     Examples:
       | site | geoState    | path                                                                     | pageName                                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | UHC  | Puerto Rico | medicare-education-classic.html                                          | Understanding Medicare Classic                | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -805,7 +486,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama     | medicare-education/keep-or-change-coverage.html                          | Medicare Education- Medicare Coverage         | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: <Scenario>- To verify social share component on <site> site <pageName> : <path>
+  Scenario Outline: To verify social share component on <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -825,7 +506,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     When the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
 
-    @validateSocialShareComponentAARP @avengersRegressionAARP @Validate3packCTA_Article_AARP
+    @validateSocialShareComponentAARP @avengersRegressionAARP @Validate3packCTA_Article_AARP @regressionAARP
     Examples:
       | site | geoState | path                                                                                                                       | pageName          | tfnXpath                                                           | tfnFlag | UHCUrl                      |
       | AARP | Alabama  | medicare-articles/can-i-change-my-medicare-plan.html                                                                       | Article Page 1    | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
@@ -994,7 +675,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       
 
 
-    @validateSocialShareComponentUHC @avengersRegressionUHC @Validate3packCTA_Article_UHC
+    @validateSocialShareComponentUHC @avengersRegressionUHC @Validate3packCTA_Article_UHC @regressionUHC
     Examples:
       | site | geoState | path                                                                                                                       | pageName          | tfnXpath                                                           | tfnFlag | UHCUrl                      |
       | UHC  | Alabama  | medicare-articles/can-i-change-my-medicare-plan.html                                                                       | Article Page 1    | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |

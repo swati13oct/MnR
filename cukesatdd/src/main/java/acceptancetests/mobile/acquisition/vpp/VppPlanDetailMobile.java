@@ -26,6 +26,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
@@ -103,6 +104,55 @@ public class VppPlanDetailMobile {
 		vppPlanDetailsPage.browserBack();
 		vppPlanDetailsPage.validatedownbacktoplanslink();
 
+	}
+	
+	@When("^user clicks on Add to compare checkbox on plan detail page$")
+	public void user_clicks_on_compare_checknox_on_plan_details_page() throws Throwable {
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.clickCompareBox();
+	}
+	
+	@Then("^verify the Add to compare checkbox is checked for selected plan$")
+	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String planIndex = memberAttributesMap.get("Plan index");
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan type" + plantype);
+		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex, plantype);
+	}
+	
+	@Then("^the user view plan details of the above selected plan in site vpp$")
+	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp1(DataTable givenAttributes) {
+		// Remove the commented code
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String planName = memberAttributesRow.get(0).getCells().get(1); String
+		 * planType = memberAttributesRow.get(1).getCells().get(1);
+		 */
+
+		// Add code to fetch the value of a DataTable column directly using cell(rowNum,
+		// columnNum)
+		String planName = givenAttributes.cell(0, 1); // row 0, column 1
+		String planType = givenAttributes.cell(1, 1); // row 1, column 1
+
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
+			// Assertion.assertTrue(true);
+			// }else
+			// Assertion.fail("Error in validating the Plan Details Page");
+
+		}
 	}
 	
 	@Then("^the user click on Plan costs tab and validates on site$")
