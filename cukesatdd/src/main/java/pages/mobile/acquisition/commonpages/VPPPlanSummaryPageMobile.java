@@ -34,6 +34,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
@@ -54,6 +55,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".back-to-plans")
 	public WebElement backToPlans;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Add your information')])[1]")
+	private WebElement AddYourInformationLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
+	private WebElement DOB1;
 
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
 	WebElement CancelBtn;
@@ -126,6 +133,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	// (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	@FindBy(css = "a[dtmname$='MA:View Plans']")
 	private WebElement maPlansViewLink;
+	
+	@FindBy(xpath = "(//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label)[1]")
+	private WebElement firstComparePlanButtonForMS;
 
 	// @FindBy(xpath = "//div[@class='overview-tabs
 	// module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
@@ -273,6 +283,21 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[contains(@class,'overview-tabs module-tabs-tabs')]/div[4]//span[@class='ng-binding']")
 	private WebElement snpPlansCount;
+	
+	@FindBy(xpath = "//*[contains(@id,'dateOfBirth')]")
+	private WebElement updateDOBDetailsForMedsup;
+	
+	@FindBy(xpath = "//button[contains(@dtmname,'Save and Update')]")
+	private WebElement saveAndUpdatePremiumsBtn;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
+	private WebElement EditYourInformationLink;
+	
+	@FindBy(css = "#part-b-month")
+	private WebElement partBDropdown;
+	
+	@FindBy(xpath = "//*[@id='gender']/..//input[@id='Female']")
+	private WebElement updateGenderDetailsForMedsup;
 
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement viewPlans;
@@ -544,6 +569,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
+	
+	@FindBy(xpath = "(//label[text()='Add to Compare'])[1]")
+	private WebElement compareLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'show active')]//div[contains(@class,'module-plan-overview module swiper-slide')]//button[contains(text(),'Compare plans')][1]")
+	private WebElement compareButton;
+	
+	@FindBy(css = "#back-to-plans")
+	private WebElement backToPlanComparePage;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Compare AARP® Medicare Supplement')])[1]")
+	private WebElement comparePageHeader;
+	
+	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[1]")
+	private WebElement savePlanButton;
+	
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[1]")
+	private WebElement close;
+	
+	@FindBy(xpath = "(//*[@class='liked'])")
+	private WebElement savePlanImg;
+	
+	@FindBy(xpath = "(//*[contains(@class,'unliked button')])[3]")
+	private WebElement savePlanK;
 
 	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
 	private WebElement emailPlanSummarySendButton;
@@ -654,6 +703,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
 	private WebElement ReturntoApplicationButton;
+	
+	@FindBy(xpath = "//*[contains(@class,'heading-1 ng-scope')]")
+	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
@@ -832,6 +884,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 	WebElement ViewPlanMedSupPage;
+	
+	@FindBy(xpath = "(//*[contains(@class,'uhc-radio__visual')])[1]")
+	private WebElement femaleGender1;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[1]")
 	private WebElement MaleGender;
@@ -969,6 +1024,20 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			return false;
 		}
 	}
+	
+	public ComparePlansPageMobile clickCompareButton() {
+		
+		if(validate(pdpPlansViewLink)) {
+			jsClickNew(pdpPlansViewLink);
+			waitForPlanSummaryPageLoad();
+		}
+		validateNew(compareButton);
+		jsClickNew(compareButton);
+		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
+		if (currentUrl().contains("/plan-compare"))
+			return new ComparePlansPageMobile(driver);
+		return null;
+	}
 
 	private boolean swipeToPlanCard(String planName) {
 		WebElement planCard = driver.findElement(By.xpath(
@@ -1046,6 +1115,32 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
 		}
+	}
+	
+	public void verifyPlanCompareCheckboxIsChecked(String planIndex, String plantype) {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		System.out.println("Plan type" + plantype);
+		if (plantype.equals("MAPD")) {
+			String CheckStatus = js
+					.executeScript("return document.getElementById('compare-plan-" + planIndex + "').checked;")
+					.toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assertion.assertEquals("true", CheckStatus.trim());
+		} else {
+			boolean CheckStatus = driver.findElement(By.xpath(
+					"//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']/..//following-sibling::span"))
+					.getAttribute("class").contains("show");
+			// boolean CheckStatus=driver.findElement(By.cssSelector("#plan-list-3 > div >
+			// div.swiper-container > div > div:nth-child("+ planIndex + ") >
+			// div.content-secondary.favourite > div > div.compare-box > span.ng-scope >
+			// label::after")).isDisplayed();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assertion.assertTrue(CheckStatus);
+		}
+
+		System.out.println("Verified Plan Compare checkbox is checked");
+
 	}
 
 	public ProviderSearchPageMobile clickNextBestActionModalFindMyDoctorsBtn() {
@@ -1148,6 +1243,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		// jsClickNew(nextButton);
 		return LastName;
 
+	}
+	
+	public VPPPlanSummaryPageMobile verifyDefaultPlanType(String planType) {
+		validateNew(planTypeHeading);
+		if (planTypeHeading.getText().contains(planType)) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 
 	public void viewPlanSummary(String planType) {
@@ -1308,6 +1411,18 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public void addPlanToCompareByIndex(String planIndex, String plantype) {
+		WebElement Checkbox;
+		if (plantype.equals("MAPD"))
+			Checkbox = driver.findElement(By.xpath("//input[contains(@id,'compare-plan-" + planIndex
+					+ "')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		else
+			Checkbox = driver
+					.findElement(By.xpath("//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+	}
 
 	public void ValidateclicksOnIsProviderCovered(String planName) throws InterruptedException {
 
@@ -1359,6 +1474,29 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void compareAllMSPlans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[@class='uhc-card']//button[contains(@class,'compare-plans-btn')]//label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS);
 	}
 
 	public boolean providerinfo(String planName) {
@@ -1864,6 +2002,26 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return false;
 
 	}
+	
+	public boolean updatePersonalDetailsForMedsup() {
+		validateNew(updateDOBDetailsForMedsup);
+		updateDOBDetailsForMedsup.clear();
+		sendKeysByCharacter(updateDOBDetailsForMedsup, "05/05/1945");
+		threadsleep(5);
+		//jsClickNew(partBDropdown);
+		//partBDropdown.click();
+		jsClickNew(updateGenderDetailsForMedsup);
+		threadsleep(5);
+		//selectFromDropDownByText(driver, partBDropdown, "May");
+		mobileSelectOption(partBDropdown, "May", true);
+		jsClickNew(saveAndUpdatePremiumsBtn);
+		threadsleep(5);
+		if(validate(EditYourInformationLink)) {
+			return true;
+		}
+		return false;
+	}
+	
 	/*
 	 * public IntroductionInformationPage clicksOnEnrollInplanLink(String planName)
 	 * {
@@ -2160,7 +2318,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		if (enrollForPlan != null) {
 
-//			scrollToView(enrollForPlan);
+			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
 		}
@@ -6415,5 +6573,122 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
 		System.out.println("populatedEmail = " + populatedEmail);
 		Assertion.assertEquals(email, populatedEmail);
+	}
+	
+	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot, String navigateComparePage)
+			throws InterruptedException {
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		if (btn.equalsIgnoreCase("Compare")) {
+			if (plans == 1) {
+				Thread.sleep(2000);
+				jsClickNew(compareLink);
+				Thread.sleep(10000);
+			} else {
+				while (plans > 0) {
+					Thread.sleep(2000);
+					WebElement comparePlanLink = driver
+							.findElement(By.xpath("(//label[text()='Add to Compare'])[" + plans + "]"));
+					jsClickNew(compareLink);
+					Thread.sleep(10000);
+					plans = plans - 1;
+				}
+			}
+			if (navigateComparePage.equalsIgnoreCase("Yes")) {
+				// action.moveToElement(compareButton).build().perform(); //Does not work on
+				// Safari browser
+				jsMouseOver(compareButton);
+				compareButton.click();
+				Thread.sleep(2000);
+				// action.moveToElement(comparePageHeader).build().perform(); //Does not work on
+				// Safari browser
+				jsMouseOver(comparePageHeader);
+				if (comparePageHeader.isDisplayed()) {
+					flag = true;
+				}
+			}
+			if (navigateComparePage.equalsIgnoreCase("No")) {
+				flag = true;
+			}
+
+		} else if (btn.equalsIgnoreCase("Save")) {
+			if (plans == 1) {
+				Thread.sleep(2000);
+				action.moveToElement(savePlanButton).build().perform();
+				savePlanButton.click();
+				Thread.sleep(2000);
+				flag = savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+			} else if (shot.equalsIgnoreCase("first")) {
+				while (plans > 0) {
+					Thread.sleep(2000);
+					WebElement savePlanLink = driver
+							.findElement(By.xpath("(//*[contains(@class,'unliked button')])[" + plans + "]"));
+
+					// action.moveToElement(savePlanLink).build().perform(); //Does not work on
+					// Safari browser
+					jsMouseOver(savePlanLink);
+					savePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans - 1;
+					if (close.isDisplayed()) {
+						close.click();
+					}
+					flag = savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+				}
+			} else if (shot.equalsIgnoreCase("second")) {
+				Thread.sleep(2000);
+				jsClickNew(savePlanK);
+				Thread.sleep(10000);
+			//	jsClickNew(savePlanL);
+				Thread.sleep(10000);
+				flag = savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+				backToPlans.click();
+				Thread.sleep(10000);
+			}
+		} else if (btn.equalsIgnoreCase("Information")) {
+			Thread.sleep(2000);
+			// action.moveToElement(editYourInformationLink).build().perform(); //Does not
+			// work on Safari browser
+		//	jsMouseOver(editYourInformationLink);
+		//	editYourInformationLink.click();
+			jsMouseOver(AddYourInformationLink);
+			//	AddYourInformationLink.click();
+				jsClickNew(AddYourInformationLink);
+
+			Thread.sleep(6000);
+			// action.moveToElement(DOB).build().perform(); //Does not work on Safari
+			// browser
+			jsMouseOver(DOB1);
+			if (DOB1.isDisplayed()) {
+				flag = true;
+			}
+
+		} else {
+			Thread.sleep(2000);
+			// action.moveToElement(ViewPlanMedSupPage).build().perform(); //Does not work
+			// on Safari browser
+			DOB1.sendKeys("01111951");
+
+			Thread.sleep(7000);
+			jsMouseOver(femaleGender1);
+			jsClickNew(femaleGender1);
+			Thread.sleep(7000);
+			jsMouseOver(ViewPlanMedSupPage);
+			jsClickNew(ViewPlanMedSupPage);
+			Thread.sleep(5000);
+			// action.moveToElement(compareButton).build().perform(); //Does not work on
+			// Safari browser
+
+			//jsMouseOver(compareButton);
+
+		//	if (compareLink.isDisplayed()) {
+				jsMouseOver(comparePageHeader);
+
+				if (comparePageHeader.isDisplayed()) {
+				flag = true;
+			}
+
+		}
+		return flag;
 	}
 }

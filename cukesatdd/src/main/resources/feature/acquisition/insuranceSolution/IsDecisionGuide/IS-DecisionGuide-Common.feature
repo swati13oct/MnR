@@ -1,4 +1,4 @@
-Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
+Feature: 1.14 Med Supp Plans (IS) Decision Guide flow E2E Scripts
 
   Scenario Outline: <Scenario> - To Test IS Decision Guide E2E on <site> site for <firstname>
     Given the user is on medicare acquisition site landing page
@@ -35,7 +35,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
       | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   58103 | NO              | Cass County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
       | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   58103 | NO              | Cass County | MS       | MNRtestSai | MNRtestKumar | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
-  Scenario Outline: <Scenario> - To Test UAT IS Decision Guide E2E on <site> site thorugh Shop Pages for <firstname>
+  Scenario Outline: <Scenario> - To Test E2E IS Decision Guide E2E on <site> site thorugh Shop Pages for <firstname>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user hovers screen over the shop for a plan

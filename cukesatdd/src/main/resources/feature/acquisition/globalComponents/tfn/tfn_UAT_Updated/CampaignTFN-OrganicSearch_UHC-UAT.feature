@@ -2,7 +2,7 @@
 Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
   ################################Script 3: Organic Search via Google and Bing######################################
-  @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prodRegression_UAT
+  @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prodRegression_UAT @regressionUHC
   Scenario Outline: - <scenario> <zipcode> 3.1 Google search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
@@ -128,7 +128,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | scenario                 | pscCode | Precedence1PSC | zipcode | county          | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                    | MedsuppTFNxpath                   | TFNxpath2                           | plantype | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 |
       | Sc. 3.08.01 - UMS_MS_3.0 |  880188 |         880187 |   23666 | New York County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS         | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //span[contains(@class, 'invoca_swap_sam')] | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   | 1-800-607-2877 | 1-888-378-0849 | 8EC        | 1-800-811-2341 | 1-888-378-0849 | 8EC         |
 
-    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup4.0 
+    @Scenario3_1_GoogleBingSearch_UHC_UAT_Medsup4.0 @regressionUHC
     Examples: 
       | scenario                 | pscCode | Precedence1PSC | zipcode | county             | isMultutiCounty | maUrl                              | medicareeduUrl                                    | shoppages        | medicarearicleUrl       | medicareMadeclearUrl                       | medicareEligibilityUrl                            | MAplantype | MSplantype | PDPplantype | TFNNo          | MedsuppTFNNo   | TFNNo2         | TFNxpath                                                                  | MedsuppTFNxpath                                    | TFNxpath2                           | plantype | planyear | FedTFNNo       | MedSupTFNNo    | sourceCode | FedTFNNo1      | MedSupTFNNo1   | sourceCode1 |
       | Sc. 3.08.01 - UMS_MS_4.0 |  880188 |         880187 |   90210 | Los Angeles County | NO              | shop/medicare-advantage-plans.html | /medicare-education/medicare-advantage-plans.html | /contact-us.html | /medicare-articles.html | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html | MA         | MS4.0      | PDP         | 1-800-607-2877 | 1-888-378-0849 | 1-800-811-2341 | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[contains(@class, 'invoca_swap text-bold tel')] | (//a[contains(@class, 'tel')])[1]/u | MAPD     | future   | 1-800-607-2877 | 1-888-378-0849 | 8EC        | 1-800-811-2341 | 1-888-378-0849 | 8EC         |
