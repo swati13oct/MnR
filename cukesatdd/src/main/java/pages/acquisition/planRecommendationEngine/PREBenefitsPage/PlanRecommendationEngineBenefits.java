@@ -139,7 +139,7 @@ public class PlanRecommendationEngineBenefits extends UhcDriver {
 				content = content + e.getText();
 			}
 			preResult.put(header, formatString(content));
-			j = j + 2;// +2 for - empty div tag of new line
+			j = j + 1;// +2 was there for - empty div tag of new line. But now its been removed
 		}
 
 		String header = formatString(plantiles.get(planIndex)

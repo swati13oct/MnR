@@ -4201,7 +4201,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
 					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1")
-					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")) {
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-qa")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers")) {
 					if (site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
