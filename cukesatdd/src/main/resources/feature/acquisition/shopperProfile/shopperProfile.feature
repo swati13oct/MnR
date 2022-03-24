@@ -504,3 +504,39 @@ Feature: 1.09. ACQ- Shopper Profile
     Examples:
       | username | password       | email        | mbi           | dob        | zipcode | fname | lname | uuid                                 | enrolledplanName                     | planName                                       | plantype | drugNames | providers | DSNPPlan                                      | PDPPlan                         |
       | ocpuser2 | Password@12345 | net@ulla.com | 6C06-DQ3-NU44 | 10/13/1930 | 90002   | ULLA  | NET   | 4c603266-44aa-420a-8c70-827808fc6002 | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        | UnitedHealthcare Chronic Complete (HMO C-SNP) | AARP MedicareRx Walgreens (PDP) |
+
+  Scenario Outline: Telesales agent validate Medicare Suppliment Compare link
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
+    And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
+    Then user validate medsup compare link for telesales
+    Then user click on MAPD link and validates
+
+    @check
+    Examples:
+      | username | password       | email             | mbi           | dob        | zipcode | fname  | lname | uuid                                 | enrolledplanName | planName                                       | plantype | drugNames | providers |
+      | ocpuser2 | Password@12345 | nathim@member.com | 1HT8-CW6-NM62 | 12/15/1952 | 30038   | NATHIM | DRUE  | 05eefdcb-6204-41d0-9c1e-fb4588531c83 | [blank]          | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        |
+
