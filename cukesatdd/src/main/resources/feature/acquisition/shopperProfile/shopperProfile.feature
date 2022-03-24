@@ -535,7 +535,7 @@ Feature: 1.09. ACQ- Shopper Profile
     Then user validate medsup compare link for telesales
     Then user click on MAPD link and validates
 
-    @check
+    @AgentMedSupValidation @regressionSPTeamE  @regressionSPStage @regressionAARP
     Examples:
       | username | password       | email             | mbi           | dob        | zipcode | fname  | lname | uuid                                 | enrolledplanName | planName                                       | plantype | drugNames | providers |
       | ocpuser2 | Password@12345 | nathim@member.com | 1HT8-CW6-NM62 | 12/15/1952 | 30038   | NATHIM | DRUE  | 05eefdcb-6204-41d0-9c1e-fb4588531c83 | [blank]          | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        |
