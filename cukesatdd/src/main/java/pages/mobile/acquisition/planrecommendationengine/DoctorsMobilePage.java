@@ -187,6 +187,9 @@ public class DoctorsMobilePage extends UhcDriver {
 		if(validate(modalEditDoctor))
 			jsClickNew(modalEditDoctor);
 		jsClickNew(modalFinddoctors);
+		if(driver.toString().contains("IOS")){
+			sleepBySec(60);
+		}
 		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, count);
 		threadsleep(5000);
 		jsClickNew(modalContinuedoctors);

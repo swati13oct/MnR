@@ -33,7 +33,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall | 80002   | UHC  |
 
-  @dceShopperProfileAddDrugsGlobally @decRelease @FebRelease @F547321
+  @dceShopperProfileAddDrugsGlobally @decRelease @FebRelease 
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -48,8 +48,11 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
-    And Back to profile button should be displayed for each plan card
-    When user clicks on Back to profile button
+  # And Back to profile button should be displayed for each plan card
+  # When user clicks on Back to profile button
+    When user verify the drug summary page
+    Then user should be able to see Return to profile link on summary page
+    When user clicks on Return to profile link on summary page  
     Then user should be navigated to shopper profile page
     When user clicks on Edit Drug and Pharmacy on visitor profile page
     Then user should be navigated to build drug list page
@@ -57,24 +60,25 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | DrugName | <drug2> |
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
     Then user should be able to see Return to profile link on summary page
-    And Back to profile button should be displayed for each plan card
+  # And Back to profile button should be displayed for each plan card
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+  # And user should be able to see Back to profile button on details page
+    And user verify the drug details page
 
-  @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP @featureGate
+  @dceShopperProfileAddDrugsGlobally_AARP @regressionAARP @featureGate
     Examples:
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi | 80002   | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @prodRegression
+  @dceShopperProfileAddDrugsGlobally_UHC @regressionUHC @prodRegression
     Examples:
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi | 80002   | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @dceShopperProfileAddDrugsPlancard @decRelease @F547321
+  @dceShopperProfileAddDrugsPlancard @decRelease 
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs from plan card
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -107,7 +111,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | DrugName | <drug2> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+   #And user should be able to see Back to profile button on details page
+    And user verify the drug details page
 
   @dceShopperProfileAddDrugsPlancard_AARP @regressionAARP @prodRegression
     Examples:
@@ -140,8 +145,11 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
-    And Back to profile button should be displayed for each plan card
-    When user clicks on Back to profile button
+  # And Back to profile button should be displayed for each plan card
+  # When user clicks on Back to profile button
+    When user verify the drug summary page
+    Then user should be able to see Return to profile link on summary page
+    When user clicks on Return to profile link on summary page 
     Then user should be navigated to shopper profile page
     Then user clicks on Add drugs button globally on shopper profile page
     Then user should be navigated to build drug list page
@@ -154,9 +162,10 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+  # And user should be able to see Back to profile button on details page
 
-  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @regressionAARP @featureGate
+  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @regressionAARP
+    #@featureGate
     Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName           | password   |
       | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | mnracq@givmail.com | Password@3 |
@@ -190,8 +199,11 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
-    And Back to profile button should be displayed for each plan card
-    When user clicks on Back to profile button
+ #  And Back to profile button should be displayed for each plan card
+ #  When user clicks on Back to profile button
+    When user verify the drug summary page
+    Then user should be able to see Return to profile link on summary page
+    When user clicks on Return to profile link on summary page 
     Then user should be navigated to shopper profile page
     Then the user validates Drugs and provides are added or not added on shopper profile page as follows
       | DrugsFlag     | <drugFlag>      |
@@ -207,7 +219,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+  # And user should be able to see Back to profile button on details page
+    And user verify the drug details page
 
   @dceImportDrugs_AuthMember_AARP
     Examples:
@@ -249,8 +262,11 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
-    And Back to profile button should be displayed for each plan card
-    When user clicks on Back to profile button
+  # And Back to profile button should be displayed for each plan card
+  # When user clicks on Back to profile button
+    When user verify the drug summary page
+    Then user should be able to see Return to profile link on summary page
+    When user clicks on Return to profile link on summary page 
     Then user should be navigated to shopper profile page
     Then the user validates Drugs and provides are added or not added on shopper profile page as follows
       | DrugsFlag     | <drugFlag>      |
@@ -266,7 +282,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+  # And user should be able to see Back to profile button on details page
+    And user verify the drug details page
 
   @dceImportDrugs_AuthNonMember_AARP
     Examples:
@@ -363,14 +380,15 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    And user should be able to see Back to profile button on details page
+   # And user should be able to see Back to profile button on details page
+     And user verify the drug details page
 
-  @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
+  @dceShopperProfileAddDrugsGlobally_AARP @regressionAARP
     Examples:
       | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
       | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) | 10001   | NO            | New York County | AARP Medicare Advantage Prime (HMO) |
 
-  @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @featureGate
+  @dceShopperProfileAddDrugsGlobally_UHC @regressionUHC @featureGate
     Examples:
       | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
       | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) | 10001   | NO            | New York County | AARP Medicare Advantage Prime (HMO) |

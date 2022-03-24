@@ -3333,8 +3333,8 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDynamicErrorMessageDisplay(pharmacyErrorType);
 	}
-	
-	//This Method is used to validate sort by under your drug section on Detail page 
+
+	//This Method is used to validate sort by under your drug section on Detail page
 	@And("the user selects the sort by under your drugs")
 	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
 		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
@@ -3342,9 +3342,24 @@ public class DCEStepDefinitionAARP {
 		String sortBy = givenAttributesMap.get("Sort By");
 		System.out.println("Sort by to Select : "+sortBy);
 		 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
-	                .getBean(PageConstants.DCE_Redesign_DrugDetails);  
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
 		 drugDetailsPage.validateDrugSortBy(sortBy);
 		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+
+     @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
+
+     @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+
+     }
 
 }

@@ -278,12 +278,12 @@ public void yahooSearch(String searchParameter) {
 	public void ClickImportValidateModals(String Authenticated_Flag) {
 		validateNew(ImportBtn);
 		jsClickNew(ImportBtn);
-		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
-		validateNew(ImportModal_GetStartedBtn);
+	//	CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
+	//	validateNew(ImportModal_GetStartedBtn);
 		if(Authenticated_Flag.equalsIgnoreCase("false")){
 			//validateNew(SignIn_Link);
 		}
-		jsClickNew(ImportModal_GetStartedBtn);
+	//	jsClickNew(ImportModal_GetStartedBtn);
 		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);
 		validateNew(ImportModal_MemberRadio);
 		validateNew(ImportModal_NonMemberRadio);
@@ -308,6 +308,9 @@ public void yahooSearch(String searchParameter) {
 	public WebElement Last_Nametxtbx;
 	@FindBy(xpath = "//*[contains(@id, 'member-attestation-field')]/../span[@class='uhc-checkbox__visual']")
 	public WebElement attestation_ckbx;
+	@FindBy(xpath = "//*[contains(@formgroupname,'memberDetailsForm')]//p[2]")
+	public WebElement Bluealert_msg;
+	
 
 	public void EnterMemberDetailsAndImport(String authenticated_flag, String first_name, String last_name, String member_dob, String member_zip, String member_mbi) {
 		validateNew(ImportModal_MemberRadio);
@@ -323,9 +326,16 @@ public void yahooSearch(String searchParameter) {
 			jsClickNew(attestation_ckbx);
 		}
 		if(authenticated_flag.equalsIgnoreCase("true")){
-			CommonUtility.waitForPageLoadNew(driver, Member_NameDisplay, 20);
-			validateNew(Member_NameDisplay);
-			System.out.println("Member Name Displayed - "+Member_NameDisplay);
+			validateNew(Bluealert_msg);
+			if(First_Nametxtbx.getText()==null || First_Nametxtbx.getText()=="")
+			{
+				Assertion.fail("Member First Name not Displayed");
+			}
+			if(Last_Nametxtbx.getText()==null || Last_Nametxtbx.getText()=="")
+			{
+				Assertion.fail("Member Last Name not Displayed");
+			}
+			System.out.println("Member Name Displayed - "+First_Nametxtbx.getText()+ Last_Nametxtbx.getText());
 		}
 		validateNew(Member_DOBtxtbx);
 		validateNew(Member_Ziptxtbx);

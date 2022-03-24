@@ -92,7 +92,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//label[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_DrugsTxt;
-	
+
 	@FindBy(xpath = "//div[@id='editdrugcontainer']//th[contains(text(), 'Drug')]")
 	public WebElement YourDrugs_NoSortTxt;
 
@@ -459,7 +459,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 		//validateNew(DrugCosts_TFN);
 	}
-  
+
 	public void validateYourDrugs() {
 		validateNew(YourDrugs_Header);
 		validateNew(YourDrugs_Table);
@@ -2810,32 +2810,32 @@ Blank error message is removed
 				Assertion.fail(">>>>> Enroll Validation failed - Enroll option is displayed when it should not be displayed <<<<<");
 		}
 	}
-	
+
 	@FindBy(xpath="//label[@id='sortby']//button")
 	protected WebElement Defaultclick;
-	
+
 	@FindBy(xpath="//label[@id='sortby']/..//button[contains(text(),'Apply')]")
 	protected WebElement SortApplyBtn;
-	
+
 	@FindBy(xpath="//div[@id='accordion']//span[contains(text(),'Your Drugs')]")
 	protected WebElement FoundCount;
-	
+
 	@FindBy(xpath="//div[@id='drugtable']//span[@class='text-bold mr-5 onlyserif']")
 	private List<WebElement> Drugname;
-	
+
 	@FindBy(xpath="//div[@id='editdrugcontainer']//div[@id='accordion-1-content']//p[@class='text-bold']")
 	private List<WebElement> DrugCost;
-	
+
 	@FindBy(xpath="//div[@id='drugtable']//*[contains(text(),'Tier')]")
 	private List<WebElement> Coveredd;
-	
+
 	@FindBy(xpath="//div[@id='drugtable']//li[contains(text(),'Not Covered*')]")
 	private List<WebElement> NotCovered;
-	
+
 	public int DrugCount;
-	
+
 	public int tierdrugcount;
-	
+
 	public int getDrugCnt(){
 	    pageloadcomplete();
 		String DrugCountText = FoundCount.getText();
@@ -2846,7 +2846,7 @@ Blank error message is removed
 		System.out.println("Displayed Drug Count - "+DrugCount);
 		return DrugCount;
 	}
-	
+
 	public int getTierDrugCnt() {
 	        pageloadcomplete();
 			String DrugCountText = FoundCount.getText();
@@ -2857,7 +2857,7 @@ Blank error message is removed
 			System.out.println("Displayed tier Drug Count - "+tierdrugcount);
 			return tierdrugcount;
 	}
-	
+
 	public void validateDrugSortBy(String sortBy) {
 		int Drugcnt = getDrugCnt();
 		int tierdrugcount = getTierDrugCnt();
@@ -2881,15 +2881,15 @@ Blank error message is removed
 		}else {
 			Assertion.assertTrue("PROBLEM - haven't code to sort By '" + sortBy + "' yet", false);
 		}
-		
+
 		WebElement label = driver.findElement(By.xpath(labelId));
 		validateNew(label);
 		jsClickNew(label);
 		validateNew(SortApplyBtn);
         jsClickNew(SortApplyBtn);
-        pageloadcomplete();       
+        pageloadcomplete();
         CommonUtility.checkPageIsReady(driver);
-                
+
         if(Drugcnt==1) {
         	validateNew(YourDrugs_NoSortTxt);
         	System.out.println("<<< Sort option is disabled for one drug >>>>>");
@@ -2922,7 +2922,7 @@ Blank error message is removed
         			System.out.println("Drugs sorted in A-Z format");
         		}else{
                        Assertion.fail(">>>>>> Drugs Not sorted in A-Z format <<<<<<");
-        		}        		   
+        		}
         	}else if(sortBy.equalsIgnoreCase("Z-A")) {
         		boolean zaflag=false;
         		List<String> druglist = new ArrayList();
@@ -2931,7 +2931,7 @@ Blank error message is removed
         			drug=we.getText().toLowerCase();
         			druglist.add(drug);
         		}
-                Collections.sort(druglist,Collections.reverseOrder()); 
+                Collections.sort(druglist,Collections.reverseOrder());
                 int i=0;
         		for(WebElement we : Drugname){
         			if(we.getText().toLowerCase().equals(druglist.get(i))) {
@@ -2946,7 +2946,7 @@ Blank error message is removed
             			System.out.println("Drugs sorted in Z-A format");
             		}else{
                            Assertion.fail(">>>>>> Drugs Not sorted in Z-A format <<<<<<<");
-            		}  
+            		}
         	}else if(sortBy.equalsIgnoreCase("Cost")) {
         		 boolean costflag=false;
         		 List<Double> costlist=new ArrayList();
@@ -2965,12 +2965,12 @@ Blank error message is removed
          				break;
          			}
          			i++;
-         		}        		 
+         		}
         		 if(costflag==true) {
         			 System.out.println("Durgs sorted by cost high to low");
         		 }else {
         			 Assertion.fail(">>>>>> Drugs Not sorted by cost <<<<<");
-        		 }        		
+        		 }
         	}else if(sortBy.equalsIgnoreCase("Tier")) {
         		boolean ncflag=false;
         		boolean cflag=false;
@@ -2996,7 +2996,7 @@ Blank error message is removed
             		}
             		Collections.sort(druglist);
             		int j=0;
-            		for (WebElement we : Drugname) {  
+            		for (WebElement we : Drugname) {
             			if(j==Drugcnt-tierdrugcount) {
             				break;
             			}
@@ -3017,7 +3017,7 @@ Blank error message is removed
             				break;
             			}
             			k++;
-            		}        			
+            		}
         		}
         		if(tierdrugcount >0) {
             		List<String> coveredlist = new ArrayList();
@@ -3068,7 +3068,7 @@ Blank error message is removed
         			System.out.println("Drugs sorted by tier low to high");
         		}else {
         			Assertion.fail(">>>>> Drugs Not sorted by tier low to high <<<<<<< ");
-        		}       		
+        		}
         	}else if(sortBy.equalsIgnoreCase("Covered")) {
         		boolean cflag=false;
         		List<String> coveredlist = new ArrayList();
@@ -3115,8 +3115,8 @@ Blank error message is removed
             			System.out.println("Drugs sorted in Covered format");
             		}else{
                            Assertion.fail(">>>>>> Drugs Not sorted in Covered format <<<<<<<");
-            		} 
-        		
+            		}
+
         	}else if(sortBy.equalsIgnoreCase("Not Covered")) {
         		boolean ncflag=false;
         		List<String> notcoveredlist = new ArrayList();
@@ -3139,7 +3139,7 @@ Blank error message is removed
         		Collections.sort(druglist);
         		int j=0;
         		boolean dflag=false;
-        		for (WebElement we : Drugname) {  
+        		for (WebElement we : Drugname) {
         			if(j==Drugcnt-tierdrugcount) {
         				break;
         			}
@@ -3165,9 +3165,17 @@ Blank error message is removed
             			System.out.println("Drugs sorted in Not covered format");
             		}else{
                            Assertion.fail(">>>>>> Drugs Not sorted in Not covered format <<<<<<<");
-            		}       		
+            		}
         	}
-        }		
+        }
+	}
+
+	public DrugDetailsPage validateDrugDetailsPage(){
+		if (validateNew(DrugDetails_ChangePharmacyLnk) &&
+			validateNew(DrugCosts_PlanDetailsBtn) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPage(driver);
+		}
+		return null;
 	}
 
 }

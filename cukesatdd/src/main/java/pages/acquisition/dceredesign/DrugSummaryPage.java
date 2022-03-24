@@ -850,7 +850,7 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
 	}
 
-	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'provides prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthCare')])[1]")
+	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'provides Prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthCare')])[1]")
 	public WebElement DrugPricingSpecialtyPharmacyText;
 
 	@FindBy(xpath = "(//div[contains(@class, 'bg-teal')]//p[contains(text(),'the pharmacy you selected does not provide Prescription Drug Coverage under this plan. We are unable to provide the drug pricing.')])[1]")
@@ -1539,6 +1539,17 @@ public class DrugSummaryPage extends UhcDriver {
 					"no Pharmacies available for both Tab on Change Pharmacy Modal From Detail Page for PDP Plan");
 			jsClickNew(selectPharmacyModalCloseBtn);
 			System.out.println("Dynamic Error Message Displayed");
+		}
+	}
+	
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				returnToProfileLink.click();
+			}
+		} catch (Exception e) {
+			Assertion.fail("Return to profile not displayed");
 		}
 	}
 

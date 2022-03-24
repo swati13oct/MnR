@@ -46,10 +46,10 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
     #  And user should verify the drug extra qualification in drug pricing popup
     And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
     And user clicks on change pharmacy link from summary page
-    Then the user selects following pharmacy and returns to DCE Summary page
-      | SelectPharmacy | <SelectPharmacy> |
-    Then the user validates Covered Drug display for NC Pharmacy selection
-    And user clicks on change pharmacy link on alert message from plan card on drug summary page
+#    Then the user selects following pharmacy and returns to DCE Summary page
+#      | SelectPharmacy | <SelectPharmacy> |
+#    Then the user validates Covered Drug display for NC Pharmacy selection
+#    And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
     Then the user selects Mail Pharmacy and returns to DCE Summary page
