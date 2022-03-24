@@ -65,6 +65,7 @@ import acceptancetests.data.MRConstants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.FlagsmithLoginPage;
@@ -858,6 +859,7 @@ public class MRScenario {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
 				capabilities.setCapability("enablePerformanceLogging", true);
+				capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UIAutomator2");
 				browserName = "Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 
@@ -870,6 +872,7 @@ public class MRScenario {
 				}
 
 			} else {
+				
 				capabilities.setCapability("browserName", "Safari");
 				capabilities.setCapability("autoAcceptAlerts", "true");
 				capabilities.setCapability("autoGrantPermissions", "true");
@@ -948,6 +951,7 @@ public class MRScenario {
 					: MRConstants.FLAGSMITH_PROD_UHC_URL;
 		default:
 			return site.equalsIgnoreCase("AARP") ? MRConstants.FLAGSMITH_AARP_URL : MRConstants.FLAGSMITH_UHC_URL;
+			//
 		}
 	}
 
