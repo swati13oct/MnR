@@ -794,11 +794,11 @@ public abstract class UhcDriver {
 
 	public void startNew(String url) {
 
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
 		
-		if(!url.contains("uhcmedicare")&& url.contains("uhc")) {
+		if(!url.contains("uhcmedicaresolution")&& url.contains("uhc")) {
 			Cookie cookieName = new Cookie("X_UMS_DEBUG_SESSION","true");
 			driver.manage().addCookie(cookieName);
 			driver.navigate().refresh();
