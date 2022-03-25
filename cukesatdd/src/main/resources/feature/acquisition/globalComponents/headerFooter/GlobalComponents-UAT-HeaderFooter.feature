@@ -308,6 +308,82 @@ Feature: 1.12 UAT - Header and Footer flows
     And user hover over for plan member to click to go to member site
     Then user validates visitor profile
     And the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Introduction" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Eligibility" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Coverage Options" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Prescriptions, Providers & Benefits" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Cost Basics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Advantage Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Supplement Insurance" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Prescription Drug Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "When to Enroll" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "How to Enroll" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Changing Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Working Past 65" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Overview of Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Special Needs Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare FAQ" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Glossary" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Articles and Special Topics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user enter email and submit in email section
+    Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
+    
+     @globalheader_AARP123
+    Examples: 
+      | Scenario           | site | path                                                      | pagename                                                    |
+      | E2E Scenario_2 AMP | AARP | health-plans.html#/zipcode                                | Shop for a Plan                                             |
 
     @globalheader_AARP @regressionAARP @featureGate
     Examples: 

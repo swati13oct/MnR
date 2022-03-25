@@ -448,7 +448,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
-  Scenario Outline: To verify the links under Learn About Medicare on the <site> site
+  Scenario Outline: To verify the links under Learn About Medicare from the navigation bar on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user hovers over the learn about medicare
@@ -523,12 +523,12 @@ Feature: 1.12 ACQ - Global Components Validation
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
 
-    @learnAboutMedicareNav_AARP @regressionAARP @GCdebug
+#    @learnAboutMedicareNav_AARP  @GCdebug
     Examples: 
       | site |
       | AARP |
 
-    @learnAboutMedicareNav_UHC @regressionUHC @featureGate @uhcmedicare
+#    @learnAboutMedicareNav_UHC  @featureGate @uhcmedicare
     Examples: 
       | site |
       | UHC  |

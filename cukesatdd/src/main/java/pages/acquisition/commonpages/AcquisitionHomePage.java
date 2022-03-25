@@ -1014,7 +1014,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
@@ -1041,7 +1041,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
-				checkForSecurityPage();
+				//checkForSecurityPage();
 				// checkModelPopup(driver, 10);
 			}
 
@@ -1061,7 +1061,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} catch (Exception e) {
 				System.out.println("Proactive chat popup not displayed");
 			}
-		} else if (site.equalsIgnoreCase("AARP") || site.equalsIgnoreCase("Ulayer") || site.equalsIgnoreCase("AMP")) {
+		} else if (site.equalsIgnoreCase("AARP")) {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
@@ -1075,9 +1075,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
 				checkModelPopup(driver, 20);
 			} else {
-				start(AARP_ACQISITION_PAGE_URL);
+				startNew(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
-				checkForSecurityPage();
+				//checkForSecurityPage();
 				// checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
@@ -1086,24 +1086,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 																									// cleanup
 		}
 
-		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
-																				// bypass PRE/ARE flows
-			// CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: " + driver.getCurrentUrl());
-			// checkModelPopup(driver,15);
-			// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-			// CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not
-			// change this to waitForPageLoadNew as
-			// we're not trying to fail the test if it
-			// isn't found
-			try {
-				validate(proactiveChatExitBtn, 20);
-				if (proactiveChatExitBtn.isDisplayed())
-					jsClickNew(proactiveChatExitBtn);
-			} catch (Exception e) {
-				System.out.println("Proactive chat popup not displayed");
-			}
-		}
+		/*
+		 * if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { //
+		 * adding this condition temporarily to // bypass PRE/ARE flows
+		 * 
+		 * try { validate(proactiveChatExitBtn, 20); if
+		 * (proactiveChatExitBtn.isDisplayed()) jsClickNew(proactiveChatExitBtn); }
+		 * catch (Exception e) {
+		 * System.out.println("Proactive chat popup not displayed"); } }
+		 */
 		
 		
 	}
