@@ -395,7 +395,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 	
-	@FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 
 	//@FindBy(xpath = "(//*[contains(text(),'Start Application')])[1]")
 	// @FindBy(xpath =
@@ -403,7 +403,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
-    @FindBy(xpath = "(//button[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
+    @FindBy(xpath = "(//*[contains(text(),'Start Application') or contains(text(),'Start application')])[1]")
 	//@FindBy(xpath = "(//*[@id=\"responsiveplan\"]/div[4]/div/div[1]/div[2]/button")
 	// @FindBy(xpath =
 	// "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start
@@ -2137,6 +2137,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
+
+		try {
+			Thread.sleep(7);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (validateNew(RightRail_TFN, 45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
@@ -7567,7 +7573,7 @@ public String GetMonthlyPremiumValue() {
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
 				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-						+ "']/following::div[contains(@class,'save-box')][1]"));
+						+ "']/following::*[contains(@class,'save-box')][1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				threadsleep(2);
@@ -7938,8 +7944,7 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		//selectFromDropDownByText(driver, partBDropdown, "May");
-		//selectFromDropDownByValue(partBDropdown, "05");
+		//selectFromDropDownByText(driver, partBDropdown, "March");
 		partBDropdown.click();
 		Select dropdown = new Select(partBDropdown);
 		dropdown.selectByValue("05");
@@ -7956,7 +7961,7 @@ public String GetMonthlyPremiumValue() {
 	private WebElement firstComparePlanButtonForMS4;
 	
 	@FindBy(xpath = "(//*[contains(@class,'compare-box')]//button[contains(@class,'cta-button')])[1]")
-	private WebElement firstComparePlanButtonForMS3;
+    private WebElement firstComparePlanButtonForMS3;
 	
 	public void compareAllMS4Plans() {
 		try {
@@ -8016,5 +8021,4 @@ public String GetMonthlyPremiumValue() {
 		}
 		jsClickNew(firstComparePlanButtonForMS3);
 	}
-	
 }

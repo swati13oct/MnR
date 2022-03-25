@@ -284,7 +284,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				jsClickNew(SameMailingAddressNo);
 
 				sendkeysMobile(MailingAdd_Street, Mailing_Street);
-				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
+				sendkeysMobile(MailingAdd_Aptno, "301");
 				sendkeysMobile(MailingAdd_City, Mailing_City);
 
 				// Select SelectState = new Select(MailingAdd_State_DropDown);
@@ -292,18 +292,16 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
-					WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
+					WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 					jsClickNew(stateLable);
 
 				}
+				
+		//checkElementisEnabled(MailingAdd_State_DropDown);
+			//	selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+				MailingAdd_State_DropDown.click();
+				mobileSelectOption(MailingAdd_State_DropDown,"ALASKA",true);
 
-				checkElementisEnabled(MailingAdd_State_DropDown);
-
-				//Below code is added for ios click issue
-				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-					MailingAdd_State_DropDown.click();
-				}
-				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 
 				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 			}
@@ -326,7 +324,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			} else
 				// goGreenNoBtn.click();
 				jsClickNew(goGreenNoBtn);
-
+			scrollToView(Email);
 			sendkeysMobile(Email, EmailAddress);
 		}
 		result = Clickoncontinuebutton("language-preference");
@@ -592,11 +590,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		Thread.sleep(3000);
 		// Updated the get url title SEP Page with Other Health insurance...OLERedesign
-		if (driver.getCurrentUrl().contains("other-health-insurance")) {
+		if (driver.getCurrentUrl().contains("other-health-insurance")|| driver.getCurrentUrl().contains("prescription-drug-coverage")) {
 			Assert.assertTrue(
 					driver.getCurrentUrl().contains("other-health-insurance")
-							|| driver.getCurrentUrl().contains("chronic-questions"),
-					"OLE Other HealthInsurance or Chronic Page Page is Displayed");
+							|| driver.getCurrentUrl().contains("prescription-drug-coverage")|| driver.getCurrentUrl().contains("chronic-questions"),
+					"OLE Other HealthInsurance or prescription drug page or Chronic Page Page is Displayed");
 			return new ConfirmYourEligibilityPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
@@ -610,11 +608,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				validateNew(NextBtn);
 				jsClickNew(NextBtn);
 
-				if (driver.getCurrentUrl().contains("other-health-insurance")
+				if (driver.getCurrentUrl().contains("other-health-insurance")|| driver.getCurrentUrl().contains("prescription-drug-coverage")
 						|| driver.getCurrentUrl().contains("chronic-questions")) {
-					System.out.println("OLE Other HealthInsurance or Chronic  Page is Displayed");
+					System.out.println("OLE Other HealthInsurance or prescription drug page or Chronic  Page is Displayed");
 				} else {
-					System.out.println("OLE Other HealthInsurance  or Chronic  Page is not Displayed");
+					System.out.println("OLE Other HealthInsurance or prescription drug page  or Chronic  Page is not Displayed");
 				}
 				return new ConfirmYourEligibilityPageMobile(driver);
 			}

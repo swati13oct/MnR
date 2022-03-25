@@ -25,12 +25,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.commonpages.*;
 import pages.acquisition.ole.*;
+import pages.acquisition.ole.ProposedEffectiveDatePage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 
 /**
  * @author sdwaraka Functionality:OLE Common Tool for both AAPR and UHC
@@ -1907,7 +1905,9 @@ public class oleStepDefinition {
 		
 		String ConfirmationNumber="";
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	||MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 			ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
@@ -1935,7 +1935,9 @@ public class oleStepDefinition {
 	public void the_user_validates_Plan_and_Membber_Details_on_Confirmation_Page() throws Throwable {
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	||MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (oleConfirmationPage != null) {
@@ -1970,32 +1972,35 @@ public class oleStepDefinition {
 
 	@Then("^the user Validates Next Steps in Confirmation Page for the Plan Type\\.$")
 	public void the_user_Validates_Next_Steps_in_Confirmation_Page_for_the_Plan_Type() throws Throwable {
-		
 
-		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
-		if (oleConfirmationPage != null) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+			//	|| MRScenario.environment.equalsIgnoreCase("team-acme")
+		)) {
 
-			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (oleConfirmationPage != null) {
 
-			boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
-			if(Validation_Status){
-				System.out.println("OLE Confirmation Page : Next Steps Validated");
+				String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+
+				boolean Validation_Status = oleConfirmationPage.validate_nextSteps_for_Plantype(PlanType);
+				if (Validation_Status) {
+					System.out.println("OLE Confirmation Page : Next Steps Validated");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+							oleConfirmationPage);
+					Assertion.assertTrue(true);
+				} else {
+					System.out.println("Review and Submit Page : Next Steps  NOT validated");
+					Assertion.fail();
+				}
+			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
 						oleConfirmationPage);
-				Assertion.assertTrue(true);
-			} else {
-				System.out.println("Review and Submit Page : Next Steps  NOT validated");
-				Assertion.fail();
+				System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
 			}
+			// }
 		}
-		else{
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
-					oleConfirmationPage);
-			System.out.println("OLE Confirmation Page is NOT Displayed : Already Enrolled or Enrollment Failed due to Service error");
-		}
-		// }
 	}
-
 	@Then("^the user validates the presence for Preliminary Questions on Page$")
 	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes)
 			throws Throwable {
@@ -3128,18 +3133,20 @@ public class oleStepDefinition {
 		String CardType = MedicareDetailsMap.get("Card Type");
 		
 		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
-		
+		String RiderFlag = MedicareDetailsMap.get("Rider Flag");
+
 		ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		//AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		//MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 
-		boolean medicareInfoPage = reviewSubmitPage.Review_page_enter_required_Medicare_details(MedicareDetailsMap);
+		boolean medicareInfoPage = reviewSubmitPage.Review_page_enter_required_Pesornal_Medicare_details(MedicareDetailsMap);
 		if (medicareInfoPage) {
 
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number1"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
-			//getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
-			//getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date1"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date1"));
+			getLoginScenario().saveBean(oleCommonConstants.DOB, MedicareDetailsMap.get("DOB1"));
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
@@ -3607,6 +3614,78 @@ public class oleStepDefinition {
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+
+	@Then("^the user validates Save and Return Later modal for OLE Page$")
+	public void the_user_save_and_return_later_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return --");
+		//PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	//	OLECommonPages saveAndReturnLater = (OLECommonPages) getLoginScenario().getBean(OLE_PageConstants.OLE_COMMONPAGES);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPages saveAndReturnLater=new OLECommonPages(wd);
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			saveAndReturnLater.OpensavereturnOLEPages();
+			System.out.println("OLE Save Return Later modal on OLE Pages");
+		}
+		}
+	@Then("^the user click on continue enrollment in visitor profile and navigate for OLE Page$")
+	public void the_user_validates_continue_enrollment_navigate_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return  continue enrollment--");
+	//	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPages ContinueEnrollment=new OLECommonPages(wd);
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			boolean Validation_Status = ContinueEnrollment.validateVPOLEDetails(PlanDetailsMap);
+			if (Validation_Status) {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status + " - Validation Passed");
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
+			System.out.println("continue enrollment on OLE Pages");
+		}
+
+	}
+
+	@Then("^the user Validates plan status on visitor profile page after submission$")
+	public void the_user_Validates_plan_status_on_vp_submission() throws Throwable {
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		PlanDetailsMap.put("SiteName", (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME));
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")
+				//	|| MRScenario.environment.equalsIgnoreCase("team-acme")
+			)) {
+
+			OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			if (oleConfirmationPage != null) {
+
+				boolean Validation_Status = oleConfirmationPage.ValidateOLESubmittedDetailsonVP(PlanDetailsMap);
+				if (Validation_Status) {
+					System.out.println("Visitor profile Page submission details validation : Next Steps Validated");
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
+							oleConfirmationPage);
+					Assertion.assertTrue(true);
+				} else {
+					System.out.println("Visitor profile Page submission details validation : Next Steps  NOT validated");
+					Assertion.fail();
+				}
+			}
+		}
 	}
 
 }
