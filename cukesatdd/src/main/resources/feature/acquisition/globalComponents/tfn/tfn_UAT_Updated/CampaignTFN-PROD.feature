@@ -1,4 +1,4 @@
-
+@globalComponent
 Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   #######################Script 1: Direct traffic########################################
