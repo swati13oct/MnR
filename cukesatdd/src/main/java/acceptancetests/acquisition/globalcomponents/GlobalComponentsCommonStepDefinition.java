@@ -84,17 +84,11 @@ public class GlobalComponentsCommonStepDefinition {
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
 		
-		scenario.log("Sai - 06/15------Need to remove  line 100 later");
+		
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String site = memberAttributesMap.get("Site");
-		//AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().openApplicationURL(wd, site);
 		if(aquisitionhomepage.returnCookieValue()!= null)
 			scenario.log(aquisitionhomepage.returnCookieValue());
@@ -105,22 +99,11 @@ public class GlobalComponentsCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, null);
-		if("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
+		if(site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
-		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))){
-				
-				//aquisitionhomepage.validateSubtitle();
-		//}
-			
-		if (MRScenario.environment.equalsIgnoreCase("offline") ||  MRScenario.environment.equalsIgnoreCase("offline-prod") || MRScenario.environment.equalsIgnoreCase("prod")){
-			aquisitionhomepage.handleSurveyPopup();
-		}
-		if (site.equalsIgnoreCase("AARP")) 
-		aquisitionhomepage.validateSubtitle();
-		}
 	}
 	
 
@@ -186,11 +169,6 @@ public class GlobalComponentsCommonStepDefinition {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);

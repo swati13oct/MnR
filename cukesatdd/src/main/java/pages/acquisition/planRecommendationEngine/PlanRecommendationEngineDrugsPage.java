@@ -538,16 +538,16 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 //Drug name List
 
 	public ArrayList<String> drugnamesList() {
+        threadsleep(3000);
+        String curID = String.valueOf(Thread.currentThread().getId());
 		int count = drugNameList.size();
 		drugNames = new ArrayList<String>();
-		String curID = String.valueOf(Thread.currentThread().getId());
 		for (int i = count - 1; i >= 0; i--) {
-			threadsleep(1000);
-			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() );
+			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase());
 		}
+		Collections.sort(drugNames);
 		System.out.println("Current Thread ID is - "+curID+" Drugs in PRE flow "+drugNames);
 		CommonConstants.PRE_Drugs.put(curID, drugNames);
-		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
 		return drugNames;
 	}
