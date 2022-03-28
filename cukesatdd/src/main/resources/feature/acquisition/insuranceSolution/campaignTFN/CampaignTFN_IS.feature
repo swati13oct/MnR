@@ -643,7 +643,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
     Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
+      | TFN No    | <MedSupStaticTFNNo>     |
       | TFN Xpath | <MedsuppStaticTFNxpath> |
     And user click on Back to Plan in MS Plan Details
       | Zip Code | <zipcode> |
@@ -651,10 +651,10 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     #And user updates Medsup form for user details
     Then user click to close MS application Modal
     Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
+      | TFN No    | <MedSupStaticTFNNo>     |
       | TFN Xpath | <MedsuppStaticTFNxpath> |
     When user selects medsup plans to compare
-    | Zip Code | <zipcode> |
+      | Zip Code | <zipcode> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -665,7 +665,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
     Then the user validates TFN in Already an insured section
-      | TFN No | <MedSupStaticTFNNo> |
+      | TFN No    | <MedSupStaticTFNNo>     |
       | TFN Xpath | <MedsuppStaticTFNxpath> |
     And user click on Start Application in MS plan compare page
       | Zip Code | <zipcode> |
@@ -682,12 +682,85 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
+    @Scenario_6_DirectTraffic__UHC_UAT_medsup4.0 @campaignTFNStageMS @IS_TFN_Scenario_6 @campaignTFNProdMS
     Examples: 
-      @Scenario_6_DirectTraffic__UHC_UAT_medsup4.0 @campaignTFNStageMS @IS_TFN_Scenario_6  @campaignTFNProdMS
-      Examples:
+      | scenario                    | site | zipcode | FedTFNNo       | MedSupTFNNo    | isMultutiCounty | county             | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                                           | DCETFNxpath                                                               | MSplantype | EnrollTFNxpath                    | userName          | password        | FedTFNNo       | MedSupTFNNo    | sourceCode | decisionGuideTFN                            | MedsuppFormTFNxpath                         | dob        | agentXpath                          | MedSupStaticTFNNo | MedsuppStaticTFNxpath                                   |
+      | Scenario 6 - UMS Medsup 4.0 | UHC  |   90210 | 1-877-596-3258 | 1-888-378-0254 | NO              | Los Angeles County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   90210 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | (//a[contains(@class, 'tel')])[3] | TiggerOptumID3331 | FebruarY##123$! | 1-877-596-3258 | 1-888-378-0254 | AEP        | //span[contains(@class, 'invoca_swap_sam')] | //span[contains(@class, 'invoca_swap_sam')] | 01/01/1950 | //*[contains(@class,'headline')]//a | 1-866-603-3424    | //*[@class='insured-member']//a[@class='tfn-call']/span |
 
-      | scenario                    | site | zipcode | FedTFNNo       | MedSupTFNNo    | isMultutiCounty | county             | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                                           | DCETFNxpath                                                               | MSplantype | EnrollTFNxpath                    | userName          | password        | FedTFNNo       | MedSupTFNNo    | sourceCode | decisionGuideTFN                            | MedsuppFormTFNxpath                         | dob        | agentXpath                          | MedSupStaticTFNNo |MedsuppStaticTFNxpath|
-      | Scenario 6 - UMS Medsup 4.0 | UHC  |   90210 | 1-877-596-3258 | 1-888-378-0254 | NO              | Los Angeles County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   90210 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | (//a[contains(@class, 'tel')])[3] | TiggerOptumID3331 | FebruarY##123$! | 1-877-596-3258 | 1-888-378-0254 | AEP        | //span[contains(@class, 'invoca_swap_sam')] | //span[contains(@class, 'invoca_swap_sam')] | 01/01/1950 | //*[contains(@class,'headline')]//a | 1-866-603-3424    |//*[@class='insured-member']//a[@class='tfn-call']/span|
+  @Scenario_6_MS
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN show correctly from UMS direct traffic
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates TFN Number
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user enter zipcode in homepage
+      | Zip Code  | <zipcode>    |
+      | Plan Type | <MSplantype> |
+    Then the user fills all the details in MedsuppPage for TFN
+      | DOB      | <dob>     |
+      | Zip Code | <zipcode> |
+    And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No    | <MedSupStaticTFNNo>     |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    And user click on Back to Plan in MS Plan Details
+      | Zip Code | <zipcode> |
+    Then the user validates TFN in Already an insured section
+      | TFN No    | <MedSupStaticTFNNo>     |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    When user selects medsup plans to compare
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No    | <MedSupStaticTFNNo>     |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    And user click on Start Application in MS plan compare page
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    And the user clicks on the shopping cart icon
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+
+    @Scenario_6_DirectTraffic__UHC_UAT_medsup3.0 @campaignTFNStageMS123 @IS_TFN_Scenario_6 @campaignTFNProdMS
+    Examples: 
+      | scenario                    | site | zipcode | dob        | FedTFNNo       | MedSupTFNNo    | isMultutiCounty | county             | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                                                           | DCETFNxpath                                                               | MSplantype | EnrollTFNxpath                    | userName          | password        | FedTFNNo       | MedSupTFNNo    | sourceCode | decisionGuideTFN                            | MedsuppFormTFNxpath                         | dob        | agentXpath                          | MedSupStaticTFNNo | MedsuppStaticTFNxpath                                   |
+      | Scenario 6 - UMS Medsup 3.0 | UHC  |   23666 | 11/11/1950 | 1-877-596-3258 | 1-888-378-0254 | NO              | Los Angeles County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=23666&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[3] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | //*[@id='sam-call-button']//span[contains(@class,'sam__button__text')][2] | MS4.0      | (//a[contains(@class, 'tel')])[3] | TiggerOptumID3331 | FebruarY##123$! | 1-877-596-3258 | 1-888-378-0254 | AEP        | //span[contains(@class, 'invoca_swap_sam')] | //span[contains(@class, 'invoca_swap_sam')] | 01/01/1950 | //*[contains(@class,'headline')]//a | 1-866-603-3424    | //span[@class='tel'] |
 
   #######################IS_TFN_E2E Scenario 8 & 9: VPP (eInquiry) ########################################
   @Scenario_IS_TFN_E2E_Scenario_8_and_9_UAT @UATRegression
