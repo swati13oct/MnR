@@ -27,13 +27,13 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow E2E Scripts
     Examples: 
       | Scenario                                      | site | zipcode | isMultutiCounty | county             | plantype |	firstname  		| lastname    	| distributionmethod | email              | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
       | IS Decision Guide Request - E2E Scenario_AARP | AARP |   15077 | NO              | Beaver County | MS       |	MNRtestKumar	| MNRtestSai 		| mail               | [blank]            | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
-      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   15077 | NO              | Cass County | MS       | 	MNRtestSai 		| MNRtestKumar	| email              | test123@optum.com 	| 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
+      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   15077 | NO              | Beaver County | MS       | 	MNRtestSai 		| MNRtestKumar	| email              | test123@optum.com 	| 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
     @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution @nonProd
     Examples: 
       | Scenario                                     | site | zipcode | isMultutiCounty | county             | plantype | firstname  | lastname     | distributionmethod | email                    | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
-      | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   15077 | NO              | Cass County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
-      | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   15077 | NO              | Cass County | MS       | MNRtestSai | MNRtestKumar | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
+      | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   15077 | NO              | Beaver County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
+      | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   15077 | NO              | Beaver County | MS       | MNRtestSai | MNRtestKumar | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
   Scenario Outline: <Scenario> - To Test E2E IS Decision Guide E2E on <site> site thorugh Shop Pages for <firstname>
     Given the user is on medicare acquisition site landing page
