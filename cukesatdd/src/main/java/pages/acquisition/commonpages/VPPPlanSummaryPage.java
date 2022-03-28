@@ -4993,6 +4993,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 
 		System.out.println("Eligibility Health Questions are displayed");
+		Thread.sleep(2000);
 		jsClickNew(Eligibility);
 		jsClickNew(NursingFacility);
 		jsClickNew(ESRD);
