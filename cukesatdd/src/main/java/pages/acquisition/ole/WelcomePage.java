@@ -247,7 +247,8 @@ public class WelcomePage extends UhcDriver{
 				//String VPPTFNNoActual = VPPTFNNo.getText();
 				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
 				//CheckiPerseptions();
-				String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
+				//String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
+				String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
 				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 			//	enrollInPlan.click();
 				validateNew(enrollInPlan);
