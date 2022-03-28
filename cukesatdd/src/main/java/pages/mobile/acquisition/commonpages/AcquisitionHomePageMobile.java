@@ -58,7 +58,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	String CallSamPopupTitle = "Need Help? Call us.";
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(css = "div[class$='newstyle_feature_toggle'] input[id^='zipcodemeded']")
+	@FindBy(xpath="//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode') or @id='zipcode']")
 	private WebElement zipCodeField;
 	
 	@FindBy(xpath = "//div[contains(@class,'label-icon')]//following-sibling::div/p[2]/span[@class='ng-scope']")
@@ -1024,7 +1024,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
 			try {
 				if (proactiveChatExitBtn != null)
-					jsClickNew(proactiveChatExitBtn);
+					proactiveChatExitBtn.click();
 
 				else
 					Assert.fail("Please check booleanvalue");
@@ -4789,7 +4789,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='submitChat']")
 	private WebElement proActiveChatSubmit;
 
-	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")

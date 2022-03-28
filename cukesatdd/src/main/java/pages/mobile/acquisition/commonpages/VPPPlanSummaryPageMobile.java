@@ -1030,10 +1030,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	public ComparePlansPageMobile clickCompareButton() {
 		
-		if(validate(pdpPlansViewLink)) {
-			jsClickNew(pdpPlansViewLink);
-			waitForPlanSummaryPageLoad();
-		}
 		validateNew(compareButton);
 		jsClickNew(compareButton);
 		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);

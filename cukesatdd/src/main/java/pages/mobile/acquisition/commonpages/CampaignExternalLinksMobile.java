@@ -1,12 +1,14 @@
 package pages.mobile.acquisition.commonpages;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -16,15 +18,24 @@ import atdd.framework.UhcDriver;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	public CampaignExternalLinksMobile(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
 
 	public String testSiteUrl;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
@@ -58,6 +69,12 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@id,'find-plans-zip')]")
 	private WebElement zipcodeEnter;
+	
+	@FindBy(id = "backToPlanSummaryTop")
+	private WebElement clickBackToPlans;
+
+	@FindBy(xpath = "//*[@id='selectCounty']/p[1]/a")
+	private WebElement selectCounty;
 
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
@@ -70,6 +87,12 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
 	private WebElement findPlansPricing;
+	
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+	
+	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
 	private WebElement workingHrs;
@@ -169,6 +192,59 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
 	
+	@FindBy(css = "input#drug")
+	private WebElement drugsearchBox;
+	
+	@FindBy(xpath = "//button[contains(text(),'Continue')]")
+	private WebElement continueBtn;
+	
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	private WebElement yesOption;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	private WebElement noOption;
+	
+	@FindBy(css = "uhc-autocomplete button")
+	private WebElement drugsearchButton;
+
+	@FindBy(css = "#modal uhc-radio[class*='checked']")
+	private WebElement modalSelcetedDrug;
+	
+	@FindBy(css = "#modal div>button[class*='primary button']")
+	private WebElement modalcontinue;
+	
+	@FindBy(xpath = "(//*[@class='enrollSection'])[1]/div/button")
+	private WebElement viewPlanButton;
+
+	@FindBy(css = "uhc-autocomplete uhc-menu-item")
+	private List<WebElement> drugsAutoList;
+	
+	@FindBy(css = "#modal #dosage-select")
+	private WebElement modalDosageSelect;
+
+	@FindBy(css = "#modal legend")
+	private WebElement modalGenericDrug;
+	
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
+	private WebElement modalGenericSwitchLabel;
+
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+	private WebElement modalGenericSwitch;
+
+	@FindBy(css = "uhc-list uhc-list-item")
+	private List<WebElement> drugsList;
+
+	@FindBy(css = "#modal #frequency-select")
+	private WebElement modalFrequencySelect;
+
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
+	
+	@FindBy(css = "#modal #package-select")
+	private WebElement modalPackageSelect;
+	
+	@FindBy(css = "#modal #Quantity")
+	private WebElement modalQuantity;	
 	
 	//Locators for Scenario 10 - New LPM
 
@@ -253,6 +329,21 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
+	
+	@FindBy(id = "medicalbenefits")
+	private List<WebElement> medBenefitsTab;
+	@FindBy(id = "prescriptiondrug")
+	private List<WebElement> presDrugTab;
+	@FindBy(id = "plancosts")
+	private WebElement planCostsTab;
+
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+	// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+	// contains(@class,'active')]")
+	private List<WebElement> presDrugTab1;
+
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
 
 	@FindBy(xpath ="//input[@id='zipcode']")
 	private WebElement zip;
@@ -434,6 +525,23 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
 	}
+	
+	public CampaignExternalLinksMobile backToPlans() {
+		validate(clickBackToPlans);
+		jsClickNew(clickBackToPlans);
+		try {
+			if (selectCounty.isDisplayed())
+				jsClickNew(selectCounty);
+		} catch (Exception e) {
+			System.out.println("County popup not displayed");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new CampaignExternalLinksMobile(driver);
+
+		}
+		return null;
+	}
 
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -512,8 +620,174 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		}
 		  return null;
 		}
-
 	
+	public void continueNextpage() {
+		validate(drugsearchBox, 30);
+		threadsleep(2000);
+		jsClickNew(continueBtn);
+	}
+	
+	public void drugsInitiate(String drugSelection) {
+		threadsleep(3000);
+		System.out.println("Drugs Page Functional Operations");
+		if (drugSelection.equalsIgnoreCase("Yes")) {
+			validate(yesOption);
+			jsClickNew(yesOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		} else if (drugSelection.equalsIgnoreCase("No")) {
+			validate(noOption);
+			jsClickNew(noOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		}
+		jsClickNew(continueBtn);
+		validate(drugsearchBox);
+	}
+	
+	public void drugsHandlerWithdetails(String drugsDetails) {
+		String drugName = "";
+		boolean searchButtonClick = false;
+		String dosage = "";
+		String packageName = "";
+		String count = "";
+		String frequency = "";
+		boolean threeeMonthSLength = false;
+		boolean GenericDrug = false;
+		boolean switchGeneric = false;
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String drugInfo = drugslist[i];
+			if (drugInfo.trim().length() > 0) {
+				String[] drugDetails = drugInfo.split(",");
+				drugName = drugDetails[0];
+				if (drugDetails[1].toUpperCase().equals("NO"))
+					searchButtonClick = true;
+				dosage = drugDetails[2];
+				packageName = drugDetails[3];
+				count = drugDetails[4];
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
+				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
+					switchGeneric = true;
+
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
+						GenericDrug, switchGeneric);
+			}
+		}
+
+	}
+	
+	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
+			String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+		try {
+			validate(drugsearchBox, 30);
+			threadsleep(2000);
+			drugsearchBox.clear();
+			drugsearchBox.sendKeys(drugName);
+			if (searchButtonClick) {
+				jsClickNew(drugsearchButton);
+				threadsleep(6000);
+				validate(modalSelcetedDrug, 30);
+				threadsleep(2000);
+				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+						"Drug name is not Matched :" + drugName);
+				// Select modal
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+				threadsleep(2000);
+			} else {
+				jsClickNew(drugsAutoList.get(0));
+			}
+
+			validate(modalDosageSelect, 30);
+			threadsleep(2000);
+			Select dos = new Select(modalDosageSelect);
+			Select freq = new Select(modalFrequencySelect);
+			Select slen = new Select(modalSLengthSelect);
+
+			if (!dosage.isEmpty())
+				dos.selectByVisibleText(dosage);
+			if (!packageName.isEmpty()) {
+				Select pack = new Select(modalPackageSelect);
+				pack.selectByVisibleText(packageName);
+			}
+			if (!count.isEmpty()) {
+				modalQuantity.clear();
+				modalQuantity.sendKeys(count);
+			}
+
+			freq.selectByVisibleText(frequency);
+
+			if (threeeMonthSLength)
+				slen.selectByVisibleText("Every 3 Months");
+
+			threadsleep(4000);
+			jsClickNew(modalcontinue);
+
+			if (GenericDrug) {
+				validate(modalGenericDrug, 30);
+				threadsleep(2000);
+				// Generic modal
+				if (switchGeneric) {
+					jsClickNew(modalGenericSwitchLabel);
+					threadsleep(2000);
+					// jsClickMobile(modalGenericSwitch);
+					jsClickNew(modalGenericSwitch);
+					drugName = modalGenericDrug.getText();
+				}
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+			}
+			Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
+					"Added drug name Mistmatch from selected one : " + drugName);
+		} catch (Exception e) {
+			System.out.println("Unable to add drug");
+		}
+	}
+	
+	public void openAndValidate(String planType) {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver, 45);
+		/*
+		 * else checkModelPopup(driver, 10);
+		 */
+
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement> of the different tabs on Plan detail page
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+		} /* Added for SNP as well */
+		validateNew(planCostsTab);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+	}
+
+	public void clickViewResults() {
+		// System.out.println("Validating Results UI Page: ");
+		// pageloadcomplete();
+		// waitForPageLoadSafari();
+		// validate(planZipInfo,60);
+		// waitforElementInvisibilityInTime(planLoaderscreen,60);
+		validate(viewPlanButton);
+		jsClickNew(viewPlanButton);
+
+	}
 
 	public void sleepBySec(int sec) {
 		try {
@@ -691,6 +965,17 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	}
 	
+	public String GetTFNforPlanType() {
+		if (validate(RightRail_TFN)) {
+			System.out.println("TFN is displayed in Right Rail");
+			String TFN_Number = RightRail_TFN.getText();
+			return TFN_Number;
+		}
+		System.out.println("TFN is not Displayed for PlanType in VPP page");
+
+		return null;
+	}
+	
 	
 	public void clickFindPlansPricing() {
 		parentWindow = driver.getWindowHandle();
@@ -703,6 +988,42 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
+	}
+	
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		try {
+			if (validate(EnrollinPlan))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlan);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
 	}
 	
 	public void goBacktoExternalPage(String url) {
@@ -899,6 +1220,46 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		  return null;
 		}
 	
+	public void clickOnViewMorePlan(String planName) {
+
+		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+
+		if (viewMoreLink.size() > 0) // if it finds the that the View More is shown then it will click on it
+			viewMoreLink.get(0).click();
+
+	}
+	
+	public CampaignExternalLinksMobile navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			jsClickNew(MAmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			jsClickNew(PDPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			jsClickNew(SNPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		return new CampaignExternalLinksMobile(driver, planType);
+
+	}
+	
 	public void validateAARPMedicarePlans11ExternalPage(String tfnXpath, String expTfnNo) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -1051,7 +1412,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public void navigateToPREGetStarted() {
 		parentWindow = driver.getWindowHandle();
-		preExternalLink.click();
+		jsClickNew(preExternalLink);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {

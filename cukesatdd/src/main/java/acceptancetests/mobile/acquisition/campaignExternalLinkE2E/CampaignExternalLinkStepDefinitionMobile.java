@@ -15,9 +15,11 @@ import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -33,6 +35,7 @@ import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.CampaignExternalLinksMobile;
@@ -40,6 +43,7 @@ import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
 import pages.mobile.acquisition.commonpages.MedicareSupplementInsurancePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -615,6 +619,103 @@ public void user_clicks_on_Estimate_Prescription_Drug_for_lower_env() {
 		String env=MRScenario.environment;
 		campaignExternalLinkspage.updateHrefUrlDCE_Script1(env);
 		campaignExternalLinkspage.navigateToDCERedesignFromExternalPage();
+
+}
+
+@Then("^user select add drug option in the Drug page$")
+public void select_add_drugs_option(DataTable givenAttributes) {
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.drugsInitiate(memberAttributesMap.get("Drug Selection"));
+	campaignExternalLinkspage.drugsHandlerWithdetails(memberAttributesMap.get("Drug Details"));
+	campaignExternalLinkspage.continueNextpage();
+}
+
+@And("^User clicks on Back to Plans on detail page$")
+public void user_clicks_on_Back_To_Plan() {
+	CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.backToPlans();
+
+}
+
+@Then("^the user views plan details for selected plan and validates$")
+public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+	/*
+	 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+	 */
+	String PlanName = givenAttributes.cell(0, 1);
+	getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+	CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	//String PlanPremium = campaignExternalLinkspage.getPlanPremium(PlanName, planType);
+	// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM,
+	// PlanPremium);
+	campaignExternalLinkspage.clickOnViewMorePlan(PlanName);
+	CampaignExternalLinksMobile campaignExternalLinkspagevppDetails = campaignExternalLinkspage
+			.navigateToPlanDetails(PlanName, planType);
+	if (campaignExternalLinkspage != null) {
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE,
+				campaignExternalLinkspagevppDetails);
+		Assertion.assertTrue(true);
+	} else
+		Assertion.fail("Error in Loading the Plan Details Page");
+
+}
+
+@Then("^the user clicks on Enroll Now in Details Page to start the OLE flow on the site$")
+public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
+	String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+	String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+
+	String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+	// (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+	String County = "";
+	// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+	String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	String TFN;
+	CampaignExternalLinksMobile campaignExternalLinks = (CampaignExternalLinksMobile) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	TFN = campaignExternalLinks.GetTFNforPlanType();
+	WelcomePageMobile welcomePage = campaignExternalLinks.Enroll_OLE_Plan(PlanName);
+	// }
+	String PlanPremium = "";
+	// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+	System.out.println("Plan Name is : " + PlanName);
+	System.out.println("Plan Type is : " + PlanType);
+	System.out.println("Plan Zip Code is : " + ZipCode);
+	System.out.println("Plan County Name is : " + County);
+	System.out.println("Plan Plan Premium is : " + PlanPremium);
+	System.out.println("TFN for Plan Type is : " + TFN);
+	System.out.println("Plan Year is : " + PlanYear);
+	// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+	if (welcomePage != null) {
+
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assertion.assertTrue(true);
+	} else
+		Assertion.fail("Error in validating the OLE Welcome Page");
+
+}
+
+@When("^the user click on view plan in results page$")
+public void user_clicks_on_view_plans_in_results_page() {
+	CampaignExternalLinksMobile campaignExternalLinkspage = (CampaignExternalLinksMobile) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.clickViewResults();
 
 }
 
