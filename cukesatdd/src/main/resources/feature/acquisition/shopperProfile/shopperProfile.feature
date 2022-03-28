@@ -540,7 +540,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password      | email             | mbi           | dob        | zipcode | fname  | lname | uuid                                 | enrolledplanName | planName                                       | plantype | drugNames | providers |
       | ocpuser2 | Password@1212 | nathim@member.com | 1HT8-CW6-NM62 | 12/15/1952 |   30038 | NATHIM | DRUE  | bd8cee09-3cd3-4aa0-9de9-b51f81520b7d | [blank]          | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        |
 
-  @F770871
+  @F770871 @regressionSPStage @regressionAARP
   Scenario Outline: Telesales agent validate Change Zipcode and Check for PDF's laoding for Current Member
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
