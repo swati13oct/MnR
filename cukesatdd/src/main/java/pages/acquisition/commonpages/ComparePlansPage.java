@@ -2517,4 +2517,28 @@ public void clickMAPDValidateMAPDPlan(Map<String, String> memberAttributesMap) {
 			Assert.fail("MAPD Plan Compare link not working correctly");
 		}
 	}
+	
+	public void validatePDFforEnrolledMember(HashMap<String, String> givenAttributesMap) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		CommonUtility.waitForPageLoad(driver, currentPlanToggle, 5);
+		Assertion.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
+		WebElement planDocs = driver.findElement(By.xpath("//table[@id='plan-documents-table']"));
+		scrollToView(planDocs);
+		WebElement SummaryLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[2]//td[contains(@class,'yellow ')]//a[1]"));
+		String SummaryLinkText = SummaryLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(SummaryLinkText.replaceAll("[\\n\\r]", ""), "Summary of Benefits (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member: " + SummaryLinkText);
+		WebElement EvidenceLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[4]//td[contains(@class,'yellow ')]//a[1]"));
+		String EvidenceLinkText = EvidenceLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(EvidenceLinkText.replaceAll("[\\n\\r]", ""), "Evidence of Coverage (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member:  " + EvidenceLinkText);
+		WebElement BenefitLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[6]//td[contains(@class,'yellow ')]//a[1]"));
+		String BenefitLinkText = BenefitLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(BenefitLinkText.replaceAll("[\\n\\r]", ""), "Benefit Highlights (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member: " + BenefitLinkText);
+	}
+	
+	
+	
 }
