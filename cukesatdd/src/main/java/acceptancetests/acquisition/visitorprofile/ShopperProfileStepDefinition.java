@@ -364,4 +364,17 @@ public class ShopperProfileStepDefinition {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		comparePlansPage.validateAgentMAPDCompareLink();
 	}
+	
+	@Then("^Validate PDFs loading for Current enrolled Plan")
+	public void Validate_PDFs_loading_for_Current_enrolled_Plan(DataTable userData){
+			
+			HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
+			
+			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			comparePlansPage.validatePDFforEnrolledMember(givenAttributesMap);
+		
+	}
+
 } 
