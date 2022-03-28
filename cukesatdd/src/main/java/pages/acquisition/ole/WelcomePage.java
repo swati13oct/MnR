@@ -233,7 +233,7 @@ public class WelcomePage extends UhcDriver{
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
-		
+
 		CheckiPerseptions();
 		if(validateNew(ViewPlanDetails)){
 			//ViewPlanDetails.click();
@@ -248,12 +248,20 @@ public class WelcomePage extends UhcDriver{
 				//System.out.println("TFN in VPP Right Rail TEXT : "+VPPTFNNoActual);
 				//CheckiPerseptions();
 				//String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
-				String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
-				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
-			//	enrollInPlan.click();
-				validateNew(enrollInPlan);
-				jsClickNew(enrollInPlan);
-				
+				if (!Expected_PlanType.equalsIgnoreCase("SNP")) {
+					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
+					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+					//	enrollInPlan.click();
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+				}
+				else{
+					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
+					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+					//	enrollInPlan.click();
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+				}
 				//flag = driver.getCurrentUrl().contains("welcome");
 				CheckiPerseptions();
 				if (flag){
