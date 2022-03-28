@@ -788,6 +788,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | TFN No | <MedSupTFNNo> |
     Then the user validates TFN in Already an insured section
       | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
     Then the user validates TFN Number
       | TFN No    | <MedSupTFN>       |
       | TFN Xpath | <MedsuppTFNxpath> |
@@ -804,6 +805,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | TFN No | <MedSupTFNNo> |
     Then the user validates TFN in Already an insured section
       | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
     Then the user validates TFN Number
       | TFN No    | <MedSupTFN>       |
       | TFN Xpath | <MedsuppTFNxpath> |
@@ -813,7 +815,9 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     And user updates Medsup form for user details
     Then the user validates TFN in Already an insured section
       | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
     When user selects medsup plans to compare
+    | Zip Code | <zipcode> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -825,6 +829,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | TFN No | <MedSupTFNNo> |
     Then the user validates TFN in Already an insured section
       | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
     Then the user validates TFN Number
       | TFN No    | <MedSupTFN>       |
       | TFN Xpath | <MedsuppTFNxpath> |
@@ -842,10 +847,10 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
 
     @Scenario_IS_TFN_E2E_Scenario_8_Medsup4.0 @campaignTFNStageMS @regressionAARP
     Examples: 
-      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                       | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenerio IS_TFN_E2E_Scenario_8 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003076 | Alabama | health-plans.html?product=medsup&WT.mc_id=2YP&HASHID=2475451813&zipcode=90210&DOB=1952-03-18&EBRC=&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3402 | 1-844-230-1339 | 2YP        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
+      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                       | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |MedsuppStaticTFNxpath|
+      | Scenerio IS_TFN_E2E_Scenario_8 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003076 | Alabama | health-plans.html?product=medsup&WT.mc_id=2YP&HASHID=2475451813&zipcode=90210&DOB=1952-03-18&EBRC=&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3402 | 1-844-230-1339 | 2YP        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |//*[@class='insured-member']//a[@class='tfn-call']/span|
 
     @Scenario_IS_TFN_E2E_Scenario_9_Medsup4.0 @campaignTFNStageMS @regressionAARP
     Examples: 
-      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                                     | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |
-      | Scenerio IS_TFN_E2E_Scenario_9 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003077 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645778514&zipcode=90210&WT.mc_id=8KH&state=TX&HASHID=2475451813&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |
+      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                                     | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |MedsuppStaticTFNxpath|
+      | Scenerio IS_TFN_E2E_Scenario_9 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003077 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645778514&zipcode=90210&WT.mc_id=8KH&state=TX&HASHID=2475451813&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |//*[@class='insured-member']//a[@class='tfn-call']/span|
