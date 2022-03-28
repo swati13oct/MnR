@@ -22,12 +22,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity @vbfGate
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | AARP |
 
-    @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @vbfGate @featureGate
+    @visitorProfile_UHC @regressionUHC @VP_ProdRegression_UHC @featureGate
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | UHC  |
@@ -50,12 +50,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP @featureGate
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prodRegression @regressionAARP @featureGate @vbfGate
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | AARP |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate @sanity
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @sanity
     Examples:
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor | 90210   | UHC  |
@@ -375,14 +375,14 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then verify the plans on plan compare page
       | Test Plans | <testPlans> |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prodRegression @regressionAARP @vbfGate
     Examples:
       | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @vbfGate @featureGate
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @featureGate
     Examples:
       | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
       | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
