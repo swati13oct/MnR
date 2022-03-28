@@ -387,10 +387,9 @@ public class VisitorProfilePage extends UhcDriver {
 //	WebElement SignInHeader;
 
 
-
-	public VisitorProfilePage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
+    public VisitorProfilePage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
 
         openAndValidate();
     }
@@ -846,7 +845,7 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
         CommonUtility.checkPageIsReadyNew(driver);
-        validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")),15);
+        validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")), 15);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -2140,6 +2139,21 @@ public class VisitorProfilePage extends UhcDriver {
 
     }
 
+    public void gotoProfilePage() {
+        WebElement viewSavedItem= driver.findElement(By.xpath("//*[contains(@class,'saved_items')]"));
+        // shoppingCartIcon.click();
+        jsClickNew(viewSavedItem);
+        jsClickNew(driver.findElement(By.xpath("//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")));
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("profile")) {
+            System.out.println("Navigation to visitor profile is successful");
+        } else {
+            Assert.fail("Navigation to visitor profile is failed");
+        }
+    }
+
     public void PREPlanCardEnrollNDetails(String plantype) {
         CommonUtility.checkPageIsReadyNew(driver);
         WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
@@ -2152,11 +2166,12 @@ public class VisitorProfilePage extends UhcDriver {
         //waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
         if (plantype.trim().equalsIgnoreCase("MS")) {
             sleepBySec(10);
-            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")),15), "Plan Details page not opened");
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")), 45), "Plan Details page not opened");
         } else {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
         }
-        clickOnBackToProfile();
+        //clickOnBackToProfile();
+        gotoProfilePage();
         CommonUtility.checkPageIsReadyNew(driver);
         sleepBySec(4);
         WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
@@ -2169,11 +2184,10 @@ public class VisitorProfilePage extends UhcDriver {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Online Enrollment')]"))), "OLE Page not opened");
         } else if (plantype.trim().equalsIgnoreCase("MS")) {
             sleepBySec(10);
-            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")),15), "Start Application Page not opened");
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")), 45), "Start Application Page not opened");
             validateMSStartApplicationPage();
         }
     }
-
 
 }
 

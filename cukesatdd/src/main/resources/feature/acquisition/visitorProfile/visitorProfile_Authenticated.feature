@@ -331,7 +331,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
 
 
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon

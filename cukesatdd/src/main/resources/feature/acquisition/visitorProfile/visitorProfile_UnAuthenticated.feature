@@ -713,7 +713,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 10001   | NO            | New York | None          | Medicaid     | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Lower                | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Mosaic Choice (PPO) |
 
 
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode>
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -755,7 +755,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
 
-  Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+  Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
