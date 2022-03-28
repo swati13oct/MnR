@@ -5192,12 +5192,21 @@ public class VppCommonStepDefinition {
 	}
 	
 	@When("^user selects medsup plans to compare$")
-	public void user_selects_medsup_plans_to_compare() throws Throwable {
+	public void user_selects_medsup_plans_to_compare(DataTable data) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(data);
+		String zipCode = inputAttributesMap.get("Zip Code");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.compareAllMSPlans();
+		if (zipCode.equals("90210"))
+			plansummaryPage.compareAllMS4Plans();
+		else if (zipCode.equals("23666"))
+			plansummaryPage.compareAllMS3Plans();
+		else
+			System.out.println("Invalid zipcode");
+			
 			System.out.println("Selected All MS plans for Plan Compare");
 	}
+	
 	@Then("^user click to close MS application Modal$")
 	public void click_close_MS_Application_Page() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -5260,4 +5269,5 @@ public class VppCommonStepDefinition {
 		}
 
 	}
+
 }
