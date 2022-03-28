@@ -854,3 +854,101 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Examples: 
       | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                                     | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |MedsuppStaticTFNxpath|
       | Scenerio IS_TFN_E2E_Scenario_9 - AMP Medsup 4.0 | ULayer |   90210 | Plan G  | MA         | MS4.0      | 8003077 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645778514&zipcode=90210&WT.mc_id=8KH&state=TX&HASHID=2475451813&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |//*[@class='insured-member']//a[@class='tfn-call']/span|
+
+      
+      @Scenario_IS_TFN_E2E_Scenario_8_and_9_UAT @UATRegression
+  Scenario Outline: <scenario> <zipcode>1.0 Verify TFN showing correctly through VPP eInquiry
+    Given the user Starts WebDriver
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+   Then the user fills all the details in MedsuppPage for TFN
+      | DOB      | <dob>     |
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN on VPP
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    Then the user validates TFN Number
+      | TFN No    | <MedSupTFN>       |
+      | TFN Xpath | <MedsuppTFNxpath> |
+    And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    Then the user validates TFN Number
+      | TFN No    | <MedSupTFN>       |
+      | TFN Xpath | <MedsuppTFNxpath> |
+    And user click on Back to Plan in MS Plan Details
+      | Zip Code | <zipcode> |
+    And user clicks on Edit Your Information link and navigate back to micro form
+    And user updates Medsup form for user details
+    Then the user validates TFN in Already an insured section
+      | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    When user selects medsup plans to compare
+    | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No | <MedSupStaticTFNNo> |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
+    Then the user validates TFN Number
+      | TFN No    | <MedSupTFN>       |
+      | TFN Xpath | <MedsuppTFNxpath> |
+    And user click on Start Application in MS plan compare page
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+
+    @Scenario_IS_TFN_E2E_Scenario_8_Medsup3.0 @campaignTFNStageMS @regressionAARP
+    Examples: 
+      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                       | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |MedsuppStaticTFNxpath|
+      | Scenerio IS_TFN_E2E_Scenario_8 - AMP Medsup 3.0 | ULayer |   23666 | Plan G  | MA         | MS      | 8003076 | Alabama | health-plans.html?product=medsup&WT.mc_id=2YP&HASHID=2475451813&zipcode=23666&DOB=1952-03-18&EBRC=&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3402 | 1-844-230-1339 | 2YP        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |//span[@class='tel']|
+
+    @Scenario_IS_TFN_E2E_Scenario_9_Medsup3.0 @campaignTFNStageMS @regressionAARP
+    Examples: 
+      | scenario                                        | site   | zipcode | MS_Plan | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                                                                                                                                                                                                                                                                                                     | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppTFNxpath                          |MedsuppStaticTFNxpath|
+      | Scenerio IS_TFN_E2E_Scenario_9 - AMP Medsup 3.0 | ULayer |   23666 | Plan G  | MA         | MS      | 8003077 | Alabama | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&adobe_mc=MCMID%3D44598998069175401371739591939441775859%7CMCORGID%3D92E102BE5330583D0A490D4C%2540AdobeOrg%7CTS%3D1645778514&zipcode=23666&WT.mc_id=8KH&state=TX&HASHID=2475451813&mrcid=email_is_p#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-322-3404 | 1-866-897-0688 | 8KH        | 1-866-603-3424    | //span[contains(@class,'text-bold tel')] |//span[@class='tel']|
+      
