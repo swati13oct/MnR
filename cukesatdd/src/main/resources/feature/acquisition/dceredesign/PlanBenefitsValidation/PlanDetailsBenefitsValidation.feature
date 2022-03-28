@@ -8,157 +8,212 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>      |
 
-    @2022planDetailsBenefitsAARP01 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_1 @DCE_MAPD_SNP
     Examples: 
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_1 | AARP |
 
-    @2022planDetailsBenefitsAARP02 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_2 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_2 | AARP |
 
-    @2022planDetailsBenefitsAARP03 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_3 @DCE_MAPD_SNP
     Examples: 
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_3 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_4 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_4 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_5 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_5 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_6 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_6 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_7 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_7 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_8 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_8 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_9 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_9 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_SNP
+    @DCE_MAPD_SNP_Sheet_10 @DCE_MAPD_SNP
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_10 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    @DCE_MAPD_SNP_Sheet_11 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_11 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_12 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_12 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_13 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_13 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_14 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_14 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_15 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_15 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_16 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_16 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_17 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_17 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_18 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_18 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_19 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_19 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_20 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_20 | AARP |
+
+    @DCE_MAPD_SNP_Sheet_21 @DCE_MAPD_SNP
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_MAPD_SNP_2022 | MAPD_SNP_DCE_2022_21 | AARP |
+
+    @DCE_MAPD_Preferred_Sheet_1 @DCE_MAPD_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_1 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    @DCE_MAPD_Preferred_Sheet_2 @DCE_MAPD_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_2 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    @DCE_MAPD_Preferred_Sheet_3 @DCE_MAPD_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_3 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_MAPD_Preferred
+    @DCE_MAPD_Preferred_Sheet_4 @DCE_MAPD_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_MAPD_Preferred_2022 | MAPD_Preferred_Sheet_4 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_1 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_1 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_2 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_2 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_3 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_3 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_4 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_4 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_5 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_5 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_6 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_6 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_7 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_7 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_8 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_8 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_9 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_9 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_PDP_Preferred
+    @DCE_PDP_Preferred_Sheet_10 @DCE_PDP_Preferred
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_PDP_Preferred_2022 | PDP_Preferred_Sheet_10 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_1 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_1 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_2 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_2 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_3 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_3 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_4 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_4 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_5 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_5 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_6 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_6 | AARP |
 
-    @2022planDetailsBenefitsAARP04 @DCE_LIS_Buydow
+    @DCE_LIS_Buydow_Sheet_7 @DCE_LIS_Buydow
     Examples:
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_7 | AARP |
