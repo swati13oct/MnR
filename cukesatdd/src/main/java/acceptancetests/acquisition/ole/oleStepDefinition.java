@@ -2505,7 +2505,18 @@ public class oleStepDefinition {
 		String[] dateArray = null;
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0")|| MRScenario.environment.equalsIgnoreCase("stage")|| MRScenario.environment.equalsIgnoreCase("offline-stage")|| MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1") || MRScenario.environment.equalsIgnoreCase("stage-0")
+				|| MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("offline-stage")
+				|| MRScenario.environment.equalsIgnoreCase("team-acme")
+				|| MRScenario.environment.equalsIgnoreCase("team-avengers")
+				|| MRScenario.environment.equalsIgnoreCase("team-chargers")
+				|| MRScenario.environment.equalsIgnoreCase("chargers-qa")
+				|| MRScenario.environment.equalsIgnoreCase("team-c")
+				|| MRScenario.environment.equalsIgnoreCase("team-f")
+				|| MRScenario.environment.equalsIgnoreCase("team-voc")
+				|| MRScenario.environment.equalsIgnoreCase("digital-dev")
+		)) {
 
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
