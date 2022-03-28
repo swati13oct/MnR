@@ -7572,7 +7572,7 @@ public String GetMonthlyPremiumValue() {
 			Thread.sleep(5000);
 			for (String plan : listOfTestPlans) {
 				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='" + plan
-						+ "']/following::div[contains(@class,'save-box')][1]"));
+						+ "']/following::*[contains(@class,'save-box')][1]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 				threadsleep(2);
