@@ -499,6 +499,7 @@ public class DCEDetailsPage extends UhcDriver {
             } catch (Exception e1) {
             }
             driver.navigate().refresh();
+            threadsleep(2);
         }
         else if(pharmacyType.equalsIgnoreCase("Standard Retail")){
             String standardRetail = "{\n" +
