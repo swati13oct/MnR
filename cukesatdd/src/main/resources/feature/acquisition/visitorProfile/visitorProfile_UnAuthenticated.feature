@@ -598,12 +598,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the changed pharmacy
       | pharmacyName | <SelectPharmacy1> |
 
-    @LTCPharmacyVPAARP
+    @LTCPharmacyVPAARP @regressionAARP
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
-    @LTCPharmacyVPUHC
+    @LTCPharmacyVPUHC @regressionUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
@@ -661,11 +661,11 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the changed pharmacy
       | pharmacyName | <SelectPharmacy1> |
 
-    @LTCPharmacyVPAARP
+    @LTCPharmacyVPAARP @regressionAARP
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | AARP | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
-    @LTCPharmacyVPUHC
+    @LTCPharmacyVPUHC @regressionUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | UHC  | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
@@ -702,12 +702,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                                                                       |
       | AARP | 10001   | NO            | New York | None          | Medicaid     | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Lower                | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Mosaic Choice (PPO) |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                                                                       |
       | UHC  | 10001   | NO            | New York | None          | Medicaid     | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Lower                | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Mosaic Choice (PPO) |
@@ -744,12 +744,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user validates the added Ms plans on visitor profile page
       | MS Test Plans | <testPlans> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
@@ -787,12 +787,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then user validate elements in loading results page
     Then user click on save results option and click on create account link and validate the correct login page
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |
