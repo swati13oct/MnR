@@ -14,13 +14,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class DCEDetailsPage extends UhcDriver {
 
@@ -451,9 +456,17 @@ public class DCEDetailsPage extends UhcDriver {
             for(int i = 0; i < 1 ; i++){
                 if(i == 0){
                     setPharmacy("Preferred Mail", sessionID , jo);
-                    //threadsleep(5);
-                    validate(driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li")));
-                    WebElement deductible = driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li"));
+                    Wait wait = new FluentWait(driver)
+                            .withTimeout(Duration.ofSeconds(30))
+                            .pollingEvery(Duration.ofSeconds(1))
+                            .ignoring(Exception.class);
+                    WebElement deductible = (WebElement) wait.until(new Function<WebDriver, WebElement>(){
+
+                        public WebElement apply(WebDriver driver ) {
+                            return driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li"));
+                        }
+                    });
+                    //WebElement deductible = driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li"));
                     WebElement intialCoverage = driver.findElement(By.xpath("//span[text()='Drug Copays & Deductible ']/../../../..//p[contains(text(),'All')]"));
                     result.put("Deductible", deductible.getText());
                     result.put("Initial Coverage Stage", intialCoverage.getText());
