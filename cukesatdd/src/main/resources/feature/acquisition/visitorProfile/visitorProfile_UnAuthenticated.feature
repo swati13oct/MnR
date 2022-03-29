@@ -297,7 +297,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate @check
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @featureGate
     Examples:
       | site | state    | zipcode | isMultiCounty | plantype | planyear | DOB        | county        | MS_testPlans  |
 #      | AARP | North Dakota | 58102   | NO            | MS       | future   | 11/11/1949 | Cass County | Plan G,Plan A |
