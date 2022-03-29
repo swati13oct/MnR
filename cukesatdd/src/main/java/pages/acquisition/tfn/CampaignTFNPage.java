@@ -1652,8 +1652,11 @@ public class CampaignTFNPage extends UhcDriver {
 		jsClickNew(cancelMS4FormModal);
 	}
 
-	@FindBy(xpath = "//button[@dtmid='cta_acq_ms_vpp']//div[@class='uhc-button__text'][normalize-space()='Cancel']")
+	@FindBy(xpath = "//div[@id='ole-cancel-confirm']//a[normalize-space()='Cancel Application']")
 	private WebElement cancelMS4FormModal;
+	
+	@FindBy(xpath = "//*[contains(@id,'ole-form-controls')]//div//a[contains(@class,'cancel-button modal-link')][normalize-space()='Cancel Application']")
+	private WebElement cancelMS4OLE;
 
 	public void decisionGuidenotPresent() {
 		Assert.assertFalse(validate(decisionGuideClick), "Verify if Decision Guide link displayed on Medsup 4.0.");
@@ -1736,6 +1739,8 @@ public class CampaignTFNPage extends UhcDriver {
 	}
 
 	public void clickCancelMS4Ole() {
+		validate(cancelMS4OLE);
+		jsClickNew(cancelMS4OLE);
 		validate(cancelMS4FormModal);
 		jsClickNew(cancelMS4FormModal);
 	}
@@ -1838,7 +1843,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 	}
 
-	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo) {
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo, String ExpecetdTFNxpath) {
 		CheckPageLoad();
 		CheckiPerseptions();
 		try {
@@ -1847,9 +1852,9 @@ public class CampaignTFNPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(msStaticTFN);
-		if (ExpecetdTFNNo.contains(msStaticTFN.getText())) {
-			System.out.println("TFN is Displayed on Page : " + msStaticTFN.getText());
+		validate(driver.findElement(By.xpath(ExpecetdTFNxpath)));
+		if (ExpecetdTFNNo.contains(driver.findElement(By.xpath(ExpecetdTFNxpath)).getText())) {
+			System.out.println("TFN is Displayed on Page : " + driver.findElement(By.xpath(ExpecetdTFNxpath)).getText());
 		} else {
 			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
 		}
@@ -1876,7 +1881,7 @@ public class CampaignTFNPage extends UhcDriver {
 		jsClickNew(startMS4OLEPlanCompare);
 	}
 	
-	@FindBy(xpath = "//button[@data-plancode='F']")
+	@FindBy(xpath = "//div[@class='has-flag column-header']//button[contains(@class,'apply-button')]//span[text()='Start application']")
 	private WebElement startMS3OLEPlanCompare;
 
 	public void clickStartMS3OlePlanCompare() {
