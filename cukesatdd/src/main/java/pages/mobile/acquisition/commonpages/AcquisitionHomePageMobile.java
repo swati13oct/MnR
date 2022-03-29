@@ -4561,7 +4561,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		jsClickNew(UnitedHealthcareMedicareSolutions);
-		threadsleep(10);// sleep added so that on iOS new window popup gets time to open up window
+		if(driver.toString().toUpperCase().contains("IOS"))
+			sleepBySec(60);    // sleep added so that on iOS new window popup gets time to open up window
 	}
 
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
