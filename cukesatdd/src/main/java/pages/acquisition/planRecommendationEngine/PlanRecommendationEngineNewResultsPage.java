@@ -1308,7 +1308,9 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		validate(NextButtonPRE);
 		NextButtonPRE.click();
-		WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+	//	WebElement PRESaveaPlan = driver.findElement(By.xpath("//*[contains(@class,'button button-secondary')]//*[contains(text(), '" + planName + "')]"));
+		WebElement PRESaveaPlan = driver.findElement(By.xpath("(//*[contains(text(), '" + planName + "')])[2]//following::*[1]"));
+
 		CommonUtility.waitForPageLoadNew(driver, PRESaveaPlan, 30);
 		System.out.println("Plan Name on PRE Page" + PRESaveaPlan);
 		jsClickNew(PRESaveaPlan);
