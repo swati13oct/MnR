@@ -249,16 +249,15 @@ public class WelcomePage extends UhcDriver{
 				//CheckiPerseptions();
 				//String elementPath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]";
 				if (!Expected_PlanType.equalsIgnoreCase("SNP")) {
-				//	String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
-					String elementPath = "(//*[@class='cta-button ng-scope'])[1]";
+					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[1]";
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 					//	enrollInPlan.click();
 					validateNew(enrollInPlan);
 					jsClickNew(enrollInPlan);
 				}
 				else{
-				//	String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
-					String elementPath = "(//*[@class='cta-button ng-scope'])[1]";
+					String elementPath = "(//*[contains(text(), 'Enroll in plan')])[2]";
+
 					WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
 					//	enrollInPlan.click();
 					validateNew(enrollInPlan);
