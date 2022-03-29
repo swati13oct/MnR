@@ -330,8 +330,8 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | member | firstName | lastName | dob        | zipcode | mbi         | userName               | password     |
       | UHC  | UHC    | JONETTE   | ESCUTIA  | 03/27/1936 | 06902   | 3PW3A88CU71 | jonette@getairmail.com | Password@123 |
 
-
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+  @SavePlanPRE
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -371,13 +371,13 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user validate view Plan details on PRE plan card and check enroll or start application button
       | PlanType | <plantype> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName              | password     | Premium | plantype |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      | MAPD     |
       | AARP | 19901   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | 1st            | Health Care Premium, Doctors | Plan F                               | vdatdd_19@getnada.com | Password@123 | [blank] | MS       |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | testPlan                             | userName                  | password     | Premium | plantype |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]                      | AARP Medicare Advantage Choice (PPO) | vdatdd_18_uhc@getnada.com | Password@123 | $0      | MAPD     |
