@@ -1,12 +1,14 @@
 package pages.mobile.acquisition.commonpages;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -15,14 +17,25 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import org.testng.Assert;
 
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	public CampaignExternalLinksMobile(WebDriver driver, String planType) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(planType);
+	}
 
 	public String testSiteUrl;
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
@@ -56,6 +69,12 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@id,'find-plans-zip')]")
 	private WebElement zipcodeEnter;
+	
+	@FindBy(id = "backToPlanSummaryTop")
+	private WebElement clickBackToPlans;
+
+	@FindBy(xpath = "//*[@id='selectCounty']/p[1]/a")
+	private WebElement selectCounty;
 
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
@@ -68,6 +87,12 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
 	private WebElement findPlansPricing;
+	
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan;
+	
+	@FindBy(xpath = "//*[@class='tel ng-binding']")
+	private WebElement RightRail_TFN;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
 	private WebElement workingHrs;
@@ -116,10 +141,10 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 //	--- locators for scenario 5
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
+	@FindBy(xpath="(//input[contains(@id,'find-plans-zip-zipfinder')])[1]")
 	private WebElement zipcodeEnterFld;
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
+	@FindBy(xpath = "(//a[contains(@href,'#modal--zip-finder')])[1]")
 	private WebElement locateZipcodeLink;
 
 	@FindBy(xpath = "//span[contains(@class,'link-text') and contains(text(),'Medicare Supplement')]")
@@ -127,8 +152,14 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@href,'/medicare-plans.html')]")
 	private WebElement getHelpFindingPlanBtn;
+	
+	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
+	private WebElement rightRailSectionTFNHeaderMedsupp;
 
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
+	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
+	private WebElement rightRailSectionTFNHeaderMedsupp1;
+
+	@FindBy(xpath = "(//button[contains(text(),'Find a Plan')])[1]")
 	private WebElement findPlanSubmitBtn;
 
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
@@ -136,6 +167,18 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
 	private WebElement accessibilitylink;
+	
+	@FindBy(xpath = "(//div[@class='uhc-container']//h2)[1]")
+	private WebElement rightRailSectionTFNHeader;
+	
+	@FindBy(xpath = "//div[@class='label-icon']//following-sibling::div/div")
+	private WebElement rightRailsectionTFNtimezone;
+	
+	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
+	private WebElement rightRailSectionTFNHeader1;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[3]")
+	private WebElement footertextsectioncallus;
 
 	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
 	private WebElement footerInfo;
@@ -149,6 +192,59 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
 	
+	@FindBy(css = "input#drug")
+	private WebElement drugsearchBox;
+	
+	@FindBy(xpath = "//button[contains(text(),'Continue')]")
+	private WebElement continueBtn;
+	
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	private WebElement yesOption;
+
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	private WebElement noOption;
+	
+	@FindBy(css = "uhc-autocomplete button")
+	private WebElement drugsearchButton;
+
+	@FindBy(css = "#modal uhc-radio[class*='checked']")
+	private WebElement modalSelcetedDrug;
+	
+	@FindBy(css = "#modal div>button[class*='primary button']")
+	private WebElement modalcontinue;
+	
+	@FindBy(xpath = "(//*[@class='enrollSection'])[1]/div/button")
+	private WebElement viewPlanButton;
+
+	@FindBy(css = "uhc-autocomplete uhc-menu-item")
+	private List<WebElement> drugsAutoList;
+	
+	@FindBy(css = "#modal #dosage-select")
+	private WebElement modalDosageSelect;
+
+	@FindBy(css = "#modal legend")
+	private WebElement modalGenericDrug;
+	
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label")
+	private WebElement modalGenericSwitchLabel;
+
+	@FindBy(css = "#modal uhc-radio:nth-of-type(2) label .radio-label-content")
+	private WebElement modalGenericSwitch;
+
+	@FindBy(css = "uhc-list uhc-list-item")
+	private List<WebElement> drugsList;
+
+	@FindBy(css = "#modal #frequency-select")
+	private WebElement modalFrequencySelect;
+
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
+	
+	@FindBy(css = "#modal #package-select")
+	private WebElement modalPackageSelect;
+	
+	@FindBy(css = "#modal #Quantity")
+	private WebElement modalQuantity;	
 	
 	//Locators for Scenario 10 - New LPM
 
@@ -233,6 +329,21 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	@FindBy(xpath ="//span[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
+	
+	@FindBy(id = "medicalbenefits")
+	private List<WebElement> medBenefitsTab;
+	@FindBy(id = "prescriptiondrug")
+	private List<WebElement> presDrugTab;
+	@FindBy(id = "plancosts")
+	private WebElement planCostsTab;
+
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+	// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+	// contains(@class,'active')]")
+	private List<WebElement> presDrugTab1;
+
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
 
 	@FindBy(xpath ="//input[@id='zipcode']")
 	private WebElement zip;
@@ -414,6 +525,23 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
 	}
+	
+	public CampaignExternalLinksMobile backToPlans() {
+		validate(clickBackToPlans);
+		jsClickNew(clickBackToPlans);
+		try {
+			if (selectCounty.isDisplayed())
+				jsClickNew(selectCounty);
+		} catch (Exception e) {
+			System.out.println("County popup not displayed");
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new CampaignExternalLinksMobile(driver);
+
+		}
+		return null;
+	}
 
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -492,8 +620,174 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		}
 		  return null;
 		}
-
 	
+	public void continueNextpage() {
+		validate(drugsearchBox, 30);
+		threadsleep(2000);
+		jsClickNew(continueBtn);
+	}
+	
+	public void drugsInitiate(String drugSelection) {
+		threadsleep(3000);
+		System.out.println("Drugs Page Functional Operations");
+		if (drugSelection.equalsIgnoreCase("Yes")) {
+			validate(yesOption);
+			jsClickNew(yesOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		} else if (drugSelection.equalsIgnoreCase("No")) {
+			validate(noOption);
+			jsClickNew(noOption);
+			System.out.println("Prescription Type " + drugSelection + " Clicked");
+		}
+		jsClickNew(continueBtn);
+		validate(drugsearchBox);
+	}
+	
+	public void drugsHandlerWithdetails(String drugsDetails) {
+		String drugName = "";
+		boolean searchButtonClick = false;
+		String dosage = "";
+		String packageName = "";
+		String count = "";
+		String frequency = "";
+		boolean threeeMonthSLength = false;
+		boolean GenericDrug = false;
+		boolean switchGeneric = false;
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			String drugInfo = drugslist[i];
+			if (drugInfo.trim().length() > 0) {
+				String[] drugDetails = drugInfo.split(",");
+				drugName = drugDetails[0];
+				if (drugDetails[1].toUpperCase().equals("NO"))
+					searchButtonClick = true;
+				dosage = drugDetails[2];
+				packageName = drugDetails[3];
+				count = drugDetails[4];
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
+				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
+					switchGeneric = true;
+
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
+						GenericDrug, switchGeneric);
+			}
+		}
+
+	}
+	
+	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
+			String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
+		try {
+			validate(drugsearchBox, 30);
+			threadsleep(2000);
+			drugsearchBox.clear();
+			drugsearchBox.sendKeys(drugName);
+			if (searchButtonClick) {
+				jsClickNew(drugsearchButton);
+				threadsleep(6000);
+				validate(modalSelcetedDrug, 30);
+				threadsleep(2000);
+				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+						"Drug name is not Matched :" + drugName);
+				// Select modal
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+				threadsleep(2000);
+			} else {
+				jsClickNew(drugsAutoList.get(0));
+			}
+
+			validate(modalDosageSelect, 30);
+			threadsleep(2000);
+			Select dos = new Select(modalDosageSelect);
+			Select freq = new Select(modalFrequencySelect);
+			Select slen = new Select(modalSLengthSelect);
+
+			if (!dosage.isEmpty())
+				dos.selectByVisibleText(dosage);
+			if (!packageName.isEmpty()) {
+				Select pack = new Select(modalPackageSelect);
+				pack.selectByVisibleText(packageName);
+			}
+			if (!count.isEmpty()) {
+				modalQuantity.clear();
+				modalQuantity.sendKeys(count);
+			}
+
+			freq.selectByVisibleText(frequency);
+
+			if (threeeMonthSLength)
+				slen.selectByVisibleText("Every 3 Months");
+
+			threadsleep(4000);
+			jsClickNew(modalcontinue);
+
+			if (GenericDrug) {
+				validate(modalGenericDrug, 30);
+				threadsleep(2000);
+				// Generic modal
+				if (switchGeneric) {
+					jsClickNew(modalGenericSwitchLabel);
+					threadsleep(2000);
+					// jsClickMobile(modalGenericSwitch);
+					jsClickNew(modalGenericSwitch);
+					drugName = modalGenericDrug.getText();
+				}
+				threadsleep(2000);
+				jsClickNew(modalcontinue);
+			}
+			Assert.assertTrue(drugsList.get(0).getText().toUpperCase().contains(drugName.toUpperCase()),
+					"Added drug name Mistmatch from selected one : " + drugName);
+		} catch (Exception e) {
+			System.out.println("Unable to add drug");
+		}
+	}
+	
+	public void openAndValidate(String planType) {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver, 45);
+		/*
+		 * else checkModelPopup(driver, 10);
+		 */
+
+		// note: setting the implicit wait to 0 as it fails because of TimeoutException
+		// while finding List<WebElement> of the different tabs on Plan detail page
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		if (planType.equalsIgnoreCase("MA")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+
+		} else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
+		} /* Added for SNP as well */
+		validateNew(planCostsTab);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+	}
+
+	public void clickViewResults() {
+		// System.out.println("Validating Results UI Page: ");
+		// pageloadcomplete();
+		// waitForPageLoadSafari();
+		// validate(planZipInfo,60);
+		// waitforElementInvisibilityInTime(planLoaderscreen,60);
+		validate(viewPlanButton);
+		jsClickNew(viewPlanButton);
+
+	}
 
 	public void sleepBySec(int sec) {
 		try {
@@ -671,6 +965,17 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	}
 	
+	public String GetTFNforPlanType() {
+		if (validate(RightRail_TFN)) {
+			System.out.println("TFN is displayed in Right Rail");
+			String TFN_Number = RightRail_TFN.getText();
+			return TFN_Number;
+		}
+		System.out.println("TFN is not Displayed for PlanType in VPP page");
+
+		return null;
+	}
+	
 	
 	public void clickFindPlansPricing() {
 		parentWindow = driver.getWindowHandle();
@@ -685,12 +990,67 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		}
 	}
 	
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		try {
+			if (validate(EnrollinPlan))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlan);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
+	}
+	
+	public void goBacktoExternalPage(String url) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		driver.navigate().to(url);
+		sleepBySec(2);
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+	
+	public VPPPlanSummaryPageMobile validateVPPEntryPage() {
+		if (driver.getCurrentUrl().contains("/health-plans/")
+				|| driver.getCurrentUrl().contains("/health-plans.html")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+	
 	public AcquisitionHomePageMobile validateShopForPlanLoaded() {
 		if (driver.getCurrentUrl().contains("WT.mc_id=8012869")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new AcquisitionHomePageMobile(driver, true);
+		} else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePageMobile(driver);
-		}
-		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+		} else if (driver.getCurrentUrl().contains("health-plans.html")
+				|| driver.getCurrentUrl().contains("/health-plans/")) {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePageMobile(driver);
 		}
@@ -860,6 +1220,46 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		  return null;
 		}
 	
+	public void clickOnViewMorePlan(String planName) {
+
+		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
+
+		if (viewMoreLink.size() > 0) // if it finds the that the View More is shown then it will click on it
+			viewMoreLink.get(0).click();
+
+	}
+	
+	public CampaignExternalLinksMobile navigateToPlanDetails(String planName, String planType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			jsClickNew(MAmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			jsClickNew(PDPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
+
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			jsClickNew(SNPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		return new CampaignExternalLinksMobile(driver, planType);
+
+	}
+	
 	public void validateAARPMedicarePlans11ExternalPage(String tfnXpath, String expTfnNo) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -886,6 +1286,72 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 		validateNew(accessibilitylink);
 		validateNew(footerInfo);
+	}
+	
+	public void validateTFNNoonRightRailFromExternal(String TFNXpath, String ExpecetdTFNNo)
+			throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+		// checkModelPopup(driver, 10);
+		// CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at (TTY 711)";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ")
+				.replaceAll("[0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9] ", "");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validate(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+		 * System.out.println("TFN is Displayed on Right Rail on the Page : " +
+		 * ActualTFNelement.getText()); else Assert.
+		 * fail("TFN element is not found / displayed on Right rail on the page : ");
+		 */
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m.,\n7 days a week";
+		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a
+		// week";
+		// String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
+		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************TFN Timezone Content was  found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
 	
 	public void navigateBacktoExternalurl(String url) {
@@ -946,7 +1412,7 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public void navigateToPREGetStarted() {
 		parentWindow = driver.getWindowHandle();
-		preExternalLink.click();
+		jsClickNew(preExternalLink);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -1006,11 +1472,63 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 		waitForPageLoadSafari();
 		checkModelPopup(driver, 10);
 
-		validateNew(vppTop, 30);
+		//validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
 			return null;
+	}
+	
+	public void validateTFNNoonRightRailforMSExternal(String TFNXpath, String ExpecetdTFNNo) {
+
+		CommonUtility.checkPageIsReady(driver);
+		// checkModelPopup(driver, 10);
+
+		System.out.println("########Validating TFN Info in RIght Rail section for Medsupp########");
+
+		if (validate(rightRailSectionTFNHeaderMedsupp)) {
+			scrollToView(rightRailSectionTFNHeaderMedsupp);
+			System.out.println(rightRailSectionTFNHeaderMedsupp.getText());
+			System.out.println(rightRailSectionTFNHeaderMedsupp1.getText());
+		}
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		/*
+		 * if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+		 * System.out.println("TFN is Displayed on Right Rail on the Page : " +
+		 * ActualTFNelement.getText()); else Assert.
+		 * fail("TFN element is not found / displayed on Right rail on the page : ");
+		 */
+
+		// String ActualCallSamTFNtimezone =
+		// rightRailsectionTFNtimezoneMedsupp.getText();
+
+		/*
+		 * String ExpectedCallSamTFNtimezone =
+		 * "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
+		 * = rightRailsectionTFNtimezone.getText();
+		 * 
+		 * System.out.
+		 * println("########Validating TFN Time zone in Right Rail section for Medsupp#####"
+		 * ); System.out.println("Expected TFN time zone: " +
+		 * ExpectedCallSamTFNtimezone); System.out.println("Actual TFN time zone: " +
+		 * ActualCallSamTFNtimezone);
+		 * 
+		 * if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone Content was found matching with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone Content was not found matching with the SAM call Popup  ***************"
+		 * );
+		 */
+
 	}
 
 	public VPPPlanSummaryPageMobile searchPlanswithCountyForMorganStanley(String zipcode, String countyName) {
@@ -1454,12 +1972,11 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	//https://www.uhc.com/legal/accessibility
 
 	public void validatePrivacy() {
+		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(PrivacyPolicy);
-		String parentwindow=driver.getWindowHandle();
-		jsClickNew(PrivacyPolicy);
-		//PrivacyPolicy.click();
-		//switchToNewTab();
-		//CommonUtility.waitForPageLoadNew(driver, Heading, 30);
+		String parentwindow = driver.getWindowHandle();
+		switchToNewTabNew(PrivacyPolicy);
+		CommonUtility.waitForPageLoadNew(driver, Heading, 30);
 		Assert.assertEquals("Privacy Policy", Heading.getText());
 		driver.close();
 		driver.switchTo().window(parentwindow);
@@ -1473,6 +1990,14 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 //		Accessibility.click();
 //		switchToNewTab();
 		threadsleep(8);
+		Set<String> handles = driver.getWindowHandles();
+		System.out.println(handles);
+		for(String handle1:handles)
+		    if(!parentwindow.equals(handle1))
+		    {
+		        driver.switchTo().window(handle1);
+		        System.out.println(handle1);
+		    }
 		Assert.assertEquals("https://www.uhc.com/legal/accessibility", driver.getCurrentUrl());
 		driver.close();
 		driver.switchTo().window(parentwindow);
@@ -1480,39 +2005,36 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 
 	public void validateErrorMsgtakeadvantage() {
 		threadsleep(8);
-		validateNew(GetMoreInformation);
-		GetMoreInformation.click();
+		validateNew(RequestAnAppointMent);
+		jsClickNew(RequestAnAppointMent);
 		threadsleep(8);
-		scrollToView(ReqAppsubmitBtn);
 		validateNew(ReqAppsubmitBtn);
 		ReqAppsubmitBtn.click();
 		threadsleep(8);
-		scrollToView(FirstNameErroMsg);
 		validateNew(FirstNameErroMsg);
-		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes", FirstNameErroMsg.getText());
-		scrollToView(LastNameErroMsg);
+		Assert.assertEquals("Enter a first name and must contain only letters, spaces, hyphens and apostrophes",
+				FirstNameErroMsg.getText());
 		validateNew(LastNameErroMsg);
-		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes", LastNameErroMsg.getText());
-		scrollToView(AddressErroMsg);
+		Assert.assertEquals("Enter a last name and must contain only letters, spaces, hyphensand apostrophes",
+				LastNameErroMsg.getText());
 		validateNew(AddressErroMsg);
-		Assert.assertEquals("Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space", AddressErroMsg.getText());
-		scrollToView(CityErroMsg);
+		Assert.assertEquals(
+				"Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space",
+				AddressErroMsg.getText());
 		validateNew(CityErroMsg);
-		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space", CityErroMsg.getText());
-		scrollToView(SelectStateErroMsg);
+		Assert.assertEquals("Enter a city that only contains non-numeric characters, apostrophe , hyphen or space",
+				CityErroMsg.getText());
 		validateNew(SelectStateErroMsg);
 		Assert.assertEquals("Please select state", SelectStateErroMsg.getText());
-		scrollToView(ZipErroMsg);
 		validateNew(ZipErroMsg);
 		Assert.assertEquals("Enter a valid 5-digit ZIP code in the format 12345", ZipErroMsg.getText());
-		scrollToView(EmailErroMsg);
 		validateNew(EmailErroMsg);
 		Assert.assertEquals("Please enter a valid email address", EmailErroMsg.getText());
-		scrollToView(PhoneErroMsg);
 		validateNew(PhoneErroMsg);
-		//Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter  10 digit valid Phone Number"));
+		// Assert.assertTrue( PhoneErroMsg.getText().trim().contains("Please enter 10
+		// digit valid Phone Number"));
 		Assert.assertEquals("Please enter 10 digit valid Phone Number", PhoneErroMsg.getText());
-		System.out.println("@@PhoneNumebr@@"+PhoneErroMsg.getText());
+		System.out.println("@@PhoneNumebr@@" + PhoneErroMsg.getText());
 
 	}
 
@@ -1547,28 +2069,29 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 	
 	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(LocationLink);
+		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
 		LocationLink.click();
+		threadsleep(8);
+		InputZipCode.clear();
+		//InputZipCode.sendKeys(zipcodeMulti);
+		sendkeysMobile(InputZipCode, zipcodeMulti);
+		jsClickNew(LocationBtn);
+		FirstZipCode.click();
+		jsClickNew(LocationBtn);
+		driver.navigate().refresh();
+		validateNew(LocationLink);
+		jsClickNew(LocationLink);
 		threadsleep(5);
 		validateNew(LocationBtn);
 		LocationBtn.click();
 		threadsleep(5);
 		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
 		InputZipCode.clear();
-		InputZipCode.sendKeys(zipcodeSingle);
+		//InputZipCode.sendKeys(zipcodeSingle);
+		sendkeysMobile(InputZipCode, zipcodeSingle);
 		threadsleep(8);
 		LocationBtn.click();
 		threadsleep(8);
-		driver.navigate().refresh();
-		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
-		LocationLink.click();
-		threadsleep(8);
-		InputZipCode.clear();
-		InputZipCode.sendKeys(zipcodeMulti);
-		jsClickNew(LocationBtn);
-		FirstZipCode.click();
-		jsClickNew(LocationBtn);
-		
 			
 	}
 
@@ -1627,7 +2150,9 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 			waitforElementNew(viewPricingBtn);
 			viewPricingBtn.click();
 			threadsleep(4);
-			waitforElementNew(samTfn);
+			if (!driver.getCurrentUrl().contains("health-plan")) {
+				Assert.fail("VPP not opened successfully");
+			}
 			
 		}
 
@@ -1681,6 +2206,40 @@ public class CampaignExternalLinksMobile extends UhcDriver {
 				}
 			}
 			
+		}
+		
+		public void validateLPPages(String tfnXpath) {
+			threadsleep(5);
+			sleepBySec(8);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			threadsleep(5);
+
+			if (driver.getCurrentUrl().contains("aarpmedicareplans.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("AARP External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("UHC External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("stage-aarpmedicareplans.uhc.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("AARP External Link Page opens successsfully");
+			} else if (driver.getCurrentUrl().contains("stage-uhcmedicaresolutions.uhc.com/")) {
+				Assertion.assertTrue(true);
+				System.out.println("UHC External Link Page opens successsfully");
+			} else
+				Assertion.fail("AARP/UHC External Link page is not opening up");
+			sleepBySec(8);
+			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+			jse.executeScript("window.scrollBy(0,-500)");
+			validate(TFNelement, 45);
+			System.out.println(">>>>>>>>>>>>> :" + TFNelement.getText());
+			System.out.print(TFNelement.getText());
+			if (validate(workingHrs)) {
+				System.out.println("Working hours Displayed on Page : " + workingHrs);
+			}
 		}
 		
 		public void validateDCEExternallinkMA() {
