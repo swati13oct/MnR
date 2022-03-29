@@ -2500,7 +2500,7 @@ public void clickMAPDValidateMAPDPlan(Map<String, String> memberAttributesMap) {
 		validateNew(lnkAgentMedSupCompare,15);
 		jsClickNew(lnkAgentMedSupCompare);
 		sleepBySec(15);
-		if (!agentMedSupCompareTable.isDisplayed() && validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Basic Costs')]")))){
+		if (!agentMedSupCompareTable.isDisplayed() && validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare Supplement')]")))){
 			Assert.fail("MS Compare not visible on Agent Plan Compare");
 		}
 	}
@@ -2538,7 +2538,28 @@ public void clickMAPDValidateMAPDPlan(Map<String, String> memberAttributesMap) {
 		Assert.assertEquals(BenefitLinkText.replaceAll("[\\n\\r]", ""), "Benefit Highlights (PDF)");
 		System.out.println("Validated PDF dispalyed for Current enrolled member: " + BenefitLinkText);
 	}
-	
-	
-	
+
+	public void validateMAPDMSLinkNotDisplay() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		/*if ((lnkAgentMedSupCompare.isDisplayed()==true)){ Assert.fail("MAPD And MedSupp Links are visible ");
+		} else{ System.out.println("MAPD And MedSupp Links are not visible "); }*/
+		try{
+			if(lnkAgentMedSupCompare.isDisplayed() || lnkAgentMAPDCompare.isDisplayed())
+				Assert.fail("MAPD and MS link is present");
+		}catch (NoSuchElementException e){
+			System.out.println("MAPD and MS link is present");
+		}
+	}
+
+	public void validateMAPDMSLinkIsDisplay() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		if (lnkAgentMedSupCompare.isDisplayed() && lnkAgentMAPDCompare.isDisplayed()){
+			System.out.println("MAPD And MedSupp Links are visible ");
+		} else{
+			Assert.fail("MAPD And MedSupp Links are not visible ");
+		}
+	}
+
 }
