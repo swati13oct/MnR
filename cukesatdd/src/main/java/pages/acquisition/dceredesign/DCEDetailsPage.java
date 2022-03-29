@@ -99,7 +99,6 @@ public class DCEDetailsPage extends UhcDriver {
     public void openAndValidate() {
         //validate(backToAllPlans,30);
         String ReturnValue = "";
-        validate(plandetails,10);
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         threadsleep(5000);
         try {
@@ -452,7 +451,8 @@ public class DCEDetailsPage extends UhcDriver {
             for(int i = 0; i < 1 ; i++){
                 if(i == 0){
                     setPharmacy("Preferred Mail", sessionID , jo);
-                    threadsleep(2);
+                    //threadsleep(5);
+                    validate(driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li")));
                     WebElement deductible = driver.findElement(By.xpath("//h3[text()='Deductible']/../..//li"));
                     WebElement intialCoverage = driver.findElement(By.xpath("//span[text()='Drug Copays & Deductible ']/../../../..//p[contains(text(),'All')]"));
                     result.put("Deductible", deductible.getText());
@@ -499,7 +499,7 @@ public class DCEDetailsPage extends UhcDriver {
             } catch (Exception e1) {
             }
             driver.navigate().refresh();
-            threadsleep(5);
+            //threadsleep(5);
         }
         else if(pharmacyType.equalsIgnoreCase("Standard Retail")){
             String standardRetail = "{\n" +
