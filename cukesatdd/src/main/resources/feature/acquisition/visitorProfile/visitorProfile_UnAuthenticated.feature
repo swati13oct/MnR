@@ -537,7 +537,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
       | UHC  | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @prodRegression
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @prodRegression @vpMSApril
     Examples:
       | site | zipcode | isMultiCounty | plantype | county      | MS_testPlans  | MS_Plan | component_code |
       | AARP | 58102   | NO            | MS       | Cass County | Plan G,Plan A | Plan G  | WB27375ST      |
