@@ -1606,6 +1606,9 @@ public class VisitorProfilePage extends UhcDriver {
     }
 
     public void clickOnMStartApplication(String planName) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
+        waitForPageLoadSafari();
         WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::*[text()='Start Application'][1]"));
         jsClickNew(btnStartApplication);
         waitforElementNew(msDOB);
