@@ -468,6 +468,18 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | TFN No    | <MedSupStaticTFNNo>     |
       | TFN Xpath | <MedsuppStaticTFNxpath> |
     And user updates Medsup form for user details
+    When user selects medsup plans to compare
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    When user click on back to plans link in compare page
     And user click on View Plan Details in MS plan
       | Zip Code | <zipcode> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -528,6 +540,20 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Then the user fills all the details in MedsuppPage for TFN
       | DOB      | <dob>     |
       | Zip Code | <zipcode> |
+    When user selects medsup plans to compare
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    When user click on back to plans link in compare page
+    #Then the user navigates to plan tab for any plan
+     # | Plan Type | <MSPlantype> |
     And user click on View Plan Details in MS plan
       | Zip Code | <zipcode> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -566,7 +592,7 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
 
-    @Scenario_IS-4_UHCReferralTraffic_UAT_Medsup3.0 @campaignTFNStageMS123 @IS_TFN_E2E_Scenario_4 @campaignTFNProdMS @regressionUHC
+    @Scenario_IS-4_UHCReferralTraffic_UAT_Medsup3.0 @campaignTFNStageMS @IS_TFN_E2E_Scenario_4 @campaignTFNProdMS @regressionUHC
     Examples: 
       | scenario                                          | site   | zipcode | dob        | MAplantype | MSPlantype | pscCode | state   | campaignUrl                                                                    | medEdURL1                                        | medEdTFN                           | shoppagesUrl                        | shoppagesTFN                                                                        | userName          | password        | TFNNo          | TFNxpath                          | EnrollTFNxpath                    | ShopTFNxpath                      | FedTFNNo       | MedSupTFNNo    | sourceCode | MedSupStaticTFNNo | MedsuppStaticTFNxpath |
       | Scenerio IS-4-UHCReferralTraffic - UMS Medsup 3.0 | BLayer |   23666 | 11/11/1950 | MA         | MS         |  832935 | Alabama | health-plans.html?WT.mc_id=832935&test_version=UMS&zipcode=23666#/plan-summary | medicare-education/medicare-advantage-plans.html | (//span[@class='heading-6']//u)[1] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | TiggerOptumID3331 | FebruarY##123$! | 1-844-850-6592 | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[4] | 1-855-259-8119 | 1-866-462-4046 | 2RZ        | 1-866-603-3424    | //span[@class='tel']  |
@@ -599,6 +625,23 @@ Feature: UAT Scripts-To test Campaign TFN for IS Medsup flows
       | TFN No | <FedTFNNo> |
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
+    Then the user fills all the details in MedsuppPage for TFN
+      | DOB      | <dob>     |
+      | Zip Code | <zipcode> |
+    And user click on View Plan Details in MS plan
+      | Zip Code | <zipcode> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user validates source code
+      | sourceCode | <sourceCode> |
+    Then the user validates Fed TFN
+      | TFN No | <FedTFNNo> |
+    Then the user validates MedSup TFN
+      | TFN No | <MedSupTFNNo> |
+    Then the user validates TFN in Already an insured section
+      | TFN No    | <MedSupStaticTFNNo>     |
+      | TFN Xpath | <MedsuppStaticTFNxpath> |
     When Navigate to Visitor Profile page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code

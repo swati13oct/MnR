@@ -1669,4 +1669,11 @@ public class CampaignTFNCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqusitionHomePage);
 	}
+	
+	@And("^user click on back to plans link in compare page$")
+	public void click_browser_Back_Button() {
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+		tfnPage.clickBackToPlansLinkComparePage();
+
+	}
 }
