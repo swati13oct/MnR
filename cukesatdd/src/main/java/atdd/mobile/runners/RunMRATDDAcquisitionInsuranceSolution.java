@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
 				features = {"src/main/resources/feature/acquisition/insuranceSolution"},
 				monochrome = true,
 				plugin = { "pretty",
