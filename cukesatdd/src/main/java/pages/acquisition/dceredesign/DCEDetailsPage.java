@@ -257,11 +257,12 @@ public class DCEDetailsPage extends UhcDriver {
         result.put("Initial Coverage Stage Modal",initialCoverageStageModalText.getText());
         initialCoverageStageModalCloseBtn.click();
 
-        if(validateNew(deductibleCoverageStageModalLink)){
+     try{
             deductibleCoverageStageModalLink.click();
             result.put("Deductible Coverage Stage Modal",deductibleCoverageStageModalText.getText());
             deductibleCoverageStageModalCloseBtn.click();
         }
+     catch (Exception ex){}
 
         if(sheetName.contains("MAPD_SNP_DCE")){
             for(int i = 0; i < 2 ; i++){
