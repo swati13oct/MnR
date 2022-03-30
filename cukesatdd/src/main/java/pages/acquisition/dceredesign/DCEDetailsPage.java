@@ -259,7 +259,7 @@ public class DCEDetailsPage extends UhcDriver {
 
         deductibleCoverageStageModalLink.click();
         result.put("Deductible Coverage Stage Modal",deductibleCoverageStageModalText.getText());
-        deductibleCoverageStageModalLink.click();
+        deductibleCoverageStageModalCloseBtn.click();
 
         if(sheetName.contains("MAPD_SNP_DCE")){
             for(int i = 0; i < 2 ; i++){
