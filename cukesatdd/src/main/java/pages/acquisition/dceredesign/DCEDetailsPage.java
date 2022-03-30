@@ -56,8 +56,14 @@ public class DCEDetailsPage extends UhcDriver {
     @FindBy(xpath="//h2[text()='Initial Coverage Stage']/../../../../../..//p")
     private WebElement initialCoverageStageModalText;
 
+    @FindBy(xpath="//h2[text()='Deductible Coverage Stage']/../../../../../..//p")
+    private WebElement deductibleCoverageStageModalText;
+
     @FindBy(xpath="//button[text()='What is the Initial Coverage stage?']")
     private WebElement initialCoverageStageModalLink;
+
+    @FindBy(xpath="//button[@id='deductible']")
+    private WebElement deductibleCoverageStageModalLink;
 
     @FindBy(xpath="//button[text()=' What is the Coverage Gap stage?']")
     private WebElement coverageGapStageModalLink;
@@ -67,6 +73,9 @@ public class DCEDetailsPage extends UhcDriver {
 
     @FindBy(xpath="//h2[text()='Initial Coverage Stage']/../../../../../..//span[text()='Done']")
     private WebElement initialCoverageStageModalCloseBtn;
+
+    @FindBy(xpath="//h2[text()='Deductible Coverage Stage']/../../../../../..//span[text()='Done']")
+    private WebElement deductibleCoverageStageModalCloseBtn;
 
     @FindBy(xpath="//h2[text()='Coverage Gap Stage']/../../../../../..//span[text()='Done']")
     private WebElement coverageGapStageModalCloseBtn;
@@ -247,6 +256,10 @@ public class DCEDetailsPage extends UhcDriver {
         initialCoverageStageModalLink.click();
         result.put("Initial Coverage Stage Modal",initialCoverageStageModalText.getText());
         initialCoverageStageModalCloseBtn.click();
+
+        deductibleCoverageStageModalLink.click();
+        result.put("Deductible Coverage Stage Modal",deductibleCoverageStageModalText.getText());
+        deductibleCoverageStageModalLink.click();
 
         if(sheetName.contains("MAPD_SNP_DCE")){
             for(int i = 0; i < 2 ; i++){
