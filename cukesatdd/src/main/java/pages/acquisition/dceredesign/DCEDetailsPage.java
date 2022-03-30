@@ -257,14 +257,26 @@ public class DCEDetailsPage extends UhcDriver {
         result.put("Initial Coverage Stage Modal",initialCoverageStageModalText.getText());
         initialCoverageStageModalCloseBtn.click();
 
-        deductibleCoverageStageModalLink.click();
-        result.put("Deductible Coverage Stage Modal",deductibleCoverageStageModalText.getText());
-        deductibleCoverageStageModalCloseBtn.click();
+        if(validateNew(deductibleCoverageStageModalLink)){
+            deductibleCoverageStageModalLink.click();
+            result.put("Deductible Coverage Stage Modal",deductibleCoverageStageModalText.getText());
+            deductibleCoverageStageModalCloseBtn.click();
+        }
 
         if(sheetName.contains("MAPD_SNP_DCE")){
             for(int i = 0; i < 2 ; i++){
                 if(i == 0){
                     setPharmacy("Preferred Mail", sessionID , jo);
+                    Wait wait = new FluentWait(driver)
+                            .withTimeout(Duration.ofSeconds(30))
+                            .pollingEvery(Duration.ofSeconds(1))
+                            .ignoring(Exception.class);
+                    WebElement deductible = (WebElement) wait.until(new Function<WebDriver, WebElement>(){
+
+                        public WebElement apply(WebDriver driver ) {
+                            return driver.findElement(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../.."));
+                        }
+                    });
                     List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
                     for(int j = 0; j < drugCopays.size(); j++){
 
@@ -299,6 +311,16 @@ public class DCEDetailsPage extends UhcDriver {
                 }
                 if(i == 1){
                     setPharmacy("Standard Retail", sessionID , jo);
+                    Wait wait = new FluentWait(driver)
+                            .withTimeout(Duration.ofSeconds(30))
+                            .pollingEvery(Duration.ofSeconds(1))
+                            .ignoring(Exception.class);
+                    WebElement deductible = (WebElement) wait.until(new Function<WebDriver, WebElement>(){
+
+                        public WebElement apply(WebDriver driver ) {
+                            return driver.findElement(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../.."));
+                        }
+                    });
                     List<WebElement> drugCopays = driver.findElements(By.xpath("//h3[text()='Drug Copays & Coinsurance']/../..//span"));
                     for(int j = 0; j < drugCopays.size(); j++){
 
