@@ -43,53 +43,6 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN Xpath | <TFNxpath> |
     Then the user navigates back to page
     Then the user navigates to plan tab for any plan
-      | Plan Type | <MSplantype> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>       |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    Then the user fills all the details in MedsuppPage for TFN
-      | DOB      | <dob>     |
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedSupTFN>           |
-      | TFN Xpath | <MedsuppFormTFNxpath> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user clicks on decision guide for MedsuppPge
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>     |
-      | TFN Xpath | <decisionGuideTFN> |
-    # Then the user navigates back to page
-    Then the user click on back to previous page on Request a Free Decision Guide
-      | Zip Code | <zipcode> |
-    #When the user clicks on Agent link for MedsuppPage
-     # | TFN No    | <agentTFN>   |
-      #| TFN Xpath | <agentXpath> |
-      #| Zip Code  | <zipcode>    |
-    And user click on Start Application in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then user click on Cancel Application in MS plan
-      | Zip Code | <zipcode> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
-    Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <PDPplantype> |
@@ -103,7 +56,6 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN Xpath | <EnrollTFNxpath> |
     Then the user navigates back to page
     Then the user navigates to homepage validates Federal TFN
-    #And the user clicks on the shopping cart icon in UHC site
     And the user clicks on the shopping cart icon
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -131,8 +83,6 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | TFN No | <FedTFNNo> |
     Then the user validates MedSup TFN
       | TFN No | <MedSupTFNNo> |
-    #Then the user navigates to plan tab for any plan
-    # | Plan Type | <MAplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
       | Plan Type | <MAplantype> |
     Then the user validates TFN Number
@@ -206,59 +156,11 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates TFN Number
       | TFN No    | <TFNNo>          |
       | TFN Xpath | <EnrollTFNxpath> |
-    #Then the user validates PSC code
-    # | PSC Code | <pscCode> |
-    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    #| Zip Code        | <zipcode>|
-    #Then the user navigates back to page
     Then the user navigates back to page
     Then the user navigates to homepage validates Federal TFN
     Then the user enter zipcode in homepage for External Links
       | Zip Code  | <zipcode>    |
       | Plan Type | <MAplantype> |
-    Then the user navigates to plan tab for any plan
-      | Plan Type | <MSplantype> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>    |
-      | TFN Xpath | <MedsuppTFNxpath> |
-    Then the user fills all the details in MedsuppPage for TFN
-      | DOB      | <dob>     |
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>        |
-      | TFN Xpath | <MedsuppFormTFNxpath> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then the user clicks on decision guide for MedsuppPge
-      | Zip Code | <zipcode> |
-    Then the user validates TFN Number
-      | TFN No    | <MedsuppTFNNo>     |
-      | TFN Xpath | <decisionGuideTFN> |
-    Then the user click on back to previous page on Request a Free Decision Guide
-      | Zip Code | <zipcode> |
-    When the user clicks on Agent link for MedsuppPage
-      | TFN No    | <agentTFN>   |
-      | TFN Xpath | <agentXpath> |
-      | Zip Code  | <zipcode>    |
-    And user click on Start Application in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    Then user click on Cancel Application in MS plan
-      | Zip Code | <zipcode> |
-    And user click on View Plan Details in MS plan
-      | Zip Code | <zipcode> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
-    Then the user validates source code
-      | sourceCode | <sourceCode> |
-    And user click on Back to Plan in MS Plan Details
-      | Zip Code | <zipcode> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN
