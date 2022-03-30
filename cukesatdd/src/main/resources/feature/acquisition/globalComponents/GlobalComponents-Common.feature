@@ -362,7 +362,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | health-insurance-brokers.html | Footer: Agents and Brokers | 
       | AARP | contact-us.html               | Footer: Contact Us         | 
       | AARP | privacy-policy.html           | Footer: Privacy Policy     | 
-	 	 | AARP | about-us.html                 | Footer: About Us           | 
+	 	 #| AARP | about-us.html                 | Footer: About Us           | 
 
 	  
     @prodRegression @regressionAARP

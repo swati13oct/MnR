@@ -2073,4 +2073,14 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
 		CheckPageLoad();
 	}
+	
+	@FindBy(xpath = "//*[@id='header']//*[contains(@class,'back-to-plans')]|//*[@id='is_vpp_subcontent_placeholder']//*[contains(@class,'back-to-plans')]")
+	private WebElement backToPlansComparePage;
+	
+	public void clickBackToPlansLinkComparePage() {
+		backToPlansComparePage.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
 }
+
+
