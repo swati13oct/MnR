@@ -4610,7 +4610,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateUrl(String url) {
-		threadsleep(6);
+		if(driver.toString().toUpperCase().contains("IOS")) {
+			sleepBySec(30);
+		}
 		String parentWindow = driver.getWindowHandle();
 		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
 		System.out.println(driver.getTitle());
