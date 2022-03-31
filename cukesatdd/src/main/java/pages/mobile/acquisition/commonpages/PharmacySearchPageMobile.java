@@ -992,13 +992,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 					pharmacyValidate(pharmaciesAvailable));
 			System.out.println("\n\nTotal pharmacy count : " + totalAfter + "\n\n");
 			if (totalAfter > 10) {
-				WebElement contactUsLink = contactUnitedHealthCare;
-				if (!pharmacyValidate(contactUnitedHealthCare))
-					contactUsLink = contactUnitedHealthCare_ol;
-				scrollToView(contactUsLink);
+			//	WebElement contactUsLink = contactUnitedHealthCare;
+			//	if (!pharmacyValidate(contactUnitedHealthCare))
+			//		contactUsLink = contactUnitedHealthCare_ol;
+			//	scrollToView(contactUsLink);
 
 				// moveMouseToElement(contactUsLink);
-				jsMouseOver(contactUsLink);
+			//	jsMouseOver(contactUsLink);
 
 				sleepBySec(3);
 				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
@@ -1056,7 +1056,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 	}
 
-	@FindBy(xpath="//span[text()='Servicio de salud ind?gena, tribal o ind?gena urbano']")
+	@FindBy(xpath="//span[text()='Servicio de salud indígena, tribal o indígena urbano']")
 	protected WebElement indian_tribal_label_filter_text;
 
 	public boolean validateNoPharmaciesErrorMessage() {
@@ -1068,8 +1068,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
 		catch (Exception ex) {
 		}
-		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud ind?gena, tribal o ind?gena urbano")){
-			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud ind?gena, tribal o ind?gena urbano']/.."));
+		if(indian_tribal_text.equalsIgnoreCase("Servicio de salud indígena, tribal o indígena urbano")){
+			indian_tribal_label_filter = driver.findElement(By.xpath("//span[text()='Servicio de salud indígena, tribal o indígena urbano']"));
 		}
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 		jsClickNew(indian_tribal_label_filter);
