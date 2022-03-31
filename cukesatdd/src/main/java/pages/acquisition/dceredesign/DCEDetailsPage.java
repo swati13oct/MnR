@@ -539,6 +539,50 @@ public class DCEDetailsPage extends UhcDriver {
                 }
             }
         }
+        else if(sheetName.contains("LIS_NonBuydown")){
+            for(int i = 0; i < 1 ; i++){
+                if(i == 0){
+                    setPharmacy("Preferred Mail", sessionID , jo);
+                    Wait wait = new FluentWait(driver)
+                            .withTimeout(Duration.ofSeconds(30))
+                            .pollingEvery(Duration.ofSeconds(1))
+                            .ignoring(Exception.class);
+                    WebElement test = (WebElement) wait.until(new Function<WebDriver, WebElement>(){
+
+                        public WebElement apply(WebDriver driver ) {
+                            return driver.findElement(By.xpath("//span[text()='Drug Copays & Deductible ']"));
+                        }
+                    });
+
+                    List<WebElement> deductible = driver.findElements(By.xpath("//h3[text()='Deductible']/..//li"));
+                    List<WebElement> intialCovergeNoLis = driver.findElements(By.xpath("//h3[text()='Initial Coverage Stage - No LIS']/..//span"));
+                    List<WebElement> intialCovergeLis = driver.findElements(By.xpath("//h3[text()='Initial Coverage Stage - If You Qualify for LIS (Extra Help)']/..//span"));
+                    String deductibles = "";
+                    String intialCovergeNoLiss = "";
+                    String intialCovergeLiss = "";
+                    for(int j = 0; j < deductible.size(); j++){
+                        deductibles = deductibles + deductible.get(j).getText();
+                        deductibles = deductibles + " ";
+                    }
+                    for(int j = 0; j < intialCovergeNoLis.size(); j++){
+                        intialCovergeNoLiss = intialCovergeNoLiss + intialCovergeNoLis.get(j).getText();
+                        intialCovergeNoLiss = intialCovergeNoLiss + " ";
+                    }
+                    for(int j = 0; j < intialCovergeLis.size(); j++){
+                        if(!intialCovergeLis.get(j).getText().equalsIgnoreCase("")){
+                            intialCovergeLiss = intialCovergeLiss + intialCovergeLis.get(j).getText();
+                            intialCovergeLiss = intialCovergeLiss + " ";
+                        }
+                    }
+
+                    //WebElement intialCoverage = driver.findElement(By.xpath("//span[text()='Drug Copays & Deductible ']/../../../..//p[contains(text(),'All')]"));
+                    result.put("Deductible", deductibles);
+                    result.put("Initial Coverage Stage-No LIS",intialCovergeNoLiss.trim());
+                    result.put("Initial Coverage Stage-If You Qualify for LIS", intialCovergeLiss.trim());
+                    //result.put("Initial Coverage Stage", intialCoverage.getText());
+                }
+            }
+        }
 
         System.out.println("Finished collecting the info on vpp detail page =====");
 
