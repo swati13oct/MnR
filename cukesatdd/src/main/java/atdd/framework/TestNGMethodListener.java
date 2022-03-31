@@ -49,7 +49,7 @@ public class TestNGMethodListener implements IInvokedMethodListener, IAnnotation
 		if (!selectedMicroApps.isEmpty()) {
 			for (String MicroApp : selectedMicroApps) {
 				String runnerFileName = testMethod.getDeclaringClass().getSimpleName();
-				if (runnerFileName.contains(MicroApp)) {
+				if (runnerFileName.toUpperCase().contains(MicroApp.toUpperCase())) {
 					annotation.setEnabled(true);
 					selectedRunners.add(runnerFileName);
 					System.out.println("Enabling " + runnerFileName + " for " + MicroApp);

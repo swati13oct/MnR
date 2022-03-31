@@ -15,26 +15,31 @@ Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take
     Then user validates Current location and change location
       | zipcodeSingle | <zipcodeSingle> |
       | zipcodeMulti  | <zipcodeMulti>  |
+    And user is on new campaign external Links page
+      | External Link | <externallink2> |
+    Then the user verify TFN on landing pages
+      | TFN Xpath | <TFNxpath1> |
+      | TFNflag   | <tfnFlag>   |
 
     @CampaignExternal_Scenario8_AARP @teamAvengersLP @featureGate
     Examples:
-      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | tfnFlag | workingHrs                              | externallink                                                       |
-      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | true    | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/take-advantage.html |
+      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | tfnFlag | workingHrs                              | externallink                                                                                     |TFNNo2        |externallink2                                                                                                                      |
+      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | true    | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/take-advantage.html |1-855-814-6893|https://www.team-avengers-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/lp/medicare-advantage-plans.html?wt.mc_id=8020691|
 
     @CampaignExternal_Scenario8_AARP @StageLP @regressionAARP
     Examples:
-      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | tfnFlag | workingHrs                              | externallink                                                       |
-      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | true    | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.stage-aarpmedicareplans.uhc.com/lp/take-advantage.html |
+      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | tfnFlag | workingHrs                              | externallink                                                       |TFNNo2        |externallink2                                                                      |
+      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | true    | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.stage-aarpmedicareplans.uhc.com/lp/take-advantage.html |1-855-814-6893|https://www.stage-aarpmedicareplans.uhc.com/lp/take-advantage.html?wt.mc_id=8020691|
 
     @CampaignExternal_Scenario8_AARP  @OfflineLP
     Examples:
-      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                                 |
-      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://offline.aarpmedicareplans.com/lp/take-advantage.html |
+      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                                 |TFNNo2        |externallink2                                                                |
+      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://offline.aarpmedicareplans.com/lp/take-advantage.html |1-855-814-6893|https://offline.aarpmedicareplans.com/lp/take-advantage.html?wt.mc_id=8020691|
 
     @CampaignExternal_Scenario8_AARP  @ProdLP
     Examples:
-      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                             |
-      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.aarpmedicareplans.com/lp/take-advantage.html |
+      | Scenario                                     | zipcodeMulti | zipcodeSingle | TFNNo          | TFNxpath1                   | workingHrs                              | externallink                                             |TFNNo2        |externallink2                                                            |
+      | Campaign External Links - E2E Scenario 8_AMP | 65656        | 33111         | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | https://www.aarpmedicareplans.com/lp/take-advantage.html |1-855-814-6893|https://www.aarpmedicareplans.com/lp/take-advantage.html?wt.mc_id=8020691|
 
   @Scenario8
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links-VPP
