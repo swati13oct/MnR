@@ -536,10 +536,10 @@ public class PharmacySearchPageNew extends PharmaacySearchBaseNew{
 					pharmacyValidate(pgInEnglish));
 		} else if (("Chinese").equalsIgnoreCase(language)) {
 			Assertion.assertTrue("PROBLEM - page should be in Chinese after selecting Chinese",
-					pharmacyValidate(pgInEnglish));
+					pharmacyValidate(pgInChinese));
 		} else if (("Spanish").equalsIgnoreCase(language)) {
 			Assertion.assertTrue("PROBLEM - page should be in Spanish after selecting Spanish",
-					pharmacyValidate(pgInEnglish));
+					pharmacyValidate(pgInSpanish));
 		} else {
 			Assertion.assertTrue("PROBLEM - language '" + language + "' is not supported, check test input", false);
 		}
