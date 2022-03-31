@@ -302,7 +302,7 @@ Feature: 1.12 UAT - Header and Footer flows
     Then user should be navigated to respective footer links page
     When user click on "AARP.org" link under more
     Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
+    #Then the user clicks on browser back button
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user hover over for plan member to click to go to member site
@@ -380,11 +380,11 @@ Feature: 1.12 UAT - Header and Footer flows
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
     
-     @globalheader_AARP123
+     @globalheader_AARP
     Examples: 
       | Scenario           | site | path                                                      | pagename                                                    |
       | E2E Scenario_2 AMP | AARP | health-plans.html#/zipcode                                | Shop for a Plan                                             |
-
+			
     @globalheader_AARP @regressionAARP @featureGate
     Examples: 
       | Scenario           | site | path                                                      | pagename                                                    |

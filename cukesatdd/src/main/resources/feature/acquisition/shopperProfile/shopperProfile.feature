@@ -534,9 +534,57 @@ Feature: 1.09. ACQ- Shopper Profile
       | County             | <county>           |
     Then user validate medsup compare link for telesales
     Then user click on MAPD link and validates
+    When the user searches for zip code using following information on Plan Compare Page
+      | Zip Code | <Changezipcode> |
+    Then the user validate the MAPD and MS links are not visible
+    When the user searches for zip code using following information on Plan Compare Page
+      | Zip Code | <zipcode> |
+    Then the user validate the MAPD and MS links are visible
 
     @AgentMedSupValidation @regressionSPTeamE  @regressionSPStage @regressionAARP
     Examples:
-      | username | password      | email             | mbi           | dob        | zipcode | fname  | lname | uuid                                 | enrolledplanName | planName                                       | plantype | drugNames | providers |
-      | ocpuser2 | Password@1212 | nathim@member.com | 1HT8-CW6-NM62 | 12/15/1952 | 30038   | NATHIM | DRUE  | bd8cee09-3cd3-4aa0-9de9-b51f81520b7d | [blank]          | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        |
+      | username | password      | email             | mbi           | dob        | zipcode | fname  | lname | uuid                                 | enrolledplanName | planName                                       | plantype | drugNames | providers | Changezipcode |
+      | ocpuser2 | Password@1212 | nathim@member.com | 1HT8-CW6-NM62 | 12/15/1952 | 30038   | NATHIM | DRUE  | 05eefdcb-6204-41d0-9c1e-fb4588531c83 | [blank]          | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        | 19149         |
 
+  @F770871 @regressionSPStage @regressionAARP
+  Scenario Outline: Telesales agent validate Change Zipcode and Check for PDF's laoding for Current Member
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
+    And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
+    Then user Validates Show DSNP and PDP Link available
+    Then Verify Change Zip Code Link is displayed on compare Page
+    When the user performs zip search using following information on Plan Compare Page
+      | Zip Code        | <Changezipcode>       |
+      | Is Multi County | <ChangeisMultiCounty> |
+      | County Name     | <Changecounty>        |
+      | Click on Enter  | <ClickEnter>          |
+    Then user Validates Show DSNP and PDP Link available
+    Then Validate PDFs loading for Current enrolled Plan
+      | Enrolled Plan Name | <enrolledplanName> |
+
+    Examples:
+      | username | password      | email               | mbi           | dob        | zipcode | county      | fname  | lname    | uuid                                 | enrolledplanName                                                 | planName                                       | plantype | drugNames | providers | Changezipcode | ChangeisMultiCounty | Changecounty | ClickEnter                |
+      | ocpuser2 | Password@1212 | NICOLINI@DREENA.com | 5P03-TK3-XM08 | 03/02/1949 | 90210   | Los Angeles | DREENA | NICOLINI | 6e4533a9-3f66-4f1b-b63d-d613dc0c72c1 | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | AARP Medicare Advantage Freedom Plus (HMO-POS) | MAPD     | No        | No        | 78006         | YES                 | Bexar County | Click on Find Plan button |

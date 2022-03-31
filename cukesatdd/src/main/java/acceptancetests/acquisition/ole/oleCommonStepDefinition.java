@@ -103,6 +103,7 @@ public class oleCommonStepDefinition {
 		else
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
+	
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
@@ -156,6 +157,7 @@ public class oleCommonStepDefinition {
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE));
 
 		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		if (Validation_Status) {
