@@ -10,12 +10,12 @@ Feature: 1.15.2 - UAT Scripts - To test SAM Icons
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression @sanity  @vbfGate1 @regressionAARP
+    @samChatCallulayer @UATRegression @sanity  @vbfGate1 @regressionAARP @samIcons
     Examples: 
       | pageName | site | scenario           |
       | /        | AARP | E2E Scenario 1_AMP |
 
-    @samChatCallblayer @UATRegression @regressionUHC
+    @samChatCallblayer @UATRegression @regressionUHC @samIcons
     Examples: 
       | pageName | site | scenario           |
       | /        | UHC  | E2E Scenario 1_UMS |
@@ -31,12 +31,12 @@ Feature: 1.15.2 - UAT Scripts - To test SAM Icons
     Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression   @regressionAARP
+    @samChatCallulayer @UATRegression   @regressionAARP @samIcons
     Examples: 
       | pageName | site | scenario           |
       | /        | AARP | E2E Scenario 3_AMP |
 
-    @samChatCallblayer @UATRegression @vbfGate1  @regressionUHC
+    @samChatCallblayer @UATRegression @vbfGate1  @regressionUHC @samIcons
         Examples: 
       | pageName | site | scenario           |
       | /        | UHC  | E2E Scenario 3_UMS |

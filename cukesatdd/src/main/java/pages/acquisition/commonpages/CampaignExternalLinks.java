@@ -1133,8 +1133,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCountyForPDPExternalPage(String zipcode) {
-		if (validate(countyModalVpp))
-			jsClickNew(cancelCountyModal);
+		/*if (validate(countyModalVpp))
+			jsClickNew(cancelCountyModal);*/
 		threadsleep(3);
 
 		validateNew(ZipCodeTxtBx);
