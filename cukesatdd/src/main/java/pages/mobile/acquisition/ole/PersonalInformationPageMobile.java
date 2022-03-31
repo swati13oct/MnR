@@ -292,7 +292,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				sendkeysMobile(MailingAdd_Street,Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
 				sendkeysMobile(MailingAdd_City,Mailing_City);
-				if(!driver.toString().toLowerCase().contains("IOS")) {
+				if(!(driver.toString().toUpperCase().contains("IOS"))) {
 					Select SelectState = new Select(MailingAdd_State_DropDown);
 					SelectState.selectByValue(Mailing_State);
 				}
