@@ -42,7 +42,7 @@ public class ShopperProfileAgentLogin extends UhcDriver {
 		//MRScenario.environment = "stage";
 		if (MRScenario.environment.equals("offline-stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
-			CommonUtility.waitForPageLoadNew(driver, username, 45);
+			//CommonUtility.waitForPageLoadNew(driver, username, 45);
 		}
 		else if (MRScenario.environment.equals("stage")) {
 			start(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);

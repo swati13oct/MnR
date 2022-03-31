@@ -1417,6 +1417,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
+	
+	@FindBy(xpath = "//*[contains(text(), normalize-space('Return to plan compare'))]")
+	public WebElement DrugCosts_PlanCompareLnk;
 
 	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
 	public WebElement ComparePage_TableHeader;
@@ -1428,8 +1431,8 @@ public class DrugDetailsPage extends UhcDriver {
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
-		validateNew(DrugCosts_PlanCompareBtn);
-		jsClickNew(DrugCosts_PlanCompareBtn);
+		validateNew(DrugCosts_PlanCompareLnk);
+		jsClickNew(DrugCosts_PlanCompareLnk);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
 		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);

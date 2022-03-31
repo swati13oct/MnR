@@ -151,7 +151,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP| shop/medicare-advantage-plans/massachusetts.html| AARP |
       | AARP| shop/medicare-advantage-plans/northcarolina.html| AARP |
       | AARP| shop/medicare-advantage-plans/arizona.html| AARP |
-       | AARP| shop/connect/agentebrc.html| AARP |
+       #| AARP| shop/connect/agentebrc.html| AARP |
        | AARP| medicare-education/how-to-enroll-in-medicare.html| AARP |
        | AARP| medicare-education/changing-plans.html| AARP |
        | AARP| medicare-education/medicare-initial-enrollment-period.html| AARP |
@@ -182,7 +182,7 @@ Feature: 1.12 ACQ - Global Components Validation
        | AARP| medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period| AARP |
        | AARP| medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan| AARP |
        | AARP| medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud| AARP |
-       | AARP| medicare-articles/what-will-medicare-cost-in-2020| AARP |
+       #| AARP| medicare-articles/what-will-medicare-cost-in-2020| AARP |
        | AARP| medicare-articles/what-is-retiree-health-coverage| AARP |
        | AARP| medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for| AARP |
        | AARP| medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options| AARP |
@@ -345,24 +345,24 @@ Feature: 1.12 ACQ - Global Components Validation
        | AARP| ?WT.mc_id=8027592&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027592      |AARP|
        | AARP| ?WT.mc_id=8027589&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027589      |AARP|
        | AARP| ?WT.mc_id=8027593&mrcid=em:Acq:MR%7CAEP1%7CEGEM3544%7C::8027593      |AARP|
-       | AARP| /?WT.mc_id=8027581&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027581 |AARP|
-       | AARP| /?WT.mc_id=8027582&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027582 |AARP|
-       | AARP| /?WT.mc_id=8027583&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027583 |AARP|
-      | AARP | /?WT.mc_id=8027586&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027586 |AARP|
-       | AARP| /?WT.mc_id=8027492&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027492 |AARP|
-       | AARP| /?WT.mc_id=8027494&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027494 |AARP|
-       | AARP| /?WT.mc_id=8027495&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027495 |AARP|
-       | AARP| /?WT.mc_id=8027496&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027496 |AARP|
-       | AARP| /?WT.mc_id=8027571&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027571 |AARP|
-       | AARP| /?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 |AARP|
-       | AARP| /?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 |AARP|                                                                                               
+       | AARP| ?WT.mc_id=8027581&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027581 |AARP|
+       | AARP| ?WT.mc_id=8027582&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027582 |AARP|
+       | AARP| ?WT.mc_id=8027583&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027583 |AARP|
+      | AARP | ?WT.mc_id=8027586&mrcid=em:Acq:MR%7CPrewarm3%7CEGEM3542%7C::8027586 |AARP|
+       | AARP| ?WT.mc_id=8027492&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027492 |AARP|
+       | AARP| ?WT.mc_id=8027494&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027494 |AARP|
+       | AARP| ?WT.mc_id=8027495&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027495 |AARP|
+       | AARP| ?WT.mc_id=8027496&mrcid=em:Acq:MR%7CPrewarm1%7CEGEM3540%7C::8027496 |AARP|
+       | AARP| ?WT.mc_id=8027571&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027571 |AARP|
+       | AARP| ?WT.mc_id=8027572&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027572 |AARP|
+       | AARP| ?WT.mc_id=8027573&mrcid=em:Acq:MR%7CPrewarm2%7CEGEM3541%7C::8027573 |AARP|                                                                                               
       | AARP | sitemap.html                  | Footer: Site Map           | 
       | AARP | terms-of-use.html             | Footer: Terms of Use       | 
       | AARP | disclaimer.html               | Footer: Disclaimers        | 
       | AARP | health-insurance-brokers.html | Footer: Agents and Brokers | 
       | AARP | contact-us.html               | Footer: Contact Us         | 
       | AARP | privacy-policy.html           | Footer: Privacy Policy     | 
-	 	 | AARP | about-us.html                 | Footer: About Us           | 
+	 	 #| AARP | about-us.html                 | Footer: About Us           | 
 
 	  
     @prodRegression @regressionAARP

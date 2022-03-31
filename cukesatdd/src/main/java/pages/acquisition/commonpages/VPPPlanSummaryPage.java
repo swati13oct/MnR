@@ -30,6 +30,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -4182,7 +4183,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(viewPlansBtnMedSupp);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		CommonUtility.waitForPageLoadNew(driver, driver.findElement(By.xpath("(//button[contains(@class,'start') or contains(text(),'Start')])[1]")), 45);
 		// Start_ApplicationBtn.click();
 		// if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
 		// return new MedSuppOLEPage(driver);
@@ -4993,6 +4995,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 
 		System.out.println("Eligibility Health Questions are displayed");
+		Thread.sleep(2000);
 		jsClickNew(Eligibility);
 		jsClickNew(NursingFacility);
 		jsClickNew(ESRD);
@@ -7931,7 +7934,7 @@ public String GetMonthlyPremiumValue() {
 	@FindBy(xpath = "(//*[contains(text(),'Edit your information')])[1]")
 	private WebElement EditYourInformationLink;
 	
-	@FindBy(id = "part-b-month")
+	@FindBy(xpath="//*[@id='part-b-month']")
 	private WebElement partBDropdown;
 	
 	public boolean updatePersonalDetailsForMedsup() {
@@ -7943,7 +7946,11 @@ public String GetMonthlyPremiumValue() {
 		//partBDropdown.click();
 		jsClickNew(updateGenderDetailsForMedsup);
 		threadsleep(5);
-		selectFromDropDownByText(driver, partBDropdown, "March");
+		//selectFromDropDownByText(driver, partBDropdown, "March");
+		partBDropdown.click();
+		Select dropdown = new Select(partBDropdown);
+		dropdown.selectByValue("05");
+		threadsleep(5);
 		jsClickNew(saveAndUpdatePremiumsBtn);
 		threadsleep(5);
 		if(validate(EditYourInformationLink)) {
@@ -7953,9 +7960,12 @@ public String GetMonthlyPremiumValue() {
 	}
 	
 	@FindBy(xpath = "(//*[contains(@class,'uhc-card')]//*[contains(@class,'compare-plans-btn')]//label)[1]")
-	private WebElement firstComparePlanButtonForMS;
+	private WebElement firstComparePlanButtonForMS4;
 	
-	public void compareAllMSPlans() {
+	@FindBy(xpath = "(//*[contains(@class,'compare-box')]//button[contains(@class,'cta-button')])[1]")
+    private WebElement firstComparePlanButtonForMS3;
+	
+	public void compareAllMS4Plans() {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -7976,7 +7986,7 @@ public String GetMonthlyPremiumValue() {
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
-		jsClickNew(firstComparePlanButtonForMS);
+		jsClickNew(firstComparePlanButtonForMS4);
 	}
 	
 	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
@@ -7990,4 +8000,27 @@ public String GetMonthlyPremiumValue() {
 		//waitforElementNew(addMSPlans);
 	}
 	
+	public void compareAllMS3Plans() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMSPlans = driver
+				.findElements(By.xpath("//*[contains(@class,'compare-box')]//*[contains(@id,'compare-plan')]/../label"));
+		int plansForCompare = allMSPlans.size();
+		if (plansForCompare > 4) {
+			System.out.println("There are more than 4 plans, only first 4 will be compared");
+			plansForCompare = 4;
+		}
+		if (allMSPlans != null) {
+			for (int i = 0; i < plansForCompare; i++) {
+				moveMouseToElement(allMSPlans.get(i));
+				jsClickNew(allMSPlans.get(i));
+				System.out.println("Plan added to compare : " + i);
+			}
+		}
+		jsClickNew(firstComparePlanButtonForMS3);
+	}
 }

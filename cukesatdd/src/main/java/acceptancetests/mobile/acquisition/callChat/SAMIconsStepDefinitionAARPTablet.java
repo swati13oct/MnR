@@ -117,6 +117,67 @@ public class SAMIconsStepDefinitionAARPTablet {
 		}
 
 	}
+	
+	@Then("^the user validates TFN Number in Still have Questions section at bottom of page$")
+	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_page(
+			DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validatefootercallussection(TFNXpath, ExpecetdTFNNo);
+
+	}
+	
+	@Then("^the user validates SAM icons on Medsupp page$")
+	public void the_user_validates_SAM_icons_on_medsupp_page(DataTable givenAttributes) throws InterruptedException {
+
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+	/*	AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo); */
+		System.out.println("Skipping call icon validations in mobile");
+
+	}
+	
+	@Then("^the user validates TFN Number in Still have Questions section at bottom of Medsupp page$")
+	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_Medsupp_page(
+			DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateMedsuppfootercallussection(TFNXpath, ExpecetdTFNNo);
+	}
 
 	@Then("^the user validates whether chat icon is visible on AARP Tablet$")
 	public void the_user_validates_whether_chat_icon_is_visible_on_AARP_Tablet() throws InterruptedException {
