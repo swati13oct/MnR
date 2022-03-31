@@ -899,7 +899,6 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
 		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
