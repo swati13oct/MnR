@@ -158,12 +158,12 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples: 
       | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam |   80002 |           10001 | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  | Test@123        |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam |   80002 |           12345 | WALGREENS    | PDP      | AARP MedicareRx Walgreens (PDP) | WALGREENS             | CVS PHARMACY  | Test@123        |
 
     @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC @featureGate
     Examples: 
       | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred | SelectPharmacy2 | SelectPharmacy4 |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam |   80002 |           10001 | DUANE READE    | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             | CONTINUED CARE  | Test@123        |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam |   80002 |           12345 | WALGREENS    | PDP      | AARP MedicareRx Walgreens (PDP) | WALGREENS             | CVS PHARMACY  | Test@123        |
 
   @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link, LIS Buydown validation, Covered and not covered drugs You pay, Details Switch to generic, NBA
@@ -549,9 +549,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     @dce_E2E_Scenario7_UAT_AARP @regressionAARP @visitorProfileAuthenticated
     Examples: 
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | E2E_Scenario7_UAT_UHC | AARP |   78006 | 10/20/1942 |         06096 | 2ED7ET4TC62 | true     | false         | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E_Scenario7_UAT_UHC | AARP |   78006 | 10/20/1942 |         06096 | 2ED7ET4TC62 | false     | false         | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
 
     @dce_E2E_Scenario7_UAT_UHC @regressionUHC @visitorProfileAuthenticated @featureGate
     Examples: 
       | Scenario              | site | zipCode | dob        | importZipCode | mbi         | drugFlag | providersFlag | authenticatedflag | firstname | lastname | planType | planName                        |
-      | E2E_Scenario7_UAT_UHC | UHC  |   78006 | 10/20/1942 |         06096 | 2ED7ET4TC62 | true     | false         | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E_Scenario7_UAT_UHC | UHC  |   78006 | 10/20/1942 |         06096 | 2ED7ET4TC62 | false     | false         | false             | LEONEL    | GUNNELS  | PDP      | AARP MedicareRx Walgreens (PDP) |
