@@ -697,9 +697,20 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile selectPlanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		SpanishLanguage.click();
+		WebElement languageDropDown = driver.findElement(By.xpath("//select[@id='language']"));
+//
+//		String dropDownOptionText = languageDropDown
+//				.findElement(By.xpath("//select[@id='language']//option[@value='" + "1: Object" + "']")).getText()
+//				.trim();
+		String dropDownOptionText = driver
+				.findElement(By.xpath("//select[@id='language']//option[@value='" + "2: Object" + "']")).getText()
+				.trim();
+
+		driver.findElement(By.xpath("//div//label[@for='language']")).click();
+		mobileSelectOption(languageDropDown, dropDownOptionText, true);
+
 		CommonUtility.checkPageIsReady(driver);
-		System.out.println("Spanish language selected"); 
+		System.out.println("Spanish language selected");
 		return new PharmacySearchPageMobile(driver);
 	}
 

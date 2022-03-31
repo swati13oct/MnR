@@ -149,7 +149,7 @@ public class PharmacySearchWebElementsNew extends UhcDriver {
 	@FindBy(xpath="//*[@id='map']/div/div/iframe")
 	protected WebElement mapCollapse;
 
-	@FindBy(xpath="//a[@id='viewpdf']//span[@class='uhc-button_text']")
+	@FindBy(xpath="//a[@id='viewpdf']")
 	protected WebElement viewsearchpdf;
 
 	@FindBy(xpath = "//app-returnlink//div/a")

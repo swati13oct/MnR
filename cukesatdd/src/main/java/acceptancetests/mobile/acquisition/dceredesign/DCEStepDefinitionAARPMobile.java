@@ -247,6 +247,18 @@ public class DCEStepDefinitionAARPMobile {
 		drugSummaryPage.validateOptumRxConsistentDisplay_PharmacyPage();
 
 	}
+	
+	@And("the user selects the sort by under your drugs")
+	public void the_user_selects_the_sort_by_under_your_drugs(DataTable givenAttributes){
+		Map<String, String> givenAttributesMap = new LinkedHashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String sortBy = givenAttributesMap.get("Sort By");
+		System.out.println("Sort by to Select : "+sortBy);
+		 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+		 drugDetailsPage.validateDrugSortBy(sortBy);
+		 getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
 
 	@Then("^the user verifies NBA modal for creating profile on drug summary page$")
 	public void user_verifies_NBAmodal_creating_profile_on_drug_summary() {

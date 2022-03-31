@@ -651,6 +651,8 @@ public class DrugSummaryPage extends UhcDriver {
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 		jsClickNew(PharmacyName.get(0));
+		pageloadcomplete();
+		waitForPageLoadSafari();
 //		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();

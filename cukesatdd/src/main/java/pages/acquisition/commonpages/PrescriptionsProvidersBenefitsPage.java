@@ -111,7 +111,7 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	}
 	public ProviderSearchPage clicksOnRallyToolFromMedEdPage() {
 		//WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//span[contains(text(),'Look up providers in the Provider Search tool')]"));
-		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a[contains(@title,'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);

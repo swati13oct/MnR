@@ -406,6 +406,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]")
 	public WebElement RightRailSection;
+	
+	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+	private WebElement closebBtnMSApplication;
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]//*[contains(@class,'module module-aside rigntrailwidget')]//*[contains(text(),'Need Help')]")
 	public WebElement needHelpRightRail;
@@ -2881,6 +2884,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			jsMouseOut(toolTip);
 		} else
 			Assertion.fail("Tool Tip is not working");
+	}
+	
+	public void clickCloseMSApplication() {
+		jsClickNew(closebBtnMSApplication);
+		//waitforElementNew(addMSPlans);
 	}
 
 	public void toolTipForAnnualDeductible(String planName) {
