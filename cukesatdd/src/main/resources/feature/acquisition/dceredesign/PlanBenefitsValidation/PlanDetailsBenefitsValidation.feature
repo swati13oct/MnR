@@ -218,6 +218,31 @@ Feature: ACQ-Plan benefits validation
       | excelPath                       | workSheet   | site |
       | DCE_MBD_LIS_Buydown_2022 | LIS_Buydown_Sheet_7 | AARP |
 
+    @DCE_LIS_Non_Buydow_Sheet_1 @DCE_LIS_Non_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Non_BuyDown_2022 | LIS_NonBuydown_Sheet_1 | AARP |
+
+    @DCE_LIS_Non_Buydow_Sheet_2 @DCE_LIS_Non_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Non_BuyDown_2022 | LIS_NonBuydown_Sheet_2 | AARP |
+
+    @DCE_LIS_Non_Buydow_Sheet_3 @DCE_LIS_Non_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Non_BuyDown_2022 | LIS_NonBuydown_Sheet_3 | AARP |
+
+    @DCE_LIS_Non_Buydow_Sheet_4 @DCE_LIS_Non_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Non_BuyDown_2022 | LIS_NonBuydown_Sheet_4 | AARP |
+
+    @DCE_LIS_Non_Buydow_Sheet_5 @DCE_LIS_Non_Buydow
+    Examples:
+      | excelPath                       | workSheet   | site |
+      | DCE_MBD_LIS_Non_BuyDown_2022 | LIS_NonBuydown_Sheet_5 | AARP |
+
 
 
   @PlanDetails_ExcelValidation @2022PlanDetialsUHC
