@@ -241,7 +241,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		String FirstName = memberDetailsMap.get("First Name");
 		String MiddleName = memberDetailsMap.get("Middle Name");
-		String LastName = memberDetailsMap.get("Last Name");
+		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
@@ -257,85 +257,94 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
 		String goGreen = memberDetailsMap.get("Go Green");
 		String HomeNumber = memberDetailsMap.get("Home Number");
-		String MobileNumber = memberDetailsMap.get("Mobile Number");
-
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		
+		CheckPageLoad();
+		CheckiPerseptions();
+		
 		sendkeysMobile(firstNameField, FirstName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		sendkeysMobile(lastNameField, LastName);
-
-		sendKeysByCharacter(DOBtxtFld, DOB);
-		if (Gender.contains("Male")) {
+		
+		sendkeysMobile(DOBtxtFld,DOB);
+		if(Gender.contains("Male")){
 			jsClickNew(GenderSelectMale);
-		} else {
-
+		}
+		else{
+			
 			jsClickNew(GenderSelectFemale);
-		}
-
-		boolean result = false;
-		result = Clickoncontinuebutton("/mailing-address");
-
-		if (result) {
-			// Code for Personal Information page 2 begin
-			sendkeysMobile(PermanentAdd_Street, Perm_Street);
-			sendkeysMobile(PermanentAdd_Aptno, Perm_Aptno);
-			sendkeysMobile(PermanentAdd_City, Perm_city);
-			System.out.println("Mailing Question : " + MailingQuestion);
-			if (MailingQuestion.equalsIgnoreCase("no")) {
+		}	
+				
+		//call method click on CONTINUE BUtton
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		//Code for Personal Information page 2 begin
+			sendkeysMobile(PermanentAdd_Street,Perm_Street);
+			sendkeysMobile(PermanentAdd_Aptno,Perm_Aptno);
+			sendkeysMobile(PermanentAdd_City,Perm_city);
+			System.out.println("Mailing Question : "+MailingQuestion);
+			if(MailingQuestion.equalsIgnoreCase("no")){
 				jsClickNew(SameMailingAddressNo);
-
-				sendkeysMobile(MailingAdd_Street, Mailing_Street);
-				sendkeysMobile(MailingAdd_Aptno, Mailing_Aptno);
-				sendkeysMobile(MailingAdd_City, Mailing_City);
-
-				// Select SelectState = new Select(MailingAdd_State_DropDown);
-				// SelectState.selectByValue(Mailing_State);
-
-				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
-					WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
+				scrollToView(MailingAdd_Street);
+				sendkeysMobile(MailingAdd_Street,Mailing_Street);
+				sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
+				sendkeysMobile(MailingAdd_City,Mailing_City);
+				if(driver.toString().toLowerCase().contains("ANDROID")) {
+					Select SelectState = new Select(MailingAdd_State_DropDown);
+					SelectState.selectByValue(Mailing_State);
+				}
+				else {
+					WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 					jsClickNew(stateLable);
-
-				}
-
-				checkElementisEnabled(MailingAdd_State_DropDown);
-
-				//Below code is added for ios click issue
-				if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 					MailingAdd_State_DropDown.click();
+					if(Mailing_State.equalsIgnoreCase("VA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"VIRGINIA",true);
+					else if(Mailing_State.equalsIgnoreCase("MN"))
+						mobileSelectOption(MailingAdd_State_DropDown,"MINNESOTA",true);
+					else if(Mailing_State.equalsIgnoreCase("NJ"))
+						mobileSelectOption(MailingAdd_State_DropDown,"NEW JERSEY",true);
+					else if(Mailing_State.equalsIgnoreCase("NY"))
+						mobileSelectOption(MailingAdd_State_DropDown,"NEW YORK",true);
+					else if(Mailing_State.equalsIgnoreCase("WA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"WASHINGTON",true);
+					else if(Mailing_State.equalsIgnoreCase("CA"))
+						mobileSelectOption(MailingAdd_State_DropDown,"CALIFORNIA",true);
+					else if(Mailing_State.equalsIgnoreCase("FL"))
+						mobileSelectOption(MailingAdd_State_DropDown,"FLORIDA",true);
 				}
-				selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
-
-				sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+				sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
 			}
-		}
-		result = Clickoncontinuebutton("phone-number");
-		// Code for Personal Information page 3 begin
-		if (result) {
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		//Code for Personal Information page 3 begin
+		if(result) {
 			validateNew(HomephoneNumberField);
 			sendkeysMobile(HomephoneNumberField, HomeNumber);
 			validateNew(MobileNumberField);
 			sendkeysMobile(MobileNumberField, MobileNumber);
 
-			if (emailConfirmation.equalsIgnoreCase("YES")) {
-				jsClickNew(emailConfirmationYesBtn);
-			} else
-				jsClickNew(emailConfirmationNoBtn);
-			if (goGreen.equalsIgnoreCase("YES")) {
-				// goGreenYesBtn.click();
+			if(emailConfirmation.equalsIgnoreCase("YES")){
+				jsClickNew(emailConfirmationYesBtn);	
+			}else
+				jsClickNew(emailConfirmationNoBtn); 
+			if(goGreen.equalsIgnoreCase("YES")){
+				//goGreenYesBtn.click();
 				jsClickNew(goGreenYesBtn);
-			} else
-				// goGreenNoBtn.click();
-				jsClickNew(goGreenNoBtn);
+			}else
+			//	goGreenNoBtn.click();
+			jsClickNew(goGreenNoBtn);
 
-			sendkeysMobile(Email, EmailAddress);
+			sendkeysMobile(Email,EmailAddress);
 		}
-		result = Clickoncontinuebutton("language-preference");
-
-		if (result) {
-			System.out.println(
-					"Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+		result= Clickoncontinuebutton("language-preference");
+		
+		if(result) {
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
 		}
-
+		
 		return result;
 	}
 
@@ -592,11 +601,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		Thread.sleep(3000);
 		// Updated the get url title SEP Page with Other Health insurance...OLERedesign
-		if (driver.getCurrentUrl().contains("other-health-insurance")) {
+		if (driver.getCurrentUrl().contains("other-health-insurance")|| driver.getCurrentUrl().contains("prescription-drug-coverage")) {
 			Assert.assertTrue(
 					driver.getCurrentUrl().contains("other-health-insurance")
-							|| driver.getCurrentUrl().contains("chronic-questions"),
-					"OLE Other HealthInsurance or Chronic Page Page is Displayed");
+							|| driver.getCurrentUrl().contains("prescription-drug-coverage")|| driver.getCurrentUrl().contains("chronic-questions"),
+					"OLE Other HealthInsurance or prescription drug page or Chronic Page Page is Displayed");
 			return new ConfirmYourEligibilityPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
@@ -610,11 +619,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				validateNew(NextBtn);
 				jsClickNew(NextBtn);
 
-				if (driver.getCurrentUrl().contains("other-health-insurance")
+				if (driver.getCurrentUrl().contains("other-health-insurance")|| driver.getCurrentUrl().contains("prescription-drug-coverage")
 						|| driver.getCurrentUrl().contains("chronic-questions")) {
-					System.out.println("OLE Other HealthInsurance or Chronic  Page is Displayed");
+					System.out.println("OLE Other HealthInsurance or prescription drug page or Chronic  Page is Displayed");
 				} else {
-					System.out.println("OLE Other HealthInsurance  or Chronic  Page is not Displayed");
+					System.out.println("OLE Other HealthInsurance or prescription drug page  or Chronic  Page is not Displayed");
 				}
 				return new ConfirmYourEligibilityPageMobile(driver);
 			}

@@ -1,13 +1,13 @@
 package pages.acquisition.commonpages;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import atdd.framework.MRScenario;
-import org.apache.commons.lang.StringUtils;
+import io.cucumber.java.bs.A;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -29,470 +29,476 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.vpp.VPPTestHarnessPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
-	@FindBy(id = "dupIconFlyOut")
-	private WebElement shoppingCartIcon;
+    @FindBy(id = "dupIconFlyOut")
+    private WebElement shoppingCartIcon;
 
     @FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
     private WebElement signIn;
 
-	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
-	private WebElement signInButton;
+    @FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+    private WebElement signInButton;
 
-	@FindBy(css = "div.signupCTA a.signin-font")
-	private WebElement signInLegacy;
+    @FindBy(css = "div.signupCTA a.signin-font")
+    private WebElement signInLegacy;
 
-	@FindBy(css = "div.signupCTA a.profileBtn")
-	private WebElement btnCreateProfile;
+    @FindBy(css = "div.signupCTA a.profileBtn")
+    private WebElement btnCreateProfile;
 
-	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
-	private WebElement addPlans;
+    @FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+    private WebElement addPlans;
 
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
-	private WebElement addplans;
+    @FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+    private WebElement addplans;
 
-	@FindBy(css = "a.addrugs")
-	private WebElement addrugs;
+    @FindBy(css = "a.addrugs")
+    private WebElement addrugs;
 
-	@FindBy(css = "a.add-provider")
-	private WebElement addprovider;
+    @FindBy(css = "a.add-provider")
+    private WebElement addprovider;
 
-	@FindBy(xpath = "//div[contains(@class,'drug-list-accordion open')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
-	private WebElement expandDrugBlock;
+    @FindBy(xpath = "//div[contains(@class,'drug-list-accordion open')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
+    private WebElement expandDrugBlock;
 
-	@FindBy(xpath = "//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
-	private WebElement expandProviderBlock;
+    @FindBy(xpath = "//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
+    private WebElement expandProviderBlock;
 
-	@FindBy(css = "div.drug-list-accordion.open div.drug-info-container span:first-child")
-	private WebElement drugname;
+    @FindBy(css = "div.drug-list-accordion.open div.drug-info-container span:first-child")
+    private WebElement drugname;
 
-	@FindBy(css = "ul.drugs-list>li>div>div>div>div:first-child")
-	private WebElement drugName;
+    @FindBy(css = "ul.drugs-list>li>div>div>div>div:first-child")
+    private WebElement drugName;
 
-	@FindBy(css = "ul.drugs-list>li:last-child>span")
-	private WebElement pharmacyAddress;
+    @FindBy(css = "ul.drugs-list>li:last-child>span")
+    private WebElement pharmacyAddress;
 
-	@FindAll({ @FindBy(xpath = "//li[@class='drug']") })
-	private List<WebElement> savedDrugs;
+    @FindAll({@FindBy(xpath = "//li[@class='drug']")})
+    private List<WebElement> savedDrugs;
 
-	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
-	private WebElement drugBlock;
+    @FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
+    private WebElement drugBlock;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
-	private WebElement signOut;
+    @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+    private WebElement signOut;
 
-	@FindBy(id = "enrollment-next-button")
-	private WebElement NextBtn;
+    @FindBy(id = "enrollment-next-button")
+    private WebElement NextBtn;
 
-	@FindBy(xpath = "//h2[@id='saved-plans']/following::button[contains(@aria-label,'Enroll')][1]")
-	private WebElement enrollInPlan;
+    @FindBy(xpath = "//h2[@id='saved-plans']/following::button[contains(@aria-label,'Enroll')][1]")
+    private WebElement enrollInPlan;
 
-	@FindBy(id = "header-number")
-	private WebElement shoppingCartNumber;
+    @FindBy(id = "header-number")
+    private WebElement shoppingCartNumber;
 
-	@FindBy(xpath = "//a[text()='Compare Plans']")
-	private WebElement comparePlans;
+    @FindBy(xpath = "//a[text()='Compare Plans']")
+    private WebElement comparePlans;
 
-	@FindBy(css = "button.cta-button.create-profile")
-	private WebElement comparePlansOnPopup;
+    @FindBy(css = "button.cta-button.create-profile")
+    private WebElement comparePlansOnPopup;
 
-	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
-	private WebElement enrollBtn;
+    @FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
+    private WebElement enrollBtn;
 
-	@FindBy(css = "div#navLinks>a:first-child")
-	private WebElement backToPlans;
+    @FindBy(css = "div#navLinks>a:first-child")
+    private WebElement backToPlans;
 
-	@FindBy(css = "div.print-back>a:first-child")
-	private WebElement legacyBackToPlans;
+    @FindBy(css = "div.print-back>a:first-child")
+    private WebElement legacyBackToPlans;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']")
-	private WebElement profileMultiYear;
+    @FindBy(xpath = "//div[@class='multi-year-select']")
+    private WebElement profileMultiYear;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
-	private WebElement profileNxtYrPlans;
+    @FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
+    private WebElement profileNxtYrPlans;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
-	private WebElement profileCrntYrPlans;
+    @FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
+    private WebElement profileCrntYrPlans;
 
-	@FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[1]")
+    @FindBy(xpath = "(//button[contains(@dtmname,'add my drugs')])[1]")
     public WebElement AddMyDrugsBtn;
 
-	// New Shopper profile page objects
+    // New Shopper profile page objects
 
-	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
-	public WebElement drugGetStarted;
+    @FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
+    public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]")
-	public WebElement drugHeader;
+    @FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]")
+    public WebElement drugHeader;
 
-	@FindBy(css = "h3#saved-drugs")
-	public WebElement savedDrugsHeader;
+    @FindBy(css = "h3#saved-drugs")
+    public WebElement savedDrugsHeader;
 
-	@FindBy(css = "h2#saved-drugs-and-doctors")
-	public WebElement savedDrugsAndDoctorsHeader;
+    @FindBy(css = "h2#saved-drugs-and-doctors")
+    public WebElement savedDrugsAndDoctorsHeader;
 
-	@FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
-	public WebElement editDrugsPharmacy;
+    @FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
+    public WebElement editDrugsPharmacy;
 
-	// OLE Details
-	@FindBy(xpath = "//h3[contains(@id,'enrollName')]")
-	public WebElement enrolledPlanName;
+    // OLE Details
+    @FindBy(xpath = "//h3[contains(@id,'enrollName')]")
+    public WebElement enrolledPlanName;
 
-	@FindBy(xpath = "//span[text()='Status']/following-sibling::span")
-	public WebElement enrolledStatus;
+    @FindBy(xpath = "//span[text()='Status']/following-sibling::span")
+    public WebElement enrolledStatus;
 
-	@FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
-	public WebElement enrolledPlanZipcode;
+    @FindBy(xpath = "//span[text()='Zip Code']/following-sibling::span")
+    public WebElement enrolledPlanZipcode;
 
-	@FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
-	public WebElement enrolledMonthlyPremium;
+    @FindBy(xpath = "//span[text()='Monthly Premium']/following-sibling::span")
+    public WebElement enrolledMonthlyPremium;
 
-	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
-	public WebElement cancelEnrollment;
+    @FindBy(xpath = "//span[text()='Yes, cancel application']/..")
+    public WebElement cancelEnrollment;
 
-	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
-	public WebElement addDrugsGlobal;
+    @FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
+    public WebElement addDrugsGlobal;
 
-	@FindBy(xpath = "(//button[contains(@dtmname,'Add drugs') and contains(@dtmid, 'visitor_profile')]/*[contains(text(), 'Add')])[1]")
-	public WebElement enterDrugInfoPlanCard;
+    @FindBy(xpath = "(//button[contains(@dtmname,'Add drugs') and contains(@dtmid, 'visitor_profile')]/*[contains(text(), 'Add')])[1]")
+    public WebElement enterDrugInfoPlanCard;
 
-	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
-	public WebElement backToDrugCostEstimatorLink;
+    @FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
+    public WebElement backToDrugCostEstimatorLink;
 
-	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
-	public WebElement expandDrugsPlanCard;
+    @FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
+    public WebElement expandDrugsPlanCard;
 
-	@FindBy(xpath = "//*[text()='Edit Drugs']")
-	//// *[contains(@aria-controls,'plan-drugs-dropdown')]/..//*[contains(@id,'plan-providers-dropdown')]//*[contains(text(),'Edit
-	//// Drugs')]
-	public WebElement editDrugsPlanCard;
+    @FindBy(xpath = "//*[text()='Edit Drugs']")
+    //// *[contains(@aria-controls,'plan-drugs-dropdown')]/..//*[contains(@id,'plan-providers-dropdown')]//*[contains(text(),'Edit
+    //// Drugs')]
+    public WebElement editDrugsPlanCard;
 
-	// @FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]")
-	// public WebElement expandDrugsGlobal;
+    // @FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]")
+    // public WebElement expandDrugsGlobal;
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
-	public WebElement AddDrugsGlobal;
+    @FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+    public WebElement AddDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
-	public WebElement loginLink;
+    @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+    public WebElement loginLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
-	public WebElement signOutLink;
+    @FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+    public WebElement signOutLink;
 
-	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
-	public List<WebElement> removeDrugs;
+    @FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
+    public List<WebElement> removeDrugs;
 
-	@FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]/img")
-	public WebElement expandProvidersPlanCard;
+    @FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]/img")
+    public WebElement expandProvidersPlanCard;
 
-	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove')]")
-	public List<WebElement> removeProviders;
+    @FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove')]")
+    public List<WebElement> removeProviders;
 
-	@FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Home']")
-	private WebElement homeTab;
+    @FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Home']")
+    private WebElement homeTab;
 
-	@FindBy(xpath = "//button[contains(@class,'remove-button') and contains(@aria-label,'Delete')]")
-	private List<WebElement> deletePlan;
+    @FindBy(xpath = "//button[contains(@class,'remove-button') and contains(@aria-label,'Delete')]")
+    private List<WebElement> deletePlan;
 
-	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
-	private WebElement breadCrumbLink;
+    @FindBy(xpath = "//*[@id='navLinks']/a[1]")
+    private WebElement breadCrumbLink;
 
-	@FindBy(xpath = "(//div[@class='provider-accordion'])[1]")
-	private WebElement providerAccordin;
+    @FindBy(xpath = "(//div[@class='provider-accordion'])[1]")
+    private WebElement providerAccordin;
 
-	@FindBy(xpath = "//button[@id='ProviderDelete-noplan-0']")
-	private WebElement legactRemoveProvider;
+    @FindBy(xpath = "//button[@id='ProviderDelete-noplan-0']")
+    private WebElement legactRemoveProvider;
 
-	// Shopper profile UI version 2
+    // Shopper profile UI version 2
 
-	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
-	private WebElement addDrugsBtn;
+    @FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
+    private WebElement addDrugsBtn;
 
-	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
-	private WebElement viewDrugPricingLink;
+    @FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
+    private WebElement viewDrugPricingLink;
 
-	//@FindBy(xpath = "//button[text()='Yes, Remove']")
-	@FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
-	private WebElement removeDrugBtn;
+    //@FindBy(xpath = "//button[text()='Yes, Remove']")
+    @FindBy(xpath = "//div[contains(@class,'modal')]//button[contains(text(),'Remove')]")
+    private WebElement removeDrugBtn;
 
-	@FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
-	private WebElement importLnk;
+    @FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
+    private WebElement importLnk;
 
-	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
-	private List<WebElement> savedDrugsList;
+    @FindAll({@FindBy(xpath = "//div[contains(@id,'DrugName')]")})
+    private List<WebElement> savedDrugsList;
 
-	@FindBy(xpath = "//div[contains(@id,'DrugName')]")
-	private WebElement savedDrug;
+    @FindBy(xpath = "//div[contains(@id,'DrugName')]")
+    private WebElement savedDrug;
 
-	@FindAll({ @FindBy(xpath = "//div[contains(@id,'ProviderName')]") })
-	private List<WebElement> savedProvidersList;
+    @FindAll({@FindBy(xpath = "//div[contains(@id,'ProviderName')]")})
+    private List<WebElement> savedProvidersList;
 
-	@FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
-	private WebElement modalClose;
+    @FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
+    private WebElement modalClose;
 
-	@FindBy(xpath = "(//h1)[1]")
-	private WebElement profileName;
+    @FindBy(xpath = "(//h1)[1]")
+    private WebElement profileName;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:first-child>a>span:nth-child(2)")
-	private WebElement savedInsuredPlans;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:first-child>a>span:nth-child(2)")
+    private WebElement savedInsuredPlans;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(2)>a>span:nth-child(2)")
-	private WebElement yourSavedPharmacyAndDrugs;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(2)>a>span:nth-child(2)")
+    private WebElement yourSavedPharmacyAndDrugs;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(3)>a>span:nth-child(2)")
-	private WebElement yourSavedDoctorsAndProviders;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(3)>a>span:nth-child(2)")
+    private WebElement yourSavedDoctorsAndProviders;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(4)>a>span:nth-child(2)")
-	private WebElement yourRecommendations;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:nth-child(4)>a>span:nth-child(2)")
+    private WebElement yourRecommendations;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:first-child")
-	private WebElement yourEnrollments;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:first-child")
+    private WebElement yourEnrollments;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:nth-child(2)")
-	private WebElement manageProfile;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:nth-child(2)")
+    private WebElement manageProfile;
 
-	@FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:last-child")
-	private WebElement signOutText;
+    @FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:last-child")
+    private WebElement signOutText;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
+    @FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
     private WebElement addDoctor;
 
-	@FindBy(xpath = "//a[contains(text(),'Import')]")
+    @FindBy(xpath = "//a[contains(text(),'Import')]")
     private WebElement lnkImport;
 
-	@FindBy(xpath = "(//span[contains(text(),'Get')])[2]")
+    @FindBy(xpath = "(//span[contains(text(),'Get')])[2]")
     private WebElement btnGetStarted;
 
-	@FindBy(xpath = "//button[@dlassetid='vp_havemedicare_next']")
+    @FindBy(xpath = "//button[@dlassetid='vp_havemedicare_next']")
     private WebElement btnNext;
 
-	@FindBy(id = "member-firstName")
+    @FindBy(id = "member-firstName")
     private WebElement txtFName;
 
-	@FindBy(id = "member-lastName")
+    @FindBy(id = "member-lastName")
     private WebElement txtLName;
 
-	@FindBy(id = "member-date-of-birth")
+    @FindBy(id = "member-date-of-birth")
     private WebElement txtDOB;
 
-	@FindBy(id = "member-zip-code")
+    @FindBy(id = "member-zip-code")
     private WebElement txtZipCode;
 
-	@FindBy(id = "member-medicare-number")
+    @FindBy(id = "member-medicare-number")
     private WebElement txtMedicareId;
 
-	@FindBy(xpath = "//div[text()='UnitedHealthcare']/parent::label")
-	private WebElement chkUHC;
+    @FindBy(xpath = "//div[text()='UnitedHealthcare']/parent::label")
+    private WebElement chkUHC;
 
-	@FindBy(xpath = "//div[text()='Aetna']/parent::label")
-	private WebElement chkAetna;
+    @FindBy(xpath = "//div[text()='Aetna']/parent::label")
+    private WebElement chkAetna;
 
-	@FindBy(xpath = "//div[contains(text(),'Aetna')]/parent::label")
-	private WebElement chkMAwithAetna;
+    @FindBy(xpath = "//div[contains(text(),'Aetna')]/parent::label")
+    private WebElement chkMAwithAetna;
 
-	@FindBy(xpath = "//div[contains(text(),'Humana')]/parent::label")
-	private WebElement chkMAwithHumana;
+    @FindBy(xpath = "//div[contains(text(),'Humana')]/parent::label")
+    private WebElement chkMAwithHumana;
 
-	@FindBy(xpath = "//div[text()='Humana']/parent::label")
-	private WebElement chkHumana;
+    @FindBy(xpath = "//div[text()='Humana']/parent::label")
+    private WebElement chkHumana;
 
-	@FindBy(xpath = "//input[@id='acceptReqAccess']/parent::label")
-	private WebElement chkReqAccess;
+    @FindBy(xpath = "//input[@id='acceptReqAccess']/parent::label")
+    private WebElement chkReqAccess;
 
-	@FindBy(xpath = "//input[@id='acceptTermsOfUse']/parent::label")
-	private WebElement chkTermsOfUse;
+    @FindBy(xpath = "//input[@id='acceptTermsOfUse']/parent::label")
+    private WebElement chkTermsOfUse;
 
-	@FindBy(xpath = "//span[text()='Continue']/parent::button")
-	private WebElement flexContinueBtn;
+    @FindBy(xpath = "//span[text()='Continue']/parent::button")
+    private WebElement flexContinueBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Import')]/parent::button")
-	private WebElement flexImportBtn;
+    @FindBy(xpath = "//span[contains(text(),'Import')]/parent::button")
+    private WebElement flexImportBtn;
 
-	@FindBy(xpath = "//div[contains(text(),'don')]/parent::label")
-	private WebElement chkMilliman;
+    @FindBy(xpath = "//div[contains(text(),'don')]/parent::label")
+    private WebElement chkMilliman;
 
-	@FindBy(xpath = "//button[@dlassetid='vp_confimp_next']")
-	private WebElement btnNonMemNext;
+    @FindBy(xpath = "//button[@dlassetid='vp_confimp_next']")
+    private WebElement btnNonMemNext;
 
-	@FindBy(id = "agreementName")
+    @FindBy(id = "agreementName")
     private WebElement txtAgreementName;
 
-	@FindBy(xpath = "//button[@dlassetid='vp_impcons_prev']")
-	private WebElement btnNonMemNext2;
+    @FindBy(xpath = "//button[@dlassetid='vp_impcons_prev']")
+    private WebElement btnNonMemNext2;
 
-	@FindBy(id = "non-member-firstName")
+    @FindBy(id = "non-member-firstName")
     private WebElement txtNonMemFName;
 
-	@FindBy(id = "non-member-lastName")
+    @FindBy(id = "non-member-lastName")
     private WebElement txtNonMemLName;
 
-	@FindBy(id = "non-member-date-of-birth")
+    @FindBy(id = "non-member-date-of-birth")
     private WebElement txtNonMemDOB;
 
-	@FindBy(id = "non-member-zip-code")
+    @FindBy(id = "non-member-zip-code")
     private WebElement txtNonMemZipCode;
 
-	@FindBy(xpath = "//label[@for='male']")
+    @FindBy(xpath = "//label[@for='male']")
     private WebElement genderMale;
 
-	@FindBy(name = "isAttested")
+    @FindBy(name = "isAttested")
     private WebElement chkAttest;
 
-	@FindBy(xpath  = "//button[@dlassetid='vp_imp_mem_det_next']")
+    @FindBy(xpath = "//button[@dlassetid='vp_imp_mem_det_next']")
     private WebElement btnViewDrugsAndDocs;
 
-	@FindBy(xpath  = "(//button[@dlassetid='vp_nonmemdetl_next'])[2]")
+    @FindBy(xpath = "(//button[@dlassetid='vp_nonmemdetl_next'])[2]")
     private WebElement btnNonMemViewDrugsAndDocs;
 
-	@FindBy(xpath  = "(//a[contains(text(),'Back')])[1]")
+    @FindBy(xpath = "(//a[contains(text(),'Back')])[1]")
     private WebElement lnkbackToProfile;
 
-	@FindBy(xpath  = "//*[text()='Basic Costs']")
+    @FindBy(xpath = "//*[text()='Basic Costs']")
     private WebElement headingBasicCost;
 
-	@FindBy(xpath  = "//*[text()='Doctor Visits']")
+    @FindBy(xpath = "//*[text()='Doctor Visits']")
     private WebElement headingDocVisits;
 
-	//@FindBy(id="dateOfBirth")
-	@FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
-	private WebElement msDOB;
+    //@FindBy(id="dateOfBirth")
+    @FindBy(xpath = "(//*[contains(@id,'dateOfBirth')])[1]")
+    private WebElement msDOB;
 
-	@FindBy(xpath = "//*[text()='Continue Application']")
-	private WebElement btnContinueApplication;
+    @FindBy(xpath = "//*[text()='Continue Application']")
+    private WebElement btnContinueApplication;
 
-	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
-	private WebElement closeMSApplication;
+    @FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+    private WebElement closeMSApplication;
 
-	@FindBy(xpath  = "//h2[text()='Gym Membership']")
+    @FindBy(xpath = "//h2[text()='Gym Membership']")
     private WebElement headingGymMembership;
 
-	@FindBy(xpath  = "//h2[text()='Brain Health']")
+    @FindBy(xpath = "//h2[text()='Brain Health']")
     private WebElement headingBH;
 
-	@FindBy(xpath  = "//h1[text()='Add your information']")
+    @FindBy(xpath = "//h1[text()='Add your information']")
     private WebElement headingAddYourInfo;
 
-	@FindBy(xpath = "//span[contains(text(),'Get')]")
+    @FindBy(xpath = "//span[contains(text(),'Get')]")
     private WebElement btnPREGetStarted;
 
-	@FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
-	WebElement btnReviewDrugs;
+    @FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
+    private WebElement btnReviewDrugs;
+    //WebElement btnReviewDrugs;
 
-	public VisitorProfilePage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
+//	@FindBy(xpath = "//*[@id='signInOptumID']")
+//	WebElement SignInHeader;
 
-		openAndValidate();
-	}
 
-	@Override
-	public void openAndValidate() {
-		validate(shoppingCartIcon);
+    public VisitorProfilePage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
 
-	}
+        openAndValidate();
+    }
 
-	public AcquisitionHomePage addPlan() {
+    @Override
+    public void openAndValidate() {
+        validate(shoppingCartIcon);
 
-		/*
-		 * if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
-		 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
-		 * "Puerto Rico") ||
-		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
-		 */
-		/*
-		 * String State = CommonConstants.getSelectedState(); if
-		 * (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State,
-		 * "Virginia")) {
-		 *
-		 * jsClickNew(addplans); } else { jsClickNew(addPlans); }
-		 */
-		jsClickNew(addPlans);
-		waitForPageLoadSafari();
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver, page);
-		}
-		return null;
-	}
+    }
 
-	/*
-	 * jsClickNew(addPlans); waitForPageLoadSafari();
-	 * if(driver.getCurrentUrl().contains("profile")) { return new
-	 * AcquisitionHomePage(driver); }else {
-	 * System.out.println("Navigation to visitor profile is failed"); return null; }
-	 *
-	 * }
-	 */
-	public void validateAddedDrugAndPharmacy(String drug,String user_state) {
+    public AcquisitionHomePage addPlan() {
 
-		/*
-		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
-		 * "Pennsylvania") ||
-		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
-		 * {
-		 */
-		/*
-		 * String State = CommonConstants.getSelectedState(); if
-		 * (StringUtils.equalsIgnoreCase(State, "Virginia")) {
-		 * jsClickNew(expandDrugBlock);
-		 * Assertion.assertTrue(drugname.getText().trim().contains(drug)); } else {
-		 * CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		 * Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy",
-		 * drugHeader.getText().trim()); jsClickNew(drugHeader);
-		 * Assertion.assertTrue(drugName.getText().trim().contains(drug));
-		 * Assertion.assertEquals("Drugs (1) & Pharmacy",
-		 * savedDrugsHeader.getText().trim());
-		 * Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)"
-		 * , savedDrugsAndDoctorsHeader.getText().trim());
-		 * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
-		 */
-		//CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-		if (user_state.equalsIgnoreCase("auth")) {
-			System.out.println(drugHeader.getText().trim().replace("\n", " "));
-			Assertion.assertTrue(
-					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
-		} else if (user_state.equalsIgnoreCase("unauth")) {
-			System.out.println(drugHeader.getText());
-			Assertion.assertTrue(
-					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
-		}
-	     //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy �", drugHeader.getText().trim());
-	     jsClickNew(drugHeader);
-	     Assertion.assertTrue(drugName.getText().trim().contains(drug));
-	     Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
-	     System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
-	     Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
-	             savedDrugsAndDoctorsHeader.getText().trim());
-	    // Assertion.assertTrue(pharmacyAddress.isDisplayed());
+        /*
+         * if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
+         * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+         * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+         * "Puerto Rico") ||
+         * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+         */
+        /*
+         * String State = CommonConstants.getSelectedState(); if
+         * (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State,
+         * "Virginia")) {
+         *
+         * jsClickNew(addplans); } else { jsClickNew(addPlans); }
+         */
+        jsClickNew(addPlans);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("plan-summary")) {
+            String page = "health-plans";
+            return new AcquisitionHomePage(driver, page);
+        }
+        return null;
+    }
 
-	}
+    /*
+     * jsClickNew(addPlans); waitForPageLoadSafari();
+     * if(driver.getCurrentUrl().contains("profile")) { return new
+     * AcquisitionHomePage(driver); }else {
+     * System.out.println("Navigation to visitor profile is failed"); return null; }
+     *
+     * }
+     */
+    public void validateAddedDrugAndPharmacy(String drug, String user_state) {
 
-	public void validateAddedPlans(String planNames) {
+        /*
+         * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+         * "Pennsylvania") ||
+         * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+         * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
+         * {
+         */
+        /*
+         * String State = CommonConstants.getSelectedState(); if
+         * (StringUtils.equalsIgnoreCase(State, "Virginia")) {
+         * jsClickNew(expandDrugBlock);
+         * Assertion.assertTrue(drugname.getText().trim().contains(drug)); } else {
+         * CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+         * Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy",
+         * drugHeader.getText().trim()); jsClickNew(drugHeader);
+         * Assertion.assertTrue(drugName.getText().trim().contains(drug));
+         * Assertion.assertEquals("Drugs (1) & Pharmacy",
+         * savedDrugsHeader.getText().trim());
+         * Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)"
+         * , savedDrugsAndDoctorsHeader.getText().trim());
+         * Assertion.assertTrue(pharmacyAddress.isDisplayed()); }
+         */
+        //CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+        if (user_state.equalsIgnoreCase("auth")) {
+            System.out.println(drugHeader.getText().trim().replace("\n", " "));
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        } else if (user_state.equalsIgnoreCase("unauth")) {
+            System.out.println(drugHeader.getText());
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        }
+        //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy �", drugHeader.getText().trim());
+        jsClickNew(drugHeader);
+        Assertion.assertTrue(drugName.getText().trim().contains(drug));
+        Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+        System.out.println(savedDrugsAndDoctorsHeader.getText().trim());
+        Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Dentists (0)",
+                savedDrugsAndDoctorsHeader.getText().trim());
+        // Assertion.assertTrue(pharmacyAddress.isDisplayed());
+
+    }
+
+    public void validateAddedPlans(String planNames) {
         String[] listOfTestPlans = planNames.split(",");
 
 		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
-            for (String plan : listOfTestPlans) {
-                Assertion.assertEquals(plan,
-                        driver.findElement(By.xpath(
-                                "//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
-                                .getText().trim());
-                Assertion.assertTrue(driver
-                        .findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"
-                                + plan + "')]/following::span[contains(@class,'search-provider')]"))
-                        .isDisplayed());
-                System.out.println(driver
-                        .findElement(By.xpath(
-                                "//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
-                        .getText());
-            }
+        for (String plan : listOfTestPlans) {
+            Assertion.assertEquals(plan,
+                    driver.findElement(By.xpath(
+                            "//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
+                            .getText().trim());
+            Assertion.assertTrue(driver
+                    .findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"
+                            + plan + "')]/following::span[contains(@class,'search-provider')]"))
+                    .isDisplayed());
+            System.out.println(driver
+                    .findElement(By.xpath(
+                            "//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
+                    .getText());
         }
+    }
 
     public void validateAddedDrugs(String druglist) {
 //		expandDrugBlock.click();
@@ -555,7 +561,7 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 //		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-            jsClickNew(addDrugsBtn);
+        jsClickNew(addDrugsBtn);
         waitForPageLoadSafari();
         if (validateNew(AddMyDrugsBtn))
             return new GetStartedPage(driver);
@@ -588,7 +594,7 @@ public class VisitorProfilePage extends UhcDriver {
 							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {*/
             /*String State = CommonConstants.getSelectedState();
-			*//*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
+             *//*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
 					&& StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*//*
             if (!StringUtils.isEmpty(State)
                     && StringUtils.equalsIgnoreCase(State, "Virginia")) {
@@ -730,7 +736,7 @@ public class VisitorProfilePage extends UhcDriver {
 					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {*/
 //			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-                jsClickNew(signIn);
+            jsClickNew(signIn);
             Thread.sleep(3000);
             waitForPageLoadSafari();
             // driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
@@ -754,8 +760,8 @@ public class VisitorProfilePage extends UhcDriver {
             }
             jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
             waitForPageLoadSafari();
-			CommonUtility.checkPageIsReadyNew(driver);
-            CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+            CommonUtility.checkPageIsReadyNew(driver);
+            CommonUtility.waitForPageLoadNew(driver, signOut, 25);
 
         } catch (Exception e) {
             Assertion.fail("###############Optum Id Sign In failed###############");
@@ -838,7 +844,8 @@ public class VisitorProfilePage extends UhcDriver {
 
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
-		validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")));
+        CommonUtility.checkPageIsReadyNew(driver);
+        validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")), 45);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -858,7 +865,7 @@ public class VisitorProfilePage extends UhcDriver {
 					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {*/
 //			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-                backToPlans.click();
+            backToPlans.click();
 
             waitForPageLoadSafari();
             CommonUtility.checkPageIsReadyNew(driver);
@@ -892,15 +899,15 @@ public class VisitorProfilePage extends UhcDriver {
 						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 //				if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-                    Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
-                    // No pdf link is availbel now
-                    // Assertion.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')]
-                    // [contains(@class,'pdf-link')]")).isDisplayed());
-                }
+                Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
+                // No pdf link is availbel now
+                // Assertion.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')]
+                // [contains(@class,'pdf-link')]")).isDisplayed());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+    }
 
     public void validateAddedPlansPDFLinks(String planNames) {
         String[] listOfTestPlans = planNames.split(",");
@@ -1254,37 +1261,38 @@ public class VisitorProfilePage extends UhcDriver {
         Assertion.assertTrue(validate(driver.findElement(By.xpath("//h1[contains(text(),'" + planName + "')]"))));
 
     }
-    public void validateViewDrugPricingModel(String planName){
-    	WebElement drugPricingLink=driver.findElement(By.xpath("//div[contains(text(),'"+planName+"')]/following::button[contains(text(),'View Drug Pricing')]"));
-    	jsClickNew(drugPricingLink);
-    	if (validateNew(driver.findElement(By.xpath("//a[contains(text(),'Why Average')]")))){
-    		System.out.println("Drug Pricing Modal on Visitor Profile is opened");
-		}else{
-			Assert.fail("Drug Pricing Modal on Visitor Profile is not opened");
-		}
-	}
+
+    public void validateViewDrugPricingModel(String planName) {
+        WebElement drugPricingLink = driver.findElement(By.xpath("//div[contains(text(),'" + planName + "')]/following::button[contains(text(),'View Drug Pricing')]"));
+        jsClickNew(drugPricingLink);
+        if (validateNew(driver.findElement(By.xpath("//a[contains(text(),'Why Average')]")))) {
+            System.out.println("Drug Pricing Modal on Visitor Profile is opened");
+        } else {
+            Assert.fail("Drug Pricing Modal on Visitor Profile is not opened");
+        }
+    }
 
     /**
      * Delete all the drugs from the profile
      */
     public void deleteAllDrugs(String drugList) {
-		if (validate(savedDrug, 45)) {
-			CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
-			if (drugList.contains(",")) {
-				String[] drugs = drugList.split(",");
-				for (String drugName : drugs) {
-					driver.findElement(
-							By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
-							.click();
-					removeDrugBtn.click();
-				}
-			} else {
-				driver.findElement(
-						By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
-						.click();
-				removeDrugBtn.click();
-			}
-		}
+        if (validate(savedDrug, 45)) {
+            CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
+            if (drugList.contains(",")) {
+                String[] drugs = drugList.split(",");
+                for (String drugName : drugs) {
+                    driver.findElement(
+                            By.xpath("//div[contains(text(),'" + drugName + "')]/following::button[text()='Remove']"))
+                            .click();
+                    removeDrugBtn.click();
+                }
+            } else {
+                driver.findElement(
+                        By.xpath("//div[contains(text(),'" + drugList + "')]/following::button[text()='Remove']"))
+                        .click();
+                removeDrugBtn.click();
+            }
+        }
 
 
         CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
@@ -1300,13 +1308,13 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {*/
         String State = CommonConstants.getSelectedState();
 //		if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-            CommonUtility.waitForPageLoadNew(driver, savedProvidersList.get(0), 45);
-            for (WebElement provider : savedProvidersList) {
-                driver.findElement(By.xpath("//div[contains(text(),'" + provider.getText().trim() + "')]/following::button[text()='Remove']")).click();
-                removeDrugBtn.click();
-            }
-            CommonUtility.waitForPageLoadNew(driver, addDoctor, 45);
-            Assertion.assertTrue(addDoctor.isDisplayed());
+        CommonUtility.waitForPageLoadNew(driver, savedProvidersList.get(0), 45);
+        for (WebElement provider : savedProvidersList) {
+            driver.findElement(By.xpath("//div[contains(text(),'" + provider.getText().trim() + "')]/following::button[text()='Remove']")).click();
+            removeDrugBtn.click();
+        }
+        CommonUtility.waitForPageLoadNew(driver, addDoctor, 45);
+        Assertion.assertTrue(addDoctor.isDisplayed());
     }
 
     /**
@@ -1318,8 +1326,8 @@ public class VisitorProfilePage extends UhcDriver {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
         Assertion.assertEquals("welcome," + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
         Assertion.assertEquals("Your Saved\n" + "Insurance Plans (1)", savedInsuredPlans.getText().trim());
-        Assertion.assertEquals("Your Saved\n"+"Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved\n"+"Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertEquals("Your Saved\n" + "Drugs & Pharmacy (1)", yourSavedPharmacyAndDrugs.getText().trim());
+        Assertion.assertEquals("Your Saved\n" + "Doctors & Dentists (1)", yourSavedDoctorsAndProviders.getText().trim());
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
@@ -1350,643 +1358,839 @@ public class VisitorProfilePage extends UhcDriver {
         }
     }
 
-	public ProviderSearchPage addDoctor() {
-		 switchToNewTabNew(addDoctor);
-		 sleepBySec(15);
+    public ProviderSearchPage addDoctor() {
+        switchToNewTabNew(addDoctor);
+        sleepBySec(15);
 
-		 if (driver.getCurrentUrl().contains("werally")) {
-			 return new ProviderSearchPage(driver);
-		 }
-		 return null;
+        if (driver.getCurrentUrl().contains("werally")) {
+            return new ProviderSearchPage(driver);
+        }
+        return null;
 
-	}
+    }
 
-	  /**
+    /**
      * Back to VPP
      */
 
-	@FindBy(xpath = "//*[contains(@dlassetid,'pd_lnk_1')]")
-	private WebElement backtoProfile;
+    @FindBy(xpath = "//*[contains(@dlassetid,'pd_lnk_1')]")
+    private WebElement backtoProfile;
 
     public void selectPlan(String planName) {
 
-        	WebElement plan = driver.findElement(
-    				By.xpath("//*[contains(@dtmname,'"+planName+"')]"));
+        WebElement plan = driver.findElement(
+                By.xpath("//*[contains(@dtmname,'" + planName + "')]"));
 
-        	plan.click();
+        plan.click();
 
-            waitForPageLoadSafari();
-            CommonUtility.checkPageIsReadyNew(driver);
-            waitforElementNew(backtoProfile);
-            backtoProfile.click();
+        waitForPageLoadSafari();
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitforElementNew(backtoProfile);
+        backtoProfile.click();
 
     }
 
     @FindBy(xpath = "//*[contains(@dtmname,'Your Saved Drugs & Pharmacy')]")
-	private WebElement viewDrugs;
+    private WebElement viewDrugs;
 
 
     public void viewDrugs() {
-    viewDrugs.click();
+        viewDrugs.click();
     }
 
     @FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
-	public WebElement EnterDrugNameTxt;
+    public WebElement EnterDrugNameTxt;
 
     public BuildYourDrugList editDrugfromProfile(String editDrug) {
-		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + editDrug + "')]"));
-		jsClickNew(editLink);
-		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
-		if (validateNew(EnterDrugNameTxt)) {
-			return new BuildYourDrugList(driver);
-		} else {
-			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
-			return null;
-		}
+        WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + editDrug + "')]"));
+        jsClickNew(editLink);
+        CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
+        if (validateNew(EnterDrugNameTxt)) {
+            return new BuildYourDrugList(driver);
+        } else {
+            Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+            return null;
+        }
     }
 
-	@FindBy(xpath = "//button[contains(@dtmname, 'Yes Remove')]")
-	public WebElement DeleteYesBtn;
+    @FindBy(xpath = "//button[contains(@dtmname, 'Yes Remove')]")
+    public WebElement DeleteYesBtn;
 
-	public void deleteDrugProfile(String deleteDrug) {
-		 waitForPageLoadSafari();
-         CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Drug to be removed : " + deleteDrug);
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
-		waitforElementNew(removeLink);
-		//validateNew(removeLink);
-		jsClickNew(removeLink);
-	//	validateNew(DeleteYesBtn);
-		jsClickNew(DeleteYesBtn);
-	}
+    public void deleteDrugProfile(String deleteDrug) {
+        waitForPageLoadSafari();
+        CommonUtility.checkPageIsReadyNew(driver);
+        System.out.println("Drug to be removed : " + deleteDrug);
+        WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
+        waitforElementNew(removeLink);
+        //validateNew(removeLink);
+        jsClickNew(removeLink);
+        //	validateNew(DeleteYesBtn);
+        jsClickNew(DeleteYesBtn);
+    }
 
-	/**
-	 * Select plans and compare
-	 *
-	 * @param plans
-	 * @return
-	 */
-	public void compareAPlan(String plans) {
-		WebElement compareaPlan;
-		if (plans.equals("PDP")) {
-			compareaPlan = driver
-					.findElement(By.xpath("//*[contains(@dtmname,'Prescription Drug Plans:Compare Plan')]"));
-		} else if ((plans.equals("MAPD")) || (plans.equals("MA"))) {
-			compareaPlan = driver
-					.findElement(By.xpath("//*[contains(@dtmname,'Medicare Advantage Plans:Compare Plan')]"));
-			System.out.println("MAPD plan");
-		} else {
-			compareaPlan = driver.findElement(By.xpath("//*[contains(@dtmname,'Compare Plan')]"));
-		}
+    /**
+     * Select plans and compare
+     *
+     * @param plans
+     * @return
+     */
+    public void compareAPlan(String plans) {
+        WebElement compareaPlan;
+        if (plans.equals("PDP")) {
+            compareaPlan = driver
+                    .findElement(By.xpath("//*[contains(@dtmname,'Prescription Drug Plans:Compare Plan')]"));
+        } else if ((plans.equals("MAPD")) || (plans.equals("MA"))) {
+            compareaPlan = driver
+                    .findElement(By.xpath("//*[contains(@dtmname,'Medicare Advantage Plans:Compare Plan')]"));
+            System.out.println("MAPD plan");
+        } else {
+            compareaPlan = driver.findElement(By.xpath("//*[contains(@dtmname,'Compare Plan')]"));
+        }
 
-		jsClickNew(compareaPlan);
-		System.out.println("adding plans to compare");
+        jsClickNew(compareaPlan);
+        System.out.println("adding plans to compare");
 
-	}
-
-
-	@FindBy(xpath = "//*[contains(@id,'ErrorMsg')][contains(text(),'Save at least two')]")
-	private WebElement errMsgCompareplans;
-
-	public void validateFailureMsg(String planType) {
-
-		String errorMessage = errMsgCompareplans.getText();
-
-		if(planType.equals("PDP")) {
-			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Prescription Drug Plans to compare", errorMessage);
-				}
-		else if(planType.equals("MA") || planType.equals("MAPD")) {
-			Assertion.assertEquals("Error message text doesnot match", "*Save at least two Medicare Advantage Plans to compare", errorMessage);
-		}
-		else
-		{Assertion.assertEquals("Error message text doesnot match", "*Save at least two ", errorMessage);
-		}
-	}
+    }
 
 
-	@FindBy(xpath = "//*[contains(@dtmname,'Next')]")
-	private WebElement nextBtnMS;
+    @FindBy(xpath = "//*[contains(@id,'ErrorMsg')][contains(text(),'Save at least two')]")
+    private WebElement errMsgCompareplans;
 
-	public WelcomePage enrollInMSPlan(String planName) {
+    public void validateFailureMsg(String planType) {
 
-		WebElement EnrolledPlan = driver.findElement(
-				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"));
-		jsClickNew(EnrolledPlan);
+        String errorMessage = errMsgCompareplans.getText();
 
-		waitforElementDisapper(
-				By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"), 5);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, nextBtnMS, 30);
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
+        if (planType.equals("PDP")) {
+            Assertion.assertEquals("Error message text doesnot match", "*Save at least two Prescription Drug Plans to compare", errorMessage);
+        } else if (planType.equals("MA") || planType.equals("MAPD")) {
+            Assertion.assertEquals("Error message text doesnot match", "*Save at least two Medicare Advantage Plans to compare", errorMessage);
+        } else {
+            Assertion.assertEquals("Error message text doesnot match", "*Save at least two ", errorMessage);
+        }
+    }
 
-	}
 
-	public WelcomePage enrollInPlan(String planName) {
+    @FindBy(xpath = "//*[contains(@dtmname,'Next')]")
+    private WebElement nextBtnMS;
 
-		WebElement EnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Enroll " + planName + "']"));
-		jsClickNew(EnrolledPlan);
+    public WelcomePage enrollInMSPlan(String planName) {
 
-		waitforElementDisapper(By.xpath("//button[@aria-label='Enroll " + planName + "']"), 5);
-		sleepBySec(3);
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
+        WebElement EnrolledPlan = driver.findElement(
+                By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"));
+        jsClickNew(EnrolledPlan);
 
-	}
+        waitforElementDisapper(
+                By.xpath("//*[contains(@aria-describedby,'" + planName + "') and contains(@dtmname,'Start')]"), 5);
+        sleepBySec(3);
+        CommonUtility.checkPageIsReadyNew(driver);
+        CommonUtility.waitForPageLoadNew(driver, nextBtnMS, 30);
+        if (driver.getCurrentUrl().contains("welcome")) {
+            System.out.println("OLE Welcome Page is Displayed");
+            return new WelcomePage(driver);
+        }
+        return null;
 
-	public void importDrugsAndDoctors(DataTable data) {
+    }
+
+    public WelcomePage enrollInPlan(String planName) {
+
+        WebElement EnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Enroll " + planName + "']"));
+        jsClickNew(EnrolledPlan);
+
+        waitforElementDisapper(By.xpath("//button[@aria-label='Enroll " + planName + "']"), 5);
+        sleepBySec(3);
+        CommonUtility.checkPageIsReadyNew(driver);
+        CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+        if (driver.getCurrentUrl().contains("welcome")) {
+            System.out.println("OLE Welcome Page is Displayed");
+            return new WelcomePage(driver);
+        }
+        return null;
+
+    }
+
+    public void importDrugsAndDoctors(DataTable data) {
         Map<String, String> testData = data.asMap(String.class, String.class);
         jsClickNew(importLnk);
         jsClickNew(btnGetStarted);
         switch (testData.get("Member")) {
-		case "Aetna":
-			jsClickNew(chkAetna);
-	        jsClickNew(btnNext);
-	        jsClickNew(chkMAwithAetna);
-	        jsClickNew(btnNext);
-	        waitforElementNew(chkReqAccess);
-	        jsClickNew(chkReqAccess);
-	        jsClickNew(chkTermsOfUse);
-	        jsClickNew(flexContinueBtn);
-	        waitforElement(flexImportBtn);
-	        jsClickNew(flexImportBtn);
-	        threadsleep(5000);
-	        switchToNewTab();
-	        Assert.assertTrue(driver.getCurrentUrl().contains("aetna.com"));
-			break;
-		case "Humana":
-			jsClickNew(chkHumana);
-	        jsClickNew(btnNext);
-	        jsClickNew(chkMAwithHumana);
-	        jsClickNew(btnNext);
-	        waitforElementNew(chkReqAccess);
-	        jsClickNew(chkReqAccess);
-	        jsClickNew(chkTermsOfUse);
-	        jsClickNew(flexContinueBtn);
-	        waitforElement(flexImportBtn);
-	        jsClickNew(flexImportBtn);
-	        threadsleep(5000);
-	        switchToNewTab();
-	        Assert.assertTrue(driver.getCurrentUrl().contains("humana.com"));
-			break;
-		case "UHC":
-			jsClickNew(chkUHC);
-	        jsClickNew(btnNext);
-			txtFName.sendKeys(testData.get("FirstName"));
-			txtLName.sendKeys(testData.get("LastName"));
-			txtDOB.sendKeys(testData.get("DOB"));
-			txtZipCode.sendKeys(testData.get("ZipCode"));
-			txtMedicareId.sendKeys(testData.get("MBI"));
-			jsClickNew(chkAttest);
-			jsClickNew(btnViewDrugsAndDocs);
-			waitforElementNew(savedDrugsAndDoctorsHeader);
-			break;
-		case "NonMember":
-			jsClickNew(chkMilliman);
-	        jsClickNew(btnNext);
-	        jsClickNew(btnNonMemNext);
-	        txtAgreementName.sendKeys(testData.get("FirstName")+" "+testData.get("LastName"));
-	        jsClickNew(btnNonMemNext2);
-			txtNonMemFName.sendKeys(testData.get("FirstName"));
-			txtNonMemLName.sendKeys(testData.get("LastName"));
-			txtNonMemDOB.sendKeys(testData.get("DOB"));
-			jsClickNew(genderMale);
-			txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
-			jsClickNew(chkAttest);
-			jsClickNew(btnNonMemViewDrugsAndDocs);
-			sleepBySec(15);
-			waitforElementNew(savedDrugsAndDoctorsHeader);
-			break;
+            case "Aetna":
+                jsClickNew(chkAetna);
+                jsClickNew(btnNext);
+                jsClickNew(chkMAwithAetna);
+                jsClickNew(btnNext);
+                waitforElementNew(chkReqAccess);
+                jsClickNew(chkReqAccess);
+                jsClickNew(chkTermsOfUse);
+                jsClickNew(flexContinueBtn);
+                waitforElement(flexImportBtn);
+                jsClickNew(flexImportBtn);
+                threadsleep(5000);
+                switchToNewTab();
+                Assert.assertTrue(driver.getCurrentUrl().contains("aetna.com"));
+                break;
+            case "Humana":
+                jsClickNew(chkHumana);
+                jsClickNew(btnNext);
+                jsClickNew(chkMAwithHumana);
+                jsClickNew(btnNext);
+                waitforElementNew(chkReqAccess);
+                jsClickNew(chkReqAccess);
+                jsClickNew(chkTermsOfUse);
+                jsClickNew(flexContinueBtn);
+                waitforElement(flexImportBtn);
+                jsClickNew(flexImportBtn);
+                threadsleep(5000);
+                switchToNewTab();
+                Assert.assertTrue(driver.getCurrentUrl().contains("humana.com"));
+                break;
+            case "UHC":
+                jsClickNew(chkUHC);
+                jsClickNew(btnNext);
+                txtFName.sendKeys(testData.get("FirstName"));
+                txtLName.sendKeys(testData.get("LastName"));
+                txtDOB.sendKeys(testData.get("DOB"));
+                txtZipCode.sendKeys(testData.get("ZipCode"));
+                txtMedicareId.sendKeys(testData.get("MBI"));
+                jsClickNew(chkAttest);
+                jsClickNew(btnViewDrugsAndDocs);
+                waitforElementNew(savedDrugsAndDoctorsHeader);
+                break;
+            case "NonMember":
+                jsClickNew(chkMilliman);
+                jsClickNew(btnNext);
+                jsClickNew(btnNonMemNext);
+                txtAgreementName.sendKeys(testData.get("FirstName") + " " + testData.get("LastName"));
+                jsClickNew(btnNonMemNext2);
+                txtNonMemFName.sendKeys(testData.get("FirstName"));
+                txtNonMemLName.sendKeys(testData.get("LastName"));
+                txtNonMemDOB.sendKeys(testData.get("DOB"));
+                jsClickNew(genderMale);
+                txtNonMemZipCode.sendKeys(testData.get("ZipCode"));
+                jsClickNew(chkAttest);
+                jsClickNew(btnNonMemViewDrugsAndDocs);
+                sleepBySec(15);
+                waitforElementNew(savedDrugsAndDoctorsHeader);
+                break;
 
-		default:
-			break;
-		}
+            default:
+                break;
+        }
 
-	}
+    }
 
-	/**
-	 * Validate MS Plan Details Page
-	 */
-	public void validateMSPlanDetailsPage() {
-		Assert.assertTrue(lnkbackToProfile.isDisplayed());
-		Assert.assertTrue(headingBasicCost.isDisplayed());
-		Assert.assertTrue(headingDocVisits.isDisplayed());
-	}
+    /**
+     * Validate MS Plan Details Page
+     */
+    public void validateMSPlanDetailsPage() {
+        Assert.assertTrue(lnkbackToProfile.isDisplayed());
+        Assert.assertTrue(headingBasicCost.isDisplayed());
+        Assert.assertTrue(headingDocVisits.isDisplayed());
+    }
 
-	public void clickOnMSPlanDetailsPage(String planName) {
-	    //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
-	    CommonUtility.checkPageIsReadyNew(driver);
-		WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::*[text()=' Plan Details' or text()='Plan Details'][1]"));
-		jsClickNew(btnMSPlanDetails);
-		waitforElementNew(lnkbackToProfile);
-	}
+    public void clickOnMSPlanDetailsPage(String planName) {
+        //WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::span[text()='Plan Details'][1]"));
+        CommonUtility.checkPageIsReadyNew(driver);
+        WebElement btnMSPlanDetails = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::*[text()=' Plan Details' or text()='Plan Details'][1]"));
+        jsClickNew(btnMSPlanDetails);
+        waitforElementNew(lnkbackToProfile);
+    }
 
-	/**
-	 * Validate MS Start application Page
-	 */
-	public void validateMSStartApplicationPage() {
-		Assert.assertTrue(msDOB.isDisplayed());
-		Assert.assertTrue(btnContinueApplication.isDisplayed());
-		Assert.assertTrue(closeMSApplication.isDisplayed());
-	}
+    /**
+     * Validate MS Start application Page
+     */
+    public void validateMSStartApplicationPage() {
+        Assert.assertTrue(msDOB.isDisplayed());
+        Assert.assertTrue(btnContinueApplication.isDisplayed());
+        Assert.assertTrue(closeMSApplication.isDisplayed());
+    }
 
-	public void clickOnMStartApplication(String planName) {
-	    WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::*[text()='Start Application'][1]"));
-		jsClickNew(btnStartApplication);
-		waitforElementNew(msDOB);
-	}
+    public void clickOnMStartApplication(String planName) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
+        waitForPageLoadSafari();
+        WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::*[text()='Start Application'][1]"));
+        jsClickNew(btnStartApplication);
+        waitforElementNew(msDOB);
+    }
 
-	public void clickOnBackToProfile() {
-		jsClickNew(lnkbackToProfile);
-		waitforElementNew(addPlans);
-	}
+    public void clickOnBackToProfile() {
+        jsClickNew(lnkbackToProfile);
+        waitforElementNew(addPlans);
+    }
 
-	public void clickOnCloseMSApplication() {
-		jsClickNew(closeMSApplication);
-		waitforElementNew(addPlans);
-	}
+    public void clickOnCloseMSApplication() {
+        jsClickNew(closeMSApplication);
+        waitforElementNew(addPlans);
+    }
 
-	public void clickOnMLearnMore(String planName) {
-	    WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::a[text()='Learn More'][1]"));
-		jsClickNew(btnStartApplication);
-		waitforElementNew(lnkbackToProfile);
-	}
+    public void clickOnMLearnMore(String planName) {
+        WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::a[text()='Learn More'][1]"));
+        jsClickNew(btnStartApplication);
+        waitforElementNew(lnkbackToProfile);
+    }
 
-	/**
-	 * Validate MS LearnMore Page
-	 */
-	public void validateMSLearnMorePage() {
-		Assert.assertTrue(lnkbackToProfile.isDisplayed());
-		//Assert.assertTrue(headingGymMembership.isDisplayed());
-		Assert.assertTrue(headingBH.isDisplayed());
-	}
+    /**
+     * Validate MS LearnMore Page
+     */
+    public void validateMSLearnMorePage() {
+        Assert.assertTrue(lnkbackToProfile.isDisplayed());
+        //Assert.assertTrue(headingGymMembership.isDisplayed());
+        Assert.assertTrue(headingBH.isDisplayed());
+    }
 
-	public void clickOnMSAddYourInformation(String planName) {
-	    WebElement btnAddInfo = driver.findElement(By.xpath("//h2[text()='"+planName+"']/following::a[text()='Add your information'][1]"));
-		jsClickNew(btnAddInfo);
-		waitforElementNew(msDOB);
-	}
+    public void clickOnMSAddYourInformation(String planName) {
+        WebElement btnAddInfo = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::a[text()='Add your information'][1]"));
+        jsClickNew(btnAddInfo);
+        waitforElementNew(msDOB);
+    }
 
-	/**
-	 * Validate MS Add Your Information Page
-	 */
-	public void validateMSAddYourInfoPage() {
-		waitforElementNew(msDOB);
-		Assert.assertTrue(headingAddYourInfo.isDisplayed());
-	}
+    /**
+     * Validate MS Add Your Information Page
+     */
+    public void validateMSAddYourInfoPage() {
+        waitforElementNew(msDOB);
+        Assert.assertTrue(headingAddYourInfo.isDisplayed());
+    }
 
-	public void validateMSSP4ProfilePage(String componentCode) {
-		Assert.assertTrue(btnPREGetStarted.isDisplayed());
-		Assert.assertTrue(lnkImport.isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'"+componentCode+"')]")).isDisplayed());
-	}
+    public void validateMSSP4ProfilePage(String componentCode) {
+        Assert.assertTrue(btnPREGetStarted.isDisplayed());
+        Assert.assertTrue(lnkImport.isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(),'" + componentCode + "')]")).isDisplayed());
+    }
 
-	public void validateNameOnFlyout(String name) {
-		sleepBySec(3);
-		driver.findElement(By.xpath("//*[contains(@class,'saved_items')]")).click();
-		WebElement authName=driver.findElement(By.xpath("//h2[@id='auth-profile']"));
-		if(authName.getText().trim().equalsIgnoreCase("Welcome, "+name)){
-			System.out.println(" Correct Text present on Flyout: "+ authName.getText().trim());
-		}else{
-			Assert.fail("Wrong Text present on Flyout: "+authName.getText().trim());
-		}
-
-
-	}
-
-	public void clickOnImportLinkOnDCE() {
-		sleepBySec(2);
-		WebElement lnkImportDCE=driver.findElement(By.xpath("(//button[@id='importDrug'])[1]"));
-		if (validateNew(lnkImportDCE)){
-			System.out.println("Import Link on DCE present");
-			jsClickNew(lnkImportDCE);
-			System.out.println("Import Link on DCE clicked");
-			sleepBySec(4);
-			WebElement ImportHeader =driver.findElement(By.xpath("(//div[@id='modal'])//div//div[contains(@class,'header')]//h2"));
-			if (ImportHeader.getText().trim().equalsIgnoreCase("import drugs and doctors")){
-				System.out.println("Import Pop-Up opened");
-			}else{
-				System.out.println("\n"+ImportHeader.getText().trim());
-				Assert.fail("Import Pop-Up not opened");
-			}
-		}else{
-			Assert.fail("Import link on DCE not present");
-		}
-
-	}
-
-	public void importOnDCE(DataTable data) {
-		Map<String, String> testData = data.asMap(String.class, String.class);
-		if(MRScenario.environment.equalsIgnoreCase("prod")||MRScenario.environment.equalsIgnoreCase("offline")) {
-			WebElement btnGetStarted = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
-			validateNew(btnGetStarted);
-			jsClickNew(btnGetStarted);
-		}
-		sleepBySec(1);
-		WebElement rdbYes=driver.findElement(By.xpath("//span[contains(@class,'radio-button__label') and contains(text(),'Yes')]"));
-		jsClickNew(rdbYes);
-		WebElement btnNext =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Next')]"));
-		jsClickNew(btnNext);
-		sleepBySec(3);
-
-		WebElement txtFirstName=driver.findElement(By.xpath("//input[@id='member-first-name']"));
-		WebElement txtLastName =driver.findElement(By.xpath("//input[@id='member-last-name']"));
-		WebElement txtYourDOB =driver.findElement(By.xpath("//input[@id='member-date-of-birth']"));
-		WebElement txtYourZIP =driver.findElement(By.xpath("//input[@id='member-zip-code']"));
-		WebElement txtYourMBI =driver.findElement(By.xpath("//input[@id='member-medicare-number']"));
-		WebElement chkAttest =driver.findElement(By.xpath("//input[@id='member-attestation-field']"));
-		WebElement btnViewDrugsDoc =driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'View Your ')]"));
-
-		txtFirstName.sendKeys(testData.get("FirstName"));
-		txtLastName.sendKeys(testData.get("LastName"));
-		txtYourDOB.sendKeys(testData.get("DOB"));
-		txtYourZIP.sendKeys(testData.get("ZipCode"));
-		txtYourMBI.sendKeys(testData.get("MBI"));
-		//jsClickNew(driver.findElement(By.xpath("//div[@id='modal']//div//div[contains(@class,'header')]//h2")));
-		//jsClickNew(txtYourMBI);
-		sleepBySec(2);
-		jsClickNew(chkAttest);
-		sleepBySec(2);
-		//jsClickNew(btnViewDrugsDoc);
-		btnViewDrugsDoc.click();
-		sleepBySec(10);
-		waitforElementNew(btnReviewDrugs,60);
-		if (validateNew(btnReviewDrugs)){
-			System.out.println("Drug import is successfull");
-		}else{
-			Assert.fail("Drug import unsuccessfull");
-		}
-	}
-
-	public void signInOnDCEImport(String username, String password) {
-		try {
-			jsClickNew(signIn);
-			Thread.sleep(3000);
-			waitForPageLoadSafari();
-			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
-			waitForPageLoadSafari();
-			Thread.sleep(3000);
-			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
-			waitforElement(securityAnswer);
-			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-				System.out.println("Question is related to friendname");
-				securityAnswer.sendKeys("name1");
-			} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-				System.out.println("Question is related to color");
-				securityAnswer.sendKeys("color1");
-			} else {
-				System.out.println("Question is related to phone");
-				securityAnswer.sendKeys("number1");
-			}
-			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
-			waitForPageLoadSafari();
-			CommonUtility.checkPageIsReadyNew(driver);
-			sleepBySec(3);
-			if(driver.getCurrentUrl().contains("health-plans/estimate-drug-costs")){
-				System.out.println("Redirect to DCE page is successful");
-				Assert.assertTrue(true);
-			}else{
-				System.out.println("Redirect to DCE page is not successful");
-			}
-		} catch (Exception e) {
-			Assertion.fail("###############Optum Id Sign In failed###############");
-		}
-	}
-
-	public WelcomePage Enroll_OLE_Plan_SignInUser(String planName) throws InterruptedException {
+    public void validateNameOnFlyout(String name) {
+        sleepBySec(3);
+        driver.findElement(By.xpath("//*[contains(@class,'saved_items')]")).click();
+        WebElement authName = driver.findElement(By.xpath("//h2[@id='auth-profile']"));
+        if (authName.getText().trim().equalsIgnoreCase("Welcome, " + name)) {
+            System.out.println(" Correct Text present on Flyout: " + authName.getText().trim());
+        } else {
+            Assert.fail("Wrong Text present on Flyout: " + authName.getText().trim());
+        }
 
 
+    }
 
-		System.out.println("Enroll in Plan for Plan through Vistor Profile: " + planName);
-		WebElement EnrollinPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::*[contains(text(), 'Enroll in Plan')]"));
-		jsClickNew(EnrollinPlan);
+    public void clickOnImportLinkOnDCE() {
+        sleepBySec(2);
+        WebElement lnkImportDCE = driver.findElement(By.xpath("(//button[@id='importDrug'])[1]"));
+        if (validateNew(lnkImportDCE)) {
+            System.out.println("Import Link on DCE present");
+            jsClickNew(lnkImportDCE);
+            System.out.println("Import Link on DCE clicked");
+            sleepBySec(4);
+            WebElement ImportHeader = driver.findElement(By.xpath("(//div[@id='modal'])//div//div[contains(@class,'header')]//h2"));
+            if (ImportHeader.getText().trim().equalsIgnoreCase("import drugs and doctors")) {
+                System.out.println("Import Pop-Up opened");
+            } else {
+                System.out.println("\n" + ImportHeader.getText().trim());
+                Assert.fail("Import Pop-Up not opened");
+            }
+        } else {
+            Assert.fail("Import link on DCE not present");
+        }
 
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
-		}
-		return null;
-	}
+    }
 
-	public void signInOptumId(String username, String password) {
+    public void importOnDCE(DataTable data) {
+        Map<String, String> testData = data.asMap(String.class, String.class);
+        if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
+            WebElement btnGetStarted = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Get')]"));
+            validateNew(btnGetStarted);
+            jsClickNew(btnGetStarted);
+        }
+        sleepBySec(1);
+        WebElement rdbYes = driver.findElement(By.xpath("//span[contains(@class,'radio-button__label') and contains(text(),'Yes')]"));
+        jsClickNew(rdbYes);
+        WebElement btnNext = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'Next')]"));
+        jsClickNew(btnNext);
+        sleepBySec(3);
 
-		validateNew(signIn);
-		jsClickNew(signIn);
-		waitForPageLoadSafari();
-		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-		jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
-		waitForPageLoadSafari();
-		String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
-		WebElement securityAnswer = driver.findElement(By.xpath("//input[@id='UnrecognizedSecAns_input']"));
-		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-			System.out.println("Question is related to friendname");
-			securityAnswer.sendKeys("name1");
-		} else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-			System.out.println("Question is related to color");
-			securityAnswer.sendKeys("color1");
-		} else {
-			System.out.println("Question is related to phone");
-			securityAnswer.sendKeys("number1");
-		}
+        WebElement txtFirstName = driver.findElement(By.xpath("//input[@id='member-first-name']"));
+        WebElement txtLastName = driver.findElement(By.xpath("//input[@id='member-last-name']"));
+        WebElement txtYourDOB = driver.findElement(By.xpath("//input[@id='member-date-of-birth']"));
+        WebElement txtYourZIP = driver.findElement(By.xpath("//input[@id='member-zip-code']"));
+        WebElement txtYourMBI = driver.findElement(By.xpath("//input[@id='member-medicare-number']"));
+        WebElement chkAttest = driver.findElement(By.xpath("//input[@id='member-attestation-field']"));
+        WebElement btnViewDrugsDoc = driver.findElement(By.xpath("//div[contains(@class,'data-import')]//button//span[contains(text(),'View Your ')]"));
 
-	}
+        txtFirstName.sendKeys(testData.get("FirstName"));
+        txtLastName.sendKeys(testData.get("LastName"));
+        txtYourDOB.sendKeys(testData.get("DOB"));
+        txtYourZIP.sendKeys(testData.get("ZipCode"));
+        txtYourMBI.sendKeys(testData.get("MBI"));
+        //jsClickNew(driver.findElement(By.xpath("//div[@id='modal']//div//div[contains(@class,'header')]//h2")));
+        //jsClickNew(txtYourMBI);
+        sleepBySec(2);
+        jsClickNew(chkAttest);
+        sleepBySec(2);
+        //jsClickNew(btnViewDrugsDoc);
+        btnViewDrugsDoc.click();
+        sleepBySec(10);
+        waitforElementNew(btnReviewDrugs, 60);
+        if (validateNew(btnReviewDrugs)) {
+            System.out.println("Drug import is successfull");
+        } else {
+            Assert.fail("Drug import unsuccessfull");
+        }
+    }
 
-	public void validateChangedPharmacy(String pharmacy, String user_state) {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(2);
-		if (user_state.equalsIgnoreCase("auth")) {
-			System.out.println(drugHeader.getText().trim().replace("\n", " "));
-			Assertion.assertTrue(
-					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
-		} else if (user_state.equalsIgnoreCase("unauth")) {
-			System.out.println(drugHeader.getText());
-			Assertion.assertTrue(
-					(drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
-		}
-		//Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy �", drugHeader.getText().trim());
-		jsClickNew(drugHeader);
+    public void signInOnDCEImport(String username, String password) {
+        try {
+            jsClickNew(signIn);
+            Thread.sleep(3000);
+            waitForPageLoadSafari();
+            // driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+            driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+            driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+            jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+            waitForPageLoadSafari();
+            Thread.sleep(3000);
+            String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+            WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+            waitforElement(securityAnswer);
+            if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+                System.out.println("Question is related to friendname");
+                securityAnswer.sendKeys("name1");
+            } else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+                System.out.println("Question is related to color");
+                securityAnswer.sendKeys("color1");
+            } else {
+                System.out.println("Question is related to phone");
+                securityAnswer.sendKeys("number1");
+            }
+            jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+            waitForPageLoadSafari();
+            CommonUtility.checkPageIsReadyNew(driver);
+            sleepBySec(3);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs")) {
+                System.out.println("Redirect to DCE page is successful");
+                Assert.assertTrue(true);
+            } else {
+                System.out.println("Redirect to DCE page is not successful");
+            }
+        } catch (Exception e) {
+            Assertion.fail("###############Optum Id Sign In failed###############");
+        }
+    }
 
-		WebElement changedPharmacy=driver.findElement(By.xpath("//ul[@class='drugs-list']//li//span[contains(text(),'"+pharmacy+"')]"));
-		if(validateNew(changedPharmacy)) {
-			System.out.println("Pharmacy added: "+pharmacy);
-		}else {
-			Assert.fail("Pharmacy not changed");
-		}
-	}
+    public WelcomePage Enroll_OLE_Plan_SignInUser(String planName) throws InterruptedException {
 
-	@FindBy(xpath = "//div[contains(@class,'pharmacy-msg')]//p")
-	WebElement pharmacyMessage;
-	@FindBy(xpath = "//div[contains(@class,'pharmacy-msg')]//button[text()=' Change Pharmacy ']")
-	WebElement changePharmacyLink;
 
-	public void validateDrugCoverageMessage(String pharmacy) {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(3);
-		if(validateNew(pharmacyMessage) && validateNew(changePharmacyLink)){
-			scrollToView(pharmacyMessage);
-			System.out.println("Pharmacy Message Visible");
-			String messageDisplayed=pharmacyMessage.getText().toLowerCase();
-			String drugCoverageMessage="provides Prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthcare:";
-			String noDrugCoverageMessage="the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
-			if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(drugCoverageMessage.toLowerCase()) && messageDisplayed.contains("tty ")){
-				System.out.println("Correct Drugs Covered Message is displayed");
-			}
-			else{
-				Assert.fail("Incorrect Drugs Covered Message is displayed:\n"+messageDisplayed);
-			}
+        System.out.println("Enroll in Plan for Plan through Vistor Profile: " + planName);
+        WebElement EnrollinPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::*[contains(text(), 'Enroll in Plan')]"));
+        jsClickNew(EnrollinPlan);
 
-		}else{
-			Assert.fail("Pharmacy Message Not Visible");
-		}
-	}
+        if (driver.getCurrentUrl().contains("welcome")) {
+            System.out.println("OLE Welcome Page is Displayed");
+            return new WelcomePage(driver);
+        }
+        return null;
+    }
 
-	public void validateNoDrugCoverageMessage(String pharmacy) {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(3);
-		if(validateNew(pharmacyMessage) && validateNew(changePharmacyLink)){
-			scrollToView(pharmacyMessage);
-			System.out.println("Pharmacy Message Visible");
-			String messageDisplayed=pharmacyMessage.getText().toLowerCase();
-			String noDrugCoverageMessage="the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
-			if(messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))){
-				System.out.println("Correct No Drugs Covered Message is displayed");
-			}
-			else{
-				Assert.fail("Incorrect No Drugs Covered Message is displayed:\n"+messageDisplayed);
-			}
+    public void signInOptumId(String username, String password) {
 
-		}else{
-			Assert.fail("Pharmacy Message Not Visible");
-		}
-	}
+        validateNew(signIn);
+        jsClickNew(signIn);
+        waitForPageLoadSafari();
+        driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+        driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+        jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+        waitForPageLoadSafari();
+        String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+        WebElement securityAnswer = driver.findElement(By.xpath("//input[@id='UnrecognizedSecAns_input']"));
+        if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+            System.out.println("Question is related to friendname");
+            securityAnswer.sendKeys("name1");
+        } else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+            System.out.println("Question is related to color");
+            securityAnswer.sendKeys("color1");
+        } else {
+            System.out.println("Question is related to phone");
+            securityAnswer.sendKeys("number1");
+        }
 
-	@FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//p")
-	WebElement pharmacyMessagePricingModal;
-	@FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//button[text()=' Change Pharmacy ']")
-	WebElement changePharmacyLinkPricingModal;
+    }
 
-	public void validateDrugCoverageMessageDrugPricingModal(String pharmacy) {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(3);
-		if(validateNew(pharmacyMessagePricingModal) && validateNew(changePharmacyLinkPricingModal)){
-			scrollToView(pharmacyMessagePricingModal);
-			System.out.println("Pharmacy Message Visible");
-			String messageDisplayed=pharmacyMessagePricingModal.getText().toLowerCase();
-			String drugCoverageMessage="provides Prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthcare:";
-			String noDrugCoverageMessage="the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
-			if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(drugCoverageMessage.toLowerCase()) && messageDisplayed.contains("tty ")){
-				System.out.println("Correct Drugs Covered Message is displayed on Drug Pricing Modal");
-			}
-			else{
-				Assert.fail("Incorrect Drugs Covered Message is displayed on Drug Pricing Modal:\n"+messageDisplayed);
-			}
+    public void validateChangedPharmacy(String pharmacy, String user_state) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(2);
+        if (user_state.equalsIgnoreCase("auth")) {
+            System.out.println(drugHeader.getText().trim().replace("\n", " "));
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        } else if (user_state.equalsIgnoreCase("unauth")) {
+            System.out.println(drugHeader.getText());
+            Assertion.assertTrue(
+                    (drugHeader.getText().trim().replace("\n", " ").contains("Your Saved Drugs & Pharmacy (1)")));
+        }
+        //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy �", drugHeader.getText().trim());
+        jsClickNew(drugHeader);
 
-		}else{
-			Assert.fail("Pharmacy Message Not Visible on Drug Pricing Modal");
-		}
-	}
-	public void validateNoDrugCoverageMessageDrugPricingModal(String pharmacy) {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(3);
-		if(validateNew(pharmacyMessagePricingModal) && validateNew(changePharmacyLinkPricingModal)){
-			scrollToView(pharmacyMessagePricingModal);
-			System.out.println("Pharmacy Message Visible");
-			String messageDisplayed=pharmacyMessagePricingModal.getText().toLowerCase();
-			String noDrugCoverageMessage="the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
-			if(messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))){
-				System.out.println("Correct No Drugs Covered Message is displayed on Drug Pricing Modal");
-			}
-			else{
-				Assert.fail("Incorrect No Drugs Covered Message is displayed on Drug Pricing Modal:\n"+messageDisplayed);
-			}
+        WebElement changedPharmacy = driver.findElement(By.xpath("//ul[@class='drugs-list']//li//span[contains(text(),'" + pharmacy + "')]"));
+        if (validateNew(changedPharmacy)) {
+            System.out.println("Pharmacy added: " + pharmacy);
+        } else {
+            Assert.fail("Pharmacy not changed");
+        }
+    }
 
-		}else{
-			Assert.fail("Pharmacy Message Not Visible on Drug Pricing Modal");
-		}
-	}
+    @FindBy(xpath = "//div[contains(@class,'pharmacy-msg')]//p")
+    WebElement pharmacyMessage;
+    @FindBy(xpath = "//div[contains(@class,'pharmacy-msg')]//button[text()=' Change Pharmacy ']")
+    WebElement changePharmacyLink;
+
+    public void validateDrugCoverageMessage(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessage) && validateNew(changePharmacyLink)) {
+            scrollToView(pharmacyMessage);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessage.getText().toLowerCase();
+            String drugCoverageMessage = "provides Prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthcare:";
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(drugCoverageMessage.toLowerCase()) && messageDisplayed.contains("tty ")) {
+                System.out.println("Correct Drugs Covered Message is displayed");
+            } else {
+                Assert.fail("Incorrect Drugs Covered Message is displayed:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible");
+        }
+    }
+
+    public void validateNoDrugCoverageMessage(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessage) && validateNew(changePharmacyLink)) {
+            scrollToView(pharmacyMessage);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessage.getText().toLowerCase();
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))) {
+                System.out.println("Correct No Drugs Covered Message is displayed");
+            } else {
+                Assert.fail("Incorrect No Drugs Covered Message is displayed:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible");
+        }
+    }
+
+    @FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//p")
+    WebElement pharmacyMessagePricingModal;
+    @FindBy(xpath = "//div[@role='dialog']//div[contains(@class,'pharmacy-msg')]//button[text()=' Change Pharmacy ']")
+    WebElement changePharmacyLinkPricingModal;
+
+    public void validateDrugCoverageMessageDrugPricingModal(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessagePricingModal) && validateNew(changePharmacyLinkPricingModal)) {
+            scrollToView(pharmacyMessagePricingModal);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessagePricingModal.getText().toLowerCase();
+            String drugCoverageMessage = "provides Prescription Drug Coverage under this plan. For drug pricing at this Pharmacy, call UnitedHealthcare:";
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(drugCoverageMessage.toLowerCase()) && messageDisplayed.contains("tty ")) {
+                System.out.println("Correct Drugs Covered Message is displayed on Drug Pricing Modal");
+            } else {
+                Assert.fail("Incorrect Drugs Covered Message is displayed on Drug Pricing Modal:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible on Drug Pricing Modal");
+        }
+    }
+
+    public void validateNoDrugCoverageMessageDrugPricingModal(String pharmacy) {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        if (validateNew(pharmacyMessagePricingModal) && validateNew(changePharmacyLinkPricingModal)) {
+            scrollToView(pharmacyMessagePricingModal);
+            System.out.println("Pharmacy Message Visible");
+            String messageDisplayed = pharmacyMessagePricingModal.getText().toLowerCase();
+            String noDrugCoverageMessage = "the pharmacy you selected, does not provide Prescription Drug Coverage under this plan. You may select a different pharmacy to see estimated drug costs";
+            if (messageDisplayed.contains(pharmacy.toLowerCase()) && messageDisplayed.contains(noDrugCoverageMessage.toLowerCase()) && (!messageDisplayed.contains("tty "))) {
+                System.out.println("Correct No Drugs Covered Message is displayed on Drug Pricing Modal");
+            } else {
+                Assert.fail("Incorrect No Drugs Covered Message is displayed on Drug Pricing Modal:\n" + messageDisplayed);
+            }
+
+        } else {
+            Assert.fail("Pharmacy Message Not Visible on Drug Pricing Modal");
+        }
+    }
 
     @FindBy(xpath = "//h2[text()='Select a Pharmacy']")
-	WebElement selectPharmacyHeader;
-	
-	public void validateChangePharmacyLink(){
-	    CommonUtility.checkPageIsReady(driver);
-	    sleepBySec(2);
-	    if (validateNew(changePharmacyLink)){
-	        System.out.println("Change pharmacy link is present");
-	        jsClickNew(changePharmacyLink);
-	        sleepBySec(5);
-	        if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html#/reviewdrugcosts") && validateNew(selectPharmacyHeader)){
-	            System.out.println("Redirect to Select Pharmacy on DCE");
-            }else{
+    WebElement selectPharmacyHeader;
+
+    public void validateChangePharmacyLink() {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(2);
+        if (validateNew(changePharmacyLink)) {
+            System.out.println("Change pharmacy link is present");
+            jsClickNew(changePharmacyLink);
+            sleepBySec(5);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html#/reviewdrugcosts") && validateNew(selectPharmacyHeader)) {
+                System.out.println("Redirect to Select Pharmacy on DCE");
+            } else {
                 Assert.fail("Not Redirected to Select Pharmacy on DCE");
             }
-        }else{
+        } else {
             Assert.fail("Change pharmacy link is present");
         }
     }
 
-	public void validateChangePharmacyLinkPricingModal(){
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(2);
-		if (validateNew(changePharmacyLinkPricingModal)){
-			System.out.println("Change pharmacy link on Drug Pricing Modal is present");
-			jsClickNew(changePharmacyLink);
-			sleepBySec(5);
-			if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html#/reviewdrugcosts") && validateNew(selectPharmacyHeader)){
-				System.out.println("Redirect to Select Pharmacy on DCE");
-			}else{
-				Assert.fail("Not Redirected to Select Pharmacy on DCE");
-			}
-		}else{
-			Assert.fail("Change pharmacy link is present");
-		}
-	}
+    public void validateChangePharmacyLinkPricingModal() {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(2);
+        if (validateNew(changePharmacyLinkPricingModal)) {
+            System.out.println("Change pharmacy link on Drug Pricing Modal is present");
+            jsClickNew(changePharmacyLink);
+            sleepBySec(5);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html#/reviewdrugcosts") && validateNew(selectPharmacyHeader)) {
+                System.out.println("Redirect to Select Pharmacy on DCE");
+            } else {
+                Assert.fail("Not Redirected to Select Pharmacy on DCE");
+            }
+        } else {
+            Assert.fail("Change pharmacy link is present");
+        }
+    }
 
-	public void selectPharmacyandBacktoProfile(String pharmacyToSelect) {
+    public void selectPharmacyandBacktoProfile(String pharmacyToSelect) {
 
-			List<WebElement> PharmacyName = driver
-					.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
-							+ pharmacyToSelect + "')]"));
-			jsClickNew(PharmacyName.get(0));
-			sleepBySec(3);
-			WebElement btnpharmacySaveUpdateDrugCosts= driver.findElement(By.xpath("//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]"));
-			btnpharmacySaveUpdateDrugCosts.click();
-			System.out.println("Save and Update button clicked");
-			sleepBySec(5);
-			CommonUtility.checkPageIsReady(driver);
-			if (driver.getCurrentUrl().contains("/profile")){
-				System.out.println("Redirect to Profile page after Pharmacy change is successful");
-			}else{
-				Assert.fail("Redirect to Profile page after Pharmacy change is NOT successful");
-			}
-	}
+        List<WebElement> PharmacyName = driver
+                .findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
+                        + pharmacyToSelect + "')]"));
+        jsClickNew(PharmacyName.get(0));
+        sleepBySec(3);
+        WebElement btnpharmacySaveUpdateDrugCosts = driver.findElement(By.xpath("//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]"));
+        btnpharmacySaveUpdateDrugCosts.click();
+        System.out.println("Save and Update button clicked");
+        sleepBySec(5);
+        CommonUtility.checkPageIsReady(driver);
+        if (driver.getCurrentUrl().contains("/profile")) {
+            System.out.println("Redirect to Profile page after Pharmacy change is successful");
+        } else {
+            Assert.fail("Redirect to Profile page after Pharmacy change is NOT successful");
+        }
+    }
 
-	@FindBy(xpath = "(//div//p[contains(text(),'Average Monthly Drug Cost')]/following::h3)[1]")
-	WebElement avgCostValue;
+    @FindBy(xpath = "(//div//p[contains(text(),'Average Monthly Drug Cost')]/following::h3)[1]")
+    WebElement avgCostValue;
 
-	public void validateNoAvgCostProfile() {
-		CommonUtility.checkPageIsReady(driver);
-		sleepBySec(3);
-		scrollToView(avgCostValue);
-		if(validateNew(avgCostValue) && avgCostValue.getText().equalsIgnoreCase("--")){
-			System.out.println("Average Cost Field present\nNo Cost is displayed");
-		}else{
-			Assert.fail("Average Cost Field not present or Cost is displayed - Value: "+avgCostValue.getText());
-		}
-	}
+    public void validateNoAvgCostProfile() {
+        CommonUtility.checkPageIsReady(driver);
+        sleepBySec(3);
+        scrollToView(avgCostValue);
+        if (validateNew(avgCostValue) && avgCostValue.getText().equalsIgnoreCase("--")) {
+            System.out.println("Average Cost Field present\nNo Cost is displayed");
+        } else {
+            Assert.fail("Average Cost Field not present or Cost is displayed - Value: " + avgCostValue.getText());
+        }
+    }
+
+    public PlanRecommendationEngineLandingAndZipcodePages clickGetStartedPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        validateNew(btnPREGetStarted);
+        scrollToView(btnPREGetStarted);
+        jsClickNew(btnPREGetStarted);
+        sleepBySec(3);
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
+            System.out.println("Navigation to PRE from VP successful");
+            return new PlanRecommendationEngineLandingAndZipcodePages(driver);
+        } else {
+            Assert.fail("Navigation to PRE from VP successful");
+            return null;
+        }
+    }
+
+    @FindBy(xpath = "//div[@id='modal']//button[contains(@class,'close')]")
+    private WebElement closeProfilePopupPRE;
+    @FindBy(xpath = "//div[@id='modal']//button[contains(text(),'Keep')]")
+    private WebElement createProfilePopupPRE;
+
+    public void savePlanOnPRE(String planName) {
+        try {
+            List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+            System.out.println(
+                    "Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+            Thread.sleep(5000);
+            for (String plan : listOfTestPlans) {
+                WebElement savePlan = driver.findElement(By.xpath("(//a[contains(text(),'" + plan + "')]/following::span[contains(@class,'save')])[1]"));
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+                Thread.sleep(5000);
+            }
+            if (createProfilePopupPRE.isDisplayed()) {
+                closeProfilePopupPRE.click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clickViewSavedPlansPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        if (createProfilePopupPRE.isDisplayed()) {
+            WebElement btnviewSavedPlans = driver.findElement(By.xpath("//div[@id='modal']//button[contains(text(),'View Saved')]"));
+            jsClickNew(btnviewSavedPlans);
+            sleepBySec(3);
+            CommonUtility.checkPageIsReadyNew(driver);
+            if (driver.getCurrentUrl().contains("/profile")) {
+                System.out.println("View Saved plans clicked on PRE");
+            } else {
+                Assert.fail("View Saved plans clicked on PRE");
+            }
+        }
+    }
+
+    public void signInSaveResults(String username, String password) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        WebElement btnsaveResultPRE = driver.findElement(By.xpath("//*[contains(@class,'saveResText')]"));
+        jsClickNew(btnsaveResultPRE);
+        sleepBySec(2);
+        WebElement signInPRE = driver.findElement(By.xpath("(//button[contains(text(),'Sign In')])"));
+
+        try {
+            jsClickNew(signInPRE);
+            Thread.sleep(3000);
+            waitForPageLoadSafari();
+            // driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+            driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+            driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+            jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+            waitForPageLoadSafari();
+            Thread.sleep(3000);
+            String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+            WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+            waitforElement(securityAnswer);
+            if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+                System.out.println("Question is related to friendname");
+                securityAnswer.sendKeys("name1");
+            } else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+                System.out.println("Question is related to color");
+                securityAnswer.sendKeys("color1");
+            } else {
+                System.out.println("Question is related to phone");
+                securityAnswer.sendKeys("number1");
+            }
+            jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+            waitForPageLoadSafari();
+            CommonUtility.checkPageIsReadyNew(driver);
+            sleepBySec(3);
+            if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs")) {
+                System.out.println("Redirect to DCE page is successful");
+                Assert.assertTrue(true);
+            } else {
+                System.out.println("Redirect to DCE page is not successful");
+            }
+        } catch (Exception e) {
+            Assertion.fail("###############Optum Id Sign In failed###############");
+        }
+    }
+
+
+    public void validatePREPlanCard(String planName, String premium, String plantype) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        WebElement planCard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')])[1]"));
+        scrollToView(planCard);
+        Assert.assertTrue(validate(planCard), "Plan Card is not visible");
+        WebElement planNamePRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//h3[contains(text(),'" + planName + "')])[1]"));
+        Assert.assertTrue(validateNew(planNamePRECard), "Incorrect Plan Name Present: " + planNamePRECard.getText());
+        WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
+        validateNew(viewDetailsPRECard);
+        WebElement editResponseLink = driver.findElement(By.xpath("//a[text()=' Edit Your Response ']"));
+        validateNew(editResponseLink);
+        if (!plantype.equalsIgnoreCase("MS")) {
+            if (!premium.isEmpty()) {
+                WebElement monthlyPremiumPRECard = driver.findElement(By.xpath("//div[contains(@class,'uhc-pre-card')]//h3/following::p[contains(text(),'Premium')]"));
+                Assert.assertTrue(monthlyPremiumPRECard.getText().contains(premium), "Monthly Premium is not matching");
+            }
+            WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
+            validateNew(btnEnrollPRECard);
+        }
+    }
+
+    public void validateCreateAccountLinkPRE() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        WebElement btnsaveResultPRE = driver.findElement(By.xpath("//*[contains(@class,'saveResText')]"));
+        jsClickNew(btnsaveResultPRE);
+        sleepBySec(2);
+        WebElement createAccountPRE = driver.findElement(By.xpath("(//button[contains(text(),'Create an Account')])"));
+        jsClickNew(createAccountPRE);
+        sleepBySec(5);
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(3);
+        if (validateNew(driver.findElement(By.xpath("//img[@alt='One Healthcare ID Logo']"))) ||
+                validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Create One Healthcare ID')]"))) ||
+                driver.getCurrentUrl().contains("onehealthcareid.com/app/index.html#/registration")
+        ) {
+            System.out.println("Create Account Page opened successfully");
+        } else {
+            Assert.fail("Create Account Page not opened successfully");
+        }
+
+    }
+
+    public void gotoProfilePage() {
+        WebElement viewSavedItem= driver.findElement(By.xpath("//*[contains(@class,'saved_items')]"));
+        // shoppingCartIcon.click();
+        jsClickNew(viewSavedItem);
+        jsClickNew(driver.findElement(By.xpath("//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")));
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("profile")) {
+            System.out.println("Navigation to visitor profile is successful");
+        } else {
+            Assert.fail("Navigation to visitor profile is failed");
+        }
+    }
+
+    public void PREPlanCardEnrollNDetails(String plantype) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
+        validateNew(viewDetailsPRECard);
+        jsClickNew(viewDetailsPRECard);
+        sleepBySec(5);
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
+        sleepBySec(5);
+        //waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
+        if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(10);
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")), 45), "Plan Details page not opened");
+        } else {
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
+        }
+        //clickOnBackToProfile();
+        gotoProfilePage();
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
+        WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
+        scrollToView(btnEnrollPRECard);
+        jsClickNew(btnEnrollPRECard);
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+        //clickOnBackToProfile()
+        if (!plantype.trim().equalsIgnoreCase("MS")) {
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Online Enrollment')]"))), "OLE Page not opened");
+        } else if (plantype.trim().equalsIgnoreCase("MS")) {
+            sleepBySec(10);
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")), 45), "Start Application Page not opened");
+            validateMSStartApplicationPage();
+        }
+    }
+
 }
 

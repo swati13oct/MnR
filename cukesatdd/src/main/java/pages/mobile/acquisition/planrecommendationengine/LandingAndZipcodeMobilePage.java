@@ -140,7 +140,8 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-		waitTillElementClickableInTime(getStartedBtn, 45);
+		//waitTillElementClickableInTime(getStartedBtn, 45);
+		waitforElement(getStartedBtn);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);

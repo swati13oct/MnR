@@ -1,7 +1,7 @@
-@UATRegression @F448210 @globalComponent
+@UATRegression @F448210 @staticPages
 Feature: 1.13 UAT - Shop Blog Pages flows
 
-  @GlobalComponentsAARPShopPages
+  
   Scenario Outline: <Scenario> : To verify Zip code and Agent link for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -925,8 +925,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UHC  | Alabama  | medicare-articles/will-medicare-pay-for-assisted-living-care.html                                                          | Article Page  161 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/medicare-coverage-for-long-term-care.html                                                                | Article Page  162 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
       | UHC  | Alabama  | medicare-articles/does-medicare-cover-acupuncture.html				                                                             | Article Page  163 | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
-
-
+     
+     
   Scenario Outline: To verify the components present on the Shop page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -962,13 +962,13 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP @featureGate
-    Examples:
+     @regressionAARP @avengersRegressionAARP @featureGate @check123
+    Examples: 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | AARP | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
-    @ShopPlan_Shop1_GlobalCompsUHC @regressionUHC @avengersRegressionUHC @uhcmedicare
-    Examples:
+     @regressionUHC @avengersRegressionUHC @uhcmedicare
+    Examples: 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
@@ -978,7 +978,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | Site | <site> |
     Then the user hovers screen over the shop for a plan
     Then the user click on Enroll link and lands on Enroll Page
-    Then the user click on MA Enroll Start button on Enroll Page
+    Then the user clic	Enroll Page
     Then the user clicks on browser back button
     Then the user click on PDP Enroll Start button on Enroll Page
     Then the user clicks on browser back button
@@ -988,17 +988,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user clicks on browser back button
     Then the user clicks on Learn About Enrollment link on Enroll Page
 
-    @ShopPlan_Shop1_GlobalCompsAARP @avengersRegressionAARP
-    Examples:
+     @avengersRegressionAARP @regressionAARP
+    Examples: 
       | site |
       | AARP |
 
-    @ShopPlan_Shop1_GlobalCompsUHC @TestEnroll @avengersRegressionUHC @uhcmedicare
-    Examples:
+     @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples: 
       | site |
       | UHC  |
 
-
+  
   Scenario Outline: To verify the components present on the Resources page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -1019,12 +1019,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then user click on Get Informed button for Preventing Medical Fraud link
     Then the user clicks on browser back button
 
-    @ShopPlan_Resources2_GlobalCompsAARP @avengersRegressionAARP
-    Examples:
+     @avengersRegressionAARP @regressionAARP
+    Examples: 
       | site |
       | AARP |
 
-    @ShopPlan_Resources2_GlobalCompsUHC @avengersRegressionUHC @uhcmedicare
-    Examples:
+     @avengersRegressionUHC @uhcmedicare @regressionUHC
+    Examples: 
       | site |
-      | UHC  |
+      | UHC  |   

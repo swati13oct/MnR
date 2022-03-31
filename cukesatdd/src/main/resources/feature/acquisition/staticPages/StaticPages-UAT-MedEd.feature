@@ -1,7 +1,7 @@
-@UATRegression @globalComponent
+@UATRegression @staticPages
 Feature: 1.12 UAT - Medicare Education Pages flows
 
-  @GlobalComponentsAARPPages
+  
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -74,7 +74,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState            | path                                         | pageName             | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_UMS | UHC  | U.S. Virgin Islands | medicare-education/medicare-eligibility.html | Medicare Eligibility | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-  @GlobalComponentsAARPPages
+  
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -109,7 +109,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | geoState            | path                                                     | pageName         | tfnXpath                                                            | tfnFlag | UHCUrl                      |
       | E2E Scenario 2_UMS | UHC  | U.S. Virgin Islands | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
-  @GlobalComponentsAARPPages
+  
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

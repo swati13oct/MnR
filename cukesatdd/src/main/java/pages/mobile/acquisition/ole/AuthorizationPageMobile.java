@@ -204,75 +204,73 @@ public class AuthorizationPageMobile extends UhcDriver {
 		String AuthorizationZip = MemberDetailsMap.get("authorizationZip");
 		String AuthorizationPhoneNo = MemberDetailsMap.get("authorizationPhoneNo");
 		String AuthorizationRelationship = MemberDetailsMap.get("authorizationRelationship");
-		String AuthorizationStateDisplay = MemberDetailsMap.get("authorizationStateDisplay");
-
+		String AuthorizationStateDisplay= MemberDetailsMap.get("authorizationStateDisplay");
+		
+		
 		boolean validation_Flag = true;
-		if (NextBtn.isEnabled()) {
-
+		if(NextBtn.isEnabled()){
+			
 			jsClickNew(AuthorizedRepresentativeRadio);
-			if (NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName)
-					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City)
-					&& validate(Authorized_State) && validate(Authorized_ZipCode) && validate(Authorized_PhNo)) {
-				System.out.println(
-						"Required Fields are displayed for Authorized Representative Details entry : Next Button is enabled");
-				validation_Flag = (!validation_Flag) ? false : true;
-			} else {
+			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
+					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
+					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
+				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is enabled");
+				validation_Flag = (!validation_Flag)?false:true;
+			}
+			else{
 				System.out.println("Next Button is enabled : Required Field Validation Failed");
 				validation_Flag = false;
 			}
-			// CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
-			Thread.sleep(6000);
+			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
+		//	Thread.sleep(6000);
+			//jsClickNew(ApplicantRadio);
+			
 			jsClickNew(AuthorizedRepresentativeRadio);
-
-//			scrollToView(Authorized_FirstName);
-			sendkeysMobile(Authorized_FirstName, AuthorizationFirstname);
-
-//			scrollToView(Authorized_LastName);
-			sendkeysMobile(Authorized_LastName, AuthorizationLastname);
-
-//			scrollToView(Authorized_Relation);
-			sendkeysMobile(Authorized_Relation, AuthorizationRelationship);
-
-//			scrollToView(Authorized_Address);
-			sendkeysMobile(Authorized_Address, AuthorizationAddress);
-
-//			scrollToView(Authorized_City);
-			sendkeysMobile(Authorized_City, AuthorizationCity);
-
-			// Clicking on label first as dropdown is not opening in iOS - this will not
-			// affect Android execution
-			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-				WebElement stateLable = driver.findElement(By.xpath("//label[@for='state0']"));
-				// WebElement stateLabel1 =
-				// driver.findElement(By.xpath("//span//label[contains(text(),'State')]"));
-				// stateLable.click();
+			
+			sendkeysMobile(Authorized_FirstName,AuthorizationFirstname);
+			sendkeysMobile(Authorized_LastName,AuthorizationLastname);
+			sendkeysMobile(Authorized_Relation,AuthorizationRelationship);
+			sendkeysMobile(Authorized_Address,AuthorizationAddress);
+			sendkeysMobile(Authorized_City,AuthorizationCity);
+			
+			Select SelectState = new Select(Authorized_State);
+			SelectState.selectByValue(AuthorizationStateDisplay);
+			
+			if(driver.toString().toUpperCase().contains("IOS")) {
+				scrollToView(Authorized_State);
+				WebElement stateLable = driver.findElement(By.xpath("//*[@id='state0']"));
 				jsClickNew(stateLable);
-				// stateLabel1.click();
-			}
-			checkElementisEnabled(Authorized_State);
-
-			// Below code is added for ios click issue
-			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 				Authorized_State.click();
+				if(AuthorizationStateDisplay.equalsIgnoreCase("MN"))
+					mobileSelectOption(Authorized_State,"MINNESOTA",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("NJ"))
+					mobileSelectOption(Authorized_State,"NEW JERSEY",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("NY"))
+					mobileSelectOption(Authorized_State,"NEW YORK",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("VA"))
+					mobileSelectOption(Authorized_State,"VIRGINIA",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("WA"))
+					mobileSelectOption(Authorized_State,"WASHINGTON",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("CA"))
+					mobileSelectOption(Authorized_State,"CALIFORNIA",true);
+				else if(AuthorizationStateDisplay.equalsIgnoreCase("FL"))
+					mobileSelectOption(Authorized_State,"FLORIDA",true);
 			}
-			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
-
-//			scrollToView(Authorized_ZipCode);
-			sendKeysByCharacter(Authorized_ZipCode, AuthorizationZip);
-
-//			scrollToView(Authorized_PhNo);
-			sendKeysByCharacter(Authorized_PhNo, AuthorizationPhoneNo);
-
-//			scrollToView(Authorized_Apartment);
+			
+			//sendkeys(Authorized_State,AuthorizationStateDisplay);
+			sendkeysMobile(Authorized_ZipCode,AuthorizationZip);
+			sendkeysMobile(Authorized_PhNo,AuthorizationPhoneNo);
 			sendkeysMobile(Authorized_Apartment, AuthorizationApartmentSuite);
-			if (NextBtn.isEnabled()) {
-				validation_Flag = (!validation_Flag) ? false : true;
+			if(NextBtn.isEnabled()){
+				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
-			} else {
+			}
+			else{
 				System.out.println("All required Fields are entered : Next Button is disabled");
 				validation_Flag = false;
 			}
-		} else {
+		}
+		else{
 			System.out.println("Next Button is enabled : Required Field Validation Failed");
 			validation_Flag = false;
 		}
