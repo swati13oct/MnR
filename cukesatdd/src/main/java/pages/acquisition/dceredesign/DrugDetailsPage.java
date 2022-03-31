@@ -1306,7 +1306,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )]")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )]//following-sibling::span")
 	private WebElement CopaySection_InsulinTier;
 
 	public void validateInsulinTier_CopaySection(String insulinCopay) {
