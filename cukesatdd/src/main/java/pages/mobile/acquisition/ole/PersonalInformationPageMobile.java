@@ -292,6 +292,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				sendkeysMobile(MailingAdd_Street,Mailing_Street);
 				sendkeysMobile(MailingAdd_Aptno,Mailing_Aptno);
 				sendkeysMobile(MailingAdd_City,Mailing_City);
+				
 				if(!(driver.toString().toUpperCase().contains("IOS"))) {
 					Select SelectState = new Select(MailingAdd_State_DropDown);
 					SelectState.selectByValue(Mailing_State);
@@ -318,6 +319,10 @@ public class PersonalInformationPageMobile extends UhcDriver {
 						mobileSelectOption(MailingAdd_State_DropDown,"COLORADO",true);
 					else if(Mailing_State.equalsIgnoreCase("MO"))
 						mobileSelectOption(MailingAdd_State_DropDown,"MISSOURI",true);
+					else if(Mailing_State.equalsIgnoreCase("TX"))
+						mobileSelectOption(MailingAdd_State_DropDown,"TEXAS",true);
+					else if(Mailing_State.equalsIgnoreCase("KS"))
+						mobileSelectOption(MailingAdd_State_DropDown,"KANSAS",true);
 				}
 				sendkeysMobile(MailingAdd_Zip,Mailing_Zip);
 			}
