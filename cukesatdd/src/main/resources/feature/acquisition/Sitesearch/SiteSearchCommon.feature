@@ -1,4 +1,4 @@
-@siteSearch @globalComponent
+@globalComponent
 Feature: 1.03 Acq-To test Sitesearch results site
 
   #@SiteSearchAARP @SiteSearchRegressionAARP @vbfGate @SiteSearchUHC  @SiteSearchRegressionUHC
@@ -14,12 +14,12 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearchCommon_AARP @regressionAARP
+    @SiteSearchCommon_AARP @regressionAARP @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | AARP | Medicare    | pharmacy       |
 
-    @SiteSearchCommon_UHC @regressionUHC
+    @SiteSearchCommon_UHC @regressionUHC @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | UHC  | Medicare    | pharmacy       |
@@ -36,13 +36,13 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | Error          | <Error>          |
       | NewSearchValue | <newsearchvalue> |
 
-    @SiteSearchCommon_AARP @regressionAARP
+    @SiteSearchCommon_AARP @regressionAARP @siteSearch
     Examples: 
       | site | searchValue | Error            | newsearchvalue |
       | AARP | Medicare    | Empty            | [blank]        |
       | AARP | Medicare    | InvalidCharacter | medicareeee    |
 
-    @SiteSearchCommon_UHC @regressionUHC
+    @SiteSearchCommon_UHC @regressionUHC @siteSearch
     Examples: 
       | site | searchValue | Error            | newsearchvalue |
       | UHC  | Medicare    | Empty            | [blank]        |
@@ -72,12 +72,12 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearchCommon_AARP @regressionAARP
+    @SiteSearchCommon_AARP @regressionAARP @siteSearch
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                    | searchValue | newsearchvalue |
       | 15652 | AARP |   19019 | No              | Iowa County | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO) | Medicare    | pharmacy       |
 
-    @SiteSearchCommon_UHC @regressionUHC
+    @SiteSearchCommon_UHC @regressionUHC @siteSearch
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                    | searchValue | newsearchvalue |
       | 15652 | UHC  |   19019 | No              | Iowa County | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO) | Medicare    | pharmacy       |
@@ -111,12 +111,12 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearchCommon_AARP @regressionAARP
+    @SiteSearchCommon_AARP @regressionAARP @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | AARP | Medicare    | pharmacy       |
 
-    @SiteSearchCommon_UHC @regressionUHC
+    @SiteSearchCommon_UHC @regressionUHC @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | UHC  | Medicare    | pharmacy       |
@@ -136,12 +136,12 @@ Feature: 1.03 Acq-To test Sitesearch results site
     Then the user clicks on the first auto complete suggestion site search page
     Then the user validates pagination and results displayed
 
-    @SiteSearchAutoComplete_AARP @regressionAARP
+    @SiteSearchAutoComplete_AARP @regressionAARP @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | AARP | Medicare    | plans          |
 
-    @SiteSearchAutoComplete_UHC @regressionUHC
+    @SiteSearchAutoComplete_UHC @regressionUHC @siteSearch
     Examples: 
       | site | searchValue | newsearchvalue |
       | UHC  | Medicare    | plans          |

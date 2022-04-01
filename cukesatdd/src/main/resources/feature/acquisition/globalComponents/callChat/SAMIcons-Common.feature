@@ -1,4 +1,4 @@
-@globalComponent @samIcons
+@globalComponent
 Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
                                                                                                                                                                                                                                                                                    
   Scenario Outline: To test the SAM icons on Acq site on VPP, Detail, Compare, OLE <site>
@@ -43,22 +43,22 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     And the user validates the chat icon
     Then the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP 
+    @samIconsAARP @regressionAARP @samIcons 
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS)|
 
-    @samIconsUHC @regressionUHC  @uhcmedicareSAMIcons
+    @samIconsUHC @regressionUHC @samIcons  @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                                            |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-    @samIconsAARP @regressionAARP 
+    @samIconsAARP @regressionAARP @samIcons 
     Examples: 
       | site | zipcode | plantype | planName                        |
       | AARP |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @samIconsUHC @regressionUHC  @featureGate @uhcmedicareSAMIcons
+    @samIconsUHC @regressionUHC @samIcons  @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipcode | plantype | planName                        |
       | UHC  |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) |
@@ -93,12 +93,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     And the user validates the chat icon
     And the user validates the proactive chat
 
-    @samIconsAARP @regressionAARP 
+    @samIconsAARP @regressionAARP @samIcons 
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
 
-    @samIconsUHC @regressionUHC  @featureGate @uhcmedicareSAMIcons
+    @samIconsUHC @regressionUHC @samIcons  @featureGate @uhcmedicareSAMIcons
     Examples: 
       | site | zipCode | planType | planName                                            | drug1   |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi |
@@ -125,12 +125,12 @@ Feature: 1.15.1 ACQ M&R- To test SAM Icons and Proactive Chat
     And the user clicks the plans of the below plan type
       | Plan Type | <planType> |
 
-    @samIconsAARP @regressionAARP 
+    @samIconsAARP @regressionAARP @samIcons 
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | AARP |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
 
-    @samIconsUHC @regressionUHC @uhcmedicareSAMIcons 
+    @samIconsUHC @regressionUHC @samIcons @uhcmedicareSAMIcons 
     Examples: 
       | site | zipcode | planType | planName                                            | drug1   | pagename                                     | isMultiCounty | county            | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         |
       | UHC  |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | Orkambi | plan-recommendation-engine.html#/get-started | No            | Miami-Dade County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO |
