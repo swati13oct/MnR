@@ -845,7 +845,7 @@ public class VisitorProfilePage extends UhcDriver {
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
         CommonUtility.checkPageIsReadyNew(driver);
-        validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")), 45);
+        validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Compare')]")), 45);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -2173,8 +2173,8 @@ public class VisitorProfilePage extends UhcDriver {
         } else {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
         }
-        //clickOnBackToProfile();
-        gotoProfilePage();
+        clickOnBackToProfile();
+        //gotoProfilePage();
         CommonUtility.checkPageIsReadyNew(driver);
         sleepBySec(4);
         WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
