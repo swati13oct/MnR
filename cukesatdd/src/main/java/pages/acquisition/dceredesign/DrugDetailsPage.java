@@ -2557,7 +2557,7 @@ Blank error message is removed
 		}
 		else {
 			WebElement YourDrugs_TierCopay = driver.findElement
-					(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), 'Tier " + tierNo + "')]"));
+					(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')]"));
 			//(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
 			validateNew(YourDrugs_TierCopay);
 			//WebElement CopayText = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
