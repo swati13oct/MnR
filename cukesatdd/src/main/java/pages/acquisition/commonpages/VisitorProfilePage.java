@@ -380,7 +380,12 @@ public class VisitorProfilePage extends UhcDriver {
     private WebElement btnPREGetStarted;
 
     @FindBy(xpath = "//div[contains(@class,'data-import')]//button//span[contains(text(),'Review My Drugs')]")
-    WebElement btnReviewDrugs;
+    private WebElement btnReviewDrugs;
+    //WebElement btnReviewDrugs;
+
+//	@FindBy(xpath = "//*[@id='signInOptumID']")
+//	WebElement SignInHeader;
+
 
     public VisitorProfilePage(WebDriver driver) {
         super(driver);
@@ -839,7 +844,8 @@ public class VisitorProfilePage extends UhcDriver {
 
         jsClickNew(comparePlans);
         //validateNew(enrollBtn);
-        validateNew(driver.findElement(By.xpath("(//*[contains(@id,'enrollbtnplancompare0')])[2]")));
+        CommonUtility.checkPageIsReadyNew(driver);
+        validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Compare')]")), 45);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/plan-compare")) {
             System.out.println("Navigation to Plan Compare page is Passed");
@@ -1600,6 +1606,9 @@ public class VisitorProfilePage extends UhcDriver {
     }
 
     public void clickOnMStartApplication(String planName) {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(4);
+        waitForPageLoadSafari();
         WebElement btnStartApplication = driver.findElement(By.xpath("//h2[text()='" + planName + "']/following::*[text()='Start Application'][1]"));
         jsClickNew(btnStartApplication);
         waitforElementNew(msDOB);
@@ -2133,6 +2142,21 @@ public class VisitorProfilePage extends UhcDriver {
 
     }
 
+    public void gotoProfilePage() {
+        WebElement viewSavedItem= driver.findElement(By.xpath("//*[contains(@class,'saved_items')]"));
+        // shoppingCartIcon.click();
+        jsClickNew(viewSavedItem);
+        jsClickNew(driver.findElement(By.xpath("//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")));
+        sleepBySec(4);
+        CommonUtility.checkPageIsReadyNew(driver);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("profile")) {
+            System.out.println("Navigation to visitor profile is successful");
+        } else {
+            Assert.fail("Navigation to visitor profile is failed");
+        }
+    }
+
     public void PREPlanCardEnrollNDetails(String plantype) {
         CommonUtility.checkPageIsReadyNew(driver);
         WebElement viewDetailsPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//a[contains(@class,'details')])[1]"));
@@ -2145,11 +2169,12 @@ public class VisitorProfilePage extends UhcDriver {
         //waitforElementNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]")), 45);
         if (plantype.trim().equalsIgnoreCase("MS")) {
             sleepBySec(10);
-            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")),15), "Plan Details page not opened");
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//button[contains(@class,'start-app')]")), 45), "Plan Details page not opened");
         } else {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//div[contains(@class,'plan-details')]"))), "Plan Details page not opened");
         }
         clickOnBackToProfile();
+        //gotoProfilePage();
         CommonUtility.checkPageIsReadyNew(driver);
         sleepBySec(4);
         WebElement btnEnrollPRECard = driver.findElement(By.xpath("(//div[contains(@class,'uhc-pre-card')]//button[contains(@class,'enroll')])[1]"));
@@ -2162,9 +2187,10 @@ public class VisitorProfilePage extends UhcDriver {
             Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Online Enrollment')]"))), "OLE Page not opened");
         } else if (plantype.trim().equalsIgnoreCase("MS")) {
             sleepBySec(10);
-            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")),15), "Start Application Page not opened");
+            Assert.assertTrue(validateNew(driver.findElement(By.xpath("//h1[contains(@id,'startAppTitle')]")), 45), "Start Application Page not opened");
             validateMSStartApplicationPage();
         }
     }
+
 }
 

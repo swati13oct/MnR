@@ -483,7 +483,7 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "(//div[contains(@class,'d-flex align-items-lg-center')]//p[contains(text(), ' level of Extra Help')])[1]")
+	@FindBy(xpath = "(//div[contains(@class,'d-flex align-items-center')]//p[contains(text(), ' level of Extra Help')])[1]")
 	private WebElement alertTextImg;
 
 	public void clickOnPDPPlan() {
@@ -651,6 +651,8 @@ public class DrugSummaryPage extends UhcDriver {
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 		jsClickNew(PharmacyName.get(0));
+		pageloadcomplete();
+		waitForPageLoadSafari();
 //		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
@@ -1143,8 +1145,8 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateDefaultDistance() {
 		Select distance = new Select(distanceDrpDown);
-		Assertion.assertTrue("Default distance is not 15 miles",
-				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+		Assertion.assertTrue("Default distance is not 10 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("10 Miles"));
 	}
 
 	public void sortPharmacies(String sortOption) {
@@ -1541,5 +1543,15 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("Dynamic Error Message Displayed");
 		}
 	}
-
+	
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				returnToProfileLink.click();
+			}
+		} catch (Exception e) {
+			Assertion.fail("Return to profile not displayed");
+		}
+	}
 }
