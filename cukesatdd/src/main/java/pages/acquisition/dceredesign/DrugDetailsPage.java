@@ -2556,14 +2556,16 @@ Blank error message is removed
 			}
 		}
 		else {
-			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			WebElement YourDrugs_TierCopay = driver.findElement
+					(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), 'Tier " + tierNo + "')]"));
+			//(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
 			validateNew(YourDrugs_TierCopay);
-			WebElement CopayText = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
-			validateNew(CopayText);
-			System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + CopayText.getText());
-			if (!CopayText.getText().contains(tierCopay)) {
+			//WebElement CopayText = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
+			//validateNew(CopayText);
+			System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + YourDrugs_TierCopay.getText());
+			if (!YourDrugs_TierCopay.getText().contains(tierCopay)) {
 				Assertion.fail(
-						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+CopayText.getText()+" <<<<<");
+						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+YourDrugs_TierCopay.getText()+" <<<<<");
 			}
 		}
 	}
