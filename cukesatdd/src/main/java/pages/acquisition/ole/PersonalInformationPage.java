@@ -102,10 +102,11 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
 	private WebElement emailConfirmationYesBtn;
 
-	@FindBy(id = "genderMale")
+	@FindBy(xpath="//*[@id='genderMale' or @id = 'genderMasculino']")
 	private WebElement GenderSelectMale;
 
-	@FindBy(id = "genderFemale")
+	//@FindBy(id = "genderFemale")
+	@FindBy(xpath="//*[@id='genderFemale' or @id = 'genderFemenino']")
 	private WebElement GenderSelectFemale;
 
 	@FindBy(id = "address1")
@@ -361,16 +362,21 @@ public class PersonalInformationPage extends UhcDriver{
 			  validateNew(MobileNumberField);
 			sendkeys(MobileNumberField, MobileNumber);
 
-					if(emailConfirmation.equalsIgnoreCase("YES")){
-				jsClickNew(emailConfirmationYesBtn);	
-			}else
-				jsClickNew(emailConfirmationNoBtn); 
-			if(goGreen.equalsIgnoreCase("YES")){
-				//goGreenYesBtn.click();
+			if (emailConfirmation.equalsIgnoreCase("YES"))
+				jsClickNew(emailConfirmationYesBtn);
+			else if (emailConfirmation.equalsIgnoreCase("No"))
+				jsClickNew(emailConfirmationNoBtn);
+			else
+				System.out.println("Email confirmation not shown");
+			
+			if (goGreen.equalsIgnoreCase("YES")) {
+				// goGreenYesBtn.click();
 				jsClickNew(goGreenYesBtn);
-			}else
+			}else if (goGreen.equalsIgnoreCase("No"))
 			//	goGreenNoBtn.click();
-			jsClickNew(goGreenNoBtn);
+				jsClickNew(goGreenNoBtn);
+			else
+				System.out.println("Go green not shown");
 
 			sendkeys(Email,EmailAddress);
 		}

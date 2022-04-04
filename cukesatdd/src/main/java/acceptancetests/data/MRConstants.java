@@ -60,6 +60,10 @@ public class MRConstants {
 
 	public static final String STAGE0_UHC_SYSTEM_DATE_URL = "https://stage-0-uhcmedicaresolutions." + getDomain() + "/planbenefitsinfo/profiledetail/aarp";
 	
+	public static final String UHCCP_URL_PROD = "https://www.uhccommunityplan.com/";
+	
+	public static final String UHCCP_URL_STAGE = "https://uhccommunityplan-stage.uhc.com/";
+	
 	public static final String SERVER_DATE_SEP_30 = "09/30";
 	public static final String SERVER_DATE_OCT_1 = "10/01";
 	public static final String SERVER_DATE_OCT_14 = "10/14";

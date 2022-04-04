@@ -796,8 +796,14 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 	public static final String ORIGINAL_MEDICARE_PAGE="originalMedicarePage";
 
 	public static final String CHANGING_MEDICARE_PLAN_PAGE="changingMedicarePlanPage";
-
-
+	
+	// UHCCP site
+	
+	public static final String UHCCP_HOME_PAGE = "UHCCPHomePage";
+	public static final String UHCCP_CONTACT_US_PAGE = "UHCCPContactUsPage";
+	public static final String UHCCP_DUAL_lANDING_PAGE = "UHCCPDualLandingPage";
+	public static final String UHCCP_PLAN_SUMMARY_PAGE = "UHCCPPlanSummaryPage";
+	public static final String UHCCP_PLAN_DETAILS_PAGE = "UHCCPPlanDetailsPage";
 
 }
 
