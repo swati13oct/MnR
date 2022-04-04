@@ -671,7 +671,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
   @SavePlanPRE @prodRegression
-  Scenario Outline: User validate PRE flow from Visitor Profile on <site> site for zipcode -<zipcode>
+  Scenario Outline: User validate PRE flow from Visitor Profile on <site> site for zipcode -<Zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -746,13 +746,13 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
     @SavePlanPRE_AARP @regressionAARP
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | AARP | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
     @SavePlanPRE_UHC @regressionUHC
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | UHC  | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
   @SavePlanPRE @prodRegression
   Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
