@@ -171,7 +171,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasEndStateRenalDiseaseNo")
 	private WebElement esrdNo;
 
-	@FindBy(id = "hasMedicaidEnrolleeYes")
+	@FindBy(xpath = "//*[@id='hasMedicaidEnrolleeYes' or @id='hasMedicaidEnrolleeSí']")
 	private WebElement medicaiddyes;
 
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
