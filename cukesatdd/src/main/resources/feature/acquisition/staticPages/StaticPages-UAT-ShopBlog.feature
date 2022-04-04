@@ -978,7 +978,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | Site | <site> |
     Then the user hovers screen over the shop for a plan
     Then the user click on Enroll link and lands on Enroll Page
-    Then the user clic	Enroll Page
+    Then the user click on MA Enroll Start button on Enroll Page
     Then the user clicks on browser back button
     Then the user click on PDP Enroll Start button on Enroll Page
     Then the user clicks on browser back button
