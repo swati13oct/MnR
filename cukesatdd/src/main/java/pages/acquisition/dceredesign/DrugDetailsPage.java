@@ -2521,7 +2521,7 @@ Blank error message is removed
 	public void validateTierCopay_YourDrugsSection(String tierNo, String tierCopay) {
 		validateNew(YourDrugs_DrugsTxt);
 		if(tierCopay.contains("N/A")){
-			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')"));
 			validateNew(YourDrugs_TierCopay);
 			System.out.println("Copay Amount Displayed for Tier - " + YourDrugs_TierCopay.getText());
 			if (YourDrugs_TierCopay.getText().contains("$") || YourDrugs_TierCopay.getText().contains("%")) {
@@ -2530,7 +2530,7 @@ Blank error message is removed
 			}
 		}
 		else if(tierCopay.contains("%")){
-			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]"));
+			WebElement YourDrugs_TierCopay = driver.findElement(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')"));
 			validateNew(YourDrugs_TierCopay);
 			System.out.println("Copay Amount Displayed for Tier - " + YourDrugs_TierCopay.getText());
 			if (!YourDrugs_TierCopay.getText().contains(tierCopay)) {
@@ -2539,7 +2539,7 @@ Blank error message is removed
 			}
 		}
 		else if(tierNo.contains("3")){
-			List<WebElement> Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
+			List<WebElement> Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li//span[contains(text(), '" + tierNo + "')"));
 			boolean flag = false;
 			String Actual = "";
 			for (WebElement Tier3text:Tier3Copays) {
