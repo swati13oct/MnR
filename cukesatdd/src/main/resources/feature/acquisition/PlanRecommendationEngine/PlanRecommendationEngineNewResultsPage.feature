@@ -21,13 +21,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validates Sort By drop down UI PRE-Result page
     Then user validates Sort By elements visibility PRE-Result page
       | Visibility Info | <Visibleinfo> |
+    Then user validates Important Resources section not enabled in PRE-Result page
 
     @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
-      | AARP |   10003 | NO            | New York         | PDP           | No             | Medigap,true           |
-      | AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | Visibleinfo  |
+      | AARP |   10003 | NO            | New York | PDP           | No             | Medigap,true |
 
+    #| AARP |   21212 | YES           | Baltimore County | PDP           | No             | MAPD,true:Medigap,true |
     @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county           | isCoverageOpt | Drug Selection | Visibleinfo            |
@@ -54,7 +55,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | AARP |   10003 | NO            | New York | PDP           | No             |
 
-    @FunctionalUHC     
+    @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | UHC  |   10003 | NO            | New York | PDP           | No             |
@@ -174,11 +175,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate elements in PRE results page
       | Zip Code       | <Zipcode> |
       | CountyDropDown | <county>  |
+    Then user validates Important Resources section enabled in PRE-Result page
+      | Resources Links | <ResourcesInfo> |
 
     @FunctionalAARP
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
-      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | ResourcesInfo               |
+      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Wrap,CMS Guide,OOC,SELECTHD |
 
     @FunctionalUHC
     Examples: 
@@ -214,31 +217,33 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | Priorities      | <priorities>     |
     Then user validate doctors info in PRE results page
       | DoctorsInfo | <doctorsInfo> |
+    Then user validates Important Resources section enabled in PRE-Result page
+      | Resources Links | <ResourcesInfo> |
 
     @regressionAARP @PREMSPlanTile @featureGate
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds     | doctors         | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                                  |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds     | doctors         | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                                  | ResourcesInfo                                     |
       #| AARP |   10001 | NO            | New York | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),local or National,False:Preferred (PDP),do not include,False:Home Plan 2 (HMO I-SNP),local or National,False             |
       #| AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
       #| AARP |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
-      | AARP |   19901 | NO            | Kent County | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage (HMO),unitedhealthcare network,False:Preferred (PDP),do not include,False:Plan 2 (PPO I-SNP),Access to in-network,True:Plan G,provider nation,True |
-      | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               |
-      | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  |
+      | AARP |   19901 | NO            | Kent County | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage (HMO),unitedhealthcare network,False:Preferred (PDP),do not include,False:Plan 2 (PPO I-SNP),Access to in-network,True:Plan G,provider nation,True | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
+      | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
+      | AARP |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
 
     @regressionAARP @BHDHProviders @featureGate
     Examples: 
-      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                        |
-      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Tiffany Nix MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Tiffany Nix MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage |
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors | DoctorsName                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                        | ResourcesInfo                                     |
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | Lookup  | Cristian Penciu MD:Tiffany Nix MA | No            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Complete (HMO C-SNP),Cristian Penciu MD,True:Plan 1 (HMO),Tiffany Nix MA,True:Plus (PDP),do not include,False:Plan L,Cristian Penciu MD,MSCoverage | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds     | doctors         | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                                  |
+      | site | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds     | doctors         | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | doctorsInfo                                                                                                                                                  | ResourcesInfo                                     |
       # | UHC  |   10001 | NO            | New York | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (HMO),local or National,False:Preferred (PDP),do not include,False:Home Plan 2 (HMO I-SNP),local or National,False             |
       # | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]           | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Home Plan 2 (HMO I-SNP),Access to doctors,True |
       # | UHC  |   10001 | NO            | New York | MAPD          | Chronic,Nursing  | Lookup          | Phyllis C Suen MD | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Phyllis C Suen MD,False:Plan 1 (HMO),Phyllis C Suen MD,True                                                   |
-      | UHC  |   19901 | NO            | Kent County | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage (HMO),unitedhealthcare network,False:Preferred (PDP),do not include,False:Plan 2 (PPO I-SNP),Access to in-network,True:Plan G,provider nation,True |
-      | UHC  |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               |
-      | UHC  |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  |
+      | UHC  |   19901 | NO            | Kent County | MAPD          | Medicaid,Nursing | AcceptsMedicare | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Advantage (HMO),unitedhealthcare network,False:Preferred (PDP),do not include,False:Plan 2 (PPO I-SNP),Access to in-network,True:Plan G,provider nation,True | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
+      | UHC  |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | UHGNetwork      | [blank]               | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Walgreens (PDP),do not include,False:Plan 1 (PPO I-SNP),Access to in-network,True:Patriot (HMO),access to doctors,True:Plan K,any provider,N/A               | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
+      | UHC  |   19901 | NO            | Kent County | MAPD          | Chronic,Nursing  | Lookup          | Sender, Gregory S, PA | No            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan 1 (PPO I-SNP),Gregory S Sender PA,False:Advantage (HMO),Gregory S Sender PA,True:Plus (PDP),do not include,False:Plan L,Gregory S Sender PA,MSCoverage  | Wrap,CMS Guide,POV,Rate pages,RD,BT,CREEED ENROLL |
 
   @PRE @planrecommendation @MAPDTile @PREResultsMAPDZeroDoctor
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
@@ -671,3 +676,46 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
       | UHC  |   30004 | YES           | Forsyth County | MAPD          | Chronic                  | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
       | UHC  |   30004 | YES           | Forsyth County | MAPD          | Medicaid,Chronic         | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
       | UHC  |   30004 | YES           | Forsyth County | MAPD          | Medicaid,chronic,nursing | AcceptsMedicare | [blank]     | [blank]       | Yes            | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | SNP      |
+      
+  
+  @viewIndividualDrugCosts @F774397
+   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD Tile in PRE Result page
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user selects add drug option in Drug page
+      | Drug Selection | <Drug Selection>                                                               |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
+    And user selects additional services option in additional services page
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
+    Then user selects cost preferences option in cost preferences page
+      | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
+    Then user validate drugCostModal in PRE results page
+      | DrugInfo | <DrugInfo> |
+      
+     @regressionAARP @featureGate
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                                                                                                                                 | 
+      | AARP |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,Lipitor TAB 20MG,False:Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
+    
+    @regressionUHC 
+    Examples: 
+      | site | Zipcode | isMultiCounty | county             | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | DrugInfo                                                                                                                                                                                 | 
+      | UHC  |   90001 | NO            | Los Angeles County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | No,No,Yes,No                  | Lower                | both           | Doctors, Vision | Plan L,Lipitor TAB 20MG,False:Plan 1 (HMO),Lipitor TAB 20MG,False:Assure (HMO),Lipitor TAB 20MG,False:Walgreens (PDP),Lipitor TAB 20MG,False:Complete (HMO C-SNP),Lipitor TAB 20MG,False | 
+
+  

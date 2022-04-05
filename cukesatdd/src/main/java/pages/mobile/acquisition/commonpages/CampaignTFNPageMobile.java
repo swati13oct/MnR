@@ -36,6 +36,7 @@ import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.android.nativekey.PressesKey;
 import io.appium.java_client.windows.PressesKeyCode;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class CampaignTFNPageMobile extends GlobalWebElements {
 
@@ -170,7 +171,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public WebElement UHCSearchLinkfromBing;
 
 	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	@FindBy(xpath = "//*[@id='zipcodemeded-1']")
 	private WebElement zipCodeShopField;
 	// @FindBy(xpath =
 	// "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
@@ -263,6 +264,20 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	public void openAndValidate() {
 		System.out.println("Current URL - " + driver.getCurrentUrl());
 
+	}
+	
+	@FindBy(xpath = "//button[contains(@class,'start-btn') and @data-plan-code='F01']")
+	private WebElement startMS4OLEPlanCompare;
+
+	public void clickStartMS4OlePlanCompare() {
+		jsClickNew(startMS4OLEPlanCompare);
+	}
+	
+	@FindBy(xpath = "//button[@data-plancode='F']")
+	private WebElement startMS3OLEPlanCompare;
+
+	public void clickStartMS3OlePlanCompare() {
+		jsClickNew(startMS3OLEPlanCompare);
 	}
 
 	public void openUrl(String url) {
@@ -446,6 +461,61 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		} else {
 			Assertion.fail("TFN displayed is INCORRECT for Federal : " + tFN_Xpath);
 		}
+
+	}
+	
+	public HashMap<String, String> retrieveTFNcookieLP() {
+		System.out.println("Current URL - " + driver.getCurrentUrl());
+		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
+		System.err.println(cookietfn);
+		String str = cookietfn.toString();
+		System.out.println("TFN Cookie Value - " + str);
+		/*
+		 * String sep = str.contains(",") ? "," : "%2C"; // String[] arrOfStr =
+		 * str.split("%2C"); String[] arrOfStr = str.split(sep);
+		 */
+
+		String[] arrStr = str.split(",");
+		/*
+		 * String[] arrOfStr = arrStr[0].split(";"); /* if (str.contains(",")) {
+		 * arrOfStr = str.split(","); }
+		 */
+		String PSC_Code;
+		String FedTFN;
+		String MedSuppTFN;
+		String SRC_Code;
+
+		/*
+		 * for (String a : arrOfStr)
+		 * 
+		 * System.out.println(a);
+		 */
+		String PSC_Code_Str = arrStr[0];
+		String[] arrStr_1 = PSC_Code_Str.split("=");
+
+		PSC_Code = arrStr_1[1];
+		FedTFN = arrStr[2];
+		MedSuppTFN = arrStr[3];
+		SRC_Code = arrStr[4];
+
+		System.out.println("Campaign PSC code - " + PSC_Code);
+		System.out.println("Source code - " + SRC_Code);
+		System.out.println("Federal TFN - " + FedTFN);
+		System.out.println("MedSupp TFN - " + MedSuppTFN);
+
+		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
+		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Source Code", SRC_Code);
+		tfnCookieValues.put("Fed TFN", FedTFN);
+		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
+		System.out.println(tfnCookieValues);
+		return tfnCookieValues;
+
+		/*
+		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
+		 * getLoginScenario().saveBean(TFNCommonConstants.FEDERAL_TFN, FedTFN);
+		 * getLoginScenario().saveBean(TFNCommonConstants.MEDSUPP_TFN, MedSuppTFN);
+		 */
 
 	}
 
@@ -766,6 +836,15 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//button[contains(@id,'zipcodebtn')]")
 	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
+	
+	@FindBy(xpath = "(//input[contains(@id,'zipcode')])[2]")
+	private WebElement planSearchEnterZip;
+	
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	private WebElement planSearchBtn;
+	
+	@FindBy(css = "#change-location")
+	private WebElement changeLocationLink;
 
 	// @FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
@@ -824,6 +903,20 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validate(findPlansButton);
 
 		jsClickNew(findPlansButton);
+	}
+	
+	public VPPPlanSummaryPageMobile planSearch(String zip) {
+		CheckPageLoad();
+
+		validate(planSearchEnterZip);
+		jsClickNew(planSearchEnterZip);
+		sendkeysMobile(planSearchEnterZip, zip);
+		validate(planSearchBtn);
+		jsClickNew(planSearchBtn);
+		if (validate(changeLocationLink))
+			return new VPPPlanSummaryPageMobile(driver);
+		else 
+			return null;
 	}
 
 	public void HomepagePlanSearchOLE(String zip) {
@@ -1207,10 +1300,7 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		 * System.out.println("TFN is Displayed on Page : " +
 		 * ActualTFNelement.getText());
 		 * 
-		 * >>>>>>> branch 'AndroidChrome_TestNG' of
-		 * https://github.optum.com/gov-prog-digital/mratdd/ } <<<<<<< HEAD
-		 * 
-		 * // } =======
+
 		 * 
 		 * else { Assertion.fail("TFN elemnet is not found / displayed on page : " +
 		 * TFNXpath); }
@@ -2038,6 +2128,9 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//img[contains(@class,'d-lg-inline-block')]//following-sibling::p//a[@dtmid='cta_acq_ms_vpp']")
 	private WebElement addYourInformation;
+	
+	@FindBy(xpath = "//*[@class='insured-member']//a[@class='tfn-call']/span")
+	private WebElement msStaticTFN;
 
 	public void addInfoAndMedSupFormTFN() throws InterruptedException {
 		CheckPageLoad();
@@ -2045,5 +2138,21 @@ public class CampaignTFNPageMobile extends GlobalWebElements {
 		validate(addYourInformation, 30);
 		jsClickNew(addYourInformation);
 
+	}
+	
+	public void validateStaticMedsupTFNNo(String ExpecetdTFNNo) {
+		CheckPageLoad();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(msStaticTFN);
+		if (ExpecetdTFNNo.contains(msStaticTFN.getText())) {
+			System.out.println("TFN is Displayed on Page : " + msStaticTFN.getText());
+		} else {
+			Assertion.fail("Static TFN elemnet is not found / displayed on page ");
+		}
 	}
 }

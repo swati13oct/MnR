@@ -350,4 +350,44 @@ public class ShopperProfileStepDefinition {
 		VisitorProfilePage visitorProfilePage = comparePlansPage.allSetAndNavigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+
+	@Then("^user validate medsup compare link for telesales$")
+	public void user_validate_medsup_compare_link_for_telesales() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateAgentMedSupCompareLink();
+	}
+
+	@Then("^user click on MAPD link and validates$")
+	public void user_click_on_MAPD_link_and_validates() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateAgentMAPDCompareLink();
+	}
+	
+	@Then("^Validate PDFs loading for Current enrolled Plan")
+	public void Validate_PDFs_loading_for_Current_enrolled_Plan(DataTable userData){
+			
+			HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
+			
+			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			comparePlansPage.validatePDFforEnrolledMember(givenAttributesMap);
+		
+	}
+
+	@Then("^the user validate the MAPD and MS links are not visible$")
+	public void the_user_validate_the_MAPD_and_MS_links_are_not_visible() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateMAPDMSLinkNotDisplay();
+	}
+	@Then("^the user validate the MAPD and MS links are visible$")
+	public void the_user_validate_the_MAPD_and_MS_links_are_visible() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateMAPDMSLinkIsDisplay();
+	}
+
 } 

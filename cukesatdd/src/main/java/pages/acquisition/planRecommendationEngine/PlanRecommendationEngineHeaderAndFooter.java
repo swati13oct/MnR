@@ -243,7 +243,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     
 //'Read More' is Inside Medicare Articles Menu
     
-    @FindBy(css = "div[class*='breadcrumb']")
+    @FindBy(css = "div[class*='breadcrumb']>ol")
 	private WebElement HeaderBreadcrumb;
     
     @FindBy(css = "a[href*='medicare-articles/eligibility-and-enrollment.html']")

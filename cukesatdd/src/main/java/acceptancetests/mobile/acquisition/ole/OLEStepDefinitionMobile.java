@@ -30,6 +30,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.OLECommonPages;
 import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.PlanPremiumPage;
@@ -50,6 +51,7 @@ import pages.mobile.acquisition.ole.CoverageInformationPageMobile;
 import pages.mobile.acquisition.ole.LearnMoreModalMobile;
 import pages.mobile.acquisition.ole.LeavingOLEmodalMobile;
 import pages.mobile.acquisition.ole.MedicareInformationPageMobile;
+import pages.mobile.acquisition.ole.OLECommonPagesMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.OLEconfirmationPageMobile;
 import pages.mobile.acquisition.ole.PersonalInformationPageMobile;
@@ -652,6 +654,23 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Medicare Info data entry failed");
 	}
+	@Then("^the user clicks on camera icon to scan Medicare Card$")
+	public void the_user_clicks_on_camera_icon_to_scan_Medicare_Card() throws Throwable {
+				MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+				//comment
+		boolean isInformationFilled = medicareInfoPage.select_from_library();
+		if (isInformationFilled) {
+
+			//getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+						getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
 
 	@Then("^the site user clicks on Start Application Button proceed to next pages$")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
@@ -1233,6 +1252,33 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
+	
+	@Then("^the user click on continue enrollment in visitor profile and navigate for OLE Page$")
+	public void the_user_validates_continue_enrollment_navigate_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return  continue enrollment--");
+	//	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPagesMobile ContinueEnrollment=new OLECommonPagesMobile(wd);
+
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			boolean Validation_Status = ContinueEnrollment.validateVPOLEDetails(PlanDetailsMap);
+			if (Validation_Status) {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status + " - Validation Passed");
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("Visitor Profile OLE Details are Validation in Visitor Profile PAGE : " + Validation_Status);
+				Assertion.fail();
+			}
+			System.out.println("continue enrollment on OLE Pages");
+		}
+
+	}
 
 	@Then("^the user enters following information in Personal Information Page SNP Plans$")
 	public void the_user_enters_following__information_in_Personal_Information_Page_SNP_plans(DataTable arg1)
@@ -1465,6 +1511,21 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail();
 		}
 		// }
+	}
+	
+	@Then("^the user validates Save and Return Later modal for OLE Page$")
+	public void the_user_save_and_return_later_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 03/21- Validate to save return --");
+		//PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	//	OLECommonPages saveAndReturnLater = (OLECommonPages) getLoginScenario().getBean(OLE_PageConstants.OLE_COMMONPAGES);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		OLECommonPagesMobile saveAndReturnLater=new OLECommonPagesMobile(wd);
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			saveAndReturnLater.OpensavereturnOLEPages();
+			System.out.println("OLE Save Return Later modal on OLE Pages");
+		}
 	}
 
 	@Then("^the user validates Leave OLE modal for SEP Page$")
@@ -1734,7 +1795,7 @@ public class OLEStepDefinitionMobile {
 		// issue.
 		// An incident is logged with the external Rally team. Remove this condition
 		// once fixed.
-				&& !MRScenario.environment.contains("mnr-acq-ci")) {
+				&& !MRScenario.environment.contains("mnr-acq-ci") &&!MRScenario.mobileDeviceOSName.contains("IOS") && !MRScenario.mobileDeviceOSName.contains("Android")) {
 			System.out.println("Validating Provider Look Up Provider for MA, MAPD, DSNP non-PFFS plans");
 			boolean Validation_Status = pcpPage.validate_provider_Lookup(planType);
 			if (Validation_Status) {
@@ -2159,7 +2220,7 @@ public class OLEStepDefinitionMobile {
 	}
 
 	/**
-	 * @param planName
+	 * @param
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in
 	 *                UHC VPP page are same
 	 */
@@ -2248,7 +2309,7 @@ public class OLEStepDefinitionMobile {
 	 */
 
 	/**
-	 * @param planName
+	 * @param
 	 * @toDo:navigate to pcp page in OLE and validates the PCP providers listed in
 	 *                AARP VPP page are same
 	 */
@@ -2308,7 +2369,7 @@ public class OLEStepDefinitionMobile {
 	 * 
 	 * To Validate the OLE WELCOME Page Marketing bullets
 	 * 
-	 * @param planAttributes
+	 * @param
 	 * @throws Throwable
 	 */
 	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
@@ -2495,6 +2556,8 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Medicare Info data entry failed");
 	}
+	
+	
 
 	@Then("^the user validates the long term questions in Medicare Information Page$")
 	public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1)
@@ -3660,4 +3723,88 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 	}
 
+	@Then("^the user enters following required Medicare Information for Medicare Card Scan$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page_Medicare_Card_Scan(DataTable planAttributes) throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
+		if (CardType.contains("HICN")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n) + "C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		} else if (CardType.contains("RRID")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID" + Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		}
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		if (SSNflag.contains("true")) {
+			MedicareDetailsMap.put("SSN Number", "123456789");
+		}
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.MedicareScanImage_Success(MedicareDetailsMap);
+		if (isInformationFilled) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered through Medicare Card Scan and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
+	@Then("^the user enters following required Medicare Information for Medicare Card Scan Error Message$")
+	public void the_user_enters_Medicare_Details_in_medicare_info_page_Medicare_Card_Scan_error_messages(DataTable planAttributes) throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String uploadBtn = MedicareDetailsMap.get("upload Btn");
+		if (CardType.contains("HICN")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = Integer.toString(n) + "C";
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		} else if (CardType.contains("RRID")) {
+			Random rnd = new Random();
+			int n = 100000000 + rnd.nextInt(900000000);
+			String MedicareNumber = "RID" + Integer.toString(n);
+			MedicareDetailsMap.put("Medicare Number", MedicareNumber);
+
+		}
+		String SSNflag = MedicareDetailsMap.get("SSN Flag");
+		if (SSNflag.contains("true")) {
+			MedicareDetailsMap.put("SSN Number", "123456789");
+		}
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+		boolean isInformationFilled = medicareInfoPage.MedicareScanImage_oopsErrorMessage(MedicareDetailsMap);
+		if (isInformationFilled) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
+			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
+
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered through Medicare Card Scan and Next Button is enabled");
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Medicare Info data entry failed");
+	}
+
 }
+

@@ -3,14 +3,20 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.time.Duration;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.MobileElement;
@@ -134,13 +140,15 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 	}
 
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-		waitTillElementClickableInTime(getStartedBtn, 45);
+		//waitTillElementClickableInTime(getStartedBtn, 45);
+		waitforElement(getStartedBtn);
 		System.out.println("Before clicking GetStarted");
 		threadsleep(5000);
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeysMobile(zipCode, zipcode);
 		threadsleep(5000);
 		jsClickNew(getStartedBtn);
+
 		try {
 			if(driver.toString().contains("IOS")) {
 				jsClickNew(zipCode);
@@ -153,6 +161,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		catch (Exception e) {
 		}
 		// getStartedBtn.click();
+
 		threadsleep(2000);
 		System.out.println("After clicking GetStarted");
 		waitforElementVisibilityInTime(coverageTitle, 30);

@@ -263,7 +263,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@dlassetid='ps-show-on-map']//span[contains(@class,'uhc-button_text')]")
 	protected List<WebElement> showonmap;
 
-	@FindBy(xpath = "//a[@dlassetid='ps-view-pdf-lnk']/span[contains(@class,'uhc-button_text')]")
+	@FindBy(xpath = "//a[@dlassetid='ps-view-pdf-lnk']")
 	protected WebElement viewsearchpdf;
 
 	@FindBy(xpath="(//div[@id='viewpdf']//a)[2]")
@@ -446,10 +446,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//html[@lang='en']")
 	protected WebElement pgInEnglish;
 
-	@FindBy(xpath = "//html[@lang='en']") // DOM does not get update after language change to Chinese or Spanish
+	@FindBy(xpath = "//html[@lang='zh']") // DOM does not get update after language change to Chinese or Spanish
 	protected WebElement pgInChinese;
 
-	@FindBy(xpath = "//html[@lang='en']")
+	@FindBy(xpath = "//html[@lang='es']")
 	protected WebElement pgInSpanish;
 
 	@FindBy(xpath = "//body")

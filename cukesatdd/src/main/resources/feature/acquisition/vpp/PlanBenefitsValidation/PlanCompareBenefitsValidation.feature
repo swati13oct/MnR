@@ -113,16 +113,16 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2022_2 |
 
-   @2022planCompareProd01
+    @2022planCompareProd01
     Examples: 
-      | workSheet    |
+      | workSheet       |
       | ProdSheet2022_1 |
 
-     @2022planCompareProd02
+    @2022planCompareProd02
     Examples: 
-      | workSheet    |
+      | workSheet       |
       | ProdSheet2022_2 |
-      
+
   @2022_UHC @current_year
   Scenario Outline: 2022 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
@@ -214,6 +214,7 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2022_17 |
+
     @planCompareBenefitsUHC18
     Examples: 
       | workSheet    |
@@ -236,14 +237,14 @@ Feature: ACQ-Plan benefits validation
 
     @2022planCompareProd01
     Examples: 
-      | workSheet    |
+      | workSheet       |
       | ProdSheet2022_1 |
 
-     @2022planCompareProd02
+    @2022planCompareProd02
     Examples: 
-      | workSheet    |
+      | workSheet       |
       | ProdSheet2022_2 |
-      
+
   @2021_AARP @next_year @2021CompareAARP
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
@@ -527,3 +528,145 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2021_3 |
+
+@BaselineBenefitsTS
+  Scenario Outline: 2022 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
+    Given the user navigates to plan compare page and compares baseline benefits value from excel to UI and reports into excel
+      | ExcelFile     | BaseLineBenefits_Data_2022 |
+      | WorkSheetName | <workSheet>                |
+      | Site          | AARP                       |
+
+    @BaselineBenefitsPDP
+    Examples: 
+      | workSheet      |
+      | PDPSheet2022_1 |
+
+    @BaselineBenefitsPDP
+    Examples: 
+      | workSheet      |
+      | PDPSheet2022_2 |
+
+    @BaselineBenefitsPDP
+    Examples: 
+      | workSheet      |
+      | PDPSheet2022_3 |
+
+    @BaselineBenefitsPDP
+    Examples: 
+      | workSheet      |
+      | PDPSheet2022_4 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_1 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_2 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_3 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_4 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_5 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_6 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_7 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_8 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet       |
+      | MAPDSheet2022_9 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_10 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_11 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_12 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_13 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_14 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_15 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_16 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_17 |
+
+    @BaselineBenefitsMAPD
+    Examples: 
+      | workSheet        |
+      | MAPDSheet2022_18 |
+
+    @BaselineBenefitsSNP
+    Examples: 
+      | workSheet      |
+      | SNPSheet2022_1 |
+
+    @BaselineBenefitsSNP
+    Examples: 
+      | workSheet      |
+      | SNPSheet2022_2 |
+
+    @BaselineBenefitsSNP
+    Examples: 
+      | workSheet      |
+      | SNPSheet2022_3 |
+
+    @BaselineBenefitsSNP
+    Examples: 
+      | workSheet      |
+      | SNPSheet2022_4 |
+
+    @BaselineBenefitsSNP
+    Examples: 
+      | workSheet      |
+      | SNPSheet2022_5 |

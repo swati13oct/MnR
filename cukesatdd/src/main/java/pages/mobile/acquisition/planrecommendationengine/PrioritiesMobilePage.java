@@ -96,6 +96,13 @@ public class PrioritiesMobilePage extends UhcDriver {
 	public void priorityOptions(boolean top, String value) {
 		System.out.println("Priorities option selection");
 		if (top) {
+			topSelect.click();
+			try {
+				topSelect.click();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
 			mobileSelectOption(topSelect, value, true);
 			System.out.println("Top Priority value " + value + " selected");
 		} else {
@@ -103,6 +110,7 @@ public class PrioritiesMobilePage extends UhcDriver {
 				jsClickNew(addAnotherLink);
 				threadsleep(1000);
 			}
+			secondSelect.click();
 			mobileSelectOption(secondSelect, value, true);
 			System.out.println("Second Priority value " + value + " selected");
 		}

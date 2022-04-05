@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.ole.OLECommonPages;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -62,6 +63,7 @@ import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
 import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ole.OLECommonPagesMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
@@ -528,6 +530,23 @@ public class VppPlanCompareMobile {
 		}
 
 		// dce.validateTotalEstimatedAnnualDrugCosts(totalAnnualDrugCost);
+	}
+	
+	@Then("user updates Medsup form for user details")
+	public void user_updates_form_details() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result=plansummaryPage.updatePersonalDetailsForMedsup();
+		Assertion.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
+		
+	}
+	
+	@When("^user selects medsup plans to compare$")
+	public void user_selects_medsup_plans_to_compare() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.compareAllMSPlans();
+			System.out.println("Selected All MS plans for Plan Compare");
 	}
 
 	@Then("^the user selects a pharmacy from the list of pharmacies in AARP site$")
@@ -1207,6 +1226,29 @@ public class VppPlanCompareMobile {
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
+	}
+	
+	@When("^user select \"([^\"]*)\" plans to compare$")
+	public void user_select_plans_to_compare(String planIndex) {
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex, plantype);
+
+	}
+	
+	@Then("^user clicks on compare button$")
+	public void user_clicks_on_compare_button() {
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickCompareButton();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@When("^the user goes to PDP Landing and performs zipcode search using widget following information in the AARP site$")
@@ -5072,6 +5114,7 @@ public class VppPlanCompareMobile {
 		WelcomePageMobile welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assertion.fail("Error Loading Welcome Page for OLE");
 		}
@@ -5303,6 +5346,69 @@ public class VppPlanCompareMobile {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.VerifyZipErrorMessageNoPlans();
+	}
+	
+	@Then("^user click to close MS application Modal$")
+	public void click_close_MS_Application_Page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickCloseMSApplication();
+	}
+	
+	@Then("^user Validates Show DSNP and PDP Link available")
+	public void user_Validates_Show_DSNP_and_PDP_Link_available(){
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateShowDSNPPDPLink();
+		
+	}
+	
+	@Then("^user clicks on Show DSNP Toggle and validate DSNP Plan")
+	public void user_clicks_on_Show_DSNP_Toggle_and_validate_DSNP_Plan(DataTable givenAttributes) throws Exception{
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickDSNPToggleValidateSNPPlan(memberAttributesMap);
+		
+	}
+	
+	@Then("^User Click on PDP Link and Validate PDP Plans are loaded")
+	public void User_Click_on_PDP_Link_and_Validate_PDP_Plans_are_loaded(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickPDPValidatePDPPlan(memberAttributesMap);
+	}
+	
+	@Then("^User Switch backs to MAPD Plans")
+	public void User_Switch_backs_to_MAPD_Plans(DataTable givenAttributes){
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		ComparePlansPageMobile  planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		planComparePage.clickMAPDValidateMAPDPlan(memberAttributesMap);
+		
+	}
+
+	@And("^the user signIn with optum Id for OLE$")
+	public void the_user_signIn_with_optum_Id_OLE(DataTable credentials) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+			//PersonalInformationPage SignIntoEnrollment = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+			OLECommonPagesMobile SignIntoEnrollment=new OLECommonPagesMobile(wd);
+
+			SignIntoEnrollment.signInOLE(username, password);
+		}
+
 	}
 
 }

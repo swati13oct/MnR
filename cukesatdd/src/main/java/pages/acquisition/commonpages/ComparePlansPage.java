@@ -1,5 +1,8 @@
 package pages.acquisition.commonpages;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -451,6 +455,23 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'plan-summary-table')]//tr[(contains(@ng-if,'plansummaryestimatedDrugCost'))]//p[contains(text(),'Drug')]//ancestor::th/following-sibling::td")
 	private WebElement planCompareTabDrugCostValueCell;
 	
+	@FindBy(xpath = "//*[@id = 'toggleSnpId']/ancestor::label//*[@class = 'uhc-switch__slider']")
+	private WebElement ShowDSNPPlansToggle;
+	
+	
+	@FindBy(xpath = "//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewpdpplansbtn']")
+	private WebElement ViewPDPPlans;
+	
+	
+	
+	@FindBy(xpath = "//th [not(contains(@id ,'printMobileHeader'))]//*[@id = 'viewmaplansbtn']")
+	private WebElement ViewMAPDPlans;
+	
+	
+	
+	
+	@FindBy(xpath = "//div[@class ='proactive-chat-cross']/svg/g/path")
+	private WebElement ClickCloseChat;
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -2343,4 +2364,202 @@ public HashMap<Boolean,String> clickAndValidatePDFText_URL(String pdfType) {
 	
 	return comparedResult;
 }
+
+public void validateShowDSNPPDPLink() {
+	
+	validateNew(ShowDSNPPlansToggle);
+	
+	validateNew(ViewPDPPlans);
+
+}
+
+public void clickDSNPToggleValidateSNPPlan(Map<String, String> memberAttributesMap) throws Exception {
+	
+	validateNew(ShowDSNPPlansToggle);
+	List <WebElement> closeChat = driver.findElements(By.xpath("//*[@class ='proactive-chat-cross']"));
+	
+	if(closeChat.size() != 0) {
+		Dimension dimension = new Dimension(1600, 920);
+		//Resize current window to the set dimension
+		driver.manage().window().setSize(dimension);
+		
+		
+	}
+	
+	String planName = memberAttributesMap.get("DSNPPlan");
+	ShowDSNPPlansToggle.click();
+	sleepBySec(5);
+	
+	List<WebElement> PlanNames = driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]"));
+	int totalPlans = PlanNames.size();
+	String planNameRunTime = "";
+	for (int i = 0; i < totalPlans; i++) {
+		planNameRunTime = PlanNames.get(i).getText();
+		if (driver.findElement(By.xpath(
+				"//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "')) ]"))
+				.isDisplayed() == false) {
+			for (int j = 0; j <= totalPlans - 2; j++) {
+				driver.findElement(By.xpath(
+						("//button[@dtmname = 'Plan Compare:View More Plans' and contains(@class,'leftScrollBtnStyle') and (contains(@ng-class, 'isEnrolledDataNotAvailable'))]")))
+						.click();				
+				if (driver.findElement(
+						By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+								+ planName + "')) ]"))
+						.isDisplayed() == true) {
+					Assert.assertEquals(driver.findElement(By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+							+ planName + "')) ]")).getText().trim(), planName);
+					break;
+				}
+			}
+
+		}
+	}
+    System.out.println("Validated SNP Plan");
+}
+
+public void clickPDPValidatePDPPlan(Map<String, String> memberAttributesMap) {
+	
+	validateNew(ViewPDPPlans);
+	
+	String planName = memberAttributesMap.get("PDPPlan");
+	ViewPDPPlans.click();
+	sleepBySec(5);
+	
+	List<WebElement> PlanNames = driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]"));
+	int totalPlans = PlanNames.size();
+	String planNameRunTime = "";
+	for (int i = 0; i < totalPlans; i++) {
+		planNameRunTime = PlanNames.get(i).getText();
+		if (driver.findElement(By.xpath(
+				"//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "')) ]"))
+				.isDisplayed() == false) {
+			for (int j = 0; j <= totalPlans - 2; j++) {
+				driver.findElement(By.xpath(
+						("//button[@dtmname = 'Plan Compare:View More Plans' and contains(@class,'leftScrollBtnStyle') and (contains(@ng-class, 'isEnrolledDataNotAvailable'))]")))
+						.click();
+				if (driver.findElement(
+						By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+								+ planName + "')) ]"))
+						.isDisplayed() == true) {
+					Assert.assertEquals(driver.findElement(By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+							+ planName + "')) ]")).getText().trim(), planName);
+					break;
+				}
+			}
+		}
+	}
+    System.out.println("Validated PDP Plan");
+}
+
+public void clickMAPDValidateMAPDPlan(Map<String, String> memberAttributesMap) {
+	
+	validateNew(ViewMAPDPlans);
+	
+	String planName = memberAttributesMap.get("planName");
+	ViewMAPDPlans.click();
+	sleepBySec(5);
+	
+	List<WebElement> PlanNames = driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]"));
+	int totalPlans = PlanNames.size();
+	String planNameRunTime = "";
+	for (int i = 0; i < totalPlans; i++) {
+		planNameRunTime = PlanNames.get(i).getText();
+		if (driver.findElement(By.xpath(
+				"//span[contains(@class,'headerPlanName') and (contains(text(), '" + planName + "')) ]"))
+				.isDisplayed() == false) {
+			for (int j = 0; j <= totalPlans - 2; j++) {
+				driver.findElement(By.xpath(
+						("//button[@dtmname = 'Plan Compare:View More Plans' and contains(@class,'leftScrollBtnStyle') and (contains(@ng-class, 'isEnrolledDataNotAvailable'))]")))
+						.click();
+				if (driver.findElement(
+						By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+								+ planName + "')) ]"))
+						.isDisplayed() == true) {
+					Assert.assertEquals(driver.findElement(By.xpath("//span[contains(@class,'headerPlanName') and (contains(text(), '"
+							+ planName + "')) ]")).getText().trim(), planName);
+					break;
+				}
+			}
+		}
+	}
+    System.out.println("Validated MAPD Plan");
+}
+	@FindBy(xpath = "//a[@id='ms-plans-link']")
+	WebElement lnkAgentMedSupCompare;
+
+	@FindBy(xpath = "//a[@id='fed-plans-link']")
+	WebElement lnkAgentMAPDCompare;
+
+	@FindBy(xpath = "//div[contains(@class,'ms-plans-section')]")
+	WebElement agentMedSupCompareTable;
+
+
+	public void validateAgentMedSupCompareLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(lnkAgentMAPDCompare,15);
+		validateNew(lnkAgentMedSupCompare,15);
+		jsClickNew(lnkAgentMedSupCompare);
+		sleepBySec(15);
+		if (!agentMedSupCompareTable.isDisplayed() && validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare Supplement')]")))){
+			Assert.fail("MS Compare not visible on Agent Plan Compare");
+		}
+	}
+
+	public void validateAgentMAPDCompareLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(4);
+		jsClickNew(lnkAgentMAPDCompare);
+		sleepBySec(15);
+		if (validateNew(ChangeZipCodeLink,15)){
+			validateShowDSNPPDPLink();
+			System.out.println("MAPD Plan Compare link working correctly");
+		}else{
+			Assert.fail("MAPD Plan Compare link not working correctly");
+		}
+	}
+	
+	public void validatePDFforEnrolledMember(HashMap<String, String> givenAttributesMap) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		CommonUtility.waitForPageLoad(driver, currentPlanToggle, 5);
+		Assertion.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
+		WebElement planDocs = driver.findElement(By.xpath("//table[@id='plan-documents-table']"));
+		scrollToView(planDocs);
+		WebElement SummaryLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[2]//td[contains(@class,'yellow ')]//a[1]"));
+		String SummaryLinkText = SummaryLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(SummaryLinkText.replaceAll("[\\n\\r]", ""), "Summary of Benefits (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member: " + SummaryLinkText);
+		WebElement EvidenceLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[4]//td[contains(@class,'yellow ')]//a[1]"));
+		String EvidenceLinkText = EvidenceLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(EvidenceLinkText.replaceAll("[\\n\\r]", ""), "Evidence of Coverage (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member:  " + EvidenceLinkText);
+		WebElement BenefitLink = driver.findElement(By.xpath("//span[normalize-space(text())='"+ enrolledPlan + "']/ancestor::table[@id='plan-documents-table']//tr[6]//td[contains(@class,'yellow ')]//a[1]"));
+		String BenefitLinkText = BenefitLink.getText().trim().replace("Opens in new tab", "");
+		Assert.assertEquals(BenefitLinkText.replaceAll("[\\n\\r]", ""), "Benefit Highlights (PDF)");
+		System.out.println("Validated PDF dispalyed for Current enrolled member: " + BenefitLinkText);
+	}
+
+	public void validateMAPDMSLinkNotDisplay() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		/*if ((lnkAgentMedSupCompare.isDisplayed()==true)){ Assert.fail("MAPD And MedSupp Links are visible ");
+		} else{ System.out.println("MAPD And MedSupp Links are not visible "); }*/
+		try{
+			if(lnkAgentMedSupCompare.isDisplayed() || lnkAgentMAPDCompare.isDisplayed())
+				Assert.fail("MAPD and MS link is present");
+		}catch (NoSuchElementException e){
+			System.out.println("MAPD and MS link is present");
+		}
+	}
+
+	public void validateMAPDMSLinkIsDisplay() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(3);
+		if (lnkAgentMedSupCompare.isDisplayed() && lnkAgentMAPDCompare.isDisplayed()){
+			System.out.println("MAPD And MedSupp Links are visible ");
+		} else{
+			Assert.fail("MAPD And MedSupp Links are not visible ");
+		}
+	}
+
 }

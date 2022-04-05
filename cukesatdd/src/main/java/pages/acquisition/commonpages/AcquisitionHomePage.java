@@ -65,7 +65,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// @FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company
 	// (UnitedHealthcare)')]")
-	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company')]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-header__top-text')]")
 	private WebElement UHCICSubTitle;
 
 	// @FindBy(xpath =
@@ -964,7 +964,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-
+	private static String UMS_ACQISITION_CHARGERS_UHC_URL = MRConstants.CHARGERS_UHC_URL;
+	private static String UMS_ACQISITION_UHC_TEST2_URL = MRConstants.UHC_TEST2_URL;
+	private static String UMS_ACQISITION_UHC_STAGE_URL = MRConstants.UHC_STAGE_URL;
 	private PageData globalFooter;
 
 	public boolean isHealthPlan = false;
@@ -1012,7 +1014,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void openAndValidate(String site) {
-		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
+		if (site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
@@ -1024,10 +1026,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			} else {
+			}else if (MRScenario.environment.contains("chargers-uhc")) {
+				startNew(UMS_ACQISITION_CHARGERS_UHC_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else if (MRScenario.environment.contains("uhc-test2")) {
+				startNew(UMS_ACQISITION_UHC_TEST2_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else if (MRScenario.environment.contains("uhc-stg")) {
+				startNew(UMS_ACQISITION_UHC_STAGE_URL);
+				checkModelPopup(driver, 20); 
+			}
+			else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
-				checkForSecurityPage();
+				//checkForSecurityPage();
 				// checkModelPopup(driver, 10);
 			}
 
@@ -1047,7 +1061,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} catch (Exception e) {
 				System.out.println("Proactive chat popup not displayed");
 			}
-		} else if (site.equalsIgnoreCase("AARP") || site.equalsIgnoreCase("Ulayer") || site.equalsIgnoreCase("AMP")) {
+		} else if (site.equalsIgnoreCase("AARP")) {
 			if (MRScenario.environment.equals("offline")) {
 				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
@@ -1061,9 +1075,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
 				checkModelPopup(driver, 20);
 			} else {
-				start(AARP_ACQISITION_PAGE_URL);
+				startNew(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
-				checkForSecurityPage();
+				//checkForSecurityPage();
 				// checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
@@ -1072,24 +1086,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 																									// cleanup
 		}
 
-		if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { // adding this condition temporarily to
-																				// bypass PRE/ARE flows
-			// CommonUtility.checkPageIsReadyNew(driver);
-			System.out.println("Current page URL: " + driver.getCurrentUrl());
-			// checkModelPopup(driver,15);
-			// CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-			// CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not
-			// change this to waitForPageLoadNew as
-			// we're not trying to fail the test if it
-			// isn't found
-			try {
-				validate(proactiveChatExitBtn, 20);
-				if (proactiveChatExitBtn.isDisplayed())
-					jsClickNew(proactiveChatExitBtn);
-			} catch (Exception e) {
-				System.out.println("Proactive chat popup not displayed");
-			}
-		}
+		/*
+		 * if (!(site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE"))) { //
+		 * adding this condition temporarily to // bypass PRE/ARE flows
+		 * 
+		 * try { validate(proactiveChatExitBtn, 20); if
+		 * (proactiveChatExitBtn.isDisplayed()) jsClickNew(proactiveChatExitBtn); }
+		 * catch (Exception e) {
+		 * System.out.println("Proactive chat popup not displayed"); } }
+		 */
 		
 		
 	}
@@ -2419,83 +2424,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			 * public void backToToplink() { validateNew(backToTop); // backToTop.click();
 			 * jsClickNew(backToTop); }
 			 * 
-			 * public boolean openPRE() { boolean offline_prod = false; String browser =
-			 * MRScenario.browsername; if (!(MRScenario.getProps() == null)) {// If running
-			 * from local if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp"))
-			 * { startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp",
-			 * "digital-uatv2") .replace(".com/",
-			 * ".com/plan-recommendation-engine.html").replace("www.", ""), browser); } else
-			 * if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
-			 * startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/",
-			 * ".com/plan-recommendation-engine.html") .replace("www.", ""), browser); }
-			 * else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
-			 * startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp",
-			 * "offline-stage").replace(".com/", ".com/plan-recommendation-engine.html"),
-			 * browser); } else if
-			 * (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-			 * startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/",
-			 * ".com/plan-recommendation-engine.html"), browser); } else if
-			 * (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
-			 * startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp",
-			 * "stage").replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-			 * } else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			 * startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/",
-			 * ".com/plan-recommendation-engine.html"), browser); } else if
-			 * (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
-			 * startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); offline_prod = true; }
-			 * else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
-			 * startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); offline_prod = true; }
-			 * else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
-			 * startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); offline_prod = true; }
-			 * else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			 * startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); offline_prod = true; } }
-			 * else { // For jenkins job String jenkinsRunnerFiles = MRScenario.runnerFiles;
-			 * if (MRScenario.environment.equalsIgnoreCase("digital-uatv2") ||
-			 * MRScenario.environment.equalsIgnoreCase("stage") ||
-			 * MRScenario.environment.equalsIgnoreCase("offline-stage")) { for (String rname
-			 * : jenkinsRunnerFiles.split(",")) { if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("ULAYER")) { if
-			 * (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-			 * startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html") .replace("www.", ""), browser); else
-			 * startNewPRE( AARP_ACQISITION_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); } if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("BLAYER")) { if
-			 * (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-			 * startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html") .replace("www.", ""), browser); else
-			 * startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); }
-			 * 
-			 * } } if (MRScenario.environment.equalsIgnoreCase("offline")) { for (String
-			 * rname : jenkinsRunnerFiles.split(",")) { if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("ULAYER"))
-			 * startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("BLAYER"))
-			 * startNewPRE( UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); } offline_prod = true; }
-			 * if (MRScenario.environment.equalsIgnoreCase("prod")) { for (String rname :
-			 * jenkinsRunnerFiles.split(",")) { if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("ULAYER"))
-			 * startNewPRE( AARP_ACQISITION_PROD_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); if
-			 * ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") ||
-			 * rname.contains("PRE")) && rname.toUpperCase().contains("BLAYER"))
-			 * startNewPRE( UMS_ACQISITION_PROD_PAGE_URL.replace(".com",
-			 * ".com/plan-recommendation-engine.html"), browser); } offline_prod = true; } }
-			 * 
-			 * System.out.println("Current page URL: " + driver.getCurrentUrl()); return
-			 * offline_prod; }
 			 * 
 			 * public PlanDocsPage navigateToPlanDocsFromHome() {
 			 * navigateToMenuLinks(ShopForaplan, menuShop);
@@ -2919,7 +2847,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			 * 
 			 * public GetStartedPage navigateToPrescriptionDrug() {
 			 * enterYourDrugListButton.click(); if (getTitle().
-			 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
+			 * equalsIgnoreCase("Our Medicare Plan Types | AARPÃ¯Â¿Â½ Medicare Plans from UnitedHealthcareÃ¯Â¿Â½"
 			 * )) { return new GetStartedPage(driver); } else { return null; } }
 			 * 
 			 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -3117,7 +3045,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * 
 	 * public GetStartedPage navigateToPrescriptionDrug() {
 	 * enterYourDrugListButton.click(); if (getTitle().
-	 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
+	 * equalsIgnoreCase("Our Medicare Plan Types | AARPÃ¯Â¿Â½ Medicare Plans from UnitedHealthcareÃ¯Â¿Â½"
 	 * )) { return new GetStartedPage(driver); } else { return null; } }
 	 * 
 	 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -3441,7 +3369,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -3769,14 +3697,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
 
-		try {
-			validate(surveyPopupNoBtn, 20);
-			if (surveyPopupNoBtn.isDisplayed())
-				jsClickNew(surveyPopupNoBtn);
-		} catch (Exception e) {
-			System.out.println("survey popup not displayed");
+		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			validateSubtitle();
 		}
-
 		Actions action = new Actions(driver);
 		if (driver.toString().contains("Safari")) {
 			planMemberLink.click();
@@ -3846,9 +3769,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))
-			checkModelPopup(driver, 20);
-
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) checkModelPopup(driver, 20);
+		 */
 	}
 
 	public void CheckiPerseptions() {
@@ -4045,30 +3969,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement searchDentists = driver
 				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Search Dentists')]"));
 
-		validateNew(ZipCodeTxt);
-		validateNew(FindPlansBtn);
-		validateNew(RequestMoreInfoLink);
-
-		validateNew(EnrollLink);
-		validateNew(ShopLink);
-		validateNew(ResourceLink);
-
-		validateNew(MAplansLink);
 		Assertion.assertTrue("No Med Sup link found in the header navigation", MedSuppPlansLink.size() > 0);
-		validateNew(PDPplansLink);
-		validateNew(SNPplansLink);
+		WebElement errorMsg = driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansBtn);
+		validateNew(errorMsg);
 
-		validateNew(PlanSelectorLink);
-		validateNew(DCELink);
-		validateNew(PharmacySearchLink);
-		validateNew(searchDoctors);
-		validateNew(searchDentists);
-
-		if (ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
-				&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
-				&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed() && SNPplansLink.isDisplayed()
-				&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed()
-				&& searchDoctors.isDisplayed() && searchDentists.isDisplayed()) {
+		if (validateNew(ZipCodeTxt) && validateNew(FindPlansBtn) && validateNew(RequestMoreInfoLink)
+				&& validateNew(EnrollLink) && validateNew(ShopLink) && validateNew(ResourceLink)
+				&& validateNew(MAplansLink) && validateNew(PDPplansLink) && validateNew(SNPplansLink)
+				&& validateNew(PlanSelectorLink) && validateNew(DCELink) && validateNew(PharmacySearchLink)
+				&& validateNew(searchDoctors) && validateNew(searchDentists)) {
 			Assertion.assertTrue(true);
 			System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
 			// Actions actions = new Actions(driver);
@@ -4264,9 +4174,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
 					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci1")
-					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")) {
-				for (String rname : jenkinsTagLists.split(",")) {
-					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
+					|| MRScenario.environment.equalsIgnoreCase("mnr-acq-ci2")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-qa")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers")) {
+					if (site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(AARP_ACQISITION_PAGE_URL
@@ -4276,7 +4187,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com",
 									".com/plan-recommendation-engine.html#/get-started"), browser);
 					}
-					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC")) {
+					if (site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(UMS_ACQISITION_PAGE_URL
@@ -4286,28 +4197,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com",
 									".com/plan-recommendation-engine.html#/get-started"), browser);
 					}
-				}
 			}
+			if (MRScenario.environment.equalsIgnoreCase("uhc-test2")) {
+				if (site.toUpperCase().contains("AARP"))
+					startNewPRE(UMS_ACQISITION_UHC_TEST2_URL.replace(".com/medicare",
+							".com/medicare/plan-recommendation-engine.html#/get-started"), browser);
+				if (site.toUpperCase().contains("UHC"))
+					startNewPRE(UMS_ACQISITION_UHC_TEST2_URL.replace(".com/medicare",
+							".com/medicare/plan-recommendation-engine.html#/get-started"), browser);
+		}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
-				for (String rname : jenkinsTagLists.split(",")) {
-					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
+					if (site.toUpperCase().contains("AARP"))
 						startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 								".com/plan-recommendation-engine.html#/get-started"), browser);
-					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
+					if (site.toUpperCase().contains("UHC"))
 						startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 								".com/plan-recommendation-engine.html#/get-started"), browser);
-				}
 				offline_prod = true;
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				for (String rname : jenkinsTagLists.split(",")) {
-					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
+					if (site.toUpperCase().contains("AARP"))
 						startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com",
 								".com/plan-recommendation-engine.html#/get-started"), browser);
-					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
+					if (site.toUpperCase().contains("UHC"))
 						startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com",
 								".com/plan-recommendation-engine.html#/get-started"), browser);
-				}
 				offline_prod = true;
 			}
 		}
@@ -4803,7 +4717,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// }
 	// }
 	public void validateSubtitle() {
-		threadsleep(5);
+		//threadsleep(5);
 		if (UHCICSubTitle.isDisplayed()) {
 			System.out.println("validating the sub header");
 			// Assertion.assertEquals(UHCICSubTitle.getText(), "UnitedHealthcare Insurance
@@ -5267,7 +5181,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public boolean checkZipCompErrorInSubNav() {
 		hoverOverShopForPlan();
-		sleepBySec(3);
+		//sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(OurPlans_zipfield);
 		validateNew(FindPlansButton1);
@@ -5775,7 +5689,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}*/
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -5991,7 +5905,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 */
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m.,\n7 days a week";
 		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a
 		// week";
 		// String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
@@ -6021,7 +5935,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
-		+ " (TTY 711) toll free, 8 a.m. � 8 p.m., 7 days a week.";
+		+ " (TTY 711) toll free, 8 a.m.  8 p.m., 7 days a week.";
 		validate(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
 
@@ -6053,7 +5967,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m.  8 p.m., 7 days a week.";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -6122,7 +6036,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("TFN elemet is not found / displayed on Call popup icon : ");*/
 
 		System.out.println("#######Validating TFN time zone on Call Popup#######");
-		String ExpectedCallSamTFNtimezone = "7 a.m. ï¿½ 11 p.m. ET, Monday-Friday\n9 a.m. ï¿½ 5 p.m. ET, Saturday";
+		String ExpectedCallSamTFNtimezone = "7 a.m. Ã¯Â¿Â½ 11 p.m. ET, Monday-Friday\n9 a.m. Ã¯Â¿Â½ 5 p.m. ET, Saturday";
 		validateNew(CallSamTFNMedsupptimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNMedsupptimezone.getText();
 
@@ -6193,7 +6107,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("TFN element is not found / displayed on Call popup icon : ");
 
 			System.out.println("#######Validating TFN time zone on Call Popup#######");
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚- 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã‚- 8 p.m. Monday ï¿½ Friday, 8 a.m. Ã‚- 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãâ- 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ãâ- 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ãâ- 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println("TFN Timezone Content for Expected Values:" + ExpectedCallSamTFNtimezone);
@@ -6266,7 +6180,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.\nHours: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.\nHours: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 		String ActualCallSamTFNtimezone = footertextsectionMedsuppTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -6313,7 +6227,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		/*
 		 * String ExpectedCallSamTFNtimezone =
-		 * "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
+		 * "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week"; String ActualCallSamTFNtimezone
 		 * = rightRailsectionTFNtimezone.getText();
 		 * 
 		 * System.out.
@@ -6376,9 +6290,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. Ã‚â€“ 8 p.m. Monday Ã‚â€“ Friday, 8 a.m. Ã‚â€“ 5 p.m. Saturday Ã‚â€“ Sunday)";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ÃâÃ¢â¬â 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. ÃâÃ¢â¬â 8 p.m. Monday ÃâÃ¢â¬â Friday, 8 a.m. ÃâÃ¢â¬â 5 p.m. Saturday ÃâÃ¢â¬â Sunday)";
 		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m. Saturday - Sunday)";
-		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ÃâÃ¢â¬â 8 p.m., 7
 		// days a
 		// week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6442,7 +6356,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");*/
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚- 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ãâ- 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
 		String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6472,7 +6386,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("########Validating TFN Info in ZipCode Component section########");
 
 		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
-				+ " (TTY 711) toll free, 8 a.m. � 8 p.m., 7 days a week.";
+				+ " (TTY 711) toll free, 8 a.m.  8 p.m., 7 days a week.";
 		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", "");
@@ -6548,11 +6462,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		//else
 		//	Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. â€“ 8 p.m., local time, 7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¢â¬â 8 p.m., local time, 7 days a week";
 		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a
 		// week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m.
 		// Saturday - Sunday)";
-		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ÃâÃ¢â¬â 8 p.m., 7
 		// days a
 		// week";
 		// String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
@@ -6942,7 +6856,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("/compare/compare-ms")
 				|| driver.getCurrentUrl().contains("/enroll/ms-apply")
 				|| driver.getCurrentUrl().contains("shop/estimate/ms-costs")) {
-			String ExpectedCallSamTFNtimezone = "7 a.m. Ã¢â‚¬â€œ 11 p.m. ET, Monday-Friday\n9 a.m. Ã¢â‚¬â€œ 5 p.m. ET, Saturday";
+			String ExpectedCallSamTFNtimezone = "7 a.m. ÃÂ¢Ã¢âÂ¬Ã¢â¬Å 11 p.m. ET, Monday-Friday\n9 a.m. ÃÂ¢Ã¢âÂ¬Ã¢â¬Å 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -6970,7 +6884,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 								+ ActualCallSamTFNMember);
 			}
 		} else {
-			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã¯Â¿Â½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Ã¯Â¿Â½ 8 p.m. Monday Ã¯Â¿Â½ Friday, 8 a.m. Ã¯Â¿Â½ 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
@@ -7641,7 +7555,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(shopForMedigapPlans);
 		CommonUtility.waitForPageLoad(driver, shopForMedigapHeader, 30);
 		Assert.assertEquals(shopForMedigapHeader.getText(),
-				"AARP® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
+				"AARPÂ® Medicare Supplement Insurance Plans insured by UnitedHealthcare");
 		// driver.navigate().back();
 		// CommonUtility.waitForPageLoad(driver, shopForMedigapPlans, 30);
 
@@ -7752,7 +7666,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateQtFNTiming() {
 		CommonUtility.waitForPageLoad(driver, qTfntime, 30);
-		Assert.assertEquals(qTfntime.getText(), "8 a.m. – 8 p.m., in your time zone, 7 days a week");
+		Assert.assertEquals(qTfntime.getText(), "8 a.m. â 8 p.m., in your time zone, 7 days a week");
 
 	}
 

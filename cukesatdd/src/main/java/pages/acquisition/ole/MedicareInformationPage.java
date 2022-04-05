@@ -171,7 +171,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(id = "hasEndStateRenalDiseaseNo")
 	private WebElement esrdNo;
 
-	@FindBy(id = "hasMedicaidEnrolleeYes")
+	@FindBy(xpath = "//*[@id='hasMedicaidEnrolleeYes' or @id='hasMedicaidEnrolleeSí']")
 	private WebElement medicaiddyes;
 
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
@@ -1237,7 +1237,7 @@ public class MedicareInformationPage extends UhcDriver {
 			validate(SaveSignIn);
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
-			// Saveclosepopup.click();
+	
 			ReturntoEnrollment.isDisplayed();
 			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
 			System.out.println("TFN in OLE ExitModels : "+TFNNoNeedHelp_OLE);
