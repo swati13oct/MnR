@@ -899,7 +899,6 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
 		pageloadcomplete();
-		//CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
@@ -1306,7 +1305,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )]")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )]//following-sibling::span")
 	private WebElement CopaySection_InsulinTier;
 
 	public void validateInsulinTier_CopaySection(String insulinCopay) {
@@ -1417,6 +1416,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
+	
+	@FindBy(xpath = "//*[contains(text(), normalize-space('Return to plan compare'))]")
+	public WebElement DrugCosts_PlanCompareLnk;
 
 	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
 	public WebElement ComparePage_TableHeader;
@@ -1428,8 +1430,8 @@ public class DrugDetailsPage extends UhcDriver {
 	private WebElement DrugInfoModal_CloseBtn;
 
 	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
-		validateNew(DrugCosts_PlanCompareBtn);
-		jsClickNew(DrugCosts_PlanCompareBtn);
+		validateNew(DrugCosts_PlanCompareLnk);
+		jsClickNew(DrugCosts_PlanCompareLnk);
 		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
 		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
@@ -2095,9 +2097,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
-	private static String LISBUYDOWN_INITIAL_COVERAGE_TEXT = "During the Initial Coverage Stage, the plan pays all of the costs for your covered drugs.";
-	private static String LISBUYDOWN_COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, the plan pays all of the costs for your covered drugs.";
-	private static String LISBUYDOWN_CATASTROPHIC_TEXT = "During the Catastrophic Coverage Stage, the plan pays all of the costs for your covered drugs.";
+	private static String LISBUYDOWN_INITIAL_COVERAGE_TEXT = "During the Initial Coverage Stage, the plan pays all of the costs for your covered drugs";
+	private static String LISBUYDOWN_COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, the plan pays all of the costs for your covered drugs";
+	private static String LISBUYDOWN_CATASTROPHIC_TEXT = "During the Catastrophic Coverage Stage, the plan pays all of the costs for your covered drugs";
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal') and (contains(@id,'modal'))]//p[contains(@class, 'text-normal')]")
 	public WebElement CoverageText;

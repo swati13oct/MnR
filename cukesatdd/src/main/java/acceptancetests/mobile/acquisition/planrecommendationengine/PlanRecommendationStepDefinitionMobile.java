@@ -174,7 +174,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
-		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage(wd);
+		LandingAndZipcodeMobilePage planSelectorhomepage = new LandingAndZipcodeMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
@@ -214,7 +214,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user selects plan type in coverage options page$")
 	public void select_plan_type_coverage_page_mobile(DataTable inputdata) throws Throwable {
 		readfeaturedataMobile(inputdata);
-		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage(wd);
+		CoverageOptionsMobilePage coveragepage = new CoverageOptionsMobilePage((AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String plantype = inputValues.get("Plan Type");
 		if (!(plantype.isEmpty())) {
 			coveragepage.coverageOptionpageFunctionalMobile(plantype, true);

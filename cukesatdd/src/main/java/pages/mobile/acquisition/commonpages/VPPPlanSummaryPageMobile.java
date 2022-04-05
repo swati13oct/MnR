@@ -406,6 +406,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]")
 	public WebElement RightRailSection;
+	
+	@FindBy(xpath = "(//button[contains(@class,'back-to-plans')])[1]")
+	private WebElement closebBtnMSApplication;
 
 	@FindBy(xpath = "//*[contains(@class,'container plans-section')]//*[contains(@class,'col-md-3')]//*[contains(@class,'module module-aside rigntrailwidget')]//*[contains(text(),'Need Help')]")
 	public WebElement needHelpRightRail;
@@ -427,6 +430,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains (@class ,'rightrail')]//*[contains(@class,'uhc-container')]//*[contains(@dtmname,'Plan Selector')]")
 	public WebElement PlanSelectorToolRightRail;
+	
+	@FindBy(xpath = "(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
+	private WebElement groupPlanMarkettingBullets;
 
 	@FindBy(xpath = "//*[contains(@id , 'selector')]")
 	public WebElement StartPlanSelector;
@@ -1027,10 +1033,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	
 	public ComparePlansPageMobile clickCompareButton() {
 		
-		if(validate(pdpPlansViewLink)) {
-			jsClickNew(pdpPlansViewLink);
-			waitForPlanSummaryPageLoad();
-		}
 		validateNew(compareButton);
 		jsClickNew(compareButton);
 		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
@@ -2883,6 +2885,11 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else
 			Assertion.fail("Tool Tip is not working");
 	}
+	
+	public void clickCloseMSApplication() {
+		jsClickNew(closebBtnMSApplication);
+		//waitforElementNew(addMSPlans);
+	}
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
@@ -3008,6 +3015,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	public void validatePlanSelectorToolRightRail() {
 		validateNew(PlanSelectorToolRightRail);
 		System.out.println("Plan Selector Tool Section is present");
+	}
+	
+	public void validateGroupPlanMArkettingBullets() {
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			driver.switchTo().window(window);
+			System.out.println(driver.getTitle());
+		}
+		validateNew(groupPlanMarkettingBullets);
 	}
 
 	public List<String> getAllPlanNames() {

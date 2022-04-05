@@ -382,7 +382,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Alabama | US1770330 | 90210   | NO            | Los Angeles County | PDP      | next     | AARP MedicareRx Walgreens (PDP),AARP MedicareRx Preferred (PDP)                                                                                                                             |
       | Visitor Profile - E2E Scenario 3 _AMP | AARP | Florida | US1770330 | 33433   | NO            | Palm Beach County  | SNP      | next     | Preferred Medicare Assist Palm Beach (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP)                                                                                          |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @featureGate
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04 @regressionUHC @featureGate @prodRegression
     Examples:
       | UID                                   | site | state   | UID       | zipcode | isMultiCounty | county             | plantype | planyear | testPlans                                                                                                                                                                                   |
       | Visitor Profile - E2E Scenario 3 _UHC | UHC  | Alabama | US1770330 | 90210   | NO            | Jefferson County   | MAPD     | next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage Harmony (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -537,7 +537,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | UHC  | 01003   | NO            | MS       | Hampshire County | Core Plan,Supplement 1A Plan           | Core Plan  | WB27375ST      |
       | UHC  | 53006   | Yes           | MS       | Dodge County     | Basic Plan,Basic Plan with Co-Payments | Basic Plan | WB27375S1      |
 
-    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start
+    @visitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @regressionAARP @vpMS4Start @prodRegression @vpMSApril
     Examples:
       | site | zipcode | isMultiCounty | plantype | county      | MS_testPlans  | MS_Plan | component_code |
       | AARP | 58102   | NO            | MS       | Cass County | Plan G,Plan A | Plan G  | WB27375ST      |
@@ -546,7 +546,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | site | zipcode | isMultiCounty | plantype | county      | MS_testPlans  | MS_Plan | component_code |
       | UHC  | 58102   | NO            | MS       | Cass County | Plan G,Plan A | Plan G  | WB27375ST      |
 
-
+  @prodRegression
   Scenario Outline: User verify LTC pharmacy scenario in <site> site- zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -598,17 +598,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the changed pharmacy
       | pharmacyName | <SelectPharmacy1> |
 
-    @LTCPharmacyVPAARP
+    @LTCPharmacyVPAARP @regressionAARP
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | AARP | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
-    @LTCPharmacyVPUHC
+    @LTCPharmacyVPUHC @regressionUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                            | drug1   | SelectPharmacy    | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | UHC  | Miama | future   | 45373   | NO            | Miami County | MAPD     | AARP Medicare Advantage Plan 6 (HMO) | Lipitor | REMEDI SENIORCARE | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
-
+  @prodRegression
   Scenario Outline: User verify LTC pharmacy scenario in <site> site for no drug coverage message- zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -661,17 +661,17 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the changed pharmacy
       | pharmacyName | <SelectPharmacy1> |
 
-    @LTCPharmacyVPAARP
+    @LTCPharmacyVPAARP @regressionAARP
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | AARP | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
-    @LTCPharmacyVPUHC
+    @LTCPharmacyVPUHC @regressionUHC
     Examples:
       | site | state | planyear | zipcode | isMultiCounty | county       | plantype | testPlans                       | drug1   | SelectPharmacy   | SelectPharmacy1 | tfnXpath                                      | tfnFlag |
       | UHC  | Miama | future   | 45373   | NO            | Miami County | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | WALMART PHARMACY | CVS PHARMACY    | (//a[contains(@class,'toll-free-number')])[1] | true    |
 
-
-  Scenario Outline: User validate PRE flow from Visitor Profile on <site> site for zipcode -<zipcode>
+  @SavePlanPRE @prodRegression
+  Scenario Outline: User validate PRE flow from Visitor Profile on <site> site for zipcode -<Zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -702,18 +702,18 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                                                                       |
       | AARP | 10001   | NO            | New York | None          | Medicaid     | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Lower                | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Mosaic Choice (PPO) |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans                                                                       |
       | UHC  | 10001   | NO            | New York | None          | Medicaid     | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,Yes                 | Lower                | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Mosaic Choice (PPO) |
 
-
-  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<zipcode>
+  @SavePlanPRE @prodRegression
+  Scenario Outline: User validate PRE flow for MS from Visitor Profile on <site> site for zipcode -<Zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -744,18 +744,18 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user validates the added Ms plans on visitor profile page
       | MS Test Plans | <testPlans> |
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | AARP | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
-      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
-      | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
+      | site | Zipcode | isMultiCounty | state      | county        | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | testPlans     | 1stRecommendation | 2ndRecommendation | UserType      | userName  | password    |
+      | UHC  | 07303   | NO            | New Jersey | Hudson County | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Higher               | Plan F,Plan G | SNP               | MA                | Authenticated | DDProfile | Test@123456 |
 
-
-  Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<zipcode> for plan <testPlan>
+  @SavePlanPRE @prodRegression
+  Scenario Outline: User validate PRE flow for and validate create Account link from Visitor Profile on <site> site for zipcode -<Zipcode> for plan <testPlan>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -787,12 +787,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then user validate elements in loading results page
     Then user click on save results option and click on create account link and validate the correct login page
 
-    @SavePlanPRE_AARP
+    @SavePlanPRE_AARP @regressionAARP
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
       | AARP | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |
 
-    @SavePlanPRE_UHC
+    @SavePlanPRE_UHC @regressionUHC
     Examples:
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities | testPlan                             | userName              | password     | Premium |
       | UHC  | 07303   | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,No                   | Lower                | [blank]        | [blank]    | AARP Medicare Advantage Choice (PPO) | vdatdd_18@getnada.com | Password@123 | $0      |

@@ -25,13 +25,16 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.FindCarePageMobile;
+import pages.mobile.acquisition.commonpages.LearnAboutMedicareHomePageMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -124,6 +127,191 @@ public class VppPlanDetailMobile {
 		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		System.out.println("plan type" + plantype);
 		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex, plantype);
+	}
+	
+	@Then("^the user enter the searchValue in the search text box$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box(DataTable inputvalue) throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 *
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
+		String InputValue = urlAttributesMap.get("search Value");
+		System.out.println("Search value" + InputValue);
+		Thread.sleep(3000);
+		aquisitionhomepage.enterSiteSearchValue(InputValue);
+
+	}
+
+	@Then("^the user should see the auto complete suggestions$")
+	public void the_user_should_see_the_auto_complete_suggestions() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAutoCompleteSuggestion();
+	}
+
+	@Then("^the user clicks on the first auto complete suggestion$")
+	public void the_user_clicks_on_the_first_auto_complete_suggestion() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickFirstSuggestion();
+	}
+
+	@Then("^the user enter the secondary searchValue in the search text box$")
+	public void the_user_enter_the_secondary_searchValue_in_the_search_text_box(DataTable inputvalue) throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 *
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
+		String InputValue = urlAttributesMap.get("NewSearchValue");
+		System.out.println("NewSearchValue" + InputValue);
+		Thread.sleep(3000);
+
+		aquisitionhomepage.enterSecondarySiteSearchValue(InputValue);
+	}
+
+	@Then("^the user should see the auto complete suggestions site search page$")
+	public void the_user_should_see_the_auto_complete_suggestions_site_search_page() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAutoCompleteSuggestionSiteSearchPage();
+	}
+
+	@Then("^the user clicks on the first auto complete suggestion site search page$")
+	public void the_user_clicks_on_the_first_auto_complete_suggestion_site_search_page() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickFirstSuggestionSiteSearch();
+	}
+
+	@And("^the user views the plans of the below plan type for shop pages$")
+	public void user_performs_planSearch_in_aarp_sites_on_shop_pages(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 *
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")
+				|| MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			plansummaryPage.viewPlanSummary(plantype);
+			if (!plantype.equalsIgnoreCase("MS"))
+				plansummaryPage.handlePlanYearSelectionPopup();
+		}
+	}
+
+	@Given("^the user directly navigates to welcome OLE page$")
+	public void the_user_navigates_to_Welcome_OLE_Pages(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String path = memberAttributesMap.get("PagePath");
+
+		String PlanName = memberAttributesMap.get("Plan Name");
+		// String PlanName = (String)
+		// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+
+		// String County = "St. Louis County";
+		// String ZipCode = "63043";
+		// String PlanYear = "2020";
+
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanPremium = "";
+		String ZipCode = "";
+		String County = "";
+		String PlanType = memberAttributesMap.get("Plan Type");
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		// String plantype = memberAttributesMap.get("Plan Type");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		WelcomePageMobile welcomepage = aquisitionhomepage.navigateToPathOLE(path);
+
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+	}
+
+	@Then("^user clicks on Learn About Medicare$")
+	public void user_clicks_on_Learn_About_Medicare() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) aquisitionhomepage
+				.openLearnAboutMedicarePage();
+
+		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+
+	}
+
+	@Then("^Validate user Land on MEDED Page and validate links$")
+	public void validate_user_Land_on_MEDED_Page_and_validate_links() throws Throwable {
+
+	}
+
+	@Then("^Navigate back to previous window$")
+	public void navigate_back_to_previous_window() throws Throwable {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String originalHandle = wd.getWindowHandle();
+		for (String handle : wd.getWindowHandles()) {
+			if (!handle.equals(originalHandle)) {
+				wd.switchTo().window(handle);
+				wd.close();
+			}
+		}
+		wd.switchTo().window(originalHandle);
+	}
+
+	@Then("^validate group plan marketting Bullets$")
+	public void validate_group_plans_markettingBullets() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateGroupPlanMArkettingBullets();
+	}
+
+	@And("^the user views the plans for below plan type$")
+	public void user_view_plans_of_plan_type(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String plantype = givenAttributesMap.get("Plan Type");
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
+		plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 	
 	@Then("^the user view plan details of the above selected plan in site vpp$")

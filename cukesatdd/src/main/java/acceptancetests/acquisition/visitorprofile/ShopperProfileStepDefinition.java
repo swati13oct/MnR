@@ -377,4 +377,17 @@ public class ShopperProfileStepDefinition {
 		
 	}
 
+	@Then("^the user validate the MAPD and MS links are not visible$")
+	public void the_user_validate_the_MAPD_and_MS_links_are_not_visible() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateMAPDMSLinkNotDisplay();
+	}
+	@Then("^the user validate the MAPD and MS links are visible$")
+	public void the_user_validate_the_MAPD_and_MS_links_are_visible() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		comparePlansPage.validateMAPDMSLinkIsDisplay();
+	}
+
 } 

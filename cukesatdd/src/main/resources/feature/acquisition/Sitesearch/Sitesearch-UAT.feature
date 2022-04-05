@@ -1,4 +1,4 @@
-@UATRegression @F513647 @siteSearch
+@UATRegression @F513647
 Feature: 1.08 UAT-Site Search Flows
 
   @SiteSearchULayer @UATRegression
@@ -14,14 +14,14 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP_01 @regressionAARP
+    @SiteSearch_AARP_01 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_AMP | AARP | Medicare        | Pharmacy                        |
       | E2E Scenario 1_AMP | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
       | E2E Scenario 1_AMP | AARP | Dental coverage | Drug cost estimator             |
 
-    @SiteSearch_UHC_01 @regressionUHC @vbfGate @featureGate
+    @SiteSearch_UHC_01 @regressionUHC @vbfGate @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_UMS | UHC  | Medicare        | Pharmacy                        |
@@ -33,7 +33,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_AMP | AARP | Medicare    | Pharmacy       |
 
-    @prodSanity_UHC @sanity 
+    @prodSanity_UHC @sanity
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Pharmacy       |
@@ -50,7 +50,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearch_AARP_02 @regressionAARP @featureGate
+    @SiteSearch_AARP_02 @regressionAARP @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 1_AMP | AARP | Medicare    | Empty            | [blank]                                                                     |
@@ -58,7 +58,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
-    @SiteSearch_UHC_02 @regressionUHC
+    @SiteSearch_UHC_02 @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            | [blank]                                                                     |
@@ -85,12 +85,12 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_03 @prodSanity_AARP @prodRegression @regressionAARP @sanity
+    @SiteSearch_AARP_03 @prodSanity_AARP @prodRegression @regressionAARP @sanity @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC @vbfGate @featureGate
+    @SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC @vbfGate @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -109,14 +109,14 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP @regressionAARP 
+    @SiteSearch_AARP @regressionAARP @siteSearch
     Examples: 
-      | Scenario           | site | searchValue     | newsearchvalue                  |
+      | Scenario             | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_AMP_1 | AARP | Medicare        | Pharmacy                        |
       | E2E Scenario 1_AMP_2 | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
       | E2E Scenario 1_AMP_3 | AARP | Dental coverage | Drug cost estimator             |
 
-    @SiteSearch_UHC @regressionUHC @featureGate
+    @SiteSearch_UHC @regressionUHC @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_UMS | UHC  | Medicare        | Pharmacy                        |
@@ -136,7 +136,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearch_AARP @regressionAARP @featureGate
+    @SiteSearch_AARP @regressionAARP @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 1_AMP | AARP | Medicare    | Empty            | [blank]                                                                     |
@@ -144,7 +144,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
-    @SiteSearch_UHC @regressionUHC
+    @SiteSearch_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            | [blank]                                                                     |
@@ -162,12 +162,12 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP @regressionAARP
+    @SiteSearch_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC @regressionUHC @sanity @featureGate
+    @SiteSearch_UHC @regressionUHC @sanity @featureGate @siteSearch
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -192,17 +192,17 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP_04 @regressionAARP
+    @SiteSearch_AARP_04 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | newsearchvalue      |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare        | pharmacy            |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
 
-    @SiteSearch_UHC_04 @regressionUHC @featureGate
+    @SiteSearch_UHC_04 @regressionUHC @featureGate @siteSearch
     Examples: 
-      | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | newsearchvalue |
-      | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | pharmacy       |
-      | E2E Scenario 3_AMP | UHC | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
+      | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | newsearchvalue      |
+      | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare        | pharmacy            |
+      | E2E Scenario 3_AMP | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
 
   @SiteSearchULayer @UATRegression
   Scenario Outline: <Scenario> : To verify Errorhandling on VPP page - <searchValue> - <NewSearchValue>
@@ -224,38 +224,38 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearch_AARP_03 @regressionAARP
+    @SiteSearch_AARP_03 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]        |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | medicareeee    |
 
-    @SiteSearch_AARP_06 @regressionAARP
+    @SiteSearch_AARP_06 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
-    @SiteSearch_AARP_05 @regressionAARP
+    @SiteSearch_AARP_05 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | plan25         |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter |         123456 |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | @@@@           |
 
-    @SiteSearch_UHC_03 @regressionUHC @featureGate
+    @SiteSearch_UHC_03 @regressionUHC @featureGate @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]        |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | medicareeee    |
 
-    @SiteSearch_UHC_06 @regressionUHC @featureGate
+    @SiteSearch_UHC_06 @regressionUHC @featureGate @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
-    @SiteSearch_UHC_05 @regressionUHC @featureGate
+    @SiteSearch_UHC_05 @regressionUHC @featureGate @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | plan25         |
@@ -277,12 +277,12 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_06 @prodSanity_AARP @regressionAARP @sanity @featureGate
+    @SiteSearch_AARP_06 @prodSanity_AARP @regressionAARP @sanity @featureGate @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC_06 @prodSanity_UHC @prodRegression @regressionUHC
+    @SiteSearch_UHC_06 @prodSanity_UHC @prodRegression @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -308,17 +308,17 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP_07 @regressionAARP
+    @SiteSearch_AARP_07 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | newsearchvalue      |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare        | pharmacy            |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
 
-    @SiteSearch_UHC_07 @regressionUHC
+    @SiteSearch_UHC_07 @regressionUHC @siteSearch
     Examples: 
-      | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | newsearchvalue |
-      | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | pharmacy       |
-      | E2E Scenario 3_UMS | UHC | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
+      | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | newsearchvalue      |
+      | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare        | pharmacy            |
+      | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Dental coverage | Drug cost estimator |
 
   @SiteSearchULayer @UATRegression
   Scenario Outline: <Scenario> : To verify Errorhandling on Visitor profile from VPP page - <searchValue> - <NewSearchValue>
@@ -341,7 +341,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearch_AARP_07 @regressionAARP @featureGate
+    @SiteSearch_AARP_07 @regressionAARP @featureGate @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]                                                                     |
@@ -352,7 +352,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter |                                                                      123456 |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | @@@@                                                                        |
 
-    @SiteSearch_UHC_07 @regressionUHC
+    @SiteSearch_UHC_07 @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]                                                                     |
@@ -379,12 +379,12 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_07 @regressionAARP
+    @SiteSearch_AARP_07 @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC_07 @regressionUHC
+    @SiteSearch_UHC_07 @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -401,7 +401,7 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearchShop_AARP @regressionAARP
+    @SiteSearchShop_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario            | site | path                                      | pageName                     | searchValue     | url                                                           |
       | E2E Scenario 2_AMP  | AARP | shop.html                                 | ShopPlan: Shop Hub           | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -424,7 +424,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP  | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan              | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
       | E2E Scenario 2_AMP  | AARP | health-plans.html#/plan-summary           | Shop for a plan              | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearchShop_UHC @regresssionUHC
+    @SiteSearchShop_UHC @regresssionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                      | pageName                     | searchValue     | url                                                           |
       | E2E Scenario 2_UMS | UHC  | shop.html                                 | ShopPlan: Shop Hub           | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -447,7 +447,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan              | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
       | E2E Scenario 2_UMS | UHC  | health-plans.html#/plan-summary           | Shop for a plan              | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearchEnroll_AARP @regressionAARP
+    @SiteSearchEnroll_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue     | url                                                           |
       | E2E Scenario 2_AMP | AARP | enroll.html                                                | ShopPlan: Enroll                        | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -459,7 +459,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
       | E2E Scenario 2_AMP | AARP | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearchEnroll_UHC  @regressionUHC
+    @SiteSearchEnroll_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue     | url                                                           |
       | E2E Scenario 2_UMS | UHC  | enroll.html                                                | ShopPlan: Enroll                        | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -471,7 +471,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
       | E2E Scenario 2_UMS | UHC  | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearchMedEd_AARP @regressionAARP
+    @SiteSearchMedEd_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue     | url                                                           |
       | E2E Scenario 2_AMP | AARP | medicare-education.html                                  | Understanding Medicare                       | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -485,7 +485,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-supplement-plans.html        | Medicare Supplement Insurance Plans          | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-part-d.html                  | Medicare Prescription Drug Plans             | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearchMedEd_UHC @regressionUHC
+    @SiteSearchMedEd_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue     | url                                                           |
       | E2E Scenario 2_UMS | UHC  | medicare-education.html                                  | Understanding Medicare                       | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -515,7 +515,7 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearchShop1_AARP @regressionAARP
+    @SiteSearchShop1_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                      | pageName                    | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_AMP | AARP | shop.html                                 | ShopPlan: Shop Hub          | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -535,7 +535,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan             | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
       | E2E Scenario 2_AMP | AARP | health-plans.html#/plan-summary           | Shop for a plan             | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
 
-    @SiteSearchShop1_UHC @regressionUHC
+    @SiteSearchShop1_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                      | pageName                    | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_UMS | UHC  | shop.html                                 | ShopPlan: Shop Hub          | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -555,7 +555,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan             | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
       | E2E Scenario 2_UMS | UHC  | health-plans.html#/plan-summary           | Shop for a plan             | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
 
-    @SiteSearchEnroll1_AARP @regressionAARP
+    @SiteSearchEnroll1_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_AMP | AARP | enroll.html                                                | ShopPlan: Enroll                        | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -567,7 +567,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
       | E2E Scenario 2_AMP | AARP | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
 
-    @SiteSearchEnroll1_UHC @regressionUHC
+    @SiteSearchEnroll1_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_UMS | UHC  | enroll.html                                                | ShopPlan: Enroll                        | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -579,7 +579,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
       | E2E Scenario 2_UMS | UHC  | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
 
-    @SiteSearchMedEd1_AARP @regressionAARP
+    @SiteSearchMedEd1_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_AMP | AARP | medicare-education.html                                  | Understanding Medicare                       | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -593,7 +593,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-supplement-plans.html        | Medicare Supplement Insurance Plans          | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-part-d.html                  | Medicare Prescription Drug Plans             | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
 
-    @SiteSearchMedEd1_UHC @regressionUHC
+    @SiteSearchMedEd1_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue | newsearchvalue | searchValue | newsearchvalue                  | searchValue     | newsearchvalue      |
       | E2E Scenario 2_UMS | UHC  | medicare-education.html                                  | Understanding Medicare                       | Medicare    | Pharmacy       | Medicare    | MEDICARE PART D CLAIM FORM(PDF) | Dental coverage | Drug cost estimator |
@@ -622,7 +622,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearchShop2_AARP @regressionAARP
+    @SiteSearchShop2_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                      | pageName                    | searchValue | Error    | NewSearchValue | searchValue | Error            | NewSearchValue   | searchValue | Error            | NewSearchValue                                                              | searchValue                                                                 | Error            | NewSearchValue   |         |
       | E2E Scenario 2_AMP | AARP | shop.html                                 | ShopPlan: Shop Hub          | Medicare    | Medicare | Empty          | [blank]     | Medicare         | InvalidCharacter | medicareeee | Medicare         | InvalidCharacter                                                            | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare         | InvalidCharacter | Unicorn |
@@ -642,7 +642,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan             | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
       | E2E Scenario 2_AMP | AARP | health-plans.html#/plan-summary           | Shop for a plan             | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
 
-    @SiteSearchShop2_UHC @regressionUHC
+    @SiteSearchShop2_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                      | pageName                    | searchValue | Error    | NewSearchValue | searchValue | Error            | NewSearchValue   | searchValue | Error            | NewSearchValue                                                              | searchValue                                                                 | Error            | NewSearchValue   |         |
       | E2E Scenario 2_UMS | UHC  | shop.html                                 | ShopPlan: Shop Hub          | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
@@ -658,11 +658,11 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | shop/compare/compare-pdp.html             | ShopPlan: Compare PDP Plan  | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
       | E2E Scenario 2_UMS | UHC  | shop/compare/compare-ma.html              | ShopPlan: Compare MA  Plan  | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
       | E2E Scenario 2_UMS | UHC  | shop/estimate/pdp-costs.html              | ShopPlan: Estimate PDP Plan | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
-      | E2E Scenario 2_AMP | AARP | shop/renew-active.html                    | ShopPlan: Renew-Active      | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
+      | E2E Scenario 2_AMP | UHC  | shop/renew-active.html                    | ShopPlan: Renew-Active      | Medicare    | Empty    | [blank]        | Medicare    | InvalidCharacter | medicareeee      | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare                                                                    | InvalidCharacter | Unicorn          |         |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan             | Medicare    | Medicare | Empty          | [blank]     | Medicare         | InvalidCharacter | medicareeee | Medicare         | InvalidCharacter                                                            | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare         | InvalidCharacter | Unicorn |
       | E2E Scenario 2_UMS | UHC  | health-plans.html#/plan-summary           | Shop for a plan             | Medicare    | Medicare | Empty          | [blank]     | Medicare         | InvalidCharacter | medicareeee | Medicare         | InvalidCharacter                                                            | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare         | InvalidCharacter | Unicorn |
 
-    @SiteSearchEnroll2_AARP  @regressionAARP
+    @SiteSearchEnroll2_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue | Error | NewSearchValue | searchValue | Error            | NewSearchValue | searchValue | Error            | NewSearchValue                                                              | searchValue | Error            | NewSearchValue |
       | E2E Scenario 2_AMP | AARP | enroll.html                                                | ShopPlan: Enroll                        | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
@@ -674,7 +674,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
       | E2E Scenario 2_AMP | AARP | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
 
-    @SiteSearchEnroll2_UHC @regressionUHC
+    @SiteSearchEnroll2_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                       | pageName                                | searchValue | Error | NewSearchValue | searchValue | Error            | NewSearchValue | searchValue | Error            | NewSearchValue                                                              | searchValue | Error            | NewSearchValue |
       | E2E Scenario 2_UMS | UHC  | enroll.html                                                | ShopPlan: Enroll                        | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
@@ -686,7 +686,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | health-plans/estimate-drug-costs.html#/drug-cost-estimator | Drug Cost Estimator                     | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
       | E2E Scenario 2_UMS | UHC  | health-plans/aarp-pharmacy.html#/Pharmacy-Search-English   | Pharmacy Locator                        | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
 
-    @SiteSearchMedEd2_AARP @regressionAARP
+    @SiteSearchMedEd2_AARP @regressionAARP @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue | Error | NewSearchValue | searchValue | Error            | NewSearchValue | searchValue | Error            | NewSearchValue                                                              | searchValue | Error            | NewSearchValue |
       | E2E Scenario 2_AMP | AARP | medicare-education.html                                  | Understanding Medicare                       | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
@@ -700,7 +700,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-supplement-plans.html        | Medicare Supplement Insurance Plans          | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-part-d.html                  | Medicare Prescription Drug Plans             | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
 
-    @SiteSearchMedEd2_UHC @regressionUHC
+    @SiteSearchMedEd2_UHC @regressionUHC @siteSearch
     Examples: 
       | Scenario           | site | path                                                     | pageName                                     | searchValue | Error | NewSearchValue | searchValue | Error            | NewSearchValue | searchValue | Error            | NewSearchValue                                                              | searchValue | Error            | NewSearchValue |
       | E2E Scenario 2_UMS | UHC  | medicare-education.html                                  | Understanding Medicare                       | Medicare    | Empty | [blank]        | Medicare    | InvalidCharacter | medicareeee    | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj | Medicare    | InvalidCharacter | Unicorn        |
