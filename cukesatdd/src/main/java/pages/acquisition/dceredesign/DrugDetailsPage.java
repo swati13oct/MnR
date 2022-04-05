@@ -2584,7 +2584,7 @@ Blank error message is removed
 	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul/li/span")
 	private List<WebElement> SplitDeductible_Text;
 
-	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul/li")
+	@FindBy(xpath = "//*[contains(text(), 'Deductible')]//following-sibling::ul//span")
 	private WebElement SingleDeductible_Text;
 
 	public void validateDeductible_CopaySection(String deductible) {
