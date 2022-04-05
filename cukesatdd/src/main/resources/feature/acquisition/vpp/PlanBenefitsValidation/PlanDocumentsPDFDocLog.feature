@@ -142,7 +142,7 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | excelPath                     | workSheet   | site |
       | PlanDocs_Validation_Data_2022 | Sheet2022_7 | AARP |
 
-  @2022PlanDocs_ExcelValidationCompare @2022pdfDocLogPlanCompare
+  @2022PlanDocs_ExcelValidation @2022pdfDocLogPlanCompare
   Scenario Outline: Verify specific PDF Plan Documents in Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user picks each example from excel to validate Plan Document PDFs and reports into excel on Plan Compare
       | ExcelFile     | <excelPath> |
