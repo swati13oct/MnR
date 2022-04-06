@@ -184,6 +184,13 @@ public class DCEStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
+	
+	@Then("^the user validates 100-day Supply Messaging for Eligible Plan$")
+    public void the_user_validates_100_day_Supply_Messaging_for_Eligible_Plan() throws Throwable {
+        DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        drugDetailsPage.validate100DayInYourDrugs();
+    }
 
 	@Then("^the user validates qty, frequency and Supply Length for following drug in DrugList Page$")
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(

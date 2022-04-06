@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -20,6 +21,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
@@ -31,6 +33,7 @@ import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 
 /**
  * @author bnaveen4 Functionality:Visitor Profile for both AAPR and UHC
@@ -353,6 +356,20 @@ public class VisitorProfileMobileStepDefinition {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
 		System.out.println(planDetails);
 	}
+	
+	@Then("^the user click on Get Started to land on Plan Recommendation Page$")
+    public void the_user_click_on_Get_Started_to_land_on_Plan_Recommendation_Page() {
+        VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+                .getBean(PageConstants.VISITOR_PROFILE_PAGE);
+        LandingAndZipcodeMobilePage planSelectorhomepage = visitorProfile.clickGetStartedPRE();
+
+        if (planSelectorhomepage != null) {
+            //getLoginScenario().saveBean(PageConstants.PRE, visitorProfile);
+            System.out.println("Navigation to PRE from VP successful");
+        } else {
+            Assert.fail("Navigation to PRE from VP is not successful");
+        }
+    }
 
 	@Then("^user saves two ms plans as favorite mobile$")
 	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
