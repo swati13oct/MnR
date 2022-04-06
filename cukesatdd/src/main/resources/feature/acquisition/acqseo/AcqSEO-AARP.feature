@@ -6,8 +6,8 @@ Feature: 2.02-VBF-Acq-To test 301 redirects in AARP site Ulayer
     Given load the AARP Ulayer medicare acquisition site page url
       | URL | <url> |
 
-    @SEO
+    @SEO @checkSEO
     Examples:
       | url                                            |
       | http://www.stage-aarpmedicareplans.uhc.com/    |
-
+      | http://www.stage-uhcmedicaresolutions.uhc.com/ |

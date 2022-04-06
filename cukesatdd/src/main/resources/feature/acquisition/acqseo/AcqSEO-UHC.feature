@@ -1,4 +1,4 @@
-@AcqSEO @BlayerAcqSEO
+#@AcqSEO @BlayerAcqSEO
 Feature: 2.01-VBF-Acq-To test 301 redirects in UMS site Blayer
 
   @regressionUHC @UHCloadUrl
@@ -6,7 +6,7 @@ Feature: 2.01-VBF-Acq-To test 301 redirects in UMS site Blayer
     Given load the UMS Blayer medicare solutions acquisition site page url
       | URL | <url> |
 
-    @SEO
+#    @SEO
     Examples:
       | url                                            |
       | http://www.stage-uhcmedicaresolutions.uhc.com/ |
