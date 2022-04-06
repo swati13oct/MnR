@@ -199,7 +199,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
 	private WebElement CancellationModalOLE;
 
-	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
 	private WebElement CreateProfile;
 
 	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
@@ -363,6 +363,13 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (NextBtn.isEnabled()) {
 			System.out.println("Conitnue Button is Enabled : All Required Details are entered");
 			jsClickNew(NextBtn);
+	/*		try {
+				sleepBySec(2);
+				NextBtn.click();
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			} */
 			String ActualPageURL = driver.getCurrentUrl();
 			if (ActualPageURL.contains(expectedPageURL)) {
 
