@@ -79,19 +79,18 @@ public class AcqSEOStepDefinitionAARP {
 	        int responseCode = connection.getResponseCode();
 	        System.out.println("Response Code -------> "+responseCode);
 	        if (responseCode == HttpURLConnection.HTTP_MOVED_PERM || responseCode == HttpURLConnection.HTTP_MOVED_TEMP) {
-				String locationUrl = connection.getHeaderField("Location");
-				System.out.println("Redirect URL -------> " + locationUrl);
-				iRedirectionCounter++;
-				/*if (locationUrl != null && locationUrl.trim().length() > 0) {
+	            String locationUrl = connection.getHeaderField("Location");
+	            System.out.println("Redirect URL -------> "+locationUrl);
+	            iRedirectionCounter++;
+/*	            if (locationUrl != null && locationUrl.trim().length() > 0) {
 	            	connection.disconnect();
-					resultUrl = fetchRedirectURL(locationUrl);
-					System.out.println(iRedirectionCounter);*/
-					if (iRedirectionCounter <= 3)
-						Assertion.assertTrue("Number of redirection urls " + iRedirectionCounter, true);
-					else
-						Assertion.assertTrue("Number of redirection urls " + iRedirectionCounter, false);
-				}
-			//}
+	                resultUrl = fetchRedirectURL(locationUrl);*/
+	                if(iRedirectionCounter<=3)
+		 		    	 Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, true);
+		 		     else
+		 		    	 Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, false);
+	            }
+	        //}
 	    } 
 	    catch (Exception e) {
 	        e.printStackTrace();
