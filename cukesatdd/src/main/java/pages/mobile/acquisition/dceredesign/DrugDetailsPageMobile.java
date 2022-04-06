@@ -83,7 +83,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#edityourdrug")
 	public WebElement LinktoEditDrugList;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	@FindBy(xpath = "//span[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
 	@FindBy(css = ".uhc-card__content")
@@ -2791,5 +2791,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void clickSearch() {
 		jsClickNew(pharmacySearchBtn);
+	}
+	
+	public DrugDetailsPageMobile validateDrugDetailsPage(){
+		if (validateNew(DrugDetails_ChangePharmacyLnk) &&
+			validateNew(DrugCosts_PlanDetailsBtn) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPageMobile(driver);
+		}
+		return null;
 	}
 }

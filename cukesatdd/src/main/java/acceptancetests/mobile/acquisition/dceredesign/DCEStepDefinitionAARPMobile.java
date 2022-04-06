@@ -371,5 +371,19 @@ public class DCEStepDefinitionAARPMobile {
 	                .getBean(PageConstants.DCE_Redesign_DrugDetails);
 	        drugDetailsPage.ApplyPharmacyFilter(FilterText);
 	    }
+	 
+	 @And("user verify the drug details page")
+     public void user_verify_the_drug_details_page() {
+    	 DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+         drugDetailsPage.validateDrugDetailsPage();
+         getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+     }
+	 
+	 @When("user clicks on Return to profile link on summary page")
+     public void user_clicks_on_return_to_profile_link_on_summary_page() {
+    	 DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+                 .getBean(PageConstants.DCE_Redesign_DrugSummary);
+    	 drugSummaryPage.clickReturnToProfile();
+      }
 
 }

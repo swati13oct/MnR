@@ -903,7 +903,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			LeaveOnlineApplicationforLogo.isDisplayed();
 			String TFNNoNeedHelp_OLE = TFNNoNeedHelp.getText();
 			System.out.println("TFN in OLE ExitModels : " + TFNNoNeedHelp_OLE);
-			closepopup.click();
+			try {
+				closepopup.click();
+			}
+			catch (Exception ElementNotInteractableException) {
+				jsClickNew(closepopup);
+			}
 			return new CancelOLEModalMobile(driver);
 		}
 		return null;
